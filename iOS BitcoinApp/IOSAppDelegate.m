@@ -6,13 +6,13 @@
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "IOSAppDelegate.h"
 
-@interface AppDelegate ()
+@interface IOSAppDelegate ()
 
 @end
 
-@implementation AppDelegate
+@implementation IOSAppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

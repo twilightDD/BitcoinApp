@@ -15,7 +15,7 @@
 		D063E9281E74BF97006E2D17 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D063E9261E74BF97006E2D17 /* Main.storyboard */; };
 		D063E9331E74BF97006E2D17 /* BitcoinAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D063E9321E74BF97006E2D17 /* BitcoinAppTests.m */; };
 		D063E9451E74C024006E2D17 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D063E9441E74C024006E2D17 /* main.m */; };
-		D063E9481E74C024006E2D17 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D063E9471E74C024006E2D17 /* AppDelegate.m */; };
+		D063E9481E74C024006E2D17 /* IOSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D063E9471E74C024006E2D17 /* IOSAppDelegate.m */; };
 		D063E94B1E74C024006E2D17 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D063E94A1E74C024006E2D17 /* ViewController.m */; };
 		D063E94E1E74C024006E2D17 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D063E94C1E74C024006E2D17 /* Main.storyboard */; };
 		D063E9511E74C024006E2D17 /* iOS_BitcoinApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D063E94F1E74C024006E2D17 /* iOS_BitcoinApp.xcdatamodeld */; };
@@ -57,8 +57,8 @@
 		D063E9341E74BF97006E2D17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D063E9411E74C024006E2D17 /* iOS BitcoinApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS BitcoinApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D063E9441E74C024006E2D17 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D063E9461E74C024006E2D17 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		D063E9471E74C024006E2D17 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D063E9461E74C024006E2D17 /* IOSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IOSAppDelegate.h; sourceTree = "<group>"; };
+		D063E9471E74C024006E2D17 /* IOSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IOSAppDelegate.m; sourceTree = "<group>"; };
 		D063E9491E74C024006E2D17 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		D063E94A1E74C024006E2D17 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		D063E94D1E74C024006E2D17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -163,8 +163,8 @@
 		D063E9421E74C024006E2D17 /* iOS BitcoinApp */ = {
 			isa = PBXGroup;
 			children = (
-				D063E9461E74C024006E2D17 /* AppDelegate.h */,
-				D063E9471E74C024006E2D17 /* AppDelegate.m */,
+				D063E9461E74C024006E2D17 /* IOSAppDelegate.h */,
+				D063E9471E74C024006E2D17 /* IOSAppDelegate.m */,
 				D063E9491E74C024006E2D17 /* ViewController.h */,
 				D063E94A1E74C024006E2D17 /* ViewController.m */,
 				D063E94C1E74C024006E2D17 /* Main.storyboard */,
@@ -382,7 +382,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D063E94B1E74C024006E2D17 /* ViewController.m in Sources */,
-				D063E9481E74C024006E2D17 /* AppDelegate.m in Sources */,
+				D063E9481E74C024006E2D17 /* IOSAppDelegate.m in Sources */,
 				D063E9511E74C024006E2D17 /* iOS_BitcoinApp.xcdatamodeld in Sources */,
 				D063E9451E74C024006E2D17 /* main.m in Sources */,
 			);
