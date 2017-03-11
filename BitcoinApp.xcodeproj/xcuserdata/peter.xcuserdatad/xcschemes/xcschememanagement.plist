@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>iOS BitcoinApp.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>mac BitcoinApp.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -18,6 +23,16 @@
 			<true/>
 		</dict>
 		<key>D063E92D1E74BF97006E2D17</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D063E9401E74C024006E2D17</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D063E95B1E74C024006E2D17</key>
 		<dict>
 			<key>primary</key>
 			<true/>

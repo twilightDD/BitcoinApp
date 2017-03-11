@@ -14,6 +14,14 @@
 		D063E9251E74BF97006E2D17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D063E9241E74BF97006E2D17 /* Assets.xcassets */; };
 		D063E9281E74BF97006E2D17 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D063E9261E74BF97006E2D17 /* Main.storyboard */; };
 		D063E9331E74BF97006E2D17 /* BitcoinAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D063E9321E74BF97006E2D17 /* BitcoinAppTests.m */; };
+		D063E9451E74C024006E2D17 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D063E9441E74C024006E2D17 /* main.m */; };
+		D063E9481E74C024006E2D17 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D063E9471E74C024006E2D17 /* AppDelegate.m */; };
+		D063E94B1E74C024006E2D17 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D063E94A1E74C024006E2D17 /* ViewController.m */; };
+		D063E94E1E74C024006E2D17 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D063E94C1E74C024006E2D17 /* Main.storyboard */; };
+		D063E9511E74C024006E2D17 /* iOS_BitcoinApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D063E94F1E74C024006E2D17 /* iOS_BitcoinApp.xcdatamodeld */; };
+		D063E9531E74C024006E2D17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D063E9521E74C024006E2D17 /* Assets.xcassets */; };
+		D063E9561E74C024006E2D17 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D063E9541E74C024006E2D17 /* LaunchScreen.storyboard */; };
+		D063E9611E74C024006E2D17 /* iOS_BitcoinAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D063E9601E74C024006E2D17 /* iOS_BitcoinAppTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,6 +31,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = D063E9141E74BF97006E2D17;
 			remoteInfo = BitcoinApp;
+		};
+		D063E95D1E74C024006E2D17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D063E90D1E74BF97006E2D17 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D063E9401E74C024006E2D17;
+			remoteInfo = "iOS BitcoinApp";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -40,6 +55,20 @@
 		D063E92E1E74BF97006E2D17 /* mac BitcoinAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mac BitcoinAppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D063E9321E74BF97006E2D17 /* BitcoinAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BitcoinAppTests.m; sourceTree = "<group>"; };
 		D063E9341E74BF97006E2D17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D063E9411E74C024006E2D17 /* iOS BitcoinApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS BitcoinApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D063E9441E74C024006E2D17 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D063E9461E74C024006E2D17 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D063E9471E74C024006E2D17 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D063E9491E74C024006E2D17 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		D063E94A1E74C024006E2D17 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D063E94D1E74C024006E2D17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D063E9501E74C024006E2D17 /* iOS_BitcoinApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iOS_BitcoinApp.xcdatamodel; sourceTree = "<group>"; };
+		D063E9521E74C024006E2D17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D063E9551E74C024006E2D17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D063E9571E74C024006E2D17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D063E95C1E74C024006E2D17 /* iOS BitcoinAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS BitcoinAppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D063E9601E74C024006E2D17 /* iOS_BitcoinAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOS_BitcoinAppTests.m; sourceTree = "<group>"; };
+		D063E9621E74C024006E2D17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +86,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D063E93E1E74C024006E2D17 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D063E9591E74C024006E2D17 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -65,6 +108,8 @@
 			children = (
 				D063E9171E74BF97006E2D17 /* Mac BitcoinApp */,
 				D063E9311E74BF97006E2D17 /* Mac BitcoinAppTests */,
+				D063E9421E74C024006E2D17 /* iOS BitcoinApp */,
+				D063E95F1E74C024006E2D17 /* iOS BitcoinAppTests */,
 				D063E9161E74BF97006E2D17 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -74,6 +119,8 @@
 			children = (
 				D063E9151E74BF97006E2D17 /* mac BitcoinApp.app */,
 				D063E92E1E74BF97006E2D17 /* mac BitcoinAppTests.xctest */,
+				D063E9411E74C024006E2D17 /* iOS BitcoinApp.app */,
+				D063E95C1E74C024006E2D17 /* iOS BitcoinAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -111,6 +158,40 @@
 			);
 			name = "Mac BitcoinAppTests";
 			path = BitcoinAppTests;
+			sourceTree = "<group>";
+		};
+		D063E9421E74C024006E2D17 /* iOS BitcoinApp */ = {
+			isa = PBXGroup;
+			children = (
+				D063E9461E74C024006E2D17 /* AppDelegate.h */,
+				D063E9471E74C024006E2D17 /* AppDelegate.m */,
+				D063E9491E74C024006E2D17 /* ViewController.h */,
+				D063E94A1E74C024006E2D17 /* ViewController.m */,
+				D063E94C1E74C024006E2D17 /* Main.storyboard */,
+				D063E9521E74C024006E2D17 /* Assets.xcassets */,
+				D063E9541E74C024006E2D17 /* LaunchScreen.storyboard */,
+				D063E9571E74C024006E2D17 /* Info.plist */,
+				D063E94F1E74C024006E2D17 /* iOS_BitcoinApp.xcdatamodeld */,
+				D063E9431E74C024006E2D17 /* Supporting Files */,
+			);
+			path = "iOS BitcoinApp";
+			sourceTree = "<group>";
+		};
+		D063E9431E74C024006E2D17 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D063E9441E74C024006E2D17 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D063E95F1E74C024006E2D17 /* iOS BitcoinAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				D063E9601E74C024006E2D17 /* iOS_BitcoinAppTests.m */,
+				D063E9621E74C024006E2D17 /* Info.plist */,
+			);
+			path = "iOS BitcoinAppTests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +232,41 @@
 			productReference = D063E92E1E74BF97006E2D17 /* mac BitcoinAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		D063E9401E74C024006E2D17 /* iOS BitcoinApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D063E9631E74C024006E2D17 /* Build configuration list for PBXNativeTarget "iOS BitcoinApp" */;
+			buildPhases = (
+				D063E93D1E74C024006E2D17 /* Sources */,
+				D063E93E1E74C024006E2D17 /* Frameworks */,
+				D063E93F1E74C024006E2D17 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "iOS BitcoinApp";
+			productName = "iOS BitcoinApp";
+			productReference = D063E9411E74C024006E2D17 /* iOS BitcoinApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D063E95B1E74C024006E2D17 /* iOS BitcoinAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D063E9661E74C024006E2D17 /* Build configuration list for PBXNativeTarget "iOS BitcoinAppTests" */;
+			buildPhases = (
+				D063E9581E74C024006E2D17 /* Sources */,
+				D063E9591E74C024006E2D17 /* Frameworks */,
+				D063E95A1E74C024006E2D17 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D063E95E1E74C024006E2D17 /* PBXTargetDependency */,
+			);
+			name = "iOS BitcoinAppTests";
+			productName = "iOS BitcoinAppTests";
+			productReference = D063E95C1E74C024006E2D17 /* iOS BitcoinAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -171,6 +287,17 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = D063E9141E74BF97006E2D17;
 					};
+					D063E9401E74C024006E2D17 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = URATVA2LKM;
+						ProvisioningStyle = Automatic;
+					};
+					D063E95B1E74C024006E2D17 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = URATVA2LKM;
+						ProvisioningStyle = Automatic;
+						TestTargetID = D063E9401E74C024006E2D17;
+					};
 				};
 			};
 			buildConfigurationList = D063E9101E74BF97006E2D17 /* Build configuration list for PBXProject "BitcoinApp" */;
@@ -188,6 +315,8 @@
 			targets = (
 				D063E9141E74BF97006E2D17 /* mac BitcoinApp */,
 				D063E92D1E74BF97006E2D17 /* mac BitcoinAppTests */,
+				D063E9401E74C024006E2D17 /* iOS BitcoinApp */,
+				D063E95B1E74C024006E2D17 /* iOS BitcoinAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -203,6 +332,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D063E92C1E74BF97006E2D17 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D063E93F1E74C024006E2D17 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D063E9561E74C024006E2D17 /* LaunchScreen.storyboard in Resources */,
+				D063E9531E74C024006E2D17 /* Assets.xcassets in Resources */,
+				D063E94E1E74C024006E2D17 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D063E95A1E74C024006E2D17 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -231,6 +377,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D063E93D1E74C024006E2D17 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D063E94B1E74C024006E2D17 /* ViewController.m in Sources */,
+				D063E9481E74C024006E2D17 /* AppDelegate.m in Sources */,
+				D063E9511E74C024006E2D17 /* iOS_BitcoinApp.xcdatamodeld in Sources */,
+				D063E9451E74C024006E2D17 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D063E9581E74C024006E2D17 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D063E9611E74C024006E2D17 /* iOS_BitcoinAppTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -238,6 +403,11 @@
 			isa = PBXTargetDependency;
 			target = D063E9141E74BF97006E2D17 /* mac BitcoinApp */;
 			targetProxy = D063E92F1E74BF97006E2D17 /* PBXContainerItemProxy */;
+		};
+		D063E95E1E74C024006E2D17 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D063E9401E74C024006E2D17 /* iOS BitcoinApp */;
+			targetProxy = D063E95D1E74C024006E2D17 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -248,6 +418,22 @@
 				D063E9271E74BF97006E2D17 /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D063E94C1E74C024006E2D17 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D063E94D1E74C024006E2D17 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D063E9541E74C024006E2D17 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D063E9551E74C024006E2D17 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -394,6 +580,72 @@
 			};
 			name = Release;
 		};
+		D063E9641E74C024006E2D17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = URATVA2LKM;
+				INFOPLIST_FILE = "iOS BitcoinApp/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.2sox.iOS-BitcoinApp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D063E9651E74C024006E2D17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = URATVA2LKM;
+				INFOPLIST_FILE = "iOS BitcoinApp/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.2sox.iOS-BitcoinApp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D063E9671E74C024006E2D17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = URATVA2LKM;
+				INFOPLIST_FILE = "iOS BitcoinAppTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.2sox.iOS-BitcoinAppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOS BitcoinApp.app/iOS BitcoinApp";
+			};
+			name = Debug;
+		};
+		D063E9681E74C024006E2D17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = URATVA2LKM;
+				INFOPLIST_FILE = "iOS BitcoinAppTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.2sox.iOS-BitcoinAppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOS BitcoinApp.app/iOS BitcoinApp";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -422,6 +674,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 		};
+		D063E9631E74C024006E2D17 /* Build configuration list for PBXNativeTarget "iOS BitcoinApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D063E9641E74C024006E2D17 /* Debug */,
+				D063E9651E74C024006E2D17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D063E9661E74C024006E2D17 /* Build configuration list for PBXNativeTarget "iOS BitcoinAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D063E9671E74C024006E2D17 /* Debug */,
+				D063E9681E74C024006E2D17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
@@ -432,6 +700,16 @@
 			);
 			currentVersion = D063E9221E74BF97006E2D17 /* BitcoinApp.xcdatamodel */;
 			path = BitcoinApp.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		D063E94F1E74C024006E2D17 /* iOS_BitcoinApp.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D063E9501E74C024006E2D17 /* iOS_BitcoinApp.xcdatamodel */,
+			);
+			currentVersion = D063E9501E74C024006E2D17 /* iOS_BitcoinApp.xcdatamodel */;
+			path = iOS_BitcoinApp.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
