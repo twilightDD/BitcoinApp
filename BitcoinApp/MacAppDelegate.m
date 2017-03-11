@@ -6,15 +6,15 @@
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "MacAppDelegate.h"
 
-@interface AppDelegate ()
+@interface MacAppDelegate ()
 
 - (IBAction)saveAction:(id)sender;
 
 @end
 
-@implementation AppDelegate
+@implementation MacAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
