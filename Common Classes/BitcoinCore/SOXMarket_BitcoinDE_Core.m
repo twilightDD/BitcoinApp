@@ -187,12 +187,12 @@
     return baseURLString;
 }
 
-+ (NSString *)apiKey {
+- (NSString *)apiKey {
     return @"a2982795ee454d6c210645c79da61bda";
     //    return @"1db1c2c90724daf1c9e11631e39572fb";
 }
 
-+ (NSString *)apiSecret {
+- (NSString *)apiSecret {
     return @"5e664fb1d6779e372bab040bef2846a7cfab7880";
     //    return @"79bc727e274b37ac90e782e121bc75b7e41ef8f2";
 }
