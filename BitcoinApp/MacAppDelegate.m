@@ -7,6 +7,8 @@
 //
 
 #import "MacAppDelegate.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @interface MacAppDelegate ()
 
@@ -18,6 +20,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
+    
+    [Fabric with:@[[Crashlytics class]]];
 }
 
 

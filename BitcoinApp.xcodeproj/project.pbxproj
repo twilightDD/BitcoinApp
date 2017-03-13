@@ -18,6 +18,10 @@
 		D049C45A1E7712E6003CBF36 /* SOXConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D049C4561E7712E6003CBF36 /* SOXConstants.m */; };
 		D049C45B1E7712E6003CBF36 /* SOXHash.m in Sources */ = {isa = PBXBuildFile; fileRef = D049C4581E7712E6003CBF36 /* SOXHash.m */; };
 		D049C45C1E7712E6003CBF36 /* SOXHash.m in Sources */ = {isa = PBXBuildFile; fileRef = D049C4581E7712E6003CBF36 /* SOXHash.m */; };
+		D049C4601E7721AC003CBF36 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D049C45E1E7721AC003CBF36 /* Fabric.framework */; };
+		D049C4611E7721AC003CBF36 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D049C45E1E7721AC003CBF36 /* Fabric.framework */; };
+		D049C4621E7721AC003CBF36 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D049C45F1E7721AC003CBF36 /* Crashlytics.framework */; };
+		D049C4631E7721AC003CBF36 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D049C45F1E7721AC003CBF36 /* Crashlytics.framework */; };
 		D063E91A1E74BF97006E2D17 /* MacAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D063E9191E74BF97006E2D17 /* MacAppDelegate.m */; };
 		D063E91D1E74BF97006E2D17 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D063E91C1E74BF97006E2D17 /* main.m */; };
 		D063E9201E74BF97006E2D17 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D063E91F1E74BF97006E2D17 /* ViewController.m */; };
@@ -73,6 +77,8 @@
 		D049C4561E7712E6003CBF36 /* SOXConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXConstants.m; sourceTree = "<group>"; };
 		D049C4571E7712E6003CBF36 /* SOXHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXHash.h; sourceTree = "<group>"; };
 		D049C4581E7712E6003CBF36 /* SOXHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXHash.m; sourceTree = "<group>"; };
+		D049C45E1E7721AC003CBF36 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		D049C45F1E7721AC003CBF36 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		D063E9151E74BF97006E2D17 /* mac BitcoinApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mac BitcoinApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D063E9181E74BF97006E2D17 /* MacAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MacAppDelegate.h; sourceTree = "<group>"; };
 		D063E9191E74BF97006E2D17 /* MacAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MacAppDelegate.m; sourceTree = "<group>"; };
@@ -110,6 +116,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9F68ED00EF1147E8A37D564 /* libPods-mac BitcoinApp.a in Frameworks */,
+				D049C4621E7721AC003CBF36 /* Crashlytics.framework in Frameworks */,
+				D049C4601E7721AC003CBF36 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +134,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5CAD54D01A6BF912CFA3BE9 /* libPods-iOS BitcoinApp.a in Frameworks */,
+				D049C4631E7721AC003CBF36 /* Crashlytics.framework in Frameworks */,
+				D049C4611E7721AC003CBF36 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +153,8 @@
 		181B8FDF53AF076D5A1A38BD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D049C45E1E7721AC003CBF36 /* Fabric.framework */,
+				D049C45F1E7721AC003CBF36 /* Crashlytics.framework */,
 				DF45B40D8F59179007F987AF /* libPods-iOS BitcoinApp.a */,
 				A243607ED1705CCF7ABD64B7 /* libPods-iOS BitcoinAppTests.a */,
 				337C676324C43B0D3C145DF6 /* libPods-mac BitcoinApp.a */,
@@ -305,6 +317,7 @@
 				D063E9131E74BF97006E2D17 /* Resources */,
 				9F1DE0B5C9E645F3FB8B8F6B /* [CP] Embed Pods Frameworks */,
 				D8203FF062B9225CA3AF4FA2 /* [CP] Copy Pods Resources */,
+				D049C45D1E7720F4003CBF36 /* Fabric */,
 			);
 			buildRules = (
 			);
@@ -633,6 +646,20 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mac BitcoinAppTests/Pods-mac BitcoinAppTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D049C45D1E7720F4003CBF36 /* Fabric */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Fabric;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 2a417f89f43234d98f7fa5e9d4a83b71fe853e6c 4bb3acc74cef15473fab5cbee2f26ddc6ae2d6f9746a54e7acff6707c31a954f";
+		};
 		D8203FF062B9225CA3AF4FA2 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -834,6 +861,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = URATVA2LKM;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = BitcoinApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.2sox.BitcoinApp;
@@ -848,6 +879,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = URATVA2LKM;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = BitcoinApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.2sox.BitcoinApp;
@@ -892,6 +927,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = URATVA2LKM;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "iOS BitcoinApp/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -909,6 +948,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = URATVA2LKM;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "iOS BitcoinApp/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
