@@ -6,9 +6,9 @@
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "MacViewController.h"
 
-@implementation ViewController
+@implementation MacViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
