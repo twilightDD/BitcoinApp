@@ -97,7 +97,7 @@
                                  , @"#"
                                  , [SOXMarket_BitcoinDE_Core sharedCore].nonceString // nonce
                                  , @"#"
-                                 , @"d41d8cd98f00b204e9800998ecf8427e" // postParameterMD5
+                                 , @"d41d8cd98f00b204e9800998ecf8427e" // postParameterMD5; hier: für md5 für weil get keine POSTParameter hat" " 
                                  ];
     
     return signatureString;
