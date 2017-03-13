@@ -134,9 +134,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D049C4491E77082D003CBF36 /* Common Classes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Common Classes";
+			sourceTree = "<group>";
+		};
 		D063E90C1E74BF97006E2D17 = {
 			isa = PBXGroup;
 			children = (
+				D049C4491E77082D003CBF36 /* Common Classes */,
 				D063E9171E74BF97006E2D17 /* Mac BitcoinApp */,
 				D063E9311E74BF97006E2D17 /* Mac BitcoinAppTests */,
 				D063E9421E74C024006E2D17 /* iOS BitcoinApp */,
@@ -916,6 +924,7 @@
 				D063E9391E74BF97006E2D17 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D063E93A1E74BF97006E2D17 /* Build configuration list for PBXNativeTarget "mac BitcoinAppTests" */ = {
 			isa = XCConfigurationList;
@@ -924,6 +933,7 @@
 				D063E93C1E74BF97006E2D17 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D063E9631E74C024006E2D17 /* Build configuration list for PBXNativeTarget "iOS BitcoinApp" */ = {
 			isa = XCConfigurationList;
@@ -932,6 +942,7 @@
 				D063E9651E74C024006E2D17 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D063E9661E74C024006E2D17 /* Build configuration list for PBXNativeTarget "iOS BitcoinAppTests" */ = {
 			isa = XCConfigurationList;
@@ -940,6 +951,7 @@
 				D063E9681E74C024006E2D17 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
