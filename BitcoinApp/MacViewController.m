@@ -9,6 +9,8 @@
 #import "MacViewController.h"
 
 #import "SOXMarket_BitcoinDE_Core.h"
+#import "SOXSocketIO_BitcoinDE_Core.h"
+
 @interface MacViewController ()
 
 @property (strong, nonatomic) NSDictionary *serverAnswerDictionary;
@@ -27,15 +29,30 @@
 -(void)viewWillAppear {
     [super viewWillAppear];
     
-    [self askServerForServerCommand:BitcoinDE_ShowAccountInfoCommandType];
+  //  [self askServerForServerCommand:BitcoinDE_ShowAccountInfoCommandType];
+    
+    [self openSocket];
 }
-
+    
 - (void)setRepresentedObject:(id)representedObject {
     [super setRepresentedObject:representedObject];
 
     // Update the view, if already loaded.
 }
 
+#pragma mark - Socket
+- (void)openSocket {
+    [SOXSocketIO_BitcoinDE_Core startWebSocketCore];
+    
+    
+//    self.socketIO = [[SocketIO alloc] initWithDelegate:self];
+//    self.socketIO.useSecure = YES;
+//    [self.socketIO connectToHost:@"ws.bitcoin.de" onPort:443];
+}
+
+
+    
+#pragma mark - Polling
 
 - (void)askServerForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType {
     NSURLRequest *request = [SOXMarket_BitcoinDE_Core urlRequestForServerCommandType:serverCommandType];
