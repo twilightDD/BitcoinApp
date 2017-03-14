@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '241DD13D3785E535F85DE2EEBF16DADD'
-               BlueprintName = 'Pods-mac BitcoinApp'
+               BlueprintIdentifier = '4BF0E323CB0FE0E45F4D7C37A5BF0679'
+               BlueprintName = 'SocketRocket'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libPods-mac BitcoinApp.a'>
+               BuildableName = 'libSocketRocket.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

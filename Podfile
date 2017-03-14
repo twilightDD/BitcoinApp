@@ -19,6 +19,7 @@ target 'mac BitcoinApp' do
   # use_frameworks!
 
   # Pods for mac BitcoinApp
+  pod 'socket.IO'
 
   target 'mac BitcoinAppTests' do
     inherit! :search_paths
