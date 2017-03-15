@@ -11,7 +11,7 @@
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXSocketIO_BitcoinDE_Core.h"
 
-@interface MacViewController ()
+@interface MacViewController () <SOXSocketIOCoreProtocol>
 
 @property (strong, nonatomic) NSDictionary *serverAnswerDictionary;
 
@@ -28,9 +28,7 @@
 
 -(void)viewWillAppear {
     [super viewWillAppear];
-    
-  //  [self askServerForServerCommand:BitcoinDE_ShowAccountInfoCommandType];
-    
+
     [self openSocket];
 }
     
@@ -44,12 +42,23 @@
 - (void)openSocket {
     [SOXSocketIO_BitcoinDE_Core startWebSocketCore];
     
-    
-//    self.socketIO = [[SocketIO alloc] initWithDelegate:self];
-//    self.socketIO.useSecure = YES;
-//    [self.socketIO connectToHost:@"ws.bitcoin.de" onPort:443];
 }
 
+#pragma mark SOXSocketIOCoreProtocol
+- (void)addOrder:(NSArray *)socketArgs {
+    NSLog(@"- (void)addOrder:(NSArray *)socketArgs");
+    NSLog(@"%@", socketArgs);
+}
+
+- (void)removeOrder:(NSArray *)socketArgs {
+    NSLog(@"- (void)removeOrder:(NSArray *)socketArgs");
+    NSLog(@"%@", socketArgs);
+}
+
+- (void)updateOrder:(NSArray *)socketArgs {
+    NSLog(@"- (void)updateOrder:(NSArray *)socketArgs");
+    NSLog(@"%@", socketArgs);
+}
 
     
 #pragma mark - Polling

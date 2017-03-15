@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol SOXMarketCoreProtocol <NSObject>
+
+@optional
+- (void)bannerUpdate:(NSDictionary *)bannerDict;
+
+@end
+
 @interface SOXMarketCore : NSObject
 @property (strong, nonatomic, readonly) NSString *apiKey;
 @property (strong, nonatomic, readonly) NSString *apiSecret;

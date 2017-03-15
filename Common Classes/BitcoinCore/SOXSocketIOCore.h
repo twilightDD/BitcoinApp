@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol SOXSocketIOCoreProtocol <NSObject>
+
+- (void)addOrder:(NSArray *)socketArgs;
+- (void)removeOrder:(NSArray *)socketArgs;
+- (void)updateOrder:(NSArray *)socketArgs;
+
+@end
+
 @interface SOXSocketIOCore : NSObject
+
+@property (weak, nonatomic) id <SOXSocketIOCoreProtocol> delegate;
 
 @end
