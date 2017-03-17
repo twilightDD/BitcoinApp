@@ -10,6 +10,12 @@
 
 #import "SOXHash.h"
 
+NSString *const _Nonnull ServerAnswerServerCommandKey = @"ServerCommand";
+NSString *const _Nonnull ServerAnswerPayloadKey       = @"Payload";
+NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
+
+
+
 @interface SOXMarket_BitcoinDE_Core ()
 
 @property (strong, nonatomic) NSString *nonceString;
@@ -35,7 +41,52 @@
     return sharedCore;
 }
 
-+ (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType respondTo:(id _Nonnull)controller {}
++ (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
+                          respondTo:(id <SOXMarketCoreServerRequestProtocol> _Nonnull)controller {
+    NSURLRequest *request = [self urlRequestForServerCommandType:serverCommandType];
+    
+//    weakify(self);
+    NSURLSessionTask *getTask = [[NSURLSession sharedSession] dataTaskWithRequest:request
+                                                                completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+//                                                                    strongify(self);
+                                                                    
+                                                                    NSError *jsonError = nil;
+                                                                    NSDictionary *payloadDictionary = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                                                           options:0
+                                                                                                                                             error:&jsonError];
+                                                                    NSDictionary *serverAnswer = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                                                                  @(serverCommandType), ServerAnswerServerCommandKey
+                                                                                                  , payloadDictionary, ServerAnswerPayloadKey
+                                                                                                  , nil];
+                                                                    
+                                                                    if ([controller respondsToSelector:@selector(answerOfServerRequest:)]) {
+                                                                        [controller performSelector:@selector(answerOfServerRequest:)
+                                                                                         withObject:serverAnswer];
+                                                                        
+//                                                                        [controller performSelectorOnMainThread:@selector(answerOfServerRequest:)
+//                                                                                                     withObject:serverAnswer
+//                                                                                                  waitUntilDone:NO];
+                                                                    }
+                                                                    
+//                                                                    NSLog(@"completionHandler");
+//                                                                    NSLog(@"Data: %@", [data base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed]);
+//                                                                    NSLog(@"JSON: %@", self.serverAnswerDictionary);
+//                                                                    NSLog(@"response: %@", response);
+//                                                                    NSLog(@"error: %@", error);
+//                                                                    NSLog(@"jsonError: %@", jsonError);
+//                                                                    
+//                                                                    
+//                                                                    [self performSelectorOnMainThread:@selector(report:)
+//                                                                                           withObject:self.serverAnswerDictionary
+//                                                                                        waitUntilDone:YES];
+                                                                    
+                                                                }];
+    
+    [getTask resume];
+
+    
+}
+
 + (void)startBannerUpdatesWithScheduleTime:(NSTimeInterval)timeInterval delegate:(id <SOXBannerDataProtocol> _Nonnull)delegateForBannerUpdates {
     // timer
     weakify(self)

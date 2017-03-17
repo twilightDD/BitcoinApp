@@ -20,6 +20,9 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_ServerCommandType) {
     , BitcoinDE_ShowRatesCommandType
 };
 
+FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerServerCommandKey;
+FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerPayloadKey;
+FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerErrorKey;
 
 @protocol SOXMarketCoreServerRequestProtocol <NSObject>
 
@@ -42,7 +45,8 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_ServerCommandType) {
  */
 + (instancetype _Nonnull)sharedCore;
 
-+ (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType respondTo:(id _Nonnull)controller;
++ (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType respondTo:(id <SOXMarketCoreServerRequestProtocol> _Nonnull)controller;
+
 + (void)startBannerUpdatesWithScheduleTime:(NSTimeInterval)timeInterval delegate:(id <SOXBannerDataProtocol> _Nonnull)delegateForBannerUpdates;
 
 + (NSURLRequest * _Nullable)urlRequestForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType;

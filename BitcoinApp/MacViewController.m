@@ -29,7 +29,10 @@
 -(void)viewWillAppear {
     [super viewWillAppear];
 
-    [self openSocket];
+    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowRatesCommandType
+                                                respondTo:self];
+    
+   // [self openSocket];
 }
     
 - (void)setRepresentedObject:(id)representedObject {
@@ -60,7 +63,12 @@
     NSLog(@"%@", socketArgs);
 }
 
-    
+#pragma mark - SOXMarketCoreServerRequestProtocol
+- (void)answerOfServerRequest:(NSDictionary *)answerOfServerRequest {
+    NSLog(@"answerOfServerRequest:\n%@", answerOfServerRequest);
+}
+
+
 #pragma mark - Polling
 
 - (void)askServerForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType {
