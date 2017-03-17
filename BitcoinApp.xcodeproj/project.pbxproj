@@ -27,7 +27,7 @@
 		D063E9201E74BF97006E2D17 /* MacViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D063E91F1E74BF97006E2D17 /* MacViewController.m */; };
 		D063E9231E74BF97006E2D17 /* BitcoinApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D063E9211E74BF97006E2D17 /* BitcoinApp.xcdatamodeld */; };
 		D063E9251E74BF97006E2D17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D063E9241E74BF97006E2D17 /* Assets.xcassets */; };
-		D063E9281E74BF97006E2D17 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D063E9261E74BF97006E2D17 /* Main.storyboard */; };
+		D063E9281E74BF97006E2D17 /* MacMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D063E9261E74BF97006E2D17 /* MacMain.storyboard */; };
 		D063E9331E74BF97006E2D17 /* BitcoinAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D063E9321E74BF97006E2D17 /* BitcoinAppTests.m */; };
 		D063E9451E74C024006E2D17 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D063E9441E74C024006E2D17 /* main.m */; };
 		D063E9481E74C024006E2D17 /* IOSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D063E9471E74C024006E2D17 /* IOSAppDelegate.m */; };
@@ -89,7 +89,7 @@
 		D063E91F1E74BF97006E2D17 /* MacViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MacViewController.m; sourceTree = "<group>"; };
 		D063E9221E74BF97006E2D17 /* BitcoinApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BitcoinApp.xcdatamodel; sourceTree = "<group>"; };
 		D063E9241E74BF97006E2D17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D063E9271E74BF97006E2D17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D063E9271E74BF97006E2D17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MacMain.storyboard; sourceTree = "<group>"; };
 		D063E9291E74BF97006E2D17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D063E92E1E74BF97006E2D17 /* mac BitcoinAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mac BitcoinAppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D063E9321E74BF97006E2D17 /* BitcoinAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BitcoinAppTests.m; sourceTree = "<group>"; };
@@ -233,7 +233,7 @@
 				D063E91E1E74BF97006E2D17 /* MacViewController.h */,
 				D063E91F1E74BF97006E2D17 /* MacViewController.m */,
 				D063E9241E74BF97006E2D17 /* Assets.xcassets */,
-				D063E9261E74BF97006E2D17 /* Main.storyboard */,
+				D063E9261E74BF97006E2D17 /* MacMain.storyboard */,
 				D063E9291E74BF97006E2D17 /* Info.plist */,
 				D063E9211E74BF97006E2D17 /* BitcoinApp.xcdatamodeld */,
 				D063E91B1E74BF97006E2D17 /* Supporting Files */,
@@ -456,7 +456,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D063E9251E74BF97006E2D17 /* Assets.xcassets in Resources */,
-				D063E9281E74BF97006E2D17 /* Main.storyboard in Resources */,
+				D063E9281E74BF97006E2D17 /* MacMain.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -748,12 +748,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D063E9261E74BF97006E2D17 /* Main.storyboard */ = {
+		D063E9261E74BF97006E2D17 /* MacMain.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				D063E9271E74BF97006E2D17 /* Base */,
 			);
-			name = Main.storyboard;
+			name = MacMain.storyboard;
 			sourceTree = "<group>";
 		};
 		D063E94C1E74C024006E2D17 /* Main.storyboard */ = {
