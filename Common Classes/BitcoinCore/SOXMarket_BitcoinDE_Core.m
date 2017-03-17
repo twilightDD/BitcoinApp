@@ -7,7 +7,6 @@
 //
 
 #import "SOXMarket_BitcoinDE_Core.h"
-#import "SOXMarketCore_Private.h"
 
 #import "SOXHash.h"
 
@@ -15,26 +14,58 @@
 
 @property (strong, nonatomic) NSString *nonceString;
 @property (strong, nonatomic) NSString *baseURL;
+@property (strong, nonatomic) NSTimer *reloadBannerDataTimer;
+
+@property (weak, nonatomic) id delegateForRequests;
+@property (weak, nonatomic) id <SOXBannerDataProtocol> delegateForBannerUpdates;
 
 @end
 
 @implementation SOXMarket_BitcoinDE_Core
 
 #pragma mark - Public methods
++ (instancetype _Nonnull)sharedCore {
+    static id sharedCore;
+    
+    static dispatch_once_t pred;
+    
+    dispatch_once(&pred, ^{
+        sharedCore = [[self class] new];
+    });
+    return sharedCore;
+}
+
++ (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType respondTo:(id _Nonnull)controller {}
++ (void)startBannerUpdatesWithScheduleTime:(NSTimeInterval)timeInterval delegate:(id <SOXBannerDataProtocol> _Nonnull)delegateForBannerUpdates {
+    // timer
+    weakify(self)
+    NSTimer *reloadBannerDataTimer = [NSTimer timerWithTimeInterval:timeInterval
+                                                            repeats:YES
+                                                              block:^(NSTimer * _Nonnull timer) {
+                                                                  strongify(self)
+                                                                //  [self startBannerUpdate];
+                                                              }];
+        [SOXMarket_BitcoinDE_Core sharedCore].reloadBannerDataTimer = reloadBannerDataTimer;
+    
+        // delegate
+        [SOXMarket_BitcoinDE_Core sharedCore].delegateForBannerUpdates = delegateForBannerUpdates;
+
+}
+
 + (NSURLRequest * _Nullable)urlRequestForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType {
     [SOXMarket_BitcoinDE_Core updateNonceString];
     
     NSString            *urlString       = [SOXMarket_BitcoinDE_Core urlStringForServerCommandType:serverCommandType];
     NSString            *signatureString = [SOXMarket_BitcoinDE_Core signatureStringForURLString:urlString];
     NSString            *hmacHex         = [SOXHash hexadecimalHMACForString:signatureString
-                                                                     withKey:[SOXMarket_BitcoinDE_Core sharedCore].apiSecret];
+                                                                     withKey:[SOXMarket_BitcoinDE_Core apiSecret]];
     
     NSMutableURLRequest *request         = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     {
         NSString *getOrPostHTTPMethod = [SOXMarket_BitcoinDE_Core getOrPostForServerCommandType:serverCommandType];
         if (getOrPostHTTPMethod) {
             [request setHTTPMethod:getOrPostHTTPMethod];
-            [request addValue:[SOXMarket_BitcoinDE_Core sharedCore].apiKey forHTTPHeaderField:@"X-API-KEY"];
+            [request addValue:[SOXMarket_BitcoinDE_Core apiKey] forHTTPHeaderField:@"X-API-KEY"];
             [request addValue:[SOXMarket_BitcoinDE_Core sharedCore].nonceString forHTTPHeaderField:@"X-API-NONCE"];
             [request addValue:hmacHex forHTTPHeaderField:@"X-API-SIGNATURE"];
         }
@@ -73,6 +104,7 @@
     
     return urlString;
 }
+
 + (NSString *)commandForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType {
     NSDictionary *commands                    = [SOXMarket_BitcoinDE_Core commands];
     NSString     *commandForServerCommandType = [commands objectForKey:@(serverCommandType)];
@@ -93,7 +125,7 @@
                                  , @"#"
                                  , urlString // uri
                                  , @"#"
-                                 , [SOXMarket_BitcoinDE_Core sharedCore].apiKey // apiKey
+                                 , [SOXMarket_BitcoinDE_Core apiKey] // apiKey
                                  , @"#"
                                  , [SOXMarket_BitcoinDE_Core sharedCore].nonceString // nonce
                                  , @"#"
@@ -103,7 +135,29 @@
     return signatureString;
 }
 
-#pragma mark - Private Helper methods
+
++ (NSString  * _Nullable )getOrPostForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType {
+    switch (serverCommandType) {
+        case UnknownCommand: {
+            return nil;
+            break;
+        }
+            
+        case BitcoinDE_ShowBuyOrderbookCommandType:
+        case BitcoinDE_ShowSellOrderbookCommandType:
+        case BitcoinDE_ShowMyOrdersCommandType:
+        case BitcoinDE_ShowMyOrderDetailsCommandType:
+        case BitcoinDE_ShowAccountInfoCommandType:
+        case BitcoinDE_ShowOrderbookCompactCommandType:
+        case BitcoinDE_ShowPublicTradeHistoryCommandType:
+        case BitcoinDE_ShowRatesCommandType:
+            return @"GET";
+            
+        default:
+            break;
+    }
+}
+
 + (void)updateNonceString {
     NSDate   *date     = [NSDate date];
     NSString *timeInMS = [NSString stringWithFormat:@"%lld", [@(floor([date timeIntervalSince1970]))longLongValue]];
@@ -119,7 +173,8 @@
     dispatch_once(&pred, ^{
         commandDescriptions = @{
                                 @(UnknownCommand): @"Error"
-                                , @(BitcoinDE_ShowOrderbookCommandType): @"/orders?type=buy"
+                                , @(BitcoinDE_ShowBuyOrderbookCommandType): @"/orders?type=buy"
+                                , @(BitcoinDE_ShowSellOrderbookCommandType): @"/orders?type=sell"
                                 , @(BitcoinDE_ShowMyOrdersCommandType): @"/orders/my_own"
                                 , @(BitcoinDE_ShowMyOrderDetailsCommandType): @"/orders/:order_id"
                                 , @(BitcoinDE_ShowAccountInfoCommandType): @"/account"
@@ -139,7 +194,8 @@
     dispatch_once(&pred, ^{
         commandDescriptions = @{
                                 @(UnknownCommand): @"Error"
-                                , @(BitcoinDE_ShowOrderbookCommandType): @"Durchsuchen des Orderbooks nach passenden Angeboten"
+                                , @(BitcoinDE_ShowBuyOrderbookCommandType): @"Durchsuchen des Orderbooks nach passenden Kaufangeboten"
+                                , @(BitcoinDE_ShowSellOrderbookCommandType): @"Durchsuchen des Orderbooks nach passenden Verkaufsangeboten"
                                 , @(BitcoinDE_ShowMyOrdersCommandType): @"Abrufen und Filtern meiner Orders"
                                 , @(BitcoinDE_ShowMyOrderDetailsCommandType): @"Details zu einer meiner Order abrufen"
                                 , @(BitcoinDE_ShowAccountInfoCommandType): @"Abruf von Account Infos"
@@ -151,30 +207,7 @@
     return commandDescriptions;
 }
 
-#pragma mark - Not used
-+ (NSString  * _Nullable )getOrPostForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType {
-    switch (serverCommandType) {
-        case UnknownCommand: {
-            return nil;
-            break;
-        }
-            
-        case BitcoinDE_ShowOrderbookCommandType:
-        case BitcoinDE_ShowMyOrdersCommandType:
-        case BitcoinDE_ShowMyOrderDetailsCommandType:
-        case BitcoinDE_ShowAccountInfoCommandType:
-        case BitcoinDE_ShowOrderbookCompactCommandType:
-        case BitcoinDE_ShowPublicTradeHistoryCommandType:
-        case BitcoinDE_ShowRatesCommandType:
-            return @"GET";
-            
-        default:
-            break;
-    }
-}
-
 #pragma mark - Manual getter
-
 + (NSString *)baseURLString {
     static NSString        *baseURLString;
     
@@ -187,12 +220,12 @@
     return baseURLString;
 }
 
-- (NSString *)apiKey {
++ (NSString *)apiKey {
     return @"a2982795ee454d6c210645c79da61bda";
     //    return @"1db1c2c90724daf1c9e11631e39572fb";
 }
 
-- (NSString *)apiSecret {
++ (NSString *)apiSecret {
     return @"5e664fb1d6779e372bab040bef2846a7cfab7880";
     //    return @"79bc727e274b37ac90e782e121bc75b7e41ef8f2";
 }

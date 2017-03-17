@@ -7,9 +7,9 @@
 //
 
 #import "SOXBanner_BitcoinDE_Data.h"
-#import "SOXBannerData_Private.h"
 
 #import "SOXMarket_BitcoinDE_Core.h"
+
 // showAccountInfo
 // BTC-Balance
 NSString *const BitcoinDE_BTCBalanceKey = @"btc_balance"; // Infos zur BTC-Balance
@@ -38,24 +38,12 @@ NSString *const BitcoinDE_BankUserUIDKey = @"uid"; // Verschlüsselte eigene Use
 
 + (void)startBannerUpdatesSceduleTime:(NSTimeInterval)timeInterval
                              delegate:(id <SOXBannerDataProtocol>)delegate {
-    // timer
-    weakify(self)
-    NSTimer *reloadBannerDataTimer = [NSTimer timerWithTimeInterval:timeInterval
-                                                            repeats:YES
-                                                              block:^(NSTimer * _Nonnull timer) {
-                                                                  strongify(self)
-                                                                  [self startBannerUpdate];
-                                                              }];
-    [SOXBanner_BitcoinDE_Data sharedData].reloadBannerDataTimer = reloadBannerDataTimer;
-    
-    // delegate
-    [SOXBanner_BitcoinDE_Data sharedData].delegate = delegate;
-}
+   }
 
 - (void)startBannerUpdate {
     NSLog(@"startBannerUpdate");
     
-    [SOXMarket_BitcoinDE_Core]
+//    [SOXMarket_BitcoinDE_Core]
 }
 
 @end

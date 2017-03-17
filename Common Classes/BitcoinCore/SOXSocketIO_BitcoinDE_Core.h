@@ -6,11 +6,17 @@
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
 
-#import "SOXSocketIOCore.h"
+#import <Foundation/Foundation.h>
 
+@protocol SOXSocketIOCoreProtocol <NSObject>
 
-@interface SOXSocketIO_BitcoinDE_Core : SOXSocketIOCore
+- (void)addOrder:(NSArray *)socketArgs;
+- (void)removeOrder:(NSArray *)socketArgs;
+- (void)updateOrder:(NSArray *)socketArgs;
+
+@end
+@interface SOXSocketIO_BitcoinDE_Core : NSObject
 
 + (void)startWebSocketCore;
-
+@property (weak, nonatomic) id <SOXSocketIOCoreProtocol> delegate;
 @end

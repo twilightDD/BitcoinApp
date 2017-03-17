@@ -6,7 +6,8 @@
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
 
-#import "SOXBannerData.h"
+#import <Foundation/Foundation.h>
+
 
 // showAccountInfo
 // BTC-Balance
@@ -28,6 +29,6 @@ FOUNDATION_EXPORT NSString *const BitcoinDE_BankBICshortKey;
 FOUNDATION_EXPORT NSString *const BitcoinDE_BankBICfullKey;
 FOUNDATION_EXPORT NSString *const BitcoinDE_BankUserUIDKey;
 
-@interface SOXBanner_BitcoinDE_Data : SOXBannerData
+@interface SOXBanner_BitcoinDE_Data : NSObject
 
 @end

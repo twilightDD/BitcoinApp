@@ -6,10 +6,12 @@
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
 
-#import "SOXMarketCore.h"
+#import <Foundation/Foundation.h>
+
 typedef NS_ENUM (NSUInteger, BitcoinDE_ServerCommandType) {
     UnknownCommand = 0
-    , BitcoinDE_ShowOrderbookCommandType
+    , BitcoinDE_ShowBuyOrderbookCommandType
+    , BitcoinDE_ShowSellOrderbookCommandType
     , BitcoinDE_ShowMyOrdersCommandType
     , BitcoinDE_ShowMyOrderDetailsCommandType
     , BitcoinDE_ShowAccountInfoCommandType
@@ -18,7 +20,23 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_ServerCommandType) {
     , BitcoinDE_ShowRatesCommandType
 };
 
-@interface SOXMarket_BitcoinDE_Core : SOXMarketCore
+@protocol SOXBannerDataProtocol <NSObject>
+
+- (void)didUpdateBannerData:(id _Nonnull)bannerData;
+
+@end
+
+@interface SOXMarket_BitcoinDE_Core : NSObject
+
+/**
+ *  Singleton.
+ *
+ *  @return The Core.
+ */
++ (instancetype _Nonnull)sharedCore;
+
++ (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType respondTo:(id _Nonnull)controller;
++ (void)startBannerUpdatesWithScheduleTime:(NSTimeInterval)timeInterval delegate:(id <SOXBannerDataProtocol> _Nonnull)delegateForBannerUpdates;
 
 + (NSURLRequest * _Nullable)urlRequestForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType;
 
