@@ -22,6 +22,7 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_ServerCommandType) {
 
 FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerServerCommandKey;
 FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerPayloadKey;
+FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerURLResponseKey;
 FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerErrorKey;
 
 @protocol SOXMarketCoreServerRequestProtocol <NSObject>

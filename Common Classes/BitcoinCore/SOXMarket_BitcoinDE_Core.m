@@ -12,6 +12,7 @@
 
 NSString *const _Nonnull ServerAnswerServerCommandKey = @"ServerCommand";
 NSString *const _Nonnull ServerAnswerPayloadKey       = @"Payload";
+NSString *const _Nonnull ServerAnswerURLResponseKey   = @"URLResponse";
 NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
 
 
@@ -45,27 +46,43 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
                           respondTo:(id <SOXMarketCoreServerRequestProtocol> _Nonnull)controller {
     NSURLRequest *request = [self urlRequestForServerCommandType:serverCommandType];
     
-//    weakify(self);
     NSURLSessionTask *getTask = [[NSURLSession sharedSession] dataTaskWithRequest:request
                                                                 completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-//                                                                    strongify(self);
                                                                     
-                                                                    NSError *jsonError = nil;
-                                                                    NSDictionary *payloadDictionary = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                                                           options:0
-                                                                                                                                             error:&jsonError];
-                                                                    NSDictionary *serverAnswer = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                                                                  @(serverCommandType), ServerAnswerServerCommandKey
-                                                                                                  , payloadDictionary, ServerAnswerPayloadKey
-                                                                                                  , nil];
+                                                                    NSDictionary *payloadDictionary;
+                                                                    {
+                                                                        NSError *jsonError = nil;
+                                                                        payloadDictionary = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                                            options:0
+                                                                                                                              error:&jsonError];
                                                                     
+                                                                        if (jsonError) {
+                                                                            NSLog(@"JSONError: %@", jsonError);
+                                                                            return;
+                                                                        }
+                                                                    }
+                                                                    
+                                                                    NSDictionary *serverAnswer;
+                                                                    {
+                                                                        if (error) {
+                                                                            serverAnswer = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                                                            @(serverCommandType), ServerAnswerServerCommandKey
+                                                                                            ,response, ServerAnswerURLResponseKey
+                                                                                            ,error, ServerAnswerErrorKey
+                                                                                            , nil];
+                                                                        }
+                                                                        else {
+                                                                            serverAnswer = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                                                            @(serverCommandType), ServerAnswerServerCommandKey
+                                                                                            , payloadDictionary, ServerAnswerPayloadKey
+                                                                                            , response, ServerAnswerURLResponseKey
+                                                                                            , nil];
+                                                                        }
+                                                                    }
+
                                                                     if ([controller respondsToSelector:@selector(answerOfServerRequest:)]) {
                                                                         [controller performSelector:@selector(answerOfServerRequest:)
                                                                                          withObject:serverAnswer];
-                                                                        
-//                                                                        [controller performSelectorOnMainThread:@selector(answerOfServerRequest:)
-//                                                                                                     withObject:serverAnswer
-//                                                                                                  waitUntilDone:NO];
                                                                     }
                                                                     
 //                                                                    NSLog(@"completionHandler");
