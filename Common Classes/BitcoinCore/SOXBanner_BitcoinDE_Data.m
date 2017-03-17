@@ -36,14 +36,5 @@ NSString *const BitcoinDE_BankUserUIDKey = @"uid"; // Verschlüsselte eigene Use
 
 @implementation SOXBanner_BitcoinDE_Data
 
-+ (void)startBannerUpdatesSceduleTime:(NSTimeInterval)timeInterval
-                             delegate:(id <SOXBannerDataProtocol>)delegate {
-   }
-
-- (void)startBannerUpdate {
-    NSLog(@"startBannerUpdate");
-    
-//    [SOXMarket_BitcoinDE_Core]
-}
 
 @end
