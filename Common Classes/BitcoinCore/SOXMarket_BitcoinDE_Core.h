@@ -20,6 +20,13 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_ServerCommandType) {
     , BitcoinDE_ShowRatesCommandType
 };
 
+
+@protocol SOXMarketCoreServerRequestProtocol <NSObject>
+
+- (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest;
+
+@end
+
 @protocol SOXBannerDataProtocol <NSObject>
 
 - (void)didUpdateBannerData:(id _Nonnull)bannerData;
