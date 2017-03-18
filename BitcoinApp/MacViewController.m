@@ -11,6 +11,12 @@
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXSocketIO_BitcoinDE_Core.h"
 
+#import "SOXOrdersViewController.h"
+
+static NSString *BannerContainerViewSegueKey      = @"BannerContainerViewSegue";
+static NSString *OrdersViewControllerBuySegueKey  = @"OrdersViewControllerBuySegue";
+static NSString *OrdersViewControllerSellSegueKey = @"OrdersViewControllerSellSegue";
+
 @interface MacViewController () <SOXSocketIOCoreProtocol>
 
 @property (strong, nonatomic) NSDictionary *serverAnswerDictionary;
@@ -29,6 +35,8 @@
 -(void)viewWillAppear {
     [super viewWillAppear];
 
+    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType
+                                                respondTo:self];
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowRatesCommandType
                                                 respondTo:self];
     
@@ -39,6 +47,17 @@
     [super setRepresentedObject:representedObject];
 
     // Update the view, if already loaded.
+}
+
+-(void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.description isEqualToString:OrdersViewControllerBuySegueKey]) {
+        SOXOrdersViewController *viewC = segue.destinationController;
+        viewC.orderType = OrdersBuyType;
+    }
+    else if ([segue.description isEqualToString:OrdersViewControllerSellSegueKey]) {
+        SOXOrdersViewController *viewC = segue.destinationController;
+        viewC.orderType = OrdersSellType;
+    }
 }
 
 #pragma mark - Socket

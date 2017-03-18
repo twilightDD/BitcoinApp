@@ -12,6 +12,7 @@
 		B9F68ED00EF1147E8A37D564 /* libPods-mac BitcoinApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 337C676324C43B0D3C145DF6 /* libPods-mac BitcoinApp.a */; };
 		D0270AE41E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m in Sources */ = {isa = PBXBuildFile; fileRef = D0270AE31E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m */; };
 		D0270AE51E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m in Sources */ = {isa = PBXBuildFile; fileRef = D0270AE31E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m */; };
+		D0331D531E7CAEFF008C0244 /* SOXOrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0331D521E7CAEFF008C0244 /* SOXOrdersViewController.m */; };
 		D049C4511E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.m in Sources */ = {isa = PBXBuildFile; fileRef = D049C4501E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.m */; };
 		D049C4521E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.m in Sources */ = {isa = PBXBuildFile; fileRef = D049C4501E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.m */; };
 		D049C4591E7712E6003CBF36 /* SOXConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D049C4561E7712E6003CBF36 /* SOXConstants.m */; };
@@ -72,6 +73,8 @@
 		C4B6EA76C6E9993DA0945AD1 /* Pods-iOS BitcoinApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS BitcoinApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOS BitcoinApp/Pods-iOS BitcoinApp.release.xcconfig"; sourceTree = "<group>"; };
 		D0270AE21E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXSocketIO_BitcoinDE_Core.h; sourceTree = "<group>"; };
 		D0270AE31E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXSocketIO_BitcoinDE_Core.m; sourceTree = "<group>"; };
+		D0331D511E7CAEFF008C0244 /* SOXOrdersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXOrdersViewController.h; sourceTree = "<group>"; };
+		D0331D521E7CAEFF008C0244 /* SOXOrdersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXOrdersViewController.m; sourceTree = "<group>"; };
 		D03B371C1E78ADBE00DD9DFA /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		D049C44F1E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXMarket_BitcoinDE_Core.h; sourceTree = "<group>"; };
 		D049C4501E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXMarket_BitcoinDE_Core.m; sourceTree = "<group>"; };
@@ -167,6 +170,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D0331D501E7CAEE3008C0244 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D0331D511E7CAEFF008C0244 /* SOXOrdersViewController.h */,
+				D0331D521E7CAEFF008C0244 /* SOXOrdersViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		D049C4491E77082D003CBF36 /* Common Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,6 +242,7 @@
 			children = (
 				D063E9181E74BF97006E2D17 /* MacAppDelegate.h */,
 				D063E9191E74BF97006E2D17 /* MacAppDelegate.m */,
+				D0331D501E7CAEE3008C0244 /* Controller */,
 				D063E91E1E74BF97006E2D17 /* MacViewController.h */,
 				D063E91F1E74BF97006E2D17 /* MacViewController.m */,
 				D063E9241E74BF97006E2D17 /* Assets.xcassets */,
@@ -694,6 +707,7 @@
 				D049C4511E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.m in Sources */,
 				D049C45B1E7712E6003CBF36 /* SOXHash.m in Sources */,
 				D049C4591E7712E6003CBF36 /* SOXConstants.m in Sources */,
+				D0331D531E7CAEFF008C0244 /* SOXOrdersViewController.m in Sources */,
 				D063E9201E74BF97006E2D17 /* MacViewController.m in Sources */,
 				D063E91D1E74BF97006E2D17 /* main.m in Sources */,
 				D063E91A1E74BF97006E2D17 /* MacAppDelegate.m in Sources */,
