@@ -860,7 +860,7 @@
                                                     </customSpacing>
                                                 </stackView>
                                                 <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="BIc-f8-Hqa">
-                                                    <rect key="frame" x="141" y="202" width="5" height="96"/>
+                                                    <rect key="frame" x="141" y="0.0" width="5" height="298"/>
                                                 </box>
                                                 <stackView distribution="fillEqually" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rJL-Qj-YBC">
                                                     <rect key="frame" x="160" y="179" width="128" height="119"/>
@@ -995,7 +995,7 @@
                                                     </customSpacing>
                                                 </stackView>
                                                 <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Tvo-4p-Qde">
-                                                    <rect key="frame" x="302" y="202" width="5" height="96"/>
+                                                    <rect key="frame" x="302" y="0.0" width="5" height="298"/>
                                                 </box>
                                                 <stackView distribution="fillEqually" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fOj-HV-tQV">
                                                     <rect key="frame" x="321" y="204" width="127" height="94"/>
@@ -1151,6 +1151,13 @@
                         <outlet property="btcBalanceReservedAmountTextField" destination="VTX-vr-jAB" id="MuN-3e-p6x"/>
                         <outlet property="btcBalanceTotalAmountDescriptionTextField" destination="FIe-Bo-Niw" id="ErM-Iw-3Ya"/>
                         <outlet property="btcBalanceTotalAmountTextField" destination="KMw-dO-CSw" id="DV6-3Q-eWJ"/>
+                        <outlet property="ratesHeadlineTextField" destination="zfI-FP-Coh" id="EaM-Mq-7Na"/>
+                        <outlet property="ratesRateWeighted12hDescriptionTextField" destination="JaA-na-sDd" id="Jv2-Kj-Sx7"/>
+                        <outlet property="ratesRateWeighted12hTextField" destination="gNZ-JI-dug" id="o0p-P1-X2g"/>
+                        <outlet property="ratesRateWeighted3hDescriptionTextField" destination="Kui-ji-oFc" id="Hoc-MF-ie8"/>
+                        <outlet property="ratesRateWeighted3hTextField" destination="fbO-bM-e6C" id="tmY-NH-2Uz"/>
+                        <outlet property="ratesRateWeightedDescriptionTextField" destination="s1s-l7-ZDR" id="S1E-L0-hOe"/>
+                        <outlet property="ratesRateWeightedTextField" destination="slR-4r-Xj5" id="ylo-K4-Cb4"/>
                     </connections>
                 </viewController>
                 <customObject id="qFb-Ue-orS" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

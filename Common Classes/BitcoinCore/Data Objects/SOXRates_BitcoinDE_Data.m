@@ -22,7 +22,7 @@
 
 @implementation SOXRates_BitcoinDE_Data
 
-@dynamic rate_weighted, rate_weighted_3h, rate_weighted_12h;
+@synthesize rate_weighted, rate_weighted_3h, rate_weighted_12h;
 
 + (SOXRatesData *)rateDataForRateInfoDictionary:(NSDictionary *)payloadDictionary {
     SOXRates_BitcoinDE_Data *rateData = [[SOXRates_BitcoinDE_Data alloc] init];

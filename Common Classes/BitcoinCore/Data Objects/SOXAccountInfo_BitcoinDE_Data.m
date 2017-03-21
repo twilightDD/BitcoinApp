@@ -57,9 +57,9 @@ NSString *const BitcoinDE_BankUserUIDKey = @"uid"; // Verschlüsselte eigene Use
 #pragma mark - Implementation
 @implementation SOXAccountInfo_BitcoinDE_Data
 
-@dynamic btcBalance_totalAmount, btcBalance_availableAmount, btcBalance_reservedAmount;
-@dynamic bankReservation_exists, bankReservation_totalAmount, bankReservation_availableAmount, bankReservation_reservedAt, bankReservation_validUntil;
-@dynamic bankInformation_bicShort, bankInformation_bicFull, bankInformation_UID;
+@synthesize btcBalance_totalAmount, btcBalance_availableAmount, btcBalance_reservedAmount;
+@synthesize bankReservation_exists, bankReservation_totalAmount, bankReservation_availableAmount, bankReservation_reservedAt, bankReservation_validUntil;
+@synthesize bankInformation_bicShort, bankInformation_bicFull, bankInformation_UID;
 
 + (instancetype)accountInfoDataForAccountInfoDictionary:(NSDictionary *)accountInfoDictionary {
     SOXAccountInfo_BitcoinDE_Data *bannerData = [[SOXAccountInfo_BitcoinDE_Data alloc] init];

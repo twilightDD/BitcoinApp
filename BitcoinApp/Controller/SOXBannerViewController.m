@@ -10,17 +10,30 @@
 
 #import "SOXMarket_BitcoinDE_Core.h"
 
-#import "SOXAccountInfo_BitcoinDE_Data.h"
+#import "SOXAccountInfoData.h"
+#import "SOXRatesData.h"
+
 #pragma mark - Interface
 @interface SOXBannerViewController () <SOXMarketCoreServerRequestProtocol>
+
 #pragma mark IBOutlets
+// accountInfoData
 @property (weak) IBOutlet NSTextField *btcBalanceHeadlineTextField;
 @property (weak) IBOutlet NSTextField *btcBalanceTotalAmountDescriptionTextField;
 @property (weak) IBOutlet NSTextField *btcBalanceTotalAmountTextField;
 @property (weak) IBOutlet NSTextField *btcBalanceAvailableAmountDescriptionTextField;
 @property (weak) IBOutlet NSTextField *btcBalanceAvailableAmountTextField;
-@property (weak) IBOutlet NSTextField *btcBalanceReservedAmountTextField;
 @property (weak) IBOutlet NSTextField *btcBalanceReservedAmountDescriptionTextField;
+@property (weak) IBOutlet NSTextField *btcBalanceReservedAmountTextField;
+
+// ratesData
+@property (weak) IBOutlet NSTextField *ratesHeadlineTextField;
+@property (weak) IBOutlet NSTextField *ratesRateWeightedDescriptionTextField;
+@property (weak) IBOutlet NSTextField *ratesRateWeightedTextField;
+@property (weak) IBOutlet NSTextField *ratesRateWeighted3hDescriptionTextField;
+@property (weak) IBOutlet NSTextField *ratesRateWeighted3hTextField;
+@property (weak) IBOutlet NSTextField *ratesRateWeighted12hDescriptionTextField;
+@property (weak) IBOutlet NSTextField *ratesRateWeighted12hTextField;
 
 #pragma mark Properties
 
@@ -50,27 +63,47 @@
 }
 
 - (void)setupUI {
-    self.btcBalanceHeadlineTextField.stringValue = @"Bitcoins";
-    self.btcBalanceTotalAmountDescriptionTextField.stringValue = @"Total smount";
-    self.btcBalanceAvailableAmountDescriptionTextField.stringValue = @"Available amount";
-    self.btcBalanceReservedAmountDescriptionTextField.stringValue = @"Reserved amount";
+    // BTC stack
+    {
+        self.btcBalanceHeadlineTextField.stringValue = @"My Bitcoins";
+        
+        self.btcBalanceTotalAmountDescriptionTextField.stringValue = @"Total smount";
+        self.btcBalanceAvailableAmountDescriptionTextField.stringValue = @"Available amount";
+        self.btcBalanceReservedAmountDescriptionTextField.stringValue = @"Reserved amount";
+        
+        self.btcBalanceTotalAmountTextField.stringValue = @"...";
+        self.btcBalanceAvailableAmountTextField.stringValue = @"...";
+        self.btcBalanceReservedAmountTextField.stringValue = @"...";
+    }
     
+    // Bank stack
+    {
     
-    self.btcBalanceTotalAmountTextField.stringValue = @"...";
-    self.btcBalanceAvailableAmountTextField.stringValue = @"...";
-    self.btcBalanceReservedAmountTextField.stringValue = @"...";
+    }
     
+    // Rates stack
+    {
+        self.ratesHeadlineTextField.stringValue = @"Weighted Bitcoin Rates";
+        
+        self.ratesRateWeightedDescriptionTextField.stringValue = @"Current";
+        self.ratesRateWeighted3hDescriptionTextField.stringValue = @"Last 3 hours";
+        self.ratesRateWeighted12hDescriptionTextField.stringValue = @"Last 12 hours";
+        
+        self.ratesRateWeightedTextField.stringValue = @"...";
+        self.ratesRateWeighted3hTextField.stringValue = @"...";
+        self.ratesRateWeighted12hTextField.stringValue = @"...";
+    }
 }
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
 - (void)answerOfServerRequest:(NSDictionary *)answerOfServerRequest {
 
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowAccountInfoCommandType)]) {
-        SOXAccountInfo_BitcoinDE_Data *bannerData = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
+        SOXAccountInfoData *accountInfoData = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
         { //  btc_balance
-            self.btcBalanceTotalAmountTextField.stringValue = bannerData.btcBalance_totalAmount;
-            self.btcBalanceAvailableAmountTextField.stringValue = bannerData.btcBalance_totalAmount;
-            self.btcBalanceReservedAmountTextField.stringValue = bannerData.btcBalance_reservedAmount;
+            self.btcBalanceTotalAmountTextField.stringValue = accountInfoData.btcBalance_totalAmount;
+            self.btcBalanceAvailableAmountTextField.stringValue = accountInfoData.btcBalance_totalAmount;
+            self.btcBalanceReservedAmountTextField.stringValue = accountInfoData.btcBalance_reservedAmount;
         }
         { // fidor_reservation
             
@@ -78,7 +111,13 @@
         }
     }
     else if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowRatesCommandType)]) {
-        NSLog(@"BitcoinDE_ShowRatesCommandType\n%@",answerOfServerRequest);
+        SOXRatesData *ratesData = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
+        { //  rates
+            self.ratesRateWeightedTextField.stringValue = ratesData.rate_weighted;
+            self.ratesRateWeighted3hTextField.stringValue = ratesData.rate_weighted_3h;
+            self.ratesRateWeighted12hTextField.stringValue = ratesData.rate_weighted_12h;
+        }
+
     }
 }
 
