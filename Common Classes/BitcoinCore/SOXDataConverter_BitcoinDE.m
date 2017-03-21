@@ -9,7 +9,7 @@
 #import "SOXDataConverter_BitcoinDE.h"
 #import "SOXKeys_BitcoinDE.h"
 
-#import "SOXBanner_BitcoinDE_Data.h" // for BitcoinDE_ShowAccountInfoCommandType
+#import "SOXAccountInfo_BitcoinDE_Data.h" // for BitcoinDE_ShowAccountInfoCommandType
 @implementation SOXDataConverter_BitcoinDE
 
 + (id)payloadForServerDictionary:(NSDictionary *)payloadDictionary
@@ -49,8 +49,8 @@
     return payload;
 }
 
-+ (SOXBanner_BitcoinDE_Data *)showAccountPayloadForServerDictionary:(NSDictionary *)payloadDictionary {
-    SOXBanner_BitcoinDE_Data *payload = [SOXBanner_BitcoinDE_Data bannerDataForAccountInfo:payloadDictionary];
++ (SOXAccountInfo_BitcoinDE_Data *)showAccountPayloadForServerDictionary:(NSDictionary *)payloadDictionary {
+    SOXAccountInfo_BitcoinDE_Data *payload = [SOXAccountInfo_BitcoinDE_Data bannerDataForAccountInfo:payloadDictionary];
     return  payload;
 }
 

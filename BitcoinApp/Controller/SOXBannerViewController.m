@@ -10,7 +10,7 @@
 
 #import "SOXMarket_BitcoinDE_Core.h"
 
-#import "SOXBanner_BitcoinDE_Data.h"
+#import "SOXAccountInfo_BitcoinDE_Data.h"
 #pragma mark - Interface
 @interface SOXBannerViewController () <SOXMarketCoreServerRequestProtocol>
 #pragma mark IBOutlets
@@ -66,7 +66,7 @@
 - (void)answerOfServerRequest:(NSDictionary *)answerOfServerRequest {
 
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowAccountInfoCommandType)]) {
-        SOXBanner_BitcoinDE_Data *bannerData = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
+        SOXAccountInfo_BitcoinDE_Data *bannerData = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
         { //  btc_balance
             self.btcBalanceTotalAmountTextField.stringValue = bannerData.btcBalance_totalAmount;
             self.btcBalanceAvailableAmountTextField.stringValue = bannerData.btcBalance_totalAmount;

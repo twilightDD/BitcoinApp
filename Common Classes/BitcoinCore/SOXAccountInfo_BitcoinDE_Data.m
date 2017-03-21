@@ -6,7 +6,7 @@
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
 
-#import "SOXBanner_BitcoinDE_Data.h"
+#import "SOXAccountInfo_BitcoinDE_Data.h"
 
 #import "SOXKeys_BitcoinDE.h"
 
@@ -34,7 +34,7 @@ NSString *const BitcoinDE_BankBICfullKey = @"bic_full"; // Verschlüsselte kompl
 NSString *const BitcoinDE_BankUserUIDKey = @"uid"; // Verschlüsselte eigene User-Id
 
 #pragma mark - Interface
-@interface SOXBanner_BitcoinDE_Data ()
+@interface SOXAccountInfo_BitcoinDE_Data ()
 
 #pragma mark Properties
 
@@ -55,10 +55,10 @@ NSString *const BitcoinDE_BankUserUIDKey = @"uid"; // Verschlüsselte eigene Use
 @end
 
 #pragma mark - Implementation
-@implementation SOXBanner_BitcoinDE_Data
+@implementation SOXAccountInfo_BitcoinDE_Data
 
 + (instancetype)bannerDataForAccountInfo:(NSDictionary *)accountInfoDictionary {
-    SOXBanner_BitcoinDE_Data *bannerData = [[SOXBanner_BitcoinDE_Data alloc] init];
+    SOXAccountInfo_BitcoinDE_Data *bannerData = [[SOXAccountInfo_BitcoinDE_Data alloc] init];
 
     [bannerData setupDataForAccountInfo:accountInfoDictionary];
     

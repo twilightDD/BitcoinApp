@@ -10,7 +10,7 @@
 
 FOUNDATION_EXPORT NSString *const BannerDataKey;
 
-@interface SOXBanner_BitcoinDE_Data : NSObject
+@interface SOXAccountInfo_BitcoinDE_Data : NSObject
 
 @property (strong, nonatomic, readonly) NSString *btcBalance_totalAmount;
 @property (strong, nonatomic, readonly) NSString *btcBalance_availableAmount;
