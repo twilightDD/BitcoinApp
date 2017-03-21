@@ -35,10 +35,10 @@ static NSString *OrdersViewControllerSellSegueKey = @"OrdersViewControllerSellSe
 -(void)viewWillAppear {
     [super viewWillAppear];
 
-    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType
-                                                respondTo:self];
-    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowRatesCommandType
-                                                respondTo:self];
+//    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType
+//                                                respondTo:self];
+//    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowRatesCommandType
+//                                                respondTo:self];
     
    // [self openSocket];
 }

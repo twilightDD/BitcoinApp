@@ -8,27 +8,24 @@
 
 #import <Foundation/Foundation.h>
 
-
-// showAccountInfo
-// BTC-Balance
-FOUNDATION_EXPORT NSString *const BitcoinDE_BTCBalanceKey;
-FOUNDATION_EXPORT NSString *const BitcoinDE_BTCTotalAmountKey;
-FOUNDATION_EXPORT NSString *const BitcoinDE_BTCAvailAmountKey;
-FOUNDATION_EXPORT NSString *const BitcoinDE_BTCReservedAmountKey;
-
-// Fidor-Reservation
-FOUNDATION_EXPORT NSString *const BitcoinDE_FidorReservationKey;
-FOUNDATION_EXPORT NSString *const BitcoinDE_FidorTotalAmountKey;
-FOUNDATION_EXPORT NSString *const BitcoinDE_FidorAvailAmountKey;
-FOUNDATION_EXPORT NSString *const BitcoinDE_FidorReservedAtKey;
-FOUNDATION_EXPORT NSString *const BitcoinDE_FidorValidUntilKey;
-
-//Encrypted-Information
-FOUNDATION_EXPORT NSString *const BitcoinDE_BankInformationKey;
-FOUNDATION_EXPORT NSString *const BitcoinDE_BankBICshortKey;
-FOUNDATION_EXPORT NSString *const BitcoinDE_BankBICfullKey;
-FOUNDATION_EXPORT NSString *const BitcoinDE_BankUserUIDKey;
+FOUNDATION_EXPORT NSString *const BannerDataKey;
 
 @interface SOXBanner_BitcoinDE_Data : NSObject
+
+@property (strong, nonatomic, readonly) NSString *btcBalance_totalAmount;
+@property (strong, nonatomic, readonly) NSString *btcBalance_availableAmount;
+@property (strong, nonatomic, readonly) NSString *btcBalance_reservedAmount;
+
+@property (nonatomic, readonly) BOOL bankReservation_exists;
+@property (strong, nonatomic, readonly) NSString *bankReservation_totalAmount;
+@property (strong, nonatomic, readonly) NSString *bankReservation_availableAmount;
+@property (strong, nonatomic, readonly) NSString *bankReservation_reservedAt;
+@property (strong, nonatomic, readonly) NSString *bankReservation_validUntil;
+
+@property (strong, nonatomic, readonly) NSString *bankInformation_bicShort;
+@property (strong, nonatomic, readonly) NSString *bankInformation_bicFull;
+@property (strong, nonatomic, readonly) NSString *bankInformation_UID;
+
++ (instancetype)bannerDataForAccountInfo:(NSDictionary *)accountInfoDictionary;
 
 @end

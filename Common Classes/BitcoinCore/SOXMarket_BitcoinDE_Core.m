@@ -10,12 +10,12 @@
 
 #import "SOXHash.h"
 
+#import "SOXDataConverter_BitcoinDE.h"
+
 NSString *const _Nonnull ServerAnswerServerCommandKey = @"ServerCommand";
 NSString *const _Nonnull ServerAnswerPayloadKey       = @"Payload";
 NSString *const _Nonnull ServerAnswerURLResponseKey   = @"URLResponse";
 NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
-
-
 
 @interface SOXMarket_BitcoinDE_Core ()
 
@@ -42,60 +42,64 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
     return sharedCore;
 }
 
++ (NSDictionary *)answerDictionaryForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
+                                          withData:(NSData * _Nullable)data
+                                       urlResponse:(NSURLResponse * _Nullable)response
+                                             error:(NSError * _Nullable)error {
+    NSDictionary *payloadDictionary;
+    {
+        NSError *jsonError = nil;
+        payloadDictionary = [NSJSONSerialization JSONObjectWithData:data
+                                                            options:0
+                                                              error:&jsonError];
+        
+        if (jsonError) {
+            NSLog(@"JSONError: %@", jsonError);
+            return nil;
+        }
+    }
+    
+    NSDictionary *serverAnswer;
+    {
+        if (error) {
+            serverAnswer = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @(serverCommandType), ServerAnswerServerCommandKey
+                            ,response, ServerAnswerURLResponseKey
+                            ,error, ServerAnswerErrorKey
+                            , nil];
+        }
+        else {
+            id payload = [SOXDataConverter_BitcoinDE payloadForServerDictionary:payloadDictionary
+                                                               forServerCommand:serverCommandType];
+            
+            serverAnswer = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @(serverCommandType), ServerAnswerServerCommandKey
+                            , payload, ServerAnswerPayloadKey
+                            , response, ServerAnswerURLResponseKey
+                            , nil];
+        }
+    }
+    return serverAnswer;
+}
+
 + (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
-                          respondTo:(id <SOXMarketCoreServerRequestProtocol> _Nonnull)controller {
+                          respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nonnull)controller {
     NSURLRequest *request = [self urlRequestForServerCommandType:serverCommandType];
     
+    weakify(self)
     NSURLSessionTask *getTask = [[NSURLSession sharedSession] dataTaskWithRequest:request
                                                                 completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                                                                    
-                                                                    NSDictionary *payloadDictionary;
-                                                                    {
-                                                                        NSError *jsonError = nil;
-                                                                        payloadDictionary = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                                            options:0
-                                                                                                                              error:&jsonError];
-                                                                    
-                                                                        if (jsonError) {
-                                                                            NSLog(@"JSONError: %@", jsonError);
-                                                                            return;
-                                                                        }
-                                                                    }
-                                                                    
-                                                                    NSDictionary *serverAnswer;
-                                                                    {
-                                                                        if (error) {
-                                                                            serverAnswer = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                                                            @(serverCommandType), ServerAnswerServerCommandKey
-                                                                                            ,response, ServerAnswerURLResponseKey
-                                                                                            ,error, ServerAnswerErrorKey
-                                                                                            , nil];
-                                                                        }
-                                                                        else {
-                                                                            serverAnswer = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                                                            @(serverCommandType), ServerAnswerServerCommandKey
-                                                                                            , payloadDictionary, ServerAnswerPayloadKey
-                                                                                            , response, ServerAnswerURLResponseKey
-                                                                                            , nil];
-                                                                        }
-                                                                    }
-
+                                                                    strongify(self)
+                                                                    NSDictionary *serverAnswer = [self answerDictionaryForServerCommand:serverCommandType
+                                                                                                                               withData:data
+                                                                                                                            urlResponse:response
+                                                                                                                                  error:error];
+                                                                    // NSURLSessionTask has its own thread
                                                                     if ([controller respondsToSelector:@selector(answerOfServerRequest:)]) {
-                                                                        [controller performSelector:@selector(answerOfServerRequest:)
-                                                                                         withObject:serverAnswer];
+                                                                        [controller performSelectorOnMainThread:@selector(answerOfServerRequest:)
+                                                                                               withObject:serverAnswer
+                                                                                            waitUntilDone:YES];
                                                                     }
-                                                                    
-//                                                                    NSLog(@"completionHandler");
-//                                                                    NSLog(@"Data: %@", [data base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed]);
-//                                                                    NSLog(@"JSON: %@", self.serverAnswerDictionary);
-//                                                                    NSLog(@"response: %@", response);
-//                                                                    NSLog(@"error: %@", error);
-//                                                                    NSLog(@"jsonError: %@", jsonError);
-//                                                                    
-//                                                                    
-//                                                                    [self performSelectorOnMainThread:@selector(report:)
-//                                                                                           withObject:self.serverAnswerDictionary
-//                                                                                        waitUntilDone:YES];
                                                                     
                                                                 }];
     

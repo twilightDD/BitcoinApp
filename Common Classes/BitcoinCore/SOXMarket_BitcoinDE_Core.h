@@ -46,7 +46,7 @@ FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerErrorKey;
  */
 + (instancetype _Nonnull)sharedCore;
 
-+ (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType respondTo:(id <SOXMarketCoreServerRequestProtocol> _Nonnull)controller;
++ (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nonnull)controller;
 
 + (void)startBannerUpdatesWithScheduleTime:(NSTimeInterval)timeInterval delegate:(id <SOXBannerDataProtocol> _Nonnull)delegateForBannerUpdates;
 
