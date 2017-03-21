@@ -17,7 +17,7 @@
 @interface SOXBannerViewController () <SOXMarketCoreServerRequestProtocol>
 
 #pragma mark IBOutlets
-// accountInfoData
+#pragma mark | accountInfoData (BTCBalance)
 @property (weak) IBOutlet NSTextField *btcBalanceHeadlineTextField;
 @property (weak) IBOutlet NSTextField *btcBalanceTotalAmountDescriptionTextField;
 @property (weak) IBOutlet NSTextField *btcBalanceTotalAmountTextField;
@@ -26,6 +26,7 @@
 @property (weak) IBOutlet NSTextField *btcBalanceReservedAmountDescriptionTextField;
 @property (weak) IBOutlet NSTextField *btcBalanceReservedAmountTextField;
 
+#pragma mark | accountInfoData (Bank Reservation)
 @property (weak) IBOutlet NSTextField *fidorReservationHeadlineTextField;
 @property (weak) IBOutlet NSTextField *fidorReservationTotalAmountDescriptionTextField;
 @property (weak) IBOutlet NSTextField *fidorReservationTotalAmountTextField;
@@ -35,9 +36,9 @@
 @property (weak) IBOutlet NSTextField *fidorReservationReservedAtTextField;
 @property (weak) IBOutlet NSTextField *fidorReservationValidUntilDescriptionTextField;
 @property (weak) IBOutlet NSTextField *fidorReservationValidUntilTextField;
-@property (weak) IBOutlet NSStackView *fidorReservationValuesAtackView;
+@property (weak) IBOutlet NSStackView *fidorReservationValuesStackView;
 
-// ratesData
+#pragma mark | ratesData
 @property (weak) IBOutlet NSTextField *ratesHeadlineTextField;
 @property (weak) IBOutlet NSTextField *ratesRateWeightedDescriptionTextField;
 @property (weak) IBOutlet NSTextField *ratesRateWeightedTextField;
@@ -46,17 +47,14 @@
 @property (weak) IBOutlet NSTextField *ratesRateWeighted12hDescriptionTextField;
 @property (weak) IBOutlet NSTextField *ratesRateWeighted12hTextField;
 
-#pragma mark Properties
-
-
 @end
 
 #pragma mark - Implementation
 @implementation SOXBannerViewController
+
 #pragma mark Init&Co.
 - (void)viewDidLoad {
     [super viewDidLoad];
-
 }
 
 - (void)viewWillAppear {
@@ -68,11 +66,9 @@
                                                 respondTo:self];
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountInfoCommandType
                                                 respondTo:self];
-    
-    
-    
 }
 
+#pragma mark - Private methods
 - (void)setupUI {
     // BTC stack
     {
@@ -117,10 +113,10 @@
     }
 }
 
-- (void)updateBankReservationWithAccountInfoData:(SOXAccountInfoData *)accountInfoData {
+- (void)updateUIForBankReservationWithAccountInfoData:(SOXAccountInfoData *)accountInfoData {
     BOOL bankReservation_exists = accountInfoData.bankReservation_exists;
     
-    self.fidorReservationValuesAtackView.hidden = !bankReservation_exists;
+    self.fidorReservationValuesStackView.hidden = !bankReservation_exists;
     
     // set strings / values
     if (bankReservation_exists) {
@@ -147,27 +143,28 @@
 
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowAccountInfoCommandType)]) {
         SOXAccountInfoData *accountInfoData = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
-        { //  btc_balance
+        
+        //  btc_balance
+        {
             self.btcBalanceTotalAmountTextField.doubleValue = accountInfoData.btcBalance_totalAmount.doubleValue;
             self.btcBalanceAvailableAmountTextField.doubleValue = accountInfoData.btcBalance_totalAmount.doubleValue;
             self.btcBalanceReservedAmountTextField.doubleValue = accountInfoData.btcBalance_reservedAmount.doubleValue;
         }
-        { // fidor_reservation
-            [self updateBankReservationWithAccountInfoData:accountInfoData];
-
-
+        
+        // fidor_reservation
+        {
+            [self updateUIForBankReservationWithAccountInfoData:accountInfoData];
         }
     }
     else if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowRatesCommandType)]) {
         SOXRatesData *ratesData = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
-        { //  rates
+        //  rates
+        {
             self.ratesRateWeightedTextField.doubleValue = ratesData.rate_weighted.doubleValue;
             self.ratesRateWeighted3hTextField.doubleValue = ratesData.rate_weighted_3h.doubleValue;
             self.ratesRateWeighted12hTextField.doubleValue = ratesData.rate_weighted_12h.doubleValue;
         }
-
     }
 }
-
 
 @end
