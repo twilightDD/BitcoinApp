@@ -10,8 +10,8 @@
 
 typedef NS_ENUM (NSUInteger, BitcoinDE_ServerCommandType) {
     UnknownCommand = 0
-    , BitcoinDE_ShowBuyOrderbookCommandType
-    , BitcoinDE_ShowSellOrderbookCommandType
+    , BitcoinDE_ShowBuyOrderbookCommandType  //"buy" liefert Verkaufsangebote
+    , BitcoinDE_ShowSellOrderbookCommandType //"sell" liefert Kaufangebote
     , BitcoinDE_ShowMyOrdersCommandType
     , BitcoinDE_ShowMyOrderDetailsCommandType
     , BitcoinDE_ShowAccountInfoCommandType
