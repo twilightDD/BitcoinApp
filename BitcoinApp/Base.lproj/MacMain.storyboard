@@ -1272,6 +1272,9 @@
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_price" id="oS0-E4-Kk3"/>
+                                                    </connections>
                                                 </tableColumn>
                                                 <tableColumn width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="zyz-M6-5GS">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="type">
@@ -1285,6 +1288,9 @@
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_type" id="ckv-XP-6gp"/>
+                                                    </connections>
                                                 </tableColumn>
                                                 <tableColumn width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="UPh-EJ-q2O">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="min_amount">
@@ -1298,6 +1304,9 @@
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_minAmount" id="Wwb-xO-ImZ"/>
+                                                    </connections>
                                                 </tableColumn>
                                                 <tableColumn width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="5bU-JA-imQ">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="max_amount">
@@ -1311,6 +1320,9 @@
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_maxAmount" id="xfr-H7-NS6"/>
+                                                    </connections>
                                                 </tableColumn>
                                                 <tableColumn width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="ZJI-GQ-9iw">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="min_volume">
@@ -1324,6 +1336,9 @@
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_minVolume" id="rpE-42-Tgh"/>
+                                                    </connections>
                                                 </tableColumn>
                                                 <tableColumn width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="gdz-ZB-REf">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="max_volume">
@@ -1337,6 +1352,9 @@
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_maxVolume" id="cza-50-EUc"/>
+                                                    </connections>
                                                 </tableColumn>
                                                 <tableColumn width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="i1d-J7-uwz">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Req. fullfilled">
@@ -1350,6 +1368,9 @@
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_orderRequirementsFullfilled" id="d6v-eB-F1E"/>
+                                                    </connections>
                                                 </tableColumn>
                                             </tableColumns>
                                         </tableView>
