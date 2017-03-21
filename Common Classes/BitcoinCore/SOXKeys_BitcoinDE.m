@@ -31,6 +31,36 @@ NSString *const BitcoinDE_ShowAccountInfoEncryptedInformation_bic_short         
 NSString *const BitcoinDE_ShowAccountInfoEncryptedInformation_bic_full                = @"bic_full";
 NSString *const BitcoinDE_ShowAccountInfoEncryptedInformation_uid                     = @"uid";
 
+#pragma mark - BitcoinDE_ShowOrderbook
+NSString *const BitcoinDE_ShowOrderbook_MainKey = @"orders";
+
+#pragma mark | Order
+NSString *const BitcoinDE_ShowOrderbook_OrderID                     = @"order_id";
+NSString *const BitcoinDE_ShowOrderbook_Type                        = @"type";
+NSString *const BitcoinDE_ShowOrderbook_MaxAmount                   = @"max_amount";
+NSString *const BitcoinDE_ShowOrderbook_MinAmount                   = @"min_amount";
+NSString *const BitcoinDE_ShowOrderbook_Price                       = @"price";
+NSString *const BitcoinDE_ShowOrderbook_MaxVolume                   = @"max_volume";
+NSString *const BitcoinDE_ShowOrderbook_MinVolume                   = @"min_volume";
+NSString *const BitcoinDE_ShowOrderbook_OrderRequirementsFullfilled = @"order_requirements_fullfilled";
+
+#pragma mark | Trading Partner Information
+NSString *const BitcoinDE_ShowOrderbook_TradingPartnerInformation               = @"trading_partner_information";
+NSString *const BitcoinDE_ShowOrderbook_TradingPartnerInformation_Username      = @"username";
+NSString *const BitcoinDE_ShowOrderbook_TradingPartnerInformation_IsKYCFull     = @"is_kyc_full";
+NSString *const BitcoinDE_ShowOrderbook_TradingPartnerInformation_TrustLevel    = @"trust_level";
+NSString *const BitcoinDE_ShowOrderbook_TradingPartnerInformation_BankName      = @"bank_name";
+NSString *const BitcoinDE_ShowOrderbook_TradingPartnerInformation_BIC           = @"bic";
+NSString *const BitcoinDE_ShowOrderbook_TradingPartnerInformation_Rating        = @"rating";
+NSString *const BitcoinDE_ShowOrderbook_TradingPartnerInformation_AmountTrades  = @"amount_trades";
+
+#pragma mark | Order Requirements
+NSString *const BitcoinDE_ShowOrderbook_OrderRequirements                   = @"order_requirements";
+NSString *const BitcoinDE_ShowOrderbook_OrderRequirements_MinTrustLevel     = @"min_trust_level";
+NSString *const BitcoinDE_ShowOrderbook_OrderRequirements_OnlyKYCFull       = @"only_kyc_full";
+NSString *const BitcoinDE_ShowOrderbook_OrderRequirements_SeatOfBank        = @"seat_of_bank";
+NSString *const BitcoinDE_ShowOrderbook_OrderRequirements_PaymentOptions    = @"payment_option";
+
 #pragma mark - BitcoinDE_ShowRates
 NSString *const BitcoinDE_ShowRates_MainKey = @"rates";
 #pragma mark | Rates

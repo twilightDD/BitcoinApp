@@ -20,10 +20,12 @@
 
 @end
 
+#pragma mark - Implementation
 @implementation SOXRates_BitcoinDE_Data
-
+#pragma mark Synthesize
 @synthesize rate_weighted, rate_weighted_3h, rate_weighted_12h;
 
+#pragma mark - Init & Co.
 + (SOXRatesData *)rateDataForRateInfoDictionary:(NSDictionary *)payloadDictionary {
     SOXRates_BitcoinDE_Data *rateData = [[SOXRates_BitcoinDE_Data alloc] init];
     
@@ -32,6 +34,7 @@
     return rateData;
 }
 
+#pragma mark - Instance methods
 - (void)setupDataForRateInfoDictionary:(NSDictionary *)payloadDictionary {
     NSDictionary *ratesDictionary = [payloadDictionary objectForKey:BitcoinDE_ShowRates_MainKey];
     

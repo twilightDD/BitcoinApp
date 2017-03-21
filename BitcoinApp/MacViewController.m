@@ -50,11 +50,11 @@ static NSString *OrdersViewControllerSellSegueKey = @"OrdersViewControllerSellSe
 }
 
 -(void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.description isEqualToString:OrdersViewControllerBuySegueKey]) {
+    if ([segue.identifier isEqualToString:OrdersViewControllerBuySegueKey]) {
         SOXOrdersViewController *viewC = segue.destinationController;
         viewC.orderType = OrdersBuyType;
     }
-    else if ([segue.description isEqualToString:OrdersViewControllerSellSegueKey]) {
+    else if ([segue.identifier isEqualToString:OrdersViewControllerSellSegueKey]) {
         SOXOrdersViewController *viewC = segue.destinationController;
         viewC.orderType = OrdersSellType;
     }

@@ -9,6 +9,7 @@
 #import "SOXDataConverter_BitcoinDE.h"
 #import "SOXKeys_BitcoinDE.h"
 
+#import "SOXShowOrderbook_BitcoinDE_Data.h" // BitcoinDE_ShowBuyOrderbookCommandType and BitcoinDE_ShowSellOrderbookCommandType
 #import "SOXAccountInfo_BitcoinDE_Data.h"   // for BitcoinDE_ShowAccountInfoCommandType
 #import "SOXRates_BitcoinDE_Data.h"         // for BitcoinDE_ShowRatesCommandType
 
@@ -18,11 +19,9 @@
                 forServerCommand:(BitcoinDE_ServerCommandType)serverCommandType {
     id payload;
     switch (serverCommandType) {
-        case BitcoinDE_ShowBuyOrderbookCommandType:
-            
-            break;
+        case BitcoinDE_ShowBuyOrderbookCommandType:;
         case BitcoinDE_ShowSellOrderbookCommandType:
-            
+            payload = payloadDictionary; //[SOXShowOrderbook_BitcoinDE_Data orderbookDataArrayForShowOrderbookDictionary:payloadDictionary];
             break;
         case BitcoinDE_ShowMyOrdersCommandType:
             

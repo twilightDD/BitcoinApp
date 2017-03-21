@@ -8,7 +8,12 @@
 
 #import "SOXOrdersViewController.h"
 
-@interface SOXOrdersViewController ()
+#import "SOXMarket_BitcoinDE_Core.h"
+#import "SOXShowOrderbook_BitcoinDE_Data.h"
+
+@interface SOXOrdersViewController () <SOXMarketCoreServerRequestProtocol>
+
+@property (strong, nonatomic) NSMutableArray *orderBook;
 
 @end
 
@@ -19,6 +24,29 @@
 
 }
 
+- (void)viewWillAppear {
+    [super viewWillAppear];
+    if (self.orderType == OrdersBuyType) {
+        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType
+                                                         respondTo:self];
+    }
+    else if (self.orderType == OrdersSellType) {
+        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType
+                                                    respondTo:self];
+    }
+    else {
+        NSLog(@"SOXOrdersViewController - (void)viewWillAppear : self.orderType has wrong type");
+    }
+}
 
+#pragma mark - SOXMarketCoreServerRequestProtocol
+- (void)answerOfServerRequest:(NSDictionary *)answerOfServerRequest {
+    if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowBuyOrderbookCommandType)]
+        || [[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowSellOrderbookCommandType)]) {
+        NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
+        NSMutableArray *orderBook = [SOXShowOrderbook_BitcoinDE_Data orderbookDataArrayForShowOrderbookDictionary:payloadDictionary];
+        self.orderBook = orderBook;
+    }
+}
 
 @end

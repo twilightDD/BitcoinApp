@@ -10,29 +10,6 @@
 
 #import "SOXKeys_BitcoinDE.h"
 
-NSString *const BannerDataKey = @"BannerData";
-
-NSString *const BitcoinDEBannerDataDictionary = @"BitcoinDE_BannerData";
-// BitcoinDE_ShowAccountInfo
-// BTC-Balance
-NSString *const BitcoinDE_BTCBalanceKey = @"btc_balance"; // Infos zur BTC-Balance
-NSString *const BitcoinDE_BTCTotalAmountKey = @"total_amount"; // Aktuelles BTC-Guthaben
-NSString *const BitcoinDE_BTCAvailAmountKey = @"available_amount"; // Aktuell verfügbares BTC-Guthaben
-NSString *const BitcoinDE_BTCReservedAmountKey = @"reserved_amount"; // Aktuell reserviertes BTC-Guthaben
-
-// Fidor-Reservation
-NSString *const BitcoinDE_bankReservationKey = @"fidor_reservation"; // Infos zur ggfs. vorhandenen Fidor-Reservierung
-NSString *const BitcoinDE_FidorTotalAmountKey = @"total_amount"; // Gesambetrag der Reservierung
-NSString *const BitcoinDE_FidorAvailAmountKey = @"available_amount"; // Aktuell verfügbarer Betrag der Reservierung
-NSString *const BitcoinDE_FidorReservedAtKey = @"reserved_at"; // Erstelldatum der Reservierung (Format: 2015-04-07T12:23:04+02:00 nach RFC 3339)
-NSString *const BitcoinDE_FidorValidUntilKey = @"valid_until"; // Reservierung gültig bis (Format: 2015-04-07T12:23:04+02:00 gemäß RFC 3339)
-
-//Encrypted-Information
-NSString *const BitcoinDE_BankInformationKey = @"encrypted_information"; // verschlüsselte Infos
-NSString *const BitcoinDE_BankBICshortKey = @"bic_short"; // Verschlüsselte Bankengruppe aus der BIC (ersten 4 Zeichen)
-NSString *const BitcoinDE_BankBICfullKey = @"bic_full"; // Verschlüsselte komplette BIC
-NSString *const BitcoinDE_BankUserUIDKey = @"uid"; // Verschlüsselte eigene User-Id
-
 #pragma mark - Interface
 @interface SOXAccountInfo_BitcoinDE_Data ()
 
@@ -57,10 +34,12 @@ NSString *const BitcoinDE_BankUserUIDKey = @"uid"; // Verschlüsselte eigene Use
 #pragma mark - Implementation
 @implementation SOXAccountInfo_BitcoinDE_Data
 
+#pragma mark Synthesize
 @synthesize btcBalance_totalAmount, btcBalance_availableAmount, btcBalance_reservedAmount;
 @synthesize bankReservation_exists, bankReservation_totalAmount, bankReservation_availableAmount, bankReservation_reservedAt, bankReservation_validUntil;
 @synthesize bankInformation_bicShort, bankInformation_bicFull, bankInformation_UID;
 
+#pragma mark - Init & Co.
 + (instancetype)accountInfoDataForAccountInfoDictionary:(NSDictionary *)accountInfoDictionary {
     SOXAccountInfo_BitcoinDE_Data *bannerData = [[SOXAccountInfo_BitcoinDE_Data alloc] init];
 
@@ -69,7 +48,7 @@ NSString *const BitcoinDE_BankUserUIDKey = @"uid"; // Verschlüsselte eigene Use
     return bannerData;
 }
 
-#pragma mark - Class methods
+#pragma mark - Instance methods
 - (void)setupDataForAccountInfoDictionary:(NSDictionary *)accountInfoDictionary {
     NSDictionary *dataDict = [accountInfoDictionary objectForKey:BitcoinDE_ShowAccountInfo_MainKey];
 

@@ -31,6 +31,36 @@ FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfoEncryptedInformation_
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfoEncryptedInformation_bic_full;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfoEncryptedInformation_uid;
 
+#pragma mark - BitcoinDE_ShowOrderbook
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_MainKey;
+
+#pragma mark | Order
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_OrderID;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_Type;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_MaxAmount;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_MinAmount;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_Price;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_MaxVolume;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_MinVolume;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_OrderRequirementsFullfilled;
+
+#pragma mark | Trading Partner Information
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_TradingPartnerInformation;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_TradingPartnerInformation_Username;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_TradingPartnerInformation_IsKYCFull;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_TradingPartnerInformation_TrustLevel;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_TradingPartnerInformation_BankName;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_TradingPartnerInformation_BIC;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_TradingPartnerInformation_Rating;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_TradingPartnerInformation_AmountTrades;
+
+#pragma mark | Order Requirements
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_OrderRequirements;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_OrderRequirements_MinTrustLevel;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_OrderRequirements_OnlyKYCFull;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_OrderRequirements_SeatOfBank;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_OrderRequirements_PaymentOptions;
+
 #pragma mark - BitcoinDE_ShowRates
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowRates_MainKey;
 #pragma mark | Rates
