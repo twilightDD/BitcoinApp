@@ -78,7 +78,7 @@
     {
         self.btcBalanceHeadlineTextField.stringValue = @"My Bitcoins";
         
-        self.btcBalanceTotalAmountDescriptionTextField.stringValue = @"Total smount";
+        self.btcBalanceTotalAmountDescriptionTextField.stringValue = @"Total amount";
         self.btcBalanceAvailableAmountDescriptionTextField.stringValue = @"Available amount";
         self.btcBalanceReservedAmountDescriptionTextField.stringValue = @"Reserved amount";
         
@@ -117,28 +117,29 @@
     }
 }
 
-- (void)updateBankReservationUI:(BOOL)bankReservation_exists {
+- (void)updateBankReservationWithAccountInfoData:(SOXAccountInfoData *)accountInfoData {
+    BOOL bankReservation_exists = accountInfoData.bankReservation_exists;
+    
     self.fidorReservationValuesAtackView.hidden = !bankReservation_exists;
     
+    // set strings / values
     if (bankReservation_exists) {
         self.fidorReservationTotalAmountDescriptionTextField.stringValue = @"Total amount";
         self.fidorReservationTotalAmountDescriptionTextField.alignment = NSTextAlignmentLeft;
+        self.fidorReservationTotalAmountTextField.doubleValue = accountInfoData.bankReservation_totalAmount.doubleValue;
+        self.fidorReservationAvailableAmountTextField.doubleValue = accountInfoData.bankReservation_availableAmount.doubleValue;
+        self.fidorReservationReservedAtTextField.doubleValue = accountInfoData.bankReservation_reservedAt.doubleValue;
+        self.fidorReservationValidUntilTextField.doubleValue = accountInfoData.bankReservation_validUntil.doubleValue;
     }
     else {
         self.fidorReservationTotalAmountDescriptionTextField.stringValue = @"No reservation";
         self.fidorReservationTotalAmountDescriptionTextField.alignment = NSTextAlignmentCenter;
     }
     
+    // hide labels if no bankReservation
     self.fidorReservationAvailableAmountDescriptionTextField.hidden = !bankReservation_exists;
     self.fidorReservationReservedAtDescriptionTextField.hidden = !bankReservation_exists;
     self.fidorReservationValidUntilDescriptionTextField.hidden = !bankReservation_exists;
-    
-    self.fidorReservationTotalAmountTextField.hidden = !bankReservation_exists;
-    self.fidorReservationAvailableAmountTextField.hidden = !bankReservation_exists;
-    self.fidorReservationReservedAtTextField.hidden = !bankReservation_exists;
-    self.fidorReservationValidUntilTextField.hidden = !bankReservation_exists;
-
-    
 }
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
@@ -152,13 +153,9 @@
             self.btcBalanceReservedAmountTextField.doubleValue = accountInfoData.btcBalance_reservedAmount.doubleValue;
         }
         { // fidor_reservation
-            
-                [self updateBankReservationUI:accountInfoData.bankReservation_exists];
-//                self.fidorReservationTotalAmountTextField.doubleValue = accountInfoData.bankReservation_totalAmount.doubleValue;
-//                self.fidorReservationAvailableAmountTextField.doubleValue = accountInfoData.bankReservation_availableAmount.doubleValue;
-//                self.fidorReservationReservedAtTextField.doubleValue = accountInfoData.bankReservation_reservedAt.doubleValue;
-//                self.fidorReservationValidUntilTextField.doubleValue = accountInfoData.bankReservation_validUntil.doubleValue;
-            
+            [self updateBankReservationWithAccountInfoData:accountInfoData];
+
+
         }
     }
     else if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowRatesCommandType)]) {
