@@ -6,8 +6,10 @@
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "SOXRatesData.h"
 
-@interface SOXRates_BitcoinDE_Data : NSObject
+@interface SOXRates_BitcoinDE_Data : SOXRatesData
+
++ (SOXRatesData *)rateDataForRateInfoDictionary:(NSDictionary *)payloadDictionary;
 
 @end

@@ -9,7 +9,9 @@
 #import "SOXDataConverter_BitcoinDE.h"
 #import "SOXKeys_BitcoinDE.h"
 
-#import "SOXAccountInfo_BitcoinDE_Data.h" // for BitcoinDE_ShowAccountInfoCommandType
+#import "SOXAccountInfo_BitcoinDE_Data.h"   // for BitcoinDE_ShowAccountInfoCommandType
+#import "SOXRates_BitcoinDE_Data.h"         // for BitcoinDE_ShowRatesCommandType
+
 @implementation SOXDataConverter_BitcoinDE
 
 + (id)payloadForServerDictionary:(NSDictionary *)payloadDictionary
@@ -29,7 +31,7 @@
             
             break;
         case BitcoinDE_ShowAccountInfoCommandType:
-            payload = [self showAccountPayloadForServerDictionary:payloadDictionary];
+            payload = [SOXAccountInfo_BitcoinDE_Data accountInfoDataForAccountInfoDictionary:payloadDictionary];
             break;
         case BitcoinDE_ShowOrderbookCompactCommandType:
             
@@ -38,7 +40,7 @@
             
             break;
         case BitcoinDE_ShowRatesCommandType:
-            payload = [self ratesPayloadForServerDictionary:payloadDictionary];
+            payload = [SOXRates_BitcoinDE_Data rateDataForRateInfoDictionary:payloadDictionary];
             break;
         default:
             // error
@@ -46,16 +48,6 @@
             break;
     }
     
-    return payload;
-}
-
-+ (SOXAccountInfo_BitcoinDE_Data *)showAccountPayloadForServerDictionary:(NSDictionary *)payloadDictionary {
-    SOXAccountInfo_BitcoinDE_Data *payload = [SOXAccountInfo_BitcoinDE_Data accountInfoDataForAccountInfo:payloadDictionary];
-    return  payload;
-}
-
-+ (id)ratesPayloadForServerDictionary:(NSDictionary *)payloadDictionary {
-    id payload;
     return payload;
 }
 
