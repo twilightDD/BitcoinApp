@@ -1376,6 +1376,9 @@
                                                     </connections>
                                                 </tableColumn>
                                             </tableColumns>
+                                            <connections>
+                                                <binding destination="4Tj-Nm-93b" name="selectionIndexes" keyPath="arrangedObjects.selectionIndexes" id="Aao-py-NsW"/>
+                                            </connections>
                                         </tableView>
                                     </subviews>
                                 </clipView>
@@ -1413,6 +1416,13 @@
                             <constraint firstItem="7Rj-Aw-xee" firstAttribute="leading" secondItem="49z-8y-L8q" secondAttribute="leading" constant="20" id="w99-et-2f6"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="filterPriceDescriptionTextField" destination="O8Y-Hv-XHJ" id="ut0-Pv-YxR"/>
+                        <outlet property="filterPriceValueTextField" destination="spC-t7-8Yj" id="HkJ-W6-1qg"/>
+                        <outlet property="otherFilterButton" destination="Gdg-Cq-pHV" id="fa8-dJ-MTf"/>
+                        <outlet property="tableView" destination="ILN-vM-hc0" id="7vu-m8-Eev"/>
+                        <outlet property="titleTextField" destination="7Rj-Aw-xee" id="jhc-mq-mcj"/>
+                    </connections>
                 </viewController>
                 <customObject id="Ixs-NX-vvZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController id="4Tj-Nm-93b">

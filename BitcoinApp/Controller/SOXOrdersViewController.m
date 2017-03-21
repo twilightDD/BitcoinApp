@@ -11,27 +11,61 @@
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXShowOrderbook_BitcoinDE_Data.h"
 
+#pragma mark - Interface
 @interface SOXOrdersViewController () <SOXMarketCoreServerRequestProtocol>
 
+#pragma mark IBOutlets
+@property (weak) IBOutlet NSTextField *titleTextField;
+@property (weak) IBOutlet NSTableView *tableView;
+@property (weak) IBOutlet NSTextField *filterPriceDescriptionTextField;
+@property (weak) IBOutlet NSTextField *filterPriceValueTextField;
+@property (weak) IBOutlet NSButton *otherFilterButton;
+
+
+#pragma mark Properties
 @property (strong, nonatomic) NSMutableArray *orderBook;
 
 @end
 
+#pragma mark - Implementation
 @implementation SOXOrdersViewController
 
+#pragma mark Init&Co.
 - (void)viewDidLoad {
     [super viewDidLoad];
-
 }
 
 - (void)viewWillAppear {
     [super viewWillAppear];
+    
+    [self setupUI];
+    [self requestServerData];
+}
+
+#pragma mark - Private methods
+- (void)setupUI {
+    {
+        NSString *titleText = nil;
+        if (self.orderType == OrdersBuyType) {
+            titleText = @"Buy";
+        }
+        else {
+            titleText = @"Sell";
+        }
+        self.titleTextField.stringValue = titleText;
+    }
+    
+    self.filterPriceDescriptionTextField.stringValue = @"Minimum price";
+    self.otherFilterButton.title = @"More filters"; 
+}
+
+- (void)requestServerData {
     if (self.orderType == OrdersBuyType) {
-        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType
-                                                         respondTo:self];
+        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType // "buy" liefert Verkaufsangebote
+                                                    respondTo:self];
     }
     else if (self.orderType == OrdersSellType) {
-        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType
+        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType //"sell" liefert Kaufangebote
                                                     respondTo:self];
     }
     else {
@@ -46,7 +80,18 @@
         NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
         NSMutableArray *orderBook = [SOXShowOrderbook_BitcoinDE_Data orderbookDataArrayForShowOrderbookDictionary:payloadDictionary];
         self.orderBook = orderBook;
+
+//        else {
+//            [self willChangeValueForKey:@"orderBook"];
+//            [self.orderBook addObjectsFromArray:orderBook];
+//            [self didChangeValueForKey:@"orderBook"];
+//        }
+        
     }
+    
+    SOXShowOrderbookData *data = self.orderBook.firstObject;
+    NSLog(@"data:\n%@", data);
+    
 }
 
 @end
