@@ -1168,6 +1168,7 @@
                         <outlet property="fidorReservationTotalAmountTextField" destination="xe8-OM-npk" id="Bd2-CG-h0O"/>
                         <outlet property="fidorReservationValidUntilDescriptionTextField" destination="22b-3H-gvx" id="fm1-bg-Urz"/>
                         <outlet property="fidorReservationValidUntilTextField" destination="c12-YI-m1X" id="hso-89-naf"/>
+                        <outlet property="fidorReservationValuesAtackView" destination="3PV-fR-X9N" id="CvO-zz-5hA"/>
                         <outlet property="ratesHeadlineTextField" destination="zfI-FP-Coh" id="EaM-Mq-7Na"/>
                         <outlet property="ratesRateWeighted12hDescriptionTextField" destination="JaA-na-sDd" id="Jv2-Kj-Sx7"/>
                         <outlet property="ratesRateWeighted12hTextField" destination="gNZ-JI-dug" id="o0p-P1-X2g"/>

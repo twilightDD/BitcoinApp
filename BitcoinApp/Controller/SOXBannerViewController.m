@@ -35,6 +35,7 @@
 @property (weak) IBOutlet NSTextField *fidorReservationReservedAtTextField;
 @property (weak) IBOutlet NSTextField *fidorReservationValidUntilDescriptionTextField;
 @property (weak) IBOutlet NSTextField *fidorReservationValidUntilTextField;
+@property (weak) IBOutlet NSStackView *fidorReservationValuesAtackView;
 
 // ratesData
 @property (weak) IBOutlet NSTextField *ratesHeadlineTextField;
@@ -117,6 +118,8 @@
 }
 
 - (void)updateBankReservationUI:(BOOL)bankReservation_exists {
+    self.fidorReservationValuesAtackView.hidden = !bankReservation_exists;
+    
     if (bankReservation_exists) {
         self.fidorReservationTotalAmountDescriptionTextField.stringValue = @"Total amount";
         self.fidorReservationTotalAmountDescriptionTextField.alignment = NSTextAlignmentLeft;
