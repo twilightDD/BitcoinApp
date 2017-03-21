@@ -57,7 +57,7 @@ NSString *const BitcoinDE_BankUserUIDKey = @"uid"; // Verschlüsselte eigene Use
 #pragma mark - Implementation
 @implementation SOXAccountInfo_BitcoinDE_Data
 
-+ (instancetype)bannerDataForAccountInfo:(NSDictionary *)accountInfoDictionary {
++ (instancetype)accountInfoDataForAccountInfo:(NSDictionary *)accountInfoDictionary {
     SOXAccountInfo_BitcoinDE_Data *bannerData = [[SOXAccountInfo_BitcoinDE_Data alloc] init];
 
     [bannerData setupDataForAccountInfo:accountInfoDictionary];

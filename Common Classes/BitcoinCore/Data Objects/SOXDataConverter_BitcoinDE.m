@@ -50,7 +50,7 @@
 }
 
 + (SOXAccountInfo_BitcoinDE_Data *)showAccountPayloadForServerDictionary:(NSDictionary *)payloadDictionary {
-    SOXAccountInfo_BitcoinDE_Data *payload = [SOXAccountInfo_BitcoinDE_Data bannerDataForAccountInfo:payloadDictionary];
+    SOXAccountInfo_BitcoinDE_Data *payload = [SOXAccountInfo_BitcoinDE_Data accountInfoDataForAccountInfo:payloadDictionary];
     return  payload;
 }
 

@@ -26,6 +26,6 @@ FOUNDATION_EXPORT NSString *const BannerDataKey;
 @property (strong, nonatomic, readonly) NSString *bankInformation_bicFull;
 @property (strong, nonatomic, readonly) NSString *bankInformation_UID;
 
-+ (instancetype)bannerDataForAccountInfo:(NSDictionary *)accountInfoDictionary;
++ (instancetype)accountInfoDataForAccountInfo:(NSDictionary *)accountInfoDictionary;
 
 @end
