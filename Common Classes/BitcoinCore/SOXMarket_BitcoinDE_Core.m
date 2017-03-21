@@ -57,6 +57,8 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
             NSLog(@"JSONError: %@", jsonError);
             return nil;
         }
+        
+         NSLog(@"CREDITS: %@ serverCommand: %tu", [payloadDictionary valueForKey:@"credits"], serverCommandType);
     }
     
     NSDictionary *serverAnswer;
@@ -101,6 +103,9 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
                                                                                             waitUntilDone:YES];
                                                                     }
                                                                     
+                                                                    if (error) {
+                                                                        NSLog(@"NSURLSessionTask completionHandler - ERROR:\n%@", error);
+                                                                    }
                                                                 }];
     
     [getTask resume];
