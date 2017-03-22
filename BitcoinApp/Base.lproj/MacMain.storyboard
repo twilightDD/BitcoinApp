@@ -807,13 +807,13 @@
                                                                         <real value="3.4028234663852886e+38"/>
                                                                     </customSpacing>
                                                                 </stackView>
-                                                                <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="09M-sd-vB3" userLabel="ValuesStack">
+                                                                <stackView distribution="fill" orientation="vertical" alignment="trailing" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="09M-sd-vB3" userLabel="ValuesStack">
                                                                     <rect key="frame" x="49" y="0.0" width="33" height="67"/>
                                                                     <subviews>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KMw-dO-CSw">
                                                                             <rect key="frame" x="-2" y="50" width="37" height="17"/>
-                                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="W9V-xS-iBA">
-                                                                                <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="5" id="Ads-D9-bc7"/>
+                                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Label" id="W9V-xS-iBA">
+                                                                                <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" alwaysShowsDecimalSeparator="YES" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="7" maximumFractionDigits="7" id="Ads-D9-bc7"/>
                                                                                 <font key="font" metaFont="system"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -821,8 +821,8 @@
                                                                         </textField>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="raD-o5-ndz">
                                                                             <rect key="frame" x="-2" y="25" width="37" height="17"/>
-                                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="xq0-HA-Am4">
-                                                                                <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="5" id="vrL-hM-LC5"/>
+                                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Label" id="xq0-HA-Am4">
+                                                                                <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" alwaysShowsDecimalSeparator="YES" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="7" maximumFractionDigits="7" id="OHg-me-WCA"/>
                                                                                 <font key="font" metaFont="system"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -830,8 +830,8 @@
                                                                         </textField>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VTX-vr-jAB">
                                                                             <rect key="frame" x="-2" y="0.0" width="37" height="17"/>
-                                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="ODW-Kz-VfU">
-                                                                                <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="dXX-he-yET"/>
+                                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Label" id="ODW-Kz-VfU">
+                                                                                <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" alwaysShowsDecimalSeparator="YES" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="7" maximumFractionDigits="7" id="z6w-rz-eNS"/>
                                                                                 <font key="font" metaFont="system"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -1062,7 +1062,7 @@
                                                                         <real value="3.4028234663852886e+38"/>
                                                                     </customSpacing>
                                                                 </stackView>
-                                                                <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IRL-vM-L6O" userLabel="ValuesStack">
+                                                                <stackView distribution="fill" orientation="vertical" alignment="trailing" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IRL-vM-L6O" userLabel="ValuesStack">
                                                                     <rect key="frame" x="49" y="0.0" width="33" height="67"/>
                                                                     <subviews>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="slR-4r-Xj5">
@@ -1189,6 +1189,19 @@
             </objects>
             <point key="canvasLocation" x="911" y="418"/>
         </scene>
+        <!--OrderDetailsViewControllerIdentifier-->
+        <scene sceneID="Tq2-rn-S5c">
+            <objects>
+                <viewController title="OrderDetailsViewControllerIdentifier" identifier="OrderDetailsViewControllerIdentifier" storyboardIdentifier="OrderDetailsViewControllerIdentifier" id="LHx-XP-RgN" sceneMemberID="viewController">
+                    <view key="view" id="t0r-IR-c9r">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="0cE-Df-n8A" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1015" y="1528"/>
+        </scene>
         <!--Orders View Controller-->
         <scene sceneID="mGC-kT-vfQ">
             <objects>
@@ -1244,7 +1257,7 @@
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="80" minWidth="40" maxWidth="1000" id="5J2-fg-U3a">
+                                                <tableColumn editable="NO" width="80" minWidth="40" maxWidth="1000" id="5J2-fg-U3a">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Price">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1261,7 +1274,7 @@
                                                         <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_price" id="oS0-E4-Kk3"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="UPh-EJ-q2O">
+                                                <tableColumn editable="NO" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="UPh-EJ-q2O">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Min. Amount">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1277,7 +1290,7 @@
                                                         <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_minAmount" id="Wwb-xO-ImZ"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="5bU-JA-imQ">
+                                                <tableColumn editable="NO" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="5bU-JA-imQ">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Max. Amount">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1293,7 +1306,7 @@
                                                         <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_maxAmount" id="xfr-H7-NS6"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="ZJI-GQ-9iw">
+                                                <tableColumn editable="NO" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="ZJI-GQ-9iw">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Min. Volume">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1310,7 +1323,7 @@
                                                         <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_minVolume" id="rpE-42-Tgh"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="gdz-ZB-REf">
+                                                <tableColumn editable="NO" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="gdz-ZB-REf">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Max. Volume">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1327,7 +1340,7 @@
                                                         <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_maxVolume" id="cza-50-EUc"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn width="80" minWidth="40" maxWidth="1000" id="o5D-GH-0gp">
+                                                <tableColumn editable="NO" width="80" minWidth="40" maxWidth="1000" id="o5D-GH-0gp">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="OrderID">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1343,7 +1356,7 @@
                                                         <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_orderID" id="i15-BL-l8g"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="zyz-M6-5GS">
+                                                <tableColumn editable="NO" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="zyz-M6-5GS">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="type">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1359,7 +1372,7 @@
                                                         <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_type" id="ckv-XP-6gp"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="i1d-J7-uwz">
+                                                <tableColumn editable="NO" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="i1d-J7-uwz">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Req. fullfilled">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1377,7 +1390,7 @@
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
-                                                <binding destination="4Tj-Nm-93b" name="selectionIndexes" keyPath="arrangedObjects.selectionIndexes" id="Aao-py-NsW"/>
+                                                <outlet property="delegate" destination="ssU-Oy-97E" id="DUn-4q-DFZ"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
@@ -1419,13 +1432,14 @@
                     <connections>
                         <outlet property="filterPriceDescriptionTextField" destination="O8Y-Hv-XHJ" id="ut0-Pv-YxR"/>
                         <outlet property="filterPriceValueTextField" destination="spC-t7-8Yj" id="HkJ-W6-1qg"/>
+                        <outlet property="orderBookArrayController" destination="4Tj-Nm-93b" id="wMi-ZS-5XU"/>
                         <outlet property="otherFilterButton" destination="Gdg-Cq-pHV" id="fa8-dJ-MTf"/>
                         <outlet property="tableView" destination="ILN-vM-hc0" id="7vu-m8-Eev"/>
                         <outlet property="titleTextField" destination="7Rj-Aw-xee" id="jhc-mq-mcj"/>
                     </connections>
                 </viewController>
                 <customObject id="Ixs-NX-vvZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController id="4Tj-Nm-93b">
+                <arrayController id="4Tj-Nm-93b" userLabel="OrderBookArrayController">
                     <connections>
                         <binding destination="ssU-Oy-97E" name="contentArray" keyPath="self.orderBook" id="ODs-HG-gtx"/>
                     </connections>
