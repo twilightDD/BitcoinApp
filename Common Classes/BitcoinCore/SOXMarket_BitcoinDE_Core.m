@@ -26,21 +26,55 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
 @property (weak, nonatomic) id delegateForRequests;
 @property (weak, nonatomic) id <SOXBannerDataProtocol> delegateForBannerUpdates;
 
+@property (strong, nonatomic) NSMutableArray <NSURLSessionTask *> *networkQueue;
+@property (nonatomic) BOOL networkQueueIsRunning;
+
 @end
 
 @implementation SOXMarket_BitcoinDE_Core
 
-#pragma mark - Public methods
+#pragma mark - Public Class methods
 + (instancetype _Nonnull)sharedCore {
-    static id sharedCore;
+    static SOXMarket_BitcoinDE_Core *sharedCore;
     
     static dispatch_once_t pred;
     
     dispatch_once(&pred, ^{
         sharedCore = [[self class] new];
+        sharedCore.networkQueueIsRunning = NO;
+        sharedCore.networkQueue = [NSMutableArray array];
     });
     return sharedCore;
 }
+
++ (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
+                          respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nonnull)controller {
+    NSURLRequest *request = [self urlRequestForServerCommandType:serverCommandType];
+    
+    weakify(self)
+    NSURLSessionTask *getTask = [[NSURLSession sharedSession] dataTaskWithRequest:request
+                                                                completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                                                    strongify(self)
+                                                                    NSDictionary *serverAnswer = [self answerDictionaryForServerCommand:serverCommandType
+                                                                                                                               withData:data
+                                                                                                                            urlResponse:response
+                                                                                                                                  error:error];
+                                                                    // NSURLSessionTask has its own thread
+                                                                    if ([controller respondsToSelector:@selector(answerOfServerRequest:)]) {
+                                                                        [controller performSelectorOnMainThread:@selector(answerOfServerRequest:)
+                                                                                                     withObject:serverAnswer
+                                                                                                  waitUntilDone:YES];
+                                                                    }
+                                                                    
+                                                                    if (error) {
+                                                                        NSLog(@"NSURLSessionTask completionHandler - ERROR:\n%@", error);
+                                                                    }
+                                                                    
+                                                                }];
+    [getTask resume];
+}
+
+#pragma mark - Private Class methods
 
 + (NSDictionary *)answerDictionaryForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
                                           withData:(NSData * _Nullable)data
@@ -84,34 +118,7 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
     return serverAnswer;
 }
 
-+ (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
-                          respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nonnull)controller {
-    NSURLRequest *request = [self urlRequestForServerCommandType:serverCommandType];
-    
-    weakify(self)
-    NSURLSessionTask *getTask = [[NSURLSession sharedSession] dataTaskWithRequest:request
-                                                                completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                                                                    strongify(self)
-                                                                    NSDictionary *serverAnswer = [self answerDictionaryForServerCommand:serverCommandType
-                                                                                                                               withData:data
-                                                                                                                            urlResponse:response
-                                                                                                                                  error:error];
-                                                                    // NSURLSessionTask has its own thread
-                                                                    if ([controller respondsToSelector:@selector(answerOfServerRequest:)]) {
-                                                                        [controller performSelectorOnMainThread:@selector(answerOfServerRequest:)
-                                                                                               withObject:serverAnswer
-                                                                                            waitUntilDone:YES];
-                                                                    }
-                                                                    
-                                                                    if (error) {
-                                                                        NSLog(@"NSURLSessionTask completionHandler - ERROR:\n%@", error);
-                                                                    }
-                                                                }];
-    
-    [getTask resume];
 
-    
-}
 
 + (void)startBannerUpdatesWithScheduleTime:(NSTimeInterval)timeInterval delegate:(id <SOXBannerDataProtocol> _Nonnull)delegateForBannerUpdates {
     // timer
@@ -174,7 +181,6 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
     }
 }
 
-#pragma mark - Private methods
 + (NSString *)urlStringForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType {
     NSString *urlString = [SOXMarket_BitcoinDE_Core baseURLString];
     urlString = [urlString stringByAppendingString:[SOXMarket_BitcoinDE_Core commandForServerCommandType:serverCommandType]];
@@ -240,6 +246,8 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
     NSString *timeInMS = [NSString stringWithFormat:@"%lld", [@(floor([date timeIntervalSince1970]))longLongValue]];
     [SOXMarket_BitcoinDE_Core sharedCore].nonceString = timeInMS;
 }
+
+
 
 #pragma mark - Private statics
 + (NSDictionary *)commands {

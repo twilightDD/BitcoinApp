@@ -90,32 +90,32 @@ static NSString *OrdersViewControllerSellSegueKey = @"OrdersViewControllerSellSe
 
 #pragma mark - Polling
 
-- (void)askServerForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType {
-    NSURLRequest *request = [SOXMarket_BitcoinDE_Core urlRequestForServerCommandType:serverCommandType];
-    
-    
-    NSURLSessionTask *getTask = [[NSURLSession sharedSession] dataTaskWithRequest:request
-                                                                completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                                                                    NSError *jsonError;
-                                                                    self.serverAnswerDictionary = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                                                  options:0
-                                                                                                                                    error:&jsonError ];
-                                                                    NSLog(@"completionHandler");
-                                                                    NSLog(@"Data: %@", [data base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed]);
-                                                                    NSLog(@"JSON: %@", self.serverAnswerDictionary);
-                                                                    NSLog(@"response: %@", response);
-                                                                    NSLog(@"error: %@", error);
-                                                                    NSLog(@"jsonError: %@", jsonError);
-                                                                    
-                                                                    
-                                                                    [self performSelectorOnMainThread:@selector(report:)
-                                                                                           withObject:self.serverAnswerDictionary
-                                                                                        waitUntilDone:YES];
-                                                                    
-                                                                }];
-    
-    [getTask resume];
-}
+//- (void)askServerForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType {
+//    NSURLRequest *request = [SOXMarket_BitcoinDE_Core urlRequestForServerCommandType:serverCommandType];
+//    
+//    
+//    NSURLSessionTask *getTask = [[NSURLSession sharedSession] dataTaskWithRequest:request
+//                                                                completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+//                                                                    NSError *jsonError;
+//                                                                    self.serverAnswerDictionary = [NSJSONSerialization JSONObjectWithData:data
+//                                                                                                                                  options:0
+//                                                                                                                                    error:&jsonError ];
+//                                                                    NSLog(@"completionHandler");
+//                                                                    NSLog(@"Data: %@", [data base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed]);
+//                                                                    NSLog(@"JSON: %@", self.serverAnswerDictionary);
+//                                                                    NSLog(@"response: %@", response);
+//                                                                    NSLog(@"error: %@", error);
+//                                                                    NSLog(@"jsonError: %@", jsonError);
+//                                                                    
+//                                                                    
+//                                                                    [self performSelectorOnMainThread:@selector(report:)
+//                                                                                           withObject:self.serverAnswerDictionary
+//                                                                                        waitUntilDone:YES];
+//                                                                    
+//                                                                }];
+//    
+//    [getTask resume];
+//}
 
 - (void)report:(NSDictionary *)serverAnswerDictionary {
 //    _serverAnswerDictionary = serverAnswerDictionary;
