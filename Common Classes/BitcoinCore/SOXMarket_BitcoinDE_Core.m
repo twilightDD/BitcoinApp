@@ -250,8 +250,8 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
     dispatch_once(&pred, ^{
         commandDescriptions = @{
                                 @(UnknownCommand): @"Error"
-                                , @(BitcoinDE_ShowBuyOrderbookCommandType): @"/orders?type=sell"  //"sell" liefert Kaufangebote
-                                , @(BitcoinDE_ShowSellOrderbookCommandType): @"/orders?type=buy"  //"buy" liefert Verkaufsangebote
+                                , @(BitcoinDE_ShowBuyOrderbookCommandType): @"/orders?type=buy"  //"sell" liefert Kaufangebote
+                                , @(BitcoinDE_ShowSellOrderbookCommandType): @"/orders?type=sell"  //"buy" liefert Verkaufsangebote
                                 , @(BitcoinDE_ShowMyOrdersCommandType): @"/orders/my_own"
                                 , @(BitcoinDE_ShowMyOrderDetailsCommandType): @"/orders/:order_id"
                                 , @(BitcoinDE_ShowAccountInfoCommandType): @"/account"
