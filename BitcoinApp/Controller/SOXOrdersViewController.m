@@ -12,7 +12,7 @@
 #import "SOXShowOrderbook_BitcoinDE_Data.h"
 
 #pragma mark - Interface
-@interface SOXOrdersViewController () <SOXMarketCoreServerRequestProtocol>
+@interface SOXOrdersViewController () <SOXMarketCoreServerRequestProtocol, NSTableViewDelegate>
 
 #pragma mark IBOutlets
 @property (weak) IBOutlet NSTextField *titleTextField;
@@ -20,10 +20,11 @@
 @property (weak) IBOutlet NSTextField *filterPriceDescriptionTextField;
 @property (weak) IBOutlet NSTextField *filterPriceValueTextField;
 @property (weak) IBOutlet NSButton *otherFilterButton;
-
+@property (strong) IBOutlet NSArrayController *orderBookArrayController;
 
 #pragma mark Properties
 @property (strong, nonatomic) NSMutableArray *orderBook;
+
 
 @end
 
@@ -40,6 +41,8 @@
     
     [self setupUI];
     [self requestServerData];
+    
+    [self.tableView setDoubleAction:@selector(tableViewDoubleAction:)];
 }
 
 #pragma mark - Private methods
@@ -73,6 +76,22 @@
     }
 }
 
+- (void)tableViewDoubleAction:(NSTableView *)tableView {
+    NSInteger clickedRow = tableView.clickedRow;
+    NSUInteger selectionIndex = self.orderBookArrayController.selectionIndex;
+    NSArray *selectedObjects = self.orderBookArrayController.selectedObjects;
+    
+    NSLog(@"\nclickedRow %ti\nselectionIndex %tu\nselectedObjects\n%@",clickedRow, selectionIndex, selectedObjects );
+    
+    SOXShowOrderbook_BitcoinDE_Data *selectedOrderBookData = selectedObjects.firstObject;
+    
+    NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"MacMain" bundle:nil];
+    NSViewController *viewC = [storyboard instantiateControllerWithIdentifier:@"OrderDetailsViewControllerIdentifier"];
+    [self presentViewControllerAsSheet:viewC];
+     
+    
+}
+
 #pragma mark - SOXMarketCoreServerRequestProtocol
 - (void)answerOfServerRequest:(NSDictionary *)answerOfServerRequest {
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowBuyOrderbookCommandType)]
@@ -93,5 +112,7 @@
     NSLog(@"data:\n%@", data);
     
 }
+#pragma mark - NSTableViewDelegate
+
 
 @end
