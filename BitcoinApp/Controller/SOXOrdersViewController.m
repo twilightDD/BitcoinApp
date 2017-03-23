@@ -45,6 +45,11 @@
     [self.tableView setDoubleAction:@selector(tableViewDoubleAction:)];
 }
 
+- (IBAction)reloadAction:(NSButton *)sender {
+    NSLog(@"Manually reload Data");
+    [self requestServerData];
+}
+
 #pragma mark - Private methods
 - (void)setupUI {
     {

@@ -14,7 +14,7 @@
 #import "SOXRatesData.h"
 
 #pragma mark - Interface
-@interface SOXBannerViewController () <SOXMarketCoreServerRequestProtocol>
+@interface SOXBannerViewController () <SOXMarketCoreServerRequestProtocol, SOXCreditUpdateProtocol>
 
 #pragma mark IBOutlets
 #pragma mark | accountInfoData (BTCBalance)
@@ -47,6 +47,14 @@
 @property (weak) IBOutlet NSTextField *ratesRateWeighted12hDescriptionTextField;
 @property (weak) IBOutlet NSTextField *ratesRateWeighted12hTextField;
 
+#pragma mark | creditData
+@property (weak) IBOutlet NSTextField *creditHeadlineTextField;
+@property (weak) IBOutlet NSTextField *creditTextCurrentCreditsDescriptionField;
+@property (weak) IBOutlet NSTextField *creditTextCurrentCreditsField;
+@property (weak) IBOutlet NSTextField *creditTextMaxCreditsDescriptonField;
+@property (weak) IBOutlet NSTextField *creditTextMaxCreditsField;
+@property (weak) IBOutlet NSStackView *creditValuesStackView;
+
 @end
 
 #pragma mark - Implementation
@@ -66,6 +74,8 @@
                                                 respondTo:self];
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowRatesCommandType
                                                 respondTo:self];
+    
+    [SOXMarket_BitcoinDE_Core registerForCreditUpdates:self];
 }
 
 #pragma mark - Private methods
@@ -110,6 +120,18 @@
         self.ratesRateWeightedTextField.stringValue = @"...";
         self.ratesRateWeighted3hTextField.stringValue = @"...";
         self.ratesRateWeighted12hTextField.stringValue = @"...";
+    }
+    
+    // Credit stack
+    {
+        self.creditHeadlineTextField.stringValue = @"Credit information";
+        
+        self.creditTextCurrentCreditsDescriptionField.stringValue = @"Current credits";
+        self.creditTextMaxCreditsDescriptonField.stringValue = @"Est. max credits";
+        
+        self.creditTextCurrentCreditsField.stringValue = @"...";
+        self.creditTextMaxCreditsField.stringValue = @"...";
+    
     }
 }
 
@@ -166,5 +188,17 @@
         }
     }
 }
+#pragma mark - SOXCreditUpdateProtocol
+- (void)creditValuesUpdated:(NSDictionary * _Nonnull)creditDicts {
+    NSNumber *currentCredit = [creditDicts objectForKey:@"currentCredit"];
+    NSNumber *maxCredits = [creditDicts objectForKey:@"maxCredits"];
+    
+    self.creditTextCurrentCreditsField.stringValue = currentCredit.stringValue;
+    self.creditTextMaxCreditsField.stringValue = maxCredits.stringValue;
+    
+    
+
+}
+
 
 @end
