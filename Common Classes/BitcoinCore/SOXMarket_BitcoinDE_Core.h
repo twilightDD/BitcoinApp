@@ -37,6 +37,12 @@ FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerErrorKey;
 
 @end
 
+@protocol SOXCreditUpdateProtocol <NSObject>
+
+- (void)creditValuesUpdated:(NSDictionary * _Nonnull)creditDicts;
+
+@end
+
 @interface SOXMarket_BitcoinDE_Core : NSObject
 
 /**
@@ -47,5 +53,8 @@ FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerErrorKey;
 + (instancetype _Nonnull)sharedCore;
 
 + (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nonnull)controller;
+
+#pragma mark | Credit handling
++ (void)registerForCreditUpdates:(id <SOXCreditUpdateProtocol> _Nullable) delegateForCredit;
 
 @end
