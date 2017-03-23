@@ -70,8 +70,10 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
                                                                         NSLog(@"NSURLSessionTask completionHandler - ERROR:\n%@", error);
                                                                     }
                                                                     
+//                                                                    NSLog(@"### NSURLSession completionhandler finished");
+                                                                    [SOXMarket_BitcoinDE_Core startNextNSURLSessionTask];
                                                                 }];
-    [getTask resume];
+    [SOXMarket_BitcoinDE_Core addNSURLSessionTask:getTask];
 }
 
 #pragma mark - Private Class methods
@@ -118,8 +120,6 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
     return serverAnswer;
 }
 
-
-
 + (void)startBannerUpdatesWithScheduleTime:(NSTimeInterval)timeInterval delegate:(id <SOXBannerDataProtocol> _Nonnull)delegateForBannerUpdates {
     // timer
     weakify(self)
@@ -137,8 +137,9 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
 }
 
 + (NSURLRequest * _Nullable)urlRequestForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType {
+    // First step: update nonce string
     [SOXMarket_BitcoinDE_Core updateNonceString];
-    
+   
     NSString            *urlString       = [SOXMarket_BitcoinDE_Core urlStringForServerCommandType:serverCommandType];
     NSString            *signatureString = [SOXMarket_BitcoinDE_Core signatureStringForURLString:urlString];
     NSString            *hmacHex         = [SOXHash hexadecimalHMACForString:signatureString
@@ -146,10 +147,12 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
     
     NSMutableURLRequest *request         = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     {
+
         NSString *getOrPostHTTPMethod = [SOXMarket_BitcoinDE_Core getOrPostForServerCommandType:serverCommandType];
         if (getOrPostHTTPMethod) {
             [request setHTTPMethod:getOrPostHTTPMethod];
             [request addValue:[SOXMarket_BitcoinDE_Core apiKey] forHTTPHeaderField:@"X-API-KEY"];
+           
             [request addValue:[SOXMarket_BitcoinDE_Core sharedCore].nonceString forHTTPHeaderField:@"X-API-NONCE"];
             [request addValue:hmacHex forHTTPHeaderField:@"X-API-SIGNATURE"];
         }
@@ -202,7 +205,7 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
 
 + (NSString *)signatureStringForURLString:(NSString *)urlString {
     //hmac_data = http_method+'#'+uri+'#'+api_key+'#'+nonce+'#'+post_parameter_md5_hashed_url_encoded_query_string
-    
+
     NSString *signatureString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@"
                                  , @"GET" // http_method
                                  , @"#"
@@ -247,7 +250,41 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
     [SOXMarket_BitcoinDE_Core sharedCore].nonceString = timeInMS;
 }
 
+#pragma mark | Network Queue handling
++ (NSMutableArray *)networkQueue {
+    NSMutableArray *networkQueue = [[SOXMarket_BitcoinDE_Core sharedCore] networkQueue];
+    if (!networkQueue) {
+        networkQueue = [NSMutableArray array];
+    }
+    
+    return networkQueue;
+}
 
++ (void)addNSURLSessionTask:(NSURLSessionTask* )urlSessionTask {
+   //  NSLog(@"### ADD A NEW NSURLSessionTask");
+    NSMutableArray *networkQueue = [SOXMarket_BitcoinDE_Core networkQueue];
+    [networkQueue addObject:urlSessionTask];
+    
+    if (![[SOXMarket_BitcoinDE_Core sharedCore] networkQueueIsRunning]) {
+        [SOXMarket_BitcoinDE_Core startNextNSURLSessionTask];
+    }
+}
+
++ (void)startNextNSURLSessionTask {
+    
+    NSMutableArray *networkQueue = [SOXMarket_BitcoinDE_Core networkQueue];
+    NSURLSessionTask *nextTask = networkQueue.firstObject;
+    if (nextTask) {
+        // NSLog(@"### START NEXT NSURLSessionTask");
+        [nextTask resume];
+        [networkQueue removeObjectAtIndex:0];
+        [SOXMarket_BitcoinDE_Core sharedCore].networkQueueIsRunning = YES;
+    }
+    else {
+       // NSLog(@"### There is no NEXT NSURLSessionTask - queue is empty");
+    }
+    
+}
 
 #pragma mark - Private statics
 + (NSDictionary *)commands {
@@ -307,7 +344,6 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
 
 + (NSString *)apiKey {
     return @"a2982795ee454d6c210645c79da61bda";
-    //    return @"1db1c2c90724daf1c9e11631e39572fb";
 }
 
 + (NSString *)apiSecret {
@@ -321,7 +357,6 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
      Verschlissen:
      79bc727e274b37ac90e782e121bc75b7e41ef8f2
      */
-    
     
     return @"5e664fb1d6779e372bab040bef2846a7cfab7880";
 }
