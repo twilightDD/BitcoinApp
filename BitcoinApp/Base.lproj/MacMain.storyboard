@@ -1357,7 +1357,7 @@
                                     <rect key="frame" x="1" y="0.0" width="408" height="187"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="r0K-dN-IBz" id="ILN-vM-hc0">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="r0K-dN-IBz" id="ILN-vM-hc0">
                                             <rect key="frame" x="0.0" y="0.0" width="664" height="164"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -1558,7 +1558,7 @@
                     </connections>
                 </viewController>
                 <customObject id="Ixs-NX-vvZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController id="4Tj-Nm-93b" userLabel="OrderBookArrayController">
+                <arrayController avoidsEmptySelection="NO" automaticallyRearrangesObjects="YES" id="4Tj-Nm-93b" userLabel="OrderBookArrayController">
                     <connections>
                         <binding destination="ssU-Oy-97E" name="contentArray" keyPath="self.orderBook" id="ODs-HG-gtx"/>
                     </connections>
