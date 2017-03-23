@@ -311,8 +311,19 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
 }
 
 + (NSString *)apiSecret {
+    /* APIKeys:
+     
+     Noch nutzbare:
+     910db7219c06a814e5152ff1321c1ae7
+     c0631648d8c3e804e11b36f38d5c5309
+     f153353bbee85ee554ea6d0a2f293fb9
+     
+     Verschlissen:
+     79bc727e274b37ac90e782e121bc75b7e41ef8f2
+     */
+    
+    
     return @"5e664fb1d6779e372bab040bef2846a7cfab7880";
-    //    return @"79bc727e274b37ac90e782e121bc75b7e41ef8f2";
 }
 
 @end
