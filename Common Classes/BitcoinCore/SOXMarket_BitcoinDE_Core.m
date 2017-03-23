@@ -243,7 +243,7 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
 
 + (void)updateNonceString {
     NSDate   *date     = [NSDate date];
-    NSString *timeInMS = [NSString stringWithFormat:@"%lld", [@(floor([date timeIntervalSince1970]))longLongValue]];
+    NSString *timeInMS = [NSString stringWithFormat:@"%.0f", floor([date timeIntervalSince1970] * 100000)];
     [SOXMarket_BitcoinDE_Core sharedCore].nonceString = timeInMS;
 }
 
