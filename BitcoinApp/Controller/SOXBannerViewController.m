@@ -13,6 +13,8 @@
 #import "SOXAccountInfoData.h"
 #import "SOXRatesData.h"
 
+#import "SOXDateFormatter.h"
+
 #pragma mark - Interface
 @interface SOXBannerViewController () <SOXMarketCoreServerRequestProtocol, SOXCreditUpdateProtocol>
 
@@ -146,8 +148,11 @@
         self.fidorReservationTotalAmountDescriptionTextField.alignment = NSTextAlignmentLeft;
         self.fidorReservationTotalAmountTextField.doubleValue = accountInfoData.bankReservation_totalAmount.doubleValue;
         self.fidorReservationAvailableAmountTextField.doubleValue = accountInfoData.bankReservation_availableAmount.doubleValue;
-        self.fidorReservationReservedAtTextField.doubleValue = accountInfoData.bankReservation_reservedAt.doubleValue;
-        self.fidorReservationValidUntilTextField.doubleValue = accountInfoData.bankReservation_validUntil.doubleValue;
+        
+        NSString *reservedATString = [SOXDateFormatter stringDateTimeStringForRFC3339DateTimeString:accountInfoData.bankReservation_reservedAt];
+        self.fidorReservationReservedAtTextField.stringValue = reservedATString;
+        NSString *validUntilString = [SOXDateFormatter stringDateTimeStringForRFC3339DateTimeString:accountInfoData.bankReservation_validUntil];
+        self.fidorReservationValidUntilTextField.stringValue = validUntilString;
     }
     else {
         self.fidorReservationTotalAmountDescriptionTextField.stringValue = @"No reservation";
