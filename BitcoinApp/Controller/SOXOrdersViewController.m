@@ -22,6 +22,9 @@
 @property (weak) IBOutlet NSButton *otherFilterButton;
 @property (strong) IBOutlet NSArrayController *orderBookArrayController;
 
+@property (weak) IBOutlet NSView *spinningBackgroundView;
+@property (weak) IBOutlet NSProgressIndicator *circularProgressIndicator;
+
 #pragma mark Properties
 @property (strong, nonatomic) NSMutableArray *orderBook;
 
@@ -45,6 +48,13 @@
     [self.tableView setDoubleAction:@selector(tableViewDoubleAction:)];
 }
 
+-(void)viewDidAppear {
+    [super viewDidAppear];
+
+    self.spinningBackgroundView.hidden = NO;
+    [self.circularProgressIndicator startAnimation:nil];
+}
+
 - (IBAction)reloadAction:(NSButton *)sender {
     NSLog(@"Manually reload Data");
     [self requestServerData];
@@ -64,7 +74,12 @@
     }
     
     self.filterPriceDescriptionTextField.stringValue = @"Minimum price";
-    self.otherFilterButton.title = @"More filters"; 
+    self.otherFilterButton.title = @"More filters";
+    
+    self.spinningBackgroundView.layer.backgroundColor = [NSColor colorWithCalibratedRed:0
+                                                                                  green:0
+                                                                                   blue:0
+                                                                                  alpha:0.1].CGColor;
 }
 
 - (void)requestServerData {
@@ -105,6 +120,9 @@
         NSMutableArray *orderBook = [SOXShowOrderbook_BitcoinDE_Data orderbookDataArrayForShowOrderbookDictionary:payloadDictionary];
         self.orderBook = orderBook;
 
+        [self.circularProgressIndicator stopAnimation:nil];
+        self.spinningBackgroundView.hidden = YES;
+        
 //        else {
 //            [self willChangeValueForKey:@"orderBook"];
 //            [self.orderBook addObjectsFromArray:orderBook];

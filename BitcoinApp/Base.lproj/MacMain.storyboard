@@ -1555,6 +1555,18 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="AaQ-lx-Nnc" userLabel="SpinningBackgroundView">
+                                <rect key="frame" x="20" y="50" width="410" height="180"/>
+                                <subviews>
+                                    <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="eC6-v3-MYv">
+                                        <rect key="frame" x="197" y="83" width="16" height="16"/>
+                                    </progressIndicator>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="eC6-v3-MYv" firstAttribute="centerY" secondItem="AaQ-lx-Nnc" secondAttribute="centerY" id="eFH-Xa-ABn"/>
+                                    <constraint firstItem="eC6-v3-MYv" firstAttribute="centerX" secondItem="AaQ-lx-Nnc" secondAttribute="centerX" id="zP5-UW-cDf"/>
+                                </constraints>
+                            </customView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2G2-Wz-Aqe">
                                 <rect key="frame" x="283" y="13" width="82" height="32"/>
                                 <buttonCell key="cell" type="push" title="Reload" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MzW-SP-QHq">
@@ -1568,6 +1580,7 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="spC-t7-8Yj" firstAttribute="baseline" secondItem="O8Y-Hv-XHJ" secondAttribute="baseline" id="3hZ-ru-EQ7"/>
+                            <constraint firstItem="AaQ-lx-Nnc" firstAttribute="leading" secondItem="UdF-MR-Kxs" secondAttribute="leading" id="6GQ-9e-vDl"/>
                             <constraint firstAttribute="trailing" secondItem="UdF-MR-Kxs" secondAttribute="trailing" constant="20" symbolic="YES" id="7w3-gp-0Uc"/>
                             <constraint firstItem="7Rj-Aw-xee" firstAttribute="top" secondItem="49z-8y-L8q" secondAttribute="top" constant="20" id="84r-Po-Ym2"/>
                             <constraint firstAttribute="trailing" secondItem="7Rj-Aw-xee" secondAttribute="trailing" constant="20" id="CvQ-DK-WGw"/>
@@ -1576,20 +1589,25 @@
                             <constraint firstItem="Gdg-Cq-pHV" firstAttribute="leading" secondItem="2G2-Wz-Aqe" secondAttribute="trailing" constant="12" symbolic="YES" id="Hv4-lr-jpk"/>
                             <constraint firstItem="UdF-MR-Kxs" firstAttribute="leading" secondItem="49z-8y-L8q" secondAttribute="leading" constant="20" symbolic="YES" id="LQo-HC-vbr"/>
                             <constraint firstAttribute="bottom" secondItem="Gdg-Cq-pHV" secondAttribute="bottom" constant="20" symbolic="YES" id="MKD-vJ-Ibd"/>
+                            <constraint firstItem="AaQ-lx-Nnc" firstAttribute="trailing" secondItem="UdF-MR-Kxs" secondAttribute="trailing" id="MmL-3d-gOB"/>
                             <constraint firstItem="UdF-MR-Kxs" firstAttribute="top" secondItem="7Rj-Aw-xee" secondAttribute="bottom" constant="8" symbolic="YES" id="NRk-SX-joq"/>
                             <constraint firstAttribute="trailing" secondItem="Gdg-Cq-pHV" secondAttribute="trailing" constant="20" symbolic="YES" id="Sov-L1-IWt"/>
                             <constraint firstItem="2G2-Wz-Aqe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="spC-t7-8Yj" secondAttribute="trailing" constant="100" id="T0a-vm-b80"/>
+                            <constraint firstItem="AaQ-lx-Nnc" firstAttribute="top" secondItem="UdF-MR-Kxs" secondAttribute="top" constant="23" id="ZdF-KK-xfU"/>
                             <constraint firstItem="2G2-Wz-Aqe" firstAttribute="baseline" secondItem="Gdg-Cq-pHV" secondAttribute="baseline" id="dFl-yS-6xZ"/>
                             <constraint firstItem="spC-t7-8Yj" firstAttribute="leading" secondItem="O8Y-Hv-XHJ" secondAttribute="trailing" constant="8" id="eQh-33-tIF"/>
                             <constraint firstItem="spC-t7-8Yj" firstAttribute="top" secondItem="UdF-MR-Kxs" secondAttribute="bottom" constant="8" symbolic="YES" id="f3n-IB-otv"/>
+                            <constraint firstItem="AaQ-lx-Nnc" firstAttribute="bottom" secondItem="UdF-MR-Kxs" secondAttribute="bottom" id="rao-PD-AeO"/>
                             <constraint firstItem="7Rj-Aw-xee" firstAttribute="leading" secondItem="49z-8y-L8q" secondAttribute="leading" constant="20" id="w99-et-2f6"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="circularProgressIndicator" destination="eC6-v3-MYv" id="1GB-1p-FGS"/>
                         <outlet property="filterPriceDescriptionTextField" destination="O8Y-Hv-XHJ" id="ut0-Pv-YxR"/>
                         <outlet property="filterPriceValueTextField" destination="spC-t7-8Yj" id="HkJ-W6-1qg"/>
                         <outlet property="orderBookArrayController" destination="4Tj-Nm-93b" id="wMi-ZS-5XU"/>
                         <outlet property="otherFilterButton" destination="Gdg-Cq-pHV" id="fa8-dJ-MTf"/>
+                        <outlet property="spinningBackgroundView" destination="AaQ-lx-Nnc" id="qcQ-v1-r3s"/>
                         <outlet property="tableView" destination="ILN-vM-hc0" id="7vu-m8-Eev"/>
                         <outlet property="titleTextField" destination="7Rj-Aw-xee" id="jhc-mq-mcj"/>
                     </connections>
