@@ -15,7 +15,7 @@
 
 #import "SOXDateFormatter.h"
 
-#import "NSAttributedString+URL.h"
+#import "NSTextField+URL.h"
 
 #pragma mark - Interface
 @interface SOXBannerViewController () <SOXMarketCoreServerRequestProtocol, SOXCreditUpdateProtocol>
@@ -142,7 +142,7 @@
 }
 
 - (void)updateUIForBankReservationWithAccountInfoData:(SOXAccountInfoData *)accountInfoData {
-    if (accountInfoData.bankReservation_exists) {
+    if (!accountInfoData.bankReservation_exists) {
         self.fidorReservationValuesStackView.hidden = NO;
         self.fidorReservationDescriptionStackView.alignment = NSTextAlignmentRight;
         { // Total amount
@@ -153,8 +153,7 @@
         }
         { // Available amount
             self.fidorReservationAvailableAmountDescriptionTextField.alignment = NSTextAlignmentLeft;
-            self.fidorReservationAvailableAmountDescriptionTextField.allowsEditingTextAttributes = NO;
-            self.fidorReservationAvailableAmountDescriptionTextField.selectable = NO;
+            [self.fidorReservationAvailableAmountDescriptionTextField resetHyperlinkFormatting];
             self.fidorReservationAvailableAmountTextField.doubleValue = accountInfoData.bankReservation_availableAmount.doubleValue;
             self.fidorReservationAvailableAmountTextField.hidden = NO;
         }
@@ -182,17 +181,8 @@
         }
         { // Available amount
             self.fidorReservationAvailableAmountDescriptionTextField.alignment = NSTextAlignmentCenter;
-            
-            {
-                self.fidorReservationAvailableAmountDescriptionTextField.allowsEditingTextAttributes= YES;
-                self.fidorReservationAvailableAmountDescriptionTextField.selectable = YES;
-        
-                NSAttributedString *string = [NSAttributedString hyperlinkFromString:@"Go to reservation"
-                                                                             withURL:[NSURL URLWithString:@"https://www.bitcoin.de/de/reservation"]];
-        
-                self.fidorReservationAvailableAmountDescriptionTextField.attributedStringValue = string;
-            }
-            
+            [self.fidorReservationAvailableAmountDescriptionTextField setHyperlinkFormattingFromString:@"Go to reservation"
+                                                                                         withURLString:@"https://www.bitcoin.de/de/reservation"];
             self.fidorReservationAvailableAmountTextField.hidden = YES;
         }
         { // Reserved At
