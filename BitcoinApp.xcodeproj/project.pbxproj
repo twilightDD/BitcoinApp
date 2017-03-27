@@ -56,6 +56,8 @@
 		D063E9611E74C024006E2D17 /* iOS_BitcoinAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D063E9601E74C024006E2D17 /* iOS_BitcoinAppTests.m */; };
 		D0B9A3341E895EA0008860ED /* NSAttributedString+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B9A3331E895EA0008860ED /* NSAttributedString+URL.m */; };
 		D0B9A3351E895EA0008860ED /* NSAttributedString+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B9A3331E895EA0008860ED /* NSAttributedString+URL.m */; };
+		D0B9A3381E89934D008860ED /* NSTextField+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B9A3371E89934D008860ED /* NSTextField+URL.m */; };
+		D0B9A3391E89934D008860ED /* NSTextField+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B9A3371E89934D008860ED /* NSTextField+URL.m */; };
 		D0E5C4FF1E80801D00352985 /* SOXBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E5C4FD1E80801D00352985 /* SOXBannerViewController.m */; };
 		D0E5C5031E809C9800352985 /* SOXKeys_BitcoinDE.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E5C5021E809C9800352985 /* SOXKeys_BitcoinDE.m */; };
 		D0E5C5041E809C9800352985 /* SOXKeys_BitcoinDE.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E5C5021E809C9800352985 /* SOXKeys_BitcoinDE.m */; };
@@ -148,6 +150,8 @@
 		D063E9621E74C024006E2D17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0B9A3321E895EA0008860ED /* NSAttributedString+URL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+URL.h"; sourceTree = "<group>"; };
 		D0B9A3331E895EA0008860ED /* NSAttributedString+URL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+URL.m"; sourceTree = "<group>"; };
+		D0B9A3361E89934D008860ED /* NSTextField+URL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTextField+URL.h"; sourceTree = "<group>"; };
+		D0B9A3371E89934D008860ED /* NSTextField+URL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTextField+URL.m"; sourceTree = "<group>"; };
 		D0E5C4FC1E80801D00352985 /* SOXBannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXBannerViewController.h; sourceTree = "<group>"; };
 		D0E5C4FD1E80801D00352985 /* SOXBannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXBannerViewController.m; sourceTree = "<group>"; };
 		D0E5C5011E809C9800352985 /* SOXKeys_BitcoinDE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXKeys_BitcoinDE.h; sourceTree = "<group>"; };
@@ -379,6 +383,8 @@
 			children = (
 				D0B9A3321E895EA0008860ED /* NSAttributedString+URL.h */,
 				D0B9A3331E895EA0008860ED /* NSAttributedString+URL.m */,
+				D0B9A3361E89934D008860ED /* NSTextField+URL.h */,
+				D0B9A3371E89934D008860ED /* NSTextField+URL.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -794,6 +800,7 @@
 				D02ED5BA1E81546800AA9448 /* SOXAccountInfoData.m in Sources */,
 				D02ED5B61E8152F900AA9448 /* SOXRatesData.m in Sources */,
 				D0E5C4FF1E80801D00352985 /* SOXBannerViewController.m in Sources */,
+				D0B9A3381E89934D008860ED /* NSTextField+URL.m in Sources */,
 				D063E91A1E74BF97006E2D17 /* MacAppDelegate.m in Sources */,
 				D02ED5C21E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m in Sources */,
 			);
@@ -815,6 +822,7 @@
 				D02ED5BF1E817CFE00AA9448 /* SOXShowOrderbookData.m in Sources */,
 				D063E94B1E74C024006E2D17 /* ViewController.m in Sources */,
 				D02ED5B31E814CF100AA9448 /* SOXRates_BitcoinDE_Data.m in Sources */,
+				D0B9A3391E89934D008860ED /* NSTextField+URL.m in Sources */,
 				D0270AE51E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m in Sources */,
 				D02ED5C31E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m in Sources */,
 				D02ED5BB1E81546800AA9448 /* SOXAccountInfoData.m in Sources */,
