@@ -30,7 +30,6 @@
 @property (weak) IBOutlet NSTextField *btcBalanceReservedAmountDescriptionTextField;
 @property (weak) IBOutlet NSTextField *btcBalanceReservedAmountTextField;
 
-
 #pragma mark | accountInfoData (Bank Reservation)
 @property (weak) IBOutlet NSStackView *fidorReservationValuesAndDescriptionStackView;
 @property (weak) IBOutlet NSTextField *fidorReservationHeadlineTextField;
@@ -148,7 +147,7 @@
 }
 
 - (void)updateUIForBankReservationWithAccountInfoData:(SOXAccountInfoData *)accountInfoData {
-    if (!accountInfoData.bankReservation_exists) {
+    if (accountInfoData.bankReservation_exists) {
         self.fidorReservationValuesAndDescriptionStackView.hidden = NO;
         
         { // Total amount

@@ -16,6 +16,7 @@
 static NSString *BannerContainerViewSegueKey      = @"BannerContainerViewSegue";
 static NSString *OrdersViewControllerBuySegueKey  = @"OrdersViewControllerBuySegue";
 static NSString *OrdersViewControllerSellSegueKey = @"OrdersViewControllerSellSegue";
+static NSString *ShowMyOrdersContainerSegueKey    = @"ShowMyOrdersContainerSegue";
 
 @interface MacViewController () <SOXSocketIOCoreProtocol>
 

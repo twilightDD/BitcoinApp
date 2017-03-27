@@ -31,6 +31,35 @@ FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfoEncryptedInformation_
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfoEncryptedInformation_bic_full;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfoEncryptedInformation_uid;
 
+#pragma mark - BitcoinDE_ShowMyOrders
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_MainKey;
+
+#pragma mark | Order Details
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_OrderID;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_Type;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_MaxAmount;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_MinAmount;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_Price;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_MaxVolume;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_MinVolume;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_CreatedAt;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_EndDateTime;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_NewOrderForRemainingAmount;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_State;
+
+#pragma mark | Order Requirements
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_OrderRequirements;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_OrderRequirements_MinTrustLevel;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_OrderRequirements_OnlyKYCFull;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_OrderRequirements_PaymentOption;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_OrderRequirements_SeatOfBank;
+
+#pragma mark | Page information
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_Page;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_Page_Current;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_Page_Last;
+
+
 #pragma mark - BitcoinDE_ShowOrderbook
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_MainKey;
 

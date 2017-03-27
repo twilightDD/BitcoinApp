@@ -711,7 +711,7 @@
                                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="YxP-Pw-sYa">
                                                 <rect key="frame" x="0.0" y="0.0" width="661" height="134"/>
                                                 <connections>
-                                                    <segue destination="q7D-iu-Op3" kind="embed" id="F6d-Ua-Exg"/>
+                                                    <segue destination="q7D-iu-Op3" kind="embed" identifier="ShowMyOrdersContainerSegue" id="F6d-Ua-Exg"/>
                                                 </connections>
                                             </containerView>
                                         </subviews>
@@ -1666,10 +1666,10 @@
             </objects>
             <point key="canvasLocation" x="410" y="1459"/>
         </scene>
-        <!--View Controller-->
+        <!--Show My Orders View Controller-->
         <scene sceneID="FDl-hu-vIc">
             <objects>
-                <viewController id="q7D-iu-Op3" sceneMemberID="viewController">
+                <viewController id="q7D-iu-Op3" customClass="SOXShowMyOrdersViewController" sceneMemberID="viewController">
                     <view key="view" id="d9Y-Go-gwW">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1770,12 +1770,27 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="djv-Fe-LAU" userLabel="SpinningBackgroundView">
+                                <rect key="frame" x="20" y="20" width="325" height="210"/>
+                                <subviews>
+                                    <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="sQ4-6W-phR">
+                                        <rect key="frame" x="155" y="97" width="16" height="16"/>
+                                    </progressIndicator>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="sQ4-6W-phR" firstAttribute="centerX" secondItem="djv-Fe-LAU" secondAttribute="centerX" id="IwW-62-osH"/>
+                                    <constraint firstItem="sQ4-6W-phR" firstAttribute="centerY" secondItem="djv-Fe-LAU" secondAttribute="centerY" id="XW8-kO-4A8"/>
+                                </constraints>
+                            </customView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wNc-yI-m0l">
                                 <rect key="frame" x="347" y="13" width="89" height="32"/>
                                 <buttonCell key="cell" type="push" title="Reload" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kJw-36-s8I">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="reloadButtonAction:" target="q7D-iu-Op3" id="ayn-ib-FgM"/>
+                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CtF-f1-Wem">
                                 <rect key="frame" x="347" y="46" width="89" height="32"/>
@@ -1783,6 +1798,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="addButtonAction:" target="q7D-iu-Op3" id="dRK-yA-juE"/>
+                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hfD-y1-lfC">
                                 <rect key="frame" x="347" y="79" width="89" height="32"/>
@@ -1790,6 +1808,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="removeButtonAction:" target="q7D-iu-Op3" id="4U7-wK-ZI2"/>
+                                </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YlZ-0A-yU6">
                                 <rect key="frame" x="18" y="261" width="414" height="19"/>
@@ -1804,9 +1825,12 @@
                             <constraint firstAttribute="trailing" secondItem="wNc-yI-m0l" secondAttribute="trailing" constant="20" id="6dy-yd-Mzi"/>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="leading" secondItem="cYm-m7-vR1" secondAttribute="trailing" constant="8" symbolic="YES" id="899-z6-iwY"/>
                             <constraint firstItem="cYm-m7-vR1" firstAttribute="top" secondItem="YlZ-0A-yU6" secondAttribute="bottom" constant="8" symbolic="YES" id="8Ss-I0-0Gg"/>
+                            <constraint firstItem="djv-Fe-LAU" firstAttribute="bottom" secondItem="cYm-m7-vR1" secondAttribute="bottom" id="8b3-Rr-xdG"/>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="trailing" secondItem="hfD-y1-lfC" secondAttribute="trailing" id="AXt-l0-V1r"/>
                             <constraint firstItem="CtF-f1-Wem" firstAttribute="top" secondItem="hfD-y1-lfC" secondAttribute="bottom" constant="12" id="B0v-Tf-ghx"/>
+                            <constraint firstItem="djv-Fe-LAU" firstAttribute="leading" secondItem="cYm-m7-vR1" secondAttribute="leading" id="KBb-QU-zYo"/>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="leading" secondItem="CtF-f1-Wem" secondAttribute="leading" id="Pio-qP-x75"/>
+                            <constraint firstItem="djv-Fe-LAU" firstAttribute="trailing" secondItem="cYm-m7-vR1" secondAttribute="trailing" id="RIe-xz-dhY"/>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="leading" secondItem="hfD-y1-lfC" secondAttribute="leading" id="RZ3-tW-jPJ"/>
                             <constraint firstItem="YlZ-0A-yU6" firstAttribute="leading" secondItem="d9Y-Go-gwW" secondAttribute="leading" constant="20" id="SIf-W6-rlz"/>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="top" secondItem="CtF-f1-Wem" secondAttribute="bottom" constant="12" id="a6C-m9-BJW"/>
@@ -1814,6 +1838,7 @@
                             <constraint firstAttribute="trailing" secondItem="YlZ-0A-yU6" secondAttribute="trailing" constant="20" id="eEv-nT-FhW"/>
                             <constraint firstItem="YlZ-0A-yU6" firstAttribute="top" secondItem="d9Y-Go-gwW" secondAttribute="top" constant="20" id="jz3-ZL-tXX"/>
                             <constraint firstAttribute="bottom" secondItem="wNc-yI-m0l" secondAttribute="bottom" constant="20" id="njI-bu-QXY"/>
+                            <constraint firstItem="djv-Fe-LAU" firstAttribute="top" secondItem="cYm-m7-vR1" secondAttribute="top" constant="23" id="pOp-eH-Fhc"/>
                             <constraint firstItem="cYm-m7-vR1" firstAttribute="leading" secondItem="d9Y-Go-gwW" secondAttribute="leading" constant="20" symbolic="YES" id="q1C-aL-0eZ"/>
                             <constraint firstItem="CtF-f1-Wem" firstAttribute="trailing" secondItem="hfD-y1-lfC" secondAttribute="trailing" id="rZB-2z-h9H"/>
                             <constraint firstItem="hfD-y1-lfC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="YlZ-0A-yU6" secondAttribute="bottom" constant="50" id="taF-Bv-K9p"/>
@@ -1821,8 +1846,19 @@
                             <constraint firstItem="CtF-f1-Wem" firstAttribute="leading" secondItem="hfD-y1-lfC" secondAttribute="leading" id="xdD-gn-o5G"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="addButton" destination="CtF-f1-Wem" id="Xv6-Aw-gQE"/>
+                        <outlet property="circularProgressIndicator" destination="sQ4-6W-phR" id="zPb-8v-Wc2"/>
+                        <outlet property="myOrderArrayController" destination="t8U-TY-Pcr" id="eUx-bd-GSy"/>
+                        <outlet property="reloadButton" destination="wNc-yI-m0l" id="dzN-3N-kBl"/>
+                        <outlet property="removeButton" destination="hfD-y1-lfC" id="bG9-EL-gug"/>
+                        <outlet property="spinningBackgroundView" destination="djv-Fe-LAU" id="Cih-2u-wdf"/>
+                        <outlet property="tableView" destination="ecq-64-hR5" id="N3w-9n-JiP"/>
+                        <outlet property="titleTextField" destination="YlZ-0A-yU6" id="NaZ-xP-Qmf"/>
+                    </connections>
                 </viewController>
                 <customObject id="7kO-Hb-1O5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <arrayController objectClassName="NSArray" id="t8U-TY-Pcr" userLabel="MyOrders Array Controller"/>
             </objects>
             <point key="canvasLocation" x="911" y="825"/>
         </scene>

@@ -31,6 +31,34 @@ NSString *const BitcoinDE_ShowAccountInfoEncryptedInformation_bic_short         
 NSString *const BitcoinDE_ShowAccountInfoEncryptedInformation_bic_full                = @"bic_full";
 NSString *const BitcoinDE_ShowAccountInfoEncryptedInformation_uid                     = @"uid";
 
+#pragma mark - BitcoinDE_ShowMyOrders
+NSString *const BitcoinDE_ShowMyOrders_MainKey = @"orders";
+
+#pragma mark | Order Details
+NSString *const BitcoinDE_ShowMyOrders_OrderID                      = @"order_id";
+NSString *const BitcoinDE_ShowMyOrders_Type                         = @"type";
+NSString *const BitcoinDE_ShowMyOrders_MaxAmount                    = @"max_amount";
+NSString *const BitcoinDE_ShowMyOrders_MinAmount                    = @"min_amount";
+NSString *const BitcoinDE_ShowMyOrders_Price                        = @"price";
+NSString *const BitcoinDE_ShowMyOrders_MaxVolume                    = @"max_volume";
+NSString *const BitcoinDE_ShowMyOrders_MinVolume                    = @"min_volume";
+NSString *const BitcoinDE_ShowMyOrders_CreatedAt                    = @"created_at";
+NSString *const BitcoinDE_ShowMyOrders_EndDateTime                  = @"end_datetime";
+NSString *const BitcoinDE_ShowMyOrders_NewOrderForRemainingAmount   = @"new_order_for_remaining_amount";
+NSString *const BitcoinDE_ShowMyOrders_State                        = @"state";
+
+#pragma mark | Order Requirements
+NSString *const BitcoinDE_ShowMyOrders_OrderRequirements                = @"order_requirements";
+NSString *const BitcoinDE_ShowMyOrders_OrderRequirements_MinTrustLevel  = @"min_trust_level";
+NSString *const BitcoinDE_ShowMyOrders_OrderRequirements_OnlyKYCFull    = @"only_kyc_full";
+NSString *const BitcoinDE_ShowMyOrders_OrderRequirements_PaymentOption  = @"payment_option";
+NSString *const BitcoinDE_ShowMyOrders_OrderRequirements_SeatOfBank     = @"seat_of_bank";
+
+#pragma mark | Page information
+NSString *const BitcoinDE_ShowMyOrders_Page         = @"page";
+NSString *const BitcoinDE_ShowMyOrders_Page_Current = @"current";
+NSString *const BitcoinDE_ShowMyOrders_Page_Last    = @"Last";
+
 #pragma mark - BitcoinDE_ShowOrderbook
 NSString *const BitcoinDE_ShowOrderbook_MainKey = @"orders";
 
