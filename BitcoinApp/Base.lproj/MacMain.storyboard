@@ -1275,6 +1275,7 @@
                         <outlet property="creditValuesStackView" destination="aTk-QB-Ksu" id="FH4-7o-zwl"/>
                         <outlet property="fidorReservationAvailableAmountDescriptionTextField" destination="7JW-Mt-ieO" id="hzB-x3-MZw"/>
                         <outlet property="fidorReservationAvailableAmountTextField" destination="WK5-8f-wXL" id="WVi-lk-XQ6"/>
+                        <outlet property="fidorReservationDescriptionStackView" destination="fst-V2-Q7l" id="d4R-kn-DbJ"/>
                         <outlet property="fidorReservationHeadlineTextField" destination="y2W-30-7eg" id="qpk-UL-uAt"/>
                         <outlet property="fidorReservationReservedAtDescriptionTextField" destination="nH6-vy-4JV" id="g32-Pg-kaj"/>
                         <outlet property="fidorReservationReservedAtTextField" destination="gxB-I5-o1W" id="hWu-wB-MgR"/>

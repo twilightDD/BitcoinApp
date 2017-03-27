@@ -15,6 +15,8 @@
 
 #import "SOXDateFormatter.h"
 
+#import "NSAttributedString+URL.h"
+
 #pragma mark - Interface
 @interface SOXBannerViewController () <SOXMarketCoreServerRequestProtocol, SOXCreditUpdateProtocol>
 
@@ -38,6 +40,8 @@
 @property (weak) IBOutlet NSTextField *fidorReservationReservedAtTextField;
 @property (weak) IBOutlet NSTextField *fidorReservationValidUntilDescriptionTextField;
 @property (weak) IBOutlet NSTextField *fidorReservationValidUntilTextField;
+
+@property (weak) IBOutlet NSStackView *fidorReservationDescriptionStackView;
 @property (weak) IBOutlet NSStackView *fidorReservationValuesStackView;
 
 #pragma mark | ratesData
@@ -138,31 +142,68 @@
 }
 
 - (void)updateUIForBankReservationWithAccountInfoData:(SOXAccountInfoData *)accountInfoData {
-    BOOL bankReservation_exists = accountInfoData.bankReservation_exists;
-    
-    self.fidorReservationValuesStackView.hidden = !bankReservation_exists;
-    
-    // set strings / values
-    if (bankReservation_exists) {
-        self.fidorReservationTotalAmountDescriptionTextField.stringValue = @"Total amount";
-        self.fidorReservationTotalAmountDescriptionTextField.alignment = NSTextAlignmentLeft;
-        self.fidorReservationTotalAmountTextField.doubleValue = accountInfoData.bankReservation_totalAmount.doubleValue;
-        self.fidorReservationAvailableAmountTextField.doubleValue = accountInfoData.bankReservation_availableAmount.doubleValue;
-        
-        NSString *reservedATString = [SOXDateFormatter stringDateTimeStringForRFC3339DateTimeString:accountInfoData.bankReservation_reservedAt];
-        self.fidorReservationReservedAtTextField.stringValue = reservedATString;
-        NSString *validUntilString = [SOXDateFormatter stringDateTimeStringForRFC3339DateTimeString:accountInfoData.bankReservation_validUntil];
-        self.fidorReservationValidUntilTextField.stringValue = validUntilString;
+    if (accountInfoData.bankReservation_exists) {
+        self.fidorReservationValuesStackView.hidden = NO;
+        self.fidorReservationDescriptionStackView.alignment = NSTextAlignmentRight;
+        { // Total amount
+            self.fidorReservationTotalAmountDescriptionTextField.stringValue = @"Total amount";
+            self.fidorReservationTotalAmountDescriptionTextField.alignment = NSTextAlignmentLeft;
+            self.fidorReservationTotalAmountTextField.doubleValue = accountInfoData.bankReservation_totalAmount.doubleValue;
+            self.fidorReservationTotalAmountTextField.hidden = NO;
+        }
+        { // Available amount
+            self.fidorReservationAvailableAmountDescriptionTextField.alignment = NSTextAlignmentLeft;
+            self.fidorReservationAvailableAmountDescriptionTextField.allowsEditingTextAttributes = NO;
+            self.fidorReservationAvailableAmountDescriptionTextField.selectable = NO;
+            self.fidorReservationAvailableAmountTextField.doubleValue = accountInfoData.bankReservation_availableAmount.doubleValue;
+            self.fidorReservationAvailableAmountTextField.hidden = NO;
+        }
+        { // Reserved At
+            NSString *reservedATString = [SOXDateFormatter stringDateTimeStringForRFC3339DateTimeString:accountInfoData.bankReservation_reservedAt];
+            self.fidorReservationReservedAtTextField.stringValue = reservedATString;
+            self.fidorReservationReservedAtDescriptionTextField.hidden = NO;
+            self.fidorReservationReservedAtTextField.hidden = NO;
+        }
+        { // Valid until
+            NSString *validUntilString = [SOXDateFormatter stringDateTimeStringForRFC3339DateTimeString:accountInfoData.bankReservation_validUntil];
+            self.fidorReservationValidUntilTextField.stringValue = validUntilString;
+            self.fidorReservationValidUntilDescriptionTextField.hidden = NO;
+            self.fidorReservationValidUntilTextField.hidden = NO;
+        }
     }
     else {
-        self.fidorReservationTotalAmountDescriptionTextField.stringValue = @"No reservation";
-        self.fidorReservationTotalAmountDescriptionTextField.alignment = NSTextAlignmentCenter;
+        self.fidorReservationValuesStackView.hidden = YES;
+        self.fidorReservationDescriptionStackView.alignment = NSTextAlignmentCenter;
+
+        { // Total amount
+            self.fidorReservationTotalAmountDescriptionTextField.stringValue = @"No reservation";
+            self.fidorReservationTotalAmountDescriptionTextField.alignment = NSTextAlignmentCenter;
+            self.fidorReservationTotalAmountTextField.hidden = YES;
+        }
+        { // Available amount
+            self.fidorReservationAvailableAmountDescriptionTextField.alignment = NSTextAlignmentCenter;
+            
+            {
+                self.fidorReservationAvailableAmountDescriptionTextField.allowsEditingTextAttributes= YES;
+                self.fidorReservationAvailableAmountDescriptionTextField.selectable = YES;
+        
+                NSAttributedString *string = [NSAttributedString hyperlinkFromString:@"Go to reservation"
+                                                                             withURL:[NSURL URLWithString:@"https://www.bitcoin.de/de/reservation"]];
+        
+                self.fidorReservationAvailableAmountDescriptionTextField.attributedStringValue = string;
+            }
+            
+            self.fidorReservationAvailableAmountTextField.hidden = YES;
+        }
+        { // Reserved At
+            self.fidorReservationReservedAtDescriptionTextField.hidden = YES;
+            self.fidorReservationReservedAtTextField.hidden = YES;
+        }
+        { // Valid until
+            self.fidorReservationValidUntilDescriptionTextField.hidden = YES;
+            self.fidorReservationValidUntilTextField.hidden = YES;
+        }
     }
-    
-    // hide labels if no bankReservation
-    self.fidorReservationAvailableAmountDescriptionTextField.hidden = !bankReservation_exists;
-    self.fidorReservationReservedAtDescriptionTextField.hidden = !bankReservation_exists;
-    self.fidorReservationValidUntilDescriptionTextField.hidden = !bankReservation_exists;
 }
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
@@ -200,10 +241,6 @@
     
     self.creditTextCurrentCreditsField.stringValue = currentCredit.stringValue;
     self.creditTextMaxCreditsField.stringValue = maxCredits.stringValue;
-    
-    
-
 }
-
 
 @end
