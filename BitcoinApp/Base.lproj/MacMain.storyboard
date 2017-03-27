@@ -873,10 +873,10 @@
                                                     <rect key="frame" x="101" y="0.0" width="5" height="298"/>
                                                 </box>
                                                 <stackView distribution="fillEqually" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rJL-Qj-YBC" userLabel="FidorStack">
-                                                    <rect key="frame" x="120" y="179" width="88" height="119"/>
+                                                    <rect key="frame" x="120" y="152" width="88" height="146"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y2W-30-7eg">
-                                                            <rect key="frame" x="22" y="100" width="43" height="19"/>
+                                                            <rect key="frame" x="22" y="127" width="43" height="19"/>
                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="d3L-nX-mJ8">
                                                                 <font key="font" metaFont="systemSemibold" size="15"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -884,7 +884,7 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="16" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZMP-KD-04C">
-                                                            <rect key="frame" x="3" y="0.0" width="82" height="92"/>
+                                                            <rect key="frame" x="3" y="27" width="82" height="92"/>
                                                             <subviews>
                                                                 <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fst-V2-Q7l" userLabel="DescriptionStack">
                                                                     <rect key="frame" x="0.0" y="0.0" width="33" height="92"/>
@@ -996,12 +996,44 @@
                                                                 <real value="3.4028234663852886e+38"/>
                                                             </customSpacing>
                                                         </stackView>
+                                                        <stackView distribution="fillEqually" orientation="horizontal" alignment="centerY" spacing="16" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zCa-tI-dmQ" userLabel="URL Stackview">
+                                                            <rect key="frame" x="3" y="0.0" width="82" height="19"/>
+                                                            <subviews>
+                                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="J5Q-AE-JKi">
+                                                                    <rect key="frame" x="-2" y="1" width="37" height="17"/>
+                                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="Dlg-wY-gFv">
+                                                                        <font key="font" metaFont="system"/>
+                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                    </textFieldCell>
+                                                                </textField>
+                                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jFY-PA-hDN">
+                                                                    <rect key="frame" x="47" y="1" width="37" height="17"/>
+                                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Label" id="VLd-g6-7jG">
+                                                                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="CCz-Um-rKg"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                    </textFieldCell>
+                                                                </textField>
+                                                            </subviews>
+                                                            <visibilityPriorities>
+                                                                <integer value="1000"/>
+                                                                <integer value="1000"/>
+                                                            </visibilityPriorities>
+                                                            <customSpacing>
+                                                                <real value="3.4028234663852886e+38"/>
+                                                                <real value="3.4028234663852886e+38"/>
+                                                            </customSpacing>
+                                                        </stackView>
                                                     </subviews>
                                                     <visibilityPriorities>
                                                         <integer value="1000"/>
                                                         <integer value="1000"/>
+                                                        <integer value="1000"/>
                                                     </visibilityPriorities>
                                                     <customSpacing>
+                                                        <real value="3.4028234663852886e+38"/>
                                                         <real value="3.4028234663852886e+38"/>
                                                         <real value="3.4028234663852886e+38"/>
                                                     </customSpacing>
@@ -1277,12 +1309,16 @@
                         <outlet property="fidorReservationAvailableAmountTextField" destination="WK5-8f-wXL" id="WVi-lk-XQ6"/>
                         <outlet property="fidorReservationDescriptionStackView" destination="fst-V2-Q7l" id="d4R-kn-DbJ"/>
                         <outlet property="fidorReservationHeadlineTextField" destination="y2W-30-7eg" id="qpk-UL-uAt"/>
+                        <outlet property="fidorReservationLeftURLTextField" destination="J5Q-AE-JKi" id="DZO-no-DEc"/>
                         <outlet property="fidorReservationReservedAtDescriptionTextField" destination="nH6-vy-4JV" id="g32-Pg-kaj"/>
                         <outlet property="fidorReservationReservedAtTextField" destination="gxB-I5-o1W" id="hWu-wB-MgR"/>
+                        <outlet property="fidorReservationRightURLTextField" destination="jFY-PA-hDN" id="0Uq-7r-vly"/>
                         <outlet property="fidorReservationTotalAmountDescriptionTextField" destination="5vx-To-2TX" id="ovp-CQ-FmM"/>
                         <outlet property="fidorReservationTotalAmountTextField" destination="xe8-OM-npk" id="Bd2-CG-h0O"/>
+                        <outlet property="fidorReservationURLStackView" destination="zCa-tI-dmQ" id="aBv-bt-4jg"/>
                         <outlet property="fidorReservationValidUntilDescriptionTextField" destination="22b-3H-gvx" id="fm1-bg-Urz"/>
                         <outlet property="fidorReservationValidUntilTextField" destination="c12-YI-m1X" id="hso-89-naf"/>
+                        <outlet property="fidorReservationValuesAndDescriptionStackView" destination="ZMP-KD-04C" id="ixD-Ur-LQ2"/>
                         <outlet property="fidorReservationValuesStackView" destination="3PV-fR-X9N" id="xHc-gf-OGn"/>
                         <outlet property="ratesHeadlineTextField" destination="zfI-FP-Coh" id="EaM-Mq-7Na"/>
                         <outlet property="ratesRateWeighted12hDescriptionTextField" destination="JaA-na-sDd" id="Jv2-Kj-Sx7"/>
