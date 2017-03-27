@@ -24,7 +24,7 @@
             payload = payloadDictionary; //[SOXShowOrderbook_BitcoinDE_Data orderbookDataArrayForShowOrderbookDictionary:payloadDictionary];
             break;
         case BitcoinDE_ShowMyOrdersCommandType:
-            
+            payload = payloadDictionary;
             break;
         case BitcoinDE_ShowMyOrderDetailsCommandType:
             
