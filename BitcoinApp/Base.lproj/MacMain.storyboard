@@ -2635,11 +2635,11 @@ Gw
             <objects>
                 <viewController id="d67-em-sMP" customClass="SOXMyAccountLedgerViewController" sceneMemberID="viewController">
                     <view key="view" id="KG1-ac-oC6">
-                        <rect key="frame" x="0.0" y="0.0" width="965" height="344"/>
+                        <rect key="frame" x="0.0" y="0.0" width="885" height="344"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RTM-y7-dO4">
-                                <rect key="frame" x="18" y="307" width="929" height="17"/>
+                                <rect key="frame" x="18" y="307" width="849" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="ceY-tG-kvr">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -2647,7 +2647,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="CvW-je-qdf">
-                                <rect key="frame" x="428" y="20" width="109" height="21"/>
+                                <rect key="frame" x="388" y="20" width="109" height="21"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VA2-Va-dtt">
                                         <rect key="frame" x="66" y="-7" width="49" height="32"/>
@@ -2685,19 +2685,19 @@ Gw
                                 </constraints>
                             </customView>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fGp-j1-fNK">
-                                <rect key="frame" x="20" y="49" width="925" height="250"/>
+                                <rect key="frame" x="20" y="49" width="845" height="250"/>
                                 <clipView key="contentView" id="q6P-13-wzZ">
-                                    <rect key="frame" x="1" y="0.0" width="923" height="234"/>
+                                    <rect key="frame" x="1" y="0.0" width="843" height="249"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="UdI-6x-40i" id="ukh-mk-8h8">
-                                            <rect key="frame" x="0.0" y="0.0" width="927" height="211"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="843" height="226"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="180" minWidth="40" maxWidth="1000" id="eh3-HK-OCG">
+                                                <tableColumn width="100" minWidth="40" maxWidth="1000" id="eh3-HK-OCG">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="date">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2829,7 +2829,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.tradeDetails_Euro_before_fee" id="hev-3c-vNG"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="100" minWidth="10" maxWidth="1100" id="WMb-IW-VZq">
+                                                <tableColumn identifier="" width="96" minWidth="10" maxWidth="1100" id="WMb-IW-VZq">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="euro after fee">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2854,7 +2854,7 @@ Gw
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="500" id="Umj-9T-mb0"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="180" id="wkM-9V-7ME"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="7C6-vt-23Y">
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="7C6-vt-23Y">
                                     <rect key="frame" x="1" y="234" width="923" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -2863,43 +2863,60 @@ Gw
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="UdI-6x-40i">
-                                    <rect key="frame" x="0.0" y="0.0" width="927" height="23"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="843" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="4oR-2z-iOV" userLabel="SpinningBackgroundView">
+                                <rect key="frame" x="21" y="50" width="843" height="226"/>
+                                <subviews>
+                                    <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="09c-cw-0o8">
+                                        <rect key="frame" x="414" y="105" width="16" height="16"/>
+                                    </progressIndicator>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="09c-cw-0o8" firstAttribute="centerX" secondItem="4oR-2z-iOV" secondAttribute="centerX" id="Tck-bY-bGG"/>
+                                    <constraint firstItem="09c-cw-0o8" firstAttribute="centerY" secondItem="4oR-2z-iOV" secondAttribute="centerY" id="X94-Zf-KOk"/>
+                                </constraints>
+                            </customView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="CvW-je-qdf" firstAttribute="centerX" secondItem="KG1-ac-oC6" secondAttribute="centerX" id="3Y0-7t-UAr"/>
                             <constraint firstAttribute="bottom" secondItem="CvW-je-qdf" secondAttribute="bottom" constant="20" symbolic="YES" id="5gc-z6-cTL"/>
                             <constraint firstItem="CvW-je-qdf" firstAttribute="top" secondItem="fGp-j1-fNK" secondAttribute="bottom" constant="8" symbolic="YES" id="Got-aD-gb9"/>
+                            <constraint firstItem="4oR-2z-iOV" firstAttribute="top" secondItem="q6P-13-wzZ" secondAttribute="top" id="PrQ-FB-imn"/>
+                            <constraint firstItem="4oR-2z-iOV" firstAttribute="trailing" secondItem="q6P-13-wzZ" secondAttribute="trailing" id="R5w-FU-DRf"/>
                             <constraint firstItem="fGp-j1-fNK" firstAttribute="top" secondItem="RTM-y7-dO4" secondAttribute="bottom" constant="8" symbolic="YES" id="VbB-0N-HU8"/>
                             <constraint firstItem="fGp-j1-fNK" firstAttribute="leading" secondItem="KG1-ac-oC6" secondAttribute="leading" constant="20" id="WO2-2V-g34"/>
                             <constraint firstItem="RTM-y7-dO4" firstAttribute="leading" secondItem="KG1-ac-oC6" secondAttribute="leading" constant="20" id="ca8-kz-nye"/>
                             <constraint firstItem="RTM-y7-dO4" firstAttribute="top" secondItem="KG1-ac-oC6" secondAttribute="top" constant="20" id="dRn-m3-M9o"/>
+                            <constraint firstItem="4oR-2z-iOV" firstAttribute="leading" secondItem="q6P-13-wzZ" secondAttribute="leading" id="krl-KI-xnf"/>
+                            <constraint firstItem="4oR-2z-iOV" firstAttribute="bottom" secondItem="q6P-13-wzZ" secondAttribute="bottom" id="lI6-38-Gon"/>
                             <constraint firstAttribute="trailing" secondItem="fGp-j1-fNK" secondAttribute="trailing" constant="20" id="nlP-N0-oAG"/>
                             <constraint firstAttribute="trailing" secondItem="RTM-y7-dO4" secondAttribute="trailing" constant="20" id="vwZ-73-wKN"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="accountLedgerArrayController" destination="8E9-hF-O6h" id="Ae3-Qu-Tme"/>
-                        <outlet property="myTradesArrayController" destination="TYB-MB-iAF" id="IFx-R3-vJ5"/>
+                        <outlet property="circularProgressIndicator" destination="09c-cw-0o8" id="iXe-jn-SEs"/>
                         <outlet property="pageBackwardButton" destination="fz1-cL-cKI" id="OkO-Pc-Idg"/>
                         <outlet property="pageContainerView" destination="CvW-je-qdf" id="jlx-IK-lCL"/>
                         <outlet property="pageForwardButton" destination="VA2-Va-dtt" id="E7F-xV-b3c"/>
                         <outlet property="pageIndicatorTextField" destination="q0G-qt-NQb" id="2qT-Iu-zhg"/>
+                        <outlet property="spinningBackgroundView" destination="4oR-2z-iOV" id="tAp-0I-fyd"/>
                         <outlet property="tableView" destination="ukh-mk-8h8" id="PWX-B4-1iB"/>
                         <outlet property="titleTextField" destination="RTM-y7-dO4" id="jkr-T0-kLi"/>
                     </connections>
                 </viewController>
                 <customObject id="gWJ-Pw-cBy" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController objectClassName="SOXAccountLedger_BitcoinDE_Data" id="8E9-hF-O6h">
+                <arrayController objectClassName="SOXAccountLedger_BitcoinDE_Data" editable="NO" selectsInsertedObjects="NO" avoidsEmptySelection="NO" id="8E9-hF-O6h">
                     <connections>
                         <binding destination="d67-em-sMP" name="contentArray" keyPath="self.accountLedger" id="Mf9-w6-vDX"/>
                     </connections>
                 </arrayController>
                 <userDefaultsController id="lEg-Nr-J4c"/>
             </objects>
-            <point key="canvasLocation" x="2367" y="1131"/>
+            <point key="canvasLocation" x="2370.5" y="1119"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
