@@ -1674,99 +1674,201 @@
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYm-m7-vR1">
+                            <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVf-cd-9K7">
                                 <rect key="frame" x="20" y="20" width="325" height="233"/>
-                                <clipView key="contentView" id="fK3-ca-dxw">
-                                    <rect key="frame" x="1" y="0.0" width="323" height="232"/>
+                                <clipView key="contentView" id="pXN-85-eeM">
+                                    <rect key="frame" x="1" y="23" width="323" height="194"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="czK-WF-9Op" viewBased="YES" id="ecq-64-hR5">
-                                            <rect key="frame" x="0.0" y="0.0" width="323" height="209"/>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="2F9-Ce-VdL" id="kdt-bX-tib">
+                                            <rect key="frame" x="0.0" y="0.0" width="664" height="194"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="116" minWidth="40" maxWidth="1000" id="6X7-oy-hJl">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
+                                                <tableColumn editable="NO" width="80" minWidth="40" maxWidth="1000" id="T6P-2d-aZO">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="type">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
-                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="XRh-ev-z9u">
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="sZh-Nd-GD4">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                    <prototypeCellViews>
-                                                        <tableCellView id="Id2-cN-Lg2">
-                                                            <rect key="frame" x="1" y="1" width="116" height="17"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vWe-jS-wrT">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="116" height="17"/>
-                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="NHE-I7-DEG">
-                                                                        <font key="font" metaFont="system"/>
-                                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                                    </textFieldCell>
-                                                                </textField>
-                                                            </subviews>
-                                                            <connections>
-                                                                <outlet property="textField" destination="vWe-jS-wrT" id="JGf-fc-pIf"/>
-                                                            </connections>
-                                                        </tableCellView>
-                                                    </prototypeCellViews>
+                                                    <connections>
+                                                        <binding destination="t8U-TY-Pcr" name="value" keyPath="arrangedObjects.orderInformation_type" id="vac-CA-PdW">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
                                                 </tableColumn>
-                                                <tableColumn width="201" minWidth="40" maxWidth="1000" id="Ooz-L0-YOg">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
+                                                <tableColumn editable="NO" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="a7f-p9-2VM">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="max_amount">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
-                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="9eH-GV-SnL">
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="SDq-cE-juy">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                    <prototypeCellViews>
-                                                        <tableCellView id="2OU-Ll-twn">
-                                                            <rect key="frame" x="120" y="1" width="201" height="17"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="die-fl-3sC">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="201" height="17"/>
-                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="NnL-Da-vQk">
-                                                                        <font key="font" metaFont="system"/>
-                                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                                    </textFieldCell>
-                                                                </textField>
-                                                            </subviews>
-                                                            <connections>
-                                                                <outlet property="textField" destination="die-fl-3sC" id="bLI-W9-e9Y"/>
-                                                            </connections>
-                                                        </tableCellView>
-                                                    </prototypeCellViews>
+                                                    <connections>
+                                                        <binding destination="t8U-TY-Pcr" name="value" keyPath="arrangedObjects.orderInformation_maxAmount" id="vFM-fK-WRr">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
+                                                </tableColumn>
+                                                <tableColumn editable="NO" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="tWX-0r-NaC">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="min_amount">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="Lw6-rz-lWN">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="t8U-TY-Pcr" name="value" keyPath="arrangedObjects.orderInformation_minAmount" id="10j-iJ-3Rg">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
+                                                </tableColumn>
+                                                <tableColumn editable="NO" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="9ff-Ke-frs">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="price">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="XjE-bI-2Ph">
+                                                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="qKJ-8j-o4r"/>
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="t8U-TY-Pcr" name="value" keyPath="arrangedObjects.orderInformation_price" id="IAH-th-Da9">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
+                                                </tableColumn>
+                                                <tableColumn editable="NO" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="CL9-A3-qKx">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="max_volume">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="l0H-RW-Odf">
+                                                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="L1y-6U-roL"/>
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="t8U-TY-Pcr" name="value" keyPath="arrangedObjects.orderInformation_maxVolume" id="KbF-sz-zQ4">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
+                                                </tableColumn>
+                                                <tableColumn editable="NO" width="80" minWidth="40" maxWidth="1000" id="1L4-9n-cDS">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="min_volume">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="dfn-aF-77N">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="t8U-TY-Pcr" name="value" keyPath="arrangedObjects.orderInformation_minVolume" id="esj-H7-0Hw">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
+                                                </tableColumn>
+                                                <tableColumn editable="NO" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="Btb-GV-QJk">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="created_at">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="SjL-73-OHC">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="t8U-TY-Pcr" name="value" keyPath="arrangedObjects.orderInformation_createdAt" id="Gdn-bD-0hh">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
+                                                </tableColumn>
+                                                <tableColumn editable="NO" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="bq1-PX-EAf">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="end_datetime">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="rDK-Sg-v8a">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="t8U-TY-Pcr" name="value" keyPath="arrangedObjects.orderInformation_endDateTime" id="ZEw-MU-5Ii">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
                                                 </tableColumn>
                                             </tableColumns>
+                                            <connections>
+                                                <outlet property="delegate" destination="ssU-Oy-97E" id="Uac-F3-FeC"/>
+                                            </connections>
                                         </tableView>
                                     </subviews>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="hBF-LR-ZMr">
-                                    <rect key="frame" x="1" y="119" width="223" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="ink-sr-cHK"/>
+                                </constraints>
+                                <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="z69-5g-yDr">
+                                    <rect key="frame" x="1" y="217" width="323" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="LJJ-zg-j52">
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="Jgd-vM-SQi">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <tableHeaderView key="headerView" id="czK-WF-9Op">
-                                    <rect key="frame" x="0.0" y="0.0" width="323" height="23"/>
+                                <tableHeaderView key="headerView" id="2F9-Ce-VdL">
+                                    <rect key="frame" x="0.0" y="0.0" width="664" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
@@ -1822,28 +1924,28 @@
                             </textField>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="wNc-yI-m0l" firstAttribute="leading" secondItem="dVf-cd-9K7" secondAttribute="trailing" constant="8" symbolic="YES" id="44W-Pd-PcN"/>
                             <constraint firstAttribute="trailing" secondItem="wNc-yI-m0l" secondAttribute="trailing" constant="20" id="6dy-yd-Mzi"/>
-                            <constraint firstItem="wNc-yI-m0l" firstAttribute="leading" secondItem="cYm-m7-vR1" secondAttribute="trailing" constant="8" symbolic="YES" id="899-z6-iwY"/>
-                            <constraint firstItem="cYm-m7-vR1" firstAttribute="top" secondItem="YlZ-0A-yU6" secondAttribute="bottom" constant="8" symbolic="YES" id="8Ss-I0-0Gg"/>
-                            <constraint firstItem="djv-Fe-LAU" firstAttribute="bottom" secondItem="cYm-m7-vR1" secondAttribute="bottom" id="8b3-Rr-xdG"/>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="trailing" secondItem="hfD-y1-lfC" secondAttribute="trailing" id="AXt-l0-V1r"/>
+                            <constraint firstItem="dVf-cd-9K7" firstAttribute="leading" secondItem="d9Y-Go-gwW" secondAttribute="leading" constant="20" symbolic="YES" id="AwV-Ul-N11"/>
                             <constraint firstItem="CtF-f1-Wem" firstAttribute="top" secondItem="hfD-y1-lfC" secondAttribute="bottom" constant="12" id="B0v-Tf-ghx"/>
-                            <constraint firstItem="djv-Fe-LAU" firstAttribute="leading" secondItem="cYm-m7-vR1" secondAttribute="leading" id="KBb-QU-zYo"/>
+                            <constraint firstItem="dVf-cd-9K7" firstAttribute="top" secondItem="YlZ-0A-yU6" secondAttribute="bottom" constant="8" symbolic="YES" id="Ij5-JG-Ljo"/>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="leading" secondItem="CtF-f1-Wem" secondAttribute="leading" id="Pio-qP-x75"/>
-                            <constraint firstItem="djv-Fe-LAU" firstAttribute="trailing" secondItem="cYm-m7-vR1" secondAttribute="trailing" id="RIe-xz-dhY"/>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="leading" secondItem="hfD-y1-lfC" secondAttribute="leading" id="RZ3-tW-jPJ"/>
                             <constraint firstItem="YlZ-0A-yU6" firstAttribute="leading" secondItem="d9Y-Go-gwW" secondAttribute="leading" constant="20" id="SIf-W6-rlz"/>
+                            <constraint firstItem="djv-Fe-LAU" firstAttribute="top" secondItem="dVf-cd-9K7" secondAttribute="top" constant="23" id="Xdn-oB-fft"/>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="top" secondItem="CtF-f1-Wem" secondAttribute="bottom" constant="12" id="a6C-m9-BJW"/>
-                            <constraint firstAttribute="bottom" secondItem="cYm-m7-vR1" secondAttribute="bottom" constant="20" symbolic="YES" id="bjZ-Y5-C2e"/>
+                            <constraint firstItem="djv-Fe-LAU" firstAttribute="bottom" secondItem="dVf-cd-9K7" secondAttribute="bottom" id="aun-FS-fVB"/>
                             <constraint firstAttribute="trailing" secondItem="YlZ-0A-yU6" secondAttribute="trailing" constant="20" id="eEv-nT-FhW"/>
+                            <constraint firstItem="djv-Fe-LAU" firstAttribute="trailing" secondItem="dVf-cd-9K7" secondAttribute="trailing" id="h6r-Rf-XbF"/>
                             <constraint firstItem="YlZ-0A-yU6" firstAttribute="top" secondItem="d9Y-Go-gwW" secondAttribute="top" constant="20" id="jz3-ZL-tXX"/>
                             <constraint firstAttribute="bottom" secondItem="wNc-yI-m0l" secondAttribute="bottom" constant="20" id="njI-bu-QXY"/>
-                            <constraint firstItem="djv-Fe-LAU" firstAttribute="top" secondItem="cYm-m7-vR1" secondAttribute="top" constant="23" id="pOp-eH-Fhc"/>
-                            <constraint firstItem="cYm-m7-vR1" firstAttribute="leading" secondItem="d9Y-Go-gwW" secondAttribute="leading" constant="20" symbolic="YES" id="q1C-aL-0eZ"/>
+                            <constraint firstAttribute="bottom" secondItem="dVf-cd-9K7" secondAttribute="bottom" constant="20" symbolic="YES" id="o9W-WE-DLd"/>
                             <constraint firstItem="CtF-f1-Wem" firstAttribute="trailing" secondItem="hfD-y1-lfC" secondAttribute="trailing" id="rZB-2z-h9H"/>
                             <constraint firstItem="hfD-y1-lfC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="YlZ-0A-yU6" secondAttribute="bottom" constant="50" id="taF-Bv-K9p"/>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="trailing" secondItem="CtF-f1-Wem" secondAttribute="trailing" id="wHe-cL-eyn"/>
                             <constraint firstItem="CtF-f1-Wem" firstAttribute="leading" secondItem="hfD-y1-lfC" secondAttribute="leading" id="xdD-gn-o5G"/>
+                            <constraint firstItem="djv-Fe-LAU" firstAttribute="leading" secondItem="dVf-cd-9K7" secondAttribute="leading" id="zkW-pa-GiK"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1853,12 +1955,16 @@
                         <outlet property="reloadButton" destination="wNc-yI-m0l" id="dzN-3N-kBl"/>
                         <outlet property="removeButton" destination="hfD-y1-lfC" id="bG9-EL-gug"/>
                         <outlet property="spinningBackgroundView" destination="djv-Fe-LAU" id="Cih-2u-wdf"/>
-                        <outlet property="tableView" destination="ecq-64-hR5" id="N3w-9n-JiP"/>
                         <outlet property="titleTextField" destination="YlZ-0A-yU6" id="NaZ-xP-Qmf"/>
                     </connections>
                 </viewController>
                 <customObject id="7kO-Hb-1O5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController objectClassName="NSArray" id="t8U-TY-Pcr" userLabel="MyOrders Array Controller"/>
+                <arrayController objectClassName="SOXMyOrderBook_BitcoinDE_Data" id="t8U-TY-Pcr" userLabel="MyOrders Array Controller">
+                    <connections>
+                        <binding destination="q7D-iu-Op3" name="contentArray" keyPath="self.myOrderBook" id="RFv-Zz-IHG"/>
+                    </connections>
+                </arrayController>
+                <userDefaultsController id="NkV-w9-bXQ"/>
             </objects>
             <point key="canvasLocation" x="911" y="825"/>
         </scene>
