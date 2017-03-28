@@ -10,6 +10,8 @@
 
 #import "SOXKeys_BitcoinDE.h"
 
+#import "SOXDateFormatter.h"
+
 #pragma mark - Interface
 @interface SOXAccountLedger_BitcoinDE_Data ()
 
@@ -54,7 +56,7 @@
 #pragma mark - Instance methods
 - (void)setupMyAccountLedgerDataForAccountLedgerDictionary:(NSDictionary *)aAccountLedgerDictionary {
     { // Ledger Position Details
-        self.positionDetails_Date = [aAccountLedgerDictionary objectForKey:BitcoinDE_ShowAccountLedger_Date];
+        self.positionDetails_Date = [SOXDateFormatter stringDateTimeStringForRFC3339DateTimeString:[aAccountLedgerDictionary objectForKey:BitcoinDE_ShowAccountLedger_Date]];
         self.positionDetails_Type = [aAccountLedgerDictionary objectForKey:BitcoinDE_ShowAccountLedger_Type];
         self.positionDetails_Reference = [aAccountLedgerDictionary objectForKey:BitcoinDE_ShowAccountLedger_Reference];
         self.positionDetails_Cashflow = [aAccountLedgerDictionary objectForKey:BitcoinDE_ShowAccountLedger_Cashflow];
