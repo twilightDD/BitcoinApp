@@ -8,8 +8,12 @@
 
 #import "SOXShowMyOrdersViewController.h"
 
+#import "SOXMyOrderDetailsViewController.h"
+
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXMyOrderBook_BitcoinDE_Data.h"
+
+
 
 #pragma mark - Interface
 @interface SOXShowMyOrdersViewController () <SOXMarketCoreServerRequestProtocol, NSTableViewDelegate>
@@ -74,7 +78,13 @@
 }
 #pragma mark - Table view methods
 - (void)tableViewDoubleAction:(NSTableView *)tableView {
-
+    NSArray <SOXMyOrderBook_BitcoinDE_Data *> *selectedObjects = [self.myOrderArrayController selectedObjects];
+    SOXMyOrderBook_BitcoinDE_Data *selectedMyOrder = selectedObjects.firstObject;
+    
+    NSStoryboard *storyBoard = [NSStoryboard storyboardWithName:@"MacMain" bundle:nil];
+    SOXMyOrderDetailsViewController *viewC = [storyBoard instantiateControllerWithIdentifier:@"MyOrderDetailsViewControllerIdentifier"];
+    viewC.myOrder = selectedMyOrder;
+    [self presentViewControllerAsSheet:viewC];
 }
 
 #pragma mark - SOXMarketCoreServerRequestProtocol

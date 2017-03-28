@@ -83,17 +83,17 @@
 }
 
 - (void)requestServerData {
-    if (self.orderType == OrdersBuyType) {
-        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType // "buy" liefert Verkaufsangebote
-                                                    respondTo:self];
-    }
-    else if (self.orderType == OrdersSellType) {
-        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType //"sell" liefert Kaufangebote
-                                                    respondTo:self];
-    }
-    else {
-        NSLog(@"SOXOrdersViewController - (void)viewWillAppear : self.orderType has wrong type");
-    }
+//    if (self.orderType == OrdersBuyType) {
+//        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType // "buy" liefert Verkaufsangebote
+//                                                    respondTo:self];
+//    }
+//    else if (self.orderType == OrdersSellType) {
+//        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType //"sell" liefert Kaufangebote
+//                                                    respondTo:self];
+//    }
+//    else {
+//        NSLog(@"SOXOrdersViewController - (void)viewWillAppear : self.orderType has wrong type");
+//    }
 }
 
 - (void)tableViewDoubleAction:(NSTableView *)tableView {

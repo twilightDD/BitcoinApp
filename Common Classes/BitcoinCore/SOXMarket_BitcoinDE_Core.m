@@ -67,7 +67,9 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
                                                                                                                                withData:data
                                                                                                                             urlResponse:response
                                                                                                                                   error:error];
-                                                                    
+                                                                    if (serverCommandType == BitcoinDE_ShowMyOrdersCommandType) {
+                                                                        NSLog(@"BitcoinDE_ShowMyOrdersCommandType");
+                                                                    }
                                                                     if ([controller respondsToSelector:@selector(answerOfServerRequest:)]) {
                                                                         // NSURLSessionTask has its own thread
                                                                         [controller performSelectorOnMainThread:@selector(answerOfServerRequest:)
@@ -93,6 +95,11 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
                                           withData:(NSData * _Nullable)data
                                        urlResponse:(NSURLResponse * _Nullable)response
                                              error:(NSError * _Nullable)error {
+    NSLog(@"Antwort für %tu", serverCommandType);
+    if (serverCommandType == BitcoinDE_ShowMyOrdersCommandType) {
+        NSLog(@"BitcoinDE_ShowMyOrdersCommandType");
+    }
+    
     NSDictionary *payloadDictionary;
     {
         NSError *jsonError = nil;

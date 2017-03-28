@@ -28,6 +28,7 @@
 		D02ED5BF1E817CFE00AA9448 /* SOXShowOrderbookData.m in Sources */ = {isa = PBXBuildFile; fileRef = D02ED5BD1E817CFE00AA9448 /* SOXShowOrderbookData.m */; };
 		D02ED5C21E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D02ED5C11E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m */; };
 		D02ED5C31E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D02ED5C11E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m */; };
+		D03289921E8A2C7C006F15F0 /* SOXMyOrderDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D03289911E8A2C7C006F15F0 /* SOXMyOrderDetailsViewController.m */; };
 		D0331D531E7CAEFF008C0244 /* SOXOrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0331D521E7CAEFF008C0244 /* SOXOrdersViewController.m */; };
 		D049C4511E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.m in Sources */ = {isa = PBXBuildFile; fileRef = D049C4501E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.m */; };
 		D049C4521E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.m in Sources */ = {isa = PBXBuildFile; fileRef = D049C4501E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.m */; };
@@ -115,6 +116,8 @@
 		D02ED5BD1E817CFE00AA9448 /* SOXShowOrderbookData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXShowOrderbookData.m; sourceTree = "<group>"; };
 		D02ED5C01E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXShowOrderbook_BitcoinDE_Data.h; sourceTree = "<group>"; };
 		D02ED5C11E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXShowOrderbook_BitcoinDE_Data.m; sourceTree = "<group>"; };
+		D03289901E8A2C7C006F15F0 /* SOXMyOrderDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXMyOrderDetailsViewController.h; sourceTree = "<group>"; };
+		D03289911E8A2C7C006F15F0 /* SOXMyOrderDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXMyOrderDetailsViewController.m; sourceTree = "<group>"; };
 		D0331D511E7CAEFF008C0244 /* SOXOrdersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXOrdersViewController.h; sourceTree = "<group>"; };
 		D0331D521E7CAEFF008C0244 /* SOXOrdersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXOrdersViewController.m; sourceTree = "<group>"; };
 		D03B371C1E78ADBE00DD9DFA /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -258,6 +261,8 @@
 				D0E5C4FD1E80801D00352985 /* SOXBannerViewController.m */,
 				D0631F051E89BB5C007ED75A /* SOXShowMyOrdersViewController.h */,
 				D0631F061E89BB5C007ED75A /* SOXShowMyOrdersViewController.m */,
+				D03289901E8A2C7C006F15F0 /* SOXMyOrderDetailsViewController.h */,
+				D03289911E8A2C7C006F15F0 /* SOXMyOrderDetailsViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -819,6 +824,7 @@
 				D02ED5BA1E81546800AA9448 /* SOXAccountInfoData.m in Sources */,
 				D02ED5B61E8152F900AA9448 /* SOXRatesData.m in Sources */,
 				D0E5C4FF1E80801D00352985 /* SOXBannerViewController.m in Sources */,
+				D03289921E8A2C7C006F15F0 /* SOXMyOrderDetailsViewController.m in Sources */,
 				D0B9A3381E89934D008860ED /* NSTextField+URL.m in Sources */,
 				D0631F071E89BB5C007ED75A /* SOXShowMyOrdersViewController.m in Sources */,
 				D063E91A1E74BF97006E2D17 /* MacAppDelegate.m in Sources */,
