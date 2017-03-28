@@ -41,6 +41,12 @@
         case BitcoinDE_ShowRatesCommandType:
             payload = [SOXRates_BitcoinDE_Data rateDataForRateInfoDictionary:payloadDictionary];
             break;
+        case BitcoinDE_ShowMyTradesType:
+            payload = payloadDictionary;
+            break;
+        case BitcoinDE_ShowAccountLedger:
+            payload = payloadDictionary;
+            break;
         default:
             // error
             

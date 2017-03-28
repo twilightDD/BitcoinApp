@@ -31,6 +31,31 @@ NSString *const BitcoinDE_ShowAccountInfoEncryptedInformation_bic_short         
 NSString *const BitcoinDE_ShowAccountInfoEncryptedInformation_bic_full                = @"bic_full";
 NSString *const BitcoinDE_ShowAccountInfoEncryptedInformation_uid                     = @"uid";
 
+#pragma mark - BitcoinDE_ShowAccountLedger
+#pragma mark | Details zur Position
+NSString *const BitcoinDE_ShowAccountLedger_Main        = @"account_ledger";
+NSString *const BitcoinDE_ShowAccountLedger_Date        = @"date";
+NSString *const BitcoinDE_ShowAccountLedger_Type        = @"type";
+NSString *const BitcoinDE_ShowAccountLedger_Reference   = @"reference";
+NSString *const BitcoinDE_ShowAccountLedger_Cashflow    = @"cashflow";
+NSString *const BitcoinDE_ShowAccountLedger_Balance     = @"balance";
+
+#pragma mark |- Tradedetails
+NSString *const BitcoinDE_ShowAccountLedger_Trade                   = @"trade";
+NSString *const BitcoinDE_ShowAccountLedger_Trade_TradeID           = @"trade_id";
+NSString *const BitcoinDE_ShowAccountLedger_Trade_Price             = @"price";
+NSString *const BitcoinDE_ShowAccountLedger_Trade_BTC               = @"btc";
+NSString *const BitcoinDE_ShowAccountLedger_Trade_BTC_BeforeFee     = @"before_fee";
+NSString *const BitcoinDE_ShowAccountLedger_Trade_BTC_AfterFee      = @"after_fee";
+NSString *const BitcoinDE_ShowAccountLedger_Trade_Euro              = @"euro";
+NSString *const BitcoinDE_ShowAccountLedger_Trade_Euro_BeforeFee    = @"before_fee";
+NSString *const BitcoinDE_ShowAccountLedger_Trade_Euro_AfterFee     = @"after_fee";
+
+#pragma mark | Page Details
+NSString *const BitcoinDE_ShowAccountLedger_Page            = @"page";
+NSString *const BitcoinDE_ShowAccountLedger_Page_Current    = @"current";
+NSString *const BitcoinDE_ShowAccountLedger_Page_Last       = @"last";
+
 #pragma mark - BitcoinDE_ShowMyOrders
 NSString *const BitcoinDE_ShowMyOrders_MainKey = @"orders";
 

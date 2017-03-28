@@ -13,13 +13,19 @@
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXMyOrderBook_BitcoinDE_Data.h"
 
-
+NSString *const PresentMyTradesSegueKey = @"PresentMyTradesSegue";
+NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 
 #pragma mark - Interface
 @interface SOXShowMyOrdersViewController () <SOXMarketCoreServerRequestProtocol, NSTableViewDelegate>
 
 #pragma mark IBOutlets
 @property (weak) IBOutlet NSTextField *titleTextField;
+
+@property (weak) IBOutlet NSButton *presentMyTradesButton;
+@property (weak) IBOutlet NSButton *presentMyAccountButton;
+
+
 @property (weak) IBOutlet NSButton *reloadButton;
 @property (weak) IBOutlet NSButton *addButton;
 @property (weak) IBOutlet NSButton *removeButton;
@@ -102,8 +108,23 @@
     SOXMyOrderBookData *data = self.myOrderBook.firstObject;
     NSLog(@"data:\n%@", data);
 }
+#pragma mark - Segue handling
+- (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:PresentMyTradesSegueKey]) {
+        
+    }
+    else if ([segue.identifier isEqualToString:PresentMyAccountSegueKey]) {
+        
+    }
+}
 
 #pragma mark - Action methods
+- (IBAction)presentMyTradesAction:(NSButton *)sender {
+}
+
+- (IBAction)presentMyAccountAction:(NSButton *)sender {
+}
+
 - (IBAction)reloadButtonAction:(NSButton *)sender {
 
 }
@@ -115,5 +136,6 @@
 - (IBAction)removeButtonAction:(NSButton *)sender {
 
 }
+
 
 @end

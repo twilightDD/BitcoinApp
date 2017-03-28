@@ -67,8 +67,8 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
                                                                                                                                withData:data
                                                                                                                             urlResponse:response
                                                                                                                                   error:error];
-                                                                    if (serverCommandType == BitcoinDE_ShowMyOrdersCommandType) {
-                                                                        NSLog(@"BitcoinDE_ShowMyOrdersCommandType");
+                                                                    if (serverCommandType == BitcoinDE_ShowAccountLedger) {
+                                                                        NSLog(@"BitcoinDE_ShowAccountLedger");
                                                                     }
                                                                     if ([controller respondsToSelector:@selector(answerOfServerRequest:)]) {
                                                                         // NSURLSessionTask has its own thread
@@ -112,6 +112,11 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
             return nil;
         }
 
+        NSArray *serverErrors = [payloadDictionary objectForKey:@"errors"];
+        if (serverErrors.count > 0) {
+            NSLog(@"%@", serverErrors);
+        }
+        
         [self updateCurrentCredit:[payloadDictionary valueForKey:@"credits"]
              forServerCommandType:serverCommandType];
     }
@@ -256,6 +261,8 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
         case BitcoinDE_ShowOrderbookCompactCommandType:
         case BitcoinDE_ShowPublicTradeHistoryCommandType:
         case BitcoinDE_ShowRatesCommandType:
+        case BitcoinDE_ShowMyTradesType:
+        case BitcoinDE_ShowAccountLedger:
             return @"GET";
             
         default:
@@ -409,6 +416,8 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
                                 , @(BitcoinDE_ShowOrderbookCompactCommandType): @"/orders/compact"
                                 , @(BitcoinDE_ShowPublicTradeHistoryCommandType): @"/trades/history"
                                 , @(BitcoinDE_ShowRatesCommandType): @"/rates"
+                                , @(BitcoinDE_ShowMyTradesType):@"/trades"
+                                , @(BitcoinDE_ShowAccountLedger):@"/account/ledger"
                                 };
     });
     return commandDescriptions;
@@ -430,6 +439,8 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
                                 , @(BitcoinDE_ShowOrderbookCompactCommandType): @"Kauf- und Verkaufsangebote (bids und asks) in kompakter Form."
                                 , @(BitcoinDE_ShowPublicTradeHistoryCommandType): @"Erfolgreich abgeschlossene Trades der letzten 7 Tage."
                                 , @(BitcoinDE_ShowRatesCommandType): @"Abfrage des gewichteten Durchschnittskurses der letzten 3 Stunden und der letzten 12 Stunden."
+                                , @(BitcoinDE_ShowMyTradesType): @"Abrufen und Filtern meiner getätigten Trades."
+                                , @(BitcoinDE_ShowAccountLedger): @"Abruf des Kontoauszuges"
                                 };
     });
     return commandDescriptions;
@@ -451,6 +462,8 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
                                    , @(3) // BitcoinDE_ShowOrderbookCompactCommandType
                                    , @(3) // BitcoinDE_ShowPublicTradeHistoryCommandType
                                    , @(3) // BitcoinDE_ShowRatesCommandType
+                                   , @(3) // BitcoinDE_ShowMyTradesType
+                                   , @(3) // BitcoinDE_ShowAccountLedger
                                    , nil];
         
     });

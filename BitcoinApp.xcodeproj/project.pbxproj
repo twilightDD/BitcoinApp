@@ -29,6 +29,8 @@
 		D02ED5C21E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D02ED5C11E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m */; };
 		D02ED5C31E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D02ED5C11E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m */; };
 		D03289921E8A2C7C006F15F0 /* SOXMyOrderDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D03289911E8A2C7C006F15F0 /* SOXMyOrderDetailsViewController.m */; };
+		D03289951E8A4C29006F15F0 /* SOXMyTradesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D03289941E8A4C29006F15F0 /* SOXMyTradesViewController.m */; };
+		D03289991E8A4C44006F15F0 /* SOXMyAccountLedgerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D03289971E8A4C44006F15F0 /* SOXMyAccountLedgerViewController.m */; };
 		D0331D531E7CAEFF008C0244 /* SOXOrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0331D521E7CAEFF008C0244 /* SOXOrdersViewController.m */; };
 		D049C4511E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.m in Sources */ = {isa = PBXBuildFile; fileRef = D049C4501E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.m */; };
 		D049C4521E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.m in Sources */ = {isa = PBXBuildFile; fileRef = D049C4501E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.m */; };
@@ -60,6 +62,8 @@
 		D063E9531E74C024006E2D17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D063E9521E74C024006E2D17 /* Assets.xcassets */; };
 		D063E9561E74C024006E2D17 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D063E9541E74C024006E2D17 /* LaunchScreen.storyboard */; };
 		D063E9611E74C024006E2D17 /* iOS_BitcoinAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D063E9601E74C024006E2D17 /* iOS_BitcoinAppTests.m */; };
+		D0B3F1311E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F1301E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m */; };
+		D0B3F1321E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F1301E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m */; };
 		D0B9A3341E895EA0008860ED /* NSAttributedString+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B9A3331E895EA0008860ED /* NSAttributedString+URL.m */; };
 		D0B9A3351E895EA0008860ED /* NSAttributedString+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B9A3331E895EA0008860ED /* NSAttributedString+URL.m */; };
 		D0B9A3381E89934D008860ED /* NSTextField+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B9A3371E89934D008860ED /* NSTextField+URL.m */; };
@@ -118,6 +122,10 @@
 		D02ED5C11E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXShowOrderbook_BitcoinDE_Data.m; sourceTree = "<group>"; };
 		D03289901E8A2C7C006F15F0 /* SOXMyOrderDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXMyOrderDetailsViewController.h; sourceTree = "<group>"; };
 		D03289911E8A2C7C006F15F0 /* SOXMyOrderDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXMyOrderDetailsViewController.m; sourceTree = "<group>"; };
+		D03289931E8A4C29006F15F0 /* SOXMyTradesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXMyTradesViewController.h; sourceTree = "<group>"; };
+		D03289941E8A4C29006F15F0 /* SOXMyTradesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXMyTradesViewController.m; sourceTree = "<group>"; };
+		D03289961E8A4C44006F15F0 /* SOXMyAccountLedgerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXMyAccountLedgerViewController.h; sourceTree = "<group>"; };
+		D03289971E8A4C44006F15F0 /* SOXMyAccountLedgerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXMyAccountLedgerViewController.m; sourceTree = "<group>"; };
 		D0331D511E7CAEFF008C0244 /* SOXOrdersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXOrdersViewController.h; sourceTree = "<group>"; };
 		D0331D521E7CAEFF008C0244 /* SOXOrdersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXOrdersViewController.m; sourceTree = "<group>"; };
 		D03B371C1E78ADBE00DD9DFA /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -162,6 +170,8 @@
 		D063E95C1E74C024006E2D17 /* iOS BitcoinAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS BitcoinAppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D063E9601E74C024006E2D17 /* iOS_BitcoinAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOS_BitcoinAppTests.m; sourceTree = "<group>"; };
 		D063E9621E74C024006E2D17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0B3F12F1E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXAccountLedger_BitcoinDE_Data.h; sourceTree = "<group>"; };
+		D0B3F1301E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXAccountLedger_BitcoinDE_Data.m; sourceTree = "<group>"; };
 		D0B9A3321E895EA0008860ED /* NSAttributedString+URL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+URL.h"; sourceTree = "<group>"; };
 		D0B9A3331E895EA0008860ED /* NSAttributedString+URL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+URL.m"; sourceTree = "<group>"; };
 		D0B9A3361E89934D008860ED /* NSTextField+URL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTextField+URL.h"; sourceTree = "<group>"; };
@@ -248,6 +258,8 @@
 				D0631F091E89C1EA007ED75A /* SOXMyOrderBookData.m */,
 				D0631F0C1E89C1FD007ED75A /* SOXMyOrderBook_BitcoinDE_Data.h */,
 				D0631F0D1E89C1FD007ED75A /* SOXMyOrderBook_BitcoinDE_Data.m */,
+				D0B3F12F1E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.h */,
+				D0B3F1301E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m */,
 			);
 			path = "Data Objects";
 			sourceTree = "<group>";
@@ -263,6 +275,10 @@
 				D0631F061E89BB5C007ED75A /* SOXShowMyOrdersViewController.m */,
 				D03289901E8A2C7C006F15F0 /* SOXMyOrderDetailsViewController.h */,
 				D03289911E8A2C7C006F15F0 /* SOXMyOrderDetailsViewController.m */,
+				D03289931E8A4C29006F15F0 /* SOXMyTradesViewController.h */,
+				D03289941E8A4C29006F15F0 /* SOXMyTradesViewController.m */,
+				D03289961E8A4C44006F15F0 /* SOXMyAccountLedgerViewController.h */,
+				D03289971E8A4C44006F15F0 /* SOXMyAccountLedgerViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -805,7 +821,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D063E9231E74BF97006E2D17 /* BitcoinApp.xcdatamodeld in Sources */,
+				D0B3F1311E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m in Sources */,
 				D0270AE41E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m in Sources */,
+				D03289951E8A4C29006F15F0 /* SOXMyTradesViewController.m in Sources */,
 				D0631F0E1E89C1FD007ED75A /* SOXMyOrderBook_BitcoinDE_Data.m in Sources */,
 				D049C4511E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.m in Sources */,
 				D049C45B1E7712E6003CBF36 /* SOXHash.m in Sources */,
@@ -826,6 +844,7 @@
 				D0E5C4FF1E80801D00352985 /* SOXBannerViewController.m in Sources */,
 				D03289921E8A2C7C006F15F0 /* SOXMyOrderDetailsViewController.m in Sources */,
 				D0B9A3381E89934D008860ED /* NSTextField+URL.m in Sources */,
+				D03289991E8A4C44006F15F0 /* SOXMyAccountLedgerViewController.m in Sources */,
 				D0631F071E89BB5C007ED75A /* SOXShowMyOrdersViewController.m in Sources */,
 				D063E91A1E74BF97006E2D17 /* MacAppDelegate.m in Sources */,
 				D02ED5C21E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m in Sources */,
@@ -865,6 +884,7 @@
 				D01F589F1E8495D200C170F7 /* SOXDateFormatter.m in Sources */,
 				D063E9451E74C024006E2D17 /* main.m in Sources */,
 				D02ED5B71E8152F900AA9448 /* SOXRatesData.m in Sources */,
+				D0B3F1321E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

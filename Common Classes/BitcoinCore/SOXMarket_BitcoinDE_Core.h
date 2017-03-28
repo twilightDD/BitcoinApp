@@ -18,6 +18,8 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_ServerCommandType) {
     , BitcoinDE_ShowOrderbookCompactCommandType
     , BitcoinDE_ShowPublicTradeHistoryCommandType
     , BitcoinDE_ShowRatesCommandType
+    , BitcoinDE_ShowMyTradesType
+    , BitcoinDE_ShowAccountLedger
 };
 
 FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerServerCommandKey;
