@@ -26,7 +26,7 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
 
 @property (strong, nonatomic) NSString *nonceString;
 @property (strong, nonatomic) NSString *baseURL;
-@property (strong, nonatomic) NSTimer *reloadBannerDataTimer;
+@property (weak, nonatomic) NSTimer *reloadBannerDataTimer;
 
 //@property (weak, nonatomic) id delegateForRequests;
 @property (weak, nonatomic) id <SOXBannerDataProtocol> delegateForBannerUpdates;
@@ -35,10 +35,9 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
 #pragma mark | Network Queue handling
 @property (strong, nonatomic) NSMutableArray <NSURLSessionTask *> *networkQueue;
 @property (nonatomic) BOOL networkQueueIsRunning;
-@property (strong, nonatomic) NSTimer *startNextDelayTimer;
 
 #pragma mark | Credit handling
-@property (strong, nonatomic) NSTimer *creditTimer;
+@property (weak, nonatomic) NSTimer *creditTimer;
 @property (nonatomic) NSInteger currentCredits;
 @property (nonatomic) NSInteger maxCredits;
 @property (weak, nonatomic) id <SOXCreditUpdateProtocol> delegateForCreditUpdates;
@@ -311,21 +310,19 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
     NSMutableArray *networkQueue = [SOXMarket_BitcoinDE_Core networkQueue];
     NSURLSessionTask *nextTask = networkQueue.firstObject;
     if (nextTask) {
-        if ([[SOXMarket_BitcoinDE_Core sharedCore] creditTimer]
-             && [[SOXMarket_BitcoinDE_Core sharedCore] currentCredits] < 3) { // TODO: TODO vergleich mit serverCommandType
+        if ([SOXMarket_BitcoinDE_Core sharedCore].creditTimer
+            && [SOXMarket_BitcoinDE_Core sharedCore].currentCredits < 3) { // TODO: TODO vergleich mit serverCommandType
             NSLog(@"Delay ### START NEXT NSURLSessionTask");
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSTimer *startNextDelayTimer  = [NSTimer scheduledTimerWithTimeInterval:2.0
                                                                                  target:[SOXMarket_BitcoinDE_Core class]
                                                                                selector:@selector(startNextNSURLSessionTask)
                                                                                userInfo:nil
-                                                                                repeats:YES];
+                                                                                repeats:NO];
                 [[NSRunLoop mainRunLoop] addTimer:startNextDelayTimer forMode:NSDefaultRunLoopMode];
-                [SOXMarket_BitcoinDE_Core sharedCore].startNextDelayTimer = startNextDelayTimer;
             });
         }
         else {
-        
             NSLog(@"### START NEXT NSURLSessionTask");
             [nextTask resume];
             [networkQueue removeObjectAtIndex:0];
@@ -335,10 +332,7 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
     else {
         NSLog(@"### There is no NEXT NSURLSessionTask - queue is empty");
         [SOXMarket_BitcoinDE_Core sharedCore].networkQueueIsRunning = NO;
-        [[SOXMarket_BitcoinDE_Core sharedCore].startNextDelayTimer invalidate];
-        [SOXMarket_BitcoinDE_Core sharedCore].startNextDelayTimer = nil;
     }
-    
 }
 
 #pragma mark | Credit handling
@@ -349,7 +343,6 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
         // get maxCredits from first server responds
         [SOXMarket_BitcoinDE_Core sharedCore].maxCredits = newCreditValue.integerValue + creditCosts;
         NSLog(@"updateCurrentCredit, inital maxCredits: %ti", [SOXMarket_BitcoinDE_Core sharedCore].maxCredits);
-        [self startCreditTimer];
     }
     else if ([SOXMarket_BitcoinDE_Core sharedCore].maxCredits < newCreditValue.integerValue) {
         // maybe maxCredit has changed?
@@ -362,9 +355,26 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
     NSLog(@"updateCurrentCredit, currentCredits: %ti", [SOXMarket_BitcoinDE_Core sharedCore].currentCredits);
 }
 
-+ (NSTimer *)startCreditTimer {
-    NSTimer *creditTimer = [[SOXMarket_BitcoinDE_Core sharedCore] creditTimer];
++ (void)creditUpdateTimerMethod:(id)userInfo {
+    // increase credit counter
+    if ([SOXMarket_BitcoinDE_Core sharedCore].currentCredits < [SOXMarket_BitcoinDE_Core sharedCore].maxCredits) {
+        [SOXMarket_BitcoinDE_Core sharedCore].currentCredits++;
+    }
+    NSLog(@"CreditTimer update: currentCredits %tu", [SOXMarket_BitcoinDE_Core sharedCore].currentCredits);
+    if ([SOXMarket_BitcoinDE_Core sharedCore].currentCredits == [SOXMarket_BitcoinDE_Core sharedCore].maxCredits) {
+        // stop timer
+        NSTimer *creditTimer = [[SOXMarket_BitcoinDE_Core sharedCore] creditTimer];
+        [creditTimer invalidate];
+        creditTimer = nil;
+        NSLog(@"Credit timer invalidated and nil'ed");
+    }
+}
+
+- (void)setCurrentCredits:(NSInteger)currentCredits {
+    _currentCredits = currentCredits;
     
+    // setup credit timer if needed
+    NSTimer *creditTimer = [[SOXMarket_BitcoinDE_Core sharedCore] creditTimer];
     if (!creditTimer) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSTimer *creditTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
@@ -372,37 +382,12 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
                                                                   selector:@selector(creditUpdateTimerMethod:)
                                                                   userInfo:nil
                                                                    repeats:YES];
+            creditTimer.tolerance = 0.05;
             [[NSRunLoop mainRunLoop] addTimer:creditTimer forMode:NSDefaultRunLoopMode];
             [SOXMarket_BitcoinDE_Core sharedCore].creditTimer = creditTimer;
+            NSLog(@"Credit timer started");
         });
     }
-    
-    return creditTimer;
-}
-
-+ (void)creditUpdateTimerMethod:(id)userInfo {
-    // increase credit counter
-    if ([SOXMarket_BitcoinDE_Core sharedCore].currentCredits < [SOXMarket_BitcoinDE_Core sharedCore].maxCredits) {
-        [SOXMarket_BitcoinDE_Core sharedCore].currentCredits++;
-    }
-    NSLog(@"CreditTimer update: currentCredits %tu", [SOXMarket_BitcoinDE_Core sharedCore].currentCredits);
-    
-    // inform delegate
-//    {
-//        NSObject *delegateForCredit = [SOXMarket_BitcoinDE_Core sharedCore].delegateForCredit;
-//        if ([delegateForCredit respondsToSelector:@selector(creditValuesUpdated:)]) {
-//            
-//            [delegateForCredit performSelectorOnMainThread:@selector(creditValuesUpdated:)
-//                                                withObject:[self creditValuesUpdatedDictionary]
-//                                             waitUntilDone:YES];
-//        }
-//    }
-}
-
-
-
-- (void)setCurrentCredits:(NSInteger)currentCredits {
-    _currentCredits = currentCredits;
     
     // inform delegate
     NSObject *delegateForCreditUpdates = [SOXMarket_BitcoinDE_Core sharedCore].delegateForCreditUpdates;
