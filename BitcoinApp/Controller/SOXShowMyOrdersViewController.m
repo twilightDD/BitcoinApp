@@ -53,10 +53,7 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
     [self setupUI];
     [self requestServerData];
     
-    [self.tableView setDoubleAction:@selector(tableViewDoubleAction:)];
-
-    self.spinningBackgroundView.hidden = NO;
-    [self.circularProgressIndicator startAnimation:nil];
+ 
 }
 
 #pragma mark - Private methods
@@ -70,18 +67,25 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
         self.removeButton.enabled = NO;
     }
     
-    self.spinningBackgroundView.layer.backgroundColor = [NSColor colorWithCalibratedRed:0
-                                                                                  green:0
-                                                                                   blue:0
-                                                                                  alpha:0.1].CGColor;
+    {
+        [self.tableView setDoubleAction:@selector(tableViewDoubleAction:)];
+    }
+    
+    {
+        self.spinningBackgroundView.hidden = NO;
+        [self.circularProgressIndicator startAnimation:nil];
+        self.spinningBackgroundView.layer.backgroundColor = [NSColor colorWithCalibratedRed:0
+                                                                                      green:0
+                                                                                       blue:0
+                                                                                      alpha:0.1].CGColor;
+    }
 }
 
 - (void)requestServerData {
-    
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowMyOrdersCommandType
                                                 respondTo:self];
-    
 }
+
 #pragma mark - Table view methods
 - (void)tableViewDoubleAction:(NSTableView *)tableView {
     NSArray <SOXMyOrderBook_BitcoinDE_Data *> *selectedObjects = [self.myOrderArrayController selectedObjects];

@@ -80,13 +80,7 @@
     [super viewWillAppear];
     
     [self setupUI];
-    
-    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountInfoCommandType
-                                                respondTo:self];
-    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowRatesCommandType
-                                                respondTo:self];
-    
-    [SOXMarket_BitcoinDE_Core registerForCreditUpdates:self];
+    [self requestServerData];
 }
 
 #pragma mark - Private methods
@@ -184,6 +178,16 @@
                                                                        withURLString:@"https://www.bitcoin.de/de/reservation"];
         }
     }
+}
+
+
+- (void)requestServerData {
+    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountInfoCommandType
+                                                respondTo:self];
+    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowRatesCommandType
+                                                respondTo:self];
+    
+    [SOXMarket_BitcoinDE_Core registerForCreditUpdates:self];
 }
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
