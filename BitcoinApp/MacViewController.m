@@ -13,10 +13,13 @@
 
 #import "SOXOrdersViewController.h"
 
-static NSString *BannerContainerViewSegueKey      = @"BannerContainerViewSegue";
-static NSString *OrdersViewControllerBuySegueKey  = @"OrdersViewControllerBuySegue";
-static NSString *OrdersViewControllerSellSegueKey = @"OrdersViewControllerSellSegue";
-static NSString *ShowMyOrdersContainerSegueKey    = @"ShowMyOrdersContainerSegue";
+static NSString *BannerContainerViewSegueKey         = @"BannerContainerViewSegue";
+static NSString *ShowMyOrdersContainerSegueKey       = @"ShowMyOrdersContainerSegue";
+static NSString *OrdersViewControllerBuySegueKey     = @"OrdersViewControllerBuySegue"; // TabView.0
+static NSString *OrdersViewControllerSellSegueKey    = @"OrdersViewControllerSellSegue"; // TabView.0
+static NSString *AccountLedgerViewControllerSegueKey = @"AccountLedgerViewControllerSegue"; // TabView.1
+
+
 
 @interface MacViewController () <SOXSocketIOCoreProtocol>
 @property (weak) IBOutlet NSTabView *bottomTabView;
