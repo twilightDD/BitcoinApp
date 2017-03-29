@@ -29,6 +29,9 @@ FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerPayloadKey;
 FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerURLResponseKey;
 FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerErrorKey;
 
+FOUNDATION_EXPORT NSString *const _Nonnull CreditUpdate_CurrentCreditsKey;
+FOUNDATION_EXPORT NSString *const _Nonnull CreditUpdate_MaximalCreditsKey;
+
 @protocol SOXMarketCoreServerRequestProtocol <NSObject>
 
 - (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest;
@@ -64,7 +67,7 @@ FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerErrorKey;
 + (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nonnull)controller;
 
 #pragma mark | Credit handling
-+ (void)registerForCreditUpdates:(id <SOXCreditUpdateProtocol> _Nullable) delegateForCredit;
++ (void)registerForCreditUpdates:(id <SOXCreditUpdateProtocol> _Nullable) delegateForCreditUpdates;
 
 + (void)registerForErrorMessages:(id <SOXMarketCoreErrorProtocol> _Nullable)delegateForErrorMessages;
 

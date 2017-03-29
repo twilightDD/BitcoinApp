@@ -220,8 +220,8 @@
 }
 #pragma mark - SOXCreditUpdateProtocol
 - (void)creditValuesUpdated:(NSDictionary * _Nonnull)creditDicts {
-    NSNumber *currentCredit = [creditDicts objectForKey:@"currentCredit"];
-    NSNumber *maxCredits = [creditDicts objectForKey:@"maxCredits"];
+    NSNumber *currentCredit = [creditDicts objectForKey:CreditUpdate_CurrentCreditsKey];
+    NSNumber *maxCredits = [creditDicts objectForKey:CreditUpdate_MaximalCreditsKey];
     
     self.creditTextCurrentCreditsField.stringValue = currentCredit.stringValue;
     self.creditTextMaxCreditsField.stringValue = maxCredits.stringValue;
