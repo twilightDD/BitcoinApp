@@ -686,11 +686,11 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="MacViewController" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="701" height="491"/>
+                        <rect key="frame" x="0.0" y="0.0" width="960" height="674"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <containerView identifier="BannerContainerViewIdentifier" translatesAutoresizingMaskIntoConstraints="NO" id="CSm-MP-mkG" userLabel="BannerContainerView">
-                                <rect key="frame" x="20" y="322" width="661" height="150"/>
+                                <rect key="frame" x="20" y="505" width="920" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="bdC-eV-eM9"/>
                                 </constraints>
@@ -699,17 +699,17 @@
                                 </connections>
                             </containerView>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="SRM-Fi-ftE">
-                                <rect key="frame" x="20" y="311" width="661" height="5"/>
+                                <rect key="frame" x="20" y="494" width="920" height="5"/>
                             </box>
                             <splitView arrangesAllSubviews="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Azg-gN-FBT">
-                                <rect key="frame" x="20" y="20" width="661" height="285"/>
+                                <rect key="frame" x="20" y="20" width="920" height="468"/>
                                 <subviews>
                                     <customView id="pbJ-vd-TbC">
-                                        <rect key="frame" x="0.0" y="0.0" width="661" height="134"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="920" height="166"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="YxP-Pw-sYa">
-                                                <rect key="frame" x="0.0" y="0.0" width="661" height="134"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="920" height="166"/>
                                                 <connections>
                                                     <segue destination="q7D-iu-Op3" kind="embed" identifier="ShowMyOrdersContainerSegue" id="F6d-Ua-Exg"/>
                                                 </connections>
@@ -723,37 +723,63 @@
                                         </constraints>
                                     </customView>
                                     <customView id="38U-sb-RBv">
-                                        <rect key="frame" x="0.0" y="143" width="661" height="142"/>
+                                        <rect key="frame" x="0.0" y="175" width="920" height="293"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
-                                            <containerView translatesAutoresizingMaskIntoConstraints="NO" id="A8Q-hU-Lrd">
-                                                <rect key="frame" x="0.0" y="0.0" width="322" height="142"/>
-                                                <connections>
-                                                    <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerBuySegue" id="ZEn-rF-4RA"/>
-                                                </connections>
-                                            </containerView>
-                                            <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Tu7-dB-5fP">
-                                                <rect key="frame" x="328" y="12" width="5" height="118"/>
-                                            </box>
-                                            <containerView translatesAutoresizingMaskIntoConstraints="NO" id="ovw-tP-oiM">
-                                                <rect key="frame" x="339" y="0.0" width="322" height="142"/>
-                                                <connections>
-                                                    <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerSellSegue" id="Sxs-iN-Wh5"/>
-                                                </connections>
-                                            </containerView>
+                                            <tabView translatesAutoresizingMaskIntoConstraints="NO" id="B9m-IQ-OSo">
+                                                <rect key="frame" x="-7" y="-10" width="934" height="297"/>
+                                                <font key="font" metaFont="system"/>
+                                                <tabViewItems>
+                                                    <tabViewItem label="Tab" identifier="1" id="eLR-ge-YSa">
+                                                        <view key="view" id="kJ0-KF-JIj">
+                                                            <rect key="frame" x="10" y="33" width="914" height="251"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <subviews>
+                                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="A8Q-hU-Lrd">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="449" height="251"/>
+                                                                    <connections>
+                                                                        <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerBuySegue" id="ZEn-rF-4RA"/>
+                                                                    </connections>
+                                                                </containerView>
+                                                                <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Tu7-dB-5fP">
+                                                                    <rect key="frame" x="455" y="12" width="5" height="227"/>
+                                                                </box>
+                                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="ovw-tP-oiM">
+                                                                    <rect key="frame" x="466" y="0.0" width="448" height="251"/>
+                                                                    <connections>
+                                                                        <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerSellSegue" id="Sxs-iN-Wh5"/>
+                                                                    </connections>
+                                                                </containerView>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="ovw-tP-oiM" firstAttribute="top" secondItem="kJ0-KF-JIj" secondAttribute="top" id="8YB-dT-0hh"/>
+                                                                <constraint firstAttribute="bottom" secondItem="A8Q-hU-Lrd" secondAttribute="bottom" id="FSM-bq-C0E"/>
+                                                                <constraint firstAttribute="trailing" secondItem="ovw-tP-oiM" secondAttribute="trailing" id="RaL-bc-3cN"/>
+                                                                <constraint firstItem="Tu7-dB-5fP" firstAttribute="top" secondItem="kJ0-KF-JIj" secondAttribute="top" constant="12" symbolic="YES" id="SVi-o8-MQh"/>
+                                                                <constraint firstItem="ovw-tP-oiM" firstAttribute="leading" secondItem="Tu7-dB-5fP" secondAttribute="trailing" constant="8" symbolic="YES" id="Vu6-JM-dVz"/>
+                                                                <constraint firstItem="A8Q-hU-Lrd" firstAttribute="leading" secondItem="kJ0-KF-JIj" secondAttribute="leading" id="a47-8e-4jO"/>
+                                                                <constraint firstAttribute="bottom" secondItem="ovw-tP-oiM" secondAttribute="bottom" id="arn-Oz-Fk5"/>
+                                                                <constraint firstItem="A8Q-hU-Lrd" firstAttribute="top" secondItem="kJ0-KF-JIj" secondAttribute="top" id="ist-fW-pmi"/>
+                                                                <constraint firstAttribute="bottom" secondItem="Tu7-dB-5fP" secondAttribute="bottom" constant="12" symbolic="YES" id="jHt-5M-CfK"/>
+                                                                <constraint firstItem="Tu7-dB-5fP" firstAttribute="centerX" secondItem="kJ0-KF-JIj" secondAttribute="centerX" id="oFq-am-bxn"/>
+                                                                <constraint firstItem="Tu7-dB-5fP" firstAttribute="leading" secondItem="A8Q-hU-Lrd" secondAttribute="trailing" constant="8" symbolic="YES" id="yKe-a2-GL6"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </tabViewItem>
+                                                    <tabViewItem label="View" identifier="2" id="Ch0-iV-PHR">
+                                                        <view key="view" id="Q3R-zu-LRo">
+                                                            <rect key="frame" x="10" y="33" width="695" height="162"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        </view>
+                                                    </tabViewItem>
+                                                </tabViewItems>
+                                            </tabView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="A8Q-hU-Lrd" firstAttribute="leading" secondItem="38U-sb-RBv" secondAttribute="leading" id="1VR-Cq-FuT"/>
-                                            <constraint firstAttribute="bottom" secondItem="A8Q-hU-Lrd" secondAttribute="bottom" id="F6x-gN-O7F"/>
-                                            <constraint firstAttribute="bottom" secondItem="Tu7-dB-5fP" secondAttribute="bottom" constant="12" symbolic="YES" id="dx6-fy-sUD"/>
-                                            <constraint firstItem="ovw-tP-oiM" firstAttribute="leading" secondItem="Tu7-dB-5fP" secondAttribute="trailing" constant="8" symbolic="YES" id="gP8-pI-mkv"/>
-                                            <constraint firstItem="Tu7-dB-5fP" firstAttribute="centerX" secondItem="38U-sb-RBv" secondAttribute="centerX" id="hvd-D3-zga"/>
-                                            <constraint firstItem="ovw-tP-oiM" firstAttribute="top" secondItem="38U-sb-RBv" secondAttribute="top" id="iQW-wc-YKe"/>
-                                            <constraint firstAttribute="trailing" secondItem="ovw-tP-oiM" secondAttribute="trailing" id="mhm-Mo-Ndh"/>
-                                            <constraint firstItem="Tu7-dB-5fP" firstAttribute="top" secondItem="38U-sb-RBv" secondAttribute="top" constant="12" symbolic="YES" id="pdj-1b-RXJ"/>
-                                            <constraint firstItem="Tu7-dB-5fP" firstAttribute="leading" secondItem="A8Q-hU-Lrd" secondAttribute="trailing" constant="8" symbolic="YES" id="u1j-Fa-QhA"/>
-                                            <constraint firstAttribute="bottom" secondItem="ovw-tP-oiM" secondAttribute="bottom" id="uSU-q8-Le6"/>
-                                            <constraint firstItem="A8Q-hU-Lrd" firstAttribute="top" secondItem="38U-sb-RBv" secondAttribute="top" id="x16-Zj-9oZ"/>
+                                            <constraint firstItem="B9m-IQ-OSo" firstAttribute="leading" secondItem="38U-sb-RBv" secondAttribute="leading" id="2c7-tW-Rz6"/>
+                                            <constraint firstAttribute="bottom" secondItem="B9m-IQ-OSo" secondAttribute="bottom" id="d11-jY-a1g"/>
+                                            <constraint firstItem="B9m-IQ-OSo" firstAttribute="top" secondItem="38U-sb-RBv" secondAttribute="top" constant="12" symbolic="YES" id="gT8-Ta-aOu"/>
+                                            <constraint firstAttribute="trailing" secondItem="B9m-IQ-OSo" secondAttribute="trailing" id="vNR-Mb-eSw"/>
                                         </constraints>
                                     </customView>
                                 </subviews>
@@ -779,7 +805,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="185.5" y="765.5"/>
+            <point key="canvasLocation" x="56" y="857"/>
         </scene>
         <!--Banner View Controller-->
         <scene sceneID="a6m-Vf-NSe">
@@ -2923,6 +2949,6 @@ Gw
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Sxs-iN-Wh5"/>
+        <segue reference="ZEn-rF-4RA"/>
     </inferredMetricsTieBreakers>
 </document>
