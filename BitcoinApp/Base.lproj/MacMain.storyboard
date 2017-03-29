@@ -802,6 +802,9 @@
                             <constraint firstAttribute="trailing" secondItem="Azg-gN-FBT" secondAttribute="trailing" constant="20" symbolic="YES" id="sWe-18-XBh"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="bottomTabView" destination="B9m-IQ-OSo" id="2IB-gg-UTH"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -19,6 +19,7 @@ static NSString *OrdersViewControllerSellSegueKey = @"OrdersViewControllerSellSe
 static NSString *ShowMyOrdersContainerSegueKey    = @"ShowMyOrdersContainerSegue";
 
 @interface MacViewController () <SOXSocketIOCoreProtocol>
+@property (weak) IBOutlet NSTabView *bottomTabView;
 
 @property (strong, nonatomic) NSDictionary *serverAnswerDictionary;
 
@@ -42,6 +43,11 @@ static NSString *ShowMyOrdersContainerSegueKey    = @"ShowMyOrdersContainerSegue
 //                                                respondTo:self];
     
    // [self openSocket];
+    
+    NSTabViewItem *item1 = [self.bottomTabView tabViewItemAtIndex:0];
+    item1.label = @"Buy and Sell";
+    NSTabViewItem *item2 = [self.bottomTabView tabViewItemAtIndex:1];
+    item2.label = @"Account ledger";
 }
     
 - (void)setRepresentedObject:(id)representedObject {
