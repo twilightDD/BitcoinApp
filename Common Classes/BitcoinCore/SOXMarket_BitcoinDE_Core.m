@@ -11,6 +11,7 @@
 #import "SOXHash.h"
 
 #import "SOXDataConverter_BitcoinDE.h"
+#import "SOXErrorMessage_BitcoinDE.h"
 
 NSString *const _Nonnull ServerAnswerServerCommandKey = @"ServerCommand";
 NSString *const _Nonnull ServerAnswerPayloadKey       = @"Payload";
@@ -23,8 +24,9 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
 @property (strong, nonatomic) NSString *baseURL;
 @property (strong, nonatomic) NSTimer *reloadBannerDataTimer;
 
-@property (weak, nonatomic) id delegateForRequests;
+//@property (weak, nonatomic) id delegateForRequests;
 @property (weak, nonatomic) id <SOXBannerDataProtocol> delegateForBannerUpdates;
+@property (weak, nonatomic) NSObject <SOXMarketCoreErrorProtocol> *delegateForErrorMessages;
 
 #pragma mark | Network Queue handling
 @property (strong, nonatomic) NSMutableArray <NSURLSessionTask *> *networkQueue;
@@ -62,27 +64,41 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
     weakify(self)
     NSURLSessionTask *getTask = [[NSURLSession sharedSession] dataTaskWithRequest:request
                                                                 completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                                                                    strongify(self)
-                                                                    NSDictionary *serverAnswer = [self answerDictionaryForServerCommand:serverCommandType
-                                                                                                                               withData:data
-                                                                                                                            urlResponse:response
-                                                                                                                                  error:error];
-                                                                    if (serverCommandType == BitcoinDE_ShowAccountLedger) {
-                                                                        NSLog(@"BitcoinDE_ShowAccountLedger");
-                                                                    }
-                                                                    if ([controller respondsToSelector:@selector(answerOfServerRequest:)]) {
-                                                                        // NSURLSessionTask has its own thread
-                                                                        [controller performSelectorOnMainThread:@selector(answerOfServerRequest:)
-                                                                                                     withObject:serverAnswer
-                                                                                                  waitUntilDone:YES];
-                                                                    }
+                                                    strongify(self)
+                                                    
+                                                    NSString *serverRequestTitle = [NSString stringWithFormat:@"%tu (%@)",
+                                                                                    serverCommandType
+                                                                                    ,[SOXMarket_BitcoinDE_Core descriptionForServerCommandType:serverCommandType]];
+                                                                                    
+                                                    SOXErrorMessage_BitcoinDE *errorMessage = [[SOXErrorMessage_BitcoinDE alloc] initWithServerRequestTitle:serverRequestTitle];
+
+                                                    NSDictionary *serverAnswer = [self answerDictionaryForServerCommand:serverCommandType
+                                                                                                               withData:data
+                                                                                                            urlResponse:response
+                                                                                                                  error:error
+                                                                                                           errorMessage:errorMessage];
+                                                    
+                                                    // Send answer to asking controller
+                                                    if ([controller respondsToSelector:@selector(answerOfServerRequest:)]) {
+                                                        // NSURLSessionTask has its own thread
+                                                        [controller performSelectorOnMainThread:@selector(answerOfServerRequest:)
+                                                                                     withObject:serverAnswer
+                                                                                  waitUntilDone:NO];
+                                                    }
+                                                    
+                                                    // Error handling
+                                                    NSObject *delegateForErrorMessages = [SOXMarket_BitcoinDE_Core sharedCore].delegateForErrorMessages;
+                                                    if (errorMessage.hasError
+                                                        && [delegateForErrorMessages respondsToSelector:@selector(presentErrorMessage:)]) {
+                                                            // NSURLSessionTask has its own thread
+                                                            [delegateForErrorMessages performSelectorOnMainThread:@selector(presentErrorMessage:)
+                                                                                                       withObject:errorMessage
+                                                                                                    waitUntilDone:NO];
+                                                    }
                                                                     
-                                                                    if (error) {
-                                                                        NSLog(@"NSURLSessionTask completionHandler - ERROR:\n%@", error);
-                                                                    }
-                                                                    
-                                                                    [SOXMarket_BitcoinDE_Core startNextNSURLSessionTask];
-                                                                }];
+                                                    [SOXMarket_BitcoinDE_Core startNextNSURLSessionTask];
+                                                }];
+    
     [SOXMarket_BitcoinDE_Core addNSURLSessionTask:getTask];
 }
 
@@ -90,32 +106,42 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
     [SOXMarket_BitcoinDE_Core sharedCore].delegateForCredit = delegateForCredit;
 }
 
++ (void)registerForErrorMessages:(id <SOXMarketCoreErrorProtocol> _Nullable)delegateForErrorMessages {
+    [SOXMarket_BitcoinDE_Core sharedCore].delegateForErrorMessages = delegateForErrorMessages;
+}
+
 #pragma mark - Private Class methods
 + (NSDictionary *)answerDictionaryForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
                                           withData:(NSData * _Nullable)data
                                        urlResponse:(NSURLResponse * _Nullable)response
-                                             error:(NSError * _Nullable)error {
-    NSLog(@"Antwort für %tu", serverCommandType);
-    if (serverCommandType == BitcoinDE_ShowMyOrdersCommandType) {
-        NSLog(@"BitcoinDE_ShowMyOrdersCommandType");
-    }
+                                             error:(NSError * _Nullable)error
+                                      errorMessage:(SOXErrorMessage_BitcoinDE * _Nullable)errorMessage {
+    // add error if so
+    [errorMessage checkNSURLResonse:response];
+    
+//    NSLog(@"Antwort für %tu", serverCommandType);
+//    if (serverCommandType == BitcoinDE_ShowMyOrdersCommandType) {
+//        NSLog(@"BitcoinDE_ShowMyOrdersCommandType");
+//    }
     
     NSDictionary *payloadDictionary;
     {
         NSError *jsonError = nil;
-        payloadDictionary = [NSJSONSerialization JSONObjectWithData:data
-                                                            options:0
-                                                              error:&jsonError];
-        
-        if (jsonError) {
-            NSLog(@"JSONError: %@", jsonError);
-            return nil;
+        if (data) {
+            payloadDictionary = [NSJSONSerialization JSONObjectWithData:data
+                                                                options:0
+                                                                  error:&jsonError];
         }
+        else {
+            [errorMessage appendErrorDescripton:@"Data for JSON is nil"];
+        }
+        [errorMessage checkJsonError:jsonError];
 
-        NSArray *serverErrors = [payloadDictionary objectForKey:@"errors"];
-        if (serverErrors.count > 0) {
-            NSLog(@"%@", serverErrors);
-        }
+        [errorMessage checkforAPIErrors:[payloadDictionary objectForKey:@"errors"]];
+//        NSArray *serverErrors = [payloadDictionary objectForKey:@"errors"];
+//        if (serverErrors.count > 0) {
+//            NSLog(@"%@", serverErrors);
+//        }
         
         [self updateCurrentCredit:[payloadDictionary valueForKey:@"credits"]
              forServerCommandType:serverCommandType];

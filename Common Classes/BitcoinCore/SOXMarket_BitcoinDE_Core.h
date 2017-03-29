@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class SOXErrorMessage_BitcoinDE;
+
 typedef NS_ENUM (NSUInteger, BitcoinDE_ServerCommandType) {
     UnknownCommand = 0
     , BitcoinDE_ShowBuyOrderbookCommandType  //"buy" liefert Verkaufsangebote
@@ -45,6 +47,11 @@ FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerErrorKey;
 
 @end
 
+@protocol SOXMarketCoreErrorProtocol <NSObject>
+
+- (void)presentErrorMessage:(SOXErrorMessage_BitcoinDE * _Nonnull)errorMessage;
+
+@end
 @interface SOXMarket_BitcoinDE_Core : NSObject
 
 /**
@@ -58,5 +65,7 @@ FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerErrorKey;
 
 #pragma mark | Credit handling
 + (void)registerForCreditUpdates:(id <SOXCreditUpdateProtocol> _Nullable) delegateForCredit;
+
++ (void)registerForErrorMessages:(id <SOXMarketCoreErrorProtocol> _Nullable)delegateForErrorMessages;
 
 @end
