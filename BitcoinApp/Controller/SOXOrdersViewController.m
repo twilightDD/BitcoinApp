@@ -11,8 +11,10 @@
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXShowOrderbook_BitcoinDE_Data.h"
 
+#import "SOXErrorMessage_BitcoinDE.h"
+
 #pragma mark - Interface
-@interface SOXOrdersViewController () <SOXMarketCoreServerRequestProtocol, NSTableViewDelegate>
+@interface SOXOrdersViewController () <SOXMarketCoreServerRequestProtocol, SOXMarketCoreErrorProtocol, NSTableViewDelegate>
 
 #pragma mark IBOutlets
 @property (weak) IBOutlet NSTextField *titleTextField;
@@ -41,6 +43,8 @@
 
 - (void)viewWillAppear {
     [super viewWillAppear];
+    
+    [SOXMarket_BitcoinDE_Core registerForErrorMessages:self];
     
     [self setupUI];
     [self requestServerData];
@@ -135,7 +139,18 @@
     NSLog(@"data:\n%@", data);
     
 }
-#pragma mark - NSTableViewDelegate
 
+#pragma mark - SOXMarketCoreErrorProtocol
+- (void)presentErrorMessage:(SOXErrorMessage_BitcoinDE *)errorMessage {
+    if (errorMessage) {
+        NSLog(@"%@", errorMessage);
+        
+        NSAlert *alert = [[NSAlert alloc] init];
+        alert.messageText = errorMessage.serverRequestTitle;
+        alert.informativeText = errorMessage.errorMessage;
+        alert.alertStyle = NSAlertStyleCritical;
+        [alert runModal];
+    }
+}
 
 @end
