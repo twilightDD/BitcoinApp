@@ -374,7 +374,7 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
     _currentCredits = currentCredits;
     
     // setup credit timer if needed
-    NSTimer *creditTimer = [[SOXMarket_BitcoinDE_Core sharedCore] creditTimer];
+    NSTimer *creditTimer = [self creditTimer];
     if (!creditTimer) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSTimer *creditTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
