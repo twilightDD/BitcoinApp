@@ -13,7 +13,7 @@
 #pragma mark Properties
 #pragma mark | Order information
 @property (strong, nonatomic, readonly) NSString   *orderInformation_orderID;
-@property (strong, nonatomic, readonly) NSString   *orderInformation_socketOrderID;
+@property (strong, nonatomic, readonly) NSString   *orderInformation_socketOrderObjectID;
 @property (strong, nonatomic, readonly) NSString   *orderInformation_type;
 @property (strong, nonatomic, readonly) NSNumber   *orderInformation_maxAmount;
 @property (strong, nonatomic, readonly) NSNumber   *orderInformation_minAmount;

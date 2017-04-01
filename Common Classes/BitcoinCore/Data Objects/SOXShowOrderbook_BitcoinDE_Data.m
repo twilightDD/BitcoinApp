@@ -16,7 +16,7 @@
 #pragma mark Properties
 #pragma mark | Order information
 @property (strong, nonatomic, readwrite) NSString   *orderInformation_orderID;
-@property (strong, nonatomic, readwrite) NSString   *orderInformation_socketOrderID;
+@property (strong, nonatomic, readwrite) NSString   *orderInformation_socketOrderObjectID;
 @property (strong, nonatomic, readwrite) NSString   *orderInformation_type;
 @property (strong, nonatomic, readwrite) NSNumber   *orderInformation_maxAmount;
 @property (strong, nonatomic, readwrite) NSNumber   *orderInformation_minAmount;
@@ -44,7 +44,7 @@
 #pragma mark - Implementation
 @implementation SOXShowOrderbook_BitcoinDE_Data
 #pragma mark Synthesize
-@synthesize orderInformation_orderID, orderInformation_socketOrderID, orderInformation_type, orderInformation_maxAmount, orderInformation_minAmount, orderInformation_price, orderInformation_maxVolume, orderInformation_minVolume, orderInformation_orderRequirementsFullfilled;
+@synthesize orderInformation_orderID, orderInformation_socketOrderObjectID, orderInformation_type, orderInformation_maxAmount, orderInformation_minAmount, orderInformation_price, orderInformation_maxVolume, orderInformation_minVolume, orderInformation_orderRequirementsFullfilled;
 @synthesize tradingPartnerInformation_username, tradingPartnerInformation_isKYCFull, tradingPartnerInformation_trustLevel, tradingPartnerInformation_bankName, tradingPartnerInformation_bic, tradingPartnerInformation_rating, tradingPartnerInformation_amountTrades;
 @synthesize orderRequirements_minTrustLevel, orderRequirements_onlyKYCFull, orderRequirements_seatOfBank, orderRequirements_paymentOption;
 
@@ -63,7 +63,7 @@
 + (instancetype)orderBookDataForSocketIODictionary:(NSDictionary *)addOrderSocketIODictionary {
     SOXShowOrderbook_BitcoinDE_Data *orderbookData = [[SOXShowOrderbook_BitcoinDE_Data alloc] init];
     orderbookData.orderInformation_orderID = [addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_OrderID];
-    orderbookData.orderInformation_socketOrderID = [addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_SocketObjectID];
+    orderbookData.orderInformation_socketOrderObjectID = [addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_SocketObjectID];
     orderbookData.orderInformation_type = [addOrderSocketIODictionary objectForKey:BitcoinDE_ShowMyOrders_Type];
     orderbookData.orderInformation_maxAmount = @([[addOrderSocketIODictionary objectForKey:@"amount"] floatValue]);
     orderbookData.orderInformation_minAmount = @([[addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_MinAmount] floatValue]);
@@ -110,6 +110,40 @@
     return orderbookData;
 }
 
+#pragma mark - Public instance methods
+- (void)updateOrderbookDataWith:(NSDictionary *)changes {
+
+    NSInteger is_trade_by_fidor_reservation_allowed = [[changes objectForKey:@"is_trade_by_fidor_reservation_allowed"] integerValue];
+    NSInteger is_trade_by_sepa_allowed = [[changes objectForKey:@"is_trade_by_sepa_allowed"] integerValue];
+    
+    /* payment Option
+     1 => Express-Only
+     2 => SEPA-Only
+     3 => Express & SEPA
+     */
+    NSInteger newPaymentOption = 0;
+    
+    {
+        if (is_trade_by_fidor_reservation_allowed == 1
+            && is_trade_by_sepa_allowed == 1) {
+            newPaymentOption = 3;
+        }
+        else if (is_trade_by_fidor_reservation_allowed == 0
+                 && is_trade_by_sepa_allowed == 1) {
+            newPaymentOption = 2;
+        }
+        else if (is_trade_by_fidor_reservation_allowed == 1
+                 && is_trade_by_sepa_allowed == 0) {
+            newPaymentOption = 1;
+        }
+        else { // (is_trade_by_fidor_reservation_allowed == 0 && is_trade_by_sepa_allowed == 0)
+            NSLog(@"Sollte nicht vorkommen");
+        }
+    }
+    
+    self.orderRequirements_paymentOption = @(newPaymentOption);
+}
+
 #pragma mark - Instance methods
 - (void)setupOrderbookDataForOrderDictionary:(NSDictionary *)orderDictionary {
     // Order information
@@ -126,21 +160,23 @@
 
     // Trading Partner Information
     {
-        self.tradingPartnerInformation_username     = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPartnerInformation_Username];
-        self.tradingPartnerInformation_isKYCFull    = [[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPartnerInformation_IsKYCFull] boolValue];
-        self.tradingPartnerInformation_trustLevel   = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPartnerInformation_TrustLevel];
-        self.tradingPartnerInformation_bankName     = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPartnerInformation_BankName];
-        self.tradingPartnerInformation_bic          = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPartnerInformation_BIC];
-        self.tradingPartnerInformation_rating       = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPartnerInformation_Rating] floatValue]);
-        self.tradingPartnerInformation_amountTrades = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPartnerInformation_AmountTrades] floatValue]);
+        NSDictionary *tradingPartnerInformation = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPartnerInformation];
+        self.tradingPartnerInformation_username     = [tradingPartnerInformation objectForKey:BitcoinDE_ShowOrderbook_TradingPartnerInformation_Username];
+        self.tradingPartnerInformation_isKYCFull    = [[tradingPartnerInformation objectForKey:BitcoinDE_ShowOrderbook_TradingPartnerInformation_IsKYCFull] boolValue];
+        self.tradingPartnerInformation_trustLevel   = [tradingPartnerInformation objectForKey:BitcoinDE_ShowOrderbook_TradingPartnerInformation_TrustLevel];
+        self.tradingPartnerInformation_bankName     = [tradingPartnerInformation objectForKey:BitcoinDE_ShowOrderbook_TradingPartnerInformation_BankName];
+        self.tradingPartnerInformation_bic          = [tradingPartnerInformation objectForKey:BitcoinDE_ShowOrderbook_TradingPartnerInformation_BIC];
+        self.tradingPartnerInformation_rating       = [tradingPartnerInformation objectForKey:BitcoinDE_ShowOrderbook_TradingPartnerInformation_Rating];
+        self.tradingPartnerInformation_amountTrades = [tradingPartnerInformation objectForKey:BitcoinDE_ShowOrderbook_TradingPartnerInformation_AmountTrades];
     }
     
     // Order Requirements
     {
-        self.orderRequirements_minTrustLevel = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderRequirements_MinTrustLevel];
-        self.orderRequirements_onlyKYCFull   = [[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderRequirements_OnlyKYCFull] boolValue];
-        self.orderRequirements_seatOfBank    = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderRequirements_SeatOfBank];
-        self.orderRequirements_paymentOption = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderRequirements_PaymentOptions] floatValue]);
+        NSDictionary *orderRequirements = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderRequirements];
+        self.orderRequirements_minTrustLevel = [orderRequirements objectForKey:BitcoinDE_ShowOrderbook_OrderRequirements_MinTrustLevel];
+        self.orderRequirements_onlyKYCFull   = [[orderRequirements objectForKey:BitcoinDE_ShowOrderbook_OrderRequirements_OnlyKYCFull] boolValue];
+        self.orderRequirements_seatOfBank    = [orderRequirements objectForKey:BitcoinDE_ShowOrderbook_OrderRequirements_SeatOfBank];
+        self.orderRequirements_paymentOption = [orderRequirements objectForKey:BitcoinDE_ShowOrderbook_OrderRequirements_PaymentOptions];
     }
 }
 

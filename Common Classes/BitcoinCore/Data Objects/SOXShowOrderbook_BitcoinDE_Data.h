@@ -14,4 +14,5 @@
 
 + (instancetype)orderBookDataForSocketIODictionary:(NSDictionary *)addOrderSocketIODictionary;
 
+- (void)updateOrderbookDataWith:(NSDictionary *)changes;
 @end
