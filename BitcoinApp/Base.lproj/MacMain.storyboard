@@ -1604,7 +1604,7 @@
                                                     </connections>
                                                 </tableColumn>
                                                 <tableColumn editable="NO" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="i1d-J7-uwz">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Req. fullfilled">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Payment options">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1616,7 +1616,11 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
-                                                        <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_orderRequirementsFullfilled" id="d6v-eB-F1E"/>
+                                                        <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderRequirements_paymentOption" id="qSU-ak-6Hz">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                            </dictionary>
+                                                        </binding>
                                                     </connections>
                                                 </tableColumn>
                                             </tableColumns>
