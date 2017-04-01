@@ -9,6 +9,7 @@
 #import "SOXOrdersViewController.h"
 
 #import "SOXMarket_BitcoinDE_Core.h"
+#import "SOXSocketIO_BitcoinDE_Core.h"
 #import "SOXShowOrderbook_BitcoinDE_Data.h"
 
 #import "SOXErrorMessage_BitcoinDE.h"
@@ -49,6 +50,8 @@
     [self requestServerData];
     
     [self.tableView setDoubleAction:@selector(tableViewDoubleAction:)];
+    
+    [SOXSocketIO_BitcoinDE_Core registerForAllOrderUpdatesWithDelegate:self];
 }
 
 -(void)viewDidAppear {
@@ -60,7 +63,7 @@
 
 - (IBAction)reloadAction:(NSButton *)sender {
     NSLog(@"Manually reload Data");
-    [self requestServerData];
+   // [self requestServerData];
 }
 
 #pragma mark - Private methods
@@ -89,6 +92,8 @@
     if (self.orderType == OrdersBuyType) {
         [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType // "buy" liefert Verkaufsangebote
                                                     respondTo:self];
+        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
+                                                                delegate:self];
     }
     else if (self.orderType == OrdersSellType) {
         [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType //"sell" liefert Kaufangebote
@@ -139,6 +144,19 @@
         NSLog(@"data:\n%@", data);
     }
 }
+
+#pragma mark - SOXSocketIOCoreProtocol
+- (void)addedOrder:(SOXShowOrderbookData *)addOrderData {
+    NSLog(@"addedOrder:(SOXShowOrderbookData *)addOrderData: %@", [addOrderData class]);
+    
+//    [self.orderBook insertObject:addOrderData atIndex:0];
+    [self.orderBookArrayController addObject:addOrderData];
+    [self.orderBookArrayController rearrangeObjects];
+
+}
+
+- (void)removedOrder:(id)socketArgs {}
+- (void)updatedOrder:(id)socketArgs {}
 
 #pragma mark - SOXMarketCoreErrorProtocol
 - (void)presentErrorMessage:(SOXErrorMessage_BitcoinDE *)errorMessage {
