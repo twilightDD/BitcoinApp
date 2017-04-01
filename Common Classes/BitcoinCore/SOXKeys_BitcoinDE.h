@@ -123,5 +123,24 @@ FOUNDATION_EXPORT NSString *const BitcoinDE_ShowRates_rate_weighted;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowRates_rate_weighted_3h;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowRates_rate_weighted_12h;
 
+#pragma mark - WebSocket
+FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_AddOrder_MainKey;
+FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_RemoveOrder_MainKey;
+FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_UpdateOrder_MainKey;
+
+#pragma mark | Add_Order
+FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_AddOrder_OrderID;
+FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_AddOrder_OrderType;
+FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_AddOrder_Amount;
+FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_AddOrder_MinAmount;
+FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_AddOrder_Price;
+FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_AddOrder_MinTustLevel;
+FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_AddOrder_OnlyKYCFull;
+FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_AddOrder_IsKYCFull;
+FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_AddOrder_SeatOfBankOfCreator;
+FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_AddOrder_BICShort;
+FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_AddOrder_BICFull;
+FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_AddOrder_TradeOfSepaCountry;
+FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_AddOrder_PaymentOption;
 
 @end

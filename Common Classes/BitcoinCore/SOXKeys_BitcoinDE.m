@@ -121,4 +121,28 @@ NSString *const BitcoinDE_ShowRates_rate_weighted     = @"rate_weighted";
 NSString *const BitcoinDE_ShowRates_rate_weighted_3h  = @"rate_weighted_3h";
 NSString *const BitcoinDE_ShowRates_rate_weighted_12h = @"rate_weighted_12h";
 
+#pragma mark - WebSocket 
+NSString *const BitcoinDE_WebSocket_AddOrder_MainKey    = @"add_order";
+NSString *const BitcoinDE_WebSocket_RemoveOrder_MainKey = @"remove_order";
+NSString *const BitcoinDE_WebSocket_UpdateOrder_MainKey = @"refresh_express_option";
+
+#pragma mark | Add_Order
+NSString *const BitcoinDE_WebSocket_AddOrder_OrderID                = @"order_id";
+NSString *const BitcoinDE_WebSocket_AddOrder_OrderType              = @"order_type";
+NSString *const BitcoinDE_WebSocket_AddOrder_Amount                 = @"amount";
+NSString *const BitcoinDE_WebSocket_AddOrder_MinAmount              = @"min_amount";
+NSString *const BitcoinDE_WebSocket_AddOrder_Price                  = @"price";
+NSString *const BitcoinDE_WebSocket_AddOrder_MinTustLevel           = @"min_trust_level";
+NSString *const BitcoinDE_WebSocket_AddOrder_OnlyKYCFull            = @"only_kyc_full";
+NSString *const BitcoinDE_WebSocket_AddOrder_IsKYCFull              = @"is_kyc_full";
+NSString *const BitcoinDE_WebSocket_AddOrder_SeatOfBankOfCreator    = @"seat_of_bank_of_creator";
+NSString *const BitcoinDE_WebSocket_AddOrder_BICShort               = @"bic_short";
+NSString *const BitcoinDE_WebSocket_AddOrder_BICFull                = @"bic_full";
+NSString *const BitcoinDE_WebSocket_AddOrder_TradeOfSepaCountry     = @"trade_to_sepa_country";
+NSString *const BitcoinDE_WebSocket_AddOrder_PaymentOption          = @"payment_option";
+
+#pragma mark | Remove_Order
+
+#pragma mark | Update_Order
+
 @end
