@@ -1700,7 +1700,7 @@
                     </connections>
                 </viewController>
                 <customObject id="Ixs-NX-vvZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController avoidsEmptySelection="NO" automaticallyRearrangesObjects="YES" id="4Tj-Nm-93b" userLabel="OrderBookArrayController">
+                <arrayController objectClassName="SOXShowOrderbookData" selectsInsertedObjects="NO" avoidsEmptySelection="NO" automaticallyRearrangesObjects="YES" id="4Tj-Nm-93b" userLabel="OrderBookArrayController">
                     <connections>
                         <binding destination="ssU-Oy-97E" name="contentArray" keyPath="self.orderBook" id="ODs-HG-gtx"/>
                     </connections>
