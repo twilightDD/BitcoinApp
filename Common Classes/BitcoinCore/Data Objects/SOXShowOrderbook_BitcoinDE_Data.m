@@ -116,11 +116,11 @@
     {
         self.orderInformation_orderID                      = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderID];
         self.orderInformation_type                         = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_Type];
-        self.orderInformation_maxAmount                    = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MaxAmount];
-        self.orderInformation_minAmount                    = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MinAmount];
-        self.orderInformation_price                        = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_Price];
-        self.orderInformation_maxVolume                    = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MaxVolume];
-        self.orderInformation_minVolume                    = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MinVolume];
+        self.orderInformation_maxAmount                    = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MaxAmount] floatValue]);
+        self.orderInformation_minAmount                    = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MinAmount] floatValue]);
+        self.orderInformation_price                        = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_Price] floatValue]);
+        self.orderInformation_maxVolume                    = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MaxVolume] floatValue]);
+        self.orderInformation_minVolume                    = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MinVolume] floatValue]);
         self.orderInformation_orderRequirementsFullfilled  = [[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderRequirementsFullfilled] boolValue];
     }
 
@@ -131,8 +131,8 @@
         self.tradingPartnerInformation_trustLevel   = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPartnerInformation_TrustLevel];
         self.tradingPartnerInformation_bankName     = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPartnerInformation_BankName];
         self.tradingPartnerInformation_bic          = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPartnerInformation_BIC];
-        self.tradingPartnerInformation_rating       = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPartnerInformation_Rating];
-        self.tradingPartnerInformation_amountTrades = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPartnerInformation_AmountTrades];
+        self.tradingPartnerInformation_rating       = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPartnerInformation_Rating] floatValue]);
+        self.tradingPartnerInformation_amountTrades = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPartnerInformation_AmountTrades] floatValue]);
     }
     
     // Order Requirements
@@ -140,7 +140,7 @@
         self.orderRequirements_minTrustLevel = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderRequirements_MinTrustLevel];
         self.orderRequirements_onlyKYCFull   = [[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderRequirements_OnlyKYCFull] boolValue];
         self.orderRequirements_seatOfBank    = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderRequirements_SeatOfBank];
-        self.orderRequirements_paymentOption = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderRequirements_PaymentOptions];
+        self.orderRequirements_paymentOption = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderRequirements_PaymentOptions] floatValue]);
     }
 }
 
