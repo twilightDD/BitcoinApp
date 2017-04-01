@@ -128,6 +128,7 @@ NSString *const BitcoinDE_WebSocket_UpdateOrder_MainKey = @"refresh_express_opti
 
 #pragma mark | Add_Order
 NSString *const BitcoinDE_WebSocket_AddOrder_OrderID                = @"order_id";
+NSString *const BitcoinDE_WebSocket_AddOrder_SocketObjectID         = @"id";
 NSString *const BitcoinDE_WebSocket_AddOrder_OrderType              = @"order_type";
 NSString *const BitcoinDE_WebSocket_AddOrder_Amount                 = @"amount";
 NSString *const BitcoinDE_WebSocket_AddOrder_MinAmount              = @"min_amount";

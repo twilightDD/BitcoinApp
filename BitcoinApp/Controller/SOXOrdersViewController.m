@@ -12,10 +12,11 @@
 #import "SOXSocketIO_BitcoinDE_Core.h"
 #import "SOXShowOrderbook_BitcoinDE_Data.h"
 
+#import "SOXKeys_BitcoinDE.h"
 #import "SOXErrorMessage_BitcoinDE.h"
 
 #pragma mark - Interface
-@interface SOXOrdersViewController () <SOXMarketCoreServerRequestProtocol, SOXMarketCoreErrorProtocol, NSTableViewDelegate>
+@interface SOXOrdersViewController () <SOXMarketCoreServerRequestProtocol, SOXMarketCoreErrorProtocol, SOXSocketIOCoreProtocol, NSTableViewDelegate>
 
 #pragma mark IBOutlets
 @property (weak) IBOutlet NSTextField *titleTextField;
@@ -92,12 +93,18 @@
     if (self.orderType == OrdersBuyType) {
         [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType // "buy" liefert Verkaufsangebote
                                                     respondTo:self];
-        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
-                                                                delegate:self];
+//        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
+//                                                                delegate:self];
+//        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
+//                                                                delegate:self];
     }
     else if (self.orderType == OrdersSellType) {
         [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType //"sell" liefert Kaufangebote
                                                     respondTo:self];
+//        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
+//                                                                delegate:self];
+//        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
+//                                                                delegate:self];
     }
     else {
         NSLog(@"SOXOrdersViewController - (void)viewWillAppear : self.orderType has wrong type");
@@ -143,6 +150,26 @@
         SOXShowOrderbookData *data = self.orderBook.firstObject;
         NSLog(@"data:\n%@", data);
     }
+    
+    if (self.orderType == OrdersBuyType) {
+//        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType // "buy" liefert Verkaufsangebote
+//                                                    respondTo:self];
+        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
+                                                                delegate:self];
+        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
+                                                                delegate:self];
+    }
+    else if (self.orderType == OrdersSellType) {
+//        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType //"sell" liefert Kaufangebote
+//                                                    respondTo:self];
+        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
+                                                                delegate:self];
+        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
+                                                                delegate:self];
+    }
+    else {
+        NSLog(@"SOXOrdersViewController - (void)viewWillAppear : self.orderType has wrong type");
+    }
 }
 
 #pragma mark - SOXSocketIOCoreProtocol
@@ -155,8 +182,41 @@
 
 }
 
-- (void)removedOrder:(id)socketArgs {}
-- (void)updatedOrder:(id)socketArgs {}
+- (void)removedOrderWithOrderID:(NSString *)orderID {
+    NSLog(@"REMOVE ORDER WITH ORDERID: %@", orderID);
+    
+    NSArray *arrangedObjects = self.orderBookArrayController.arrangedObjects;
+    NSMutableArray *foundOrders = [NSMutableArray array];
+    
+    for (SOXShowOrderbookData *orderbookData in arrangedObjects) {
+        if ([orderbookData.orderInformation_orderID isEqualToString:orderID]) {
+            [foundOrders addObject:orderbookData];
+        }
+    }
+
+    NSLog(@"arrangedObjects %tu foundOrder %tu", arrangedObjects.count, foundOrders.count);
+    
+    for (id foundOrder in foundOrders) {
+        [self.orderBookArrayController removeObject:foundOrder];
+    }
+//    NSString *orderIDPredicateString = [NSString stringWithFormat:@"self.orderInformation_orderID CONTAINS %@", orderID];
+//    NSPredicate *orderIDPredicate = [NSPredicate predicateWithFormat:orderIDPredicateString];
+//    [arrangedObjects filteredArrayUsingPredicate:orderIDPredicate];
+    
+    
+}
+- (void)updatedOrder:(id)socketArgs {
+    if ([socketArgs isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *socketDict = (NSDictionary *)socketArgs;
+        NSArray *keys = socketDict.allKeys;
+        
+        for (NSString *key in keys) {
+            
+        }
+        
+        
+    }
+}
 
 #pragma mark - SOXMarketCoreErrorProtocol
 - (void)presentErrorMessage:(SOXErrorMessage_BitcoinDE *)errorMessage {

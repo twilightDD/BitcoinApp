@@ -30,6 +30,7 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
 @property (strong, nonatomic) NSHashTable *delegateForAllOrderUpdates;
 @property (strong, nonatomic) NSHashTable *delegateForBuyOrderUpdates;
 @property (strong, nonatomic) NSHashTable *delegateForSellOrderUpdates;
+@property (strong, nonatomic) NSHashTable *delegateForRemoveOrderUpdates;
 
 @property (nonatomic) BOOL socketIsRunning;
 
@@ -59,6 +60,9 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
             case BitcoinDE_UpdateType_SellOrderChanges:
                 [[SOXSocketIO_BitcoinDE_Core sharedCore].delegateForSellOrderUpdates addObject:delegate];
                 break;
+            case BitcoinDE_UpdateType_RemoveOrderChanges:
+                [[SOXSocketIO_BitcoinDE_Core sharedCore].delegateForRemoveOrderUpdates addObject:delegate];
+                break;
             default:
                 NSLog(@"ERROR: registerForOrderUpdatesForUpdateType - unknown type");
                 break;
@@ -81,6 +85,7 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
         sharedCore.delegateForAllOrderUpdates = [[NSHashTable alloc] init];
         sharedCore.delegateForBuyOrderUpdates = [[NSHashTable alloc] init];
         sharedCore.delegateForSellOrderUpdates = [[NSHashTable alloc] init];
+        sharedCore.delegateForRemoveOrderUpdates = [[NSHashTable alloc] init];
         
     });
     return sharedCore;
@@ -119,30 +124,50 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
    
     
     if ([packet.name isEqualToString:BitcoinDE_WebSocket_AddOrder_MainKey]) {
-        NSLog(@"SocketIO: add_order");
-        for (NSObject *delegate in self.delegateForBuyOrderUpdates) {
-            if ([delegate respondsToSelector:@selector(addedOrder:)]) {
-                for (NSDictionary *packetDictionary in packetArguments) {
-                    SOXShowOrderbookData *addOrderData = [SOXShowOrderbook_BitcoinDE_Data orderBookDataForSocketIODictionary:packetDictionary];
-                    [delegate performSelector:@selector(addedOrder:) withObject:addOrderData];
+        for (NSDictionary *packetDictionary in packetArguments) {
+            SOXShowOrderbookData *addOrderData = [SOXShowOrderbook_BitcoinDE_Data orderBookDataForSocketIODictionary:packetDictionary];
+            if (!addOrderData) {
+                NSLog(@"nil");
+            }
+            if ([addOrderData.orderInformation_type isEqualToString:@"order"]) {
+                for (NSObject *delegate in self.delegateForBuyOrderUpdates) {
+                    if ([delegate respondsToSelector:@selector(addedOrder:)]) {
+                        [delegate performSelector:@selector(addedOrder:) withObject:addOrderData];
+                    }
                 }
             }
+            else if ([addOrderData.orderInformation_type isEqualToString:@"offer"]) {
+                for (NSObject *delegate in self.delegateForSellOrderUpdates) {
+                    if ([delegate respondsToSelector:@selector(addedOrder:)]) {
+                        [delegate performSelector:@selector(addedOrder:) withObject:addOrderData];
+                    }
+                }
+            }
+            else {
+                NSLog(@"socketIO:didReceiveEvent: BitcoinDE_WebSocket_AddOrder_MainKey -> unknown type: %@", addOrderData.orderInformation_type);
+            }
         }
-            
-        
-        
     }
 
     else if ([packet.name isEqualToString:BitcoinDE_WebSocket_RemoveOrder_MainKey]) {
         NSLog(@"SocketIO: remove_order");
-        if ([self.delegate respondsToSelector:@selector(removeOrder:)]) {
-            [self.delegate performSelector:@selector(removeOrder:) withObject:packet.args];
+        // TODO: Todo: siehe Doku, for eigene Angebote, die (teilweise) verkauft wurden
+        for (NSDictionary *packetDictionary in packetArguments) {
+            for (NSObject *delegate in self.delegateForRemoveOrderUpdates) {
+                if ([delegate respondsToSelector:@selector(removedOrderWithOrderID:)]) {
+                    [delegate performSelector:@selector(removedOrderWithOrderID:)
+                                   withObject:[packetDictionary objectForKey:@"order_id"]];
+                }
+            }
         }
+        
     }
     else if ([packet.name isEqualToString:BitcoinDE_WebSocket_UpdateOrder_MainKey]) {
         NSLog(@"SocketIO: refresh_express_option");
-        if ([self.delegate respondsToSelector:@selector(updateOrder:)]) {
-            [self.delegate performSelector:@selector(updateOrder:) withObject:packet.args];
+        NSLog(@"packetArguments\n%@",packetArguments);
+        
+        if ([self.delegate respondsToSelector:@selector(updatedOrder:)]) {
+            [self.delegate performSelector:@selector(updatedOrder:) withObject:packet.args];
         }
     }
     else {

@@ -15,13 +15,14 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_UpdateType) {
     , BitcoinDE_UpdateType_AllOrderChanges
     , BitcoinDE_UpdateType_BuyOrderChanges
     , BitcoinDE_UpdateType_SellOrderChanges
+    , BitcoinDE_UpdateType_RemoveOrderChanges
 };
 
 @protocol SOXSocketIOCoreProtocol <NSObject>
 
 @optional
 - (void)addedOrder:(SOXShowOrderbookData *)addOrderData;
-- (void)removedOrder:(id)socketArgs;
+- (void)removedOrderWithOrderID:(NSString *)orderID;
 - (void)updatedOrder:(id)socketArgs;
 
 @end

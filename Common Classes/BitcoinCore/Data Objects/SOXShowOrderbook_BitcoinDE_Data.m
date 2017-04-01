@@ -16,6 +16,7 @@
 #pragma mark Properties
 #pragma mark | Order information
 @property (strong, nonatomic, readwrite) NSString   *orderInformation_orderID;
+@property (strong, nonatomic, readwrite) NSString   *orderInformation_socketOrderID;
 @property (strong, nonatomic, readwrite) NSString   *orderInformation_type;
 @property (strong, nonatomic, readwrite) NSNumber   *orderInformation_maxAmount;
 @property (strong, nonatomic, readwrite) NSNumber   *orderInformation_minAmount;
@@ -43,7 +44,7 @@
 #pragma mark - Implementation
 @implementation SOXShowOrderbook_BitcoinDE_Data
 #pragma mark Synthesize
-@synthesize orderInformation_orderID, orderInformation_type, orderInformation_maxAmount, orderInformation_minAmount, orderInformation_price, orderInformation_maxVolume, orderInformation_minVolume, orderInformation_orderRequirementsFullfilled;
+@synthesize orderInformation_orderID, orderInformation_socketOrderID, orderInformation_type, orderInformation_maxAmount, orderInformation_minAmount, orderInformation_price, orderInformation_maxVolume, orderInformation_minVolume, orderInformation_orderRequirementsFullfilled;
 @synthesize tradingPartnerInformation_username, tradingPartnerInformation_isKYCFull, tradingPartnerInformation_trustLevel, tradingPartnerInformation_bankName, tradingPartnerInformation_bic, tradingPartnerInformation_rating, tradingPartnerInformation_amountTrades;
 @synthesize orderRequirements_minTrustLevel, orderRequirements_onlyKYCFull, orderRequirements_seatOfBank, orderRequirements_paymentOption;
 
@@ -60,25 +61,24 @@
 }
 
 + (instancetype)orderBookDataForSocketIODictionary:(NSDictionary *)addOrderSocketIODictionary {
-    
-    
     SOXShowOrderbook_BitcoinDE_Data *orderbookData = [[SOXShowOrderbook_BitcoinDE_Data alloc] init];
-    orderbookData.orderInformation_orderID = [addOrderSocketIODictionary objectForKey:BitcoinDE_ShowMyOrders_OrderID];
+    orderbookData.orderInformation_orderID = [addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_OrderID];
+    orderbookData.orderInformation_socketOrderID = [addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_SocketObjectID];
     orderbookData.orderInformation_type = [addOrderSocketIODictionary objectForKey:BitcoinDE_ShowMyOrders_Type];
     orderbookData.orderInformation_maxAmount = @([[addOrderSocketIODictionary objectForKey:@"amount"] floatValue]);
-    orderbookData.orderInformation_minAmount = @([[addOrderSocketIODictionary objectForKey:BitcoinDE_ShowMyOrders_MinAmount] floatValue]);
-    orderbookData.orderInformation_price = @([[addOrderSocketIODictionary objectForKey:BitcoinDE_ShowMyOrders_Price] floatValue]);
+    orderbookData.orderInformation_minAmount = @([[addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_MinAmount] floatValue]);
+    orderbookData.orderInformation_price = @([[addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_Price] floatValue]);
     
     orderbookData.orderInformation_maxVolume = @(orderbookData.orderInformation_price.doubleValue * orderbookData.orderInformation_maxAmount.doubleValue);
     orderbookData.orderInformation_minVolume = @(orderbookData.orderInformation_price.doubleValue * orderbookData.orderInformation_minAmount.doubleValue);
     
-    orderbookData.orderRequirements_minTrustLevel = [addOrderSocketIODictionary objectForKey:BitcoinDE_ShowMyOrders_OrderRequirements_MinTrustLevel];
-    orderbookData.orderRequirements_onlyKYCFull = [[addOrderSocketIODictionary objectForKey:BitcoinDE_ShowMyOrders_OrderRequirements_OnlyKYCFull] boolValue];
-    orderbookData.orderRequirements_paymentOption = @([[addOrderSocketIODictionary objectForKey:BitcoinDE_ShowMyOrders_OrderRequirements_PaymentOption] floatValue]);
+    orderbookData.orderRequirements_minTrustLevel = [addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_MinTustLevel];
+    orderbookData.orderRequirements_onlyKYCFull = [[addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_OnlyKYCFull] boolValue];
+    orderbookData.orderRequirements_paymentOption = @([[addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_PaymentOption] floatValue]);
 //    orderbookData.orderRequirements_seatOfBank = [addOrderSocketIODictionary objectForKey:BitcoinDE_ShowMyOrders_OrderID];
     
-    orderbookData.tradingPartnerInformation_isKYCFull = [[addOrderSocketIODictionary objectForKey:BitcoinDE_ShowMyOrders_OrderRequirements_OnlyKYCFull] boolValue];
-    orderbookData.tradingPartnerInformation_bic = [addOrderSocketIODictionary objectForKey:BitcoinDE_ShowAccountInfoEncryptedInformation_bic_full];
+    orderbookData.tradingPartnerInformation_isKYCFull = [[addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_IsKYCFull] boolValue];
+    orderbookData.tradingPartnerInformation_bic = [addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_BICFull];
     
     return orderbookData;
 //    orderbookData.trade_to_sepa_country
