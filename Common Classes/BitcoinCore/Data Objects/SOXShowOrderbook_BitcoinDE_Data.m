@@ -59,6 +59,49 @@
     return orderbookDataArray;
 }
 
++ (instancetype)orderBookDataForSocketIODictionary:(NSDictionary *)addOrderSocketIODictionary {
+    
+    
+    SOXShowOrderbook_BitcoinDE_Data *orderbookData = [[SOXShowOrderbook_BitcoinDE_Data alloc] init];
+    orderbookData.orderInformation_orderID = [addOrderSocketIODictionary objectForKey:BitcoinDE_ShowMyOrders_OrderID];
+    orderbookData.orderInformation_type = [addOrderSocketIODictionary objectForKey:BitcoinDE_ShowMyOrders_Type];
+    orderbookData.orderInformation_maxAmount = @([[addOrderSocketIODictionary objectForKey:@"amount"] floatValue]);
+    orderbookData.orderInformation_minAmount = @([[addOrderSocketIODictionary objectForKey:BitcoinDE_ShowMyOrders_MinAmount] floatValue]);
+    orderbookData.orderInformation_price = @([[addOrderSocketIODictionary objectForKey:BitcoinDE_ShowMyOrders_Price] floatValue]);
+    
+    orderbookData.orderInformation_maxVolume = @(orderbookData.orderInformation_price.doubleValue * orderbookData.orderInformation_maxAmount.doubleValue);
+    orderbookData.orderInformation_minVolume = @(orderbookData.orderInformation_price.doubleValue * orderbookData.orderInformation_minAmount.doubleValue);
+    
+    orderbookData.orderRequirements_minTrustLevel = [addOrderSocketIODictionary objectForKey:BitcoinDE_ShowMyOrders_OrderRequirements_MinTrustLevel];
+    orderbookData.orderRequirements_onlyKYCFull = [[addOrderSocketIODictionary objectForKey:BitcoinDE_ShowMyOrders_OrderRequirements_OnlyKYCFull] boolValue];
+    orderbookData.orderRequirements_paymentOption = @([[addOrderSocketIODictionary objectForKey:BitcoinDE_ShowMyOrders_OrderRequirements_PaymentOption] floatValue]);
+//    orderbookData.orderRequirements_seatOfBank = [addOrderSocketIODictionary objectForKey:BitcoinDE_ShowMyOrders_OrderID];
+    
+    orderbookData.tradingPartnerInformation_isKYCFull = [[addOrderSocketIODictionary objectForKey:BitcoinDE_ShowMyOrders_OrderRequirements_OnlyKYCFull] boolValue];
+    orderbookData.tradingPartnerInformation_bic = [addOrderSocketIODictionary objectForKey:BitcoinDE_ShowAccountInfoEncryptedInformation_bic_full];
+    
+    return orderbookData;
+//    orderbookData.trade_to_sepa_country
+    
+    /* add_order
+     
+     order_id
+     order_type
+     amount
+     min_amount
+     price
+     min_trust_level
+     only_kyc_full
+     is_kyc_full
+     seat_of_bank_of_creator
+     bic_short
+     bic_full
+     trade_to_sepa_country
+     payment_option
+     */
+
+}
+
 #pragma mark - Class methods
 + (SOXShowOrderbookData *)orderbookDataForOrderDictionary:(NSDictionary *)orderDictionary {
     SOXShowOrderbook_BitcoinDE_Data *orderbookData = [[SOXShowOrderbook_BitcoinDE_Data alloc] init];

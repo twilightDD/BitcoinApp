@@ -12,4 +12,6 @@
 
 + (NSMutableArray *)orderbookDataArrayForShowOrderbookDictionary:(NSDictionary *)payloadDictionary;
 
++ (instancetype)orderBookDataForSocketIODictionary:(NSDictionary *)addOrderSocketIODictionary;
+
 @end
