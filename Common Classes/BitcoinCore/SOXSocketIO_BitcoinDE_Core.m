@@ -163,11 +163,41 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
         
     }
     else if ([packet.name isEqualToString:BitcoinDE_WebSocket_UpdateOrder_MainKey]) {
-        NSLog(@"SocketIO: refresh_express_option");
-        NSLog(@"packetArguments\n%@",packetArguments);
+        /* packet.args ist ein Array aus Dictionaries
+         (
+            {
+                4466901 = {                                             => Key des Dict ist objectOrderID (sehr geile API!)
+                    "is_trade_by_fidor_reservation_allowed" = 1;
+                    "is_trade_by_sepa_allowed" = 0;
+                };
+            }
+         )
+         */
         
-        if ([self.delegate respondsToSelector:@selector(updatedOrder:)]) {
-            [self.delegate performSelector:@selector(updatedOrder:) withObject:packet.args];
+        if ([packet.args isKindOfClass:[NSArray class]]) {
+            NSArray *updateDictionaries = (NSArray *)packet.args;
+            
+            // alle Dict im Array parsen
+            for (NSDictionary *updateDictionary in updateDictionaries) {
+                NSArray *objectOrderIDs = updateDictionary.allKeys; // Key des Dict ist objectOrderID (sehr geile API!)
+                for (NSString *objectOrderID in objectOrderIDs) { // für jeden Key(objectOrderID) die Payload an die Delegates senden
+                    NSDictionary *changesDictionary = [updateDictionary objectForKey:objectOrderID];
+                    for (NSObject *delegate in self.delegateForBuyOrderUpdates) {
+                        if ([delegate respondsToSelector:@selector(updateOrderWithSocketOrderObjectID:withValues:)]) {
+                            [delegate performSelector:@selector(updateOrderWithSocketOrderObjectID:withValues:)
+                                           withObject:objectOrderID
+                                           withObject:changesDictionary];
+                        }
+                    }
+                    for (NSObject *delegate in self.delegateForSellOrderUpdates) {
+                        if ([delegate respondsToSelector:@selector(updateOrderWithSocketOrderObjectID:withValues:)]) {
+                            [delegate performSelector:@selector(updateOrderWithSocketOrderObjectID:withValues:)
+                                           withObject:objectOrderID
+                                           withObject:changesDictionary];
+                        }
+                    }
+                }
+            }
         }
     }
     else {

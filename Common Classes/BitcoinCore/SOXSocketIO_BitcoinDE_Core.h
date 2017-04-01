@@ -23,7 +23,7 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_UpdateType) {
 @optional
 - (void)addedOrder:(SOXShowOrderbookData *)addOrderData;
 - (void)removedOrderWithOrderID:(NSString *)orderID;
-- (void)updatedOrder:(id)socketArgs;
+- (void)updateOrderWithSocketOrderObjectID:(NSString *)orderID withValues:(NSDictionary *)changesDictionary;
 
 @end
 
