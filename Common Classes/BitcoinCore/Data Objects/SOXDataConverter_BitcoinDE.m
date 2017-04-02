@@ -44,7 +44,7 @@
         case BitcoinDE_ShowMyTradesType:
             payload = payloadDictionary;
             break;
-        case BitcoinDE_ShowAccountLedger:
+        case BitcoinDE_ShowAccountLedgerType:
             payload = payloadDictionary;
             break;
         default:

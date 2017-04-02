@@ -54,14 +54,25 @@
 
 
 - (void)requestServerData {
-    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountLedger
+    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowMyTradesType
                                                 respondTo:self];
     
 }
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
 - (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest {
-    NSLog(@"BitcoinDE_ShowAccountLedger\n%@",answerOfServerRequest);
+    NSLog(@"BitcoinDE_ShowMyTradesType \n%@",answerOfServerRequest);
+    if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowMyTradesType)]) {
+//        NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
+//        NSMutableArray *orderBook = [SOXShowOrderbook_BitcoinDE_Data orderbookDataArrayForShowOrderbookDictionary:payloadDictionary];
+//        self.orderBook = orderBook;
+//        
+//        [self.circularProgressIndicator stopAnimation:nil];
+//        self.spinningBackgroundView.hidden = YES;
+    }
+    
+
+
 }
 
 @end

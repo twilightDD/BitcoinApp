@@ -271,7 +271,7 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
         case BitcoinDE_ShowPublicTradeHistoryCommandType:
         case BitcoinDE_ShowRatesCommandType:
         case BitcoinDE_ShowMyTradesType:
-        case BitcoinDE_ShowAccountLedger:
+        case BitcoinDE_ShowAccountLedgerType:
             return @"GET";
             
         default:
@@ -423,7 +423,7 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
                                 , @(BitcoinDE_ShowPublicTradeHistoryCommandType): @"/trades/history"
                                 , @(BitcoinDE_ShowRatesCommandType): @"/rates"
                                 , @(BitcoinDE_ShowMyTradesType):@"/trades"
-                                , @(BitcoinDE_ShowAccountLedger):@"/account/ledger"
+                                , @(BitcoinDE_ShowAccountLedgerType):@"/account/ledger"
                                 };
     });
     return commandDescriptions;
@@ -446,7 +446,7 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
                                 , @(BitcoinDE_ShowPublicTradeHistoryCommandType): @"Erfolgreich abgeschlossene Trades der letzten 7 Tage."
                                 , @(BitcoinDE_ShowRatesCommandType): @"Abfrage des gewichteten Durchschnittskurses der letzten 3 Stunden und der letzten 12 Stunden."
                                 , @(BitcoinDE_ShowMyTradesType): @"Abrufen und Filtern meiner getätigten Trades."
-                                , @(BitcoinDE_ShowAccountLedger): @"Abruf des Kontoauszuges"
+                                , @(BitcoinDE_ShowAccountLedgerType): @"Abruf des Kontoauszuges"
                                 };
     });
     return commandDescriptions;
