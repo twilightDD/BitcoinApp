@@ -64,48 +64,62 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
 
 + (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
                           respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nonnull)controller {
-    NSURLRequest *request = [self urlRequestForServerCommandType:serverCommandType];
+    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:serverCommandType
+                                            withParameter:nil
+                                                respondTo:controller];
+}
+
++ (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
+                      withParameter:(NSDictionary * _Nullable)parameterDictionary
+                          respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nonnull)controller {
+    NSURLRequest *request = [self urlRequestForServerCommandType:serverCommandType
+                                                   withParameter:parameterDictionary];
+    if (!request) {
+        return;
+    }
+    
     
     weakify(self)
     NSURLSessionTask *getTask = [[NSURLSession sharedSession] dataTaskWithRequest:request
                                                                 completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                                                    strongify(self)
-                                                    
-                                                    NSString *serverRequestTitle = [NSString stringWithFormat:@"%tu (%@)",
-                                                                                    serverCommandType
-                                                                                    ,[SOXMarket_BitcoinDE_Core descriptionForServerCommandType:serverCommandType]];
-                                                                                    
-                                                    SOXErrorMessage_BitcoinDE *errorMessage = [[SOXErrorMessage_BitcoinDE alloc] initWithServerRequestTitle:serverRequestTitle];
-
-                                                    NSDictionary *serverAnswer = [self answerDictionaryForServerCommand:serverCommandType
-                                                                                                               withData:data
-                                                                                                            urlResponse:response
-                                                                                                                  error:error
-                                                                                                           errorMessage:errorMessage];
-                                                    
-                                                    // Send answer to asking controller
-                                                    if ([controller respondsToSelector:@selector(answerOfServerRequest:)]) {
-                                                        // NSURLSessionTask has its own thread
-                                                        [controller performSelectorOnMainThread:@selector(answerOfServerRequest:)
-                                                                                     withObject:serverAnswer
-                                                                                  waitUntilDone:NO];
-                                                    }
-                                                    
-                                                    // Error handling
-                                                    NSObject *delegateForErrorMessages = [SOXMarket_BitcoinDE_Core sharedCore].delegateForErrorMessages;
-                                                    if (errorMessage.hasError
-                                                        && [delegateForErrorMessages respondsToSelector:@selector(presentErrorMessage:)]) {
-                                                            // NSURLSessionTask has its own thread
-                                                            [delegateForErrorMessages performSelectorOnMainThread:@selector(presentErrorMessage:)
-                                                                                                       withObject:errorMessage
-                                                                                                    waitUntilDone:NO];
-                                                    }
+                                                                    strongify(self)
                                                                     
-                                                    [SOXMarket_BitcoinDE_Core startNextNSURLSessionTask];
-                                                }];
+                                                                    NSString *serverRequestTitle = [NSString stringWithFormat:@"%tu (%@)",
+                                                                                                    serverCommandType
+                                                                                                    ,[SOXMarket_BitcoinDE_Core descriptionForServerCommandType:serverCommandType]];
+                                                                    
+                                                                    SOXErrorMessage_BitcoinDE *errorMessage = [[SOXErrorMessage_BitcoinDE alloc] initWithServerRequestTitle:serverRequestTitle];
+                                                                    
+                                                                    NSDictionary *serverAnswer = [self answerDictionaryForServerCommand:serverCommandType
+                                                                                                                               withData:data
+                                                                                                                            urlResponse:response
+                                                                                                                                  error:error
+                                                                                                                           errorMessage:errorMessage];
+                                                                    
+                                                                    // Send answer to asking controller
+                                                                    if ([controller respondsToSelector:@selector(answerOfServerRequest:)]) {
+                                                                        // NSURLSessionTask has its own thread
+                                                                        [controller performSelectorOnMainThread:@selector(answerOfServerRequest:)
+                                                                                                     withObject:serverAnswer
+                                                                                                  waitUntilDone:NO];
+                                                                    }
+                                                                    
+                                                                    // Error handling
+                                                                    NSObject *delegateForErrorMessages = [SOXMarket_BitcoinDE_Core sharedCore].delegateForErrorMessages;
+                                                                    if (errorMessage.hasError
+                                                                        && [delegateForErrorMessages respondsToSelector:@selector(presentErrorMessage:)]) {
+                                                                        // NSURLSessionTask has its own thread
+                                                                        [delegateForErrorMessages performSelectorOnMainThread:@selector(presentErrorMessage:)
+                                                                                                                   withObject:errorMessage
+                                                                                                                waitUntilDone:NO];
+                                                                    }
+                                                                    
+                                                                    [SOXMarket_BitcoinDE_Core startNextNSURLSessionTask];
+                                                                }];
     
     [SOXMarket_BitcoinDE_Core addNSURLSessionTask:getTask];
 }
+
 
 + (void)registerForCreditUpdates:(id <SOXCreditUpdateProtocol> _Nullable)delegateForCreditUpdates {
     [SOXMarket_BitcoinDE_Core sharedCore].delegateForCreditUpdates = delegateForCreditUpdates;
@@ -170,11 +184,13 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
     return serverAnswer;
 }
 
-+ (NSURLRequest * _Nullable)urlRequestForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType {
++ (NSURLRequest * _Nullable)urlRequestForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType
+                                             withParameter:(NSDictionary * _Nullable)parameterDictionary {
     // First step: update nonce string
     [SOXMarket_BitcoinDE_Core updateNonceString];
    
-    NSString            *urlString       = [SOXMarket_BitcoinDE_Core urlStringForServerCommandType:serverCommandType];
+    NSString            *urlString       = [SOXMarket_BitcoinDE_Core urlStringForServerCommandType:serverCommandType
+                                                                                     withParameter:parameterDictionary];
     NSString            *signatureString = [SOXMarket_BitcoinDE_Core signatureStringForURLString:urlString];
     NSString            *hmacHex         = [SOXHash hexadecimalHMACForString:signatureString
                                                                      withKey:[SOXMarket_BitcoinDE_Core apiSecret]];
@@ -218,9 +234,22 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
     }
 }
 
-+ (NSString *)urlStringForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType {
++ (NSString *)urlStringForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType
+                              withParameter:(NSDictionary * _Nullable)parameterDictionary {
     NSString *urlString = [SOXMarket_BitcoinDE_Core baseURLString];
     urlString = [urlString stringByAppendingString:[SOXMarket_BitcoinDE_Core commandForServerCommandType:serverCommandType]];
+    if (parameterDictionary.allKeys.count > 0) {
+        
+        NSMutableArray *parameters = [NSMutableArray array];
+        for (NSString *key in parameterDictionary.allKeys) {
+            NSString *parameter = [NSString stringWithFormat:@"%@=%@", key, [parameterDictionary objectForKey:key]];
+            [parameters addObject:parameter];
+        }
+        
+        NSString *parametersString = [parameters componentsJoinedByString:@"&"];
+        urlString = [urlString stringByAppendingString:@"?"];
+        urlString = [urlString stringByAppendingString:parametersString];
+    }
     
     return urlString;
 }

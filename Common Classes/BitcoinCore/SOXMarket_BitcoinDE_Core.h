@@ -64,7 +64,12 @@ FOUNDATION_EXPORT NSString *const _Nonnull CreditUpdate_MaximalCreditsKey;
  */
 + (instancetype _Nonnull)sharedCore;
 
-+ (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nonnull)controller;
++ (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
+                          respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nonnull)controller;
+
++ (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
+                      withParameter:(NSDictionary * _Nullable)parameterDictionary
+                          respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nonnull)controller;
 
 #pragma mark | Credit handling
 + (void)registerForCreditUpdates:(id <SOXCreditUpdateProtocol> _Nullable) delegateForCreditUpdates;
