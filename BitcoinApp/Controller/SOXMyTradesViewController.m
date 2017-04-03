@@ -9,6 +9,9 @@
 #import "SOXMyTradesViewController.h"
 
 #import "SOXMarket_BitcoinDE_Core.h"
+#import "SOXMyTrades_BitcoinDE_Data.h"
+
+
 
 #pragma mark - Interface
 @interface SOXMyTradesViewController () <SOXMarketCoreServerRequestProtocol>
@@ -54,9 +57,10 @@
 
 
 - (void)requestServerData {
+    NSDictionary *parameterDictionary = [SOXMyTrades_BitcoinDE_Data parameterFor];
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowMyTradesType
+                                            withParameter:parameterDictionary
                                                 respondTo:self];
-    
 }
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
