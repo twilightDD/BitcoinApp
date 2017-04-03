@@ -64,6 +64,8 @@
 		D063E9611E74C024006E2D17 /* iOS_BitcoinAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D063E9601E74C024006E2D17 /* iOS_BitcoinAppTests.m */; };
 		D0AA14F31E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D0AA14F21E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m */; };
 		D0AA14F41E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D0AA14F21E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m */; };
+		D0AA14F71E92BE48008D8FD7 /* MacMyTrades.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0AA14F51E92BE48008D8FD7 /* MacMyTrades.storyboard */; };
+		D0AA14F81E92BE48008D8FD7 /* MacMyTrades.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0AA14F51E92BE48008D8FD7 /* MacMyTrades.storyboard */; };
 		D0B3F1311E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F1301E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m */; };
 		D0B3F1321E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F1301E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m */; };
 		D0B942B01E8AF1D600EF7434 /* SOXErrorMessage_BitcoinDE.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B942AF1E8AF1D600EF7434 /* SOXErrorMessage_BitcoinDE.m */; };
@@ -176,6 +178,7 @@
 		D063E9621E74C024006E2D17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0AA14F11E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXMyTrades_BitcoinDE_Data.h; sourceTree = "<group>"; };
 		D0AA14F21E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXMyTrades_BitcoinDE_Data.m; sourceTree = "<group>"; };
+		D0AA14F61E92BE48008D8FD7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MacMyTrades.storyboard; sourceTree = "<group>"; };
 		D0B3F12F1E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXAccountLedger_BitcoinDE_Data.h; sourceTree = "<group>"; };
 		D0B3F1301E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXAccountLedger_BitcoinDE_Data.m; sourceTree = "<group>"; };
 		D0B942AE1E8AF1D600EF7434 /* SOXErrorMessage_BitcoinDE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXErrorMessage_BitcoinDE.h; sourceTree = "<group>"; };
@@ -367,6 +370,7 @@
 				D063E91F1E74BF97006E2D17 /* MacViewController.m */,
 				D063E9241E74BF97006E2D17 /* Assets.xcassets */,
 				D063E9261E74BF97006E2D17 /* MacMain.storyboard */,
+				D0AA14F51E92BE48008D8FD7 /* MacMyTrades.storyboard */,
 				D063E9291E74BF97006E2D17 /* Info.plist */,
 				D063E9211E74BF97006E2D17 /* BitcoinApp.xcdatamodeld */,
 				D063E91B1E74BF97006E2D17 /* Supporting Files */,
@@ -600,6 +604,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D063E9251E74BF97006E2D17 /* Assets.xcassets in Resources */,
+				D0AA14F71E92BE48008D8FD7 /* MacMyTrades.storyboard in Resources */,
 				D063E9281E74BF97006E2D17 /* MacMain.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -618,6 +623,7 @@
 				D063E9561E74C024006E2D17 /* LaunchScreen.storyboard in Resources */,
 				D063E9531E74C024006E2D17 /* Assets.xcassets in Resources */,
 				D063E94E1E74C024006E2D17 /* Main.storyboard in Resources */,
+				D0AA14F81E92BE48008D8FD7 /* MacMyTrades.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -950,6 +956,14 @@
 				D063E9551E74C024006E2D17 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D0AA14F51E92BE48008D8FD7 /* MacMyTrades.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D0AA14F61E92BE48008D8FD7 /* Base */,
+			);
+			name = MacMyTrades.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
