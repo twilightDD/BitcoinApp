@@ -13,11 +13,12 @@
 
 #import "SOXOrdersViewController.h"
 
-static NSString *BannerContainerViewSegueKey         = @"BannerContainerViewSegue";
-static NSString *ShowMyOrdersContainerSegueKey       = @"ShowMyOrdersContainerSegue";
-static NSString *OrdersViewControllerBuySegueKey     = @"OrdersViewControllerBuySegue"; // TabView.0
-static NSString *OrdersViewControllerSellSegueKey    = @"OrdersViewControllerSellSegue"; // TabView.0
-static NSString *AccountLedgerViewControllerSegueKey = @"AccountLedgerViewControllerSegue"; // TabView.1
+static NSString *BannerContainerViewSegueKey          = @"BannerContainerViewSegue";
+static NSString *ShowMyOrdersContainerSegueKey        = @"ShowMyOrdersContainerSegue";
+static NSString *OrdersViewControllerBuySegueKey      = @"OrdersViewControllerBuySegue";     // TabView.0
+static NSString *OrdersViewControllerSellSegueKey     = @"OrdersViewControllerSellSegue";    // TabView.0
+static NSString *AccountLedgerViewControllerSegueKey  = @"AccountLedgerViewControllerSegue"; // TabView.1
+static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewControllerSegue";// TabView.2
 
 
 
@@ -47,10 +48,12 @@ static NSString *AccountLedgerViewControllerSegueKey = @"AccountLedgerViewContro
     
    // [self openSocket];
     
-    NSTabViewItem *item1 = [self.bottomTabView tabViewItemAtIndex:0];
-    item1.label = @"Buy and Sell";
-    NSTabViewItem *item2 = [self.bottomTabView tabViewItemAtIndex:1];
-    item2.label = @"Account ledger";
+    NSTabViewItem *item0 = [self.bottomTabView tabViewItemAtIndex:0];
+    item0.label = @"Buy and Sell";
+    NSTabViewItem *item1 = [self.bottomTabView tabViewItemAtIndex:1];
+    item1.label = @"Account ledger";
+    NSTabViewItem *item2 = [self.bottomTabView tabViewItemAtIndex:2];
+    item2.label = @"My Trade History";
 }
     
 - (void)setRepresentedObject:(id)representedObject {
