@@ -2943,6 +2943,9 @@ Gw
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         </datePickerCell>
+                                        <connections>
+                                            <action selector="startDatePickerAction:" target="TPt-gD-CmY" id="Ugb-BE-IzM"/>
+                                        </connections>
                                     </datePicker>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kV6-lp-rPb">
                                         <rect key="frame" x="18" y="222" width="124" height="17"/>
@@ -2952,7 +2955,7 @@ Gw
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button tag="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eDw-Fa-1yM">
+                                    <button tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="eDw-Fa-1yM">
                                         <rect key="frame" x="44" y="153" width="57" height="18"/>
                                         <buttonCell key="cell" type="radio" title="Radio" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="AFy-3D-nFN">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -2981,8 +2984,11 @@ Gw
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         </datePickerCell>
+                                        <connections>
+                                            <action selector="endDatePickerAction:" target="TPt-gD-CmY" id="gsH-Sw-htY"/>
+                                        </connections>
                                     </datePicker>
-                                    <button tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="C4a-TF-9ZG">
+                                    <button tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="C4a-TF-9ZG">
                                         <rect key="frame" x="44" y="258" width="57" height="18"/>
                                         <buttonCell key="cell" type="radio" title="Radio" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="MFP-N2-6nx">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -2992,7 +2998,7 @@ Gw
                                             <action selector="orderTypeButtonAction:" target="TPt-gD-CmY" id="j2e-Lp-FqP"/>
                                         </connections>
                                     </button>
-                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="Qba-J5-jM6">
+                                    <button tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="Qba-J5-jM6">
                                         <rect key="frame" x="44" y="280" width="57" height="18"/>
                                         <buttonCell key="cell" type="radio" title="Radio" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="yLX-jX-bEq">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -3020,7 +3026,7 @@ Gw
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="Sn1-8d-4du">
+                                    <button tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="Sn1-8d-4du">
                                         <rect key="frame" x="44" y="175" width="57" height="18"/>
                                         <buttonCell key="cell" type="radio" title="Radio" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="TIY-Ru-fUU">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -3072,6 +3078,9 @@ Gw
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="fetchDataButtonAction:" target="TPt-gD-CmY" id="5VI-rQ-5UF"/>
+                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Njb-t7-0sg">
                                 <rect key="frame" x="20" y="-306" width="13" height="21"/>
@@ -3107,6 +3116,7 @@ Gw
                     <connections>
                         <outlet property="endDateDatePicker" destination="MFP-Wg-jot" id="gUW-73-PAe"/>
                         <outlet property="endDateTextField" destination="lmi-FD-D5R" id="4zS-X8-jbJ"/>
+                        <outlet property="fetchDataButton" destination="eTK-pp-sYM" id="hyA-rp-jbn"/>
                         <outlet property="myTradesArrayController" destination="sb6-Q3-A24" id="31u-Mf-WDq"/>
                         <outlet property="orderTypeBuyRadioButton" destination="Qba-J5-jM6" id="oox-Du-ipz"/>
                         <outlet property="orderTypeSellRadioButton" destination="C4a-TF-9ZG" id="KP6-MO-Nmr"/>
