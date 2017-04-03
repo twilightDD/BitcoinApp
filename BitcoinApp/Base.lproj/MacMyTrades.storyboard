@@ -127,19 +127,19 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
-                            <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sYH-JL-tMr">
-                                <rect key="frame" x="474" y="144" width="207" height="594"/>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="sYH-JL-tMr">
+                                <rect key="frame" x="428" y="144" width="321" height="594"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="inh-eS-7Cs">
-                                        <rect key="frame" x="18" y="369" width="171" height="17"/>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="inh-eS-7Cs">
+                                        <rect key="frame" x="18" y="369" width="285" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Start Date" id="GRG-7S-hcs">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <datePicker verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cUs-v8-X2V">
-                                        <rect key="frame" x="45" y="213" width="142" height="148"/>
+                                    <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cUs-v8-X2V">
+                                        <rect key="frame" x="45" y="213" width="256" height="148"/>
                                         <datePickerCell key="cell" borderStyle="bezel" alignment="left" datePickerStyle="clockAndCalendar" id="vba-lr-Ubc">
                                             <font key="font" metaFont="system"/>
                                             <calendarDate key="date" timeIntervalSinceReferenceDate="-595929600" calendarFormat="%Y-%m-%d %H:%M:%S %z">
@@ -150,22 +150,22 @@
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         </datePickerCell>
                                     </datePicker>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dmh-CB-1aI">
-                                        <rect key="frame" x="18" y="474" width="171" height="17"/>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dmh-CB-1aI">
+                                        <rect key="frame" x="18" y="474" width="285" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="State" id="5dj-3c-JQa">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F9k-Ve-isj">
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="F9k-Ve-isj">
                                         <rect key="frame" x="44" y="405" width="57" height="18"/>
                                         <buttonCell key="cell" type="radio" title="Radio" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Z1q-bf-hZg">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </button>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eTC-U7-W6M">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eTC-U7-W6M">
                                         <rect key="frame" x="18" y="176" width="60" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="End Date" id="AIP-Ja-DTJ">
                                             <font key="font" metaFont="system"/>
@@ -173,8 +173,8 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <datePicker verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YKl-wv-ZPK">
-                                        <rect key="frame" x="45" y="20" width="139" height="148"/>
+                                    <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YKl-wv-ZPK">
+                                        <rect key="frame" x="45" y="20" width="253" height="148"/>
                                         <datePickerCell key="cell" borderStyle="bezel" alignment="left" datePickerStyle="clockAndCalendar" id="cpd-z0-JU9">
                                             <font key="font" metaFont="system"/>
                                             <calendarDate key="date" timeIntervalSinceReferenceDate="-595929600" calendarFormat="%Y-%m-%d %H:%M:%S %z">
@@ -185,36 +185,36 @@
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         </datePickerCell>
                                     </datePicker>
-                                    <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GfV-Xe-Q5Z">
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="GfV-Xe-Q5Z">
                                         <rect key="frame" x="44" y="510" width="57" height="18"/>
                                         <buttonCell key="cell" type="radio" title="Radio" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="pFR-bx-rP5">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </button>
-                                    <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8PW-br-VRh">
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="8PW-br-VRh">
                                         <rect key="frame" x="44" y="532" width="57" height="18"/>
                                         <buttonCell key="cell" type="radio" title="Radio" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="9aP-Sj-bvK">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </button>
-                                    <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ghL-hd-EH2">
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="ghL-hd-EH2">
                                         <rect key="frame" x="44" y="449" width="57" height="18"/>
                                         <buttonCell key="cell" type="radio" title="Radio" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="AVn-pw-ngg">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </button>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iko-xL-DvN">
-                                        <rect key="frame" x="18" y="557" width="171" height="17"/>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iko-xL-DvN">
+                                        <rect key="frame" x="18" y="557" width="285" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Order Type" id="95F-nH-qol">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mq9-k3-vmQ">
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="Mq9-k3-vmQ">
                                         <rect key="frame" x="44" y="427" width="57" height="18"/>
                                         <buttonCell key="cell" type="radio" title="Radio" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="HgS-O4-nt2">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -224,6 +224,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="ghL-hd-EH2" firstAttribute="leading" secondItem="dmh-CB-1aI" secondAttribute="leading" constant="25" id="1g0-W6-HoX"/>
+                                    <constraint firstItem="iko-xL-DvN" firstAttribute="leading" secondItem="sYH-JL-tMr" secondAttribute="leading" constant="20" symbolic="YES" id="2a7-th-8dx"/>
                                     <constraint firstItem="cUs-v8-X2V" firstAttribute="leading" secondItem="inh-eS-7Cs" secondAttribute="leading" constant="25" id="5DF-TK-8YD"/>
                                     <constraint firstItem="GfV-Xe-Q5Z" firstAttribute="trailing" secondItem="8PW-br-VRh" secondAttribute="trailing" id="8Cv-af-86N"/>
                                     <constraint firstItem="dmh-CB-1aI" firstAttribute="leading" secondItem="iko-xL-DvN" secondAttribute="leading" id="Aio-lt-9hB"/>
@@ -236,6 +237,7 @@
                                     <constraint firstItem="eTC-U7-W6M" firstAttribute="top" secondItem="cUs-v8-X2V" secondAttribute="bottom" constant="20" id="Rpi-Gb-xmT"/>
                                     <constraint firstItem="inh-eS-7Cs" firstAttribute="top" secondItem="F9k-Ve-isj" secondAttribute="bottom" constant="20" id="VbZ-3J-oPY"/>
                                     <constraint firstItem="GfV-Xe-Q5Z" firstAttribute="top" secondItem="8PW-br-VRh" secondAttribute="bottom" constant="6" id="W9v-vF-agd"/>
+                                    <constraint firstItem="iko-xL-DvN" firstAttribute="top" secondItem="sYH-JL-tMr" secondAttribute="top" constant="20" id="Ydf-Lb-Kj6"/>
                                     <constraint firstItem="Mq9-k3-vmQ" firstAttribute="top" secondItem="ghL-hd-EH2" secondAttribute="bottom" constant="6" id="aM3-5s-y4I"/>
                                     <constraint firstItem="8PW-br-VRh" firstAttribute="leading" secondItem="iko-xL-DvN" secondAttribute="leading" constant="25" id="aUZ-NR-9kp"/>
                                     <constraint firstItem="cUs-v8-X2V" firstAttribute="top" secondItem="inh-eS-7Cs" secondAttribute="bottom" constant="8" id="e6w-qH-3ou"/>
@@ -248,8 +250,10 @@
                                     <constraint firstItem="Mq9-k3-vmQ" firstAttribute="trailing" secondItem="ghL-hd-EH2" secondAttribute="trailing" id="mgk-O6-sKt"/>
                                     <constraint firstItem="F9k-Ve-isj" firstAttribute="top" secondItem="Mq9-k3-vmQ" secondAttribute="bottom" constant="6" id="oIW-q8-o1E"/>
                                     <constraint firstAttribute="trailing" secondItem="iko-xL-DvN" secondAttribute="trailing" constant="20" symbolic="YES" id="os9-8u-WhL"/>
+                                    <constraint firstAttribute="trailing" secondItem="YKl-wv-ZPK" secondAttribute="trailing" constant="23" id="qcv-vY-wXg"/>
                                     <constraint firstItem="YKl-wv-ZPK" firstAttribute="leading" secondItem="eTC-U7-W6M" secondAttribute="leading" constant="25" id="uG3-fT-lHw"/>
                                     <constraint firstItem="inh-eS-7Cs" firstAttribute="leading" secondItem="dmh-CB-1aI" secondAttribute="leading" id="vBW-Ck-Dcj"/>
+                                    <constraint firstAttribute="bottom" secondItem="YKl-wv-ZPK" secondAttribute="bottom" constant="20" id="yD9-xc-ty3"/>
                                 </constraints>
                             </customView>
                         </subviews>
@@ -258,7 +262,7 @@
                             <constraint firstAttribute="trailing" secondItem="sYH-JL-tMr" secondAttribute="trailing" constant="20" symbolic="YES" id="6Wt-Lc-kHo"/>
                             <constraint firstItem="nG5-lE-f7e" firstAttribute="leading" secondItem="7yA-OY-1zV" secondAttribute="leading" constant="20" symbolic="YES" id="9a0-PS-dCO"/>
                             <constraint firstAttribute="bottom" secondItem="ubx-3z-Fo1" secondAttribute="bottom" constant="20" id="DF3-6f-ByA"/>
-                            <constraint firstItem="ubx-3z-Fo1" firstAttribute="top" relation="greaterThanOrEqual" secondItem="sYH-JL-tMr" secondAttribute="bottom" constant="20" symbolic="YES" id="MSv-yv-46o"/>
+                            <constraint firstItem="ubx-3z-Fo1" firstAttribute="top" relation="greaterThanOrEqual" secondItem="sYH-JL-tMr" secondAttribute="bottom" constant="20" symbolic="YES" id="O1r-F2-FBE"/>
                             <constraint firstItem="sYH-JL-tMr" firstAttribute="top" secondItem="nG5-lE-f7e" secondAttribute="top" id="TLZ-65-SbE"/>
                             <constraint firstItem="QAK-pH-iPf" firstAttribute="top" secondItem="nG5-lE-f7e" secondAttribute="bottom" constant="8" symbolic="YES" id="WX4-Kb-aeV"/>
                             <constraint firstItem="tzE-IV-WGf" firstAttribute="top" secondItem="7yA-OY-1zV" secondAttribute="top" constant="20" id="aah-4r-PZf"/>
