@@ -146,9 +146,11 @@
 
         [self.circularProgressIndicator stopAnimation:nil];
         self.spinningBackgroundView.hidden = YES;
+        
+        [self registerForWebSocketUpdates]; // after basic dataset, so self.orderBook != nil;
     }
     
-    [self registerForWebSocketUpdates]; // after basic dataset, so self.orderBook != nil;
+   
 }
 
 #pragma mark - SOXSocketIOCoreProtocol
