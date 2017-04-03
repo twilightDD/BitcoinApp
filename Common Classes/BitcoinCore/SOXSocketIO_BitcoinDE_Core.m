@@ -129,14 +129,14 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
             if (!addOrderData) {
                 NSLog(@"nil");
             }
-            if ([addOrderData.orderInformation_type isEqualToString:@"order"]) {
+            if ([addOrderData.orderInformation_type isEqualToString:@"offer"]) {
                 for (NSObject *delegate in self.delegateForBuyOrderUpdates) {
                     if ([delegate respondsToSelector:@selector(addedOrder:)]) {
                         [delegate performSelector:@selector(addedOrder:) withObject:addOrderData];
                     }
                 }
             }
-            else if ([addOrderData.orderInformation_type isEqualToString:@"offer"]) {
+            else if ([addOrderData.orderInformation_type isEqualToString:@"order"]) {
                 for (NSObject *delegate in self.delegateForSellOrderUpdates) {
                     if ([delegate respondsToSelector:@selector(addedOrder:)]) {
                         [delegate performSelector:@selector(addedOrder:) withObject:addOrderData];
