@@ -17,7 +17,6 @@
 @interface SOXMyTradesViewController () <SOXMarketCoreServerRequestProtocol>
 
 #pragma mark IBOutlets
-@property (weak) IBOutlet NSTextField *titleTextField;
 @property (weak) IBOutlet NSTableView *tableView;
 
 // Page selector
@@ -68,8 +67,6 @@
 
 #pragma mark - Private methods
 - (void)setupUI {
-    self.titleTextField.stringValue = @"My trading history - leider gibt die API keine Daten zurück";
-    
     self.pageContainerView.hidden = YES;
 }
 
