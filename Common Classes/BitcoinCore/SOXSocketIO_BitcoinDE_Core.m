@@ -182,6 +182,8 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
                 NSArray *objectOrderIDs = updateDictionary.allKeys; // Key des Dict ist objectOrderID (sehr geile API!)
                 for (NSString *objectOrderID in objectOrderIDs) { // für jeden Key(objectOrderID) die Payload an die Delegates senden
                     NSDictionary *changesDictionary = [updateDictionary objectForKey:objectOrderID];
+                    
+                    // an buy-delegates senden
                     for (NSObject *delegate in self.delegateForBuyOrderUpdates) {
                         if ([delegate respondsToSelector:@selector(updateOrderWithSocketOrderObjectID:withValues:)]) {
                             [delegate performSelector:@selector(updateOrderWithSocketOrderObjectID:withValues:)
@@ -189,6 +191,8 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
                                            withObject:changesDictionary];
                         }
                     }
+                    
+                    // an sell-delegates senden
                     for (NSObject *delegate in self.delegateForSellOrderUpdates) {
                         if ([delegate respondsToSelector:@selector(updateOrderWithSocketOrderObjectID:withValues:)]) {
                             [delegate performSelector:@selector(updateOrderWithSocketOrderObjectID:withValues:)
