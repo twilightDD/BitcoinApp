@@ -47,7 +47,7 @@
 
 #pragma mark - Private methods
 - (void)setupUI {
-    self.titleTextField.stringValue = @"My trading history";
+    self.titleTextField.stringValue = @"My trading history - leider gibt die API keine Daten zurück";
     
     self.pageContainerView.hidden = YES;
 }
