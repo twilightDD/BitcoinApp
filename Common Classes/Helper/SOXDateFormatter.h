@@ -11,5 +11,6 @@
 @interface SOXDateFormatter : NSObject
 
 + (NSString *)stringDateTimeStringForRFC3339DateTimeString:(NSString *)rfc3339DateTimeString;
++ (NSString *)rfc3339DateTimeStringDate:(NSDate *)date;
 
 @end

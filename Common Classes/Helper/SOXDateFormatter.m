@@ -15,12 +15,32 @@
  */
 
 #pragma mark - Static Formatters
-+ (NSDateFormatter *)dateFormatterRFC3339 {
++ (NSDateFormatter *)dateFormatterDecodeRFC3339 {
+    /*
+     Format gemäß RFC 3339 (Bsp: 2015-01-20T15:00:00+02:00).
+     */
+    
     static dispatch_once_t pred;
     static NSDateFormatter *sRFC3339DateFormatter = nil;
     dispatch_once(&pred, ^{
         sRFC3339DateFormatter            = [[NSDateFormatter alloc] init];
         sRFC3339DateFormatter.locale     = [NSLocale autoupdatingCurrentLocale];
+        sRFC3339DateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZ";
+        sRFC3339DateFormatter.timeZone   = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    });
+    return sRFC3339DateFormatter;
+}
+
++ (NSDateFormatter *)dateFormatterEncodeRFC3339 {
+    /*
+     Format gemäß RFC 3339 (Bsp: 2015-01-20T15:00:00+02:00).
+     */
+    
+    static dispatch_once_t pred;
+    static NSDateFormatter *sRFC3339DateFormatter = nil;
+    dispatch_once(&pred, ^{
+        sRFC3339DateFormatter            = [[NSDateFormatter alloc] init];
+        sRFC3339DateFormatter.locale     = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
         sRFC3339DateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
         sRFC3339DateFormatter.timeZone   = [NSTimeZone timeZoneForSecondsFromGMT:0];
     });
@@ -46,7 +66,7 @@
     // all possible RFC 3339 date time strings, just one of the most common
     // styles.
 
-    NSDate *date = [[SOXDateFormatter dateFormatterRFC3339] dateFromString:rfc3339DateTimeString];
+    NSDate *date = [[SOXDateFormatter dateFormatterDecodeRFC3339] dateFromString:rfc3339DateTimeString];
     NSString *userVisibleDateTimeString = nil;
     
     if (date != nil) {
@@ -54,6 +74,15 @@
     }
     
     return userVisibleDateTimeString;
+}
+
++ (NSString*)rfc3339DateTimeStringDate:(NSDate *)date {
+    if (!date) {
+        date = [NSDate date];
+    }
+    
+    NSString *rfc = [[SOXDateFormatter dateFormatterEncodeRFC3339] stringFromDate:date];
+    return rfc;
 }
 
 @end
