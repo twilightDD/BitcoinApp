@@ -120,18 +120,11 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ubx-3z-Fo1">
-                                <rect key="frame" x="646" y="13" width="106" height="32"/>
-                                <buttonCell key="cell" type="push" title="Fetch Data" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yw3-O9-PdI">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="sYH-JL-tMr">
-                                <rect key="frame" x="428" y="144" width="321" height="594"/>
+                                <rect key="frame" x="428" y="396" width="321" height="342"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="inh-eS-7Cs">
-                                        <rect key="frame" x="18" y="369" width="285" height="17"/>
+                                        <rect key="frame" x="18" y="117" width="285" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Start Date" id="GRG-7S-hcs">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -139,8 +132,8 @@
                                         </textFieldCell>
                                     </textField>
                                     <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cUs-v8-X2V">
-                                        <rect key="frame" x="45" y="213" width="256" height="148"/>
-                                        <datePickerCell key="cell" borderStyle="bezel" alignment="left" datePickerStyle="clockAndCalendar" id="vba-lr-Ubc">
+                                        <rect key="frame" x="45" y="87" width="256" height="22"/>
+                                        <datePickerCell key="cell" borderStyle="bezel" alignment="left" datePickerStyle="textField" id="vba-lr-Ubc">
                                             <font key="font" metaFont="system"/>
                                             <calendarDate key="date" timeIntervalSinceReferenceDate="-595929600" calendarFormat="%Y-%m-%d %H:%M:%S %z">
                                                 <!--1982-02-12 08:00:00 -0800-->
@@ -151,7 +144,7 @@
                                         </datePickerCell>
                                     </datePicker>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dmh-CB-1aI">
-                                        <rect key="frame" x="18" y="474" width="285" height="17"/>
+                                        <rect key="frame" x="18" y="222" width="285" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="State" id="5dj-3c-JQa">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -159,7 +152,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="F9k-Ve-isj">
-                                        <rect key="frame" x="44" y="405" width="57" height="18"/>
+                                        <rect key="frame" x="44" y="153" width="57" height="18"/>
                                         <buttonCell key="cell" type="radio" title="Radio" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Z1q-bf-hZg">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -169,7 +162,7 @@
                                         </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eTC-U7-W6M">
-                                        <rect key="frame" x="18" y="176" width="60" height="17"/>
+                                        <rect key="frame" x="18" y="50" width="60" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="End Date" id="AIP-Ja-DTJ">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -177,8 +170,8 @@
                                         </textFieldCell>
                                     </textField>
                                     <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YKl-wv-ZPK">
-                                        <rect key="frame" x="45" y="20" width="253" height="148"/>
-                                        <datePickerCell key="cell" borderStyle="bezel" alignment="left" datePickerStyle="clockAndCalendar" id="cpd-z0-JU9">
+                                        <rect key="frame" x="45" y="20" width="253" height="22"/>
+                                        <datePickerCell key="cell" borderStyle="bezel" alignment="left" datePickerStyle="textField" id="cpd-z0-JU9">
                                             <font key="font" metaFont="system"/>
                                             <calendarDate key="date" timeIntervalSinceReferenceDate="-595929600" calendarFormat="%Y-%m-%d %H:%M:%S %z">
                                                 <!--1982-02-12 08:00:00 -0800-->
@@ -189,7 +182,7 @@
                                         </datePickerCell>
                                     </datePicker>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="GfV-Xe-Q5Z">
-                                        <rect key="frame" x="44" y="510" width="57" height="18"/>
+                                        <rect key="frame" x="44" y="258" width="57" height="18"/>
                                         <buttonCell key="cell" type="radio" title="Radio" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="pFR-bx-rP5">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -199,7 +192,7 @@
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="8PW-br-VRh">
-                                        <rect key="frame" x="44" y="532" width="57" height="18"/>
+                                        <rect key="frame" x="44" y="280" width="57" height="18"/>
                                         <buttonCell key="cell" type="radio" title="Radio" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="9aP-Sj-bvK">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -209,7 +202,7 @@
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="ghL-hd-EH2">
-                                        <rect key="frame" x="44" y="449" width="57" height="18"/>
+                                        <rect key="frame" x="44" y="197" width="57" height="18"/>
                                         <buttonCell key="cell" type="radio" title="Radio" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="AVn-pw-ngg">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -219,7 +212,7 @@
                                         </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iko-xL-DvN">
-                                        <rect key="frame" x="18" y="557" width="285" height="17"/>
+                                        <rect key="frame" x="18" y="305" width="285" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Order Type" id="95F-nH-qol">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -227,7 +220,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="Mq9-k3-vmQ">
-                                        <rect key="frame" x="44" y="427" width="57" height="18"/>
+                                        <rect key="frame" x="44" y="175" width="57" height="18"/>
                                         <buttonCell key="cell" type="radio" title="Radio" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="HgS-O4-nt2">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -271,6 +264,29 @@
                                     <constraint firstAttribute="bottom" secondItem="YKl-wv-ZPK" secondAttribute="bottom" constant="20" id="yD9-xc-ty3"/>
                                 </constraints>
                             </customView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ubx-3z-Fo1">
+                                <rect key="frame" x="646" y="13" width="106" height="32"/>
+                                <buttonCell key="cell" type="push" title="Fetch Data" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yw3-O9-PdI">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="avt-P3-tvC">
+                                <rect key="frame" x="20" y="29" width="13" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QF5-Ys-Aji">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wiL-cL-q0q">
+                                <rect key="frame" x="32" y="19" width="27" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRefreshTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bNJ-hT-5he">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="ubx-3z-Fo1" secondAttribute="trailing" constant="23" id="3Wz-XA-1RZ"/>
@@ -316,4 +332,8 @@
             <point key="canvasLocation" x="989.5" y="642.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="NSRefreshTemplate" width="11" height="15"/>
+    </resources>
 </document>
