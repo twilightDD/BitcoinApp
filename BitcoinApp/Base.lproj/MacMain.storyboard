@@ -2952,7 +2952,7 @@ Gw
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="eDw-Fa-1yM">
+                                    <button tag="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eDw-Fa-1yM">
                                         <rect key="frame" x="44" y="153" width="57" height="18"/>
                                         <buttonCell key="cell" type="radio" title="Radio" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="AFy-3D-nFN">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -2982,7 +2982,7 @@ Gw
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         </datePickerCell>
                                     </datePicker>
-                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="C4a-TF-9ZG">
+                                    <button tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="C4a-TF-9ZG">
                                         <rect key="frame" x="44" y="258" width="57" height="18"/>
                                         <buttonCell key="cell" type="radio" title="Radio" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="MFP-N2-6nx">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -3002,7 +3002,7 @@ Gw
                                             <action selector="orderTypeButtonAction:" target="TPt-gD-CmY" id="huV-gH-3FV"/>
                                         </connections>
                                     </button>
-                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="hxF-LU-GKU">
+                                    <button tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="hxF-LU-GKU">
                                         <rect key="frame" x="44" y="197" width="57" height="18"/>
                                         <buttonCell key="cell" type="radio" title="Radio" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="K6g-BO-Sf8">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -3118,9 +3118,9 @@ Gw
                         <outlet property="startDateDatePicker" destination="UsC-be-eAW" id="tZu-F9-5mX"/>
                         <outlet property="startDateTextField" destination="BAO-9i-ubM" id="jaa-k8-anr"/>
                         <outlet property="tableView" destination="fVk-ot-ntz" id="OUx-xi-NFk"/>
-                        <outlet property="tradeStateCancelledRadioButton" destination="hxF-LU-GKU" id="jEJ-m9-BDB"/>
+                        <outlet property="tradeStateCancelledRadioButton" destination="eDw-Fa-1yM" id="QwD-Uz-oxm"/>
                         <outlet property="tradeStatePendingRadioButton" destination="Sn1-8d-4du" id="wWL-9W-vhC"/>
-                        <outlet property="tradeStateSuccessfulRadioButton" destination="eDw-Fa-1yM" id="0qe-95-PvH"/>
+                        <outlet property="tradeStateSuccessfulRadioButton" destination="hxF-LU-GKU" id="PfM-cS-c0i"/>
                         <outlet property="tradeStateTextField" destination="kV6-lp-rPb" id="qYW-Rk-jbd"/>
                     </connections>
                 </viewController>

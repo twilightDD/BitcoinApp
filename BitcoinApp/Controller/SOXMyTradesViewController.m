@@ -32,9 +32,9 @@
 @property (weak) IBOutlet NSButton *orderTypeSellRadioButton;
 // - trade state
 @property (weak) IBOutlet NSTextField *tradeStateTextField;
-@property (weak) IBOutlet NSButton *tradeStateCancelledRadioButton;
-@property (weak) IBOutlet NSButton *tradeStatePendingRadioButton;
 @property (weak) IBOutlet NSButton *tradeStateSuccessfulRadioButton;
+@property (weak) IBOutlet NSButton *tradeStatePendingRadioButton;
+@property (weak) IBOutlet NSButton *tradeStateCancelledRadioButton;
 // - start date
 @property (weak) IBOutlet NSTextField *startDateTextField;
 @property (weak) IBOutlet NSDatePicker *startDateDatePicker;
@@ -46,7 +46,10 @@
 @property (strong) IBOutlet NSArrayController *myTradesArrayController;
 
 #pragma mark Properties
-
+@property (nonatomic) NSInteger selectedOrderType;
+@property (nonatomic) NSInteger selectedTradeStateType;
+@property (strong, nonatomic) NSDate *selectedStartDate;
+@property (strong, nonatomic) NSDate *selectedEndDate;
 @end
 
 #pragma mark - Implementation
@@ -61,6 +64,11 @@
 - (void)viewWillAppear {
     [super viewWillAppear];
     
+    self.selectedOrderType      = 0;
+    self.selectedTradeStateType = 1;
+    self.selectedStartDate      = [NSDate dateWithTimeInterval:-1*60*60*24*7 sinceDate:[NSDate date]];
+    self.selectedEndDate        = [NSDate date];
+    
     [self setupUI];
     [self requestServerData];
 }
@@ -68,8 +76,28 @@
 #pragma mark - Private methods
 - (void)setupUI {
     self.pageContainerView.hidden = YES;
+    
+    { // Radio buttons
+        self.orderTypeTextField.stringValue     = @"Order type";
+        self.orderTypeBuyRadioButton.title      = @"Buy";
+        self.orderTypeBuyRadioButton.state      = NSOnState;
+        self.orderTypeSellRadioButton.title     = @"Sell";
+        
+        self.tradeStateTextField.stringValue        = @"Trade state";
+        self.tradeStateSuccessfulRadioButton.title  = @"Successful";
+        self.tradeStateSuccessfulRadioButton.state  = NSOnState;
+        self.tradeStatePendingRadioButton.title     = @"Pending";
+        self.tradeStateCancelledRadioButton.title   = @"Cancelled";
+    }
+    
+    { // date picker
+        self.startDateTextField.stringValue = @"Start date";
+        self.startDateDatePicker.dateValue  = self.selectedStartDate;
+        
+        self.endDateTextField.stringValue   = @"End date";
+        self.endDateDatePicker.dateValue    = self.selectedEndDate;
+    }
 }
-
 
 - (void)requestServerData {
     NSDictionary *parameterDictionary = [SOXMyTrades_BitcoinDE_Data parameterFor];
@@ -92,9 +120,13 @@
 }
 
 - (IBAction)orderTypeButtonAction:(NSButton *)sender {
+    NSLog(@"tag: %ti", sender.tag);
+    self.selectedOrderType = sender.tag;
 }
 
 - (IBAction)tradeStateButtonAction:(NSButton *)sender {
+    NSLog(@"tag: %ti", sender.tag);
+    self.selectedTradeStateType = sender.tag;
 }
 
 
