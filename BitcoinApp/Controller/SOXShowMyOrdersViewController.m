@@ -22,14 +22,10 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 #pragma mark IBOutlets
 @property (weak) IBOutlet NSTextField *titleTextField;
 
-@property (weak) IBOutlet NSButton *presentMyTradesButton;
-@property (weak) IBOutlet NSButton *presentMyAccountButton;
-
+@property (weak) IBOutlet NSTableView *tableView;
 
 @property (weak) IBOutlet NSButton *reloadButton;
-@property (weak) IBOutlet NSButton *addButton;
 @property (weak) IBOutlet NSButton *removeButton;
-@property (weak) IBOutlet NSTableView *tableView;
 
 @property (weak) IBOutlet NSView *spinningBackgroundView;
 @property (weak) IBOutlet NSProgressIndicator *circularProgressIndicator;
@@ -38,6 +34,7 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 
 #pragma mark Properties
 @property (strong, nonatomic) NSMutableArray *myOrderBook;
+
 @end
 
 #pragma mark - Implementation
@@ -52,8 +49,6 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
     
     [self setupUI];
     [self requestServerData];
-    
- 
 }
 
 #pragma mark - Private methods
@@ -62,7 +57,6 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
     
     {
         self.reloadButton.title = @"Reload";
-        self.addButton.title = @"Add new order";
         self.removeButton.title = @"Remove order";
         self.removeButton.enabled = NO;
     }
@@ -108,38 +102,15 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
         [self.circularProgressIndicator stopAnimation:nil];
         self.spinningBackgroundView.hidden = YES;
     }
-    
-    SOXMyOrderBookData *data = self.myOrderBook.firstObject;
-    NSLog(@"data:\n%@", data);
-}
-#pragma mark - Segue handling
-- (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:PresentMyTradesSegueKey]) {
-        
-    }
-    else if ([segue.identifier isEqualToString:PresentMyAccountSegueKey]) {
-        
-    }
 }
 
 #pragma mark - Action methods
-- (IBAction)presentMyTradesAction:(NSButton *)sender {
-}
-
-- (IBAction)presentMyAccountAction:(NSButton *)sender {
+- (IBAction)removeButtonAction:(NSButton *)sender {
+    
 }
 
 - (IBAction)reloadButtonAction:(NSButton *)sender {
 
 }
-
-- (IBAction)addButtonAction:(NSButton *)sender {
-
-}
-
-- (IBAction)removeButtonAction:(NSButton *)sender {
-
-}
-
 
 @end
