@@ -2874,11 +2874,11 @@ Gw
             <objects>
                 <viewController id="TPt-gD-CmY" customClass="SOXMyTradesViewController" sceneMemberID="viewController">
                     <view key="view" id="O2L-9r-szs">
-                        <rect key="frame" x="0.0" y="0.0" width="769" height="448"/>
+                        <rect key="frame" x="0.0" y="0.0" width="608" height="448"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7aD-LK-IVQ">
-                                <rect key="frame" x="18" y="411" width="733" height="17"/>
+                                <rect key="frame" x="18" y="411" width="572" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="R0w-5g-yGr">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -2886,7 +2886,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="gUV-FX-0N4">
-                                <rect key="frame" x="330" y="20" width="109" height="21"/>
+                                <rect key="frame" x="250" y="20" width="109" height="21"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sti-1t-PUj">
                                         <rect key="frame" x="66" y="-7" width="49" height="32"/>
@@ -2984,10 +2984,10 @@ Gw
                                 </tableHeaderView>
                             </scrollView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="YVJ-te-weM">
-                                <rect key="frame" x="428" y="61" width="321" height="342"/>
+                                <rect key="frame" x="428" y="61" width="160" height="342"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BAO-9i-ubM">
-                                        <rect key="frame" x="18" y="117" width="285" height="17"/>
+                                        <rect key="frame" x="18" y="117" width="124" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Start Date" id="7O3-bC-RuM">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -2995,7 +2995,7 @@ Gw
                                         </textFieldCell>
                                     </textField>
                                     <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UsC-be-eAW">
-                                        <rect key="frame" x="45" y="87" width="256" height="22"/>
+                                        <rect key="frame" x="45" y="87" width="95" height="22"/>
                                         <datePickerCell key="cell" borderStyle="bezel" alignment="left" datePickerStyle="textField" id="TqN-ab-DvF">
                                             <font key="font" metaFont="system"/>
                                             <calendarDate key="date" timeIntervalSinceReferenceDate="-595929600" calendarFormat="%Y-%m-%d %H:%M:%S %z">
@@ -3007,7 +3007,7 @@ Gw
                                         </datePickerCell>
                                     </datePicker>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kV6-lp-rPb">
-                                        <rect key="frame" x="18" y="222" width="285" height="17"/>
+                                        <rect key="frame" x="18" y="222" width="124" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="State" id="tgs-jV-b1h">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -3033,7 +3033,7 @@ Gw
                                         </textFieldCell>
                                     </textField>
                                     <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MFP-Wg-jot">
-                                        <rect key="frame" x="45" y="20" width="253" height="22"/>
+                                        <rect key="frame" x="45" y="20" width="92" height="22"/>
                                         <datePickerCell key="cell" borderStyle="bezel" alignment="left" datePickerStyle="textField" id="Tbi-Q4-RNX">
                                             <font key="font" metaFont="system"/>
                                             <calendarDate key="date" timeIntervalSinceReferenceDate="-595929600" calendarFormat="%Y-%m-%d %H:%M:%S %z">
@@ -3075,7 +3075,7 @@ Gw
                                         </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3PB-Fa-ykA">
-                                        <rect key="frame" x="18" y="305" width="285" height="17"/>
+                                        <rect key="frame" x="18" y="305" width="124" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Order Type" id="gou-sT-7hL">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -3118,6 +3118,7 @@ Gw
                                     <constraint firstItem="lmi-FD-D5R" firstAttribute="top" secondItem="UsC-be-eAW" secondAttribute="bottom" constant="20" id="d8a-8h-FER"/>
                                     <constraint firstItem="Sn1-8d-4du" firstAttribute="top" secondItem="hxF-LU-GKU" secondAttribute="bottom" constant="6" id="dHa-7y-MMx"/>
                                     <constraint firstItem="lmi-FD-D5R" firstAttribute="leading" secondItem="BAO-9i-ubM" secondAttribute="leading" id="gEN-Vl-RGk"/>
+                                    <constraint firstAttribute="width" constant="160" placeholder="YES" id="hvR-S7-PXF"/>
                                     <constraint firstItem="BAO-9i-ubM" firstAttribute="leading" secondItem="kV6-lp-rPb" secondAttribute="leading" id="mlB-cG-x3g"/>
                                     <constraint firstItem="hxF-LU-GKU" firstAttribute="leading" secondItem="kV6-lp-rPb" secondAttribute="leading" constant="25" id="pZN-9I-9x1"/>
                                     <constraint firstItem="C4a-TF-9ZG" firstAttribute="trailing" secondItem="Qba-J5-jM6" secondAttribute="trailing" id="qUg-Id-O6w"/>
@@ -3128,7 +3129,7 @@ Gw
                                 </constraints>
                             </customView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eTK-pp-sYM">
-                                <rect key="frame" x="646" y="13" width="106" height="32"/>
+                                <rect key="frame" x="485" y="13" width="106" height="32"/>
                                 <buttonCell key="cell" type="push" title="Fetch Data" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EV7-fK-DOm">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
