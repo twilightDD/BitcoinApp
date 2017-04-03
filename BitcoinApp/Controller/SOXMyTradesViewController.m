@@ -20,12 +20,30 @@
 @property (weak) IBOutlet NSTextField *titleTextField;
 @property (weak) IBOutlet NSTableView *tableView;
 
+// Page selector
 @property (weak) IBOutlet NSView *pageContainerView;
-
 @property (weak) IBOutlet NSButton *pageBackwardButton;
 @property (weak) IBOutlet NSButton *pageForwardButton;
 @property (weak) IBOutlet NSTextField *pageIndicatorTextField;
 
+// Parameter
+// - order type
+@property (weak) IBOutlet NSTextField *orderTypeTextField;
+@property (weak) IBOutlet NSButton *orderTypeBuyRadioButton;
+@property (weak) IBOutlet NSButton *orderTypeSellRadioButton;
+// - trade state
+@property (weak) IBOutlet NSTextField *tradeStateTextField;
+@property (weak) IBOutlet NSButton *tradeStateCancelledRadioButton;
+@property (weak) IBOutlet NSButton *tradeStatePendingRadioButton;
+@property (weak) IBOutlet NSButton *tradeStateSuccessfulRadioButton;
+// - start date
+@property (weak) IBOutlet NSTextField *startDateTextField;
+@property (weak) IBOutlet NSDatePicker *startDateDatePicker;
+// - end date
+@property (weak) IBOutlet NSTextField *endDateTextField;
+@property (weak) IBOutlet NSDatePicker *endDateDatePicker;
+
+// Array controller
 @property (strong) IBOutlet NSArrayController *myTradesArrayController;
 
 #pragma mark Properties
@@ -74,9 +92,13 @@
 //        [self.circularProgressIndicator stopAnimation:nil];
 //        self.spinningBackgroundView.hidden = YES;
     }
-    
-
-
 }
+
+- (IBAction)orderTypeButtonAction:(NSButton *)sender {
+}
+
+- (IBAction)tradeStateButtonAction:(NSButton *)sender {
+}
+
 
 @end

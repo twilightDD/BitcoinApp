@@ -164,6 +164,9 @@
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="tradeStateButtonAction:" target="oBA-1O-WEn" id="r48-Bz-Jyw"/>
+                                        </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eTC-U7-W6M">
                                         <rect key="frame" x="18" y="176" width="60" height="17"/>
@@ -191,6 +194,9 @@
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="orderTypeButtonAction:" target="oBA-1O-WEn" id="nWl-jZ-VAg"/>
+                                        </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="8PW-br-VRh">
                                         <rect key="frame" x="44" y="532" width="57" height="18"/>
@@ -198,6 +204,9 @@
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="orderTypeButtonAction:" target="oBA-1O-WEn" id="htK-9R-GP6"/>
+                                        </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="ghL-hd-EH2">
                                         <rect key="frame" x="44" y="449" width="57" height="18"/>
@@ -205,6 +214,9 @@
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="tradeStateButtonAction:" target="oBA-1O-WEn" id="065-bf-24p"/>
+                                        </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iko-xL-DvN">
                                         <rect key="frame" x="18" y="557" width="285" height="17"/>
@@ -220,6 +232,9 @@
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="tradeStateButtonAction:" target="oBA-1O-WEn" id="Glh-eA-ici"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -275,13 +290,24 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="endDateDatePicker" destination="YKl-wv-ZPK" id="9Nb-BL-sKd"/>
+                        <outlet property="endDateTextField" destination="eTC-U7-W6M" id="CVx-KB-vry"/>
                         <outlet property="myTradesArrayController" destination="TYB-MB-iAF" id="098-fX-cDo"/>
+                        <outlet property="orderTypeBuyRadioButton" destination="8PW-br-VRh" id="Ghb-HN-OId"/>
+                        <outlet property="orderTypeSellRadioButton" destination="GfV-Xe-Q5Z" id="cb4-Oh-GDe"/>
+                        <outlet property="orderTypeTextField" destination="iko-xL-DvN" id="dDH-19-VC9"/>
                         <outlet property="pageBackwardButton" destination="SDM-5E-nsr" id="aEH-g4-0TY"/>
                         <outlet property="pageContainerView" destination="QAK-pH-iPf" id="MMA-wD-wrL"/>
                         <outlet property="pageForwardButton" destination="I1k-6y-zWZ" id="LH2-KK-rg7"/>
                         <outlet property="pageIndicatorTextField" destination="XeN-bG-4ca" id="2he-SA-zvt"/>
+                        <outlet property="startDateDatePicker" destination="cUs-v8-X2V" id="kiK-H9-nnV"/>
+                        <outlet property="startDateTextField" destination="inh-eS-7Cs" id="pG6-gi-Dsn"/>
                         <outlet property="tableView" destination="FCw-ti-i3i" id="BdA-bD-w9V"/>
                         <outlet property="titleTextField" destination="tzE-IV-WGf" id="6cQ-eF-THv"/>
+                        <outlet property="tradeStateCancelledRadioButton" destination="ghL-hd-EH2" id="NKx-Pq-3hP"/>
+                        <outlet property="tradeStatePendingRadioButton" destination="Mq9-k3-vmQ" id="HPR-Y6-vo3"/>
+                        <outlet property="tradeStateSuccessfulRadioButton" destination="F9k-Ve-isj" id="wDV-l4-zx7"/>
+                        <outlet property="tradeStateTextField" destination="dmh-CB-1aI" id="zjL-N2-OKq"/>
                     </connections>
                 </viewController>
                 <customObject id="ciY-Dn-0wG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
