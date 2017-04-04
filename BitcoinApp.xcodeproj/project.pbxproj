@@ -62,6 +62,7 @@
 		D063E9531E74C024006E2D17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D063E9521E74C024006E2D17 /* Assets.xcassets */; };
 		D063E9561E74C024006E2D17 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D063E9541E74C024006E2D17 /* LaunchScreen.storyboard */; };
 		D063E9611E74C024006E2D17 /* iOS_BitcoinAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D063E9601E74C024006E2D17 /* iOS_BitcoinAppTests.m */; };
+		D0962CCC1E945906004FFF62 /* SOXSpinningWheelAbstractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0962CCB1E945906004FFF62 /* SOXSpinningWheelAbstractViewController.m */; };
 		D0AA14F31E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D0AA14F21E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m */; };
 		D0AA14F41E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D0AA14F21E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m */; };
 		D0B3F1311E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F1301E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m */; };
@@ -174,6 +175,9 @@
 		D063E95C1E74C024006E2D17 /* iOS BitcoinAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS BitcoinAppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D063E9601E74C024006E2D17 /* iOS_BitcoinAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOS_BitcoinAppTests.m; sourceTree = "<group>"; };
 		D063E9621E74C024006E2D17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0962CCA1E945906004FFF62 /* SOXSpinningWheelAbstractViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXSpinningWheelAbstractViewController.h; sourceTree = "<group>"; };
+		D0962CCB1E945906004FFF62 /* SOXSpinningWheelAbstractViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXSpinningWheelAbstractViewController.m; sourceTree = "<group>"; };
+		D0962CCD1E945967004FFF62 /* SOXSpinningWheelAbstractViewController_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXSpinningWheelAbstractViewController_Private.h; sourceTree = "<group>"; };
 		D0AA14F11E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXMyTrades_BitcoinDE_Data.h; sourceTree = "<group>"; };
 		D0AA14F21E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXMyTrades_BitcoinDE_Data.m; sourceTree = "<group>"; };
 		D0B3F12F1E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXAccountLedger_BitcoinDE_Data.h; sourceTree = "<group>"; };
@@ -291,6 +295,9 @@
 				D03289941E8A4C29006F15F0 /* SOXMyTradesViewController.m */,
 				D03289961E8A4C44006F15F0 /* SOXMyAccountLedgerViewController.h */,
 				D03289971E8A4C44006F15F0 /* SOXMyAccountLedgerViewController.m */,
+				D0962CCA1E945906004FFF62 /* SOXSpinningWheelAbstractViewController.h */,
+				D0962CCB1E945906004FFF62 /* SOXSpinningWheelAbstractViewController.m */,
+				D0962CCD1E945967004FFF62 /* SOXSpinningWheelAbstractViewController_Private.h */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -862,6 +869,7 @@
 				D0631F071E89BB5C007ED75A /* SOXShowMyOrdersViewController.m in Sources */,
 				D063E91A1E74BF97006E2D17 /* MacAppDelegate.m in Sources */,
 				D02ED5C21E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m in Sources */,
+				D0962CCC1E945906004FFF62 /* SOXSpinningWheelAbstractViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

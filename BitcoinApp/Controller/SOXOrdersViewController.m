@@ -7,6 +7,7 @@
 //
 
 #import "SOXOrdersViewController.h"
+#import "SOXSpinningWheelAbstractViewController_Private.h"
 
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXSocketIO_BitcoinDE_Core.h"
@@ -25,9 +26,6 @@
 @property (weak) IBOutlet NSTextField *filterPriceValueTextField;
 @property (weak) IBOutlet NSButton *otherFilterButton;
 @property (strong) IBOutlet NSArrayController *orderBookArrayController;
-
-@property (weak) IBOutlet NSView *spinningBackgroundView;
-@property (weak) IBOutlet NSProgressIndicator *circularProgressIndicator;
 
 #pragma mark Properties
 @property (strong, nonatomic) NSMutableArray *orderBook;
@@ -51,15 +49,12 @@
     [self requestServerData];
     
     [self.tableView setDoubleAction:@selector(tableViewDoubleAction:)];
-    
-    [SOXSocketIO_BitcoinDE_Core registerForAllOrderUpdatesWithDelegate:self];
 }
 
 -(void)viewDidAppear {
     [super viewDidAppear];
 
-    self.spinningBackgroundView.hidden = NO;
-    [self.circularProgressIndicator startAnimation:nil];
+    [self enableSpinningWheel];
 }
 
 - (IBAction)reloadAction:(NSButton *)sender {
@@ -82,11 +77,6 @@
     
     self.filterPriceDescriptionTextField.stringValue = @"Minimum price";
     self.otherFilterButton.title = @"More filters";
-    
-    self.spinningBackgroundView.layer.backgroundColor = [NSColor colorWithCalibratedRed:0
-                                                                                  green:0
-                                                                                   blue:0
-                                                                                  alpha:0.1].CGColor;
 }
 
 - (void)requestServerData {
@@ -144,13 +134,9 @@
         NSMutableArray *orderBook = [SOXShowOrderbook_BitcoinDE_Data orderbookDataArrayForShowOrderbookDictionary:payloadDictionary];
         self.orderBook = orderBook;
 
-        [self.circularProgressIndicator stopAnimation:nil];
-        self.spinningBackgroundView.hidden = YES;
-        
+        [self disableSpinningWheel];
         [self registerForWebSocketUpdates]; // after basic dataset, so self.orderBook != nil;
     }
-    
-   
 }
 
 #pragma mark - SOXSocketIOCoreProtocol

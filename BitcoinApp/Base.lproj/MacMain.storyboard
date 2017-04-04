@@ -3008,6 +3008,18 @@ Gw
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="Kn5-TW-Ng0" userLabel="SpinningBackgroundView">
+                                <rect key="frame" x="20" y="49" width="400" height="368"/>
+                                <subviews>
+                                    <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="tc2-os-6sk">
+                                        <rect key="frame" x="192" y="176" width="16" height="16"/>
+                                    </progressIndicator>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="tc2-os-6sk" firstAttribute="centerY" secondItem="Kn5-TW-Ng0" secondAttribute="centerY" id="KJg-ZN-brO"/>
+                                    <constraint firstItem="tc2-os-6sk" firstAttribute="centerX" secondItem="Kn5-TW-Ng0" secondAttribute="centerX" id="dih-2X-sdH"/>
+                                </constraints>
+                            </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="YVJ-te-weM">
                                 <rect key="frame" x="428" y="98" width="160" height="342"/>
                                 <subviews>
@@ -3190,17 +3202,22 @@ Gw
                             <constraint firstItem="gUV-FX-0N4" firstAttribute="centerX" secondItem="O2L-9r-szs" secondAttribute="centerX" id="5eV-Bd-Zzs"/>
                             <constraint firstAttribute="trailing" secondItem="eTK-pp-sYM" secondAttribute="trailing" constant="23" id="9z6-av-3cS"/>
                             <constraint firstItem="gUV-FX-0N4" firstAttribute="top" secondItem="rBg-iH-I78" secondAttribute="bottom" constant="8" symbolic="YES" id="GLD-Ed-rlO"/>
+                            <constraint firstItem="Kn5-TW-Ng0" firstAttribute="bottom" secondItem="rBg-iH-I78" secondAttribute="bottom" id="IKf-5L-YUy"/>
                             <constraint firstItem="eTK-pp-sYM" firstAttribute="top" relation="greaterThanOrEqual" secondItem="YVJ-te-weM" secondAttribute="bottom" constant="20" symbolic="YES" id="MHI-Jx-h0O"/>
+                            <constraint firstItem="Kn5-TW-Ng0" firstAttribute="trailing" secondItem="rBg-iH-I78" secondAttribute="trailing" id="MlC-9S-w2z"/>
+                            <constraint firstItem="Kn5-TW-Ng0" firstAttribute="top" secondItem="yYE-bp-FYh" secondAttribute="bottom" id="U01-bp-kmO"/>
                             <constraint firstAttribute="trailing" secondItem="YVJ-te-weM" secondAttribute="trailing" constant="20" symbolic="YES" id="UGb-ae-UuZ"/>
                             <constraint firstItem="rBg-iH-I78" firstAttribute="leading" secondItem="O2L-9r-szs" secondAttribute="leading" constant="20" symbolic="YES" id="Zsz-X7-UpV"/>
                             <constraint firstItem="rBg-iH-I78" firstAttribute="top" secondItem="O2L-9r-szs" secondAttribute="top" constant="8" id="ayY-Wr-vac"/>
                             <constraint firstAttribute="bottom" secondItem="gUV-FX-0N4" secondAttribute="bottom" constant="20" symbolic="YES" id="n2m-nW-KwW"/>
+                            <constraint firstItem="Kn5-TW-Ng0" firstAttribute="leading" secondItem="rBg-iH-I78" secondAttribute="leading" id="pDa-Z4-1Cn"/>
                             <constraint firstItem="YVJ-te-weM" firstAttribute="leading" secondItem="rBg-iH-I78" secondAttribute="trailing" constant="8" symbolic="YES" id="sVF-Dw-XJv"/>
                             <constraint firstItem="YVJ-te-weM" firstAttribute="top" secondItem="rBg-iH-I78" secondAttribute="top" id="x4r-9R-1i1"/>
                             <constraint firstAttribute="bottom" secondItem="eTK-pp-sYM" secondAttribute="bottom" constant="20" id="xRz-B5-9Do"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="circularProgressIndicator" destination="tc2-os-6sk" id="MxS-gj-uI5"/>
                         <outlet property="endDateDatePicker" destination="MFP-Wg-jot" id="gUW-73-PAe"/>
                         <outlet property="endDateTextField" destination="lmi-FD-D5R" id="4zS-X8-jbJ"/>
                         <outlet property="fetchDataButton" destination="eTK-pp-sYM" id="hyA-rp-jbn"/>
@@ -3212,6 +3229,7 @@ Gw
                         <outlet property="pageContainerView" destination="gUV-FX-0N4" id="ABW-Ui-6P3"/>
                         <outlet property="pageForwardButton" destination="sti-1t-PUj" id="lNw-Yx-ZQc"/>
                         <outlet property="pageIndicatorTextField" destination="y6K-Hy-WRK" id="VNr-3i-xL8"/>
+                        <outlet property="spinningBackgroundView" destination="Kn5-TW-Ng0" id="DBz-iW-vuk"/>
                         <outlet property="startDateDatePicker" destination="UsC-be-eAW" id="tZu-F9-5mX"/>
                         <outlet property="startDateTextField" destination="BAO-9i-ubM" id="jaa-k8-anr"/>
                         <outlet property="tableView" destination="fVk-ot-ntz" id="OUx-xi-NFk"/>

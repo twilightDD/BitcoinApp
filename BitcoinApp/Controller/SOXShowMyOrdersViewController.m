@@ -7,6 +7,7 @@
 //
 
 #import "SOXShowMyOrdersViewController.h"
+#import "SOXSpinningWheelAbstractViewController_Private.h"
 
 #import "SOXMyOrderDetailsViewController.h"
 
@@ -26,9 +27,6 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 
 @property (weak) IBOutlet NSButton *reloadButton;
 @property (weak) IBOutlet NSButton *removeButton;
-
-@property (weak) IBOutlet NSView *spinningBackgroundView;
-@property (weak) IBOutlet NSProgressIndicator *circularProgressIndicator;
 
 @property (strong) IBOutlet NSArrayController *myOrderArrayController;
 
@@ -65,14 +63,7 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
         [self.tableView setDoubleAction:@selector(tableViewDoubleAction:)];
     }
     
-    {
-        self.spinningBackgroundView.hidden = NO;
-        [self.circularProgressIndicator startAnimation:nil];
-        self.spinningBackgroundView.layer.backgroundColor = [NSColor colorWithCalibratedRed:0
-                                                                                      green:0
-                                                                                       blue:0
-                                                                                      alpha:0.1].CGColor;
-    }
+    [self enableSpinningWheel];
 }
 
 - (void)requestServerData {
@@ -99,8 +90,7 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
         NSMutableArray *myOrderBook = [SOXMyOrderBook_BitcoinDE_Data myOrderbookDataArrayForMyOrderbookDictionary:payloadDictionary];
         self.myOrderBook = myOrderBook;
         
-        [self.circularProgressIndicator stopAnimation:nil];
-        self.spinningBackgroundView.hidden = YES;
+        [self disableSpinningWheel];
     }
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import "SOXMyTradesViewController.h"
+#import "SOXSpinningWheelAbstractViewController_Private.h"
 
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXMyTrades_BitcoinDE_Data.h"
@@ -136,8 +137,7 @@
         NSMutableArray *myTrades = [SOXMyTrades_BitcoinDE_Data myTradesDataArrayForMyTradeHistoryDictionary:payloadDictionary];
         self.myTrades = myTrades;
         
-//        [self.circularProgressIndicator stopAnimation:nil];
-//        self.spinningBackgroundView.hidden = YES;
+        [self disableSpinningWheel];
     }
 }
 
@@ -197,6 +197,7 @@
 }
 
 - (IBAction)fetchDataButtonAction:(NSButton *)sender {
+    [self enableSpinningWheel];
     NSDictionary *parameterDictionary = [SOXMyTrades_BitcoinDE_Data parameterForOrderType:self.selectedOrderType
                                                                                tradeState:self.selectedTradeStateType
                                                                                 startDate:self.selectedStartDate
