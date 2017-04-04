@@ -199,7 +199,7 @@
         //  btc_balance
         {
             self.btcBalanceTotalAmountTextField.doubleValue = accountInfoData.btcBalance_totalAmount.doubleValue;
-            self.btcBalanceAvailableAmountTextField.doubleValue = accountInfoData.btcBalance_totalAmount.doubleValue;
+            self.btcBalanceAvailableAmountTextField.doubleValue = accountInfoData.btcBalance_availableAmount.doubleValue;
             self.btcBalanceReservedAmountTextField.doubleValue = accountInfoData.btcBalance_reservedAmount.doubleValue;
         }
         
