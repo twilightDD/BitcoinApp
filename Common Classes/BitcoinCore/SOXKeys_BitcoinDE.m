@@ -84,6 +84,38 @@ NSString *const BitcoinDE_ShowMyOrders_Page         = @"page";
 NSString *const BitcoinDE_ShowMyOrders_Page_Current = @"current";
 NSString *const BitcoinDE_ShowMyOrders_Page_Last    = @"Last";
 
+#pragma mark - BitcoinDE_ShowMyTrades
+#pragma mark | Trades
+NSString *const BitcoinDE_ShowMyTrades_Trades_MainKey                          = @"trades";
+NSString *const BitcoinDE_ShowMyTrades_TradeID                                 = @"trade_id";
+NSString *const BitcoinDE_ShowMyTrades_Type                                    = @"type";
+NSString *const BitcoinDE_ShowMyTrades_Amount                                  = @"amount";
+NSString *const BitcoinDE_ShowMyTrades_Price                                   = @"price";
+NSString *const BitcoinDE_ShowMyTrades_Volume                                  = @"volume";
+NSString *const BitcoinDE_ShowMyTrades_FeeEur                                  = @"fee_eur";
+NSString *const BitcoinDE_ShowMyTrades_FeeBTC                                  = @"fee_btc";
+NSString *const BitcoinDE_ShowMyTrades_NewOrderIDForRemainingAmount            = @"new_order_id_for_remaining_amount";
+NSString *const BitcoinDE_ShowMyTrades_State                                   = @"state";
+NSString *const BitcoinDE_ShowMyTrades_MyRatingForTradingPartner               = @"my_rating_for_trading_partner";
+NSString *const BitcoinDE_ShowMyTrades_CreatedAt                               = @"created_at";
+NSString *const BitcoinDE_ShowMyTrades_SuccessfullyFinishedAt                  = @"successfully_finished_at";
+NSString *const BitcoinDE_ShowMyTrades_CancelledAt                             = @"cancelled_at";
+NSString *const BitcoinDE_ShowMyTrades_PaymentMethod                           = @"payment_method";
+NSString *const BitcoinDE_ShowMyTrades_TradingPartnerInformation               = @"trading_partner_information";
+NSString *const BitcoinDE_ShowMyTrades_TradingPartnerInformation_Username      = @"username";
+NSString *const BitcoinDE_ShowMyTrades_TradingPartnerInformation_IsKYCFull     = @"is_kyc_full";
+NSString *const BitcoinDE_ShowMyTrades_TradingPartnerInformation_TrustLevel    = @"trust_level";
+NSString *const BitcoinDE_ShowMyTrades_TradingPartnerInformation_BankName      = @"bank_name";
+NSString *const BitcoinDE_ShowMyTrades_TradingPartnerInformation_BIC           = @"bic";
+NSString *const BitcoinDE_ShowMyTrades_TradingPartnerInformation_SeatOfBank    = @"seat_of_bank";
+NSString *const BitcoinDE_ShowMyTrades_TradingPartnerInformation_AmountTrades  = @"amount_trades";
+NSString *const BitcoinDE_ShowMyTrades_TradingPartnerInformation_Rating        = @"rating";
+
+#pragma mark | Page information
+NSString *const BitcoinDE_ShowMyTrades_Page         = @"page";
+NSString *const BitcoinDE_ShowMyTrades_Page_Current = @"current";
+NSString *const BitcoinDE_ShowMyTrades_Page_Last    = @"last";
+
 #pragma mark - BitcoinDE_ShowOrderbook
 NSString *const BitcoinDE_ShowOrderbook_MainKey = @"orders";
 

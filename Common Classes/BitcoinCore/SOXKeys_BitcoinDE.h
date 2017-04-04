@@ -85,6 +85,37 @@ FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_Page;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_Page_Current;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_Page_Last;
 
+#pragma mark - BitcoinDE_ShowMyTrades
+#pragma mark | Trades
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_Trades_MainKey;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_TradeID;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_Type;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_Amount;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_Price;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_Volume;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_FeeEur;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_FeeBTC;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_NewOrderIDForRemainingAmount;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_State;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_MyRatingForTradingPartner;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_CreatedAt;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_SuccessfullyFinishedAt;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_CancelledAt;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_PaymentMethod;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_TradingPartnerInformation;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_TradingPartnerInformation_Username;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_TradingPartnerInformation_IsKYCFull;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_TradingPartnerInformation_TrustLevel;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_TradingPartnerInformation_BankName;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_TradingPartnerInformation_BIC;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_TradingPartnerInformation_SeatOfBank;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_TradingPartnerInformation_AmountTrades;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_TradingPartnerInformation_Rating;
+
+#pragma mark | Page information
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_Page;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_Page_Current;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_Page_Last;
 
 #pragma mark - BitcoinDE_ShowOrderbook
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_MainKey;

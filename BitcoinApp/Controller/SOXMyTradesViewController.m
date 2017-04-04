@@ -11,8 +11,6 @@
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXMyTrades_BitcoinDE_Data.h"
 
-
-
 #pragma mark - Interface
 @interface SOXMyTradesViewController () <SOXMarketCoreServerRequestProtocol>
 
@@ -52,6 +50,8 @@
 @property (strong, nonatomic) NSDate *selectedStartDate;
 @property (strong, nonatomic) NSDate *selectedEndDate;
 @property (nonatomic) NSInteger selectedPage;
+
+@property (strong, nonatomic) NSMutableArray *myTrades;
 
 @end
 
@@ -131,12 +131,11 @@
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
 - (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest {
-    NSLog(@"BitcoinDE_ShowMyTradesType \n%@",answerOfServerRequest);
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowMyTradesType)]) {
-//        NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
-//        NSMutableArray *orderBook = [SOXShowOrderbook_BitcoinDE_Data orderbookDataArrayForShowOrderbookDictionary:payloadDictionary];
-//        self.orderBook = orderBook;
-//        
+        NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
+        NSMutableArray *myTrades = [SOXMyTrades_BitcoinDE_Data myTradesDataArrayForMyTradeHistoryDictionary:payloadDictionary];
+        self.myTrades = myTrades;
+        
 //        [self.circularProgressIndicator stopAnimation:nil];
 //        self.spinningBackgroundView.hidden = YES;
     }
