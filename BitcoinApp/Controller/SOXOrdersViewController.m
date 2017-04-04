@@ -65,17 +65,16 @@
 #pragma mark - Private methods
 - (void)setupUI {
     {
-        NSString *titleText = nil;
         if (self.orderType == OrdersBuyType) {
-            titleText = @"Buy";
+            self.titleTextField.stringValue                     = @"Buy";
+            self.filterPriceDescriptionTextField.stringValue    = @"Maximum pice";
         }
         else {
-            titleText = @"Sell";
+            self.titleTextField.stringValue                     = @"Sell";
+            self.filterPriceDescriptionTextField.stringValue    = @"Minimum price";
         }
-        self.titleTextField.stringValue = titleText;
     }
     
-    self.filterPriceDescriptionTextField.stringValue = @"Minimum price";
     self.otherFilterButton.title = @"More filters";
 }
 
