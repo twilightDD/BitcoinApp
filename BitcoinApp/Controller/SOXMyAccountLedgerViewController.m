@@ -46,11 +46,6 @@
     [self requestServerData];
 }
 
--(void)viewDidAppear {
-    [super viewDidAppear];
-    [self enableSpinningWheel];
-}
-
 #pragma mark - Private methods
 - (void)setupUI {
     self.titleTextField.stringValue = @"My trading history";
@@ -60,6 +55,7 @@
 
 
 - (void)requestServerData {
+    [self enableSpinningWheel];
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountLedgerType
                                                 respondTo:self];
 }

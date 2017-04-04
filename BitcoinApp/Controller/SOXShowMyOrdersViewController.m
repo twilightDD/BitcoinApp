@@ -62,11 +62,10 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
     {
         [self.tableView setDoubleAction:@selector(tableViewDoubleAction:)];
     }
-    
-    [self enableSpinningWheel];
 }
 
 - (void)requestServerData {
+    [self enableSpinningWheel];
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowMyOrdersCommandType
                                                 respondTo:self];
 }
@@ -100,7 +99,7 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 }
 
 - (IBAction)reloadButtonAction:(NSButton *)sender {
-
+    [self requestServerData];
 }
 
 @end

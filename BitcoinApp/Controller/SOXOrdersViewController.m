@@ -51,15 +51,8 @@
     [self.tableView setDoubleAction:@selector(tableViewDoubleAction:)];
 }
 
--(void)viewDidAppear {
-    [super viewDidAppear];
-
-    [self enableSpinningWheel];
-}
-
 - (IBAction)reloadAction:(NSButton *)sender {
-    NSLog(@"Manually reload Data");
-   // [self requestServerData];
+   [self requestServerData];
 }
 
 #pragma mark - Private methods
@@ -79,6 +72,8 @@
 }
 
 - (void)requestServerData {
+    [self enableSpinningWheel];
+    
     if (self.orderType == OrdersBuyType) {
         [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType // "buy" liefert Verkaufsangebote
                                                     respondTo:self];
