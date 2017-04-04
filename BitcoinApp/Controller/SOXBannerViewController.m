@@ -15,8 +15,6 @@
 
 #import "SOXDateFormatter.h"
 
-#import "NSTextField+URL.h"
-
 #pragma mark - Interface
 @interface SOXBannerViewController () <SOXMarketCoreServerRequestProtocol, SOXCreditUpdateProtocol>
 
@@ -44,10 +42,6 @@
 
 @property (weak) IBOutlet NSStackView *fidorReservationDescriptionStackView;
 @property (weak) IBOutlet NSStackView *fidorReservationValuesStackView;
-
-@property (weak) IBOutlet NSStackView *fidorReservationURLStackView;
-@property (weak) IBOutlet NSTextField *fidorReservationLeftURLTextField;
-@property (weak) IBOutlet NSTextField *fidorReservationRightURLTextField;
 
 #pragma mark | ratesData
 @property (weak) IBOutlet NSTextField *ratesHeadlineTextField;
@@ -159,27 +153,11 @@
             NSString *validUntilString = [SOXDateFormatter stringDateTimeStringForRFC3339DateTimeString:accountInfoData.bankReservation_validUntil];
             self.fidorReservationValidUntilTextField.stringValue = validUntilString;
         }
-        { // clickable URLs
-            [self.fidorReservationLeftURLTextField setHyperlinkFormattingFromString:@"Cancel reservation"
-                                                                      withURLString:@"https://www.bitcoin.de/de/end_reservation"];
-            [self.fidorReservationRightURLTextField setHyperlinkFormattingFromString:@"Renew reservation"
-                                                                       withURLString:@"https://www.bitcoin.de/de/create_reservation"];
-        }
     }
     else {
         self.fidorReservationValuesAndDescriptionStackView.hidden = YES;
-
-        { // Description
-            [self.fidorReservationLeftURLTextField resetHyperlinkFormatting];
-            self.fidorReservationLeftURLTextField.stringValue = @"No Reservation";
-        }
-        { // clickable URL
-            [self.fidorReservationRightURLTextField setHyperlinkFormattingFromString:@"Go to reservation"
-                                                                       withURLString:@"https://www.bitcoin.de/de/reservation"];
-        }
     }
 }
-
 
 - (void)requestServerData {
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountInfoCommandType
