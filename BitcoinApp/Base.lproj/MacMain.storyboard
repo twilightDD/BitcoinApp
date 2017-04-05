@@ -2534,7 +2534,7 @@ Gw
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="120" minWidth="40" maxWidth="1000" id="eh3-HK-OCG">
+                                                <tableColumn editable="NO" width="120" minWidth="40" maxWidth="1000" id="eh3-HK-OCG">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="date">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2550,7 +2550,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.positionDetails_Date" id="PbE-yU-s9t"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn width="40" minWidth="40" maxWidth="1000" id="1zU-O8-OQu">
+                                                <tableColumn editable="NO" width="40" minWidth="40" maxWidth="1000" id="1zU-O8-OQu">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="type">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2566,7 +2566,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.positionDetails_Type" id="Kly-o3-M8L"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="NgY-vm-nuq">
+                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="NgY-vm-nuq">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Cashflow">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2583,7 +2583,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.positionDetails_Cashflow" id="08u-2B-l6d"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="2Wh-aE-M1a">
+                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="2Wh-aE-M1a">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="balance">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2600,7 +2600,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.positionDetails_Balance" id="402-U0-zvk"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="axJ-uI-fQr">
+                                                <tableColumn identifier="" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="axJ-uI-fQr">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="price">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2617,7 +2617,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.tradeDetails_Price" id="aG8-pm-BRt"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="120" minWidth="10" maxWidth="1100" id="CdC-Ba-H0W">
+                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="1100" id="CdC-Ba-H0W">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="btc before fee">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2634,7 +2634,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.tradeDetails_BTC_before_fee" id="zbd-YA-nhG"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="120" minWidth="10" maxWidth="1100" id="xCf-ac-UJ6">
+                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="1100" id="xCf-ac-UJ6">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="btc after fee">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2651,7 +2651,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.tradeDetails_BTC_after_fee" id="FVB-Ee-Xt9"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="120" minWidth="10" maxWidth="1100" id="uNg-0S-NHy">
+                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="1100" id="uNg-0S-NHy">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="euro before fee">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2668,7 +2668,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.tradeDetails_Euro_before_fee" id="hev-3c-vNG"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="120" minWidth="10" maxWidth="1100" id="WMb-IW-VZq">
+                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="1100" id="WMb-IW-VZq">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="euro after fee">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2828,7 +2828,7 @@ Gw
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="40" minWidth="40" maxWidth="1000" id="dqm-22-bHF">
+                                                <tableColumn editable="NO" width="40" minWidth="40" maxWidth="1000" id="dqm-22-bHF">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="type">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2844,7 +2844,7 @@ Gw
                                                         <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.type" id="OJp-Yf-Zxq"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn width="120" minWidth="40" maxWidth="1000" id="4MZ-GR-MVY">
+                                                <tableColumn editable="NO" width="120" minWidth="40" maxWidth="1000" id="4MZ-GR-MVY">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="amount">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2861,7 +2861,7 @@ Gw
                                                         <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.amount" id="cla-gJ-pp6"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="XAz-Ru-WnC">
+                                                <tableColumn identifier="" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="XAz-Ru-WnC">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="price">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2878,7 +2878,7 @@ Gw
                                                         <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.price" id="9l9-Bx-0em"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="oKA-rf-IhP">
+                                                <tableColumn identifier="" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="oKA-rf-IhP">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="volume">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2895,7 +2895,7 @@ Gw
                                                         <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.volume" id="Ujb-ep-A2A"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="40" minWidth="10" maxWidth="3.4028234663852886e+38" id="Xlf-UH-PMB">
+                                                <tableColumn identifier="" editable="NO" width="40" minWidth="10" maxWidth="3.4028234663852886e+38" id="Xlf-UH-PMB">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="state">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2911,7 +2911,7 @@ Gw
                                                         <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.state" id="X5q-1p-P5p"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="rTc-2h-niy">
+                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="rTc-2h-niy">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="date">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2927,7 +2927,7 @@ Gw
                                                         <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.successfullyFinishedAt" id="pwm-AS-dDj"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="o7A-jb-8It">
+                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="o7A-jb-8It">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="username">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
