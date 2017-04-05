@@ -105,6 +105,18 @@
     }
 }
 
+- (NSArray *)sortDescriptorsForArrayController {
+    BOOL ascending = NO;
+    if (self.orderType == OrdersBuyType) {
+        ascending = YES;
+    }
+    
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"orderInformation_price" ascending:ascending];
+    NSArray *sortDesciptors = [NSArray arrayWithObjects:sort, nil];
+    
+    return sortDesciptors;
+}
+
 #pragma mark - Table view handling
 - (void)tableViewDoubleAction:(NSTableView *)tableView {
     NSInteger clickedRow = tableView.clickedRow;
@@ -129,6 +141,7 @@
         self.orderBook = orderBook;
 
         [self disableSpinningWheel];
+        self.orderBookArrayController.sortDescriptors = [self sortDescriptorsForArrayController];
         [self registerForWebSocketUpdates]; // after basic dataset, so self.orderBook != nil;
     }
 }
