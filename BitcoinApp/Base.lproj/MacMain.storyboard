@@ -1467,13 +1467,13 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" headerView="r0K-dN-IBz" id="ILN-vM-hc0">
-                                            <rect key="frame" x="0.0" y="0.0" width="581" height="184"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="651" height="184"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn editable="NO" width="80" minWidth="40" maxWidth="1000" id="5J2-fg-U3a">
+                                                <tableColumn editable="NO" width="90" minWidth="40" maxWidth="1000" id="5J2-fg-U3a">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Price">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1490,13 +1490,14 @@
                                                         <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_price" id="oS0-E4-Kk3"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="UPh-EJ-q2O">
+                                                <tableColumn editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="UPh-EJ-q2O">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Min. Amount">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="gVT-HG-s1y">
+                                                        <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="8" currencyCode="BTC" currencySymbol="BTC" internationalCurrencySymbol="BTC" id="a9Y-se-RSS"/>
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1506,13 +1507,14 @@
                                                         <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_minAmount" id="Wwb-xO-ImZ"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="5bU-JA-imQ">
+                                                <tableColumn editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="5bU-JA-imQ">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Max. Amount">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="SKK-NL-EJ0">
+                                                        <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="8" currencyCode="BTC" currencySymbol="BTC" internationalCurrencySymbol="BTC" id="L2R-P4-Fkf"/>
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1522,7 +1524,7 @@
                                                         <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_maxAmount" id="xfr-H7-NS6"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="ZJI-GQ-9iw">
+                                                <tableColumn editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="ZJI-GQ-9iw">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Min. Volume">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1539,7 +1541,7 @@
                                                         <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_minVolume" id="rpE-42-Tgh"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="gdz-ZB-REf">
+                                                <tableColumn editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="gdz-ZB-REf">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Max. Volume">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1556,7 +1558,7 @@
                                                         <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_maxVolume" id="cza-50-EUc"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="zyz-M6-5GS">
+                                                <tableColumn editable="NO" width="40" minWidth="10" maxWidth="3.4028234663852886e+38" id="zyz-M6-5GS">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="type">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1611,7 +1613,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="r0K-dN-IBz">
-                                    <rect key="frame" x="0.0" y="0.0" width="581" height="23"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="651" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
@@ -1697,13 +1699,13 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" headerView="2F9-Ce-VdL" id="kdt-bX-tib">
-                                            <rect key="frame" x="0.0" y="0.0" width="664" height="226"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="814" height="226"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn editable="NO" width="80" minWidth="40" maxWidth="1000" id="T6P-2d-aZO">
+                                                <tableColumn editable="NO" width="40" minWidth="40" maxWidth="1000" id="T6P-2d-aZO">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="type">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1723,13 +1725,14 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="a7f-p9-2VM">
+                                                <tableColumn editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="a7f-p9-2VM">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="max_amount">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
-                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="SDq-cE-juy">
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="SDq-cE-juy">
+                                                        <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="8" currencyCode="BTC" currencySymbol="BTC" internationalCurrencySymbol="BTC" id="pnr-dO-2Ew"/>
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1743,13 +1746,14 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="tWX-0r-NaC">
+                                                <tableColumn editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="tWX-0r-NaC">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="min_amount">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
-                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="Lw6-rz-lWN">
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="Lw6-rz-lWN">
+                                                        <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="8" currencyCode="BTC" currencySymbol="BTC" internationalCurrencySymbol="BTC" id="rnr-x7-dsN"/>
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1763,7 +1767,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="9ff-Ke-frs">
+                                                <tableColumn editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="9ff-Ke-frs">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="price">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1784,7 +1788,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="CL9-A3-qKx">
+                                                <tableColumn editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="CL9-A3-qKx">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="max_volume">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1805,7 +1809,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="80" minWidth="40" maxWidth="1000" id="1L4-9n-cDS">
+                                                <tableColumn editable="NO" width="90" minWidth="40" maxWidth="1000" id="1L4-9n-cDS">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="min_volume">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1826,7 +1830,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="Btb-GV-QJk">
+                                                <tableColumn editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="Btb-GV-QJk">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="created_at">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1846,7 +1850,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="bq1-PX-EAf">
+                                                <tableColumn editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="bq1-PX-EAf">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="end_datetime">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1885,7 +1889,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="2F9-Ce-VdL">
-                                    <rect key="frame" x="0.0" y="0.0" width="664" height="23"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="814" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
@@ -2520,17 +2524,17 @@ Gw
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fGp-j1-fNK">
                                 <rect key="frame" x="20" y="49" width="845" height="268"/>
                                 <clipView key="contentView" id="q6P-13-wzZ">
-                                    <rect key="frame" x="1" y="0.0" width="843" height="267"/>
+                                    <rect key="frame" x="1" y="0.0" width="843" height="252"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" headerView="UdI-6x-40i" id="ukh-mk-8h8">
-                                            <rect key="frame" x="0.0" y="0.0" width="843" height="244"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="997" height="229"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="100" minWidth="40" maxWidth="1000" id="eh3-HK-OCG">
+                                                <tableColumn width="120" minWidth="40" maxWidth="1000" id="eh3-HK-OCG">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="date">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2546,7 +2550,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.positionDetails_Date" id="PbE-yU-s9t"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn width="80" minWidth="40" maxWidth="1000" id="1zU-O8-OQu">
+                                                <tableColumn width="40" minWidth="40" maxWidth="1000" id="1zU-O8-OQu">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="type">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2562,7 +2566,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.positionDetails_Type" id="Kly-o3-M8L"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="NgY-vm-nuq">
+                                                <tableColumn identifier="" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="NgY-vm-nuq">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Cashflow">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2579,7 +2583,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.positionDetails_Cashflow" id="08u-2B-l6d"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="2Wh-aE-M1a">
+                                                <tableColumn identifier="" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="2Wh-aE-M1a">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="balance">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2596,7 +2600,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.positionDetails_Balance" id="402-U0-zvk"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="80" minWidth="10" maxWidth="3.4028234663852886e+38" id="axJ-uI-fQr">
+                                                <tableColumn identifier="" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="axJ-uI-fQr">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="price">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2613,7 +2617,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.tradeDetails_Price" id="aG8-pm-BRt"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="100" minWidth="10" maxWidth="1100" id="CdC-Ba-H0W">
+                                                <tableColumn identifier="" width="120" minWidth="10" maxWidth="1100" id="CdC-Ba-H0W">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="btc before fee">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2630,7 +2634,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.tradeDetails_BTC_before_fee" id="zbd-YA-nhG"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="100" minWidth="10" maxWidth="1100" id="xCf-ac-UJ6">
+                                                <tableColumn identifier="" width="120" minWidth="10" maxWidth="1100" id="xCf-ac-UJ6">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="btc after fee">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2647,7 +2651,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.tradeDetails_BTC_after_fee" id="FVB-Ee-Xt9"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="100" minWidth="10" maxWidth="1100" id="uNg-0S-NHy">
+                                                <tableColumn identifier="" width="120" minWidth="10" maxWidth="1100" id="uNg-0S-NHy">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="euro before fee">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2664,7 +2668,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.tradeDetails_Euro_before_fee" id="hev-3c-vNG"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="96" minWidth="10" maxWidth="1100" id="WMb-IW-VZq">
+                                                <tableColumn identifier="" width="120" minWidth="10" maxWidth="1100" id="WMb-IW-VZq">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="euro after fee">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2689,8 +2693,8 @@ Gw
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="500" id="Umj-9T-mb0"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="180" id="wkM-9V-7ME"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="7C6-vt-23Y">
-                                    <rect key="frame" x="1" y="234" width="923" height="15"/>
+                                <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="7C6-vt-23Y">
+                                    <rect key="frame" x="1" y="252" width="843" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="lZK-RD-pkv">
@@ -2698,15 +2702,15 @@ Gw
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="UdI-6x-40i">
-                                    <rect key="frame" x="0.0" y="0.0" width="843" height="23"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="997" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="4oR-2z-iOV" userLabel="SpinningBackgroundView">
-                                <rect key="frame" x="21" y="50" width="843" height="244"/>
+                                <rect key="frame" x="21" y="65" width="843" height="229"/>
                                 <subviews>
                                     <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="09c-cw-0o8">
-                                        <rect key="frame" x="414" y="114" width="16" height="16"/>
+                                        <rect key="frame" x="414" y="107" width="16" height="16"/>
                                     </progressIndicator>
                                 </subviews>
                                 <constraints>
@@ -2818,13 +2822,13 @@ Gw
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" headerView="yYE-bp-FYh" id="fVk-ot-ntz">
-                                            <rect key="frame" x="0.0" y="0.0" width="711" height="352"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="641" height="352"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="90" minWidth="40" maxWidth="1000" id="dqm-22-bHF">
+                                                <tableColumn width="40" minWidth="40" maxWidth="1000" id="dqm-22-bHF">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="type">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2840,13 +2844,14 @@ Gw
                                                         <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.type" id="OJp-Yf-Zxq"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn width="90" minWidth="40" maxWidth="1000" id="4MZ-GR-MVY">
+                                                <tableColumn width="120" minWidth="40" maxWidth="1000" id="4MZ-GR-MVY">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="amount">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
-                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="tbP-Lh-Fuh">
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="tbP-Lh-Fuh">
+                                                        <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="8" currencyCode="BTC" currencySymbol="BTC" internationalCurrencySymbol="BTC" id="Wo6-c3-rfH"/>
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2862,7 +2867,7 @@ Gw
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
-                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="3Xv-IV-aHV">
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="3Xv-IV-aHV">
                                                         <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="siy-nP-TqE"/>
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -2879,7 +2884,8 @@ Gw
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
-                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="FMi-It-rIF">
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="FMi-It-rIF">
+                                                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="2cB-6d-OMW"/>
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2889,7 +2895,7 @@ Gw
                                                         <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.volume" id="Ujb-ep-A2A"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="Xlf-UH-PMB">
+                                                <tableColumn identifier="" width="40" minWidth="10" maxWidth="3.4028234663852886e+38" id="Xlf-UH-PMB">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="state">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2954,7 +2960,7 @@ Gw
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="yYE-bp-FYh">
-                                    <rect key="frame" x="0.0" y="0.0" width="711" height="23"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="641" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
