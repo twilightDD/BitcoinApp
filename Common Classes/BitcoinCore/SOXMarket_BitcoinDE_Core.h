@@ -22,6 +22,7 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_ServerCommandType) {
     , BitcoinDE_ShowRatesCommandType
     , BitcoinDE_ShowMyTradesType
     , BitcoinDE_ShowAccountLedgerType
+    , BitcoinDE_RemoveOrderType
 };
 
 FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerServerCommandKey;
@@ -75,5 +76,8 @@ FOUNDATION_EXPORT NSString *const _Nonnull CreditUpdate_MaximalCreditsKey;
 + (void)registerForCreditUpdates:(id <SOXCreditUpdateProtocol> _Nullable) delegateForCreditUpdates;
 
 + (void)registerForErrorMessages:(id <SOXMarketCoreErrorProtocol> _Nullable)delegateForErrorMessages;
+
+#pragma mark - Delete
++ (void)removeOrderWithOrderID:(NSString * _Nullable)orderID respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nonnull)controller;
 
 @end

@@ -78,6 +78,7 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
         return;
     }
     
+    // return;
     
     weakify(self)
     NSURLSessionTask *getTask = [[NSURLSession sharedSession] dataTaskWithRequest:request
@@ -127,6 +128,13 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
 
 + (void)registerForErrorMessages:(id <SOXMarketCoreErrorProtocol> _Nullable)delegateForErrorMessages {
     [SOXMarket_BitcoinDE_Core sharedCore].delegateForErrorMessages = delegateForErrorMessages;
+}
+#pragma mark - Delete
++ (void)removeOrderWithOrderID:(NSString * _Nullable)orderID
+                     respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nonnull)controller{
+
+
+
 }
 
 #pragma mark - Private Class methods
@@ -191,14 +199,15 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
    
     NSString            *urlString       = [SOXMarket_BitcoinDE_Core urlStringForServerCommandType:serverCommandType
                                                                                      withParameter:parameterDictionary];
-    NSString            *signatureString = [SOXMarket_BitcoinDE_Core signatureStringForURLString:urlString];
+    NSString            *signatureString = [SOXMarket_BitcoinDE_Core signatureStringForServerCommandType:serverCommandType
+                                            forURLString:urlString];
     NSString            *hmacHex         = [SOXHash hexadecimalHMACForString:signatureString
                                                                      withKey:[SOXMarket_BitcoinDE_Core apiSecret]];
     
     NSMutableURLRequest *request         = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     {
 
-        NSString *getOrPostHTTPMethod = [SOXMarket_BitcoinDE_Core getOrPostForServerCommandType:serverCommandType];
+        NSString *getOrPostHTTPMethod = [SOXMarket_BitcoinDE_Core httpMethodForServerCommandType:serverCommandType];
         if (getOrPostHTTPMethod) {
             [request setHTTPMethod:getOrPostHTTPMethod];
             [request addValue:[SOXMarket_BitcoinDE_Core apiKey] forHTTPHeaderField:@"X-API-KEY"];
@@ -238,10 +247,22 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
                               withParameter:(NSDictionary * _Nullable)parameterDictionary {
     NSString *urlString = [SOXMarket_BitcoinDE_Core baseURLString];
     urlString = [urlString stringByAppendingString:[SOXMarket_BitcoinDE_Core commandForServerCommandType:serverCommandType]];
-    if (parameterDictionary.allKeys.count > 0) {
+    
+    if (serverCommandType == BitcoinDE_RemoveOrderType) {
+        NSArray *orderIDs = parameterDictionary.allValues;
+        NSString *orderID = [orderIDs componentsJoinedByString:@""];
+        urlString = [urlString stringByAppendingString:orderID];
+        
+    }
+    
+    else if (parameterDictionary.allKeys.count > 0) {
         
         NSMutableArray *parameters = [NSMutableArray array];
-        for (NSString *key in parameterDictionary.allKeys) {
+        
+        
+        NSArray *allKeys = parameterDictionary.allKeys;
+        allKeys = [allKeys sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+        for (NSString *key in allKeys) {
             NSString *parameter = [NSString stringWithFormat:@"%@=%@", key, [parameterDictionary objectForKey:key]];
             [parameters addObject:parameter];
         }
@@ -266,11 +287,12 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
     }
 }
 
-+ (NSString *)signatureStringForURLString:(NSString *)urlString {
++ (NSString *)signatureStringForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType
+                                     forURLString:(NSString *)urlString {
     //hmac_data = http_method+'#'+uri+'#'+api_key+'#'+nonce+'#'+post_parameter_md5_hashed_url_encoded_query_string
 
     NSString *signatureString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@"
-                                 , @"GET" // http_method
+                                 , [self httpMethodForServerCommandType:serverCommandType] // http_method
                                  , @"#"
                                  , urlString // uri
                                  , @"#"
@@ -278,13 +300,13 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
                                  , @"#"
                                  , [SOXMarket_BitcoinDE_Core sharedCore].nonceString // nonce
                                  , @"#"
-                                 , @"d41d8cd98f00b204e9800998ecf8427e" // postParameterMD5; hier: für md5 für weil get keine POSTParameter hat" " 
+                                 , @"d41d8cd98f00b204e9800998ecf8427e" // postParameterMD5; GET/DELETE hat keine POSTParameter, darum md5 für <Leerzeichen> 
                                  ];
     
     return signatureString;
 }
 
-+ (NSString  * _Nullable )getOrPostForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType {
++ (NSString  * _Nullable )httpMethodForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType {
     switch (serverCommandType) {
         case UnknownCommand: {
             return nil;
@@ -302,10 +324,14 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
         case BitcoinDE_ShowMyTradesType:
         case BitcoinDE_ShowAccountLedgerType:
             return @"GET";
-            
+            break;
+        case BitcoinDE_RemoveOrderType:
+            return @"DELETE";
+            break;
         default:
             break;
     }
+    return nil;
 }
 
 + (void)updateNonceString {
@@ -453,6 +479,7 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
                                 , @(BitcoinDE_ShowRatesCommandType): @"/rates"
                                 , @(BitcoinDE_ShowMyTradesType):@"/trades"
                                 , @(BitcoinDE_ShowAccountLedgerType):@"/account/ledger"
+                                , @(BitcoinDE_RemoveOrderType):@"/orders/"
                                 };
     });
     return commandDescriptions;
@@ -476,6 +503,7 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
                                 , @(BitcoinDE_ShowRatesCommandType): @"Abfrage des gewichteten Durchschnittskurses der letzten 3 Stunden und der letzten 12 Stunden."
                                 , @(BitcoinDE_ShowMyTradesType): @"Abrufen und Filtern meiner getätigten Trades."
                                 , @(BitcoinDE_ShowAccountLedgerType): @"Abruf des Kontoauszuges"
+                                , @(BitcoinDE_RemoveOrderType): @"Löschen einer Order"
                                 };
     });
     return commandDescriptions;
@@ -499,6 +527,7 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
                                    , @(3) // BitcoinDE_ShowRatesCommandType
                                    , @(3) // BitcoinDE_ShowMyTradesType
                                    , @(3) // BitcoinDE_ShowAccountLedger
+                                   , @(1) // BitcoinDE_RemoveOrderType
                                    , nil];
         
     });

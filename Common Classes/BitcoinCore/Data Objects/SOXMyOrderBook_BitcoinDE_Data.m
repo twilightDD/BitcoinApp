@@ -56,6 +56,14 @@
     return myOrderbookDataArray;
 }
 
++ (NSDictionary *)parameterForDeletingOrderWithOrderID:(NSString *)orderID {
+    NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:
+                               orderID, @"order_id"
+                               , nil];
+    
+    return parameter;
+}
+
 #pragma mark - Class methods
 + (SOXMyOrderBookData *)myOrderbookDataForOrderDictionary:(NSDictionary *)myOrderDictionary {
     SOXMyOrderBook_BitcoinDE_Data *myOrderbookData = [[SOXMyOrderBook_BitcoinDE_Data alloc] init];

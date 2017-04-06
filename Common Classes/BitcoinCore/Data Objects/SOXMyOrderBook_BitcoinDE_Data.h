@@ -12,4 +12,6 @@
 
 + (NSMutableArray *)myOrderbookDataArrayForMyOrderbookDictionary:(NSDictionary *)payloadDictionary;
 
++ (NSDictionary *)parameterForDeletingOrderWithOrderID:(NSString *)orderID;
+
 @end

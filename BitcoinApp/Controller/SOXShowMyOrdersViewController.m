@@ -90,11 +90,28 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
         
         [self disableSpinningWheel];
     }
+    else if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_RemoveOrderType)]){
+        NSDictionary *errors = [answerOfServerRequest objectForKey:ServerAnswerErrorKey];
+        if (errors.count == 0) {
+            [self requestServerData];
+        }
+        
+    }
 }
 
 #pragma mark - Action methods
 - (IBAction)removeButtonAction:(NSButton *)sender {
+    NSLog(@"Remove");
     
+    NSArray <SOXMyOrderBook_BitcoinDE_Data *> *selectedData = self.myOrderArrayController.selectedObjects;
+    for (SOXMyOrderBook_BitcoinDE_Data *myOrderbookData in selectedData) {
+        NSString *myOrderbookDataOrderID = myOrderbookData.orderInformation_orderID;
+        NSDictionary *parameter = [SOXMyOrderBook_BitcoinDE_Data parameterForDeletingOrderWithOrderID:myOrderbookDataOrderID];
+        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_RemoveOrderType
+                                                withParameter:parameter
+                                                    respondTo:self];
+      
+    }
 }
 
 - (IBAction)reloadButtonAction:(NSButton *)sender {
