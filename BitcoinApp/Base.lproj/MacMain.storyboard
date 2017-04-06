@@ -1941,7 +1941,7 @@
                     </connections>
                 </viewController>
                 <customObject id="7kO-Hb-1O5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController objectClassName="SOXMyOrderBook_BitcoinDE_Data" id="t8U-TY-Pcr" userLabel="MyOrders Array Controller">
+                <arrayController objectClassName="SOXMyOrderBook_BitcoinDE_Data" selectsInsertedObjects="NO" avoidsEmptySelection="NO" id="t8U-TY-Pcr" userLabel="MyOrders Array Controller">
                     <connections>
                         <binding destination="q7D-iu-Op3" name="contentArray" keyPath="self.myOrderBook" id="RFv-Zz-IHG"/>
                     </connections>
