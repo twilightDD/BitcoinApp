@@ -31,7 +31,9 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 @property (strong) IBOutlet NSArrayController *myOrderArrayController;
 
 #pragma mark Properties
-@property (strong, nonatomic) NSMutableArray *myOrderBook;
+@property (strong, nonatomic) NSMutableArray <SOXMyOrderBook_BitcoinDE_Data *> *myOrderBook;
+@property (nonatomic) NSInteger countOfMyOrderBook_BitcoinDE_DatasToDelete;
+@property (nonatomic) NSInteger countOfDeletedMyOrderBook_BitcoinDE_Datas;
 
 @end
 
@@ -46,6 +48,7 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
     [super viewWillAppear];
     
     [self setupUI];
+    [self enableSpinningWheel]; // has to be here
     [self requestServerData];
 }
 
@@ -64,7 +67,6 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 }
 
 - (void)requestServerData {
-    [self enableSpinningWheel];
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowMyOrdersCommandType
                                                 respondTo:self];
 }
@@ -93,28 +95,53 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
     else if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_RemoveOrderType)]){
         NSDictionary *errors = [answerOfServerRequest objectForKey:ServerAnswerErrorKey];
         if (errors.count == 0) {
-            [self requestServerData];
+            self.countOfMyOrderBook_BitcoinDE_DatasToDelete++;
+            if (self.countOfMyOrderBook_BitcoinDE_DatasToDelete == self.countOfDeletedMyOrderBook_BitcoinDE_Datas) {
+                
+                // Start tableView update
+                [self requestServerData];
+                
+                // inform user
+                [self informUserAboutDeletion:self.countOfDeletedMyOrderBook_BitcoinDE_Datas];
+                // reset counters
+                self.countOfMyOrderBook_BitcoinDE_DatasToDelete = 0;
+                self.countOfDeletedMyOrderBook_BitcoinDE_Datas  = 0;
+            }
         }
         
     }
 }
 
+#pragma mark - User information
+- (void)informUserAboutDeletion:(NSInteger)countofDeletedObjects {
+    NSAlert *alert = [[NSAlert alloc] init];
+    alert.messageText = @"Deletion successfull";
+    alert.informativeText = [NSString stringWithFormat:@"%ti orders deleted.", countofDeletedObjects];
+    alert.alertStyle = NSAlertStyleInformational;
+    [alert runModal];
+}
+
 #pragma mark - Action methods
 - (IBAction)removeButtonAction:(NSButton *)sender {
-    NSLog(@"Remove");
+    NSArray <SOXMyOrderBook_BitcoinDE_Data *> *selectedDatas = self.myOrderArrayController.selectedObjects;
+    // get parameterDictionaries for data to delete
+    NSArray *myOrderBookParametersToDelete = [SOXMyOrderBook_BitcoinDE_Data parametersForDeletingMyOrderBookDatas:selectedDatas];
+    //
+    self.countOfMyOrderBook_BitcoinDE_DatasToDelete = myOrderBookParametersToDelete.count;
+    if (self.countOfMyOrderBook_BitcoinDE_DatasToDelete > 0) {
+        self.removeButton.enabled = NO;
+        [self enableSpinningWheel];
     
-    NSArray <SOXMyOrderBook_BitcoinDE_Data *> *selectedData = self.myOrderArrayController.selectedObjects;
-    for (SOXMyOrderBook_BitcoinDE_Data *myOrderbookData in selectedData) {
-        NSString *myOrderbookDataOrderID = myOrderbookData.orderInformation_orderID;
-        NSDictionary *parameter = [SOXMyOrderBook_BitcoinDE_Data parameterForDeletingOrderWithOrderID:myOrderbookDataOrderID];
-        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_RemoveOrderType
-                                                withParameter:parameter
-                                                    respondTo:self];
-      
+        for (NSDictionary *myOrderBookParameter in myOrderBookParametersToDelete) {
+            [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_RemoveOrderType
+                                                    withParameter:myOrderBookParameter
+                                                        respondTo:self];
+        }
     }
 }
 
 - (IBAction)reloadButtonAction:(NSButton *)sender {
+    [self enableSpinningWheel];
     [self requestServerData];
 }
 
