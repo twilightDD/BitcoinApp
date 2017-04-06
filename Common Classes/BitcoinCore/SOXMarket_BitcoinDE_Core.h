@@ -77,7 +77,4 @@ FOUNDATION_EXPORT NSString *const _Nonnull CreditUpdate_MaximalCreditsKey;
 
 + (void)registerForErrorMessages:(id <SOXMarketCoreErrorProtocol> _Nullable)delegateForErrorMessages;
 
-#pragma mark - Delete
-+ (void)removeOrderWithOrderID:(NSString * _Nullable)orderID respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nonnull)controller;
-
 @end

@@ -129,13 +129,6 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
 + (void)registerForErrorMessages:(id <SOXMarketCoreErrorProtocol> _Nullable)delegateForErrorMessages {
     [SOXMarket_BitcoinDE_Core sharedCore].delegateForErrorMessages = delegateForErrorMessages;
 }
-#pragma mark - Delete
-+ (void)removeOrderWithOrderID:(NSString * _Nullable)orderID
-                     respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nonnull)controller{
-
-
-
-}
 
 #pragma mark - Private Class methods
 + (NSDictionary *)answerDictionaryForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
