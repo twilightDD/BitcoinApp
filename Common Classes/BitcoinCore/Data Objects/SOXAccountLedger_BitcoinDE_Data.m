@@ -12,6 +12,24 @@
 
 #import "SOXDateFormatter.h"
 
+static NSString *BitcoinDE_AccountLedgerParameter_AllOrderTypeKey = @"all";
+static NSString *BitcoinDE_AccountLedgerParameter_BuyOrderTypeKey = @"buy";
+static NSString *BitcoinDE_AccountLedgerParameter_SellOrderTypeKey = @"sell";
+static NSString *BitcoinDE_AccountLedgerParameter_InpaymentOrderTypeKey = @"inpayment";
+static NSString *BitcoinDE_AccountLedgerParameter_PayoutOrderTypeKey = @"payout";
+static NSString *BitcoinDE_AccountLedgerParameter_AffiliateOrderTypeKey = @"affiliate";
+static NSString *BitcoinDE_AccountLedgerParameter_WelcomeBTCOrderTypeKey = @"welcome_btc";
+static NSString *BitcoinDE_AccountLedgerParameter_BuyYubiKeyOrderTypeKey = @"buy_yubikey";
+static NSString *BitcoinDE_AccountLedgerParameter_BuyGoldshopOrderTypeKey = @"buy_goldshop";
+static NSString *BitcoinDE_AccountLedgerParameter_BuyDiamondshopOrderTypeKey = @"buy_diamondshop";
+static NSString *BitcoinDE_AccountLedgerParameter_KickbackOrderTypeKey = @"kickback";
+static NSString *BitcoinDE_AccountLedgerParameter_OutgoingFeeVoluntaryOrderTypeKey = @"outgoing_fee_voluntary";
+
+static NSString *AccountLedgerParameter_TypeKey         = @"type";
+static NSString *AccountLedgerParameter_DateStartKey    = @"datetime_start";
+static NSString *AccountLedgerParameter_DateEndKey      = @"datetime_end";
+static NSString *AccountLedgerParameter_PageKey         = @"page";
+
 #pragma mark - Interface
 @interface SOXAccountLedger_BitcoinDE_Data ()
 
@@ -45,7 +63,69 @@
     return accountLedgerDataArray;
 }
 
-#pragma mark - Class methods
++ (NSDictionary *)parameterForOrderType:(BitcoinDE_AccountLedgerParameter_OrderType)orderType
+                              startDate:(NSDate *)startDate
+                                endDate:(NSDate *)endDate
+                                   page:(NSInteger)page {
+    NSString *orderTypeString;
+    switch (orderType) {
+        case BitcoinDE_AccountLedgerParameter_AllOrderType:
+            orderTypeString = BitcoinDE_AccountLedgerParameter_AllOrderTypeKey;
+            break;
+        case BitcoinDE_AccountLedgerParameter_BuyOrderType:
+            orderTypeString = BitcoinDE_AccountLedgerParameter_BuyOrderTypeKey;
+            break;
+        case BitcoinDE_AccountLedgerParameter_SellOrderType:
+            orderTypeString = BitcoinDE_AccountLedgerParameter_SellOrderTypeKey;
+            break;
+        case BitcoinDE_AccountLedgerParameter_InpaymentOrderType:
+            orderTypeString = BitcoinDE_AccountLedgerParameter_InpaymentOrderTypeKey;
+            break;
+        case BitcoinDE_AccountLedgerParameter_PayoutOrderType:
+            orderTypeString = BitcoinDE_AccountLedgerParameter_PayoutOrderTypeKey;
+            break;
+        case BitcoinDE_AccountLedgerParameter_AffiliateOrderType:
+            orderTypeString = BitcoinDE_AccountLedgerParameter_AffiliateOrderTypeKey;
+            break;
+        case BitcoinDE_AccountLedgerParameter_WelcomeBTCOrderType:
+            orderTypeString = BitcoinDE_AccountLedgerParameter_WelcomeBTCOrderTypeKey;
+            break;
+        case BitcoinDE_AccountLedgerParameter_BuyYubiKeyOrderType:
+            orderTypeString = BitcoinDE_AccountLedgerParameter_BuyYubiKeyOrderTypeKey;
+            break;
+        case BitcoinDE_AccountLedgerParameter_BuyGoldshopOrderType:
+            orderTypeString = BitcoinDE_AccountLedgerParameter_BuyGoldshopOrderTypeKey;
+            break;
+        case BitcoinDE_AccountLedgerParameter_BuyDiamondshopOrderType:
+            orderTypeString = BitcoinDE_AccountLedgerParameter_BuyDiamondshopOrderTypeKey;
+            break;
+        case BitcoinDE_AccountLedgerParameter_KickbackOrderType:
+            orderTypeString = BitcoinDE_AccountLedgerParameter_KickbackOrderTypeKey;
+            break;
+        case BitcoinDE_AccountLedgerParameter_OutgoingFeeVoluntaryOrderType:
+            orderTypeString = BitcoinDE_AccountLedgerParameter_OutgoingFeeVoluntaryOrderTypeKey;
+            break;
+        default:
+            NSLog(@"Unknown BitcoinDE_AccountLedgerParameter_OrderType: %tu", orderType);
+            break;
+    };
+    
+    NSString *startDateString = [SOXDateFormatter rfc3339DateTimeStringDate:nil];
+    NSString *endDateString   = [SOXDateFormatter rfc3339DateTimeStringDate:nil];
+    
+    NSNumber *pageNumber = @(page);
+    
+    NSDictionary *parameterDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                   orderTypeString,       AccountLedgerParameter_TypeKey
+                                   , @"2000-01-20T15:00:00+02:00",     AccountLedgerParameter_DateStartKey
+                                   , @"2017-04-05T15:00:00+02:00",       AccountLedgerParameter_DateEndKey
+                                   , pageNumber,          AccountLedgerParameter_PageKey
+                                   , nil];
+    
+    return parameterDict;
+}
+
+#pragma mark - Private Class methods
 + (SOXAccountLedger_BitcoinDE_Data *)accountLedgerDataForAccountLedgerDictionary:(NSDictionary *)aAccountLedgerDictionary {
     SOXAccountLedger_BitcoinDE_Data *accountLedgerData = [[SOXAccountLedger_BitcoinDE_Data alloc] init];
     [accountLedgerData setupMyAccountLedgerDataForAccountLedgerDictionary:aAccountLedgerDictionary];

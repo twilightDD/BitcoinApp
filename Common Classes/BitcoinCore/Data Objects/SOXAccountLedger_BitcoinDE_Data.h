@@ -8,6 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM (NSUInteger, BitcoinDE_AccountLedgerParameter_OrderType) {
+    BitcoinDE_AccountLedgerParameter_UnknownOrderType = 0
+    , BitcoinDE_AccountLedgerParameter_AllOrderType
+    , BitcoinDE_AccountLedgerParameter_BuyOrderType
+    , BitcoinDE_AccountLedgerParameter_SellOrderType
+    , BitcoinDE_AccountLedgerParameter_InpaymentOrderType
+    , BitcoinDE_AccountLedgerParameter_PayoutOrderType
+    , BitcoinDE_AccountLedgerParameter_AffiliateOrderType
+    , BitcoinDE_AccountLedgerParameter_WelcomeBTCOrderType
+    , BitcoinDE_AccountLedgerParameter_BuyYubiKeyOrderType
+    , BitcoinDE_AccountLedgerParameter_BuyGoldshopOrderType
+    , BitcoinDE_AccountLedgerParameter_BuyDiamondshopOrderType
+    , BitcoinDE_AccountLedgerParameter_KickbackOrderType
+    , BitcoinDE_AccountLedgerParameter_OutgoingFeeVoluntaryOrderType
+};
+
+
 @interface SOXAccountLedger_BitcoinDE_Data : NSObject
 
 @property (strong, nonatomic, readonly) NSString *positionDetails_Date;
@@ -24,5 +41,10 @@
 @property (strong, nonatomic, readonly) NSString *tradeDetails_Euro_after_fee;
 
 + (NSMutableArray *)accountLedgerDataArrayForAccountLedgerDictionary:(NSDictionary *)payloadDictionary;
+
++ (NSDictionary *)parameterForOrderType:(BitcoinDE_AccountLedgerParameter_OrderType)orderType
+                              startDate:(NSDate *)startDate
+                                endDate:(NSDate *)endDate
+                                   page:(NSInteger)page;
 
 @end
