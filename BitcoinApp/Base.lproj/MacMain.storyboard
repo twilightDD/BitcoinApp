@@ -704,20 +704,20 @@
                                 <tabViewItems>
                                     <tabViewItem label="Tab" identifier="1" id="eLR-ge-YSa">
                                         <view key="view" id="kJ0-KF-JIj">
-                                            <rect key="frame" x="10" y="33" width="914" height="270"/>
+                                            <rect key="frame" x="10" y="33" width="914" height="468"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="A8Q-hU-Lrd">
-                                                    <rect key="frame" x="0.0" y="0.0" width="449" height="270"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="449" height="468"/>
                                                     <connections>
                                                         <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerBuySegue" id="ZEn-rF-4RA"/>
                                                     </connections>
                                                 </containerView>
                                                 <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Tu7-dB-5fP">
-                                                    <rect key="frame" x="455" y="12" width="5" height="246"/>
+                                                    <rect key="frame" x="455" y="12" width="5" height="444"/>
                                                 </box>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="ovw-tP-oiM">
-                                                    <rect key="frame" x="466" y="0.0" width="448" height="270"/>
+                                                    <rect key="frame" x="466" y="0.0" width="448" height="468"/>
                                                     <connections>
                                                         <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerSellSegue" id="Sxs-iN-Wh5"/>
                                                     </connections>
@@ -1673,7 +1673,7 @@
                                     <rect key="frame" x="1" y="0.0" width="312" height="249"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" headerView="2F9-Ce-VdL" id="kdt-bX-tib">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" headerView="2F9-Ce-VdL" id="kdt-bX-tib">
                                             <rect key="frame" x="0.0" y="0.0" width="814" height="226"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -1898,6 +1898,7 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="removeButtonAction:" target="q7D-iu-Op3" id="4U7-wK-ZI2"/>
+                                    <binding destination="t8U-TY-Pcr" name="enabled" keyPath="selectedObjects.@count" id="J3r-4M-cN3"/>
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YlZ-0A-yU6">
@@ -2685,7 +2686,7 @@ Gw
                                 <rect key="frame" x="21" y="65" width="498" height="229"/>
                                 <subviews>
                                     <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="09c-cw-0o8">
-                                        <rect key="frame" x="242" y="107" width="16" height="16"/>
+                                        <rect key="frame" x="241" y="107" width="16" height="16"/>
                                     </progressIndicator>
                                 </subviews>
                                 <constraints>

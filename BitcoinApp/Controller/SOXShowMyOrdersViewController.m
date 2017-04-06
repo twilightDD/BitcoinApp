@@ -56,7 +56,6 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
     {
         self.reloadButton.title = @"Reload";
         self.removeButton.title = @"Remove order";
-        self.removeButton.enabled = NO;
     }
     
     {
