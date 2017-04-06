@@ -7,7 +7,7 @@
 //
 
 #import "SOXShowMyOrdersViewController.h"
-#import "SOXSpinningWheelAbstractViewController_Private.h"
+#import "SOXAbstractViewController_Private.h"
 
 #import "SOXMyOrderDetailsViewController.h"
 

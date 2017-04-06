@@ -7,7 +7,7 @@
 //
 
 #import "SOXMyAccountLedgerViewController.h"
-#import "SOXSpinningWheelAbstractViewController_Private.h"
+#import "SOXAbstractViewController_Private.h"
 
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXAccountLedger_BitcoinDE_Data.h"

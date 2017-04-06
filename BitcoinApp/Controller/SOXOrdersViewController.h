@@ -6,14 +6,14 @@
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
 
-#import "SOXSpinningWheelAbstractViewController.h"
+#import "SOXAbstractViewController.h"
 
 typedef NS_ENUM (NSUInteger, OrdersType) {
     OrdersBuyType = 1, // "buy" liefert Verkaufsangebote
     OrdersSellType = 2 // "sell" liefert Kaufangebote
 };
 
-@interface SOXOrdersViewController : SOXSpinningWheelAbstractViewController
+@interface SOXOrdersViewController : SOXAbstractViewController
 
 @property (nonatomic) OrdersType orderType;
 

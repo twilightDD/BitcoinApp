@@ -6,8 +6,8 @@
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
 
-#import "SOXSpinningWheelAbstractViewController.h"
+#import "SOXAbstractViewController.h"
 
-@interface SOXMyAccountLedgerViewController : SOXSpinningWheelAbstractViewController
+@interface SOXMyAccountLedgerViewController : SOXAbstractViewController
 
 @end

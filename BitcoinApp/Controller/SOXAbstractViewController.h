@@ -1,5 +1,5 @@
 //
-//  SOXSpinningWheelAbstractViewController.h
+//  SOXAbstractViewController.h
 //  BitcoinApp
 //
 //  Created by Peter Hauke on 05.04.17.
@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface SOXSpinningWheelAbstractViewController : NSViewController
+@interface SOXAbstractViewController : NSViewController
 
 @end

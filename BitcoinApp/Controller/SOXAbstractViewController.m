@@ -1,21 +1,21 @@
 //
-//  SOXSpinningWheelAbstractViewController.m
+//  SOXAbstractViewController.m
 //  BitcoinApp
 //
 //  Created by Peter Hauke on 05.04.17.
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
 
-#import "SOXSpinningWheelAbstractViewController.h"
+#import "SOXAbstractViewController.h"
 
-@interface SOXSpinningWheelAbstractViewController ()
+@interface SOXAbstractViewController ()
 
 @property (weak) IBOutlet NSView *spinningBackgroundView;
 @property (weak) IBOutlet NSProgressIndicator *circularProgressIndicator;
 
 @end
 
-@implementation SOXSpinningWheelAbstractViewController
+@implementation SOXAbstractViewController
 
 - (void)viewWillAppear {
     [super viewWillAppear];
