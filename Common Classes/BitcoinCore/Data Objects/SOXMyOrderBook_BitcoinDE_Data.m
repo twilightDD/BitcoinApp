@@ -55,6 +55,16 @@
     
     return myOrderbookDataArray;
 }
++ (NSArray <NSDictionary *> *)parametersForDeletingMyOrderBookDatas:(NSArray <SOXMyOrderBook_BitcoinDE_Data *>*)myOrderBookDatas {
+    NSMutableArray *parameters = [NSMutableArray array];
+    for (SOXMyOrderBook_BitcoinDE_Data *myOrderBookData in myOrderBookDatas) {
+        NSString *myOrderbookDataOrderID = myOrderBookData.orderInformation_orderID;
+        NSDictionary *parameter = [SOXMyOrderBook_BitcoinDE_Data parameterForDeletingOrderWithOrderID:myOrderbookDataOrderID];
+        [parameters addObject:parameter];
+    }
+    
+    return [parameters copy];
+}
 
 + (NSDictionary *)parameterForDeletingOrderWithOrderID:(NSString *)orderID {
     NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:

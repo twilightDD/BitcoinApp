@@ -13,5 +13,5 @@
 + (NSMutableArray *)myOrderbookDataArrayForMyOrderbookDictionary:(NSDictionary *)payloadDictionary;
 
 + (NSDictionary *)parameterForDeletingOrderWithOrderID:(NSString *)orderID;
-
++ (NSArray <NSDictionary *> *)parametersForDeletingMyOrderBookDatas:(NSArray <SOXMyOrderBook_BitcoinDE_Data *>*)myOrderBookDatas;
 @end
