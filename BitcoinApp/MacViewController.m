@@ -54,6 +54,8 @@ static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewCont
     item1.label = @"Account ledger";
     NSTabViewItem *item2 = [self.bottomTabView tabViewItemAtIndex:2];
     item2.label = @"My Trade History";
+    NSTabViewItem *item3 = [self.bottomTabView tabViewItemAtIndex:3];
+    item3.label = @"My Active Orders";
 }
     
 - (void)setRepresentedObject:(id)representedObject {

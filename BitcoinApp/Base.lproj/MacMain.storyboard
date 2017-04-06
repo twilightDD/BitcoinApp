@@ -698,142 +698,117 @@
                                     <segue destination="QBX-OO-T9K" kind="embed" identifier="BannerContainerViewSegue" id="FTT-y5-ehJ"/>
                                 </connections>
                             </containerView>
-                            <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="SRM-Fi-ftE">
-                                <rect key="frame" x="20" y="523" width="920" height="5"/>
-                            </box>
-                            <splitView arrangesAllSubviews="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Azg-gN-FBT">
-                                <rect key="frame" x="20" y="20" width="920" height="497"/>
-                                <subviews>
-                                    <customView id="pbJ-vd-TbC">
-                                        <rect key="frame" x="0.0" y="0.0" width="920" height="176"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <subviews>
-                                            <containerView translatesAutoresizingMaskIntoConstraints="NO" id="YxP-Pw-sYa">
-                                                <rect key="frame" x="0.0" y="0.0" width="920" height="176"/>
-                                                <connections>
-                                                    <segue destination="q7D-iu-Op3" kind="embed" identifier="ShowMyOrdersContainerSegue" id="F6d-Ua-Exg"/>
-                                                </connections>
-                                            </containerView>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="YxP-Pw-sYa" secondAttribute="trailing" id="EZz-gO-ynu"/>
-                                            <constraint firstItem="YxP-Pw-sYa" firstAttribute="top" secondItem="pbJ-vd-TbC" secondAttribute="top" id="Eyk-ND-mXs"/>
-                                            <constraint firstAttribute="bottom" secondItem="YxP-Pw-sYa" secondAttribute="bottom" id="r6t-rR-Oh0"/>
-                                            <constraint firstItem="YxP-Pw-sYa" firstAttribute="leading" secondItem="pbJ-vd-TbC" secondAttribute="leading" id="slc-fe-i1g"/>
-                                        </constraints>
-                                    </customView>
-                                    <customView id="38U-sb-RBv">
-                                        <rect key="frame" x="0.0" y="185" width="920" height="312"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <subviews>
-                                            <tabView translatesAutoresizingMaskIntoConstraints="NO" id="B9m-IQ-OSo">
-                                                <rect key="frame" x="-7" y="-10" width="934" height="316"/>
-                                                <font key="font" metaFont="system"/>
-                                                <tabViewItems>
-                                                    <tabViewItem label="Tab" identifier="1" id="eLR-ge-YSa">
-                                                        <view key="view" id="kJ0-KF-JIj">
-                                                            <rect key="frame" x="10" y="33" width="914" height="270"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            <subviews>
-                                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="A8Q-hU-Lrd">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="449" height="270"/>
-                                                                    <connections>
-                                                                        <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerBuySegue" id="ZEn-rF-4RA"/>
-                                                                    </connections>
-                                                                </containerView>
-                                                                <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Tu7-dB-5fP">
-                                                                    <rect key="frame" x="455" y="12" width="5" height="246"/>
-                                                                </box>
-                                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="ovw-tP-oiM">
-                                                                    <rect key="frame" x="466" y="0.0" width="448" height="270"/>
-                                                                    <connections>
-                                                                        <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerSellSegue" id="Sxs-iN-Wh5"/>
-                                                                    </connections>
-                                                                </containerView>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstItem="ovw-tP-oiM" firstAttribute="top" secondItem="kJ0-KF-JIj" secondAttribute="top" id="8YB-dT-0hh"/>
-                                                                <constraint firstAttribute="bottom" secondItem="A8Q-hU-Lrd" secondAttribute="bottom" id="FSM-bq-C0E"/>
-                                                                <constraint firstAttribute="trailing" secondItem="ovw-tP-oiM" secondAttribute="trailing" id="RaL-bc-3cN"/>
-                                                                <constraint firstItem="Tu7-dB-5fP" firstAttribute="top" secondItem="kJ0-KF-JIj" secondAttribute="top" constant="12" symbolic="YES" id="SVi-o8-MQh"/>
-                                                                <constraint firstItem="ovw-tP-oiM" firstAttribute="leading" secondItem="Tu7-dB-5fP" secondAttribute="trailing" constant="8" symbolic="YES" id="Vu6-JM-dVz"/>
-                                                                <constraint firstItem="A8Q-hU-Lrd" firstAttribute="leading" secondItem="kJ0-KF-JIj" secondAttribute="leading" id="a47-8e-4jO"/>
-                                                                <constraint firstAttribute="bottom" secondItem="ovw-tP-oiM" secondAttribute="bottom" id="arn-Oz-Fk5"/>
-                                                                <constraint firstItem="A8Q-hU-Lrd" firstAttribute="top" secondItem="kJ0-KF-JIj" secondAttribute="top" id="ist-fW-pmi"/>
-                                                                <constraint firstAttribute="bottom" secondItem="Tu7-dB-5fP" secondAttribute="bottom" constant="12" symbolic="YES" id="jHt-5M-CfK"/>
-                                                                <constraint firstItem="Tu7-dB-5fP" firstAttribute="centerX" secondItem="kJ0-KF-JIj" secondAttribute="centerX" id="oFq-am-bxn"/>
-                                                                <constraint firstItem="Tu7-dB-5fP" firstAttribute="leading" secondItem="A8Q-hU-Lrd" secondAttribute="trailing" constant="8" symbolic="YES" id="yKe-a2-GL6"/>
-                                                            </constraints>
-                                                        </view>
-                                                    </tabViewItem>
-                                                    <tabViewItem label="View" identifier="2" id="Ch0-iV-PHR">
-                                                        <view key="view" id="Q3R-zu-LRo">
-                                                            <rect key="frame" x="10" y="33" width="914" height="251"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            <subviews>
-                                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="oUM-74-QBF">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="251"/>
-                                                                    <connections>
-                                                                        <segue destination="d67-em-sMP" kind="embed" identifier="AccountLedgerViewControllerSegue" id="OTS-cT-mu6"/>
-                                                                    </connections>
-                                                                </containerView>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstItem="oUM-74-QBF" firstAttribute="top" secondItem="Q3R-zu-LRo" secondAttribute="top" id="CI4-lW-jUo"/>
-                                                                <constraint firstAttribute="bottom" secondItem="oUM-74-QBF" secondAttribute="bottom" id="QPG-E0-df7"/>
-                                                                <constraint firstAttribute="trailing" secondItem="oUM-74-QBF" secondAttribute="trailing" id="e7A-yI-KBM"/>
-                                                                <constraint firstItem="oUM-74-QBF" firstAttribute="leading" secondItem="Q3R-zu-LRo" secondAttribute="leading" id="f22-gZ-xbP"/>
-                                                            </constraints>
-                                                        </view>
-                                                    </tabViewItem>
-                                                    <tabViewItem label="My Trade History" identifier="" id="KJJ-NU-KfP">
-                                                        <view key="view" id="Jwu-D5-GY5">
-                                                            <rect key="frame" x="10" y="33" width="914" height="251"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            <subviews>
-                                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="Jo0-rk-ilP">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="251"/>
-                                                                    <connections>
-                                                                        <segue destination="TPt-gD-CmY" kind="embed" identifier="MyTradeHistoryViewControllerSegue" id="aLD-dy-1E4"/>
-                                                                    </connections>
-                                                                </containerView>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstItem="Jo0-rk-ilP" firstAttribute="leading" secondItem="Jwu-D5-GY5" secondAttribute="leading" id="TuW-NA-g3D"/>
-                                                                <constraint firstAttribute="bottom" secondItem="Jo0-rk-ilP" secondAttribute="bottom" id="bPw-Cb-ugh"/>
-                                                                <constraint firstItem="Jo0-rk-ilP" firstAttribute="top" secondItem="Jwu-D5-GY5" secondAttribute="top" id="dlV-J7-T8a"/>
-                                                                <constraint firstAttribute="trailing" secondItem="Jo0-rk-ilP" secondAttribute="trailing" id="kEj-F3-wjK"/>
-                                                            </constraints>
-                                                        </view>
-                                                    </tabViewItem>
-                                                </tabViewItems>
-                                            </tabView>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="B9m-IQ-OSo" firstAttribute="leading" secondItem="38U-sb-RBv" secondAttribute="leading" id="2c7-tW-Rz6"/>
-                                            <constraint firstAttribute="bottom" secondItem="B9m-IQ-OSo" secondAttribute="bottom" id="d11-jY-a1g"/>
-                                            <constraint firstItem="B9m-IQ-OSo" firstAttribute="top" secondItem="38U-sb-RBv" secondAttribute="top" constant="12" symbolic="YES" id="gT8-Ta-aOu"/>
-                                            <constraint firstAttribute="trailing" secondItem="B9m-IQ-OSo" secondAttribute="trailing" id="vNR-Mb-eSw"/>
-                                        </constraints>
-                                    </customView>
-                                </subviews>
-                                <holdingPriorities>
-                                    <real value="250"/>
-                                    <real value="250"/>
-                                </holdingPriorities>
-                            </splitView>
+                            <tabView translatesAutoresizingMaskIntoConstraints="NO" id="B9m-IQ-OSo">
+                                <rect key="frame" x="13" y="10" width="934" height="514"/>
+                                <font key="font" metaFont="system"/>
+                                <tabViewItems>
+                                    <tabViewItem label="Tab" identifier="1" id="eLR-ge-YSa">
+                                        <view key="view" id="kJ0-KF-JIj">
+                                            <rect key="frame" x="10" y="33" width="914" height="270"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="A8Q-hU-Lrd">
+                                                    <rect key="frame" x="0.0" y="0.0" width="449" height="270"/>
+                                                    <connections>
+                                                        <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerBuySegue" id="ZEn-rF-4RA"/>
+                                                    </connections>
+                                                </containerView>
+                                                <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Tu7-dB-5fP">
+                                                    <rect key="frame" x="455" y="12" width="5" height="246"/>
+                                                </box>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="ovw-tP-oiM">
+                                                    <rect key="frame" x="466" y="0.0" width="448" height="270"/>
+                                                    <connections>
+                                                        <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerSellSegue" id="Sxs-iN-Wh5"/>
+                                                    </connections>
+                                                </containerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ovw-tP-oiM" firstAttribute="top" secondItem="kJ0-KF-JIj" secondAttribute="top" id="8YB-dT-0hh"/>
+                                                <constraint firstAttribute="bottom" secondItem="A8Q-hU-Lrd" secondAttribute="bottom" id="FSM-bq-C0E"/>
+                                                <constraint firstAttribute="trailing" secondItem="ovw-tP-oiM" secondAttribute="trailing" id="RaL-bc-3cN"/>
+                                                <constraint firstItem="Tu7-dB-5fP" firstAttribute="top" secondItem="kJ0-KF-JIj" secondAttribute="top" constant="12" symbolic="YES" id="SVi-o8-MQh"/>
+                                                <constraint firstItem="ovw-tP-oiM" firstAttribute="leading" secondItem="Tu7-dB-5fP" secondAttribute="trailing" constant="8" symbolic="YES" id="Vu6-JM-dVz"/>
+                                                <constraint firstItem="A8Q-hU-Lrd" firstAttribute="leading" secondItem="kJ0-KF-JIj" secondAttribute="leading" id="a47-8e-4jO"/>
+                                                <constraint firstAttribute="bottom" secondItem="ovw-tP-oiM" secondAttribute="bottom" id="arn-Oz-Fk5"/>
+                                                <constraint firstItem="A8Q-hU-Lrd" firstAttribute="top" secondItem="kJ0-KF-JIj" secondAttribute="top" id="ist-fW-pmi"/>
+                                                <constraint firstAttribute="bottom" secondItem="Tu7-dB-5fP" secondAttribute="bottom" constant="12" symbolic="YES" id="jHt-5M-CfK"/>
+                                                <constraint firstItem="Tu7-dB-5fP" firstAttribute="centerX" secondItem="kJ0-KF-JIj" secondAttribute="centerX" id="oFq-am-bxn"/>
+                                                <constraint firstItem="Tu7-dB-5fP" firstAttribute="leading" secondItem="A8Q-hU-Lrd" secondAttribute="trailing" constant="8" symbolic="YES" id="yKe-a2-GL6"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="View" identifier="2" id="Ch0-iV-PHR">
+                                        <view key="view" id="Q3R-zu-LRo">
+                                            <rect key="frame" x="10" y="33" width="914" height="270"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="oUM-74-QBF">
+                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="270"/>
+                                                    <connections>
+                                                        <segue destination="d67-em-sMP" kind="embed" identifier="AccountLedgerViewControllerSegue" id="OTS-cT-mu6"/>
+                                                    </connections>
+                                                </containerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="oUM-74-QBF" firstAttribute="top" secondItem="Q3R-zu-LRo" secondAttribute="top" id="CI4-lW-jUo"/>
+                                                <constraint firstAttribute="bottom" secondItem="oUM-74-QBF" secondAttribute="bottom" id="QPG-E0-df7"/>
+                                                <constraint firstAttribute="trailing" secondItem="oUM-74-QBF" secondAttribute="trailing" id="e7A-yI-KBM"/>
+                                                <constraint firstItem="oUM-74-QBF" firstAttribute="leading" secondItem="Q3R-zu-LRo" secondAttribute="leading" id="f22-gZ-xbP"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="My Trade History" identifier="" id="KJJ-NU-KfP">
+                                        <view key="view" id="Jwu-D5-GY5">
+                                            <rect key="frame" x="10" y="33" width="914" height="270"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="Jo0-rk-ilP">
+                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="270"/>
+                                                    <connections>
+                                                        <segue destination="TPt-gD-CmY" kind="embed" identifier="MyTradeHistoryViewControllerSegue" id="aLD-dy-1E4"/>
+                                                    </connections>
+                                                </containerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Jo0-rk-ilP" firstAttribute="leading" secondItem="Jwu-D5-GY5" secondAttribute="leading" id="TuW-NA-g3D"/>
+                                                <constraint firstAttribute="bottom" secondItem="Jo0-rk-ilP" secondAttribute="bottom" id="bPw-Cb-ugh"/>
+                                                <constraint firstItem="Jo0-rk-ilP" firstAttribute="top" secondItem="Jwu-D5-GY5" secondAttribute="top" id="dlV-J7-T8a"/>
+                                                <constraint firstAttribute="trailing" secondItem="Jo0-rk-ilP" secondAttribute="trailing" id="kEj-F3-wjK"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Active orders" identifier="" id="l82-SC-zEw">
+                                        <view key="view" id="MN5-M8-jLH">
+                                            <rect key="frame" x="10" y="33" width="914" height="468"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="aZ7-BW-zaH">
+                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="468"/>
+                                                    <connections>
+                                                        <segue destination="q7D-iu-Op3" kind="embed" id="2AF-qZ-Ph7"/>
+                                                    </connections>
+                                                </containerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="aZ7-BW-zaH" firstAttribute="top" secondItem="MN5-M8-jLH" secondAttribute="top" id="RT3-9d-oyx"/>
+                                                <constraint firstAttribute="bottom" secondItem="aZ7-BW-zaH" secondAttribute="bottom" id="fAg-fi-IYU"/>
+                                                <constraint firstItem="aZ7-BW-zaH" firstAttribute="leading" secondItem="MN5-M8-jLH" secondAttribute="leading" id="nyn-vt-Zog"/>
+                                                <constraint firstAttribute="trailing" secondItem="aZ7-BW-zaH" secondAttribute="trailing" id="uLd-c2-oiJ"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                </tabViewItems>
+                            </tabView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="CSm-MP-mkG" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="19" id="0tE-OE-4Hw"/>
-                            <constraint firstItem="SRM-Fi-ftE" firstAttribute="trailing" secondItem="CSm-MP-mkG" secondAttribute="trailing" id="4eE-3t-70L"/>
-                            <constraint firstAttribute="bottom" secondItem="Azg-gN-FBT" secondAttribute="bottom" constant="20" symbolic="YES" id="7Ju-02-Hdh"/>
-                            <constraint firstItem="Azg-gN-FBT" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="Lbb-nt-1Dh"/>
-                            <constraint firstItem="SRM-Fi-ftE" firstAttribute="top" secondItem="CSm-MP-mkG" secondAttribute="bottom" constant="8" symbolic="YES" id="MAt-l0-Zeq"/>
-                            <constraint firstItem="SRM-Fi-ftE" firstAttribute="leading" secondItem="CSm-MP-mkG" secondAttribute="leading" id="f02-i4-3oL"/>
-                            <constraint firstItem="Azg-gN-FBT" firstAttribute="top" secondItem="SRM-Fi-ftE" secondAttribute="bottom" constant="8" symbolic="YES" id="jZe-bh-lf2"/>
+                            <constraint firstItem="B9m-IQ-OSo" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="2yw-fd-kfL"/>
+                            <constraint firstAttribute="trailing" secondItem="B9m-IQ-OSo" secondAttribute="trailing" constant="20" symbolic="YES" id="5lN-Sj-40p"/>
+                            <constraint firstAttribute="bottom" secondItem="B9m-IQ-OSo" secondAttribute="bottom" constant="20" symbolic="YES" id="QHd-3a-WVE"/>
                             <constraint firstItem="CSm-MP-mkG" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="nfg-cA-a2k"/>
                             <constraint firstAttribute="trailing" secondItem="CSm-MP-mkG" secondAttribute="trailing" constant="20" id="reb-tP-K6x"/>
-                            <constraint firstAttribute="trailing" secondItem="Azg-gN-FBT" secondAttribute="trailing" constant="20" symbolic="YES" id="sWe-18-XBh"/>
+                            <constraint firstItem="B9m-IQ-OSo" firstAttribute="top" secondItem="CSm-MP-mkG" secondAttribute="bottom" constant="16" id="yWP-zG-RBt"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1682,7 +1657,7 @@
                 </arrayController>
                 <userDefaultsController representsSharedInstance="YES" id="fA4-JS-frA"/>
             </objects>
-            <point key="canvasLocation" x="-326" y="1648"/>
+            <point key="canvasLocation" x="-941" y="1601"/>
         </scene>
         <!--Show My Orders View Controller-->
         <scene sceneID="FDl-hu-vIc">
@@ -1972,7 +1947,7 @@
                 </arrayController>
                 <userDefaultsController id="NkV-w9-bXQ"/>
             </objects>
-            <point key="canvasLocation" x="911" y="825"/>
+            <point key="canvasLocation" x="1000" y="1601"/>
         </scene>
         <!--My Order Details View Controller-->
         <scene sceneID="mTb-3W-ATq">
@@ -2471,12 +2446,12 @@ Gw
         <scene sceneID="kdR-ZD-AXk">
             <objects>
                 <viewController id="d67-em-sMP" customClass="SOXMyAccountLedgerViewController" sceneMemberID="viewController">
-                    <view key="view" id="KG1-ac-oC6">
-                        <rect key="frame" x="0.0" y="0.0" width="885" height="344"/>
+                    <view key="view" misplaced="YES" id="KG1-ac-oC6">
+                        <rect key="frame" x="0.0" y="0.0" width="529" height="344"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RTM-y7-dO4">
-                                <rect key="frame" x="18" y="325" width="849" height="19"/>
+                                <rect key="frame" x="18" y="325" width="504" height="19"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="ceY-tG-kvr">
                                     <font key="font" metaFont="systemMedium" size="15"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -2484,7 +2459,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="CvW-je-qdf">
-                                <rect key="frame" x="388" y="20" width="109" height="21"/>
+                                <rect key="frame" x="216" y="20" width="109" height="21"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VA2-Va-dtt">
                                         <rect key="frame" x="66" y="-7" width="49" height="32"/>
@@ -2522,9 +2497,9 @@ Gw
                                 </constraints>
                             </customView>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fGp-j1-fNK">
-                                <rect key="frame" x="20" y="49" width="845" height="268"/>
+                                <rect key="frame" x="20" y="49" width="500" height="268"/>
                                 <clipView key="contentView" id="q6P-13-wzZ">
-                                    <rect key="frame" x="1" y="0.0" width="843" height="252"/>
+                                    <rect key="frame" x="1" y="0.0" width="498" height="252"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" headerView="UdI-6x-40i" id="ukh-mk-8h8">
@@ -2694,7 +2669,7 @@ Gw
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="180" id="wkM-9V-7ME"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="7C6-vt-23Y">
-                                    <rect key="frame" x="1" y="252" width="843" height="15"/>
+                                    <rect key="frame" x="1" y="252" width="498" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="lZK-RD-pkv">
@@ -2707,10 +2682,10 @@ Gw
                                 </tableHeaderView>
                             </scrollView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="4oR-2z-iOV" userLabel="SpinningBackgroundView">
-                                <rect key="frame" x="21" y="65" width="843" height="229"/>
+                                <rect key="frame" x="21" y="65" width="498" height="229"/>
                                 <subviews>
                                     <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="09c-cw-0o8">
-                                        <rect key="frame" x="414" y="107" width="16" height="16"/>
+                                        <rect key="frame" x="242" y="107" width="16" height="16"/>
                                     </progressIndicator>
                                 </subviews>
                                 <constraints>
@@ -2755,7 +2730,7 @@ Gw
                 </arrayController>
                 <userDefaultsController id="lEg-Nr-J4c"/>
             </objects>
-            <point key="canvasLocation" x="434" y="1636"/>
+            <point key="canvasLocation" x="-404.5" y="1623"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="GdZ-5p-nL2">
@@ -3203,7 +3178,7 @@ Gw
                 </arrayController>
                 <userDefaultsController id="j00-vA-Ddo"/>
             </objects>
-            <point key="canvasLocation" x="1492" y="1712"/>
+            <point key="canvasLocation" x="328" y="1675"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="bBP-r4-ovA">
@@ -3223,6 +3198,6 @@ Gw
         <image name="NSRefreshTemplate" width="11" height="15"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Sxs-iN-Wh5"/>
+        <segue reference="ZEn-rF-4RA"/>
     </inferredMetricsTieBreakers>
 </document>
