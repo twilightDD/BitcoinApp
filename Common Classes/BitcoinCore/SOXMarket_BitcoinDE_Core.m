@@ -419,14 +419,15 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
 
 + (void)createURIForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType {
     NSString *uri = [SOXMarket_BitcoinDE_Core commandForServerCommandType:serverCommandType];
-    
+    NSLog(@"uri\n%@",uri);
     [SOXMarket_BitcoinDE_Core sharedCore].uri = uri;
 }
 
 + (void)createNonceString {
     NSDate   *date     = [NSDate date];
-    NSString *timeInMS = [NSString stringWithFormat:@"%.0f", floor([date timeIntervalSince1970] * 100000)];
-    //timeInMS = @"50000";
+    NSString *timeInMS = [NSString stringWithFormat:@"%.0f", floor([date timeIntervalSince1970] * 1000000)];
+    //timeInMS = @"149158196620898";
+    NSLog(@"nonce \n%@",timeInMS);
     [SOXMarket_BitcoinDE_Core sharedCore].nonce = timeInMS;
 }
 
@@ -458,6 +459,7 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
         };
     }
 
+    NSLog(@"url_encoded_query string\n%@",url_encoded_query_string);
     [SOXMarket_BitcoinDE_Core sharedCore].url_encoded_query_string = url_encoded_query_string;
 }
 + (void)createURL {
@@ -476,7 +478,7 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
         url = [url stringByAppendingString:url_encoded_query_string];
     }
 
-    
+    NSLog(@"url\n%@",url);
     core.url = url;
 }
 
@@ -490,7 +492,7 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
             md5String = [SOXHash md5StringForString:url_encoded_query_string];
         }
     }
-
+    NSLog(@"md5 %@", md5String);
     [SOXMarket_BitcoinDE_Core sharedCore].post_parameter_md5_hashed_url_encoded_query_string = md5String;
 }
 
@@ -509,7 +511,12 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
     NSString *api_key = core.api_key;
     NSString *nonce = core.nonce;
     NSString *post_parameter_md5_hashed_url_encoded_query_string = core.post_parameter_md5_hashed_url_encoded_query_string;
-    
+    NSString *url_encoded_query_string = core.url_encoded_query_string;
+//    if (url_encoded_query_string && [httpMethod isEqualToString:@"POST"]) {
+//        url = [url stringByAppendingString:@"?"];
+//        
+//        url = [url stringByAppendingString:url_encoded_query_string];
+//    }
     
     NSString *hmac_data = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@"
                            , httpMethod
@@ -522,7 +529,7 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
                            , @"#"
                            , post_parameter_md5_hashed_url_encoded_query_string
                            ];
-    
+    NSLog(@"hmac_data\n%@",hmac_data);
     [SOXMarket_BitcoinDE_Core sharedCore].hmac_data = hmac_data;
 }
 
@@ -530,14 +537,15 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
     SOXMarket_BitcoinDE_Core *core = [SOXMarket_BitcoinDE_Core sharedCore];
     NSString *hmac_data  = core.hmac_data;
     NSString *api_secret = core.api_secret;
+    
+    NSString *hmac = nil;
     if (hmac_data) {
-        NSString *hmac = [SOXHash hexadecimalHMACForString:hmac_data
-                                                   withKey:api_secret];
-        core.hmac = hmac;
+        hmac = [SOXHash hexadecimalHMACForString:hmac_data
+                                         withKey:api_secret];
     }
-    else {
-        core.hmac = nil;
-    }
+    
+    NSLog(@"hmac\n%@", hmac);
+    core.hmac = hmac;
 }
 
 
@@ -552,10 +560,10 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
     
     
     NSString *url_encoded_query_string = core.url_encoded_query_string;
-    if (url_encoded_query_string && [httpMethod isEqualToString:@"POST"]) {
-        urlString = [urlString stringByAppendingString:@"?"];
-        urlString = [urlString stringByAppendingString:url_encoded_query_string];
-    }
+//    if (url_encoded_query_string && [httpMethod isEqualToString:@"POST"]) {
+//        urlString = [urlString stringByAppendingString:@"?"];
+//        urlString = [urlString stringByAppendingString:url_encoded_query_string];
+//    }
 
     NSURL *url = [NSURL URLWithString:urlString];
     
@@ -581,7 +589,7 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
 }
 
 + (void)addNSURLSessionTask:(NSURLSessionTask* )urlSessionTask {
-    NSLog(@"### ADD A NEW NSURLSessionTask");
+ //   NSLog(@"### ADD A NEW NSURLSessionTask");
     NSMutableArray *networkQueue = [SOXMarket_BitcoinDE_Core networkQueue];
     [networkQueue addObject:urlSessionTask];
     
@@ -591,13 +599,13 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
 }
 
 + (void)startNextNSURLSessionTask {
-    NSLog(@"startNextNSURLSessionTask - currentCredits: %ti", [[SOXMarket_BitcoinDE_Core sharedCore] currentCredits]);
+ //   NSLog(@"startNextNSURLSessionTask - currentCredits: %ti", [[SOXMarket_BitcoinDE_Core sharedCore] currentCredits]);
     NSMutableArray *networkQueue = [SOXMarket_BitcoinDE_Core networkQueue];
     NSURLSessionTask *nextTask = networkQueue.firstObject;
     if (nextTask) {
         if ([SOXMarket_BitcoinDE_Core sharedCore].creditTimer
             && [SOXMarket_BitcoinDE_Core sharedCore].currentCredits < 3) { // TODO: TODO vergleich mit serverCommandType
-            NSLog(@"Delay ### START NEXT NSURLSessionTask");
+    //        NSLog(@"Delay ### START NEXT NSURLSessionTask");
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSTimer *startNextDelayTimer  = [NSTimer scheduledTimerWithTimeInterval:2.0
                                                                                  target:[SOXMarket_BitcoinDE_Core class]
@@ -608,14 +616,14 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
             });
         }
         else {
-            NSLog(@"### START NEXT NSURLSessionTask");
+         //   NSLog(@"### START NEXT NSURLSessionTask");
             [nextTask resume];
             [networkQueue removeObjectAtIndex:0];
             [SOXMarket_BitcoinDE_Core sharedCore].networkQueueIsRunning = YES;
         }
     }
     else {
-        NSLog(@"### There is no NEXT NSURLSessionTask - queue is empty");
+       // NSLog(@"### There is no NEXT NSURLSessionTask - queue is empty");
         [SOXMarket_BitcoinDE_Core sharedCore].networkQueueIsRunning = NO;
     }
 }
@@ -627,17 +635,17 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
     if ([SOXMarket_BitcoinDE_Core sharedCore].maxCredits == 0) {
         // get maxCredits from first server responds
         [SOXMarket_BitcoinDE_Core sharedCore].maxCredits = newCreditValue.integerValue + creditCosts;
-        NSLog(@"updateCurrentCredit, inital maxCredits: %ti", [SOXMarket_BitcoinDE_Core sharedCore].maxCredits);
+       // NSLog(@"updateCurrentCredit, inital maxCredits: %ti", [SOXMarket_BitcoinDE_Core sharedCore].maxCredits);
     }
     else if ([SOXMarket_BitcoinDE_Core sharedCore].maxCredits < newCreditValue.integerValue) {
         // maybe maxCredit has changed?
         [SOXMarket_BitcoinDE_Core sharedCore].maxCredits = newCreditValue.integerValue + creditCosts;
-        NSLog(@"updateCurrentCredit, update maxCredits: %ti", [SOXMarket_BitcoinDE_Core sharedCore].maxCredits);
+        //NSLog(@"updateCurrentCredit, update maxCredits: %ti", [SOXMarket_BitcoinDE_Core sharedCore].maxCredits);
     }
     
     // set currentCredits to new value
     [SOXMarket_BitcoinDE_Core sharedCore].currentCredits = newCreditValue.integerValue;
-    NSLog(@"updateCurrentCredit, currentCredits: %ti", [SOXMarket_BitcoinDE_Core sharedCore].currentCredits);
+  //  NSLog(@"updateCurrentCredit, currentCredits: %ti", [SOXMarket_BitcoinDE_Core sharedCore].currentCredits);
 }
 
 + (void)creditUpdateTimerMethod:(id)userInfo {
@@ -645,13 +653,13 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
     if ([SOXMarket_BitcoinDE_Core sharedCore].currentCredits < [SOXMarket_BitcoinDE_Core sharedCore].maxCredits) {
         [SOXMarket_BitcoinDE_Core sharedCore].currentCredits++;
     }
-    NSLog(@"CreditTimer update: currentCredits %tu", [SOXMarket_BitcoinDE_Core sharedCore].currentCredits);
+ //   NSLog(@"CreditTimer update: currentCredits %tu", [SOXMarket_BitcoinDE_Core sharedCore].currentCredits);
     if ([SOXMarket_BitcoinDE_Core sharedCore].currentCredits == [SOXMarket_BitcoinDE_Core sharedCore].maxCredits) {
         // stop timer
         NSTimer *creditTimer = [[SOXMarket_BitcoinDE_Core sharedCore] creditTimer];
         [creditTimer invalidate];
         creditTimer = nil;
-        NSLog(@"Credit timer invalidated and nil'ed");
+ //       NSLog(@"Credit timer invalidated and nil'ed");
     }
 }
 
@@ -670,7 +678,7 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
             creditTimer.tolerance = 0.05;
             [[NSRunLoop mainRunLoop] addTimer:creditTimer forMode:NSDefaultRunLoopMode];
             [SOXMarket_BitcoinDE_Core sharedCore].creditTimer = creditTimer;
-            NSLog(@"Credit timer started");
+           // NSLog(@"Credit timer started");
         });
     }
     
@@ -787,7 +795,7 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
 }
 
 + (NSString *)apiKey {
-    return @"a91d87355821c6ce9d073849a93dd0e6";
+    return @"db8b38266d2f955fa96f19064f60a4c8";
 }
 
 - (NSString *)api_key {
@@ -795,7 +803,7 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
 }
 
 + (NSString *)apiSecret {
-    return @"5d87a6573bec15f63f1f3255ca0f1ed63602243e";
+    return @"a4ebc1d021b88bba3c8b79ba4b93b1045dea0cc7";
 }
 
 - (NSString *)api_secret {
