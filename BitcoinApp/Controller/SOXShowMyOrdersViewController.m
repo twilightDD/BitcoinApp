@@ -97,7 +97,7 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
     else if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_RemoveOrderType)]){
         NSDictionary *errors = [answerOfServerRequest objectForKey:ServerAnswerErrorKey];
         if (errors.count == 0) {
-            self.countOfMyOrderBook_BitcoinDE_DatasToDelete++;
+            self.countOfDeletedMyOrderBook_BitcoinDE_Datas++;
             if (self.countOfMyOrderBook_BitcoinDE_DatasToDelete == self.countOfDeletedMyOrderBook_BitcoinDE_Datas) {
                 
                 // Start tableView update

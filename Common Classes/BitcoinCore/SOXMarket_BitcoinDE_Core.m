@@ -466,15 +466,15 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
     
     NSString *baseURL = @"https://api.bitcoin.de/v1";
     NSString *uri = core.uri;
-//    NSString *url_encoded_query_string = core.url_encoded_query_string;
-    
+    NSString *url_encoded_query_string = core.url_encoded_query_string;
+    NSString *httpMethod = core.httpMethod;
     
     NSString *url = nil;
     url = [NSString stringWithFormat:@"%@%@", baseURL, uri];
     
-//    if (url_encoded_query_string && [httpMethod isEqualToString:@"POST"]) {
-//        url = [url stringByAppendingString:url_encoded_query_string];
-//    }
+    if (url_encoded_query_string && [httpMethod isEqualToString:@"DELETE"]) {
+        url = [url stringByAppendingString:url_encoded_query_string];
+    }
 
     
     core.url = url;
@@ -552,7 +552,8 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
     
     
     NSString *url_encoded_query_string = core.url_encoded_query_string;
-    if (url_encoded_query_string && [httpMethod isEqualToString:@"DELETE"]) {
+    if (url_encoded_query_string && [httpMethod isEqualToString:@"POST"]) {
+        urlString = [urlString stringByAppendingString:@"?"];
         urlString = [urlString stringByAppendingString:url_encoded_query_string];
     }
 
