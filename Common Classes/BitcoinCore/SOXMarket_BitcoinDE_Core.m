@@ -534,11 +534,11 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
     NSString *nonce = core.nonce;
     NSString *hmac = core.hmac;
     
-    NSString *baseURL = @"https://api.bitcoin.de/v1";
-    // url = uri + '?' + encoded_string
-    
-    NSString *urlString = [NSString stringWithFormat:@"%@%@", baseURL, uri];
-    NSURL *url = [NSURL URLWithString:urlString];
+//    NSString *baseURL = @"https://api.bitcoin.de/v1";
+//    // url = uri + '?' + encoded_string
+//    
+//    NSString *urlString = [NSString stringWithFormat:@"%@%@", baseURL, uri];
+    NSURL *url = [NSURL URLWithString:core.url];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     {
