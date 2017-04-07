@@ -55,6 +55,7 @@
     
     return myOrderbookDataArray;
 }
+
 + (NSArray <NSDictionary *> *)parametersForDeletingMyOrderBookDatas:(NSArray <SOXMyOrderBook_BitcoinDE_Data *>*)myOrderBookDatas {
     NSMutableArray *parameters = [NSMutableArray array];
     for (SOXMyOrderBook_BitcoinDE_Data *myOrderBookData in myOrderBookDatas) {
@@ -71,6 +72,38 @@
                                orderID, @"order_id"
                                , nil];
     
+    return parameter;
+}
+
++ (NSDictionary *)parameterForNewOrderWithOrderType:(BitcoinDE_OrderType )type
+                                         max_amount:(NSNumber *)max_amount
+                                              price:(NSNumber *)price
+                                         min_amount:(NSNumber *)min_amount
+                                       end_datetime:(NSString *)end_datetime
+                     new_order_for_remaining_amount:(BOOL)new_order_for_remaining_amount
+                                    min_trust_level:(BitcoinDE_MinimalTrustLevel )min_trust_level
+                                      only_kyc_full:(BOOL)only_kyc_full
+                                     payment_option:(BitcoinDE_PaymentOption )payment_option
+                                       seat_of_bank:(NSArray <NSString *> *)seat_of_bank {
+    
+    NSString *typeString = @"sell";
+    NSString *min_trust_levelString = @"gold";
+    
+    
+    NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:
+                               @"sell", @"type"
+                               ,@(0.1) , @"max_amount"
+                               ,@(1500) , @"price"
+                               //,min_amount , @"min_amount"
+                               //,end_datetime , @"end_datetime"
+                               //,@(new_order_for_remaining_amount) , @"new_order_for_remaining_amount"
+                               //,min_trust_levelString , @"min_trust_level"
+                               //,@(only_kyc_full) , @"only_kyc_full"
+                               //,@(payment_option) , @"payment_option"
+                               //,seat_of_bank , @"seat_of_bank"
+                               , nil];
+
+//    parameter = [NSDictionary dictionary];
     return parameter;
 }
 

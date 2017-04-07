@@ -26,6 +26,9 @@ NS_RETURNS_NOT_RETAINED NSString *md5_string(NSString *string) {
 
 @implementation SOXHash
 + (NSString *)md5StringForString:(NSString *)string {
+    if (!string) {
+        string = @"";
+    }
     NSString *md5String = md5_string(string);
     return md5String;
 }
@@ -46,7 +49,7 @@ NS_RETURNS_NOT_RETAINED NSString *md5_string(NSString *string) {
     const unsigned char *buffer     = (const unsigned char *)[hmacAsData bytes];
     for (int i = 0; i < hmacAsData.length; ++i)
         hmac = [hmac stringByAppendingFormat:@"%02lx", (unsigned long)buffer[i]];
-
+//        hmac = [hmac stringByAppendingFormat:@"%02x", buffer[i]];
     return hmac;
 }
 

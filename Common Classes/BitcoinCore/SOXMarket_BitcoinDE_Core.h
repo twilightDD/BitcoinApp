@@ -23,6 +23,27 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_ServerCommandType) {
     , BitcoinDE_ShowMyTradesType
     , BitcoinDE_ShowAccountLedgerType
     , BitcoinDE_RemoveOrderType
+    , BitcoinDE_CreateOrderType
+    , BitcoinDE_ExecuteTrade
+};
+
+typedef NS_ENUM (NSUInteger, BitcoinDE_MinimalTrustLevel) {
+    BitcoinDE_UnknownMinimalTrustLevel = 0
+    , BitcoinDE_BronzeMinimalTrustLevel = 1
+    , BitcoinDE_SilverMinimalTrustLevel = 2
+    , BitcoinDE_GoldMinimalTrustLevel = 3
+};
+
+typedef NS_ENUM (NSUInteger, BitcoinDE_OrderType) {
+    BitcoinDE_UnknownOrderType
+    , BitcoinDE_BuyOrderType
+    , BitcoinDE_SellOrderType
+};
+typedef NS_ENUM (NSUInteger, BitcoinDE_PaymentOption) {
+    BitcoinDE_UnknownPaymentOption = 0
+    , BitcoinDE_ExpressOnlyPaymentOption = 1
+    , BitcoinDE_SEPAOnlyPaymentOption = 2
+    , BitcoinDE_ExpressAndSepaPaymentOption = 3
 };
 
 FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerServerCommandKey;

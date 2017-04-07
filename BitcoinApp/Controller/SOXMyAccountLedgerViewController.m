@@ -43,7 +43,7 @@
     [super viewWillAppear];
     
     [self setupUI];
-    [self requestServerData];
+   // [self requestServerData];
 }
 
 #pragma mark - Private methods
