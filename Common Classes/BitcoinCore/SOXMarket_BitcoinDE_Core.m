@@ -573,6 +573,7 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
         [request addValue:api_key           forHTTPHeaderField:@"X-API-KEY"];
         [request addValue:nonce             forHTTPHeaderField:@"X-API-NONCE"];
         [request addValue:hmac              forHTTPHeaderField:@"X-API-SIGNATURE"];
+        [request setHTTPBody:[url_encoded_query_string dataUsingEncoding:NSUTF8StringEncoding]];
     }
     
     return [request copy];
