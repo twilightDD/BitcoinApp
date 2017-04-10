@@ -22,6 +22,10 @@ NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
 NSString *const _Nonnull CreditUpdate_CurrentCreditsKey = @"CreditUpdate_CurrentCredits";
 NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_MaximalCredits";
 
+NSString *const _Nonnull HTTPMethodGETKey    = @"GET";
+NSString *const _Nonnull HTTPMethodDELETEKey = @"DELETE";
+NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
+
 @interface SOXMarket_BitcoinDE_Core ()
 
 @property (copy, nonatomic) NSString *baseURL;
@@ -261,14 +265,14 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
         case BitcoinDE_ShowRatesCommandType:
         case BitcoinDE_ShowMyTradesType:
         case BitcoinDE_ShowAccountLedgerType:
-            return @"GET";
+            return HTTPMethodGETKey;
             break;
         case BitcoinDE_RemoveOrderType:
-            return @"DELETE";
+            return HTTPMethodDELETEKey;
             break;
         case BitcoinDE_CreateOrderType:
         case BitcoinDE_ExecuteTrade:
-            return @"POST";
+            return HTTPMethodPOSTKey;
         default:
             break;
     }
@@ -300,11 +304,11 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
         allKeys = [allKeys sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
         
         NSString *httpMethod = [SOXMarket_BitcoinDE_Core sharedCore].httpMethod;
-        if ([httpMethod isEqualToString:@"DELETE"]) {
+        if ([httpMethod isEqualToString:HTTPMethodDELETEKey]) {
             NSArray *orderIDs = parameterDictionary.allValues;
             url_encoded_query_string = orderIDs.firstObject;
         }
-        else if ([httpMethod isEqualToString:@"POST"]) {
+        else if ([httpMethod isEqualToString:HTTPMethodPOSTKey]) {
             // create "parameter=value" pairs
             NSMutableArray *parameters = [NSMutableArray array];
             for (NSString *key in allKeys) {
@@ -335,7 +339,7 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
     NSString *url = nil;
     url = [NSString stringWithFormat:@"%@%@", baseURL, uri];
     
-    if (url_encoded_query_string && [httpMethod isEqualToString:@"DELETE"]) {
+    if (url_encoded_query_string && [httpMethod isEqualToString:HTTPMethodDELETEKey]) {
         url = [url stringByAppendingString:url_encoded_query_string];
     }
 
@@ -347,7 +351,7 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
     SOXMarket_BitcoinDE_Core *core = [SOXMarket_BitcoinDE_Core sharedCore];
     
     NSString *md5String = @"d41d8cd98f00b204e9800998ecf8427e"; // md5 for @""
-    if ([core.httpMethod isEqualToString:@"POST"]) {
+    if ([core.httpMethod isEqualToString:HTTPMethodPOSTKey]) {
         NSString *url_encoded_query_string = core.url_encoded_query_string;
         if (url_encoded_query_string) {
             md5String = [SOXHash md5StringForString:url_encoded_query_string];
@@ -416,6 +420,8 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
     NSString *postParametersString  = core.url_encoded_query_string;
 
     NSURL *url = [NSURL URLWithString:urlString];
+    
+    
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     {

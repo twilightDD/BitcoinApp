@@ -54,6 +54,10 @@ FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerErrorKey;
 FOUNDATION_EXPORT NSString *const _Nonnull CreditUpdate_CurrentCreditsKey;
 FOUNDATION_EXPORT NSString *const _Nonnull CreditUpdate_MaximalCreditsKey;
 
+FOUNDATION_EXPORT NSString *const _Nonnull HTTPMethodGETKey;
+FOUNDATION_EXPORT NSString *const _Nonnull HTTPMethodDELETEKey;
+FOUNDATION_EXPORT NSString *const _Nonnull HTTPMethodPOSTKey;
+
 @protocol SOXMarketCoreServerRequestProtocol <NSObject>
 
 - (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest;
