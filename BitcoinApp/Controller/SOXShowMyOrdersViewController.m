@@ -115,9 +115,9 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
     // TODO: TODO DEBUG
     else if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_CreateOrderType)]) {
         NSLog(@"BitcoinDE_CreateOrderType %@", answerOfServerRequest);
-       // [self enableSpinningWheel];
+        [self enableSpinningWheel];
         // Start tableView update
-    //    [self requestServerData];
+        [self requestServerData];
     }
     else if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ExecuteTrade)]) {
         NSLog(@"BitcoinDE_ExecuteTrade %@", answerOfServerRequest);
