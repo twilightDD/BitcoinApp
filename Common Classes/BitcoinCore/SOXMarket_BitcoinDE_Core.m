@@ -283,7 +283,7 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
 
 + (void)createURIForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType {
     NSString *uri = [SOXMarket_BitcoinDE_Core commandForServerCommandType:serverCommandType];
-    NSLog(@"uri\n%@",uri);
+//    NSLog(@"uri\n%@",uri);
     [SOXMarket_BitcoinDE_Core sharedCore].uri = uri;
 }
 
@@ -308,7 +308,7 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
             NSArray *orderIDs = parameterDictionary.allValues;
             url_encoded_query_string = orderIDs.firstObject;
         }
-        else if ([httpMethod isEqualToString:HTTPMethodPOSTKey]) {
+        else {//if ([httpMethod isEqualToString:HTTPMethodPOSTKey]) {
             // create "parameter=value" pairs
             NSMutableArray *parameters = [NSMutableArray array];
             for (NSString *key in allKeys) {
@@ -318,9 +318,9 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
             // join pairs with "&"
             url_encoded_query_string = [parameters componentsJoinedByString:@"&"];
         }
-        else {
-            NSLog(@"ERROR: httpMethod should be DELETE or POST but is %@",httpMethod);
-        };
+//        else {
+//            NSLog(@"ERROR: httpMethod should be DELETE or POST but is %@",httpMethod);
+//        };
     }
 
 //    NSLog(@"url_encoded_query string\n%@",url_encoded_query_string);
@@ -342,7 +342,10 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
     if (url_encoded_query_string && [httpMethod isEqualToString:HTTPMethodDELETEKey]) {
         url = [url stringByAppendingString:url_encoded_query_string];
     }
-
+    else if (url_encoded_query_string && [httpMethod isEqualToString:HTTPMethodGETKey]) {
+        url = [url stringByAppendingString:@"?"];
+        url = [url stringByAppendingString:url_encoded_query_string];
+    }
 //    NSLog(@"url\n%@",url);
     core.url = url;
 }
@@ -418,10 +421,8 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
     NSString *nonce                 = core.nonce;
     NSString *hmac                  = core.hmac;
     NSString *postParametersString  = core.url_encoded_query_string;
-
+    
     NSURL *url = [NSURL URLWithString:urlString];
-    
-    
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     {
@@ -429,7 +430,10 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
         [request addValue:api_key           forHTTPHeaderField:@"X-API-KEY"];
         [request addValue:nonce             forHTTPHeaderField:@"X-API-NONCE"];
         [request addValue:hmac              forHTTPHeaderField:@"X-API-SIGNATURE"];
+        if (postParametersString
+            && [httpMethod isEqualToString:HTTPMethodPOSTKey]) {
         [request setHTTPBody:[postParametersString dataUsingEncoding:NSUTF8StringEncoding]];
+        }
     }
     
     return [request copy];
