@@ -62,6 +62,8 @@
 		D063E9531E74C024006E2D17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D063E9521E74C024006E2D17 /* Assets.xcassets */; };
 		D063E9561E74C024006E2D17 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D063E9541E74C024006E2D17 /* LaunchScreen.storyboard */; };
 		D063E9611E74C024006E2D17 /* iOS_BitcoinAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D063E9601E74C024006E2D17 /* iOS_BitcoinAppTests.m */; };
+		D08ABF0E1E9C03040059825F /* SOXPreferenceCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ABF0D1E9C03040059825F /* SOXPreferenceCenter.m */; };
+		D08ABF0F1E9C03040059825F /* SOXPreferenceCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ABF0D1E9C03040059825F /* SOXPreferenceCenter.m */; };
 		D0962CCC1E945906004FFF62 /* SOXAbstractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0962CCB1E945906004FFF62 /* SOXAbstractViewController.m */; };
 		D0AA14F31E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D0AA14F21E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m */; };
 		D0AA14F41E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D0AA14F21E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m */; };
@@ -175,6 +177,8 @@
 		D063E95C1E74C024006E2D17 /* iOS BitcoinAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS BitcoinAppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D063E9601E74C024006E2D17 /* iOS_BitcoinAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOS_BitcoinAppTests.m; sourceTree = "<group>"; };
 		D063E9621E74C024006E2D17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D08ABF0C1E9C03040059825F /* SOXPreferenceCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXPreferenceCenter.h; sourceTree = "<group>"; };
+		D08ABF0D1E9C03040059825F /* SOXPreferenceCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXPreferenceCenter.m; sourceTree = "<group>"; };
 		D0962CCA1E945906004FFF62 /* SOXAbstractViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXAbstractViewController.h; sourceTree = "<group>"; };
 		D0962CCB1E945906004FFF62 /* SOXAbstractViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXAbstractViewController.m; sourceTree = "<group>"; };
 		D0962CCD1E945967004FFF62 /* SOXAbstractViewController_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXAbstractViewController_Private.h; sourceTree = "<group>"; };
@@ -335,6 +339,8 @@
 				D049C4581E7712E6003CBF36 /* SOXHash.m */,
 				D01F589C1E8495D200C170F7 /* SOXDateFormatter.h */,
 				D01F589D1E8495D200C170F7 /* SOXDateFormatter.m */,
+				D08ABF0C1E9C03040059825F /* SOXPreferenceCenter.h */,
+				D08ABF0D1E9C03040059825F /* SOXPreferenceCenter.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -849,6 +855,7 @@
 				D049C4591E7712E6003CBF36 /* SOXConstants.m in Sources */,
 				D0B9A3341E895EA0008860ED /* NSAttributedString+URL.m in Sources */,
 				D0B942B01E8AF1D600EF7434 /* SOXErrorMessage_BitcoinDE.m in Sources */,
+				D08ABF0E1E9C03040059825F /* SOXPreferenceCenter.m in Sources */,
 				D0631F0A1E89C1EA007ED75A /* SOXMyOrderBookData.m in Sources */,
 				D01F589E1E8495D200C170F7 /* SOXDateFormatter.m in Sources */,
 				D0331D531E7CAEFF008C0244 /* SOXOrdersViewController.m in Sources */,
@@ -908,6 +915,7 @@
 				D01F589F1E8495D200C170F7 /* SOXDateFormatter.m in Sources */,
 				D063E9451E74C024006E2D17 /* main.m in Sources */,
 				D02ED5B71E8152F900AA9448 /* SOXRatesData.m in Sources */,
+				D08ABF0F1E9C03040059825F /* SOXPreferenceCenter.m in Sources */,
 				D0B3F1321E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
