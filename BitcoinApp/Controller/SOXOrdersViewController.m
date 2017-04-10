@@ -22,9 +22,13 @@
 #pragma mark IBOutlets
 @property (weak) IBOutlet NSTextField *titleTextField;
 @property (weak) IBOutlet NSTableView *tableView;
+
 @property (weak) IBOutlet NSTextField *filterPriceDescriptionTextField;
 @property (weak) IBOutlet NSTextField *filterPriceValueTextField;
 @property (weak) IBOutlet NSButton *otherFilterButton;
+
+@property (weak) IBOutlet NSButton *addOrderButton;
+
 @property (strong) IBOutlet NSArrayController *orderBookArrayController;
 
 #pragma mark Properties
@@ -51,8 +55,12 @@
     [self.tableView setDoubleAction:@selector(tableViewDoubleAction:)];
 }
 
+#pragma mark - Action methods
 - (IBAction)reloadAction:(NSButton *)sender {
    [self requestServerData];
+}
+
+- (IBAction)addOrderAction:(NSButton *)sender {
 }
 
 #pragma mark - Private methods
@@ -61,10 +69,12 @@
         if (self.orderType == OrdersBuyType) {
             self.titleTextField.stringValue                     = @"Buy";
             self.filterPriceDescriptionTextField.stringValue    = @"Maximum pice";
+            self.addOrderButton.title                           = @"Add Buy Order";
         }
         else {
             self.titleTextField.stringValue                     = @"Sell";
             self.filterPriceDescriptionTextField.stringValue    = @"Minimum price";
+            self.addOrderButton.title                           = @"Add Sell Order";
         }
     }
     
