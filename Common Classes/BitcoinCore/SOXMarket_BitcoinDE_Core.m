@@ -92,7 +92,6 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
         [SOXMarket_BitcoinDE_Core sharedCore].hmac_data = nil;
         [SOXMarket_BitcoinDE_Core sharedCore].hmac = nil;
     }
-     
     
     [SOXMarket_BitcoinDE_Core createHttpMethodForServerCommandType:serverCommandType];
     [SOXMarket_BitcoinDE_Core createURIForServerCommandType:serverCommandType];
@@ -103,14 +102,10 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
     [SOXMarket_BitcoinDE_Core createHmac_data];
     [SOXMarket_BitcoinDE_Core createHMAC];
     NSURLRequest *request = [SOXMarket_BitcoinDE_Core createRequest];
-    
-//    NSURLRequest *request = [self urlRequestForServerCommandType:serverCommandType
-//                                                   withParameter:parameterDictionary];
+
     if (!request) {
         return;
     }
-    
-    // return;
     
     weakify(self)
     NSURLSessionTask *getTask = [[NSURLSession sharedSession] dataTaskWithRequest:request
@@ -216,43 +211,6 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
     }
     return serverAnswer;
 }
-// TODO: urlRequestForServerCommandType:withParameter:
-/*
-+ (NSURLRequest * _Nullable)urlRequestForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType
-                                             withParameter:(NSDictionary * _Nullable)parameterDictionary {
-    // First step: update nonce string
-    
-   
-    NSString            *urlString       = [SOXMarket_BitcoinDE_Core urlStringForServerCommandType:serverCommandType
-                                                                                     withParameter:parameterDictionary];
-    NSLog(@"URLString: %@", urlString);
-    NSString            *signatureString = [SOXMarket_BitcoinDE_Core signatureStringForServerCommandType:serverCommandType
-                                                                                            forURLString:urlString
-                                                                                           withParameter:parameterDictionary];
-    NSLog(@"url_encoded_query_string: %@", signatureString);
-    NSString            *hmacHex         = [SOXHash hexadecimalHMACForString:signatureString
-                                                                     withKey:[SOXMarket_BitcoinDE_Core apiSecret]];
-    NSLog(@"api_secret %@", [SOXMarket_BitcoinDE_Core apiSecret]);
-    NSLog(@"hmac: %@", hmacHex);
-    NSMutableURLRequest *request         = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
-    {
-
-        NSString *getOrPostHTTPMethod = [SOXMarket_BitcoinDE_Core httpMethodForServerCommandType:serverCommandType];
-        if (getOrPostHTTPMethod) {
-            [request setHTTPMethod:getOrPostHTTPMethod];
-            [request addValue:[SOXMarket_BitcoinDE_Core apiKey] forHTTPHeaderField:@"X-API-KEY"];
-           
-            [request addValue:[SOXMarket_BitcoinDE_Core sharedCore].nonceString forHTTPHeaderField:@"X-API-NONCE"];
-            [request addValue:hmacHex forHTTPHeaderField:@"X-API-SIGNATURE"];
-        }
-        else {
-            request = nil;
-        }
-    }
-    
-    return request;
-}
-*/
 
 + (NSArray * _Nonnull)serverCommandsKeys {
     NSDictionary *commands = [SOXMarket_BitcoinDE_Core commands];
@@ -274,56 +232,6 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
     }
 }
 
-+ (NSString *)urlStringForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType
-                              withParameter:(NSDictionary * _Nullable)parameterDictionary {
-    NSString *urlString = [SOXMarket_BitcoinDE_Core baseURLString];
-    urlString = [urlString stringByAppendingString:[SOXMarket_BitcoinDE_Core commandForServerCommandType:serverCommandType]];
-    
-    if (serverCommandType == BitcoinDE_RemoveOrderType) {
-        NSArray *orderIDs = parameterDictionary.allValues;
-        NSString *orderID = [orderIDs componentsJoinedByString:@""];
-        urlString = [urlString stringByAppendingString:orderID];
-        
-    }
-    
-    else if (parameterDictionary.allKeys.count > 0) {
-        
-        NSMutableArray *parameters = [NSMutableArray array];
-        
-        
-        NSArray *allKeys = parameterDictionary.allKeys;
-        allKeys = [allKeys sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-        for (NSString *key in allKeys) {
-            NSString *parameter = [NSString stringWithFormat:@"%@=%@", key, [parameterDictionary objectForKey:key]];
-            [parameters addObject:parameter];
-        }
-        
-        NSString *parametersString = [parameters componentsJoinedByString:@"&"];
-        urlString = [urlString stringByAppendingString:@"?"];
-        urlString = [urlString stringByAppendingString:parametersString];
-    }
-    
-    return urlString;
-}
-+ (NSString *)bubuForParameter:(NSDictionary *)parameterDictionary {
-    if (parameterDictionary.allKeys.count > 0) {
-        
-        NSMutableArray *parameters = [NSMutableArray array];
-        
-        
-        NSArray *allKeys = parameterDictionary.allKeys;
-        allKeys = [allKeys sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-        for (NSString *key in allKeys) {
-            NSString *parameter = [NSString stringWithFormat:@"%@=%@", key, [parameterDictionary objectForKey:key]];
-            [parameters addObject:parameter];
-        }
-        
-        NSString *parametersString = [parameters componentsJoinedByString:@"&"];
-        return parametersString;
-    }
-    return nil;
-}
-
 + (NSString *)commandForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType {
     NSDictionary *commands                    = [SOXMarket_BitcoinDE_Core commands];
     NSString     *commandForServerCommandType = [commands objectForKey:@(serverCommandType)];
@@ -335,54 +243,6 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
         return @"Error commandForServerCommandType";
     }
 }
-
-// TODO: signatureStringForServerCommandType:forURLString:withParameter:
-/*
-+ (NSString *)signatureStringForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType
-                                     forURLString:(NSString *)urlString
-                                    withParameter:(NSDictionary *)parameterDictionary {
-    
-    //hmac_data = http_method+'#'+uri+'#'+api_key+'#'+nonce+'#'+post_parameter_md5_hashed_url_encoded_query_string
-
-    NSString *httpMethod = [self httpMethodForServerCommandType:serverCommandType];
-    
-    // postParameterMD5; GET/DELETE hat keine POSTParameter, darum md5 für <Leerzeichen>
-    NSString *md5String;
-    if ([httpMethod isEqualToString:@"POST"]) {
-        NSString *parameterString  = [self bubuForParameter:parameterDictionary];
-        NSLog(@"url_encoded_query_string %@", parameterString);
-        md5String = [SOXHash md5StringForString:parameterString];
-        NSLog(@"post_parameter_md5_hashed_url_encoded_query_string %@", md5String);
-        //md5String = @"5f4aece1d75c7adfc5ef346216e9bb11"; // different md5 for 'max_amount=5.3&price=255.5&type=buy'
-        urlString = [SOXMarket_BitcoinDE_Core baseURLString];
-        urlString = [urlString stringByAppendingString:[SOXMarket_BitcoinDE_Core commandForServerCommandType:serverCommandType]];
-    }
-    else {
-        md5String = @"d41d8cd98f00b204e9800998ecf8427e";// [SOXHash md5StringForString:@""];
-    }
-    NSLog(@"md");
-    
-    NSString *signatureString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@"
-                                 , httpMethod // http_method
-                                 , @"#"
-                                 , urlString // uri
-                                 , @"#"
-                                 , [SOXMarket_BitcoinDE_Core apiKey] // apiKey
-                                 , @"#"
-                                 , [SOXMarket_BitcoinDE_Core sharedCore].nonceString // nonce
-                                 , @"#"
-                                 , md5String
-                                 ];
-    NSLog(@"http_method %@",httpMethod);
-    NSLog(@"uri %@",urlString);
-    NSLog(@"api_key %@",[SOXMarket_BitcoinDE_Core apiKey]);
-    NSLog(@"nonce %@",[SOXMarket_BitcoinDE_Core sharedCore].nonceString);
-    NSLog(@"post_parameter_md5_hashed_url_encoded_query_string %@",md5String);
-    
-    
-    return signatureString;
-}
- */
 
 + (NSString  * _Nullable )httpMethodForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType {
     switch (serverCommandType) {
@@ -426,8 +286,8 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
 + (void)createNonceString {
     NSDate   *date     = [NSDate date];
     NSString *timeInMS = [NSString stringWithFormat:@"%.0f", floor([date timeIntervalSince1970] * 1000000)];
-    //timeInMS = @"149158196620898";
-    NSLog(@"nonce \n%@",timeInMS);
+
+//    NSLog(@"nonce \n%@",timeInMS);
     [SOXMarket_BitcoinDE_Core sharedCore].nonce = timeInMS;
 }
 
@@ -459,15 +319,16 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
         };
     }
 
-    NSLog(@"url_encoded_query string\n%@",url_encoded_query_string);
+//    NSLog(@"url_encoded_query string\n%@",url_encoded_query_string);
     [SOXMarket_BitcoinDE_Core sharedCore].url_encoded_query_string = url_encoded_query_string;
 }
+
 + (void)createURL {
     SOXMarket_BitcoinDE_Core *core = [SOXMarket_BitcoinDE_Core sharedCore];
     
     
-    NSString *baseURL = @"https://api.bitcoin.de/v1";
-    NSString *uri = core.uri;
+    NSString *baseURL = [SOXMarket_BitcoinDE_Core baseURLString];
+    NSString *uri     = core.uri;
     NSString *url_encoded_query_string = core.url_encoded_query_string;
     NSString *httpMethod = core.httpMethod;
     
@@ -478,7 +339,7 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
         url = [url stringByAppendingString:url_encoded_query_string];
     }
 
-    NSLog(@"url\n%@",url);
+//    NSLog(@"url\n%@",url);
     core.url = url;
 }
 
@@ -492,7 +353,8 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
             md5String = [SOXHash md5StringForString:url_encoded_query_string];
         }
     }
-    NSLog(@"md5 %@", md5String);
+
+//    NSLog(@"md5 %@", md5String);
     [SOXMarket_BitcoinDE_Core sharedCore].post_parameter_md5_hashed_url_encoded_query_string = md5String;
 }
 
@@ -511,12 +373,6 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
     NSString *api_key = core.api_key;
     NSString *nonce = core.nonce;
     NSString *post_parameter_md5_hashed_url_encoded_query_string = core.post_parameter_md5_hashed_url_encoded_query_string;
-    NSString *url_encoded_query_string = core.url_encoded_query_string;
-//    if (url_encoded_query_string && [httpMethod isEqualToString:@"POST"]) {
-//        url = [url stringByAppendingString:@"?"];
-//        
-//        url = [url stringByAppendingString:url_encoded_query_string];
-//    }
     
     NSString *hmac_data = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@"
                            , httpMethod
@@ -529,7 +385,7 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
                            , @"#"
                            , post_parameter_md5_hashed_url_encoded_query_string
                            ];
-    NSLog(@"hmac_data\n%@",hmac_data);
+//    NSLog(@"hmac_data\n%@",hmac_data);
     [SOXMarket_BitcoinDE_Core sharedCore].hmac_data = hmac_data;
 }
 
@@ -544,7 +400,7 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
                                          withKey:api_secret];
     }
     
-    NSLog(@"hmac\n%@", hmac);
+//    NSLog(@"hmac\n%@", hmac);
     core.hmac = hmac;
 }
 
@@ -552,18 +408,12 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
 + (NSURLRequest *)createRequest {
     SOXMarket_BitcoinDE_Core *core = [SOXMarket_BitcoinDE_Core sharedCore];
     
-    NSString *httpMethod = core.httpMethod;
-    NSString *urlString = core.url;
-    NSString *api_key = core.api_key;
-    NSString *nonce = core.nonce;
-    NSString *hmac = core.hmac;
-    
-    
-    NSString *url_encoded_query_string = core.url_encoded_query_string;
-//    if (url_encoded_query_string && [httpMethod isEqualToString:@"POST"]) {
-//        urlString = [urlString stringByAppendingString:@"?"];
-//        urlString = [urlString stringByAppendingString:url_encoded_query_string];
-//    }
+    NSString *httpMethod            = core.httpMethod;
+    NSString *urlString             = core.url;
+    NSString *api_key               = core.api_key;
+    NSString *nonce                 = core.nonce;
+    NSString *hmac                  = core.hmac;
+    NSString *postParametersString  = core.url_encoded_query_string;
 
     NSURL *url = [NSURL URLWithString:urlString];
     
@@ -573,7 +423,7 @@ NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_Maximal
         [request addValue:api_key           forHTTPHeaderField:@"X-API-KEY"];
         [request addValue:nonce             forHTTPHeaderField:@"X-API-NONCE"];
         [request addValue:hmac              forHTTPHeaderField:@"X-API-SIGNATURE"];
-        [request setHTTPBody:[url_encoded_query_string dataUsingEncoding:NSUTF8StringEncoding]];
+        [request setHTTPBody:[postParametersString dataUsingEncoding:NSUTF8StringEncoding]];
     }
     
     return [request copy];
