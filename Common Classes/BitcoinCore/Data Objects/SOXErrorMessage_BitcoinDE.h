@@ -21,4 +21,5 @@
 - (void)checkforAPIErrors:(NSArray * _Nullable)apiErrors;
 - (void)appendErrorDescripton:(NSString * _Nullable)errorDescripton;
 
+- (NSString *)description;
 @end

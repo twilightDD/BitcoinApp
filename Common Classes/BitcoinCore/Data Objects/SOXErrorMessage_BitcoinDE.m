@@ -93,6 +93,17 @@ NSString static *APIError_BitcoinDE_FieldKey   = @"field";
     }
 }
 
+- (NSString *)description {
+    NSString *serverRequestTitleString = [NSString stringWithFormat:@"ServerRequest: %@", self.serverRequestTitle];
+    NSString *hasErrorString = [NSString stringWithFormat:@"hasError: %@", self.hasError ? @"YES" : @"NO"];
+    NSString *description = [NSString stringWithFormat:@"\n%@\n%@\n%@"
+                             , serverRequestTitleString
+                             , hasErrorString,
+                             self.errorMessage];
+    
+    return description;
+}
+
 #pragma mark - Private methods
 - (NSString * _Nullable)errorDescriptionForURLResponseStatusCode:(NSUInteger)responseErrorCode {
     if (responseErrorCode == 0//) {
