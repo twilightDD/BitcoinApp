@@ -203,9 +203,9 @@
                                                                                 startDate:self.selectedStartDate
                                                                                   endDate:self.selectedEndDate
                                                                                      page:self.selectedPage];
-//    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowMyTradesType
-//                                            withParameter:parameterDictionary
-//                                                respondTo:self];
+    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowMyTradesType
+                                            withParameter:parameterDictionary
+                                                respondTo:self];
 }
 
 

@@ -114,10 +114,8 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
     }
     // TODO: TODO DEBUG
     else if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_CreateOrderType)]) {
-        NSLog(@"BitcoinDE_CreateOrderType %@", answerOfServerRequest);
         [self enableSpinningWheel];
-        // Start tableView update
-        [self requestServerData];
+        [self requestServerData]; // update serverData
     }
     else if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ExecuteTrade)]) {
         NSLog(@"BitcoinDE_ExecuteTrade %@", answerOfServerRequest);
@@ -165,7 +163,8 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 
 #pragma mark - TESTING
 - (IBAction)new5kOrder:(NSButton *)sender {
-
+    [self enableSpinningWheel];
+    
     NSString *end_datetime = @"2017-04-07T15:00:00+02:00";//[SOXDateFormatter rfc3339DateTimeStringDate:[NSDate dateWithTimeIntervalSinceNow:60]];
     
     NSDictionary *parameters = [SOXMyOrderBook_BitcoinDE_Data parameterForNewOrderWithOrderType:BitcoinDE_SellOrderType
