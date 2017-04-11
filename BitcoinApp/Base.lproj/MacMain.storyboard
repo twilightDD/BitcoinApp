@@ -3720,7 +3720,7 @@ Gw
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <size key="minSize" width="616" height="372"/>
-                                                    <size key="maxSize" width="633" height="10000000"/>
+                                                    <size key="maxSize" width="633" height="400"/>
                                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <connections>
                                                         <binding destination="cwM-7M-FeE" name="attributedString" keyPath="self.log" id="atc-6l-83u"/>
@@ -3733,6 +3733,7 @@ Gw
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="Hsz-9K-EUW"/>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="500" id="JdG-2F-bD3"/>
                                         </constraints>
+                                        <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="aVE-jj-kdn">
                                             <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                             <autoresizingMask key="autoresizingMask"/>
