@@ -184,6 +184,8 @@
 		D063E9621E74C024006E2D17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D080866F1E9CEB3400373F09 /* SOXAutomaticTradingMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXAutomaticTradingMainViewController.h; sourceTree = "<group>"; };
 		D08086701E9CEB3400373F09 /* SOXAutomaticTradingMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXAutomaticTradingMainViewController.m; sourceTree = "<group>"; };
+		D08086721E9CEC5D00373F09 /* SOXAutomaticTradingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXAutomaticTradingViewController.h; sourceTree = "<group>"; };
+		D08086731E9CEC5D00373F09 /* SOXAutomaticTradingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXAutomaticTradingViewController.m; sourceTree = "<group>"; };
 		D08086751E9CECAC00373F09 /* SOXMarket_BitcoinDE_DefTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXMarket_BitcoinDE_DefTypes.h; sourceTree = "<group>"; };
 		D08086761E9CECAC00373F09 /* SOXMarket_BitcoinDE_DefTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXMarket_BitcoinDE_DefTypes.m; sourceTree = "<group>"; };
 		D08ABF0C1E9C03040059825F /* SOXPreferenceCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXPreferenceCenter.h; sourceTree = "<group>"; };
@@ -462,6 +464,8 @@
 			children = (
 				D080866F1E9CEB3400373F09 /* SOXAutomaticTradingMainViewController.h */,
 				D08086701E9CEB3400373F09 /* SOXAutomaticTradingMainViewController.m */,
+				D08086721E9CEC5D00373F09 /* SOXAutomaticTradingViewController.h */,
+				D08086731E9CEC5D00373F09 /* SOXAutomaticTradingViewController.m */,
 			);
 			path = AutomaticTrading;
 			sourceTree = "<group>";
@@ -874,6 +878,7 @@
 				D0B3F1311E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m in Sources */,
 				D0270AE41E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m in Sources */,
 				D03289951E8A4C29006F15F0 /* SOXMyTradesViewController.m in Sources */,
+				D08086741E9CEC5D00373F09 /* SOXAutomaticTradingViewController.m in Sources */,
 				D0631F0E1E89C1FD007ED75A /* SOXMyOrderBook_BitcoinDE_Data.m in Sources */,
 				D049C4511E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.m in Sources */,
 				D049C45B1E7712E6003CBF36 /* SOXHash.m in Sources */,

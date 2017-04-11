@@ -2017,7 +2017,7 @@
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="hGd-B5-cMg">
                                                     <rect key="frame" x="0.0" y="79" width="509" height="179"/>
                                                     <connections>
-                                                        <segue destination="cwM-7M-FeE" kind="embed" id="hbW-vl-Eu4"/>
+                                                        <segue destination="cwM-7M-FeE" kind="embed" identifier="EmbedAutomaticBuySegue" id="hbW-vl-Eu4"/>
                                                     </connections>
                                                 </containerView>
                                                 <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="3kb-VW-lux">
@@ -2026,7 +2026,7 @@
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="WVP-M3-a5q">
                                                     <rect key="frame" x="526" y="94" width="509" height="150"/>
                                                     <connections>
-                                                        <segue destination="cwM-7M-FeE" kind="embed" id="z6P-Xb-vu3"/>
+                                                        <segue destination="cwM-7M-FeE" kind="embed" identifier="EmbedAutomaticSellSegue" id="z6P-Xb-vu3"/>
                                                     </connections>
                                                 </containerView>
                                             </subviews>
@@ -3613,10 +3613,10 @@ Gw
             </objects>
             <point key="canvasLocation" x="-427" y="1709"/>
         </scene>
-        <!--View Controller-->
+        <!--Automatic Trading View Controller-->
         <scene sceneID="lPU-HL-3jH">
             <objects>
-                <viewController id="cwM-7M-FeE" sceneMemberID="viewController">
+                <viewController id="cwM-7M-FeE" customClass="SOXAutomaticTradingViewController" sceneMemberID="viewController">
                     <view key="view" id="Kgl-De-aER">
                         <rect key="frame" x="0.0" y="0.0" width="673" height="398"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -3683,6 +3683,9 @@ Gw
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="useMaxReservation:" target="cwM-7M-FeE" id="Zz0-zf-Tto"/>
+                                        </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3fd-l3-d7n">
                                         <rect key="frame" x="591" y="277" width="68" height="32"/>
@@ -3690,6 +3693,9 @@ Gw
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="runAutomaticAction:" target="cwM-7M-FeE" id="12I-vl-ESC"/>
+                                        </connections>
                                     </button>
                                     <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lt0-xZ-Drv">
                                         <rect key="frame" x="20" y="49" width="633" height="206"/>
@@ -3734,6 +3740,9 @@ Gw
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="clearLogAction:" target="cwM-7M-FeE" id="Rtz-VD-m8a"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -3777,10 +3786,24 @@ Gw
                             <constraint firstItem="fVP-xb-zlr" firstAttribute="leading" secondItem="Kgl-De-aER" secondAttribute="leading" constant="20" id="tkU-fs-0Sx"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="automaticBackgroundView" destination="WgR-KD-pyB" id="uaj-We-1XA"/>
+                        <outlet property="automaticInvestmentTextField" destination="WgR-KD-pyB" id="CBG-nM-ddo"/>
+                        <outlet property="clearLogButton" destination="fe2-pf-czM" id="MnP-Lo-Lsk"/>
+                        <outlet property="logDescriptionTextField" destination="9Xe-Tk-Z3f" id="POx-rB-BT8"/>
+                        <outlet property="logTextView" destination="1uU-jM-2ID" id="0Fm-On-Qu3"/>
+                        <outlet property="maxInvestmentDescriptionTextField" destination="WgR-KD-pyB" id="A32-dm-kmy"/>
+                        <outlet property="minInterestDescriptionTextField" destination="vmD-DK-nO2" id="EAj-r0-SKT"/>
+                        <outlet property="minInvestmentTextField" destination="4sC-Co-fvX" id="qMk-y7-SH2"/>
+                        <outlet property="runAutomaticButton" destination="fVP-xb-zlr" id="6BU-kA-cTd"/>
+                        <outlet property="startAutomaticButton" destination="3fd-l3-d7n" id="JIn-Ke-RST"/>
+                        <outlet property="statusTextField" destination="pFG-pr-Jvw" id="UVx-Z0-s8Q"/>
+                        <outlet property="useMaxReservationButton" destination="0q8-u5-RhW" id="KmE-gd-4je"/>
+                    </connections>
                 </viewController>
                 <customObject id="Wqd-Md-RGQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1895.5" y="2153"/>
+            <point key="canvasLocation" x="1630.5" y="2215"/>
         </scene>
     </scenes>
     <resources>
@@ -3789,6 +3812,6 @@ Gw
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ZEn-rF-4RA"/>
-        <segue reference="hbW-vl-Eu4"/>
+        <segue reference="z6P-Xb-vu3"/>
     </inferredMetricsTieBreakers>
 </document>

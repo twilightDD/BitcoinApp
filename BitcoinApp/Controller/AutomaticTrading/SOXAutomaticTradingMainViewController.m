@@ -8,6 +8,11 @@
 
 #import "SOXAutomaticTradingMainViewController.h"
 
+#import "SOXAutomaticTradingViewController.h"
+
+static NSString *EmbedAutomaticBuySegueKey  = @"EmbedAutomaticBuySegue";
+static NSString *EmbedAutomaticSellSegue    = @"EmbedAutomaticSellSegue";
+
 #pragma mark - Interface
 @interface SOXAutomaticTradingMainViewController ()
 
@@ -29,6 +34,17 @@
     [super viewDidLoad];
 
     [self setupUI];
+}
+
+- (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:EmbedAutomaticBuySegueKey]) {
+        SOXAutomaticTradingViewController *destinationViewController = segue.destinationController;
+        destinationViewController.orderType = BitcoinDE_BuyOrderType;
+    }
+    else if ([segue.identifier isEqualToString:EmbedAutomaticBuySegueKey]) {
+        SOXAutomaticTradingViewController *destinationViewController = segue.destinationController;
+        destinationViewController.orderType = BitcoinDE_SellOrderType;
+    }
 }
 
 #pragma mark - Public methods
