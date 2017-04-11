@@ -82,6 +82,8 @@ FOUNDATION_EXPORT NSString *const _Nonnull HTTPMethodPOSTKey;
 
 @end
 @interface SOXMarket_BitcoinDE_Core : NSObject
+@property (strong, nonatomic) NSNumber * _Nullable rate_weighted;
+@property (strong, nonatomic) NSNumber * _Nullable availableAmount;
 
 /**
  *  Singleton.
