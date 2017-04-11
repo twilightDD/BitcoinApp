@@ -97,7 +97,7 @@ FOUNDATION_EXPORT NSString *const _Nonnull HTTPMethodPOSTKey;
 
 + (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
                       withParameter:(NSDictionary * _Nullable)parameterDictionary
-                          respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nonnull)controller;
+                          respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nullable)controller;
 
 #pragma mark | Credit handling
 + (void)registerForCreditUpdates:(id <SOXCreditUpdateProtocol> _Nullable) delegateForCreditUpdates;

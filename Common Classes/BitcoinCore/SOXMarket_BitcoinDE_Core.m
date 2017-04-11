@@ -85,7 +85,7 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
 
 + (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
                       withParameter:(NSDictionary * _Nullable)parameterDictionary
-                          respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nonnull)controller {
+                          respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nullable)controller {
     // reset values
     {
         [SOXMarket_BitcoinDE_Core sharedCore].uri = nil;
@@ -323,7 +323,9 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
 //        };
     }
 
-//    NSLog(@"url_encoded_query string\n%@",url_encoded_query_string);
+    NSLog(@"url_encoded_query string\n%@",url_encoded_query_string);
+    NSLog(@"url_encoded_query string\n%s",url_encoded_query_string.UTF8String);
+    
     [SOXMarket_BitcoinDE_Core sharedCore].url_encoded_query_string = url_encoded_query_string;
 }
 
