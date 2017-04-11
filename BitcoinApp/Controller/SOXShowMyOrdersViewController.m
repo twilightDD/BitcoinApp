@@ -171,7 +171,7 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
                                                                                      max_amount:@(0.1)
                                                                                           price:@(2000)
                                                                                      min_amount:@(0.1)
-                                                                                   end_datetime:end_datetime
+                                                                                   end_datetime:[NSDate dateWithTimeIntervalSinceNow:3600]
                                                                  new_order_for_remaining_amount:NO
                                                                                 min_trust_level:BitcoinDE_GoldMinimalTrustLevel
                                                                                   only_kyc_full:YES
