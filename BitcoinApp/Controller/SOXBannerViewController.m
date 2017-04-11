@@ -74,7 +74,7 @@
     [super viewWillAppear];
     
     [self setupUI];
-   // [self requestServerData];
+    [self requestServerData];
 }
 
 #pragma mark - Private methods
@@ -179,6 +179,8 @@
             self.btcBalanceTotalAmountTextField.doubleValue = accountInfoData.btcBalance_totalAmount.doubleValue;
             self.btcBalanceAvailableAmountTextField.doubleValue = accountInfoData.btcBalance_availableAmount.doubleValue;
             self.btcBalanceReservedAmountTextField.doubleValue = accountInfoData.btcBalance_reservedAmount.doubleValue;
+            
+            [SOXMarket_BitcoinDE_Core sharedCore].availableAmount = @(accountInfoData.btcBalance_availableAmount.doubleValue);
         }
         
         // fidor_reservation
@@ -193,6 +195,8 @@
             self.ratesRateWeightedTextField.doubleValue = ratesData.rate_weighted.doubleValue;
             self.ratesRateWeighted3hTextField.doubleValue = ratesData.rate_weighted_3h.doubleValue;
             self.ratesRateWeighted12hTextField.doubleValue = ratesData.rate_weighted_12h.doubleValue;
+            
+            [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted = @(ratesData.rate_weighted.doubleValue);
         }
     }
 }
