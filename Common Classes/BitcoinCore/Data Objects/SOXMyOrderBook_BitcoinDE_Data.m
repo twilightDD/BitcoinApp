@@ -111,18 +111,13 @@
     
     // convert date
     NSString *endDateString = [SOXDateFormatter rfc3339DateTimeStringDate:end_datetime];
-    NSString *test = [SOXDateFormatter testTime:end_datetime];
-    
-    NSData *testData = [test dataUsingEncoding:NSUTF8StringEncoding];
-    
-    NSString *revert = [[NSString alloc] initWithData:testData encoding:NSUTF8StringEncoding];
     
     NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:
                                typeString, @"type"
                                ,max_amount , @"max_amount"
                                ,price , @"price"
                                ,min_amount , @"min_amount"
-                               //,revert , @"end_datetime"
+                               //,endDateString , @"end_datetime"
                                ,@(new_order_for_remaining_amount) , @"new_order_for_remaining_amount"
                                ,@"gold" , @"min_trust_level"
                                ,@(only_kyc_full) , @"only_kyc_full"
