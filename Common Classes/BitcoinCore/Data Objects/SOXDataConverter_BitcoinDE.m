@@ -12,6 +12,7 @@
 #import "SOXShowOrderbook_BitcoinDE_Data.h" // BitcoinDE_ShowBuyOrderbookCommandType and BitcoinDE_ShowSellOrderbookCommandType
 #import "SOXAccountInfo_BitcoinDE_Data.h"   // for BitcoinDE_ShowAccountInfoCommandType
 #import "SOXRates_BitcoinDE_Data.h"         // for BitcoinDE_ShowRatesCommandType
+#import "SOXMyOrderBook_BitcoinDE_Data.h"   // for BitcoinDE_CreateOrderType
 
 @implementation SOXDataConverter_BitcoinDE
 
@@ -46,6 +47,14 @@
             break;
         case BitcoinDE_ShowAccountLedgerType:
             payload = payloadDictionary;
+            break;
+        case BitcoinDE_RemoveOrderType:
+            payload = payloadDictionary;
+            break;
+        case BitcoinDE_CreateOrderType:
+            payload = [SOXMyOrderBook_BitcoinDE_Data myOrderBookDataForCreateInfoDictionary:payloadDictionary];
+            break;
+        case BitcoinDE_ExecuteTrade:
             break;
         default:
             // error
