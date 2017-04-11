@@ -89,28 +89,45 @@
                                          max_amount:(NSNumber *)max_amount
                                               price:(NSNumber *)price
                                          min_amount:(NSNumber *)min_amount
-                                       end_datetime:(NSString *)end_datetime
+                                       end_datetime:(NSDate *)end_datetime
                      new_order_for_remaining_amount:(BOOL)new_order_for_remaining_amount
                                     min_trust_level:(BitcoinDE_MinimalTrustLevel )min_trust_level
                                       only_kyc_full:(BOOL)only_kyc_full
                                      payment_option:(BitcoinDE_PaymentOption )payment_option
                                        seat_of_bank:(NSArray <NSString *> *)seat_of_bank {
     
+    // TODO: only for testing: @"sell"
+    /* save values :
+     @"sell", @"type"
+     ,@(0.1) , @"max_amount"
+     ,@(1500) , @"price"
+     */
     NSString *typeString = @"sell";
-    NSString *min_trust_levelString = @"gold";
+    max_amount = @(0.1);
+    min_amount = @(0.1);
+    price = @(1500);
     
+    
+    
+    // convert date
+    NSString *endDateString = [SOXDateFormatter rfc3339DateTimeStringDate:end_datetime];
+    NSString *test = [SOXDateFormatter testTime:end_datetime];
+    
+    NSData *testData = [test dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSString *revert = [[NSString alloc] initWithData:testData encoding:NSUTF8StringEncoding];
     
     NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:
-                               @"sell", @"type"
-                               ,@(0.1) , @"max_amount"
-                               ,@(1500) , @"price"
-                               //,min_amount , @"min_amount"
-                               //,end_datetime , @"end_datetime"
-                               //,@(new_order_for_remaining_amount) , @"new_order_for_remaining_amount"
-                               //,min_trust_levelString , @"min_trust_level"
-                               //,@(only_kyc_full) , @"only_kyc_full"
-                               //,@(payment_option) , @"payment_option"
-                               //,seat_of_bank , @"seat_of_bank"
+                               typeString, @"type"
+                               ,max_amount , @"max_amount"
+                               ,price , @"price"
+                               ,min_amount , @"min_amount"
+                               //,revert , @"end_datetime"
+                               ,@(new_order_for_remaining_amount) , @"new_order_for_remaining_amount"
+                               ,@"gold" , @"min_trust_level"
+                               ,@(only_kyc_full) , @"only_kyc_full"
+                               ,@(payment_option) , @"payment_option"
+//                               ,seat_of_bank , @"seat_of_bank"
                                , nil];
 
 //    parameter = [NSDictionary dictionary];
