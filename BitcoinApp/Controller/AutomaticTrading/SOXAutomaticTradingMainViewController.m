@@ -11,7 +11,7 @@
 #import "SOXAutomaticTradingViewController.h"
 
 static NSString *EmbedAutomaticBuySegueKey  = @"EmbedAutomaticBuySegue";
-static NSString *EmbedAutomaticSellSegue    = @"EmbedAutomaticSellSegue";
+static NSString *EmbedAutomaticSellSegueKey = @"EmbedAutomaticSellSegue";
 
 #pragma mark - Interface
 @interface SOXAutomaticTradingMainViewController ()
@@ -41,7 +41,7 @@ static NSString *EmbedAutomaticSellSegue    = @"EmbedAutomaticSellSegue";
         SOXAutomaticTradingViewController *destinationViewController = segue.destinationController;
         destinationViewController.orderType = BitcoinDE_BuyOrderType;
     }
-    else if ([segue.identifier isEqualToString:EmbedAutomaticBuySegueKey]) {
+    else if ([segue.identifier isEqualToString:EmbedAutomaticSellSegueKey]) {
         SOXAutomaticTradingViewController *destinationViewController = segue.destinationController;
         destinationViewController.orderType = BitcoinDE_SellOrderType;
     }
