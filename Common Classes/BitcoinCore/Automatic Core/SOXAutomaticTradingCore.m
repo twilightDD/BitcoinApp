@@ -15,15 +15,17 @@
 @implementation SOXAutomaticTradingCore
 
 + (instancetype)sharedTradingCore {
-    static id sharedTradingCore;
-    
-    static dispatch_once_t pred;
-    
-    dispatch_once(&pred, ^{
-        sharedTradingCore = [[self class] new];
-    });
-    
-    return sharedTradingCore;
+    NSLog(@"sharedTradingCore Must be implemented in subclass");
+    return nil;
+//    static id sharedTradingCore;
+//    
+//    static dispatch_once_t pred;
+//    
+//    dispatch_once(&pred, ^{
+//        sharedTradingCore = [[self class] new];
+//    });
+//    
+//    return sharedTradingCore;
 }
 
 - (void)startAutomaticTrading {

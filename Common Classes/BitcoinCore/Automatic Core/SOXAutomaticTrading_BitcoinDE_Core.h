@@ -5,9 +5,21 @@
 //  Created by Peter Hauke on 11.04.17.
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
-
+#import <Foundation/Foundation.h>
 #import "SOXAutomaticTradingCore.h"
+#import "SOXMarket_BitcoinDE_DefTypes.h"
 
-@interface SOXAutomaticTrading_BitcoinDE_Core : SOXAutomaticTradingCore
+@interface SOXAutomaticTrading_BitcoinDE_Core : NSObject
+@property (nonatomic) double buyLowestPrice;
+@property (nonatomic) double sellHighestPrice;
+@property (nonatomic) double buyInterestRate;
+@property (nonatomic) double sellInterestRate;
 
+@property (nonatomic) double freeReservation;
+@property (nonatomic) double freeBitcoins;
++ (instancetype)sharedTradingCore;
++ (void)registerController:(id <SOXAutomaticTradingCoreProtocol>)controller forUpdatesForType:(BitcoinDE_OrderType)orderType;
+
++ (void)startAutomaticTrading;
++ (void)stopAutomaticTrading;
 @end

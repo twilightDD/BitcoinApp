@@ -8,13 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
-//typedef NS_ENUM (NSUInteger, SOXAutomaticTradingType) {
-//    SOXAutomaticTradingUnkownType   = 0
-//    , SOXAutomaticTradingBuyType    = 1
-//    , SOXAutomaticTradingSellType   = 2
-//};
+@protocol SOXAutomaticTradingCoreProtocol <NSObject>
+
+- (void)executedTrade:(NSString *)tradeLine;
+
+@end
 
 @interface SOXAutomaticTradingCore : NSObject
+
+@property (nonatomic) double currentPriceLimit;
+@property (nonatomic) double interestRate;
+@property (nonatomic) double freeReservedMoney;
+
+@property (nonatomic) double currentBestBuyPrice;
+@property (nonatomic) double currentBestSellPrice;
+
+@property (weak, nonatomic) id <SOXAutomaticTradingCoreProtocol> delegate;
 
 + (instancetype)sharedTradingCore;
 

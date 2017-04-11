@@ -8,11 +8,11 @@
 
 #import "SOXAutomaticTradingViewController.h"
 
-#import "SOXAutomaticTrading_BitcoinDE_BuyCore.h"
-#import "SOXAutomaticTrading_BitcoinDE_SellCore.h"
+#import "SOXMarket_BitcoinDE_Core.h"
+#import "SOXAutomaticTrading_BitcoinDE_Core.h"
 
 #pragma mark - Interface
-@interface SOXAutomaticTradingViewController ()
+@interface SOXAutomaticTradingViewController () <SOXAutomaticTradingCoreProtocol>
 
 #pragma mark IBOutlets
 @property (weak) IBOutlet NSButton *runAutomaticButton;
@@ -34,6 +34,7 @@
 #pragma mark Properties
 @property (nonatomic) BOOL automaticTradingIsRunning;
 @property (strong, nonatomic) SOXAutomaticTrading_BitcoinDE_Core *tradingCore;
+@property (strong, nonatomic) NSString *log;
 @end
 
 @implementation SOXAutomaticTradingViewController
@@ -43,6 +44,8 @@
     [super viewDidLoad];
     [self setupCore];
     [self setupUI];
+    
+    self.log = @"";
 }
 
 #pragma mark - Public methods
@@ -50,11 +53,12 @@
 #pragma mark - Private methods
 - (void)setupCore {
     if (self.orderType == BitcoinDE_BuyOrderType) {
-        self.tradingCore = [SOXAutomaticTrading_BitcoinDE_BuyCore sharedTradingCore];
-        
+        [SOXAutomaticTrading_BitcoinDE_Core registerController:self
+                                             forUpdatesForType:BitcoinDE_BuyOrderType];
     }
     else if (self.orderType == BitcoinDE_SellOrderType) {
-        self.tradingCore = [SOXAutomaticTrading_BitcoinDE_SellCore sharedTradingCore];
+        [SOXAutomaticTrading_BitcoinDE_Core registerController:self
+                                             forUpdatesForType:BitcoinDE_SellOrderType];
     }
     else {
         NSLog(@"ERROR - no orderType set");
@@ -104,7 +108,7 @@
     self.automaticBackgroundView.hidden = !sender.state;
     if (self.automaticTradingIsRunning == YES
         && sender.state == NO) {
-        [self.tradingCore startAutomaticTrading];
+       // [self.tradingCore startAutomaticTrading];
     }
     
 }
@@ -113,11 +117,11 @@
     self.automaticTradingIsRunning = !self.automaticTradingIsRunning;
     if (self.automaticTradingIsRunning) {
         sender.title = @"Stop";
-        [self.tradingCore startAutomaticTrading];
+        [SOXAutomaticTrading_BitcoinDE_Core startAutomaticTrading];
     }
     else {
         sender.title = @"Start";
-        [self.tradingCore stopAutomaticTrading];
+        [SOXAutomaticTrading_BitcoinDE_Core stopAutomaticTrading];
     }
 }
 
@@ -125,6 +129,14 @@
 }
 
 - (IBAction)clearLogAction:(NSButton *)sender {
+}
+
+#pragma mark - SOXAutomaticTradingCoreProtocol
+- (void)executedTrade:(NSString *)tradeLine {
+    self.log = [self.log stringByAppendingString:@"\n"];
+    self.log = [self.log stringByAppendingString:tradeLine];
+    
+    self.logTextView.string = self.log;
 }
 
 

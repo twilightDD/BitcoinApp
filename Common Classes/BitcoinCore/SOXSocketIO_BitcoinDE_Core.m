@@ -94,7 +94,7 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
 + (void)startWebSocketCore {
     [SOXSocketIO_BitcoinDE_Core sharedCore].socketIO = [[SocketIO alloc] initWithDelegate:[SOXSocketIO_BitcoinDE_Core sharedCore]];
     [SOXSocketIO_BitcoinDE_Core sharedCore].socketIO.useSecure = YES;
-   [[SOXSocketIO_BitcoinDE_Core sharedCore].socketIO connectToHost:@"ws.bitcoin.de" onPort:443];
+    [[SOXSocketIO_BitcoinDE_Core sharedCore].socketIO connectToHost:@"ws.bitcoin.de" onPort:443];
 }
 
 #pragma mark SocketIODelegate
