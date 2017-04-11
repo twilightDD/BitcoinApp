@@ -9,6 +9,8 @@
 #import "SOXOrdersViewController.h"
 #import "SOXAbstractViewController_Private.h"
 
+#import "SOXCreateNewOrderViewController.h"
+
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXSocketIO_BitcoinDE_Core.h"
 #import "SOXShowOrderbook_BitcoinDE_Data.h"
@@ -61,6 +63,13 @@
 }
 
 - (IBAction)addOrderAction:(NSButton *)sender {
+    NSLog(@"addOrderAction");
+    
+    NSStoryboard *storyBoard = [NSStoryboard storyboardWithName:@"MacMain" bundle:nil];
+    SOXCreateNewOrderViewController *viewC = [storyBoard instantiateControllerWithIdentifier:@"CreateNewOrderIdentifier"];
+    viewC.orderType = self.orderType;
+    
+    [self presentViewControllerAsSheet:viewC];
 }
 
 #pragma mark - Private methods
