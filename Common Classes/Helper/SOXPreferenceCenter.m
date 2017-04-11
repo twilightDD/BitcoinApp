@@ -14,12 +14,12 @@
     return YES;
 }
 
-+ (NSString *)defaultMinTrustLevel {
-    /*bronze
-     silver
-     gold*/
++ (NSUInteger )defaultMinTrustLevel {
+    /*1 - bronze
+     2 - silver
+     3 - gold*/
     
-    return @"gold";
+    return 3;
 }
 
 + (NSNumber *)defaultPaymentOption {
@@ -33,7 +33,7 @@
 }
 
 + (NSArray *)defaultTradingCountries {
-    NSArray *defaultTradingCountries = [NSArray arrayWithObject:@"DE"];
+    NSArray *defaultTradingCountries = [NSArray arrayWithObjects:@"DE", nil];
     
     return defaultTradingCountries;
 }

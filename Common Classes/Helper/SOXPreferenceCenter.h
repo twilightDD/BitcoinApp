@@ -11,7 +11,7 @@
 @interface SOXPreferenceCenter : NSObject
 
 + (BOOL)defaultKYCOnly;
-+ (NSString *)defaultMinTrustLevel;
++ (NSUInteger )defaultMinTrustLevel;
 + (NSNumber *)defaultPaymentOption;
 + (NSArray *)defaultTradingCountries;
 
