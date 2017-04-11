@@ -3627,6 +3627,9 @@ Gw
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="runAutomaticAction:" target="cwM-7M-FeE" id="af2-em-Uoc"/>
+                                </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pFG-pr-Jvw">
                                 <rect key="frame" x="612" y="363" width="43" height="17"/>
@@ -3694,7 +3697,7 @@ Gw
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="runAutomaticAction:" target="cwM-7M-FeE" id="12I-vl-ESC"/>
+                                            <action selector="startAutomaticAction:" target="cwM-7M-FeE" id="Tp4-vQ-dvx"/>
                                         </connections>
                                     </button>
                                     <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lt0-xZ-Drv">
@@ -3788,11 +3791,11 @@ Gw
                     </view>
                     <connections>
                         <outlet property="automaticBackgroundView" destination="WgR-KD-pyB" id="uaj-We-1XA"/>
-                        <outlet property="automaticInvestmentTextField" destination="WgR-KD-pyB" id="CBG-nM-ddo"/>
+                        <outlet property="automaticInvestmentTextField" destination="Jr3-wH-a3M" id="59m-iV-kAd"/>
                         <outlet property="clearLogButton" destination="fe2-pf-czM" id="MnP-Lo-Lsk"/>
                         <outlet property="logDescriptionTextField" destination="9Xe-Tk-Z3f" id="POx-rB-BT8"/>
                         <outlet property="logTextView" destination="1uU-jM-2ID" id="0Fm-On-Qu3"/>
-                        <outlet property="maxInvestmentDescriptionTextField" destination="WgR-KD-pyB" id="A32-dm-kmy"/>
+                        <outlet property="maxInvestmentDescriptionTextField" destination="8d9-sH-1hz" id="xLz-R6-TH1"/>
                         <outlet property="minInterestDescriptionTextField" destination="vmD-DK-nO2" id="EAj-r0-SKT"/>
                         <outlet property="minInvestmentTextField" destination="4sC-Co-fvX" id="qMk-y7-SH2"/>
                         <outlet property="runAutomaticButton" destination="fVP-xb-zlr" id="6BU-kA-cTd"/>
