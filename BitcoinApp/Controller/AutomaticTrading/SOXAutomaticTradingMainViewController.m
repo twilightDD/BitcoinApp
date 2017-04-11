@@ -6,10 +6,10 @@
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
 
-#import "SOXAutomaticTradingViewController.h"
+#import "SOXAutomaticTradingMainViewController.h"
 
 #pragma mark - Interface
-@interface SOXAutomaticTradingViewController ()
+@interface SOXAutomaticTradingMainViewController ()
 
 #pragma mark IBOutlets
 @property (weak) IBOutlet NSButton *enableAutomaticTradingButton;
@@ -22,7 +22,7 @@
 @end
 
 #pragma mark - Implementation
-@implementation SOXAutomaticTradingViewController
+@implementation SOXAutomaticTradingMainViewController
 
 #pragma mark Init&Co.
 - (void)viewDidLoad {

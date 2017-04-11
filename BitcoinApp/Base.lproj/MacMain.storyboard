@@ -1987,10 +1987,10 @@
             </objects>
             <point key="canvasLocation" x="165" y="1635"/>
         </scene>
-        <!--Automatic Trading View Controller-->
+        <!--Automatic Trading Main View Controller-->
         <scene sceneID="mpl-WA-2gF">
             <objects>
-                <viewController id="lQp-qx-buJ" customClass="SOXAutomaticTradingViewController" sceneMemberID="viewController">
+                <viewController id="lQp-qx-buJ" customClass="SOXAutomaticTradingMainViewController" sceneMemberID="viewController">
                     <view key="view" id="WJc-vY-5SM">
                         <rect key="frame" x="0.0" y="0.0" width="1073" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>

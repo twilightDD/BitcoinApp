@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface SOXAutomaticTradingViewController : NSViewController
+@interface SOXAutomaticTradingMainViewController : NSViewController
 
 @end
