@@ -73,11 +73,11 @@
 #pragma mark - Private methods
 - (void)setupUI {
     
-    if (self.orderType == CreateNewOrdersTypeOrdersBuyType) {
+    if (self.orderType == BitcoinDE_BuyOrderType) {
         self.titleTextField.stringValue                 = @"Create new buy order";
         self.amountDescriptionTextField.stringValue     = @"Amount to buy";
     }
-    else if (self.orderType == CreateNewOrdersTypeOrdersSellType) {
+    else if (self.orderType == BitcoinDE_SellOrderType) {
         self.titleTextField.stringValue                 = @"Create new sell order";
         self.amountDescriptionTextField.stringValue     = @"Amount to sell";
     }
@@ -110,10 +110,10 @@
     self.endDatePicker.dateValue = [NSDate dateWithTimeIntervalSinceNow:5 * 24 * 60 * 60];
    
     self.cancelButton.title = @"Cancel";
-    if (self.orderType == CreateNewOrdersTypeOrdersBuyType) {
+    if (self.orderType == BitcoinDE_BuyOrderType) {
         self.createOrderButton.title = @"Create new buy order";
     }
-    else if (self.orderType == CreateNewOrdersTypeOrdersSellType) {
+    else if (self.orderType == BitcoinDE_SellOrderType) {
         self.createOrderButton.title = @"Create new sell order";
     }
     else {
@@ -149,16 +149,7 @@
     BOOL validInput = [self validateInput];
     
     if (validInput) {
-        // create order data object
-        BitcoinDE_OrderType orderType = BitcoinDE_UnknownOrderType;
-        if (self.orderType == CreateNewOrdersTypeOrdersBuyType) {
-            orderType = BitcoinDE_BuyOrderType;
-        }
-        else if (self.orderType == CreateNewOrdersTypeOrdersSellType) {
-            orderType = BitcoinDE_SellOrderType;
-        }
-
-        NSDictionary *parameters = [SOXMyOrderBook_BitcoinDE_Data parameterForNewOrderWithOrderType:orderType
+        NSDictionary *parameters = [SOXMyOrderBook_BitcoinDE_Data parameterForNewOrderWithOrderType:self.orderType
                                                                                          max_amount:@(self.amountTextField.doubleValue)
                                                                                               price:@(self.priceTextField.doubleValue)
                                                                                          min_amount:@(self.minAmountTextField.doubleValue)

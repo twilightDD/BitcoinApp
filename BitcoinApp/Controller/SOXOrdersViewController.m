@@ -75,12 +75,12 @@
 #pragma mark - Private methods
 - (void)setupUI {
     {
-        if (self.orderType == OrdersBuyType) {
+        if (self.orderType == BitcoinDE_BuyOrderType) {
             self.titleTextField.stringValue                     = @"Buy";
             self.filterPriceDescriptionTextField.stringValue    = @"Maximum pice";
             self.addOrderButton.title                           = @"Add Buy Order";
         }
-        else {
+        else if (self.orderType == BitcoinDE_SellOrderType) {
             self.titleTextField.stringValue                     = @"Sell";
             self.filterPriceDescriptionTextField.stringValue    = @"Minimum price";
             self.addOrderButton.title                           = @"Add Sell Order";
@@ -93,11 +93,11 @@
 - (void)requestServerData {
     [self enableSpinningWheel];
     
-    if (self.orderType == OrdersBuyType) {
+    if (self.orderType == BitcoinDE_BuyOrderType) {
         [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType // "buy" liefert Verkaufsangebote
                                                     respondTo:self];
     }
-    else if (self.orderType == OrdersSellType) {
+    else if (self.orderType == BitcoinDE_SellOrderType) {
         [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType //"sell" liefert Kaufangebote
                                                     respondTo:self];
     }
@@ -107,13 +107,13 @@
 }
 
 - (void)registerForWebSocketUpdates {
-    if (self.orderType == OrdersBuyType) {
+    if (self.orderType == BitcoinDE_BuyOrderType) {
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
                                                                 delegate:self];
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
                                                                 delegate:self];
     }
-    else if (self.orderType == OrdersSellType) {
+    else if (self.orderType == BitcoinDE_SellOrderType) {
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
                                                                 delegate:self];
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
@@ -126,7 +126,7 @@
 
 - (NSArray *)sortDescriptorsForArrayController {
     BOOL ascending = NO;
-    if (self.orderType == OrdersBuyType) {
+    if (self.orderType == BitcoinDE_BuyOrderType) {
         ascending = YES;
     }
     

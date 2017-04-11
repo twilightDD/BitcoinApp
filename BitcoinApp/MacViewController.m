@@ -67,11 +67,11 @@ static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewCont
 -(void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:OrdersViewControllerBuySegueKey]) {
         SOXOrdersViewController *viewC = segue.destinationController;
-        viewC.orderType = OrdersBuyType;
+        viewC.orderType = BitcoinDE_BuyOrderType;
     }
     else if ([segue.identifier isEqualToString:OrdersViewControllerSellSegueKey]) {
         SOXOrdersViewController *viewC = segue.destinationController;
-        viewC.orderType = OrdersSellType;
+        viewC.orderType = BitcoinDE_SellOrderType;
     }
 }
 

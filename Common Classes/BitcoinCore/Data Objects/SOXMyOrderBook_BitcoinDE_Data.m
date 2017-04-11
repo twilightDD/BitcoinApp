@@ -85,7 +85,7 @@
     return parameter;
 }
 
-+ (NSDictionary *)parameterForNewOrderWithOrderType:(BitcoinDE_OrderType )type
++ (NSDictionary *)parameterForNewOrderWithOrderType:(BitcoinDE_OrderType)type
                                          max_amount:(NSNumber *)max_amount
                                               price:(NSNumber *)price
                                          min_amount:(NSNumber *)min_amount

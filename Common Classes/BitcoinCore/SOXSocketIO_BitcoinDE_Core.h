@@ -7,16 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SOXMarket_BitcoinDE_DefTypes.h"
 
 @class SOXShowOrderbookData;
-
-typedef NS_ENUM (NSUInteger, BitcoinDE_UpdateType) {
-    UnknownType = 0
-    , BitcoinDE_UpdateType_AllOrderChanges
-    , BitcoinDE_UpdateType_BuyOrderChanges
-    , BitcoinDE_UpdateType_SellOrderChanges
-    , BitcoinDE_UpdateType_RemoveOrderChanges
-};
 
 @protocol SOXSocketIOCoreProtocol <NSObject>
 

@@ -7,14 +7,10 @@
 //
 
 #import "SOXAbstractViewController.h"
-
-typedef NS_ENUM (NSUInteger, OrdersType) {
-    OrdersBuyType = 1, // "buy" liefert Verkaufsangebote
-    OrdersSellType = 2 // "sell" liefert Kaufangebote
-};
+#import "SOXMarket_BitcoinDE_DefTypes.h"
 
 @interface SOXOrdersViewController : SOXAbstractViewController
 
-@property (nonatomic) OrdersType orderType;
+@property (nonatomic) BitcoinDE_OrderType orderType;
 
 @end

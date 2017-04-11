@@ -7,17 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
-typedef NS_ENUM (NSUInteger, CreateNewOrdersType) {
-    CreateNewOrdersTypeOrdersBuyType  = 1, // "buy" liefert Verkaufsangebote
-    CreateNewOrdersTypeOrdersSellType = 2 // "sell" liefert Kaufangebote
-};
+#import "SOXMarket_BitcoinDE_DefTypes.h"
 
 @interface SOXCreateNewOrderViewController : NSViewController
 
 // TODO: doublette of type OrdersType (@see SOXOrdersViewController)
-@property (nonatomic) CreateNewOrdersType orderType;
-
-
+@property (nonatomic) BitcoinDE_OrderType orderType;
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "SOXMyOrderBookData.h"
-#import "SOXMarket_BitcoinDE_Core.h"
+#import "SOXMarket_BitcoinDE_DefTypes.h"
 
 @interface SOXMyOrderBook_BitcoinDE_Data : SOXMyOrderBookData
 
