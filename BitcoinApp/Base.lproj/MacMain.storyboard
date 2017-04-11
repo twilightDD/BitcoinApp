@@ -2750,10 +2750,10 @@ Gw
             </objects>
             <point key="canvasLocation" x="-404.5" y="1623"/>
         </scene>
-        <!--View Controller-->
+        <!--Create New Order View Controller-->
         <scene sceneID="UM8-a9-Vdn">
             <objects>
-                <viewController storyboardIdentifier="CreateNewOrderIdentifier" id="UMb-sB-suB" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateNewOrderIdentifier" id="UMb-sB-suB" customClass="SOXCreateNewOrderViewController" sceneMemberID="viewController">
                     <view key="view" misplaced="YES" id="1na-89-Udh">
                         <rect key="frame" x="0.0" y="0.0" width="729" height="336"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2787,6 +2787,10 @@ Gw
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <outlet property="delegate" destination="UMb-sB-suB" id="fV0-VP-bvV"/>
+                                    <outlet property="nextKeyView" destination="Bqf-Fe-k9G" id="2oN-go-7Gs"/>
+                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="C7b-w6-4AT">
                                 <rect key="frame" x="280" y="240" width="154" height="17"/>
@@ -2820,6 +2824,9 @@ Gw
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <outlet property="nextKeyView" destination="DMa-qt-pqL" id="eqH-XP-byb"/>
+                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="f6Y-1R-M4X">
                                 <rect key="frame" x="280" y="210" width="154" height="17"/>
@@ -2853,6 +2860,9 @@ Gw
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <outlet property="nextKeyView" destination="5tt-E2-Y2e" id="XzW-cH-4xP"/>
+                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3LD-JI-7kF">
                                 <rect key="frame" x="280" y="180" width="154" height="17"/>
@@ -2877,6 +2887,9 @@ Gw
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
+                                            <connections>
+                                                <outlet property="nextKeyView" destination="dlV-kR-ppO" id="ltC-pM-tyi"/>
+                                            </connections>
                                         </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="5tt-E2-Y2e">
                                             <rect key="frame" x="18" y="152" width="77" height="18"/>
@@ -2887,6 +2900,9 @@ Gw
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
+                                            <connections>
+                                                <outlet property="nextKeyView" destination="ehG-Ud-cJJ" id="62I-qr-23L"/>
+                                            </connections>
                                         </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="oFJ-jv-rrY">
                                             <rect key="frame" x="19" y="55" width="76" height="18"/>
@@ -2894,6 +2910,9 @@ Gw
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
+                                            <connections>
+                                                <action selector="trustLevelAction:" target="UMb-sB-suB" id="aIX-k5-6O1"/>
+                                            </connections>
                                         </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="dlV-kR-ppO">
                                             <rect key="frame" x="19" y="77" width="76" height="18"/>
@@ -2901,6 +2920,9 @@ Gw
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
+                                            <connections>
+                                                <action selector="trustLevelAction:" target="UMb-sB-suB" id="ghF-6Y-2NQ"/>
+                                            </connections>
                                         </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="nfn-lu-b8i">
                                             <rect key="frame" x="19" y="33" width="76" height="18"/>
@@ -2908,9 +2930,12 @@ Gw
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
+                                            <connections>
+                                                <action selector="trustLevelAction:" target="UMb-sB-suB" id="A9x-Tf-tNs"/>
+                                            </connections>
                                         </button>
                                         <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Mzv-eg-HWw">
-                                            <rect key="frame" x="101" y="20" width="140" height="148"/>
+                                            <rect key="frame" x="101" y="20" width="141" height="148"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="140" id="tLy-2N-SVO"/>
                                                 <constraint firstAttribute="height" constant="148" id="wQM-vF-Fgv"/>
@@ -2923,6 +2948,7 @@ Gw
                                                 </calendarDate>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <datePickerElements key="datePickerElements" year="YES" month="YES" day="YES" hour="YES" minute="YES"/>
                                             </datePickerCell>
                                         </datePicker>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="I1S-WB-efT">
@@ -2968,6 +2994,9 @@ Gw
 Gw
 </string>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="cancelAction:" target="UMb-sB-suB" id="1k8-Yb-WhO"/>
+                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="w8c-KB-of4">
                                 <rect key="frame" x="546" y="13" width="171" height="32"/>
@@ -2975,6 +3004,9 @@ Gw
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="createOrderAction:" target="UMb-sB-suB" id="z9g-nR-L1q"/>
+                                </connections>
                             </button>
                         </subviews>
                         <constraints>
@@ -3015,6 +3047,28 @@ Gw
                             <constraint firstItem="C7b-w6-4AT" firstAttribute="baseline" secondItem="ZMe-eq-kHL" secondAttribute="baseline" id="zqZ-ie-kez"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="amountDescriptionTextField" destination="zII-rh-hZI" id="rvo-xV-gC5"/>
+                        <outlet property="amountTextField" destination="ZMe-eq-kHL" id="9mf-yj-zpo"/>
+                        <outlet property="avaibleAmountTetField" destination="C7b-w6-4AT" id="LAG-9n-Iz7"/>
+                        <outlet property="bronceTrustLevelButton" destination="dlV-kR-ppO" id="BrF-on-2Tq"/>
+                        <outlet property="cancelButton" destination="mWb-Gs-3Vc" id="pg0-aY-n8r"/>
+                        <outlet property="createOrderButton" destination="w8c-KB-of4" id="4W5-kG-0sf"/>
+                        <outlet property="endDateDescriptionTextField" destination="I1S-WB-efT" id="3q3-Ei-iHO"/>
+                        <outlet property="endDatePicker" destination="Mzv-eg-HWw" id="syV-fc-Qb9"/>
+                        <outlet property="goldTrustLevelButton" destination="nfn-lu-b8i" id="Ojz-bP-qN0"/>
+                        <outlet property="minAmountDescriptionTextField" destination="Gf2-SM-5g3" id="AxS-J4-9tZ"/>
+                        <outlet property="minAmountHintTextField" destination="f6Y-1R-M4X" id="r7i-gT-pTY"/>
+                        <outlet property="minAmountTextField" destination="Bqf-Fe-k9G" id="UMI-Ap-Vhf"/>
+                        <outlet property="onlyKYCButton" destination="5tt-E2-Y2e" id="vrQ-FC-7lh"/>
+                        <outlet property="optionBox" destination="kfE-Jk-12m" id="POb-58-vph"/>
+                        <outlet property="priceDescriptionTextField" destination="tOu-s3-kGk" id="f6x-oo-mv0"/>
+                        <outlet property="priceTextField" destination="DMa-qt-pqL" id="kH1-BY-30M"/>
+                        <outlet property="reNewOrderButton" destination="ehG-Ud-cJJ" id="DWh-xK-d8f"/>
+                        <outlet property="silverTrustLevelButton" destination="oFJ-jv-rrY" id="F40-jg-3sZ"/>
+                        <outlet property="titleTextField" destination="aWc-gU-d53" id="fD6-Gn-yeS"/>
+                        <outlet property="volumeTextField" destination="3LD-JI-7kF" id="Hqg-gm-6VG"/>
+                    </connections>
                 </viewController>
                 <customObject id="X15-X3-ZW6" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
