@@ -12,6 +12,7 @@
 @interface SOXMyOrderBook_BitcoinDE_Data : SOXMyOrderBookData
 
 + (NSMutableArray *)myOrderbookDataArrayForMyOrderbookDictionary:(NSDictionary *)payloadDictionary;
++ (NSDictionary *)myOrderBookDataForCreateInfoDictionary:(NSDictionary *)payloadDictionary;
 
 + (NSDictionary *)parameterForDeletingOrderWithOrderID:(NSString *)orderID;
 

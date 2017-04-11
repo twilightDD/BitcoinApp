@@ -56,6 +56,16 @@
     return myOrderbookDataArray;
 }
 
++ (NSDictionary *)myOrderBookDataForCreateInfoDictionary:(NSDictionary *)payloadDictionary {
+    NSString *newOrderID = [payloadDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderID];
+    
+    NSDictionary *myOrderBookData = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     newOrderID, BitcoinDE_ShowOrderbook_OrderID
+                                     ,nil];
+    
+    return myOrderBookData;
+}
+
 + (NSArray <NSDictionary *> *)parametersForDeletingMyOrderBookDatas:(NSArray <SOXMyOrderBook_BitcoinDE_Data *>*)myOrderBookDatas {
     NSMutableArray *parameters = [NSMutableArray array];
     for (SOXMyOrderBook_BitcoinDE_Data *myOrderBookData in myOrderBookDatas) {
