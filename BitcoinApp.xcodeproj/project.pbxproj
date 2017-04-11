@@ -66,6 +66,14 @@
 		D08086741E9CEC5D00373F09 /* SOXAutomaticTradingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D08086731E9CEC5D00373F09 /* SOXAutomaticTradingViewController.m */; };
 		D08086771E9CECAC00373F09 /* SOXMarket_BitcoinDE_DefTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = D08086761E9CECAC00373F09 /* SOXMarket_BitcoinDE_DefTypes.m */; };
 		D08086781E9CECAC00373F09 /* SOXMarket_BitcoinDE_DefTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = D08086761E9CECAC00373F09 /* SOXMarket_BitcoinDE_DefTypes.m */; };
+		D080867C1E9D0B7F00373F09 /* SOXAutomaticTradingCore.m in Sources */ = {isa = PBXBuildFile; fileRef = D080867B1E9D0B7F00373F09 /* SOXAutomaticTradingCore.m */; };
+		D080867D1E9D0B7F00373F09 /* SOXAutomaticTradingCore.m in Sources */ = {isa = PBXBuildFile; fileRef = D080867B1E9D0B7F00373F09 /* SOXAutomaticTradingCore.m */; };
+		D08086801E9D0B9700373F09 /* SOXAutomaticTrading_BitcoinDE_Core.m in Sources */ = {isa = PBXBuildFile; fileRef = D080867F1E9D0B9700373F09 /* SOXAutomaticTrading_BitcoinDE_Core.m */; };
+		D08086811E9D0B9700373F09 /* SOXAutomaticTrading_BitcoinDE_Core.m in Sources */ = {isa = PBXBuildFile; fileRef = D080867F1E9D0B9700373F09 /* SOXAutomaticTrading_BitcoinDE_Core.m */; };
+		D08086841E9D0D7500373F09 /* SOXAutomaticTrading_BitcoinDE_BuyCore.m in Sources */ = {isa = PBXBuildFile; fileRef = D08086831E9D0D7500373F09 /* SOXAutomaticTrading_BitcoinDE_BuyCore.m */; };
+		D08086851E9D0D7500373F09 /* SOXAutomaticTrading_BitcoinDE_BuyCore.m in Sources */ = {isa = PBXBuildFile; fileRef = D08086831E9D0D7500373F09 /* SOXAutomaticTrading_BitcoinDE_BuyCore.m */; };
+		D08086881E9D0D8100373F09 /* SOXAutomaticTrading_BitcoinDE_SellCore.m in Sources */ = {isa = PBXBuildFile; fileRef = D08086871E9D0D8100373F09 /* SOXAutomaticTrading_BitcoinDE_SellCore.m */; };
+		D08086891E9D0D8100373F09 /* SOXAutomaticTrading_BitcoinDE_SellCore.m in Sources */ = {isa = PBXBuildFile; fileRef = D08086871E9D0D8100373F09 /* SOXAutomaticTrading_BitcoinDE_SellCore.m */; };
 		D08ABF0E1E9C03040059825F /* SOXPreferenceCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ABF0D1E9C03040059825F /* SOXPreferenceCenter.m */; };
 		D08ABF0F1E9C03040059825F /* SOXPreferenceCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ABF0D1E9C03040059825F /* SOXPreferenceCenter.m */; };
 		D08ABF121E9C270D0059825F /* SOXCreateNewOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ABF111E9C270D0059825F /* SOXCreateNewOrderViewController.m */; };
@@ -188,6 +196,14 @@
 		D08086731E9CEC5D00373F09 /* SOXAutomaticTradingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXAutomaticTradingViewController.m; sourceTree = "<group>"; };
 		D08086751E9CECAC00373F09 /* SOXMarket_BitcoinDE_DefTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXMarket_BitcoinDE_DefTypes.h; sourceTree = "<group>"; };
 		D08086761E9CECAC00373F09 /* SOXMarket_BitcoinDE_DefTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXMarket_BitcoinDE_DefTypes.m; sourceTree = "<group>"; };
+		D080867A1E9D0B7F00373F09 /* SOXAutomaticTradingCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXAutomaticTradingCore.h; sourceTree = "<group>"; };
+		D080867B1E9D0B7F00373F09 /* SOXAutomaticTradingCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXAutomaticTradingCore.m; sourceTree = "<group>"; };
+		D080867E1E9D0B9700373F09 /* SOXAutomaticTrading_BitcoinDE_Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXAutomaticTrading_BitcoinDE_Core.h; sourceTree = "<group>"; };
+		D080867F1E9D0B9700373F09 /* SOXAutomaticTrading_BitcoinDE_Core.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXAutomaticTrading_BitcoinDE_Core.m; sourceTree = "<group>"; };
+		D08086821E9D0D7500373F09 /* SOXAutomaticTrading_BitcoinDE_BuyCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXAutomaticTrading_BitcoinDE_BuyCore.h; sourceTree = "<group>"; };
+		D08086831E9D0D7500373F09 /* SOXAutomaticTrading_BitcoinDE_BuyCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXAutomaticTrading_BitcoinDE_BuyCore.m; sourceTree = "<group>"; };
+		D08086861E9D0D8100373F09 /* SOXAutomaticTrading_BitcoinDE_SellCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXAutomaticTrading_BitcoinDE_SellCore.h; sourceTree = "<group>"; };
+		D08086871E9D0D8100373F09 /* SOXAutomaticTrading_BitcoinDE_SellCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXAutomaticTrading_BitcoinDE_SellCore.m; sourceTree = "<group>"; };
 		D08ABF0C1E9C03040059825F /* SOXPreferenceCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXPreferenceCenter.h; sourceTree = "<group>"; };
 		D08ABF0D1E9C03040059825F /* SOXPreferenceCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXPreferenceCenter.m; sourceTree = "<group>"; };
 		D08ABF101E9C270D0059825F /* SOXCreateNewOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXCreateNewOrderViewController.h; sourceTree = "<group>"; };
@@ -343,6 +359,7 @@
 				D0270AE31E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m */,
 				D0E5C5011E809C9800352985 /* SOXKeys_BitcoinDE.h */,
 				D0E5C5021E809C9800352985 /* SOXKeys_BitcoinDE.m */,
+				D08086791E9D0B6900373F09 /* Automatic Core */,
 				D02ED5A71E814CA600AA9448 /* Data Objects */,
 			);
 			path = BitcoinCore;
@@ -468,6 +485,21 @@
 				D08086731E9CEC5D00373F09 /* SOXAutomaticTradingViewController.m */,
 			);
 			path = AutomaticTrading;
+			sourceTree = "<group>";
+		};
+		D08086791E9D0B6900373F09 /* Automatic Core */ = {
+			isa = PBXGroup;
+			children = (
+				D080867A1E9D0B7F00373F09 /* SOXAutomaticTradingCore.h */,
+				D080867B1E9D0B7F00373F09 /* SOXAutomaticTradingCore.m */,
+				D080867E1E9D0B9700373F09 /* SOXAutomaticTrading_BitcoinDE_Core.h */,
+				D080867F1E9D0B9700373F09 /* SOXAutomaticTrading_BitcoinDE_Core.m */,
+				D08086821E9D0D7500373F09 /* SOXAutomaticTrading_BitcoinDE_BuyCore.h */,
+				D08086831E9D0D7500373F09 /* SOXAutomaticTrading_BitcoinDE_BuyCore.m */,
+				D08086861E9D0D8100373F09 /* SOXAutomaticTrading_BitcoinDE_SellCore.h */,
+				D08086871E9D0D8100373F09 /* SOXAutomaticTrading_BitcoinDE_SellCore.m */,
+			);
+			path = "Automatic Core";
 			sourceTree = "<group>";
 		};
 		D0B9A3311E895E96008860ED /* Categories */ = {
@@ -874,6 +906,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D08086841E9D0D7500373F09 /* SOXAutomaticTrading_BitcoinDE_BuyCore.m in Sources */,
 				D063E9231E74BF97006E2D17 /* BitcoinApp.xcdatamodeld in Sources */,
 				D0B3F1311E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m in Sources */,
 				D0270AE41E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m in Sources */,
@@ -881,11 +914,13 @@
 				D08086741E9CEC5D00373F09 /* SOXAutomaticTradingViewController.m in Sources */,
 				D0631F0E1E89C1FD007ED75A /* SOXMyOrderBook_BitcoinDE_Data.m in Sources */,
 				D049C4511E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.m in Sources */,
+				D08086801E9D0B9700373F09 /* SOXAutomaticTrading_BitcoinDE_Core.m in Sources */,
 				D049C45B1E7712E6003CBF36 /* SOXHash.m in Sources */,
 				D049C4591E7712E6003CBF36 /* SOXConstants.m in Sources */,
 				D0B9A3341E895EA0008860ED /* NSAttributedString+URL.m in Sources */,
 				D0B942B01E8AF1D600EF7434 /* SOXErrorMessage_BitcoinDE.m in Sources */,
 				D08ABF0E1E9C03040059825F /* SOXPreferenceCenter.m in Sources */,
+				D080867C1E9D0B7F00373F09 /* SOXAutomaticTradingCore.m in Sources */,
 				D0631F0A1E89C1EA007ED75A /* SOXMyOrderBookData.m in Sources */,
 				D01F589E1E8495D200C170F7 /* SOXDateFormatter.m in Sources */,
 				D0331D531E7CAEFF008C0244 /* SOXOrdersViewController.m in Sources */,
@@ -900,6 +935,7 @@
 				D0AA14F31E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m in Sources */,
 				D063E91D1E74BF97006E2D17 /* main.m in Sources */,
 				D02ED5BA1E81546800AA9448 /* SOXAccountInfoData.m in Sources */,
+				D08086881E9D0D8100373F09 /* SOXAutomaticTrading_BitcoinDE_SellCore.m in Sources */,
 				D02ED5B61E8152F900AA9448 /* SOXRatesData.m in Sources */,
 				D0E5C4FF1E80801D00352985 /* SOXBannerViewController.m in Sources */,
 				D03289921E8A2C7C006F15F0 /* SOXMyOrderDetailsViewController.m in Sources */,
@@ -926,10 +962,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D02ED5AD1E814CA600AA9448 /* SOXAccountInfo_BitcoinDE_Data.m in Sources */,
+				D08086811E9D0B9700373F09 /* SOXAutomaticTrading_BitcoinDE_Core.m in Sources */,
 				D02ED5BF1E817CFE00AA9448 /* SOXShowOrderbookData.m in Sources */,
 				D063E94B1E74C024006E2D17 /* ViewController.m in Sources */,
 				D02ED5B31E814CF100AA9448 /* SOXRates_BitcoinDE_Data.m in Sources */,
 				D0B9A3391E89934D008860ED /* NSTextField+URL.m in Sources */,
+				D08086851E9D0D7500373F09 /* SOXAutomaticTrading_BitcoinDE_BuyCore.m in Sources */,
 				D0270AE51E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m in Sources */,
 				D02ED5C31E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m in Sources */,
 				D02ED5BB1E81546800AA9448 /* SOXAccountInfoData.m in Sources */,
@@ -951,6 +989,8 @@
 				D02ED5B71E8152F900AA9448 /* SOXRatesData.m in Sources */,
 				D08ABF0F1E9C03040059825F /* SOXPreferenceCenter.m in Sources */,
 				D0B3F1321E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m in Sources */,
+				D080867D1E9D0B7F00373F09 /* SOXAutomaticTradingCore.m in Sources */,
+				D08086891E9D0D8100373F09 /* SOXAutomaticTrading_BitcoinDE_SellCore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
