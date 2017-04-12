@@ -17,6 +17,9 @@
 
 @property (nonatomic) double freeReservation;
 @property (nonatomic) double freeBitcoins;
+
+@property (nonatomic) BitcoinDE_OrderType orderType;
+
 + (instancetype)sharedTradingCore;
 + (void)registerController:(id <SOXAutomaticTradingCoreProtocol>)controller forUpdatesForType:(BitcoinDE_OrderType)orderType;
 

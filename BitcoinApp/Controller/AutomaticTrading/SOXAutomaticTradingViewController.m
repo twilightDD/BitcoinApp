@@ -114,6 +114,12 @@
 }
 
 - (IBAction)startAutomaticAction:(NSButton *)sender {
+//    NSString *longString = @"bububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \n";
+//    for (int a = 0; a <5; a++) {
+//        longString = [longString stringByAppendingString:longString];
+//    }
+//    self.logTextView.string = longString;
+//    return;
     self.automaticTradingIsRunning = !self.automaticTradingIsRunning;
     if (self.automaticTradingIsRunning) {
         sender.title = @"Stop";
@@ -123,6 +129,22 @@
         sender.title = @"Start";
         [SOXAutomaticTrading_BitcoinDE_Core stopAutomaticTrading];
     }
+    
+    NSString *infoSring;
+    switch (self.orderType) {
+        case BitcoinDE_BuyOrderType:
+            infoSring = [NSString stringWithFormat:@"Threshhold: %0.4f",
+                         [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted.doubleValue * (1 - 0.01/100)];
+            break;
+        case BitcoinDE_SellOrderType:
+            infoSring = [NSString stringWithFormat:@"Threshhold: %0.4f",
+                         [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted.doubleValue * (1 + 0.01/100)];
+            break;
+        default:
+            infoSring = @"ERROR: No orderType";
+            break;
+    }
+    self.statusTextField.stringValue = infoSring;
 }
 
 - (IBAction)useMaxReservation:(NSButton *)sender {
