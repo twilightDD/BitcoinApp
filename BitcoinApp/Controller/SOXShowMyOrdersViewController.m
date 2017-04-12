@@ -175,7 +175,7 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
                                                                  new_order_for_remaining_amount:NO
                                                                                 min_trust_level:BitcoinDE_GoldMinimalTrustLevel
                                                                                   only_kyc_full:YES
-                                                                                 payment_option:BitcoinDE_SEPAOnlyPaymentOption
+                                                                                 payment_option:BitcoinDE_PaymentOptionSEPAOnly
                                                                                    seat_of_bank:nil];
     NSLog(@"parameters: \n%@", parameters);
     

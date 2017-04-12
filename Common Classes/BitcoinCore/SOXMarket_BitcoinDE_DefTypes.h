@@ -39,10 +39,10 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_MinimalTrustLevel) {
 };
 
 typedef NS_ENUM (NSUInteger, BitcoinDE_PaymentOption) {
-    BitcoinDE_UnknownPaymentOption = 0
-    , BitcoinDE_ExpressOnlyPaymentOption = 1
-    , BitcoinDE_SEPAOnlyPaymentOption = 2
-    , BitcoinDE_ExpressAndSepaPaymentOption = 3
+    BitcoinDE_PaymentOptionUnknown          = 0
+    , BitcoinDE_PaymentOptionExpressOnly    = 1
+    , BitcoinDE_PaymentOptionSEPAOnly       = 2
+    , BitcoinDE_PaymentOptionExpressAndSepa = 3
 };
 
 typedef NS_ENUM (NSUInteger, BitcoinDE_UpdateType) {
