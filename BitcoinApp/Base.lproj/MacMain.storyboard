@@ -3709,42 +3709,11 @@ Gw
                                             <action selector="startAutomaticAction:" target="cwM-7M-FeE" id="Tp4-vQ-dvx"/>
                                         </connections>
                                     </button>
-                                    <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lt0-xZ-Drv">
-                                        <rect key="frame" x="20" y="49" width="633" height="374"/>
-                                        <clipView key="contentView" id="nnc-uQ-HhK">
-                                            <rect key="frame" x="1" y="1" width="616" height="372"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <subviews>
-                                                <textView importsGraphics="NO" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="1uU-jM-2ID">
-                                                    <rect key="frame" x="0.0" y="0.0" width="616" height="372"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <size key="minSize" width="616" height="372"/>
-                                                    <size key="maxSize" width="633" height="400"/>
-                                                    <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                    <connections>
-                                                        <binding destination="cwM-7M-FeE" name="attributedString" keyPath="self.log" id="atc-6l-83u"/>
-                                                    </connections>
-                                                </textView>
-                                            </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </clipView>
-                                        <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="Hsz-9K-EUW"/>
-                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="500" id="JdG-2F-bD3"/>
-                                        </constraints>
-                                        <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
-                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="aVE-jj-kdn">
-                                            <rect key="frame" x="-100" y="-100" width="87" height="18"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </scroller>
-                                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Vlu-MP-l8Y">
-                                            <rect key="frame" x="617" y="1" width="15" height="372"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </scroller>
-                                    </scrollView>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Xe-Tk-Z3f">
                                         <rect key="frame" x="18" y="421" width="33" height="14"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="14" id="b1e-Ao-M49"/>
+                                        </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="z4J-DE-SdI">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -3761,25 +3730,53 @@ Gw
                                             <action selector="clearLogAction:" target="cwM-7M-FeE" id="Rtz-VD-m8a"/>
                                         </connections>
                                     </button>
+                                    <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKc-pr-7pa">
+                                        <rect key="frame" x="20" y="50" width="633" height="363"/>
+                                        <clipView key="contentView" id="nmU-5h-Mv5">
+                                            <rect key="frame" x="1" y="1" width="616" height="361"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <textView importsGraphics="NO" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="6J3-fH-bxe">
+                                                    <rect key="frame" x="0.0" y="0.0" width="616" height="361"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <size key="minSize" width="616" height="361"/>
+                                                    <size key="maxSize" width="616" height="10000000"/>
+                                                    <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                </textView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </clipView>
+                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="Mfu-Ec-qWk">
+                                            <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </scroller>
+                                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="fkk-xy-wgi">
+                                            <rect key="frame" x="617" y="1" width="15" height="361"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </scroller>
+                                    </scrollView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="fe2-pf-czM" firstAttribute="top" secondItem="1uU-jM-2ID" secondAttribute="bottom" constant="8" id="1Cg-Od-8XA"/>
                                     <constraint firstItem="0q8-u5-RhW" firstAttribute="leading" secondItem="Jr3-wH-a3M" secondAttribute="trailing" constant="8" id="2mZ-x7-3W2"/>
                                     <constraint firstAttribute="height" constant="524" id="3Kt-rT-Qh4"/>
                                     <constraint firstAttribute="bottom" secondItem="fe2-pf-czM" secondAttribute="bottom" constant="20" symbolic="YES" id="8rp-nt-rZh"/>
                                     <constraint firstItem="9Xe-Tk-Z3f" firstAttribute="top" secondItem="vmD-DK-nO2" secondAttribute="bottom" constant="20" id="965-Wu-lrA"/>
-                                    <constraint firstItem="Lt0-xZ-Drv" firstAttribute="top" secondItem="9Xe-Tk-Z3f" secondAttribute="bottom" constant="-2" id="C4E-hD-yhU"/>
+                                    <constraint firstItem="vmD-DK-nO2" firstAttribute="top" secondItem="8d9-sH-1hz" secondAttribute="bottom" constant="13" id="BEk-oU-UR9"/>
+                                    <constraint firstItem="0q8-u5-RhW" firstAttribute="top" secondItem="WgR-KD-pyB" secondAttribute="top" constant="24" id="Eis-Ga-yI7"/>
+                                    <constraint firstItem="sKc-pr-7pa" firstAttribute="trailing" secondItem="fe2-pf-czM" secondAttribute="trailing" id="KqP-Ou-YhM"/>
                                     <constraint firstItem="4sC-Co-fvX" firstAttribute="leading" secondItem="vmD-DK-nO2" secondAttribute="trailing" constant="8" symbolic="YES" id="LYa-D4-6de"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0q8-u5-RhW" secondAttribute="trailing" constant="20" symbolic="YES" id="LjR-hp-5gm"/>
                                     <constraint firstItem="0q8-u5-RhW" firstAttribute="baseline" secondItem="Jr3-wH-a3M" secondAttribute="baseline" id="Lk8-Cu-2v3"/>
+                                    <constraint firstItem="sKc-pr-7pa" firstAttribute="leading" secondItem="9Xe-Tk-Z3f" secondAttribute="leading" id="Nub-U9-K0q"/>
                                     <constraint firstItem="vmD-DK-nO2" firstAttribute="trailing" secondItem="8d9-sH-1hz" secondAttribute="trailing" id="PD0-SM-SGC"/>
+                                    <constraint firstItem="sKc-pr-7pa" firstAttribute="top" secondItem="9Xe-Tk-Z3f" secondAttribute="bottom" constant="8" id="PQu-X2-jEP"/>
                                     <constraint firstItem="Jr3-wH-a3M" firstAttribute="top" secondItem="WgR-KD-pyB" secondAttribute="top" constant="20" id="QQF-4J-q7d"/>
                                     <constraint firstItem="fe2-pf-czM" firstAttribute="trailing" secondItem="3fd-l3-d7n" secondAttribute="trailing" id="Ssm-BU-mM4"/>
                                     <constraint firstItem="8d9-sH-1hz" firstAttribute="leading" secondItem="WgR-KD-pyB" secondAttribute="leading" constant="20" id="YkP-2J-yGc"/>
-                                    <constraint firstAttribute="trailing" secondItem="Lt0-xZ-Drv" secondAttribute="trailing" constant="20" symbolic="YES" id="bla-4r-lyD"/>
                                     <constraint firstItem="3fd-l3-d7n" firstAttribute="baseline" secondItem="4sC-Co-fvX" secondAttribute="baseline" id="cCf-gt-APd"/>
-                                    <constraint firstItem="Lt0-xZ-Drv" firstAttribute="leading" secondItem="WgR-KD-pyB" secondAttribute="leading" constant="20" id="e3D-7T-X4c"/>
                                     <constraint firstItem="4sC-Co-fvX" firstAttribute="leading" secondItem="Jr3-wH-a3M" secondAttribute="leading" id="fBd-OT-fn3"/>
+                                    <constraint firstItem="fe2-pf-czM" firstAttribute="top" secondItem="sKc-pr-7pa" secondAttribute="bottom" constant="8" id="fmX-YV-pO9"/>
                                     <constraint firstItem="vmD-DK-nO2" firstAttribute="baseline" secondItem="4sC-Co-fvX" secondAttribute="baseline" id="gUN-OW-KWu"/>
                                     <constraint firstItem="9Xe-Tk-Z3f" firstAttribute="leading" secondItem="WgR-KD-pyB" secondAttribute="leading" constant="20" id="iKL-MH-uPy"/>
                                     <constraint firstItem="4sC-Co-fvX" firstAttribute="trailing" secondItem="Jr3-wH-a3M" secondAttribute="trailing" id="lvE-re-mdV"/>
@@ -3809,7 +3806,7 @@ Gw
                         <outlet property="automaticInvestmentTextField" destination="Jr3-wH-a3M" id="59m-iV-kAd"/>
                         <outlet property="clearLogButton" destination="fe2-pf-czM" id="MnP-Lo-Lsk"/>
                         <outlet property="logDescriptionTextField" destination="9Xe-Tk-Z3f" id="POx-rB-BT8"/>
-                        <outlet property="logTextView" destination="1uU-jM-2ID" id="0Fm-On-Qu3"/>
+                        <outlet property="logTextView" destination="6J3-fH-bxe" id="cLz-U2-TLl"/>
                         <outlet property="maxInvestmentDescriptionTextField" destination="8d9-sH-1hz" id="xLz-R6-TH1"/>
                         <outlet property="minInterestDescriptionTextField" destination="vmD-DK-nO2" id="EAj-r0-SKT"/>
                         <outlet property="minInvestmentTextField" destination="4sC-Co-fvX" id="qMk-y7-SH2"/>
@@ -3822,7 +3819,7 @@ Gw
                 <customObject id="Wqd-Md-RGQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="3AY-bf-m6w"/>
             </objects>
-            <point key="canvasLocation" x="1630.5" y="2299"/>
+            <point key="canvasLocation" x="1630.5" y="2428"/>
         </scene>
     </scenes>
     <resources>
