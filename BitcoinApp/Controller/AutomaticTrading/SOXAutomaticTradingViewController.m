@@ -10,9 +10,9 @@
 
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXAutomaticTrading_BitcoinDE_Core.h"
-
+#import "SOXShowOrderbook_BitcoinDE_Data.h"
 #pragma mark - Interface
-@interface SOXAutomaticTradingViewController () <SOXAutomaticTradingCoreProtocol>
+@interface SOXAutomaticTradingViewController () <SOXAutomaticTradingCoreProtocol, SOXMarketCoreServerRequestProtocol>
 
 #pragma mark IBOutlets
 @property (weak) IBOutlet NSButton *runAutomaticButton;
@@ -35,6 +35,8 @@
 @property (nonatomic) BOOL automaticTradingIsRunning;
 @property (strong, nonatomic) SOXAutomaticTrading_BitcoinDE_Core *tradingCore;
 @property (strong, nonatomic) NSString *log;
+
+@property (nonatomic) double currentLimit;
 @end
 
 @implementation SOXAutomaticTradingViewController
@@ -42,7 +44,6 @@
 #pragma mark - Init&Co.
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupCore];
     [self setupUI];
     
     self.log = @"";
@@ -53,12 +54,14 @@
 #pragma mark - Private methods
 - (void)setupCore {
     if (self.orderType == BitcoinDE_BuyOrderType) {
-        [SOXAutomaticTrading_BitcoinDE_Core registerController:self
-                                             forUpdatesForType:BitcoinDE_BuyOrderType];
+        // we want to compare buy price with highest sell price
+        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType
+                                                    respondTo:self];
     }
     else if (self.orderType == BitcoinDE_SellOrderType) {
-        [SOXAutomaticTrading_BitcoinDE_Core registerController:self
-                                             forUpdatesForType:BitcoinDE_SellOrderType];
+        // we want to compare sell price with lowest buy price
+        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType
+                                                    respondTo:self];
     }
     else {
         NSLog(@"ERROR - no orderType set");
@@ -86,6 +89,7 @@
     self.statusTextField.stringValue = @"";
     
     self.automaticBackgroundView.hidden = YES;
+    // TextFields in separate automaticBackgroundView
     {
         self.maxInvestmentDescriptionTextField.stringValue = @"Max. Investment";
         self.automaticInvestmentTextField.doubleValue = 0;
@@ -99,7 +103,6 @@
         self.logTextView.string = @"";
         self.clearLogButton.title = @"Clear Log";
     }
-
 }
 
 
@@ -114,12 +117,10 @@
 }
 
 - (IBAction)startAutomaticAction:(NSButton *)sender {
-//    NSString *longString = @"bububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \nbububububububu \n";
-//    for (int a = 0; a <5; a++) {
-//        longString = [longString stringByAppendingString:longString];
-//    }
-//    self.logTextView.string = longString;
-//    return;
+    self.statusTextField.stringValue = @"Fetching base data ...";
+    [self setupCore];
+    
+    
     self.automaticTradingIsRunning = !self.automaticTradingIsRunning;
     if (self.automaticTradingIsRunning) {
         sender.title = @"Stop";
@@ -129,28 +130,38 @@
         sender.title = @"Start";
         [SOXAutomaticTrading_BitcoinDE_Core stopAutomaticTrading];
     }
-    
-    NSString *infoSring;
-    switch (self.orderType) {
-        case BitcoinDE_BuyOrderType:
-            infoSring = [NSString stringWithFormat:@"Threshhold: %0.4f",
-                         [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted.doubleValue * (1 - 0.01/100)];
-            break;
-        case BitcoinDE_SellOrderType:
-            infoSring = [NSString stringWithFormat:@"Threshhold: %0.4f",
-                         [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted.doubleValue * (1 + 0.01/100)];
-            break;
-        default:
-            infoSring = @"ERROR: No orderType";
-            break;
-    }
-    self.statusTextField.stringValue = infoSring;
 }
 
 - (IBAction)useMaxReservation:(NSButton *)sender {
 }
 
 - (IBAction)clearLogAction:(NSButton *)sender {
+}
+
+#pragma mark - SOXMarketCoreServerRequestProtocol
+- (void)answerOfServerRequest:(NSDictionary *)answerOfServerRequest {
+    NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
+    NSMutableArray *orderBook = [SOXShowOrderbook_BitcoinDE_Data orderbookDataArrayForShowOrderbookDictionary:payloadDictionary];
+    if (orderBook) {
+        self.currentLimit = [SOXShowOrderbook_BitcoinDE_Data currentAutomaticPriceLimitOfOrderBook:orderBook
+                                                                                      forOrderType:self.orderType];
+        self.statusTextField.stringValue = [NSString stringWithFormat:@"Running with limit: %f",self.currentLimit];
+        if (self.orderType == BitcoinDE_BuyOrderType) {
+            [SOXAutomaticTrading_BitcoinDE_Core registerController:self
+                                                 forUpdatesForType:BitcoinDE_BuyOrderType];
+        }
+        else if (self.orderType == BitcoinDE_SellOrderType) {
+            [SOXAutomaticTrading_BitcoinDE_Core registerController:self
+                                                 forUpdatesForType:BitcoinDE_SellOrderType];
+        }
+        else {
+            NSLog(@"An error occured: no orderType");
+        }
+    }
+    else {
+        self.currentLimit = 0;
+        NSLog(@"An error occured: no limit");
+    }
 }
 
 #pragma mark - SOXAutomaticTradingCoreProtocol
