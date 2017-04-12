@@ -27,7 +27,7 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
 #pragma mark Properties
 @property (strong, nonatomic) SocketIO *socketIO;
 
-@property (strong, nonatomic) NSHashTable *delegateForAllOrderUpdates;
+//@property (strong, nonatomic) NSHashTable *delegateForAllOrderUpdates;
 @property (strong, nonatomic) NSHashTable *delegateForBuyOrderUpdates;
 @property (strong, nonatomic) NSHashTable *delegateForSellOrderUpdates;
 @property (strong, nonatomic) NSHashTable *delegateForRemoveOrderUpdates;
@@ -42,7 +42,9 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
 #pragma mark - Public Class methods
 + (void)registerForAllOrderUpdatesWithDelegate:(id <SOXSocketIOCoreProtocol>)delegate {
     if (delegate) {
-        [[SOXSocketIO_BitcoinDE_Core sharedCore].delegateForAllOrderUpdates addObject:delegate];
+        [[SOXSocketIO_BitcoinDE_Core sharedCore].delegateForBuyOrderUpdates addObject:delegate];
+        [[SOXSocketIO_BitcoinDE_Core sharedCore].delegateForSellOrderUpdates addObject:delegate];
+        [[SOXSocketIO_BitcoinDE_Core sharedCore].delegateForRemoveOrderUpdates addObject:delegate];
         
         if (![SOXSocketIO_BitcoinDE_Core sharedCore].socketIO) {
             [SOXSocketIO_BitcoinDE_Core startWebSocketCore];
@@ -52,7 +54,6 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
 + (void)registerForOrderUpdatesForUpdateType:(BitcoinDE_UpdateType)bitcoinDE_UpdateType
                                     delegate:(id <SOXSocketIOCoreProtocol>)delegate {
     if (delegate) {
-        [[SOXSocketIO_BitcoinDE_Core sharedCore].delegateForAllOrderUpdates addObject:delegate];
         switch (bitcoinDE_UpdateType) {
             case BitcoinDE_UpdateType_BuyOrderChanges:
                 [[SOXSocketIO_BitcoinDE_Core sharedCore].delegateForBuyOrderUpdates addObject:delegate];
@@ -74,6 +75,21 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
     }
 }
 
++ (void)unRegisterForUpdateType:(BitcoinDE_UpdateType)bitcoinDE_UpdateType
+                       delegate:(id <SOXSocketIOCoreProtocol>)delegate {
+    SOXSocketIO_BitcoinDE_Core *core = [SOXSocketIO_BitcoinDE_Core sharedCore];
+    
+    [core.delegateForBuyOrderUpdates removeObject:delegate];
+    [core.delegateForSellOrderUpdates removeObject:delegate];
+    [core.delegateForRemoveOrderUpdates removeObject:delegate];
+    
+    if (core.delegateForBuyOrderUpdates.count == 0
+        && core.delegateForSellOrderUpdates.count == 0
+        && core.delegateForRemoveOrderUpdates.count == 0) {
+        [SOXSocketIO_BitcoinDE_Core stopWebSocketCore];
+    }
+}
+
 #pragma mark - Private class methods
 + (instancetype)sharedCore {
     static SOXSocketIO_BitcoinDE_Core *sharedCore;
@@ -82,7 +98,6 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
     
     dispatch_once(&pred, ^{
         sharedCore = [[self class] new];
-        sharedCore.delegateForAllOrderUpdates = [[NSHashTable alloc] init];
         sharedCore.delegateForBuyOrderUpdates = [[NSHashTable alloc] init];
         sharedCore.delegateForSellOrderUpdates = [[NSHashTable alloc] init];
         sharedCore.delegateForRemoveOrderUpdates = [[NSHashTable alloc] init];
@@ -97,6 +112,11 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
     [[SOXSocketIO_BitcoinDE_Core sharedCore].socketIO connectToHost:@"ws.bitcoin.de" onPort:443];
 }
 
++ (void)stopWebSocketCore {
+    [[SOXSocketIO_BitcoinDE_Core sharedCore].socketIO disconnect];
+    [[SOXSocketIO_BitcoinDE_Core sharedCore] setSocketIO:nil];
+}
+
 #pragma mark SocketIODelegate
 
 - (void) socketIODidConnect:(SocketIO *)socket {
@@ -105,6 +125,8 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
 
 - (void) socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error {
     NSLog(@"socketIODidDisconnect: %@ disconnectedWithError:\n%@", socket, error);
+    
+    // wait a little bit and restart socket
 }
 
 - (void) socketIO:(SocketIO *)socket didReceiveMessage:(SocketIOPacket *)packet {
