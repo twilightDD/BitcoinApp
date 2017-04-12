@@ -21,9 +21,13 @@
 @property (nonatomic) BitcoinDE_OrderType orderType;
 
 + (instancetype)sharedTradingCore;
+
 + (void)registerController:(id <SOXAutomaticTradingCoreProtocol>)controller
     forUpdatesForOrderType:(BitcoinDE_OrderType)orderType;
 
-+ (void)startAutomaticTrading;
-+ (void)stopAutomaticTrading;
++ (void)unRegisterController:(id)controller
+      forUpdatesForOrderType:(BitcoinDE_OrderType)orderType;
+
+//+ (void)startAutomaticTrading;
+//+ (void)stopAutomaticTrading;
 @end

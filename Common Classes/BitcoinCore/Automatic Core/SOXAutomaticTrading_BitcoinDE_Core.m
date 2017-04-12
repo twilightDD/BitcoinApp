@@ -33,6 +33,7 @@
         sharedTradingCore = [[self class] new];
         [(SOXAutomaticTrading_BitcoinDE_Core *)sharedTradingCore setBuyDelegates:[[NSHashTable alloc] init]];
         [(SOXAutomaticTrading_BitcoinDE_Core *)sharedTradingCore setSellDelegates:[[NSHashTable alloc] init]];
+        [(SOXAutomaticTrading_BitcoinDE_Core *)sharedTradingCore setOrderDataToCheckLater:[NSMutableDictionary dictionary]];
     });
     
     return sharedTradingCore;
@@ -42,8 +43,8 @@
     forUpdatesForOrderType:(BitcoinDE_OrderType)orderType {
     if (!controller) {
         return;
-        
     }
+
     SOXAutomaticTrading_BitcoinDE_Core *tradingCore = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
     tradingCore.orderType = orderType;
     switch (orderType) {
@@ -57,23 +58,87 @@
             NSLog(@"ERROR - (void)registerForUpdatesForType:(BitcoinDE_OrderType)orderType");
             break;
     }
-}
-
-+ (void)startAutomaticTrading {
-    // setup sharedCore
     
-    SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
-    core.buyInterestRate = 0.01;
-    core.sellInterestRate = 0.01;
-    core.orderDataToCheckLater = [NSMutableDictionary dictionary];
-    [core registerForWebSocketUpdates];
+    [SOXAutomaticTrading_BitcoinDE_Core checkRegisterForSocketUpdatesStatus];
 }
 
-+ (void)stopAutomaticTrading {
-    // setup sharedCore
-//    SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
-//    [core registerForWebSocketUpdates];
++ (void)unRegisterController:(id)controller
+      forUpdatesForOrderType:(BitcoinDE_OrderType)orderType {
+    if (!controller) {
+        return;
+    }
+    
+    SOXAutomaticTrading_BitcoinDE_Core *tradingCore = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
+    tradingCore.orderType = orderType;
+    switch (orderType) {
+        case BitcoinDE_BuyOrderType:
+            [tradingCore.buyDelegates removeObject:controller];
+            break;
+        case BitcoinDE_SellOrderType:
+            [tradingCore.sellDelegates removeObject:controller];
+            break;
+        default:
+            NSLog(@"ERROR - (void)registerForUpdatesForType:(BitcoinDE_OrderType)orderType");
+            break;
+    }
+    
+    [SOXAutomaticTrading_BitcoinDE_Core checkRegisterForSocketUpdatesStatus];
 }
+
+//+ (void)startAutomaticTradingForOrderType:(BitcoinDE_OrderType)orderType {
+//    // setup sharedCore
+//    
+//    SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
+//    core.buyInterestRate = 0.01;
+//    core.sellInterestRate = 0.01;
+//    
+//    [core registerForWebSocketUpdates];
+//}
+
+//+ (void)stopAutomaticTradingForOrderType:(BitcoinDE_OrderType)orderType {
+//    // setup sharedCore
+////    SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
+////    [core registerForWebSocketUpdates];
+//}
+
++ (void)checkRegisterForSocketUpdatesStatus {
+    SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
+    
+    // buy updates
+    if (core.buyDelegates.count > 0) {
+        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
+                                                                delegate:core];
+        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
+                                                                  delegate:core];
+    }
+    else {
+        [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
+                                                                  delegate:core];
+    }
+    
+    // sell updates
+    if (core.sellDelegates.count > 0) {
+        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
+                                                                delegate:core];
+        
+    }
+    else {
+        [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
+                                                                  delegate:core];
+    }
+    
+    // remove updates
+    if (core.buyDelegates.count == 0
+        && core.sellDelegates.count == 0) {
+        [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
+                                                                  delegate:core];
+    }
+    else {
+        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
+                                                                delegate:core];
+    }
+}
+
 - (void)registerForWebSocketUpdates {
     [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
                                                             delegate:self];
@@ -85,9 +150,6 @@
 
 #pragma mark - SOXSocketIOCoreProtocol
 - (void)addedOrder:(SOXShowOrderbookData *)addOrderData {
-    
-    
-    
     if ([addOrderData.orderInformation_type isEqualToString:@"offer"]) {
         [self checkOfferData:addOrderData];
     }
@@ -227,37 +289,6 @@
         [sellDelegate performSelector:@selector(executedTrade:)
                           withObject:executeTradeText];
     }
-
-    
-    
-    
-    
-    
-//    double orderPrice = orderData.orderInformation_price.doubleValue;
-//    double rateWeight = [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted.doubleValue;
-//    
-//    NSString *line = [NSString stringWithFormat:@"No sell: %@", orderData.orderInformation_price];
-//    line = [NSString stringWithFormat:@"NO sell: %@€, maxBTC: %@ (threshhold: %0.5f)"
-//            , orderData.orderInformation_price
-//            , orderData.orderInformation_maxAmount
-//            , rateWeight * (1 + self.sellInterestRate/100)
-//            ];
-//    if (orderPrice > rateWeight * (1 + self.sellInterestRate/100)) {
-//        NSLog(@"### SELL offer with ID: %@", orderData.orderInformation_orderID);
-//        line = [NSString stringWithFormat:@"sell: %@€, maxBTC: %@"
-//                , orderData.orderInformation_price
-//                , orderData.orderInformation_maxAmount];
-//    }
-//    else {
-//        NSLog(@"### no sell offer with ID: %@", orderData.orderInformation_orderID);
-//    }
-//    for (NSObject *sellDelegate in self.sellDelegates) {
-//        [sellDelegate performSelector:@selector(executedTrade:)
-//                           withObject:line];
-//    }
-
 }
-
-
 
 @end
