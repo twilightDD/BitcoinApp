@@ -27,8 +27,8 @@
 + (void)registerForAllOrderUpdatesWithDelegate:(id <SOXSocketIOCoreProtocol>)delegate;
 + (void)registerForOrderUpdatesForUpdateType:(BitcoinDE_UpdateType)bitcoinDE_UpdateType
                                     delegate:(id <SOXSocketIOCoreProtocol>)delegate;
-+ (void)unRegisterForUpdateType:(BitcoinDE_UpdateType)bitcoinDE_UpdateType
-                       delegate:(id <SOXSocketIOCoreProtocol>)delegate;
++ (void)unRegisterForOrderUpdatesForUpdateType:(BitcoinDE_UpdateType)bitcoinDE_UpdateType
+                                      delegate:(id <SOXSocketIOCoreProtocol>)delegate;
 
 @property (weak, nonatomic) id <SOXSocketIOCoreProtocol> delegate;
 @end
