@@ -147,11 +147,11 @@
         self.statusTextField.stringValue = [NSString stringWithFormat:@"Running with limit: %f",self.currentLimit];
         if (self.orderType == BitcoinDE_BuyOrderType) {
             [SOXAutomaticTrading_BitcoinDE_Core registerController:self
-                                                 forUpdatesForType:BitcoinDE_BuyOrderType];
+                                            forUpdatesForOrderType:BitcoinDE_BuyOrderType];
         }
         else if (self.orderType == BitcoinDE_SellOrderType) {
             [SOXAutomaticTrading_BitcoinDE_Core registerController:self
-                                                 forUpdatesForType:BitcoinDE_SellOrderType];
+                                            forUpdatesForOrderType:BitcoinDE_SellOrderType];
         }
         else {
             NSLog(@"An error occured: no orderType");

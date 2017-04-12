@@ -38,7 +38,8 @@
     return sharedTradingCore;
 }
 
-+ (void)registerController:(id <SOXAutomaticTradingCoreProtocol>)controller forUpdatesForType:(BitcoinDE_OrderType)orderType {
++ (void)registerController:(id <SOXAutomaticTradingCoreProtocol>)controller
+    forUpdatesForOrderType:(BitcoinDE_OrderType)orderType {
     if (!controller) {
         return;
         
