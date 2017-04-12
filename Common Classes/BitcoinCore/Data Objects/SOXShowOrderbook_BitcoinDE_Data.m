@@ -103,6 +103,24 @@
 }
 
 #pragma mark - Class methods
++ (double)currentAutomaticPriceLimitOfOrderBook:(NSMutableArray <SOXShowOrderbookData *> *)orderbook forOrderType:(BitcoinDE_OrderType)orderType {
+    [orderbook sortUsingSelector:@selector(orderInformation_price)];
+    
+    SOXShowOrderbookData *dataOfInterest = nil;
+    switch (orderType) {
+        case BitcoinDE_BuyOrderType:
+            dataOfInterest = orderbook.lastObject; // lastObject seems right
+            break;
+        case BitcoinDE_SellOrderType:
+            dataOfInterest = orderbook.lastObject; // lastObject seems right, too ... stranged!
+            break;
+        default:
+            break;
+    }
+    double currentAutomaticPrice = dataOfInterest.orderInformation_price.doubleValue;
+    return currentAutomaticPrice;
+}
+
 + (SOXShowOrderbookData *)orderbookDataForOrderDictionary:(NSDictionary *)orderDictionary {
     SOXShowOrderbook_BitcoinDE_Data *orderbookData = [[SOXShowOrderbook_BitcoinDE_Data alloc] init];
     [orderbookData setupOrderbookDataForOrderDictionary:orderDictionary];

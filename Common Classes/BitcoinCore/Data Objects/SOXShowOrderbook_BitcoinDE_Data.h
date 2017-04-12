@@ -7,12 +7,14 @@
 //
 
 #import "SOXShowOrderbookData.h"
+#import "SOXMarket_BitcoinDE_DefTypes.h"
 
 @interface SOXShowOrderbook_BitcoinDE_Data : SOXShowOrderbookData
 
 + (NSMutableArray *)orderbookDataArrayForShowOrderbookDictionary:(NSDictionary *)payloadDictionary;
 
 + (instancetype)orderBookDataForSocketIODictionary:(NSDictionary *)addOrderSocketIODictionary;
++ (double)currentAutomaticPriceLimitOfOrderBook:(NSMutableArray *)orderbook forOrderType:(BitcoinDE_OrderType)orderType;
 
 - (void)updateOrderbookDataWith:(NSDictionary *)changes;
 @end
