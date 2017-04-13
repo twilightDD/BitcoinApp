@@ -98,9 +98,10 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
     
     dispatch_once(&pred, ^{
         sharedCore = [[self class] new];
-        sharedCore.delegateForBuyOrderUpdates = [[NSHashTable alloc] init];
-        sharedCore.delegateForSellOrderUpdates = [[NSHashTable alloc] init];
-        sharedCore.delegateForRemoveOrderUpdates = [[NSHashTable alloc] init];
+        sharedCore.delegateForBuyOrderUpdates    = [NSHashTable hashTableWithOptions:NSHashTableWeakMemory];
+        sharedCore.delegateForSellOrderUpdates   = [NSHashTable hashTableWithOptions:NSHashTableWeakMemory];
+        sharedCore.delegateForRemoveOrderUpdates = [NSHashTable hashTableWithOptions:NSHashTableWeakMemory];
+        
         
     });
     return sharedCore;
@@ -217,16 +218,7 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
                 for (NSString *objectOrderID in objectOrderIDs) { // für jeden Key(objectOrderID) die Payload an die Delegates senden
                     NSDictionary *changesDictionary = [updateDictionary objectForKey:objectOrderID];
                     
-                    // an buy-delegates senden
-                    for (NSObject *delegate in self.delegateForBuyOrderUpdates) {
-                        if ([delegate respondsToSelector:@selector(updateOrderWithSocketOrderObjectID:withValues:)]) {
-                            [delegate performSelector:@selector(updateOrderWithSocketOrderObjectID:withValues:)
-                                           withObject:objectOrderID
-                                           withObject:changesDictionary];
-                        }
-                    }
-                    
-                    // an sell-delegates senden
+                    // inform sell-delegates: WebSocket_UpdateOrder only for sell orders
                     for (NSObject *delegate in self.delegateForSellOrderUpdates) {
                         if ([delegate respondsToSelector:@selector(updateOrderWithSocketOrderObjectID:withValues:)]) {
                             [delegate performSelector:@selector(updateOrderWithSocketOrderObjectID:withValues:)
