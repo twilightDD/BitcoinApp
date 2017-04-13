@@ -105,6 +105,22 @@
     }
 }
 
+- (void)stopAutomaticTrading {
+    if (self.orderType == BitcoinDE_BuyOrderType) {
+        // we want to compare buy price with highest sell price
+        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType
+                                                    respondTo:self];
+    }
+    else if (self.orderType == BitcoinDE_SellOrderType) {
+        // we want to compare sell price with lowest buy price
+        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType
+                                                    respondTo:self];
+    }
+    else {
+        NSLog(@"ERROR - no orderType set");
+    }
+}
+
 #pragma mark - Action methods
 - (IBAction)runAutomaticAction:(NSButton *)sender {
     self.automaticBackgroundView.hidden = !sender.state;
@@ -122,12 +138,11 @@
     self.automaticTradingIsRunning = !self.automaticTradingIsRunning;
     if (self.automaticTradingIsRunning) {
         sender.title = @"Stop";
-        [SOXAutomaticTrading_BitcoinDE_Core startAutomaticTrading];
         [self startAutomaticTrading];
     }
     else {
         sender.title = @"Start";
-        [SOXAutomaticTrading_BitcoinDE_Core stopAutomaticTrading];
+        [self stopAutomaticTrading];
     }
 }
 
