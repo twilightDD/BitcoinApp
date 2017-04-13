@@ -86,7 +86,7 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
     if (core.delegateForBuyOrderUpdates.count == 0
         && core.delegateForSellOrderUpdates.count == 0
         && core.delegateForRemoveOrderUpdates.count == 0) {
-        [SOXSocketIO_BitcoinDE_Core stopWebSocketCore];
+       // [SOXSocketIO_BitcoinDE_Core stopWebSocketCore];
     }
 }
 
@@ -117,24 +117,36 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
     [[SOXSocketIO_BitcoinDE_Core sharedCore] setSocketIO:nil];
 }
 
++ (void)restartWebSocketCore {
+    NSLog(@"~~~~~ Try to restart WebSocket Connection in 20 seconds ~~~~~");
+    
+    // wait a little bit and restart socket
+    NSTimer *ratesReloadTimer  = [NSTimer scheduledTimerWithTimeInterval:20
+                                                                  target:[SOXSocketIO_BitcoinDE_Core class]
+                                                                selector:@selector(startWebSocketCore)
+                                                                userInfo:nil
+                                                                 repeats:NO];
+    [[NSRunLoop mainRunLoop] addTimer:ratesReloadTimer forMode:NSDefaultRunLoopMode];
+
+}
 #pragma mark SocketIODelegate
 
 - (void) socketIODidConnect:(SocketIO *)socket {
-    NSLog(@"socketIODidConnect: %@ ", socket);
+    NSLog(@"~~~~~ socketIODidConnect: %@ ", socket);
 }
 
 - (void) socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error {
-    NSLog(@"socketIODidDisconnect: %@ disconnectedWithError:\n%@", socket, error);
+    NSLog(@"~~~~~ socketIODidDisconnect: %@ disconnectedWithError:\n%@", socket, error);
     
-    // wait a little bit and restart socket
+    [SOXSocketIO_BitcoinDE_Core restartWebSocketCore];
 }
 
 - (void) socketIO:(SocketIO *)socket didReceiveMessage:(SocketIOPacket *)packet {
-    NSLog(@"socketIO: %@ didReceiveMessage:\n%@", socket, packet);
+    NSLog(@"~~~~~ socketIO: %@ didReceiveMessage:\n%@", socket, packet);
 }
 
 - (void) socketIO:(SocketIO *)socket didReceiveJSON:(SocketIOPacket *)packet {
-    NSLog(@"socketIO: %@ didReceiveJSON:\n%@", socket, packet);
+    NSLog(@"~~~~~ socketIO: %@ didReceiveJSON:\n%@", socket, packet);
 }
 
 - (void) socketIO:(SocketIO *)socket didReceiveEvent:(SocketIOPacket *)packet {
@@ -239,7 +251,8 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
 }
 
 - (void) socketIO:(SocketIO *)socket onError:(NSError *)error {
-    NSLog(@"socketIO: %@ onError:\n%@", socket, error);
+    NSLog(@"~~~~~ socketIO: %@ onError:\n%@", socket, error);
+    [SOXSocketIO_BitcoinDE_Core restartWebSocketCore];
 }
 
 
