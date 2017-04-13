@@ -10,8 +10,7 @@
 
 #import "SOXMarket_BitcoinDE_Core.h"
 
-@interface MacViewController : NSViewController <SOXMarketCoreServerRequestProtocol>
-
+@interface MacViewController : NSViewController
 
 @end
 
