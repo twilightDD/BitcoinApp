@@ -276,11 +276,12 @@
     }
     
     NSString *orderDataInformation;
-    orderDataInformation = [NSString stringWithFormat:@"ID: %@, price: %@€, maxBTC: %@, payOpt: %@"
+    orderDataInformation = [NSString stringWithFormat:@"ID: %@, price: %@€, maxBTC: %@, payOpt: %@, timeStamp: %@"
                             , orderbookData.orderInformation_socketOrderObjectID
                             , orderbookData.orderInformation_price
                             , orderbookData.orderInformation_maxAmount
                             , paymentOptionString
+                            , [NSDate date]
                             ];
     
     return orderDataInformation;
@@ -325,31 +326,65 @@
 
 }
 
-#pragma mark - Manual setters
-- (void)setBuyLowestPrice:(double)buyLowestPrice {
+- (void)calculateNewBuyLowestPriceForCurrentHighestSellPrice:(double)currentHighestSellPrice {
+    // debug
     
-    NSString *priceUpdateText = [NSString stringWithFormat:@"BUY Limit alt: %0.2f neu: %0.2f", _buyLowestPrice , buyLowestPrice];
-
-    _buyLowestPrice = buyLowestPrice;
+    currentHighestSellPrice -=0.0001;
+    double oldBuyLowestPrice = self.buyLowestPrice;
+    
+    if (self.buyLowestPrice == 0) {
+        self.buyLowestPrice = currentHighestSellPrice * (1 - self.buyInterestRate/100);
+    }
+    else if (currentHighestSellPrice > 0) { // just in case
+        SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
+        double potentialNewLowestBuyPrice = currentHighestSellPrice * (1 - core.buyInterestRate/100);
+        if (self.buyLowestPrice > potentialNewLowestBuyPrice) {
+            self.buyLowestPrice = potentialNewLowestBuyPrice;
+        }
+    }
+    else {
+        return;
+    }
+    // Inform delegates about change
+    // Debug
+    NSString *priceUpdateText = [NSString stringWithFormat:@"new BUY limit alt: %0.2f neu: %0.2f",
+                                 oldBuyLowestPrice , self.buyLowestPrice];
     
     for (NSObject *buyDelegate in self.buyDelegates) {
         [buyDelegate performSelector:@selector(currentLimitHasChangedTo:)
-                          withObject:@(buyLowestPrice)];
+                          withObject:@(self.buyLowestPrice)];
+        // Debug
         [buyDelegate performSelector:@selector(executedTrade:)
-                           withObject:priceUpdateText];
+                          withObject:priceUpdateText];
     }
+    
 }
 
--(void)setSellHighestPrice:(double)sellHighestPrice {
+- (void)calculateNewSellHighestPriceForCurrentLowestBuyPrice:(double)currentLowestBuyPrice {
+    currentLowestBuyPrice +=0.0001;
+    double oldSellHighestPrice = self.sellHighestPrice;
     
+    if (self.sellHighestPrice == 0) {
+        self.sellHighestPrice = currentLowestBuyPrice * (1 + self.sellInterestRate/100);
+    }
+    else if (currentLowestBuyPrice > 0) { // just in case
+        SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
+        double potentialNewSellHighestPrice = currentLowestBuyPrice * (1 + core.sellInterestRate/100);
+        if (self.sellHighestPrice < potentialNewSellHighestPrice) {
+            self.sellHighestPrice = potentialNewSellHighestPrice;
+        }
+    }
+    else {
+        return;
+    }
     
-    NSString *priceUpdateText = [NSString stringWithFormat:@"SELL Limit alt: %0.2f neu: %0.2f", _sellHighestPrice, sellHighestPrice];
-    
-    _sellHighestPrice = sellHighestPrice;
+    // Debug
+    NSString *priceUpdateText = [NSString stringWithFormat:@"new SELL limit alt: %0.2f neu: %0.2f", oldSellHighestPrice, self.sellHighestPrice];
     
     for (NSObject *sellDelegate in self.sellDelegates) {
         [sellDelegate performSelector:@selector(currentLimitHasChangedTo:)
-                           withObject:@(sellHighestPrice)];
+                           withObject:@(self.sellHighestPrice)];
+        // Debug
         [sellDelegate performSelector:@selector(executedTrade:)
                            withObject:priceUpdateText];
     }
@@ -359,30 +394,34 @@
 - (void)answerOfServerRequest:(NSDictionary *)answerOfServerRequest {
     SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
     
-    
     NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
     NSMutableArray *orderBook = [SOXShowOrderbook_BitcoinDE_Data orderbookDataArrayForShowOrderbookDictionary:payloadDictionary];
     
-    if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowBuyOrderbookCommandType)]) {
-        double currentLimit = [SOXShowOrderbook_BitcoinDE_Data lowestPriceOfOrderBookDatas:orderBook];
-        core.sellHighestPrice = currentLimit;// * (1 + core.sellInterestRate/100);
-        NSLog(@"buyCommand => core.sellHighestPrice %0.3f", core.sellHighestPrice);
+    if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowBuyOrderbookCommandType)]
+        && orderBook.count > 0) {
+        // get lowest price from incoming orderDatas ...
+        double currentLowestBuyPrice = [SOXShowOrderbook_BitcoinDE_Data lowestPriceOfOrderBookDatas:orderBook];
+        //  ... compare to currently highest sell price
+        
+        [self calculateNewSellHighestPriceForCurrentLowestBuyPrice:currentLowestBuyPrice];
+        
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
                                                                 delegate:core];
         [core startRefetchOrderBookTimer]; // once for sharedCore
     }
-    else if([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowSellOrderbookCommandType)]) {
-        double currentLimit = [SOXShowOrderbook_BitcoinDE_Data highestPriceOfOrderBookDatas:orderBook];
-        
-        core.buyLowestPrice = currentLimit;// * (1 - core.buyInterestRate/100);
-        NSLog(@"sellCommand => core.buyLowestPrice %0.3f", core.buyLowestPrice);
+    else if([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowSellOrderbookCommandType)]
+            && orderBook.count > 0) {
+        // get highest price from incoming orderDatas ...
+        double currentHighestSellPrice = [SOXShowOrderbook_BitcoinDE_Data highestPriceOfOrderBookDatas:orderBook];
+        // ... compare to currently lowest buy price
+        [self calculateNewBuyLowestPriceForCurrentHighestSellPrice:currentHighestSellPrice];
+
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
                                                                 delegate:core];
     }
     
     [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
                                                             delegate:core];
-    
 }
 
 #pragma mark - SOXSocketIOCoreProtocol
@@ -393,7 +432,6 @@
     else if ([addOrderData.orderInformation_type isEqualToString:@"order"]) {
         [SOXAutomaticTrading_BitcoinDE_Core checkOrderData:addOrderData];
     }
-    // look out for lower/higher price
 }
 
 - (void)removedOrderWithOrderID:(NSString *)orderID {
