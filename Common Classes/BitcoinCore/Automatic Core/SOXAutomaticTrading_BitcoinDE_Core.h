@@ -6,8 +6,16 @@
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
 #import <Foundation/Foundation.h>
-#import "SOXAutomaticTradingCore.h"
 #import "SOXMarket_BitcoinDE_DefTypes.h"
+
+@protocol SOXAutomaticTradingCoreProtocol <NSObject>
+
+- (void)currentLimitHasChangedTo:(NSNumber *)newLimit;
+
+@optional
+- (void)executedTrade:(NSString *)tradeLine;
+
+@end
 
 @interface SOXAutomaticTrading_BitcoinDE_Core : NSObject
 @property (nonatomic) double buyLowestPrice;

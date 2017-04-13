@@ -91,6 +91,21 @@
 
 - (void)startAutomaticTrading {
     if (self.orderType == BitcoinDE_BuyOrderType) {
+        [SOXAutomaticTrading_BitcoinDE_Core registerController:self
+                                        forUpdatesForOrderType:BitcoinDE_BuyOrderType];
+    }
+    else if (self.orderType == BitcoinDE_SellOrderType) {
+        [SOXAutomaticTrading_BitcoinDE_Core registerController:self
+                                        forUpdatesForOrderType:BitcoinDE_SellOrderType];
+    }
+    else {
+        NSLog(@"An error occured: no orderType");
+    }
+
+    return;
+    
+    
+    if (self.orderType == BitcoinDE_BuyOrderType) {
         // we want to compare buy price with highest sell price - BuyOrderType vs. SellOrderBook ist richtig!
         [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType
                                                     respondTo:self];
@@ -130,16 +145,15 @@
 }
 
 - (IBAction)startAutomaticAction:(NSButton *)sender {
-    self.statusTextField.stringValue = @"Fetching base data ...";
-    
-    
     self.automaticTradingIsRunning = !self.automaticTradingIsRunning;
     if (self.automaticTradingIsRunning) {
         sender.title = @"Stop";
+        self.statusTextField.stringValue = @"Fetching base data ...";
         [self startAutomaticTrading];
     }
     else {
         sender.title = @"Start";
+        self.statusTextField.stringValue = @"Automatic trading stopped";
         [self stopAutomaticTrading];
     }
 }
@@ -184,5 +198,8 @@
     self.logTextView.string = self.log;
 }
 
+- (void)currentLimitHasChangedTo:(NSNumber *)newLimit {
+    self.statusTextField.stringValue = [NSString stringWithFormat:@"Limit: %0.2f (%@)", newLimit.doubleValue, [[NSDate date] description]];
+}
 
 @end
