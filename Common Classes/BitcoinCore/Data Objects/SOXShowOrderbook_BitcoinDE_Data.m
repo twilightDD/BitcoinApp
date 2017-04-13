@@ -103,7 +103,40 @@
 }
 
 #pragma mark - Class methods
-+ (double)currentAutomaticPriceLimitOfOrderBook:(NSMutableArray <SOXShowOrderbookData *> *)orderbook forOrderType:(BitcoinDE_OrderType)orderType {
++ (double)highestPriceOfOrderBookDatas:(NSMutableArray <SOXShowOrderbookData *> *)orderbook {
+    NSNumber *highestPrice = [orderbook valueForKeyPath:@"@max.orderInformation_price"];
+    return highestPrice.doubleValue;
+}
+
++ (double)lowestPriceOfOrderBookDatas:(NSMutableArray <SOXShowOrderbookData *> *)orderbook {
+    NSNumber *lowestPrice = [orderbook valueForKeyPath:@"@min.orderInformation_price"];
+    return lowestPrice.doubleValue;
+}
+
+
++ (double)currentAutomaticPriceLimitOfOrderBook:(NSMutableArray <SOXShowOrderbookData *> *)orderbook
+                                   forOrderType:(BitcoinDE_OrderType)orderType {
+    NSArray *prices = [orderbook valueForKeyPath:@"orderInformation_price"];
+    
+    if (orderbook) {
+        NSNumber *priceLimit = [orderbook valueForKeyPath:@"@min.orderInformation_price"];
+        switch (orderType) {
+            case BitcoinDE_BuyOrderType:
+                priceLimit = [orderbook valueForKeyPath:@"@min.orderInformation_price"];
+                break;
+            case BitcoinDE_SellOrderType:
+                priceLimit = [orderbook valueForKeyPath:@"@max.orderInformation_price"];
+                break;
+            default:
+                break;
+        }
+        
+        return priceLimit.doubleValue;
+    }
+    else {
+        return 0.0;
+    }
+    /*
     [orderbook sortUsingSelector:@selector(orderInformation_price)];
     
     SOXShowOrderbookData *dataOfInterest = nil;
@@ -119,6 +152,7 @@
     }
     double currentAutomaticPrice = dataOfInterest.orderInformation_price.doubleValue;
     return currentAutomaticPrice;
+     */
 }
 
 + (SOXShowOrderbookData *)orderbookDataForOrderDictionary:(NSDictionary *)orderDictionary {
