@@ -22,8 +22,6 @@
 
 @interface SOXSocketIO_BitcoinDE_Core : NSObject
 
-+ (void)startWebSocketCore;
-
 + (void)registerForAllOrderUpdatesWithDelegate:(id <SOXSocketIOCoreProtocol>)delegate;
 + (void)registerForOrderUpdatesForUpdateType:(BitcoinDE_UpdateType)bitcoinDE_UpdateType
                                     delegate:(id <SOXSocketIOCoreProtocol>)delegate;
