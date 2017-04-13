@@ -197,9 +197,24 @@
             self.ratesRateWeighted12hTextField.doubleValue = ratesData.rate_weighted_12h.doubleValue;
             
             [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted = @(ratesData.rate_weighted.doubleValue);
+            
+            [self startRatesReloadTimer];
         }
     }
 }
+
+- (void)startRatesReloadTimer {
+    NSLog(@"***** NEW RATE: %@", [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted);
+    
+    NSTimer *ratesReloadTimer  = [NSTimer scheduledTimerWithTimeInterval:600
+                                                                     target:self
+                                                                   selector:@selector(requestServerData)
+                                                                   userInfo:nil
+                                                                    repeats:NO];
+    [[NSRunLoop mainRunLoop] addTimer:ratesReloadTimer forMode:NSDefaultRunLoopMode];
+}
+
+
 #pragma mark - SOXCreditUpdateProtocol
 - (void)creditValuesUpdated:(NSDictionary * _Nonnull)creditDicts {
     NSNumber *currentCredit = [creditDicts objectForKey:CreditUpdate_CurrentCreditsKey];
