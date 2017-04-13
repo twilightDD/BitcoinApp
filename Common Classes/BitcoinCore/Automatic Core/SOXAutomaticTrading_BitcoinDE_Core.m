@@ -149,14 +149,14 @@
     double orderPrice = offerData.orderInformation_price.doubleValue;
     
     {
-        if (core.buyLowestPrice > orderPrice * (1 - core.buyInterestRate/100)) {
+        if (core.sellHighestPrice < orderPrice * (1 + core.sellInterestRate/100)) {
             
-            NSString *priceUpdateText = [NSString stringWithFormat:@"Limit alt: %0.2f neu: %0.2f",core.buyLowestPrice, orderPrice];
-            for (NSObject *sellDelegate in core.buyDelegates) {
+            NSString *priceUpdateText = [NSString stringWithFormat:@"SELL Limit alt: %0.2f neu: %0.2f",core.sellHighestPrice, orderPrice];
+            for (NSObject *sellDelegate in core.sellDelegates) {
                 [sellDelegate performSelector:@selector(executedTrade:)
                                    withObject:priceUpdateText];
             }
-            core.buyLowestPrice = orderPrice;
+            core.sellHighestPrice = orderPrice;
         }
     }
     
@@ -190,8 +190,12 @@
     for (NSObject *buyDelegate in core.buyDelegates) {
         [buyDelegate performSelector:@selector(executedTrade:)
                           withObject:executeTradeText];
+        
     }
-    
+    for (NSObject *sellDelegate in core.sellDelegates) {
+        [sellDelegate performSelectorInBackground:@selector(currentLimitHasChangedTo:)
+                                       withObject:@(core.sellHighestPrice)];
+    }
 }
 
 + (void)checkOrderData:(SOXShowOrderbookData *)orderData {
@@ -202,10 +206,10 @@
     
     double orderPrice = orderData.orderInformation_price.doubleValue;
     {
-        if (core.sellHighestPrice < orderPrice * (1 + core.sellInterestRate/100)) {
+        if (core.buyLowestPrice > orderPrice * (1 - core.buyLowestPrice/100)) {
             
-            NSString *priceUpdateText = [NSString stringWithFormat:@"Limit alt: %0.2f neu: %0.2f",core.sellHighestPrice, orderPrice];
-            for (NSObject *sellDelegate in core.sellDelegates) {
+            NSString *priceUpdateText = [NSString stringWithFormat:@"BUY Limit alt: %0.2f neu: %0.2f",core.sellHighestPrice, orderPrice];
+            for (NSObject *sellDelegate in core.buyDelegates) {
                 [sellDelegate performSelector:@selector(executedTrade:)
                                    withObject:priceUpdateText];
             }
@@ -240,10 +244,16 @@
     [core.orderDataToCheckLater setObject:orderData
                                    forKey:orderData.orderInformation_socketOrderObjectID];
     // inform delegate
+    for (NSObject *buyDelegate in core.buyDelegates) {
+        [buyDelegate performSelectorInBackground:@selector(currentLimitHasChangedTo:)
+                                      withObject:@(core.sellHighestPrice)];
+    }
     for (NSObject *sellDelegate in core.sellDelegates) {
         [sellDelegate performSelector:@selector(executedTrade:)
                            withObject:executeTradeText];
     }
+    
+    
 }
 
 #pragma mark | Helper methods
