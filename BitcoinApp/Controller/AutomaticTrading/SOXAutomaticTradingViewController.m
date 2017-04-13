@@ -91,12 +91,12 @@
 
 - (void)startAutomaticTrading {
     if (self.orderType == BitcoinDE_BuyOrderType) {
-        // we want to compare buy price with highest sell price
+        // we want to compare buy price with highest sell price - BuyOrderType vs. SellOrderBook ist richtig!
         [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType
                                                     respondTo:self];
     }
     else if (self.orderType == BitcoinDE_SellOrderType) {
-        // we want to compare sell price with lowest buy price
+        // we want to compare sell price with lowest buy price - SellOrderType vs. BuyOrderBook ist richtig!
         [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType
                                                     respondTo:self];
     }
@@ -107,14 +107,12 @@
 
 - (void)stopAutomaticTrading {
     if (self.orderType == BitcoinDE_BuyOrderType) {
-        // we want to compare buy price with highest sell price
-        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType
-                                                    respondTo:self];
+        [SOXAutomaticTrading_BitcoinDE_Core unRegisterController:self
+                                          forUpdatesForOrderType:BitcoinDE_BuyOrderType];
     }
     else if (self.orderType == BitcoinDE_SellOrderType) {
-        // we want to compare sell price with lowest buy price
-        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType
-                                                    respondTo:self];
+        [SOXAutomaticTrading_BitcoinDE_Core unRegisterController:self
+                                          forUpdatesForOrderType:BitcoinDE_SellOrderType];
     }
     else {
         NSLog(@"ERROR - no orderType set");
