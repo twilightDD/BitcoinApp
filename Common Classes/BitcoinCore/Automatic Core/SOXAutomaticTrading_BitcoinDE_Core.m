@@ -149,10 +149,10 @@
     double orderPrice = offerData.orderInformation_price.doubleValue;
     
     {
-        if (core.buyLowestPrice > orderPrice) {
+        if (core.buyLowestPrice > orderPrice * (1 - core.buyInterestRate/100)) {
             
             NSString *priceUpdateText = [NSString stringWithFormat:@"Limit alt: %0.2f neu: %0.2f",core.buyLowestPrice, orderPrice];
-            for (NSObject *sellDelegate in core.sellDelegates) {
+            for (NSObject *sellDelegate in core.buyDelegates) {
                 [sellDelegate performSelector:@selector(executedTrade:)
                                    withObject:priceUpdateText];
             }
@@ -160,7 +160,7 @@
         }
     }
     
-    BOOL buyThisOffer = orderPrice < (core.buyLowestPrice * (1 - core.buyInterestRate/100));
+    BOOL buyThisOffer = orderPrice < core.buyLowestPrice;
     if (!buyThisOffer) {
         executeTradeText = [NSString stringWithFormat:@"no buy %@", orderInfo];
     }
@@ -202,7 +202,7 @@
     
     double orderPrice = orderData.orderInformation_price.doubleValue;
     {
-        if (core.sellHighestPrice < orderPrice) {
+        if (core.sellHighestPrice < orderPrice * (1 + core.sellInterestRate/100)) {
             
             NSString *priceUpdateText = [NSString stringWithFormat:@"Limit alt: %0.2f neu: %0.2f",core.sellHighestPrice, orderPrice];
             for (NSObject *sellDelegate in core.sellDelegates) {
@@ -213,7 +213,7 @@
         }
     }
     
-    BOOL sellThisOffer = orderPrice > core.sellHighestPrice * (1 + core.sellInterestRate/100);
+    BOOL sellThisOffer = orderPrice > core.sellHighestPrice;
     if (!sellThisOffer) {
         executeTradeText = [NSString stringWithFormat:@"no sell %@", orderInfo];
     }
@@ -309,7 +309,7 @@
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowBuyOrderbookCommandType)]) {
         double currentLimit = [SOXShowOrderbook_BitcoinDE_Data currentAutomaticPriceLimitOfOrderBook:orderBook
                                                                                         forOrderType:BitcoinDE_SellOrderType];
-        core.sellHighestPrice = currentLimit;
+        core.sellHighestPrice = currentLimit * (1 + core.sellInterestRate/100);
         
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
                                                                 delegate:core];
@@ -317,7 +317,8 @@
     else if([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowSellOrderbookCommandType)]) {
         double currentLimit = [SOXShowOrderbook_BitcoinDE_Data currentAutomaticPriceLimitOfOrderBook:orderBook
                                                                                         forOrderType:BitcoinDE_BuyOrderType];
-        core.buyLowestPrice = currentLimit;
+        
+        core.buyLowestPrice = currentLimit * (1 - core.buyInterestRate/100);
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
                                                                 delegate:core];
     }
