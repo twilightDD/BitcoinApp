@@ -10,6 +10,11 @@
 
 @implementation SOXKeys_BitcoinDE
 
+#pragma mark - BitcoinDE_ExecuteTrade
+NSString *const BitcoinDE_ExecuteTrade_OrderID          = @"order_id";
+NSString *const BitcoinDE_ExecuteTrade_Type             = @"type";
+NSString *const BitcoinDE_ExecuteTrade_BitcoinAmount    = @"amount";
+
 #pragma mark - BitcoinDE_ShowAccountInfo
 NSString *const BitcoinDE_ShowAccountInfo_MainKey = @"data";
 #pragma mark | BTC-Balance

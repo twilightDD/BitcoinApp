@@ -10,6 +10,11 @@
 
 @interface SOXKeys_BitcoinDE : NSObject
 
+#pragma mark - BitcoinDE_ExecuteTrade
+FOUNDATION_EXPORT NSString *const BitcoinDE_ExecuteTrade_OrderID;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ExecuteTrade_Type;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ExecuteTrade_BitcoinAmount;
+
 #pragma mark - BitcoinDE_ShowAccountInfo
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfo_MainKey;
 #pragma mark | BTC-Balance
