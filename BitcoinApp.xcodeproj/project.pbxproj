@@ -10,6 +10,8 @@
 		2B050008052C0074E160ABF6 /* libPods-iOS BitcoinAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A243607ED1705CCF7ABD64B7 /* libPods-iOS BitcoinAppTests.a */; };
 		5F29BF12BEB45F346C4E59FB /* libPods-mac BitcoinAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B79D58838F5047E63DA16D /* libPods-mac BitcoinAppTests.a */; };
 		B9F68ED00EF1147E8A37D564 /* libPods-mac BitcoinApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 337C676324C43B0D3C145DF6 /* libPods-mac BitcoinApp.a */; };
+		D00FF1371EA03B71008BCD63 /* SOXTradeJob_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D00FF1361EA03B71008BCD63 /* SOXTradeJob_BitcoinDE_Data.m */; };
+		D00FF1381EA03B71008BCD63 /* SOXTradeJob_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D00FF1361EA03B71008BCD63 /* SOXTradeJob_BitcoinDE_Data.m */; };
 		D01F589E1E8495D200C170F7 /* SOXDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D01F589D1E8495D200C170F7 /* SOXDateFormatter.m */; };
 		D01F589F1E8495D200C170F7 /* SOXDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D01F589D1E8495D200C170F7 /* SOXDateFormatter.m */; };
 		D0270AE41E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m in Sources */ = {isa = PBXBuildFile; fileRef = D0270AE31E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m */; };
@@ -118,6 +120,8 @@
 		B30DF34ECAF33459973BF538 /* Pods-mac BitcoinAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mac BitcoinAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mac BitcoinAppTests/Pods-mac BitcoinAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B7B5F5E2E05175F4B0DF93A6 /* Pods-iOS BitcoinAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS BitcoinAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOS BitcoinAppTests/Pods-iOS BitcoinAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		C4B6EA76C6E9993DA0945AD1 /* Pods-iOS BitcoinApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS BitcoinApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOS BitcoinApp/Pods-iOS BitcoinApp.release.xcconfig"; sourceTree = "<group>"; };
+		D00FF1351EA03B71008BCD63 /* SOXTradeJob_BitcoinDE_Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXTradeJob_BitcoinDE_Data.h; sourceTree = "<group>"; };
+		D00FF1361EA03B71008BCD63 /* SOXTradeJob_BitcoinDE_Data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXTradeJob_BitcoinDE_Data.m; sourceTree = "<group>"; };
 		D01F589C1E8495D200C170F7 /* SOXDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXDateFormatter.h; sourceTree = "<group>"; };
 		D01F589D1E8495D200C170F7 /* SOXDateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXDateFormatter.m; sourceTree = "<group>"; };
 		D0270AE21E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXSocketIO_BitcoinDE_Core.h; sourceTree = "<group>"; };
@@ -301,6 +305,8 @@
 				D0B942AF1E8AF1D600EF7434 /* SOXErrorMessage_BitcoinDE.m */,
 				D0AA14F11E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.h */,
 				D0AA14F21E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m */,
+				D00FF1351EA03B71008BCD63 /* SOXTradeJob_BitcoinDE_Data.h */,
+				D00FF1361EA03B71008BCD63 /* SOXTradeJob_BitcoinDE_Data.m */,
 			);
 			path = "Data Objects";
 			sourceTree = "<group>";
@@ -909,6 +915,7 @@
 				D08ABF0E1E9C03040059825F /* SOXPreferenceCenter.m in Sources */,
 				D080867C1E9D0B7F00373F09 /* SOXAutomaticTradingCore.m in Sources */,
 				D0631F0A1E89C1EA007ED75A /* SOXMyOrderBookData.m in Sources */,
+				D00FF1371EA03B71008BCD63 /* SOXTradeJob_BitcoinDE_Data.m in Sources */,
 				D01F589E1E8495D200C170F7 /* SOXDateFormatter.m in Sources */,
 				D0331D531E7CAEFF008C0244 /* SOXOrdersViewController.m in Sources */,
 				D02ED5B21E814CF100AA9448 /* SOXRates_BitcoinDE_Data.m in Sources */,
@@ -967,6 +974,7 @@
 				D0631F0F1E89C1FD007ED75A /* SOXMyOrderBook_BitcoinDE_Data.m in Sources */,
 				D063E9481E74C024006E2D17 /* IOSAppDelegate.m in Sources */,
 				D063E9511E74C024006E2D17 /* iOS_BitcoinApp.xcdatamodeld in Sources */,
+				D00FF1381EA03B71008BCD63 /* SOXTradeJob_BitcoinDE_Data.m in Sources */,
 				D0631F0B1E89C1EA007ED75A /* SOXMyOrderBookData.m in Sources */,
 				D0AA14F41E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m in Sources */,
 				D01F589F1E8495D200C170F7 /* SOXDateFormatter.m in Sources */,
