@@ -162,6 +162,15 @@
         [self disableSpinningWheel];
         self.orderBookArrayController.sortDescriptors = [self sortDescriptorsForArrayController];
         [self registerForWebSocketUpdates]; // after basic dataset, so self.orderBook != nil;
+        
+        // debug
+        {
+            if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowBuyOrderbookCommandType)]) {
+                SOXShowOrderbook_BitcoinDE_Data *try = [self.orderBookArrayController.arrangedObjects firstObject];
+                NSLog(@"???? Try: %@ %@", try.orderInformation_orderID, try.orderInformation_price);
+            }
+
+        }
     }
 }
 
