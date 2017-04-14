@@ -103,12 +103,12 @@
 }
 
 #pragma mark - Class methods
-+ (double)highestPriceOfOrderBookDatas:(NSMutableArray <SOXShowOrderbookData *> *)orderbook {
++ (double)highestPriceOfOrderBookDatas:(NSMutableArray <SOXShowOrderbook_BitcoinDE_Data *> *)orderbook {
     NSNumber *highestPrice = [orderbook valueForKeyPath:@"@max.orderInformation_price"];
     return highestPrice.doubleValue;
 }
 
-+ (double)lowestPriceOfOrderBookDatas:(NSMutableArray <SOXShowOrderbookData *> *)orderbook {
++ (double)lowestPriceOfOrderBookDatas:(NSMutableArray <SOXShowOrderbook_BitcoinDE_Data *> *)orderbook {
     NSNumber *lowestPrice = [orderbook valueForKeyPath:@"@min.orderInformation_price"];
     return lowestPrice.doubleValue;
 }

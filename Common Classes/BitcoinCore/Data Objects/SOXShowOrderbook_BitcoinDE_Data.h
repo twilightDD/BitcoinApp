@@ -15,8 +15,8 @@
 
 + (instancetype)orderBookDataForSocketIODictionary:(NSDictionary *)addOrderSocketIODictionary;
 
-+ (double)highestPriceOfOrderBookDatas:(NSMutableArray <SOXShowOrderbookData *> *)orderbook;
-+ (double)lowestPriceOfOrderBookDatas:(NSMutableArray <SOXShowOrderbookData *> *)orderbook;
++ (double)highestPriceOfOrderBookDatas:(NSMutableArray <SOXShowOrderbook_BitcoinDE_Data *> *)orderbook;
++ (double)lowestPriceOfOrderBookDatas:(NSMutableArray <SOXShowOrderbook_BitcoinDE_Data *> *)orderbook;
 
 - (void)updateOrderbookDataWith:(NSDictionary *)changes;
 @end
