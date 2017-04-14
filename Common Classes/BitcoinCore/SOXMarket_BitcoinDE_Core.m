@@ -8,6 +8,7 @@
 
 #import "SOXMarket_BitcoinDE_Core.h"
 
+#import "SOXKeys_BitcoinDE.h"
 #import "SOXHash.h"
 
 #import "SOXDataConverter_BitcoinDE.h"
@@ -83,9 +84,14 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
                                                 respondTo:controller];
 }
 
-+ (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
++ (void)executeTradeWithOrderID:(NSString *)orderID
                       withParameter:(NSDictionary * _Nullable)parameterDictionary
-                          respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nullable)controller {
+                          respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nullable)controller{
+    
+}
+
++ (void)prepareRequestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
+                             withParameter:(NSDictionary * _Nullable)parameterDictionary {
     // reset values
     {
         [SOXMarket_BitcoinDE_Core sharedCore].uri = nil;
@@ -100,11 +106,42 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
     [SOXMarket_BitcoinDE_Core createHttpMethodForServerCommandType:serverCommandType];
     [SOXMarket_BitcoinDE_Core createURIForServerCommandType:serverCommandType];
     [SOXMarket_BitcoinDE_Core createNonceString];
-    [SOXMarket_BitcoinDE_Core create_url_encoded_query_stringFromParameterDictionary:parameterDictionary];
-    [SOXMarket_BitcoinDE_Core createURL];
+    if (serverCommandType != BitcoinDE_ExecuteTrade) {
+        [SOXMarket_BitcoinDE_Core create_url_encoded_query_stringFromParameterDictionary:parameterDictionary];
+        [SOXMarket_BitcoinDE_Core createURL];
+    }
+    else {
+        NSString *orderID = [parameterDictionary objectForKey:BitcoinDE_ExecuteTrade_OrderID];
+        
+        // create_url_encoded_query_stringFromParameterDictionary
+        {
+            NSMutableDictionary *mutableParameterDictionary = [parameterDictionary mutableCopy];
+            [mutableParameterDictionary removeObjectForKey:BitcoinDE_ExecuteTrade_OrderID];
+            [SOXMarket_BitcoinDE_Core create_url_encoded_query_stringFromParameterDictionary:[mutableParameterDictionary copy]];
+        }
+        
+        // createURL
+        {
+            SOXMarket_BitcoinDE_Core *core = [SOXMarket_BitcoinDE_Core sharedCore];
+            NSString *url = [NSString stringWithFormat:@"%@%@%@", [SOXMarket_BitcoinDE_Core baseURLString],core.uri, orderID];
+            core.url = url;
+        }
+        
+    }
+    
     [SOXMarket_BitcoinDE_Core createMD5Of_url_encoded_query_string];
     [SOXMarket_BitcoinDE_Core createHmac_data];
     [SOXMarket_BitcoinDE_Core createHMAC];
+
+}
+
+
++ (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
+                      withParameter:(NSDictionary * _Nullable)parameterDictionary
+                          respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nullable)controller {
+    [SOXMarket_BitcoinDE_Core prepareRequestDataForServerCommand:serverCommandType
+                                                   withParameter:parameterDictionary];
+    
     NSURLRequest *request = [SOXMarket_BitcoinDE_Core createRequest];
 
     if (!request) {
@@ -152,11 +189,12 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
     [SOXMarket_BitcoinDE_Core addNSURLSessionTask:getTask];
 }
 
-
+#pragma mark | Credit handling
 + (void)registerForCreditUpdates:(id <SOXCreditUpdateProtocol> _Nullable)delegateForCreditUpdates {
     [SOXMarket_BitcoinDE_Core sharedCore].delegateForCreditUpdates = delegateForCreditUpdates;
 }
 
+#pragma mark | Error handling
 + (void)registerForErrorMessages:(id <SOXMarketCoreErrorProtocol> _Nullable)delegateForErrorMessages {
     [SOXMarket_BitcoinDE_Core sharedCore].delegateForErrorMessages = delegateForErrorMessages;
 }
@@ -324,7 +362,7 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
     }
 
     NSLog(@"url_encoded_query string\n%@",url_encoded_query_string);
-    NSLog(@"url_encoded_query string\n%s",url_encoded_query_string.UTF8String);
+//    NSLog(@"url_encoded_query string\n%s",url_encoded_query_string.UTF8String);
     
     [SOXMarket_BitcoinDE_Core sharedCore].url_encoded_query_string = url_encoded_query_string;
 }
@@ -348,7 +386,7 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
         url = [url stringByAppendingString:@"?"];
         url = [url stringByAppendingString:url_encoded_query_string];
     }
-//    NSLog(@"url\n%@",url);
+    NSLog(@"url\n%@",url);
     core.url = url;
 }
 
@@ -582,7 +620,7 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
                                 , @(BitcoinDE_ShowAccountLedgerType):@"/account/ledger"
                                 , @(BitcoinDE_RemoveOrderType):@"/orders/"
                                 , @(BitcoinDE_CreateOrderType):@"/orders"
-                                , @(BitcoinDE_ExecuteTrade):@"/trades/abcdefghiklmn"
+                                , @(BitcoinDE_ExecuteTrade):@"/trades/"
                                 };
     });
     return commandDescriptions;
