@@ -113,12 +113,12 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     self.executeTradeButton.title = executeTradeButtonText;
     self.cancelButton.title = @"Cancel";
     
-    // orderBook data
-    self.priceTextField.stringValue     = self.orderBookData.orderInformation_price.stringValue;
-    self.minBTCTextField.stringValue    = self.orderBookData.orderInformation_minAmount.stringValue;
-    self.maxBTCTextField.stringValue    = self.orderBookData.orderInformation_maxAmount.stringValue;
-    self.minVolumeTextField.stringValue = self.orderBookData.orderInformation_minVolume.stringValue;
-    self.maxVolumeTextField.stringValue = self.orderBookData.orderInformation_maxVolume.stringValue;
+
+    self.priceTextField.doubleValue     = self.orderBookData.orderInformation_price.doubleValue;
+    self.minBTCTextField.doubleValue    = self.orderBookData.orderInformation_minAmount.doubleValue;
+    self.maxBTCTextField.doubleValue    = self.orderBookData.orderInformation_maxAmount.doubleValue;
+    self.minVolumeTextField.doubleValue = self.orderBookData.orderInformation_minVolume.doubleValue;
+    self.maxVolumeTextField.doubleValue = self.orderBookData.orderInformation_maxVolume.doubleValue;
     self.orderIDTextField.stringValue   = self.orderBookData.orderInformation_orderID;
     
     // Trading partner information
