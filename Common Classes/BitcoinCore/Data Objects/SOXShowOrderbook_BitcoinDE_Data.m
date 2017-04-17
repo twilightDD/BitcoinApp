@@ -65,16 +65,16 @@
     orderbookData.orderInformation_orderID = [addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_OrderID];
     orderbookData.orderInformation_socketOrderObjectID = [addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_SocketObjectID];
     orderbookData.orderInformation_type = [addOrderSocketIODictionary objectForKey:BitcoinDE_ShowMyOrders_Type];
-    orderbookData.orderInformation_maxAmount = @([[addOrderSocketIODictionary objectForKey:@"amount"] floatValue]);
-    orderbookData.orderInformation_minAmount = @([[addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_MinAmount] floatValue]);
-    orderbookData.orderInformation_price = @([[addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_Price] floatValue]);
+    orderbookData.orderInformation_maxAmount = @([[addOrderSocketIODictionary objectForKey:@"amount"] doubleValue]);
+    orderbookData.orderInformation_minAmount = @([[addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_MinAmount] doubleValue]);
+    orderbookData.orderInformation_price = @([[addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_Price] doubleValue]);
     
     orderbookData.orderInformation_maxVolume = @(orderbookData.orderInformation_price.doubleValue * orderbookData.orderInformation_maxAmount.doubleValue);
     orderbookData.orderInformation_minVolume = @(orderbookData.orderInformation_price.doubleValue * orderbookData.orderInformation_minAmount.doubleValue);
     
     orderbookData.orderRequirements_minTrustLevel = [addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_MinTustLevel];
     orderbookData.orderRequirements_onlyKYCFull = [[addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_OnlyKYCFull] boolValue];
-    orderbookData.orderRequirements_paymentOption = @([[addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_PaymentOption] floatValue]);
+    orderbookData.orderRequirements_paymentOption = @([[addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_PaymentOption] doubleValue]);
 //    orderbookData.orderRequirements_seatOfBank = [addOrderSocketIODictionary objectForKey:BitcoinDE_ShowMyOrders_OrderID];
     
     orderbookData.tradingPartnerInformation_isKYCFull = [[addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_IsKYCFull] boolValue];
@@ -202,11 +202,11 @@
     {
         self.orderInformation_orderID                      = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderID];
         self.orderInformation_type                         = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_Type];
-        self.orderInformation_maxAmount                    = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MaxAmount] floatValue]);
-        self.orderInformation_minAmount                    = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MinAmount] floatValue]);
-        self.orderInformation_price                        = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_Price] floatValue]);
-        self.orderInformation_maxVolume                    = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MaxVolume] floatValue]);
-        self.orderInformation_minVolume                    = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MinVolume] floatValue]);
+        self.orderInformation_maxAmount                    = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MaxAmount] doubleValue]);
+        self.orderInformation_minAmount                    = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MinAmount] doubleValue]);
+        self.orderInformation_price                        = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_Price] doubleValue]);
+        self.orderInformation_maxVolume                    = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MaxVolume] doubleValue]);
+        self.orderInformation_minVolume                    = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MinVolume] doubleValue]);
         self.orderInformation_orderRequirementsFullfilled  = [[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderRequirementsFullfilled] boolValue];
     }
 
