@@ -3187,8 +3187,8 @@ Gw
         <scene sceneID="z37-1q-W32">
             <objects>
                 <viewController identifier="ExecuteTradeViewControllerIdentifier" storyboardIdentifier="ExecuteTradeViewControllerIdentifier" id="f8g-UU-ziE" customClass="SOXExecuteTradeViewController" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="FeD-ys-PjZ">
-                        <rect key="frame" x="0.0" y="0.0" width="448" height="346"/>
+                    <view key="view" id="FeD-ys-PjZ">
+                        <rect key="frame" x="0.0" y="0.0" width="471" height="346"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="11I-pb-Bhs">
@@ -3233,16 +3233,16 @@ Gw
                                                         </textFieldCell>
                                                     </textField>
                                                     <textField horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hvV-l8-svN">
-                                                        <rect key="frame" x="-2" y="50" width="78" height="17"/>
-                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Max Volume" id="3Lb-yf-8VJ">
+                                                        <rect key="frame" x="-2" y="50" width="75" height="17"/>
+                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="min Volume" id="3Lb-yf-8VJ">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                     </textField>
                                                     <textField horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nyN-ig-Nb6">
-                                                        <rect key="frame" x="-2" y="25" width="75" height="17"/>
-                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="min Volume" id="sSN-fy-pIU">
+                                                        <rect key="frame" x="-2" y="25" width="78" height="17"/>
+                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="max Volume" id="sSN-fy-pIU">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -3302,16 +3302,16 @@ Gw
                                                         </textFieldCell>
                                                     </textField>
                                                     <textField horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ytD-1Y-I0f">
-                                                        <rect key="frame" x="-2" y="50" width="78" height="17"/>
-                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Max Volume" id="hvZ-Aw-nXw">
+                                                        <rect key="frame" x="-2" y="50" width="75" height="17"/>
+                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Min Volume" id="hvZ-Aw-nXw">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                     </textField>
                                                     <textField horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NfI-oN-nPS">
-                                                        <rect key="frame" x="-2" y="25" width="75" height="17"/>
-                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="min Volume" id="fFr-s7-Pel">
+                                                        <rect key="frame" x="-2" y="25" width="78" height="17"/>
+                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="max Volume" id="fFr-s7-Pel">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -3368,15 +3368,15 @@ Gw
                             <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="rs9-e0-1Gn">
                                 <rect key="frame" x="233" y="125" width="5" height="174"/>
                             </box>
-                            <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qka-Ez-slt" userLabel="Trading Partner Information">
+                            <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qka-Ez-slt" userLabel="Trading Partner Information">
                                 <rect key="frame" x="252" y="137" width="199" height="162"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="89c-X1-AA9">
-                                        <rect key="frame" x="-2" y="145" width="175" height="17"/>
+                                        <rect key="frame" x="12" y="145" width="175" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Trading Partner information" id="F9f-RU-0SA">
                                             <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EZO-Rs-R6j">
@@ -3625,9 +3625,36 @@ Gw
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="amountToTradeDescriptionTextField" destination="yHF-bd-Qhq" id="NHV-oU-7y4"/>
+                        <outlet property="amountToTradeTextField" destination="8GV-as-4uk" id="u4X-UR-X1J"/>
                         <outlet property="cancelButton" destination="xhs-ZU-bWu" id="OZg-bw-Acs"/>
                         <outlet property="executeTradeButton" destination="fno-wR-f3q" id="EGM-rb-jUQ"/>
+                        <outlet property="isKYCDescriptionTextField" destination="mFB-x6-g6N" id="FRS-ef-xwf"/>
+                        <outlet property="isKYCTextField" destination="LuH-X9-AxG" id="Uqf-nH-chL"/>
+                        <outlet property="maxBTCDescriptionTextField" destination="xnS-bA-nia" id="M8o-ap-zfs"/>
+                        <outlet property="maxBTCTextField" destination="itc-bY-XU5" id="3b0-fw-i03"/>
+                        <outlet property="maxVolumeDescriptionTextField" destination="nyN-ig-Nb6" id="C57-in-KhJ"/>
+                        <outlet property="maxVolumeTextField" destination="NfI-oN-nPS" id="OKR-qS-ylB"/>
+                        <outlet property="minBTCDescriptionTextField" destination="CYt-32-bF4" id="8Cg-rf-Cjx"/>
+                        <outlet property="minBTCTextField" destination="KLr-XX-aty" id="4Q5-OF-ycy"/>
+                        <outlet property="minVolumeDescriptionTextField" destination="hvV-l8-svN" id="t37-n6-9kf"/>
+                        <outlet property="minVolumeTextField" destination="ytD-1Y-I0f" id="Uhk-x5-rys"/>
+                        <outlet property="orderIDTextDescriptionField" destination="c6V-tJ-aAX" id="pwF-Vm-rv8"/>
+                        <outlet property="orderIDTextField" destination="IwY-T0-562" id="fI5-c1-utl"/>
+                        <outlet property="priceDescriptionTextField" destination="KZd-3F-BfO" id="Chy-im-jnI"/>
+                        <outlet property="priceTextField" destination="jYy-rP-Oiq" id="cVh-l4-5vV"/>
+                        <outlet property="ratingDescriptionTextField" destination="wEO-bU-JZ2" id="sko-Ce-3Ij"/>
+                        <outlet property="ratingTextField" destination="7WY-mo-9lV" id="0As-b3-vWA"/>
                         <outlet property="titleTextField" destination="11I-pb-Bhs" id="XRr-ea-n1S"/>
+                        <outlet property="tradesDescriptionTextField" destination="kM3-ST-NPc" id="8wi-nu-XZJ"/>
+                        <outlet property="tradesTextField" destination="O8z-dZ-kQz" id="ClA-er-Ara"/>
+                        <outlet property="tradingPartnerInformationDescriptionTextField" destination="89c-X1-AA9" id="27g-IN-AjP"/>
+                        <outlet property="trustLevelDescriptionTextField" destination="CFG-LE-hkI" id="FxA-4G-pSv"/>
+                        <outlet property="trustLevelTextField" destination="DcN-gD-s3c" id="FkU-yO-LH4"/>
+                        <outlet property="userNameDescriptionTextField" destination="ZEj-yH-MxX" id="SfY-0Y-SWh"/>
+                        <outlet property="userNameTextField" destination="yZK-Gr-qxI" id="XFd-SM-xj1"/>
+                        <outlet property="volumeToTradeDescriptionTextField" destination="dVv-dz-NJx" id="GbF-SS-eno"/>
+                        <outlet property="volumeToTradeTextField" destination="tOn-17-omV" id="APk-eQ-xPe"/>
                     </connections>
                 </viewController>
                 <customObject id="wkM-Yd-0pe" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
