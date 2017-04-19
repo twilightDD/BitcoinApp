@@ -134,9 +134,9 @@
         self.endDateTimeDescriptionTextField.stringValue = @"End Date";
         
         NSString *createdAt = [SOXDateFormatter stringDateTimeStringForRFC3339DateTimeString:self.myOrder.orderInformation_createdAt];
-        self.createdAtTextField.stringValue = createdAt;
+        self.createdAtTextField.stringValue = createdAt ? createdAt : @"-";
         NSString *endDateTime = [SOXDateFormatter stringDateTimeStringForRFC3339DateTimeString:self.myOrder.orderInformation_endDateTime];
-        self.endDateTimeTextField.stringValue = endDateTime;
+        self.endDateTimeTextField.stringValue = endDateTime ? endDateTime : @"-";
     }
 }
 
