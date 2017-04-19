@@ -3556,6 +3556,7 @@ Gw
                                 </buttonCell>
                                 <connections>
                                     <action selector="executeTradeAction:" target="f8g-UU-ziE" id="w5L-3t-VMV"/>
+                                    <binding destination="f8g-UU-ziE" name="enabled" keyPath="self.mayExecuteTrade" id="A9C-3q-d2A"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xhs-ZU-bWu">
@@ -3589,6 +3590,7 @@ Gw
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tOn-17-omV">
                                 <rect key="frame" x="169" y="61" width="37" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="78g-UZ-sJT">
+                                    <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="5J1-Rp-YR5"/>
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -3680,6 +3682,7 @@ Gw
                     </connections>
                 </viewController>
                 <customObject id="wkM-Yd-0pe" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController id="BZP-X4-Etp"/>
             </objects>
             <point key="canvasLocation" x="-2041.5" y="2546"/>
         </scene>
