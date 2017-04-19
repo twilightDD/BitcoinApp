@@ -10,6 +10,7 @@
 #import "SOXAbstractViewController_Private.h"
 
 #import "SOXCreateNewOrderViewController.h"
+#import "SOXExecuteTradeViewController.h"
 
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXSocketIO_BitcoinDE_Core.h"
@@ -144,11 +145,13 @@
     
     NSLog(@"\nclickedRow %ti\nselectionIndex %tu\nselectedObjects\n%@",clickedRow, selectionIndex, selectedObjects );
     
-   // SOXShowOrderbook_BitcoinDE_Data *selectedOrderBookData = selectedObjects.firstObject;
-    
-    NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"MacMain" bundle:nil];
-    NSViewController *viewC = [storyboard instantiateControllerWithIdentifier:@"OrderDetailsViewControllerIdentifier"];
-    [self presentViewControllerAsSheet:viewC];
+    SOXShowOrderbook_BitcoinDE_Data *selectedOrderBookData = selectedObjects.firstObject;
+    if (selectedOrderBookData) {
+        NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"MacMain" bundle:nil];
+        SOXExecuteTradeViewController *viewC = [storyboard instantiateControllerWithIdentifier:@"ExecuteTradeViewControllerIdentifier"];
+        viewC.orderBookData = selectedOrderBookData;
+        [self presentViewControllerAsSheet:viewC];
+    }
 }
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
