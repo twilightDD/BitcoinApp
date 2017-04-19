@@ -128,19 +128,24 @@
         self.endDateDatePicker.dateValue    = self.selectedEndDate;
         self.endDateDatePicker.locale = [NSLocale autoupdatingCurrentLocale];
     }
-}
-
-#pragma mark - SOXMarketCoreServerRequestProtocol
-- (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest {
-    if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowMyTradesType)]) {
-        NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
-        NSMutableArray *myTrades = [SOXMyTrades_BitcoinDE_Data myTradesDataArrayForMyTradeHistoryDictionary:payloadDictionary];
-        self.myTrades = myTrades;
-        
-        [self disableSpinningWheel];
+    
+    {
+        [self.tableView setDoubleAction:@selector(tableViewDoubleAction:)];
     }
 }
 
+#pragma mark - Table view methods
+- (void)tableViewDoubleAction:(NSTableView *)tableView {
+//    NSArray <SOXMyOrderBook_BitcoinDE_Data *> *selectedObjects = [self.myOrderArrayController selectedObjects];
+//    SOXMyOrderBook_BitcoinDE_Data *selectedMyOrder = selectedObjects.firstObject;
+//    
+//    NSStoryboard *storyBoard = [NSStoryboard storyboardWithName:@"MacMain" bundle:nil];
+//    SOXMyOrderDetailsViewController *viewC = [storyBoard instantiateControllerWithIdentifier:@"MyOrderDetailsViewControllerIdentifier"];
+//    viewC.myOrder = selectedMyOrder;
+//    [self presentViewControllerAsSheet:viewC];
+}
+
+#pragma mark - Action methods
 - (IBAction)orderTypeButtonAction:(NSButton *)sender {
     NSLog(@"tag: %ti", sender.tag);
     self.selectedOrderType = sender.tag;
@@ -208,5 +213,15 @@
                                                 respondTo:self];
 }
 
+#pragma mark - SOXMarketCoreServerRequestProtocol
+- (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest {
+    if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowMyTradesType)]) {
+        NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
+        NSMutableArray *myTrades = [SOXMyTrades_BitcoinDE_Data myTradesDataArrayForMyTradeHistoryDictionary:payloadDictionary];
+        self.myTrades = myTrades;
+        
+        [self disableSpinningWheel];
+    }
+}
 
 @end
