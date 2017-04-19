@@ -87,7 +87,7 @@
     
     
     self.amountTextField.doubleValue                = 0;
-    self.avaibleAmountTetField.stringValue          = [NSString stringWithFormat:@"Avaible: %@", [SOXMarket_BitcoinDE_Core sharedCore].availableAmount];
+    self.avaibleAmountTetField.stringValue          = [NSString stringWithFormat:@"Avaible: %@", [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount];
     
     self.minAmountDescriptionTextField.stringValue  = @"Minimal amount";
     self.minAmountTextField.stringValue             = @"";
