@@ -50,6 +50,8 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 // Amount section
 @property (weak) IBOutlet NSTextField *amountToTradeDescriptionTextField;
 @property (weak) IBOutlet NSTextField *amountToTradeTextField;
+@property (weak) IBOutlet NSTextField *minMaxPossibleAmountTextField;
+
 @property (weak) IBOutlet NSTextField *volumeToTradeDescriptionTextField;
 @property (weak) IBOutlet NSTextField *volumeToTradeTextField;
 // Buttons
@@ -58,6 +60,9 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 
 #pragma mark Properties
 @property (nonatomic) BOOL mayExecuteTrade;
+@property (strong, nonatomic) NSNumber *minimalAmountToTrade;
+@property (strong, nonatomic) NSNumber *maximalAmountToTrade;
+
 @end
 
 #pragma mark - Implementation
@@ -73,10 +78,55 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     
     self.mayExecuteTrade = NO;
     
+    [self setupMinMaxAmountToTrade];
     [self setupUI];
 }
 
 #pragma mark - Private methods
+- (void)setupMinMaxAmountToTrade {
+    SOXMarket_BitcoinDE_Core *core = [SOXMarket_BitcoinDE_Core sharedCore];
+    if (self.orderBookData) {
+        double minAmount = self.orderBookData.orderInformation_minAmount.doubleValue;
+        double maxAmount  = 0;
+        
+        // SELL
+        if ([self.orderBookData.orderInformation_type isEqualToString:@"buy"]
+            || [self.orderBookData.orderInformation_type isEqualToString:@"order"]) {
+        
+            if ([self.orderBookData.orderInformation_maxAmount isLessThan:core.availableBitcoinAmount]) {
+                maxAmount = self.orderBookData.orderInformation_maxAmount.doubleValue;
+            }
+            else {
+                maxAmount = core.availableBitcoinAmount.doubleValue;
+            }
+        }
+        // BUY
+        else {
+            NSNumber *maxAmountNumber = self.orderBookData.orderInformation_maxAmount;
+            NSNumber *maxCalculatedAmountNumber = @([SOXMarket_BitcoinDE_Core sharedCore].availableEuroAmount.doubleValue /
+                                                    self.orderBookData.orderInformation_price.doubleValue);
+            
+            if ([maxAmountNumber isLessThan:maxCalculatedAmountNumber]) {
+                maxAmount = maxAmountNumber.doubleValue;
+            }
+            else {
+                maxAmount = maxCalculatedAmountNumber.doubleValue;
+            }
+        }
+        self.minimalAmountToTrade = @(minAmount);
+        self.maximalAmountToTrade = @(maxAmount);
+    }
+    else {
+        self.minimalAmountToTrade = @(0);
+        self.maximalAmountToTrade = @(0);
+    }
+    
+    // set boundaries of input field number formatter
+    NSNumberFormatter* fieldFormatter = self.amountToTradeTextField.formatter;
+    fieldFormatter.minimum = self.minimalAmountToTrade;
+    fieldFormatter.maximum = self.maximalAmountToTrade;
+}
+
 - (void)setupUI {
     // Descriptions
     self.tradingPartnerInformationDescriptionTextField.stringValue = @"Trading partner";
@@ -110,7 +160,10 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     self.titleTextField.stringValue = titleText;
     
     self.amountToTradeDescriptionTextField.stringValue = amountToTradeDescriptionText;
+    self.minMaxPossibleAmountTextField.stringValue = [NSString stringWithFormat:@"(min: %@, max: %@)",
+                                                      self.minimalAmountToTrade, self.maximalAmountToTrade];
     self.volumeToTradeDescriptionTextField.stringValue = @"Volume";
+    self.volumeToTradeTextField.doubleValue            = 0;
     
     self.executeTradeButton.title = executeTradeButtonText;
     self.cancelButton.title = @"Cancel";
@@ -131,9 +184,17 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     self.ratingTextField.stringValue        = self.orderBookData.tradingPartnerInformation_rating.stringValue ? : @" ? ";
 }
 
-- (void)updateVolumeTextFieldWithInput:(double)inputValue {
-    double volume = inputValue * self.orderBookData.orderInformation_price.doubleValue;
-    self.volumeToTradeTextField.doubleValue = volume;
+- (BOOL)validateAmountInput:(NSNumber *)inputValue {
+    if (inputValue.doubleValue >= self.minimalAmountToTrade.doubleValue
+        && inputValue.doubleValue <= self.maximalAmountToTrade.doubleValue) {
+        
+        double volume = inputValue.doubleValue * self.orderBookData.orderInformation_price.doubleValue;
+        self.volumeToTradeTextField.doubleValue = volume;
+        
+        return YES;
+    }
+    self.volumeToTradeTextField.stringValue = @"Non valid input";
+    return NO;
 }
 
 #pragma mark - Action methods
@@ -152,26 +213,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     
     id newValue = ( fieldEditor!=nil ? [fieldFormatter numberFromString:fieldEditor.string] : valueField.objectValue );
     
-    
-    NSLog(@"objectValue: %@ (class: %@)", newValue, [newValue class]);
-    
-    NSNumber *value = newValue;
-    [self updateVolumeTextFieldWithInput:value.doubleValue];
-    
-//    if (notification.object == self.amountToTradeTextField) {
-//        double inputValue = self.amountToTradeTextField.doubleValue;
-//        if (inputValue < self.orderBookData.orderInformation_maxAmount.doubleValue) {
-//            self.mayExecuteTrade = YES;
-//        }
-//        else {
-//            self.mayExecuteTrade = NO;
-//        }
-//        [self updateVolumeTextFieldWithInput:inputValue];
-//    }
-}
-
-- (BOOL)control:(NSControl *)control isValidObject:(id)obj {
-    return YES;
+    [self validateAmountInput:(NSNumber *)newValue];
 }
 
 @end

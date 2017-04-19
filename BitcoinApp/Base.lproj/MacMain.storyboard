@@ -3594,17 +3594,28 @@ Gw
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xht-9O-gjY">
+                                <rect key="frame" x="273" y="89" width="180" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="Y1u-7L-JaK"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="spp-9a-pIi">
+                                    <font key="font" metaFont="systemLight" size="11"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="fno-wR-f3q" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xhs-ZU-bWu" secondAttribute="trailing" constant="12" symbolic="YES" id="3Cs-eJ-uSK"/>
                             <constraint firstItem="qka-Ez-slt" firstAttribute="top" secondItem="11I-pb-Bhs" secondAttribute="bottom" constant="8" symbolic="YES" id="3N8-4s-kt7"/>
+                            <constraint firstItem="Xht-9O-gjY" firstAttribute="leading" secondItem="547-Dn-FKR" secondAttribute="trailing" constant="8" id="5kr-Gx-Vre"/>
                             <constraint firstAttribute="trailing" secondItem="qka-Ez-slt" secondAttribute="trailing" constant="20" id="AKa-DN-QiF"/>
                             <constraint firstAttribute="trailing" secondItem="11I-pb-Bhs" secondAttribute="trailing" constant="17" id="G8d-hR-sFN"/>
                             <constraint firstItem="tOn-17-omV" firstAttribute="baseline" secondItem="dVv-dz-NJx" secondAttribute="baseline" id="Hcw-Ky-Z5t"/>
                             <constraint firstItem="yHF-bd-Qhq" firstAttribute="leading" secondItem="FeD-ys-PjZ" secondAttribute="leading" constant="20" id="MPd-ia-njD"/>
                             <constraint firstItem="11I-pb-Bhs" firstAttribute="top" secondItem="FeD-ys-PjZ" secondAttribute="top" constant="20" id="Odu-ny-0c7"/>
                             <constraint firstAttribute="trailing" secondItem="fno-wR-f3q" secondAttribute="trailing" constant="13" id="P4R-Dr-oDu"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="547-Dn-FKR" secondAttribute="trailing" constant="20" symbolic="YES" id="PYL-vT-W2s"/>
                             <constraint firstItem="8JX-kG-xe7" firstAttribute="top" secondItem="11I-pb-Bhs" secondAttribute="bottom" constant="8" symbolic="YES" id="SYP-Tk-UXL"/>
                             <constraint firstItem="11I-pb-Bhs" firstAttribute="leading" secondItem="FeD-ys-PjZ" secondAttribute="leading" constant="20" id="UfQ-zZ-79P"/>
                             <constraint firstAttribute="bottom" secondItem="xhs-ZU-bWu" secondAttribute="bottom" constant="20" id="VNJ-HX-7p6"/>
@@ -3622,6 +3633,7 @@ Gw
                             <constraint firstItem="wZ1-OQ-NTT" firstAttribute="top" secondItem="qka-Ez-slt" secondAttribute="bottom" constant="20" id="nOK-rt-ilR"/>
                             <constraint firstItem="qka-Ez-slt" firstAttribute="leading" secondItem="rs9-e0-1Gn" secondAttribute="trailing" constant="16" id="naO-Go-vKW"/>
                             <constraint firstItem="tOn-17-omV" firstAttribute="leading" secondItem="dVv-dz-NJx" secondAttribute="trailing" constant="8" id="p7Q-xK-vQ8"/>
+                            <constraint firstItem="Xht-9O-gjY" firstAttribute="baseline" secondItem="547-Dn-FKR" secondAttribute="baseline" id="pin-hL-kMT"/>
                             <constraint firstItem="dVv-dz-NJx" firstAttribute="top" secondItem="yHF-bd-Qhq" secondAttribute="bottom" constant="11" id="q7c-Ka-UF8"/>
                             <constraint firstItem="xhs-ZU-bWu" firstAttribute="leading" secondItem="FeD-ys-PjZ" secondAttribute="leading" constant="35" id="rSP-O0-KEx"/>
                             <constraint firstItem="xhs-ZU-bWu" firstAttribute="top" secondItem="dVv-dz-NJx" secondAttribute="bottom" constant="20" id="smn-aN-ZRs"/>
@@ -3630,6 +3642,7 @@ Gw
                             <constraint firstAttribute="trailing" secondItem="wZ1-OQ-NTT" secondAttribute="trailing" constant="17" id="ve8-hV-JLr"/>
                             <constraint firstItem="rs9-e0-1Gn" firstAttribute="leading" secondItem="8JX-kG-xe7" secondAttribute="trailing" constant="16" id="wwo-Y3-zZH"/>
                             <constraint firstItem="wZ1-OQ-NTT" firstAttribute="leading" secondItem="FeD-ys-PjZ" secondAttribute="leading" constant="20" id="zPa-mM-plU"/>
+                            <constraint firstAttribute="trailing" secondItem="Xht-9O-gjY" secondAttribute="trailing" constant="20" id="zoB-lr-2nE"/>
                         </constraints>
                     </view>
                     <connections>
@@ -3645,6 +3658,7 @@ Gw
                         <outlet property="maxVolumeTextField" destination="NfI-oN-nPS" id="OKR-qS-ylB"/>
                         <outlet property="minBTCDescriptionTextField" destination="CYt-32-bF4" id="8Cg-rf-Cjx"/>
                         <outlet property="minBTCTextField" destination="KLr-XX-aty" id="4Q5-OF-ycy"/>
+                        <outlet property="minMaxPossibleAmountTextField" destination="Xht-9O-gjY" id="xVw-6P-tIE"/>
                         <outlet property="minVolumeDescriptionTextField" destination="hvV-l8-svN" id="t37-n6-9kf"/>
                         <outlet property="minVolumeTextField" destination="ytD-1Y-I0f" id="Uhk-x5-rys"/>
                         <outlet property="orderIDTextDescriptionField" destination="c6V-tJ-aAX" id="pwF-Vm-rv8"/>
