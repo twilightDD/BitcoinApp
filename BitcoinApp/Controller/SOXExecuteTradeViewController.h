@@ -14,6 +14,6 @@ FOUNDATION_EXPORT NSString const  * _Nonnull ExecuteTradeViewControllerIdentifie
 
 @interface SOXExecuteTradeViewController : NSViewController
 
-@property (weak) SOXShowOrderbook_BitcoinDE_Data * _Nullable orderBookData;
+@property (strong) SOXShowOrderbook_BitcoinDE_Data * _Nullable orderBookData;
 
 @end

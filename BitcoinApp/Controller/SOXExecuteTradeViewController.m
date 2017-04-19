@@ -16,7 +16,7 @@
 NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTradeViewControllerIdentifier";
 
 #pragma mark - Interface
-@interface SOXExecuteTradeViewController ()
+@interface SOXExecuteTradeViewController () <NSControlTextEditingDelegate>
 
 #pragma mark IBOutlets
 @property (weak) IBOutlet NSTextField *titleTextField;
@@ -57,7 +57,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 @property (weak) IBOutlet NSButton *cancelButton;
 
 #pragma mark Properties
-
+@property (nonatomic) BOOL mayExecuteTrade;
 @end
 
 #pragma mark - Implementation
@@ -70,6 +70,8 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 
 - (void)viewWillAppear {
     [super viewWillAppear];
+    
+    self.mayExecuteTrade = NO;
     
     [self setupUI];
 }
@@ -114,19 +116,24 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     self.cancelButton.title = @"Cancel";
     
 
-    self.priceTextField.doubleValue     = self.orderBookData.orderInformation_price.doubleValue;
-    self.minBTCTextField.doubleValue    = self.orderBookData.orderInformation_minAmount.doubleValue;
-    self.maxBTCTextField.doubleValue    = self.orderBookData.orderInformation_maxAmount.doubleValue;
-    self.minVolumeTextField.doubleValue = self.orderBookData.orderInformation_minVolume.doubleValue;
-    self.maxVolumeTextField.doubleValue = self.orderBookData.orderInformation_maxVolume.doubleValue;
-    self.orderIDTextField.stringValue   = self.orderBookData.orderInformation_orderID;
+    self.priceTextField.doubleValue     = self.orderBookData.orderInformation_price.doubleValue ? : -1;
+    self.minBTCTextField.doubleValue    = self.orderBookData.orderInformation_minAmount.doubleValue ? : -1;
+    self.maxBTCTextField.doubleValue    = self.orderBookData.orderInformation_maxAmount.doubleValue ? : -1;
+    self.minVolumeTextField.doubleValue = self.orderBookData.orderInformation_minVolume.doubleValue ? : -1;
+    self.maxVolumeTextField.doubleValue = self.orderBookData.orderInformation_maxVolume.doubleValue ? : -1;
+    self.orderIDTextField.stringValue   = self.orderBookData.orderInformation_orderID ? : @" - ";
     
     // Trading partner information
-    self.userNameTextField.stringValue      = self.orderBookData.tradingPartnerInformation_username;
+    self.userNameTextField.stringValue      = self.orderBookData.tradingPartnerInformation_username ? : @" ? ";
     self.isKYCTextField.stringValue         = self.orderBookData.tradingPartnerInformation_isKYCFull ? @"Yes" : @"NO";
-    self.trustLevelTextField.stringValue    = self.orderBookData.tradingPartnerInformation_trustLevel;
-    self.tradesTextField.stringValue        = self.orderBookData.tradingPartnerInformation_amountTrades.stringValue;
-    self.ratingTextField.stringValue        = self.orderBookData.tradingPartnerInformation_rating.stringValue;
+    self.trustLevelTextField.stringValue    = self.orderBookData.tradingPartnerInformation_trustLevel ? : @" ? ";
+    self.tradesTextField.stringValue        = self.orderBookData.tradingPartnerInformation_amountTrades.stringValue ? : @" ? ";
+    self.ratingTextField.stringValue        = self.orderBookData.tradingPartnerInformation_rating.stringValue ? : @" ? ";
+}
+
+- (void)updateVolumeTextFieldWithInput:(double)inputValue {
+    double volume = inputValue * self.orderBookData.orderInformation_price.doubleValue;
+    self.volumeToTradeTextField.doubleValue = volume;
 }
 
 #pragma mark - Action methods
@@ -137,5 +144,34 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     [self dismissViewController:self];
 }
 
+#pragma mark - NSControlTextEditingDelegate
+- (void)controlTextDidChange:(NSNotification *)notification {
+    NSTextField* valueField = notification.object;
+    NSNumberFormatter* fieldFormatter = valueField.formatter;
+    NSText* fieldEditor = valueField.currentEditor;
+    
+    id newValue = ( fieldEditor!=nil ? [fieldFormatter numberFromString:fieldEditor.string] : valueField.objectValue );
+    
+    
+    NSLog(@"objectValue: %@ (class: %@)", newValue, [newValue class]);
+    
+    NSNumber *value = newValue;
+    [self updateVolumeTextFieldWithInput:value.doubleValue];
+    
+//    if (notification.object == self.amountToTradeTextField) {
+//        double inputValue = self.amountToTradeTextField.doubleValue;
+//        if (inputValue < self.orderBookData.orderInformation_maxAmount.doubleValue) {
+//            self.mayExecuteTrade = YES;
+//        }
+//        else {
+//            self.mayExecuteTrade = NO;
+//        }
+//        [self updateVolumeTextFieldWithInput:inputValue];
+//    }
+}
+
+- (BOOL)control:(NSControl *)control isValidObject:(id)obj {
+    return YES;
+}
 
 @end
