@@ -10,13 +10,14 @@
 
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXShowOrderbook_BitcoinDE_Data.h"
+#import "SOXTradeJob_BitcoinDE_Data.h"
 
 #import "SOXKeys_BitcoinDE.h"
 
 NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTradeViewControllerIdentifier";
 
 #pragma mark - Interface
-@interface SOXExecuteTradeViewController () <NSControlTextEditingDelegate>
+@interface SOXExecuteTradeViewController () <SOXMarketCoreServerRequestProtocol, NSControlTextEditingDelegate>
 
 #pragma mark IBOutlets
 @property (weak) IBOutlet NSTextField *titleTextField;
@@ -62,6 +63,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 @property (nonatomic) BOOL mayExecuteTrade;
 @property (strong, nonatomic) NSNumber *minimalAmountToTrade;
 @property (strong, nonatomic) NSNumber *maximalAmountToTrade;
+@property (strong, nonatomic) NSNumber *amountToTrade;
 
 @end
 
@@ -89,28 +91,24 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
         double minAmount = self.orderBookData.orderInformation_minAmount.doubleValue;
         double maxAmount  = 0;
         
-        // SELL
-        if ([self.orderBookData.orderInformation_type isEqualToString:@"buy"]
-            || [self.orderBookData.orderInformation_type isEqualToString:@"order"]) {
-        
-            if ([self.orderBookData.orderInformation_maxAmount isLessThan:core.availableBitcoinAmount]) {
-                maxAmount = self.orderBookData.orderInformation_maxAmount.doubleValue;
-            }
-            else {
-                maxAmount = core.availableBitcoinAmount.doubleValue;
-            }
-        }
-        // BUY
-        else {
+        if (self.orderType == BitcoinDE_BuyOrderType) {
             NSNumber *maxAmountNumber = self.orderBookData.orderInformation_maxAmount;
             NSNumber *maxCalculatedAmountNumber = @([SOXMarket_BitcoinDE_Core sharedCore].availableEuroAmount.doubleValue /
-                                                    self.orderBookData.orderInformation_price.doubleValue);
+            self.orderBookData.orderInformation_price.doubleValue);
             
             if ([maxAmountNumber isLessThan:maxCalculatedAmountNumber]) {
                 maxAmount = maxAmountNumber.doubleValue;
             }
             else {
                 maxAmount = maxCalculatedAmountNumber.doubleValue;
+            }
+        }
+        else if (self.orderType == BitcoinDE_SellOrderType) {
+            if ([self.orderBookData.orderInformation_maxAmount isLessThan:core.availableBitcoinAmount]) {
+                maxAmount = self.orderBookData.orderInformation_maxAmount.doubleValue;
+            }
+            else {
+                maxAmount = core.availableBitcoinAmount.doubleValue;
             }
         }
         self.minimalAmountToTrade = @(minAmount);
@@ -145,18 +143,18 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     NSString *titleText;
     NSString *amountToTradeDescriptionText;
     NSString *executeTradeButtonText;
-    if ([self.orderBookData.orderInformation_type isEqualToString:@"buy"]
-        || [self.orderBookData.orderInformation_type isEqualToString:@"order"]) {
-        titleText = @"Sell bitcoins";
-        amountToTradeDescriptionText = @"Sell bitcoins";
-        executeTradeButtonText = @"Execute sell";
-    }
-    else if ([self.orderBookData.orderInformation_type isEqualToString:@"sell"]
-             || [self.orderBookData.orderInformation_type isEqualToString:@"offer"]) {
+    
+    if (self.orderType == BitcoinDE_BuyOrderType) {
         titleText = @"Buy bitcoins";
         amountToTradeDescriptionText = @"Buy bitcoins";
         executeTradeButtonText = @"Execute buy";
     }
+    else if (self.orderType == BitcoinDE_SellOrderType) {
+        titleText = @"Sell bitcoins";
+        amountToTradeDescriptionText = @"Sell bitcoins";
+        executeTradeButtonText = @"Execute sell";
+    }
+
     self.titleTextField.stringValue = titleText;
     
     self.amountToTradeDescriptionTextField.stringValue = amountToTradeDescriptionText;
@@ -168,7 +166,6 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     self.executeTradeButton.title = executeTradeButtonText;
     self.cancelButton.title = @"Cancel";
     
-
     self.priceTextField.doubleValue     = self.orderBookData.orderInformation_price.doubleValue ? : -1;
     self.minBTCTextField.doubleValue    = self.orderBookData.orderInformation_minAmount.doubleValue ? : -1;
     self.maxBTCTextField.doubleValue    = self.orderBookData.orderInformation_maxAmount.doubleValue ? : -1;
@@ -187,22 +184,36 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 - (BOOL)validateAmountInput:(NSNumber *)inputValue {
     if (inputValue.doubleValue >= self.minimalAmountToTrade.doubleValue
         && inputValue.doubleValue <= self.maximalAmountToTrade.doubleValue) {
-        
+        self.amountToTrade = inputValue;
         double volume = inputValue.doubleValue * self.orderBookData.orderInformation_price.doubleValue;
         self.volumeToTradeTextField.doubleValue = volume;
-        
+        self.mayExecuteTrade = YES;
         return YES;
     }
     self.volumeToTradeTextField.stringValue = @"Non valid input";
+    self.amountToTrade = @(0);
+    self.mayExecuteTrade = NO;
     return NO;
 }
 
 #pragma mark - Action methods
 - (IBAction)executeTradeAction:(NSButton *)sender {
+    NSDictionary *parameterDictionary = [SOXTradeJob_BitcoinDE_Data parameterForOrderID:self.orderBookData.orderInformation_orderID
+                                                                              orderType:self.orderType
+                                                                          bitcoinAmount:self.amountToTrade];
+    
+    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
+                                            withParameter:parameterDictionary
+                                                respondTo:self];
 }
 
 - (IBAction)cancelAction:(NSButton *)sender {
     [self dismissViewController:self];
+}
+
+#pragma mark - SOXMarketCoreServerRequestProtocol
+- (void)answerOfServerRequest:(NSDictionary *)answerOfServerRequest {
+    NSLog(@"answerOfServerRequest: \n%@", answerOfServerRequest);
 }
 
 #pragma mark - NSControlTextEditingDelegate
