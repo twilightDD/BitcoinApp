@@ -1,5 +1,5 @@
 //
-//  SOXMarket_BitcoinDE_OrderTypes.m
+//  SOXMarket_BitcoinDE_DefTypes.m
 //  BitcoinApp
 //
 //  Created by Peter Hauke on 11.04.17.
