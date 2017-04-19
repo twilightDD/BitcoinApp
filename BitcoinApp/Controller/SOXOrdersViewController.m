@@ -149,6 +149,7 @@
     if (selectedOrderBookData) {
         NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"MacMain" bundle:nil];
         SOXExecuteTradeViewController *viewC = [storyboard instantiateControllerWithIdentifier:@"ExecuteTradeViewControllerIdentifier"];
+        viewC.orderType = self.orderType;
         viewC.orderBookData = selectedOrderBookData;
         [self presentViewControllerAsSheet:viewC];
     }
