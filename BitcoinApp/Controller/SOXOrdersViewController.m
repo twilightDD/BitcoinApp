@@ -137,6 +137,29 @@
     return sortDesciptors;
 }
 
+- (BOOL)isTradePossibleForOrderBookData:(SOXShowOrderbook_BitcoinDE_Data *)orderBookData {
+    if (!orderBookData) {
+        return NO;
+    }
+    NSNumber *availableBitcoinAmount = [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount;
+    NSNumber *availableEuroAmount = [SOXMarket_BitcoinDE_Core sharedCore].availableEuroAmount;
+    if (self.orderType == BitcoinDE_BuyOrderType) {
+        // mehr availEuro als minAmount*Price
+        if (availableEuroAmount.doubleValue >
+            orderBookData.orderInformation_minAmount.doubleValue * orderBookData.orderInformation_price.doubleValue) {
+            return YES;
+        }
+    }
+    else if (self.orderType == BitcoinDE_SellOrderType) {
+        // mehr availBitcoin als minAmount
+        if (availableBitcoinAmount.doubleValue >
+            orderBookData.orderInformation_minAmount.doubleValue) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
 #pragma mark - Table view handling
 - (void)tableViewDoubleAction:(NSTableView *)tableView {
     NSInteger clickedRow = tableView.clickedRow;
@@ -146,12 +169,32 @@
     NSLog(@"\nclickedRow %ti\nselectionIndex %tu\nselectedObjects\n%@",clickedRow, selectionIndex, selectedObjects );
     
     SOXShowOrderbook_BitcoinDE_Data *selectedOrderBookData = selectedObjects.firstObject;
-    if (selectedOrderBookData) {
+    
+    if ([self isTradePossibleForOrderBookData:selectedOrderBookData]) {
         NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"MacMain" bundle:nil];
         SOXExecuteTradeViewController *viewC = [storyboard instantiateControllerWithIdentifier:@"ExecuteTradeViewControllerIdentifier"];
         viewC.orderType = self.orderType;
         viewC.orderBookData = selectedOrderBookData;
         [self presentViewControllerAsSheet:viewC];
+    }
+    else {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setAlertStyle:NSAlertStyleInformational];
+        NSString *messageText;
+        {
+            if (self.orderType == BitcoinDE_BuyOrderType) {
+                messageText = @"You are too poor on real money.";
+            }
+            else if (self.orderType == BitcoinDE_SellOrderType) {
+                messageText = @"You are too poor on internet money.";
+            }
+            else {
+                messageText = @"I don't know why, but you are too poor.";
+            }
+        }
+        alert.messageText = messageText;
+        alert.informativeText = @"HARHARHARHARHARHAR.";
+        [alert runModal];
     }
 }
 
