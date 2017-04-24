@@ -26,8 +26,6 @@
 @property (weak) IBOutlet NSTextField *titleTextField;
 @property (weak) IBOutlet NSTableView *tableView;
 
-@property (weak) IBOutlet NSTextField *filterPriceDescriptionTextField;
-@property (weak) IBOutlet NSTextField *filterPriceValueTextField;
 @property (weak) IBOutlet NSButton *otherFilterButton;
 
 @property (weak) IBOutlet NSButton *addOrderButton;
@@ -78,17 +76,15 @@
     {
         if (self.orderType == BitcoinDE_BuyOrderType) {
             self.titleTextField.stringValue                     = @"Buy";
-            self.filterPriceDescriptionTextField.stringValue    = @"Maximum pice";
             self.addOrderButton.title                           = @"Add Buy Order";
         }
         else if (self.orderType == BitcoinDE_SellOrderType) {
             self.titleTextField.stringValue                     = @"Sell";
-            self.filterPriceDescriptionTextField.stringValue    = @"Minimum price";
             self.addOrderButton.title                           = @"Add Sell Order";
         }
     }
     
-    self.otherFilterButton.title = @"More filters";
+    self.otherFilterButton.title = @"Filters";
 }
 
 - (void)requestServerData {
