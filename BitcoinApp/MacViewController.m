@@ -45,11 +45,11 @@ static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewCont
         NSTabViewItem *item0 = [self.bottomTabView tabViewItemAtIndex:0];
         item0.label = @"Buy and Sell";
         NSTabViewItem *item1 = [self.bottomTabView tabViewItemAtIndex:1];
-        item1.label = @"Account ledger";
+        item1.label = @"My Active Orders";
         NSTabViewItem *item2 = [self.bottomTabView tabViewItemAtIndex:2];
-        item2.label = @"My Trade History";
+        item2.label = @"Account ledger";
         NSTabViewItem *item3 = [self.bottomTabView tabViewItemAtIndex:3];
-        item3.label = @"My Active Orders";
+        item3.label = @"My Trade History";
         NSTabViewItem *item4 = [self.bottomTabView tabViewItemAtIndex:4];
         item4.label = @"Rich mode";
     }

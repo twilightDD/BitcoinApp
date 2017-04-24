@@ -738,6 +738,26 @@
                                             </constraints>
                                         </view>
                                     </tabViewItem>
+                                    <tabViewItem label="Active orders" identifier="" id="l82-SC-zEw">
+                                        <view key="view" id="MN5-M8-jLH">
+                                            <rect key="frame" x="10" y="33" width="914" height="468"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="aZ7-BW-zaH">
+                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="468"/>
+                                                    <connections>
+                                                        <segue destination="q7D-iu-Op3" kind="embed" id="2AF-qZ-Ph7"/>
+                                                    </connections>
+                                                </containerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="aZ7-BW-zaH" firstAttribute="top" secondItem="MN5-M8-jLH" secondAttribute="top" id="RT3-9d-oyx"/>
+                                                <constraint firstAttribute="bottom" secondItem="aZ7-BW-zaH" secondAttribute="bottom" id="fAg-fi-IYU"/>
+                                                <constraint firstItem="aZ7-BW-zaH" firstAttribute="leading" secondItem="MN5-M8-jLH" secondAttribute="leading" id="nyn-vt-Zog"/>
+                                                <constraint firstAttribute="trailing" secondItem="aZ7-BW-zaH" secondAttribute="trailing" id="uLd-c2-oiJ"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
                                     <tabViewItem label="View" identifier="2" id="Ch0-iV-PHR">
                                         <view key="view" id="Q3R-zu-LRo">
                                             <rect key="frame" x="10" y="33" width="914" height="468"/>
@@ -775,26 +795,6 @@
                                                 <constraint firstAttribute="bottom" secondItem="Jo0-rk-ilP" secondAttribute="bottom" id="bPw-Cb-ugh"/>
                                                 <constraint firstItem="Jo0-rk-ilP" firstAttribute="top" secondItem="Jwu-D5-GY5" secondAttribute="top" id="dlV-J7-T8a"/>
                                                 <constraint firstAttribute="trailing" secondItem="Jo0-rk-ilP" secondAttribute="trailing" id="kEj-F3-wjK"/>
-                                            </constraints>
-                                        </view>
-                                    </tabViewItem>
-                                    <tabViewItem label="Active orders" identifier="" id="l82-SC-zEw">
-                                        <view key="view" id="MN5-M8-jLH">
-                                            <rect key="frame" x="10" y="33" width="914" height="468"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <subviews>
-                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="aZ7-BW-zaH">
-                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="468"/>
-                                                    <connections>
-                                                        <segue destination="q7D-iu-Op3" kind="embed" id="2AF-qZ-Ph7"/>
-                                                    </connections>
-                                                </containerView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="aZ7-BW-zaH" firstAttribute="top" secondItem="MN5-M8-jLH" secondAttribute="top" id="RT3-9d-oyx"/>
-                                                <constraint firstAttribute="bottom" secondItem="aZ7-BW-zaH" secondAttribute="bottom" id="fAg-fi-IYU"/>
-                                                <constraint firstItem="aZ7-BW-zaH" firstAttribute="leading" secondItem="MN5-M8-jLH" secondAttribute="leading" id="nyn-vt-Zog"/>
-                                                <constraint firstAttribute="trailing" secondItem="aZ7-BW-zaH" secondAttribute="trailing" id="uLd-c2-oiJ"/>
                                             </constraints>
                                         </view>
                                     </tabViewItem>
@@ -1985,7 +1985,7 @@
                 </arrayController>
                 <userDefaultsController id="NkV-w9-bXQ"/>
             </objects>
-            <point key="canvasLocation" x="165" y="1635"/>
+            <point key="canvasLocation" x="-1152" y="1635"/>
         </scene>
         <!--Automatic Trading Main View Controller-->
         <scene sceneID="mpl-WA-2gF">
@@ -2074,7 +2074,7 @@
                 </viewController>
                 <customObject id="tSY-Dr-lBg" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1257.5" y="1652"/>
+            <point key="canvasLocation" x="1181" y="1817"/>
         </scene>
         <!--My Order Details View Controller-->
         <scene sceneID="mTb-3W-ATq">
@@ -2567,7 +2567,7 @@ Gw
                 </viewController>
                 <customObject id="wUr-tg-Jqj" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="174" y="2179"/>
+            <point key="canvasLocation" x="-1143" y="2179"/>
         </scene>
         <!--My Account Ledger View Controller-->
         <scene sceneID="kdR-ZD-AXk">
@@ -2857,7 +2857,7 @@ Gw
                 </arrayController>
                 <userDefaultsController id="lEg-Nr-J4c"/>
             </objects>
-            <point key="canvasLocation" x="-1160" y="1657"/>
+            <point key="canvasLocation" x="-497" y="1657"/>
         </scene>
         <!--Create New Order View Controller-->
         <scene sceneID="UM8-a9-Vdn">
@@ -4120,7 +4120,7 @@ Gw
                 </arrayController>
                 <userDefaultsController id="j00-vA-Ddo"/>
             </objects>
-            <point key="canvasLocation" x="-427" y="1709"/>
+            <point key="canvasLocation" x="220" y="1709"/>
         </scene>
         <!--Automatic Trading View Controller-->
         <scene sceneID="lPU-HL-3jH">
