@@ -14,22 +14,12 @@
     return YES;
 }
 
-+ (NSUInteger )defaultMinTrustLevel {
-    /*1 - bronze
-     2 - silver
-     3 - gold*/
-    
-    return 3;
++ (BitcoinDE_MinimalTrustLevel )defaultMinTrustLevel {
+    return BitcoinDE_GoldMinimalTrustLevel;
 }
 
-+ (NSNumber *)defaultPaymentOption {
-    /*
-    1 => Express-Only
-    2 => SEPA-Only
-    3 => Express & SEPA
-     */
-    
-    return @(1);
++ (BitcoinDE_PaymentOption)defaultPaymentOption {
+    return BitcoinDE_PaymentOptionExpressOnly;
 }
 
 + (NSArray *)defaultTradingCountries {

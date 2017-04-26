@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+#import "SOXMarket_BitcoinDE_DefTypes.h"
+
 @interface SOXPreferenceCenter : NSObject
 
 + (BOOL)defaultKYCOnly;
-+ (NSUInteger )defaultMinTrustLevel;
-+ (NSNumber *)defaultPaymentOption;
++ (BitcoinDE_MinimalTrustLevel)defaultMinTrustLevel;
++ (BitcoinDE_PaymentOption)defaultPaymentOption;
 + (NSArray *)defaultTradingCountries;
 
 @end
