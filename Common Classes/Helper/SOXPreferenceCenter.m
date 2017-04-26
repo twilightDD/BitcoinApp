@@ -28,5 +28,8 @@
     return defaultTradingCountries;
 }
 
++ (BOOL)secureExecuteTrade {
+    return YES;
+}
 
 @end

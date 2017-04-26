@@ -17,4 +17,6 @@
 + (BitcoinDE_PaymentOption)defaultPaymentOption;
 + (NSArray *)defaultTradingCountries;
 
++ (BOOL)secureExecuteTrade;
+
 @end
