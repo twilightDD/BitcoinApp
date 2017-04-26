@@ -15,6 +15,7 @@
 + (BOOL)defaultKYCOnly;
 + (BitcoinDE_MinimalTrustLevel)defaultMinTrustLevel;
 + (BitcoinDE_PaymentOption)defaultPaymentOptionForCreateOrder;
++ (BitcoinDE_PaymentOption)defaultPaymentOptionForExecuteTrade;
 + (NSArray *)defaultTradingCountries;
 
 + (BOOL)secureExecuteTrade;

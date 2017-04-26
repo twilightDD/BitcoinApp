@@ -22,6 +22,10 @@
     return BitcoinDE_PaymentOptionExpressOnly;
 }
 
++ (BitcoinDE_PaymentOption)defaultPaymentOptionForExecuteTrade {
+    return BitcoinDE_PaymentOptionExpressAndSepa;
+}
+
 + (NSArray *)defaultTradingCountries {
     NSArray *defaultTradingCountries = [NSArray arrayWithObjects:@"DE", nil];
     
