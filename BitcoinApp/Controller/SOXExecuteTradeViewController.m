@@ -13,6 +13,7 @@
 #import "SOXTradeJob_BitcoinDE_Data.h"
 
 #import "SOXKeys_BitcoinDE.h"
+#import "SOXPreferenceCenter.h"
 
 NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTradeViewControllerIdentifier";
 
@@ -236,45 +237,56 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     return NO;
 }
 
+- (void)executeTrade {
+    NSDictionary *parameterDictionary;
+    parameterDictionary = [SOXTradeJob_BitcoinDE_Data parameterForOrderID:self.orderBookData.orderInformation_orderID
+                                                                orderType:self.orderType
+                                                            bitcoinAmount:self.amountToTrade];
+    
+    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
+                                            withParameter:parameterDictionary
+                                                respondTo:nil];
+    [self dismissController:self];
+
+}
+
 #pragma mark - Action methods
 - (IBAction)executeTradeAction:(NSButton *)sender {
-    // create strings
-    NSString *executeTradeButtonTitle = self.executeTradeButton.title;
-    NSString *cancelButtonTitle       = @"Cancel";
-    NSString *messageText             = @"Attention attention ihr Menschen!";
-    NSString *informativeText         = [NSString stringWithFormat:@"You will %@ %@ bitcoins (worth %0.2f of real money).",
-                                         [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:self.orderType]
-                                         , self.amountToTrade
-                                         , self.amountToTrade.doubleValue * self.orderBookData.orderInformation_price.doubleValue];
-    // create alert
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert addButtonWithTitle:executeTradeButtonTitle];
-    [alert addButtonWithTitle:cancelButtonTitle];
-    [alert setMessageText:messageText];
-    [alert setInformativeText:informativeText];
-    [alert setAlertStyle:NSWarningAlertStyle];
-    
-    // present alert
-    weakify(self)
-    [alert beginSheetModalForWindow:self.view.window
-                  completionHandler:^(NSModalResponse returnCode) {
-                      strongify(self)
-                 
-                      if (returnCode == 1000) { // Execute trade
-                          NSDictionary *parameterDictionary;
-                          parameterDictionary = [SOXTradeJob_BitcoinDE_Data parameterForOrderID:self.orderBookData.orderInformation_orderID
-                                                                                      orderType:self.orderType
-                                                                                  bitcoinAmount:self.amountToTrade];
-                          
-                          [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
-                                                                  withParameter:parameterDictionary
-                                                                      respondTo:nil];
-                          [self dismissController:self];
-                      }
-                      else if (returnCode == 1001) { // Cancel
-                        // do nothing
-                      }
-                  }];
+    if ([SOXPreferenceCenter secureExecuteTrade]) {
+        
+        // create strings
+        NSString *executeTradeButtonTitle = self.executeTradeButton.title;
+        NSString *cancelButtonTitle       = @"Cancel";
+        NSString *messageText             = @"Attention attention ihr Menschen!";
+        NSString *informativeText         = [NSString stringWithFormat:@"You will %@ %@ bitcoins (worth %0.2f of real money).",
+                                             [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:self.orderType]
+                                             , self.amountToTrade
+                                             , self.amountToTrade.doubleValue * self.orderBookData.orderInformation_price.doubleValue];
+        // create alert
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:executeTradeButtonTitle];
+        [alert addButtonWithTitle:cancelButtonTitle];
+        [alert setMessageText:messageText];
+        [alert setInformativeText:informativeText];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        
+        // present alert
+        weakify(self)
+        [alert beginSheetModalForWindow:self.view.window
+                      completionHandler:^(NSModalResponse returnCode) {
+                          strongify(self)
+                     
+                          if (returnCode == 1000) { // Execute trade
+                              [self executeTrade];                          }
+                          else if (returnCode == 1001) { // Cancel
+                            // do nothing
+                          }
+                      }];
+    }
+    else {
+        // TODO: Enable [self executeTrade]; on secureExecuteTrade = NO;
+//        [self executeTrade];
+    }
 }
 
 - (IBAction)cancelAction:(NSButton *)sender {
