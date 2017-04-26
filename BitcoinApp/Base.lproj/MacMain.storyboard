@@ -3163,11 +3163,11 @@ Gw
             <objects>
                 <viewController identifier="ExecuteTradeViewControllerIdentifier" storyboardIdentifier="ExecuteTradeViewControllerIdentifier" id="f8g-UU-ziE" customClass="SOXExecuteTradeViewController" sceneMemberID="viewController">
                     <view key="view" id="FeD-ys-PjZ">
-                        <rect key="frame" x="0.0" y="0.0" width="471" height="330"/>
+                        <rect key="frame" x="0.0" y="0.0" width="582" height="406"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="11I-pb-Bhs">
-                                <rect key="frame" x="18" y="291" width="438" height="19"/>
+                                <rect key="frame" x="18" y="367" width="549" height="19"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Buy offer / Sell order" id="seG-Ii-xtJ">
                                     <font key="font" metaFont="systemMedium" size="15"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -3175,13 +3175,13 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <stackView distribution="fillEqually" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8JX-kG-xe7" userLabel="Order information">
-                                <rect key="frame" x="20" y="125" width="199" height="158"/>
+                                <rect key="frame" x="20" y="125" width="255" height="234"/>
                                 <subviews>
                                     <stackView distribution="fillEqually" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2GF-4D-RKr">
-                                        <rect key="frame" x="0.0" y="0.0" width="176" height="158"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="176" height="234"/>
                                         <subviews>
                                             <stackView distribution="fillEqually" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jXF-vw-v9b">
-                                                <rect key="frame" x="0.0" y="16" width="84" height="142"/>
+                                                <rect key="frame" x="0.0" y="92" width="84" height="142"/>
                                                 <subviews>
                                                     <textField horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KZd-3F-BfO">
                                                         <rect key="frame" x="-2" y="125" width="88" height="17"/>
@@ -3250,7 +3250,7 @@ Gw
                                                 </customSpacing>
                                             </stackView>
                                             <stackView distribution="fillEqually" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gyT-A4-fxR">
-                                                <rect key="frame" x="92" y="16" width="84" height="142"/>
+                                                <rect key="frame" x="92" y="92" width="84" height="142"/>
                                                 <subviews>
                                                     <textField horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jYy-rP-Oiq">
                                                         <rect key="frame" x="-2" y="125" width="88" height="17"/>
@@ -3346,13 +3346,13 @@ Gw
                                 </customSpacing>
                             </stackView>
                             <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="rs9-e0-1Gn">
-                                <rect key="frame" x="233" y="125" width="5" height="158"/>
+                                <rect key="frame" x="289" y="125" width="5" height="234"/>
                             </box>
                             <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qka-Ez-slt" userLabel="Trading Partner Information">
-                                <rect key="frame" x="252" y="137" width="199" height="146"/>
+                                <rect key="frame" x="308" y="137" width="254" height="222"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="89c-X1-AA9">
-                                        <rect key="frame" x="12" y="129" width="175" height="17"/>
+                                        <rect key="frame" x="40" y="205" width="175" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Trading Partner information" id="F9f-RU-0SA">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -3360,10 +3360,10 @@ Gw
                                         </textFieldCell>
                                     </textField>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EZO-Rs-R6j">
-                                        <rect key="frame" x="0.0" y="0.0" width="199" height="121"/>
+                                        <rect key="frame" x="28" y="0.0" width="199" height="197"/>
                                         <subviews>
                                             <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="89b-XL-pFU">
-                                                <rect key="frame" x="0.0" y="4" width="128" height="117"/>
+                                                <rect key="frame" x="0.0" y="80" width="128" height="117"/>
                                                 <subviews>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZEj-yH-MxX">
                                                         <rect key="frame" x="-2" y="100" width="132" height="17"/>
@@ -3422,7 +3422,7 @@ Gw
                                                 </customSpacing>
                                             </stackView>
                                             <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xa5-8H-gJH">
-                                                <rect key="frame" x="136" y="4" width="63" height="117"/>
+                                                <rect key="frame" x="136" y="80" width="63" height="117"/>
                                                 <subviews>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yZK-Gr-qxI">
                                                         <rect key="frame" x="-2" y="100" width="66" height="17"/>
@@ -3505,7 +3505,7 @@ Gw
                                 </customSpacing>
                             </stackView>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="wZ1-OQ-NTT">
-                                <rect key="frame" x="20" y="114" width="434" height="5"/>
+                                <rect key="frame" x="20" y="114" width="545" height="5"/>
                             </box>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yHF-bd-Qhq">
                                 <rect key="frame" x="18" y="89" width="147" height="17"/>
@@ -3524,14 +3524,14 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fno-wR-f3q">
-                                <rect key="frame" x="376" y="13" width="88" height="32"/>
+                                <rect key="frame" x="487" y="13" width="88" height="32"/>
                                 <buttonCell key="cell" type="push" title="Buy/sell" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UN9-n3-Xcy">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="executeTradeAction:" target="f8g-UU-ziE" id="w5L-3t-VMV"/>
-                                    <binding destination="f8g-UU-ziE" name="enabled" keyPath="self.mayExecuteTrade" id="A9C-3q-d2A"/>
+                                    <binding destination="f8g-UU-ziE" name="enabled" keyPath="self.mayExecuteTrade" id="U2C-cZ-Jba"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xhs-ZU-bWu">
@@ -3559,6 +3559,8 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
+                                    <binding destination="f8g-UU-ziE" name="enabled" keyPath="self.executeTradeIsPossible" id="w5r-kQ-Agq"/>
+                                    <binding destination="f8g-UU-ziE" name="value" keyPath="self.amountToTrade" id="Fkg-xg-1im"/>
                                     <outlet property="delegate" destination="f8g-UU-ziE" id="8ZB-8u-8Dy"/>
                                 </connections>
                             </textField>
@@ -3572,7 +3574,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xht-9O-gjY">
-                                <rect key="frame" x="273" y="89" width="180" height="14"/>
+                                <rect key="frame" x="111" y="24" width="104" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="Y1u-7L-JaK"/>
                                 </constraints>
@@ -3582,14 +3584,40 @@ Gw
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IQI-j2-3tx">
+                                <rect key="frame" x="358" y="79" width="92" height="32"/>
+                                <buttonCell key="cell" type="push" title="autoMax" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="S9C-VM-fi6">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="autoMaxAmountToTradeAction:" target="f8g-UU-ziE" id="s1I-JY-BhN"/>
+                                    <binding destination="f8g-UU-ziE" name="enabled" keyPath="self.executeTradeIsPossible" id="mML-yJ-NQz"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lgN-Fm-B5w">
+                                <rect key="frame" x="269" y="79" width="89" height="32"/>
+                                <buttonCell key="cell" type="push" title="autoMin" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3sq-SU-Tjz">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="autoMinAmountToTradeAction:" target="f8g-UU-ziE" id="WEc-Kj-dIm"/>
+                                    <binding destination="f8g-UU-ziE" name="enabled" keyPath="self.executeTradeIsPossible" id="GXP-xI-jk3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="547-Dn-FKR" firstAttribute="baseline" secondItem="lgN-Fm-B5w" secondAttribute="baseline" id="1Zq-Jb-Oie"/>
                             <constraint firstItem="fno-wR-f3q" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xhs-ZU-bWu" secondAttribute="trailing" constant="12" symbolic="YES" id="3Cs-eJ-uSK"/>
                             <constraint firstItem="qka-Ez-slt" firstAttribute="top" secondItem="11I-pb-Bhs" secondAttribute="bottom" constant="8" symbolic="YES" id="3N8-4s-kt7"/>
-                            <constraint firstItem="Xht-9O-gjY" firstAttribute="leading" secondItem="547-Dn-FKR" secondAttribute="trailing" constant="8" id="5kr-Gx-Vre"/>
+                            <constraint firstAttribute="bottom" secondItem="Xht-9O-gjY" secondAttribute="bottom" constant="24" id="4Je-1d-oIn"/>
                             <constraint firstAttribute="trailing" secondItem="qka-Ez-slt" secondAttribute="trailing" constant="20" id="AKa-DN-QiF"/>
+                            <constraint firstItem="Xht-9O-gjY" firstAttribute="leading" secondItem="xhs-ZU-bWu" secondAttribute="trailing" constant="8" symbolic="YES" id="CdX-8c-T9R"/>
+                            <constraint firstItem="547-Dn-FKR" firstAttribute="baseline" secondItem="IQI-j2-3tx" secondAttribute="baseline" id="FzD-fR-NMh"/>
                             <constraint firstAttribute="trailing" secondItem="11I-pb-Bhs" secondAttribute="trailing" constant="17" id="G8d-hR-sFN"/>
                             <constraint firstItem="tOn-17-omV" firstAttribute="baseline" secondItem="dVv-dz-NJx" secondAttribute="baseline" id="Hcw-Ky-Z5t"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="IQI-j2-3tx" secondAttribute="trailing" constant="20" symbolic="YES" id="KmY-Tn-k42"/>
                             <constraint firstItem="yHF-bd-Qhq" firstAttribute="leading" secondItem="FeD-ys-PjZ" secondAttribute="leading" constant="20" id="MPd-ia-njD"/>
                             <constraint firstItem="11I-pb-Bhs" firstAttribute="top" secondItem="FeD-ys-PjZ" secondAttribute="top" constant="20" id="Odu-ny-0c7"/>
                             <constraint firstAttribute="trailing" secondItem="fno-wR-f3q" secondAttribute="trailing" constant="13" id="P4R-Dr-oDu"/>
@@ -3599,9 +3627,11 @@ Gw
                             <constraint firstItem="8JX-kG-xe7" firstAttribute="leading" secondItem="FeD-ys-PjZ" secondAttribute="leading" constant="20" id="WhK-uH-DQC"/>
                             <constraint firstItem="rs9-e0-1Gn" firstAttribute="top" secondItem="11I-pb-Bhs" secondAttribute="bottom" constant="8" id="XX2-Je-3TS"/>
                             <constraint firstItem="547-Dn-FKR" firstAttribute="baseline" secondItem="yHF-bd-Qhq" secondAttribute="baseline" id="Z7J-RM-yBa"/>
+                            <constraint firstItem="IQI-j2-3tx" firstAttribute="leading" secondItem="lgN-Fm-B5w" secondAttribute="trailing" constant="12" symbolic="YES" id="ZUM-Tq-f6L"/>
                             <constraint firstItem="wZ1-OQ-NTT" firstAttribute="top" secondItem="8JX-kG-xe7" secondAttribute="bottom" constant="8" symbolic="YES" id="ajy-Xf-nzI"/>
                             <constraint firstItem="547-Dn-FKR" firstAttribute="top" secondItem="wZ1-OQ-NTT" secondAttribute="bottom" constant="8" symbolic="YES" id="dQs-ZH-HAz"/>
                             <constraint firstItem="dVv-dz-NJx" firstAttribute="leading" secondItem="yHF-bd-Qhq" secondAttribute="leading" id="fbt-dR-1gx"/>
+                            <constraint firstItem="fno-wR-f3q" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Xht-9O-gjY" secondAttribute="trailing" constant="8" symbolic="YES" id="gg7-1W-k0T"/>
                             <constraint firstAttribute="bottom" secondItem="fno-wR-f3q" secondAttribute="bottom" constant="20" id="h7w-qd-c5n"/>
                             <constraint firstItem="8JX-kG-xe7" firstAttribute="width" secondItem="qka-Ez-slt" secondAttribute="width" id="hCt-ck-XFP"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tOn-17-omV" secondAttribute="trailing" constant="20" symbolic="YES" id="j1V-cZ-nGj"/>
@@ -3610,7 +3640,7 @@ Gw
                             <constraint firstItem="wZ1-OQ-NTT" firstAttribute="top" secondItem="qka-Ez-slt" secondAttribute="bottom" constant="20" id="nOK-rt-ilR"/>
                             <constraint firstItem="qka-Ez-slt" firstAttribute="leading" secondItem="rs9-e0-1Gn" secondAttribute="trailing" constant="16" id="naO-Go-vKW"/>
                             <constraint firstItem="tOn-17-omV" firstAttribute="leading" secondItem="dVv-dz-NJx" secondAttribute="trailing" constant="8" id="p7Q-xK-vQ8"/>
-                            <constraint firstItem="Xht-9O-gjY" firstAttribute="baseline" secondItem="547-Dn-FKR" secondAttribute="baseline" id="pin-hL-kMT"/>
+                            <constraint firstItem="lgN-Fm-B5w" firstAttribute="leading" secondItem="547-Dn-FKR" secondAttribute="trailing" constant="8" symbolic="YES" id="pdS-cr-4lq"/>
                             <constraint firstItem="dVv-dz-NJx" firstAttribute="top" secondItem="yHF-bd-Qhq" secondAttribute="bottom" constant="11" id="q7c-Ka-UF8"/>
                             <constraint firstItem="xhs-ZU-bWu" firstAttribute="leading" secondItem="FeD-ys-PjZ" secondAttribute="leading" constant="35" id="rSP-O0-KEx"/>
                             <constraint firstItem="xhs-ZU-bWu" firstAttribute="top" secondItem="dVv-dz-NJx" secondAttribute="bottom" constant="20" id="smn-aN-ZRs"/>
@@ -3619,12 +3649,13 @@ Gw
                             <constraint firstAttribute="trailing" secondItem="wZ1-OQ-NTT" secondAttribute="trailing" constant="17" id="ve8-hV-JLr"/>
                             <constraint firstItem="rs9-e0-1Gn" firstAttribute="leading" secondItem="8JX-kG-xe7" secondAttribute="trailing" constant="16" id="wwo-Y3-zZH"/>
                             <constraint firstItem="wZ1-OQ-NTT" firstAttribute="leading" secondItem="FeD-ys-PjZ" secondAttribute="leading" constant="20" id="zPa-mM-plU"/>
-                            <constraint firstAttribute="trailing" secondItem="Xht-9O-gjY" secondAttribute="trailing" constant="20" id="zoB-lr-2nE"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="amountToTradeDescriptionTextField" destination="yHF-bd-Qhq" id="NHV-oU-7y4"/>
                         <outlet property="amountToTradeTextField" destination="547-Dn-FKR" id="Evw-7A-NC1"/>
+                        <outlet property="autoMaxAmountToTradeButton" destination="IQI-j2-3tx" id="HHc-VS-IJD"/>
+                        <outlet property="autoMinAmountToTradeButton" destination="lgN-Fm-B5w" id="ATt-JP-i7v"/>
                         <outlet property="cancelButton" destination="xhs-ZU-bWu" id="OZg-bw-Acs"/>
                         <outlet property="executeTradeButton" destination="fno-wR-f3q" id="EGM-rb-jUQ"/>
                         <outlet property="isKYCDescriptionTextField" destination="mFB-x6-g6N" id="FRS-ef-xwf"/>
@@ -3658,8 +3689,10 @@ Gw
                 </viewController>
                 <customObject id="wkM-Yd-0pe" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="BZP-X4-Etp"/>
+                <userDefaultsController id="2uj-Lz-301"/>
+                <userDefaultsController id="Xdu-6B-eBT"/>
             </objects>
-            <point key="canvasLocation" x="-2041.5" y="2546"/>
+            <point key="canvasLocation" x="-1816" y="2630"/>
         </scene>
         <!--My Trades View Controller-->
         <scene sceneID="GHY-7L-bja">
