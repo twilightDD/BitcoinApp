@@ -18,7 +18,7 @@
     return BitcoinDE_GoldMinimalTrustLevel;
 }
 
-+ (BitcoinDE_PaymentOption)defaultPaymentOption {
++ (BitcoinDE_PaymentOption)defaultPaymentOptionForCreateOrder {
     return BitcoinDE_PaymentOptionExpressOnly;
 }
 

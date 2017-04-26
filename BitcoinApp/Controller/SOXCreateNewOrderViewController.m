@@ -157,7 +157,7 @@
                                                                      new_order_for_remaining_amount:self.reNewOrderButton.state
                                                                                     min_trust_level:self.trustLevel
                                                                                       only_kyc_full:self.reNewOrderButton.state
-                                                                                     payment_option:[SOXPreferenceCenter defaultPaymentOption]
+                                                                                     payment_option:[SOXPreferenceCenter defaultPaymentOptionForCreateOrder]
                                                                                        seat_of_bank:[SOXPreferenceCenter defaultTradingCountries]];
         
         NSLog(@"Parameters:\n%@", parameters);
