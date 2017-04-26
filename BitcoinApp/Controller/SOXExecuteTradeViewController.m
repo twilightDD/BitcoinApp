@@ -132,7 +132,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     }
     
     // if minAmount < maxMount we can buy/sell
-    if (minAmount < maxAmount) {
+    if (minAmount <= maxAmount) {
         // maxMount may have up to 8 digits after "."
         maxAmount = floor(maxAmount * 100000000) / 100000000;
         
