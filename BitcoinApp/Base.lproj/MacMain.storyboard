@@ -3175,13 +3175,13 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <stackView distribution="fillEqually" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8JX-kG-xe7" userLabel="Order information">
-                                <rect key="frame" x="20" y="125" width="255" height="234"/>
+                                <rect key="frame" x="20" y="150" width="255" height="209"/>
                                 <subviews>
                                     <stackView distribution="fillEqually" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2GF-4D-RKr">
-                                        <rect key="frame" x="0.0" y="0.0" width="176" height="234"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="176" height="209"/>
                                         <subviews>
                                             <stackView distribution="fillEqually" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jXF-vw-v9b">
-                                                <rect key="frame" x="0.0" y="92" width="84" height="142"/>
+                                                <rect key="frame" x="0.0" y="67" width="84" height="142"/>
                                                 <subviews>
                                                     <textField horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KZd-3F-BfO">
                                                         <rect key="frame" x="-2" y="125" width="88" height="17"/>
@@ -3250,7 +3250,7 @@ Gw
                                                 </customSpacing>
                                             </stackView>
                                             <stackView distribution="fillEqually" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gyT-A4-fxR">
-                                                <rect key="frame" x="92" y="92" width="84" height="142"/>
+                                                <rect key="frame" x="92" y="67" width="84" height="142"/>
                                                 <subviews>
                                                     <textField horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jYy-rP-Oiq">
                                                         <rect key="frame" x="-2" y="125" width="88" height="17"/>
@@ -3346,13 +3346,13 @@ Gw
                                 </customSpacing>
                             </stackView>
                             <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="rs9-e0-1Gn">
-                                <rect key="frame" x="289" y="125" width="5" height="234"/>
+                                <rect key="frame" x="289" y="150" width="5" height="209"/>
                             </box>
                             <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qka-Ez-slt" userLabel="Trading Partner Information">
-                                <rect key="frame" x="308" y="137" width="254" height="222"/>
+                                <rect key="frame" x="308" y="162" width="254" height="197"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="89c-X1-AA9">
-                                        <rect key="frame" x="40" y="205" width="175" height="17"/>
+                                        <rect key="frame" x="40" y="180" width="175" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Trading Partner information" id="F9f-RU-0SA">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -3360,10 +3360,10 @@ Gw
                                         </textFieldCell>
                                     </textField>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EZO-Rs-R6j">
-                                        <rect key="frame" x="28" y="0.0" width="199" height="197"/>
+                                        <rect key="frame" x="28" y="0.0" width="199" height="172"/>
                                         <subviews>
                                             <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="89b-XL-pFU">
-                                                <rect key="frame" x="0.0" y="80" width="128" height="117"/>
+                                                <rect key="frame" x="0.0" y="55" width="128" height="117"/>
                                                 <subviews>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZEj-yH-MxX">
                                                         <rect key="frame" x="-2" y="100" width="132" height="17"/>
@@ -3422,7 +3422,7 @@ Gw
                                                 </customSpacing>
                                             </stackView>
                                             <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xa5-8H-gJH">
-                                                <rect key="frame" x="136" y="80" width="63" height="117"/>
+                                                <rect key="frame" x="136" y="55" width="63" height="117"/>
                                                 <subviews>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yZK-Gr-qxI">
                                                         <rect key="frame" x="-2" y="100" width="66" height="17"/>
@@ -3505,10 +3505,10 @@ Gw
                                 </customSpacing>
                             </stackView>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="wZ1-OQ-NTT">
-                                <rect key="frame" x="20" y="114" width="545" height="5"/>
+                                <rect key="frame" x="20" y="139" width="545" height="5"/>
                             </box>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yHF-bd-Qhq">
-                                <rect key="frame" x="18" y="89" width="147" height="17"/>
+                                <rect key="frame" x="18" y="114" width="147" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="BTC Amount to buy/sell" id="6IK-3G-RQi">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -3516,7 +3516,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dVv-dz-NJx">
-                                <rect key="frame" x="18" y="61" width="147" height="17"/>
+                                <rect key="frame" x="18" y="86" width="147" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Trades" id="u5Y-OI-NJB">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -3548,7 +3548,7 @@ Gw
                                 </connections>
                             </button>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="547-Dn-FKR">
-                                <rect key="frame" x="171" y="86" width="96" height="22"/>
+                                <rect key="frame" x="171" y="111" width="96" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="96" id="MSx-u7-MFf"/>
                                 </constraints>
@@ -3565,7 +3565,7 @@ Gw
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tOn-17-omV">
-                                <rect key="frame" x="169" y="61" width="37" height="17"/>
+                                <rect key="frame" x="169" y="86" width="37" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="78g-UZ-sJT">
                                     <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="5J1-Rp-YR5"/>
                                     <font key="font" metaFont="system"/>
@@ -3585,7 +3585,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IQI-j2-3tx">
-                                <rect key="frame" x="358" y="79" width="92" height="32"/>
+                                <rect key="frame" x="358" y="104" width="92" height="32"/>
                                 <buttonCell key="cell" type="push" title="autoMax" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="S9C-VM-fi6">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -3596,7 +3596,7 @@ Gw
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lgN-Fm-B5w">
-                                <rect key="frame" x="269" y="79" width="89" height="32"/>
+                                <rect key="frame" x="269" y="104" width="89" height="32"/>
                                 <buttonCell key="cell" type="push" title="autoMin" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3sq-SU-Tjz">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -3606,14 +3606,25 @@ Gw
                                     <binding destination="f8g-UU-ziE" name="enabled" keyPath="self.executeTradeIsPossible" id="GXP-xI-jk3"/>
                                 </connections>
                             </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aZd-kx-19f">
+                                <rect key="frame" x="18" y="49" width="546" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="43R-Yj-oNe">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="547-Dn-FKR" firstAttribute="baseline" secondItem="lgN-Fm-B5w" secondAttribute="baseline" id="1Zq-Jb-Oie"/>
+                            <constraint firstItem="aZd-kx-19f" firstAttribute="top" secondItem="dVv-dz-NJx" secondAttribute="bottom" constant="20" id="1si-um-mGI"/>
+                            <constraint firstItem="xhs-ZU-bWu" firstAttribute="top" secondItem="aZd-kx-19f" secondAttribute="bottom" constant="8" id="1y3-oG-oex"/>
                             <constraint firstItem="fno-wR-f3q" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xhs-ZU-bWu" secondAttribute="trailing" constant="12" symbolic="YES" id="3Cs-eJ-uSK"/>
                             <constraint firstItem="qka-Ez-slt" firstAttribute="top" secondItem="11I-pb-Bhs" secondAttribute="bottom" constant="8" symbolic="YES" id="3N8-4s-kt7"/>
                             <constraint firstAttribute="bottom" secondItem="Xht-9O-gjY" secondAttribute="bottom" constant="24" id="4Je-1d-oIn"/>
                             <constraint firstAttribute="trailing" secondItem="qka-Ez-slt" secondAttribute="trailing" constant="20" id="AKa-DN-QiF"/>
                             <constraint firstItem="Xht-9O-gjY" firstAttribute="leading" secondItem="xhs-ZU-bWu" secondAttribute="trailing" constant="8" symbolic="YES" id="CdX-8c-T9R"/>
+                            <constraint firstAttribute="trailing" secondItem="aZd-kx-19f" secondAttribute="trailing" constant="20" id="Crp-hO-Wf2"/>
                             <constraint firstItem="547-Dn-FKR" firstAttribute="baseline" secondItem="IQI-j2-3tx" secondAttribute="baseline" id="FzD-fR-NMh"/>
                             <constraint firstAttribute="trailing" secondItem="11I-pb-Bhs" secondAttribute="trailing" constant="17" id="G8d-hR-sFN"/>
                             <constraint firstItem="tOn-17-omV" firstAttribute="baseline" secondItem="dVv-dz-NJx" secondAttribute="baseline" id="Hcw-Ky-Z5t"/>
@@ -3642,8 +3653,8 @@ Gw
                             <constraint firstItem="tOn-17-omV" firstAttribute="leading" secondItem="dVv-dz-NJx" secondAttribute="trailing" constant="8" id="p7Q-xK-vQ8"/>
                             <constraint firstItem="lgN-Fm-B5w" firstAttribute="leading" secondItem="547-Dn-FKR" secondAttribute="trailing" constant="8" symbolic="YES" id="pdS-cr-4lq"/>
                             <constraint firstItem="dVv-dz-NJx" firstAttribute="top" secondItem="yHF-bd-Qhq" secondAttribute="bottom" constant="11" id="q7c-Ka-UF8"/>
+                            <constraint firstItem="aZd-kx-19f" firstAttribute="leading" secondItem="FeD-ys-PjZ" secondAttribute="leading" constant="20" id="qnv-YA-DIY"/>
                             <constraint firstItem="xhs-ZU-bWu" firstAttribute="leading" secondItem="FeD-ys-PjZ" secondAttribute="leading" constant="35" id="rSP-O0-KEx"/>
-                            <constraint firstItem="xhs-ZU-bWu" firstAttribute="top" secondItem="dVv-dz-NJx" secondAttribute="bottom" constant="20" id="smn-aN-ZRs"/>
                             <constraint firstItem="547-Dn-FKR" firstAttribute="leading" secondItem="yHF-bd-Qhq" secondAttribute="trailing" constant="8" id="tbn-lZ-orb"/>
                             <constraint firstItem="tOn-17-omV" firstAttribute="leading" secondItem="547-Dn-FKR" secondAttribute="leading" id="usp-F8-XD6"/>
                             <constraint firstAttribute="trailing" secondItem="wZ1-OQ-NTT" secondAttribute="trailing" constant="17" id="ve8-hV-JLr"/>
@@ -3681,6 +3692,7 @@ Gw
                         <outlet property="tradingPartnerInformationDescriptionTextField" destination="89c-X1-AA9" id="27g-IN-AjP"/>
                         <outlet property="trustLevelDescriptionTextField" destination="CFG-LE-hkI" id="FxA-4G-pSv"/>
                         <outlet property="trustLevelTextField" destination="DcN-gD-s3c" id="FkU-yO-LH4"/>
+                        <outlet property="userInformationTextField" destination="aZd-kx-19f" id="Av0-0Y-Ol1"/>
                         <outlet property="userNameDescriptionTextField" destination="ZEj-yH-MxX" id="SfY-0Y-SWh"/>
                         <outlet property="userNameTextField" destination="yZK-Gr-qxI" id="XFd-SM-xj1"/>
                         <outlet property="volumeToTradeDescriptionTextField" destination="dVv-dz-NJx" id="GbF-SS-eno"/>

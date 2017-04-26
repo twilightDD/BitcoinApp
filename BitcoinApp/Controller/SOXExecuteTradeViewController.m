@@ -54,11 +54,10 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 @property (weak) IBOutlet NSTextField *minMaxPossibleAmountTextField;
 @property (weak) IBOutlet NSButton *autoMinAmountToTradeButton;
 @property (weak) IBOutlet NSButton *autoMaxAmountToTradeButton;
-
-
-
 @property (weak) IBOutlet NSTextField *volumeToTradeDescriptionTextField;
 @property (weak) IBOutlet NSTextField *volumeToTradeTextField;
+
+@property (weak) IBOutlet NSTextField *userInformationTextField;
 // Buttons
 @property (weak) IBOutlet NSButton *executeTradeButton;
 @property (weak) IBOutlet NSButton *cancelButton;
@@ -91,17 +90,16 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 
 #pragma mark - Private methods
 - (void)setupMinMaxAmountToTrade {
-    self.minimalAmountToTrade = @"0";
-    self.maximalAmountToTrade = @"0";
+    // MinAmount (we need it for userInformation in case of self.executeTradeIsPossible stays NO
+    double minAmount = self.orderBookData.orderInformation_minAmount.doubleValue;
+    self.minimalAmountToTrade = [NSString stringWithFormat:@"%.8g", minAmount];
+    
     self.executeTradeIsPossible = NO;
     
     if (!self.orderBookData) {
         return;
     }
     
-    
-    // MinAmount
-    double minAmount = self.orderBookData.orderInformation_minAmount.doubleValue;
     
     // MaxAmount
     double maxAmount  = 0;
@@ -137,7 +135,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
         // maxMount may have up to 8 digits after "."
         maxAmount = floor(maxAmount * 100000000) / 100000000;
         
-        self.minimalAmountToTrade = [NSString stringWithFormat:@"%.8g", minAmount];
+        
         self.maximalAmountToTrade = [NSString stringWithFormat:@"%.8g", maxAmount];
         self.executeTradeIsPossible = YES;
     }
@@ -187,20 +185,22 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     NSString *titleText;
     NSString *amountToTradeDescriptionText;
     NSString *executeTradeButtonText;
+    NSString *userInformationText;
     
     if (self.orderType == BitcoinDE_BuyOrderType) {
         titleText = @"Buy bitcoins";
         amountToTradeDescriptionText = @"Buy bitcoins";
+        userInformationText = [NSString stringWithFormat:@"You have not enough fidor amount to buy at least %@ BTC", self.minimalAmountToTrade];
         executeTradeButtonText = @"Execute buy";
     }
     else if (self.orderType == BitcoinDE_SellOrderType) {
         titleText = @"Sell bitcoins";
         amountToTradeDescriptionText = @"Sell bitcoins";
+        userInformationText = [NSString stringWithFormat:@"You have not enough BTC to sell at least %@ BTC", self.minimalAmountToTrade];
         executeTradeButtonText = @"Execute sell";
     }
 
     self.titleTextField.stringValue = titleText;
-//    self.amountToTradeTextField.doubleValue = 2.1;
     self.amountToTradeDescriptionTextField.stringValue = amountToTradeDescriptionText;
     
     self.autoMinAmountToTradeButton.title = @"Minimal BTC";//self.minimalAmountToTrade.stringValue;
@@ -208,6 +208,8 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     
     self.volumeToTradeDescriptionTextField.stringValue = @"Volume";
     self.volumeToTradeTextField.doubleValue            = 0;
+    
+    self.userInformationTextField.stringValue = userInformationText;
     
     self.executeTradeButton.title = executeTradeButtonText;
     self.cancelButton.title = @"Cancel";
@@ -302,10 +304,30 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     NSLog(@"Neuer Wert: %@", self.amountToTradeTextField.stringValue);
 }
 
--(void)setAmountToTrade:(NSNumber *)amountToTrade {
+#pragma mark - Manual Setters
+- (void)setAmountToTrade:(NSNumber *)amountToTrade {
     _amountToTrade = amountToTrade;
     NSLog(@"setAmountToTrade %@", amountToTrade);
     [self validateAmountInput:amountToTrade];
+}
+
+- (void)setExecuteTradeIsPossible:(BOOL)executeTradeIsPossible {
+    _executeTradeIsPossible = executeTradeIsPossible;
+    
+    [self toggleUIElements];
+}
+
+- (void)toggleUIElements {
+    self.userInformationTextField.hidden = self.executeTradeIsPossible;
+    
+    self.amountToTradeDescriptionTextField.hidden = !self.executeTradeIsPossible;
+    self.amountToTradeTextField.hidden = !self.executeTradeIsPossible;
+    self.minMaxPossibleAmountTextField.hidden = !self.executeTradeIsPossible;
+    self.autoMinAmountToTradeButton.hidden = !self.executeTradeIsPossible;
+    self.autoMaxAmountToTradeButton.hidden = !self.executeTradeIsPossible;
+    self.volumeToTradeDescriptionTextField.hidden = !self.executeTradeIsPossible;
+    self.volumeToTradeTextField.hidden = !self.executeTradeIsPossible;
+    self.executeTradeButton.hidden = !self.executeTradeIsPossible;
 }
 #pragma mark - SOXMarketCoreServerRequestProtocol
 - (void)answerOfServerRequest:(NSDictionary *)answerOfServerRequest {
