@@ -66,8 +66,8 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 #pragma mark Properties
 @property (nonatomic) BOOL mayExecuteTrade;
 @property (nonatomic) BOOL executeTradeIsPossible;
-@property (strong, nonatomic) NSNumber *minimalAmountToTrade;
-@property (strong, nonatomic) NSNumber *maximalAmountToTrade;
+@property (strong, nonatomic) NSString *minimalAmountToTrade;
+@property (strong, nonatomic) NSString *maximalAmountToTrade;
 @property (strong, nonatomic) NSNumber *amountToTrade;
 
 @end
@@ -93,50 +93,59 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 - (void)setupMinMaxAmountToTrade {
     SOXMarket_BitcoinDE_Core *core = [SOXMarket_BitcoinDE_Core sharedCore];
     if (self.orderBookData) {
+        // MinAmount
         double minAmount = self.orderBookData.orderInformation_minAmount.doubleValue;
-        double maxAmount  = 0;
         
-        if (self.orderType == BitcoinDE_BuyOrderType) {
-            NSNumber *maxAmountNumber = self.orderBookData.orderInformation_maxAmount;
-            NSNumber *maxCalculatedAmountNumber = @([SOXMarket_BitcoinDE_Core sharedCore].availableEuroAmount.doubleValue /
-            self.orderBookData.orderInformation_price.doubleValue);
-            
-            if ([maxAmountNumber isLessThan:maxCalculatedAmountNumber]) {
-                maxAmount = maxAmountNumber.doubleValue;
+        // MaxAmount
+        double maxAmount  = 0;
+        {
+            if (self.orderType == BitcoinDE_BuyOrderType) {
+                NSNumber *maxAmountNumber = self.orderBookData.orderInformation_maxAmount;
+                NSNumber *maxCalculatedAmountNumber = @([SOXMarket_BitcoinDE_Core sharedCore].availableEuroAmount.doubleValue /
+                                                    self.orderBookData.orderInformation_price.doubleValue);
+                
+                if ([maxAmountNumber isLessThan:maxCalculatedAmountNumber]) {
+                    maxAmount = maxAmountNumber.doubleValue;
+                }
+                else {
+                    maxAmount = maxCalculatedAmountNumber.doubleValue;
+                }
             }
-            else {
-                maxAmount = maxCalculatedAmountNumber.doubleValue;
+            else if (self.orderType == BitcoinDE_SellOrderType) {
+                if ([self.orderBookData.orderInformation_maxAmount isLessThan:core.availableBitcoinAmount]) {
+                    maxAmount = self.orderBookData.orderInformation_maxAmount.doubleValue;
+                }
+                else {
+                    maxAmount = core.availableBitcoinAmount.doubleValue;
+                }
             }
         }
-        else if (self.orderType == BitcoinDE_SellOrderType) {
-            if ([self.orderBookData.orderInformation_maxAmount isLessThan:core.availableBitcoinAmount]) {
-                maxAmount = self.orderBookData.orderInformation_maxAmount.doubleValue;
-            }
-            else {
-                maxAmount = core.availableBitcoinAmount.doubleValue;
-            }
-        }
+        
         if (minAmount > maxAmount) {
-            self.minimalAmountToTrade = @(0);
-            self.maximalAmountToTrade = @(0);
+            self.minimalAmountToTrade = @"0";
+            self.maximalAmountToTrade = @"0";
             self.executeTradeIsPossible = NO;
         }
         else {
-            self.minimalAmountToTrade = @(minAmount);
-            self.maximalAmountToTrade = @(maxAmount);
+            // up to 8 digits after "."
+            minAmount = floor(minAmount * 100000000) / 100000000;
+            maxAmount = floor(maxAmount * 100000000) / 100000000;
+            
+            self.minimalAmountToTrade = [NSString stringWithFormat:@"%.8g", minAmount];
+            self.maximalAmountToTrade = [NSString stringWithFormat:@"%.8g", maxAmount];
             self.executeTradeIsPossible = YES;
         }
     }
     else {
-        self.minimalAmountToTrade = @(0);
-        self.maximalAmountToTrade = @(0);
+        self.minimalAmountToTrade = @"0";
+        self.maximalAmountToTrade = @"0";
         self.executeTradeIsPossible = NO;
     }
     
     // set boundaries of input field number formatter
     NSNumberFormatter* fieldFormatter = self.amountToTradeTextField.formatter;
-    fieldFormatter.minimum = self.minimalAmountToTrade;
-    fieldFormatter.maximum = self.maximalAmountToTrade;
+    fieldFormatter.minimum = @(self.minimalAmountToTrade.doubleValue);
+    fieldFormatter.maximum = @(self.maximalAmountToTrade.doubleValue);
 }
 
 - (void)setupUI {
