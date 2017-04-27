@@ -91,44 +91,21 @@
 
 - (void)startAutomaticTrading {
     
-    if (self.orderType == BitcoinDE_BuyOrderType) {
+    if (self.orderType) {
         [SOXAutomaticTrading_BitcoinDE_Core registerController:self
-                                        forUpdatesForOrderType:BitcoinDE_BuyOrderType];
-    }
-    else if (self.orderType == BitcoinDE_SellOrderType) {
-        [SOXAutomaticTrading_BitcoinDE_Core registerController:self
-                                        forUpdatesForOrderType:BitcoinDE_SellOrderType];
+                                        forUpdatesForOrderType:self.orderType];
     }
     else {
         NSLog(@"An error occured: no orderType");
     }
 
     return;
-    
-    
-//    if (self.orderType == BitcoinDE_BuyOrderType) {
-//        // we want to compare buy price with highest sell price - BuyOrderType vs. SellOrderBook ist richtig!
-//        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType
-//                                                    respondTo:self];
-//    }
-//    else if (self.orderType == BitcoinDE_SellOrderType) {
-//        // we want to compare sell price with lowest buy price - SellOrderType vs. BuyOrderBook ist richtig!
-//        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType
-//                                                    respondTo:self];
-//    }
-//    else {
-//        NSLog(@"ERROR - no orderType set");
-//    }
 }
 
 - (void)stopAutomaticTrading {
-    if (self.orderType == BitcoinDE_BuyOrderType) {
+    if (self.orderType) {
         [SOXAutomaticTrading_BitcoinDE_Core unRegisterController:self
-                                          forUpdatesForOrderType:BitcoinDE_BuyOrderType];
-    }
-    else if (self.orderType == BitcoinDE_SellOrderType) {
-        [SOXAutomaticTrading_BitcoinDE_Core unRegisterController:self
-                                          forUpdatesForOrderType:BitcoinDE_SellOrderType];
+                                          forUpdatesForOrderType:self.orderType];
     }
     else {
         NSLog(@"ERROR - no orderType set");
@@ -164,32 +141,6 @@
 
 - (IBAction)clearLogAction:(NSButton *)sender {
 }
-
-#pragma mark - SOXMarketCoreServerRequestProtocol
-//- (void)answerOfServerRequest:(NSDictionary *)answerOfServerRequest {
-//    NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
-//    NSMutableArray *orderBook = [SOXShowOrderbook_BitcoinDE_Data orderbookDataArrayForShowOrderbookDictionary:payloadDictionary];
-//    if (orderBook) {
-//        self.currentLimit = [SOXShowOrderbook_BitcoinDE_Data currentAutomaticPriceLimitOfOrderBook:orderBook
-//                                                                                      forOrderType:self.orderType];
-//        self.statusTextField.stringValue = [NSString stringWithFormat:@"Running with limit: %f",self.currentLimit];
-//        if (self.orderType == BitcoinDE_BuyOrderType) {
-//            [SOXAutomaticTrading_BitcoinDE_Core registerController:self
-//                                            forUpdatesForOrderType:BitcoinDE_BuyOrderType];
-//        }
-//        else if (self.orderType == BitcoinDE_SellOrderType) {
-//            [SOXAutomaticTrading_BitcoinDE_Core registerController:self
-//                                            forUpdatesForOrderType:BitcoinDE_SellOrderType];
-//        }
-//        else {
-//            NSLog(@"An error occured: no orderType");
-//        }
-//    }
-//    else {
-//        self.currentLimit = 0;
-//        NSLog(@"An error occured: no limit");
-//    }
-//}
 
 #pragma mark - SOXAutomaticTradingCoreProtocol
 - (void)executedTrade:(NSString *)tradeLine {

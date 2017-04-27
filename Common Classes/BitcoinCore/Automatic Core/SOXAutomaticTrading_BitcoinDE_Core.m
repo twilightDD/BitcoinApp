@@ -342,10 +342,22 @@
 
 - (void)startRefetchOrderBook {
     NSLog(@"startRefetchOrderBook for type: %tu", self.orderType);
+    
+    // buy
+    NSDictionary *buyParameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:BitcoinDE_BuyOrderType
+                                                                 onlyExpressPaymentOption:YES];
+    
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType
+                                            withParameter:buyParameters
                                                 respondTo:self];
+    // sell
+    NSDictionary *sellParameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:BitcoinDE_SellOrderType
+                                                                  onlyExpressPaymentOption:YES];
+    
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType
+                                            withParameter:sellParameters
                                                     respondTo:self];
+    
     NSString *infoString = @"Fetching orderbook ...";
     for (NSObject *buyDelegate in self.buyDelegates) {
         [buyDelegate performSelector:@selector(executedTrade:)

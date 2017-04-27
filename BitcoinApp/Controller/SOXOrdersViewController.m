@@ -18,6 +18,7 @@
 
 #import "SOXKeys_BitcoinDE.h"
 #import "SOXErrorMessage_BitcoinDE.h"
+#import "SOXPreferenceCenter.h"
 
 #pragma mark - Interface
 @interface SOXOrdersViewController () <SOXMarketCoreServerRequestProtocol, SOXMarketCoreErrorProtocol, SOXSocketIOCoreProtocol, NSTableViewDelegate>
@@ -90,12 +91,12 @@
 - (void)requestServerData {
     [self enableSpinningWheel];
     
-    if (self.orderType == BitcoinDE_BuyOrderType) {
+    if (self.orderType == BitcoinDE_BuyOrderType
+        || self.orderType == BitcoinDE_SellOrderType) {
+        NSDictionary *parameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:self.orderType
+                                                                  onlyExpressPaymentOption:NO];
         [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType // "buy" liefert Verkaufsangebote
-                                                    respondTo:self];
-    }
-    else if (self.orderType == BitcoinDE_SellOrderType) {
-        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType //"sell" liefert Kaufangebote
+                                                withParameter:parameters
                                                     respondTo:self];
     }
     else {
