@@ -57,5 +57,5 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_UpdateType) {
 @interface SOXMarket_BitcoinDE_DefTypes : NSObject
 
 + (NSString *)orderTypeStringForOrderType:(BitcoinDE_OrderType)orderType;
-
++ (NSString *)paymentOptionStringForPaymentOption:(BitcoinDE_PaymentOption)paymentOption;
 @end

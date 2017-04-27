@@ -24,4 +24,21 @@
     }
 }
 
++ (NSString *)paymentOptionStringForPaymentOption:(BitcoinDE_PaymentOption)paymentOption {
+    static NSDictionary    *paymentOptionDescription;
+    
+    static dispatch_once_t pred;
+    
+    dispatch_once(&pred, ^{
+        paymentOptionDescription = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    @"Unknown", @(BitcoinDE_PaymentOptionUnknown)
+                                    , @"Express", @(BitcoinDE_PaymentOptionExpressOnly)
+                                    , @"SEPA", @(BitcoinDE_PaymentOptionSEPAOnly)
+                                    , @"Express/SEPA", @(BitcoinDE_PaymentOptionExpressAndSepa)
+                                    , nil];
+    });
+    
+    return [paymentOptionDescription objectForKey:@(paymentOption)];
+}
+
 @end
