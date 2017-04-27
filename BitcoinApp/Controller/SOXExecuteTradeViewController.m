@@ -147,6 +147,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
         }
         else {
             self.executePaymentOption = BitcoinDE_PaymentOptionSEPAOnly;
+            self.autoMaxAmountToTradeButton.hidden = YES;
         }
     }
     
