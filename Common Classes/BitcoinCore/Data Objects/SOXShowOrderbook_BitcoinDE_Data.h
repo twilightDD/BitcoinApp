@@ -11,6 +11,21 @@
 
 @interface SOXShowOrderbook_BitcoinDE_Data : SOXShowOrderbookData
 
++ (NSDictionary *)parametersForAutoTradingForOrderType:(BitcoinDE_OrderType)orderType;
+
++ (NSDictionary *)parametersForOrderType:(BitcoinDE_OrderType)orderType
+                onlyExpressPaymentOption:(BOOL)onlyExpressPaymentOption;
+
++ (NSDictionary *)parametersForOrderType:(BitcoinDE_OrderType)orderType
+                           bitcoinAmount:(NSNumber *)bitcoinAmount
+                                   price:(NSNumber *)price
+             orderRequirementsFullfilled:(BOOL)orderRequirementsFullfilled
+                             onlyKYCFull:(BOOL)onlyKYCFull
+                onlyExpressPaymentOption:(BOOL)onlyExpressPaymentOption
+                       onlySameBankGroup:(BOOL)onlySameBankGroup
+                             onlySameBIC:(BOOL)onlySameBIC
+                              seatOfBank:(NSArray *)seatsOfBank;
+
 + (NSMutableArray *)orderbookDataArrayForShowOrderbookDictionary:(NSDictionary *)payloadDictionary;
 
 + (instancetype)orderBookDataForSocketIODictionary:(NSDictionary *)addOrderSocketIODictionary;
@@ -19,4 +34,5 @@
 + (double)lowestPriceOfOrderBookDatas:(NSMutableArray <SOXShowOrderbook_BitcoinDE_Data *> *)orderbook;
 
 - (void)updateOrderbookDataWith:(NSDictionary *)changes;
+
 @end

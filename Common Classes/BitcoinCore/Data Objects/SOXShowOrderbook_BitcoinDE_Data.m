@@ -9,6 +9,7 @@
 #import "SOXShowOrderbook_BitcoinDE_Data.h"
 
 #import "SOXKeys_BitcoinDE.h"
+#import "SOXMarket_BitcoinDE_DefTypes.h"
 
 #pragma mark - Interface
 @interface SOXShowOrderbook_BitcoinDE_Data ()
@@ -48,7 +49,59 @@
 @synthesize tradingPartnerInformation_username, tradingPartnerInformation_isKYCFull, tradingPartnerInformation_trustLevel, tradingPartnerInformation_bankName, tradingPartnerInformation_bic, tradingPartnerInformation_rating, tradingPartnerInformation_amountTrades;
 @synthesize orderRequirements_minTrustLevel, orderRequirements_onlyKYCFull, orderRequirements_seatOfBank, orderRequirements_paymentOption;
 
-#pragma mark - Init & Co.
+
+#pragma mark - Public Class methods
+#pragma mark | Parameter dictionary
++ (NSDictionary *)parametersForAutoTradingForOrderType:(BitcoinDE_OrderType)orderType {
+    NSString *orderTypeString = [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:orderType];
+    
+    NSDictionary *parametersForAutoTrading = [NSDictionary dictionaryWithObjectsAndKeys:
+                                               orderTypeString, BitcoinDE_ShowOrderbook_Type
+                                              , nil];
+
+    return parametersForAutoTrading;
+}
+
++ (NSDictionary *)parametersForOrderType:(BitcoinDE_OrderType)orderType
+                onlyExpressPaymentOption:(BOOL)onlyExpressPaymentOption {
+    NSString *orderTypeString = [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:orderType];
+    
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                orderTypeString, BitcoinDE_ShowOrderbook_Type
+                                , @(onlyExpressPaymentOption), @"only_express_orders"
+                                , nil];
+
+    return parameters;
+}
+
++ (NSDictionary *)parametersForOrderType:(BitcoinDE_OrderType)orderType
+                           bitcoinAmount:(NSNumber *)bitcoinAmount
+                                   price:(NSNumber *)price
+             orderRequirementsFullfilled:(BOOL)orderRequirementsFullfilled
+                             onlyKYCFull:(BOOL)onlyKYCFull
+                onlyExpressPaymentOption:(BOOL)onlyExpressPaymentOption
+                       onlySameBankGroup:(BOOL)onlySameBankGroup
+                             onlySameBIC:(BOOL)onlySameBIC
+                              seatOfBank:(NSArray *)seatsOfBank{
+
+    NSString *orderTypeString = [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:orderType];
+    
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                orderTypeString, BitcoinDE_ShowOrderbook_Type
+                                , bitcoinAmount, @"amount"
+                                , price, @"price"
+                                , @(orderRequirementsFullfilled), @"order_requirements_fullfilled"
+                                , @(onlyKYCFull), @"only_kyc_full"
+                                , @(onlyExpressPaymentOption), @"only_express_orders"
+                                , @(onlySameBankGroup), @"only_same_bankgroup"
+                                , @(onlySameBIC), @"only_same_bic"
+                                , seatsOfBank, @"seat_of_bank"
+                                , nil];
+    
+    return parameters;
+}
+
+#pragma mark | OrderBookData
 + (NSMutableArray *)orderbookDataArrayForShowOrderbookDictionary:(NSDictionary *)payloadDictionary {
     NSMutableArray *orderbookDataArray = [NSMutableArray array];
     
@@ -102,7 +155,7 @@
 
 }
 
-#pragma mark - Class methods
+#pragma mark - Private Class methods
 + (double)highestPriceOfOrderBookDatas:(NSMutableArray <SOXShowOrderbook_BitcoinDE_Data *> *)orderbook {
     NSNumber *highestPrice = [orderbook valueForKeyPath:@"@max.orderInformation_price"];
     return highestPrice.doubleValue;
@@ -116,10 +169,8 @@
 
 + (double)currentAutomaticPriceLimitOfOrderBook:(NSMutableArray <SOXShowOrderbookData *> *)orderbook
                                    forOrderType:(BitcoinDE_OrderType)orderType {
-    NSArray *prices = [orderbook valueForKeyPath:@"orderInformation_price"];
-    
+    NSNumber *priceLimit = @0;
     if (orderbook) {
-        NSNumber *priceLimit = [orderbook valueForKeyPath:@"@min.orderInformation_price"];
         switch (orderType) {
             case BitcoinDE_BuyOrderType:
                 priceLimit = [orderbook valueForKeyPath:@"@min.orderInformation_price"];
@@ -130,29 +181,9 @@
             default:
                 break;
         }
-        
-        return priceLimit.doubleValue;
     }
-    else {
-        return 0.0;
-    }
-    /*
-    [orderbook sortUsingSelector:@selector(orderInformation_price)];
     
-    SOXShowOrderbookData *dataOfInterest = nil;
-    switch (orderType) {
-        case BitcoinDE_BuyOrderType:
-            dataOfInterest = orderbook.lastObject; // lastObject seems right
-            break;
-        case BitcoinDE_SellOrderType:
-            dataOfInterest = orderbook.lastObject; // lastObject seems right, too ... stranged!
-            break;
-        default:
-            break;
-    }
-    double currentAutomaticPrice = dataOfInterest.orderInformation_price.doubleValue;
-    return currentAutomaticPrice;
-     */
+    return priceLimit.doubleValue;
 }
 
 + (SOXShowOrderbookData *)orderbookDataForOrderDictionary:(NSDictionary *)orderDictionary {
