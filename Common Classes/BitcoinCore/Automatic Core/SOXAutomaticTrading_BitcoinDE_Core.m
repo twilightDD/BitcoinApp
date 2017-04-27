@@ -51,14 +51,13 @@
     [SOXAutomaticTrading_BitcoinDE_Core registerForWebSocketUpdates];
 }
 
-+ (void)unRegisterController:(id)controller
-      forUpdatesForOrderType:(BitcoinDE_OrderType)orderType {
++ (void)unRegisterController:(id)controller forUpdatesForOrderType:(BitcoinDE_OrderType)orderType {
     if (!controller) {
         return;
     }
     
     SOXAutomaticTrading_BitcoinDE_Core *tradingCore = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
-    tradingCore.orderType = orderType;
+    
     switch (orderType) {
         case BitcoinDE_BuyOrderType:
             [tradingCore.buyDelegates removeObject:controller];
@@ -349,8 +348,6 @@
 }
 
 - (void)startRefetchOrderBook {
-    NSLog(@"startRefetchOrderBook for type: %tu", self.orderType);
-    
     // buy
     NSDictionary *buyParameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:BitcoinDE_BuyOrderType
                                                                  onlyExpressPaymentOption:YES];
