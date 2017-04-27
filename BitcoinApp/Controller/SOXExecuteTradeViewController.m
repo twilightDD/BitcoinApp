@@ -77,15 +77,10 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 #pragma mark - Implementation
 @implementation SOXExecuteTradeViewController
 #pragma mark Init&Co.
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do view setup here.
-}
-
 - (void)viewWillAppear {
     [super viewWillAppear];
     
-    self.mayExecuteTrade = NO;
+    self.mayExecuteTrade        = NO;
     self.defaultPaymentOption   = [SOXPreferenceCenter defaultPaymentOptionForExecuteTrade];
     self.orderBookPaymentOption = self.orderBookData.orderRequirements_paymentOption.unsignedIntegerValue;
     
@@ -96,8 +91,8 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 #pragma mark - Private methods
 - (void)setupMinMaxAmountToTrade {
     // MinAmount (we need it for userInformation in case of self.executeTradeIsPossible stays NO
-    double minAmount = self.orderBookData.orderInformation_minAmount.doubleValue;
-    self.minimalAmountToTrade = [NSString stringWithFormat:@"%.8g", minAmount];
+    double minAmount            = self.orderBookData.orderInformation_minAmount.doubleValue;
+    self.minimalAmountToTrade   = [NSString stringWithFormat:@"%.8g", minAmount];
     
     self.executeTradeIsPossible = NO;
     
@@ -138,7 +133,6 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     if (minAmount <= maxAmount) {
         // maxMount may have up to 8 digits after "."
         maxAmount = floor(maxAmount * 100000000) / 100000000;
-        
         
         self.maximalAmountToTrade = [NSString stringWithFormat:@"%.8g", maxAmount];
         self.executeTradeIsPossible = YES;
@@ -236,27 +230,33 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     else if (self.orderType == BitcoinDE_SellOrderType) {
         self.executeTradeButton.title = @"Execute sell";
     }
+    else {
+        self.executeTradeButton.title = @"No orderType";
+    }
 }
 
 - (void)toggleUIElements {
     self.userInformationTextField.hidden = self.executeTradeIsPossible;
     
-    self.amountToTradeDescriptionTextField.hidden = !self.executeTradeIsPossible;
-    self.amountToTradeTextField.hidden = !self.executeTradeIsPossible;
-    self.minMaxPossibleAmountTextField.hidden = !self.executeTradeIsPossible;
-    self.autoMinAmountToTradeButton.hidden = !self.executeTradeIsPossible;
-    self.autoMaxAmountToTradeButton.hidden = !self.executeTradeIsPossible;
-    self.volumeToTradeDescriptionTextField.hidden = !self.executeTradeIsPossible;
-    self.volumeToTradeTextField.hidden = !self.executeTradeIsPossible;
-    self.executeTradeButton.hidden = !self.executeTradeIsPossible;
+    self.amountToTradeDescriptionTextField.hidden   = !self.executeTradeIsPossible;
+    self.amountToTradeTextField.hidden              = !self.executeTradeIsPossible;
+    self.minMaxPossibleAmountTextField.hidden       = !self.executeTradeIsPossible;
+    self.autoMinAmountToTradeButton.hidden          = !self.executeTradeIsPossible;
+    self.autoMaxAmountToTradeButton.hidden          = !self.executeTradeIsPossible;
+    self.volumeToTradeDescriptionTextField.hidden   = !self.executeTradeIsPossible;
+    self.volumeToTradeTextField.hidden              = !self.executeTradeIsPossible;
+    self.executeTradeButton.hidden                  = !self.executeTradeIsPossible;
 }
 
 - (BOOL)validateAmountInput:(NSNumber *)inputValue {
     BOOL validationResult = NO;
+    
+    // Validate minAmount
     if (inputValue.doubleValue >= self.minimalAmountToTrade.doubleValue) {
         validationResult = YES;
     }
     
+    // Validate maxAmount and paymentOption
     if (validationResult) {
         // Express only
         if (self.defaultPaymentOption == BitcoinDE_PaymentOptionExpressOnly) {
@@ -307,20 +307,6 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
         self.mayExecuteTrade = NO;
     }
     
-//    if (inputValue.doubleValue >= self.minimalAmountToTrade.doubleValue
-//        && inputValue.doubleValue <= self.maximalAmountToTrade.doubleValue) {
-//        //self.amountToTrade = inputValue;
-//        double volume = inputValue.doubleValue * self.orderBookData.orderInformation_price.doubleValue;
-//        self.volumeToTradeTextField.doubleValue = volume;
-//        self.mayExecuteTrade = YES;
-//        return YES;
-//    }
-    
-    
-//    self.volumeToTradeTextField.stringValue = @"Non valid input";
-//    _amountToTrade = @(0);
-//    self.mayExecuteTrade = NO;
-    
     return validationResult;
 }
 
@@ -362,11 +348,8 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
         [alert beginSheetModalForWindow:self.view.window
                       completionHandler:^(NSModalResponse returnCode) {
                           strongify(self)
-                     
-                          if (returnCode == 1000) { // Execute trade
-                              [self executeTrade];                          }
-                          else if (returnCode == 1001) { // Cancel
-                            // do nothing
+                          if (returnCode == NSModalResponseOK) { // Execute trade
+                              [self executeTrade];
                           }
                       }];
     }
@@ -391,20 +374,18 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 #pragma mark - Manual Setters
 - (void)setAmountToTrade:(NSNumber *)amountToTrade {
     _amountToTrade = amountToTrade;
-    NSLog(@"setAmountToTrade %@", amountToTrade);
     [self validateAmountInput:amountToTrade];
 }
 
 - (void)setExecuteTradeIsPossible:(BOOL)executeTradeIsPossible {
     _executeTradeIsPossible = executeTradeIsPossible;
-    
     [self toggleUIElements];
 }
 
 - (void)setExecutePaymentOption:(BitcoinDE_PaymentOption)executePaymentOption {
     _executePaymentOption = executePaymentOption;
     if (executePaymentOption == BitcoinDE_PaymentOptionSEPAOnly) {
-        self.userInformationTextField.hidden = NO;
+        self.userInformationTextField.hidden      = NO;
         self.userInformationTextField.stringValue = @"Attention: SEPA trade";
     }
     else {
@@ -427,7 +408,6 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     
     id newValue = ( fieldEditor!=nil ? [fieldFormatter numberFromString:fieldEditor.string] : valueField.objectValue );
     self.amountToTrade = newValue;
-//    [self validateAmountInput:(NSNumber *)newValue];
 }
 
 @end
