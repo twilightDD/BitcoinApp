@@ -191,20 +191,17 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     // title and buttons
     NSString *titleText;
     NSString *amountToTradeDescriptionText;
-    NSString *executeTradeButtonText;
     NSString *userInformationText;
     
     if (self.orderType == BitcoinDE_BuyOrderType) {
         titleText = @"Buy bitcoins";
         amountToTradeDescriptionText = @"Buy bitcoins";
         userInformationText = [NSString stringWithFormat:@"You have not enough fidor amount to buy at least %@ BTC", self.minimalAmountToTrade];
-        executeTradeButtonText = @"Execute buy";
     }
     else if (self.orderType == BitcoinDE_SellOrderType) {
         titleText = @"Sell bitcoins";
         amountToTradeDescriptionText = @"Sell bitcoins";
         userInformationText = [NSString stringWithFormat:@"You have not enough BTC to sell at least %@ BTC", self.minimalAmountToTrade];
-        executeTradeButtonText = @"Execute sell";
     }
 
     self.titleTextField.stringValue = titleText;
@@ -218,7 +215,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     
     self.userInformationTextField.stringValue = userInformationText;
     
-    self.executeTradeButton.title = executeTradeButtonText;
+    [self setupExecuteTradeButton];
     self.cancelButton.title = @"Cancel";
     
     self.minMaxPossibleAmountTextField.stringValue = [NSString stringWithFormat:@"(min: %@, max: %@)",
@@ -226,25 +223,19 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 }
 
 - (void)setupExecuteTradeButton {
-    NSString *executeTradeButtonText;
     if (self.orderType == BitcoinDE_BuyOrderType) {
+        NSString *executeTradeButtonText;
         if (self.executePaymentOption != BitcoinDE_PaymentOptionSEPAOnly) {
-            executeTradeButtonText = @"Buy bitcoins";
+            executeTradeButtonText = @"Execute buy";
         }
         else {
-            executeTradeButtonText = @"Buy bitcoins - SEPA";
+            executeTradeButtonText = @"Execute SEPA buy";
         }
+        self.executeTradeButton.title = executeTradeButtonText;
     }
-    else if (self.orderType == BitcoinDE_SellOrderType  && self.executePaymentOption != BitcoinDE_PaymentOptionSEPAOnly) {
-        if (self.executePaymentOption != BitcoinDE_PaymentOptionSEPAOnly) {
-            executeTradeButtonText = @"SELL bitcoins";
-        }
-        else {
-            executeTradeButtonText = @"SELL bitcoins - SEPA";
-        }
+    else if (self.orderType == BitcoinDE_SellOrderType) {
+        self.executeTradeButton.title = @"Execute sell";
     }
-    
-    self.executeTradeButton.title = executeTradeButtonText;
 }
 
 - (void)toggleUIElements {
