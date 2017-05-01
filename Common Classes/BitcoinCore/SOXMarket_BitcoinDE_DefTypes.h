@@ -46,7 +46,7 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_PaymentOption) {
 };
 
 typedef NS_ENUM (NSUInteger, BitcoinDE_UpdateType) {
-    UnknownType = 0
+    BitcoinDE_UpdateType_Unknown = 0
     , BitcoinDE_UpdateType_AllOrderChanges
     , BitcoinDE_UpdateType_BuyOrderChanges
     , BitcoinDE_UpdateType_SellOrderChanges
