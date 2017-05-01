@@ -18,13 +18,7 @@
 @end
 
 @interface SOXAutomaticTrading_BitcoinDE_Core : NSObject
-@property (nonatomic) double buyLowestPrice;
-@property (nonatomic) double sellHighestPrice;
-@property (nonatomic) double buyInterestRate;
-@property (nonatomic) double sellInterestRate;
 
-@property (nonatomic) double freeReservation;
-@property (nonatomic) double freeBitcoins;
 
 
 + (void)registerController:(id <SOXAutomaticTradingCoreProtocol>)controller
@@ -32,5 +26,10 @@
 
 + (void)unRegisterController:(id)controller
       forUpdatesForOrderType:(BitcoinDE_OrderType)orderType;
+
++ (void)setBuyInterestRate:(NSNumber *)buyInterestRate;
++ (void)setSellInterestRate:(NSNumber *)sellInterestRate;
++ (void)setBuyMaximalEuro:(NSNumber *)buyMaximalEuro;
++ (void)setSellMaximalBTC:(NSNumber *)sellMaximalBTC;
 
 @end
