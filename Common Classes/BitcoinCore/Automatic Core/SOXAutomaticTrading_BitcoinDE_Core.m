@@ -223,11 +223,7 @@
     }
 
     // inform delegate
-    for (NSObject *buyDelegate in core.buyDelegates) {
-        [buyDelegate performSelector:@selector(executedTrade:)
-                          withObject:executeTradeText];
-        
-    }
+    [core informBuyDelegateWithNote:executeTradeText];
 }
 
 + (void)checkOrderData:(SOXShowOrderbookData *)orderData {
@@ -266,10 +262,7 @@
     [core.orderDataToCheckLater setObject:orderData
                                    forKey:orderData.orderInformation_socketOrderObjectID];
     // inform delegate
-    for (NSObject *sellDelegate in core.sellDelegates) {
-        [sellDelegate performSelector:@selector(executedTrade:)
-                           withObject:executeTradeText];
-    }
+    [core informSellDelegateWithNote:executeTradeText];
 }
 
 + (void)trySellOffer:(SOXShowOrderbookData *)sellOffer {
@@ -277,10 +270,7 @@
     // debug
     {
         NSString *executeTradesString = [NSString stringWithFormat:@"Try to sell offer with ID: %@", sellOffer.orderInformation_orderID];
-        for (NSObject *sellDelegate in core.sellDelegates) {
-            [sellDelegate performSelector:@selector(executedTrade:)
-                              withObject:executeTradesString];
-        }
+        [core informSellDelegateWithNote:executeTradesString];
     }
     // 1. check price => already done in -(void)checkOrderData
     // 2. check paymentOption => already done in -(void)checkOrderData
@@ -299,10 +289,8 @@
                                                                                   orderType:BitcoinDE_SellOrderType
                                                                               bitcoinAmount:bitcoinAmount];
         NSString *executeTradesString = [NSString stringWithFormat:@"EXECUTE: Sell with parameters:\n%@", parameterDictionary];
-        for (NSObject *buyDelegate in core.buyDelegates) {
-            [buyDelegate performSelector:@selector(executedTrade:)
-                              withObject:executeTradesString];
-        }
+        [core informSellDelegateWithNote:executeTradesString];
+    
 //        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
 //                                                withParameter:parameterDictionary
 //                                                    respondTo:core];
@@ -315,10 +303,7 @@
                                              , core.freeBitcoins
                                              , sellOffer.orderInformation_minAmount
                                              ];
-            for (NSObject *buyDelegate in core.buyDelegates) {
-                [buyDelegate performSelector:@selector(executedTrade:)
-                                  withObject:executeTradesString];
-            }
+            [core informSellDelegateWithNote:executeTradesString];
         }
     }
 }
@@ -391,14 +376,8 @@
                                                     respondTo:self];
     
     NSString *infoString = @"Fetching orderbook ...";
-    for (NSObject *buyDelegate in self.buyDelegates) {
-        [buyDelegate performSelector:@selector(executedTrade:)
-                          withObject:infoString];
-    }
-    for (NSObject *sellDelegate in self.sellDelegates) {
-        [sellDelegate performSelector:@selector(executedTrade:)
-                           withObject:infoString];
-    }
+    [self informBuyDelegateWithNote:infoString];
+    [self informSellDelegateWithNote:infoString];
     
     [self.orderbookTimer invalidate];
     self.orderbookTimer = nil;
@@ -429,12 +408,11 @@
     NSString *priceUpdateText = [NSString stringWithFormat:@"new BUY limit alt: %@ neu: %@",
                                  oldBuyLowestPrice , self.buyCurrentLowestPrice];
     
+    [self informBuyDelegateWithNote:priceUpdateText];
+    
     for (NSObject *buyDelegate in self.buyDelegates) {
         [buyDelegate performSelector:@selector(currentLimitHasChangedTo:)
                           withObject:self.buyCurrentLowestPrice];
-        // Debug
-        [buyDelegate performSelector:@selector(executedTrade:)
-                          withObject:priceUpdateText];
     }
     
 }
@@ -462,13 +440,32 @@
                                  , oldSellHighestPrice
                                  , self.sellCurrentHighestPrice
                                  ];
+    [self informSellDelegateWithNote:priceUpdateText];
     
     for (NSObject *sellDelegate in self.sellDelegates) {
         [sellDelegate performSelector:@selector(currentLimitHasChangedTo:)
                            withObject:self.sellCurrentHighestPrice];
-        // Debug
-        [sellDelegate performSelector:@selector(executedTrade:)
-                           withObject:priceUpdateText];
+    }
+}
+
+#pragma mark | Inform delegates
+
+- (void)informBuyDelegateWithNote:(NSString *)note {
+    if (note) {
+        for (NSObject *delegate in self.buyDelegates) {
+            [delegate performSelector:@selector(logLine:)
+                                       withObject:note
+                                    ];
+        }
+    }
+}
+- (void)informSellDelegateWithNote:(NSString *)note {
+    if (note) {
+        for (NSObject *delegate in self.sellDelegates) {
+            [delegate performSelector:@selector(logLine:)
+                           withObject:note
+             ];
+        }
     }
 }
 

@@ -11,9 +11,7 @@
 @protocol SOXAutomaticTradingCoreProtocol <NSObject>
 
 - (void)currentLimitHasChangedTo:(NSNumber *)newLimit;
-
-@optional
-- (void)executedTrade:(NSString *)tradeLine;
+- (void)logLine:(NSString *)tradeLine;
 
 @end
 

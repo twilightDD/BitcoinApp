@@ -181,10 +181,10 @@
 }
 
 #pragma mark - SOXAutomaticTradingCoreProtocol
-- (void)executedTrade:(NSString *)tradeLine {
+- (void)logLine:(NSString *)line {
     
     self.log = [self.log stringByAppendingString:@"\n"];
-    self.log = [self.log stringByAppendingString:tradeLine];
+    self.log = [self.log stringByAppendingString:line];
     
     self.logTextView.string = self.log;
 }

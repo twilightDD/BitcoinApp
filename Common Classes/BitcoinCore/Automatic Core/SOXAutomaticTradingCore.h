@@ -10,7 +10,7 @@
 
 @protocol SOXAutomaticTradingCoreProtocol <NSObject>
 
-- (void)executedTrade:(NSString *)tradeLine;
+- (void)logLine:(NSString *)tradeLine;
 
 @end
 
