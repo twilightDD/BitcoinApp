@@ -21,10 +21,11 @@
 @property (weak) IBOutlet NSView *automaticBackgroundView;
 
 @property (weak) IBOutlet NSTextField *maxInvestmentDescriptionTextField;
-@property (weak) IBOutlet NSTextField *automaticInvestmentTextField;
+@property (weak) IBOutlet NSTextField *maxInvestmentTextField;
 @property (weak) IBOutlet NSButton *useMaxReservationButton;
 @property (weak) IBOutlet NSTextField *minInterestDescriptionTextField;
-@property (weak) IBOutlet NSTextField *minInvestmentTextField;
+@property (weak) IBOutlet NSTextField *minInterestTextField;
+
 @property (weak) IBOutlet NSButton *startAutomaticButton;
 
 @property (weak) IBOutlet NSTextField *logDescriptionTextField;
@@ -75,17 +76,20 @@
     self.automaticBackgroundView.hidden = YES;
     // TextFields in separate automaticBackgroundView
     {
-        self.maxInvestmentDescriptionTextField.stringValue = @"Max. Investment";
-        self.automaticInvestmentTextField.doubleValue = 0;
-        self.useMaxReservationButton.state = 0;
+        self.maxInvestmentDescriptionTextField.stringValue  = @"Max. Investment";
+        self.maxInvestmentTextField.doubleValue             = 0;
+        
         self.useMaxReservationButton.title = @"Use maximal reservation";
+        self.useMaxReservationButton.state = 0;
+        
         self.minInterestDescriptionTextField.stringValue = @"Min. Investment [%]";
-        self.minInvestmentTextField.doubleValue = 0;
+        self.minInterestTextField.doubleValue            = 0;
+        
         self.startAutomaticButton.title = startAutomaticButtonTitle;
         
         self.logDescriptionTextField.stringValue = @"Log output";
-        self.logTextView.string = @"";
-        self.clearLogButton.title = @"Clear Log";
+        self.logTextView.string                  = @"";
+        self.clearLogButton.title                = @"Clear Log";
     }
 }
 
@@ -140,6 +144,40 @@
 }
 
 - (IBAction)clearLogAction:(NSButton *)sender {
+}
+
+
+#pragma mark - NSControlTextEditingDelegate
+- (void)controlTextDidChange:(NSNotification *)notification {
+    NSTextField* valueField           = notification.object;
+    NSNumberFormatter* fieldFormatter = valueField.formatter;
+    NSText* fieldEditor               = valueField.currentEditor;
+    
+    id newValue = ( fieldEditor != nil ? [fieldFormatter numberFromString:fieldEditor.string] : valueField.objectValue );
+    
+    if (valueField == self.minInterestTextField) { // %
+        switch (self.orderType) {
+            case BitcoinDE_BuyOrderType:
+                [SOXAutomaticTrading_BitcoinDE_Core setBuyInterestRate:newValue];
+                break;
+            case BitcoinDE_SellOrderType:
+                [SOXAutomaticTrading_BitcoinDE_Core setSellInterestRate:newValue];
+            default:
+                break;
+        }
+    }
+    else if (valueField == self.maxInvestmentTextField) { // €
+        switch (self.orderType) {
+            case BitcoinDE_BuyOrderType:
+                [SOXAutomaticTrading_BitcoinDE_Core setBuyMaximalEuro:newValue];
+                break;
+            case BitcoinDE_SellOrderType:
+                [SOXAutomaticTrading_BitcoinDE_Core setSellMaximalBTC:newValue];
+            default:
+                break;
+        }
+    }
+    
 }
 
 #pragma mark - SOXAutomaticTradingCoreProtocol

@@ -4189,10 +4189,16 @@ Gw
                                             <constraint firstAttribute="width" constant="100" id="ueQ-vR-YxO"/>
                                         </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="U3r-8S-qsc">
+                                            <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="Xax-sF-NrI">
+                                                <real key="minimum" value="0.0"/>
+                                            </numberFormatter>
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
+                                        <connections>
+                                            <outlet property="delegate" destination="cwM-7M-FeE" id="d98-gZ-CKV"/>
+                                        </connections>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vmD-DK-nO2">
                                         <rect key="frame" x="18" y="455" width="100" height="17"/>
@@ -4201,6 +4207,9 @@ Gw
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
+                                        <connections>
+                                            <outlet property="delegate" destination="cwM-7M-FeE" id="Zc1-yg-nPq"/>
+                                        </connections>
                                     </textField>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4sC-Co-fvX">
                                         <rect key="frame" x="124" y="452" width="100" height="22"/>
@@ -4208,10 +4217,16 @@ Gw
                                             <constraint firstAttribute="width" constant="100" id="JLy-wU-tzD"/>
                                         </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="eNw-ZB-O2D">
+                                            <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" minimumIntegerDigits="0" maximumIntegerDigits="2000000000" maximumFractionDigits="3" currencyCode="%" internationalCurrencySymbol="%" id="oOA-Aa-sAV">
+                                                <real key="minimum" value="0.0"/>
+                                            </numberFormatter>
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
+                                        <connections>
+                                            <outlet property="delegate" destination="cwM-7M-FeE" id="fj9-wt-5PG"/>
+                                        </connections>
                                     </textField>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="0q8-u5-RhW">
                                         <rect key="frame" x="230" y="484" width="171" height="18"/>
@@ -4327,13 +4342,13 @@ Gw
                     </view>
                     <connections>
                         <outlet property="automaticBackgroundView" destination="WgR-KD-pyB" id="uaj-We-1XA"/>
-                        <outlet property="automaticInvestmentTextField" destination="Jr3-wH-a3M" id="59m-iV-kAd"/>
                         <outlet property="clearLogButton" destination="fe2-pf-czM" id="MnP-Lo-Lsk"/>
                         <outlet property="logDescriptionTextField" destination="9Xe-Tk-Z3f" id="POx-rB-BT8"/>
                         <outlet property="logTextView" destination="6J3-fH-bxe" id="cLz-U2-TLl"/>
                         <outlet property="maxInvestmentDescriptionTextField" destination="8d9-sH-1hz" id="xLz-R6-TH1"/>
+                        <outlet property="maxInvestmentTextField" destination="Jr3-wH-a3M" id="2Ga-5m-Mma"/>
                         <outlet property="minInterestDescriptionTextField" destination="vmD-DK-nO2" id="EAj-r0-SKT"/>
-                        <outlet property="minInvestmentTextField" destination="4sC-Co-fvX" id="qMk-y7-SH2"/>
+                        <outlet property="minInterestTextField" destination="4sC-Co-fvX" id="Oca-iB-YoE"/>
                         <outlet property="runAutomaticButton" destination="fVP-xb-zlr" id="6BU-kA-cTd"/>
                         <outlet property="startAutomaticButton" destination="3fd-l3-d7n" id="JIn-Ke-RST"/>
                         <outlet property="statusTextField" destination="pFG-pr-Jvw" id="UVx-Z0-s8Q"/>
@@ -4343,7 +4358,7 @@ Gw
                 <customObject id="Wqd-Md-RGQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="3AY-bf-m6w"/>
             </objects>
-            <point key="canvasLocation" x="1630.5" y="2428"/>
+            <point key="canvasLocation" x="1420" y="2678"/>
         </scene>
     </scenes>
     <resources>
