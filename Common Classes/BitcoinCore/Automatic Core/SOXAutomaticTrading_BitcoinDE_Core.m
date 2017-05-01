@@ -21,6 +21,10 @@
 @property (strong, nonatomic) NSMutableDictionary *orderDataToCheckLater;
 
 @property (strong, nonatomic) NSTimer *orderbookTimer;
+
+@property (strong, nonatomic) NSMutableDictionary *buyOrderBookDatas;
+@property (strong, nonatomic) NSMutableDictionary *sellOrderBookDatas;
+
 @end
 
 #pragma mark - Implementation
@@ -28,12 +32,13 @@
 #pragma mark - Public class methods
 + (void)registerController:(id <SOXAutomaticTradingCoreProtocol>)controller
     forUpdatesForOrderType:(BitcoinDE_OrderType)orderType {
+
     if (!controller) {
         return;
     }
-
+    
     SOXAutomaticTrading_BitcoinDE_Core *tradingCore = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
-
+    
     switch (orderType) {
         case BitcoinDE_BuyOrderType:
             [tradingCore.buyDelegates addObject:controller];
@@ -159,6 +164,8 @@
     BOOL buyThisOffer = orderPrice < core.buyLowestPrice;
     if (!buyThisOffer) {
         executeTradeText = [NSString stringWithFormat:@"no buy %@", orderInfo];
+        [core.buyOrderBookDatas setObject:offerData
+                                   forKey:offerData.orderInformation_orderID];
     }
     else {
         // check for payment option
@@ -182,18 +189,13 @@
                 break;
         }
     }
-//    [core.orderDataToCheckLater setObject:offerData
-//                                   forKey:offerData.orderInformation_socketOrderObjectID];
+
     // inform delegate
     for (NSObject *buyDelegate in core.buyDelegates) {
         [buyDelegate performSelector:@selector(executedTrade:)
                           withObject:executeTradeText];
         
     }
-//    for (NSObject *sellDelegate in core.sellDelegates) {
-//        [sellDelegate performSelector:@selector(currentLimitHasChangedTo:)
-//                           withObject:@(core.sellHighestPrice)];
-//    }
 }
 
 + (void)checkOrderData:(SOXShowOrderbookData *)orderData {
@@ -207,6 +209,8 @@
     BOOL sellThisOffer = orderPrice > core.sellHighestPrice;
     if (!sellThisOffer) {
         executeTradeText = [NSString stringWithFormat:@"no sell %@", orderInfo];
+        [core.sellOrderBookDatas setObject:orderData
+                                    forKey:orderData.orderInformation_orderID];
     }
     else {
         // check for payment option
@@ -442,6 +446,24 @@
     }
 }
 
+#pragma mark - Manual getters
+
+- (NSMutableArray *)buyOrderBookDatas {
+    if (!_buyOrderBookDatas) {
+        _buyOrderBookDatas = [NSMutableArray array];
+    }
+    
+    return _buyOrderBookDatas;
+}
+
+- (NSMutableArray *)sellOrderBookDatas {
+    if (!_sellOrderBookDatas) {
+        _sellOrderBookDatas = [NSMutableArray array];
+    }
+    
+    return _sellOrderBookDatas;
+}
+
 #pragma mark - SOXMarketCoreServerRequestProtocol
 - (void)answerOfServerRequest:(NSDictionary *)answerOfServerRequest {
     id errorMessage = [answerOfServerRequest objectForKey:ServerAnswerErrorKey];
@@ -453,29 +475,42 @@
     SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
     
     NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
-    NSMutableArray *orderBook = [SOXShowOrderbook_BitcoinDE_Data orderbookDataArrayForShowOrderbookDictionary:payloadDictionary];
+    NSMutableArray <SOXShowOrderbook_BitcoinDE_Data *> *orderBookDatas;
+    orderBookDatas = [SOXShowOrderbook_BitcoinDE_Data orderbookDataArrayForShowOrderbookDictionary:payloadDictionary];
     
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowBuyOrderbookCommandType)]
-        && orderBook.count > 0) {
+        && orderBookDatas.count > 0) {
+        
+        self.buyOrderBookDatas = orderBookDatas;
+        
+        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
+                                                                delegate:core];
+        /*
         // get lowest price from incoming orderDatas ...
-        double currentLowestBuyPrice = [SOXShowOrderbook_BitcoinDE_Data lowestPriceOfOrderBookDatas:orderBook];
+        double currentLowestBuyPrice = [SOXShowOrderbook_BitcoinDE_Data lowestPriceOfOrderBookDatas:orderBookDatas];
         //  ... compare to currently highest sell price
         
         [self calculateNewSellHighestPriceForCurrentLowestBuyPrice:currentLowestBuyPrice];
         
-        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
-                                                                delegate:core];
+       
         [core startRefetchOrderBookTimer]; // once for sharedCore
+         */
     }
     else if([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowSellOrderbookCommandType)]
-            && orderBook.count > 0) {
+            && orderBookDatas.count > 0) {
+        
+        self.sellOrderBookDatas = orderBookDatas;
+        
+        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
+                                                                delegate:core];
+        /*
         // get highest price from incoming orderDatas ...
-        double currentHighestSellPrice = [SOXShowOrderbook_BitcoinDE_Data highestPriceOfOrderBookDatas:orderBook];
+        double currentHighestSellPrice = [SOXShowOrderbook_BitcoinDE_Data highestPriceOfOrderBookDatas:orderBookDatas];
         // ... compare to currently lowest buy price
         [self calculateNewBuyLowestPriceForCurrentHighestSellPrice:currentHighestSellPrice];
 
-        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
-                                                                delegate:core];
+        
+         */
     }
     
     [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
@@ -493,7 +528,13 @@
 }
 
 - (void)removedOrderWithOrderID:(NSString *)orderID {
-    [[SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore].orderDataToCheckLater removeObjectForKey:orderID];
+    SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
+    
+    [core.buyOrderBookDatas removeObjectForKey:orderID];
+    [core.sellOrderBookDatas removeObjectForKey:orderID];
+    
+    [core.orderDataToCheckLater removeObjectForKey:orderID];
+    
     NSLog(@"Removed order with orderID: %@ from orderDataToCheckLater", orderID);
 }
 
