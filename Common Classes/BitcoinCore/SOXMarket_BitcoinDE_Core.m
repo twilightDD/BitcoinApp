@@ -240,6 +240,14 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
                             ,error, ServerAnswerErrorKey
                             , nil];
         }
+        else if (!error && errorMessage.hasError) {
+            // on error on executeTrade there is no error! (Warum auch immer)
+            serverAnswer = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @(serverCommandType), ServerAnswerServerCommandKey
+                            ,response, ServerAnswerURLResponseKey
+                            ,[payloadDictionary objectForKey:@"errors"], ServerAnswerErrorKey
+                            , nil];
+        }
         else {
             id payload = [SOXDataConverter_BitcoinDE payloadForServerDictionary:payloadDictionary
                                                                forServerCommand:serverCommandType];

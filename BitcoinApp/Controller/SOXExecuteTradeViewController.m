@@ -332,7 +332,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
                                             withParameter:parameterDictionary
-                                                respondTo:nil];
+                                                respondTo:self];
     [self dismissController:self];
 
 }
@@ -362,7 +362,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
         [alert beginSheetModalForWindow:self.view.window
                       completionHandler:^(NSModalResponse returnCode) {
                           strongify(self)
-                          if (returnCode == NSModalResponseOK) { // Execute trade
+                          if (returnCode == 1000) { // Execute trade
                               [self executeTrade];
                           }
                       }];
@@ -411,7 +411,15 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
 - (void)answerOfServerRequest:(NSDictionary *)answerOfServerRequest {
-    NSLog(@"answerOfServerRequest: \n%@", answerOfServerRequest);
+    if (![answerOfServerRequest valueForKey:ServerAnswerErrorKey]) {
+        // No error means success
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"Okay"];
+        [alert setMessageText:@"Success"];
+        [alert setInformativeText:@"Trade executed."];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        [alert runModal];
+    }
 }
 
 #pragma mark - NSControlTextEditingDelegate
