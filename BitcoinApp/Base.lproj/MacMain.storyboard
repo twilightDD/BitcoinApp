@@ -1909,24 +1909,12 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DYK-0F-rNx">
-                                <rect key="frame" x="344" y="105" width="89" height="32"/>
-                                <buttonCell key="cell" type="push" title="new 5k" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Vdh-Ek-ayu">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="new5kOrder:" target="q7D-iu-Op3" id="8sp-I1-qG3"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="leading" secondItem="dVf-cd-9K7" secondAttribute="trailing" constant="16" id="44W-Pd-PcN"/>
                             <constraint firstAttribute="trailing" secondItem="wNc-yI-m0l" secondAttribute="trailing" constant="23" id="6dy-yd-Mzi"/>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="trailing" secondItem="hfD-y1-lfC" secondAttribute="trailing" id="AXt-l0-V1r"/>
                             <constraint firstItem="dVf-cd-9K7" firstAttribute="leading" secondItem="d9Y-Go-gwW" secondAttribute="leading" constant="20" symbolic="YES" id="AwV-Ul-N11"/>
-                            <constraint firstItem="DYK-0F-rNx" firstAttribute="trailing" secondItem="hfD-y1-lfC" secondAttribute="trailing" id="EbA-Sf-8Ai"/>
-                            <constraint firstItem="hfD-y1-lfC" firstAttribute="top" secondItem="DYK-0F-rNx" secondAttribute="bottom" constant="50" id="GKW-ww-XoH"/>
                             <constraint firstItem="hfD-y1-lfC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="pXN-85-eeM" secondAttribute="top" constant="20" id="GZ5-Ej-Yxn"/>
                             <constraint firstItem="dVf-cd-9K7" firstAttribute="top" secondItem="YlZ-0A-yU6" secondAttribute="bottom" constant="8" symbolic="YES" id="Ij5-JG-Ljo"/>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="top" secondItem="hfD-y1-lfC" secondAttribute="bottom" constant="12" symbolic="YES" id="RYQ-fU-VC7"/>
@@ -1939,7 +1927,6 @@
                             <constraint firstItem="YlZ-0A-yU6" firstAttribute="top" secondItem="d9Y-Go-gwW" secondAttribute="top" id="jz3-ZL-tXX"/>
                             <constraint firstAttribute="bottom" secondItem="wNc-yI-m0l" secondAttribute="bottom" constant="8" id="njI-bu-QXY"/>
                             <constraint firstAttribute="bottom" secondItem="dVf-cd-9K7" secondAttribute="bottom" constant="8" id="o9W-WE-DLd"/>
-                            <constraint firstItem="DYK-0F-rNx" firstAttribute="leading" secondItem="hfD-y1-lfC" secondAttribute="leading" id="zBI-1F-nUH"/>
                             <constraint firstItem="djv-Fe-LAU" firstAttribute="leading" secondItem="dVf-cd-9K7" secondAttribute="leading" id="zkW-pa-GiK"/>
                         </constraints>
                     </view>

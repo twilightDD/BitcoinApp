@@ -87,6 +87,9 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
 - (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest {
+    if ([answerOfServerRequest valueForKey:ServerAnswerErrorKey]) {
+        return;
+    }
     
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowMyOrdersCommandType)]) {
         NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
@@ -113,19 +116,6 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
         }
         
     }
-    // TODO: TODO DEBUG
-    else if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_CreateOrderType)]) {
-        [self enableSpinningWheel];
-        [self requestServerData]; // update serverData
-    }
-    else if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ExecuteTrade)]) {
-        NSLog(@"BitcoinDE_ExecuteTrade %@", answerOfServerRequest);
-         [self enableSpinningWheel];
-        // Start tableView update
-            [self requestServerData];
-    }
-    
-    
 }
 
 #pragma mark - User information
@@ -159,54 +149,6 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 - (IBAction)reloadButtonAction:(NSButton *)sender {
     [self enableSpinningWheel];
     [self requestServerData];
-}
-
-
-#pragma mark - TESTING
-- (IBAction)new5kOrder:(NSButton *)sender {
-    [self enableSpinningWheel];
-    
-//    NSString *end_datetime = @"2017-04-07T15:00:00+02:00";//[SOXDateFormatter rfc3339DateTimeStringDate:[NSDate dateWithTimeIntervalSinceNow:60]];
-//    
-//    NSDictionary *parameters = [SOXMyOrderBook_BitcoinDE_Data parameterForNewOrderWithOrderType:BitcoinDE_SellOrderType
-//                                                                                     max_amount:@(0.1)
-//                                                                                          price:@(2000)
-//                                                                                     min_amount:@(0.1)
-//                                                                                   end_datetime:[NSDate dateWithTimeIntervalSinceNow:3600]
-//                                                                 new_order_for_remaining_amount:NO
-//                                                                                min_trust_level:BitcoinDE_GoldMinimalTrustLevel
-//                                                                                  only_kyc_full:YES
-//                                                                                 payment_option:BitcoinDE_PaymentOptionSEPAOnly
-//                                                                                   seat_of_bank:nil];
-//    NSLog(@"parameters: \n%@", parameters);
-//    
-//    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_CreateOrderType
-//                                            withParameter:parameters
-//                                                respondTo:self];
-
-//    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-//                                 @(0.0001), @"amount"
-//                                , @"buy", @"type"
-//                                , nil];
-//    
-//    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
-//                                            withParameter:parameters
-//                                                respondTo:self];
-    NSDictionary *parameterDictionary = [SOXTradeJob_BitcoinDE_Data parameterForOrderID:@"39EGMM"
-                                                                              orderType:BitcoinDE_BuyOrderType
-                                                                          bitcoinAmount:@(0.1)];
-    
-    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
-                                            withParameter:parameterDictionary
-                                                respondTo:self];
-
-//    SOXTradeJob_BitcoinDE_Data *tradeJobData = [SOXTradeJob_BitcoinDE_Data tradeJobForOrderID:@"abcedefflfkjs"
-//                                                                                         type:BitcoinDE_BuyOrderType
-//                                                                                bitcoinAmount:@(0.1)];
-//    
-//    [SOXMarket_BitcoinDE_Core executeTradeWithTradeJobData:tradeJobData
-//                                                 respondTo:self];
-
 }
 
 
