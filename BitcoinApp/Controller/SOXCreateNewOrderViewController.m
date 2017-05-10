@@ -86,11 +86,11 @@
     }
     
     
-    self.amountTextField.doubleValue                = 0;
+    self.amountTextField.doubleValue                = 0.1;
     self.avaibleAmountTetField.stringValue          = [NSString stringWithFormat:@"Avaible: %@", [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount];
     
     self.minAmountDescriptionTextField.stringValue  = @"Minimal amount";
-    self.minAmountTextField.stringValue             = @"";
+    self.minAmountTextField.doubleValue             = 0.1;
     self.minAmountHintTextField.stringValue         = @"";
     
     self.priceDescriptionTextField.stringValue      = @"Price per BTC";
@@ -123,14 +123,24 @@
 }
 
 - (BOOL)validateInput {
-    if (self.amountTextField.stringValue.length == 0) {
-        return  NO;
+    // all fields are used
+    {
+        if (self.amountTextField.stringValue.length == 0) {
+            return  NO;
+        }
+        if (self.minAmountTextField.stringValue.length == 0) {
+            return  NO;
+        }
+        if (self.priceTextField.stringValue.length == 0) {
+            return  NO;
+        }
     }
-    if (self.minAmountTextField.stringValue.length == 0) {
-        return  NO;
-    }
-    if (self.priceTextField.stringValue.length == 0) {
-        return  NO;
+    
+    // amount < minAmount
+    {
+        if (self.amountTextField.doubleValue < self.minAmountTextField.doubleValue) {
+            return NO;
+        }
     }
     
     NSDate *endDate = self.endDatePicker.dateValue;
@@ -143,16 +153,14 @@
 
 #pragma mark - Action methods
 - (IBAction)createOrderAction:(NSButton *)sender {
-    // gather information and create data object and send data object to Bitcoin core
-    
     // Input validation
     BOOL validInput = [self validateInput];
     
     if (validInput) {
         NSDictionary *parameters = [SOXMyOrderBook_BitcoinDE_Data parameterForNewOrderWithOrderType:self.orderType
                                                                                          max_amount:@(self.amountTextField.doubleValue)
-                                                                                              price:@(self.priceTextField.doubleValue)
                                                                                          min_amount:@(self.minAmountTextField.doubleValue)
+                                                                                              price:@(self.priceTextField.doubleValue)
                                                                                        end_datetime:self.endDatePicker.dateValue
                                                                      new_order_for_remaining_amount:self.reNewOrderButton.state
                                                                                     min_trust_level:self.trustLevel
@@ -165,6 +173,14 @@
         [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_CreateOrderType
                                                 withParameter:parameters
                                                     respondTo:self];
+    }
+    else {
+        // inform user
+        NSAlert *alert = [[NSAlert alloc] init];
+        alert.messageText = @"Non valid input";
+        alert.informativeText = [NSString stringWithFormat:@"Some information are missing"];
+        alert.alertStyle = NSAlertStyleInformational;
+        [alert runModal];
     }
 }
 
