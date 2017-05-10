@@ -43,7 +43,7 @@
     [super viewWillAppear];
     
     [self setupUI];
-   // [self requestServerData];
+    [self requestServerData];
 }
 
 #pragma mark - Private methods
@@ -56,7 +56,14 @@
 
 - (void)requestServerData {
     [self enableSpinningWheel];
+    
+    NSDictionary *parameter = [SOXAccountLedger_BitcoinDE_Data parameterForOrderType:BitcoinDE_AccountLedgerParameter_AllOrderType
+                                                                           startDate:[NSDate dateWithTimeIntervalSinceNow:-4320000]
+                                                                             endDate:nil
+                                                                                page:1];
+    
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountLedgerType
+                                            withParameter:parameter
                                                 respondTo:self];
 }
 
