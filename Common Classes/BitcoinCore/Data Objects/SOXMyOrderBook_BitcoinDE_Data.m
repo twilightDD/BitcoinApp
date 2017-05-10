@@ -85,10 +85,10 @@
     return parameter;
 }
 
-+ (NSDictionary *)parameterForNewOrderWithOrderType:(BitcoinDE_OrderType)type
++ (NSDictionary *)parameterForNewOrderWithOrderType:(BitcoinDE_OrderType)orderType
                                          max_amount:(NSNumber *)max_amount
-                                              price:(NSNumber *)price
                                          min_amount:(NSNumber *)min_amount
+                                              price:(NSNumber *)price
                                        end_datetime:(NSDate *)end_datetime
                      new_order_for_remaining_amount:(BOOL)new_order_for_remaining_amount
                                     min_trust_level:(BitcoinDE_MinimalTrustLevel )min_trust_level
@@ -96,17 +96,17 @@
                                      payment_option:(BitcoinDE_PaymentOption )payment_option
                                        seat_of_bank:(NSArray <NSString *> *)seat_of_bank {
     
-    // TODO: only for testing: @"sell"
-    /* save values :
-     @"sell", @"type"
-     ,@(0.1) , @"max_amount"
-     ,@(1500) , @"price"
-     */
-    NSString *typeString = @"sell";
-    max_amount = @(0.1);
-    min_amount = @(0.1);
-    price = @(1500);
     
+    NSString *typeString = [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:orderType];
+    /*
+    { // debug
+        typeString = @"sell";
+        max_amount = @(0.1);
+        min_amount = @(0.1);
+        price = @(1500);
+    }
+     */
+
     
     
     // convert date
