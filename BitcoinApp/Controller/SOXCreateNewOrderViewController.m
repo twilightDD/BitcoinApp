@@ -50,6 +50,15 @@
 
 #pragma mark Properties
 @property (nonatomic) BitcoinDE_TrustLevel trustLevel;
+
+@property (nonatomic) NSNumber *amount;
+@property (nonatomic) NSNumber *minAmount;
+@property (nonatomic) NSNumber *price;
+@property (nonatomic) NSNumber *minimalPossibleAmount;
+@property (nonatomic) NSNumber *minimalPossiblePrice;
+
+@property (nonatomic, getter = isInputValid) BOOL validInput;
+
 @end
 
 #pragma mark - Implementation
@@ -65,7 +74,36 @@
     [super viewWillAppear];
     
     self.trustLevel = [SOXPreferenceCenter defaultTrustLevelNewOrder];
+    self.validInput = NO;
     [self setupUI];
+    
+    // Default values (for bindings)
+    {
+        self.amount = @0.05;
+        self.minAmount = @0.05;
+        self.minimalPossibleAmount = @0.05;
+        if (self.orderType == BitcoinDE_BuyOrderType) {
+            self.price = @100;
+            
+            // TODO: calculate
+            self.minimalPossiblePrice = @1;
+            /*
+             Please correct the purchase price per bitcoin. 
+             The price shall not be less than 50% of the current market rate (€1,592.87/BTC). 
+             (price)
+             */
+        }
+        else if (self.orderType == BitcoinDE_SellOrderType) {
+            self.price = @3000;
+            // TODO: calculate
+            self.minimalPossiblePrice = @1;
+            
+        }
+        else {
+            self.price = @0;
+        }
+        [self validateInputs];
+    }
 }
 
 #pragma mark - Public methods
@@ -85,24 +123,21 @@
         self.titleTextField.stringValue                 = @"ERROR - no type given!";
     }
     
-    //
-    self.amountTextField.doubleValue                = 0.05;
+    // input textFields uses bindings
     self.avaibleAmountTetField.stringValue          = [NSString stringWithFormat:@"Avaible: %@", [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount];
     
     self.minAmountDescriptionTextField.stringValue  = @"Minimal amount";
-    self.minAmountTextField.doubleValue             = 0.05;
     self.minAmountHintTextField.stringValue         = @"";
     
     self.priceDescriptionTextField.stringValue      = @"Price per BTC";
-    self.priceTextField.stringValue                 = @"";
     self.volumeTextField.stringValue                = @"";
     
     self.optionBox.title                            = @"Options";
     self.onlyKYCButton.title                        = @"Trade with KYC only";
     self.reNewOrderButton.title                     = @"New Order for residue";
     
-    self.bronceTrustLevelButton.title               = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelBronce];
-    self.bronceTrustLevelButton.tag                 = BitcoinDE_TrustLevelBronce;
+    self.bronceTrustLevelButton.title               = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelBronze];
+    self.bronceTrustLevelButton.tag                 = BitcoinDE_TrustLevelBronze;
     self.silverTrustLevelButton.title               = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelSilver];
     self.silverTrustLevelButton.tag                 = BitcoinDE_TrustLevelSilver;
     self.goldTrustLevelButton.title                 = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelGold];
@@ -135,41 +170,32 @@
     }
 }
 
-- (BOOL)validateInput {
-    // all fields are used
-    {
-        if (self.amountTextField.stringValue.length == 0) {
-            return  NO;
-        }
-        if (self.minAmountTextField.stringValue.length == 0) {
-            return  NO;
-        }
-        if (self.priceTextField.stringValue.length == 0) {
-            return  NO;
-        }
+- (void)validateInputs {
+    if ([self.amount isLessThan:self.minimalPossibleAmount]) {
+        self.validInput = NO;
+        return;
     }
-    
-    // amount < minAmount
-    {
-        if (self.amountTextField.doubleValue <= self.minAmountTextField.doubleValue) {
-            return NO;
-        }
+    if ([self.amount isLessThan:self.minAmount]) {
+        self.validInput = NO;
+        return;
+    }
+    if ([self.price isLessThan:self.minimalPossiblePrice]) {
+        self.validInput = NO;
+        return;
     }
     
     NSDate *endDate = self.endDatePicker.dateValue;
     if ([endDate isLessThanOrEqualTo:[NSDate date]]) {
-        return NO;
+        self.validInput = NO;
+        return;
     }
-    return YES;
+    self.validInput = YES;
 }
 
 
 #pragma mark - Action methods
 - (IBAction)createOrderAction:(NSButton *)sender {
-    // Input validation
-    BOOL validInput = [self validateInput];
-    
-    if (validInput) {
+    if (self.isInputValid) {
         NSDictionary *parameters = [SOXMyOrderBook_BitcoinDE_Data parameterForNewOrderWithOrderType:self.orderType
                                                                                          max_amount:@(self.amountTextField.doubleValue)
                                                                                          min_amount:@(self.minAmountTextField.doubleValue)
@@ -242,5 +268,37 @@
     }
 }
 
+#pragma mark - NSControlTextEditingDelegate
+- (void)controlTextDidChange:(NSNotification *)notification {
+    NSTextField* textField           = notification.object;
+    NSNumberFormatter* textFieldFormatter = textField.formatter;
+    NSText* textFieldEditor               = textField.currentEditor;
+    
+    id newValue = ( textFieldEditor != nil ? [textFieldFormatter numberFromString:textFieldEditor.string] : textField.objectValue );
+    NSLog(@"NewValue: %@ (class: %@)", newValue, [newValue class]);
+    newValue = newValue ? newValue : @0;
+    if (textField == self.amountTextField) {
+        self.amount = newValue;
+    }
+    else if (textField == self.minAmountTextField) {
+        self.minAmount = newValue;
+    }
+    else if (textField == self.priceTextField) {
+        self.price = newValue;
+    }
+    NSLog(@"amount %@", self.amount);
+    NSLog(@"minAmount %@", self.minAmount);
+    NSLog(@"price %@", self.price);
+    [self validateInputs];
+    NSLog(@"validInputs: %@", self.isInputValid ? @"YES" : @"NO");
+}
+
+-(void)controlTextDidEndEditing:(NSNotification *)obj {
+    NSLog(@"### controlTextDidEndEditing");
+    NSLog(@"amountTextField %@", self.amount);
+    NSLog(@"minAmountTextField %@", self.minAmount);
+    NSLog(@"priceTextField %@", self.price);
+    NSLog(@"### controlTextDidEndEditing");
+}
 
 @end

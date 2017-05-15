@@ -2855,11 +2855,15 @@ Gw
                                     <constraint firstAttribute="width" constant="120" id="QhG-9S-MIe"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="" drawsBackground="YES" id="pxO-Gt-6Xk">
+                                    <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" roundingMode="down" minimumIntegerDigits="0" maximumIntegerDigits="2000000000" maximumFractionDigits="8" currencyCode="%" internationalCurrencySymbol="%" id="hki-rj-m5x" userLabel="BTCFormatter">
+                                        <real key="minimum" value="0.0"/>
+                                    </numberFormatter>
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
+                                    <binding destination="UMb-sB-suB" name="value" keyPath="self.amount" id="76L-DE-6jI"/>
                                     <outlet property="delegate" destination="UMb-sB-suB" id="fV0-VP-bvV"/>
                                     <outlet property="nextKeyView" destination="Bqf-Fe-k9G" id="2oN-go-7Gs"/>
                                 </connections>
@@ -2892,11 +2896,16 @@ Gw
                                     <constraint firstAttribute="width" constant="120" id="lvR-e7-Gp5"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="nIm-Sl-F9a">
+                                    <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" roundingMode="down" minimumIntegerDigits="0" maximumIntegerDigits="2000000000" maximumFractionDigits="8" currencyCode="%" internationalCurrencySymbol="%" id="TzJ-sG-Byo" userLabel="BTCFormatter">
+                                        <real key="minimum" value="0.0"/>
+                                    </numberFormatter>
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
+                                    <binding destination="UMb-sB-suB" name="value" keyPath="self.minAmount" id="YFN-VX-9Xf"/>
+                                    <outlet property="delegate" destination="UMb-sB-suB" id="xbW-qw-m9f"/>
                                     <outlet property="nextKeyView" destination="DMa-qt-pqL" id="eqH-XP-byb"/>
                                 </connections>
                             </textField>
@@ -2928,11 +2937,16 @@ Gw
                                     <constraint firstAttribute="width" constant="120" id="btM-QD-IcI"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="fWS-ia-ani">
+                                    <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" roundingMode="down" minimumIntegerDigits="0" maximumIntegerDigits="2000000000" maximumFractionDigits="2" id="aUR-aZ-Od9" userLabel="Currency Formatter">
+                                        <real key="minimum" value="0.0"/>
+                                    </numberFormatter>
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
+                                    <binding destination="UMb-sB-suB" name="value" keyPath="self.price" id="V8S-kJ-mRa"/>
+                                    <outlet property="delegate" destination="UMb-sB-suB" id="K4O-Pb-9QN"/>
                                     <outlet property="nextKeyView" destination="5tt-E2-Y2e" id="XzW-cH-4xP"/>
                                 </connections>
                             </textField>
@@ -3078,6 +3092,7 @@ Gw
                                 </buttonCell>
                                 <connections>
                                     <action selector="createOrderAction:" target="UMb-sB-suB" id="z9g-nR-L1q"/>
+                                    <binding destination="UMb-sB-suB" name="enabled" keyPath="self.validInput" id="xiK-NP-Bey"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -3143,6 +3158,7 @@ Gw
                     </connections>
                 </viewController>
                 <customObject id="X15-X3-ZW6" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController id="ELZ-ho-4GV"/>
             </objects>
             <point key="canvasLocation" x="-1870" y="2077"/>
         </scene>
@@ -4176,7 +4192,7 @@ Gw
                                             <constraint firstAttribute="width" constant="100" id="ueQ-vR-YxO"/>
                                         </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="U3r-8S-qsc">
-                                            <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="Xax-sF-NrI">
+                                            <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="Xax-sF-NrI" userLabel="Currency Formatter">
                                                 <real key="minimum" value="0.0"/>
                                             </numberFormatter>
                                             <font key="font" metaFont="system"/>
@@ -4204,7 +4220,7 @@ Gw
                                             <constraint firstAttribute="width" constant="100" id="JLy-wU-tzD"/>
                                         </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="eNw-ZB-O2D">
-                                            <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" minimumIntegerDigits="0" maximumIntegerDigits="2000000000" maximumFractionDigits="3" currencyCode="%" internationalCurrencySymbol="%" id="oOA-Aa-sAV">
+                                            <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" minimumIntegerDigits="0" maximumIntegerDigits="2000000000" maximumFractionDigits="3" currencyCode="%" internationalCurrencySymbol="%" id="oOA-Aa-sAV" userLabel="Pseudo%Formatter">
                                                 <real key="minimum" value="0.0"/>
                                             </numberFormatter>
                                             <font key="font" metaFont="system"/>
