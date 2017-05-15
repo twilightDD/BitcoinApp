@@ -24,7 +24,7 @@
                                               price:(NSNumber *)price
                                        end_datetime:(NSDate *)end_datetime
                      new_order_for_remaining_amount:(BOOL)new_order_for_remaining_amount
-                                    min_trust_level:(BitcoinDE_MinimalTrustLevel )min_trust_level
+                                    min_trust_level:(BitcoinDE_TrustLevel )min_trust_level
                                       only_kyc_full:(BOOL)only_kyc_full
                                      payment_option:(BitcoinDE_PaymentOption )payment_option
                                        seat_of_bank:(NSArray <NSString *> *)seat_of_bank;

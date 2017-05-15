@@ -31,11 +31,11 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_OrderType) {
     , BitcoinDE_SellOrderType
 };
 
-typedef NS_ENUM (NSUInteger, BitcoinDE_MinimalTrustLevel) {
-    BitcoinDE_UnknownMinimalTrustLevel = 0
-    , BitcoinDE_BronzeMinimalTrustLevel = 1
-    , BitcoinDE_SilverMinimalTrustLevel = 2
-    , BitcoinDE_GoldMinimalTrustLevel = 3
+typedef NS_ENUM (NSUInteger, BitcoinDE_TrustLevel) {
+    BitcoinDE_TrustLevelUnknown = 0
+    , BitcoinDE_TrustLevelBronze = 1
+    , BitcoinDE_TrustLevelSilver = 2
+    , BitcoinDE_TrustLevelGold = 3
 };
 
 typedef NS_ENUM (NSUInteger, BitcoinDE_PaymentOption) {
@@ -58,4 +58,5 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_UpdateType) {
 
 + (NSString *)orderTypeStringForOrderType:(BitcoinDE_OrderType)orderType;
 + (NSString *)paymentOptionStringForPaymentOption:(BitcoinDE_PaymentOption)paymentOption;
++ (NSString *)trustLevelStringForTrustLevel:(BitcoinDE_TrustLevel)trustLevel;
 @end

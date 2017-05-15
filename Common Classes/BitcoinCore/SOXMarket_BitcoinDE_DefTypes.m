@@ -41,4 +41,21 @@
     return [paymentOptionDescription objectForKey:@(paymentOption)];
 }
 
++ (NSString *)trustLevelStringForTrustLevel:(BitcoinDE_TrustLevel)trustLevel {
+    static NSDictionary    *trustLevelDescription;
+    
+    static dispatch_once_t pred;
+    
+    dispatch_once(&pred, ^{
+        trustLevelDescription = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    @"Unknown", @(BitcoinDE_TrustLevelUnknown)
+                                    , @"bronze", @(BitcoinDE_TrustLevelBronze)
+                                    , @"silver", @(BitcoinDE_TrustLevelSilver)
+                                    , @"gold", @(BitcoinDE_TrustLevelGold)
+                                    , nil];
+    });
+    
+    return [trustLevelDescription objectForKey:@(trustLevel)];
+}
+
 @end

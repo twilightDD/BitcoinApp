@@ -13,7 +13,8 @@
 @interface SOXPreferenceCenter : NSObject
 
 + (BOOL)defaultKYCOnly;
-+ (BitcoinDE_MinimalTrustLevel)defaultMinTrustLevel;
++ (BitcoinDE_TrustLevel)defaultTrustLevelBuyOrder;
++ (BitcoinDE_TrustLevel)defaultTrustLevelNewOrder;
 + (BitcoinDE_PaymentOption)defaultPaymentOptionForCreateOrder;
 + (BitcoinDE_PaymentOption)defaultPaymentOptionForExecuteTrade;
 + (NSArray *)defaultTradingCountries;

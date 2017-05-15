@@ -49,7 +49,7 @@
 
 
 #pragma mark Properties
-@property (nonatomic) BitcoinDE_MinimalTrustLevel trustLevel;
+@property (nonatomic) BitcoinDE_TrustLevel trustLevel;
 @end
 
 #pragma mark - Implementation
@@ -64,7 +64,7 @@
 -(void)viewWillAppear {
     [super viewWillAppear];
     
-    self.trustLevel = [SOXPreferenceCenter defaultMinTrustLevel];
+    self.trustLevel = [SOXPreferenceCenter defaultTrustLevelNewOrder];
     [self setupUI];
 }
 
@@ -85,7 +85,7 @@
         self.titleTextField.stringValue                 = @"ERROR - no type given!";
     }
     
-    
+    //
     self.amountTextField.doubleValue                = 0.05;
     self.avaibleAmountTetField.stringValue          = [NSString stringWithFormat:@"Avaible: %@", [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount];
     
@@ -97,14 +97,27 @@
     self.priceTextField.stringValue                 = @"";
     self.volumeTextField.stringValue                = @"";
     
-    self.optionBox.title = @"Options";
-    self.onlyKYCButton.title = @"Trade with KYC only";
-    self.reNewOrderButton.title = @"New Order for residue";
+    self.optionBox.title                            = @"Options";
+    self.onlyKYCButton.title                        = @"Trade with KYC only";
+    self.reNewOrderButton.title                     = @"New Order for residue";
     
-    self.bronceTrustLevelButton.title = @"Bronce";
-    self.silverTrustLevelButton.title = @"Silver";
-    self.goldTrustLevelButton.title = @"Gold & Platin";
-    self.goldTrustLevelButton.state = 1;
+    self.bronceTrustLevelButton.title               = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelBronce];
+    self.bronceTrustLevelButton.tag                 = BitcoinDE_TrustLevelBronce;
+    self.silverTrustLevelButton.title               = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelSilver];
+    self.silverTrustLevelButton.tag                 = BitcoinDE_TrustLevelSilver;
+    self.goldTrustLevelButton.title                 = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelGold];
+    self.goldTrustLevelButton.tag                   = BitcoinDE_TrustLevelGold;
+    
+    if (self.bronceTrustLevelButton.tag == self.trustLevel) {
+        self.bronceTrustLevelButton.state = 1;
+    }
+    else if (self.silverTrustLevelButton.tag == self.trustLevel) {
+        self.silverTrustLevelButton.state = 1;
+    }
+    else if (self.goldTrustLevelButton.tag == self.trustLevel) {
+        self.goldTrustLevelButton.state = 1;
+    }
+    
     
     self.endDateDescriptionTextField.stringValue = @"Order should end";
     self.endDatePicker.dateValue = [NSDate dateWithTimeIntervalSinceNow:5 * 24 * 60 * 60];
@@ -138,7 +151,7 @@
     
     // amount < minAmount
     {
-        if (self.amountTextField.doubleValue < self.minAmountTextField.doubleValue) {
+        if (self.amountTextField.doubleValue <= self.minAmountTextField.doubleValue) {
             return NO;
         }
     }
@@ -189,6 +202,8 @@
 }
 
 - (IBAction)trustLevelAction:(NSButton *)sender {
+    self.trustLevel = sender.tag;
+    NSLog(@"selected Trust Level: %tu", self.trustLevel);
 }
 
 #pragma mark - SOXMarketCoreServerRequestProtocol

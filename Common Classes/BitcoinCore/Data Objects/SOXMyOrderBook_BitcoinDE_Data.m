@@ -91,41 +91,35 @@
                                               price:(NSNumber *)price
                                        end_datetime:(NSDate *)end_datetime
                      new_order_for_remaining_amount:(BOOL)new_order_for_remaining_amount
-                                    min_trust_level:(BitcoinDE_MinimalTrustLevel )min_trust_level
+                                    min_trust_level:(BitcoinDE_TrustLevel )min_trust_level
                                       only_kyc_full:(BOOL)only_kyc_full
                                      payment_option:(BitcoinDE_PaymentOption )payment_option
                                        seat_of_bank:(NSArray <NSString *> *)seat_of_bank {
     
     
     NSString *typeString = [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:orderType];
-    /*
-    { // debug
-        typeString = @"sell";
-        max_amount = @(0.1);
-        min_amount = @(0.1);
-        price = @(1500);
-    }
-     */
-
-    
-    
-    // convert date
-    NSString *endDateString = [SOXDateFormatter rfc3339DateTimeStringDate:end_datetime];
+    NSString *minTrustLevelAsString = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:min_trust_level];
+    //NSString *endDateString = [SOXDateFormatter rfc3339DateTimeStringDate:end_datetime];
     
     NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:
                                typeString, @"type"
-                               ,max_amount , @"max_amount"
+                               , max_amount , @"max_amount"
                                ,price , @"price"
                                ,min_amount , @"min_amount"
-                               //,endDateString , @"end_datetime"
+//                               ,endDateString , @"end_datetime"
                                ,@(new_order_for_remaining_amount) , @"new_order_for_remaining_amount"
-                               ,@"gold" , @"min_trust_level"
+                               ,minTrustLevelAsString , @"min_trust_level"
                                ,@(only_kyc_full) , @"only_kyc_full"
-                               ,@(payment_option) , @"payment_option"
 //                               ,seat_of_bank , @"seat_of_bank"
                                , nil];
 
-//    parameter = [NSDictionary dictionary];
+    // only on order with type "sell" we can set paymentOption
+    if (orderType == BitcoinDE_SellOrderType) {
+        NSMutableDictionary *mutableParameter = [parameter mutableCopy];
+        [mutableParameter setObject:@(payment_option) forKey:@"payment_option"];
+        
+        parameter = [mutableParameter copy];
+    }
     return parameter;
 }
 

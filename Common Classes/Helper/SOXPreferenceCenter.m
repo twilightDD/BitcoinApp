@@ -14,8 +14,12 @@
     return YES;
 }
 
-+ (BitcoinDE_MinimalTrustLevel )defaultMinTrustLevel {
-    return BitcoinDE_GoldMinimalTrustLevel;
++ (BitcoinDE_TrustLevel)defaultTrustLevelBuyOrder {
+    return BitcoinDE_TrustLevelGold;
+}
+
++ (BitcoinDE_TrustLevel)defaultTrustLevelNewOrder {
+    return BitcoinDE_TrustLevelBronce;
 }
 
 + (BitcoinDE_PaymentOption)defaultPaymentOptionForCreateOrder {
