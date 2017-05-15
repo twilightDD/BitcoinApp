@@ -10,7 +10,7 @@
 
 #import "SOXMyOrderBook_BitcoinDE_Data.h"
 
-#import "SOXDateFormatter.h"
+#import "SOXFormatters.h"
 
 #pragma mark - Interface
 @interface SOXMyOrderDetailsViewController ()
@@ -133,9 +133,9 @@
         self.createdAtDescriptionTextField.stringValue = @"Created At";
         self.endDateTimeDescriptionTextField.stringValue = @"End Date";
         
-        NSString *createdAt = [SOXDateFormatter stringDateTimeStringForRFC3339DateTimeString:self.myOrder.orderInformation_createdAt];
+        NSString *createdAt = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:self.myOrder.orderInformation_createdAt];
         self.createdAtTextField.stringValue = createdAt ? createdAt : @"-";
-        NSString *endDateTime = [SOXDateFormatter stringDateTimeStringForRFC3339DateTimeString:self.myOrder.orderInformation_endDateTime];
+        NSString *endDateTime = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:self.myOrder.orderInformation_endDateTime];
         self.endDateTimeTextField.stringValue = endDateTime ? endDateTime : @"-";
     }
 }

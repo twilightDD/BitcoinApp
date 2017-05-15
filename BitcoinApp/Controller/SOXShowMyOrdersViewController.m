@@ -15,7 +15,7 @@
 #import "SOXMyOrderBook_BitcoinDE_Data.h"
 #import "SOXTradeJob_BitcoinDE_Data.h"
 
-#import "SOXDateFormatter.h"
+#import "SOXFormatters.h"
 
 NSString *const PresentMyTradesSegueKey = @"PresentMyTradesSegue";
 NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";

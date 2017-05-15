@@ -8,7 +8,7 @@
 
 #import "SOXMyTrades_BitcoinDE_Data.h"
 
-#import "SOXDateFormatter.h"
+#import "SOXFormatters.h"
 #import "SOXKeys_BitcoinDE.h"
 
 static NSString *MyTradeHistoryParameter_OrderTypeBuyKey = @"buy";
@@ -81,8 +81,8 @@ static NSString *MyTradeHistoryParameter_PageKey = @"page";
             break;
     }
     
-    NSString *startDateString = [SOXDateFormatter rfc3339DateTimeStringDate:startDate];
-    NSString *endDateString   = [SOXDateFormatter rfc3339DateTimeStringDate:endDate];
+    NSString *startDateString = [SOXFormatters rfc3339DateTimeStringDate:startDate];
+    NSString *endDateString   = [SOXFormatters rfc3339DateTimeStringDate:endDate];
     
     NSNumber *pageNumber = @(page);
     
@@ -143,9 +143,9 @@ static NSString *MyTradeHistoryParameter_PageKey = @"page";
         self.aNewOrderIDForRemainingAmount  = [tDD objectForKey:BitcoinDE_ShowMyTrades_NewOrderIDForRemainingAmount];
         self.state                          = [tDD objectForKey:BitcoinDE_ShowMyTrades_State];
         self.myRatingForTradingPartner      = [tDD objectForKey:BitcoinDE_ShowMyTrades_MyRatingForTradingPartner];
-        self.createdAt                      = [SOXDateFormatter stringDateTimeStringForRFC3339DateTimeString:[tDD objectForKey:BitcoinDE_ShowMyTrades_CreatedAt]];
-        self.successfullyFinishedAt         = [SOXDateFormatter stringDateTimeStringForRFC3339DateTimeString:[tDD objectForKey:BitcoinDE_ShowMyTrades_SuccessfullyFinishedAt]];
-        self.cancelledAt                    = [SOXDateFormatter stringDateTimeStringForRFC3339DateTimeString:[tDD objectForKey:BitcoinDE_ShowMyTrades_CancelledAt]];
+        self.createdAt                      = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:[tDD objectForKey:BitcoinDE_ShowMyTrades_CreatedAt]];
+        self.successfullyFinishedAt         = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:[tDD objectForKey:BitcoinDE_ShowMyTrades_SuccessfullyFinishedAt]];
+        self.cancelledAt                    = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:[tDD objectForKey:BitcoinDE_ShowMyTrades_CancelledAt]];
         self.paymentMethod                  = [tDD objectForKey:BitcoinDE_ShowMyTrades_PaymentMethod];
     }
     

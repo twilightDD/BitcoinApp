@@ -8,7 +8,7 @@
 
 #import "SOXMyOrderBook_BitcoinDE_Data.h"
 
-#import "SOXDateFormatter.h"
+#import "SOXFormatters.h"
 #import "SOXKeys_BitcoinDE.h"
 
 @interface SOXMyOrderBook_BitcoinDE_Data()
@@ -142,8 +142,8 @@
         self.orderInformation_price                         = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_Price];
         self.orderInformation_maxVolume                     = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MaxVolume];
         self.orderInformation_minVolume                     = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MinVolume];
-        self.orderInformation_createdAt                     = [SOXDateFormatter stringDateTimeStringForRFC3339DateTimeString:[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_CreatedAt]];
-        self.orderInformation_endDateTime                   = [SOXDateFormatter stringDateTimeStringForRFC3339DateTimeString:[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_EndDateTime]];
+        self.orderInformation_createdAt                     = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_CreatedAt]];
+        self.orderInformation_endDateTime                   = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_EndDateTime]];
         self.orderInformation_newOrderForRemainingAmount    = [[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_NewOrderForRemainingAmount] boolValue];
         self.orderInformation_state                         = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_State];
     }

@@ -19,7 +19,7 @@
 }
 
 + (BitcoinDE_TrustLevel)defaultTrustLevelNewOrder {
-    return BitcoinDE_TrustLevelBronce;
+    return BitcoinDE_TrustLevelBronze;
 }
 
 + (BitcoinDE_PaymentOption)defaultPaymentOptionForCreateOrder {

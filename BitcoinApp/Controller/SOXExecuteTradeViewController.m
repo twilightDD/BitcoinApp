@@ -234,7 +234,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     if (self.orderType == BitcoinDE_BuyOrderType) {
         NSString *executeTradeButtonText;
         if (self.executePaymentOption != BitcoinDE_PaymentOptionSEPAOnly) {
-            executeTradeButtonText = @"Execute buy";
+            executeTradeButtonText = @"Execute Express buy";
         }
         else {
             executeTradeButtonText = @"Execute SEPA buy";

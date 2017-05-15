@@ -10,7 +10,7 @@
 
 #import "SOXKeys_BitcoinDE.h"
 
-#import "SOXDateFormatter.h"
+#import "SOXFormatters.h"
 
 static NSString *BitcoinDE_AccountLedgerParameter_AllOrderTypeKey = @"all";
 static NSString *BitcoinDE_AccountLedgerParameter_BuyOrderTypeKey = @"buy";
@@ -110,8 +110,8 @@ static NSString *AccountLedgerParameter_PageKey         = @"page";
             break;
     };
     
-    NSString *startDateString = [SOXDateFormatter rfc3339DateTimeStringDate:startDate];
-    NSString *endDateString   = [SOXDateFormatter rfc3339DateTimeStringDate:endDate];
+    NSString *startDateString = [SOXFormatters rfc3339DateTimeStringDate:startDate];
+    NSString *endDateString   = [SOXFormatters rfc3339DateTimeStringDate:endDate];
     
     NSNumber *pageNumber = @(page);
     
@@ -136,7 +136,7 @@ static NSString *AccountLedgerParameter_PageKey         = @"page";
 #pragma mark - Instance methods
 - (void)setupMyAccountLedgerDataForAccountLedgerDictionary:(NSDictionary *)aAccountLedgerDictionary {
     { // Ledger Position Details
-        self.positionDetails_Date = [SOXDateFormatter stringDateTimeStringForRFC3339DateTimeString:[aAccountLedgerDictionary objectForKey:BitcoinDE_ShowAccountLedger_Date]];
+        self.positionDetails_Date = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:[aAccountLedgerDictionary objectForKey:BitcoinDE_ShowAccountLedger_Date]];
         self.positionDetails_Type = [aAccountLedgerDictionary objectForKey:BitcoinDE_ShowAccountLedger_Type];
         self.positionDetails_Reference = [aAccountLedgerDictionary objectForKey:BitcoinDE_ShowAccountLedger_Reference];
         self.positionDetails_Cashflow = [aAccountLedgerDictionary objectForKey:BitcoinDE_ShowAccountLedger_Cashflow];

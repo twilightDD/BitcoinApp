@@ -1,5 +1,5 @@
 //
-//  SOXDateFormatter.h
+//  SOXFormatters.h
 //  BitcoinApp
 //
 //  Created by Peter Hauke on 24.03.17.
@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SOXDateFormatter : NSObject
+@interface SOXFormatters : NSObject
 
 + (NSString *)stringDateTimeStringForRFC3339DateTimeString:(NSString *)rfc3339DateTimeString;
 + (NSString *)rfc3339DateTimeStringDate:(NSDate *)date;
+
++ (NSNumber *)currencyStringForNumber:(NSNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode;
 
 @end

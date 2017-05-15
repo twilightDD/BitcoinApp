@@ -13,7 +13,7 @@
 #import "SOXAccountInfoData.h"
 #import "SOXRatesData.h"
 
-#import "SOXDateFormatter.h"
+#import "SOXFormatters.h"
 
 #pragma mark - Interface
 @interface SOXBannerViewController () <SOXMarketCoreServerRequestProtocol, SOXCreditUpdateProtocol>
@@ -146,11 +146,11 @@
             self.fidorReservationAvailableAmountTextField.doubleValue = accountInfoData.bankReservation_availableAmount.doubleValue;
         }
         { // Reserved At
-            NSString *reservedATString = [SOXDateFormatter stringDateTimeStringForRFC3339DateTimeString:accountInfoData.bankReservation_reservedAt];
+            NSString *reservedATString = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:accountInfoData.bankReservation_reservedAt];
             self.fidorReservationReservedAtTextField.stringValue = reservedATString;
         }
         { // Valid until
-            NSString *validUntilString = [SOXDateFormatter stringDateTimeStringForRFC3339DateTimeString:accountInfoData.bankReservation_validUntil];
+            NSString *validUntilString = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:accountInfoData.bankReservation_validUntil];
             self.fidorReservationValidUntilTextField.stringValue = validUntilString;
         }
     }

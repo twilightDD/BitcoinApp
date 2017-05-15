@@ -1,14 +1,14 @@
 //
-//  SOXDateFormatter.m
+//  SOXFormatters.m
 //  BitcoinApp
 //
 //  Created by Peter Hauke on 24.03.17.
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
 
-#import "SOXDateFormatter.h"
+#import "SOXFormatters.h"
 
-@implementation SOXDateFormatter
+@implementation SOXFormatters
 /*
  https://developer.apple.com/library/content/qa/qa1480/_index.html
  http://stackoverflow.com/questions/24873069/nsdateformatter-format-string-for-rfc-3339-date-string-without-milliseconds
@@ -66,11 +66,11 @@
     // all possible RFC 3339 date time strings, just one of the most common
     // styles.
 
-    NSDate *date = [[SOXDateFormatter dateFormatterDecodeRFC3339] dateFromString:rfc3339DateTimeString];
+    NSDate *date = [[SOXFormatters dateFormatterDecodeRFC3339] dateFromString:rfc3339DateTimeString];
     NSString *userVisibleDateTimeString = nil;
     
     if (date != nil) {
-        userVisibleDateTimeString = [[SOXDateFormatter dateFormatterShortDateShortTime] stringFromDate:date];
+        userVisibleDateTimeString = [[SOXFormatters dateFormatterShortDateShortTime] stringFromDate:date];
     }
     
     return userVisibleDateTimeString;
@@ -81,7 +81,7 @@
         date = [NSDate date];
     }
     
-    NSString *rfc = [[SOXDateFormatter dateFormatterEncodeRFC3339] stringFromDate:date];
+    NSString *rfc = [[SOXFormatters dateFormatterEncodeRFC3339] stringFromDate:date];
     return rfc;
 }
 
