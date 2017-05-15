@@ -193,16 +193,37 @@
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
 -(void)answerOfServerRequest:(NSDictionary *)answerOfServerRequest {
+    // on Error: do nothing (error message will be displayed by bitcoinCore)
+    if ([answerOfServerRequest objectForKey:ServerAnswerErrorKey]) {
+        return;
+    }
+    
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_CreateOrderType)]) {
         NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
         NSString *newOrderID = [payloadDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderID];
         
-        NSAlert *alert = [[NSAlert alloc] init];
-        alert.messageText = @"Succsess";
-        alert.informativeText = [NSString stringWithFormat:@"Order created with orderID %@", newOrderID];
-        alert.alertStyle = NSAlertStyleInformational;
-        [alert runModal];
-        [self dismissViewController:self];
+         // inform user
+        {
+            NSString *messageText,*informativeText;
+            NSAlertStyle alertStyle;
+            if (newOrderID) {
+                messageText     = @"Success";
+                informativeText = [NSString stringWithFormat:@"Order created with orderID %@", newOrderID];
+                alertStyle      = NSAlertStyleInformational;
+            }
+            else {
+                messageText     = @"No order created";
+                informativeText = @"There is no orderID";
+                alertStyle      = NSAlertStyleWarning;
+            }
+            
+            NSAlert *alert = [[NSAlert alloc] init];
+            alert.messageText     = messageText;
+            alert.informativeText = informativeText;
+            alert.alertStyle      = alertStyle;
+            [alert runModal];
+            [self dismissViewController:self];
+        }
     }
 }
 
