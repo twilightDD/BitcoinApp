@@ -10,9 +10,12 @@
 
 @interface SOXFormatters : NSObject
 
+#pragma mark - Date methods
 + (NSString *)stringDateTimeStringForRFC3339DateTimeString:(NSString *)rfc3339DateTimeString;
 + (NSString *)rfc3339DateTimeStringDate:(NSDate *)date;
 
-+ (NSNumber *)currencyStringForNumber:(NSNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode;
+#pragma mark - Currency methods
++ (NSNumber *)currencyNumberForNumber:(NSNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode;
++ (NSString *)currencyStringForNumber:(NSNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode;
 
 @end

@@ -14,7 +14,7 @@
  http://stackoverflow.com/questions/24873069/nsdateformatter-format-string-for-rfc-3339-date-string-without-milliseconds
  */
 
-#pragma mark - Static Formatters
+#pragma mark - Static DateFormatters
 + (NSDateFormatter *)dateFormatterDecodeRFC3339 {
     /*
      Format gemäß RFC 3339 (Bsp: 2015-01-20T15:00:00+02:00).
@@ -59,7 +59,24 @@
     return dateFormatterRFC3339;
 }
 
+#pragma mark - Static NumberFormatters
++ (NSNumberFormatter *)currencyFormatter {
+    static dispatch_once_t pred;
+    static NSNumberFormatter *currencyStringFormatter = nil;
+    dispatch_once(&pred, ^{
+        currencyStringFormatter = [NSNumberFormatter new];
+        [currencyStringFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+        [currencyStringFormatter setLocale:[NSLocale autoupdatingCurrentLocale]];
+//        [currencyStringFormatter setRoundingIncrement:@(2)];
+        [currencyStringFormatter setMinimumIntegerDigits:1];
+        [currencyStringFormatter setMinimumFractionDigits:2];
+        [currencyStringFormatter setMaximumFractionDigits:2];
+    });
+    return currencyStringFormatter;
+}
+
 #pragma mark - Public methods
+#pragma mark | Date methods
 + (NSString *)stringDateTimeStringForRFC3339DateTimeString:(NSString *)rfc3339DateTimeString {
     // Returns a user-visible date time string that corresponds to the
     // specified RFC 3339 date time string. Note that this does not handle
@@ -83,6 +100,25 @@
     
     NSString *rfc = [[SOXFormatters dateFormatterEncodeRFC3339] stringFromDate:date];
     return rfc;
+}
+
+#pragma mark | Currency methods
++ (NSNumber *)currencyNumberForNumber:(NSNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode {
+    NSNumberFormatter *currencyFormatter = [SOXFormatters currencyFormatter];
+    currencyFormatter.roundingMode       = roundingMode;
+
+    NSString *currencyString = [currencyFormatter stringFromNumber:value];
+    NSNumber *currencyNumber = [currencyFormatter numberFromString:currencyString];
+    
+    return currencyNumber;
+}
+
++ (NSString *)currencyStringForNumber:(NSNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode {
+    NSNumberFormatter *currencyFormatter = [SOXFormatters currencyFormatter];
+    currencyFormatter.roundingMode       = roundingMode;
+    
+    NSString *currencyString = [currencyFormatter stringFromNumber:value];
+    return currencyString;
 }
 
 @end
