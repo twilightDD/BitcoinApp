@@ -12,7 +12,10 @@
 #import "SOXMyOrderBook_BitcoinDE_Data.h"
 
 #import "SOXPreferenceCenter.h"
+
 #import "SOXKeys_BitcoinDE.h"
+
+#import "SOXFormatters.h"
 
 #pragma mark - Interface
 @interface SOXCreateNewOrderViewController () <SOXMarketCoreServerRequestProtocol>
@@ -83,20 +86,28 @@
         self.minAmount = @0.05;
         self.minimalPossibleAmount = @0.05;
         if (self.orderType == BitcoinDE_BuyOrderType) {
-            self.price = @100;
-            
-            // TODO: calculate
-            self.minimalPossiblePrice = @1;
-            /*
-             Please correct the purchase price per bitcoin. 
-             The price shall not be less than 50% of the current market rate (€1,592.87/BTC). 
-             (price)
+
+            /* self.minimalPossiblePrice for BuyOrderType:
+             Please correct the purchase price per bitcoin.
+             The price shall not be less than 50% of the current market rate.
              */
+            self.minimalPossiblePrice = [[SOXMarket_BitcoinDE_Core sharedCore] rate_weighted_half];
+            self.price                = [[SOXMarket_BitcoinDE_Core sharedCore] rate_weighted_half];
+            
+            // setting numberFormatter minimum value and inform user
+            NSNumberFormatter *priceFormatter = self.priceTextField.formatter;
+            priceFormatter.minimum = self.minimalPossiblePrice;
+            self.volumeTextField.stringValue = [NSString stringWithFormat:@"Min. price: %@",
+                                                [SOXFormatters currencyStringForNumber:self.minimalPossiblePrice
+                                                                          roundingMode:NSNumberFormatterRoundUp]];
+            
         }
         else if (self.orderType == BitcoinDE_SellOrderType) {
             self.price = @3000;
             // TODO: calculate
+            
             self.minimalPossiblePrice = @1;
+            
             
         }
         else {
