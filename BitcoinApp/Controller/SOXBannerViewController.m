@@ -203,16 +203,16 @@
             self.ratesRateWeighted3hTextField.doubleValue = ratesData.rate_weighted_3h.doubleValue;
             self.ratesRateWeighted12hTextField.doubleValue = ratesData.rate_weighted_12h.doubleValue;
             
+            // set values on SOXMarket_BitcoinDE_Core
+            {
+                [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted = ratesData.rate_weighted;
             
-            NSNumber *rate_weighted = @(ratesData.rate_weighted.doubleValue);
-            [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted = rate_weighted;
+                NSNumber *rate_weighted_half = [SOXFormatters divideNumber:ratesData.rate_weighted by:2];
+                NSNumber *rate_weighted_half_rounded = [SOXFormatters currencyNumberForNumber:rate_weighted_half
+                                                                                 roundingMode:NSNumberFormatterRoundUp];
+                [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted_half = [NSDecimalNumber decimalNumberWithDecimal:rate_weighted_half_rounded.decimalValue];
+            }
             
-            NSDecimalNumber *dN = [NSDecimalNumber decimalNumberWithDecimal:rate_weighted.decimalValue];
-            NSDecimalNumber *half = [NSDecimalNumber decimalNumberWithString:@"2"];
-            NSDecimalNumber *rate_weighted_half = [dN decimalNumberByDividingBy:half];
-            NSNumber *rate_weighted_half_rounded = [SOXFormatters currencyNumberForNumber:rate_weighted_half
-                                                                             roundingMode:NSNumberFormatterRoundUp];
-            [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted_half = rate_weighted_half_rounded;
             [self startRatesReloadTimer];
         }
     }
