@@ -99,6 +99,9 @@
               (approx. 0.074 BTC at your desired exchange rate of €801.64 / BTC). (max_amount)
               */
             self.minimalPossiblePrice = [[SOXMarket_BitcoinDE_Core sharedCore] rate_weighted_half];
+            if (!self.minimalPossiblePrice) {
+                self.minimalPossiblePrice = @0;
+            }
             self.price                = [[SOXMarket_BitcoinDE_Core sharedCore] rate_weighted_half];
             
             // setting numberFormatter minimum value and inform user
@@ -199,6 +202,13 @@
 }
 
 - (void)validateInputs {
+    if (!self.minAmount && self.amount) {
+        self.minAmount = [SOXFormatters divideNumber:self.amount by:2] ;
+    }
+    else if (!self.minAmount && !self.amount) {
+        self.minAmount = @0;
+    }
+    
     if ([self.amount isLessThan:self.minimalPossibleAmount]) {
         self.validInput = NO;
         return;
@@ -304,29 +314,19 @@
     
     id newValue = ( textFieldEditor != nil ? [textFieldFormatter numberFromString:textFieldEditor.string] : textField.objectValue );
     NSLog(@"NewValue: %@ (class: %@)", newValue, [newValue class]);
-    newValue = newValue ? newValue : @0;
+
     if (textField == self.amountTextField) {
-        self.amount = newValue;
+        _amount = newValue;
     }
     else if (textField == self.minAmountTextField) {
-        self.minAmount = newValue;
+        _minAmount = newValue;
     }
     else if (textField == self.priceTextField) {
-        self.price = newValue;
+        _price = newValue;
     }
-    NSLog(@"amount %@", self.amount);
-    NSLog(@"minAmount %@", self.minAmount);
-    NSLog(@"price %@", self.price);
-    [self validateInputs];
-    NSLog(@"validInputs: %@", self.isInputValid ? @"YES" : @"NO");
-}
 
--(void)controlTextDidEndEditing:(NSNotification *)obj {
-    NSLog(@"### controlTextDidEndEditing");
-    NSLog(@"amountTextField %@", self.amount);
-    NSLog(@"minAmountTextField %@", self.minAmount);
-    NSLog(@"priceTextField %@", self.price);
-    NSLog(@"### controlTextDidEndEditing");
+    [self validateInputs];
+
 }
 
 @end
