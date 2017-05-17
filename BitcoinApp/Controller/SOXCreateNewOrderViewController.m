@@ -85,9 +85,32 @@
         self.amount = @0.05;
         self.minAmount = @0.05;
         self.minimalPossibleAmount = @0.05;
+        
+        /* Bedingungen:
+         #1 Please correct the purchase price per bitcoin.
+            The price shall not be less than 50% of the current market rate.
+         #2 The value of the amount of bitcoin may not be lower than than €60.00
+         */
         if (self.orderType == BitcoinDE_BuyOrderType) {
-
-            /* self.minimalPossiblePrice for BuyOrderType:
+            self.price = @100;
+            // TODO: calculate
+             /*
+              The value of the amount of bitcoin may not be lower than than €60.00 
+              (approx. 0.074 BTC at your desired exchange rate of €801.64 / BTC). (max_amount)
+              */
+            self.minimalPossiblePrice = [[SOXMarket_BitcoinDE_Core sharedCore] rate_weighted_half];
+            self.price                = [[SOXMarket_BitcoinDE_Core sharedCore] rate_weighted_half];
+            
+            // setting numberFormatter minimum value and inform user
+            NSNumberFormatter *priceFormatter = self.priceTextField.formatter;
+            priceFormatter.minimum = self.minimalPossiblePrice;
+            self.volumeTextField.stringValue = [NSString stringWithFormat:@"Min. price: %@\n(50%% weighted rate)",
+                                                [SOXFormatters currencyStringForNumber:self.minimalPossiblePrice
+                                                                          roundingMode:NSNumberFormatterRoundUp]];
+        }
+        else if (self.orderType == BitcoinDE_SellOrderType) {
+            
+            /* self.minimalPossiblePrice for SellOrderType:
              Please correct the purchase price per bitcoin.
              The price shall not be less than 50% of the current market rate.
              */
@@ -97,17 +120,9 @@
             // setting numberFormatter minimum value and inform user
             NSNumberFormatter *priceFormatter = self.priceTextField.formatter;
             priceFormatter.minimum = self.minimalPossiblePrice;
-            self.volumeTextField.stringValue = [NSString stringWithFormat:@"Min. price: %@",
+            self.volumeTextField.stringValue = [NSString stringWithFormat:@"Min. price: %@\n(50%% weighted rate)",
                                                 [SOXFormatters currencyStringForNumber:self.minimalPossiblePrice
                                                                           roundingMode:NSNumberFormatterRoundUp]];
-            
-        }
-        else if (self.orderType == BitcoinDE_SellOrderType) {
-            self.price = @3000;
-            // TODO: calculate
-            
-            self.minimalPossiblePrice = @1;
-            
             
         }
         else {
@@ -125,17 +140,19 @@
     if (self.orderType == BitcoinDE_BuyOrderType) {
         self.titleTextField.stringValue                 = @"Create new buy order";
         self.amountDescriptionTextField.stringValue     = @"Amount to buy";
+        self.avaibleAmountTetField.hidden               = YES;
     }
     else if (self.orderType == BitcoinDE_SellOrderType) {
         self.titleTextField.stringValue                 = @"Create new sell order";
         self.amountDescriptionTextField.stringValue     = @"Amount to sell";
+        // input textFields uses bindings
+        self.avaibleAmountTetField.stringValue          = [NSString stringWithFormat:@"Avaible: %@", [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount];
     }
     else {
         self.titleTextField.stringValue                 = @"ERROR - no type given!";
     }
     
-    // input textFields uses bindings
-    self.avaibleAmountTetField.stringValue          = [NSString stringWithFormat:@"Avaible: %@", [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount];
+    
     
     self.minAmountDescriptionTextField.stringValue  = @"Minimal amount";
     self.minAmountHintTextField.stringValue         = @"";
