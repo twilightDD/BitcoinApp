@@ -10,13 +10,13 @@
 
 @interface SOXAccountInfoData : NSObject
 
-@property (strong, nonatomic, readonly) NSString *btcBalance_totalAmount;
-@property (strong, nonatomic, readonly) NSString *btcBalance_availableAmount;
-@property (strong, nonatomic, readonly) NSString *btcBalance_reservedAmount;
+@property (strong, nonatomic, readonly) NSDecimalNumber *btcBalance_totalAmount;
+@property (strong, nonatomic, readonly) NSDecimalNumber *btcBalance_availableAmount;
+@property (strong, nonatomic, readonly) NSDecimalNumber *btcBalance_reservedAmount;
 
 @property (nonatomic, readonly) BOOL bankReservation_exists;
-@property (strong, nonatomic, readonly) NSString *bankReservation_totalAmount;
-@property (strong, nonatomic, readonly) NSString *bankReservation_availableAmount;
+@property (strong, nonatomic, readonly) NSDecimalNumber *bankReservation_totalAmount;
+@property (strong, nonatomic, readonly) NSDecimalNumber *bankReservation_availableAmount;
 @property (strong, nonatomic, readonly) NSString *bankReservation_reservedAt;
 @property (strong, nonatomic, readonly) NSString *bankReservation_validUntil;
 

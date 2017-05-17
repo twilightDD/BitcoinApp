@@ -14,9 +14,9 @@
 @interface SOXRates_BitcoinDE_Data ()
 
 #pragma mark Properties
-@property (strong, nonatomic, readwrite) NSString *rate_weighted;
-@property (strong, nonatomic, readwrite) NSString *rate_weighted_3h;
-@property (strong, nonatomic, readwrite) NSString *rate_weighted_12h;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *rate_weighted;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *rate_weighted_3h;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *rate_weighted_12h;
 
 @end
 
@@ -37,10 +37,10 @@
 #pragma mark - Instance methods
 - (void)setupDataForRateInfoDictionary:(NSDictionary *)payloadDictionary {
     NSDictionary *ratesDictionary = [payloadDictionary objectForKey:BitcoinDE_ShowRates_MainKey];
-    
-    self.rate_weighted = [ratesDictionary objectForKey:BitcoinDE_ShowRates_rate_weighted];
-    self.rate_weighted_3h = [ratesDictionary objectForKey:BitcoinDE_ShowRates_rate_weighted_3h];
-    self.rate_weighted_12h = [ratesDictionary objectForKey:BitcoinDE_ShowRates_rate_weighted_12h];
+    // NSString to NSNumber
+    self.rate_weighted = [NSDecimalNumber decimalNumberWithString:[ratesDictionary objectForKey:BitcoinDE_ShowRates_rate_weighted]];
+    self.rate_weighted_3h = [NSDecimalNumber decimalNumberWithString:[ratesDictionary objectForKey:BitcoinDE_ShowRates_rate_weighted_3h]];
+    self.rate_weighted_12h = [NSDecimalNumber decimalNumberWithString:[ratesDictionary objectForKey:BitcoinDE_ShowRates_rate_weighted_12h]];
 }
 
 @end

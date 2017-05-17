@@ -15,13 +15,13 @@
 
 #pragma mark Properties
 
-@property (strong, nonatomic, readwrite) NSString *btcBalance_totalAmount;
-@property (strong, nonatomic, readwrite) NSString *btcBalance_availableAmount;
-@property (strong, nonatomic, readwrite) NSString *btcBalance_reservedAmount;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *btcBalance_totalAmount;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *btcBalance_availableAmount;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *btcBalance_reservedAmount;
 
 @property (nonatomic, readwrite) BOOL bankReservation_exists;
-@property (strong, nonatomic, readwrite) NSString *bankReservation_totalAmount;
-@property (strong, nonatomic, readwrite) NSString *bankReservation_availableAmount;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *bankReservation_totalAmount;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *bankReservation_availableAmount;
 @property (strong, nonatomic, readwrite) NSString *bankReservation_reservedAt;
 @property (strong, nonatomic, readwrite) NSString *bankReservation_validUntil;
 
@@ -55,17 +55,17 @@
     // BTC information
     {
         NSDictionary *btc_balance = [dataDict objectForKey:BitcoinDE_ShowAccountInfoBTCBalance_btc_balance];
-        self.btcBalance_totalAmount = [btc_balance objectForKey:BitcoinDE_ShowAccountInfoBTCBalance_total_amount];
-        self.btcBalance_availableAmount = [btc_balance objectForKey:BitcoinDE_ShowAccountInfoBTCBalance_available_amount];
-        self.btcBalance_reservedAmount = [btc_balance objectForKey:BitcoinDE_ShowAccountInfoBTCBalance_reserved_amount];
+        self.btcBalance_totalAmount = [NSDecimalNumber decimalNumberWithString:[btc_balance objectForKey:BitcoinDE_ShowAccountInfoBTCBalance_total_amount]];
+        self.btcBalance_availableAmount = [NSDecimalNumber decimalNumberWithString:[btc_balance objectForKey:BitcoinDE_ShowAccountInfoBTCBalance_available_amount]];
+        self.btcBalance_reservedAmount = [NSDecimalNumber decimalNumberWithString:[btc_balance objectForKey:BitcoinDE_ShowAccountInfoBTCBalance_reserved_amount]];
     }
     // Fidor information
     {
         NSDictionary *fidor_reservation = [dataDict objectForKey:BitcoinDE_ShowAccountInfoFidorReservation_fidor_reservation];
         if (fidor_reservation) {
             self.bankReservation_exists = YES;
-            self.bankReservation_totalAmount = [fidor_reservation objectForKey:BitcoinDE_ShowAccountInfoFidorReservation_total_amount];
-            self.bankReservation_availableAmount = [fidor_reservation objectForKey:BitcoinDE_ShowAccountInfoFidorReservation_available_amount];
+            self.bankReservation_totalAmount = [NSDecimalNumber decimalNumberWithDecimal:[[fidor_reservation objectForKey:BitcoinDE_ShowAccountInfoFidorReservation_total_amount] decimalValue ]];
+            self.bankReservation_availableAmount = [NSDecimalNumber decimalNumberWithDecimal:[[fidor_reservation objectForKey:BitcoinDE_ShowAccountInfoFidorReservation_available_amount] decimalValue]];
             self.bankReservation_reservedAt = [fidor_reservation objectForKey:BitcoinDE_ShowAccountInfoFidorReservation_reserved_at];
             self.bankReservation_validUntil = [fidor_reservation objectForKey:BitcoinDE_ShowAccountInfoFidorReservation_valid_until];
         }

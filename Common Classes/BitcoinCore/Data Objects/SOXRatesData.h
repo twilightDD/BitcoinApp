@@ -10,8 +10,8 @@
 
 @interface SOXRatesData : NSObject
 
-@property (strong, nonatomic, readonly) NSString *rate_weighted;
-@property (strong, nonatomic, readonly) NSString *rate_weighted_3h;
-@property (strong, nonatomic, readonly) NSString *rate_weighted_12h;
+@property (strong, nonatomic, readonly) NSDecimalNumber *rate_weighted;
+@property (strong, nonatomic, readonly) NSDecimalNumber *rate_weighted_3h;
+@property (strong, nonatomic, readonly) NSDecimalNumber *rate_weighted_12h;
 
 @end
