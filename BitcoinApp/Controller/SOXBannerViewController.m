@@ -185,13 +185,13 @@
             self.btcBalanceAvailableAmountTextField.doubleValue = accountInfoData.btcBalance_availableAmount.doubleValue;
             self.btcBalanceReservedAmountTextField.doubleValue = accountInfoData.btcBalance_reservedAmount.doubleValue;
             
-            [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount = @(accountInfoData.btcBalance_availableAmount.doubleValue);
+            [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount = accountInfoData.btcBalance_availableAmount;
         }
         
         // fidor_reservation
         {
             
-            [SOXMarket_BitcoinDE_Core sharedCore].availableEuroAmount = @(accountInfoData.bankReservation_availableAmount.doubleValue);
+            [SOXMarket_BitcoinDE_Core sharedCore].availableEuroAmount = accountInfoData.bankReservation_availableAmount;
             [self updateUIForBankReservationWithAccountInfoData:accountInfoData];
         }
     }

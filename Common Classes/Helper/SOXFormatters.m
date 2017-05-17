@@ -122,9 +122,9 @@
 }
 
 #pragma mark - Basic Math
-+ (NSNumber *)divideNumber:(NSNumber *)dividend by:(NSInteger)divisor {
++ (NSDecimalNumber *)divideNumber:(NSNumber *)dividend by:(NSInteger)divisor {
     if (!dividend || divisor == 0) {
-        return @0;
+        return [NSDecimalNumber decimalNumberWithString:@"0"];
     }
     
     NSDecimalNumber *dividendDN = [NSDecimalNumber decimalNumberWithDecimal:dividend.decimalValue];

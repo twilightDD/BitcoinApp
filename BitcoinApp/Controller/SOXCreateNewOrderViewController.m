@@ -26,7 +26,7 @@
 
 @property (weak) IBOutlet NSTextField *amountDescriptionTextField;
 @property (weak) IBOutlet NSTextField *amountTextField;
-@property (weak) IBOutlet NSTextField *avaibleAmountTetField;
+@property (weak) IBOutlet NSTextField *availableAmountTextField;
 
 @property (weak) IBOutlet NSTextField *minAmountDescriptionTextField;
 @property (weak) IBOutlet NSTextField *minAmountTextField;
@@ -82,9 +82,9 @@
     
     // Default values (for bindings)
     {
-        self.amount = @0.05;
-        self.minAmount = @0.05;
-        self.minimalPossibleAmount = @0.05;
+        self.amount = [NSDecimalNumber decimalNumberWithString:@"0.05"];
+        self.minAmount = [NSDecimalNumber decimalNumberWithString:@"0.05"];
+        self.minimalPossibleAmount = [NSDecimalNumber decimalNumberWithString:@"0.05"];
         
         /* Bedingungen:
          #1 Please correct the purchase price per bitcoin.
@@ -108,7 +108,7 @@
             }
         }
         else {
-            self.price = @0;
+            self.price = [NSDecimalNumber decimalNumberWithString:@"0"];
         }
         [self validateInputs];
     }
@@ -122,13 +122,13 @@
     if (self.orderType == BitcoinDE_BuyOrderType) {
         self.titleTextField.stringValue                 = @"Create new buy order";
         self.amountDescriptionTextField.stringValue     = @"Amount to buy";
-        self.avaibleAmountTetField.hidden               = YES;
+        self.availableAmountTextField.hidden               = YES;
     }
     else if (self.orderType == BitcoinDE_SellOrderType) {
         self.titleTextField.stringValue                 = @"Create new sell order";
         self.amountDescriptionTextField.stringValue     = @"Amount to sell";
         // input textFields uses bindings
-        self.avaibleAmountTetField.stringValue          = [NSString stringWithFormat:@"Avaible: %@", [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount];
+        self.availableAmountTextField.stringValue          = [NSString stringWithFormat:@"Available: %@", [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount];
     }
     else {
         self.titleTextField.stringValue                 = @"ERROR - no type given!";
@@ -185,7 +185,7 @@
         self.minAmount = [SOXFormatters divideNumber:self.amount by:2] ;
     }
     else if (!self.minAmount && !self.amount) {
-        self.minAmount = @0;
+        self.minAmount = [NSDecimalNumber decimalNumberWithString:@"0"];
     }
     
     if ([self.amount isLessThan:self.minimalPossibleAmount]) {
