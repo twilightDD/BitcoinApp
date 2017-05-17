@@ -2940,8 +2940,8 @@ Gw
                                     <constraint firstAttribute="width" constant="120" id="btM-QD-IcI"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="fWS-ia-ani">
-                                    <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" roundingMode="down" minimumIntegerDigits="0" maximumIntegerDigits="2000000000" maximumFractionDigits="2" id="aUR-aZ-Od9" userLabel="Currency Formatter">
-                                        <real key="minimum" value="0.0"/>
+                                    <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="currency" lenient="YES" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="aUR-aZ-Od9" userLabel="Currency Formatter">
+                                        <real key="maximum" value="100000"/>
                                     </numberFormatter>
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
