@@ -73,6 +73,9 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
         sharedCore.networkQueueIsRunning = NO;
         sharedCore.networkQueue = [NSMutableArray array];
         sharedCore.maxCredits = 0;
+        
+        sharedCore.rate_weighted      = [NSDecimalNumber decimalNumberWithString:@"0"];
+        sharedCore.rate_weighted_half = [NSDecimalNumber decimalNumberWithString:@"0"];
     });
     return sharedCore;
 }
