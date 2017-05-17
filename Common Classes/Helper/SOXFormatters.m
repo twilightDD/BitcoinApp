@@ -121,4 +121,19 @@
     return currencyString;
 }
 
+#pragma mark - Basic Math
++ (NSNumber *)divideNumber:(NSNumber *)dividend by:(NSInteger)divisor {
+    if (!dividend || divisor == 0) {
+        return @0;
+    }
+    
+    NSDecimalNumber *dividendDN = [NSDecimalNumber decimalNumberWithDecimal:dividend.decimalValue];
+    
+    NSString *divisorString    = [NSString stringWithFormat:@"%zd", divisor];
+    NSDecimalNumber *divisorDN = [NSDecimalNumber decimalNumberWithString:divisorString];
+    
+    NSDecimalNumber *result = [dividendDN decimalNumberByDividingBy:divisorDN];
+    return result;
+}
+
 @end

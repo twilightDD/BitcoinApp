@@ -18,4 +18,7 @@
 + (NSNumber *)currencyNumberForNumber:(NSNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode;
 + (NSString *)currencyStringForNumber:(NSNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode;
 
+#pragma mark - Basic Math
++ (NSNumber *)divideNumber:(NSNumber *)dividend by:(NSInteger)divisor;
+
 @end
