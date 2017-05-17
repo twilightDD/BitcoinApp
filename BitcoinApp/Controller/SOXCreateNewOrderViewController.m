@@ -96,14 +96,16 @@
             
             self.price                = [[SOXMarket_BitcoinDE_Core sharedCore] rate_weighted_half];
             self.minimalPossiblePrice = [[SOXMarket_BitcoinDE_Core sharedCore] rate_weighted_half];
-
-            // setting numberFormatter minimum value
-            NSNumberFormatter *priceFormatter = self.priceTextField.formatter;
-            // Stipid hack, but needed: subtract 0.001!
-            priceFormatter.minimum            = [self.minimalPossiblePrice decimalNumberBySubtracting:[NSDecimalNumber decimalNumberWithString:@"0.001"]];
+            // condition #1
+            {
+                // setting numberFormatter minimum value
+                NSNumberFormatter *priceFormatter = self.priceTextField.formatter;
+                // Stupid hack, but needed: subtract 0.001!
+                priceFormatter.minimum            = [self.minimalPossiblePrice decimalNumberBySubtracting:[NSDecimalNumber decimalNumberWithString:@"0.001"]];
             
-            // inform user
-            self.volumeTextField.stringValue = [NSString stringWithFormat:@"Min. price: %@\n(50%% weighted rate)",self.minimalPossiblePrice];
+                // inform user
+                self.volumeTextField.stringValue = [NSString stringWithFormat:@"Min. price: %@\n(50%% weighted rate)",self.minimalPossiblePrice];
+            }
         }
         else {
             self.price = @0;
