@@ -41,6 +41,12 @@ FOUNDATION_EXPORT NSString *const _Nonnull HTTPMethodPOSTKey;
 
 @end
 
+@protocol SOXStatusBarUpdateProtocol <NSObject>
+
+- (void)statusBarUpdated:(NSString * _Nonnull)statusBarText;
+
+@end
+
 @protocol SOXMarketCoreErrorProtocol <NSObject>
 
 - (void)presentErrorMessage:(SOXErrorMessage_BitcoinDE * _Nonnull)errorMessage;
@@ -70,8 +76,9 @@ FOUNDATION_EXPORT NSString *const _Nonnull HTTPMethodPOSTKey;
                       withParameter:(NSDictionary * _Nullable)parameterDictionary
                           respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nullable)controller;
 
-#pragma mark | Credit handling
+#pragma mark | Status handling
 + (void)registerForCreditUpdates:(id <SOXCreditUpdateProtocol> _Nullable) delegateForCreditUpdates;
++ (void)registerForStatusBarUpdates:(id <SOXCreditUpdateProtocol> _Nullable) delegateForStatusBarUpdates;
 
 #pragma mark | Error handling
 + (void)registerForErrorMessages:(id <SOXMarketCoreErrorProtocol> _Nullable)delegateForErrorMessages;

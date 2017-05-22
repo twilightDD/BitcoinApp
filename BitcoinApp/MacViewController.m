@@ -21,7 +21,7 @@ static NSString *AccountLedgerViewControllerSegueKey  = @"AccountLedgerViewContr
 static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewControllerSegue";// TabView.2
 
 #pragma mark - Interface
-@interface MacViewController () <SOXSocketIOCoreProtocol, SOXCreditUpdateProtocol>
+@interface MacViewController () <SOXSocketIOCoreProtocol, SOXCreditUpdateProtocol, SOXStatusBarUpdateProtocol>
 #pragma mark | IBOutlets
 @property (weak) IBOutlet NSTabView *bottomTabView;
 
@@ -45,6 +45,7 @@ static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewCont
 - (void)viewWillAppear {
     [super viewWillAppear];
     [SOXMarket_BitcoinDE_Core registerForCreditUpdates:self];
+    [SOXMarket_BitcoinDE_Core registerForStatusBarUpdates:self];
 }
 #pragma mark - Private methods
 - (void)setupUI {
@@ -86,6 +87,13 @@ static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewCont
     
     NSString *creditString = [NSString stringWithFormat:@"%@/%@", currentCredit, maxCredits];
     self.rightStatusTextField.stringValue = creditString;
+}
+
+#pragma mark - SOXStatusBarUpdateProtocol
+- (void)statusBarUpdated:(NSString *)statusBarText {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.leftStatusTextField.stringValue = statusBarText;
+    });
 }
 
 @end
