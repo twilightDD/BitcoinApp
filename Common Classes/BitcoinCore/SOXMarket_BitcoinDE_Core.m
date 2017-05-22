@@ -61,6 +61,12 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
 
 #pragma mark - Implementation
 @implementation SOXMarket_BitcoinDE_Core
+- (void)startRequests {
+            [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountInfoCommandType
+                                                        respondTo:nil];
+            [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowRatesCommandType
+                                                        respondTo:nil];
+}
 
 #pragma mark Public Class methods
 + (instancetype _Nonnull)sharedCore {
@@ -81,7 +87,7 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
 }
 
 + (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
-                          respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nonnull)controller {
+                          respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nullable)controller {
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:serverCommandType
                                             withParameter:nil
                                                 respondTo:controller];
@@ -168,22 +174,31 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
                                                                                                                                   error:error
                                                                                                                            errorMessage:errorMessage];
                                                                     
-                                                                    // Send answer to asking controller
-                                                                    if ([controller respondsToSelector:@selector(answerOfServerRequest:)]) {
-                                                                        // NSURLSessionTask has its own thread
-                                                                        [controller performSelectorOnMainThread:@selector(answerOfServerRequest:)
-                                                                                                     withObject:serverAnswer
-                                                                                                  waitUntilDone:NO];
+                                                                    if (serverCommandType == BitcoinDE_ShowAccountInfoCommandType) {
+                                                                        [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_RequestShowAccountInfo
+                                                                                                                            object:serverAnswer];
                                                                     }
-                                                                    
-                                                                    // Error handling
-                                                                    NSObject *delegateForErrorMessages = [SOXMarket_BitcoinDE_Core sharedCore].delegateForErrorMessages;
-                                                                    if (errorMessage.hasError
-                                                                        && [delegateForErrorMessages respondsToSelector:@selector(presentErrorMessage:)]) {
-                                                                        // NSURLSessionTask has its own thread
-                                                                        [delegateForErrorMessages performSelectorOnMainThread:@selector(presentErrorMessage:)
-                                                                                                                   withObject:errorMessage
-                                                                                                                waitUntilDone:NO];
+                                                                    else if (serverCommandType == BitcoinDE_ShowRatesCommandType) {
+                                                                        [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_RequestShowRates
+                                                                                                                            object:serverAnswer];
+                                                                    } else {
+                                                                        // Send answer to asking controller
+                                                                        if ([controller respondsToSelector:@selector(answerOfServerRequest:)]) {
+                                                                            // NSURLSessionTask has its own thread
+                                                                            [controller performSelectorOnMainThread:@selector(answerOfServerRequest:)
+                                                                                                         withObject:serverAnswer
+                                                                                                      waitUntilDone:NO];
+                                                                        }
+                                                                        
+                                                                        // Error handling
+                                                                        NSObject *delegateForErrorMessages = [SOXMarket_BitcoinDE_Core sharedCore].delegateForErrorMessages;
+                                                                        if (errorMessage.hasError
+                                                                            && [delegateForErrorMessages respondsToSelector:@selector(presentErrorMessage:)]) {
+                                                                            // NSURLSessionTask has its own thread
+                                                                            [delegateForErrorMessages performSelectorOnMainThread:@selector(presentErrorMessage:)
+                                                                                                                       withObject:errorMessage
+                                                                                                                    waitUntilDone:NO];
+                                                                        }
                                                                     }
                                                                     
                                                                     [SOXMarket_BitcoinDE_Core startNextNSURLSessionTask];

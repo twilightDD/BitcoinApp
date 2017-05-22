@@ -95,7 +95,7 @@
         || self.orderType == BitcoinDE_SellOrderType) {
         NSDictionary *parameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:self.orderType
                                                                   onlyExpressPaymentOption:NO];
-        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType // "buy" liefert Verkaufsangebote
+        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType
                                                 withParameter:parameters
                                                     respondTo:self];
     }

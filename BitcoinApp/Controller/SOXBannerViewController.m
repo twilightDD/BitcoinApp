@@ -9,6 +9,7 @@
 #import "SOXBannerViewController.h"
 
 #import "SOXMarket_BitcoinDE_Core.h"
+#import "SOXKeys_BitcoinDE.h"
 
 #import "SOXAccountInfoData.h"
 #import "SOXRatesData.h"
@@ -58,6 +59,10 @@
 @property (weak) IBOutlet NSTextField *creditTextMaxCreditsField;
 @property (weak) IBOutlet NSStackView *creditValuesStackView;
 
+#pragma mark - Properties
+@property (strong, nonatomic) id requestShowAccountInfoNotification;
+@property (strong, nonatomic) id requestShowRatesNotification;
+
 @end
 
 #pragma mark - Implementation
@@ -66,6 +71,8 @@
 #pragma mark Init&Co.
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self registerOberservers];
 }
 
 - (void)viewWillAppear {
@@ -75,7 +82,35 @@
     [self requestServerData];
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self.requestShowAccountInfoNotification];
+    [[NSNotificationCenter defaultCenter] removeObserver:self.requestShowRatesNotification];
+}
+
 #pragma mark - Private methods
+- (void)registerOberservers {
+    NSOperationQueue *mainQueue = [NSOperationQueue mainQueue];
+    
+    weakify(self)
+    self.requestShowAccountInfoNotification = [[NSNotificationCenter defaultCenter] addObserverForName:BitcoinDE_Notification_RequestShowAccountInfo
+                                                                                                object:nil
+                                                                                                 queue:mainQueue
+                                                                                            usingBlock:^(NSNotification * _Nonnull note) {
+                                                                                                strongify(self)
+                                                                                                [self answerOfServerRequest:note.object];
+                                                                                            }
+                                               ];
+    
+    self.requestShowRatesNotification = [[NSNotificationCenter defaultCenter] addObserverForName:BitcoinDE_Notification_RequestShowRates
+                                                                                          object:nil
+                                                                                           queue:mainQueue
+                                                                                      usingBlock:^(NSNotification * _Nonnull note) {
+                                                                                          strongify(self)
+                                                                                          [self answerOfServerRequest:note.object];
+                                                                                      }
+                                         ];
+}
+
 - (void)setupUI {
     // BTC stack
     {
@@ -157,10 +192,10 @@
 }
 
 - (void)requestServerData {
-    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountInfoCommandType
-                                                respondTo:self];
-    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowRatesCommandType
-                                                respondTo:self];
+//    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountInfoCommandType
+//                                                respondTo:self];
+//    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowRatesCommandType
+//                                                respondTo:self];
     
     [SOXMarket_BitcoinDE_Core registerForCreditUpdates:self];
 }

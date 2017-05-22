@@ -10,6 +10,10 @@
 
 @implementation SOXKeys_BitcoinDE
 
+#pragma mark - Notifications
+NSString *const BitcoinDE_Notification_RequestShowAccountInfo   = @"Notification_RequestShowAccountInfo";
+NSString *const BitcoinDE_Notification_RequestShowRates         = @"Notification_RequestShowRates";
+
 #pragma mark - BitcoinDE_ExecuteTrade
 NSString *const BitcoinDE_ExecuteTrade_OrderID          = @"order_id";
 NSString *const BitcoinDE_ExecuteTrade_Type             = @"type";

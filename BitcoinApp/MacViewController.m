@@ -36,6 +36,7 @@ static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewCont
     [super viewDidLoad];
 
     [self setupUI];
+    [[SOXMarket_BitcoinDE_Core sharedCore] startRequests];
 }
 
 #pragma mark - Private methods
@@ -65,6 +66,10 @@ static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewCont
         SOXOrdersViewController *viewC = segue.destinationController;
         viewC.orderType = BitcoinDE_SellOrderType;
     }
+}
+#pragma mark - Action methods
+- (IBAction)startRequests:(NSButton *)sender {
+    [[SOXMarket_BitcoinDE_Core sharedCore] startRequests];
 }
 
 @end

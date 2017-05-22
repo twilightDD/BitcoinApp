@@ -10,6 +10,10 @@
 
 @interface SOXKeys_BitcoinDE : NSObject
 
+#pragma mark - Notifications
+FOUNDATION_EXPORT NSString *const BitcoinDE_Notification_RequestShowAccountInfo;
+FOUNDATION_EXPORT NSString *const BitcoinDE_Notification_RequestShowRates;
+
 #pragma mark - BitcoinDE_ExecuteTrade
 FOUNDATION_EXPORT NSString *const BitcoinDE_ExecuteTrade_OrderID;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ExecuteTrade_Type;

@@ -46,11 +46,15 @@ FOUNDATION_EXPORT NSString *const _Nonnull HTTPMethodPOSTKey;
 - (void)presentErrorMessage:(SOXErrorMessage_BitcoinDE * _Nonnull)errorMessage;
 
 @end
+
+
 @interface SOXMarket_BitcoinDE_Core : NSObject
 @property (strong, nonatomic) NSDecimalNumber * _Nullable rate_weighted;
 @property (strong, nonatomic) NSDecimalNumber * _Nullable rate_weighted_half;
 @property (strong, nonatomic) NSDecimalNumber * _Nullable availableBitcoinAmount;
 @property (strong, nonatomic) NSDecimalNumber * _Nullable availableEuroAmount;
+
+- (void)startRequests;
 
 /**
  *  Singleton.
@@ -60,7 +64,7 @@ FOUNDATION_EXPORT NSString *const _Nonnull HTTPMethodPOSTKey;
 + (instancetype _Nonnull)sharedCore;
 
 + (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
-                          respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nonnull)controller;
+                          respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nullable)controller;
 
 + (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
                       withParameter:(NSDictionary * _Nullable)parameterDictionary
