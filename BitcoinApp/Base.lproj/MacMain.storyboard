@@ -843,7 +843,7 @@
         <scene sceneID="a6m-Vf-NSe">
             <objects>
                 <viewController id="QBX-OO-T9K" customClass="SOXBannerViewController" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="XTy-1Y-1hn">
+                    <view key="view" id="XTy-1Y-1hn">
                         <rect key="frame" x="0.0" y="0.0" width="459" height="121"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -1331,7 +1331,7 @@
                                         <constraint firstItem="J8O-sa-1lW" firstAttribute="leading" secondItem="1i6-H3-iQT" secondAttribute="leading" id="tJ7-s9-Znb"/>
                                     </constraints>
                                 </view>
-                                <color key="fillColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                <color key="fillColor" name="secondarySelectedControlColor" catalog="System" colorSpace="catalog"/>
                             </box>
                         </subviews>
                         <constraints>
