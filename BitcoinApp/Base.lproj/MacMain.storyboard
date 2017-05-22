@@ -699,25 +699,25 @@
                                 </connections>
                             </containerView>
                             <tabView translatesAutoresizingMaskIntoConstraints="NO" id="B9m-IQ-OSo">
-                                <rect key="frame" x="13" y="10" width="934" height="514"/>
+                                <rect key="frame" x="13" y="65" width="934" height="459"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="Tab" identifier="1" id="eLR-ge-YSa">
                                         <view key="view" id="kJ0-KF-JIj">
-                                            <rect key="frame" x="10" y="33" width="914" height="468"/>
+                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="A8Q-hU-Lrd">
-                                                    <rect key="frame" x="0.0" y="0.0" width="449" height="468"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="449" height="413"/>
                                                     <connections>
                                                         <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerBuySegue" id="ZEn-rF-4RA"/>
                                                     </connections>
                                                 </containerView>
                                                 <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Tu7-dB-5fP">
-                                                    <rect key="frame" x="455" y="12" width="5" height="444"/>
+                                                    <rect key="frame" x="455" y="12" width="5" height="389"/>
                                                 </box>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="ovw-tP-oiM">
-                                                    <rect key="frame" x="466" y="0.0" width="448" height="468"/>
+                                                    <rect key="frame" x="466" y="0.0" width="448" height="413"/>
                                                     <connections>
                                                         <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerSellSegue" id="Sxs-iN-Wh5"/>
                                                     </connections>
@@ -830,21 +830,60 @@
                                     <action selector="startRequests:" target="XfG-lQ-9wD" id="7oO-NN-6vX"/>
                                 </connections>
                             </button>
+                            <box boxType="custom" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="ljh-CW-puG">
+                                <rect key="frame" x="20" y="20" width="920" height="39"/>
+                                <view key="contentView" id="7KU-hO-f7z">
+                                    <rect key="frame" x="1" y="1" width="918" height="37"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1Q-d5-dvP">
+                                            <rect key="frame" x="18" y="10" width="37" height="17"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="zte-gv-QZ1">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CJx-Nr-pZ0">
+                                            <rect key="frame" x="863" y="10" width="37" height="17"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="b8d-YG-3zQ">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="CJx-Nr-pZ0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="k1Q-d5-dvP" secondAttribute="trailing" constant="8" symbolic="YES" id="93e-Qt-5vL"/>
+                                        <constraint firstAttribute="bottom" secondItem="k1Q-d5-dvP" secondAttribute="bottom" constant="10" id="Qc3-5l-WeM"/>
+                                        <constraint firstItem="k1Q-d5-dvP" firstAttribute="baseline" secondItem="CJx-Nr-pZ0" secondAttribute="baseline" id="XHR-W4-DCy"/>
+                                        <constraint firstItem="k1Q-d5-dvP" firstAttribute="top" secondItem="7KU-hO-f7z" secondAttribute="top" constant="10" id="Xxi-ko-kfb"/>
+                                        <constraint firstItem="k1Q-d5-dvP" firstAttribute="leading" secondItem="7KU-hO-f7z" secondAttribute="leading" constant="20" symbolic="YES" id="fnb-Vm-G4f"/>
+                                        <constraint firstAttribute="trailing" secondItem="CJx-Nr-pZ0" secondAttribute="trailing" constant="20" symbolic="YES" id="gbE-zR-LYS"/>
+                                    </constraints>
+                                </view>
+                                <color key="fillColor" name="secondarySelectedControlColor" catalog="System" colorSpace="catalog"/>
+                            </box>
                         </subviews>
                         <constraints>
                             <constraint firstItem="CSm-MP-mkG" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="19" id="0tE-OE-4Hw"/>
+                            <constraint firstItem="ljh-CW-puG" firstAttribute="top" secondItem="B9m-IQ-OSo" secondAttribute="bottom" constant="16" symbolic="YES" id="1pN-iI-EwZ"/>
                             <constraint firstItem="B9m-IQ-OSo" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="2yw-fd-kfL"/>
                             <constraint firstAttribute="trailing" secondItem="B9m-IQ-OSo" secondAttribute="trailing" constant="20" symbolic="YES" id="5lN-Sj-40p"/>
+                            <constraint firstAttribute="bottom" secondItem="ljh-CW-puG" secondAttribute="bottom" constant="20" id="KFI-fy-mUx"/>
                             <constraint firstItem="6TX-DJ-6MW" firstAttribute="top" secondItem="CSm-MP-mkG" secondAttribute="bottom" constant="3" id="Ke1-Jq-UQR"/>
-                            <constraint firstAttribute="bottom" secondItem="B9m-IQ-OSo" secondAttribute="bottom" constant="20" symbolic="YES" id="QHd-3a-WVE"/>
+                            <constraint firstAttribute="trailing" secondItem="ljh-CW-puG" secondAttribute="trailing" constant="20" id="ZrP-wd-2ba"/>
                             <constraint firstAttribute="trailing" secondItem="6TX-DJ-6MW" secondAttribute="trailing" constant="20" id="fIv-oS-Ift"/>
                             <constraint firstItem="CSm-MP-mkG" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="nfg-cA-a2k"/>
                             <constraint firstAttribute="trailing" secondItem="CSm-MP-mkG" secondAttribute="trailing" constant="20" id="reb-tP-K6x"/>
+                            <constraint firstItem="ljh-CW-puG" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="uEz-3t-LXb"/>
                             <constraint firstItem="B9m-IQ-OSo" firstAttribute="top" secondItem="CSm-MP-mkG" secondAttribute="bottom" constant="16" id="yWP-zG-RBt"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="bottomTabView" destination="B9m-IQ-OSo" id="2IB-gg-UTH"/>
+                        <outlet property="leftStatusTextField" destination="k1Q-d5-dvP" id="tI2-le-D5H"/>
+                        <outlet property="rightStatusTextField" destination="CJx-Nr-pZ0" id="q0b-Hl-Rxj"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

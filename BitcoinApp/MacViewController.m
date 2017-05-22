@@ -21,10 +21,12 @@ static NSString *AccountLedgerViewControllerSegueKey  = @"AccountLedgerViewContr
 static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewControllerSegue";// TabView.2
 
 #pragma mark - Interface
-@interface MacViewController () <SOXSocketIOCoreProtocol>
+@interface MacViewController () <SOXSocketIOCoreProtocol, SOXCreditUpdateProtocol>
+#pragma mark | IBOutlets
 @property (weak) IBOutlet NSTabView *bottomTabView;
 
-@property (strong, nonatomic) NSDictionary *serverAnswerDictionary;
+@property (weak) IBOutlet NSTextField *leftStatusTextField;
+@property (weak) IBOutlet NSTextField *rightStatusTextField;
 
 @end
 
@@ -37,8 +39,13 @@ static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewCont
 
     [self setupUI];
     [[SOXMarket_BitcoinDE_Core sharedCore] startRequests];
+    
 }
 
+- (void)viewWillAppear {
+    [super viewWillAppear];
+    [SOXMarket_BitcoinDE_Core registerForCreditUpdates:self];
+}
 #pragma mark - Private methods
 - (void)setupUI {
     // Configure TabView
@@ -70,6 +77,15 @@ static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewCont
 #pragma mark - Action methods
 - (IBAction)startRequests:(NSButton *)sender {
     [[SOXMarket_BitcoinDE_Core sharedCore] startRequests];
+}
+
+#pragma mark - SOXCreditUpdateProtocol
+- (void)creditValuesUpdated:(NSDictionary * _Nonnull)creditDicts {
+    NSNumber *currentCredit = [creditDicts objectForKey:CreditUpdate_CurrentCreditsKey];
+    NSNumber *maxCredits = [creditDicts objectForKey:CreditUpdate_MaximalCreditsKey];
+    
+    NSString *creditString = [NSString stringWithFormat:@"%@/%@", currentCredit, maxCredits];
+    self.rightStatusTextField.stringValue = creditString;
 }
 
 @end
