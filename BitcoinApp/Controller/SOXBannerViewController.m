@@ -35,8 +35,6 @@
 @property (weak) IBOutlet NSTextField *fidorReservationTotalAmountTextField;
 @property (weak) IBOutlet NSTextField *fidorReservationAvailableAmountDescriptionTextField;
 @property (weak) IBOutlet NSTextField *fidorReservationAvailableAmountTextField;
-@property (weak) IBOutlet NSTextField *fidorReservationReservedAtDescriptionTextField;
-@property (weak) IBOutlet NSTextField *fidorReservationReservedAtTextField;
 @property (weak) IBOutlet NSTextField *fidorReservationValidUntilDescriptionTextField;
 @property (weak) IBOutlet NSTextField *fidorReservationValidUntilTextField;
 
@@ -98,12 +96,10 @@
         
         self.fidorReservationTotalAmountDescriptionTextField.stringValue = @"Total amount";
         self.fidorReservationAvailableAmountDescriptionTextField.stringValue = @"Available amount";
-        self.fidorReservationReservedAtDescriptionTextField.stringValue = @"Reserved at";
         self.fidorReservationValidUntilDescriptionTextField.stringValue = @"Valid unitl";
         
         self.fidorReservationTotalAmountTextField.stringValue = @"...";
         self.fidorReservationAvailableAmountTextField.stringValue = @"...";
-        self.fidorReservationReservedAtTextField.stringValue = @"...";
         self.fidorReservationValidUntilTextField.stringValue = @"...";
         
     }
@@ -144,10 +140,6 @@
         }
         { // Available amount
             self.fidorReservationAvailableAmountTextField.doubleValue = accountInfoData.bankReservation_availableAmount.doubleValue;
-        }
-        { // Reserved At
-            NSString *reservedATString = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:accountInfoData.bankReservation_reservedAt];
-            self.fidorReservationReservedAtTextField.stringValue = reservedATString;
         }
         { // Valid until
             NSString *validUntilString = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:accountInfoData.bankReservation_validUntil];
