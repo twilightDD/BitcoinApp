@@ -143,8 +143,8 @@
     self.volumeTextField.stringValue                = @"";
     
     self.optionBox.title                            = @"Options";
-    self.onlyKYCButton.title                        = @"Trade with KYC only";
-    self.reNewOrderButton.title                     = @"New Order for residue";
+    self.onlyKYCButton.title                        = @"Allow only fully identified Users";
+    self.reNewOrderButton.title                     = @"Automatic residual purchase request";
     
     self.bronceTrustLevelButton.title               = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelBronze];
     self.bronceTrustLevelButton.tag                 = BitcoinDE_TrustLevelBronze;
