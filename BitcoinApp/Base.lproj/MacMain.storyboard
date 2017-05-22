@@ -1436,23 +1436,6 @@
                                                         <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_price" id="oS0-E4-Kk3"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="UPh-EJ-q2O">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Min. Amount">
-                                                        <font key="font" metaFont="smallSystem"/>
-                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    </tableHeaderCell>
-                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="gVT-HG-s1y">
-                                                        <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="8" currencyCode="BTC" currencySymbol="BTC" internationalCurrencySymbol="BTC" id="a9Y-se-RSS"/>
-                                                        <font key="font" metaFont="system"/>
-                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                    <connections>
-                                                        <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_minAmount" id="Wwb-xO-ImZ"/>
-                                                    </connections>
-                                                </tableColumn>
                                                 <tableColumn editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="5bU-JA-imQ">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Max. Amount">
                                                         <font key="font" metaFont="smallSystem"/>
@@ -1468,23 +1451,6 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
                                                         <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_maxAmount" id="xfr-H7-NS6"/>
-                                                    </connections>
-                                                </tableColumn>
-                                                <tableColumn editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="ZJI-GQ-9iw">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Min. Volume">
-                                                        <font key="font" metaFont="smallSystem"/>
-                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    </tableHeaderCell>
-                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="vNv-DE-czo">
-                                                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="0W3-uq-j2O"/>
-                                                        <font key="font" metaFont="system"/>
-                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                    <connections>
-                                                        <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_minVolume" id="rpE-42-Tgh"/>
                                                     </connections>
                                                 </tableColumn>
                                                 <tableColumn editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="gdz-ZB-REf">
@@ -1504,20 +1470,38 @@
                                                         <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_maxVolume" id="cza-50-EUc"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="40" minWidth="10" maxWidth="3.4028234663852886e+38" id="zyz-M6-5GS">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="type">
+                                                <tableColumn editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="UPh-EJ-q2O">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Min. Amount">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
-                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="gnJ-Qt-dSj">
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="gVT-HG-s1y">
+                                                        <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="8" currencyCode="BTC" currencySymbol="BTC" internationalCurrencySymbol="BTC" id="a9Y-se-RSS"/>
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
-                                                        <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_type" id="ckv-XP-6gp"/>
+                                                        <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_minAmount" id="Wwb-xO-ImZ"/>
+                                                    </connections>
+                                                </tableColumn>
+                                                <tableColumn editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="ZJI-GQ-9iw">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Min. Volume">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="vNv-DE-czo">
+                                                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="0W3-uq-j2O"/>
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_minVolume" id="rpE-42-Tgh"/>
                                                     </connections>
                                                 </tableColumn>
                                                 <tableColumn editable="NO" width="140" minWidth="10" maxWidth="3.4028234663852886e+38" id="i1d-J7-uwz">
@@ -1539,6 +1523,22 @@
                                                                 <string key="NSValueTransformerName">SOXPaymentOptionValueTransformer</string>
                                                             </dictionary>
                                                         </binding>
+                                                    </connections>
+                                                </tableColumn>
+                                                <tableColumn editable="NO" width="40" minWidth="10" maxWidth="3.4028234663852886e+38" id="zyz-M6-5GS">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="type">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="gnJ-Qt-dSj">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_type" id="ckv-XP-6gp"/>
                                                     </connections>
                                                 </tableColumn>
                                                 <tableColumn identifier="" width="1" minWidth="1" maxWidth="1" id="xzu-Of-sPV" userLabel="Empty column">
