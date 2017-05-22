@@ -52,7 +52,7 @@
     [SOXMarket_BitcoinDE_Core registerForErrorMessages:self];
     
     [self setupUI];
-   // [self requestServerData];
+    [self requestServerData];
     
     [self.tableView setDoubleAction:@selector(tableViewDoubleAction:)];
 }
