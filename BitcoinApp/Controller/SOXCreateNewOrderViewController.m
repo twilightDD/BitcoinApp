@@ -75,6 +75,10 @@
 
 -(void)viewWillAppear {
     [super viewWillAppear];
+    if (self.orderType != BitcoinDE_BuyOrderType
+        && self.orderType != BitcoinDE_SellOrderType) {
+        return;
+    }
     
     self.trustLevel = [SOXPreferenceCenter defaultTrustLevelNewOrder];
     self.validInput = NO;
@@ -86,30 +90,30 @@
         self.minAmount = [NSDecimalNumber decimalNumberWithString:@"0.05"];
         self.minimalPossibleAmount = [NSDecimalNumber decimalNumberWithString:@"0.05"];
         
+        self.minimalPossiblePrice = [[SOXMarket_BitcoinDE_Core sharedCore] rate_weighted_half];
+        // condition #1
+        {
+            // setting numberFormatter minimum value
+            NSNumberFormatter *priceFormatter = self.priceTextField.formatter;
+            // Stupid hack, but needed: subtract 0.001!
+            priceFormatter.minimum            = [self.minimalPossiblePrice decimalNumberBySubtracting:[NSDecimalNumber decimalNumberWithString:@"0.001"]];
+            
+            // inform user
+            self.volumeTextField.stringValue = [NSString stringWithFormat:@"Min. price: %@\n(50%% weighted rate)",self.minimalPossiblePrice];
+        }
+        
         /* Bedingungen:
          #1 Please correct the purchase price per bitcoin.
             The price shall not be less than 50% of the current market rate.
          #2 The value of the amount of bitcoin may not be lower than than €60.00
          */
-        if (self.orderType == BitcoinDE_BuyOrderType
-            || self.orderType == BitcoinDE_SellOrderType) {
-            
-            self.price                = [[SOXMarket_BitcoinDE_Core sharedCore] rate_weighted_half];
-            self.minimalPossiblePrice = [[SOXMarket_BitcoinDE_Core sharedCore] rate_weighted_half];
-            // condition #1
-            {
-                // setting numberFormatter minimum value
-                NSNumberFormatter *priceFormatter = self.priceTextField.formatter;
-                // Stupid hack, but needed: subtract 0.001!
-                priceFormatter.minimum            = [self.minimalPossiblePrice decimalNumberBySubtracting:[NSDecimalNumber decimalNumberWithString:@"0.001"]];
-            
-                // inform user
-                self.volumeTextField.stringValue = [NSString stringWithFormat:@"Min. price: %@\n(50%% weighted rate)",self.minimalPossiblePrice];
-            }
+        if (self.orderType == BitcoinDE_BuyOrderType){
+            self.price = [[SOXMarket_BitcoinDE_Core sharedCore] rate_weighted_half];
         }
-        else {
-            self.price = [NSDecimalNumber decimalNumberWithString:@"0"];
+        else if (self.orderType == BitcoinDE_SellOrderType) {
+            self.price = [[SOXMarket_BitcoinDE_Core sharedCore] rate_weighted];
         }
+
         [self validateInputs];
     }
 }
