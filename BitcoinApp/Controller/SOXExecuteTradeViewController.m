@@ -107,7 +107,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
         
         if (self.orderType == BitcoinDE_BuyOrderType) {
             NSNumber *maxAmountOrderBookData = self.orderBookData.orderInformation_maxAmount;
-            NSNumber *maxAmountAvailableEuro = @([SOXMarket_BitcoinDE_Core sharedCore].availableEuroAmount.doubleValue /
+            NSNumber *maxAmountAvailableEuro = @([SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount.doubleValue /
                                                 self.orderBookData.orderInformation_price.doubleValue);
             
             if ([maxAmountOrderBookData isLessThan:maxAmountAvailableEuro]) {

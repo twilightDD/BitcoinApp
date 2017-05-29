@@ -185,9 +185,9 @@
         self.fidorReservationValuesAndDescriptionStackView.hidden = YES;
         
         // DEBUG Fidor Reservation for testing
-//        self.fidorReservationValuesAndDescriptionStackView.hidden = NO;
-//        [SOXMarket_BitcoinDE_Core sharedCore].availableEuroAmount = @(1111.11);
-//        self.fidorReservationAvailableAmountTextField.stringValue = @"Debug: 1111.11€";
+        self.fidorReservationValuesAndDescriptionStackView.hidden = NO;
+        [SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount = [NSDecimalNumber decimalNumberWithString:@"200"];
+        self.fidorReservationAvailableAmountTextField.stringValue = @"Debug: 200€";
     }
 }
 
@@ -218,7 +218,7 @@
         // fidor_reservation
         {
             
-            [SOXMarket_BitcoinDE_Core sharedCore].availableEuroAmount = accountInfoData.bankReservation_availableAmount;
+            [SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount = accountInfoData.bankReservation_availableAmount;
             [self updateUIForBankReservationWithAccountInfoData:accountInfoData];
         }
     }
