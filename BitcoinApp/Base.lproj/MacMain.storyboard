@@ -3208,7 +3208,7 @@ Gw
         <scene sceneID="z37-1q-W32">
             <objects>
                 <viewController identifier="ExecuteTradeViewControllerIdentifier" storyboardIdentifier="ExecuteTradeViewControllerIdentifier" id="f8g-UU-ziE" customClass="SOXExecuteTradeViewController" sceneMemberID="viewController">
-                    <view key="view" id="FeD-ys-PjZ">
+                    <view key="view" misplaced="YES" id="FeD-ys-PjZ">
                         <rect key="frame" x="0.0" y="0.0" width="478" height="367"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -3636,24 +3636,24 @@ Gw
                                         <rect key="frame" x="0.0" y="0.0" width="60" height="75"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tej-8D-5h6">
-                                                <rect key="frame" x="-2" y="58" width="64" height="17"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="maxOrder" id="VaB-Tc-qEu">
+                                                <rect key="frame" x="-2" y="58" width="52" height="17"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="minBTC" id="VaB-Tc-qEu">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="stZ-4b-lQt">
-                                                <rect key="frame" x="-2" y="29" width="52" height="17"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="minBTC" id="E7c-tL-MtR">
+                                                <rect key="frame" x="-2" y="29" width="60" height="17"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="maxFidor" id="E7c-tL-MtR">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DUQ-h0-IV5">
-                                                <rect key="frame" x="-2" y="0.0" width="60" height="17"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="maxFidor" id="uDn-Cs-xlQ">
+                                                <rect key="frame" x="-2" y="0.0" width="64" height="17"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="maxOrder" id="uDn-Cs-xlQ">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -3719,6 +3719,9 @@ Gw
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
+                                                <connections>
+                                                    <action selector="minimumBTCAmountButtonAction:" target="f8g-UU-ziE" id="Js2-uc-21N"/>
+                                                </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1yq-CC-Glb">
                                                 <rect key="frame" x="-6" y="20" width="81" height="32"/>
@@ -3726,6 +3729,9 @@ Gw
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
+                                                <connections>
+                                                    <action selector="maximalFidorBTCAmountButtonAction:" target="f8g-UU-ziE" id="ete-wK-KsC"/>
+                                                </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IMV-LJ-7LH">
                                                 <rect key="frame" x="-6" y="-7" width="81" height="32"/>
@@ -3733,6 +3739,9 @@ Gw
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
+                                                <connections>
+                                                    <action selector="maximalOrderBTCAmountButtonAction:" target="f8g-UU-ziE" id="9Gk-IE-cj2"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <visibilityPriorities>
@@ -3824,11 +3833,20 @@ Gw
                         <outlet property="maxBTCTextField" destination="itc-bY-XU5" id="3b0-fw-i03"/>
                         <outlet property="maxVolumeDescriptionTextField" destination="nyN-ig-Nb6" id="C57-in-KhJ"/>
                         <outlet property="maxVolumeTextField" destination="NfI-oN-nPS" id="OKR-qS-ylB"/>
+                        <outlet property="maximalFidorBTCAmountButton" destination="1yq-CC-Glb" id="Kk1-0C-M3S"/>
+                        <outlet property="maximalFidorBTCAmountDescriptionTextField" destination="stZ-4b-lQt" id="DBh-gM-UTY"/>
+                        <outlet property="maximalFidorBTCAmountTextField" destination="T6T-mN-4q7" id="MXL-0n-e9i"/>
+                        <outlet property="maximalOrderBTCAmountButton" destination="IMV-LJ-7LH" id="zYP-1h-0gI"/>
+                        <outlet property="maximalOrderBTCAmountDescriptionTextField" destination="DUQ-h0-IV5" id="Whe-UT-bPH"/>
+                        <outlet property="maximalOrderBTCAmountTextField" destination="qrW-eE-fyc" id="0ZG-SN-9tg"/>
                         <outlet property="minBTCDescriptionTextField" destination="CYt-32-bF4" id="8Cg-rf-Cjx"/>
                         <outlet property="minBTCTextField" destination="KLr-XX-aty" id="4Q5-OF-ycy"/>
                         <outlet property="minMaxPossibleAmountTextField" destination="Xht-9O-gjY" id="xVw-6P-tIE"/>
                         <outlet property="minVolumeDescriptionTextField" destination="hvV-l8-svN" id="t37-n6-9kf"/>
                         <outlet property="minVolumeTextField" destination="ytD-1Y-I0f" id="Uhk-x5-rys"/>
+                        <outlet property="minimumBTCAmountButton" destination="IRh-0y-Pxc" id="q5s-0U-JG9"/>
+                        <outlet property="minimumBTCAmountDescriptionTextField" destination="tej-8D-5h6" id="rjw-NC-02p"/>
+                        <outlet property="minimumBTCAmountTextField" destination="do3-pM-Mc6" id="yVk-HT-QHV"/>
                         <outlet property="orderIDTextDescriptionField" destination="c6V-tJ-aAX" id="pwF-Vm-rv8"/>
                         <outlet property="orderIDTextField" destination="IwY-T0-562" id="fI5-c1-utl"/>
                         <outlet property="priceDescriptionTextField" destination="KZd-3F-BfO" id="Chy-im-jnI"/>
@@ -3853,7 +3871,7 @@ Gw
                 <userDefaultsController id="2uj-Lz-301"/>
                 <userDefaultsController id="Xdu-6B-eBT"/>
             </objects>
-            <point key="canvasLocation" x="-1851.5" y="2629.5"/>
+            <point key="canvasLocation" x="-1852" y="2629.5"/>
         </scene>
         <!--My Trades View Controller-->
         <scene sceneID="GHY-7L-bja">

@@ -58,6 +58,19 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 @property (weak) IBOutlet NSTextField *volumeToTradeDescriptionTextField;
 @property (weak) IBOutlet NSTextField *volumeToTradeTextField;
 
+// Auto btc amount stack view
+@property (weak) IBOutlet NSTextField *minimumBTCAmountDescriptionTextField;
+@property (weak) IBOutlet NSTextField *minimumBTCAmountTextField;
+@property (weak) IBOutlet NSButton *minimumBTCAmountButton;
+
+@property (weak) IBOutlet NSTextField *maximalFidorBTCAmountDescriptionTextField;
+@property (weak) IBOutlet NSTextField *maximalFidorBTCAmountTextField;
+@property (weak) IBOutlet NSButton *maximalFidorBTCAmountButton;
+
+@property (weak) IBOutlet NSTextField *maximalOrderBTCAmountDescriptionTextField;
+@property (weak) IBOutlet NSTextField *maximalOrderBTCAmountTextField;
+@property (weak) IBOutlet NSButton *maximalOrderBTCAmountButton;
+
 @property (weak) IBOutlet NSTextField *userInformationTextField;
 // Buttons
 @property (weak) IBOutlet NSButton *executeTradeButton;
@@ -209,6 +222,21 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
         self.ratingTextField.stringValue        = self.orderBookData.tradingPartnerInformation_rating.stringValue ? : @" ? ";
     }
     
+    // Auto btc amount stack view
+    {
+        self.minimumBTCAmountDescriptionTextField.stringValue = @"Min. BTC amount";
+        self.minimumBTCAmountTextField.stringValue = self.minimalAmountToTrade;
+        self.minimumBTCAmountButton.title = @"Apply";
+        
+        self.maximalFidorBTCAmountDescriptionTextField.stringValue = @"Max. Fidor";
+        self.maximalFidorBTCAmountTextField.stringValue = self.maximalAmountToTrade;
+        self.maximalFidorBTCAmountButton.title = @"Apply";
+        
+        self.maximalOrderBTCAmountDescriptionTextField.stringValue = @"Max. BTC from order";
+        self.maximalOrderBTCAmountTextField.stringValue = self.orderBookData.orderInformation_maxAmount.stringValue;
+        self.maximalOrderBTCAmountButton.title = @"Apply";
+    }
+    
     // title and buttons
     NSString *titleText;
     NSString *amountToTradeDescriptionText;
@@ -224,9 +252,6 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 
     self.titleTextField.stringValue = titleText;
     self.amountToTradeDescriptionTextField.stringValue = amountToTradeDescriptionText;
-    
-    self.autoMinAmountToTradeButton.title = @"Minimal BTC";//self.minimalAmountToTrade.stringValue;
-    self.autoMaxAmountToTradeButton.title = @"Maximal BTC";//self.maximalAmountToTrade.stringValue;
     
     self.volumeToTradeDescriptionTextField.stringValue = @"Volume";
     self.volumeToTradeTextField.doubleValue            = 0;
@@ -388,13 +413,17 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     [self dismissViewController:self];
 }
 
-- (IBAction)autoMinAmountToTradeAction:(NSButton *)sender {
+- (IBAction)minimumBTCAmountButtonAction:(NSButton *)sender {
     self.amountToTrade = @(self.minimalAmountToTrade.doubleValue);
 }
 
-- (IBAction)autoMaxAmountToTradeAction:(NSButton *)sender {
+- (IBAction)maximalFidorBTCAmountButtonAction:(NSButton *)sender {
     self.amountToTrade = @(self.maximalAmountToTrade.doubleValue);
 }
+- (IBAction)maximalOrderBTCAmountButtonAction:(NSButton *)sender {
+    self.amountToTrade = self.orderBookData.orderInformation_maxAmount;
+}
+
 
 #pragma mark - Manual Setters
 - (void)setAmountToTrade:(NSNumber *)amountToTrade {
