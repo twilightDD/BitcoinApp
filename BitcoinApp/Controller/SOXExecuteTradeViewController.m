@@ -72,6 +72,9 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 @property (nonatomic) BitcoinDE_PaymentOption defaultPaymentOption;
 @property (nonatomic) BitcoinDE_PaymentOption orderBookPaymentOption;
 @property (nonatomic) BitcoinDE_PaymentOption executePaymentOption;
+
+@property (strong, nonatomic) NSDecimalNumber *availableFidorAmount;
+
 @end
 
 #pragma mark - Implementation
@@ -90,15 +93,15 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 
 #pragma mark - Private methods
 - (void)setupMinMaxAmountToTrade {
-    // MinAmount (we need it for userInformation in case of self.executeTradeIsPossible stays NO
-    double minAmount            = self.orderBookData.orderInformation_minAmount.doubleValue;
-    self.minimalAmountToTrade   = [NSString stringWithFormat:@"%.8g", minAmount];
-    
-    self.executeTradeIsPossible = NO;
-    
     if (!self.orderBookData) {
         return;
     }
+    
+    self.executeTradeIsPossible = NO;
+    
+    // MinAmount (we need it for userInformation in case of self.executeTradeIsPossible stays NO
+    double minAmount            = self.orderBookData.orderInformation_minAmount.doubleValue;
+    self.minimalAmountToTrade   = [NSString stringWithFormat:@"%.8g", minAmount];
     
     // MaxAmount
     double maxAmount  = 0;
@@ -132,14 +135,24 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
         maxAmount = floor(maxAmount * 100000000) / 100000000;
     }
     
+    
+    
+    
+    
     if ([SOXPreferenceCenter defaultPaymentOptionForExecuteTrade] == BitcoinDE_PaymentOptionExpressOnly) {
         // if minAmount < maxMount we can buy/sell
         if (minAmount <= maxAmount) {
+            self.userNameTextField.hidden = YES;
             self.maximalAmountToTrade = [NSString stringWithFormat:@"%.8g", maxAmount];
             self.executeTradeIsPossible = YES;
         }
+        else {
+            self.userNameTextField.hidden      = NO;
+            self.userNameTextField.stringValue = @"Express only - you don't have enough fidor reservation";
+            self.executeTradeIsPossible        = NO;
+        }
     }
-    else {
+    else { // Sepa OR Express&Sepa
         self.maximalAmountToTrade = [NSString stringWithFormat:@"%.8g", maxAmount];
         self.executeTradeIsPossible = YES;
         if (minAmount <= maxAmount) {
@@ -199,17 +212,14 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     // title and buttons
     NSString *titleText;
     NSString *amountToTradeDescriptionText;
-    NSString *userInformationText;
     
     if (self.orderType == BitcoinDE_BuyOrderType) {
         titleText = @"Buy bitcoins";
         amountToTradeDescriptionText = @"Buy bitcoins";
-        userInformationText = [NSString stringWithFormat:@"You have not enough fidor amount to buy at least %@ BTC", self.minimalAmountToTrade];
     }
     else if (self.orderType == BitcoinDE_SellOrderType) {
         titleText = @"Sell bitcoins";
         amountToTradeDescriptionText = @"Sell bitcoins";
-        userInformationText = [NSString stringWithFormat:@"You have not enough BTC to sell at least %@ BTC", self.minimalAmountToTrade];
     }
 
     self.titleTextField.stringValue = titleText;
@@ -221,7 +231,10 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     self.volumeToTradeDescriptionTextField.stringValue = @"Volume";
     self.volumeToTradeTextField.doubleValue            = 0;
     
-    self.userInformationTextField.stringValue = userInformationText;
+    {// userInformationTextField not used at the moment
+        self.userInformationTextField.hidden        = YES;
+        self.userInformationTextField.stringValue   = @"";
+    }
     
     [self setupExecuteTradeButton];
     self.cancelButton.title = @"Cancel";
@@ -234,10 +247,10 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     if (self.orderType == BitcoinDE_BuyOrderType) {
         NSString *executeTradeButtonText;
         if (self.executePaymentOption != BitcoinDE_PaymentOptionSEPAOnly) {
-            executeTradeButtonText = @"Execute Express buy";
+            executeTradeButtonText = @"Buy via Express";
         }
         else {
-            executeTradeButtonText = @"Execute SEPA buy";
+            executeTradeButtonText = @"Buy via SEPA";
         }
         self.executeTradeButton.title = executeTradeButtonText;
     }
@@ -250,8 +263,6 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 }
 
 - (void)toggleUIElements {
-    self.userInformationTextField.hidden = self.executeTradeIsPossible;
-    
     self.amountToTradeDescriptionTextField.hidden   = !self.executeTradeIsPossible;
     self.amountToTradeTextField.hidden              = !self.executeTradeIsPossible;
     self.minMaxPossibleAmountTextField.hidden       = !self.executeTradeIsPossible;
@@ -398,14 +409,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 
 - (void)setExecutePaymentOption:(BitcoinDE_PaymentOption)executePaymentOption {
     _executePaymentOption = executePaymentOption;
-    if (executePaymentOption == BitcoinDE_PaymentOptionSEPAOnly) {
-        self.userInformationTextField.hidden      = NO;
-        self.userInformationTextField.stringValue = @"Attention: SEPA trade";
-    }
-    else {
-        self.userInformationTextField.hidden = YES;
-    }
-    
+   
     [self setupExecuteTradeButton];
 }
 
