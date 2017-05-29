@@ -73,13 +73,7 @@
     [super viewDidLoad];
     
     [self registerOberservers];
-}
-
-- (void)viewWillAppear {
-    [super viewWillAppear];
-    
     [self setupUI];
-    [self requestServerData];
 }
 
 - (void)dealloc {
@@ -189,15 +183,6 @@
         [SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount = [NSDecimalNumber decimalNumberWithString:@"200"];
         self.fidorReservationAvailableAmountTextField.stringValue = @"Debug: 200€";
     }
-}
-
-- (void)requestServerData {
-//    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountInfoCommandType
-//                                                respondTo:self];
-//    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowRatesCommandType
-//                                                respondTo:self];
-    
-   // [SOXMarket_BitcoinDE_Core registerForCreditUpdates:self];
 }
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
