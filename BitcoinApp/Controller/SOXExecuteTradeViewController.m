@@ -212,12 +212,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
         self.ratingTextField.stringValue        = self.orderBookData.tradingPartnerInformation_rating.stringValue ? : @" ? ";
     }
     
-    // Auto btc amount stack view
-    {
-        self.minimumBTCAmountButton.title = @"Min";
-        self.maximalFidorBTCAmountButton.title = @"Max Fidor";
-        self.maximalOrderBTCAmountButton.title = @"Max from order";
-    }
+    
     
     // title and buttons
     NSString *titleText;
@@ -243,11 +238,42 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
         self.userInformationTextField.stringValue   = @"";
     }
     
+    // Auto btc amount stack view
+    {
+        self.minimumBTCAmountButton.title = @"Min";
+        
+        if (self.orderType == BitcoinDE_BuyOrderType) {
+            if (self.orderBookData.orderRequirements_paymentOption.unsignedIntegerValue == BitcoinDE_PaymentOptionSEPAOnly
+                || [[SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount isLessThan:self.orderBookData.orderInformation_minVolume]) {
+                self.maximalFidorBTCAmountButton.hidden = YES;
+            }
+            else {
+                self.maximalFidorBTCAmountButton.hidden = NO;
+                self.maximalFidorBTCAmountButton.title = @"Max Fidor";
+            }
+            
+            if (self.orderBookData.orderRequirements_paymentOption.unsignedIntegerValue == BitcoinDE_PaymentOptionExpressOnly
+                && [[SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount isLessThan:self.orderBookData.orderInformation_minVolume]) {
+                self.userInformationTextField.hidden        = NO;
+                self.userInformationTextField.stringValue = @"Express only, but not enough Fidor reservation";
+                self.minimumBTCAmountButton.hidden = YES;
+                self.maximalFidorBTCAmountButton.hidden = YES;
+                self.maximalOrderBTCAmountButton.hidden = YES;
+                self.amountToTradeTextField.enabled = NO;
+            }
+            
+            self.maximalOrderBTCAmountButton.title = @"Max from order";
+        }
+        else if (self.orderType == BitcoinDE_SellOrderType) {
+            self.maximalFidorBTCAmountButton.hidden = YES;
+            self.maximalOrderBTCAmountButton.title = @"Max possible";
+        }
+    }
+    
     [self setupExecuteTradeButton];
     self.cancelButton.title = @"Cancel";
     
-    self.minMaxPossibleAmountTextField.stringValue = [NSString stringWithFormat:@"(min: %@, max: %@)",
-                                                      self.minimalAmountToTrade, self.maximalAmountToTrade];
+    self.minMaxPossibleAmountTextField.hidden = YES;
 }
 
 - (void)setupExecuteTradeButton {
@@ -401,7 +427,17 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     self.amountToTrade = @(self.maximalAmountToTrade.doubleValue);
 }
 - (IBAction)maximalOrderBTCAmountButtonAction:(NSButton *)sender {
-    self.amountToTrade = self.orderBookData.orderInformation_maxAmount;
+    if (self.orderType == BitcoinDE_BuyOrderType) {
+        self.amountToTrade = self.orderBookData.orderInformation_maxAmount;
+    }
+    else if (self.orderType == BitcoinDE_SellOrderType) {
+        if ([[SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount isLessThan:self.orderBookData.orderInformation_maxAmount]) {
+            self.amountToTrade = [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount;
+        }
+        else {
+            self.amountToTrade = self.orderBookData.orderInformation_maxAmount;
+        }
+    }
 }
 
 
