@@ -186,7 +186,7 @@
 
 - (void)validateInputs {
     if (!self.minAmount && self.amount) {
-        self.minAmount = [SOXFormatters divideNumber:self.amount by:2] ;
+        self.minAmount = [self.amount decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"2"]];
     }
     else if (!self.minAmount && !self.amount) {
         self.minAmount = [NSDecimalNumber decimalNumberWithString:@"0"];

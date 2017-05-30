@@ -19,11 +19,11 @@
 @property (strong, nonatomic, readwrite) NSString   *orderInformation_orderID;
 @property (strong, nonatomic, readwrite) NSString   *orderInformation_socketOrderObjectID;
 @property (strong, nonatomic, readwrite) NSString   *orderInformation_type;
-@property (strong, nonatomic, readwrite) NSNumber   *orderInformation_maxAmount;
-@property (strong, nonatomic, readwrite) NSNumber   *orderInformation_minAmount;
-@property (strong, nonatomic, readwrite) NSNumber   *orderInformation_price;
-@property (strong, nonatomic, readwrite) NSNumber   *orderInformation_maxVolume;
-@property (strong, nonatomic, readwrite) NSNumber   *orderInformation_minVolume;
+@property (strong, nonatomic, readwrite) NSDecimalNumber   *orderInformation_maxAmount;
+@property (strong, nonatomic, readwrite) NSDecimalNumber   *orderInformation_minAmount;
+@property (strong, nonatomic, readwrite) NSDecimalNumber   *orderInformation_price;
+@property (strong, nonatomic, readwrite) NSDecimalNumber   *orderInformation_maxVolume;
+@property (strong, nonatomic, readwrite) NSDecimalNumber   *orderInformation_minVolume;
 @property (nonatomic, readwrite)         BOOL       orderInformation_orderRequirementsFullfilled;
 
 #pragma mark | Trading Partner Information
@@ -118,12 +118,12 @@
     orderbookData.orderInformation_orderID = [addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_OrderID];
     orderbookData.orderInformation_socketOrderObjectID = [addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_SocketObjectID];
     orderbookData.orderInformation_type = [addOrderSocketIODictionary objectForKey:BitcoinDE_ShowMyOrders_Type];
-    orderbookData.orderInformation_maxAmount = @([[addOrderSocketIODictionary objectForKey:@"amount"] doubleValue]);
-    orderbookData.orderInformation_minAmount = @([[addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_MinAmount] doubleValue]);
-    orderbookData.orderInformation_price = @([[addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_Price] doubleValue]);
+    orderbookData.orderInformation_maxAmount = [NSDecimalNumber decimalNumberWithDecimal:[[addOrderSocketIODictionary objectForKey:@"amount"] decimalValue]];
+    orderbookData.orderInformation_minAmount = [NSDecimalNumber decimalNumberWithDecimal:[[addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_MinAmount]  decimalValue]];
+    orderbookData.orderInformation_price = [NSDecimalNumber decimalNumberWithDecimal:[[addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_Price]  decimalValue]];
     
-    orderbookData.orderInformation_maxVolume = @(orderbookData.orderInformation_price.doubleValue * orderbookData.orderInformation_maxAmount.doubleValue);
-    orderbookData.orderInformation_minVolume = @(orderbookData.orderInformation_price.doubleValue * orderbookData.orderInformation_minAmount.doubleValue);
+    orderbookData.orderInformation_maxVolume = [orderbookData.orderInformation_price decimalNumberByMultiplyingBy:orderbookData.orderInformation_maxAmount];
+    orderbookData.orderInformation_minVolume = [orderbookData.orderInformation_price decimalNumberByMultiplyingBy:orderbookData.orderInformation_minAmount];
     
     orderbookData.orderRequirements_minTrustLevel = [addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_MinTustLevel];
     orderbookData.orderRequirements_onlyKYCFull = [[addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_OnlyKYCFull] boolValue];
@@ -233,11 +233,11 @@
     {
         self.orderInformation_orderID                      = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderID];
         self.orderInformation_type                         = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_Type];
-        self.orderInformation_maxAmount                    = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MaxAmount] doubleValue]);
-        self.orderInformation_minAmount                    = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MinAmount] doubleValue]);
-        self.orderInformation_price                        = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_Price] doubleValue]);
-        self.orderInformation_maxVolume                    = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MaxVolume] doubleValue]);
-        self.orderInformation_minVolume                    = @([[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MinVolume] doubleValue]);
+        self.orderInformation_maxAmount                    = [NSDecimalNumber decimalNumberWithDecimal:[[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MaxAmount] decimalValue]];
+        self.orderInformation_minAmount                    = [NSDecimalNumber decimalNumberWithDecimal:[[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MinAmount] decimalValue]];
+        self.orderInformation_price                        = [NSDecimalNumber decimalNumberWithDecimal:[[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_Price] decimalValue]];
+        self.orderInformation_maxVolume                    = [NSDecimalNumber decimalNumberWithDecimal:[[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MaxVolume] decimalValue]];
+        self.orderInformation_minVolume                    = [NSDecimalNumber decimalNumberWithDecimal:[[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MinVolume] decimalValue]];
         self.orderInformation_orderRequirementsFullfilled  = [[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderRequirementsFullfilled] boolValue];
     }
 

@@ -180,8 +180,8 @@
         
         // DEBUG Fidor Reservation for testing
         self.fidorReservationValuesAndDescriptionStackView.hidden = NO;
-        [SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount = [NSDecimalNumber decimalNumberWithString:@"200"];
-        self.fidorReservationAvailableAmountTextField.stringValue = @"Debug: 200€";
+        [SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount = [NSDecimalNumber decimalNumberWithString:@"300"];
+        self.fidorReservationAvailableAmountTextField.stringValue = @"Debug: 300€";
     }
 }
 
@@ -219,10 +219,11 @@
             {
                 [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted = ratesData.rate_weighted;
             
-                NSNumber *rate_weighted_half = [SOXFormatters divideNumber:ratesData.rate_weighted by:2];
-                NSNumber *rate_weighted_half_rounded = [SOXFormatters currencyNumberForNumber:rate_weighted_half
-                                                                                 roundingMode:NSNumberFormatterRoundUp];
-                [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted_half = [NSDecimalNumber decimalNumberWithDecimal:rate_weighted_half_rounded.decimalValue];
+                
+                NSDecimalNumber *rate_weighted_half         = [ratesData.rate_weighted decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"2"]];
+                NSDecimalNumber *rate_weighted_half_rounded = [SOXFormatters currencyNumberForNumber:rate_weighted_half
+                                                                                        roundingMode:NSNumberFormatterRoundUp];
+                [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted_half = rate_weighted_half_rounded;
             }
             
             [self startRatesReloadTimer];

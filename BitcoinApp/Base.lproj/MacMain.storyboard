@@ -3606,7 +3606,6 @@ Gw
                                 </textFieldCell>
                                 <connections>
                                     <binding destination="f8g-UU-ziE" name="value" keyPath="self.amountToTrade" id="Fkg-xg-1im"/>
-                                    <binding destination="f8g-UU-ziE" name="enabled" keyPath="self.executeTradeIsPossible" id="w5r-kQ-Agq"/>
                                     <outlet property="delegate" destination="f8g-UU-ziE" id="8ZB-8u-8Dy"/>
                                 </connections>
                             </textField>

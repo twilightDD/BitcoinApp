@@ -103,17 +103,17 @@
 }
 
 #pragma mark | Currency methods
-+ (NSNumber *)currencyNumberForNumber:(NSNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode {
++ (NSDecimalNumber *)currencyNumberForNumber:(NSDecimalNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode {
     NSNumberFormatter *currencyFormatter = [SOXFormatters currencyFormatter];
     currencyFormatter.roundingMode       = roundingMode;
 
     NSString *currencyString = [currencyFormatter stringFromNumber:value];
     NSNumber *currencyNumber = [currencyFormatter numberFromString:currencyString];
     
-    return currencyNumber;
+    return [NSDecimalNumber decimalNumberWithDecimal:currencyNumber.decimalValue];
 }
 
-+ (NSString *)currencyStringForNumber:(NSNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode {
++ (NSString *)currencyStringForNumber:(NSDecimalNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode {
     NSNumberFormatter *currencyFormatter = [SOXFormatters currencyFormatter];
     currencyFormatter.roundingMode       = roundingMode;
     
@@ -121,19 +121,33 @@
     return currencyString;
 }
 
-#pragma mark - Basic Math
-+ (NSDecimalNumber *)divideNumber:(NSNumber *)dividend by:(NSInteger)divisor {
-    if (!dividend || divisor == 0) {
-        return [NSDecimalNumber decimalNumberWithString:@"0"];
-    }
-    
-    NSDecimalNumber *dividendDN = [NSDecimalNumber decimalNumberWithDecimal:dividend.decimalValue];
-    
-    NSString *divisorString    = [NSString stringWithFormat:@"%zd", divisor];
-    NSDecimalNumber *divisorDN = [NSDecimalNumber decimalNumberWithString:divisorString];
-    
-    NSDecimalNumber *result = [dividendDN decimalNumberByDividingBy:divisorDN];
-    return result;
++ (NSDecimalNumberHandler *)btcNumberHandler {
+    static dispatch_once_t pred;
+    static NSDecimalNumberHandler *btcNumberHandler = nil;
+    dispatch_once(&pred, ^{
+        btcNumberHandler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown
+                                                                                  scale:8
+                                                                       raiseOnExactness:YES
+                                                                        raiseOnOverflow:YES
+                                                                       raiseOnUnderflow:YES
+                                                                    raiseOnDivideByZero:YES];
+    });
+    return btcNumberHandler;
 }
+
++ (NSDecimalNumber *)greaterDecimalNumberFrom:(NSDecimalNumber *)decimalNumber1 and:(NSDecimalNumber *)decimalNumber2 {
+    if ([decimalNumber1 isGreaterThanOrEqualTo:decimalNumber2]) {
+        return decimalNumber1;
+    }
+    return decimalNumber2;
+}
+
++ (NSDecimalNumber *)lessDecimalNumberFrom:(NSDecimalNumber *)decimalNumber1 and:(NSDecimalNumber *)decimalNumber2 {
+    if ([decimalNumber1 isLessThanOrEqualTo:decimalNumber2]) {
+        return decimalNumber1;
+    }
+    return decimalNumber2;
+}
+
 
 @end

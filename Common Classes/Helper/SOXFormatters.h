@@ -15,10 +15,10 @@
 + (NSString *)rfc3339DateTimeStringDate:(NSDate *)date;
 
 #pragma mark - Currency methods
-+ (NSNumber *)currencyNumberForNumber:(NSNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode;
-+ (NSString *)currencyStringForNumber:(NSNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode;
++ (NSDecimalNumber *)currencyNumberForNumber:(NSDecimalNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode;
++ (NSString *)currencyStringForNumber:(NSDecimalNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode;
 
-#pragma mark - Basic Math
-+ (NSDecimalNumber *)divideNumber:(NSNumber *)dividend by:(NSInteger)divisor;
-
++ (NSDecimalNumberHandler *)btcNumberHandler;
++ (NSDecimalNumber *)greaterDecimalNumberFrom:(NSDecimalNumber *)decimalNumber1 and:(NSDecimalNumber *)decimalNumber2;
++ (NSDecimalNumber *)lesserDecimalNumberFrom:(NSDecimalNumber *)decimalNumber1 and:(NSDecimalNumber *)decimalNumber2;
 @end

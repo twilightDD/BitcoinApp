@@ -15,11 +15,11 @@
 @property (strong, nonatomic, readonly) NSString   *orderInformation_orderID;
 @property (strong, nonatomic, readonly) NSString   *orderInformation_socketOrderObjectID;
 @property (strong, nonatomic, readonly) NSString   *orderInformation_type;
-@property (strong, nonatomic, readonly) NSNumber   *orderInformation_maxAmount;
-@property (strong, nonatomic, readonly) NSNumber   *orderInformation_minAmount;
-@property (strong, nonatomic, readonly) NSNumber   *orderInformation_price;
-@property (strong, nonatomic, readonly) NSNumber   *orderInformation_maxVolume;
-@property (strong, nonatomic, readonly) NSNumber   *orderInformation_minVolume;
+@property (strong, nonatomic, readonly) NSDecimalNumber   *orderInformation_maxAmount;
+@property (strong, nonatomic, readonly) NSDecimalNumber   *orderInformation_minAmount;
+@property (strong, nonatomic, readonly) NSDecimalNumber   *orderInformation_price;
+@property (strong, nonatomic, readonly) NSDecimalNumber   *orderInformation_maxVolume;
+@property (strong, nonatomic, readonly) NSDecimalNumber   *orderInformation_minVolume;
 @property (nonatomic, readonly)         BOOL       orderInformation_orderRequirementsFullfilled;
 
 #pragma mark | Trading Partner Information

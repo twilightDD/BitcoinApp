@@ -17,8 +17,8 @@
                 onlyExpressPaymentOption:(BOOL)onlyExpressPaymentOption;
 
 + (NSDictionary *)parametersForOrderType:(BitcoinDE_OrderType)orderType
-                           bitcoinAmount:(NSNumber *)bitcoinAmount
-                                   price:(NSNumber *)price
+                           bitcoinAmount:(NSDecimalNumber *)bitcoinAmount
+                                   price:(NSDecimalNumber *)price
              orderRequirementsFullfilled:(BOOL)orderRequirementsFullfilled
                              onlyKYCFull:(BOOL)onlyKYCFull
                 onlyExpressPaymentOption:(BOOL)onlyExpressPaymentOption
