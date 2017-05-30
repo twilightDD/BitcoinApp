@@ -236,7 +236,8 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
         
         if (self.orderType == BitcoinDE_BuyOrderType) {
             if (self.orderBookData.orderRequirements_paymentOption.unsignedIntegerValue == BitcoinDE_PaymentOptionSEPAOnly
-                || [[SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount isLessThan:self.orderBookData.orderInformation_minVolume]) {
+                || [self.orderBookData.orderInformation_minVolume isGreaterThanOrEqualTo:[SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount]) {
+                
                 self.maximalFidorBTCAmountButton.hidden = YES;
             }
             else {
@@ -245,7 +246,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
             }
             
             if (self.orderBookData.orderRequirements_paymentOption.unsignedIntegerValue == BitcoinDE_PaymentOptionExpressOnly
-                && [[SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount isLessThan:self.orderBookData.orderInformation_minVolume]) {
+                && [self.orderBookData.orderInformation_minVolume isGreaterThanOrEqualTo:[SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount]) {
                 self.userInformationTextField.hidden        = NO;
                 self.userInformationTextField.stringValue = @"Express only, but not enough Fidor reservation";
                 self.minimumBTCAmountButton.hidden = YES;
