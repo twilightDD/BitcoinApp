@@ -60,6 +60,10 @@
 @property (weak) IBOutlet NSStackView *creditValuesStackView;
 
 #pragma mark - Properties
+// Values to calculate wealth
+@property (strong, nonatomic) NSDecimalNumber *btcBalanceTotalAmount;
+
+// Notifications
 @property (strong, nonatomic) id requestShowAccountInfoNotification;
 @property (strong, nonatomic) id requestShowRatesNotification;
 
@@ -148,12 +152,12 @@
     
     // Credit stack
     {
-        self.creditHeadlineTextField.stringValue = @"Credit information";
+        self.creditHeadlineTextField.stringValue = @"Wealth information";
         
-        self.creditTextCurrentCreditsDescriptionField.stringValue = @"Current credits";
-        self.creditTextMaxCreditsDescriptonField.stringValue = @"Est. max credits";
+        self.creditTextCurrentCreditsDescriptionField.stringValue = @"";
+        self.creditTextMaxCreditsDescriptonField.stringValue = @"Current worth";
         
-        self.creditTextCurrentCreditsField.stringValue = @"...";
+        self.creditTextCurrentCreditsField.stringValue = @"";
         self.creditTextMaxCreditsField.stringValue = @"...";
     
     }
@@ -179,9 +183,9 @@
         self.fidorReservationValuesAndDescriptionStackView.hidden = YES;
         
         // DEBUG Fidor Reservation for testing
-        self.fidorReservationValuesAndDescriptionStackView.hidden = NO;
-        [SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount = [NSDecimalNumber decimalNumberWithString:@"300"];
-        self.fidorReservationAvailableAmountTextField.stringValue = @"Debug: 300€";
+//        self.fidorReservationValuesAndDescriptionStackView.hidden = NO;
+//        [SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount = [NSDecimalNumber decimalNumberWithString:@"300"];
+//        self.fidorReservationAvailableAmountTextField.stringValue = @"Debug: 300€";
     }
 }
 
@@ -198,6 +202,7 @@
             self.btcBalanceReservedAmountTextField.doubleValue = accountInfoData.btcBalance_reservedAmount.doubleValue;
             
             [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount = accountInfoData.btcBalance_availableAmount;
+            self.btcBalanceTotalAmount = accountInfoData.btcBalance_totalAmount;
         }
         
         // fidor_reservation
@@ -226,9 +231,16 @@
                 [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted_half = rate_weighted_half_rounded;
             }
             
-            [self startRatesReloadTimer];
+           // [self startRatesReloadTimer];
         }
     }
+    
+    if (self.btcBalanceTotalAmount && [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted ) {
+        NSDecimalNumber *wealth = [self.btcBalanceTotalAmount decimalNumberByMultiplyingBy:[SOXMarket_BitcoinDE_Core sharedCore].rate_weighted ];
+        self.creditTextMaxCreditsField.stringValue = [SOXFormatters currencyStringForNumber:wealth
+                                                                               roundingMode:NSNumberFormatterRoundUp];
+    }
+    
 }
 
 - (void)startRatesReloadTimer {
