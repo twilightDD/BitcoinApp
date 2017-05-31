@@ -92,17 +92,19 @@
 - (void)requestServerData {
     [self enableSpinningWheel];
     
-    if (self.orderType == BitcoinDE_BuyOrderType
-        || self.orderType == BitcoinDE_SellOrderType) {
-        NSDictionary *parameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:self.orderType
-                                                                  onlyExpressPaymentOption:NO];
-        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType
-                                                withParameter:parameters
-                                                    respondTo:self];
+    BitcoinDE_ServerCommandType serverCommand = UnknownCommand;
+    if (self.orderType == BitcoinDE_BuyOrderType ){
+        serverCommand = BitcoinDE_ShowBuyOrderbookCommandType;
     }
-    else {
-        NSLog(@"SOXOrdersViewController - (void)viewWillAppear : self.orderType has wrong type");
+    else if (self.orderType == BitcoinDE_SellOrderType) {
+        serverCommand = BitcoinDE_ShowSellOrderbookCommandType;
     }
+    
+    NSDictionary *parameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:self.orderType
+                                                              onlyExpressPaymentOption:NO];
+    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:serverCommand
+                                            withParameter:parameters
+                                                respondTo:self];
 }
 
 - (void)registerForWebSocketUpdates {
