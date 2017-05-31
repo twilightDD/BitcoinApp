@@ -24,8 +24,6 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 @interface SOXShowMyOrdersViewController () <SOXMarketCoreServerRequestProtocol, NSTableViewDelegate>
 
 #pragma mark IBOutlets
-@property (weak) IBOutlet NSTextField *titleTextField;
-
 @property (weak) IBOutlet NSTableView *tableView;
 
 @property (weak) IBOutlet NSButton *reloadButton;
@@ -56,9 +54,7 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 }
 
 #pragma mark - Private methods
-- (void)setupUI {
-    self.titleTextField.stringValue = @"My active orders";
-    
+- (void)setupUI {    
     {
         self.reloadButton.title = @"Reload";
         self.removeButton.title = @"Remove order";

@@ -1750,13 +1750,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVf-cd-9K7">
-                                <rect key="frame" x="20" y="8" width="314" height="265"/>
+                                <rect key="frame" x="20" y="8" width="314" height="272"/>
                                 <clipView key="contentView" id="pXN-85-eeM">
-                                    <rect key="frame" x="1" y="0.0" width="312" height="249"/>
+                                    <rect key="frame" x="1" y="0.0" width="312" height="256"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" headerView="2F9-Ce-VdL" id="kdt-bX-tib">
-                                            <rect key="frame" x="0.0" y="0.0" width="814" height="226"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="814" height="233"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1938,7 +1938,7 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="ink-sr-cHK"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="z69-5g-yDr">
-                                    <rect key="frame" x="1" y="249" width="312" height="15"/>
+                                    <rect key="frame" x="1" y="256" width="312" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="Jgd-vM-SQi">
@@ -1951,10 +1951,10 @@
                                 </tableHeaderView>
                             </scrollView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="djv-Fe-LAU" userLabel="SpinningBackgroundView">
-                                <rect key="frame" x="20" y="8" width="314" height="242"/>
+                                <rect key="frame" x="20" y="8" width="314" height="249"/>
                                 <subviews>
                                     <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="sQ4-6W-phR">
-                                        <rect key="frame" x="149" y="113" width="16" height="16"/>
+                                        <rect key="frame" x="149" y="117" width="16" height="16"/>
                                     </progressIndicator>
                                 </subviews>
                                 <constraints>
@@ -1983,30 +1983,19 @@
                                     <binding destination="t8U-TY-Pcr" name="enabled" keyPath="selectedObjects.@count" id="J3r-4M-cN3"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YlZ-0A-yU6">
-                                <rect key="frame" x="18" y="281" width="414" height="19"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="rN4-WM-AC4">
-                                    <font key="font" metaFont="systemMedium" size="15"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="leading" secondItem="dVf-cd-9K7" secondAttribute="trailing" constant="16" id="44W-Pd-PcN"/>
                             <constraint firstAttribute="trailing" secondItem="wNc-yI-m0l" secondAttribute="trailing" constant="23" id="6dy-yd-Mzi"/>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="trailing" secondItem="hfD-y1-lfC" secondAttribute="trailing" id="AXt-l0-V1r"/>
                             <constraint firstItem="dVf-cd-9K7" firstAttribute="leading" secondItem="d9Y-Go-gwW" secondAttribute="leading" constant="20" symbolic="YES" id="AwV-Ul-N11"/>
+                            <constraint firstItem="dVf-cd-9K7" firstAttribute="top" secondItem="d9Y-Go-gwW" secondAttribute="top" constant="20" symbolic="YES" id="GHS-ea-bq1"/>
                             <constraint firstItem="hfD-y1-lfC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="pXN-85-eeM" secondAttribute="top" constant="20" id="GZ5-Ej-Yxn"/>
-                            <constraint firstItem="dVf-cd-9K7" firstAttribute="top" secondItem="YlZ-0A-yU6" secondAttribute="bottom" constant="8" symbolic="YES" id="Ij5-JG-Ljo"/>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="top" secondItem="hfD-y1-lfC" secondAttribute="bottom" constant="12" symbolic="YES" id="RYQ-fU-VC7"/>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="leading" secondItem="hfD-y1-lfC" secondAttribute="leading" id="RZ3-tW-jPJ"/>
-                            <constraint firstItem="YlZ-0A-yU6" firstAttribute="leading" secondItem="d9Y-Go-gwW" secondAttribute="leading" constant="20" id="SIf-W6-rlz"/>
                             <constraint firstItem="djv-Fe-LAU" firstAttribute="top" secondItem="dVf-cd-9K7" secondAttribute="top" constant="23" id="Xdn-oB-fft"/>
                             <constraint firstItem="djv-Fe-LAU" firstAttribute="bottom" secondItem="dVf-cd-9K7" secondAttribute="bottom" id="aun-FS-fVB"/>
-                            <constraint firstAttribute="trailing" secondItem="YlZ-0A-yU6" secondAttribute="trailing" constant="20" id="eEv-nT-FhW"/>
                             <constraint firstItem="djv-Fe-LAU" firstAttribute="trailing" secondItem="dVf-cd-9K7" secondAttribute="trailing" id="h6r-Rf-XbF"/>
-                            <constraint firstItem="YlZ-0A-yU6" firstAttribute="top" secondItem="d9Y-Go-gwW" secondAttribute="top" id="jz3-ZL-tXX"/>
                             <constraint firstAttribute="bottom" secondItem="wNc-yI-m0l" secondAttribute="bottom" constant="8" id="njI-bu-QXY"/>
                             <constraint firstAttribute="bottom" secondItem="dVf-cd-9K7" secondAttribute="bottom" constant="8" id="o9W-WE-DLd"/>
                             <constraint firstItem="djv-Fe-LAU" firstAttribute="leading" secondItem="dVf-cd-9K7" secondAttribute="leading" id="zkW-pa-GiK"/>
@@ -2019,7 +2008,6 @@
                         <outlet property="removeButton" destination="hfD-y1-lfC" id="bG9-EL-gug"/>
                         <outlet property="spinningBackgroundView" destination="djv-Fe-LAU" id="Cih-2u-wdf"/>
                         <outlet property="tableView" destination="kdt-bX-tib" id="5nZ-eQ-vmd"/>
-                        <outlet property="titleTextField" destination="YlZ-0A-yU6" id="NaZ-xP-Qmf"/>
                     </connections>
                 </viewController>
                 <customObject id="7kO-Hb-1O5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -2622,14 +2610,6 @@ Gw
                         <rect key="frame" x="0.0" y="0.0" width="540" height="344"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTM-y7-dO4">
-                                <rect key="frame" x="18" y="325" width="504" height="19"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="ceY-tG-kvr">
-                                    <font key="font" metaFont="systemMedium" size="15"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="CvW-je-qdf">
                                 <rect key="frame" x="216" y="20" width="109" height="21"/>
                                 <subviews>
@@ -2669,13 +2649,13 @@ Gw
                                 </constraints>
                             </customView>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fGp-j1-fNK">
-                                <rect key="frame" x="20" y="49" width="500" height="268"/>
+                                <rect key="frame" x="20" y="49" width="500" height="275"/>
                                 <clipView key="contentView" id="q6P-13-wzZ">
-                                    <rect key="frame" x="1" y="0.0" width="498" height="252"/>
+                                    <rect key="frame" x="1" y="0.0" width="498" height="259"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" headerView="UdI-6x-40i" id="ukh-mk-8h8">
-                                            <rect key="frame" x="0.0" y="0.0" width="997" height="229"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="997" height="236"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2841,7 +2821,7 @@ Gw
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="180" id="wkM-9V-7ME"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="7C6-vt-23Y">
-                                    <rect key="frame" x="1" y="252" width="498" height="15"/>
+                                    <rect key="frame" x="1" y="259" width="498" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="lZK-RD-pkv">
@@ -2854,10 +2834,10 @@ Gw
                                 </tableHeaderView>
                             </scrollView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="4oR-2z-iOV" userLabel="SpinningBackgroundView">
-                                <rect key="frame" x="21" y="65" width="498" height="229"/>
+                                <rect key="frame" x="21" y="65" width="498" height="236"/>
                                 <subviews>
                                     <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="09c-cw-0o8">
-                                        <rect key="frame" x="241" y="107" width="16" height="16"/>
+                                        <rect key="frame" x="241" y="111" width="16" height="16"/>
                                     </progressIndicator>
                                 </subviews>
                                 <constraints>
@@ -2872,14 +2852,11 @@ Gw
                             <constraint firstItem="CvW-je-qdf" firstAttribute="top" secondItem="fGp-j1-fNK" secondAttribute="bottom" constant="8" symbolic="YES" id="Got-aD-gb9"/>
                             <constraint firstItem="4oR-2z-iOV" firstAttribute="top" secondItem="q6P-13-wzZ" secondAttribute="top" id="PrQ-FB-imn"/>
                             <constraint firstItem="4oR-2z-iOV" firstAttribute="trailing" secondItem="q6P-13-wzZ" secondAttribute="trailing" id="R5w-FU-DRf"/>
-                            <constraint firstItem="fGp-j1-fNK" firstAttribute="top" secondItem="RTM-y7-dO4" secondAttribute="bottom" constant="8" symbolic="YES" id="VbB-0N-HU8"/>
                             <constraint firstItem="fGp-j1-fNK" firstAttribute="leading" secondItem="KG1-ac-oC6" secondAttribute="leading" constant="20" id="WO2-2V-g34"/>
-                            <constraint firstItem="RTM-y7-dO4" firstAttribute="leading" secondItem="KG1-ac-oC6" secondAttribute="leading" constant="20" id="ca8-kz-nye"/>
-                            <constraint firstItem="RTM-y7-dO4" firstAttribute="top" secondItem="KG1-ac-oC6" secondAttribute="top" id="dRn-m3-M9o"/>
+                            <constraint firstItem="fGp-j1-fNK" firstAttribute="top" secondItem="KG1-ac-oC6" secondAttribute="top" constant="20" id="eN2-x7-j04"/>
                             <constraint firstItem="4oR-2z-iOV" firstAttribute="leading" secondItem="q6P-13-wzZ" secondAttribute="leading" id="krl-KI-xnf"/>
                             <constraint firstItem="4oR-2z-iOV" firstAttribute="bottom" secondItem="q6P-13-wzZ" secondAttribute="bottom" id="lI6-38-Gon"/>
                             <constraint firstAttribute="trailing" secondItem="fGp-j1-fNK" secondAttribute="trailing" constant="20" id="nlP-N0-oAG"/>
-                            <constraint firstAttribute="trailing" secondItem="RTM-y7-dO4" secondAttribute="trailing" constant="20" id="vwZ-73-wKN"/>
                         </constraints>
                     </view>
                     <connections>
@@ -2891,7 +2868,6 @@ Gw
                         <outlet property="pageIndicatorTextField" destination="q0G-qt-NQb" id="2qT-Iu-zhg"/>
                         <outlet property="spinningBackgroundView" destination="4oR-2z-iOV" id="tAp-0I-fyd"/>
                         <outlet property="tableView" destination="ukh-mk-8h8" id="PWX-B4-1iB"/>
-                        <outlet property="titleTextField" destination="RTM-y7-dO4" id="jkr-T0-kLi"/>
                     </connections>
                 </viewController>
                 <customObject id="gWJ-Pw-cBy" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

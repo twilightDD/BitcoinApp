@@ -15,8 +15,6 @@
 #pragma mark - Interface
 @interface SOXMyAccountLedgerViewController () <SOXMarketCoreServerRequestProtocol>
 #pragma mark IBOutlets
-
-@property (weak) IBOutlet NSTextField *titleTextField;
 @property (weak) IBOutlet NSTableView *tableView;
 
 @property (weak) IBOutlet NSView *pageContainerView;
@@ -47,9 +45,7 @@
 }
 
 #pragma mark - Private methods
-- (void)setupUI {
-    self.titleTextField.stringValue = @"My trading history";
-    
+- (void)setupUI {    
     self.pageContainerView.hidden = YES;
 }
 
