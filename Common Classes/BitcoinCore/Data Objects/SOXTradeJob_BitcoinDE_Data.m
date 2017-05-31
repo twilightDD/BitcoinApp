@@ -16,8 +16,7 @@
                         bitcoinAmount:(NSNumber *)bitcoinAmount{
     if (!orderID
         || orderID.length == 0
-        || (orderType != BitcoinDE_BuyOrderType && orderType != BitcoinDE_SellOrderType)
-        || bitcoinAmount.doubleValue < 0.1) {
+        || (orderType != BitcoinDE_BuyOrderType && orderType != BitcoinDE_SellOrderType)) {
         return nil;
     }
     
