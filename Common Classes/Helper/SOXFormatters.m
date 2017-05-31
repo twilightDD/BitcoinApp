@@ -75,6 +75,20 @@
     return currencyStringFormatter;
 }
 
++ (NSNumberFormatter *)btcFormatter {
+    static dispatch_once_t pred;
+    static NSNumberFormatter *btcFormatter = nil;
+    dispatch_once(&pred, ^{
+        btcFormatter = [NSNumberFormatter new];
+        [btcFormatter setLocale:[NSLocale autoupdatingCurrentLocale]];
+        [btcFormatter setMinimumIntegerDigits:1];
+        [btcFormatter setMinimumFractionDigits:8];
+        [btcFormatter setMaximumFractionDigits:8];
+    });
+    return btcFormatter;
+}
+
+
 #pragma mark - Public methods
 #pragma mark | Date methods
 + (NSString *)stringDateTimeStringForRFC3339DateTimeString:(NSString *)rfc3339DateTimeString {
@@ -121,6 +135,7 @@
     return currencyString;
 }
 
+#pragma mark | BTC methods
 + (NSDecimalNumberHandler *)btcNumberHandler {
     static dispatch_once_t pred;
     static NSDecimalNumberHandler *btcNumberHandler = nil;
@@ -135,6 +150,18 @@
     return btcNumberHandler;
 }
 
++ (NSString *)stringForBTCNumber:(NSDecimalNumber *)btcValue {
+    NSString *stringForBTCNumber = @"";
+    
+    if (btcValue) {
+        NSNumberFormatter *btcFormatter = [SOXFormatters btcFormatter];
+        stringForBTCNumber = [btcFormatter stringFromNumber:btcValue];
+    }
+    
+    return stringForBTCNumber;
+}
+
+#pragma mark | Decimal Number handling
 + (NSDecimalNumber *)greaterDecimalNumberFrom:(NSDecimalNumber *)decimalNumber1 and:(NSDecimalNumber *)decimalNumber2 {
     if ([decimalNumber1 isGreaterThanOrEqualTo:decimalNumber2]) {
         return decimalNumber1;

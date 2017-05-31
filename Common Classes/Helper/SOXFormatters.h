@@ -18,7 +18,13 @@
 + (NSDecimalNumber *)currencyNumberForNumber:(NSDecimalNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode;
 + (NSString *)currencyStringForNumber:(NSDecimalNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode;
 
+#pragma mark - BTC methods
 + (NSDecimalNumberHandler *)btcNumberHandler;
++ (NSString *)stringForBTCNumber:(NSDecimalNumber *)btcValue;
+
+#pragma mark - Decimal Number handling
 + (NSDecimalNumber *)greaterDecimalNumberFrom:(NSDecimalNumber *)decimalNumber1 and:(NSDecimalNumber *)decimalNumber2;
 + (NSDecimalNumber *)lesserDecimalNumberFrom:(NSDecimalNumber *)decimalNumber1 and:(NSDecimalNumber *)decimalNumber2;
+
+
 @end
