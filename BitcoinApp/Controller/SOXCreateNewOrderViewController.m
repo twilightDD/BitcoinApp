@@ -40,6 +40,7 @@
 @property (weak) IBOutlet NSBox *optionBox;
 @property (weak) IBOutlet NSButton *onlyKYCButton;
 @property (weak) IBOutlet NSButton *reNewOrderButton;
+@property (weak) IBOutlet NSTextField *trustLevelDescpriptionTextField;
 @property (weak) IBOutlet NSButton *bronceTrustLevelButton;
 @property (weak) IBOutlet NSButton *silverTrustLevelButton;
 @property (weak) IBOutlet NSButton *goldTrustLevelButton;
@@ -150,6 +151,7 @@
     self.onlyKYCButton.title                        = @"Allow only fully identified Users";
     self.reNewOrderButton.title                     = @"Automatic residual purchase request";
     
+    self.trustLevelDescpriptionTextField.stringValue = @"Minimal Trust Level";
     self.bronceTrustLevelButton.title               = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelBronze];
     self.bronceTrustLevelButton.tag                 = BitcoinDE_TrustLevelBronze;
     self.silverTrustLevelButton.title               = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelSilver];
@@ -270,7 +272,7 @@
             NSString *messageText,*informativeText;
             NSAlertStyle alertStyle;
             if (newOrderID) {
-                messageText     = @"Success";
+                messageText     = @"Successfully created";
                 informativeText = [NSString stringWithFormat:@"Order created with orderID %@", newOrderID];
                 alertStyle      = NSAlertStyleInformational;
             }

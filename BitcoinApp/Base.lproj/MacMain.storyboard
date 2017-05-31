@@ -3033,7 +3033,7 @@ Gw
                                             </connections>
                                         </button>
                                         <button horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="oFJ-jv-rrY">
-                                            <rect key="frame" x="19" y="55" width="76" height="18"/>
+                                            <rect key="frame" x="19" y="44" width="76" height="18"/>
                                             <buttonCell key="cell" type="radio" title="Silver" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="C5B-hE-41M">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -3043,7 +3043,7 @@ Gw
                                             </connections>
                                         </button>
                                         <button horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="dlV-kR-ppO">
-                                            <rect key="frame" x="19" y="77" width="76" height="18"/>
+                                            <rect key="frame" x="19" y="66" width="76" height="18"/>
                                             <buttonCell key="cell" type="radio" title="Bronce" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="XhG-ek-esa">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -3053,7 +3053,7 @@ Gw
                                             </connections>
                                         </button>
                                         <button horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="nfn-lu-b8i">
-                                            <rect key="frame" x="19" y="33" width="76" height="18"/>
+                                            <rect key="frame" x="19" y="22" width="76" height="18"/>
                                             <buttonCell key="cell" type="radio" title="Gold" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="ySp-Oq-ekU">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -3087,12 +3087,20 @@ Gw
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIf-ZL-8JB">
+                                            <rect key="frame" x="18" y="91" width="58" height="17"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="minLevel" id="gjr-iQ-Kf7">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="5tt-E2-Y2e" firstAttribute="top" secondItem="Yxd-wM-TZl" secondAttribute="top" constant="45" id="2Cg-Yi-UBy"/>
                                         <constraint firstItem="Mzv-eg-HWw" firstAttribute="top" secondItem="I1S-WB-efT" secondAttribute="bottom" constant="8" symbolic="YES" id="4WV-jL-nIb"/>
                                         <constraint firstItem="nfn-lu-b8i" firstAttribute="trailing" secondItem="dlV-kR-ppO" secondAttribute="trailing" id="5l6-JF-R86"/>
-                                        <constraint firstItem="dlV-kR-ppO" firstAttribute="top" secondItem="ehG-Ud-cJJ" secondAttribute="bottom" constant="36" id="8vS-Yw-oyg"/>
+                                        <constraint firstItem="aIf-ZL-8JB" firstAttribute="top" secondItem="ehG-Ud-cJJ" secondAttribute="bottom" constant="22" id="6X6-Gb-e3U"/>
                                         <constraint firstItem="ehG-Ud-cJJ" firstAttribute="leading" secondItem="Yxd-wM-TZl" secondAttribute="leading" constant="20" id="9fZ-PS-9eV"/>
                                         <constraint firstItem="nfn-lu-b8i" firstAttribute="top" secondItem="oFJ-jv-rrY" secondAttribute="bottom" constant="6" id="Bs0-8e-fD8"/>
                                         <constraint firstItem="I1S-WB-efT" firstAttribute="leading" secondItem="Mzv-eg-HWw" secondAttribute="leading" id="EQ9-0m-Jla"/>
@@ -3100,8 +3108,11 @@ Gw
                                         <constraint firstItem="nfn-lu-b8i" firstAttribute="leading" secondItem="Yxd-wM-TZl" secondAttribute="leading" constant="20" id="Jlz-KG-mWg"/>
                                         <constraint firstItem="oFJ-jv-rrY" firstAttribute="top" secondItem="dlV-kR-ppO" secondAttribute="bottom" constant="6" id="Khl-4O-sxH"/>
                                         <constraint firstItem="Mzv-eg-HWw" firstAttribute="leading" secondItem="ehG-Ud-cJJ" secondAttribute="trailing" constant="8" id="LFI-lf-XNY"/>
+                                        <constraint firstItem="dlV-kR-ppO" firstAttribute="top" secondItem="aIf-ZL-8JB" secondAttribute="bottom" constant="8" symbolic="YES" id="Mdb-Zz-dKo"/>
                                         <constraint firstAttribute="bottom" secondItem="Mzv-eg-HWw" secondAttribute="bottom" constant="20" symbolic="YES" id="N5g-6c-Xcc"/>
+                                        <constraint firstItem="Mzv-eg-HWw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aIf-ZL-8JB" secondAttribute="trailing" constant="8" symbolic="YES" id="Qyj-c5-PTg"/>
                                         <constraint firstItem="nfn-lu-b8i" firstAttribute="leading" secondItem="dlV-kR-ppO" secondAttribute="leading" id="Tqg-UM-30l"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="nfn-lu-b8i" secondAttribute="bottom" constant="20" symbolic="YES" id="UnR-Td-MAh"/>
                                         <constraint firstItem="nfn-lu-b8i" firstAttribute="leading" secondItem="oFJ-jv-rrY" secondAttribute="leading" id="azA-7e-mu0"/>
                                         <constraint firstItem="nfn-lu-b8i" firstAttribute="trailing" secondItem="oFJ-jv-rrY" secondAttribute="trailing" id="dKu-TI-qa6"/>
                                         <constraint firstItem="ehG-Ud-cJJ" firstAttribute="top" secondItem="5tt-E2-Y2e" secondAttribute="bottom" constant="10" id="dYd-lB-yDL"/>
@@ -3110,6 +3121,7 @@ Gw
                                         <constraint firstItem="5tt-E2-Y2e" firstAttribute="trailing" secondItem="dlV-kR-ppO" secondAttribute="trailing" id="nKR-5H-bui"/>
                                         <constraint firstItem="5tt-E2-Y2e" firstAttribute="leading" secondItem="dlV-kR-ppO" secondAttribute="leading" id="olz-Ry-mJj"/>
                                         <constraint firstAttribute="trailing" secondItem="Mzv-eg-HWw" secondAttribute="trailing" constant="20" symbolic="YES" id="yKo-Ve-tXr"/>
+                                        <constraint firstItem="aIf-ZL-8JB" firstAttribute="leading" secondItem="ehG-Ud-cJJ" secondAttribute="leading" id="zYo-uD-kou"/>
                                     </constraints>
                                 </view>
                             </box>
@@ -3196,6 +3208,7 @@ Gw
                         <outlet property="reNewOrderButton" destination="ehG-Ud-cJJ" id="DWh-xK-d8f"/>
                         <outlet property="silverTrustLevelButton" destination="oFJ-jv-rrY" id="F40-jg-3sZ"/>
                         <outlet property="titleTextField" destination="aWc-gU-d53" id="fD6-Gn-yeS"/>
+                        <outlet property="trustLevelDescpriptionTextField" destination="aIf-ZL-8JB" id="Cgs-Wq-fbD"/>
                         <outlet property="volumeTextField" destination="3LD-JI-7kF" id="Hqg-gm-6VG"/>
                     </connections>
                 </viewController>
