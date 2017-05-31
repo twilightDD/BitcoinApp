@@ -1261,10 +1261,10 @@
                                                     <rect key="frame" x="361" y="0.0" width="5" height="119"/>
                                                 </box>
                                                 <stackView distribution="fillEqually" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aTk-QB-Ksu" userLabel="CreditStack">
-                                                    <rect key="frame" x="380" y="50" width="93" height="69"/>
+                                                    <rect key="frame" x="380" y="46" width="93" height="73"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zNQ-4W-MRR">
-                                                            <rect key="frame" x="25" y="50" width="43" height="19"/>
+                                                            <rect key="frame" x="25" y="54" width="43" height="19"/>
                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="9OJ-Vx-3Iz">
                                                                 <font key="font" metaFont="systemSemibold" size="15"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1272,23 +1272,23 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="16" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C7I-8U-PBB">
-                                                            <rect key="frame" x="5" y="0.0" width="82" height="42"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="92" height="46"/>
                                                             <subviews>
                                                                 <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sdp-M6-mrQ" userLabel="DescriptionStack">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="33" height="42"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="38" height="46"/>
                                                                     <subviews>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q2f-6I-X6F">
-                                                                            <rect key="frame" x="-2" y="25" width="37" height="17"/>
+                                                                            <rect key="frame" x="-2" y="27" width="42" height="19"/>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="5Jk-pP-TPz">
-                                                                                <font key="font" metaFont="system"/>
+                                                                                <font key="font" metaFont="system" size="15"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Swe-C7-ICY">
-                                                                            <rect key="frame" x="-2" y="0.0" width="37" height="17"/>
+                                                                            <rect key="frame" x="-2" y="0.0" width="42" height="19"/>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="HAQ-iL-qFL">
-                                                                                <font key="font" metaFont="system"/>
+                                                                                <font key="font" metaFont="system" size="15"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
@@ -1304,22 +1304,22 @@
                                                                     </customSpacing>
                                                                 </stackView>
                                                                 <stackView distribution="fill" orientation="vertical" alignment="trailing" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UA5-GU-pca" userLabel="ValuesStack">
-                                                                    <rect key="frame" x="49" y="0.0" width="33" height="42"/>
+                                                                    <rect key="frame" x="54" y="0.0" width="38" height="46"/>
                                                                     <subviews>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MNx-sU-WUO">
-                                                                            <rect key="frame" x="-2" y="25" width="37" height="17"/>
+                                                                            <rect key="frame" x="-2" y="27" width="42" height="19"/>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="JuO-Bb-JBV">
                                                                                 <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="rN9-Gi-CJP"/>
-                                                                                <font key="font" metaFont="system"/>
+                                                                                <font key="font" metaFont="system" size="15"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87r-AJ-JBl">
-                                                                            <rect key="frame" x="-2" y="0.0" width="37" height="17"/>
+                                                                            <rect key="frame" x="-2" y="0.0" width="42" height="19"/>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="w4A-NA-pk1">
                                                                                 <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="YoY-E8-0vx"/>
-                                                                                <font key="font" metaFont="system"/>
+                                                                                <font key="font" metaFont="system" size="15"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
@@ -1400,12 +1400,12 @@
                         <outlet property="btcBalanceReservedAmountTextField" destination="VTX-vr-jAB" id="MuN-3e-p6x"/>
                         <outlet property="btcBalanceTotalAmountDescriptionTextField" destination="FIe-Bo-Niw" id="ErM-Iw-3Ya"/>
                         <outlet property="btcBalanceTotalAmountTextField" destination="KMw-dO-CSw" id="DV6-3Q-eWJ"/>
-                        <outlet property="creditHeadlineTextField" destination="zNQ-4W-MRR" id="JTD-v4-Lpw"/>
-                        <outlet property="creditTextCurrentCreditsDescriptionField" destination="Q2f-6I-X6F" id="eUj-JR-aro"/>
-                        <outlet property="creditTextCurrentCreditsField" destination="MNx-sU-WUO" id="RI0-T5-5x1"/>
-                        <outlet property="creditTextMaxCreditsDescriptonField" destination="Swe-C7-ICY" id="5tB-i7-tik"/>
-                        <outlet property="creditTextMaxCreditsField" destination="87r-AJ-JBl" id="5HX-Of-zbs"/>
-                        <outlet property="creditValuesStackView" destination="aTk-QB-Ksu" id="FH4-7o-zwl"/>
+                        <outlet property="coinValueDescriptionTextField" destination="Q2f-6I-X6F" id="aro-nv-AdU"/>
+                        <outlet property="coinValueHeadlineTextField" destination="zNQ-4W-MRR" id="8q2-eR-70n"/>
+                        <outlet property="coinValueStackView" destination="aTk-QB-Ksu" id="KAA-Ph-Ado"/>
+                        <outlet property="coinValueTextField" destination="MNx-sU-WUO" id="SMc-cm-EPi"/>
+                        <outlet property="emptyDescriptionTextField" destination="Swe-C7-ICY" id="LVG-39-5CE"/>
+                        <outlet property="emptyTextField" destination="87r-AJ-JBl" id="xBb-Tc-TfV"/>
                         <outlet property="fidorReservationAvailableAmountDescriptionTextField" destination="7JW-Mt-ieO" id="hzB-x3-MZw"/>
                         <outlet property="fidorReservationAvailableAmountTextField" destination="WK5-8f-wXL" id="WVi-lk-XQ6"/>
                         <outlet property="fidorReservationDescriptionStackView" destination="fst-V2-Q7l" id="d4R-kn-DbJ"/>

@@ -17,7 +17,7 @@
 #import "SOXFormatters.h"
 
 #pragma mark - Interface
-@interface SOXBannerViewController () <SOXMarketCoreServerRequestProtocol, SOXCreditUpdateProtocol>
+@interface SOXBannerViewController () <SOXMarketCoreServerRequestProtocol>
 
 #pragma mark IBOutlets
 #pragma mark | accountInfoData (BTCBalance)
@@ -51,13 +51,14 @@
 @property (weak) IBOutlet NSTextField *ratesRateWeighted12hDescriptionTextField;
 @property (weak) IBOutlet NSTextField *ratesRateWeighted12hTextField;
 
-#pragma mark | creditData
-@property (weak) IBOutlet NSTextField *creditHeadlineTextField;
-@property (weak) IBOutlet NSTextField *creditTextCurrentCreditsDescriptionField;
-@property (weak) IBOutlet NSTextField *creditTextCurrentCreditsField;
-@property (weak) IBOutlet NSTextField *creditTextMaxCreditsDescriptonField;
-@property (weak) IBOutlet NSTextField *creditTextMaxCreditsField;
-@property (weak) IBOutlet NSStackView *creditValuesStackView;
+#pragma mark | Coin value data
+@property (weak) IBOutlet NSTextField *coinValueHeadlineTextField;
+@property (weak) IBOutlet NSTextField *coinValueDescriptionTextField;
+@property (weak) IBOutlet NSTextField *coinValueTextField;
+@property (weak) IBOutlet NSTextField *emptyDescriptionTextField; // layout errors
+@property (weak) IBOutlet NSTextField *emptyTextField;// layout errors
+
+@property (weak) IBOutlet NSStackView *coinValueStackView;
 
 #pragma mark - Properties
 // Values to calculate wealth
@@ -152,13 +153,13 @@
     
     // Credit stack
     {
-        self.creditHeadlineTextField.stringValue = @"Wealth information";
+        self.coinValueHeadlineTextField.stringValue = @"Coin value";
         
-        self.creditTextCurrentCreditsDescriptionField.stringValue = @"";
-        self.creditTextMaxCreditsDescriptonField.stringValue = @"Current worth";
+        self.coinValueDescriptionTextField.stringValue = @"BTC value";
+        self.coinValueTextField.stringValue = @"...";
         
-        self.creditTextCurrentCreditsField.stringValue = @"";
-        self.creditTextMaxCreditsField.stringValue = @"...";
+        self.emptyDescriptionTextField.hidden = YES;
+        self.emptyTextField.hidden = YES;
     
     }
 }
@@ -236,9 +237,9 @@
     }
     
     if (self.btcBalanceTotalAmount && [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted ) {
-        NSDecimalNumber *wealth = [self.btcBalanceTotalAmount decimalNumberByMultiplyingBy:[SOXMarket_BitcoinDE_Core sharedCore].rate_weighted ];
-        self.creditTextMaxCreditsField.stringValue = [SOXFormatters currencyStringForNumber:wealth
-                                                                               roundingMode:NSNumberFormatterRoundUp];
+        NSDecimalNumber *coinValue = [self.btcBalanceTotalAmount decimalNumberByMultiplyingBy:[SOXMarket_BitcoinDE_Core sharedCore].rate_weighted ];
+        self.coinValueTextField.stringValue = [SOXFormatters currencyStringForNumber:coinValue
+                                                                        roundingMode:NSNumberFormatterRoundUp];
     }
     
 }
@@ -254,14 +255,5 @@
     [[NSRunLoop mainRunLoop] addTimer:ratesReloadTimer forMode:NSDefaultRunLoopMode];
 }
 
-
-#pragma mark - SOXCreditUpdateProtocol
-- (void)creditValuesUpdated:(NSDictionary * _Nonnull)creditDicts {
-    NSNumber *currentCredit = [creditDicts objectForKey:CreditUpdate_CurrentCreditsKey];
-    NSNumber *maxCredits = [creditDicts objectForKey:CreditUpdate_MaximalCreditsKey];
-    
-    self.creditTextCurrentCreditsField.stringValue = currentCredit.stringValue;
-    self.creditTextMaxCreditsField.stringValue = maxCredits.stringValue;
-}
 
 @end
