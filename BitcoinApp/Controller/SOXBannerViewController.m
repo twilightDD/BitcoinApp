@@ -198,9 +198,9 @@
         
         //  btc_balance
         {
-            self.btcBalanceTotalAmountTextField.doubleValue = accountInfoData.btcBalance_totalAmount.doubleValue;
-            self.btcBalanceAvailableAmountTextField.doubleValue = accountInfoData.btcBalance_availableAmount.doubleValue;
-            self.btcBalanceReservedAmountTextField.doubleValue = accountInfoData.btcBalance_reservedAmount.doubleValue;
+            self.btcBalanceTotalAmountTextField.objectValue     = accountInfoData.btcBalance_totalAmount;
+            self.btcBalanceAvailableAmountTextField.objectValue = accountInfoData.btcBalance_availableAmount;
+            self.btcBalanceReservedAmountTextField.objectValue  = accountInfoData.btcBalance_reservedAmount;
             
             [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount = accountInfoData.btcBalance_availableAmount;
             self.btcBalanceTotalAmount = accountInfoData.btcBalance_totalAmount;
@@ -217,9 +217,9 @@
         SOXRatesData *ratesData = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
         //  rates
         {
-            self.ratesRateWeightedTextField.doubleValue = ratesData.rate_weighted.doubleValue;
-            self.ratesRateWeighted3hTextField.doubleValue = ratesData.rate_weighted_3h.doubleValue;
-            self.ratesRateWeighted12hTextField.doubleValue = ratesData.rate_weighted_12h.doubleValue;
+            self.ratesRateWeightedTextField.objectValue     = ratesData.rate_weighted;
+            self.ratesRateWeighted3hTextField.objectValue   = ratesData.rate_weighted_3h;
+            self.ratesRateWeighted12hTextField.objectValue  = ratesData.rate_weighted_12h;
             
             // set values on SOXMarket_BitcoinDE_Core
             {
