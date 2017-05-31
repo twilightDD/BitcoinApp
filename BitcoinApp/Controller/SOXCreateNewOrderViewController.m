@@ -100,9 +100,11 @@
             NSNumberFormatter *priceFormatter = self.priceTextField.formatter;
             // Stupid hack, but needed: subtract 0.001!
             priceFormatter.minimum            = [self.minimalPossiblePrice decimalNumberBySubtracting:[NSDecimalNumber decimalNumberWithString:@"0.001"]];
-            
+        
             // inform user
-            self.volumeTextField.stringValue = [NSString stringWithFormat:@"Min. price: %@\n(50%% weighted rate)",self.minimalPossiblePrice];
+            self.volumeTextField.stringValue = [NSString stringWithFormat:@"Min. price: %@\n(50%% weighted rate)",
+                                                [SOXFormatters currencyStringForNumber:self.minimalPossiblePrice
+                                                                          roundingMode:NSNumberFormatterRoundUp]];
         }
         
         /* Bedingungen:
