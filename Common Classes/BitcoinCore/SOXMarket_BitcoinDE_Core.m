@@ -575,7 +575,7 @@ NSString *const _Nonnull NSURLSessionTaskKey = @"NSURLSessionTask";
         NSLog(@"### There is no NEXT NSURLSessionTask - queue is empty");
         [SOXMarket_BitcoinDE_Core sharedCore].networkQueueIsRunning = NO;
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[SOXMarket_BitcoinDE_Core sharedCore].delegateForStatusBarUpdates statusBarUpdated:@"Done."];
+            [[SOXMarket_BitcoinDE_Core sharedCore].delegateForStatusBarUpdates statusBarUpdated:@"Idle"];
         });
     }
 }
@@ -692,6 +692,23 @@ NSString *const _Nonnull NSURLSessionTaskKey = @"NSURLSessionTask";
     dispatch_once(&pred, ^{
         commandDescriptions = @{
                                 @(UnknownCommand): @"Error"
+                                , @(BitcoinDE_ShowBuyOrderbookCommandType): @"Retrieving Buy Orders"
+                                , @(BitcoinDE_ShowSellOrderbookCommandType): @"Retrieving Sell Offers"
+                                , @(BitcoinDE_ShowMyOrdersCommandType): @"Retrieving My active Orders"
+                                , @(BitcoinDE_ShowMyOrderDetailsCommandType): @"Retrieving Data for Order ID"
+                                , @(BitcoinDE_ShowAccountInfoCommandType): @"Retrieving Account Informations"
+                                , @(BitcoinDE_ShowOrderbookCompactCommandType): @"— wo wird dies denn angezeigt? —"
+                                , @(BitcoinDE_ShowPublicTradeHistoryCommandType): @"— haben wir auch noch nicht - chart ;) —"
+                                , @(BitcoinDE_ShowRatesCommandType): @"Retrieving Rates"
+                                , @(BitcoinDE_ShowMyTradesType): @"Retrieving own Trades"
+                                , @(BitcoinDE_ShowAccountLedgerType): @"Retrieving Account ledger"
+                                , @(BitcoinDE_RemoveOrderType): @"Removing Order"
+                                , @(BitcoinDE_CreateOrderType) : @"Creating Order"
+                                , @(BitcoinDE_ExecuteTrade): @"Executing Trade"
+                                };
+        /* Doitscha Text
+        commandDescriptions = @{
+                                @(UnknownCommand): @"Error"
                                 , @(BitcoinDE_ShowBuyOrderbookCommandType): @"Durchsuchen des Orderbooks nach passenden Kaufangeboten"
                                 , @(BitcoinDE_ShowSellOrderbookCommandType): @"Durchsuchen des Orderbooks nach passenden Verkaufsangeboten"
                                 , @(BitcoinDE_ShowMyOrdersCommandType): @"Abrufen und Filtern meiner Orders"
@@ -705,6 +722,8 @@ NSString *const _Nonnull NSURLSessionTaskKey = @"NSURLSessionTask";
                                 , @(BitcoinDE_RemoveOrderType): @"Löschen einer Order"
                                 , @(BitcoinDE_ExecuteTrade): @"Kaufen/Verkaufen einer konkreten Order"
                                 };
+         */
+
     });
     return commandDescriptions;
 }
