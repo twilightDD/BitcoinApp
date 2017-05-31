@@ -48,6 +48,8 @@
 @property (weak) IBOutlet NSTextField *endDateDescriptionTextField;
 @property (weak) IBOutlet NSDatePicker *endDatePicker;
 
+@property (weak) IBOutlet NSTextField *paymentOptionHintTextField;
+
 @property (weak) IBOutlet NSButton *cancelButton;
 @property (weak) IBOutlet NSButton *createOrderButton;
 
@@ -173,6 +175,15 @@
     self.endDateDescriptionTextField.stringValue = @"Order should end";
     self.endDatePicker.dateValue = [NSDate dateWithTimeIntervalSinceNow:5 * 24 * 60 * 60];
    
+    // Hint on buy: paymentOption depend on default via preferences on webside
+    if (self.orderType == BitcoinDE_BuyOrderType) {
+        self.paymentOptionHintTextField.stringValue = @"For type = \"buy\", it depends on you settings in \"Express Trade Settings\"";
+    }
+    else if (self.orderType == BitcoinDE_SellOrderType) {
+        self.paymentOptionHintTextField.hidden = YES;
+    }
+    
+    
     self.cancelButton.title = @"Cancel";
     if (self.orderType == BitcoinDE_BuyOrderType) {
         self.createOrderButton.title = @"Create new buy order";

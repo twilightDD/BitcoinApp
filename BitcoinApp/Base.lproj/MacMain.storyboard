@@ -3149,6 +3149,14 @@ Gw
                                     <binding destination="UMb-sB-suB" name="enabled" keyPath="self.validInput" id="xiK-NP-Bey"/>
                                 </connections>
                             </button>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9u6-HK-LcK">
+                                <rect key="frame" x="32" y="139" width="402" height="17"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Buy Hinweis auf PaymentOption über Webeinstellung" id="8GY-lH-553">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Bqf-Fe-k9G" firstAttribute="top" secondItem="ZMe-eq-kHL" secondAttribute="bottom" constant="8" id="1Lt-Tg-noW"/>
@@ -3161,9 +3169,11 @@ Gw
                             <constraint firstItem="DMa-qt-pqL" firstAttribute="top" secondItem="Bqf-Fe-k9G" secondAttribute="bottom" constant="8" id="C1N-ef-t5A"/>
                             <constraint firstItem="aWc-gU-d53" firstAttribute="top" secondItem="1na-89-Udh" secondAttribute="top" constant="20" symbolic="YES" id="Cp2-1x-1IJ"/>
                             <constraint firstAttribute="bottom" secondItem="w8c-KB-of4" secondAttribute="bottom" constant="20" symbolic="YES" id="Eli-HR-hHu"/>
+                            <constraint firstItem="Yxd-wM-TZl" firstAttribute="leading" secondItem="9u6-HK-LcK" secondAttribute="trailing" constant="19" id="FxH-tc-Hmf"/>
                             <constraint firstItem="zII-rh-hZI" firstAttribute="leading" secondItem="1na-89-Udh" secondAttribute="leading" constant="32" id="HAI-iF-ndY"/>
                             <constraint firstItem="3LD-JI-7kF" firstAttribute="leading" secondItem="DMa-qt-pqL" secondAttribute="trailing" constant="8" symbolic="YES" id="Irb-yd-3LA"/>
                             <constraint firstItem="aWc-gU-d53" firstAttribute="leading" secondItem="1na-89-Udh" secondAttribute="leading" constant="20" id="LmX-9g-bNM"/>
+                            <constraint firstItem="mWb-Gs-3Vc" firstAttribute="top" relation="greaterThanOrEqual" secondItem="9u6-HK-LcK" secondAttribute="bottom" constant="8" symbolic="YES" id="R4r-Yc-vXZ"/>
                             <constraint firstItem="tOu-s3-kGk" firstAttribute="baseline" secondItem="DMa-qt-pqL" secondAttribute="baseline" id="Uoi-JE-ACA"/>
                             <constraint firstItem="mWb-Gs-3Vc" firstAttribute="leading" secondItem="1na-89-Udh" secondAttribute="leading" constant="20" id="WFJ-lD-YWQ"/>
                             <constraint firstItem="3LD-JI-7kF" firstAttribute="leading" secondItem="C7b-w6-4AT" secondAttribute="leading" id="Wh8-g1-2BY"/>
@@ -3171,11 +3181,13 @@ Gw
                             <constraint firstItem="ZMe-eq-kHL" firstAttribute="top" secondItem="aWc-gU-d53" secondAttribute="bottom" constant="38" id="Znf-az-ZiB"/>
                             <constraint firstAttribute="trailing" secondItem="kfE-Jk-12m" secondAttribute="trailing" constant="20" symbolic="YES" id="ZpA-Vs-uOs"/>
                             <constraint firstItem="f6Y-1R-M4X" firstAttribute="leading" secondItem="Bqf-Fe-k9G" secondAttribute="trailing" constant="8" symbolic="YES" id="eHb-rB-KPK"/>
+                            <constraint firstItem="9u6-HK-LcK" firstAttribute="top" secondItem="DMa-qt-pqL" secondAttribute="bottom" constant="21" id="fP2-u8-fjo"/>
                             <constraint firstItem="kfE-Jk-12m" firstAttribute="leading" secondItem="C7b-w6-4AT" secondAttribute="trailing" constant="20" id="fsP-Qr-FOC"/>
                             <constraint firstItem="tOu-s3-kGk" firstAttribute="trailing" secondItem="Gf2-SM-5g3" secondAttribute="trailing" id="gRl-nk-0zt"/>
                             <constraint firstItem="C7b-w6-4AT" firstAttribute="leading" secondItem="ZMe-eq-kHL" secondAttribute="trailing" constant="8" symbolic="YES" id="iEh-u4-lgB"/>
                             <constraint firstAttribute="trailing" secondItem="w8c-KB-of4" secondAttribute="trailing" constant="20" symbolic="YES" id="igs-Ig-bL4"/>
                             <constraint firstItem="kfE-Jk-12m" firstAttribute="top" secondItem="aWc-gU-d53" secondAttribute="bottom" constant="8" symbolic="YES" id="jsW-c3-U7U"/>
+                            <constraint firstItem="9u6-HK-LcK" firstAttribute="leading" secondItem="1na-89-Udh" secondAttribute="leading" constant="34" id="k7y-AX-G0r"/>
                             <constraint firstItem="Gf2-SM-5g3" firstAttribute="trailing" secondItem="zII-rh-hZI" secondAttribute="trailing" id="laF-4n-EdX"/>
                             <constraint firstItem="f6Y-1R-M4X" firstAttribute="trailing" secondItem="C7b-w6-4AT" secondAttribute="trailing" id="lxE-3H-T8w"/>
                             <constraint firstItem="f6Y-1R-M4X" firstAttribute="leading" secondItem="C7b-w6-4AT" secondAttribute="leading" id="oV8-pu-rhp"/>
@@ -3203,6 +3215,7 @@ Gw
                         <outlet property="minAmountTextField" destination="Bqf-Fe-k9G" id="UMI-Ap-Vhf"/>
                         <outlet property="onlyKYCButton" destination="5tt-E2-Y2e" id="vrQ-FC-7lh"/>
                         <outlet property="optionBox" destination="kfE-Jk-12m" id="POb-58-vph"/>
+                        <outlet property="paymentOptionHintTextField" destination="9u6-HK-LcK" id="gY5-M1-CnT"/>
                         <outlet property="priceDescriptionTextField" destination="tOu-s3-kGk" id="f6x-oo-mv0"/>
                         <outlet property="priceTextField" destination="DMa-qt-pqL" id="kH1-BY-30M"/>
                         <outlet property="reNewOrderButton" destination="ehG-Ud-cJJ" id="DWh-xK-d8f"/>
@@ -3215,7 +3228,7 @@ Gw
                 <customObject id="X15-X3-ZW6" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="ELZ-ho-4GV"/>
             </objects>
-            <point key="canvasLocation" x="-1870" y="2077"/>
+            <point key="canvasLocation" x="-1870.5" y="2077"/>
         </scene>
         <!--Execute Trade View Controller-->
         <scene sceneID="z37-1q-W32">
