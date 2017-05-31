@@ -27,6 +27,8 @@ NSString *const _Nonnull HTTPMethodGETKey    = @"GET";
 NSString *const _Nonnull HTTPMethodDELETEKey = @"DELETE";
 NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
 
+NSString *const _Nonnull NSURLSessionTaskKey = @"NSURLSessionTask";
+
 @interface SOXMarket_BitcoinDE_Core ()
 
 @property (copy, nonatomic) NSString *baseURL;
@@ -49,7 +51,7 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
 @property (weak, nonatomic) NSObject <SOXStatusBarUpdateProtocol> *delegateForStatusBarUpdates;
 
 #pragma mark | Network Queue handling
-@property (strong, nonatomic) NSMutableArray <NSURLSessionTask *> *networkQueue;
+@property (strong, nonatomic) NSMutableArray <NSDictionary *> *networkQueue;
 @property (nonatomic) BOOL networkQueueIsRunning;
 
 #pragma mark | Credit handling
@@ -162,7 +164,8 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
     NSURLSessionTask *getTask = [[NSURLSession sharedSession] dataTaskWithRequest:request
                                                                 completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                                                                     strongify(self)
-                                                                    
+                                                                    [SOXMarket_BitcoinDE_Core startNextNSURLSessionTask];
+                                                                
                                                                     NSString *serverRequestTitle = [NSString stringWithFormat:@"%tu (%@)",
                                                                                                     serverCommandType
                                                                                                     ,[SOXMarket_BitcoinDE_Core descriptionForServerCommandType:serverCommandType]];
@@ -201,11 +204,9 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
                                                                                                                     waitUntilDone:NO];
                                                                         }
                                                                     }
-                                                                    
-                                                                    [SOXMarket_BitcoinDE_Core startNextNSURLSessionTask];
                                                                 }];
     
-    [SOXMarket_BitcoinDE_Core addNSURLSessionTask:getTask];
+    [SOXMarket_BitcoinDE_Core addNSURLSessionTask:getTask forServerCommand:serverCommandType];
 }
 
 #pragma mark | Status bar handling
@@ -520,10 +521,15 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
     return networkQueue;
 }
 
-+ (void)addNSURLSessionTask:(NSURLSessionTask* )urlSessionTask {
++ (void)addNSURLSessionTask:(NSURLSessionTask* )urlSessionTask forServerCommand:(BitcoinDE_ServerCommandType)serverCommand {
  //   NSLog(@"### ADD A NEW NSURLSessionTask");
     NSMutableArray *networkQueue = [SOXMarket_BitcoinDE_Core networkQueue];
-    [networkQueue addObject:urlSessionTask];
+    NSDictionary *queueDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     urlSessionTask, NSURLSessionTaskKey
+                                     , @(serverCommand), ServerAnswerServerCommandKey
+                                     , nil];
+    
+    [networkQueue addObject:queueDictionary];
     
     if (![[SOXMarket_BitcoinDE_Core sharedCore] networkQueueIsRunning]) {
         [SOXMarket_BitcoinDE_Core startNextNSURLSessionTask];
@@ -533,7 +539,9 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
 + (void)startNextNSURLSessionTask {
  //   NSLog(@"startNextNSURLSessionTask - currentCredits: %ti", [[SOXMarket_BitcoinDE_Core sharedCore] currentCredits]);
     NSMutableArray *networkQueue = [SOXMarket_BitcoinDE_Core networkQueue];
-    NSURLSessionTask *nextTask = networkQueue.firstObject;
+    NSDictionary *nextTastDictionary = networkQueue.firstObject;
+    NSURLSessionTask *nextTask = [nextTastDictionary objectForKey:NSURLSessionTaskKey];
+    
     if (nextTask) {
         if ([SOXMarket_BitcoinDE_Core sharedCore].creditTimer
             && [SOXMarket_BitcoinDE_Core sharedCore].currentCredits < 3) { // TODO: TODO vergleich mit serverCommandType
@@ -551,14 +559,16 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
         else {
             NSLog(@"### START NEXT NSURLSessionTask");
             [nextTask resume];
-            NSURL *url = nextTask.currentRequest.URL;
+        
+            // update status bar
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[SOXMarket_BitcoinDE_Core sharedCore].delegateForStatusBarUpdates statusBarUpdated:url.absoluteString];
+                BitcoinDE_ServerCommandType serverCommand = [[nextTastDictionary objectForKey:ServerAnswerServerCommandKey] unsignedIntegerValue];
+                NSString *statusBarString = [self commandDescriptionForServerCommand:serverCommand];
+                [[SOXMarket_BitcoinDE_Core sharedCore].delegateForStatusBarUpdates statusBarUpdated:statusBarString];
             });
             
             [networkQueue removeObjectAtIndex:0];
             [SOXMarket_BitcoinDE_Core sharedCore].networkQueueIsRunning = YES;
-            [[SOXMarket_BitcoinDE_Core sharedCore].delegateForStatusBarUpdates statusBarUpdated:@"Done."];
         }
     }
     else {
@@ -665,6 +675,13 @@ NSString *const _Nonnull HTTPMethodPOSTKey   = @"POST";
                                 };
     });
     return commandDescriptions;
+}
+
++ (NSString *)commandDescriptionForServerCommand:(BitcoinDE_ServerCommandType)serverCommand {
+    NSDictionary *commandDescriptions = [self commandDescriptions];
+    NSString *commandDescriptionForServerCommand = [commandDescriptions objectForKey:@(serverCommand)];
+    
+    return commandDescriptionForServerCommand;
 }
 
 + (NSDictionary *)commandDescriptions {
