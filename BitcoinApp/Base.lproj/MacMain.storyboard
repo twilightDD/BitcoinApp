@@ -740,11 +740,11 @@
                                     </tabViewItem>
                                     <tabViewItem label="Active orders" identifier="" id="l82-SC-zEw">
                                         <view key="view" id="MN5-M8-jLH">
-                                            <rect key="frame" x="10" y="33" width="914" height="468"/>
+                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="aZ7-BW-zaH">
-                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="468"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="413"/>
                                                     <connections>
                                                         <segue destination="q7D-iu-Op3" kind="embed" id="2AF-qZ-Ph7"/>
                                                     </connections>
@@ -760,11 +760,11 @@
                                     </tabViewItem>
                                     <tabViewItem label="View" identifier="2" id="Ch0-iV-PHR">
                                         <view key="view" id="Q3R-zu-LRo">
-                                            <rect key="frame" x="10" y="33" width="914" height="468"/>
+                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="oUM-74-QBF">
-                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="468"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="413"/>
                                                     <connections>
                                                         <segue destination="d67-em-sMP" kind="embed" identifier="AccountLedgerViewControllerSegue" id="OTS-cT-mu6"/>
                                                     </connections>
@@ -780,11 +780,11 @@
                                     </tabViewItem>
                                     <tabViewItem label="My Trade History" identifier="" id="KJJ-NU-KfP">
                                         <view key="view" id="Jwu-D5-GY5">
-                                            <rect key="frame" x="10" y="33" width="914" height="468"/>
+                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="Jo0-rk-ilP">
-                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="468"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="413"/>
                                                     <connections>
                                                         <segue destination="TPt-gD-CmY" kind="embed" identifier="MyTradeHistoryViewControllerSegue" id="aLD-dy-1E4"/>
                                                     </connections>
@@ -798,13 +798,53 @@
                                             </constraints>
                                         </view>
                                     </tabViewItem>
-                                    <tabViewItem label="Item 4" identifier="" id="ucc-xu-QEr">
+                                    <tabViewItem label="Chart" identifier="" id="Qp1-7J-gXi">
+                                        <view key="view" id="ZUJ-kP-C9B">
+                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="QpD-So-MLq">
+                                                    <rect key="frame" x="17" y="17" width="880" height="393"/>
+                                                    <connections>
+                                                        <segue destination="9fh-ec-Y7W" kind="embed" id="HQk-kA-Hem"/>
+                                                    </connections>
+                                                </containerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="QpD-So-MLq" firstAttribute="leading" secondItem="ZUJ-kP-C9B" secondAttribute="leading" constant="17" id="KLT-kK-nh8"/>
+                                                <constraint firstAttribute="bottom" secondItem="QpD-So-MLq" secondAttribute="bottom" constant="17" id="WBE-l5-RkY"/>
+                                                <constraint firstItem="QpD-So-MLq" firstAttribute="top" secondItem="ZUJ-kP-C9B" secondAttribute="top" constant="3" id="eMk-Tk-i1z"/>
+                                                <constraint firstAttribute="trailing" secondItem="QpD-So-MLq" secondAttribute="trailing" constant="17" id="gm3-0N-lnM"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Reporting" identifier="" id="8Sh-td-6eg">
+                                        <view key="view" id="z5f-zY-fdL">
+                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="PbG-Uz-bIq">
+                                                    <rect key="frame" x="17" y="17" width="880" height="393"/>
+                                                    <connections>
+                                                        <segue destination="xMU-f2-ame" kind="embed" id="Qkn-cy-0oi"/>
+                                                    </connections>
+                                                </containerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="PbG-Uz-bIq" firstAttribute="top" secondItem="z5f-zY-fdL" secondAttribute="top" constant="3" id="6St-0F-gav"/>
+                                                <constraint firstAttribute="trailing" secondItem="PbG-Uz-bIq" secondAttribute="trailing" constant="17" id="Exz-Tn-vY3"/>
+                                                <constraint firstAttribute="bottom" secondItem="PbG-Uz-bIq" secondAttribute="bottom" constant="17" id="lzh-8C-uO9"/>
+                                                <constraint firstItem="PbG-Uz-bIq" firstAttribute="leading" secondItem="z5f-zY-fdL" secondAttribute="leading" constant="17" id="sWC-86-inE"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Item 4" identifier="" id="ucc-xu-QEr" userLabel="Rich mode">
                                         <view key="view" id="KtV-3h-LnT">
-                                            <rect key="frame" x="10" y="33" width="914" height="468"/>
+                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="Fs1-UN-uNY">
-                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="468"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="413"/>
                                                     <connections>
                                                         <segue destination="lQp-qx-buJ" kind="embed" id="y6d-HU-csy"/>
                                                     </connections>
@@ -2079,7 +2119,7 @@
                 </viewController>
                 <customObject id="tSY-Dr-lBg" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1181" y="1817"/>
+            <point key="canvasLocation" x="2173" y="1817"/>
         </scene>
         <!--My Order Details View Controller-->
         <scene sceneID="mTb-3W-ATq">
@@ -4438,6 +4478,32 @@ Gw
                 <userDefaultsController id="3AY-bf-m6w"/>
             </objects>
             <point key="canvasLocation" x="1420" y="2678"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="xE3-nL-Ntb">
+            <objects>
+                <viewController id="9fh-ec-Y7W" sceneMemberID="viewController">
+                    <view key="view" id="MXU-z7-71L">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="OiU-7p-fnV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="823" y="1635"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="OTD-xN-sx7">
+            <objects>
+                <viewController id="xMU-f2-ame" sceneMemberID="viewController">
+                    <view key="view" id="boh-gX-FSH">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="54Q-yi-tPh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1344" y="1635"/>
         </scene>
     </scenes>
     <resources>

@@ -60,7 +60,14 @@ static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewCont
         NSTabViewItem *item3 = [self.bottomTabView tabViewItemAtIndex:3];
         item3.label = @"My Trade History";
         NSTabViewItem *item4 = [self.bottomTabView tabViewItemAtIndex:4];
-        item4.label = @"Rich mode";
+        item4.label = @"Chart";
+        NSTabViewItem *item5 = [self.bottomTabView tabViewItemAtIndex:5];
+        item5.label = @"Reporting";
+        NSTabViewItem *item6 = [self.bottomTabView tabViewItemAtIndex:6];
+        item6.label = @"Rich mode";
+        // debug
+        [self.bottomTabView removeTabViewItem:item6];
+        
     }
 }
 
@@ -85,7 +92,7 @@ static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewCont
     NSNumber *currentCredit = [creditDicts objectForKey:CreditUpdate_CurrentCreditsKey];
     NSNumber *maxCredits = [creditDicts objectForKey:CreditUpdate_MaximalCreditsKey];
     
-    NSString *creditString = [NSString stringWithFormat:@"%@/%@", currentCredit, maxCredits];
+    NSString *creditString = [NSString stringWithFormat:@"API Credits: %@/%@", currentCredit, maxCredits];
     self.rightStatusTextField.stringValue = creditString;
 }
 
