@@ -104,15 +104,15 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     self.executeTradeIsPossible = NO;
     
     // MaxAmount
-    NSDecimalNumber *maxPossibleBTCAmountToTrade  = 0;
+    NSDecimalNumber *maxPossibleBTCAmountToTrade  = [NSDecimalNumber decimalNumberWithString:@"0"];
     {
         SOXMarket_BitcoinDE_Core *core = [SOXMarket_BitcoinDE_Core sharedCore];
         
         if (self.orderType == BitcoinDE_BuyOrderType) {
             NSDecimalNumber *maxAmountOrderBookData = self.orderBookData.orderInformation_maxAmount;
-            NSDecimalNumber *maxAmountAvailableEuro = [[SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount decimalNumberByDividingBy:
-                                                self.orderBookData.orderInformation_price
-                                                                                                                               withBehavior:[SOXFormatters btcNumberHandler]];
+            NSDecimalNumber *availableFidorAmount   = [SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount;
+            NSDecimalNumber *maxAmountAvailableEuro = [availableFidorAmount decimalNumberByDividingBy:self.orderBookData.orderInformation_price
+                                                                                         withBehavior:[SOXFormatters btcNumberHandler]];
             
             if ([maxAmountOrderBookData isLessThan:maxAmountAvailableEuro]) {
                 maxPossibleBTCAmountToTrade = maxAmountOrderBookData;
@@ -163,9 +163,21 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     
     // set boundaries of input field number formatter
     NSNumberFormatter* fieldFormatter = self.amountToTradeTextField.formatter;
-    fieldFormatter.minimum = self.orderBookData.orderInformation_minAmount;
-    fieldFormatter.maximum = [SOXFormatters greaterDecimalNumberFrom:self.maxPossibleBTCAmountToTrade
-                                                                 and:self.orderBookData.orderInformation_maxAmount];
+  //  fieldFormatter.minimum = self.orderBookData.orderInformation_minAmount;
+    NSDecimalNumber *max =[SOXFormatters greaterDecimalNumberFrom:self.maxPossibleBTCAmountToTrade
+                                                              and:self.orderBookData.orderInformation_maxAmount];
+  //  fieldFormatter.maximum = [SOXFormatters greaterDecimalNumberFrom:self.maxPossibleBTCAmountToTrade
+    //                                                             and:self.orderBookData.orderInformation_maxAmount];
+    
+    NSLog(@"Fieldformatter: \nMin: %@ Max:\n%@ %@", fieldFormatter.minimum, fieldFormatter.maximum, [SOXFormatters greaterDecimalNumberFrom:self.maxPossibleBTCAmountToTrade
+                                                                                                                        and:self.orderBookData.orderInformation_maxAmount]);
+    NSNumber *maxFromFromatter = fieldFormatter.maximum;
+    NSDecimalNumber *maxFromFormatterDC = [NSDecimalNumber decimalNumberWithDecimal:maxFromFromatter.decimalValue];
+    NSDecimalNumber *diff = [maxFromFormatterDC decimalNumberBySubtracting:max];
+    NSLog(@"Diff: %@", diff);
+    if (![diff isEqualToNumber:@0]) {
+        
+    }
 }
 
 - (void)setupUI {
@@ -267,7 +279,8 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     self.cancelButton.title = @"Cancel";
     
     self.minMaxPossibleAmountTextField.stringValue = [NSString stringWithFormat:@"(min: %@, max: %@)",
-                                                      self.orderBookData.orderInformation_minAmount, self.maxPossibleBTCAmountToTrade];
+                                                      [SOXFormatters stringForBTCNumber:self.orderBookData.orderInformation_minAmount],
+                                                      [SOXFormatters stringForBTCNumber:self.maxPossibleBTCAmountToTrade]];
 }
 
 - (void)setupExecuteTradeButton {
@@ -371,7 +384,6 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
                                             withParameter:parameterDictionary
                                                 respondTo:self];
     [self dismissController:self];
-
 }
 
 #pragma mark - Action methods
@@ -382,10 +394,12 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
         NSString *executeTradeButtonTitle = self.executeTradeButton.title;
         NSString *cancelButtonTitle       = @"Cancel";
         NSString *messageText             = @"Attention attention ihr Menschen!";
-        NSString *informativeText         = [NSString stringWithFormat:@"You will %@ %@ bitcoins (worth %0.2f of real money).",
+        NSDecimalNumber *volume           = [self.amountToTrade decimalNumberByMultiplyingBy:self.orderBookData.orderInformation_price];
+        NSString *informativeText         = [NSString stringWithFormat:@"You will %@ %@ bitcoins,\nworth %@ of real money.",
                                              [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:self.orderType]
-                                             , self.amountToTrade
-                                             , self.amountToTrade.doubleValue * self.orderBookData.orderInformation_price.doubleValue];
+                                             , [SOXFormatters stringForBTCNumber:self.amountToTrade]
+                                             , [SOXFormatters currencyStringForNumber:volume roundingMode:NSNumberFormatterRoundUp]
+                                             ];
         // create alert
         NSAlert *alert = [[NSAlert alloc] init];
         [alert addButtonWithTitle:executeTradeButtonTitle];
@@ -440,6 +454,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 #pragma mark - Manual Setters
 - (void)setAmountToTrade:(NSDecimalNumber *)amountToTrade {
     _amountToTrade = amountToTrade;
+    self.amountToTradeTextField.objectValue = _amountToTrade;
     [self validateInput];
 }
 
@@ -468,6 +483,11 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 }
 
 #pragma mark - NSControlTextEditingDelegate
+- (BOOL)control:(NSControl *)control isValidObject:(id)obj {
+    NSLog(@"isValidObject %@", obj);
+    return YES;
+}
+
 - (void)controlTextDidChange:(NSNotification *)notification {
     NSTextField* valueField = notification.object;
     NSNumberFormatter* fieldFormatter = valueField.formatter;
@@ -476,8 +496,6 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     id newValue = ( fieldEditor!=nil ? [fieldFormatter numberFromString:fieldEditor.string] : valueField.objectValue );
     NSLog(@"newValuenewValuenewValue: %@", newValue);
     _amountToTrade = newValue;
-    
-    
 }
 
 @end
