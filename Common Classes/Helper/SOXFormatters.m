@@ -151,7 +151,7 @@
 }
 
 + (NSString *)stringForBTCNumber:(NSDecimalNumber *)btcValue {
-    NSString *stringForBTCNumber = @"";
+    NSString *stringForBTCNumber = @"-";
     
     if (btcValue) {
         NSNumberFormatter *btcFormatter = [SOXFormatters btcFormatter];
