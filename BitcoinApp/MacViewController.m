@@ -60,13 +60,15 @@ static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewCont
         NSTabViewItem *item3 = [self.bottomTabView tabViewItemAtIndex:3];
         item3.label = @"My Trade History";
         NSTabViewItem *item4 = [self.bottomTabView tabViewItemAtIndex:4];
-        item4.label = @"Chart";
+        item4.label = @"Public Trade History";
         NSTabViewItem *item5 = [self.bottomTabView tabViewItemAtIndex:5];
-        item5.label = @"Reporting";
+        item5.label = @"Chart";
         NSTabViewItem *item6 = [self.bottomTabView tabViewItemAtIndex:6];
-        item6.label = @"Rich mode";
+        item6.label = @"Reporting";
+        NSTabViewItem *item7 = [self.bottomTabView tabViewItemAtIndex:7];
+        item7.label = @"Rich mode";
         // debug
-        [self.bottomTabView removeTabViewItem:item6];
+        //[self.bottomTabView removeTabViewItem:item6];
         
     }
 }

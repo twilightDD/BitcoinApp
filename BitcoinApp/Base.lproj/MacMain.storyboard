@@ -758,7 +758,7 @@
                                             </constraints>
                                         </view>
                                     </tabViewItem>
-                                    <tabViewItem label="View" identifier="2" id="Ch0-iV-PHR">
+                                    <tabViewItem label="Account ledger" identifier="2" id="Ch0-iV-PHR">
                                         <view key="view" id="Q3R-zu-LRo">
                                             <rect key="frame" x="10" y="33" width="914" height="413"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -795,6 +795,26 @@
                                                 <constraint firstAttribute="bottom" secondItem="Jo0-rk-ilP" secondAttribute="bottom" id="bPw-Cb-ugh"/>
                                                 <constraint firstItem="Jo0-rk-ilP" firstAttribute="top" secondItem="Jwu-D5-GY5" secondAttribute="top" id="dlV-J7-T8a"/>
                                                 <constraint firstAttribute="trailing" secondItem="Jo0-rk-ilP" secondAttribute="trailing" id="kEj-F3-wjK"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Public Trade History" identifier="" id="0nJ-Mu-e5N">
+                                        <view key="view" id="vEw-qY-7gv">
+                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="f2N-bD-oSE">
+                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="413"/>
+                                                    <connections>
+                                                        <segue destination="JOb-0z-SoZ" kind="embed" id="SQJ-SP-TnO"/>
+                                                    </connections>
+                                                </containerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="f2N-bD-oSE" secondAttribute="trailing" id="Hlf-Rj-25C"/>
+                                                <constraint firstItem="f2N-bD-oSE" firstAttribute="top" secondItem="vEw-qY-7gv" secondAttribute="top" id="MR4-9m-1Sc"/>
+                                                <constraint firstAttribute="bottom" secondItem="f2N-bD-oSE" secondAttribute="bottom" id="gF1-RG-LjC"/>
+                                                <constraint firstItem="f2N-bD-oSE" firstAttribute="leading" secondItem="vEw-qY-7gv" secondAttribute="leading" id="i88-ZT-WYG"/>
                                             </constraints>
                                         </view>
                                     </tabViewItem>
@@ -2107,7 +2127,7 @@
                 </viewController>
                 <customObject id="tSY-Dr-lBg" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2173" y="1817"/>
+            <point key="canvasLocation" x="3002" y="1817"/>
         </scene>
         <!--My Order Details View Controller-->
         <scene sceneID="mTb-3W-ATq">
@@ -4456,6 +4476,19 @@ Gw
             <point key="canvasLocation" x="1420" y="2678"/>
         </scene>
         <!--View Controller-->
+        <scene sceneID="2np-EZ-Vjc">
+            <objects>
+                <viewController id="JOb-0z-SoZ" sceneMemberID="viewController">
+                    <view key="view" id="Lq0-dG-K0T">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="iw5-Oy-rRi" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="986" y="1635"/>
+        </scene>
+        <!--View Controller-->
         <scene sceneID="xE3-nL-Ntb">
             <objects>
                 <viewController id="9fh-ec-Y7W" sceneMemberID="viewController">
@@ -4466,7 +4499,7 @@ Gw
                 </viewController>
                 <customObject id="OiU-7p-fnV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="823" y="1635"/>
+            <point key="canvasLocation" x="1652" y="1635"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="OTD-xN-sx7">
@@ -4479,7 +4512,7 @@ Gw
                 </viewController>
                 <customObject id="54Q-yi-tPh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1344" y="1635"/>
+            <point key="canvasLocation" x="2173" y="1635"/>
         </scene>
     </scenes>
     <resources>
