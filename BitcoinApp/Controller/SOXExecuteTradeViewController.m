@@ -229,6 +229,9 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
         titleText = @"Sell bitcoins";
         amountToTradeDescriptionText = @"Sell bitcoins";
     }
+    else {
+        return;
+    }
 
     self.titleTextField.stringValue = titleText;
     self.amountToTradeDescriptionTextField.stringValue = amountToTradeDescriptionText;

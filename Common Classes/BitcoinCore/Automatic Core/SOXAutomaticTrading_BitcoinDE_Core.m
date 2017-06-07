@@ -393,7 +393,7 @@
     if ([self.buyCurrentLowestPrice isEqualToNumber:@0]) {
         self.buyCurrentLowestPrice = @(currentHighestSellPrice.doubleValue * (1 - self.buyInterestRate.doubleValue/100));
     }
-    else if (currentHighestSellPrice > 0) { // just in case
+    else if (currentHighestSellPrice.doubleValue > 0) { // just in case
         SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
         NSNumber *potentialNewLowestBuyPrice = @(currentHighestSellPrice.doubleValue * (1 - core.buyInterestRate.doubleValue/100));
         if ([self.buyCurrentLowestPrice isGreaterThan:potentialNewLowestBuyPrice]) {
@@ -424,7 +424,7 @@
     if ([self.sellCurrentHighestPrice isEqualToNumber:@0]) {
         self.sellCurrentHighestPrice = @(currentLowestBuyPrice.doubleValue * (1 + self.sellInterestRate.doubleValue/100));
     }
-    else if (currentLowestBuyPrice > 0) { // just in case
+    else if (currentLowestBuyPrice.doubleValue > 0) { // just in case
         SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
         NSNumber *potentialNewSellHighestPrice = @(currentLowestBuyPrice.doubleValue * (1 + core.sellInterestRate.doubleValue/100));
         if ([self.sellCurrentHighestPrice isLessThan:potentialNewSellHighestPrice]) {

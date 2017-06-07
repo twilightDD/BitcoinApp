@@ -67,6 +67,7 @@
     }
     else {
         NSLog(@"ERROR - no orderType set");
+        return;
     }
 
     self.runAutomaticButton.state = 0;
