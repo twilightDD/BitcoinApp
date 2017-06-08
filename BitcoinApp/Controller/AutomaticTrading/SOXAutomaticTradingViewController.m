@@ -179,20 +179,21 @@
 
 
 #pragma mark - NSControlTextEditingDelegate
-- (void)controlTextDidChange:(NSNotification *)notification {
+-(void)controlTextDidEndEditing:(NSNotification *)notification {
+//- (void)controlTextDidChange:(NSNotification *)notification {
     NSTextField* valueField           = notification.object;
     NSNumberFormatter* fieldFormatter = valueField.formatter;
     NSText* fieldEditor               = valueField.currentEditor;
     
     id newValue = ( fieldEditor != nil ? [fieldFormatter numberFromString:fieldEditor.string] : valueField.objectValue );
-    
+    NSLog(@"newValue: %@", newValue);
     if (valueField == self.minInterestTextField) { // %
         switch (self.orderType) {
             case BitcoinDE_BuyOrderType:
-                [SOXAutomaticTrading_BitcoinDE_Core_OLD setBuyInterestRate:newValue];
+                [SOXAutomaticTrading_BitcoinDE_Core setBuyInterestRate:newValue];
                 break;
             case BitcoinDE_SellOrderType:
-                [SOXAutomaticTrading_BitcoinDE_Core_OLD setSellInterestRate:newValue];
+                [SOXAutomaticTrading_BitcoinDE_Core setSellInterestRate:newValue];
             default:
                 break;
         }
@@ -200,10 +201,10 @@
     else if (valueField == self.maxInvestmentTextField) { // €
         switch (self.orderType) {
             case BitcoinDE_BuyOrderType:
-                [SOXAutomaticTrading_BitcoinDE_Core_OLD setBuyMaximalEuro:newValue];
+                [SOXAutomaticTrading_BitcoinDE_Core setBuyMaximalEuro:newValue];
                 break;
             case BitcoinDE_SellOrderType:
-                [SOXAutomaticTrading_BitcoinDE_Core_OLD setSellMaximalBTC:newValue];
+                [SOXAutomaticTrading_BitcoinDE_Core setSellMaximalBTC:newValue];
             default:
                 break;
         }

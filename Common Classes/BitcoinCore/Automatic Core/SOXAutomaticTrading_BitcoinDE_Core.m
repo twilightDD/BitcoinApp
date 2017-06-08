@@ -26,6 +26,11 @@
 @property (nonatomic) BOOL executeBuyTrades;
 @property (nonatomic) BOOL executeSellTrades;
 
+@property (strong, nonatomic) NSDecimalNumber *buyInterestRate;
+@property (strong, nonatomic) NSDecimalNumber *buyMaximalEuroInvestment;
+@property (strong, nonatomic) NSDecimalNumber *sellInterestRate;
+@property (strong, nonatomic) NSDecimalNumber *sellMaximalBTCInvestment;
+
 @end
 
 @implementation SOXAutomaticTrading_BitcoinDE_Core
@@ -104,6 +109,32 @@
                                             withParameter:sellParameters
                                                 respondTo:core];
 }
+
+#pragma mark - Manual setters
++ (void)setBuyInterestRate:(NSDecimalNumber *)buyInterestRate {
+    if (buyInterestRate) {
+        [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore].buyInterestRate = buyInterestRate;
+    }
+}
+
++ (void)setSellInterestRate:(NSDecimalNumber *)sellInterestRate {
+    if (sellInterestRate) {
+        [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore].sellInterestRate = sellInterestRate;
+    }
+}
+
++ (void)setBuyMaximalEuro:(NSDecimalNumber *)buyMaximalEuro {
+    if (buyMaximalEuro) {
+        [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore].buyMaximalEuroInvestment = buyMaximalEuro;
+    }
+}
+
++ (void)setSellMaximalBTC:(NSDecimalNumber *)sellMaximalBTC {
+    if (sellMaximalBTC) {
+        [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore].sellMaximalBTCInvestment = sellMaximalBTC;
+    }
+}
+
 #pragma mark - Private class methods
 + (NSMutableArray *)sortedOrderBook:(NSMutableArray *)orderBookDatas forOrderType:(BitcoinDE_OrderType)orderType {
     switch (orderType) {

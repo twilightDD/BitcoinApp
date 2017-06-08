@@ -16,4 +16,9 @@
 + (void)registerController:(id <SOXAutomaticTradingCoreProtocol>)controller
     forUpdatesForOrderType:(BitcoinDE_OrderType)orderType;
 
++ (void)setBuyInterestRate:(NSDecimalNumber *)buyInterestRate;
++ (void)setSellInterestRate:(NSDecimalNumber *)sellInterestRate;
++ (void)setBuyMaximalEuro:(NSDecimalNumber *)buyMaximalEuro;
++ (void)setSellMaximalBTC:(NSDecimalNumber *)sellMaximalBTC;
+
 @end

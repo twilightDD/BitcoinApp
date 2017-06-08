@@ -4304,7 +4304,7 @@ Gw
                                             <constraint firstAttribute="width" constant="100" id="ueQ-vR-YxO"/>
                                         </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="U3r-8S-qsc">
-                                            <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="Xax-sF-NrI" userLabel="Currency Formatter">
+                                            <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" generatesDecimalNumbers="YES" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="8" id="Xax-sF-NrI" userLabel="Currency Formatter">
                                                 <real key="minimum" value="0.0"/>
                                             </numberFormatter>
                                             <font key="font" metaFont="system"/>
@@ -4313,6 +4313,7 @@ Gw
                                         </textFieldCell>
                                         <connections>
                                             <outlet property="delegate" destination="cwM-7M-FeE" id="d98-gZ-CKV"/>
+                                            <outlet property="nextKeyView" destination="4sC-Co-fvX" id="PVw-E6-I8X"/>
                                         </connections>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vmD-DK-nO2">
@@ -4332,7 +4333,7 @@ Gw
                                             <constraint firstAttribute="width" constant="100" id="JLy-wU-tzD"/>
                                         </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="eNw-ZB-O2D">
-                                            <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" minimumIntegerDigits="0" maximumIntegerDigits="2000000000" maximumFractionDigits="3" currencyCode="%" internationalCurrencySymbol="%" id="oOA-Aa-sAV" userLabel="Pseudo%Formatter">
+                                            <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" generatesDecimalNumbers="YES" minimumIntegerDigits="0" maximumIntegerDigits="2000000000" maximumFractionDigits="3" currencyCode="%" internationalCurrencySymbol="%" id="oOA-Aa-sAV" userLabel="Pseudo%Formatter">
                                                 <real key="minimum" value="0.0"/>
                                             </numberFormatter>
                                             <font key="font" metaFont="system"/>
@@ -4341,6 +4342,7 @@ Gw
                                         </textFieldCell>
                                         <connections>
                                             <outlet property="delegate" destination="cwM-7M-FeE" id="fj9-wt-5PG"/>
+                                            <outlet property="nextKeyView" destination="0q8-u5-RhW" id="wzv-zl-6OP"/>
                                         </connections>
                                     </textField>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="0q8-u5-RhW">
@@ -4351,6 +4353,7 @@ Gw
                                         </buttonCell>
                                         <connections>
                                             <action selector="useMaxReservation:" target="cwM-7M-FeE" id="Zz0-zf-Tto"/>
+                                            <outlet property="nextKeyView" destination="NLc-ce-lrH" id="ftr-Wu-5Co"/>
                                         </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Xe-Tk-Z3f">
@@ -4408,6 +4411,7 @@ Gw
                                         </buttonCell>
                                         <connections>
                                             <action selector="startAutomaticAction:" target="cwM-7M-FeE" id="Tp4-vQ-dvx"/>
+                                            <outlet property="nextKeyView" destination="Jr3-wH-a3M" id="oXe-RA-rrp"/>
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="NLc-ce-lrH">
@@ -4416,6 +4420,9 @@ Gw
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <outlet property="nextKeyView" destination="3fd-l3-d7n" id="OMB-0S-gqg"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
