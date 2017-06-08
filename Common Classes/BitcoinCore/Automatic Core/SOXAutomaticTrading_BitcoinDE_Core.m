@@ -197,17 +197,19 @@
     NSDecimalNumber *referenceData_price = [referenceData.orderInformation_price decimalNumberByDividingBy:interest];
 
     if ([dataOfInterest_price isLessThan:referenceData_price]) {
-        NSString *note = [NSString stringWithFormat:@"BUY type %@ oID %@ miA%@",
-                          dataOfInterest.orderInformation_type
+        NSString *note = [NSString stringWithFormat:@"BUY - type %@ - orderID %@ - minAmount %@ - price %@"
+                          , dataOfInterest.orderInformation_type
                           , dataOfInterest.orderInformation_orderID
-                          , dataOfInterest.orderInformation_minAmount];
+                          , dataOfInterest.orderInformation_minAmount
+                          , dataOfInterest.orderInformation_price];
         [self informBuyDelegateWithNote:note];
     }
     else {
-        NSString *note = [NSString stringWithFormat:@"no buy type %@ oID %@ miA%@",
-                          dataOfInterest.orderInformation_type
+        NSString *note = [NSString stringWithFormat:@"no buy - type %@ - orderID %@ - minAmount %@ - price %@"
+                          , dataOfInterest.orderInformation_type
                           , dataOfInterest.orderInformation_orderID
-                          , dataOfInterest.orderInformation_minAmount];
+                          , dataOfInterest.orderInformation_minAmount
+                          , dataOfInterest.orderInformation_price];
         [self informBuyDelegateWithNote:note];
     }
 
@@ -220,16 +222,16 @@
     NSDecimalNumber *interest = [NSDecimalNumber decimalNumberWithString:@"1"];
     NSDecimalNumber *referenceData_price = [referenceData.orderInformation_price decimalNumberByMultiplyingBy:interest];
     if ([dataOfInterest_price isGreaterThan:referenceData_price]) {
-        NSString *note = [NSString stringWithFormat:@"SELL type %@ oID %@ minAmount %@ price %@",
-                          dataOfInterest.orderInformation_type
+        NSString *note = [NSString stringWithFormat:@"SELL - type %@ - orderID %@ - minAmount %@ - price %@"
+                          , dataOfInterest.orderInformation_type
                           , dataOfInterest.orderInformation_orderID
                           , dataOfInterest.orderInformation_minAmount
                           , dataOfInterest.orderInformation_price];
         [self informSellDelegateWithNote:note];
     }
     else {
-        NSString *note = [NSString stringWithFormat:@"no sell type %@ oID %@ minAmount %@  price %@",
-                          dataOfInterest.orderInformation_type
+        NSString *note = [NSString stringWithFormat:@"no sell - type %@ - orderID %@ - minAmount %@ - price %@"
+                          , dataOfInterest.orderInformation_type
                           , dataOfInterest.orderInformation_orderID
                           , dataOfInterest.orderInformation_minAmount
                           , dataOfInterest.orderInformation_price];
@@ -248,10 +250,10 @@
             [self checkForSellableOrder];
         }
         else {
-            NSString *note = [NSString stringWithFormat:@"added sell order 'type: order' at idx %tu (price: %@)"
-                              , [self.sellOrderBook indexOfObject:addOrderData]
+            NSString *note = [NSString stringWithFormat:@"added buy order - type: offer - index %tu - price: %@"
+                              , [self.buyOrderBook indexOfObject:addOrderData]
                               , addOrderData.orderInformation_price];
-            [self informSellDelegateWithNote:note];
+            [self informBuyDelegateWithNote:note];
 
         }
 
@@ -263,10 +265,10 @@
             [self checkForBuyableOrder];
         }
         else {
-            NSString *note = [NSString stringWithFormat:@"added buy order 'type: offer' at idx %tu (price: %@)"
-                              , [self.buyOrderBook indexOfObject:addOrderData]
+            NSString *note = [NSString stringWithFormat:@"added sell order - type: order - index %tu - price: %@"
+                              , [self.sellOrderBook indexOfObject:addOrderData]
                               , addOrderData.orderInformation_price];
-            [self informBuyDelegateWithNote:note];
+            [self informSellDelegateWithNote:note];
 
         }
     }
@@ -314,11 +316,12 @@
     }
 }
 
+#pragma mark - Private methods
 #pragma mark | Inform delegates
 
 - (void)informBuyDelegateWithNote:(NSString *)note {
     if (note) {
-        for (NSObject *delegate in self.buyDelegates) {
+        for (NSObject <SOXAutomaticTradingCoreProtocol> *delegate in self.buyDelegates) {
             [delegate performSelector:@selector(logLine:)
                            withObject:note
              ];
@@ -327,7 +330,7 @@
 }
 - (void)informSellDelegateWithNote:(NSString *)note {
     if (note) {
-        for (NSObject *delegate in self.sellDelegates) {
+        for (NSObject <SOXAutomaticTradingCoreProtocol> *delegate in self.sellDelegates) {
             [delegate performSelector:@selector(logLine:)
                            withObject:note
              ];
