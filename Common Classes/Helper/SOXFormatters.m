@@ -49,14 +49,14 @@
 
 + (NSDateFormatter *)dateFormatterShortDateShortTime {
     static dispatch_once_t pred;
-    static NSDateFormatter *dateFormatterRFC3339 = nil;
+    static NSDateFormatter *shortDateShortTimeDateFormatter = nil;
     dispatch_once(&pred, ^{
-        dateFormatterRFC3339           = [[NSDateFormatter alloc] init];
-        dateFormatterRFC3339.locale    = [NSLocale autoupdatingCurrentLocale];
-        dateFormatterRFC3339.dateStyle = NSDateFormatterShortStyle;
-        dateFormatterRFC3339.timeStyle = NSDateFormatterShortStyle;
+        shortDateShortTimeDateFormatter           = [[NSDateFormatter alloc] init];
+        shortDateShortTimeDateFormatter.locale    = [NSLocale autoupdatingCurrentLocale];
+        shortDateShortTimeDateFormatter.dateStyle = NSDateFormatterShortStyle;
+        shortDateShortTimeDateFormatter.timeStyle = NSDateFormatterShortStyle;
     });
-    return dateFormatterRFC3339;
+    return shortDateShortTimeDateFormatter;
 }
 
 #pragma mark - Static NumberFormatters
@@ -114,6 +114,15 @@
     
     NSString *rfc = [[SOXFormatters dateFormatterEncodeRFC3339] stringFromDate:date];
     return rfc;
+}
+
++ (NSString *)shortDateShortTimeStringForDate:(NSDate *)date {
+    if (!date) {
+        return @"";
+    }
+
+    NSString *dateString = [[SOXFormatters dateFormatterShortDateShortTime] stringFromDate:date];
+    return dateString;
 }
 
 #pragma mark | Currency methods
