@@ -9,6 +9,7 @@
 #import "SOXAutomaticTradingViewController.h"
 
 #import "SOXMarket_BitcoinDE_Core.h"
+#import "SOXAutomaticTrading_BitcoinDE_Core_OLD.h"
 #import "SOXAutomaticTrading_BitcoinDE_Core.h"
 #import "SOXShowOrderbook_BitcoinDE_Data.h"
 #pragma mark - Interface
@@ -34,7 +35,7 @@
 
 #pragma mark Properties
 @property (nonatomic) BOOL automaticTradingIsRunning;
-@property (strong, nonatomic) SOXAutomaticTrading_BitcoinDE_Core *tradingCore;
+@property (strong, nonatomic) SOXAutomaticTrading_BitcoinDE_Core_OLD *tradingCore;
 @property (strong, nonatomic) NSString *log;
 
 @property (nonatomic) double currentLimit;
@@ -109,7 +110,7 @@
 
 - (void)stopAutomaticTrading {
     if (self.orderType) {
-        [SOXAutomaticTrading_BitcoinDE_Core unRegisterController:self
+        [SOXAutomaticTrading_BitcoinDE_Core_OLD unRegisterController:self
                                           forUpdatesForOrderType:self.orderType];
     }
     else {
@@ -159,10 +160,10 @@
     if (valueField == self.minInterestTextField) { // %
         switch (self.orderType) {
             case BitcoinDE_BuyOrderType:
-                [SOXAutomaticTrading_BitcoinDE_Core setBuyInterestRate:newValue];
+                [SOXAutomaticTrading_BitcoinDE_Core_OLD setBuyInterestRate:newValue];
                 break;
             case BitcoinDE_SellOrderType:
-                [SOXAutomaticTrading_BitcoinDE_Core setSellInterestRate:newValue];
+                [SOXAutomaticTrading_BitcoinDE_Core_OLD setSellInterestRate:newValue];
             default:
                 break;
         }
@@ -170,10 +171,10 @@
     else if (valueField == self.maxInvestmentTextField) { // €
         switch (self.orderType) {
             case BitcoinDE_BuyOrderType:
-                [SOXAutomaticTrading_BitcoinDE_Core setBuyMaximalEuro:newValue];
+                [SOXAutomaticTrading_BitcoinDE_Core_OLD setBuyMaximalEuro:newValue];
                 break;
             case BitcoinDE_SellOrderType:
-                [SOXAutomaticTrading_BitcoinDE_Core setSellMaximalBTC:newValue];
+                [SOXAutomaticTrading_BitcoinDE_Core_OLD setSellMaximalBTC:newValue];
             default:
                 break;
         }
