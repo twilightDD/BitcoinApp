@@ -23,6 +23,9 @@
 @property (strong, nonatomic) NSMutableArray *buyOrderBook;
 @property (strong, nonatomic) NSMutableArray *sellOrderBook;
 
+@property (nonatomic) BOOL executeBuyTrades;
+@property (nonatomic) BOOL executeSellTrades;
+
 @end
 
 @implementation SOXAutomaticTrading_BitcoinDE_Core
@@ -41,6 +44,25 @@
     return sharedTradingCore;
 }
 #pragma mark - Public class methods
++ (void)executeTrades:(BOOL)executeTrades forOrderType:(BitcoinDE_OrderType)orderType {
+    SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
+
+    switch (orderType) {
+        case BitcoinDE_BuyOrderType:
+            core.executeBuyTrades = executeTrades;
+            [core informBuyDelegateWithNote:[NSString stringWithFormat:@"Execute trades %@"
+                                             , executeTrades ? @"enabled" : @"disabled"]];
+            break;
+        case BitcoinDE_SellOrderType:
+            core.executeBuyTrades = executeTrades;
+            [core informSellDelegateWithNote:[NSString stringWithFormat:@"Execute trades %@"
+                                              , executeTrades ? @"enabled" : @"disabled"]];
+            break;
+        default:
+            break;
+    }
+}
+
 + (void)registerController:(id <SOXAutomaticTradingCoreProtocol>)controller
     forUpdatesForOrderType:(BitcoinDE_OrderType)orderType {
 

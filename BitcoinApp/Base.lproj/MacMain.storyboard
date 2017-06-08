@@ -4353,16 +4353,6 @@ Gw
                                             <action selector="useMaxReservation:" target="cwM-7M-FeE" id="Zz0-zf-Tto"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3fd-l3-d7n">
-                                        <rect key="frame" x="591" y="445" width="68" height="32"/>
-                                        <buttonCell key="cell" type="push" title="RUN" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UKG-Te-ogE">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="startAutomaticAction:" target="cwM-7M-FeE" id="Tp4-vQ-dvx"/>
-                                        </connections>
-                                    </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Xe-Tk-Z3f">
                                         <rect key="frame" x="18" y="421" width="33" height="14"/>
                                         <constraints>
@@ -4410,6 +4400,23 @@ Gw
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3fd-l3-d7n">
+                                        <rect key="frame" x="591" y="475" width="68" height="32"/>
+                                        <buttonCell key="cell" type="push" title="RUN" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UKG-Te-ogE">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="startAutomaticAction:" target="cwM-7M-FeE" id="Tp4-vQ-dvx"/>
+                                        </connections>
+                                    </button>
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="NLc-ce-lrH">
+                                        <rect key="frame" x="546" y="454" width="109" height="18"/>
+                                        <buttonCell key="cell" type="check" title="Execute Trade" bezelStyle="regularSquare" imagePosition="left" inset="2" id="eZJ-fd-81I">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="0q8-u5-RhW" firstAttribute="leading" secondItem="Jr3-wH-a3M" secondAttribute="trailing" constant="8" id="2mZ-x7-3W2"/>
@@ -4417,8 +4424,10 @@ Gw
                                     <constraint firstAttribute="bottom" secondItem="fe2-pf-czM" secondAttribute="bottom" constant="20" symbolic="YES" id="8rp-nt-rZh"/>
                                     <constraint firstItem="9Xe-Tk-Z3f" firstAttribute="top" secondItem="vmD-DK-nO2" secondAttribute="bottom" constant="20" id="965-Wu-lrA"/>
                                     <constraint firstItem="vmD-DK-nO2" firstAttribute="top" secondItem="8d9-sH-1hz" secondAttribute="bottom" constant="13" id="BEk-oU-UR9"/>
+                                    <constraint firstItem="NLc-ce-lrH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4sC-Co-fvX" secondAttribute="trailing" constant="8" symbolic="YES" id="D8S-e3-WaZ"/>
                                     <constraint firstItem="0q8-u5-RhW" firstAttribute="top" secondItem="WgR-KD-pyB" secondAttribute="top" constant="24" id="Eis-Ga-yI7"/>
                                     <constraint firstItem="sKc-pr-7pa" firstAttribute="trailing" secondItem="fe2-pf-czM" secondAttribute="trailing" id="KqP-Ou-YhM"/>
+                                    <constraint firstItem="4sC-Co-fvX" firstAttribute="baseline" secondItem="NLc-ce-lrH" secondAttribute="baseline" id="L4Z-UF-sti"/>
                                     <constraint firstItem="4sC-Co-fvX" firstAttribute="leading" secondItem="vmD-DK-nO2" secondAttribute="trailing" constant="8" symbolic="YES" id="LYa-D4-6de"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0q8-u5-RhW" secondAttribute="trailing" constant="20" symbolic="YES" id="LjR-hp-5gm"/>
                                     <constraint firstItem="0q8-u5-RhW" firstAttribute="baseline" secondItem="Jr3-wH-a3M" secondAttribute="baseline" id="Lk8-Cu-2v3"/>
@@ -4426,16 +4435,17 @@ Gw
                                     <constraint firstItem="vmD-DK-nO2" firstAttribute="trailing" secondItem="8d9-sH-1hz" secondAttribute="trailing" id="PD0-SM-SGC"/>
                                     <constraint firstItem="sKc-pr-7pa" firstAttribute="top" secondItem="9Xe-Tk-Z3f" secondAttribute="bottom" constant="8" id="PQu-X2-jEP"/>
                                     <constraint firstItem="Jr3-wH-a3M" firstAttribute="top" secondItem="WgR-KD-pyB" secondAttribute="top" constant="20" id="QQF-4J-q7d"/>
+                                    <constraint firstItem="NLc-ce-lrH" firstAttribute="trailing" secondItem="3fd-l3-d7n" secondAttribute="trailing" id="Sf2-7o-fj5"/>
                                     <constraint firstItem="fe2-pf-czM" firstAttribute="trailing" secondItem="3fd-l3-d7n" secondAttribute="trailing" id="Ssm-BU-mM4"/>
+                                    <constraint firstItem="3fd-l3-d7n" firstAttribute="baseline" secondItem="0q8-u5-RhW" secondAttribute="baseline" id="Uh4-VW-wyx"/>
+                                    <constraint firstItem="3fd-l3-d7n" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0q8-u5-RhW" secondAttribute="trailing" constant="8" symbolic="YES" id="VZJ-vV-6K6"/>
                                     <constraint firstItem="8d9-sH-1hz" firstAttribute="leading" secondItem="WgR-KD-pyB" secondAttribute="leading" constant="20" id="YkP-2J-yGc"/>
-                                    <constraint firstItem="3fd-l3-d7n" firstAttribute="baseline" secondItem="4sC-Co-fvX" secondAttribute="baseline" id="cCf-gt-APd"/>
                                     <constraint firstItem="4sC-Co-fvX" firstAttribute="leading" secondItem="Jr3-wH-a3M" secondAttribute="leading" id="fBd-OT-fn3"/>
                                     <constraint firstItem="fe2-pf-czM" firstAttribute="top" secondItem="sKc-pr-7pa" secondAttribute="bottom" constant="8" id="fmX-YV-pO9"/>
                                     <constraint firstItem="vmD-DK-nO2" firstAttribute="baseline" secondItem="4sC-Co-fvX" secondAttribute="baseline" id="gUN-OW-KWu"/>
                                     <constraint firstItem="9Xe-Tk-Z3f" firstAttribute="leading" secondItem="WgR-KD-pyB" secondAttribute="leading" constant="20" id="iKL-MH-uPy"/>
                                     <constraint firstItem="4sC-Co-fvX" firstAttribute="trailing" secondItem="Jr3-wH-a3M" secondAttribute="trailing" id="lvE-re-mdV"/>
                                     <constraint firstItem="vmD-DK-nO2" firstAttribute="leading" secondItem="8d9-sH-1hz" secondAttribute="leading" id="npf-YS-m5K"/>
-                                    <constraint firstItem="3fd-l3-d7n" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4sC-Co-fvX" secondAttribute="trailing" constant="8" symbolic="YES" id="pni-7K-pqV"/>
                                     <constraint firstItem="4sC-Co-fvX" firstAttribute="top" secondItem="Jr3-wH-a3M" secondAttribute="bottom" constant="8" id="qEN-Rw-Az1"/>
                                     <constraint firstItem="8d9-sH-1hz" firstAttribute="baseline" secondItem="Jr3-wH-a3M" secondAttribute="baseline" id="vKI-YB-AtA"/>
                                     <constraint firstAttribute="trailing" secondItem="3fd-l3-d7n" secondAttribute="trailing" constant="20" id="xse-ev-OAV"/>
@@ -4458,6 +4468,7 @@ Gw
                     <connections>
                         <outlet property="automaticBackgroundView" destination="WgR-KD-pyB" id="uaj-We-1XA"/>
                         <outlet property="clearLogButton" destination="fe2-pf-czM" id="MnP-Lo-Lsk"/>
+                        <outlet property="executeTradesButton" destination="NLc-ce-lrH" id="r2F-YY-Dhb"/>
                         <outlet property="logDescriptionTextField" destination="9Xe-Tk-Z3f" id="POx-rB-BT8"/>
                         <outlet property="logTextView" destination="6J3-fH-bxe" id="cLz-U2-TLl"/>
                         <outlet property="maxInvestmentDescriptionTextField" destination="8d9-sH-1hz" id="xLz-R6-TH1"/>
