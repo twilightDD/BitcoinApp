@@ -104,7 +104,8 @@
                                             withParameter:sellParameters
                                                 respondTo:core];
 }
-- (NSMutableArray *)sortedOrderBook:(NSMutableArray *)orderBookDatas forOrderType:(BitcoinDE_OrderType)orderType {
+#pragma mark - Private class methods
++ (NSMutableArray *)sortedOrderBook:(NSMutableArray *)orderBookDatas forOrderType:(BitcoinDE_OrderType)orderType {
     switch (orderType) {
         case BitcoinDE_BuyOrderType: {
             [orderBookDatas sortUsingComparator:^NSComparisonResult(SOXShowOrderbook_BitcoinDE_Data *_Nonnull obj1, SOXShowOrderbook_BitcoinDE_Data  *_Nonnull obj2) {
@@ -157,7 +158,8 @@
     }
 
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowBuyOrderbookCommandType)]) {
-        self.buyOrderBook = [self sortedOrderBook:orderBookDatas forOrderType:BitcoinDE_BuyOrderType];
+        self.buyOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:orderBookDatas
+                                                                   forOrderType:BitcoinDE_BuyOrderType];
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
                                                                 delegate:core];
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
@@ -173,7 +175,8 @@
     }
     else if([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowSellOrderbookCommandType)]) {
 
-        self.sellOrderBook = [self sortedOrderBook:orderBookDatas forOrderType:BitcoinDE_SellOrderType];
+        self.sellOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:orderBookDatas
+                                                                    forOrderType:BitcoinDE_SellOrderType];
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
                                                                 delegate:core];
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
@@ -243,11 +246,14 @@
 
 #pragma mark - SOXSocketIOCoreProtocol
 - (void)addedOrder:(SOXShowOrderbookData *)addOrderData {
-    if ([addOrderData.orderInformation_type isEqualToString:@"order"]) {
-        [self.sellOrderBook addObject:addOrderData];
-        self.sellOrderBook = [self sortedOrderBook:self.sellOrderBook forOrderType:BitcoinDE_SellOrderType];
-        if ([[self.sellOrderBook objectAtIndex:0] isEqual:addOrderData]) {
-            [self checkForSellableOrder];
+    // Buy
+    NSString *orderInformationType = addOrderData.orderInformation_type;
+    if ([orderInformationType isEqualToString:@"offer"]) {
+        [self.buyOrderBook addObject:addOrderData];
+        self.buyOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:self.buyOrderBook
+                                                                   forOrderType:BitcoinDE_BuyOrderType];
+        if ([[self.buyOrderBook objectAtIndex:0] isEqual:addOrderData]) {
+            [self checkForBuyableOrder];
         }
         else {
             NSString *note = [NSString stringWithFormat:@"added buy order - type: offer - index %tu - price: %@"
@@ -256,13 +262,14 @@
             [self informBuyDelegateWithNote:note];
 
         }
-
     }
-    else if ([addOrderData.orderInformation_type isEqualToString:@"offer"]) {
-        [self.buyOrderBook addObject:addOrderData];
-        self.buyOrderBook = [self sortedOrderBook:self.buyOrderBook forOrderType:BitcoinDE_BuyOrderType];
-        if ([[self.buyOrderBook objectAtIndex:0] isEqual:addOrderData]) {
-            [self checkForBuyableOrder];
+    // Sell
+    else if ([orderInformationType isEqualToString:@"order"]) {
+        [self.sellOrderBook addObject:addOrderData];
+        self.sellOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:self.sellOrderBook
+                                                                    forOrderType:BitcoinDE_SellOrderType];
+        if ([[self.sellOrderBook objectAtIndex:0] isEqual:addOrderData]) {
+            [self checkForSellableOrder];
         }
         else {
             NSString *note = [NSString stringWithFormat:@"added sell order - type: order - index %tu - price: %@"

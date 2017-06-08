@@ -10,6 +10,10 @@
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
 @interface SOXAutomaticTrading_BitcoinDE_Core : SOXAutomaticTradingCore
+
++ (void)executeTrades:(BOOL)executeTrades forOrderType:(BitcoinDE_OrderType)orderType;
+
 + (void)registerController:(id <SOXAutomaticTradingCoreProtocol>)controller
     forUpdatesForOrderType:(BitcoinDE_OrderType)orderType;
+
 @end
