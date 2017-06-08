@@ -6,7 +6,7 @@
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
 
-#import "SOXAutomaticTrading_BitcoinDE_Core.h"
+#import "SOXAutomaticTrading_BitcoinDE_Core_OLD.h"
 
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXSocketIO_BitcoinDE_Core.h"
