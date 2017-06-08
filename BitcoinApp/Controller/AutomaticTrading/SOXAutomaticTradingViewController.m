@@ -12,6 +12,9 @@
 #import "SOXAutomaticTrading_BitcoinDE_Core_OLD.h"
 #import "SOXAutomaticTrading_BitcoinDE_Core.h"
 #import "SOXShowOrderbook_BitcoinDE_Data.h"
+
+#import "SOXFormatters.h"
+
 #pragma mark - Interface
 @interface SOXAutomaticTradingViewController () <SOXAutomaticTradingCoreProtocol>
 
@@ -195,9 +198,11 @@
 
 #pragma mark - SOXAutomaticTradingCoreProtocol
 - (void)logLine:(NSString *)line {
-    
     self.log = [self.log stringByAppendingString:@"\n"];
-    self.log = [self.log stringByAppendingString:line];
+    NSString *lineWithDate = [NSString stringWithFormat:@"%@: %@"
+                              , [SOXFormatters shortDateShortTimeStringForDate:[NSDate date]]
+                              , line];
+    self.log = [self.log stringByAppendingString:lineWithDate];
     
     self.logTextView.string = self.log;
 }
