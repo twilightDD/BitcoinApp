@@ -4333,7 +4333,7 @@ Gw
                                             <constraint firstAttribute="width" constant="100" id="JLy-wU-tzD"/>
                                         </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="eNw-ZB-O2D">
-                                            <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" generatesDecimalNumbers="YES" minimumIntegerDigits="0" maximumIntegerDigits="2000000000" maximumFractionDigits="3" currencyCode="%" internationalCurrencySymbol="%" id="oOA-Aa-sAV" userLabel="Pseudo%Formatter">
+                                            <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" generatesDecimalNumbers="YES" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" currencyCode="%" internationalCurrencySymbol="%" id="oOA-Aa-sAV" userLabel="Pseudo%Formatter">
                                                 <real key="minimum" value="0.0"/>
                                             </numberFormatter>
                                             <font key="font" metaFont="system"/>

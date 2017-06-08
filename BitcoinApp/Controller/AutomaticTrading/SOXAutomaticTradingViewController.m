@@ -111,9 +111,13 @@
 
     self.maxInvestmentDescriptionTextField.stringValue  = maxInvestmentDescriptionText;
     self.maxInvestmentTextField.doubleValue             = 0;
+    NSNumberFormatter *formatter                        = self.maxInvestmentTextField.formatter;
+    formatter.minimum                                   = [NSDecimalNumber zero];
 
     self.minInterestDescriptionTextField.stringValue = minInterestDescriptionText;
-    self.minInterestTextField.doubleValue            = 0;
+    self.minInterestTextField.doubleValue            = 0.25;
+    NSNumberFormatter *formatter2                    = self.minInterestTextField.formatter;
+    formatter2.minimum                               = [NSDecimalNumber decimalNumberWithString:@"0.25"];
 
     self.logDescriptionTextField.stringValue = @"Log output";
     self.logTextView.string                  = @"";
