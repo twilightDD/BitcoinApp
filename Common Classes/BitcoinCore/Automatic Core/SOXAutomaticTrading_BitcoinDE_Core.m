@@ -113,25 +113,37 @@
 #pragma mark - Manual setters
 + (void)setBuyInterestRate:(NSDecimalNumber *)buyInterestRate {
     if (buyInterestRate) {
-        [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore].buyInterestRate = buyInterestRate;
+        SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
+        core .buyInterestRate = buyInterestRate;
+        NSString *note = [NSString stringWithFormat:@"Set interest rate to %@ %%", buyInterestRate];
+        [core informBuyDelegateWithNote:note];
     }
 }
 
 + (void)setSellInterestRate:(NSDecimalNumber *)sellInterestRate {
     if (sellInterestRate) {
+        SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
         [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore].sellInterestRate = sellInterestRate;
+        NSString *note = [NSString stringWithFormat:@"Set interest rate to %@ %%", sellInterestRate];
+        [core informSellDelegateWithNote:note];
     }
 }
 
 + (void)setBuyMaximalEuro:(NSDecimalNumber *)buyMaximalEuro {
     if (buyMaximalEuro) {
+        SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
         [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore].buyMaximalEuroInvestment = buyMaximalEuro;
+        NSString *note = [NSString stringWithFormat:@"Set maximal trading volume to %@ €", buyMaximalEuro];
+        [core informBuyDelegateWithNote:note];
     }
 }
 
 + (void)setSellMaximalBTC:(NSDecimalNumber *)sellMaximalBTC {
     if (sellMaximalBTC) {
+        SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
         [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore].sellMaximalBTCInvestment = sellMaximalBTC;
+        NSString *note = [NSString stringWithFormat:@"Set maximal trading amount to %@ BTC", sellMaximalBTC];
+        [core informSellDelegateWithNote:note];
     }
 }
 
