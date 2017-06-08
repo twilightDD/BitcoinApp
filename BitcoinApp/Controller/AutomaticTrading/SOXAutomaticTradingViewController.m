@@ -19,7 +19,7 @@
 @interface SOXAutomaticTradingViewController () <SOXAutomaticTradingCoreProtocol>
 
 #pragma mark IBOutlets
-@property (weak) IBOutlet NSButton *runAutomaticButton;
+@property (weak) IBOutlet NSButton *showAutomaticTradingAreaButton;
 @property (weak) IBOutlet NSButton *executeTradesButton;
 @property (weak) IBOutlet NSTextField *statusTextField;
 
@@ -60,48 +60,63 @@
 
 #pragma mark - Private methods
 - (void)setupUI {
-    NSString *runAutomaticButtonTitle;
-    NSString *startAutomaticButtonTitle;
-    
-    if (self.orderType == BitcoinDE_BuyOrderType) {
-        runAutomaticButtonTitle = @"Buy automatically";
-        startAutomaticButtonTitle = @"Start Automatic Buy";
-    }
-    else if (self.orderType == BitcoinDE_SellOrderType) {
-        runAutomaticButtonTitle = @"Sell automatically";
-        startAutomaticButtonTitle = @"Start Automatic Sell";
-    }
-    else {
-        NSLog(@"ERROR - no orderType set");
+    if (self.orderType == BitcoinDE_UnknownOrderType) {
+        self.logTextView.string = @"Error - no self.orderType";
         return;
     }
 
-    self.runAutomaticButton.state = NSControlStateValueOff;
-    self.runAutomaticButton.title = runAutomaticButtonTitle;
-    self.statusTextField.stringValue = @"";
-    
-    self.automaticBackgroundView.hidden = YES;
-    // TextFields in separate automaticBackgroundView
-    {
-        self.maxInvestmentDescriptionTextField.stringValue  = @"Max. Investment";
-        self.maxInvestmentTextField.doubleValue             = 0;
-        
-        self.useMaxReservationButton.title = @"Use maximal reservation";
-        self.useMaxReservationButton.state = 0;
-        
-        self.minInterestDescriptionTextField.stringValue = @"Min. Investment [%]";
-        self.minInterestTextField.doubleValue            = 0;
-        
-        self.startAutomaticButton.title = startAutomaticButtonTitle;
-        
-        self.logDescriptionTextField.stringValue = @"Log output";
-        self.logTextView.string                  = @"";
-        self.clearLogButton.title                = @"Clear Log";
+    self.automaticBackgroundView.hidden = YES; // disable on startup
+
+    NSString *showAutomaticTradingAreaButtonTitle;
+    NSString *startAutomaticButtonTitle;
+    NSString *executeTradesButtonTitle;
+    NSString *useMaxReservationButtonTitle;
+    NSString *clearLogButtonTitle = @"Clear log";
+
+    NSString *maxInvestmentDescriptionText;
+    NSString *minInterestDescriptionText = @"Min. Interest Rate [%]";
+
+    if (self.orderType == BitcoinDE_BuyOrderType) {
+        showAutomaticTradingAreaButtonTitle   = @"Buy automatically";
+        startAutomaticButtonTitle = @"Start Automatic Buy";
+        executeTradesButtonTitle  = @"Execute Trades";
+        useMaxReservationButtonTitle = @"Use Maximal Fidor reservation";
+
+        maxInvestmentDescriptionText = @"Max. Investment";
+    }
+    else if (self.orderType == BitcoinDE_SellOrderType) {
+        showAutomaticTradingAreaButtonTitle   = @"Sell automatically";
+        startAutomaticButtonTitle = @"Start Automatic Sell";
+        executeTradesButtonTitle  = @"Execute Trades";
+        useMaxReservationButtonTitle = @"Use Maximal BTC amount";
+
+        maxInvestmentDescriptionText = @"Max. Investment";
     }
 
+    self.showAutomaticTradingAreaButton.state = 0;
+    self.showAutomaticTradingAreaButton.title = showAutomaticTradingAreaButtonTitle;
+
+    self.startAutomaticButton.title = startAutomaticButtonTitle;
+
     self.executeTradesButton.state = NSControlStateValueOff;
-    self.executeTradesButton.title = @"Execute Trades";
+    self.executeTradesButton.title = executeTradesButtonTitle;
     self.executeTrades = NO;
+
+    self.useMaxReservationButton.state = NSControlStateValueOff;
+    self.useMaxReservationButton.title = useMaxReservationButtonTitle;
+
+    self.clearLogButton.title = clearLogButtonTitle;
+
+    self.statusTextField.stringValue = @"";
+
+    self.maxInvestmentDescriptionTextField.stringValue  = maxInvestmentDescriptionText;
+    self.maxInvestmentTextField.doubleValue             = 0;
+
+    self.minInterestDescriptionTextField.stringValue = minInterestDescriptionText;
+    self.minInterestTextField.doubleValue            = 0;
+
+    self.logDescriptionTextField.stringValue = @"Log output";
+    self.logTextView.string                  = @"";
 }
 
 - (void)startAutomaticTrading {
@@ -128,7 +143,7 @@
 }
 
 #pragma mark - Action methods
-- (IBAction)runAutomaticAction:(NSButton *)sender {
+- (IBAction)showAutomaticTradingAreaAction:(NSButton *)sender {
     self.automaticBackgroundView.hidden = !sender.state;
     if (self.automaticTradingIsRunning == YES
         && sender.state == NO) {

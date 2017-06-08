@@ -4276,7 +4276,7 @@ Gw
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="runAutomaticAction:" target="cwM-7M-FeE" id="af2-em-Uoc"/>
+                                    <action selector="showAutomaticTradingAreaAction" target="cwM-7M-FeE" id="af2-em-Uoc"/>
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pFG-pr-Jvw">
@@ -4475,7 +4475,7 @@ Gw
                         <outlet property="maxInvestmentTextField" destination="Jr3-wH-a3M" id="2Ga-5m-Mma"/>
                         <outlet property="minInterestDescriptionTextField" destination="vmD-DK-nO2" id="EAj-r0-SKT"/>
                         <outlet property="minInterestTextField" destination="4sC-Co-fvX" id="Oca-iB-YoE"/>
-                        <outlet property="runAutomaticButton" destination="fVP-xb-zlr" id="6BU-kA-cTd"/>
+                        <outlet property="showAutomaticTradingAreaButton" destination="fVP-xb-zlr" id="nxP-B4-5BL"/>
                         <outlet property="startAutomaticButton" destination="3fd-l3-d7n" id="JIn-Ke-RST"/>
                         <outlet property="statusTextField" destination="pFG-pr-Jvw" id="UVx-Z0-s8Q"/>
                         <outlet property="useMaxReservationButton" destination="0q8-u5-RhW" id="KmE-gd-4je"/>
