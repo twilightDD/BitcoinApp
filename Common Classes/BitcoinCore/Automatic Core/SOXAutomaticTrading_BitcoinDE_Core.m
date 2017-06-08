@@ -48,7 +48,8 @@
         sharedTradingCore = [[self class] new];
         [(SOXAutomaticTrading_BitcoinDE_Core *)sharedTradingCore setBuyDelegates:[[NSHashTable alloc] init]];
         [(SOXAutomaticTrading_BitcoinDE_Core *)sharedTradingCore setSellDelegates:[[NSHashTable alloc] init]];
-
+        [(SOXAutomaticTrading_BitcoinDE_Core *)sharedTradingCore setBuyInterestRate:[NSDecimalNumber one]];
+        [(SOXAutomaticTrading_BitcoinDE_Core *)sharedTradingCore setSellInterestRate:[NSDecimalNumber one]];
     });
 
     return sharedTradingCore;
@@ -83,13 +84,26 @@
     SOXAutomaticTrading_BitcoinDE_Core *tradingCore = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
 
     switch (orderType) {
-        case BitcoinDE_BuyOrderType:
+        case BitcoinDE_BuyOrderType: {
             [tradingCore.buyDelegates addObject:controller];
 
+            NSString *note = [NSString stringWithFormat:@"Maximal Fidor trading amount: %@"
+                              , [SOXFormatters currencyStringForNumber:tradingCore.buyMaximalFidorAmountInvestment
+                                                          roundingMode:NSNumberFormatterRoundDown]];
+            [tradingCore informBuyDelegateWithNote:note];
+            NSString *note2 = [NSString stringWithFormat:@"Interest factor: %@", tradingCore.buyInterestRate];
+            [tradingCore informBuyDelegateWithNote:note2];
+        }
             break;
-        case BitcoinDE_SellOrderType:
+        case BitcoinDE_SellOrderType: {
             [tradingCore.sellDelegates addObject:controller];
+            NSString *note = [NSString stringWithFormat:@"Maximal BTC trading amount: %@"
+                              , [SOXFormatters stringForBTCNumber:tradingCore.sellMaximalBTCInvestment]];
+            [tradingCore informSellDelegateWithNote:note];
 
+            NSString *note2 = [NSString stringWithFormat:@"Interest factor: %@", tradingCore.sellInterestRate];
+            [tradingCore informSellDelegateWithNote:note2];
+        }
             break;
         default:
             NSLog(@"ERROR - (void)registerForUpdatesForType:(BitcoinDE_OrderType)orderType");
@@ -119,8 +133,9 @@
 + (void)setBuyInterestRate:(NSDecimalNumber *)buyInterestRate {
     if (buyInterestRate) {
         SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
-        core .buyInterestRate = buyInterestRate;
-        NSString *note = [NSString stringWithFormat:@"Set interest rate to %@ %%", buyInterestRate];
+        NSDecimalNumber *buyInterestRatePercent = [buyInterestRate decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"100"]];
+        core.buyInterestRate = [[NSDecimalNumber one] decimalNumberBySubtracting:buyInterestRatePercent];
+        NSString *note = [NSString stringWithFormat:@"Set interest factor to %@", core.buyInterestRate];
         [core informBuyDelegateWithNote:note];
     }
 }
@@ -128,8 +143,9 @@
 + (void)setSellInterestRate:(NSDecimalNumber *)sellInterestRate {
     if (sellInterestRate) {
         SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
-        [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore].sellInterestRate = sellInterestRate;
-        NSString *note = [NSString stringWithFormat:@"Set interest rate to %@ %%", sellInterestRate];
+        NSDecimalNumber *sellInterestRatePercent = [sellInterestRate decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"100"]];
+        core.sellInterestRate = [[NSDecimalNumber one] decimalNumberByAdding:sellInterestRatePercent];
+        NSString *note = [NSString stringWithFormat:@"Set interest factor to %@", core.sellInterestRate];
         [core informSellDelegateWithNote:note];
     }
 }
@@ -193,8 +209,7 @@
     SOXShowOrderbook_BitcoinDE_Data *dataOfInterest = [self.buyOrderBook objectAtIndex: 0];
     SOXShowOrderbook_BitcoinDE_Data *referenceData  = [self.buyOrderBook objectAtIndex:1];
     NSDecimalNumber *dataOfInterest_price = dataOfInterest.orderInformation_price;
-    NSDecimalNumber *interest = [NSDecimalNumber decimalNumberWithString:@"1"];
-    NSDecimalNumber *referenceData_price = [referenceData.orderInformation_price decimalNumberByDividingBy:interest];
+    NSDecimalNumber *referenceData_price = [referenceData.orderInformation_price decimalNumberByDividingBy:self.buyInterestRate];
 
     if ([dataOfInterest_price isLessThan:referenceData_price]) {
         NSString *note = [NSString stringWithFormat:@"TRY TO BUY - type %@ - orderID %@ - minAmount %@ - maxAmount %@ - price %@"
@@ -224,8 +239,7 @@
     SOXShowOrderbook_BitcoinDE_Data *dataOfInterest = self.sellOrderBook.firstObject;
     SOXShowOrderbook_BitcoinDE_Data *referenceData = [self.sellOrderBook objectAtIndex:1];
     NSDecimalNumber *dataOfInterest_price = dataOfInterest.orderInformation_price;
-    NSDecimalNumber *interest = [NSDecimalNumber decimalNumberWithString:@"1"];
-    NSDecimalNumber *referenceData_price = [referenceData.orderInformation_price decimalNumberByMultiplyingBy:interest];
+    NSDecimalNumber *referenceData_price = [referenceData.orderInformation_price decimalNumberByMultiplyingBy:self.sellInterestRate];
     if ([dataOfInterest_price isGreaterThan:referenceData_price]) {
         NSString *note = [NSString stringWithFormat:@"TRY TO SELL - type %@ - orderID %@ - minAmount %@ - maxAmount %@ - price %@"
                           , dataOfInterest.orderInformation_type
@@ -262,6 +276,10 @@
 
     // consider user given maxFidorAmount
     NSDecimalNumber *availableFidorAmount = [[SOXMarket_BitcoinDE_Core sharedCore] availableFidorAmount];
+    if (self.buyMaximalFidorAmountInvestment) {
+        availableFidorAmount = [SOXFormatters lesserDecimalNumberFrom:self.buyMaximalFidorAmountInvestment
+                                                                  and:availableFidorAmount];
+    }
 
     NSDecimalNumber *btcAmountToBuy = nil;
     NSString *note = @"Error in tryToExecuteBuyOrder";
@@ -314,9 +332,9 @@
                     , [SOXFormatters stringForBTCNumber:btcAmountToBuy]];
         }
         [self informBuyDelegateWithNote:note];
-        [self informBuyDelegateWithNote:@"------"];
         NSBeep();
     }
+    [self informBuyDelegateWithNote:@"------"];
 }
 
 - (void)tryToExecuteSellOrder:(SOXShowOrderbook_BitcoinDE_Data *)orderToSell {
@@ -328,8 +346,13 @@
      FRAGE: was passiert mit der Order, die executed wurde? Wann wird die aus dem array entfernt?
      */
 
-    NSDecimalNumber *availableBTCAmount = [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount;
     NSDecimalNumber *orderMinAmountToSell = orderToSell.orderInformation_minAmount;
+
+    NSDecimalNumber *availableBTCAmount = [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount;
+    if (self.sellMaximalBTCInvestment) {
+        availableBTCAmount = [SOXFormatters lesserDecimalNumberFrom:self.sellMaximalBTCInvestment
+                                                                and:availableBTCAmount];
+    }
 
     NSDecimalNumber *btcAmountToSell;
     NSString *note = @"error in tryToExecuteSellOrder";
@@ -381,9 +404,9 @@
                     , [SOXFormatters stringForBTCNumber:btcAmountToSell]];
         }
         [self informSellDelegateWithNote:note];
-        [self informSellDelegateWithNote:@"------"];
         NSBeep();
     }
+    [self informBuyDelegateWithNote:@"------"];
 }
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
