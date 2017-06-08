@@ -18,7 +18,7 @@
 
 + (void)setBuyInterestRate:(NSDecimalNumber *)buyInterestRate;
 + (void)setSellInterestRate:(NSDecimalNumber *)sellInterestRate;
-+ (void)setBuyMaximalEuro:(NSDecimalNumber *)buyMaximalEuro;
-+ (void)setSellMaximalBTC:(NSDecimalNumber *)sellMaximalBTC;
++ (void)setBuyMaximalFidorAmount:(NSDecimalNumber *)buyMaximalEuro;
++ (void)setSellMaximalBTCAmount:(NSDecimalNumber *)sellMaximalBTC;
 
 @end

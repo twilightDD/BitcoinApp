@@ -32,7 +32,7 @@
 @property (nonatomic) BOOL executeSellTrades;
 
 @property (strong, nonatomic) NSDecimalNumber *buyInterestRate;
-@property (strong, nonatomic) NSDecimalNumber *buyMaximalEuroInvestment;
+@property (strong, nonatomic) NSDecimalNumber *buyMaximalFidorAmountInvestment;
 @property (strong, nonatomic) NSDecimalNumber *sellInterestRate;
 @property (strong, nonatomic) NSDecimalNumber *sellMaximalBTCInvestment;
 
@@ -134,16 +134,16 @@
     }
 }
 
-+ (void)setBuyMaximalEuro:(NSDecimalNumber *)buyMaximalEuro {
++ (void)setBuyMaximalFidorAmount:(NSDecimalNumber *)buyMaximalEuro {
     if (buyMaximalEuro) {
         SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
-        [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore].buyMaximalEuroInvestment = buyMaximalEuro;
+        [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore].buyMaximalFidorAmountInvestment = buyMaximalEuro;
         NSString *note = [NSString stringWithFormat:@"Set maximal trading volume to %@ €", buyMaximalEuro];
         [core informBuyDelegateWithNote:note];
     }
 }
 
-+ (void)setSellMaximalBTC:(NSDecimalNumber *)sellMaximalBTC {
++ (void)setSellMaximalBTCAmount:(NSDecimalNumber *)sellMaximalBTC {
     if (sellMaximalBTC) {
         SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
         [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore].sellMaximalBTCInvestment = sellMaximalBTC;
@@ -252,17 +252,15 @@
 
 - (void)tryToExecuteBuyOrder:(SOXShowOrderbook_BitcoinDE_Data *)orderToBuy {
     /*
-     1. amountToBuy herausfinden
-     => orderToBuy.minVolume <= availableVolume
-     => MAX orderToBuy.maxVolume vs. availableVolume
-     =
-     2. executeBuy
-     3. auf ServerAnswer warten
-     => Gegenkauf/käufe auslösen
+     # Vorgegebenen MaxAmount beachten
+     # auf ServerAnswer warten
+         => Gegenkauf/käufe auslösen
      FRAGE: was passiert mit der Order, die executed wurde? Wann wird die aus dem array entfernt?
      */
     // figure out amountToBuy
     NSDecimalNumber *orderToBuyMinVolume = orderToBuy.orderInformation_minVolume;
+
+    // consider user given maxFidorAmount
     NSDecimalNumber *availableFidorAmount = [[SOXMarket_BitcoinDE_Core sharedCore] availableFidorAmount];
 
     NSDecimalNumber *btcAmountToBuy = nil;

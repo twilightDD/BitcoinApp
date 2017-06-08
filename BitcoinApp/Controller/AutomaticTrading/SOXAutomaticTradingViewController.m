@@ -201,10 +201,10 @@
     else if (valueField == self.maxInvestmentTextField) { // €
         switch (self.orderType) {
             case BitcoinDE_BuyOrderType:
-                [SOXAutomaticTrading_BitcoinDE_Core setBuyMaximalEuro:newValue];
+                [SOXAutomaticTrading_BitcoinDE_Core setBuyMaximalFidorAmount:newValue];
                 break;
             case BitcoinDE_SellOrderType:
-                [SOXAutomaticTrading_BitcoinDE_Core setSellMaximalBTC:newValue];
+                [SOXAutomaticTrading_BitcoinDE_Core setSellMaximalBTCAmount:newValue];
             default:
                 break;
         }
