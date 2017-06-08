@@ -178,7 +178,7 @@
     return decimalNumber2;
 }
 
-+ (NSDecimalNumber *)lessDecimalNumberFrom:(NSDecimalNumber *)decimalNumber1 and:(NSDecimalNumber *)decimalNumber2 {
++ (NSDecimalNumber *)lesserDecimalNumberFrom:(NSDecimalNumber *)decimalNumber1 and:(NSDecimalNumber *)decimalNumber2 {
     if ([decimalNumber1 isLessThanOrEqualTo:decimalNumber2]) {
         return decimalNumber1;
     }
