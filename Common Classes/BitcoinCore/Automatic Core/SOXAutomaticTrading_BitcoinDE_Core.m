@@ -214,10 +214,18 @@
 - (void)checkForBuyableOrder {
     SOXShowOrderbook_BitcoinDE_Data *dataOfInterest = [self.buyOrderBook objectAtIndex: 0];
     SOXShowOrderbook_BitcoinDE_Data *referenceData  = [self.buyOrderBook objectAtIndex:1];
-    NSDecimalNumber *dataOfInterest_price = dataOfInterest.orderInformation_price;
-    NSDecimalNumber *referenceData_price = [referenceData.orderInformation_price decimalNumberByDividingBy:self.buyInterestFactor];
-    NSDecimalNumber *effectivInteresRate = [self effectiveBuyInterestRateFor:dataOfInterest toReference:referenceData];
-    if ([dataOfInterest_price isLessThan:referenceData_price]) {
+    NSDecimalNumber *effectivInteresRate            = [self effectiveBuyInterestRateFor:dataOfInterest toReference:referenceData];
+    if ([effectivInteresRate isLessThan:self.buyInterestRate]) {
+        NSString *note = [NSString stringWithFormat:@"no buy - type %@ - orderID %@ - minAmount %@ - maxAmount %@ - price %@ - interest %@"
+                          , dataOfInterest.orderInformation_type
+                          , dataOfInterest.orderInformation_orderID
+                          , [SOXFormatters stringForBTCNumber:dataOfInterest.orderInformation_minAmount]
+                          , [SOXFormatters stringForBTCNumber:dataOfInterest.orderInformation_maxAmount]
+                          , [SOXFormatters currencyStringForNumber:dataOfInterest.orderInformation_price roundingMode:NSNumberFormatterRoundDown]
+                          , effectivInteresRate];
+        [self informBuyDelegateWithNote:note];
+    }
+    else {
         NSString *note = [NSString stringWithFormat:@"TRY TO BUY - type %@ - orderID %@ - minAmount %@ - maxAmount %@ - price %@ - interest %@"
                           , dataOfInterest.orderInformation_type
                           , dataOfInterest.orderInformation_orderID
@@ -228,29 +236,25 @@
         [self informBuyDelegateWithNote:@"------"];
         [self informBuyDelegateWithNote:note];
         [self tryToExecuteBuyOrder:dataOfInterest];
-
     }
-    else {
-        NSString *note = [NSString stringWithFormat:@"no buy - type %@ - orderID %@ - minAmount %@ - maxAmount %@ - price %@ - interest %@"
+}
+
+- (void)checkForSellableOrder {
+    SOXShowOrderbook_BitcoinDE_Data *dataOfInterest = [self.sellOrderBook objectAtIndex:0];
+    SOXShowOrderbook_BitcoinDE_Data *referenceData  = [self.sellOrderBook objectAtIndex:1];
+    NSDecimalNumber *effectivInteresRate            = [self effectiveSellInterestRateFor:dataOfInterest toReference:referenceData];
+    if ([effectivInteresRate isLessThan:self.sellInterestRate]) {
+        NSString *note = [NSString stringWithFormat:@"no sell - type %@ - orderID %@ - minAmount %@ - maxAmount %@ - price %@ - interest %@"
                           , dataOfInterest.orderInformation_type
                           , dataOfInterest.orderInformation_orderID
                           , [SOXFormatters stringForBTCNumber:dataOfInterest.orderInformation_minAmount]
                           , [SOXFormatters stringForBTCNumber:dataOfInterest.orderInformation_maxAmount]
                           , [SOXFormatters currencyStringForNumber:dataOfInterest.orderInformation_price roundingMode:NSNumberFormatterRoundDown]
                           , effectivInteresRate];
-        [self informBuyDelegateWithNote:note];
+
+        [self informSellDelegateWithNote:note];
     }
-
-}
-
-- (void)checkForSellableOrder {
-    SOXShowOrderbook_BitcoinDE_Data *dataOfInterest = self.sellOrderBook.firstObject;
-    SOXShowOrderbook_BitcoinDE_Data *referenceData = [self.sellOrderBook objectAtIndex:1];
-    NSDecimalNumber *dataOfInterest_price = dataOfInterest.orderInformation_price;
-    NSDecimalNumber *referenceData_price = [referenceData.orderInformation_price decimalNumberByMultiplyingBy:self.sellInterestFactor];
-    NSDecimalNumber *effectivInteresRate = [self effectiveSellInterestRateFor:dataOfInterest toReference:referenceData];
-    if ([dataOfInterest_price isGreaterThan:referenceData_price]) {
-
+    else {
         NSString *note = [NSString stringWithFormat:@"TRY TO SELL - type %@ - orderID %@ - minAmount %@ - maxAmount %@ - price %@ - interest %@"
                           , dataOfInterest.orderInformation_type
                           , dataOfInterest.orderInformation_orderID
@@ -261,18 +265,6 @@
         [self informSellDelegateWithNote:@"------"];
         [self informSellDelegateWithNote:note];
         [self tryToExecuteSellOrder:dataOfInterest];
-    }
-    else {
-        NSString *note = [NSString stringWithFormat:@"no sell - type %@ - orderID %@ - minAmount %@ - maxAmount %@ - price %@ - interest %@"
-                          , dataOfInterest.orderInformation_type
-                          , dataOfInterest.orderInformation_orderID
-                          , [SOXFormatters stringForBTCNumber:dataOfInterest.orderInformation_minAmount]
-                          , [SOXFormatters stringForBTCNumber:dataOfInterest.orderInformation_maxAmount]
-                          , [SOXFormatters currencyStringForNumber:dataOfInterest.orderInformation_price roundingMode:NSNumberFormatterRoundDown]
-                          , effectivInteresRate];
-
-        [self informSellDelegateWithNote:note];
-
     }
 }
 
