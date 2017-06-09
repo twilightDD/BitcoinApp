@@ -473,9 +473,8 @@
     NSDecimalNumber *effectivInteresRate;
     effectivInteresRate = [orderOfInterest.orderInformation_price decimalNumberByDividingBy:reference.orderInformation_price];
     effectivInteresRate = [[NSDecimalNumber one] decimalNumberBySubtracting:effectivInteresRate];
-    effectivInteresRate = [effectivInteresRate decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"100"]];
-    effectivInteresRate = [SOXFormatters roundDecimalNumber:effectivInteresRate withFractionDigits:3];
-    
+    effectivInteresRate = [effectivInteresRate decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"100"]
+                                                               withBehavior:[SOXFormatters interestRateNumberHandler]];
     return effectivInteresRate;
 }
 
@@ -483,9 +482,8 @@
     NSDecimalNumber *effectivInteresRate;
     effectivInteresRate = [reference.orderInformation_price decimalNumberByDividingBy:orderOfInterest.orderInformation_price];
     effectivInteresRate = [[NSDecimalNumber one] decimalNumberBySubtracting:effectivInteresRate];
-    effectivInteresRate = [effectivInteresRate decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"100"]];
-    effectivInteresRate = [SOXFormatters roundDecimalNumber:effectivInteresRate withFractionDigits:3];
-
+    effectivInteresRate = [effectivInteresRate decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"100"]
+                            withBehavior:[SOXFormatters interestRateNumberHandler]];
     return effectivInteresRate;
 }
 
