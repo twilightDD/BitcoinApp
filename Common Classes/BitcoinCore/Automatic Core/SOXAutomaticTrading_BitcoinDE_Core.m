@@ -80,13 +80,12 @@
 
 + (void)registerController:(id <SOXAutomaticTradingCoreProtocol>)controller
     forUpdatesForOrderType:(BitcoinDE_OrderType)orderType {
-    NSBeep();
+
     if (!controller) {
         return;
     }
 
     SOXAutomaticTrading_BitcoinDE_Core *tradingCore = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
-
     switch (orderType) {
         case BitcoinDE_BuyOrderType: {
             [tradingCore.buyDelegates addObject:controller];
@@ -209,6 +208,12 @@
 
     return orderBookDatas;
 }
+#pragma mark - Private methods
+- (void)playSound {
+    NSSound *mySound = [NSSound soundNamed:@"ka-ching"];
+    [mySound play];
+
+}
 
 #pragma mark - Automatic trading methods
 - (void)checkForBuyableOrder {
@@ -326,14 +331,14 @@
             [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
                                                     withParameter:parameters
                                                         respondTo:self];
+            [self playSound];
         }
         else {
             note = [NSString stringWithFormat:@"EXECUTE BUY not allowed - so I don't buy."];
+            NSBeep();
         }
 
         [self informBuyDelegateWithNote:note];
-
-        NSBeep();
     }
 
     [self informBuyDelegateWithNote:@"------"];
@@ -402,14 +407,14 @@
             [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
                                                     withParameter:parameters
                                                         respondTo:self];
+            [self playSound];
         }
         else {
             note = [NSString stringWithFormat:@"EXECUTE SELL not allowed - so I don't sell."];
+            NSBeep();
         }
 
         [self informSellDelegateWithNote:note];
-
-        NSBeep();
     }
     [self informSellDelegateWithNote:@"------"];
 }
