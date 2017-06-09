@@ -110,30 +110,45 @@
     self.statusTextField.stringValue = @"";
 
     self.maxInvestmentDescriptionTextField.stringValue  = maxInvestmentDescriptionText;
-    self.maxInvestmentTextField.doubleValue             = 0;
+    self.maxInvestmentTextField.objectValue             = [NSDecimalNumber decimalNumberWithString:@"0"];
     NSNumberFormatter *formatter                        = self.maxInvestmentTextField.formatter;
     formatter.minimum                                   = [NSDecimalNumber zero];
+    formatter.maximum                                   = [NSDecimalNumber decimalNumberWithString:@"100000"];
 
     self.minInterestDescriptionTextField.stringValue = minInterestDescriptionText;
-    self.minInterestTextField.doubleValue            = 0.25;
+    self.minInterestTextField.objectValue            = [NSDecimalNumber decimalNumberWithString:@"0.25"];
     NSNumberFormatter *formatter2                    = self.minInterestTextField.formatter;
     formatter2.minimum                               = [NSDecimalNumber decimalNumberWithString:@"0.25"];
+    formatter2.maximum                               = [NSDecimalNumber decimalNumberWithString:@"100"];
 
     self.logDescriptionTextField.stringValue = @"Log output";
     self.logTextView.string                  = @"";
 }
 
 - (void)startAutomaticTrading {
-    
-    if (self.orderType) {
-        [SOXAutomaticTrading_BitcoinDE_Core registerController:self
-                                        forUpdatesForOrderType:self.orderType];
-    }
-    else {
-        NSLog(@"An error occured: no orderType");
+    NSNumberFormatter *maxInvestmentTextFieldFormatter = self.maxInvestmentTextField.formatter;
+//    [fieldFormatter numberFromString:fieldEditor.string]
+
+
+    NSDecimalNumber *maximalFidorAmount = self.maxInvestmentTextField.objectValue;
+    NSDecimalNumber *interestRate = self.minInterestTextField.objectValue;
+    switch (self.orderType) {
+        case BitcoinDE_BuyOrderType:
+            [SOXAutomaticTrading_BitcoinDE_Core setBuyMaximalFidorAmount:maximalFidorAmount];
+            [SOXAutomaticTrading_BitcoinDE_Core setBuyInterestRate:interestRate];
+            break;
+        case BitcoinDE_SellOrderType:
+            [SOXAutomaticTrading_BitcoinDE_Core setSellMaximalBTCAmount:maximalFidorAmount];
+            [SOXAutomaticTrading_BitcoinDE_Core setSellInterestRate:interestRate];
+            break;
+        default:
+            return;
+            break;
     }
 
-    return;
+    [SOXAutomaticTrading_BitcoinDE_Core registerController:self
+                                    forUpdatesForOrderType:self.orderType];
+
 }
 
 - (void)stopAutomaticTrading {
