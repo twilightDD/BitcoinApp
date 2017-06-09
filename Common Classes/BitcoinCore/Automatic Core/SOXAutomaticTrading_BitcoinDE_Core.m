@@ -533,8 +533,13 @@
 }
 
 - (void)removedOrderWithOrderID:(NSString *)orderID {
-    [self removeOrderWithOrderID:orderID fromOrderBook:self.buyOrderBook];
-    [self removeOrderWithOrderID:orderID fromOrderBook:self.sellOrderBook];
+    if ([self removeOrderWithOrderID:orderID fromOrderBook:self.buyOrderBook]) {
+        [self updateBuyStatus];
+    }
+
+    if ([self removeOrderWithOrderID:orderID fromOrderBook:self.sellOrderBook]) {
+        [self updateSellStatus];
+    }
 }
 
 - (void)updateOrderWithSocketOrderObjectID:(NSString *)orderObjectID withValues:(NSDictionary *)changesDictionary {
@@ -548,7 +553,7 @@
 }
 
 #pragma mark | Socket helper methods
-- (void)removeOrderWithOrderID:(NSString *)orderID fromOrderBook:(NSMutableArray *)orderBook {
+- (BOOL)removeOrderWithOrderID:(NSString *)orderID fromOrderBook:(NSMutableArray *)orderBook {
     NSMutableArray *foundOrders = [NSMutableArray array];
     // check for orderbookData with correct orderID
     for (SOXShowOrderbookData *orderbookData in orderBook) {
@@ -556,12 +561,14 @@
             [foundOrders addObject:orderbookData];
         }
     }
-
+    BOOL didRemoveOrders = NO;
     // remove orderbookData from arrayController
     for (id foundOrder in foundOrders) {
         [orderBook removeObject:foundOrder];
+        didRemoveOrders = YES;
     }
-}
+    return didRemoveOrders;
+};
 
 - (void)updateOrderWithSocketOrderObjectID:(NSString *)orderObjectID
                                inOrderBook:(NSMutableArray *)orderBook
