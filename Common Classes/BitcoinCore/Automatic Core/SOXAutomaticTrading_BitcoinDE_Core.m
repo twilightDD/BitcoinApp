@@ -494,17 +494,20 @@
 
 #pragma mark - SOXSocketIOCoreProtocol
 - (void)addedOrder:(SOXShowOrderbookData *)addOrderData {
-    // Buy
     NSString *orderInformationType = addOrderData.orderInformation_type;
+    NSString *addOrderDataOrderID = addOrderData.orderInformation_orderID;
+    NSString *addOrderDataPrice   = [SOXFormatters currencyStringForNumber:addOrderData.orderInformation_price
+                                                              roundingMode:NSNumberFormatterRoundDown];
+    // Buy
     if ([orderInformationType isEqualToString:@"offer"]) {
         [self.buyOrderBook addObject:addOrderData];
         self.buyOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:self.buyOrderBook
                                                                    forOrderType:BitcoinDE_BuyOrderType];
 
         NSString *note = [NSString stringWithFormat:@"added buy order - orderID: %@ - type: offer - index %tu - price: %@ - interest %@"
-                          , addOrderData.orderInformation_orderID
+                          , addOrderDataOrderID
                           , [self.buyOrderBook indexOfObject:addOrderData]
-                          , [SOXFormatters currencyStringForNumber:addOrderData.orderInformation_price roundingMode:NSNumberFormatterRoundDown]
+                          , addOrderDataPrice
                           , [self effectiveBuyInterestRateFor:addOrderData
                                                   toReference:self.buyOrderBook.firstObject]];
         [self informBuyDelegateWithNote:note];
@@ -521,9 +524,9 @@
                                                                     forOrderType:BitcoinDE_SellOrderType];
 
         NSString *note = [NSString stringWithFormat:@"added sell order - orderID: %@ - type: order - index %tu - price: %@ - interest %@"
-                          , addOrderData.orderInformation_orderID
+                          , addOrderDataOrderID
                           , [self.sellOrderBook indexOfObject:addOrderData]
-                          , [SOXFormatters currencyStringForNumber:addOrderData.orderInformation_price  roundingMode:NSNumberFormatterRoundDown]
+                          , addOrderDataPrice
                           , [self effectiveSellInterestRateFor:addOrderData
                                                    toReference:self.sellOrderBook.firstObject]];
         [self informSellDelegateWithNote:note];
