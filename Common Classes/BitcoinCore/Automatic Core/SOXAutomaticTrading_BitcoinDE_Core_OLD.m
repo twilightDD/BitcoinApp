@@ -42,7 +42,7 @@
 #pragma mark - Implementation
 @implementation SOXAutomaticTrading_BitcoinDE_Core_OLD
 #pragma mark - Public class methods
-+ (void)registerController:(id <SOXAutomaticTradingCoreProtocol>)controller
++ (void)registerController:(id)controller
     forUpdatesForOrderType:(BitcoinDE_OrderType)orderType {
 
     if (!controller) {

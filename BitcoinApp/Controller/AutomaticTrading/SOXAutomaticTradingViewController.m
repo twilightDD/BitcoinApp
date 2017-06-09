@@ -242,6 +242,17 @@
     self.logTextView.string = self.log;
 }
 
+- (void)statusUpdate:(NSString *)status {
+    self.statusTextField.stringValue = status;
+}
+
+- (void)automaticTradingDidBegin {
+    self.statusTextField.stringValue = @"Automatic trading started";
+}
+- (void)automaticTradingDidStop {
+    self.statusTextField.stringValue = @"Automatic trading did stop";
+}
+
 - (void)currentLimitHasChangedTo:(NSNumber *)newLimit {
     NSLog(@"currentLimitHasChangedTo %@ - orderType: %tu", newLimit, self.orderType);
     self.statusTextField.stringValue = [NSString stringWithFormat:@"Limit: %0.3f (%@)", newLimit.doubleValue, [[NSDate date] description]];

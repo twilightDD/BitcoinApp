@@ -446,6 +446,8 @@
                           , dataOfInterest.orderInformation_minAmount
                           , dataOfInterest.orderInformation_price];
         [self informBuyDelegateWithNote:note];
+
+        [self updateBuyStatus];
     }
     else if([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowSellOrderbookCommandType)]) {
 
@@ -463,6 +465,7 @@
                           , dataOfInterest.orderInformation_minAmount
                           , dataOfInterest.orderInformation_price];
         [self informSellDelegateWithNote:note];
+        [self updateSellStatus];
     }
 }
 
@@ -504,6 +507,7 @@
         [self informBuyDelegateWithNote:note];
 
         if ([[self.buyOrderBook objectAtIndex:0] isEqual:addOrderData]) {
+            [self updateBuyStatus];
             [self checkForBuyableOrder];
         }
     }
@@ -522,6 +526,7 @@
         [self informSellDelegateWithNote:note];
 
         if ([[self.sellOrderBook objectAtIndex:0] isEqual:addOrderData]) {
+            [self updateSellStatus];
             [self checkForSellableOrder];
         }
     }
@@ -570,7 +575,6 @@
 }
 
 #pragma mark - Inform delegates
-
 - (void)informBuyDelegateWithNote:(NSString *)note {
     if (note) {
         for (NSObject <SOXAutomaticTradingCoreProtocol> *delegate in self.buyDelegates) {
@@ -588,6 +592,47 @@
              ];
         }
     }
+}
+
+- (void)informBuyDelegateWithStatus:(NSString *)status {
+    if (status) {
+        for (NSObject <SOXAutomaticTradingCoreProtocol> *delegate in self.buyDelegates) {
+            [delegate performSelector:@selector(statusUpdate:)
+                           withObject:status
+             ];
+        }
+    }
+}
+
+- (void)informSellDelegateWithStatus:(NSString *)status {
+    if (status) {
+        for (NSObject <SOXAutomaticTradingCoreProtocol> *delegate in self.sellDelegates) {
+            [delegate performSelector:@selector(statusUpdate:)
+                           withObject:status
+             ];
+        }
+    }
+}
+
+#pragma mark | Helpers
+- (void)updateBuyStatus {
+    SOXShowOrderbook_BitcoinDE_Data *bestOrderData = self.buyOrderBook.firstObject;
+    NSDecimalNumber *bestOrderDataPrice = bestOrderData.orderInformation_price;
+    NSDecimalNumber *buyLowerThanPrice = [bestOrderDataPrice decimalNumberByMultiplyingBy:self.buyInterestFactor];
+    NSString *status = [NSString stringWithFormat:@"Best: price %@, buy less than %@",
+                        [SOXFormatters currencyStringForNumber:bestOrderDataPrice roundingMode:NSNumberFormatterRoundDown]
+                        , [SOXFormatters currencyStringForNumber:buyLowerThanPrice roundingMode:NSNumberFormatterRoundDown]];
+    [self informBuyDelegateWithStatus:status];
+}
+
+- (void)updateSellStatus {
+    SOXShowOrderbook_BitcoinDE_Data *bestOrderData = self.sellOrderBook.firstObject;
+    NSDecimalNumber *bestOrderDataPrice = bestOrderData.orderInformation_price;
+    NSDecimalNumber *sellGreaterThanPrice = [bestOrderDataPrice decimalNumberByMultiplyingBy:self.sellInterestFactor];
+    NSString *status = [NSString stringWithFormat:@"Best: price %@, sell greater than %@",
+                        [SOXFormatters currencyStringForNumber:bestOrderDataPrice roundingMode:NSNumberFormatterRoundDown]
+                        , [SOXFormatters currencyStringForNumber:sellGreaterThanPrice roundingMode:NSNumberFormatterRoundDown]];
+    [self informSellDelegateWithStatus:status];
 }
 
 @end

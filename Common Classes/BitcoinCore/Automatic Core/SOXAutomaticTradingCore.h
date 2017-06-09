@@ -10,7 +10,10 @@
 
 @protocol SOXAutomaticTradingCoreProtocol <NSObject>
 
-- (void)logLine:(NSString *)tradeLine;
+- (void)logLine:(NSString *)line;
+- (void)statusUpdate:(NSString *)status;
+- (void)automaticTradingDidBegin;
+- (void)automaticTradingDidStop;
 
 @end
 

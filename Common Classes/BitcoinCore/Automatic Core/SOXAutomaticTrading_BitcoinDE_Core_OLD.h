@@ -8,18 +8,18 @@
 #import <Foundation/Foundation.h>
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
-@protocol SOXAutomaticTradingCoreProtocol <NSObject>
-
-- (void)currentLimitHasChangedTo:(NSNumber *)newLimit;
-- (void)logLine:(NSString *)tradeLine;
-
-@end
+//@protocol SOXAutomaticTradingCoreProtocol <NSObject>
+//
+//- (void)currentLimitHasChangedTo:(NSNumber *)newLimit;
+//- (void)logLine:(NSString *)tradeLine;
+//
+//@end
 
 @interface SOXAutomaticTrading_BitcoinDE_Core_OLD : NSObject
 
 
 
-+ (void)registerController:(id <SOXAutomaticTradingCoreProtocol>)controller
++ (void)registerController:(id )controller
     forUpdatesForOrderType:(BitcoinDE_OrderType)orderType;
 
 + (void)unRegisterController:(id)controller
