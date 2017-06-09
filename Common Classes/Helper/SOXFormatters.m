@@ -95,8 +95,8 @@
         fractionNumberFormatter = [NSNumberFormatter new];
         [fractionNumberFormatter setLocale:[NSLocale autoupdatingCurrentLocale]];
         [fractionNumberFormatter setMinimumIntegerDigits:1];
-        [fractionNumberFormatter setMinimumFractionDigits:0];
-//        fractionNumberFormatter.generatesDecimalNumbers = YES;
+        [fractionNumberFormatter setMinimumFractionDigits:3];
+        [fractionNumberFormatter setMaximumFractionDigits:3];
     });
     return fractionNumberFormatter;
 }
@@ -196,16 +196,19 @@
     }
     return decimalNumber2;
 }
-+ (NSDecimalNumber *)roundDecimalNumber:(NSDecimalNumber *)decimalNumber withFractionDigits:(NSUInteger)digits {
-    // TODO: bug!
 
-    return decimalNumber;
-    
-    NSNumberFormatter *fractionNumberFormatter = [SOXFormatters fractionNumberFormatter];
-    fractionNumberFormatter.maximumFractionDigits = digits;
-    id a = [fractionNumberFormatter numberFromString:decimalNumber.stringValue];
-    NSDecimalNumber *roundedWithFractionDigits = (NSDecimalNumber *)[fractionNumberFormatter numberFromString:decimalNumber.stringValue];
-    return roundedWithFractionDigits;
++ (NSDecimalNumberHandler *)interestRateNumberHandler {
+    static dispatch_once_t pred;
+    static NSDecimalNumberHandler *interestRateNumberHandler = nil;
+    dispatch_once(&pred, ^{
+        interestRateNumberHandler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown
+                                                                                           scale:3
+                                                                                raiseOnExactness:YES
+                                                                                 raiseOnOverflow:YES
+                                                                                raiseOnUnderflow:YES
+                                                                             raiseOnDivideByZero:YES];
+    });
+    return interestRateNumberHandler;
 }
 
 @end

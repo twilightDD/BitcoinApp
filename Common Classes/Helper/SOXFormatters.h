@@ -26,6 +26,6 @@
 #pragma mark - Decimal Number handling
 + (NSDecimalNumber *)greaterDecimalNumberFrom:(NSDecimalNumber *)decimalNumber1 and:(NSDecimalNumber *)decimalNumber2;
 + (NSDecimalNumber *)lesserDecimalNumberFrom:(NSDecimalNumber *)decimalNumber1 and:(NSDecimalNumber *)decimalNumber2;
-+ (NSDecimalNumber *)roundDecimalNumber:(NSDecimalNumber *)decimalNumber withFractionDigits:(NSUInteger)digits;
 
++ (NSDecimalNumberHandler *)interestRateNumberHandler;
 @end
