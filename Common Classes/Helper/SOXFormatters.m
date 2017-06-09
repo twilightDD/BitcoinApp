@@ -88,6 +88,18 @@
     return btcFormatter;
 }
 
++ (NSNumberFormatter *)fractionNumberFormatter {
+    static dispatch_once_t pred;
+    static NSNumberFormatter *fractionNumberFormatter = nil;
+    dispatch_once(&pred, ^{
+        fractionNumberFormatter = [NSNumberFormatter new];
+        [fractionNumberFormatter setLocale:[NSLocale autoupdatingCurrentLocale]];
+        [fractionNumberFormatter setMinimumIntegerDigits:1];
+        [fractionNumberFormatter setMinimumFractionDigits:0];
+//        fractionNumberFormatter.generatesDecimalNumbers = YES;
+    });
+    return fractionNumberFormatter;
+}
 
 #pragma mark - Public methods
 #pragma mark | Date methods
@@ -184,6 +196,16 @@
     }
     return decimalNumber2;
 }
++ (NSDecimalNumber *)roundDecimalNumber:(NSDecimalNumber *)decimalNumber withFractionDigits:(NSUInteger)digits {
+    // TODO: bug!
 
+    return decimalNumber;
+    
+    NSNumberFormatter *fractionNumberFormatter = [SOXFormatters fractionNumberFormatter];
+    fractionNumberFormatter.maximumFractionDigits = digits;
+    id a = [fractionNumberFormatter numberFromString:decimalNumber.stringValue];
+    NSDecimalNumber *roundedWithFractionDigits = (NSDecimalNumber *)[fractionNumberFormatter numberFromString:decimalNumber.stringValue];
+    return roundedWithFractionDigits;
+}
 
 @end
