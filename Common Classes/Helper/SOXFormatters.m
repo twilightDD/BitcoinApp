@@ -59,6 +59,19 @@
     return shortDateShortTimeDateFormatter;
 }
 
++ (NSDateFormatter *)dateFormatterShortDateMediumTime {
+    static dispatch_once_t pred;
+    static NSDateFormatter *dateFormatterShortDateMediumTime = nil;
+    dispatch_once(&pred, ^{
+        dateFormatterShortDateMediumTime           = [[NSDateFormatter alloc] init];
+        dateFormatterShortDateMediumTime.locale    = [NSLocale autoupdatingCurrentLocale];
+        dateFormatterShortDateMediumTime.dateStyle = NSDateFormatterShortStyle;
+        dateFormatterShortDateMediumTime.timeStyle = NSDateFormatterMediumStyle;
+    });
+    return dateFormatterShortDateMediumTime;
+}
+
+
 #pragma mark - Static NumberFormatters
 + (NSNumberFormatter *)currencyFormatter {
     static dispatch_once_t pred;
@@ -134,6 +147,15 @@
     }
 
     NSString *dateString = [[SOXFormatters dateFormatterShortDateShortTime] stringFromDate:date];
+    return dateString;
+}
+
++ (NSString *)shortDateMediumTimeStringForDate:(NSDate *)date {
+    if (!date) {
+        return @"";
+    }
+
+    NSString *dateString = [[SOXFormatters dateFormatterShortDateMediumTime] stringFromDate:date];
     return dateString;
 }
 
