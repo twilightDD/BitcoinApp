@@ -236,7 +236,7 @@
     SOXShowOrderbook_BitcoinDE_Data *referenceData  = [self.buyOrderBook objectAtIndex:1];
     NSDecimalNumber *effectivInterestRate           = [self effectiveBuyInterestRateFor:dataOfInterest toReference:referenceData];
 
-    NSString *statisticForNote = [NSString stringWithFormat:@"- type %@ - orderID %@ - minAmount %@ - maxAmount %@ - price0 %@ - price1 %@ - interest %@"
+    NSString *statisticForNote = [NSString stringWithFormat:@"- type %@ - ID %@ - minAmo %@ - maxAmo %@ - p0 %@ - p1 %@ - iR %@"
                                   , dataOfInterest.orderInformation_type
                                   , dataOfInterest.orderInformation_orderID
                                   , [SOXFormatters stringForBTCNumber:dataOfInterest.orderInformation_minAmount]
@@ -263,7 +263,7 @@
     SOXShowOrderbook_BitcoinDE_Data *referenceData  = [self.sellOrderBook objectAtIndex:1];
     NSDecimalNumber *effectivInterestRate           = [self effectiveSellInterestRateFor:dataOfInterest toReference:referenceData];
 
-    NSString *statisticForNote = [NSString stringWithFormat:@"- type %@ - orderID %@ - minAmount %@ - maxAmount %@ - price0 %@ - price1 %@ - interest %@"
+    NSString *statisticForNote = [NSString stringWithFormat:@"- type %@ - ID %@ - minAmo %@ - maxAmo %@ - p0 %@ - p1 %@ - iR %@"
                                   , dataOfInterest.orderInformation_type
                                   , dataOfInterest.orderInformation_orderID
                                   , [SOXFormatters stringForBTCNumber:dataOfInterest.orderInformation_minAmount]
@@ -305,14 +305,14 @@
     NSString *note = @"Error in tryToExecuteBuyOrder";
     if ([orderToBuyMinVolume isGreaterThan:availableFidorAmount]) {
         // minVolume > availableAmount => no buy possible
-        note = [NSString stringWithFormat:@"NO BUY possible: order_minVolume %@ > availableFidorAmount %@ (not enough fidor amount)"
+        note = [NSString stringWithFormat:@"NO BUY possible: order_minVol %@ > avaFidor %@ (not enough fidor amount)"
                 , [SOXFormatters currencyStringForNumber:orderToBuyMinVolume roundingMode:NSNumberFormatterRoundDown]
                 , [SOXFormatters currencyStringForNumber:availableFidorAmount roundingMode:NSNumberFormatterRoundDown]];
 
     }
     else if ([orderToBuyMinVolume isEqual:availableFidorAmount]) {
         // minVolume = availableAmount => buy minAmount
-        note = [NSString stringWithFormat:@"BUY possible: order_minVolume %@ = availableFidorAmount %@ (buy order.minAmount)"
+        note = [NSString stringWithFormat:@"BUY possible: order_minVol %@ = avaFidor %@ (buy order.minAmount)"
                 , [SOXFormatters currencyStringForNumber:orderToBuyMinVolume roundingMode:NSNumberFormatterRoundDown]
                 , [SOXFormatters currencyStringForNumber:availableFidorAmount roundingMode:NSNumberFormatterRoundDown]];
 
@@ -320,7 +320,7 @@
     }
     else if ([orderToBuyMinVolume isLessThan:availableFidorAmount]) {
         // minVolume < availableAmount => buy more than minAmount (figure out, how much)
-        note = [NSString stringWithFormat:@"BUY possible: order_minVolume %@ < availableFidorAmount %@ (figure out btcToBuyAmount now ...)"
+        note = [NSString stringWithFormat:@"BUY possible: order_minVol %@ < avaFidor %@ (figure out btcToBuyAmount now ...)"
                 , [SOXFormatters currencyStringForNumber:orderToBuyMinVolume roundingMode:NSNumberFormatterRoundDown]
                 , [SOXFormatters currencyStringForNumber:availableFidorAmount roundingMode:NSNumberFormatterRoundDown]];
 
@@ -380,13 +380,13 @@
     NSString *note = @"error in tryToExecuteSellOrder";
     if ([orderMinAmountToSell isGreaterThan:availableBTCAmount]) {
         // minAmountToSell > availableBTCAmount => no sell possible
-        note = [NSString stringWithFormat:@"NO SELL possible: orderMinAmount %@ > availableBTCAmount %@ (not enough free BTC amount)"
+        note = [NSString stringWithFormat:@"NO SELL possible: orderMinAmo %@ > avaBTC %@ (not enough free BTC amount)"
                 , [SOXFormatters stringForBTCNumber:orderMinAmountToSell]
                 , [SOXFormatters stringForBTCNumber:availableBTCAmount]];
     }
     else if ([orderMinAmountToSell isEqualToNumber:availableBTCAmount]) {
         // minAmountToSell = availableBTCAmount => sell minAmount
-        note = [NSString stringWithFormat:@"SELL possible: orderMinAmount %@ = availableBTCAmount %@ (sell order.minAmount)"
+        note = [NSString stringWithFormat:@"SELL possible: orderMinAmo %@ = avaBTC %@ (sell order.minAmount)"
                 , [SOXFormatters stringForBTCNumber:orderMinAmountToSell]
                 , [SOXFormatters stringForBTCNumber:availableBTCAmount]];
 
@@ -394,7 +394,7 @@
     }
     else if ([orderMinAmountToSell isLessThan:availableBTCAmount]) {
         // minAmountToSell < availableBTCAmount => sell more than minAmount (figure out, how much)
-        note = [NSString stringWithFormat:@"SELL possible: orderMinAmount %@ < availableBTCAmount %@ (figure out btcToBuyAmount now ...)"
+        note = [NSString stringWithFormat:@"SELL possible: orderMinAmo %@ < avaBTC %@ (figure out btcToBuyAmount now ...)"
                 , [SOXFormatters stringForBTCNumber:orderMinAmountToSell]
                 , [SOXFormatters stringForBTCNumber:availableBTCAmount]];
         NSDecimalNumber *volumeToSell = [SOXFormatters lesserDecimalNumberFrom:orderToSell.orderInformation_maxAmount
@@ -663,7 +663,7 @@
             [orderbookData updateOrderbookDataWith:changesDictionary];
             [updatesOrders addObject:orderbookData];
 
-            NSString *note = [NSString stringWithFormat:@"~ update paymentOption - orderID: %@ - oldPayOp: %@ - newPayOp: %@"
+            NSString *note = [NSString stringWithFormat:@"~ update paymentOption - ID: %@ - oldPO: %@ - newPO: %@"
                               , orderbookData.orderInformation_orderID
                               , oldPaymentOption
                               , orderbookData.orderRequirements_paymentOption];
@@ -690,7 +690,7 @@
         self.buyOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:self.buyOrderBook
                                                                    forOrderType:BitcoinDE_BuyOrderType];
 
-        NSString *note = [NSString stringWithFormat:@"added buy order - orderID: %@ - payOp: %@ - type: offer - index %tu - price: %@ - interest %@"
+        NSString *note = [NSString stringWithFormat:@"added buy - ID: %@ - pO: %@ - type: offer - idx %tu - p: %@ - iR %@"
                           , addOrderDataOrderID
                           , addOrderData.orderRequirements_paymentOption
                           , [self.buyOrderBook indexOfObject:addOrderData]
@@ -710,7 +710,7 @@
         self.sellOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:self.sellOrderBook
                                                                     forOrderType:BitcoinDE_SellOrderType];
 
-        NSString *note = [NSString stringWithFormat:@"added sell order - orderID: %@ - payOpt: %@ - type: order - index %tu - price: %@ - interest %@"
+        NSString *note = [NSString stringWithFormat:@"added sell - ID: %@ - pO: %@ - type: offer - idx %tu - p: %@ - iR %@"
                           , addOrderDataOrderID
                           , addOrderData.orderRequirements_paymentOption
                           , [self.sellOrderBook indexOfObject:addOrderData]
@@ -727,21 +727,18 @@
 }
 
 - (void)addSEPAOrderBookData:(SOXShowOrderbookData *)addSEPAOrderData {
+    NSString *note = [NSString stringWithFormat:@"~ new SEPA order - orderID: %@ - pO: %@ - type offer - IR %@"
+                      , addSEPAOrderData.orderInformation_orderID
+                      , addSEPAOrderData.orderRequirements_paymentOption
+                      , [SOXFormatters currencyStringForNumber:addSEPAOrderData.orderInformation_price roundingMode:NSNumberFormatterRoundDown]];
+
     NSString *orderInformationType = addSEPAOrderData.orderInformation_type;
     if ([orderInformationType isEqualToString:@"offer"]) {
         [self.buySEPAOrderBook addObject:addSEPAOrderData];
-        NSString *note = [NSString stringWithFormat:@"~ new SEPA order - orderID: %@ - payOp: %@ - type offer - interest %@"
-                          , addSEPAOrderData.orderInformation_orderID
-                          , addSEPAOrderData.orderRequirements_paymentOption
-                          , [SOXFormatters currencyStringForNumber:addSEPAOrderData.orderInformation_price roundingMode:NSNumberFormatterRoundDown]];
         [self informBuyDelegateWithNote:note];
     }
     else if ([orderInformationType isEqualToString:@"order"]) {
         [self.sellSEPAOrderBook addObject:addSEPAOrderData];
-        NSString *note = [NSString stringWithFormat:@"~ new SEPA order - orderID: %@ - payOp: %@ - type order - interest %@"
-                          , addSEPAOrderData.orderInformation_orderID
-                          , addSEPAOrderData.orderRequirements_paymentOption
-                          , [SOXFormatters currencyStringForNumber:addSEPAOrderData.orderInformation_price roundingMode:NSNumberFormatterRoundDown]];
         [self informSellDelegateWithNote:note];
     }
 }
