@@ -700,18 +700,22 @@
 - (void)informBuyDelegateWithNote:(NSString *)note {
     if (note) {
         for (NSObject <SOXAutomaticTradingCoreProtocol> *delegate in self.buyDelegates) {
-            [delegate performSelector:@selector(logLine:)
-                           withObject:note
-             ];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [delegate performSelector:@selector(logLine:)
+                               withObject:note
+                 ];
+            });
         }
     }
 }
 - (void)informSellDelegateWithNote:(NSString *)note {
     if (note) {
         for (NSObject <SOXAutomaticTradingCoreProtocol> *delegate in self.sellDelegates) {
-            [delegate performSelector:@selector(logLine:)
-                           withObject:note
-             ];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [delegate performSelector:@selector(logLine:)
+                               withObject:note
+                 ];
+            });
         }
     }
 }
@@ -719,9 +723,11 @@
 - (void)informBuyDelegateWithStatus:(NSString *)status {
     if (status) {
         for (NSObject <SOXAutomaticTradingCoreProtocol> *delegate in self.buyDelegates) {
-            [delegate performSelector:@selector(statusUpdate:)
-                           withObject:status
-             ];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [delegate performSelector:@selector(statusUpdate:)
+                               withObject:status
+                 ];
+            });
         }
     }
 }
@@ -729,34 +735,40 @@
 - (void)informSellDelegateWithStatus:(NSString *)status {
     if (status) {
         for (NSObject <SOXAutomaticTradingCoreProtocol> *delegate in self.sellDelegates) {
-            [delegate performSelector:@selector(statusUpdate:)
-                           withObject:status
-             ];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [delegate performSelector:@selector(statusUpdate:)
+                               withObject:status
+                 ];
+            });
         }
     }
 }
 
 #pragma mark | Helpers
 - (void)updateBuyStatus {
-    SOXShowOrderbook_BitcoinDE_Data *bestOrderData = self.buyOrderBook.firstObject;
-    NSDecimalNumber *bestOrderDataPrice = bestOrderData.orderInformation_price;
-    NSDecimalNumber *buyLowerThanPrice = [bestOrderDataPrice decimalNumberByMultiplyingBy:self.buyInterestFactor];
-    NSString *status = [NSString stringWithFormat:@"Best: price %@, buy less than %@",
-                        [SOXFormatters currencyStringForNumber:bestOrderDataPrice roundingMode:NSNumberFormatterRoundDown]
-                        , [SOXFormatters currencyStringForNumber:buyLowerThanPrice roundingMode:NSNumberFormatterRoundDown]];
-    [self informBuyDelegateWithStatus:status];
-    [self informBuyDelegateWithNote:status];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        SOXShowOrderbook_BitcoinDE_Data *bestOrderData = self.buyOrderBook.firstObject;
+        NSDecimalNumber *bestOrderDataPrice = bestOrderData.orderInformation_price;
+        NSDecimalNumber *buyLowerThanPrice = [bestOrderDataPrice decimalNumberByMultiplyingBy:self.buyInterestFactor];
+        NSString *status = [NSString stringWithFormat:@"Best: price %@, buy less than %@",
+                            [SOXFormatters currencyStringForNumber:bestOrderDataPrice roundingMode:NSNumberFormatterRoundDown]
+                            , [SOXFormatters currencyStringForNumber:buyLowerThanPrice roundingMode:NSNumberFormatterRoundDown]];
+        [self informBuyDelegateWithStatus:status];
+        [self informBuyDelegateWithNote:status];
+    });
 }
 
 - (void)updateSellStatus {
-    SOXShowOrderbook_BitcoinDE_Data *bestOrderData = self.sellOrderBook.firstObject;
-    NSDecimalNumber *bestOrderDataPrice = bestOrderData.orderInformation_price;
-    NSDecimalNumber *sellGreaterThanPrice = [bestOrderDataPrice decimalNumberByMultiplyingBy:self.sellInterestFactor];
-    NSString *status = [NSString stringWithFormat:@"Best: price %@, sell greater than %@",
-                        [SOXFormatters currencyStringForNumber:bestOrderDataPrice roundingMode:NSNumberFormatterRoundDown]
-                        , [SOXFormatters currencyStringForNumber:sellGreaterThanPrice roundingMode:NSNumberFormatterRoundDown]];
-    [self informSellDelegateWithStatus:status];
-    [self informSellDelegateWithNote:status];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        SOXShowOrderbook_BitcoinDE_Data *bestOrderData = self.sellOrderBook.firstObject;
+        NSDecimalNumber *bestOrderDataPrice = bestOrderData.orderInformation_price;
+        NSDecimalNumber *sellGreaterThanPrice = [bestOrderDataPrice decimalNumberByMultiplyingBy:self.sellInterestFactor];
+        NSString *status = [NSString stringWithFormat:@"Best: price %@, sell greater than %@",
+                            [SOXFormatters currencyStringForNumber:bestOrderDataPrice roundingMode:NSNumberFormatterRoundDown]
+                            , [SOXFormatters currencyStringForNumber:sellGreaterThanPrice roundingMode:NSNumberFormatterRoundDown]];
+        [self informSellDelegateWithStatus:status];
+        [self informSellDelegateWithNote:status];
+    });
 }
 
 @end
