@@ -27,6 +27,8 @@
 
 @property (strong, nonatomic) NSMutableArray *buyOrderBook;
 @property (strong, nonatomic) NSMutableArray *sellOrderBook;
+@property (strong, nonatomic) NSMutableSet *buySEPAOrderBook; // as cache for SEPA offers
+@property (strong, nonatomic) NSMutableSet *sellSEPAOrderBook;  // as cache for SEPA orders
 
 @property (nonatomic) BOOL executeBuyTrades;
 @property (nonatomic) BOOL executeSellTrades;
@@ -54,6 +56,8 @@
         [(SOXAutomaticTrading_BitcoinDE_Core *)sharedTradingCore setBuyInterestFactor:[NSDecimalNumber one]];
         [(SOXAutomaticTrading_BitcoinDE_Core *)sharedTradingCore setSellInterestRate:[NSDecimalNumber one]];
         [(SOXAutomaticTrading_BitcoinDE_Core *)sharedTradingCore setSellInterestFactor:[NSDecimalNumber one]];
+        [(SOXAutomaticTrading_BitcoinDE_Core *)sharedTradingCore setBuySEPAOrderBook:[NSMutableSet set]];
+        [(SOXAutomaticTrading_BitcoinDE_Core *)sharedTradingCore setSellSEPAOrderBook:[NSMutableSet set]];
     });
 
     return sharedTradingCore;
@@ -437,8 +441,15 @@
     }
 
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowBuyOrderbookCommandType)]) {
-        self.buyOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:orderBookDatas
-                                                                   forOrderType:BitcoinDE_BuyOrderType];
+        NSMutableArray *buyOrderBookDatas = [NSMutableArray array];
+        for (SOXShowOrderbook_BitcoinDE_Data *orderBookData in orderBookDatas) {
+            if ([self checkForExpressOrder:orderBookData]) {
+                [buyOrderBookDatas addObject:orderBookData];
+            }
+        }
+
+        self.buyOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:buyOrderBookDatas
+                                                                 forOrderType:BitcoinDE_BuyOrderType];
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
                                                                 delegate:core];
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
@@ -455,9 +466,15 @@
         [self updateBuyStatus];
     }
     else if([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowSellOrderbookCommandType)]) {
+        NSMutableArray *sellOrderBookDatas = [NSMutableArray array];
+        for (SOXShowOrderbook_BitcoinDE_Data *orderBookData in orderBookDatas) {
+            if ([self checkForExpressOrder:orderBookData]) {
+                [sellOrderBookDatas addObject:orderBookData];
+            }
+        }
 
-        self.sellOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:orderBookDatas
-                                                                    forOrderType:BitcoinDE_SellOrderType];
+        self.sellOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:sellOrderBookDatas
+                                                                  forOrderType:BitcoinDE_SellOrderType];
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
                                                                 delegate:core];
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
@@ -494,6 +511,122 @@
 
 #pragma mark - SOXSocketIOCoreProtocol
 - (void)addedOrder:(SOXShowOrderbookData *)addOrderData {
+    if ([self checkForExpressOrder:addOrderData]) {
+        [self addOrderBookData:addOrderData];
+    }
+    else {
+        [self addSEPAOrderBookData:addOrderData];
+    }
+}
+
+- (void)removedOrderWithOrderID:(NSString *)orderID {
+    if ([self removeOrderWithOrderID:orderID fromOrderBook:self.buyOrderBook]) {
+        [self updateBuyStatus];
+    }
+
+    if ([self removeOrderWithOrderID:orderID fromOrderBook:self.sellOrderBook]) {
+        [self updateSellStatus];
+    }
+}
+
+- (void)updateOrderWithSocketOrderObjectID:(NSString *)orderObjectID withValues:(NSDictionary *)changesDictionary {
+    NSArray *updatesBuyOrders = [self updateOrderWithSocketOrderObjectID:orderObjectID
+                                                             inOrderBook:self.buyOrderBook
+                                                              withValues:changesDictionary];
+    for (SOXShowOrderbookData *updatedOrder in updatesBuyOrders) {
+        [self addedOrder:updatedOrder];
+        [self.buySEPAOrderBook removeObject:updatedOrder];
+    }
+
+    NSArray *updatesSellOrders = [self updateOrderWithSocketOrderObjectID:orderObjectID
+                                                              inOrderBook:self.sellOrderBook
+                                                               withValues:changesDictionary];
+
+    for (SOXShowOrderbookData *updatedOrder in updatesSellOrders) {
+        [self addedOrder:updatedOrder];
+        [self.sellSEPAOrderBook removeObject:updatedOrder];
+    }
+
+    updatesBuyOrders = [self updateOrderWithSocketOrderObjectID:orderObjectID
+                                                             inOrderBook:[self.buySEPAOrderBook.allObjects mutableCopy]
+                                                              withValues:changesDictionary];
+    for (SOXShowOrderbookData *updatedOrder in updatesBuyOrders) {
+        [self addedOrder:updatedOrder];
+        [self.buySEPAOrderBook removeObject:updatedOrder];
+    }
+
+    updatesSellOrders = [self updateOrderWithSocketOrderObjectID:orderObjectID
+                                                              inOrderBook:[self.sellSEPAOrderBook.allObjects mutableCopy]
+                                                               withValues:changesDictionary];
+
+    NSLog(@"####");
+    NSLog(@"UpdatePaymentOption");
+    NSLog(@"before self.sellOrderBook.count %tu self.sellSEPAOrderBook.count %zu", self.sellOrderBook.count, self.sellSEPAOrderBook.count);
+    for (SOXShowOrderbookData *updatedOrder in updatesSellOrders) {
+        [self addedOrder:updatedOrder];
+        [self.sellSEPAOrderBook removeObject:updatedOrder];
+    }
+    NSLog(@"after self.sellOrderBook.count %tu self.sellSEPAOrderBook.count %zu", self.sellOrderBook.count, self.sellSEPAOrderBook.count);
+    NSLog(@"####");
+}
+
+#pragma mark | Socket helper methods
+- (BOOL)checkForExpressOrder:(SOXShowOrderbookData *)addOrderData {
+    if ([addOrderData.orderRequirements_paymentOption isEqual:@(BitcoinDE_PaymentOptionExpressOnly)]
+        || [addOrderData.orderRequirements_paymentOption isEqual:@(BitcoinDE_PaymentOptionExpressAndSepa)]) {
+        return YES;
+    }
+
+    return NO;
+}
+
+- (BOOL)removeOrderWithOrderID:(NSString *)orderID fromOrderBook:(NSMutableArray *)orderBook {
+    NSMutableArray *foundOrders = [NSMutableArray array];
+    // check for orderbookData with correct orderID
+    for (SOXShowOrderbookData *orderbookData in orderBook) {
+        if ([orderbookData.orderInformation_orderID isEqualToString:orderID]) {
+            [foundOrders addObject:orderbookData];
+        }
+    }
+
+    BOOL didRemoveOrders = NO;
+    // remove orderbookData from arrayController
+    for (id foundOrder in foundOrders) {
+        [orderBook removeObject:foundOrder];
+        didRemoveOrders = YES;
+    }
+    return didRemoveOrders;
+};
+
+- (NSArray *)updateOrderWithSocketOrderObjectID:(NSString *)orderObjectID
+                               inOrderBook:(NSMutableArray *)orderBook
+                                withValues:(NSDictionary *)changesDictionary {
+    NSMutableArray *updatesOrders = [NSMutableArray array];
+    for (SOXShowOrderbook_BitcoinDE_Data *orderbookData in orderBook) {
+        NSLog(@"%@ - %@", orderObjectID, orderbookData.orderInformation_socketOrderObjectID);
+        if ([orderbookData.orderInformation_socketOrderObjectID isEqualToString:orderObjectID]) {
+            NSNumber *oldPaymentOption = orderbookData.orderRequirements_paymentOption;
+            // ist data object mit orderObjectID vorhanden? Ja: updaten!
+            [orderbookData updateOrderbookDataWith:changesDictionary];
+            [updatesOrders addObject:orderbookData];
+
+            NSString *note = [NSString stringWithFormat:@"~ update paymentOption - orderID: %@ - oldPayOp: %@ - newPayOp: %@"
+                              , orderbookData.orderInformation_orderID
+                              , oldPaymentOption
+                              , orderbookData.orderRequirements_paymentOption];
+            NSString *orderInformationType = orderbookData.orderInformation_type;
+            if ([orderInformationType isEqualToString:@"offer"]) {
+                [self informBuyDelegateWithNote:note];
+            }
+            else if ([orderInformationType isEqualToString:@"order"]) {
+                [self informSellDelegateWithNote:note];
+            }
+        }
+    }
+    return [updatesOrders copy];
+}
+
+- (void)addOrderBookData:(SOXShowOrderbookData *)addOrderData {
     NSString *orderInformationType = addOrderData.orderInformation_type;
     NSString *addOrderDataOrderID = addOrderData.orderInformation_orderID;
     NSString *addOrderDataPrice   = [SOXFormatters currencyStringForNumber:addOrderData.orderInformation_price
@@ -504,8 +637,9 @@
         self.buyOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:self.buyOrderBook
                                                                    forOrderType:BitcoinDE_BuyOrderType];
 
-        NSString *note = [NSString stringWithFormat:@"added buy order - orderID: %@ - type: offer - index %tu - price: %@ - interest %@"
+        NSString *note = [NSString stringWithFormat:@"added buy order - orderID: %@ - payOp: %@ - type: offer - index %tu - price: %@ - interest %@"
                           , addOrderDataOrderID
+                          , addOrderData.orderRequirements_paymentOption
                           , [self.buyOrderBook indexOfObject:addOrderData]
                           , addOrderDataPrice
                           , [self effectiveBuyInterestRateFor:addOrderData
@@ -523,8 +657,9 @@
         self.sellOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:self.sellOrderBook
                                                                     forOrderType:BitcoinDE_SellOrderType];
 
-        NSString *note = [NSString stringWithFormat:@"added sell order - orderID: %@ - type: order - index %tu - price: %@ - interest %@"
+        NSString *note = [NSString stringWithFormat:@"added sell order - orderID: %@ - payOpt: %@ - type: order - index %tu - price: %@ - interest %@"
                           , addOrderDataOrderID
+                          , addOrderData.orderRequirements_paymentOption
                           , [self.sellOrderBook indexOfObject:addOrderData]
                           , addOrderDataPrice
                           , [self effectiveSellInterestRateFor:addOrderData
@@ -538,55 +673,25 @@
     }
 }
 
-- (void)removedOrderWithOrderID:(NSString *)orderID {
-    if ([self removeOrderWithOrderID:orderID fromOrderBook:self.buyOrderBook]) {
-        [self updateBuyStatus];
+- (void)addSEPAOrderBookData:(SOXShowOrderbookData *)addSEPAOrderData {
+    NSString *orderInformationType = addSEPAOrderData.orderInformation_type;
+    if ([orderInformationType isEqualToString:@"offer"]) {
+        [self.buySEPAOrderBook addObject:addSEPAOrderData];
+        NSString *note = [NSString stringWithFormat:@"~ new SEPA order - orderID: %@ - payOp: %@ - type offer - interest %@"
+                          , addSEPAOrderData.orderInformation_orderID
+                          , addSEPAOrderData.orderRequirements_paymentOption
+                          , [SOXFormatters currencyStringForNumber:addSEPAOrderData.orderInformation_price roundingMode:NSNumberFormatterRoundDown]];
+        [self informBuyDelegateWithNote:note];
     }
-
-    if ([self removeOrderWithOrderID:orderID fromOrderBook:self.sellOrderBook]) {
-        [self updateSellStatus];
-    }
-}
-
-- (void)updateOrderWithSocketOrderObjectID:(NSString *)orderObjectID withValues:(NSDictionary *)changesDictionary {
-    [self updateOrderWithSocketOrderObjectID:orderObjectID
-                                 inOrderBook:self.buyOrderBook
-                                  withValues:changesDictionary];
-
-    [self updateOrderWithSocketOrderObjectID:orderObjectID
-                                 inOrderBook:self.sellOrderBook
-                                  withValues:changesDictionary];
-}
-
-#pragma mark | Socket helper methods
-- (BOOL)removeOrderWithOrderID:(NSString *)orderID fromOrderBook:(NSMutableArray *)orderBook {
-    NSMutableArray *foundOrders = [NSMutableArray array];
-    // check for orderbookData with correct orderID
-    for (SOXShowOrderbookData *orderbookData in orderBook) {
-        if ([orderbookData.orderInformation_orderID isEqualToString:orderID]) {
-            [foundOrders addObject:orderbookData];
-        }
-    }
-    BOOL didRemoveOrders = NO;
-    // remove orderbookData from arrayController
-    for (id foundOrder in foundOrders) {
-        [orderBook removeObject:foundOrder];
-        didRemoveOrders = YES;
-    }
-    return didRemoveOrders;
-};
-
-- (void)updateOrderWithSocketOrderObjectID:(NSString *)orderObjectID
-                               inOrderBook:(NSMutableArray *)orderBook
-                                withValues:(NSDictionary *)changesDictionary {
-    for (SOXShowOrderbook_BitcoinDE_Data *orderbookData in orderBook) {
-        if ([orderbookData.orderInformation_socketOrderObjectID isEqualToString:orderObjectID]) {
-            // ist data object mit orderObjectID vorhanden? Ja: updaten!
-            [orderbookData updateOrderbookDataWith:changesDictionary];
-        }
+    else if ([orderInformationType isEqualToString:@"order"]) {
+        [self.sellSEPAOrderBook addObject:addSEPAOrderData];
+        NSString *note = [NSString stringWithFormat:@"~ new SEPA order - orderID: %@ - payOp: %@ - type order - interest %@"
+                          , addSEPAOrderData.orderInformation_orderID
+                          , addSEPAOrderData.orderRequirements_paymentOption
+                          , [SOXFormatters currencyStringForNumber:addSEPAOrderData.orderInformation_price roundingMode:NSNumberFormatterRoundDown]];
+        [self informSellDelegateWithNote:note];
     }
 }
-
 #pragma mark - Inform delegates
 - (void)informBuyDelegateWithNote:(NSString *)note {
     if (note) {
