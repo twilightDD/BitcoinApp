@@ -4421,6 +4421,7 @@ Gw
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
+                                            <action selector="executeTradesAction:" target="cwM-7M-FeE" id="LAf-vt-y0Y"/>
                                             <outlet property="nextKeyView" destination="3fd-l3-d7n" id="OMB-0S-gqg"/>
                                         </connections>
                                     </button>

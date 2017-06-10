@@ -75,7 +75,9 @@
     NSString *useMaxReservationButtonTitle;
     NSString *clearLogButtonTitle = @"Clear log";
 
+    NSString *maxInvestmentText;
     NSString *maxInvestmentDescriptionText;
+    NSString *minInterestText = @"0.81";
     NSString *minInterestDescriptionText = @"Min. Interest Rate [%]";
 
     if (self.orderType == BitcoinDE_BuyOrderType) {
@@ -84,7 +86,9 @@
         executeTradesButtonTitle  = @"Execute Trades";
         useMaxReservationButtonTitle = @"Use Maximal Fidor reservation";
 
+        maxInvestmentText = @"200";
         maxInvestmentDescriptionText = @"Max. Investment";
+
     }
     else if (self.orderType == BitcoinDE_SellOrderType) {
         showAutomaticTradingAreaButtonTitle   = @"Sell automatically";
@@ -92,6 +96,7 @@
         executeTradesButtonTitle  = @"Execute Trades";
         useMaxReservationButtonTitle = @"Use Maximal BTC amount";
 
+        maxInvestmentText = @"0.2";
         maxInvestmentDescriptionText = @"Max. Investment";
     }
 
@@ -112,15 +117,16 @@
     self.statusTextField.stringValue = @"";
 
     self.maxInvestmentDescriptionTextField.stringValue  = maxInvestmentDescriptionText;
-    self.maxInvestmentTextField.objectValue             = [NSDecimalNumber decimalNumberWithString:@"0"];
+
+    self.maxInvestmentTextField.objectValue             = [NSDecimalNumber decimalNumberWithString:maxInvestmentText];
     NSNumberFormatter *formatter                        = self.maxInvestmentTextField.formatter;
     formatter.minimum                                   = [NSDecimalNumber zero];
     formatter.maximum                                   = [NSDecimalNumber decimalNumberWithString:@"100000"];
 
     self.minInterestDescriptionTextField.stringValue = minInterestDescriptionText;
-    self.minInterestTextField.objectValue            = [NSDecimalNumber decimalNumberWithString:@"0.25"];
+    self.minInterestTextField.objectValue            = [NSDecimalNumber decimalNumberWithString:minInterestText];
     NSNumberFormatter *formatter2                    = self.minInterestTextField.formatter;
-    formatter2.minimum                               = [NSDecimalNumber decimalNumberWithString:@"0.25"];
+    formatter2.minimum                               = [NSDecimalNumber decimalNumberWithString:minInterestText];
     formatter2.maximum                               = [NSDecimalNumber decimalNumberWithString:@"100"];
 
     self.logDescriptionTextField.stringValue = @"Log output";

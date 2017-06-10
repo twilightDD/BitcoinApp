@@ -69,16 +69,18 @@
     SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
 
     switch (orderType) {
-        case BitcoinDE_BuyOrderType:
+        case BitcoinDE_BuyOrderType: {
             core.executeBuyTrades = executeTrades;
-            [core informBuyDelegateWithNote:[NSString stringWithFormat:@"Execute trades %@"
+            [core informBuyDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE TRADE %@ !!!"
                                              , executeTrades ? @"enabled" : @"disabled"]];
             break;
-        case BitcoinDE_SellOrderType:
-            core.executeBuyTrades = executeTrades;
-            [core informSellDelegateWithNote:[NSString stringWithFormat:@"Execute trades %@"
+        }
+        case BitcoinDE_SellOrderType: {
+            core.executeSellTrades = executeTrades;
+            [core informSellDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE TRADE %@ !!!"
                                               , executeTrades ? @"enabled" : @"disabled"]];
             break;
+        }
         default:
             break;
     }
