@@ -145,6 +145,8 @@
         core.buyInterestFactor = [[NSDecimalNumber one] decimalNumberBySubtracting:buyInterestRatePercent];
         NSString *note = [NSString stringWithFormat:@"UPDATE VALUE: Set interest factor to %@", core.buyInterestRate];
         [core informBuyDelegateWithNote:note];
+
+        [core updateBuyStatus];
     }
 }
 
@@ -156,6 +158,8 @@
         core.sellInterestFactor = [[NSDecimalNumber one] decimalNumberByAdding:sellInterestRatePercent];
         NSString *note = [NSString stringWithFormat:@"UPDATE VALUE: Set interest factor to %@", core.sellInterestRate];
         [core informSellDelegateWithNote:note];
+
+        [core updateSellStatus];
     }
 }
 
@@ -741,6 +745,7 @@
                         [SOXFormatters currencyStringForNumber:bestOrderDataPrice roundingMode:NSNumberFormatterRoundDown]
                         , [SOXFormatters currencyStringForNumber:buyLowerThanPrice roundingMode:NSNumberFormatterRoundDown]];
     [self informBuyDelegateWithStatus:status];
+    [self informBuyDelegateWithNote:status];
 }
 
 - (void)updateSellStatus {
@@ -751,6 +756,7 @@
                         [SOXFormatters currencyStringForNumber:bestOrderDataPrice roundingMode:NSNumberFormatterRoundDown]
                         , [SOXFormatters currencyStringForNumber:sellGreaterThanPrice roundingMode:NSNumberFormatterRoundDown]];
     [self informSellDelegateWithStatus:status];
+    [self informSellDelegateWithNote:status];
 }
 
 @end
