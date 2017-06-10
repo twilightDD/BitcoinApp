@@ -8,6 +8,8 @@
 
 #import "SOXAutomaticTrading_BitcoinDE_Core.h"
 
+#import "SOXKeys_BitcoinDE.h"
+
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXSocketIO_BitcoinDE_Core.h"
 
@@ -125,14 +127,19 @@
     NSDictionary *buyParameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:BitcoinDE_BuyOrderType
                                                                  onlyExpressPaymentOption:YES];
 
+    NSMutableDictionary *newBuyParameters = [buyParameters mutableCopy];
+    [newBuyParameters setObject:@1 forKey:BitcoinDE_ShowMyOrders_OrderRequirements_OnlyKYCFull];
+
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType
-                                            withParameter:buyParameters
+                                            withParameter:[newBuyParameters copy]
                                                 respondTo:core];
     NSDictionary *sellParameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:BitcoinDE_SellOrderType
                                                                   onlyExpressPaymentOption:YES];
 
+    NSMutableDictionary *newSellParameters = [sellParameters mutableCopy];
+    [newSellParameters setObject:@1 forKey:BitcoinDE_ShowMyOrders_OrderRequirements_OnlyKYCFull];
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType
-                                            withParameter:sellParameters
+                                            withParameter:[newSellParameters copy]
                                                 respondTo:core];
 }
 
@@ -373,7 +380,7 @@
     NSString *note = @"error in tryToExecuteSellOrder";
     if ([orderMinAmountToSell isGreaterThan:availableBTCAmount]) {
         // minAmountToSell > availableBTCAmount => no sell possible
-        note = [NSString stringWithFormat:@"NO SELL possible: orderMinAmount %@ > availableBTCAmount %@ (not enough fidor amount)"
+        note = [NSString stringWithFormat:@"NO SELL possible: orderMinAmount %@ > availableBTCAmount %@ (not enough free BTC amount)"
                 , [SOXFormatters stringForBTCNumber:orderMinAmountToSell]
                 , [SOXFormatters stringForBTCNumber:availableBTCAmount]];
     }
@@ -435,9 +442,19 @@
         return;
     }
 
+
+
+
     SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
 
     NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
+
+    if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ExecuteTrade)]) {
+        NSLog(@"#################################");
+        NSLog(@"TRADE EXECUTED");
+        NSLog(@"#################################");
+    }
+
     NSMutableArray <SOXShowOrderbook_BitcoinDE_Data *> *orderBookDatas;
     orderBookDatas = [SOXShowOrderbook_BitcoinDE_Data orderbookDataArrayForShowOrderbookDictionary:payloadDictionary];
     if (orderBookDatas.count == 0) {
@@ -450,6 +467,9 @@
             if ([self checkForExpressOrder:orderBookData]) {
                 [buyOrderBookDatas addObject:orderBookData];
             }
+            NSLog(@"answer buy: %@ %@"
+                  , orderBookData.orderInformation_orderID
+                  , orderBookData.tradingPartnerInformation_isKYCFull ? @"YES" : @"NO");
         }
 
         self.buyOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:buyOrderBookDatas
@@ -475,6 +495,9 @@
             if ([self checkForExpressOrder:orderBookData]) {
                 [sellOrderBookDatas addObject:orderBookData];
             }
+            NSLog(@"answer sell: %@ %@"
+                  , orderBookData.orderInformation_orderID
+                  , orderBookData.tradingPartnerInformation_isKYCFull ? @"YES" : @"NO");
         }
 
         self.sellOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:sellOrderBookDatas
@@ -515,6 +538,11 @@
 
 #pragma mark - SOXSocketIOCoreProtocol
 - (void)addedOrder:(SOXShowOrderbookData *)addOrderData {
+    if (!addOrderData.tradingPartnerInformation_isKYCFull) {
+        NSLog(@"### NO KYC: orderID: %@", addOrderData.orderInformation_orderID);
+        return;
+    }
+
     if ([self checkForExpressOrder:addOrderData]) {
         [self addOrderBookData:addOrderData];
     }
@@ -524,12 +552,18 @@
 }
 
 - (void)removedOrderWithOrderID:(NSString *)orderID {
+    NSString *note = [NSString stringWithFormat:@"removed order - orderID %@", orderID];
     if ([self removeOrderWithOrderID:orderID fromOrderBook:self.buyOrderBook]) {
         [self updateBuyStatus];
+        [self informBuyDelegateWithNote:note];
     }
 
-    if ([self removeOrderWithOrderID:orderID fromOrderBook:self.sellOrderBook]) {
+    else if ([self removeOrderWithOrderID:orderID fromOrderBook:self.sellOrderBook]) {
         [self updateSellStatus];
+        [self informSellDelegateWithNote:note];
+    }
+    else {
+        [self removeSEPAOrderWithOrderID:orderID];
     }
 }
 
@@ -601,6 +635,21 @@
     }
     return didRemoveOrders;
 };
+
+- (void)removeSEPAOrderWithOrderID:(NSString *)orderID {
+    NSString *note = [NSString stringWithFormat:@"~ removed SEPA order - orderID %@", orderID];
+    NSPredicate* orderWithOrderIDPredicate = [NSPredicate predicateWithFormat:@"orderInformation_orderID == %@",orderID ];
+    NSSet *filteredBuySEPAOrderbook = [self.buySEPAOrderBook filteredSetUsingPredicate:orderWithOrderIDPredicate];
+    for (SOXShowOrderbookData *orderbookData in filteredBuySEPAOrderbook) {
+        [self.buySEPAOrderBook removeObject:orderbookData];
+        [self informBuyDelegateWithNote:note];
+    }
+    NSSet *filteredSellSEPAOrderbook = [self.sellSEPAOrderBook filteredSetUsingPredicate:orderWithOrderIDPredicate];
+    for (SOXShowOrderbookData *orderbookData in filteredSellSEPAOrderbook) {
+        [self.sellSEPAOrderBook removeObject:orderbookData];
+        [self informSellDelegateWithNote:note];
+    }
+}
 
 - (NSArray *)updateOrderWithSocketOrderObjectID:(NSString *)orderObjectID
                                inOrderBook:(NSMutableArray *)orderBook
