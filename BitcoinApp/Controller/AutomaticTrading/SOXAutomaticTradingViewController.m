@@ -35,6 +35,8 @@
 
 @property (weak) IBOutlet NSTextField *logDescriptionTextField;
 @property (unsafe_unretained) IBOutlet NSTextView *logTextView;
+@property (weak) IBOutlet NSScrollView *logTextScrollView;
+
 @property (weak) IBOutlet NSButton *clearLogButton;
 
 #pragma mark Properties
@@ -235,11 +237,14 @@
 - (void)logLine:(NSString *)line {
     self.log = [self.log stringByAppendingString:@"\n"];
     NSString *lineWithDate = [NSString stringWithFormat:@"%@: %@"
-                              , [SOXFormatters shortDateShortTimeStringForDate:[NSDate date]]
+                              , [SOXFormatters shortDateMediumTimeStringForDate:[NSDate date]]
                               , line];
     self.log = [self.log stringByAppendingString:lineWithDate];
     
     self.logTextView.string = self.log;
+    NSPoint pt = NSMakePoint(0.0, [[self.logTextScrollView documentView]
+                                   bounds].size.height);
+    [self.logTextScrollView.documentView scrollPoint:pt];
 }
 
 - (void)statusUpdate:(NSString *)status {
