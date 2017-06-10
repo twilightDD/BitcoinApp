@@ -4477,6 +4477,7 @@ Gw
                         <outlet property="clearLogButton" destination="fe2-pf-czM" id="MnP-Lo-Lsk"/>
                         <outlet property="executeTradesButton" destination="NLc-ce-lrH" id="r2F-YY-Dhb"/>
                         <outlet property="logDescriptionTextField" destination="9Xe-Tk-Z3f" id="POx-rB-BT8"/>
+                        <outlet property="logTextScrollView" destination="sKc-pr-7pa" id="a5q-6d-tra"/>
                         <outlet property="logTextView" destination="6J3-fH-bxe" id="cLz-U2-TLl"/>
                         <outlet property="maxInvestmentDescriptionTextField" destination="8d9-sH-1hz" id="xLz-R6-TH1"/>
                         <outlet property="maxInvestmentTextField" destination="Jr3-wH-a3M" id="2Ga-5m-Mma"/>
