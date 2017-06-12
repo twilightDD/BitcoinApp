@@ -30,5 +30,18 @@
     return parameter;
 }
 
++ (NSDictionary *)parameterAutomaticTradingForOrderID:(NSString *)orderID
+                                            orderType:(BitcoinDE_OrderType)orderType
+                                        bitcoinAmount:(NSNumber *)bitcoinAmount
+                                                price:(NSDecimalNumber *)price {
+    NSDictionary *parameters = [self parameterForOrderID:orderID
+                                               orderType:orderType
+                                          bitcoinAmount:bitcoinAmount];
+    NSMutableDictionary *parameterAutomaticTrading = [parameters mutableCopy];
+    [parameterAutomaticTrading setObject:@YES forKey:BitcoinDE_ExecuteTrade_IsAutomaticTrade];
+    [parameterAutomaticTrading setObject:price forKey:BitcoinDE_ExecuteTrade_Price];
+
+    return [parameterAutomaticTrading copy];
+}
 
 @end

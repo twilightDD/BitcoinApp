@@ -18,6 +18,8 @@ FOUNDATION_EXPORT NSString *const BitcoinDE_Notification_RequestShowRates;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ExecuteTrade_OrderID;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ExecuteTrade_Type;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ExecuteTrade_BitcoinAmount;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ExecuteTrade_IsAutomaticTrade;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ExecuteTrade_Price;
 
 #pragma mark - BitcoinDE_ShowAccountInfo
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfo_MainKey;

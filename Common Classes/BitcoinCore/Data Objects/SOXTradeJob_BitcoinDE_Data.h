@@ -20,4 +20,9 @@
                             orderType:(BitcoinDE_OrderType)orderType
                           bitcoinAmount:(NSNumber *)bitcoinAmount;
 
++ (NSDictionary *)parameterAutomaticTradingForOrderID:(NSString *)orderID
+                                            orderType:(BitcoinDE_OrderType)orderType
+                                        bitcoinAmount:(NSNumber *)bitcoinAmount
+                                                price:(NSDecimalNumber *)price;
+
 @end

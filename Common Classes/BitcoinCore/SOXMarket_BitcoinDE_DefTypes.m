@@ -24,6 +24,18 @@
     }
 }
 
++ (BitcoinDE_OrderType)orderTypeForOrderTypeString:(NSString *)orderTypeString {
+    BitcoinDE_OrderType orderType = BitcoinDE_UnknownOrderType;
+    if ([orderTypeString isEqualToString:@"buy"]) {
+        orderType = BitcoinDE_BuyOrderType;
+    }
+    else if ([orderTypeString isEqualToString:@"sell"]) {
+        orderType = BitcoinDE_SellOrderType;
+    }
+
+    return orderType;
+}
+
 + (NSString *)paymentOptionStringForPaymentOption:(BitcoinDE_PaymentOption)paymentOption {
     static NSDictionary    *paymentOptionDescription;
     

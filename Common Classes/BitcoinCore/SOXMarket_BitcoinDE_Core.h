@@ -15,6 +15,7 @@ FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerServerCommandKey;
 FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerPayloadKey;
 FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerURLResponseKey;
 FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerErrorKey;
+FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerParametersKey;
 
 FOUNDATION_EXPORT NSString *const _Nonnull CreditUpdate_CurrentCreditsKey;
 FOUNDATION_EXPORT NSString *const _Nonnull CreditUpdate_MaximalCreditsKey;

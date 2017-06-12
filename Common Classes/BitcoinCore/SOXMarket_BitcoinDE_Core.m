@@ -19,6 +19,7 @@ NSString *const _Nonnull ServerAnswerServerCommandKey = @"ServerCommand";
 NSString *const _Nonnull ServerAnswerPayloadKey       = @"Payload";
 NSString *const _Nonnull ServerAnswerURLResponseKey   = @"URLResponse";
 NSString *const _Nonnull ServerAnswerErrorKey         = @"Error";
+NSString *const _Nonnull ServerAnswerParametersKey    = @"Parameters";
 
 NSString *const _Nonnull CreditUpdate_CurrentCreditsKey = @"CreditUpdate_CurrentCredits";
 NSString *const _Nonnull CreditUpdate_MaximalCreditsKey = @"CreditUpdate_MaximalCredits";
@@ -173,10 +174,18 @@ NSString *const _Nonnull NSURLSessionTaskKey = @"NSURLSessionTask";
                                                                     SOXErrorMessage_BitcoinDE *errorMessage = [[SOXErrorMessage_BitcoinDE alloc] initWithServerRequestTitle:serverRequestTitle];
                                                                     
                                                                     NSDictionary *serverAnswer = [self answerDictionaryForServerCommand:serverCommandType
+                                                                                                                             parameters:parameterDictionary
                                                                                                                                withData:data
                                                                                                                             urlResponse:response
                                                                                                                                   error:error
                                                                                                                            errorMessage:errorMessage];
+                                                                    NSMutableDictionary *serverAnswerWithParameters = [serverAnswer mutableCopy];
+                                                                    if (parameterDictionary) {
+                                                                        [serverAnswerWithParameters setObject:parameterDictionary
+                                                                                                       forKey:@"parameters"];
+                                                                    }
+
+
                                                                     
                                                                     if (serverCommandType == BitcoinDE_ShowAccountInfoCommandType) {
                                                                         [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_RequestShowAccountInfo
@@ -190,7 +199,7 @@ NSString *const _Nonnull NSURLSessionTaskKey = @"NSURLSessionTask";
                                                                         if ([controller respondsToSelector:@selector(answerOfServerRequest:)]) {
                                                                             // NSURLSessionTask has its own thread
                                                                             [controller performSelectorOnMainThread:@selector(answerOfServerRequest:)
-                                                                                                         withObject:serverAnswer
+                                                                                                         withObject:[serverAnswerWithParameters copy]
                                                                                                       waitUntilDone:NO];
                                                                         }
                                                                         
@@ -225,6 +234,7 @@ NSString *const _Nonnull NSURLSessionTaskKey = @"NSURLSessionTask";
 
 #pragma mark - Private Class methods
 + (NSDictionary *)answerDictionaryForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
+                                        parameters:(NSDictionary *)parameters
                                           withData:(NSData * _Nullable)data
                                        urlResponse:(NSURLResponse * _Nullable)response
                                              error:(NSError * _Nullable)error
@@ -255,35 +265,29 @@ NSString *const _Nonnull NSURLSessionTaskKey = @"NSURLSessionTask";
     }
     
     // process server answer
-    NSDictionary *serverAnswer;
+    NSMutableDictionary *serverAnswer = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                         @(serverCommandType), ServerAnswerServerCommandKey
+                                         , response, ServerAnswerURLResponseKey
+                                         , parameters, ServerAnswerParametersKey
+                                         , nil];
     {
         if (error) {
-            serverAnswer = [NSDictionary dictionaryWithObjectsAndKeys:
-                            @(serverCommandType), ServerAnswerServerCommandKey
-                            ,response, ServerAnswerURLResponseKey
-                            ,error, ServerAnswerErrorKey
-                            , nil];
+            [serverAnswer setObject:error
+                             forKey:ServerAnswerErrorKey];
         }
         else if (!error && errorMessage.hasError) {
             // on error on executeTrade there is no error! (Warum auch immer)
-            serverAnswer = [NSDictionary dictionaryWithObjectsAndKeys:
-                            @(serverCommandType), ServerAnswerServerCommandKey
-                            ,response, ServerAnswerURLResponseKey
-                            ,[payloadDictionary objectForKey:@"errors"], ServerAnswerErrorKey
-                            , nil];
+            [serverAnswer setObject:[payloadDictionary objectForKey:@"errors"]
+                             forKey:ServerAnswerErrorKey];
         }
         else {
             id payload = [SOXDataConverter_BitcoinDE payloadForServerDictionary:payloadDictionary
                                                                forServerCommand:serverCommandType];
-            
-            serverAnswer = [NSDictionary dictionaryWithObjectsAndKeys:
-                            @(serverCommandType), ServerAnswerServerCommandKey
-                            , payload, ServerAnswerPayloadKey
-                            , response, ServerAnswerURLResponseKey
-                            , nil];
+            [serverAnswer setObject:payload
+                             forKey:ServerAnswerPayloadKey];
         }
     }
-    return serverAnswer;
+    return [serverAnswer copy];
 }
 
 + (NSArray * _Nonnull)serverCommandsKeys {

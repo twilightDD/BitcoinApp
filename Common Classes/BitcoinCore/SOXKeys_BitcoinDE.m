@@ -18,6 +18,8 @@ NSString *const BitcoinDE_Notification_RequestShowRates         = @"Notification
 NSString *const BitcoinDE_ExecuteTrade_OrderID          = @"order_id";
 NSString *const BitcoinDE_ExecuteTrade_Type             = @"type";
 NSString *const BitcoinDE_ExecuteTrade_BitcoinAmount    = @"amount";
+NSString *const BitcoinDE_ExecuteTrade_IsAutomaticTrade = @"isAutomaticTrade";
+NSString *const BitcoinDE_ExecuteTrade_Price            = @"price";
 
 #pragma mark - BitcoinDE_ShowAccountInfo
 NSString *const BitcoinDE_ShowAccountInfo_MainKey = @"data";
