@@ -539,6 +539,16 @@
 }
 
 #pragma mark - SOXSocketIOCoreProtocol
+- (void)socketIODidConnect:(NSString *)socketStatus {
+    [self informBuyDelegateWithNote:socketStatus];
+    [self informSellDelegateWithNote:socketStatus];
+}
+
+- (void)socketIODidDisconnect:(NSString *)socketStatus {
+    [self informBuyDelegateWithNote:socketStatus];
+    [self informSellDelegateWithNote:socketStatus];
+}
+
 - (void)addedOrder:(SOXShowOrderbookData *)addOrderData {
     if (!addOrderData.tradingPartnerInformation_isKYCFull) {
         NSLog(@"### NO KYC: orderID: %@", addOrderData.orderInformation_orderID);

@@ -132,13 +132,46 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
 }
 #pragma mark SocketIODelegate
 
-- (void) socketIODidConnect:(SocketIO *)socket {
-    NSLog(@"~~~~~ socketIODidConnect: %@ ", socket);
+- (void)socketIODidConnect:(SocketIO *)socket {
+    NSLog(@"~~~~~ socketIODidConnect");
+    SEL socketIODidConnectSelector = NSSelectorFromString(@"socketIODidConnect:");
+    NSString *note = @"*** socketIODidConnect";
+    for (NSObject *delegate in self.delegateForBuyOrderUpdates) {
+        if ([delegate respondsToSelector:socketIODidConnectSelector]) {
+        [delegate performSelectorOnMainThread:socketIODidConnectSelector
+                                   withObject:note
+                                waitUntilDone:NO];
+        }
+
+    }
+    for (NSObject *delegate in self.delegateForSellOrderUpdates) {
+        if ([delegate respondsToSelector:socketIODidConnectSelector]) {
+        [delegate performSelectorOnMainThread:socketIODidConnectSelector
+                                   withObject:note
+                                waitUntilDone:NO];
+        }
+    }
 }
 
 - (void) socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error {
     NSLog(@"~~~~~ socketIODidDisconnect: %@ disconnectedWithError:\n%@", socket, error);
-    
+    SEL socketIODidDisconnect = NSSelectorFromString(@"socketIODidDisconnect:");
+    NSString *note = [NSString stringWithFormat:@"*** socketIODidDisconnect with Error:\n%@", error.localizedDescription];
+    for (NSObject *delegate in self.delegateForBuyOrderUpdates) {
+        if ([delegate respondsToSelector:socketIODidDisconnect]) {
+            [delegate performSelectorOnMainThread:socketIODidDisconnect
+                                       withObject:note
+                                    waitUntilDone:NO];
+        }
+
+    }
+    for (NSObject *delegate in self.delegateForSellOrderUpdates) {
+        if ([delegate respondsToSelector:socketIODidDisconnect]) {
+            [delegate performSelectorOnMainThread:socketIODidDisconnect
+                                       withObject:note
+                                    waitUntilDone:NO];
+        }
+    }
     [SOXSocketIO_BitcoinDE_Core restartWebSocketCore];
 }
 
@@ -166,16 +199,23 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
             }
             if ([addOrderData.orderInformation_type isEqualToString:@"offer"]) {
                 for (NSObject *delegate in self.delegateForBuyOrderUpdates) {
-                    if ([delegate respondsToSelector:@selector(addedOrder:)]) {
-                        [delegate performSelector:@selector(addedOrder:) withObject:addOrderData];
-                    }
+                    [delegate performSelectorOnMainThread:@selector(addedOrder:)
+                                                 withObject:addOrderData
+                                              waitUntilDone:NO];
+
+//                    if ([delegate respondsToSelector:@selector(addedOrder:)]) {
+//                        [delegate performSelector:@selector(addedOrder:) withObject:addOrderData];
+//                    }
                 }
             }
             else if ([addOrderData.orderInformation_type isEqualToString:@"order"]) {
                 for (NSObject *delegate in self.delegateForSellOrderUpdates) {
-                    if ([delegate respondsToSelector:@selector(addedOrder:)]) {
-                        [delegate performSelector:@selector(addedOrder:) withObject:addOrderData];
-                    }
+                    [delegate performSelectorOnMainThread:@selector(addedOrder:)
+                                               withObject:addOrderData
+                                            waitUntilDone:NO];
+//                    if ([delegate respondsToSelector:@selector(addedOrder:)]) {
+//                        [delegate performSelector:@selector(addedOrder:) withObject:addOrderData];
+//                    }
                 }
             }
             else {
@@ -190,8 +230,11 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
         for (NSDictionary *packetDictionary in packetArguments) {
             for (NSObject *delegate in self.delegateForRemoveOrderUpdates) {
                 if ([delegate respondsToSelector:@selector(removedOrderWithOrderID:)]) {
-                    [delegate performSelector:@selector(removedOrderWithOrderID:)
-                                   withObject:[packetDictionary objectForKey:@"order_id"]];
+                    [delegate performSelectorOnMainThread:@selector(removedOrderWithOrderID:)
+                                               withObject:[packetDictionary objectForKey:@"order_id"]
+                                            waitUntilDone:NO];
+//                    [delegate performSelector:@selector(removedOrderWithOrderID:)
+//                                   withObject:[packetDictionary objectForKey:@"order_id"]];
                 }
             }
         }
@@ -221,6 +264,7 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
                     // inform sell-delegates: WebSocket_UpdateOrder only for sell orders
                     for (NSObject *delegate in self.delegateForSellOrderUpdates) {
                         if ([delegate respondsToSelector:@selector(updateOrderWithSocketOrderObjectID:withValues:)]) {
+                            // TODO: Perform in MainThread
                             [delegate performSelector:@selector(updateOrderWithSocketOrderObjectID:withValues:)
                                            withObject:objectOrderID
                                            withObject:changesDictionary];
