@@ -54,6 +54,7 @@ NSString *const _Nonnull NSURLSessionTaskKey = @"NSURLSessionTask";
 #pragma mark | Network Queue handling
 @property (strong, nonatomic) NSMutableArray <NSDictionary *> *networkQueue;
 @property (nonatomic) BOOL networkQueueIsRunning;
+@property (nonatomic) NSInteger parameterDummyCounter;
 
 #pragma mark | Credit handling
 @property (weak, nonatomic) NSTimer *creditTimer;
@@ -65,12 +66,6 @@ NSString *const _Nonnull NSURLSessionTaskKey = @"NSURLSessionTask";
 
 #pragma mark - Implementation
 @implementation SOXMarket_BitcoinDE_Core
-- (void)startRequests {
-            [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountInfoCommandType
-                                                        respondTo:nil];
-            [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowRatesCommandType
-                                                        respondTo:nil];
-}
 
 #pragma mark Public Class methods
 + (instancetype _Nonnull)sharedCore {
@@ -82,6 +77,7 @@ NSString *const _Nonnull NSURLSessionTaskKey = @"NSURLSessionTask";
         sharedCore = [[self class] new];
         sharedCore.networkQueueIsRunning = NO;
         sharedCore.networkQueue = [NSMutableArray array];
+        sharedCore.parameterDummyCounter = 0;
         sharedCore.maxCredits = 0;
         
         sharedCore.rate_weighted      = [NSDecimalNumber decimalNumberWithString:@"0"];
@@ -90,77 +86,29 @@ NSString *const _Nonnull NSURLSessionTaskKey = @"NSURLSessionTask";
     return sharedCore;
 }
 
-+ (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
-                          respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nullable)controller {
-    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:serverCommandType
-                                            withParameter:nil
-                                                respondTo:controller];
-}
-
-+ (void)executeTradeWithOrderID:(NSString *)orderID
-                      withParameter:(NSDictionary * _Nullable)parameterDictionary
-                          respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nullable)controller{
-    
-}
-
-+ (void)prepareRequestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
-                             withParameter:(NSDictionary * _Nullable)parameterDictionary {
-    // reset values
-    {
-        [SOXMarket_BitcoinDE_Core sharedCore].uri = nil;
-        [SOXMarket_BitcoinDE_Core sharedCore].nonce = nil;
-        [SOXMarket_BitcoinDE_Core sharedCore].url_encoded_query_string = nil;
-        [SOXMarket_BitcoinDE_Core sharedCore].post_parameter_md5_hashed_url_encoded_query_string = nil;
-        [SOXMarket_BitcoinDE_Core sharedCore].httpMethod = nil;
-        [SOXMarket_BitcoinDE_Core sharedCore].hmac_data = nil;
-        [SOXMarket_BitcoinDE_Core sharedCore].hmac = nil;
-    }
-    
-    [SOXMarket_BitcoinDE_Core createHttpMethodForServerCommandType:serverCommandType];
-    [SOXMarket_BitcoinDE_Core createURIForServerCommandType:serverCommandType];
-    [SOXMarket_BitcoinDE_Core createNonceString];
-    if (serverCommandType != BitcoinDE_ExecuteTrade) {
-        [SOXMarket_BitcoinDE_Core create_url_encoded_query_stringFromParameterDictionary:parameterDictionary];
-        [SOXMarket_BitcoinDE_Core createURL];
-    }
-    else {
-        NSString *orderID = [parameterDictionary objectForKey:BitcoinDE_ExecuteTrade_OrderID];
-        
-        // create_url_encoded_query_stringFromParameterDictionary
-        {
-            NSMutableDictionary *mutableParameterDictionary = [parameterDictionary mutableCopy];
-            [mutableParameterDictionary removeObjectForKey:BitcoinDE_ExecuteTrade_OrderID];
-            [SOXMarket_BitcoinDE_Core create_url_encoded_query_stringFromParameterDictionary:[mutableParameterDictionary copy]];
-        }
-        
-        // createURL
-        {
-            SOXMarket_BitcoinDE_Core *core = [SOXMarket_BitcoinDE_Core sharedCore];
-            NSString *url = [NSString stringWithFormat:@"%@%@%@", [SOXMarket_BitcoinDE_Core baseURLString],core.uri, orderID];
-            core.url = url;
-        }
-        
-    }
-    
-    [SOXMarket_BitcoinDE_Core createMD5Of_url_encoded_query_string];
-    [SOXMarket_BitcoinDE_Core createHmac_data];
-    [SOXMarket_BitcoinDE_Core createHMAC];
-
-}
 
 
 + (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
                       withParameter:(NSDictionary * _Nullable)parameterDictionary
                           respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nullable)controller {
-    [SOXMarket_BitcoinDE_Core prepareRequestDataForServerCommand:serverCommandType
-                                                   withParameter:parameterDictionary];
-    
-    NSURLRequest *request = [SOXMarket_BitcoinDE_Core createRequest];
+    NSURLRequest * request = [self requestForServerCommandType:serverCommandType
+                                                    parameters:parameterDictionary];
 
     if (!request) {
         return;
     }
-    
+
+    id parameters;
+    if (parameterDictionary) {
+        parameters = parameterDictionary;
+    }
+    else {
+        parameters = @([SOXMarket_BitcoinDE_Core sharedCore].parameterDummyCounter);
+        [SOXMarket_BitcoinDE_Core sharedCore].parameterDummyCounter++;
+    }
+
+
+
     weakify(self)
     NSURLSessionTask *getTask = [[NSURLSession sharedSession] dataTaskWithRequest:request
                                                                 completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -174,19 +122,12 @@ NSString *const _Nonnull NSURLSessionTaskKey = @"NSURLSessionTask";
                                                                     SOXErrorMessage_BitcoinDE *errorMessage = [[SOXErrorMessage_BitcoinDE alloc] initWithServerRequestTitle:serverRequestTitle];
                                                                     
                                                                     NSDictionary *serverAnswer = [self answerDictionaryForServerCommand:serverCommandType
-                                                                                                                             parameters:parameterDictionary
+                                                                                                                             parameters:parameters
                                                                                                                                withData:data
                                                                                                                             urlResponse:response
                                                                                                                                   error:error
                                                                                                                            errorMessage:errorMessage];
-                                                                    NSMutableDictionary *serverAnswerWithParameters = [serverAnswer mutableCopy];
-                                                                    if (parameterDictionary) {
-                                                                        [serverAnswerWithParameters setObject:parameterDictionary
-                                                                                                       forKey:@"parameters"];
-                                                                    }
 
-
-                                                                    
                                                                     if (serverCommandType == BitcoinDE_ShowAccountInfoCommandType) {
                                                                         [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_RequestShowAccountInfo
                                                                                                                             object:serverAnswer];
@@ -199,7 +140,7 @@ NSString *const _Nonnull NSURLSessionTaskKey = @"NSURLSessionTask";
                                                                         if ([controller respondsToSelector:@selector(answerOfServerRequest:)]) {
                                                                             // NSURLSessionTask has its own thread
                                                                             [controller performSelectorOnMainThread:@selector(answerOfServerRequest:)
-                                                                                                         withObject:[serverAnswerWithParameters copy]
+                                                                                                         withObject:serverAnswer
                                                                                                       waitUntilDone:NO];
                                                                         }
                                                                         
@@ -232,7 +173,8 @@ NSString *const _Nonnull NSURLSessionTaskKey = @"NSURLSessionTask";
     [SOXMarket_BitcoinDE_Core sharedCore].delegateForErrorMessages = delegateForErrorMessages;
 }
 
-#pragma mark - Private Class methods
+
+
 + (NSDictionary *)answerDictionaryForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
                                         parameters:(NSDictionary *)parameters
                                           withData:(NSData * _Nullable)data
@@ -290,6 +232,7 @@ NSString *const _Nonnull NSURLSessionTaskKey = @"NSURLSessionTask";
     return [serverAnswer copy];
 }
 
+#pragma mark - Server commands
 + (NSArray * _Nonnull)serverCommandsKeys {
     NSDictionary *commands = [SOXMarket_BitcoinDE_Core commands];
     NSArray *sortedKeys = [commands.allKeys sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"self"
@@ -353,7 +296,60 @@ NSString *const _Nonnull NSURLSessionTaskKey = @"NSURLSessionTask";
     return nil;
 }
 
-#pragma mark - Create methods
+#pragma mark - Create NSURLRequest Methods
++ (NSURLRequest *)requestForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType
+                                   parameters:(NSDictionary * _Nullable)parameterDictionary {
+    [SOXMarket_BitcoinDE_Core prepareRequestDataForServerCommand:serverCommandType
+                                                   withParameter:parameterDictionary];
+
+    NSURLRequest *request = [SOXMarket_BitcoinDE_Core createRequest];
+    return request;
+}
+
+#pragma mark | Helper
++ (void)prepareRequestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
+                             withParameter:(NSDictionary * _Nullable)parameterDictionary {
+    // reset values
+    {
+        [SOXMarket_BitcoinDE_Core sharedCore].uri = nil;
+        [SOXMarket_BitcoinDE_Core sharedCore].nonce = nil;
+        [SOXMarket_BitcoinDE_Core sharedCore].url_encoded_query_string = nil;
+        [SOXMarket_BitcoinDE_Core sharedCore].post_parameter_md5_hashed_url_encoded_query_string = nil;
+        [SOXMarket_BitcoinDE_Core sharedCore].httpMethod = nil;
+        [SOXMarket_BitcoinDE_Core sharedCore].hmac_data = nil;
+        [SOXMarket_BitcoinDE_Core sharedCore].hmac = nil;
+    }
+
+    [SOXMarket_BitcoinDE_Core createHttpMethodForServerCommandType:serverCommandType];
+    [SOXMarket_BitcoinDE_Core createURIForServerCommandType:serverCommandType];
+    [SOXMarket_BitcoinDE_Core createNonceString];
+    if (serverCommandType != BitcoinDE_ExecuteTrade) {
+        [SOXMarket_BitcoinDE_Core create_url_encoded_query_stringFromParameterDictionary:parameterDictionary];
+        [SOXMarket_BitcoinDE_Core createURL];
+    }
+    else {
+        NSString *orderID = [parameterDictionary objectForKey:BitcoinDE_ExecuteTrade_OrderID];
+
+        // create_url_encoded_query_stringFromParameterDictionary
+        {
+            NSMutableDictionary *mutableParameterDictionary = [parameterDictionary mutableCopy];
+            [mutableParameterDictionary removeObjectForKey:BitcoinDE_ExecuteTrade_OrderID];
+            [SOXMarket_BitcoinDE_Core create_url_encoded_query_stringFromParameterDictionary:[mutableParameterDictionary copy]];
+        }
+
+        // createURL
+        {
+            SOXMarket_BitcoinDE_Core *core = [SOXMarket_BitcoinDE_Core sharedCore];
+            NSString *url = [NSString stringWithFormat:@"%@%@%@", [SOXMarket_BitcoinDE_Core baseURLString],core.uri, orderID];
+            core.url = url;
+        }
+
+    }
+
+    [SOXMarket_BitcoinDE_Core createMD5Of_url_encoded_query_string];
+    [SOXMarket_BitcoinDE_Core createHmac_data];
+    [SOXMarket_BitcoinDE_Core createHMAC];
+}
 
 + (void)createURIForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType {
     NSString *uri = [SOXMarket_BitcoinDE_Core commandForServerCommandType:serverCommandType];
@@ -515,7 +511,7 @@ NSString *const _Nonnull NSURLSessionTaskKey = @"NSURLSessionTask";
     return [request copy];
 }
 
-#pragma mark | Network Queue handling
+#pragma mark - Network Queue handling
 + (NSMutableArray *)networkQueue {
     NSMutableArray *networkQueue = [[SOXMarket_BitcoinDE_Core sharedCore] networkQueue];
     if (!networkQueue) {
@@ -584,7 +580,7 @@ NSString *const _Nonnull NSURLSessionTaskKey = @"NSURLSessionTask";
     }
 }
 
-#pragma mark | Credit handling
+#pragma mark - Credit handling
 + (void)updateCurrentCredit:(NSNumber *)newCreditValue forServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType {
     NSInteger creditCosts = [SOXMarket_BitcoinDE_Core creditCostsForServerCommandType:serverCommandType];
     
@@ -780,34 +776,27 @@ NSString *const _Nonnull NSURLSessionTaskKey = @"NSURLSessionTask";
     return @"db8b38266d2f955fa96f19064f60a4c8";
 }
 
-- (NSString *)api_key {
-    return [SOXMarket_BitcoinDE_Core apiKey];
-}
-
 + (NSString *)apiSecret {
     return @"a4ebc1d021b88bba3c8b79ba4b93b1045dea0cc7";
+}
+
+#pragma mark | Instance getters
+- (NSString *)api_key {
+    return [SOXMarket_BitcoinDE_Core apiKey];
 }
 
 - (NSString *)api_secret {
     return [SOXMarket_BitcoinDE_Core apiSecret];
 }
 
-#pragma mark - Code for later use
-// for later use
-+ (void)startBannerUpdatesWithScheduleTime:(NSTimeInterval)timeInterval
-                                  delegate:(id <SOXBannerDataProtocol> _Nonnull)delegateForBannerUpdates {
-    // timer
-//    weakify(self)
-//    NSTimer *reloadBannerDataTimer = [NSTimer timerWithTimeInterval:timeInterval
-//                                                            repeats:YES
-//                                                              block:^(NSTimer * _Nonnull timer) {
-//                                                                  strongify(self)
-//                                                                //  [self startBannerUpdate];
-//                                                              }];
-//        [SOXMarket_BitcoinDE_Core sharedCore].reloadBannerDataTimer = reloadBannerDataTimer;
-//
-//        // delegate
-//        [SOXMarket_BitcoinDE_Core sharedCore].delegateForBannerUpdates = delegateForBannerUpdates;
-//
+#pragma mark - Private Instance Methods
+- (void)startRequests {
+    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountInfoCommandType
+                                            withParameter:nil
+                                                respondTo:nil];
+    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowRatesCommandType
+                                            withParameter:nil
+                                                respondTo:nil];
 }
+
 @end

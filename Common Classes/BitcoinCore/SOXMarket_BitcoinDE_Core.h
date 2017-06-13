@@ -71,9 +71,6 @@ FOUNDATION_EXPORT NSString *const _Nonnull HTTPMethodPOSTKey;
 + (instancetype _Nonnull)sharedCore;
 
 + (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
-                          respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nullable)controller;
-
-+ (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
                       withParameter:(NSDictionary * _Nullable)parameterDictionary
                           respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nullable)controller;
 

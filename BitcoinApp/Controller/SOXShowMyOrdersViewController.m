@@ -67,6 +67,7 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 
 - (void)requestServerData {
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowMyOrdersCommandType
+                                            withParameter:nil
                                                 respondTo:self];
 }
 
