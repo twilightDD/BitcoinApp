@@ -453,14 +453,18 @@
         return;
     }
 
+    NSString *orderTypeString = [parameters objectForKey:BitcoinDE_ExecuteTrade_Type];
+    BitcoinDE_OrderType orderType = [SOXMarket_BitcoinDE_DefTypes orderTypeForOrderTypeString:orderTypeString];
+    if (orderType != BitcoinDE_BuyOrderType
+        && orderType != BitcoinDE_SellOrderType) {
+        return;
+    }
+
     // Balance payments due to successful trade
-    NSString *noteSuccess = [NSString stringWithFormat:@"Successful trade was - ID: %@ - amount %@ - price %@"
+    NSString *noteSuccess = [NSString stringWithFormat:@"Successful trade - ID: %@ - amount %@ - price %@"
                              , [parameters objectForKey:BitcoinDE_ExecuteTrade_OrderID]
                              , [parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]
                              , [parameters objectForKey:BitcoinDE_ExecuteTrade_Price]];
-
-    NSString *orderTypeString = [parameters objectForKey:BitcoinDE_ExecuteTrade_Type];  //=> buy oder sell
-    BitcoinDE_OrderType orderType = [SOXMarket_BitcoinDE_DefTypes orderTypeForOrderTypeString:orderTypeString];
     NSArray *parametersToExecute;
 
     if (orderType == BitcoinDE_BuyOrderType) {
@@ -473,41 +477,10 @@
         parametersToExecute = [self buyBalanceParametersForTradeParameters:parameters];
 
     }
-    else {
-        return;
-        // ERROR
-    }
 
-    // Execute Trades
-    NSDecimalNumber *sum = [NSDecimalNumber zero];
-    for (NSDictionary *parameters in parametersToExecute) {
-        // Debug logout
-        if (orderType == BitcoinDE_BuyOrderType) {
-            NSString *note = [NSString stringWithFormat:@"SellBalancePayment: ID %@ - amount %@"
-                              , [parameters objectForKey:BitcoinDE_ExecuteTrade_OrderID]
-                              , [parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]];
-            sum = [sum decimalNumberByAdding:[parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]];
-            [self informBuyDelegateWithNote:note];
-        }
-        else if (orderType == BitcoinDE_SellOrderType) {
-            NSString *note = [NSString stringWithFormat:@"BuyBalancePayment: ID %@ - amount %@"
-                              , [parameters objectForKey:BitcoinDE_ExecuteTrade_OrderID]
-                              , [parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]];
-            sum = [sum decimalNumberByAdding:[parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]];
-            [self informSellDelegateWithNote:note];
-        }
-
-//        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
-//                                                withParameter:parameters
-//                                                    respondTo:self];
-    }
-    NSString *note = [NSString stringWithFormat:@"sum of amount: %@", sum];
-    if (orderType == BitcoinDE_BuyOrderType) {
-        [self informBuyDelegateWithNote:note];
-    }
-    else if (orderType == BitcoinDE_SellOrderType) {
-        [self informSellDelegateWithNote:note];
-    }
+    // Execute Balance Trades
+    [self executeBalanceTradesWithParameters:parametersToExecute
+                                forOrderType:orderType];
 }
 
 - (NSArray *)buyBalanceParametersForTradeParameters:(NSDictionary *)parameters {
@@ -587,6 +560,39 @@
     return [sellBalanceParameters copy];
 }
 
+- (void)executeBalanceTradesWithParameters:(NSArray *)parametersToExecute
+                              forOrderType:(BitcoinDE_OrderType)orderType {
+    NSDecimalNumber *sum = [NSDecimalNumber zero];
+    for (NSDictionary *parameters in parametersToExecute) {
+        // Debug logout
+        if (orderType == BitcoinDE_BuyOrderType) {
+            NSString *note = [NSString stringWithFormat:@"SellBalancePayment: ID %@ - amount %@"
+                              , [parameters objectForKey:BitcoinDE_ExecuteTrade_OrderID]
+                              , [parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]];
+            sum = [sum decimalNumberByAdding:[parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]];
+            [self informBuyDelegateWithNote:note];
+        }
+        else if (orderType == BitcoinDE_SellOrderType) {
+            NSString *note = [NSString stringWithFormat:@"BuyBalancePayment: ID %@ - amount %@"
+                              , [parameters objectForKey:BitcoinDE_ExecuteTrade_OrderID]
+                              , [parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]];
+            sum = [sum decimalNumberByAdding:[parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]];
+            [self informSellDelegateWithNote:note];
+        }
+
+        //        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
+        //                                                withParameter:parameters
+        //                                                    respondTo:self];
+    }
+    NSString *note = [NSString stringWithFormat:@"sum of amount: %@", sum];
+    if (orderType == BitcoinDE_BuyOrderType) {
+        [self informBuyDelegateWithNote:note];
+    }
+    else if (orderType == BitcoinDE_SellOrderType) {
+        [self informSellDelegateWithNote:note];
+    }
+}
+
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
 - (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest {
@@ -604,10 +610,27 @@
     NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
 
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ExecuteTrade)]) {
-        NSLog(@"#################################");
-        NSLog(@"TRADE EXECUTED");
-        NSLog(@"#################################");
         NSDictionary *parameters = [answerOfServerRequest objectForKey:ServerAnswerParametersKey];
+        if ([[parameters objectForKey:BitcoinDE_ExecuteTrade_IsAutomaticTrade] isEqualTo:@YES]) {
+            NSString *orderTypeString = [parameters objectForKey:BitcoinDE_ExecuteTrade_Type];  //=> buy oder sell
+            BitcoinDE_OrderType orderType = [SOXMarket_BitcoinDE_DefTypes orderTypeForOrderTypeString:orderTypeString];
+
+            NSString *noteSuccess = [NSString stringWithFormat:@"Successful trade - ID: %@ - amount %@ - price %@"
+                                     , [parameters objectForKey:BitcoinDE_ExecuteTrade_OrderID]
+                                     , [parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]
+                                     , [parameters objectForKey:BitcoinDE_ExecuteTrade_Price]];
+            if (orderType == BitcoinDE_BuyOrderType) {
+                [self informBuyDelegateWithNote:noteSuccess];
+            }
+            else if (orderType == BitcoinDE_SellOrderType) {
+                [self informSellDelegateWithNote:noteSuccess];
+            }
+            else {
+                return;
+                // ERROR
+            }
+        }
+
         if ([[parameters objectForKey:BitcoinDE_ExecuteTrade_IsAutomaticTrade] isEqualTo:@YES]) {
             [self createBalancePaymentsForTradeParameters:parameters];
         }
