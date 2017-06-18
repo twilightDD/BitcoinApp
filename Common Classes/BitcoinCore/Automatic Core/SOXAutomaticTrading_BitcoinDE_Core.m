@@ -320,14 +320,35 @@
 - (void)playSound {
     NSSound *mySound = [NSSound soundNamed:@"ka-ching"];
     [mySound play];
+}
 
+- (NSDecimalNumber *)effectiveBuyInterestRateForData:(SOXShowOrderbookData *)orderOfInterestData
+                                     toReferenceData:(SOXShowOrderbookData *)referenceData {
+    return [self effectiveBuyInterestRateForPrice:orderOfInterestData.orderInformation_price
+                                 toReferencePrice:referenceData.orderInformation_price];
+}
+
+- (NSDecimalNumber *)effectiveSellInterestRateForData:(SOXShowOrderbookData *)orderOfInterestData
+                                      toReferenceData:(SOXShowOrderbookData *)referenceData {
+    return [self effectiveSellInterestRateForPrice:orderOfInterestData.orderInformation_price
+                                 toReferencePrice:referenceData.orderInformation_price];
+}
+
+- (NSDecimalNumber *)effectiveBuyInterestRateForPrice:(NSDecimalNumber *)priceOfInterest toReferencePrice:(NSDecimalNumber *)referencePrice {
+    NSDecimalNumber *effectiveInterestRate = [priceOfInterest decimalNumberByDividingBy:referencePrice];
+    return [SOXFormatters formattedInterestRate:effectiveInterestRate];
+}
+
+- (NSDecimalNumber *)effectiveSellInterestRateForPrice:(NSDecimalNumber *)priceOfInterest toReferencePrice:(NSDecimalNumber *)referencePrice {
+    NSDecimalNumber *effectiveInterestRate = [referencePrice decimalNumberByDividingBy:priceOfInterest];
+    return [SOXFormatters formattedInterestRate:effectiveInterestRate];
 }
 
 #pragma mark - Automatic trading methods
 - (void)checkForBuyableOrder {
     SOXShowOrderbook_BitcoinDE_Data *dataOfInterest = [self.buyOrderBook objectAtIndex: 0];
     SOXShowOrderbook_BitcoinDE_Data *referenceData  = [self.buyOrderBook objectAtIndex:1];
-    NSDecimalNumber *effectivInterestRate           = [self effectiveBuyInterestRateFor:dataOfInterest toReference:referenceData];
+    NSDecimalNumber *effectivInterestRate           = [self effectiveBuyInterestRateForData:dataOfInterest toReferenceData:referenceData];
 
     NSString *statisticForNote = [NSString stringWithFormat:@"- type %@ - ID %@ - minAmo %@ - maxAmo %@ - p0 %@ - p1 %@ - iR %@"
                                   , dataOfInterest.orderInformation_type
@@ -354,7 +375,7 @@
 - (void)checkForSellableOrder {
     SOXShowOrderbook_BitcoinDE_Data *dataOfInterest = [self.sellOrderBook objectAtIndex:0];
     SOXShowOrderbook_BitcoinDE_Data *referenceData  = [self.sellOrderBook objectAtIndex:1];
-    NSDecimalNumber *effectivInterestRate           = [self effectiveSellInterestRateFor:dataOfInterest toReference:referenceData];
+    NSDecimalNumber *effectivInterestRate           = [self effectiveSellInterestRateForData:dataOfInterest toReferenceData:referenceData];
 
     NSString *statisticForNote = [NSString stringWithFormat:@"- type %@ - ID %@ - minAmo %@ - maxAmo %@ - p0 %@ - p1 %@ - iR %@"
                                   , dataOfInterest.orderInformation_type
@@ -620,8 +641,9 @@
 
     for (NSUInteger idx = 0; idx < self.sellOrderBook.count; idx++) {
         SOXShowOrderbookData *sellOrder = [self.sellOrderBook objectAtIndex:idx];
-
-//        if ([oldBuyPrice isGreaterThanOrEqualTo:sellOrder.orderInformation_price]  ) { // TODO: interestRate!!!
+        NSDecimalNumber *effectivInterestRate = [self effectiveSellInterestRateForPrice:oldBuyPrice
+                                                                       toReferencePrice:sellOrder.orderInformation_price];
+        //        if ([oldBuyPrice isGreaterThanOrEqualTo:sellOrder.orderInformation_price]  ) { // TODO: interestRate!!!
 //            break;
 //        }
 
@@ -783,24 +805,6 @@
         [self informSellDelegateWithNote:note];
         [self updateSellStatus];
     }
-}
-
-- (NSDecimalNumber *)effectiveBuyInterestRateFor:(SOXShowOrderbookData *)orderOfInterest toReference:(SOXShowOrderbookData *)reference {
-    NSDecimalNumber *effectivInteresRate;
-    effectivInteresRate = [orderOfInterest.orderInformation_price decimalNumberByDividingBy:reference.orderInformation_price];
-    effectivInteresRate = [[NSDecimalNumber one] decimalNumberBySubtracting:effectivInteresRate];
-    effectivInteresRate = [effectivInteresRate decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"100"]
-                                                               withBehavior:[SOXFormatters interestRateNumberHandler]];
-    return effectivInteresRate;
-}
-
-- (NSDecimalNumber *)effectiveSellInterestRateFor:(SOXShowOrderbookData *)orderOfInterest toReference:(SOXShowOrderbookData *)reference {
-    NSDecimalNumber *effectivInteresRate;
-    effectivInteresRate = [reference.orderInformation_price decimalNumberByDividingBy:orderOfInterest.orderInformation_price];
-    effectivInteresRate = [[NSDecimalNumber one] decimalNumberBySubtracting:effectivInteresRate];
-    effectivInteresRate = [effectivInteresRate decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"100"]
-                            withBehavior:[SOXFormatters interestRateNumberHandler]];
-    return effectivInteresRate;
 }
 
 #pragma mark - SOXSocketIOCoreProtocol
@@ -974,8 +978,8 @@
                           , addOrderDataPrice
                           , addOrderData.orderInformation_minAmount
                           , addOrderData.orderInformation_maxAmount
-                          , [self effectiveBuyInterestRateFor:addOrderData
-                                                  toReference:self.buyOrderBook.firstObject]];
+                          , [self effectiveBuyInterestRateForData:addOrderData
+                                                  toReferenceData:self.buyOrderBook.firstObject]];
         [self informBuyDelegateWithNote:note];
 
         if ([[self.buyOrderBook objectAtIndex:0] isEqual:addOrderData]) {
@@ -1009,8 +1013,8 @@
                           , addOrderDataPrice
                           , addOrderData.orderInformation_minAmount
                           , addOrderData.orderInformation_maxAmount
-                          , [self effectiveSellInterestRateFor:addOrderData
-                                                   toReference:self.sellOrderBook.firstObject]];
+                          , [self effectiveSellInterestRateForData:addOrderData
+                                                   toReferenceData:self.sellOrderBook.firstObject]];
         [self informSellDelegateWithNote:note];
 
         if ([[self.sellOrderBook objectAtIndex:0] isEqual:addOrderData]) {
@@ -1035,21 +1039,27 @@
 }
 
 - (void)addSEPAOrderBookData:(SOXShowOrderbookData *)addSEPAOrderData {
-    NSString *note = [NSString stringWithFormat:@"~ new SEPA order - orderID: %@ - pO: %@ - type offer - IR %@"
-                      , addSEPAOrderData.orderInformation_orderID
-                      , addSEPAOrderData.orderRequirements_paymentOption
-                      , [SOXFormatters currencyStringForNumber:addSEPAOrderData.orderInformation_price roundingMode:NSNumberFormatterRoundDown]];
-
     NSString *orderInformationType = addSEPAOrderData.orderInformation_type;
     if ([orderInformationType isEqualToString:@"offer"]) {
         [self.buySEPAOrderBook addObject:addSEPAOrderData];
+
+        NSString *note = [NSString stringWithFormat:@"~ new SEPA: type offer - order - orderID: %@ - pO: %@ - IR %@"
+                          , addSEPAOrderData.orderInformation_orderID
+                          , addSEPAOrderData.orderRequirements_paymentOption
+                          , [self effectiveBuyInterestRateForData:addSEPAOrderData toReferenceData:[self.buyOrderBook objectAtIndex:1]]];
         [self informBuyDelegateWithNote:note];
     }
     else if ([orderInformationType isEqualToString:@"order"]) {
         [self.sellSEPAOrderBook addObject:addSEPAOrderData];
+
+        NSString *note = [NSString stringWithFormat:@"~ new SEPA: type order - orderID: %@ - pO: %@ - IR %@"
+                          , addSEPAOrderData.orderInformation_orderID
+                          , addSEPAOrderData.orderRequirements_paymentOption
+                          , [self effectiveSellInterestRateForData:addSEPAOrderData toReferenceData:[self.sellOrderBook objectAtIndex:1]]];
         [self informSellDelegateWithNote:note];
     }
 }
+
 #pragma mark - Inform delegates
 - (void)informBuyDelegateWithNote:(NSString *)note {
     if (note) {
