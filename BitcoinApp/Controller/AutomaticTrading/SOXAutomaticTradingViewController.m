@@ -9,7 +9,6 @@
 #import "SOXAutomaticTradingViewController.h"
 
 #import "SOXMarket_BitcoinDE_Core.h"
-#import "SOXAutomaticTrading_BitcoinDE_Core_OLD.h"
 #import "SOXAutomaticTrading_BitcoinDE_Core.h"
 #import "SOXShowOrderbook_BitcoinDE_Data.h"
 
@@ -45,7 +44,6 @@
 @property (nonatomic) BOOL automaticTradingIsRunning;
 @property (nonatomic) BOOL executeTrades;
 @property (nonatomic) BOOL executeBalanceTrades;
-@property (strong, nonatomic) SOXAutomaticTrading_BitcoinDE_Core_OLD *tradingCore;
 @property (strong, nonatomic) NSString *log;
 
 @property (nonatomic) double currentLimit;
@@ -164,7 +162,7 @@
 
 - (void)stopAutomaticTrading {
     if (self.orderType) {
-        [SOXAutomaticTrading_BitcoinDE_Core_OLD unRegisterController:self
+        [SOXAutomaticTrading_BitcoinDE_Core deRegisterController:self
                                           forUpdatesForOrderType:self.orderType];
     }
     else {

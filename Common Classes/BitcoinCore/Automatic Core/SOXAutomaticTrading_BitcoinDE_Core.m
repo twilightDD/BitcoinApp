@@ -152,6 +152,30 @@
 
     [SOXAutomaticTrading_BitcoinDE_Core registerForWebSocketUpdates];
 }
+
++ (void)deRegisterController:(id)controller forUpdatesForOrderType:(BitcoinDE_OrderType)orderType {
+    if (!controller) {
+        return;
+    }
+
+    SOXAutomaticTrading_BitcoinDE_Core *tradingCore = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
+
+    switch (orderType) {
+        case BitcoinDE_BuyOrderType:
+            [tradingCore.buyDelegates removeObject:controller];
+            break;
+        case BitcoinDE_SellOrderType:
+            [tradingCore.sellDelegates removeObject:controller];
+            break;
+        default:
+            NSLog(@"ERROR - (void)registerForUpdatesForType:(BitcoinDE_OrderType)orderType");
+            break;
+    }
+
+    [SOXAutomaticTrading_BitcoinDE_Core checkRegisterForSocketUpdatesStatus];
+}
+
+#pragma mark - WebSocket methods
 + (void)registerForWebSocketUpdates {
     SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
 
@@ -173,6 +197,44 @@
                                             withParameter:[newSellParameters copy]
                                                 respondTo:core];
 }
++ (void)checkRegisterForSocketUpdatesStatus {
+    SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
+
+    // buy updates
+    if (core.buyDelegates.count > 0) {
+        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
+                                                                delegate:core];
+        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
+                                                                delegate:core];
+    }
+    else {
+        [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
+                                                                  delegate:core];
+    }
+
+    // sell updates
+    if (core.sellDelegates.count > 0) {
+        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
+                                                                delegate:core];
+
+    }
+    else {
+        [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
+                                                                  delegate:core];
+    }
+
+    // remove updates
+    if (core.buyDelegates.count == 0
+        && core.sellDelegates.count == 0) {
+        [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
+                                                                  delegate:core];
+    }
+    else {
+        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
+                                                                delegate:core];
+    }
+}
+
 
 #pragma mark - Manual setters
 + (void)setBuyInterestRate:(NSDecimalNumber *)buyInterestRate {
