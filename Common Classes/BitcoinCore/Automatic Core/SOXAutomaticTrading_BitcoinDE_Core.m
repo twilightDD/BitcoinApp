@@ -503,7 +503,7 @@
     }
 
     // Execute Balance Trades
-    [self executeBalanceTradesWithParameters:parametersToExecute
+    [self tryToExecuteBalanceTradesWithParameters:parametersToExecute
                                 forOrderType:orderType];
 }
 
@@ -584,7 +584,7 @@
     return [sellBalanceParameters copy];
 }
 
-- (void)executeBalanceTradesWithParameters:(NSArray *)parametersToExecute
+- (void)tryToExecuteBalanceTradesWithParameters:(NSArray *)parametersToExecute
                               forOrderType:(BitcoinDE_OrderType)orderType {
     NSDecimalNumber *sum = [NSDecimalNumber zero];
     for (NSDictionary *parameters in parametersToExecute) {
