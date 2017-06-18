@@ -114,6 +114,20 @@
     return fractionNumberFormatter;
 }
 
++ (NSDecimalNumberHandler *)interestRateNumberHandler {
+    static dispatch_once_t pred;
+    static NSDecimalNumberHandler *interestRateNumberHandler = nil;
+    dispatch_once(&pred, ^{
+        interestRateNumberHandler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown
+                                                                                           scale:3
+                                                                                raiseOnExactness:YES
+                                                                                 raiseOnOverflow:YES
+                                                                                raiseOnUnderflow:YES
+                                                                             raiseOnDivideByZero:YES];
+    });
+    return interestRateNumberHandler;
+}
+
 #pragma mark - Public methods
 #pragma mark | Date methods
 + (NSString *)stringDateTimeStringForRFC3339DateTimeString:(NSString *)rfc3339DateTimeString {
@@ -219,18 +233,11 @@
     return decimalNumber2;
 }
 
-+ (NSDecimalNumberHandler *)interestRateNumberHandler {
-    static dispatch_once_t pred;
-    static NSDecimalNumberHandler *interestRateNumberHandler = nil;
-    dispatch_once(&pred, ^{
-        interestRateNumberHandler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown
-                                                                                           scale:3
-                                                                                raiseOnExactness:YES
-                                                                                 raiseOnOverflow:YES
-                                                                                raiseOnUnderflow:YES
-                                                                             raiseOnDivideByZero:YES];
-    });
-    return interestRateNumberHandler;
+#pragma mark - Interest Rate
++ (NSDecimalNumber *)formattedInterestRate:(NSDecimalNumber *)effectivInteresRate {
+    NSDecimalNumber *formattedInterestRate = [effectivInteresRate decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"100"]
+                                                                                  withBehavior:[SOXFormatters interestRateNumberHandler]];
+    return formattedInterestRate;
 }
 
 @end

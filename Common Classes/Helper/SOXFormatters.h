@@ -28,5 +28,7 @@
 + (NSDecimalNumber *)greaterDecimalNumberFrom:(NSDecimalNumber *)decimalNumber1 and:(NSDecimalNumber *)decimalNumber2;
 + (NSDecimalNumber *)lesserDecimalNumberFrom:(NSDecimalNumber *)decimalNumber1 and:(NSDecimalNumber *)decimalNumber2;
 
-+ (NSDecimalNumberHandler *)interestRateNumberHandler;
+#pragma mark - Interest Rate
++ (NSDecimalNumber *)formattedInterestRate:(NSDecimalNumber *)effectivInteresRate;
+
 @end
