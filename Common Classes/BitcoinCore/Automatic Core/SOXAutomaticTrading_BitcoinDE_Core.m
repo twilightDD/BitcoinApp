@@ -34,6 +34,8 @@
 
 @property (nonatomic) BOOL executeBuyTrades;
 @property (nonatomic) BOOL executeSellTrades;
+@property (nonatomic) BOOL executeBalanceBuyTrades;
+@property (nonatomic) BOOL executeBalanceSellTrades;
 
 @property (strong, nonatomic) NSDecimalNumber *buyInterestRate;
 @property (strong, nonatomic) NSDecimalNumber *buyInterestFactor;
@@ -89,6 +91,28 @@
         default:
             break;
     }
+}
+
++ (void)executeBalanceTrades:(BOOL)executeBalanceTrades forOrderType:(BitcoinDE_OrderType)orderType {
+    SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
+
+    switch (orderType) {
+        case BitcoinDE_BuyOrderType: {
+            core.executeBalanceBuyTrades = executeBalanceTrades;
+            [core informBuyDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE BALANCE TRADE %@ !!!"
+                                             , executeBalanceTrades ? @"enabled" : @"disabled"]];
+            break;
+        }
+        case BitcoinDE_SellOrderType: {
+            core.executeBalanceSellTrades = executeBalanceTrades;
+            [core informSellDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE BALANCE TRADE %@ !!!"
+                                              , executeBalanceTrades ? @"enabled" : @"disabled"]];
+            break;
+        }
+        default:
+            break;
+    }
+
 }
 
 + (void)registerController:(id <SOXAutomaticTradingCoreProtocol>)controller

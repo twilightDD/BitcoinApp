@@ -4415,7 +4415,7 @@ Gw
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="NLc-ce-lrH">
-                                        <rect key="frame" x="546" y="454" width="109" height="18"/>
+                                        <rect key="frame" x="488" y="454" width="167" height="18"/>
                                         <buttonCell key="cell" type="check" title="Execute Trade" bezelStyle="regularSquare" imagePosition="left" inset="2" id="eZJ-fd-81I">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -4423,6 +4423,16 @@ Gw
                                         <connections>
                                             <action selector="executeTradesAction:" target="cwM-7M-FeE" id="LAf-vt-y0Y"/>
                                             <outlet property="nextKeyView" destination="3fd-l3-d7n" id="OMB-0S-gqg"/>
+                                        </connections>
+                                    </button>
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="Keq-IK-Ka9">
+                                        <rect key="frame" x="488" y="434" width="167" height="18"/>
+                                        <buttonCell key="cell" type="check" title="Execute Balance Trades" bezelStyle="regularSquare" imagePosition="left" inset="2" id="3HL-Kj-AlV">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="executeBalanceTradesAction:" target="cwM-7M-FeE" id="Rhe-IQ-RJD"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -4434,6 +4444,8 @@ Gw
                                     <constraint firstItem="vmD-DK-nO2" firstAttribute="top" secondItem="8d9-sH-1hz" secondAttribute="bottom" constant="13" id="BEk-oU-UR9"/>
                                     <constraint firstItem="NLc-ce-lrH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4sC-Co-fvX" secondAttribute="trailing" constant="8" symbolic="YES" id="D8S-e3-WaZ"/>
                                     <constraint firstItem="0q8-u5-RhW" firstAttribute="top" secondItem="WgR-KD-pyB" secondAttribute="top" constant="24" id="Eis-Ga-yI7"/>
+                                    <constraint firstItem="Keq-IK-Ka9" firstAttribute="leading" secondItem="NLc-ce-lrH" secondAttribute="leading" id="F8n-Nd-xMr"/>
+                                    <constraint firstItem="Keq-IK-Ka9" firstAttribute="top" secondItem="NLc-ce-lrH" secondAttribute="bottom" constant="6" id="HCd-je-J5Y"/>
                                     <constraint firstItem="sKc-pr-7pa" firstAttribute="trailing" secondItem="fe2-pf-czM" secondAttribute="trailing" id="KqP-Ou-YhM"/>
                                     <constraint firstItem="4sC-Co-fvX" firstAttribute="baseline" secondItem="NLc-ce-lrH" secondAttribute="baseline" id="L4Z-UF-sti"/>
                                     <constraint firstItem="4sC-Co-fvX" firstAttribute="leading" secondItem="vmD-DK-nO2" secondAttribute="trailing" constant="8" symbolic="YES" id="LYa-D4-6de"/>
@@ -4453,6 +4465,7 @@ Gw
                                     <constraint firstItem="vmD-DK-nO2" firstAttribute="baseline" secondItem="4sC-Co-fvX" secondAttribute="baseline" id="gUN-OW-KWu"/>
                                     <constraint firstItem="9Xe-Tk-Z3f" firstAttribute="leading" secondItem="WgR-KD-pyB" secondAttribute="leading" constant="20" id="iKL-MH-uPy"/>
                                     <constraint firstItem="4sC-Co-fvX" firstAttribute="trailing" secondItem="Jr3-wH-a3M" secondAttribute="trailing" id="lvE-re-mdV"/>
+                                    <constraint firstItem="Keq-IK-Ka9" firstAttribute="trailing" secondItem="NLc-ce-lrH" secondAttribute="trailing" id="mYT-fx-Kkt"/>
                                     <constraint firstItem="vmD-DK-nO2" firstAttribute="leading" secondItem="8d9-sH-1hz" secondAttribute="leading" id="npf-YS-m5K"/>
                                     <constraint firstItem="4sC-Co-fvX" firstAttribute="top" secondItem="Jr3-wH-a3M" secondAttribute="bottom" constant="8" id="qEN-Rw-Az1"/>
                                     <constraint firstItem="8d9-sH-1hz" firstAttribute="baseline" secondItem="Jr3-wH-a3M" secondAttribute="baseline" id="vKI-YB-AtA"/>
@@ -4476,6 +4489,7 @@ Gw
                     <connections>
                         <outlet property="automaticBackgroundView" destination="WgR-KD-pyB" id="uaj-We-1XA"/>
                         <outlet property="clearLogButton" destination="fe2-pf-czM" id="MnP-Lo-Lsk"/>
+                        <outlet property="executeBalanceTradesButton" destination="Keq-IK-Ka9" id="bwM-kI-L4i"/>
                         <outlet property="executeTradesButton" destination="NLc-ce-lrH" id="r2F-YY-Dhb"/>
                         <outlet property="logDescriptionTextField" destination="9Xe-Tk-Z3f" id="POx-rB-BT8"/>
                         <outlet property="logTextScrollView" destination="sKc-pr-7pa" id="a5q-6d-tra"/>
@@ -4493,7 +4507,7 @@ Gw
                 <customObject id="Wqd-Md-RGQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="3AY-bf-m6w"/>
             </objects>
-            <point key="canvasLocation" x="1420" y="2678"/>
+            <point key="canvasLocation" x="1419.5" y="2678"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="2np-EZ-Vjc">

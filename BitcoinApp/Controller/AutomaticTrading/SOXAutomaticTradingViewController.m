@@ -21,6 +21,8 @@
 #pragma mark IBOutlets
 @property (weak) IBOutlet NSButton *showAutomaticTradingAreaButton;
 @property (weak) IBOutlet NSButton *executeTradesButton;
+@property (weak) IBOutlet NSButton *executeBalanceTradesButton;
+
 @property (weak) IBOutlet NSTextField *statusTextField;
 
 @property (weak) IBOutlet NSView *automaticBackgroundView;
@@ -42,6 +44,7 @@
 #pragma mark Properties
 @property (nonatomic) BOOL automaticTradingIsRunning;
 @property (nonatomic) BOOL executeTrades;
+@property (nonatomic) BOOL executeBalanceTrades;
 @property (strong, nonatomic) SOXAutomaticTrading_BitcoinDE_Core_OLD *tradingCore;
 @property (strong, nonatomic) NSString *log;
 
@@ -183,6 +186,13 @@
     [SOXAutomaticTrading_BitcoinDE_Core executeTrades:self.executeTrades
                                          forOrderType:self.orderType];
 }
+
+- (IBAction)executeBalanceTradesAction:(NSButton *)sender {
+    self.executeBalanceTrades = !self.executeBalanceTrades;
+    [SOXAutomaticTrading_BitcoinDE_Core executeTrades:self.executeBalanceTrades
+                                         forOrderType:self.orderType];
+}
+
 
 - (IBAction)startAutomaticAction:(NSButton *)sender {
     self.automaticTradingIsRunning = !self.automaticTradingIsRunning;
