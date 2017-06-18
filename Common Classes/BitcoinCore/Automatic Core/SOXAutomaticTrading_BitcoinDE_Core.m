@@ -7,6 +7,7 @@
 //
 
 #import "SOXAutomaticTrading_BitcoinDE_Core.h"
+#import "SOXAutomaticTradingCore_Private.h"
 
 #import "SOXKeys_BitcoinDE.h"
 
@@ -18,34 +19,11 @@
 #import "SOXShowOrderbook_BitcoinDE_Data.h"
 #import "SOXTradeJob_BitcoinDE_Data.h"
 
-#import "SOXFormatters.h"
 
 @import AppKit;
 
 @interface SOXAutomaticTrading_BitcoinDE_Core () <SOXMarketCoreServerRequestProtocol, SOXSocketIOCoreProtocol>
 
-@property (strong, nonatomic) NSHashTable *buyDelegates;
-@property (strong, nonatomic) NSHashTable *sellDelegates;
-
-@property (strong, nonatomic) NSMutableArray *buyOrderBook;
-@property (strong, nonatomic) NSMutableArray *sellOrderBook;
-@property (strong, nonatomic) NSMutableSet *buySEPAOrderBook; // as cache for SEPA offers
-@property (strong, nonatomic) NSMutableSet *sellSEPAOrderBook;  // as cache for SEPA orders
-
-@property (nonatomic) BOOL executeBuyTrades;
-@property (nonatomic) BOOL executeSellTrades;
-@property (nonatomic) BOOL executeBalanceBuyTrades;
-@property (nonatomic) BOOL executeBalanceSellTrades;
-
-@property (strong, nonatomic) NSDecimalNumber *buyInterestRate;
-@property (strong, nonatomic) NSDecimalNumber *buyInterestFactor;
-@property (strong, nonatomic) NSDecimalNumber *buyMaximalFidorAmountInvestment;
-@property (strong, nonatomic) NSDecimalNumber *sellInterestRate;
-@property (strong, nonatomic) NSDecimalNumber *sellInterestFactor;
-@property (strong, nonatomic) NSDecimalNumber *sellMaximalBTCInvestment;
-
-@property (strong, nonatomic) NSDecimalNumber *remainingBuyBitcoinAmount;
-@property (strong, nonatomic) NSDecimalNumber *remainingSellBitcoinAmount;
 
 @end
 
@@ -236,50 +214,7 @@
 }
 
 
-#pragma mark - Manual setters
-+ (void)setBuyInterestRate:(NSDecimalNumber *)buyInterestRate {
-    if (buyInterestRate) {
-        SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
-        core.buyInterestRate = buyInterestRate;
-        NSDecimalNumber *buyInterestRatePercent = [buyInterestRate decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"100"]];
-        core.buyInterestFactor = [[NSDecimalNumber one] decimalNumberBySubtracting:buyInterestRatePercent];
-        NSString *note = [NSString stringWithFormat:@"UPDATE VALUE: Set interest factor to %@", core.buyInterestRate];
-        [core informBuyDelegateWithNote:note];
 
-        [core updateBuyStatus];
-    }
-}
-
-+ (void)setSellInterestRate:(NSDecimalNumber *)sellInterestRate {
-    if (sellInterestRate) {
-        SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
-        core.sellInterestRate = sellInterestRate;
-        NSDecimalNumber *sellInterestRatePercent = [sellInterestRate decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"100"]];
-        core.sellInterestFactor = [[NSDecimalNumber one] decimalNumberByAdding:sellInterestRatePercent];
-        NSString *note = [NSString stringWithFormat:@"UPDATE VALUE: Set interest factor to %@", core.sellInterestRate];
-        [core informSellDelegateWithNote:note];
-
-        [core updateSellStatus];
-    }
-}
-
-+ (void)setBuyMaximalFidorAmount:(NSDecimalNumber *)buyMaximalEuro {
-    if (buyMaximalEuro) {
-        SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
-        [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore].buyMaximalFidorAmountInvestment = buyMaximalEuro;
-        NSString *note = [NSString stringWithFormat:@"UPDATE VALUE: Set maximal trading volume to %@ €", buyMaximalEuro];
-        [core informBuyDelegateWithNote:note];
-    }
-}
-
-+ (void)setSellMaximalBTCAmount:(NSDecimalNumber *)sellMaximalBTC {
-    if (sellMaximalBTC) {
-        SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
-        [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore].sellMaximalBTCInvestment = sellMaximalBTC;
-        NSString *note = [NSString stringWithFormat:@"UPDATE VALUE: Set maximal trading amount to %@ BTC", sellMaximalBTC];
-        [core informSellDelegateWithNote:note];
-    }
-}
 
 #pragma mark - Private class methods
 + (NSMutableArray *)sortedOrderBook:(NSMutableArray *)orderBookDatas forOrderType:(BitcoinDE_OrderType)orderType {
@@ -398,7 +333,7 @@
     }
 }
 
-- (void)tryToExecuteBuyOrder:(SOXShowOrderbook_BitcoinDE_Data *)orderToBuy {
+- (void)tryToExecuteBuyOrder:(SOXShowOrderbookData *)orderToBuy {
     /*
      # Vorgegebenen MaxAmount beachten
      # auf ServerAnswer warten
@@ -476,7 +411,7 @@
     [self informBuyDelegateWithNote:@"------"];
 }
 
-- (void)tryToExecuteSellOrder:(SOXShowOrderbook_BitcoinDE_Data *)orderToSell {
+- (void)tryToExecuteSellOrder:(SOXShowOrderbookData *)orderToSell {
     /*
      1. amountToSell herausfinden
      2. executeBuy
@@ -1058,81 +993,6 @@
                           , [self effectiveSellInterestRateForData:addSEPAOrderData toReferenceData:[self.sellOrderBook objectAtIndex:1]]];
         [self informSellDelegateWithNote:note];
     }
-}
-
-#pragma mark - Inform delegates
-- (void)informBuyDelegateWithNote:(NSString *)note {
-    if (note) {
-        for (NSObject <SOXAutomaticTradingCoreProtocol> *delegate in self.buyDelegates) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [delegate performSelector:@selector(logLine:)
-                               withObject:note
-                 ];
-            });
-        }
-    }
-}
-- (void)informSellDelegateWithNote:(NSString *)note {
-    if (note) {
-        for (NSObject <SOXAutomaticTradingCoreProtocol> *delegate in self.sellDelegates) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [delegate performSelector:@selector(logLine:)
-                               withObject:note
-                 ];
-            });
-        }
-    }
-}
-
-- (void)informBuyDelegateWithStatus:(NSString *)status {
-    if (status) {
-        for (NSObject <SOXAutomaticTradingCoreProtocol> *delegate in self.buyDelegates) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [delegate performSelector:@selector(statusUpdate:)
-                               withObject:status
-                 ];
-            });
-        }
-    }
-}
-
-- (void)informSellDelegateWithStatus:(NSString *)status {
-    if (status) {
-        for (NSObject <SOXAutomaticTradingCoreProtocol> *delegate in self.sellDelegates) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [delegate performSelector:@selector(statusUpdate:)
-                               withObject:status
-                 ];
-            });
-        }
-    }
-}
-
-#pragma mark | Helpers
-- (void)updateBuyStatus {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        SOXShowOrderbook_BitcoinDE_Data *bestOrderData = self.buyOrderBook.firstObject;
-        NSDecimalNumber *bestOrderDataPrice = bestOrderData.orderInformation_price;
-        NSDecimalNumber *buyLowerThanPrice = [bestOrderDataPrice decimalNumberByMultiplyingBy:self.buyInterestFactor];
-        NSString *status = [NSString stringWithFormat:@"Best: price %@, buy less than %@",
-                            [SOXFormatters currencyStringForNumber:bestOrderDataPrice roundingMode:NSNumberFormatterRoundDown]
-                            , [SOXFormatters currencyStringForNumber:buyLowerThanPrice roundingMode:NSNumberFormatterRoundDown]];
-        [self informBuyDelegateWithStatus:status];
-        [self informBuyDelegateWithNote:status];
-    });
-}
-
-- (void)updateSellStatus {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        SOXShowOrderbook_BitcoinDE_Data *bestOrderData = self.sellOrderBook.firstObject;
-        NSDecimalNumber *bestOrderDataPrice = bestOrderData.orderInformation_price;
-        NSDecimalNumber *sellGreaterThanPrice = [bestOrderDataPrice decimalNumberByMultiplyingBy:self.sellInterestFactor];
-        NSString *status = [NSString stringWithFormat:@"Best: price %@, sell greater than %@",
-                            [SOXFormatters currencyStringForNumber:bestOrderDataPrice roundingMode:NSNumberFormatterRoundDown]
-                            , [SOXFormatters currencyStringForNumber:sellGreaterThanPrice roundingMode:NSNumberFormatterRoundDown]];
-        [self informSellDelegateWithStatus:status];
-        [self informSellDelegateWithNote:status];
-    });
 }
 
 @end
