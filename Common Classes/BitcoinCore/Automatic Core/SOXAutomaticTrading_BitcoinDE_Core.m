@@ -26,6 +26,7 @@
 @interface SOXAutomaticTrading_BitcoinDE_Core () <SOXMarketCoreServerRequestProtocol, SOXSocketIOCoreProtocol>
 
 @property (strong, nonatomic) id requestShowAccountInfoNotification;
+@property (strong, nonatomic) NSDecimalNumber *debugNewAvailBTC;
 
 @end
 
@@ -169,7 +170,8 @@
                                                                                                  queue:mainQueue
                                                                                             usingBlock:^(NSNotification * _Nonnull note) {
                                                                                                 strongify(self)
-                                                                                                [self bannerWasUpdated:note.object];
+
+                                                                                                [[SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore] bannerWasUpdated:note.object];
                                                                                             }
                                                ];
 
@@ -337,9 +339,11 @@
     NSDecimalNumber *bitcoinFee = [NSDecimalNumber decimalNumberWithString:@"0.996"];
     buyBTCSum = [buyBTCSum decimalNumberByMultiplyingBy:bitcoinFee];
 
+    [self.buyBalanceTradeParameters removeAllObjects];
     if ([buyBTCSum isGreaterThan:[NSDecimalNumber zero]] ) {
         // new Paramater
-        NSDictionary *parameters = [SOXTradeJob_BitcoinDE_Data parameterBalanceTradingForOrderID:@""
+        
+        NSDictionary *parameters = [SOXTradeJob_BitcoinDE_Data parameterBalanceTradingForOrderID:@"abcfdsfsdfhdsfhdsofhdw"
                                                                                        orderType:BitcoinDE_BuyOrderType
                                                                                    bitcoinAmount:buyBTCSum
                                                                                            price:[NSDecimalNumber zero]];
@@ -348,13 +352,13 @@
         [self createBalanceTradesForTradeParameters:parameters];
     }
 
-
     // sellParameters
     NSDecimalNumber *sellBTCSum = [NSDecimalNumber zero];
     for (NSDictionary *sellBalanceTradeParameter in self.sellBalanceTradeParameters) {
         sellBTCSum = [sellBTCSum decimalNumberByAdding:[sellBalanceTradeParameter objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]];
     }
 
+    [self.sellBalanceTradeParameters removeAllObjects];
     if ([sellBTCSum isGreaterThan:[NSDecimalNumber zero]] ) {
         NSDictionary *parameters = [SOXTradeJob_BitcoinDE_Data parameterBalanceTradingForOrderID:@""
                                                                                        orderType:BitcoinDE_SellOrderType
@@ -470,8 +474,8 @@
 
     for (NSUInteger idx = 0; idx < self.sellOrderBook.count; idx++) {
         SOXShowOrderbookData *sellOrder = [self.sellOrderBook objectAtIndex:idx];
-        NSDecimalNumber *effectiveInterestRate = [self effectiveSellInterestRateForPrice:oldBuyPrice
-                                                                        toReferencePrice:sellOrder.orderInformation_price];
+//        NSDecimalNumber *effectiveInterestRate = [self effectiveSellInterestRateForPrice:oldBuyPrice
+//                                                                        toReferencePrice:sellOrder.orderInformation_price];
         //        if ([oldBuyPrice isGreaterThanOrEqualTo:sellOrder.orderInformation_price]  ) { // TODO: interestRate!!!
         //            break;
         //        }
@@ -530,7 +534,7 @@
 //                                   withObject:parameters
 //                                waitUntilDone:NO];
         }
-        // execute balancePayment
+        // execute balanceTrades
         //        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
         //                                                withParameter:parameters
         //                                                    respondTo:self];
@@ -541,6 +545,16 @@
     }
     else if (orderType == BitcoinDE_SellOrderType) {
         [self informSellDelegateWithNote:note];
+    }
+
+    for (NSDictionary *parameters in parametersToExecute) {
+        NSString *type = [parameters objectForKey:BitcoinDE_ExecuteTrade_Type];
+        if ([type isEqualToString:@"sell"]) {
+            [self fakeServerAnswerForSellOrder:parameters];
+        }
+        else if ([type isEqualToString:@"buy"]) {
+            [self fakeServerAnswerForBuyOrder:parameters];
+        }
     }
 }
 
@@ -626,9 +640,10 @@
             if ([self checkForExpressOrder:orderBookData]) {
                 [buyOrderBookDatas addObject:orderBookData];
             }
-            NSLog(@"answer buy: %@ %@"
+            NSLog(@"answer buy: %@ %@ - payOp: %@"
                   , orderBookData.orderInformation_orderID
-                  , orderBookData.tradingPartnerInformation_isKYCFull ? @"YES" : @"NO");
+                  , orderBookData.tradingPartnerInformation_isKYCFull ? @"YES" : @"NO"
+                  , orderBookData.orderRequirements_paymentOption);
         }
 
         self.buyOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:buyOrderBookDatas
@@ -647,8 +662,8 @@
         [self informBuyDelegateWithNote:note];
 
         // TODO: Fake
-//        SOXShowOrderbookData *buyOrder = [self.buyOrderBook objectAtIndex:5];
-//        [self fakeServerAnswerForBuyOrder:buyOrder];
+        SOXShowOrderbookData *buyOrder = [self.buyOrderBook objectAtIndex:5];
+        [self createFakeServerAnswerForBuyOrder:buyOrder];
 
         [self updateBuyStatus];
     }
@@ -658,9 +673,10 @@
             if ([self checkForExpressOrder:orderBookData]) {
                 [sellOrderBookDatas addObject:orderBookData];
             }
-            NSLog(@"answer sell: %@ %@"
+            NSLog(@"answer buy: %@ %@ - payOp: %@"
                   , orderBookData.orderInformation_orderID
-                  , orderBookData.tradingPartnerInformation_isKYCFull ? @"YES" : @"NO");
+                  , orderBookData.tradingPartnerInformation_isKYCFull ? @"YES" : @"NO"
+                  , orderBookData.orderRequirements_paymentOption);
         }
 
         self.sellOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:sellOrderBookDatas
@@ -958,7 +974,7 @@
                                                                                       bitcoinAmount:buyOrder.orderInformation_maxAmount
                                                                                               price:buyOrder.orderInformation_price];
 
-    [self fakeServerAnswerForBuyOrder:balanceParameters];
+    [self fakeServerAnswerForBuyOrder:autoParameters];
 }
 
 - (void)createFakeServerAnswerForSellOrder:(SOXShowOrderbookData *)sellOrder {
@@ -979,7 +995,7 @@
     NSMutableDictionary *fakeAnswerDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                            @(BitcoinDE_ExecuteTrade), ServerAnswerServerCommandKey
                                            , parameters, ServerAnswerParametersKey
-                                           , @"error", ServerAnswerErrorKey
+                                           //, @"error", ServerAnswerErrorKey
                                            , nil];
 
     NSString *note = [NSString stringWithFormat:@"!!! FAKE TRADE !!!"];
@@ -1009,6 +1025,7 @@
 }
 
 - (void)bannerWasUpdated:(NSDictionary *)serverAnswer {
+
     // buyParameters
     NSDecimalNumber *buyBTCSum = [NSDecimalNumber zero];
     for (NSDictionary *buyBalanceTradeParameter in self.buyBalanceTradeParameters) {
@@ -1027,7 +1044,12 @@
     NSDecimalNumber *estBTC = [self.availableBitcoinAmountBeforeBannerUpdate decimalNumberByAdding:diff];
 
     SOXAccountInfoData *accountInfoData = [serverAnswer objectForKey:ServerAnswerPayloadKey];
+
+
     NSDecimalNumber *newAvailBTC = accountInfoData.btcBalance_availableAmount;
+    if (self.debugNewAvailBTC) {
+        newAvailBTC = estBTC;
+    }
 
     if ([newAvailBTC isEqualTo:estBTC]) {
         // Banner update erfolgreich
@@ -1042,6 +1064,7 @@
                                                                      repeats:NO];
         [[NSRunLoop mainRunLoop] addTimer:bannerReloadTimer
                                   forMode:NSDefaultRunLoopMode];
+        self.debugNewAvailBTC = [NSDecimalNumber zero];
     }
 }
 
