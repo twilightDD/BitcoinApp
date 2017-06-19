@@ -8,6 +8,10 @@
 
 #import "SOXFormatters.h"
 
+#import "SOXMarket_BitcoinDE_Core.h"
+
+#import "SOXShowOrderbookData.h"
+
 @interface SOXAutomaticTradingCore ()
 
 @property (strong, nonatomic) NSHashTable *buyDelegates;
@@ -34,10 +38,28 @@
 @property (strong, nonatomic) NSDecimalNumber *remainingSellBitcoinAmount;
 
 
+#pragma mark - Interest Rate methods
+- (NSDecimalNumber *)effectiveBuyInterestRateForData:(SOXShowOrderbookData *)orderOfInterestData
+                                     toReferenceData:(SOXShowOrderbookData *)referenceData;
+- (NSDecimalNumber *)effectiveSellInterestRateForData:(SOXShowOrderbookData *)orderOfInterestData
+                                      toReferenceData:(SOXShowOrderbookData *)referenceData;
+- (NSDecimalNumber *)effectiveBuyInterestRateForPrice:(NSDecimalNumber *)priceOfInterest
+                                     toReferencePrice:(NSDecimalNumber *)referencePrice;
+- (NSDecimalNumber *)effectiveSellInterestRateForPrice:(NSDecimalNumber *)priceOfInterest
+                                      toReferencePrice:(NSDecimalNumber *)referencePrice;
+
+#pragma mark - Automatic trading methods
+- (void)checkForBuyableOrder;
+- (void)checkForSellableOrder;
+- (NSDecimalNumber *)btcBuyAmountForOrder:(SOXShowOrderbookData *)orderToBuy;
+- (NSDecimalNumber *)btcSellAmountForOrder:(SOXShowOrderbookData *)orderToSell;
+
+#pragma mark - Inform delegates
 - (void)informBuyDelegateWithNote:(NSString *)note;
 - (void)informSellDelegateWithNote:(NSString *)note;
 - (void)informBuyDelegateWithStatus:(NSString *)status;
 - (void)informSellDelegateWithStatus:(NSString *)status;
+#pragma mark | Helpers
 - (void)updateBuyStatus;
 - (void)updateSellStatus;
 
