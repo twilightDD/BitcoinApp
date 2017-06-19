@@ -37,8 +37,21 @@
 }
 
 #pragma mark - Public class methods
++ (instancetype)sharedTradingCore {
+    static id sharedTradingCore;
+
+    static dispatch_once_t pred;
+
+    dispatch_once(&pred, ^{
+        sharedTradingCore = [SOXAutomaticTrading_BitcoinDE_Core new];
+        [sharedTradingCore setupProperties];
+    });
+
+    return sharedTradingCore;
+}
+
 + (void)executeTrades:(BOOL)executeTrades forOrderType:(BitcoinDE_OrderType)orderType {
-    SOXAutomaticTradingCore *core = [SOXAutomaticTradingCore sharedTradingCore];
+    SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
 
     switch (orderType) {
         case BitcoinDE_BuyOrderType: {
@@ -59,7 +72,7 @@
 }
 
 + (void)executeBalanceTrades:(BOOL)executeBalanceTrades forOrderType:(BitcoinDE_OrderType)orderType {
-    SOXAutomaticTradingCore *core = [SOXAutomaticTradingCore sharedTradingCore];
+    SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
 
     switch (orderType) {
         case BitcoinDE_BuyOrderType: {
@@ -527,6 +540,8 @@
         {
             if (orderType == BitcoinDE_BuyOrderType) {
                 if (self.executeBalanceTradesForBuyTrades) {
+                    NSString *note = [NSString stringWithFormat:@"Would try to execute"];
+                    [self informBuyDelegateWithNote:note];
 //                    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
 //                                                            withParameter:parameters
 //                                                                respondTo:self];
@@ -537,6 +552,8 @@
             }
             else if (orderType == BitcoinDE_SellOrderType) {
                 if (self.executeBalanceTradesForSellTrades) {
+                    NSString *note = [NSString stringWithFormat:@"Would try to execute"];
+                    [self informSellDelegateWithNote:note];
 //                    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
 //                                                            withParameter:parameters
 //                                                                respondTo:self];

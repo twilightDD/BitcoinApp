@@ -21,30 +21,26 @@
 
 #pragma mark - Class methods
 + (instancetype)sharedTradingCore {
-    static id sharedTradingCore;
-
-    static dispatch_once_t pred;
-
-    dispatch_once(&pred, ^{
-        sharedTradingCore = [[self class] new];
-        [(SOXAutomaticTradingCore *)sharedTradingCore setBuyDelegates:[[NSHashTable alloc] init]];
-        [(SOXAutomaticTradingCore *)sharedTradingCore setSellDelegates:[[NSHashTable alloc] init]];
-        [(SOXAutomaticTradingCore *)sharedTradingCore setBuyInterestRate:[NSDecimalNumber one]];
-        [(SOXAutomaticTradingCore *)sharedTradingCore setBuyInterestFactor:[NSDecimalNumber one]];
-        [(SOXAutomaticTradingCore *)sharedTradingCore setSellInterestRate:[NSDecimalNumber one]];
-        [(SOXAutomaticTradingCore *)sharedTradingCore setSellInterestFactor:[NSDecimalNumber one]];
-        [(SOXAutomaticTradingCore *)sharedTradingCore setBuySEPAOrderBook:[NSMutableSet set]];
-        [(SOXAutomaticTradingCore *)sharedTradingCore setSellSEPAOrderBook:[NSMutableSet set]];
-        [(SOXAutomaticTradingCore *)sharedTradingCore setRemainingBuyBitcoinAmount:[NSDecimalNumber zero]];
-        [(SOXAutomaticTradingCore *)sharedTradingCore setRemainingSellBitcoinAmount:[NSDecimalNumber zero]];
-
-        [(SOXAutomaticTradingCore *)sharedTradingCore setBuyBalanceTradeParameters:[NSMutableArray array]];
-        [(SOXAutomaticTradingCore *)sharedTradingCore setSellBalanceTradeParameters:[NSMutableArray array]];
-    });
-
-    return sharedTradingCore;
+    [self missedImplementation:@"+ (instancetype)sharedTradingCore"];
+    return nil;
 }
 
+- (void)setupProperties {
+    [self setBuyDelegates:[[NSHashTable alloc] init]];
+    [self setSellDelegates:[[NSHashTable alloc] init]];
+    [self setBuyInterestRate:[NSDecimalNumber one]];
+    [self setBuyInterestFactor:[NSDecimalNumber one]];
+    [self setSellInterestRate:[NSDecimalNumber one]];
+    [self setSellInterestFactor:[NSDecimalNumber one]];
+    [self setBuySEPAOrderBook:[NSMutableSet set]];
+    [self setSellSEPAOrderBook:[NSMutableSet set]];
+    [self setRemainingBuyBitcoinAmount:[NSDecimalNumber zero]];
+    [self setRemainingSellBitcoinAmount:[NSDecimalNumber zero]];
+
+    [self setBuyBalanceTradeParameters:[NSMutableArray array]];
+    [self setSellBalanceTradeParameters:[NSMutableArray array]];
+
+}
 #pragma mark - Manual setters
 + (void)setBuyInterestRate:(NSDecimalNumber *)buyInterestRate {
     if (buyInterestRate) {

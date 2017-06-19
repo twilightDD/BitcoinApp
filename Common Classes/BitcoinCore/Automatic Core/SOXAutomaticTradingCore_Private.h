@@ -41,6 +41,7 @@
 @property (strong, nonatomic) NSMutableArray *buyBalanceTradeParameters; // Keep parameters we have to balance after banner update
 @property (strong, nonatomic) NSMutableArray *sellBalanceTradeParameters; // Keep parameters we have to balance after banner update
 
+- (void)setupProperties;
 
 #pragma mark - Interest Rate methods
 - (NSDecimalNumber *)effectiveBuyInterestRateForData:(SOXShowOrderbookData *)orderOfInterestData

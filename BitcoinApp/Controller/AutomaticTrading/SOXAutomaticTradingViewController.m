@@ -187,8 +187,8 @@
 
 - (IBAction)executeBalanceTradesAction:(NSButton *)sender {
     self.executeBalanceTrades = !self.executeBalanceTrades;
-    [SOXAutomaticTrading_BitcoinDE_Core executeTrades:self.executeBalanceTrades
-                                         forOrderType:self.orderType];
+    [SOXAutomaticTrading_BitcoinDE_Core executeBalanceTrades:self.executeBalanceTrades
+                                                forOrderType:self.orderType];
 }
 
 
