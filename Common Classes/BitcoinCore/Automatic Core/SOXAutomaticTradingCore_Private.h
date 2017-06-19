@@ -37,6 +37,10 @@
 @property (strong, nonatomic) NSDecimalNumber *remainingBuyBitcoinAmount;
 @property (strong, nonatomic) NSDecimalNumber *remainingSellBitcoinAmount;
 
+@property (strong, nonatomic) NSDecimalNumber *availableBitcoinAmountBeforeBannerUpdate;
+@property (strong, nonatomic) NSMutableArray *buyBalanceTradeParameters; // Keep parameters we have to balance after banner update
+@property (strong, nonatomic) NSMutableArray *sellBalanceTradeParameters; // Keep parameters we have to balance after banner update
+
 
 #pragma mark - Interest Rate methods
 - (NSDecimalNumber *)effectiveBuyInterestRateForData:(SOXShowOrderbookData *)orderOfInterestData

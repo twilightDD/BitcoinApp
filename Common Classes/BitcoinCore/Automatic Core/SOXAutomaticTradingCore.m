@@ -37,6 +37,9 @@
         [(SOXAutomaticTradingCore *)sharedTradingCore setSellSEPAOrderBook:[NSMutableSet set]];
         [(SOXAutomaticTradingCore *)sharedTradingCore setRemainingBuyBitcoinAmount:[NSDecimalNumber zero]];
         [(SOXAutomaticTradingCore *)sharedTradingCore setRemainingSellBitcoinAmount:[NSDecimalNumber zero]];
+
+        [(SOXAutomaticTradingCore *)sharedTradingCore setBuyBalanceTradeParameters:[NSMutableArray array]];
+        [(SOXAutomaticTradingCore *)sharedTradingCore setSellBalanceTradeParameters:[NSMutableArray array]];
     });
 
     return sharedTradingCore;
