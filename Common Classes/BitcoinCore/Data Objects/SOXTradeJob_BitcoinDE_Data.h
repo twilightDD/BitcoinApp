@@ -25,4 +25,9 @@
                                         bitcoinAmount:(NSNumber *)bitcoinAmount
                                                 price:(NSDecimalNumber *)price;
 
++ (NSDictionary *)parameterBalanceTradingForOrderID:(NSString *)orderID
+                                          orderType:(BitcoinDE_OrderType)orderType
+                                      bitcoinAmount:(NSNumber *)bitcoinAmount
+                                              price:(NSDecimalNumber *)price;
+
 @end
