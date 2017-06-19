@@ -24,8 +24,8 @@
 
 @property (nonatomic) BOOL executeBuyTrades;
 @property (nonatomic) BOOL executeSellTrades;
-@property (nonatomic) BOOL executeBalanceBuyTrades;
-@property (nonatomic) BOOL executeBalanceSellTrades;
+@property (nonatomic) BOOL executeBalanceTradesForBuyTrades;
+@property (nonatomic) BOOL executeBalanceTradesForSellTrades;
 
 @property (strong, nonatomic) NSDecimalNumber *buyInterestRate;
 @property (strong, nonatomic) NSDecimalNumber *buyInterestFactor;
