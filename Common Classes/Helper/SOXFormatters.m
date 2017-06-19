@@ -234,9 +234,10 @@
 }
 
 #pragma mark - Interest Rate
-+ (NSDecimalNumber *)formattedInterestRate:(NSDecimalNumber *)effectivInteresRate {
-    NSDecimalNumber *formattedInterestRate = [effectivInteresRate decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"100"]
-                                                                                  withBehavior:[SOXFormatters interestRateNumberHandler]];
++ (NSDecimalNumber *)formattedInterestRate:(NSDecimalNumber *)effectiveInterestRate {
+    effectiveInterestRate = [[NSDecimalNumber one] decimalNumberBySubtracting:effectiveInterestRate];
+    NSDecimalNumber *formattedInterestRate = [effectiveInterestRate decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"100"]
+                                                                                    withBehavior:[SOXFormatters interestRateNumberHandler]];
     return formattedInterestRate;
 }
 
