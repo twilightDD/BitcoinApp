@@ -197,7 +197,7 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
             if (!addOrderData) {
                 NSLog(@"nil");
             }
-            if ([addOrderData.orderInformation_type isEqualToString:@"offer"]) {
+            if ([addOrderData.orderInformation_type isEqualToString:BitcoinDE_WebSocket_BuyOrderType]) {
                 for (NSObject *delegate in self.delegateForBuyOrderUpdates) {
                     [delegate performSelectorOnMainThread:@selector(addedOrder:)
                                                  withObject:addOrderData
@@ -208,7 +208,7 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
 //                    }
                 }
             }
-            else if ([addOrderData.orderInformation_type isEqualToString:@"order"]) {
+            else if ([addOrderData.orderInformation_type isEqualToString:BitcoinDE_WebSocket_SellOrderType]) {
                 for (NSObject *delegate in self.delegateForSellOrderUpdates) {
                     [delegate performSelectorOnMainThread:@selector(addedOrder:)
                                                withObject:addOrderData

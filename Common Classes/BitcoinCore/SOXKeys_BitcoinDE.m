@@ -169,6 +169,10 @@ NSString *const BitcoinDE_WebSocket_AddOrder_MainKey    = @"add_order";
 NSString *const BitcoinDE_WebSocket_RemoveOrder_MainKey = @"remove_order";
 NSString *const BitcoinDE_WebSocket_UpdateOrder_MainKey = @"refresh_express_option";
 
+NSString *const BitcoinDE_WebSocket_BuyOrderType        = @"offer";
+NSString *const BitcoinDE_WebSocket_SellOrderType       = @"order";
+
+
 #pragma mark | Add_Order
 NSString *const BitcoinDE_WebSocket_AddOrder_OrderID                = @"order_id";
 NSString *const BitcoinDE_WebSocket_AddOrder_SocketObjectID         = @"id";
