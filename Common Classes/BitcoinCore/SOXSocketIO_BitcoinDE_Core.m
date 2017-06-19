@@ -119,7 +119,25 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
 }
 
 + (void)restartWebSocketCore {
-    NSLog(@"~~~~~ Try to restart WebSocket Connection in 20 seconds ~~~~~");
+    NSString *info = @"~~~~~ Try to restart WebSocket Connection in 20 seconds ~~~~~";
+    NSLog(@"%@", info);
+
+    SEL socketIODidDisconnect = NSSelectorFromString(@"socketIODidDisconnect:");
+    for (NSObject *delegate in [[SOXSocketIO_BitcoinDE_Core sharedCore] delegateForBuyOrderUpdates]) {
+        if ([delegate respondsToSelector:socketIODidDisconnect]) {
+            [delegate performSelectorOnMainThread:socketIODidDisconnect
+                                       withObject:info
+                                    waitUntilDone:NO];
+        }
+
+    }
+    for (NSObject *delegate in [[SOXSocketIO_BitcoinDE_Core sharedCore] delegateForSellOrderUpdates]) {
+        if ([delegate respondsToSelector:socketIODidDisconnect]) {
+            [delegate performSelectorOnMainThread:socketIODidDisconnect
+                                       withObject:info
+                                    waitUntilDone:NO];
+        }
+    }
     
     // wait a little bit and restart socket
     NSTimer *ratesReloadTimer  = [NSTimer scheduledTimerWithTimeInterval:20
@@ -155,6 +173,7 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
 
 - (void) socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error {
     NSLog(@"~~~~~ socketIODidDisconnect: %@ disconnectedWithError:\n%@", socket, error);
+
     SEL socketIODidDisconnect = NSSelectorFromString(@"socketIODidDisconnect:");
     NSString *note = [NSString stringWithFormat:@"*** socketIODidDisconnect with Error:\n%@", error.localizedDescription];
     for (NSObject *delegate in self.delegateForBuyOrderUpdates) {
