@@ -28,7 +28,27 @@
 @end
 
 @implementation SOXAutomaticTrading_BitcoinDE_Core
-
+//+ (instancetype)sharedTradingCore {
+//    static id sharedTradingCore;
+//
+//    static dispatch_once_t pred;
+//
+//    dispatch_once(&pred, ^{
+//        sharedTradingCore = [[self class] new];
+//        [(SOXAutomaticTradingCore *)sharedTradingCore setBuyDelegates:[[NSHashTable alloc] init]];
+//        [(SOXAutomaticTradingCore *)sharedTradingCore setSellDelegates:[[NSHashTable alloc] init]];
+//        [(SOXAutomaticTradingCore *)sharedTradingCore setBuyInterestRate:[NSDecimalNumber one]];
+//        [(SOXAutomaticTradingCore *)sharedTradingCore setBuyInterestFactor:[NSDecimalNumber one]];
+//        [(SOXAutomaticTradingCore *)sharedTradingCore setSellInterestRate:[NSDecimalNumber one]];
+//        [(SOXAutomaticTradingCore *)sharedTradingCore setSellInterestFactor:[NSDecimalNumber one]];
+//        [(SOXAutomaticTradingCore *)sharedTradingCore setBuySEPAOrderBook:[NSMutableSet set]];
+//        [(SOXAutomaticTradingCore *)sharedTradingCore setSellSEPAOrderBook:[NSMutableSet set]];
+//        [(SOXAutomaticTradingCore *)sharedTradingCore setRemainingBuyBitcoinAmount:[NSDecimalNumber zero]];
+//        [(SOXAutomaticTradingCore *)sharedTradingCore setRemainingSellBitcoinAmount:[NSDecimalNumber zero]];
+//    });
+//
+//    return sharedTradingCore;
+//}
 #pragma mark - Public class methods
 + (void)executeTrades:(BOOL)executeTrades forOrderType:(BitcoinDE_OrderType)orderType {
     SOXAutomaticTradingCore *core = [SOXAutomaticTradingCore sharedTradingCore];
@@ -79,7 +99,7 @@
         return;
     }
 
-    SOXAutomaticTradingCore *tradingCore = [SOXAutomaticTradingCore sharedTradingCore];
+    SOXAutomaticTradingCore *tradingCore = [self sharedTradingCore];
     switch (orderType) {
         case BitcoinDE_BuyOrderType: {
             [tradingCore.buyDelegates addObject:controller];
@@ -791,7 +811,7 @@
     if ([orderInformationType isEqualToString:@"offer"]) {
         [self.buySEPAOrderBook addObject:addSEPAOrderData];
 
-        NSString *note = [NSString stringWithFormat:@"~ new SEPA: type offer - order - orderID: %@ - pO: %@ - IR %@"
+        NSString *note = [NSString stringWithFormat:@"~ new SEPA: type offer - order - orderID: %@ - payO: %@ - IR %@"
                           , addSEPAOrderData.orderInformation_orderID
                           , addSEPAOrderData.orderRequirements_paymentOption
                           , [self effectiveBuyInterestRateForData:addSEPAOrderData toReferenceData:[self.buyOrderBook objectAtIndex:1]]];
@@ -800,7 +820,7 @@
     else if ([orderInformationType isEqualToString:@"order"]) {
         [self.sellSEPAOrderBook addObject:addSEPAOrderData];
 
-        NSString *note = [NSString stringWithFormat:@"~ new SEPA: type order - orderID: %@ - pO: %@ - IR %@"
+        NSString *note = [NSString stringWithFormat:@"~ new SEPA: type order - orderID: %@ - payO: %@ - IR %@"
                           , addSEPAOrderData.orderInformation_orderID
                           , addSEPAOrderData.orderRequirements_paymentOption
                           , [self effectiveSellInterestRateForData:addSEPAOrderData toReferenceData:[self.sellOrderBook objectAtIndex:1]]];

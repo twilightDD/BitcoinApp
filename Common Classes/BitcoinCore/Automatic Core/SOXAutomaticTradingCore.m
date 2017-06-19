@@ -45,7 +45,7 @@
 #pragma mark - Manual setters
 + (void)setBuyInterestRate:(NSDecimalNumber *)buyInterestRate {
     if (buyInterestRate) {
-        SOXAutomaticTradingCore *core = [SOXAutomaticTradingCore sharedTradingCore];
+        SOXAutomaticTradingCore *core = [self sharedTradingCore];
         core.buyInterestRate = buyInterestRate;
         NSDecimalNumber *buyInterestRatePercent = [buyInterestRate decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"100"]];
         core.buyInterestFactor = [[NSDecimalNumber one] decimalNumberBySubtracting:buyInterestRatePercent];
@@ -58,7 +58,7 @@
 
 + (void)setSellInterestRate:(NSDecimalNumber *)sellInterestRate {
     if (sellInterestRate) {
-        SOXAutomaticTradingCore *core = [SOXAutomaticTradingCore sharedTradingCore];
+        SOXAutomaticTradingCore *core = [self sharedTradingCore];
         core.sellInterestRate = sellInterestRate;
         NSDecimalNumber *sellInterestRatePercent = [sellInterestRate decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"100"]];
         core.sellInterestFactor = [[NSDecimalNumber one] decimalNumberByAdding:sellInterestRatePercent];
@@ -71,7 +71,7 @@
 
 + (void)setBuyMaximalFidorAmount:(NSDecimalNumber *)buyMaximalEuro {
     if (buyMaximalEuro) {
-        SOXAutomaticTradingCore *core = [SOXAutomaticTradingCore sharedTradingCore];
+        SOXAutomaticTradingCore *core = [self sharedTradingCore];
         core.buyMaximalFidorAmountInvestment = buyMaximalEuro;
         NSString *note = [NSString stringWithFormat:@"UPDATE VALUE: Set maximal trading volume to %@ €", buyMaximalEuro];
         [core informBuyDelegateWithNote:note];
@@ -80,7 +80,7 @@
 
 + (void)setSellMaximalBTCAmount:(NSDecimalNumber *)sellMaximalBTC {
     if (sellMaximalBTC) {
-        SOXAutomaticTradingCore *core = [SOXAutomaticTradingCore sharedTradingCore];
+        SOXAutomaticTradingCore *core = [self sharedTradingCore];
         core.sellMaximalBTCInvestment = sellMaximalBTC;
         NSString *note = [NSString stringWithFormat:@"UPDATE VALUE: Set maximal trading amount to %@ BTC", sellMaximalBTC];
         [core informSellDelegateWithNote:note];
