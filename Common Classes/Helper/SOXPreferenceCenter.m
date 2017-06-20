@@ -27,7 +27,9 @@
 }
 
 + (BitcoinDE_PaymentOption)defaultPaymentOptionForExecuteTrade {
-    return BitcoinDE_PaymentOptionExpressAndSepa;
+//    return BitcoinDE_PaymentOptionExpressOnly;
+//    return BitcoinDE_PaymentOptionSEPAOnly;
+        return BitcoinDE_PaymentOptionExpressAndSepa;
 }
 
 + (NSArray *)defaultTradingCountries {

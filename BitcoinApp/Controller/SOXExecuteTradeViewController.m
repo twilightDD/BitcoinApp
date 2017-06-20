@@ -71,6 +71,9 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 #pragma mark Properties
 @property (nonatomic) BOOL mayExecuteTrade;
 @property (nonatomic) BOOL executeTradeIsPossible;
+
+@property (strong, nonatomic) NSDecimalNumber *minAmountOrder;
+@property (strong, nonatomic) NSDecimalNumber *maxAmountOrder;
 @property (strong, nonatomic) NSDecimalNumber *maxPossibleBTCAmountToTrade;
 @property (strong, nonatomic) NSDecimalNumber *amountToTrade;
 @property (nonatomic) BitcoinDE_PaymentOption defaultPaymentOption;
@@ -79,6 +82,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 
 @property (strong, nonatomic) NSDecimalNumber *availableFidorAmount;
 
+@property (strong, nonatomic) NSString *userInformationText;
 @end
 
 #pragma mark - Implementation
@@ -90,94 +94,239 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     self.mayExecuteTrade        = NO;
     self.defaultPaymentOption   = [SOXPreferenceCenter defaultPaymentOptionForExecuteTrade];
     self.orderBookPaymentOption = self.orderBookData.orderRequirements_paymentOption.unsignedIntegerValue;
-    
-    [self setupMinMaxAmountToTrade];
+    self.availableFidorAmount   = [SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount;
+    // TODO: Debug availFidorAmount = 500
+    self.availableFidorAmount   = [NSDecimalNumber decimalNumberWithString:@"500"];
+
+    [self setupTradeValues];
     [self setupUI];
+    [self toggleUIElements];
 }
 
 #pragma mark - Private methods
-- (void)setupMinMaxAmountToTrade {
+- (void)setupTradeValues {
     if (!self.orderBookData) {
         return;
     }
-    
-    self.executeTradeIsPossible = NO;
-    
-    // MaxAmount
-    NSDecimalNumber *maxPossibleBTCAmountToTrade  = [NSDecimalNumber decimalNumberWithString:@"0"];
-    {
-        SOXMarket_BitcoinDE_Core *core = [SOXMarket_BitcoinDE_Core sharedCore];
-        
-        if (self.orderType == BitcoinDE_BuyOrderType) {
-            NSDecimalNumber *maxAmountOrderBookData = self.orderBookData.orderInformation_maxAmount;
-            NSDecimalNumber *availableFidorAmount   = [SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount;
-            NSDecimalNumber *maxAmountAvailableEuro = [availableFidorAmount decimalNumberByDividingBy:self.orderBookData.orderInformation_price
-                                                                                         withBehavior:[SOXFormatters btcNumberHandler]];
-            
-            if ([maxAmountOrderBookData isLessThan:maxAmountAvailableEuro]) {
-                maxPossibleBTCAmountToTrade = maxAmountOrderBookData;
+
+    // check paymentOptions
+    switch (self.orderBookPaymentOption) {
+        case BitcoinDE_PaymentOptionExpressOnly:
+            if (self.defaultPaymentOption == BitcoinDE_PaymentOptionExpressOnly
+                || self.defaultPaymentOption == BitcoinDE_PaymentOptionExpressAndSepa) {
+                self.executeTradeIsPossible = YES;
             }
-            else {
-                maxPossibleBTCAmountToTrade = maxAmountAvailableEuro;
+            break;
+        case BitcoinDE_PaymentOptionSEPAOnly:
+            if (self.defaultPaymentOption == BitcoinDE_PaymentOptionSEPAOnly
+                || self.defaultPaymentOption == BitcoinDE_PaymentOptionExpressAndSepa) {
+                self.executeTradeIsPossible = YES;
             }
-        }
-        else if (self.orderType == BitcoinDE_SellOrderType) {
-            if ([self.orderBookData.orderInformation_maxAmount isLessThan:core.availableBitcoinAmount]) {
-                maxPossibleBTCAmountToTrade = self.orderBookData.orderInformation_maxAmount;
-            }
-            else {
-                maxPossibleBTCAmountToTrade = core.availableBitcoinAmount;
-            }
-        }
-    }
-    
-    
-    
-    
-    
-    if ([SOXPreferenceCenter defaultPaymentOptionForExecuteTrade] == BitcoinDE_PaymentOptionExpressOnly) {
-        // if minAmount < maxMount we can buy/sell
-        if ([self.orderBookData.orderInformation_minAmount isLessThanOrEqualTo:maxPossibleBTCAmountToTrade]) {
-            self.userNameTextField.hidden = YES;
-            self.maxPossibleBTCAmountToTrade = maxPossibleBTCAmountToTrade;
+            break;
+        case BitcoinDE_PaymentOptionExpressAndSepa:
             self.executeTradeIsPossible = YES;
+            break;
+        default:
+            break;
+    }
+    if (!self.executeTradeIsPossible) {
+        self.minAmountOrder = nil;
+        self.maxAmountOrder = nil;
+        self.maxPossibleBTCAmountToTrade = nil;
+        return;
+    }
+
+    // MinAmount
+    self.minAmountOrder = self.orderBookData.orderInformation_minAmount;
+    self.maxAmountOrder = self.orderBookData.orderInformation_maxAmount;
+
+    // MaxAmount
+    {
+        // First get maxAmount from available BTC/Fidor amount
+        {
+            SOXMarket_BitcoinDE_Core *core = [SOXMarket_BitcoinDE_Core sharedCore];
+
+            if (self.orderType == BitcoinDE_BuyOrderType) {
+                /*
+                 Express => maxAvaFidor
+                 Sepa => default(SEPA mgl) ? order.maxAmount : geht nicht
+                 Express/Sepa => default(SEPA mgl) ? order.maxAmount : maxAvaFidor
+                 */
+                // calculate, how much BTC we could buy with availableFidorAmount
+                self.maxPossibleBTCAmountToTrade = [self.availableFidorAmount decimalNumberByDividingBy:self.orderBookData.orderInformation_price
+                                                                                           withBehavior:[SOXFormatters btcNumberHandler]];
+                NSLog(@"minAmountOrder %@", self.minAmountOrder);
+                NSLog(@"maxAmountOrder %@", self.maxAmountOrder);
+                NSLog(@"maxPossibleBTCAmountToTrade %@", self.maxPossibleBTCAmountToTrade);
+
+                if (self.orderBookPaymentOption == BitcoinDE_PaymentOptionExpressOnly) {
+                    self.executePaymentOption = BitcoinDE_PaymentOptionExpressOnly;
+                    self.userInformationText = @"Express only";
+                    self.executeTradeIsPossible = YES;
+                    if ([self.maxPossibleBTCAmountToTrade isLessThanOrEqualTo:self.maxAmountOrder]) {
+                        self.maxAmountOrder = nil;
+                    }
+                    else {
+                        self.maxPossibleBTCAmountToTrade = nil;
+                    }
+                }
+                else if (self.orderBookPaymentOption == BitcoinDE_PaymentOptionSEPAOnly) {
+                    self.executePaymentOption = BitcoinDE_PaymentOptionSEPAOnly;
+                    if (self.defaultPaymentOption == BitcoinDE_PaymentOptionSEPAOnly
+                        || self.defaultPaymentOption == BitcoinDE_PaymentOptionExpressAndSepa) {
+                        self.userInformationText = @"SEPA only";
+                        self.maxPossibleBTCAmountToTrade = nil;
+                        self.executeTradeIsPossible = YES;
+                    }
+                    else {
+                        self.userInformationText = @"SEPA not possible";
+                        self.executePaymentOption = BitcoinDE_PaymentOptionUnknown;
+                        self.executeTradeIsPossible = NO;
+                    }
+                }
+                else if (self.orderBookPaymentOption == BitcoinDE_PaymentOptionExpressAndSepa) {
+                    if ([self.maxPossibleBTCAmountToTrade isGreaterThanOrEqualTo:self.minAmountOrder]
+                        && [self.maxAmountOrder isLessThanOrEqualTo:self.maxPossibleBTCAmountToTrade]) {
+                        self.userInformationText = @"Express&SEPA - only Express";
+                        self.executePaymentOption = BitcoinDE_PaymentOptionExpressOnly;
+                        self.maxAmountOrder = nil;
+                        self.executeTradeIsPossible = YES;
+                    }
+                    else if ([self.maxPossibleBTCAmountToTrade isGreaterThanOrEqualTo:self.minAmountOrder]) {
+                        self.userInformationText = @"Express&SEPA";
+                        self.executePaymentOption = BitcoinDE_PaymentOptionExpressAndSepa;
+                        self.executeTradeIsPossible = YES;
+                    }
+                    else if ([self.maxPossibleBTCAmountToTrade isLessThan:self.minAmountOrder]) {
+                        self.userInformationText = [NSString stringWithFormat:@"Express&SEPA - only SEPA - you don't have enough fidor reservation (%@)"
+                                                    , [SOXFormatters currencyStringForNumber:self.availableFidorAmount
+                                                                                roundingMode:NSNumberFormatterRoundDown]];
+                        self.maxPossibleBTCAmountToTrade = nil;
+                        self.executePaymentOption = BitcoinDE_PaymentOptionSEPAOnly;
+                        self.executeTradeIsPossible = YES;
+                    }
+                    else {
+                        self.userInformationText = @"Stranged";
+                        self.executeTradeIsPossible = NO;
+                    }
+
+                }
+                else {
+                    self.userInformationText = @"VERY Stranged";
+                    self.executeTradeIsPossible = NO;
+                }
+            }
+            else if (self.orderType == BitcoinDE_SellOrderType) {
+                /*
+                 Express => maxAvaBTC
+                 Sepa => default(SEPA mgl) ? order.maxAmount : geht nicht
+                 Express/Sepa => default(SEPA mgl) ? order.maxAmount : maxAvaBTC
+                 */
+
+                self.maxPossibleBTCAmountToTrade = [SOXFormatters lesserDecimalNumberFrom:self.orderBookData.orderInformation_maxAmount
+                                                                                 and:core.availableBitcoinAmount];
+                if ([self.maxPossibleBTCAmountToTrade isLessThan:self.maxAmountOrder]) {
+                    self.maxAmountOrder = nil;
+                }
+                else {
+                    self.maxPossibleBTCAmountToTrade = nil;
+                }
+            }
         }
-        else {
-            self.userNameTextField.hidden      = NO;
-            self.userNameTextField.stringValue = @"Express only - you don't have enough fidor reservation";
-            self.executeTradeIsPossible        = NO;
+
+        NSLog(@"minAmountOrder %@", self.minAmountOrder);
+        NSLog(@"maxAmountOrder %@", self.maxAmountOrder);
+        NSLog(@"maxPossibleBTCAmountToTrade %@", self.maxPossibleBTCAmountToTrade);
+
+        // Second: consider paymentOption
+        if (self.orderBookPaymentOption == BitcoinDE_PaymentOptionExpressOnly) {
+            self.executePaymentOption = BitcoinDE_PaymentOptionExpressOnly;
+            // if minAmount < maxMount we can buy/sell
+            if ((self.maxPossibleBTCAmountToTrade && [self.minAmountOrder isLessThanOrEqualTo:self.maxPossibleBTCAmountToTrade])
+                || (self.maxAmountOrder && [self.minAmountOrder isLessThanOrEqualTo:self.maxAmountOrder])) {
+                self.userInformationTextField.hidden = YES;
+                self.executeTradeIsPossible          = YES;
+            }
+            else {
+                self.executeTradeIsPossible               = NO;
+                if (self.orderType == BitcoinDE_BuyOrderType) {
+                    self.userInformationText = [NSString stringWithFormat:@"Express only - you don't have enough fidor reservation (%@)"
+                                                , [SOXFormatters currencyStringForNumber:self.availableFidorAmount
+                                                                            roundingMode:NSNumberFormatterRoundDown]];
+                }
+                else {
+                    self.userInformationText = @"Not enough available bitcoins to sell";
+                }
+
+            }
+        }
+        else if (self.orderBookPaymentOption == BitcoinDE_PaymentOptionSEPAOnly) {
+            if ((self.maxPossibleBTCAmountToTrade && [self.minAmountOrder isLessThanOrEqualTo:self.maxPossibleBTCAmountToTrade])
+                || (self.maxAmountOrder && [self.minAmountOrder isLessThanOrEqualTo:self.maxAmountOrder])) {
+                self.executePaymentOption = BitcoinDE_PaymentOptionSEPAOnly;
+                self.executeTradeIsPossible = YES;
+            }
+            else {
+                self.executeTradeIsPossible = NO;
+                if (self.orderType == BitcoinDE_BuyOrderType) {
+                    self.userInformationText = @"Sepa not possible";
+                }
+                else {
+                    self.userInformationText = @"Sepa - Not enough available bitcoins to sell";
+                }
+            }
+        }
+        else { //
+//            if ((self.maxPossibleBTCAmountToTrade && [self.minAmountOrder isLessThanOrEqualTo:self.maxPossibleBTCAmountToTrade])
+//                || (self.maxAmountOrder && [self.minAmountOrder isLessThanOrEqualTo:self.maxAmountOrder])) {
+//                self.executePaymentOption = BitcoinDE_PaymentOptionExpressAndSepa;
+//                self.executeTradeIsPossible = YES;
+//                if ((self.maxPossibleBTCAmountToTrade && [self.maxPossibleBTCAmountToTrade isLessThanOrEqualTo:self.minAmountOrder])) {
+//                    self.maxPossibleBTCAmountToTrade = nil;
+//                    self.executePaymentOption = BitcoinDE_PaymentOptionSEPAOnly;
+//                    self.userInformationText = @"Only SEPA possible";
+//                }
+//                else if ((self.maxPossibleBTCAmountToTrade && self.maxAmountOrder)
+//                         && [self.maxPossibleBTCAmountToTrade isGreaterThanOrEqualTo:self.maxAmountOrder]) {
+//                    self.maxPossibleBTCAmountToTrade = nil;
+//                    self.executePaymentOption = BitcoinDE_PaymentOptionExpressOnly;
+//                }
+//
+//            }
+//            else {
+//                self.executeTradeIsPossible = NO;
+//
+//                if (self.orderType == BitcoinDE_BuyOrderType) {
+//                    self.userInformationText = @"Not enough fidor reservation";
+//                }
+//                else {
+//                    self.userInformationText = @"Express/Sepa - Not enough available bitcoins to sell";
+//                }
+//            }
         }
     }
-    else { // Sepa OR Express&Sepa
-        self.maxPossibleBTCAmountToTrade = maxPossibleBTCAmountToTrade;
-        self.executeTradeIsPossible = YES;
-        if ([self.orderBookData.orderInformation_minAmount isLessThanOrEqualTo:maxPossibleBTCAmountToTrade]) {
-            self.executePaymentOption = BitcoinDE_PaymentOptionExpressAndSepa;
-        }
-        else {
-            self.executePaymentOption = BitcoinDE_PaymentOptionSEPAOnly;
-            
-        }
-    }
+
     
-    
-    // set boundaries of input field number formatter
-    NSNumberFormatter* fieldFormatter = self.amountToTradeTextField.formatter;
-  //  fieldFormatter.minimum = self.orderBookData.orderInformation_minAmount;
-    NSDecimalNumber *max =[SOXFormatters greaterDecimalNumberFrom:self.maxPossibleBTCAmountToTrade
-                                                              and:self.orderBookData.orderInformation_maxAmount];
-  //  fieldFormatter.maximum = [SOXFormatters greaterDecimalNumberFrom:self.maxPossibleBTCAmountToTrade
-    //                                                             and:self.orderBookData.orderInformation_maxAmount];
-    
-    NSLog(@"Fieldformatter: \nMin: %@ Max:\n%@ %@", fieldFormatter.minimum, fieldFormatter.maximum, [SOXFormatters greaterDecimalNumberFrom:self.maxPossibleBTCAmountToTrade
-                                                                                                                        and:self.orderBookData.orderInformation_maxAmount]);
-    NSNumber *maxFromFromatter = fieldFormatter.maximum;
-    NSDecimalNumber *maxFromFormatterDC = [NSDecimalNumber decimalNumberWithDecimal:maxFromFromatter.decimalValue];
-    NSDecimalNumber *diff = [maxFromFormatterDC decimalNumberBySubtracting:max];
-    NSLog(@"Diff: %@", diff);
-    if (![diff isEqualToNumber:@0]) {
-        
-    }
+//    // set boundaries of input field number formatter
+//    NSNumberFormatter* fieldFormatter = self.amountToTradeTextField.formatter;
+//  //  fieldFormatter.minimum = self.orderBookData.orderInformation_minAmount;
+//    NSDecimalNumber *max =[SOXFormatters greaterDecimalNumberFrom:self.maxPossibleBTCAmountToTrade
+//                                                              and:self.orderBookData.orderInformation_maxAmount];
+//  //  fieldFormatter.maximum = [SOXFormatters greaterDecimalNumberFrom:self.maxPossibleBTCAmountToTrade
+//    //                                                             and:self.orderBookData.orderInformation_maxAmount];
+//
+//    NSLog(@"Fieldformatter: \nMin: %@\nMax:%@ %@"
+//          , fieldFormatter.minimum
+//          , fieldFormatter.maximum
+//          , [SOXFormatters greaterDecimalNumberFrom:self.maxPossibleBTCAmountToTrade
+//                                                                                                                        and:self.orderBookData.orderInformation_maxAmount]);
+//    NSNumber *maxFromFromatter = fieldFormatter.maximum;
+//    NSDecimalNumber *maxFromFormatterDC = [NSDecimalNumber decimalNumberWithDecimal:maxFromFromatter.decimalValue];
+//    NSDecimalNumber *diff = [maxFromFormatterDC decimalNumberBySubtracting:max];
+//    NSLog(@"Diff: %@", diff);
+//    if (![diff isEqualToNumber:@0]) {
+//
+//    }
 }
 
 - (void)setupUI {
@@ -220,14 +369,22 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     // title and buttons
     NSString *titleText;
     NSString *amountToTradeDescriptionText;
-    
+    NSString *minimumBTCAmountButtonText;
+    NSString *maximalFidorBTCAmountButtonText;
+    NSString *maximalOrderBTCAmountButtonText;
     if (self.orderType == BitcoinDE_BuyOrderType) {
         titleText = @"Buy bitcoins";
         amountToTradeDescriptionText = @"Buy bitcoins";
+        minimumBTCAmountButtonText = @"Min";
+        maximalFidorBTCAmountButtonText = @"Max BTC for reservation";
+        maximalOrderBTCAmountButtonText = @"Max BTC from order";
     }
     else if (self.orderType == BitcoinDE_SellOrderType) {
         titleText = @"Sell bitcoins";
         amountToTradeDescriptionText = @"Sell bitcoins";
+        minimumBTCAmountButtonText = @"Min BTC";
+        maximalFidorBTCAmountButtonText = @"Max available BTC ";
+        maximalOrderBTCAmountButtonText = @"Max BTC from order";
     }
     else {
         return;
@@ -235,7 +392,11 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 
     self.titleTextField.stringValue = titleText;
     self.amountToTradeDescriptionTextField.stringValue = amountToTradeDescriptionText;
-    
+    self.minimumBTCAmountButton.title = minimumBTCAmountButtonText;
+    self.maximalFidorBTCAmountButton.title = maximalFidorBTCAmountButtonText;
+    self.maximalOrderBTCAmountButton.title = maximalOrderBTCAmountButtonText;
+
+
     self.volumeToTradeDescriptionTextField.stringValue = @"Volume";
     self.volumeToTradeTextField.stringValue            = [SOXFormatters currencyStringForNumber:[NSDecimalNumber decimalNumberWithString:@"0"]
                                                                                    roundingMode:NSNumberFormatterRoundUp];
@@ -249,33 +410,33 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     {
         self.minimumBTCAmountButton.title = @"Min";
         
-        if (self.orderType == BitcoinDE_BuyOrderType) {
-            if (self.orderBookData.orderRequirements_paymentOption.unsignedIntegerValue == BitcoinDE_PaymentOptionSEPAOnly
-                || [self.orderBookData.orderInformation_minVolume isGreaterThanOrEqualTo:[SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount]) {
-                
-                self.maximalFidorBTCAmountButton.hidden = YES;
-            }
-            else {
-                self.maximalFidorBTCAmountButton.hidden = NO;
-                self.maximalFidorBTCAmountButton.title = @"Max Fidor";
-            }
-            
-            if (self.orderBookData.orderRequirements_paymentOption.unsignedIntegerValue == BitcoinDE_PaymentOptionExpressOnly
-                && [self.orderBookData.orderInformation_minVolume isGreaterThanOrEqualTo:[SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount]) {
-                self.userInformationTextField.hidden        = NO;
-                self.userInformationTextField.stringValue = @"Express only, but not enough Fidor reservation";
-                self.minimumBTCAmountButton.hidden = YES;
-                self.maximalFidorBTCAmountButton.hidden = YES;
-                self.maximalOrderBTCAmountButton.hidden = YES;
-                self.amountToTradeTextField.enabled = NO;
-            }
-            
-            self.maximalOrderBTCAmountButton.title = @"Max from order";
-        }
-        else if (self.orderType == BitcoinDE_SellOrderType) {
-            self.maximalFidorBTCAmountButton.hidden = YES;
-            self.maximalOrderBTCAmountButton.title = @"Max possible";
-        }
+//        if (self.orderType == BitcoinDE_BuyOrderType) {
+//            if (self.orderBookData.orderRequirements_paymentOption.unsignedIntegerValue == BitcoinDE_PaymentOptionSEPAOnly
+//                || [self.orderBookData.orderInformation_minVolume isGreaterThanOrEqualTo:[SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount]) {
+//
+//                self.maximalFidorBTCAmountButton.hidden = YES;
+//            }
+//            else {
+//                self.maximalFidorBTCAmountButton.hidden = NO;
+//                self.maximalFidorBTCAmountButton.title = @"Max Fidor";
+//            }
+//
+//            if (self.orderBookData.orderRequirements_paymentOption.unsignedIntegerValue == BitcoinDE_PaymentOptionExpressOnly
+//                && [self.orderBookData.orderInformation_minVolume isGreaterThanOrEqualTo:[SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount]) {
+//                self.userInformationTextField.hidden        = NO;
+//                self.userInformationTextField.stringValue = @"Express only, but not enough Fidor reservation";
+//                self.minimumBTCAmountButton.hidden = YES;
+//                self.maximalFidorBTCAmountButton.hidden = YES;
+//                self.maximalOrderBTCAmountButton.hidden = YES;
+//                self.amountToTradeTextField.enabled = NO;
+//            }
+//
+//            self.maximalOrderBTCAmountButton.title = @"Max from order";
+//        }
+//        else if (self.orderType == BitcoinDE_SellOrderType) {
+//            self.maximalFidorBTCAmountButton.hidden = YES;
+//            self.maximalOrderBTCAmountButton.title = @"Max possible";
+//        }
     }
     
     [self setupExecuteTradeButton];
@@ -312,6 +473,19 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     self.volumeToTradeDescriptionTextField.hidden   = !self.executeTradeIsPossible;
     self.volumeToTradeTextField.hidden              = !self.executeTradeIsPossible;
     self.executeTradeButton.hidden                  = !self.executeTradeIsPossible;
+
+
+    self.minimumBTCAmountButton.hidden = self.minAmountOrder == nil;
+    self.maximalOrderBTCAmountButton.hidden = self.maxAmountOrder == nil;
+    self.maximalFidorBTCAmountButton.hidden = self.maxPossibleBTCAmountToTrade == nil;
+
+    if (self.userInformationText) {
+        self.userInformationTextField.stringValue = self.userInformationText;
+        self.userInformationTextField.hidden = NO;
+    }
+    else {
+        self.userInformationTextField.hidden = YES;
+    }
 }
 
 - (BOOL)validateInput {
@@ -326,7 +500,8 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     if (validationResult) {
         // Express only
         if (self.defaultPaymentOption == BitcoinDE_PaymentOptionExpressOnly) {
-            if ([self.amountToTrade isGreaterThan:self.maxPossibleBTCAmountToTrade]) {
+            if ((self.maxPossibleBTCAmountToTrade && [self.amountToTrade isGreaterThan:self.maxPossibleBTCAmountToTrade])
+                || (self.maxAmountOrder && [self.amountToTrade isGreaterThan:self.maxAmountOrder])) {
                 validationResult = NO;
             }
             else {
@@ -349,16 +524,17 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
         // Express or Sepa
         if (self.orderBookPaymentOption == BitcoinDE_PaymentOptionExpressAndSepa
             && self.defaultPaymentOption == BitcoinDE_PaymentOptionExpressAndSepa) {
-            if ([self.amountToTrade isLessThanOrEqualTo:self.maxPossibleBTCAmountToTrade]) {
+            if (self.maxPossibleBTCAmountToTrade && [self.amountToTrade isLessThanOrEqualTo:self.maxPossibleBTCAmountToTrade]) {
                 self.executePaymentOption = BitcoinDE_PaymentOptionExpressOnly;
             }
-            else if ([self.amountToTrade isLessThanOrEqualTo:self.orderBookData.orderInformation_maxAmount]){
+            else if (self.maxAmountOrder && [self.amountToTrade isLessThanOrEqualTo:self.maxAmountOrder]){
                 self.executePaymentOption = BitcoinDE_PaymentOptionSEPAOnly;
             }
             else {
                 validationResult = NO;
             }
         }
+
     }
 
     if (validationResult) {
@@ -432,7 +608,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 }
 
 - (IBAction)minimumBTCAmountButtonAction:(NSButton *)sender {
-    self.amountToTrade = self.orderBookData.orderInformation_minAmount;
+    self.amountToTrade = self.minAmountOrder;
 }
 
 - (IBAction)maximalFidorBTCAmountButtonAction:(NSButton *)sender {
@@ -440,6 +616,8 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 }
 
 - (IBAction)maximalOrderBTCAmountButtonAction:(NSButton *)sender {
+    self.amountToTrade = self.maxAmountOrder;
+    return;
     if (self.orderType == BitcoinDE_BuyOrderType) {
         self.amountToTrade = self.orderBookData.orderInformation_maxAmount;
     }
@@ -455,6 +633,10 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 
 
 #pragma mark - Manual Setters
+- (void)setMaxAmountOrder:(NSDecimalNumber *)maxAmountOrder {
+    _maxAmountOrder = maxAmountOrder;
+
+}
 - (void)setAmountToTrade:(NSDecimalNumber *)amountToTrade {
     _amountToTrade = amountToTrade;
     self.amountToTradeTextField.objectValue = _amountToTrade;
@@ -463,7 +645,11 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 
 - (void)setExecuteTradeIsPossible:(BOOL)executeTradeIsPossible {
     _executeTradeIsPossible = executeTradeIsPossible;
-    [self toggleUIElements];
+    if (!executeTradeIsPossible) {
+        self.minAmountOrder = nil;
+        self.maxAmountOrder = nil;
+        self.maxPossibleBTCAmountToTrade = nil;
+    }
 }
 
 - (void)setExecutePaymentOption:(BitcoinDE_PaymentOption)executePaymentOption {
