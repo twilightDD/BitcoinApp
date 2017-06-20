@@ -146,7 +146,9 @@
     NSLog(@"\nclickedRow %ti\nselectionIndex %tu\nselectedObjects\n%@",clickedRow, selectionIndex, selectedObjects );
     
     SOXShowOrderbook_BitcoinDE_Data *selectedOrderBookData = selectedObjects.firstObject;
-    
+    if (!selectedOrderBookData) {
+        return;
+    }
     NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"MacMain" bundle:nil];
     SOXExecuteTradeViewController *viewC = [storyboard instantiateControllerWithIdentifier:@"ExecuteTradeViewControllerIdentifier"];
     viewC.orderType = self.orderType;
