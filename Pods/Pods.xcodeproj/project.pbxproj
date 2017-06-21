@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		029E2486C33AD95DAC0A284F2A5220A9 /* SocketIOTransport.h in Headers */ = {isa = PBXBuildFile; fileRef = 85B8EF5405FECB94041E65F54480FFD1 /* SocketIOTransport.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0E5CC006697FE3A851CE95557F138F80 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A577AE35D377D1E871E27D81039DC5FE /* Foundation.framework */; };
 		101E9432B21B2EAA4DDA126748B00796 /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = DEBAC2B27A598F07941907B680722231 /* SRWebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		17F329E9CA54F24D85B8305E48486738 /* SocketIOPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = EF61F0945FF5F78CF125E016B67913E1 /* SocketIOPacket.m */; };
 		193D87F42E46C9940D2A203162C9930A /* SocketRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 1749D2B68AA602EBDD90367BA30DD39D /* SocketRocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		288ABAAA314FEB4A577A3C39AAD97A7A /* SocketIOJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC638DC43A4EAFB98333F50D0F90DC6 /* SocketIOJSONSerialization.m */; };
 		2EC7FC4D732F6BA1967F24F0F59C5706 /* SocketIOTransportXHR.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF5E3F1901BF15369ACB0A840BEDE0 /* SocketIOTransportXHR.m */; };
 		36B64EDF847427D3D9C6699C84974C1E /* SocketIO.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BDFD0161E17F0924EED9B4090D5E5BD /* SocketIO.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		46351AA2478939C28A04F301A535FE04 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9888479987FF8994C83747F5E72262D /* Foundation.framework */; };
 		479B656CD4FFB2CD97C6843A49C9E4C9 /* Pods-mac BitcoinAppTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 244B6F62097721B870495F6BB5C674AF /* Pods-mac BitcoinAppTests-dummy.m */; };
 		4EF988C3E8874224C510411BD7865CB9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1021DB6E8F3A54C3D1A638EC8BB2AE9 /* Security.framework */; };
 		582666DB59005D9F7E8251CC8C4A3C9C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B479919665723FB186287D7E2526B1D /* Cocoa.framework */; };
@@ -25,11 +25,11 @@
 		7DAA058F857C9BC9963EF51DCB8014E7 /* SocketIOTransportWebsocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BE9E231244C855A5FA464F1C8E1DE5 /* SocketIOTransportWebsocket.m */; };
 		7DE50FBF7C2B55EC33BA147160A0E3A4 /* socket.IO-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A5C8D860B555DEDD3009E88CC42C9F /* socket.IO-dummy.m */; };
 		89CFEA43BA47F752183985986781DD30 /* SocketIOTransportWebsocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EE8A098FFC30259409EF6A55E67F868 /* SocketIOTransportWebsocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BA84B4A16E18AD0B5B65CA0EF63103A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9888479987FF8994C83747F5E72262D /* Foundation.framework */; };
 		92ADF6580D43A7690281EFA7F5C8DF1B /* Pods-mac BitcoinApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F05A228EC6CC845521DFC4F14E8FA6BF /* Pods-mac BitcoinApp-dummy.m */; };
 		964A282925FC86346776AC76AFC7369F /* SocketIO.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE1886FDC3B52F458425F3E1D90EC80 /* SocketIO.m */; };
 		9AF0A752EB574BA01070E33E616DE1D3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B479919665723FB186287D7E2526B1D /* Cocoa.framework */; };
 		A381DECA491630B108ADE35273BCC579 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B479919665723FB186287D7E2526B1D /* Cocoa.framework */; };
-		BB68243142A0E3F03ED6E10F38AC8200 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A577AE35D377D1E871E27D81039DC5FE /* Foundation.framework */; };
 		C49846466B938C13A7AC43C5D3524B9E /* Pods-iOS BitcoinApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3F9E97D58113C537A205542D26F42D /* Pods-iOS BitcoinApp-dummy.m */; };
 		D29C8DE024C1A382FFDC3C1CF03EDB93 /* SocketRocket-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B5A433A7D6316EC7688BC8349F31BDC4 /* SocketRocket-dummy.m */; };
 		D48C89BE7FD699A85BF18FAC916BDEDA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B479919665723FB186287D7E2526B1D /* Cocoa.framework */; };
@@ -96,7 +96,6 @@
 		9D86BBD711F6A1735045830EACBA2D54 /* Pods-mac BitcoinApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-mac BitcoinApp.release.xcconfig"; sourceTree = "<group>"; };
 		A1021DB6E8F3A54C3D1A638EC8BB2AE9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		A246C49A8D25BBB9C0422CB73DADDD48 /* Pods-iOS BitcoinAppTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-iOS BitcoinAppTests-resources.sh"; sourceTree = "<group>"; };
-		A577AE35D377D1E871E27D81039DC5FE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		A6E7DB945C42B1D02F7CCAC0CE041801 /* socket.IO-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "socket.IO-prefix.pch"; sourceTree = "<group>"; };
 		A9C5414E783C52EF48A325EA8DF6D78E /* Pods-iOS BitcoinAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-iOS BitcoinAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		B5A433A7D6316EC7688BC8349F31BDC4 /* SocketRocket-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SocketRocket-dummy.m"; sourceTree = "<group>"; };
@@ -111,6 +110,7 @@
 		D2839B33AB09B1E8ABA8522CFDEE368B /* libPods-mac BitcoinApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-mac BitcoinApp.a"; path = "libPods-mac BitcoinApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D61C4E8710FA46682965D1B8BF563C26 /* libsocket.IO.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libsocket.IO.a; path = libsocket.IO.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D81CE5E5B2A9C542E1EBF53673BC126F /* Pods-mac BitcoinApp-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-mac BitcoinApp-frameworks.sh"; sourceTree = "<group>"; };
+		D9888479987FF8994C83747F5E72262D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		DAE1886FDC3B52F458425F3E1D90EC80 /* SocketIO.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SocketIO.m; sourceTree = "<group>"; };
 		DEBAC2B27A598F07941907B680722231 /* SRWebSocket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SRWebSocket.h; path = SocketRocket/SRWebSocket.h; sourceTree = "<group>"; };
 		E9C75ABFBCCB266512AA0C66934C1217 /* libPods-iOS BitcoinApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-iOS BitcoinApp.a"; path = "libPods-iOS BitcoinApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,7 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB68243142A0E3F03ED6E10F38AC8200 /* Foundation.framework in Frameworks */,
+				46351AA2478939C28A04F301A535FE04 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,7 +170,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E5CC006697FE3A851CE95557F138F80 /* Foundation.framework in Frameworks */,
+				8BA84B4A16E18AD0B5B65CA0EF63103A /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,7 +195,7 @@
 		1EBDE8AB47632040BC781EFD7A96C75D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9D9F8AE467017CA021124B5996DF349D /* iOS */,
+				DB830961B0D7435441B5AE0A4FBF6A02 /* iOS */,
 				DDC80B76911BC96576ED87A164D70DD7 /* OS X */,
 			);
 			name = Frameworks;
@@ -312,14 +312,6 @@
 			path = "Target Support Files/Pods-iOS BitcoinAppTests";
 			sourceTree = "<group>";
 		};
-		9D9F8AE467017CA021124B5996DF349D /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				A577AE35D377D1E871E27D81039DC5FE /* Foundation.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
 		D26EBB8E81B1B31F283F6BC7072FCAE5 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -329,6 +321,14 @@
 				245C48AD3487EA0F47A60513B30DB40E /* Pods-mac BitcoinAppTests */,
 			);
 			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		DB830961B0D7435441B5AE0A4FBF6A02 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				D9888479987FF8994C83747F5E72262D /* Foundation.framework */,
+			);
+			name = iOS;
 			sourceTree = "<group>";
 		};
 		DDC80B76911BC96576ED87A164D70DD7 /* OS X */ = {
@@ -497,7 +497,7 @@
 		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0700;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
@@ -698,6 +698,51 @@
 			};
 			name = Release;
 		};
+		1CB63C0C76E7B195E14EC09486400B3C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		38B832D3597BE3052086D3ECF7389029 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6745561D8D6089001D5749F33689CD7F /* Pods-iOS BitcoinApp.release.xcconfig */;
@@ -744,6 +789,55 @@
 				SDKROOT = macosx;
 			};
 			name = Release;
+		};
+		77BA7578E17B841137DF55B9FC12B42F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
 		};
 		7CF5D96E09F327B82D192209E807D825 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -841,51 +935,6 @@
 			};
 			name = Debug;
 		};
-		D4FB579CA46FAB0F2426E295AA45A5ED /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_REQUIRED = NO;
-				COPY_PHASE_STRIP = NO;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_DEBUG=1",
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-			};
-			name = Debug;
-		};
 		DB1C0249D65B3820D16523CA8D77AB0B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EE35DCCB72EAED8B028909CAD12F2CD9 /* socket.IO.xcconfig */;
@@ -909,47 +958,6 @@
 				SDKROOT = macosx;
 			};
 			name = Debug;
-		};
-		EB39CD07A07FAE508821C862BC82BBF2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_REQUIRED = NO;
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_RELEASE=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
 		};
 		EF042CACE0C795776370198406BDF8EB /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -999,8 +1007,8 @@
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D4FB579CA46FAB0F2426E295AA45A5ED /* Debug */,
-				EB39CD07A07FAE508821C862BC82BBF2 /* Release */,
+				77BA7578E17B841137DF55B9FC12B42F /* Debug */,
+				1CB63C0C76E7B195E14EC09486400B3C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
