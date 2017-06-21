@@ -319,14 +319,16 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     NSString *maximalFidorBTCAmountButtonText;
     NSString *maximalOrderBTCAmountButtonText;
     if (self.orderType == BitcoinDE_BuyOrderType) {
-        titleText = @"Buy bitcoins";
+        titleText = [NSString stringWithFormat:@"Buy bitcoins (%@)"
+                     , [SOXMarket_BitcoinDE_DefTypes paymentOptionStringForPaymentOption:self.orderBookPaymentOption]];
         amountToTradeDescriptionText = @"Buy bitcoins";
         minimumBTCAmountButtonText = @"Min BTC";
         maximalFidorBTCAmountButtonText = @"Max BTC for reservation";
         maximalOrderBTCAmountButtonText = @"Max BTC from order";
     }
     else if (self.orderType == BitcoinDE_SellOrderType) {
-        titleText = @"Sell bitcoins";
+        titleText = [NSString stringWithFormat:@"Sell bitcoins (%@)"
+                     , [SOXMarket_BitcoinDE_DefTypes paymentOptionStringForPaymentOption:self.orderBookPaymentOption]];
         amountToTradeDescriptionText = @"Sell bitcoins";
         minimumBTCAmountButtonText = @"Min BTC";
         maximalFidorBTCAmountButtonText = @"Max available BTC ";
