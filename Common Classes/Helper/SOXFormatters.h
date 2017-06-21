@@ -10,6 +10,9 @@
 
 @interface SOXFormatters : NSObject
 
+#pragma mark - Number Formatters
++ (NSNumberFormatter *)bitcoinNumberFormatter;
+
 #pragma mark - Date methods
 + (NSString *)stringDateTimeStringForRFC3339DateTimeString:(NSString *)rfc3339DateTimeString;
 + (NSString *)rfc3339DateTimeStringDate:(NSDate *)date;

@@ -7,37 +7,13 @@
 //
 
 #import "SOXBitcoinFormatter.h"
+#import "SOXFormatters.h"
 
 @implementation SOXBitcoinFormatter
-+ (NSNumberFormatter *)bitcoinFormatter {
-    static NSNumberFormatter *bitcoinFormatter;
-
-    static dispatch_once_t pred;
-
-    dispatch_once(&pred, ^{
-        bitcoinFormatter = [[NSNumberFormatter alloc] init];
-
-        bitcoinFormatter.locale= [NSLocale autoupdatingCurrentLocale];
-        bitcoinFormatter.minimumIntegerDigits = 1;
-        bitcoinFormatter.maximumIntegerDigits = 1000;
-        bitcoinFormatter.minimumFractionDigits = 2;
-        bitcoinFormatter.maximumFractionDigits = 8;
-
-        bitcoinFormatter.numberStyle =NSNumberFormatterCurrencyStyle;
-        bitcoinFormatter.currencySymbol = @"\u20BF";
-        bitcoinFormatter.currencyCode = @"\u20BF";
-        bitcoinFormatter.internationalCurrencySymbol = @"XBT";
-    });
-
-    return bitcoinFormatter;
-
-}
-
 - (NSString *)stringForObjectValue:(id)obj {
     NSString *stringForObjectValue = @"";
     if ([obj isKindOfClass:[NSNumber class]]) {
-        NSNumberFormatter *bitcoinFormatter = [SOXBitcoinFormatter bitcoinFormatter];
-
+        NSNumberFormatter *bitcoinFormatter = [SOXFormatters bitcoinNumberFormatter];
         stringForObjectValue = [bitcoinFormatter stringFromNumber:obj];
     }
     return stringForObjectValue;

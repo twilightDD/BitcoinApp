@@ -88,15 +88,21 @@
     return currencyStringFormatter;
 }
 
-+ (NSNumberFormatter *)btcFormatter {
++ (NSNumberFormatter *)bitcoinNumberFormatter {
     static dispatch_once_t pred;
     static NSNumberFormatter *btcFormatter = nil;
     dispatch_once(&pred, ^{
         btcFormatter = [NSNumberFormatter new];
-        [btcFormatter setLocale:[NSLocale autoupdatingCurrentLocale]];
-        [btcFormatter setMinimumIntegerDigits:1];
-        [btcFormatter setMinimumFractionDigits:8];
-        [btcFormatter setMaximumFractionDigits:8];
+
+        btcFormatter.minimumIntegerDigits = 1;
+        btcFormatter.minimumFractionDigits = 2;
+        btcFormatter.maximumFractionDigits = 8;
+
+        btcFormatter.locale= [NSLocale autoupdatingCurrentLocale];
+        btcFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
+        btcFormatter.currencySymbol = @"\u20BF";
+        btcFormatter.currencyCode = @"\u20BF";
+        btcFormatter.internationalCurrencySymbol = @"XBT";
     });
     return btcFormatter;
 }
@@ -211,7 +217,7 @@
     NSString *stringForBTCNumber = @"-";
     
     if (btcValue) {
-        NSNumberFormatter *btcFormatter = [SOXFormatters btcFormatter];
+        NSNumberFormatter *btcFormatter = [SOXFormatters bitcoinNumberFormatter];
         stringForBTCNumber = [btcFormatter stringFromNumber:btcValue];
     }
     
