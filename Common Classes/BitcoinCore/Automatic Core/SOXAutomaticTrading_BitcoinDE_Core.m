@@ -31,6 +31,8 @@
 @property (strong, nonatomic) NSDecimalNumber *debugNewAvailBTC; // TODO: debug
 
 
+@property (nonatomic) BOOL useBannerUpdateMechanicForBalanceTrades; // to use toggle balance trade mechanic
+
 @end
 
 @implementation SOXAutomaticTrading_BitcoinDE_Core
@@ -48,6 +50,9 @@
     dispatch_once(&pred, ^{
         sharedTradingCore = [SOXAutomaticTrading_BitcoinDE_Core new];
         [sharedTradingCore setupProperties];
+
+        // TODO: toggle balance trade mechanic
+        [(SOXAutomaticTrading_BitcoinDE_Core *)sharedTradingCore setUseBannerUpdateMechanicForBalanceTrades:NO];
     });
 
     return sharedTradingCore;
@@ -496,6 +501,7 @@
 
     for (NSUInteger idx = 0; idx < self.sellOrderBook.count; idx++) {
         SOXShowOrderbookData *sellOrder = [self.sellOrderBook objectAtIndex:idx];
+
 //        NSDecimalNumber *effectiveInterestRate = [self effectiveSellInterestRateForPrice:oldBuyPrice
 //                                                                        toReferencePrice:sellOrder.orderInformation_price];
         //        if ([oldBuyPrice isGreaterThanOrEqualTo:sellOrder.orderInformation_price]  ) { // TODO: interestRate!!!
@@ -522,7 +528,7 @@
         }
     }
     self.remainingSellBitcoinAmount = remainingBitcoinAmount;
-
+    // TODO: dont remove on nonbannerMechanics
     [self.sellOrderBook removeObjectsInArray:sellOrderBookDatasToRemove];
 
     return [balanceSellParameters copy];
@@ -645,8 +651,13 @@
             else if (orderType == BitcoinDE_SellOrderType) {
                 [self.sellBalanceTradeParameters addObject:parameters];
             }
+
             // update banner
             [self updateBanner];
+            if (!self.useBannerUpdateMechanicForBalanceTrades) {
+                [self createBalanceTrades];
+            }
+
         }
         else if (!errorMessage
                  && !wasAutoTrade) { // if no success and was balanceTrade: keep parameters for further balance trades
@@ -719,13 +730,6 @@
                           , dataOfInterest.orderInformation_price];
         [self informBuyDelegateWithNote:note];
 
-        { // TODO: Fake
-            if (!self.executeBalanceTradesForBuyTrades) {
-                SOXShowOrderbookData *buyOrder = [self.buyOrderBook objectAtIndex:0];
-                [self createFakeServerAnswerForBuyOrder:buyOrder];
-            }
-        }
-
         [self updateBuyStatus];
 
     }
@@ -762,13 +766,6 @@
                           , dataOfInterest.orderInformation_price];
         [self informSellDelegateWithNote:note];
         [self updateSellStatus];
-
-        { // TODO: Fake
-            if (!self.executeBalanceTradesForSellTrades) {
-                SOXShowOrderbookData *sellOrder = [self.sellOrderBook objectAtIndex:0];
-                [self createFakeServerAnswerForSellOrder:sellOrder];
-            }
-        }
     }
 }
 
@@ -950,6 +947,7 @@
         if ([[self.buyOrderBook objectAtIndex:0] isEqual:addOrderData]) {
             [self updateBuyStatus];
             [self checkForBuyableOrder];
+            return;
         }
         else if (!self.waitingForBannerUpdate
                  && (self.sellBalanceTradeParameters.count > 0
@@ -962,6 +960,16 @@
             [self createBalanceTrades];
             [self informBuyDelegateWithNote:@"~~~~~~~~~~~~~~~~"];
         }
+        if (self.buyOrderBook.count > 0
+            && self.sellOrderBook.count > 0) {
+            { // TODO: Fake
+                if (!self.executeBalanceTradesForBuyTrades) {
+                    SOXShowOrderbookData *buyOrder = [self.buyOrderBook objectAtIndex:0];
+                    [self createFakeServerAnswerForBuyOrder:buyOrder];
+                }
+            }
+        }
+
 
     }
     // Sell
@@ -984,6 +992,7 @@
         if ([[self.sellOrderBook objectAtIndex:0] isEqual:addOrderData]) {
             [self updateSellStatus];
             [self checkForSellableOrder];
+            return;
         }
         else if (!self.waitingForBannerUpdate
                  && (self.buyBalanceTradeParameters.count > 0
@@ -995,6 +1004,15 @@
             [self informSellDelegateWithNote:@"try to create new balanceTrades to BUY"];
             [self createBalanceTrades];
             [self informBuyDelegateWithNote:@"~~~~~~~~~~~~~~~~"];
+        }
+        if (self.buyOrderBook.count > 0
+            && self.sellOrderBook.count > 0) {
+            { // TODO: Fake
+                if (!self.executeBalanceTradesForSellTrades) {
+                    SOXShowOrderbookData *sellOrder = [self.sellOrderBook objectAtIndex:0];
+                    [self createFakeServerAnswerForSellOrder:sellOrder];
+                }
+            }
         }
     }
 }
@@ -1147,7 +1165,9 @@
 
         // Banner update erfolgreich
         self.waitingForBannerUpdate = NO;
-        [self createBalanceTrades];
+        if (self.useBannerUpdateMechanicForBalanceTrades) {
+            [self createBalanceTrades];
+        }
     }
     else {
         NSString *note = [NSString stringWithFormat:@"BannerUpdated UNsuccessful! - reload banner in 2 sec"];
