@@ -1087,11 +1087,15 @@
 
 
     NSDecimalNumber *newAvailBTC = accountInfoData.btcBalance_availableAmount;
-    if (self.debugNewAvailBTC) {
-        newAvailBTC = estBTC;
+
+    // TODO: Debug
+    {
+        if (self.debugNewAvailBTC) {
+            newAvailBTC = estBTC;
+        }
     }
 
-    if ([newAvailBTC isEqualTo:estBTC]) {
+    if ([newAvailBTC isEqualTo:estBTC]) { // TODO: Rundungsfehler?
         // Banner update erfolgreich
         [self createBalanceTrades];
     }

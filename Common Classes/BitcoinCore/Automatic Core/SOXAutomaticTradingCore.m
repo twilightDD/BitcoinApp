@@ -121,7 +121,7 @@
 
 #pragma mark - Automatic trading methods
 - (void)checkForBuyableOrder {
-    SOXShowOrderbookData *dataOfInterest  = [self.buyOrderBook objectAtIndex: 0];
+    SOXShowOrderbookData *dataOfInterest  = [self.buyOrderBook objectAtIndex:0];
     SOXShowOrderbookData *referenceData   = [self.buyOrderBook objectAtIndex:1];
     NSDecimalNumber *effectivInterestRate = [self effectiveBuyInterestRateForData:dataOfInterest toReferenceData:referenceData];
 
