@@ -350,13 +350,14 @@
         buyBTCSum = [buyBTCSum decimalNumberByMultiplyingBy:bitcoinFee];
 
         [self.buyBalanceTradeParameters removeAllObjects];
+
         if ([buyBTCSum isGreaterThan:[NSDecimalNumber zero]] ) {
             // new Paramater
 
-            NSDictionary *parameters = [SOXTradeJob_BitcoinDE_Data parameterBalanceTradingForOrderID:@"dummyBuyOrderID"
-                                                                                           orderType:BitcoinDE_BuyOrderType
-                                                                                       bitcoinAmount:buyBTCSum
-                                                                                               price:[NSDecimalNumber zero]];
+            NSDictionary *parameters = [SOXTradeJob_BitcoinDE_Data parameterAutomaticTradingForOrderID:@"dummyBuyOrderID"
+                                                                                             orderType:BitcoinDE_BuyOrderType
+                                                                                         bitcoinAmount:buyBTCSum
+                                                                                                 price:[NSDecimalNumber zero]];
             [self createBalanceTradesForTradeParameters:parameters];
         }
     }
@@ -369,11 +370,12 @@
         }
 
         [self.sellBalanceTradeParameters removeAllObjects];
+
         if ([sellBTCSum isGreaterThan:[NSDecimalNumber zero]] ) {
-            NSDictionary *parameters = [SOXTradeJob_BitcoinDE_Data parameterBalanceTradingForOrderID:@"dummySellOrderID"
-                                                                                           orderType:BitcoinDE_SellOrderType
-                                                                                       bitcoinAmount:sellBTCSum
-                                                                                               price:[NSDecimalNumber zero]];
+            NSDictionary *parameters = [SOXTradeJob_BitcoinDE_Data parameterAutomaticTradingForOrderID:@"dummySellOrderID"
+                                                                                             orderType:BitcoinDE_SellOrderType
+                                                                                         bitcoinAmount:sellBTCSum
+                                                                                                 price:[NSDecimalNumber zero]];
             [self createBalanceTradesForTradeParameters:parameters];
         }
     }
@@ -444,6 +446,8 @@
     NSDecimalNumber *remainingBitcoinAmount = [self.remainingBuyBitcoinAmount decimalNumberByAdding:[parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]];
     NSDecimalNumber *oldSellPrice = [parameters objectForKey:BitcoinDE_ExecuteTrade_Price];
 
+    NSMutableArray *buyOrderBookDatasToRemove = [NSMutableArray array];
+
     for (NSUInteger idx = 0; idx < self.buyOrderBook.count; idx++) {
         SOXShowOrderbookData *buyOrder = [self.buyOrderBook objectAtIndex:idx];
 
@@ -460,6 +464,7 @@
                                                                              orderType:BitcoinDE_BuyOrderType
                                                                          bitcoinAmount:amountToBuy];
             [balanceBuyParameters addObject:parameters];
+            [buyOrderBookDatasToRemove addObject:buyOrder];
 
             remainingBitcoinAmount = [remainingBitcoinAmount decimalNumberBySubtracting:amountToBuy];
             if ([remainingBitcoinAmount isEqualTo:[NSDecimalNumber zero]]) {
@@ -467,6 +472,8 @@
             }
         }
     }
+    [self.buyOrderBook removeObjectsInArray:buyOrderBookDatasToRemove];
+
     self.remainingBuyBitcoinAmount = remainingBitcoinAmount;
 
     return [balanceBuyParameters copy];
@@ -481,6 +488,8 @@
 
     NSDecimalNumber *remainingBitcoinAmount = [self.remainingSellBitcoinAmount decimalNumberByAdding:[parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]];
     NSDecimalNumber *oldBuyPrice = [parameters objectForKey:BitcoinDE_ExecuteTrade_Price];
+
+    NSMutableArray *sellOrderBookDatasToRemove = [NSMutableArray array];
 
     for (NSUInteger idx = 0; idx < self.sellOrderBook.count; idx++) {
         SOXShowOrderbookData *sellOrder = [self.sellOrderBook objectAtIndex:idx];
@@ -501,12 +510,17 @@
             [balanceSellParameters addObject:parameters];
 
             remainingBitcoinAmount = [remainingBitcoinAmount decimalNumberBySubtracting:amountToSell];
+
+            [sellOrderBookDatasToRemove addObject:sellOrder];
+
             if ([remainingBitcoinAmount isEqualTo:[NSDecimalNumber zero]]) {
                 break;
             }
         }
     }
     self.remainingSellBitcoinAmount = remainingBitcoinAmount;
+
+    [self.sellOrderBook removeObjectsInArray:sellOrderBookDatasToRemove];
 
     return [balanceSellParameters copy];
 }
