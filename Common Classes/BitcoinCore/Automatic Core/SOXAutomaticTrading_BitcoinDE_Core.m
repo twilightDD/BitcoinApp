@@ -1081,11 +1081,13 @@
     }
 
     NSDecimalNumber *diff = [buyBTCSum decimalNumberBySubtracting:sellBTCSum];
+
     NSDecimalNumber *estBTC = [self.availableBitcoinAmountBeforeBannerUpdate decimalNumberByAdding:diff];
+    NSDecimalNumber *btcSpectrum = [NSDecimalNumber decimalNumberWithString:@"0.0000001"];
+    NSDecimalNumber *estBTClow = [estBTC decimalNumberBySubtracting:btcSpectrum];
+    NSDecimalNumber *estBTChigh = [estBTC decimalNumberByAdding:btcSpectrum];
 
     SOXAccountInfoData *accountInfoData = [serverAnswer objectForKey:ServerAnswerPayloadKey];
-
-
     NSDecimalNumber *newAvailBTC = accountInfoData.btcBalance_availableAmount;
 
     // TODO: Debug
@@ -1095,11 +1097,46 @@
         }
     }
 
-    if ([newAvailBTC isEqualTo:estBTC]) { // TODO: Rundungsfehler?
+    NSString *note = [NSString stringWithFormat:@"BannerUpdated - bSum: %@ sSell: %@ diff: %@ estL: %@ est: %@ estH: new: %@"
+                      , buyBTCSum
+                      , sellBTCSum
+                      , estBTClow
+                      , estBTC
+                      , estBTChigh
+                      , newAvailBTC
+                      ];
+    if (self.buyBalanceTradeParameters.count > 0) {
+        [self informBuyDelegateWithNote:note];
+    }
+    else if (self.sellBalanceTradeParameters.count > 0) {
+        [self informSellDelegateWithNote:note];
+    }
+
+    // weil wir nur ein estimatedBTC haben, es aber zu kleinen Abweichungen kommen kann,
+    // wird hier mit einer "Unschärfe" gearbeitet um den neuen availBTCAmount zu prüfen
+    if ([estBTClow isLessThan:newAvailBTC]
+        && [estBTChigh isGreaterThan:newAvailBTC]) {
+
+        NSString *note = [NSString stringWithFormat:@"BannerUpdated SUCCESSFUL!"];
+        if (self.buyBalanceTradeParameters.count > 0) {
+            [self informBuyDelegateWithNote:note];
+        }
+        else if (self.sellBalanceTradeParameters.count > 0) {
+            [self informSellDelegateWithNote:note];
+        }
+
         // Banner update erfolgreich
         [self createBalanceTrades];
     }
     else {
+        NSString *note = [NSString stringWithFormat:@"BannerUpdated UNsuccessful! - reload banner in 2 sec"];
+        if (self.buyBalanceTradeParameters.count > 0) {
+            [self informBuyDelegateWithNote:note];
+        }
+        else if (self.sellBalanceTradeParameters.count > 0) {
+            [self informSellDelegateWithNote:note];
+        }
+
         // reload banner after a few seconds
         NSTimer *bannerReloadTimer  = [NSTimer scheduledTimerWithTimeInterval:2
                                                                       target:self
