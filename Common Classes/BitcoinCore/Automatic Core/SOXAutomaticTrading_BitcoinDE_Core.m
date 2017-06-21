@@ -26,7 +26,10 @@
 @interface SOXAutomaticTrading_BitcoinDE_Core () <SOXMarketCoreServerRequestProtocol, SOXSocketIOCoreProtocol>
 
 @property (strong, nonatomic) id requestShowAccountInfoNotification;
-@property (strong, nonatomic) NSDecimalNumber *debugNewAvailBTC;
+@property (nonatomic) BOOL waitingForBannerUpdate;
+
+@property (strong, nonatomic) NSDecimalNumber *debugNewAvailBTC; // TODO: debug
+
 
 @end
 
@@ -948,8 +951,9 @@
             [self updateBuyStatus];
             [self checkForBuyableOrder];
         }
-        else if (self.sellBalanceTradeParameters.count > 0
-                 || [self.remainingSellBitcoinAmount isGreaterThan:[NSDecimalNumber zero]]) {
+        else if (!self.waitingForBannerUpdate
+                 && (self.sellBalanceTradeParameters.count > 0
+                     || [self.remainingSellBitcoinAmount isGreaterThan:[NSDecimalNumber zero]])) {
             // create balancePayments
             [self informBuyDelegateWithNote:@"~~~~~~~~~~~~~~~~"];
             NSString *note = [NSString stringWithFormat:@"Socket addOrder BUY & remainingSellBitcoinAmount %@", self.remainingSellBitcoinAmount];
@@ -981,8 +985,9 @@
             [self updateSellStatus];
             [self checkForSellableOrder];
         }
-        else if (self.buyBalanceTradeParameters.count > 0
-                 || [self.remainingBuyBitcoinAmount isGreaterThan:[NSDecimalNumber zero]]) {
+        else if (!self.waitingForBannerUpdate
+                 && (self.buyBalanceTradeParameters.count > 0
+                     || [self.remainingBuyBitcoinAmount isGreaterThan:[NSDecimalNumber zero]])) {
             // create balancePayments
             [self informSellDelegateWithNote:@"~~~~~~~~~~~~~~~~"];
             NSString *note = [NSString stringWithFormat:@"Socket addOrder SELL & remainingBuyBitcoinAmount %@", self.remainingBuyBitcoinAmount];
@@ -1073,6 +1078,7 @@
 
 #pragma mark - Banner updates
 - (void)updateBanner {
+    self.waitingForBannerUpdate = YES;
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountInfoCommandType
                                             withParameter:nil
                                                 respondTo:nil];
@@ -1140,6 +1146,7 @@
         }
 
         // Banner update erfolgreich
+        self.waitingForBannerUpdate = NO;
         [self createBalanceTrades];
     }
     else {
