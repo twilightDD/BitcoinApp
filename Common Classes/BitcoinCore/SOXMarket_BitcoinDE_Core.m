@@ -639,26 +639,6 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
     }
 
     if (sharedCore.networkQueueIsRunning) {
-
-//        NSMutableArray *runningNetworkRequestsDescriptions = [NSMutableArray array];
-//        for (NSDictionary *taskDictionary in sharedCore.prioritizedNetworkQueue) {
-//            BitcoinDE_ServerCommandType serverCommand = [[taskDictionary objectForKey:ServerAnswerServerCommandKey] unsignedIntegerValue];
-//            NSString *taskDescription = [NSString stringWithFormat:@"p: %@"
-//                                         , [SOXMarket_BitcoinDE_Core commandDescriptionForServerCommand:serverCommand]];
-//            [runningNetworkRequestsDescriptions addObject:taskDescription];
-//        }
-//        for (NSDictionary *taskDictionary in sharedCore.defaultNetworkQueue) {
-//            BitcoinDE_ServerCommandType serverCommand = [[taskDictionary objectForKey:ServerAnswerServerCommandKey] unsignedIntegerValue];
-//            NSString *taskDescription = [NSString stringWithFormat:@"d: %@"
-//                                         , [SOXMarket_BitcoinDE_Core commandDescriptionForServerCommand:serverCommand]];
-//            [runningNetworkRequestsDescriptions addObject:taskDescription];
-//        }
-//        NSString *runningNetworkRequestsDescription = [runningNetworkRequestsDescriptions componentsJoinedByString:@" - "];
-//        NSString *statusBarString = [NSString stringWithFormat:@"p:%tu/d:%tu %@"
-//                                     , sharedCore.prioritizedNetworkQueue.count
-//                                     , sharedCore.defaultNetworkQueue.count
-//                                     , runningNetworkRequestsDescription];
-
         NSMutableArray *runningRequestDescriptions = [NSMutableArray array];
         for (NSDictionary *taskDictionary in sharedCore.runningRequests) {
             BitcoinDE_ServerCommandType serverCommand = [[taskDictionary objectForKey:ServerAnswerServerCommandKey] unsignedIntegerValue];
@@ -671,7 +651,6 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 
         dispatch_async(dispatch_get_main_queue(), ^{
             [sharedCore.delegateForStatusBarUpdates statusBarUpdated:statusBarString];
-            NSLog(statusBarString);
         });
     }
 }

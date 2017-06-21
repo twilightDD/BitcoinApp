@@ -135,10 +135,6 @@
 }
 
 - (void)startAutomaticTrading {
-    NSNumberFormatter *maxInvestmentTextFieldFormatter = self.maxInvestmentTextField.formatter;
-//    [fieldFormatter numberFromString:fieldEditor.string]
-
-
     NSDecimalNumber *maximalFidorAmount = self.maxInvestmentTextField.objectValue;
     NSDecimalNumber *interestRate = self.minInterestTextField.objectValue;
     switch (self.orderType) {
@@ -270,11 +266,6 @@
 }
 - (void)automaticTradingDidStop {
     self.statusTextField.stringValue = @"Automatic trading did stop";
-}
-
-- (void)currentLimitHasChangedTo:(NSNumber *)newLimit {
-    NSLog(@"currentLimitHasChangedTo %@ - orderType: %tu", newLimit, self.orderType);
-    self.statusTextField.stringValue = [NSString stringWithFormat:@"Limit: %0.3f (%@)", newLimit.doubleValue, [[NSDate date] description]];
 }
 
 @end

@@ -30,9 +30,6 @@
 
 + (instancetype)orderBookDataForSocketIODictionary:(NSDictionary *)addOrderSocketIODictionary;
 
-+ (double)highestPriceOfOrderBookDatas:(NSMutableArray <SOXShowOrderbook_BitcoinDE_Data *> *)orderbook;
-+ (double)lowestPriceOfOrderBookDatas:(NSMutableArray <SOXShowOrderbook_BitcoinDE_Data *> *)orderbook;
-
 - (void)updateOrderbookDataWith:(NSDictionary *)changes;
 
 @end

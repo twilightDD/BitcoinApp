@@ -538,20 +538,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 
 - (IBAction)maximalOrderBTCAmountButtonAction:(NSButton *)sender {
     self.amountToTrade = self.maxAmountOrder;
-    return;
-    if (self.orderType == BitcoinDE_BuyOrderType) {
-        self.amountToTrade = self.orderBookData.orderInformation_maxAmount;
-    }
-    else if (self.orderType == BitcoinDE_SellOrderType) {
-        if ([[SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount isLessThan:self.orderBookData.orderInformation_maxAmount]) {
-            self.amountToTrade = [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount;
-        }
-        else {
-            self.amountToTrade = self.orderBookData.orderInformation_maxAmount;
-        }
-    }
 }
-
 
 #pragma mark - Manual Setters
 - (void)setMaxAmountOrder:(NSDecimalNumber *)maxAmountOrder {

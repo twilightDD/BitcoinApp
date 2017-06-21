@@ -177,19 +177,15 @@
     // register for banner update notifications
     NSOperationQueue *mainQueue = [NSOperationQueue mainQueue];
 
-    weakify(self)
     core.requestShowAccountInfoNotification = [[NSNotificationCenter defaultCenter] addObserverForName:BitcoinDE_Notification_RequestShowAccountInfo
                                                                                                 object:nil
                                                                                                  queue:mainQueue
                                                                                             usingBlock:^(NSNotification * _Nonnull note) {
-                                                                                                strongify(self)
-
                                                                                                 [[SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore] bannerWasUpdated:note.object];
                                                                                             }
                                                ];
-
-
 }
+
 + (void)checkRegisterForSocketUpdatesStatus {
     SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
 

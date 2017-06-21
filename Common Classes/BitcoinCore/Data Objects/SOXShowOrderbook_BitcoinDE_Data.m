@@ -155,41 +155,10 @@
 
 }
 
-#pragma mark - Private Class methods
-+ (double)highestPriceOfOrderBookDatas:(NSMutableArray <SOXShowOrderbook_BitcoinDE_Data *> *)orderbook {
-    NSNumber *highestPrice = [orderbook valueForKeyPath:@"@max.orderInformation_price"];
-    return highestPrice.doubleValue;
-}
-
-+ (double)lowestPriceOfOrderBookDatas:(NSMutableArray <SOXShowOrderbook_BitcoinDE_Data *> *)orderbook {
-    NSNumber *lowestPrice = [orderbook valueForKeyPath:@"@min.orderInformation_price"];
-    return lowestPrice.doubleValue;
-}
-
-
-+ (double)currentAutomaticPriceLimitOfOrderBook:(NSMutableArray <SOXShowOrderbookData *> *)orderbook
-                                   forOrderType:(BitcoinDE_OrderType)orderType {
-    NSNumber *priceLimit = @0;
-    if (orderbook) {
-        switch (orderType) {
-            case BitcoinDE_BuyOrderType:
-                priceLimit = [orderbook valueForKeyPath:@"@min.orderInformation_price"];
-                break;
-            case BitcoinDE_SellOrderType:
-                priceLimit = [orderbook valueForKeyPath:@"@max.orderInformation_price"];
-                break;
-            default:
-                break;
-        }
-    }
-    
-    return priceLimit.doubleValue;
-}
-
 + (SOXShowOrderbookData *)orderbookDataForOrderDictionary:(NSDictionary *)orderDictionary {
     SOXShowOrderbook_BitcoinDE_Data *orderbookData = [[SOXShowOrderbook_BitcoinDE_Data alloc] init];
     [orderbookData setupOrderbookDataForOrderDictionary:orderDictionary];
-     
+
     return orderbookData;
 }
 
