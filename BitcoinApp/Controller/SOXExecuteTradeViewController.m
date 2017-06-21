@@ -183,19 +183,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
                     }
                 }
                 else if (self.orderBookPaymentOption == BitcoinDE_PaymentOptionExpressAndSepa) {
-                    if ([self.maxPossibleBTCAmountToTrade isGreaterThanOrEqualTo:self.minAmountOrder]
-                        && [self.maxAmountOrder isLessThanOrEqualTo:self.maxPossibleBTCAmountToTrade]) {
-                        self.userInformationText = @"Express&SEPA - only Express";
-                        self.executePaymentOption = BitcoinDE_PaymentOptionExpressOnly;
-                        self.maxAmountOrder = nil;
-                        self.executeTradeIsPossible = YES;
-                    }
-                    else if ([self.maxPossibleBTCAmountToTrade isGreaterThanOrEqualTo:self.minAmountOrder]) {
-                        self.userInformationText = @"Express&SEPA";
-                        self.executePaymentOption = BitcoinDE_PaymentOptionExpressAndSepa;
-                        self.executeTradeIsPossible = YES;
-                    }
-                    else if ([self.maxPossibleBTCAmountToTrade isLessThan:self.minAmountOrder]) {
+                    if ([self.maxPossibleBTCAmountToTrade isLessThan:self.minAmountOrder]) {
                         self.userInformationText = [NSString stringWithFormat:@"Express&SEPA - only SEPA - you don't have enough fidor reservation (%@)"
                                                     , [SOXFormatters currencyStringForNumber:self.availableFidorAmount
                                                                                 roundingMode:NSNumberFormatterRoundDown]];
@@ -203,6 +191,18 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
                         self.executePaymentOption = BitcoinDE_PaymentOptionSEPAOnly;
                         self.executeTradeIsPossible = YES;
                     }
+                    else if ([self.maxAmountOrder isLessThanOrEqualTo:self.maxPossibleBTCAmountToTrade]) {
+                        self.userInformationText = @"Express&SEPA - Express";
+                        self.executePaymentOption = BitcoinDE_PaymentOptionExpressOnly;
+                        self.maxPossibleBTCAmountToTrade = nil;
+                        self.executeTradeIsPossible = YES;
+                    }
+                    else if ([self.maxPossibleBTCAmountToTrade isGreaterThanOrEqualTo:self.minAmountOrder]) {
+                        self.userInformationText = @"Express&SEPA";
+                        self.executePaymentOption = BitcoinDE_PaymentOptionExpressAndSepa;
+                        self.executeTradeIsPossible = YES;
+                    }
+
                     else {
                         self.userInformationText = @"Stranged";
                         self.executeTradeIsPossible = NO;
@@ -252,6 +252,27 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
             }
         }
     }
+
+    // set formatter bounds
+    NSNumberFormatter *amountToTradeTextFieldFormatter = self.amountToTradeTextField.formatter;
+    NSDecimalNumber *formatterCorrection = [NSDecimalNumber decimalNumberWithString:@"0.000000001"];
+
+    amountToTradeTextFieldFormatter.minimum = [self.minAmountOrder decimalNumberBySubtracting:formatterCorrection];
+    NSDecimalNumber *maximum;
+    if (self.maxPossibleBTCAmountToTrade && self.maxAmountOrder) {
+        maximum = [SOXFormatters lesserDecimalNumberFrom:self.maxPossibleBTCAmountToTrade
+                                                     and:self.maxAmountOrder];
+    }
+    else if (self.maxPossibleBTCAmountToTrade) {
+        maximum = self.maxPossibleBTCAmountToTrade;
+    }
+    else if (self.maxAmountOrder) {
+        maximum = self.maxAmountOrder;
+    }
+    amountToTradeTextFieldFormatter.maximum = [maximum decimalNumberByAdding:formatterCorrection];
+
+    NSLog(@"Formatter bounds - min: %@ - max: %@", amountToTradeTextFieldFormatter.minimum, amountToTradeTextFieldFormatter.maximum);
+    NSLog(@"~~~");
 }
 
 - (void)setupUI {
@@ -331,7 +352,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
         self.userInformationTextField.stringValue   = @"";
     }
 
-    [self setupExecuteTradeButton];
+//    [self setupExecuteTradeButton];
     self.cancelButton.title = @"Cancel";
     
     self.minMaxPossibleAmountTextField.stringValue = [NSString stringWithFormat:@"(min: %@, max: %@)",
@@ -421,10 +442,13 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
         // Express or Sepa
         if (self.orderBookPaymentOption == BitcoinDE_PaymentOptionExpressAndSepa
             && self.defaultPaymentOption == BitcoinDE_PaymentOptionExpressAndSepa) {
-            if (self.maxPossibleBTCAmountToTrade && [self.amountToTrade isLessThanOrEqualTo:self.maxPossibleBTCAmountToTrade]) {
+            if ((self.maxPossibleBTCAmountToTrade && [self.amountToTrade isLessThanOrEqualTo:self.maxPossibleBTCAmountToTrade])
+                || (self.maxAmountOrder && [self.amountToTrade isLessThanOrEqualTo:self.maxAmountOrder])) {
                 self.executePaymentOption = BitcoinDE_PaymentOptionExpressOnly;
             }
-            else if (self.maxAmountOrder && [self.amountToTrade isLessThanOrEqualTo:self.maxAmountOrder]){
+            else if (self.maxAmountOrder
+                     && self.maxPossibleBTCAmountToTrade
+                     && [self.amountToTrade isGreaterThan:self.maxPossibleBTCAmountToTrade]){
                 self.executePaymentOption = BitcoinDE_PaymentOptionSEPAOnly;
             }
             else {
@@ -437,7 +461,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     if (validationResult) {
         NSDecimalNumber *volume = [self.amountToTrade decimalNumberByMultiplyingBy:self.orderBookData.orderInformation_price];
         self.volumeToTradeTextField.stringValue = [SOXFormatters currencyStringForNumber:volume
-                                                                            roundingMode:NSNumberFormatterRoundUp];
+                                                                            roundingMode:NSNumberFormatterRoundHalfUp];
         self.mayExecuteTrade = YES;
     }
     else {
