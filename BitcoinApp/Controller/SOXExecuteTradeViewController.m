@@ -231,7 +231,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
                 }
                 else if ([self.maxPossibleBTCAmountToTrade isLessThan:self.maxAmountOrder]) {
                     self.maxAmountOrder = nil;
-                    self.userInformationText = [NSString stringWithFormat:@"You may sell all my bitcoins (%@)"
+                    self.userInformationText = [NSString stringWithFormat:@"You may sell all your bitcoins (%@)"
                                                 , [SOXFormatters stringForBTCNumber:self.availableBitcoinAmount]];
                     self.executeTradeIsPossible = YES;
                 }
