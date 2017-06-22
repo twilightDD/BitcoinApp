@@ -121,6 +121,13 @@
 
 #pragma mark - Automatic trading methods
 - (void)checkForBuyableOrder {
+    if (self.buyOrderBook.count < 2) {
+        NSString *note = [NSString stringWithFormat:@"no buy - too less entries with payOption 1 or 3 in buyOrderBook (count: %tu)"
+                          , self.buyOrderBook.count];
+        [self informBuyDelegateWithNote:note];
+        return;
+    }
+
     SOXShowOrderbookData *dataOfInterest  = [self.buyOrderBook objectAtIndex:0];
     SOXShowOrderbookData *referenceData   = [self.buyOrderBook objectAtIndex:1];
     NSDecimalNumber *effectivInterestRate = [self effectiveBuyInterestRateForData:dataOfInterest toReferenceData:referenceData];
@@ -139,6 +146,10 @@
         [self informBuyDelegateWithNote:note];
     }
     else {
+        // check for potential balance trade orders in sellOrderBook
+        
+
+
         [self informBuyDelegateWithNote:@"------"];
         NSString *note = [NSString stringWithFormat:@"TRY TO BUY %@", statisticForNote];
 
@@ -149,6 +160,13 @@
 }
 
 - (void)checkForSellableOrder {
+    if (self.sellOrderBook.count < 2) {
+        NSString *note = [NSString stringWithFormat:@"no sell - too less entries with payOption 1 or 3 in sellOrderBook (count: %tu)"
+                          , self.sellOrderBook.count];
+        [self informSellDelegateWithNote:note];
+        return;
+    }
+
     SOXShowOrderbookData *dataOfInterest  = [self.sellOrderBook objectAtIndex:0];
     SOXShowOrderbookData *referenceData   = [self.sellOrderBook objectAtIndex:1];
     NSDecimalNumber *effectivInterestRate = [self effectiveSellInterestRateForData:dataOfInterest toReferenceData:referenceData];
