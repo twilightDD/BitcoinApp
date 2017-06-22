@@ -480,7 +480,10 @@
             }
         }
     }
-    [self.buyOrderBook removeObjectsInArray:buyOrderBookDatasToRemove];
+    // TODO: dont remove on nonbannerMechanics
+    if (self.useBannerUpdateMechanicForBalanceTrades) {
+        [self.buyOrderBook removeObjectsInArray:buyOrderBookDatasToRemove];
+    }
 
     self.remainingBuyBitcoinAmount = remainingBitcoinAmount;
 
@@ -528,8 +531,11 @@
         }
     }
     self.remainingSellBitcoinAmount = remainingBitcoinAmount;
+
     // TODO: dont remove on nonbannerMechanics
-    [self.sellOrderBook removeObjectsInArray:sellOrderBookDatasToRemove];
+    if (self.useBannerUpdateMechanicForBalanceTrades) {
+        [self.sellOrderBook removeObjectsInArray:sellOrderBookDatasToRemove];
+    }
 
     return [balanceSellParameters copy];
 }
@@ -798,11 +804,15 @@
     NSString *note = [NSString stringWithFormat:@"removed order - orderID %@", orderID];
     if ([self removeOrderWithOrderID:orderID fromOrderBook:self.buyOrderBook]) {
         [self updateBuyStatus];
+        note = [note stringByAppendingString:[NSString stringWithFormat:@" (bOB.count: %tu)"
+                                              ,self.buyOrderBook.count]];
         [self informBuyDelegateWithNote:note];
     }
 
     else if ([self removeOrderWithOrderID:orderID fromOrderBook:self.sellOrderBook]) {
         [self updateSellStatus];
+        note = [note stringByAppendingString:[NSString stringWithFormat:@" (sOB.count: %tu)"
+                                              ,self.sellOrderBook.count]];
         [self informSellDelegateWithNote:note];
     }
     else {
@@ -933,7 +943,8 @@
         self.buyOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:self.buyOrderBook
                                                                    forOrderType:BitcoinDE_BuyOrderType];
 
-        NSString *note = [NSString stringWithFormat:@"added buy - ID: %@ - pO: %@ - type: offer - idx %tu - p: %@ - minA: %@ - maxA: %@ - iR %@"
+        NSString *note = [NSString stringWithFormat:@"added buy (bOB.count: %tu)- ID: %@ - pO: %@ - type: offer - idx %tu - p: %@ - minA: %@ - maxA: %@ - iR %@"
+                          , self.buyOrderBook.count
                           , addOrderDataOrderID
                           , addOrderData.orderRequirements_paymentOption
                           , [self.buyOrderBook indexOfObject:addOrderData]
@@ -978,7 +989,8 @@
         self.sellOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:self.sellOrderBook
                                                                     forOrderType:BitcoinDE_SellOrderType];
 
-        NSString *note = [NSString stringWithFormat:@"added sell - ID: %@ - pO: %@ - type: offer - idx %tu - p: %@ - minA: %@ - maxA: %@ - iR %@"
+        NSString *note = [NSString stringWithFormat:@"added sell (sOB.count: %tu)- ID: %@ - pO: %@ - type: offer - idx %tu - p: %@ - minA: %@ - maxA: %@ - iR %@"
+                          , self.sellOrderBook.count
                           , addOrderDataOrderID
                           , addOrderData.orderRequirements_paymentOption
                           , [self.sellOrderBook indexOfObject:addOrderData]
@@ -1022,19 +1034,31 @@
     if ([orderInformationType isEqualToString:BitcoinDE_WebSocket_BuyOrderType]) {
         [self.buySEPAOrderBook addObject:addSEPAOrderData];
 
-        NSString *note = [NSString stringWithFormat:@"~ new SEPA: type offer - order - orderID: %@ - payO: %@ - IR %@"
+        NSDecimalNumber *effectiveBuyInterestRate;
+        if (self.buyOrderBook.count > 1) {
+            effectiveBuyInterestRate = [self effectiveBuyInterestRateForData:addSEPAOrderData
+                                                             toReferenceData:[self.buyOrderBook objectAtIndex:1]];
+        }
+
+        NSString *note = [NSString stringWithFormat:@"~ new SEPA (bSepa.count: %tu): type offer - order - orderID: %@ - payO: %@ - IR %@"
+                          , self.buySEPAOrderBook.count
                           , addSEPAOrderData.orderInformation_orderID
                           , addSEPAOrderData.orderRequirements_paymentOption
-                          , [self effectiveBuyInterestRateForData:addSEPAOrderData toReferenceData:[self.buyOrderBook objectAtIndex:1]]];
+                          , effectiveBuyInterestRate ? effectiveBuyInterestRate : @"NaN (buyOrderBook has too less entries"];
         [self informBuyDelegateWithNote:note];
     }
     else if ([orderInformationType isEqualToString:BitcoinDE_WebSocket_SellOrderType]) {
         [self.sellSEPAOrderBook addObject:addSEPAOrderData];
-
-        NSString *note = [NSString stringWithFormat:@"~ new SEPA: type order - orderID: %@ - payO: %@ - IR %@"
+        NSDecimalNumber *effectiveSellInterestRate;
+        if (self.sellOrderBook.count > 1) {
+            effectiveSellInterestRate = [self effectiveSellInterestRateForData:addSEPAOrderData
+                                                               toReferenceData:[self.sellOrderBook objectAtIndex:1]];
+        }
+        NSString *note = [NSString stringWithFormat:@"~ new SEPA (sSepa.count: %tu): type order - orderID: %@ - payO: %@ - IR %@"
+                          , self.sellSEPAOrderBook.count
                           , addSEPAOrderData.orderInformation_orderID
                           , addSEPAOrderData.orderRequirements_paymentOption
-                          , [self effectiveSellInterestRateForData:addSEPAOrderData toReferenceData:[self.sellOrderBook objectAtIndex:1]]];
+                          , effectiveSellInterestRate ? effectiveSellInterestRate : @"NaN (sellOrderBook has too less entries"];
         [self informSellDelegateWithNote:note];
     }
 }
