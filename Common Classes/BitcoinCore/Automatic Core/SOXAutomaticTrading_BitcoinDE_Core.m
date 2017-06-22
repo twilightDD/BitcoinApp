@@ -23,18 +23,22 @@
 
 @import AppKit;
 
+#pragma mark - Interface
 @interface SOXAutomaticTrading_BitcoinDE_Core () <SOXMarketCoreServerRequestProtocol, SOXSocketIOCoreProtocol>
 
+#pragma mark | Properties
 @property (strong, nonatomic) id requestShowAccountInfoNotification;
+
+@property (nonatomic) BOOL automaticTradingIsRunning;
 @property (nonatomic) BOOL waitingForBannerUpdate;
 
 @property (strong, nonatomic) NSDecimalNumber *debugNewAvailBTC; // TODO: debug
-
 
 @property (nonatomic) BOOL useBannerUpdateMechanicForBalanceTrades; // to use toggle balance trade mechanic
 
 @end
 
+#pragma mark - Implementation
 @implementation SOXAutomaticTrading_BitcoinDE_Core
 
 - (void)dealloc {
@@ -118,6 +122,14 @@
             [tradingCore informBuyDelegateWithNote:note];
             NSString *note2 = [NSString stringWithFormat:@"START: Interest rate %@%%", tradingCore.buyInterestRate];
             [tradingCore informBuyDelegateWithNote:note2];
+            NSString *note3;
+            if ([SOXAutomaticTrading_BitcoinDE_Core registerForWebSocketUpdates]) {
+                note3 = @"Fetching Orderbooks ...";
+            }
+            else {
+                note3 = @"Orderbooks already fetched";
+            }
+            [tradingCore informBuyDelegateWithNote:note3];
         }
             break;
         case BitcoinDE_SellOrderType: {
@@ -128,6 +140,14 @@
 
             NSString *note2 = [NSString stringWithFormat:@"START: Interest rate %@%%", tradingCore.sellInterestRate];
             [tradingCore informSellDelegateWithNote:note2];
+            NSString *note3;
+            if ([SOXAutomaticTrading_BitcoinDE_Core registerForWebSocketUpdates]) {
+                note3 = @"Fetching Orderbooks ...";
+            }
+            else {
+                note3 = @"Orderbooks already fetched";
+            }
+            [tradingCore informSellDelegateWithNote:note3];
         }
             break;
         default:
@@ -135,7 +155,7 @@
             break;
     }
 
-    [SOXAutomaticTrading_BitcoinDE_Core registerForWebSocketUpdates];
+
 }
 
 + (void)deRegisterController:(id)controller forUpdatesForOrderType:(BitcoinDE_OrderType)orderType {
@@ -161,37 +181,48 @@
 }
 
 #pragma mark - WebSocket methods
-+ (void)registerForWebSocketUpdates {
++ (BOOL)registerForWebSocketUpdates {
     SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
 
-    NSDictionary *buyParameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:BitcoinDE_BuyOrderType
-                                                                 onlyExpressPaymentOption:YES];
+    if (core.automaticTradingIsRunning) {
+        return NO;
+    }
 
-    NSMutableDictionary *newBuyParameters = [buyParameters mutableCopy];
-    [newBuyParameters setObject:@1 forKey:BitcoinDE_ShowMyOrders_OrderRequirements_OnlyKYCFull];
+    { // get buyOrderBook
+        NSDictionary *buyParameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:BitcoinDE_BuyOrderType
+                                                                     onlyExpressPaymentOption:YES];
 
-    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType
-                                            withParameter:[newBuyParameters copy]
-                                                respondTo:core];
-    NSDictionary *sellParameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:BitcoinDE_SellOrderType
-                                                                  onlyExpressPaymentOption:YES];
+        NSMutableDictionary *newBuyParameters = [buyParameters mutableCopy];
+        [newBuyParameters setObject:@1 forKey:BitcoinDE_ShowMyOrders_OrderRequirements_OnlyKYCFull];
 
-    NSMutableDictionary *newSellParameters = [sellParameters mutableCopy];
-    [newSellParameters setObject:@1 forKey:BitcoinDE_ShowMyOrders_OrderRequirements_OnlyKYCFull];
-    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType
-                                            withParameter:[newSellParameters copy]
-                                                respondTo:core];
+        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType
+                                                withParameter:[newBuyParameters copy]
+                                                    respondTo:core];
+    }
+
+    { // get sellOrderBook
+        NSDictionary *sellParameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:BitcoinDE_SellOrderType
+                                                                      onlyExpressPaymentOption:YES];
+        
+        NSMutableDictionary *newSellParameters = [sellParameters mutableCopy];
+        [newSellParameters setObject:@1 forKey:BitcoinDE_ShowMyOrders_OrderRequirements_OnlyKYCFull];
+        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType
+                                                withParameter:[newSellParameters copy]
+                                                    respondTo:core];
+    }
 
     // register for banner update notifications
-    NSOperationQueue *mainQueue = [NSOperationQueue mainQueue];
-
     core.requestShowAccountInfoNotification = [[NSNotificationCenter defaultCenter] addObserverForName:BitcoinDE_Notification_RequestShowAccountInfo
                                                                                                 object:nil
-                                                                                                 queue:mainQueue
+                                                                                                 queue:[NSOperationQueue mainQueue]
                                                                                             usingBlock:^(NSNotification * _Nonnull note) {
-                                                                                                [[SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore] bannerWasUpdated:note.object];
+                                                                                                [core bannerWasUpdated:note.object];
                                                                                             }
                                                ];
+
+    core.automaticTradingIsRunning = YES;
+
+    return YES;
 }
 
 + (void)checkRegisterForSocketUpdatesStatus {
