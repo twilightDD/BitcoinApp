@@ -37,8 +37,8 @@
     [self setRemainingBuyBitcoinAmount:[NSDecimalNumber zero]];
     [self setRemainingSellBitcoinAmount:[NSDecimalNumber zero]];
 
-    [self setBuyBalanceTradeParameters:[NSMutableArray array]];
-    [self setSellBalanceTradeParameters:[NSMutableArray array]];
+    [self setBuyBalanceTradeParametersBacklog:[NSMutableArray array]];
+    [self setSellBalanceTradeParametersBacklog:[NSMutableArray array]];
 
 }
 #pragma mark - Manual setters
@@ -120,12 +120,12 @@
 }
 
 #pragma mark - Automatic trading methods
-- (void)checkForBuyableOrder {
+- (BOOL)checkForBuyableOrder {
     if (self.buyOrderBook.count < 2) {
         NSString *note = [NSString stringWithFormat:@"no buy - too less entries with payOption 1 or 3 in buyOrderBook (count: %tu)"
                           , self.buyOrderBook.count];
         [self informBuyDelegateWithNote:note];
-        return;
+        return NO;
     }
 
     SOXShowOrderbookData *dataOfInterest  = [self.buyOrderBook objectAtIndex:0];
@@ -144,6 +144,7 @@
     if ([effectivInterestRate isLessThan:self.buyInterestRate]) {
         NSString *note = [NSString stringWithFormat:@"no buy %@", statisticForNote];
         [self informBuyDelegateWithNote:note];
+        return NO;
     }
     else {
         // check for potential balance trade orders in sellOrderBook
@@ -156,15 +157,16 @@
         [self informBuyDelegateWithNote:note];
         NSDecimalNumber *btcAmountToBuy= [self btcBuyAmountForOrder:dataOfInterest];
         [self tryToBuy:dataOfInterest btcAmountToBuy:btcAmountToBuy];
+        return YES;
     }
 }
 
-- (void)checkForSellableOrder {
+- (BOOL)checkForSellableOrder {
     if (self.sellOrderBook.count < 2) {
         NSString *note = [NSString stringWithFormat:@"no sell - too less entries with payOption 1 or 3 in sellOrderBook (count: %tu)"
                           , self.sellOrderBook.count];
         [self informSellDelegateWithNote:note];
-        return;
+        return NO;
     }
 
     SOXShowOrderbookData *dataOfInterest  = [self.sellOrderBook objectAtIndex:0];
@@ -183,6 +185,7 @@
     if ([effectivInterestRate isLessThan:self.sellInterestRate]) {
         NSString *note = [NSString stringWithFormat:@"no sell %@", statisticForNote];
         [self informSellDelegateWithNote:note];
+        return NO;
     }
     else {
         [self informSellDelegateWithNote:@"------"];
@@ -191,6 +194,7 @@
 
         NSDecimalNumber *btcAmountToSell = [self btcSellAmountForOrder:dataOfInterest];
         [self tryToSell:dataOfInterest btcAmountToSell:btcAmountToSell];
+        return YES;
     }
 }
 

@@ -38,8 +38,8 @@
 @property (strong, nonatomic) NSDecimalNumber *remainingSellBitcoinAmount;
 
 @property (strong, nonatomic) NSDecimalNumber *availableBitcoinAmountBeforeBannerUpdate;
-@property (strong, nonatomic) NSMutableArray *buyBalanceTradeParameters; // Keep parameters we have to balance after banner update
-@property (strong, nonatomic) NSMutableArray *sellBalanceTradeParameters; // Keep parameters we have to balance after banner update
+@property (strong, nonatomic) NSMutableArray *buyBalanceTradeParametersBacklog; // Keep parameters we have to balance after banner update
+@property (strong, nonatomic) NSMutableArray *sellBalanceTradeParametersBacklog; // Keep parameters we have to balance after banner update
 
 - (void)setupProperties;
 
@@ -54,8 +54,8 @@
                                       toReferencePrice:(NSDecimalNumber *)referencePrice;
 
 #pragma mark - Automatic trading methods
-- (void)checkForBuyableOrder;
-- (void)checkForSellableOrder;
+- (BOOL)checkForBuyableOrder;
+- (BOOL)checkForSellableOrder;
 - (NSDecimalNumber *)btcBuyAmountForOrder:(SOXShowOrderbookData *)orderToBuy;
 - (NSDecimalNumber *)btcSellAmountForOrder:(SOXShowOrderbookData *)orderToSell;
 
