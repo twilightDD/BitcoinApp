@@ -301,70 +301,57 @@
     return btcAmountToSell;
 }
 
-- (NSDecimalNumber *)potentialSellBalanceTradeAmountForBuyAmount:(NSDecimalNumber *)btcAmountToBuy
-                                                        forPrice:(NSDecimalNumber *)buyPrice {
-    NSDecimalNumber *remainingBitcoinAmount = [btcAmountToBuy copy];
-
-    // add fee to price
-    NSDecimalNumber *buyPriceWithFee = [buyPrice decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"1.004"]];
-
-    for (NSUInteger idx = 0; idx < self.sellOrderBook.count; idx++) {
-        SOXShowOrderbookData *sellOrder = [self.sellOrderBook objectAtIndex:idx];
-
-        if ([sellOrder.orderInformation_price isLessThan:buyPriceWithFee]) {
-            break;
-        }
-
-        if ([sellOrder.orderInformation_minAmount isLessThanOrEqualTo:remainingBitcoinAmount]) {
-            NSDecimalNumber *amountToSell = [SOXFormatters lesserDecimalNumberFrom:remainingBitcoinAmount
-                                                                               and:sellOrder.orderInformation_maxAmount];
-
-
-
-            remainingBitcoinAmount = [remainingBitcoinAmount decimalNumberBySubtracting:amountToSell];
-
-            if ([remainingBitcoinAmount isEqualTo:[NSDecimalNumber zero]]) {
-                break;
-            }
-            else if ([remainingBitcoinAmount isLessThan:[NSDecimalNumber zero]]) {
-                NSString *note = [NSString stringWithFormat:@"!!!! ERROR !!!!"];
-                [self informSellDelegateWithNote:note];
-                note = [NSString stringWithFormat:@"remainingBitcoinAmount %@ is less than 0! (in potentialSellBalanceTradeAmountForBuyAmount)",
-                        remainingBitcoinAmount];
-                [self informSellDelegateWithNote:note];
-                note = [NSString stringWithFormat:@"!!!! ERROR !!!!"];
-                [self informSellDelegateWithNote:note];
-            }
-        }
-    }
-
-    NSDecimalNumber *potentialSellBalanceTradeAmount = [btcAmountToBuy decimalNumberBySubtracting:remainingBitcoinAmount];
-    return potentialSellBalanceTradeAmount;
-}
-
 - (NSDecimalNumber *)potentialBuyBalanceTradeAmountForSellAmount:(NSDecimalNumber *)btcAmountToSell
                                                         forPrice:(NSDecimalNumber *)sellPrice {
+    NSString *note = @"----------------------------";
+    [self informSellDelegateWithNote:note];
+    note = [NSString stringWithFormat:@"Start potentialBuyBalanceTradeAmountForSellAmount: %@ sellPrice: %@"
+                      , btcAmountToSell
+                      , sellPrice];
+    [self informSellDelegateWithNote:note];
+
     NSDecimalNumber *remainingBitcoinAmount = [btcAmountToSell copy];
 
     // add fee to price
     NSDecimalNumber *sellPriceWithFee = [sellPrice decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"1.004"]];
 
+    note = [NSString stringWithFormat:@"sellPriceWithFee: %@"
+            , sellPriceWithFee];
+    [self informSellDelegateWithNote:note];
+
     for (NSUInteger idx = 0; idx < self.buyOrderBook.count; idx++) {
         SOXShowOrderbookData *buyOrder = [self.buyOrderBook objectAtIndex:idx];
 
+        note = [NSString stringWithFormat:@"buyOrder.orderInformation_price: %@ (idx: %tu)"
+                , buyOrder.orderInformation_price
+                , idx];
+        [self informSellDelegateWithNote:note];
+
         if ([buyOrder.orderInformation_price isGreaterThan:sellPriceWithFee]) {
+            note = [NSString stringWithFormat:@"buyOrder.orderInformation_price isGreaterThan:sellPriceWithFee => break"];
+            [self informSellDelegateWithNote:note];
+
             break;
         }
 
         if ([buyOrder.orderInformation_minAmount isLessThanOrEqualTo:remainingBitcoinAmount]) {
+            note = [NSString stringWithFormat:@"[buyOrder.orderInformation_minAmount %@ isLessThanOrEqualTo:remainingBitcoinAmount %@] => look for amountToBuy"
+                    , buyOrder.orderInformation_minAmount
+                    , remainingBitcoinAmount];
+            [self informSellDelegateWithNote:note];
+
             NSDecimalNumber *amountToBuy = [SOXFormatters lesserDecimalNumberFrom:remainingBitcoinAmount
-                                                                               and:buyOrder.orderInformation_maxAmount];
-
-
-
+                                                                              and:buyOrder.orderInformation_maxAmount];
             remainingBitcoinAmount = [remainingBitcoinAmount decimalNumberBySubtracting:amountToBuy];
 
+            note = [NSString stringWithFormat:@"amountToBuy %@ => new remainingBitcoinAmount %@"
+                    , amountToBuy
+                    , remainingBitcoinAmount];
+            [self informSellDelegateWithNote:note];
+
             if ([remainingBitcoinAmount isEqualTo:[NSDecimalNumber zero]]) {
+                note = [NSString stringWithFormat:@"remainingBitcoinAmount == 0 => break"];
+                [self informSellDelegateWithNote:note];
                 break;
             }
             else if ([remainingBitcoinAmount isLessThan:[NSDecimalNumber zero]]) {
@@ -380,7 +367,93 @@
     }
 
     NSDecimalNumber *potentialBuyBalanceTradeAmount = [btcAmountToSell decimalNumberBySubtracting:remainingBitcoinAmount];
+
+    note = [NSString stringWithFormat:@"potentialBuyBalanceTradeAmount = %@ => return this value"
+            , potentialBuyBalanceTradeAmount];
+    [self informSellDelegateWithNote:note];
+
+    note = @"----------------------------";
+    [self informSellDelegateWithNote:note];
+
     return potentialBuyBalanceTradeAmount;
+}
+
+- (NSDecimalNumber *)potentialSellBalanceTradeAmountForBuyAmount:(NSDecimalNumber *)btcAmountToBuy
+                                                        forPrice:(NSDecimalNumber *)buyPrice {
+
+    NSString *note = @"----------------------------";
+    [self informBuyDelegateWithNote:note];
+    note = [NSString stringWithFormat:@"Start potentialSellBalanceTradeAmountForBuyAmount: %@ buyPrice: %@"
+            , btcAmountToBuy
+            , buyPrice];
+    [self informBuyDelegateWithNote:note];
+
+    NSDecimalNumber *remainingBitcoinAmount = [btcAmountToBuy copy];
+
+    // add fee to price
+    NSDecimalNumber *buyPriceWithFee = [buyPrice decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"1.004"]];
+
+    note = [NSString stringWithFormat:@"buyPriceWithFee: %@"
+            , buyPriceWithFee];
+    [self informBuyDelegateWithNote:note];
+
+    for (NSUInteger idx = 0; idx < self.sellOrderBook.count; idx++) {
+        SOXShowOrderbookData *sellOrder = [self.sellOrderBook objectAtIndex:idx];
+
+        note = [NSString stringWithFormat:@"sellOrder.orderInformation_price: %@ (idx: %tu)"
+                , sellOrder.orderInformation_price
+                , idx];
+        [self informBuyDelegateWithNote:note];
+
+        if ([sellOrder.orderInformation_price isLessThan:buyPriceWithFee]) {
+            note = [NSString stringWithFormat:@"sellOrder.orderInformation_price isLessThan:buyPriceWithFee => break"];
+            [self informBuyDelegateWithNote:note];
+            break;
+        }
+
+        if ([sellOrder.orderInformation_minAmount isLessThanOrEqualTo:remainingBitcoinAmount]) {
+            note = [NSString stringWithFormat:@"[sellOrder.orderInformation_minAmount %@ isLessThanOrEqualTo:remainingBitcoinAmount %@] => look for amountToSell"
+                    , sellOrder.orderInformation_minAmount
+                    , remainingBitcoinAmount];
+            [self informBuyDelegateWithNote:note];
+
+
+            NSDecimalNumber *amountToSell = [SOXFormatters lesserDecimalNumberFrom:remainingBitcoinAmount
+                                                                               and:sellOrder.orderInformation_maxAmount];
+            remainingBitcoinAmount = [remainingBitcoinAmount decimalNumberBySubtracting:amountToSell];
+
+            note = [NSString stringWithFormat:@"amountToSell %@ => new remainingBitcoinAmount %@"
+                    , amountToSell
+                    , remainingBitcoinAmount];
+            [self informBuyDelegateWithNote:note];
+
+            if ([remainingBitcoinAmount isEqualTo:[NSDecimalNumber zero]]) {
+                note = [NSString stringWithFormat:@"remainingBitcoinAmount == 0 => break"];
+                [self informBuyDelegateWithNote:note];
+                break;
+            }
+            else if ([remainingBitcoinAmount isLessThan:[NSDecimalNumber zero]]) {
+                NSString *note = [NSString stringWithFormat:@"!!!! ERROR !!!!"];
+                [self informBuyDelegateWithNote:note];
+                note = [NSString stringWithFormat:@"remainingBitcoinAmount %@ is less than 0! (in potentialSellBalanceTradeAmountForBuyAmount)",
+                        remainingBitcoinAmount];
+                [self informBuyDelegateWithNote:note];
+                note = [NSString stringWithFormat:@"!!!! ERROR !!!!"];
+                [self informBuyDelegateWithNote:note];
+            }
+        }
+    }
+
+    NSDecimalNumber *potentialSellBalanceTradeAmount = [btcAmountToBuy decimalNumberBySubtracting:remainingBitcoinAmount];
+
+    note = [NSString stringWithFormat:@"potentialSellBalanceTradeAmount = %@ => return this value"
+            , potentialSellBalanceTradeAmount];
+    [self informBuyDelegateWithNote:note];
+
+    note = @"----------------------------";
+    [self informBuyDelegateWithNote:note];
+
+    return potentialSellBalanceTradeAmount;
 }
 
 #pragma mark | Subclass dummies

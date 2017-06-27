@@ -339,6 +339,11 @@
 
         [self informBuyDelegateWithNote:note];
     }
+    else {
+        NSString *note = [NSString stringWithFormat:@"NO BUY - btcAmountToBuy is not valid: %@"
+                          , btcAmountToBuy];
+        [self informBuyDelegateWithNote:note];
+    }
 
     [self informBuyDelegateWithNote:@"------"];
 }
@@ -370,6 +375,11 @@
             NSBeep();
         }
 
+        [self informSellDelegateWithNote:note];
+    }
+    else {
+        NSString *note = [NSString stringWithFormat:@"NO SELL - btcAmountToSell is not valid: %@"
+                          , btcAmountToSell];
         [self informSellDelegateWithNote:note];
     }
     [self informSellDelegateWithNote:@"------"];
@@ -831,8 +841,7 @@
     NSString *noteExtension = nil;
     if ([payloadDictionary objectForKey:BitcoinDE_WebSocket_RemoveOrder_Amount]) {
         NSDecimalNumber *amount = [NSDecimalNumber decimalNumberWithString:[payloadDictionary objectForKey:BitcoinDE_WebSocket_RemoveOrder_Amount]];
-        NSNumber *priceNumber = [payloadDictionary objectForKey:BitcoinDE_WebSocket_RemoveOrder_Price];
-        NSDecimalNumber *price = [NSDecimalNumber decimalNumberWithString:priceNumber.stringValue];
+        NSDecimalNumber *price = [NSDecimalNumber decimalNumberWithString:[payloadDictionary objectForKey:BitcoinDE_WebSocket_RemoveOrder_Price]];
         noteExtension = [NSString stringWithFormat:@" (traded: %@ - price: %@)"
                          , [SOXFormatters stringForBTCNumber:amount]
                          , [SOXFormatters currencyStringForNumber:price
@@ -872,7 +881,7 @@
     // buySEPAOrderBook
     orderToRemove = [self orderToRemoveWithOrderID:orderID fromOrderBook:self.buySEPAOrderBook.allObjects];
     if (orderToRemove) {
-        note = [NSString stringWithFormat:@"~ removed order - orderID %@ - buySEPAOB.count: %tu"
+        note = [NSString stringWithFormat:@"~ removed SEPA order - orderID %@ - buySEPAOB.count: %tu"
                 , orderID
                 , self.buySEPAOrderBook.count];
         if (noteExtension) {
@@ -885,7 +894,7 @@
     // sellSEPAOrderBook
     orderToRemove = [self orderToRemoveWithOrderID:orderID fromOrderBook:self.sellSEPAOrderBook.allObjects];
     if (orderToRemove) {
-        note = [NSString stringWithFormat:@"~ removed order - orderID %@ - sellSEPAOB.count: %tu"
+        note = [NSString stringWithFormat:@"~ removed SEPA order - orderID %@ - sellSEPAOB.count: %tu"
                 , orderID
                 , self.sellSEPAOrderBook.count];
         if (noteExtension) {
