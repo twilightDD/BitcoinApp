@@ -18,8 +18,6 @@
 
 #import "SOXAccountInfoData.h"
 #import "SOXShowOrderbook_BitcoinDE_Data.h"
-#import "SOXTradeJob_BitcoinDE_Data.h"
-
 
 @import AppKit;
 
@@ -897,12 +895,17 @@
 
 - (BOOL)removeOrderWithOrderID:(NSString *)orderID fromOrderBook:(NSMutableArray <SOXShowOrderbookData*> *)orderBook {
     NSMutableArray *foundOrders = [NSMutableArray array];
+    __block NSInteger indexOfRemovedOrderData = -1;
     // check for orderbookData with correct orderID
-    for (SOXShowOrderbookData *orderbookData in orderBook) {
+    [orderBook enumerateObjectsUsingBlock:^(SOXShowOrderbookData * _Nonnull orderbookData, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([orderbookData.orderInformation_orderID isEqualToString:orderID]) {
             [foundOrders addObject:orderbookData];
+            indexOfRemovedOrderData = idx;
+            *stop = YES;
         }
-    }
+    }];
+
+    
 
     BOOL didRemoveOrders = NO;
     // remove orderbookData from arrayController

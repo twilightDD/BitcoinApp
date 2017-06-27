@@ -11,6 +11,7 @@
 #import "SOXMarket_BitcoinDE_Core.h"
 
 #import "SOXShowOrderbookData.h"
+#import "SOXTradeJob_BitcoinDE_Data.h"
 
 @interface SOXAutomaticTradingCore ()
 
