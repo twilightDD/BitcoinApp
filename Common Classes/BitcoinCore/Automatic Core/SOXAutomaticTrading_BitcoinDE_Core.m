@@ -823,26 +823,57 @@
 }
 
 - (void)removedOrderWithOrderID:(NSString *)orderID {
-    NSString *note = [NSString stringWithFormat:@"removed order - orderID %@", orderID];
-    if ([self removeOrderWithOrderID:orderID fromOrderBook:self.buyOrderBook]) {
-        [self updateBuyStatus];
-        note = [note stringByAppendingString:[NSString stringWithFormat:@" (bOB.count: %tu)"
-                                              ,self.buyOrderBook.count]];
+    NSString *note;
+    // buyOrderBook
+    SOXShowOrderbookData *orderToRemove = [self orderToRemoveWithOrderID:orderID fromOrderBook:self.buyOrderBook];
+    if (orderToRemove) {
+        NSUInteger idx = [self.buyOrderBook indexOfObject:orderToRemove];
+        note = [NSString stringWithFormat:@"- removed order - orderID %@ - idx: %tu - bOB.count: %tu"
+                , orderID
+                , idx
+                , self.buyOrderBook.count];
         [self informBuyDelegateWithNote:note];
+        return;
     }
 
-    else if ([self removeOrderWithOrderID:orderID fromOrderBook:self.sellOrderBook]) {
-        [self updateSellStatus];
-        note = [note stringByAppendingString:[NSString stringWithFormat:@" (sOB.count: %tu)"
-                                              ,self.sellOrderBook.count]];
+    // sellOrderBook
+    orderToRemove = [self orderToRemoveWithOrderID:orderID fromOrderBook:self.sellOrderBook];
+    if (orderToRemove) {
+        NSUInteger idx = [self.sellOrderBook indexOfObject:orderToRemove];
+        note = [NSString stringWithFormat:@"- removed order - orderID %@ - idx: %tu - sOB.count: %tu"
+                , orderID
+                , idx
+                , self.sellOrderBook.count];
+
         [self informSellDelegateWithNote:note];
+        return;
     }
-    else {
-        [self removeSEPAOrderWithOrderID:orderID];
+
+    // buySEPAOrderBook
+    orderToRemove = [self orderToRemoveWithOrderID:orderID fromOrderBook:self.buySEPAOrderBook.allObjects];
+    if (orderToRemove) {
+        note = [NSString stringWithFormat:@"~ removed order - orderID %@ - buySEPAOB.count: %tu"
+                , orderID
+                , self.buySEPAOrderBook.count];
+
+        [self informBuyDelegateWithNote:note];
+        return;
+    }
+
+    // sellSEPAOrderBook
+    orderToRemove = [self orderToRemoveWithOrderID:orderID fromOrderBook:self.sellSEPAOrderBook.allObjects];
+    if (orderToRemove) {
+        note = [NSString stringWithFormat:@"~ removed order - orderID %@ - sellSEPAOB.count: %tu"
+                , orderID
+                , self.sellSEPAOrderBook.count];
+
+        [self informSellDelegateWithNote:note];
+        return;
     }
 }
 
 - (void)updateOrderWithSocketOrderObjectID:(NSString *)orderObjectID withValues:(NSDictionary *)changesDictionary {
+    // update buyOrders
     NSArray *updatesBuyOrders = [self updateOrderWithSocketOrderObjectID:orderObjectID
                                                              inOrderBook:self.buyOrderBook
                                                               withValues:changesDictionary];
@@ -851,6 +882,7 @@
         [self.buySEPAOrderBook removeObject:updatedOrder];
     }
 
+    // update sellOrders
     NSArray *updatesSellOrders = [self updateOrderWithSocketOrderObjectID:orderObjectID
                                                               inOrderBook:self.sellOrderBook
                                                                withValues:changesDictionary];
@@ -860,6 +892,7 @@
         [self.sellSEPAOrderBook removeObject:updatedOrder];
     }
 
+    //  update buy SEPA orders
     updatesBuyOrders = [self updateOrderWithSocketOrderObjectID:orderObjectID
                                                     inOrderBook:[self.buySEPAOrderBook.allObjects mutableCopy]
                                                      withValues:changesDictionary];
@@ -868,19 +901,15 @@
         [self.buySEPAOrderBook removeObject:updatedOrder];
     }
 
+    //  update buy SEPA orders
     updatesSellOrders = [self updateOrderWithSocketOrderObjectID:orderObjectID
                                                      inOrderBook:[self.sellSEPAOrderBook.allObjects mutableCopy]
                                                       withValues:changesDictionary];
 
-    NSLog(@"####");
-    NSLog(@"UpdatePaymentOption");
-    NSLog(@"before self.sellOrderBook.count %tu self.sellSEPAOrderBook.count %zu", self.sellOrderBook.count, self.sellSEPAOrderBook.count);
     for (SOXShowOrderbookData *updatedOrder in updatesSellOrders) {
         [self addedOrder:updatedOrder];
         [self.sellSEPAOrderBook removeObject:updatedOrder];
     }
-    NSLog(@"after self.sellOrderBook.count %tu self.sellSEPAOrderBook.count %zu", self.sellOrderBook.count, self.sellSEPAOrderBook.count);
-    NSLog(@"####");
 }
 
 #pragma mark | Socket helper methods
@@ -893,42 +922,17 @@
     return NO;
 }
 
-- (BOOL)removeOrderWithOrderID:(NSString *)orderID fromOrderBook:(NSMutableArray <SOXShowOrderbookData*> *)orderBook {
-    NSMutableArray *foundOrders = [NSMutableArray array];
-    __block NSInteger indexOfRemovedOrderData = -1;
+- (SOXShowOrderbookData *)orderToRemoveWithOrderID:(NSString *)orderID fromOrderBook:(NSArray <SOXShowOrderbookData*> *)orderBook {
+    __block SOXShowOrderbookData *orderToRemove = nil;
     // check for orderbookData with correct orderID
     [orderBook enumerateObjectsUsingBlock:^(SOXShowOrderbookData * _Nonnull orderbookData, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([orderbookData.orderInformation_orderID isEqualToString:orderID]) {
-            [foundOrders addObject:orderbookData];
-            indexOfRemovedOrderData = idx;
+            orderToRemove = orderbookData;
             *stop = YES;
         }
     }];
+    return orderToRemove;
 
-    
-
-    BOOL didRemoveOrders = NO;
-    // remove orderbookData from arrayController
-    for (id foundOrder in foundOrders) {
-        [orderBook removeObject:foundOrder];
-        didRemoveOrders = YES;
-    }
-    return didRemoveOrders;
-};
-
-- (void)removeSEPAOrderWithOrderID:(NSString *)orderID {
-    NSString *note = [NSString stringWithFormat:@"~ removed SEPA order - orderID %@", orderID];
-    NSPredicate* orderWithOrderIDPredicate = [NSPredicate predicateWithFormat:@"orderInformation_orderID == %@",orderID ];
-    NSSet *filteredBuySEPAOrderbook = [self.buySEPAOrderBook filteredSetUsingPredicate:orderWithOrderIDPredicate];
-    for (SOXShowOrderbookData *orderbookData in filteredBuySEPAOrderbook) {
-        [self.buySEPAOrderBook removeObject:orderbookData];
-        [self informBuyDelegateWithNote:note];
-    }
-    NSSet *filteredSellSEPAOrderbook = [self.sellSEPAOrderBook filteredSetUsingPredicate:orderWithOrderIDPredicate];
-    for (SOXShowOrderbookData *orderbookData in filteredSellSEPAOrderbook) {
-        [self.sellSEPAOrderBook removeObject:orderbookData];
-        [self informSellDelegateWithNote:note];
-    }
 }
 
 - (NSArray *)updateOrderWithSocketOrderObjectID:(NSString *)orderObjectID
@@ -936,14 +940,13 @@
                                      withValues:(NSDictionary *)changesDictionary {
     NSMutableArray *updatesOrders = [NSMutableArray array];
     for (SOXShowOrderbook_BitcoinDE_Data *orderbookData in orderBook) {
-        NSLog(@"%@ - %@", orderObjectID, orderbookData.orderInformation_socketOrderObjectID);
         if ([orderbookData.orderInformation_socketOrderObjectID isEqualToString:orderObjectID]) {
             NSNumber *oldPaymentOption = orderbookData.orderRequirements_paymentOption;
             // ist data object mit orderObjectID vorhanden? Ja: updaten!
             [orderbookData updateOrderbookDataWith:changesDictionary];
             [updatesOrders addObject:orderbookData];
 
-            NSString *note = [NSString stringWithFormat:@"~ update paymentOption - ID: %@ - oldPO: %@ - newPO: %@"
+            NSString *note = [NSString stringWithFormat:@"* update paymentOption - ID: %@ - oldPO: %@ - newPO: %@"
                               , orderbookData.orderInformation_orderID
                               , oldPaymentOption
                               , orderbookData.orderRequirements_paymentOption];
@@ -970,7 +973,7 @@
         self.buyOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:self.buyOrderBook
                                                                    forOrderType:BitcoinDE_BuyOrderType];
 
-        NSString *note = [NSString stringWithFormat:@"added buy (bOB.count: %tu)- ID: %@ - pO: %@ - type: offer - idx %tu - p: %@ - minA: %@ - maxA: %@ - iR %@"
+        NSString *note = [NSString stringWithFormat:@"+ added buy (bOB.count: %tu)- ID: %@ - pO: %@ - type: offer - idx %tu - p: %@ - minA: %@ - maxA: %@ - iR %@"
                           , self.buyOrderBook.count
                           , addOrderDataOrderID
                           , addOrderData.orderRequirements_paymentOption
@@ -1018,7 +1021,7 @@
         self.sellOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:self.sellOrderBook
                                                                     forOrderType:BitcoinDE_SellOrderType];
 
-        NSString *note = [NSString stringWithFormat:@"added sell (sOB.count: %tu)- ID: %@ - pO: %@ - type: offer - idx %tu - p: %@ - minA: %@ - maxA: %@ - iR %@"
+        NSString *note = [NSString stringWithFormat:@"+ added sell (sOB.count: %tu)- ID: %@ - pO: %@ - type: offer - idx %tu - p: %@ - minA: %@ - maxA: %@ - iR %@"
                           , self.sellOrderBook.count
                           , addOrderDataOrderID
                           , addOrderData.orderRequirements_paymentOption
