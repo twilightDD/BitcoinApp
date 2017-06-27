@@ -822,8 +822,23 @@
     }
 }
 
-- (void)removedOrderWithOrderID:(NSString *)orderID {
-    NSString *note;
+- (void)removedOrderWithOrderID:(NSDictionary *)payloadDictionary {
+    NSLog(@"--------------------");
+    NSLog(@"payload:\n%@", payloadDictionary);
+    NSLog(@"--------------------");
+    NSString *orderID = [payloadDictionary objectForKey:BitcoinDE_WebSocket_RemoveOrder_OrderID];
+    NSString *note = nil;
+    NSString *noteExtension = nil;
+    if ([payloadDictionary objectForKey:BitcoinDE_WebSocket_RemoveOrder_Amount]) {
+        NSDecimalNumber *amount = [NSDecimalNumber decimalNumberWithString:[payloadDictionary objectForKey:BitcoinDE_WebSocket_RemoveOrder_Amount]];
+        NSNumber *priceNumber = [payloadDictionary objectForKey:BitcoinDE_WebSocket_RemoveOrder_Price];
+        NSDecimalNumber *price = [NSDecimalNumber decimalNumberWithString:priceNumber.stringValue];
+        noteExtension = [NSString stringWithFormat:@" (traded: %@ - price: %@)"
+                         , [SOXFormatters stringForBTCNumber:amount]
+                         , [SOXFormatters currencyStringForNumber:price
+                                                     roundingMode:NSNumberFormatterRoundHalfUp]];
+        NSLog(@"%@", noteExtension);
+    }
     // buyOrderBook
     SOXShowOrderbookData *orderToRemove = [self orderToRemoveWithOrderID:orderID fromOrderBook:self.buyOrderBook];
     if (orderToRemove) {
@@ -832,6 +847,9 @@
                 , orderID
                 , idx
                 , self.buyOrderBook.count];
+        if (noteExtension) {
+            note = [note stringByAppendingString:noteExtension];
+        }
         [self informBuyDelegateWithNote:note];
         return;
     }
@@ -844,7 +862,9 @@
                 , orderID
                 , idx
                 , self.sellOrderBook.count];
-
+        if (noteExtension) {
+            note = [note stringByAppendingString:noteExtension];
+        }
         [self informSellDelegateWithNote:note];
         return;
     }
@@ -855,7 +875,9 @@
         note = [NSString stringWithFormat:@"~ removed order - orderID %@ - buySEPAOB.count: %tu"
                 , orderID
                 , self.buySEPAOrderBook.count];
-
+        if (noteExtension) {
+            note = [note stringByAppendingString:noteExtension];
+        }
         [self informBuyDelegateWithNote:note];
         return;
     }
@@ -866,7 +888,9 @@
         note = [NSString stringWithFormat:@"~ removed order - orderID %@ - sellSEPAOB.count: %tu"
                 , orderID
                 , self.sellSEPAOrderBook.count];
-
+        if (noteExtension) {
+            note = [note stringByAppendingString:noteExtension];
+        }
         [self informSellDelegateWithNote:note];
         return;
     }

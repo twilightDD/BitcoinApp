@@ -190,6 +190,10 @@ NSString *const BitcoinDE_WebSocket_AddOrder_TradeOfSepaCountry     = @"trade_to
 NSString *const BitcoinDE_WebSocket_AddOrder_PaymentOption          = @"payment_option";
 
 #pragma mark | Remove_Order
+NSString *const BitcoinDE_WebSocket_RemoveOrder_OrderID     = @"order_id";
+NSString *const BitcoinDE_WebSocket_RemoveOrder_OrderType   = @"order_type";
+NSString *const BitcoinDE_WebSocket_RemoveOrder_Amount      = @"amount";
+NSString *const BitcoinDE_WebSocket_RemoveOrder_Price       = @"price";
 
 #pragma mark | Update_Order
 

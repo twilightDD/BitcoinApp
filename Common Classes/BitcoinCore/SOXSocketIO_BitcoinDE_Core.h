@@ -13,9 +13,8 @@
 
 @protocol SOXSocketIOCoreProtocol <NSObject>
 
-@optional
 - (void)addedOrder:(SOXShowOrderbookData *)addOrderData;
-- (void)removedOrderWithOrderID:(NSString *)orderID;
+- (void)removedOrderWithOrderID:(NSDictionary *)payloadDictionary;
 - (void)updateOrderWithSocketOrderObjectID:(NSString *)orderID withValues:(NSDictionary *)changesDictionary;
 
 @end

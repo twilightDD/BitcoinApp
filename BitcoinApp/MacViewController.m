@@ -21,7 +21,7 @@ static NSString *AccountLedgerViewControllerSegueKey  = @"AccountLedgerViewContr
 static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewControllerSegue";// TabView.2
 
 #pragma mark - Interface
-@interface MacViewController () <SOXSocketIOCoreProtocol, SOXCreditUpdateProtocol, SOXStatusBarUpdateProtocol>
+@interface MacViewController () <SOXCreditUpdateProtocol, SOXStatusBarUpdateProtocol>
 #pragma mark | IBOutlets
 @property (weak) IBOutlet NSTabView *bottomTabView;
 

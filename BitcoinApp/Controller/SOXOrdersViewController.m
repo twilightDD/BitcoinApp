@@ -176,8 +176,8 @@
     [self.orderBookArrayController rearrangeObjects];
 }
 
-- (void)removedOrderWithOrderID:(NSString *)orderID {
-    
+- (void)removedOrderWithOrderID:(NSDictionary *)payloadDictionary {
+    NSString *orderID = [payloadDictionary objectForKey:BitcoinDE_WebSocket_RemoveOrder_OrderID];
     NSArray *arrangedObjects = self.orderBookArrayController.arrangedObjects;
     NSMutableArray *foundOrders = [NSMutableArray array];
     

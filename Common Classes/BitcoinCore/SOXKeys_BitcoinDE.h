@@ -189,4 +189,12 @@ FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_AddOrder_BICFull;
 FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_AddOrder_TradeOfSepaCountry;
 FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_AddOrder_PaymentOption;
 
+#pragma mark | Remove_Order
+FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_RemoveOrder_OrderID;
+FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_RemoveOrder_OrderType;
+FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_RemoveOrder_Amount;
+FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_RemoveOrder_Price;
+
+#pragma mark | Update_Order
+
 @end

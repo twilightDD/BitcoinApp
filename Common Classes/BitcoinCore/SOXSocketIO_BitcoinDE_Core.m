@@ -250,10 +250,8 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
             for (NSObject *delegate in self.delegateForRemoveOrderUpdates) {
                 if ([delegate respondsToSelector:@selector(removedOrderWithOrderID:)]) {
                     [delegate performSelectorOnMainThread:@selector(removedOrderWithOrderID:)
-                                               withObject:[packetDictionary objectForKey:@"order_id"]
+                                               withObject:packetDictionary
                                             waitUntilDone:NO];
-//                    [delegate performSelector:@selector(removedOrderWithOrderID:)
-//                                   withObject:[packetDictionary objectForKey:@"order_id"]];
                 }
             }
         }
