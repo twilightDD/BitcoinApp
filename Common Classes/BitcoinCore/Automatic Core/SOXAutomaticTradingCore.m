@@ -237,9 +237,30 @@
     }
 
     if (btcAmountToBuy) {
+        // TODO: compare to offer minAmount
         NSDecimalNumber *potentialSellBalanceTradeAmount = [self potentialSellBalanceTradeAmountForBuyAmount:btcAmountToBuy
                                                                                                     forPrice:orderToBuy.orderInformation_price];
         btcAmountToBuy = potentialSellBalanceTradeAmount;
+
+        /*
+         28.06.17, 13:34:27: TRY TO SELL - type order - ID A4TNUM - minAmo 0,10 ₿ - maxAmo 0,20 ₿ - p0 2.199,00 € - p1 2.197,36 € - iR 0.074
+         28.06.17, 13:34:27: ----------------------------
+         28.06.17, 13:34:27: Start potentialBuyBalanceTradeAmountForSellAmount: 0.11257325 sellPrice: 2199
+         28.06.17, 13:34:27: sellPriceWithFee: 2207.796
+         28.06.17, 13:34:27: buyOrder.orderInformation_price: 2198 (idx: 0)
+         28.06.17, 13:34:27: [buyOrder.orderInformation_minAmount 0.08 isLessThanOrEqualTo:remainingBitcoinAmount 0.11257325] => look for amountToBuy
+         28.06.17, 13:34:27: amountToBuy 0.08 => new remainingBitcoinAmount 0.03257325
+         28.06.17, 13:34:27: buyOrder.orderInformation_price: 2200 (idx: 1)
+         28.06.17, 13:34:27: buyOrder.orderInformation_price: 2200 (idx: 2)
+         28.06.17, 13:34:27: buyOrder.orderInformation_price: 2200 (idx: 3)
+         28.06.17, 13:34:27: buyOrder.orderInformation_price: 2219 (idx: 4)
+         28.06.17, 13:34:27: buyOrder.orderInformation_price isGreaterThan:sellPriceWithFee => break
+         28.06.17, 13:34:27: potentialBuyBalanceTradeAmount = 0.08 => return this value
+         28.06.17, 13:34:27: ----------------------------
+         28.06.17, 13:34:27: SELL possible: orderMinAmo 0,10 ₿ < avaBTC 0,11257325 ₿ (figure out btcToBuyAmount now ...) potBuyAmount: 0.08
+         28.06.17, 13:34:27: SELL btcAmount: 0,08 ₿ for 175,92 €
+         28.06.17, 13:34:27: EXECUTE SELL not allowed - so I don't sell.
+         */
     }
 
     note = [note stringByAppendingString:[NSString stringWithFormat:@" potSellAmount: %@"
@@ -313,17 +334,19 @@
     NSDecimalNumber *remainingBitcoinAmount = [btcAmountToSell copy];
 
     // add fee to price
-    NSDecimalNumber *sellPriceWithFee = [sellPrice decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"1.004"]];
+    NSDecimalNumber *sellPriceWithFee = [sellPrice decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"1.008016"]];
 
-    note = [NSString stringWithFormat:@"sellPriceWithFee: %@"
+    note = [NSString stringWithFormat:@"sellPriceWithFee (0,8%%): %@"
             , sellPriceWithFee];
     [self informSellDelegateWithNote:note];
 
     for (NSUInteger idx = 0; idx < self.buyOrderBook.count; idx++) {
         SOXShowOrderbookData *buyOrder = [self.buyOrderBook objectAtIndex:idx];
 
-        note = [NSString stringWithFormat:@"buyOrder.orderInformation_price: %@ (idx: %tu)"
+        note = [NSString stringWithFormat:@"buyOrder.orderInformation_price: %@ - minA: %@ - maxA: %@ (idx: %tu)"
                 , buyOrder.orderInformation_price
+                , buyOrder.orderInformation_minAmount
+                , buyOrder.orderInformation_maxAmount
                 , idx];
         [self informSellDelegateWithNote:note];
 
@@ -364,6 +387,9 @@
                 [self informSellDelegateWithNote:note];
             }
         }
+        else {
+            note = [NSString stringWithFormat:@"minAmout too less"];
+        }
     }
 
     NSDecimalNumber *potentialBuyBalanceTradeAmount = [btcAmountToSell decimalNumberBySubtracting:remainingBitcoinAmount];
@@ -391,9 +417,9 @@
     NSDecimalNumber *remainingBitcoinAmount = [btcAmountToBuy copy];
 
     // add fee to price
-    NSDecimalNumber *buyPriceWithFee = [buyPrice decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"1.004"]];
+    NSDecimalNumber *buyPriceWithFee = [buyPrice decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"1.008016"]];
 
-    note = [NSString stringWithFormat:@"buyPriceWithFee: %@"
+    note = [NSString stringWithFormat:@"buyPriceWithFee (0,8%%): %@"
             , buyPriceWithFee];
     [self informBuyDelegateWithNote:note];
 
