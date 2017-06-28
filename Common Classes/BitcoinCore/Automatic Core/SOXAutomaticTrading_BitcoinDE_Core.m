@@ -393,7 +393,7 @@
     }
     NSDecimalNumber *bitcoinFee = [NSDecimalNumber decimalNumberWithString:@"0.996"];
     buyBTCSum = [buyBTCSum decimalNumberByMultiplyingBy:bitcoinFee];
-
+    
     [self.buyBalanceTradeParametersBacklog removeAllObjects];
 
     if ([buyBTCSum isGreaterThan:[NSDecimalNumber zero]] ) {
@@ -861,6 +861,11 @@
             note = [note stringByAppendingString:noteExtension];
         }
         [self informBuyDelegateWithNote:note];
+
+        if (idx == 0) {
+            [self updateBuyStatus];
+        }
+
         return;
     }
 
@@ -877,6 +882,11 @@
             note = [note stringByAppendingString:noteExtension];
         }
         [self informSellDelegateWithNote:note];
+
+        if (idx == 0) {
+            [self updateSellStatus];
+        }
+
         return;
     }
 
@@ -1197,6 +1207,9 @@
 }
 
 - (void)bannerWasUpdated:(NSDictionary *)serverAnswer {
+    if (!self.waitingForBannerUpdate) {
+        return;
+    }
 
     // buyParameters
     NSDecimalNumber *buyBTCSum = [NSDecimalNumber zero];
