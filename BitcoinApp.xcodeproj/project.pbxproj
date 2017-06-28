@@ -30,6 +30,8 @@
 		D02ED5BF1E817CFE00AA9448 /* SOXShowOrderbookData.m in Sources */ = {isa = PBXBuildFile; fileRef = D02ED5BD1E817CFE00AA9448 /* SOXShowOrderbookData.m */; };
 		D02ED5C21E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D02ED5C11E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m */; };
 		D02ED5C31E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D02ED5C11E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m */; };
+		D03050FD1F03AE8A009A7E25 /* ka-ching.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D03050FC1F03AE89009A7E25 /* ka-ching.mp3 */; };
+		D03050FE1F03AE8A009A7E25 /* ka-ching.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D03050FC1F03AE89009A7E25 /* ka-ching.mp3 */; };
 		D03289921E8A2C7C006F15F0 /* SOXMyOrderDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D03289911E8A2C7C006F15F0 /* SOXMyOrderDetailsViewController.m */; };
 		D03289951E8A4C29006F15F0 /* SOXMyTradesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D03289941E8A4C29006F15F0 /* SOXMyTradesViewController.m */; };
 		D03289991E8A4C44006F15F0 /* SOXMyAccountLedgerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D03289971E8A4C44006F15F0 /* SOXMyAccountLedgerViewController.m */; };
@@ -81,8 +83,6 @@
 		D0962CCC1E945906004FFF62 /* SOXAbstractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0962CCB1E945906004FFF62 /* SOXAbstractViewController.m */; };
 		D0AA14F31E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D0AA14F21E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m */; };
 		D0AA14F41E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D0AA14F21E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m */; };
-		D0AA21171EEAA13F00118590 /* ka-ching.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D0AA21161EEAA13F00118590 /* ka-ching.mp3 */; };
-		D0AA21181EEAA13F00118590 /* ka-ching.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D0AA21161EEAA13F00118590 /* ka-ching.mp3 */; };
 		D0B3F1311E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F1301E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m */; };
 		D0B3F1321E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F1301E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m */; };
 		D0B8B4DC1EFA903900FB4747 /* SOXBitcoinFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B8B4DB1EFA903900FB4747 /* SOXBitcoinFormatter.m */; };
@@ -148,6 +148,7 @@
 		D02ED5BD1E817CFE00AA9448 /* SOXShowOrderbookData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXShowOrderbookData.m; sourceTree = "<group>"; };
 		D02ED5C01E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXShowOrderbook_BitcoinDE_Data.h; sourceTree = "<group>"; };
 		D02ED5C11E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXShowOrderbook_BitcoinDE_Data.m; sourceTree = "<group>"; };
+		D03050FC1F03AE89009A7E25 /* ka-ching.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "ka-ching.mp3"; path = "../../../../Desktop/ka-ching.mp3"; sourceTree = "<group>"; };
 		D03289901E8A2C7C006F15F0 /* SOXMyOrderDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXMyOrderDetailsViewController.h; sourceTree = "<group>"; };
 		D03289911E8A2C7C006F15F0 /* SOXMyOrderDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXMyOrderDetailsViewController.m; sourceTree = "<group>"; };
 		D03289931E8A4C29006F15F0 /* SOXMyTradesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXMyTradesViewController.h; sourceTree = "<group>"; };
@@ -221,7 +222,6 @@
 		D0962CCD1E945967004FFF62 /* SOXAbstractViewController_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXAbstractViewController_Private.h; sourceTree = "<group>"; };
 		D0AA14F11E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXMyTrades_BitcoinDE_Data.h; sourceTree = "<group>"; };
 		D0AA14F21E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXMyTrades_BitcoinDE_Data.m; sourceTree = "<group>"; };
-		D0AA21161EEAA13F00118590 /* ka-ching.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "ka-ching.mp3"; path = "../../../../../../Desktop/ka-ching.mp3"; sourceTree = "<group>"; };
 		D0B3F12F1E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXAccountLedger_BitcoinDE_Data.h; sourceTree = "<group>"; };
 		D0B3F1301E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXAccountLedger_BitcoinDE_Data.m; sourceTree = "<group>"; };
 		D0B8B4DA1EFA903900FB4747 /* SOXBitcoinFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXBitcoinFormatter.h; sourceTree = "<group>"; };
@@ -443,7 +443,7 @@
 		D063E91B1E74BF97006E2D17 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D0AA21161EEAA13F00118590 /* ka-ching.mp3 */,
+				D03050FC1F03AE89009A7E25 /* ka-ching.mp3 */,
 				D063E91C1E74BF97006E2D17 /* main.m */,
 				D03B371C1E78ADBE00DD9DFA /* PrefixHeader.pch */,
 			);
@@ -706,7 +706,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0AA21171EEAA13F00118590 /* ka-ching.mp3 in Resources */,
+				D03050FD1F03AE8A009A7E25 /* ka-ching.mp3 in Resources */,
 				D063E9251E74BF97006E2D17 /* Assets.xcassets in Resources */,
 				D063E9281E74BF97006E2D17 /* MacMain.storyboard in Resources */,
 			);
@@ -723,7 +723,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0AA21181EEAA13F00118590 /* ka-ching.mp3 in Resources */,
+				D03050FE1F03AE8A009A7E25 /* ka-ching.mp3 in Resources */,
 				D063E9561E74C024006E2D17 /* LaunchScreen.storyboard in Resources */,
 				D063E9531E74C024006E2D17 /* Assets.xcassets in Resources */,
 				D063E94E1E74C024006E2D17 /* Main.storyboard in Resources */,
