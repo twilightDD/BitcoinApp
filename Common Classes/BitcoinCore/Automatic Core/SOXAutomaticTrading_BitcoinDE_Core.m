@@ -645,6 +645,10 @@
 
     // Answer for execute Trade
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ExecuteTrade)]) {
+        // Update banner after successful trade
+        [self updateBanner];
+
+
         NSDictionary *parameters = [answerOfServerRequest objectForKey:ServerAnswerParametersKey]; // parameters of executed trade
 
         NSString *orderTypeString = [parameters objectForKey:BitcoinDE_ExecuteTrade_Type];  //=> buy oder sell
@@ -676,7 +680,8 @@
 
         BOOL wasAutoTrade = [[parameters objectForKey:BitcoinDE_ExecuteTrade_IsAutomaticTrade] isEqualTo:@YES];
         if (!errorMessage
-            && wasAutoTrade) { // if success and was autoTrade: update Banner and then create balance trades
+            && wasAutoTrade) { // if success and was autoTrade: create balance trades
+
             // Keep current availableBitcoinAmount
             self.availableBitcoinAmountBeforeBannerUpdate = [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount;
 
@@ -693,12 +698,9 @@
                     [self createBuyBalanceTrades];
                 }
             }
-
-            // update banner
-            [self updateBanner];
         }
         else if (!errorMessage
-                 && !wasAutoTrade) { // if no success and was balanceTrade: keep parameters for further balance trades
+                 && !wasAutoTrade) { // if success and was balanceTrade: inform user
             NSString *note = [NSString stringWithFormat:@"BALANCE TRADE SUCCESSFUL type: %@-%@ - ID: %@ - btc: %@ - price: %@"
                               , [parameters objectForKey:BitcoinDE_ExecuteTrade_IsAutomaticTrade] ? @"Auto" : @"Balance"
                               , [parameters objectForKey:BitcoinDE_ExecuteTrade_Type]
@@ -717,11 +719,21 @@
 
             if (orderType == BitcoinDE_BuyOrderType) {
                 [self.buyBalanceTradeParametersBacklog addObject:parameters];
+                if (!self.useBannerUpdateMechanicForBalanceTrades) {
+                    [self createBuyBalanceTrades];
+                }
             }
             else if (orderType == BitcoinDE_SellOrderType) {
                 [self.sellBalanceTradeParametersBacklog addObject:parameters];
+                if (!self.useBannerUpdateMechanicForBalanceTrades) {
+                    [self createSellBalanceTrades];
+                }
+            }
+            if (!self.useBannerUpdateMechanicForBalanceTrades) {
+
             }
         }
+
         return;
     }
 
