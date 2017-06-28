@@ -852,6 +852,7 @@
     SOXShowOrderbookData *orderToRemove = [self orderToRemoveWithOrderID:orderID fromOrderBook:self.buyOrderBook];
     if (orderToRemove) {
         NSUInteger idx = [self.buyOrderBook indexOfObject:orderToRemove];
+        [self.buyOrderBook removeObject:orderToRemove];
         note = [NSString stringWithFormat:@"- removed order - orderID %@ - idx: %tu - bOB.count: %tu"
                 , orderID
                 , idx
@@ -867,6 +868,7 @@
     orderToRemove = [self orderToRemoveWithOrderID:orderID fromOrderBook:self.sellOrderBook];
     if (orderToRemove) {
         NSUInteger idx = [self.sellOrderBook indexOfObject:orderToRemove];
+        [self.sellOrderBook removeObject:orderToRemove];
         note = [NSString stringWithFormat:@"- removed order - orderID %@ - idx: %tu - sOB.count: %tu"
                 , orderID
                 , idx
@@ -881,6 +883,7 @@
     // buySEPAOrderBook
     orderToRemove = [self orderToRemoveWithOrderID:orderID fromOrderBook:self.buySEPAOrderBook.allObjects];
     if (orderToRemove) {
+        [self.buySEPAOrderBook removeObject:orderToRemove];
         note = [NSString stringWithFormat:@"~ removed SEPA order - orderID %@ - buySEPAOB.count: %tu"
                 , orderID
                 , self.buySEPAOrderBook.count];
@@ -894,6 +897,7 @@
     // sellSEPAOrderBook
     orderToRemove = [self orderToRemoveWithOrderID:orderID fromOrderBook:self.sellSEPAOrderBook.allObjects];
     if (orderToRemove) {
+        [self.sellSEPAOrderBook removeObject:orderToRemove];
         note = [NSString stringWithFormat:@"~ removed SEPA order - orderID %@ - sellSEPAOB.count: %tu"
                 , orderID
                 , self.sellSEPAOrderBook.count];
