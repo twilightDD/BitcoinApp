@@ -78,7 +78,7 @@
 
     NSString *maxInvestmentText;
     NSString *maxInvestmentDescriptionText;
-    NSString *minInterestText = @"0.81";
+    NSString *minInterestText = @"0.01";
     NSString *minInterestDescriptionText = @"Min. Interest Rate [%]";
 
     if (self.orderType == BitcoinDE_BuyOrderType) {
