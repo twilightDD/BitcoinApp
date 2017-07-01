@@ -386,43 +386,105 @@
 }
 
 #pragma mark - Balance trade methods
-- (void)createBuyBalanceTrades {
-    NSDecimalNumber *buyBTCSum = [NSDecimalNumber zero];
-    for (NSDictionary *buyBalanceTradeParameter in self.buyBalanceTradeParametersBacklog) {
-        buyBTCSum = [buyBTCSum decimalNumberByAdding:[buyBalanceTradeParameter objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]];
+- (NSDecimalNumber *)averagePriceOfBacklogParameters:(NSMutableArray <NSDictionary *>*)backlogParameters {
+    { // DEBUG
+        [self informSellDelegateWithNote:@".............."];
+        NSString *note = [NSString stringWithFormat:@"createBuyBalanceTrades - calc average values - buyBalanceTradeParametersBacklog.count: %tu"
+                          , self.buyBalanceTradeParametersBacklog.count];
+        if (backlogParameters == self.buyBalanceTradeParametersBacklog) {
+            [self informSellDelegateWithNote:note];
+        }
+        else {
+            [self informBuyDelegateWithNote:note];
+        }
     }
+
+    NSString *keyPath = [NSString stringWithFormat:@"@sum.%@", BitcoinDE_ExecuteTrade_BitcoinAmount];
+    NSDecimalNumber *buyBTCSum    = [self.buyBalanceTradeParametersBacklog valueForKeyPath:keyPath];
+    NSDecimalNumber *averagePrice = [NSDecimalNumber zero];
+
+    if (backlogParameters.count == 1) {
+        NSDictionary *backlogParameter = backlogParameters.firstObject;
+        averagePrice = [backlogParameter objectForKey:BitcoinDE_ExecuteTrade_Price];
+    }
+    else {
+        for (NSDictionary *backlogParameter in backlogParameters) {
+            // for all buyBacklogs: add buyBTC and calculate average price
+            NSDecimalNumber *bitcoinAmount = [backlogParameter objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount];
+            NSDecimalNumber *price         = [backlogParameter objectForKey:BitcoinDE_ExecuteTrade_Price];
+            NSDecimalNumber *volume        = [bitcoinAmount decimalNumberByMultiplyingBy:price];
+            NSDecimalNumber *average       = [volume decimalNumberByDividingBy:buyBTCSum];
+            averagePrice = [averagePrice decimalNumberByAdding:average];
+
+            { // DEBUG
+                NSString *note = [NSString stringWithFormat:@"btc: %@ - price: %@"
+                                  , bitcoinAmount
+                                  , price];
+                if (backlogParameters == self.buyBalanceTradeParametersBacklog) {
+                    [self informSellDelegateWithNote:note];
+                }
+                else {
+                    [self informBuyDelegateWithNote:note];
+                }
+            }
+        }
+    }
+
+    { // DEBUG
+        NSString *note = [NSString stringWithFormat:@"==> btcSum inlc. fee: %@ - averagePrice: %@"
+                          , buyBTCSum
+                          , averagePrice];
+        if (backlogParameters == self.buyBalanceTradeParametersBacklog) {
+            [self informSellDelegateWithNote:note];
+            [self informSellDelegateWithNote:@".............."];
+        }
+        else {
+            [self informBuyDelegateWithNote:note];
+            [self informBuyDelegateWithNote:@".............."];
+        }
+    }
+    return averagePrice;
+}
+
+- (void)createBuyBalanceTrades {
+    NSString *keyPath = [NSString stringWithFormat:@"@sum.%@", BitcoinDE_ExecuteTrade_BitcoinAmount];
+    NSDecimalNumber *buyBTCSum    = [self.buyBalanceTradeParametersBacklog valueForKeyPath:keyPath];
+    NSDecimalNumber *averagePrice = [self averagePriceOfBacklogParameters:self.buyBalanceTradeParametersBacklog];
+
+    // consider fee
     NSDecimalNumber *bitcoinFee = [NSDecimalNumber decimalNumberWithString:@"0.996"];
-    buyBTCSum = [buyBTCSum decimalNumberByMultiplyingBy:bitcoinFee];
-    
+    buyBTCSum = [buyBTCSum decimalNumberByMultiplyingBy:bitcoinFee
+                                           withBehavior:[SOXFormatters btcNumberHandler]];
+
     [self.buyBalanceTradeParametersBacklog removeAllObjects];
 
     if ([buyBTCSum isGreaterThan:[NSDecimalNumber zero]] ) {
-        // new Paramater
-
-        NSDictionary *parameters = [SOXTradeJob_BitcoinDE_Data parameterAutomaticTradingForOrderID:@"wasASellOrder"
+        NSDictionary *parameters = [SOXTradeJob_BitcoinDE_Data parameterAutomaticTradingForOrderID:@"wasASellOrders"
                                                                                          orderType:BitcoinDE_SellOrderType
                                                                                      bitcoinAmount:buyBTCSum
-                                                                                             price:[NSDecimalNumber zero]];
+                                                                                             price:averagePrice];
         [self createBalanceTradesForTradeParameters:parameters];
     }
 }
 
 - (void)createSellBalanceTrades {
-    {
-        NSDecimalNumber *sellBTCSum = [NSDecimalNumber zero];
-        for (NSDictionary *sellBalanceTradeParameter in self.sellBalanceTradeParametersBacklog) {
-            sellBTCSum = [sellBTCSum decimalNumberByAdding:[sellBalanceTradeParameter objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]];
-        }
+    NSString *keyPath = [NSString stringWithFormat:@"@sum.%@", BitcoinDE_ExecuteTrade_BitcoinAmount];
+    NSDecimalNumber *sellBTCSum    = [self.sellBalanceTradeParametersBacklog valueForKeyPath:keyPath];
+    NSDecimalNumber *averagePrice = [self averagePriceOfBacklogParameters:self.sellBalanceTradeParametersBacklog];
 
-        [self.sellBalanceTradeParametersBacklog removeAllObjects];
+    // consider fee
+    NSDecimalNumber *bitcoinFee = [NSDecimalNumber decimalNumberWithString:@"0.996"];
+    sellBTCSum = [sellBTCSum decimalNumberByMultiplyingBy:bitcoinFee
+                                             withBehavior:[SOXFormatters btcNumberHandler]];
 
-        if ([sellBTCSum isGreaterThan:[NSDecimalNumber zero]] ) {
-            NSDictionary *parameters = [SOXTradeJob_BitcoinDE_Data parameterAutomaticTradingForOrderID:@"wasABuyOrder"
-                                                                                             orderType:BitcoinDE_BuyOrderType
-                                                                                         bitcoinAmount:sellBTCSum
-                                                                                                 price:[NSDecimalNumber zero]];
-            [self createBalanceTradesForTradeParameters:parameters];
-        }
+    [self.sellBalanceTradeParametersBacklog removeAllObjects];
+
+    if ([sellBTCSum isGreaterThan:[NSDecimalNumber zero]] ) {
+        NSDictionary *parameters = [SOXTradeJob_BitcoinDE_Data parameterAutomaticTradingForOrderID:@"wasABuyOrders"
+                                                                                         orderType:BitcoinDE_BuyOrderType
+                                                                                     bitcoinAmount:sellBTCSum
+                                                                                             price:averagePrice];
+        [self createBalanceTradesForTradeParameters:parameters];
     }
 }
 
@@ -452,33 +514,6 @@
     [self tryToExecuteBalanceTradesWithParameters:parametersToExecute
                                      forOrderType:automaticTradeHadOrderType];
 }
-
-//- (void)createNewBalanceTradeForBalanceTradeParameters:(NSDictionary *)balanceParameters {
-//    if (!balanceParameters
-//        || balanceParameters.allKeys.count == 0) {
-//        return;
-//    }
-//
-//    NSString *orderTypeString = [balanceParameters objectForKey:BitcoinDE_ExecuteTrade_Type];
-//    BitcoinDE_OrderType orderType = [SOXMarket_BitcoinDE_DefTypes orderTypeForOrderTypeString:orderTypeString];
-//    if (orderType != BitcoinDE_BuyOrderType
-//        && orderType != BitcoinDE_SellOrderType) {
-//        return;
-//    }
-//
-//    NSArray *parametersToExecute;
-//
-//    if (orderType == BitcoinDE_BuyOrderType) {
-//        parametersToExecute = [self buyBalanceParametersForTradeParameters:balanceParameters];
-//    }
-//    else if (orderType == BitcoinDE_SellOrderType) {
-//        parametersToExecute = [self sellBalanceParametersForTradeParameters:balanceParameters];
-//    }
-//
-//    // Execute Balance Trades
-//    [self tryToExecuteBalanceTradesWithParameters:parametersToExecute
-//                                     forOrderType:orderType];
-//}
 
 - (NSArray *)buyBalanceParametersForTradeParameters:(NSDictionary *)parameters {
     NSString *note = [NSString stringWithFormat:@"New remainingBuyBitcoinAmount: %@ (old+remainingFromLastSell)"
@@ -767,6 +802,19 @@
 
         self.buyOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:buyOrderBookDatas
                                                                    forOrderType:BitcoinDE_BuyOrderType];
+
+        NSString *keyPath = [NSString stringWithFormat:@"@sum.self.orderInformation_maxAmount"];
+        NSDecimalNumber *buyBTCSum    = [self.buyOrderBook valueForKeyPath:keyPath];
+        NSDecimalNumber *averagePrice = [NSDecimalNumber zero];
+        for (SOXShowOrderbookData *buyBalanceTradeParameter in self.buyOrderBook) {
+            // for all buyBacklogs: add buyBTC and calculate average price
+            NSDecimalNumber *bitcoinAmount = buyBalanceTradeParameter.orderInformation_maxAmount;
+            NSDecimalNumber *price         = buyBalanceTradeParameter.orderInformation_price;
+            NSDecimalNumber *average = [bitcoinAmount decimalNumberByMultiplyingBy:price];
+            average = [average decimalNumberByDividingBy:buyBTCSum];
+            averagePrice = [averagePrice decimalNumberByAdding:average];
+        }
+        NSLog(@"buySum: %@ averagePrice: %@", buyBTCSum, averagePrice);
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
                                                                 delegate:core];
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
