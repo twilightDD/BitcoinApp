@@ -35,12 +35,16 @@
 @property (strong, nonatomic) NSDecimalNumber *sellInterestFactor;
 @property (strong, nonatomic) NSDecimalNumber *sellMaximalBTCInvestment;
 
-@property (strong, nonatomic) NSDecimalNumber *remainingBuyBitcoinAmount;
-@property (strong, nonatomic) NSDecimalNumber *remainingSellBitcoinAmount;
 
 @property (strong, nonatomic) NSDecimalNumber *availableBitcoinAmountBeforeBannerUpdate;
-@property (strong, nonatomic) NSMutableArray *buyBalanceTradeParametersBacklog; // Keep parameters we have to balance after banner update
-@property (strong, nonatomic) NSMutableArray *sellBalanceTradeParametersBacklog; // Keep parameters we have to balance after banner update
+
+@property (strong, nonatomic) NSMutableArray *runningAutomaticBuyTradeParameters;
+@property (strong, nonatomic) NSMutableArray *runningAutomaticSellTradeParameters;
+@property (strong, nonatomic) NSMutableArray *runningBalanceBuyTradeParameters;
+@property (strong, nonatomic) NSMutableArray *runningBalanceSellTradeParameters;
+
+@property (strong, nonatomic) NSMutableArray *boughtTradeParametersBacklog; // buy parameters we have to balance out
+@property (strong, nonatomic) NSMutableArray *soldTradeParametersBacklog;   // sell parameters we have to balance out
 
 - (void)setupProperties;
 
@@ -59,6 +63,33 @@
 - (BOOL)checkForSellableOrder;
 - (NSDecimalNumber *)btcBuyAmountForOrder:(SOXShowOrderbookData *)orderToBuy;
 - (NSDecimalNumber *)btcSellAmountForOrder:(SOXShowOrderbookData *)orderToSell;
+
+#pragma mark - Balance trade methods
+- (void)createBalanceTradesForBoughtTrades;
+- (void)createBalanceTradesForSoldTrades;
+
+- (NSMutableArray *)buyBalanceTradeParametersForSellAmount:(NSDecimalNumber *)soldBTCAmount
+                                              forSellPrice:(NSDecimalNumber *)soldPrice
+                                 createPotentialParameters:(BOOL)createPotentialParameters;
+
+- (NSMutableArray *)sellBalanceTradeParametersForBuyAmount:(NSDecimalNumber *)boughtBTCAmount
+                                               forBuyPrice:(NSDecimalNumber *)boughtPrice
+                                 createPotentialParameters:(BOOL)createPotentialParameters;
+
+#pragma mark - Math Helpers
+- (NSDecimalNumber *)sumOfBitcoinsOfParameters:(NSArray <NSDictionary *>*)parameter;
+
+#pragma mark - Handle (un)successful trades
+#pragma mark | Auto trades
+- (void)successfulAutomaticBuyTrade:(NSDictionary *)tradeParameters;
+- (void)successfulAutomaticSellTrade:(NSDictionary *)tradeParameters;
+- (void)unSuccessfulAutomaticBuyTrade:(NSDictionary *)tradeParameters;
+- (void)unSuccessfulAutomaticSellTrade:(NSDictionary *)tradeParameters;
+#pragma mark | Balance trades
+- (void)successfulBalanceBuyTrade:(NSDictionary *)tradeParameters;
+- (void)successfulBalanceSellTrade:(NSDictionary *)tradeParameters;
+- (void)unSuccessfulBalanceBuyTrade:(NSDictionary *)tradeParameters;
+- (void)unSuccessfulBalanceSellTrade:(NSDictionary *)tradeParameters;
 
 #pragma mark - Inform delegates
 - (void)informBuyDelegateWithNote:(NSString *)note;
