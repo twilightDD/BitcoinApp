@@ -197,6 +197,20 @@
 }
 
 #pragma mark | Currency methods
++ (NSDecimalNumberHandler *)currencyNumberHandler {
+    static dispatch_once_t pred;
+    static NSDecimalNumberHandler *currencyNumberHandler = nil;
+    dispatch_once(&pred, ^{
+        currencyNumberHandler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown
+                                                                                       scale:2
+                                                                            raiseOnExactness:YES
+                                                                             raiseOnOverflow:YES
+                                                                            raiseOnUnderflow:YES
+                                                                         raiseOnDivideByZero:YES];
+    });
+    return currencyNumberHandler;
+}
+
 + (NSDecimalNumber *)currencyNumberForNumber:(NSDecimalNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode {
     NSNumberFormatter *currencyFormatter = [SOXFormatters currencyFormatter];
     currencyFormatter.roundingMode       = roundingMode;

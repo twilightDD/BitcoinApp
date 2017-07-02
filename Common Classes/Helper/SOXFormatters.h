@@ -21,6 +21,7 @@
 + (NSString *)shortDateLongTimeStringForDate:(NSDate *)date;
 
 #pragma mark - Currency methods
++ (NSDecimalNumberHandler *)currencyNumberHandler;
 + (NSDecimalNumber *)currencyNumberForNumber:(NSDecimalNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode;
 + (NSString *)currencyStringForNumber:(NSDecimalNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode;
 
