@@ -19,13 +19,6 @@
 
 @interface SOXAutomaticTradingCore : NSObject
 
-@property (nonatomic) double currentPriceLimit;
-@property (nonatomic) double interestRate;
-@property (nonatomic) double freeReservedMoney;
-
-@property (nonatomic) double currentBestBuyPrice;
-@property (nonatomic) double currentBestSellPrice;
-
 @property (weak, nonatomic) id <SOXAutomaticTradingCoreProtocol> delegate;
 
 + (instancetype)sharedTradingCore;
