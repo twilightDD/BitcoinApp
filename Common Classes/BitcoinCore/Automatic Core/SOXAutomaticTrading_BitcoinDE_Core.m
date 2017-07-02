@@ -352,9 +352,9 @@
                     [self informBuyDelegateWithNote:note];
                 }
 
-                [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
-                                                        withParameter:buyParameters
-                                                            respondTo:self];
+//                [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
+//                                                        withParameter:buyParameters
+//                                                            respondTo:self];
             }
             else {
                 { // DEBUG
@@ -421,9 +421,9 @@
                     [self informSellDelegateWithNote:note];
                 }
 
-                [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
-                                                        withParameter:sellParameters
-                                                            respondTo:self];
+//                [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
+//                                                        withParameter:sellParameters
+//                                                            respondTo:self];
             }
             else {
                 { // DEBUG
@@ -666,19 +666,23 @@
                               , [parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]
                               ];
             if (orderType == BitcoinDE_BuyOrderType) {
-                if (self.executeBalanceTradesForBuyTrades) {
+                if (self.executeBuyTrades
+                    && self.executeSellTrades
+                    && self.executeBalanceTradesForBuyTrades) {
                     [self informSellDelegateWithNote:note];
-                    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
-                                                            withParameter:parameters
-                                                                respondTo:self];
+//                    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
+//                                                            withParameter:parameters
+//                                                                respondTo:self];
                 }
             }
             else if (orderType == BitcoinDE_SellOrderType) {
-                if (self.executeBalanceTradesForSellTrades) {
+                if (self.executeBuyTrades
+                     && self.executeSellTrades
+                     && self.executeBalanceTradesForSellTrades) {
                     [self informBuyDelegateWithNote:note];
-                    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
-                                                            withParameter:parameters
-                                                                respondTo:self];
+//                    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
+//                                                            withParameter:parameters
+//                                                                respondTo:self];
                 }
             }
         }
