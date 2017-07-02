@@ -19,7 +19,9 @@
 
 #pragma mark IBOutlets
 @property (weak) IBOutlet NSButton *showAutomaticTradingAreaButton;
+
 @property (weak) IBOutlet NSButton *executeTradesButton;
+@property (weak) IBOutlet NSButton *executeAutomaticTradesButton;
 @property (weak) IBOutlet NSButton *executeBalanceTradesButton;
 
 @property (weak) IBOutlet NSTextField *statusTextField;
@@ -43,7 +45,9 @@
 #pragma mark Properties
 @property (nonatomic) BOOL automaticTradingIsRunning;
 @property (nonatomic) BOOL executeTrades;
+@property (nonatomic) BOOL executeAutomaticTrades;
 @property (nonatomic) BOOL executeBalanceTrades;
+
 @property (strong, nonatomic) NSString *log;
 
 @property (nonatomic) double currentLimit;
@@ -68,46 +72,46 @@
         return;
     }
 
-    self.automaticBackgroundView.hidden = YES; // disable on startup
+    { // On startup hide view
+        self.automaticBackgroundView.hidden = YES; // disable on startup
+        self.executeTradesButton.hidden = YES;
+    }
 
     NSString *showAutomaticTradingAreaButtonTitle;
     NSString *startAutomaticButtonTitle;
-    NSString *executeTradesButtonTitle;
+    NSString *executeTradesButtonTitle          = @"Execute trades";
+    NSString *executeAutomaticTradesButtonTitle = @"Execute Automatic Trades";
+    NSString *executeBalanceTradesButtonTitle   = @"Execute Balance Trades";
     NSString *useMaxReservationButtonTitle;
-    NSString *clearLogButtonTitle = @"Clear log";
+    NSString *clearLogButtonTitle               = @"Clear log";
 
     NSString *maxInvestmentText;
     NSString *maxInvestmentDescriptionText;
-    NSString *minInterestText = @"0.01";
-    NSString *minInterestDescriptionText = @"Min. Interest Rate [%]";
+    NSString *minInterestText                   = @"0.01";
+    NSString *minInterestDescriptionText        = @"Min. Interest Rate [%]";
 
     if (self.orderType == BitcoinDE_BuyOrderType) {
-        showAutomaticTradingAreaButtonTitle   = @"Buy automatically";
-        startAutomaticButtonTitle = @"Start Automatic Buy";
-        executeTradesButtonTitle  = @"Execute Trades";
-        useMaxReservationButtonTitle = @"Use Maximal Fidor reservation";
-
-        maxInvestmentText = @"200";
-        maxInvestmentDescriptionText = @"Max. Investment";
+        showAutomaticTradingAreaButtonTitle = @"Buy automatically";
+        startAutomaticButtonTitle           = @"Start Automatic Buy";
+        useMaxReservationButtonTitle        = @"Use Maximal Fidor reservation";
+        maxInvestmentText                   = @"200";
+        maxInvestmentDescriptionText        = @"Max. Investment";
 
     }
     else if (self.orderType == BitcoinDE_SellOrderType) {
-        showAutomaticTradingAreaButtonTitle   = @"Sell automatically";
-        startAutomaticButtonTitle = @"Start Automatic Sell";
-        executeTradesButtonTitle  = @"Execute Trades";
-        useMaxReservationButtonTitle = @"Use Maximal BTC amount";
-
-        maxInvestmentText = @"0.2";
-        maxInvestmentDescriptionText = @"Max. Investment";
+        showAutomaticTradingAreaButtonTitle = @"Sell automatically";
+        startAutomaticButtonTitle           = @"Start Automatic Sell";
+        useMaxReservationButtonTitle        = @"Use Maximal BTC amount";
+        maxInvestmentText                   = @"0.2";
+        maxInvestmentDescriptionText        = @"Max. Investment";
     }
     else {
-        showAutomaticTradingAreaButtonTitle   = @"Error - no orderType";
-        startAutomaticButtonTitle = @"Error - no orderType";
-        executeTradesButtonTitle  = @"Error - no orderType";
-        useMaxReservationButtonTitle = @"Error - no orderType";
-
-        maxInvestmentText = @"0";
-        maxInvestmentDescriptionText = @"Error - no orderType";
+        showAutomaticTradingAreaButtonTitle = @"Error - no orderType";
+        startAutomaticButtonTitle           = @"Error - no orderType";
+        executeAutomaticTradesButtonTitle   = @"Error - no orderType";
+        useMaxReservationButtonTitle        = @"Error - no orderType";
+        maxInvestmentText                   = @"0";
+        maxInvestmentDescriptionText        = @"Error - no orderType";
     }
 
     self.showAutomaticTradingAreaButton.state = 0;
@@ -118,6 +122,16 @@
     self.executeTradesButton.state = NSControlStateValueOff;
     self.executeTradesButton.title = executeTradesButtonTitle;
     self.executeTrades = NO;
+
+    self.executeAutomaticTradesButton.state = NSControlStateValueOff;
+    self.executeAutomaticTradesButton.title = executeAutomaticTradesButtonTitle;
+    self.executeAutomaticTradesButton.enabled = NO;
+    self.executeAutomaticTrades = NO;
+
+    self.executeBalanceTradesButton.state = NSControlStateValueOff;
+    self.executeBalanceTradesButton.title = executeBalanceTradesButtonTitle;
+    self.executeBalanceTradesButton.enabled = NO;
+    self.executeBalanceTrades = NO;
 
     self.useMaxReservationButton.state = NSControlStateValueOff;
     self.useMaxReservationButton.title = useMaxReservationButtonTitle;
@@ -178,27 +192,36 @@
 #pragma mark - Action methods
 - (IBAction)showAutomaticTradingAreaAction:(NSButton *)sender {
     self.automaticBackgroundView.hidden = !sender.state;
+    self.executeTradesButton.hidden = !sender.state;
+    
     if (self.automaticTradingIsRunning == YES
         && sender.state == NO) {
        // [self.tradingCore startAutomaticTrading];
     }
-    
 }
+
 - (IBAction)executeTradesAction:(NSButton *)sender {
     self.executeTrades = !self.executeTrades;
     [SOXAutomaticTrading_BitcoinDE_Core executeTrades:self.executeTrades
                                          forOrderType:self.orderType];
 }
 
+- (IBAction)executeAutomaticTradesAction:(NSButton *)sender {
+    self.executeAutomaticTrades = !self.executeAutomaticTrades;
+    [SOXAutomaticTrading_BitcoinDE_Core executeAutomaticTrades:self.executeAutomaticTrades
+                                                  forOrderType:self.orderType];
+}
+
 - (IBAction)executeBalanceTradesAction:(NSButton *)sender {
     self.executeBalanceTrades = !self.executeBalanceTrades;
     [SOXAutomaticTrading_BitcoinDE_Core executeBalanceTrades:self.executeBalanceTrades
-                                                forOrderType:self.orderType];
+                                                    forOrderType:self.orderType];
 }
-
 
 - (IBAction)startAutomaticAction:(NSButton *)sender {
     self.automaticTradingIsRunning = !self.automaticTradingIsRunning;
+    self.executeAutomaticTradesButton.enabled = sender.state;
+    self.executeBalanceTradesButton.enabled = sender.state;
     if (self.automaticTradingIsRunning) {
         sender.title = @"Stop";
         self.statusTextField.stringValue = @"Fetching base data ...";

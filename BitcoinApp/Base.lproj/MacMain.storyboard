@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13122.17"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13122.19"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
@@ -4423,7 +4423,7 @@ Gw
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="executeTradesAction:" target="cwM-7M-FeE" id="LAf-vt-y0Y"/>
+                                            <action selector="executeAutomaticTradesAction:" target="cwM-7M-FeE" id="X1V-aM-H5l"/>
                                             <outlet property="nextKeyView" destination="3fd-l3-d7n" id="OMB-0S-gqg"/>
                                         </connections>
                                     </button>
@@ -4475,12 +4475,24 @@ Gw
                                     <constraint firstItem="Jr3-wH-a3M" firstAttribute="leading" secondItem="8d9-sH-1hz" secondAttribute="trailing" constant="8" symbolic="YES" id="y1k-rb-PcG"/>
                                 </constraints>
                             </customView>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="iO2-U9-jE2">
+                                <rect key="frame" x="185" y="530" width="173" height="18"/>
+                                <buttonCell key="cell" type="check" title="Demo Modus (no trades)" bezelStyle="regularSquare" imagePosition="left" inset="2" id="o6Y-nu-aFY">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="executeTradesAction:" target="cwM-7M-FeE" id="u2X-iI-7lN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="fVP-xb-zlr" firstAttribute="top" secondItem="Kgl-De-aER" secondAttribute="top" constant="20" id="4bn-fO-qMR"/>
-                            <constraint firstItem="pFG-pr-Jvw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fVP-xb-zlr" secondAttribute="trailing" constant="8" symbolic="YES" id="9AP-f8-pBd"/>
                             <constraint firstItem="WgR-KD-pyB" firstAttribute="top" secondItem="fVP-xb-zlr" secondAttribute="bottom" constant="8" id="D6C-fE-AB8"/>
                             <constraint firstItem="WgR-KD-pyB" firstAttribute="leading" secondItem="Kgl-De-aER" secondAttribute="leading" id="DRu-wb-P2E"/>
+                            <constraint firstItem="fVP-xb-zlr" firstAttribute="baseline" secondItem="iO2-U9-jE2" secondAttribute="baseline" id="HDi-A8-7Fd"/>
+                            <constraint firstItem="pFG-pr-Jvw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iO2-U9-jE2" secondAttribute="trailing" constant="8" symbolic="YES" id="OEJ-Jj-cyv"/>
+                            <constraint firstItem="iO2-U9-jE2" firstAttribute="leading" secondItem="fVP-xb-zlr" secondAttribute="trailing" constant="8" id="WMb-xj-Amy"/>
                             <constraint firstAttribute="trailing" secondItem="pFG-pr-Jvw" secondAttribute="trailing" constant="20" id="dbL-s2-bHg"/>
                             <constraint firstAttribute="trailing" secondItem="WgR-KD-pyB" secondAttribute="trailing" id="gtM-Zp-y8d"/>
                             <constraint firstAttribute="bottom" secondItem="WgR-KD-pyB" secondAttribute="bottom" id="mG6-UZ-tov"/>
@@ -4491,8 +4503,9 @@ Gw
                     <connections>
                         <outlet property="automaticBackgroundView" destination="WgR-KD-pyB" id="uaj-We-1XA"/>
                         <outlet property="clearLogButton" destination="fe2-pf-czM" id="MnP-Lo-Lsk"/>
+                        <outlet property="executeAutomaticTradesButton" destination="NLc-ce-lrH" id="Gi0-dk-jkF"/>
                         <outlet property="executeBalanceTradesButton" destination="Keq-IK-Ka9" id="bwM-kI-L4i"/>
-                        <outlet property="executeTradesButton" destination="NLc-ce-lrH" id="r2F-YY-Dhb"/>
+                        <outlet property="executeTradesButton" destination="iO2-U9-jE2" id="Lff-BS-UHg"/>
                         <outlet property="logDescriptionTextField" destination="9Xe-Tk-Z3f" id="POx-rB-BT8"/>
                         <outlet property="logTextScrollView" destination="sKc-pr-7pa" id="a5q-6d-tra"/>
                         <outlet property="logTextView" destination="6J3-fH-bxe" id="cLz-U2-TLl"/>
@@ -4509,7 +4522,7 @@ Gw
                 <customObject id="Wqd-Md-RGQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="3AY-bf-m6w"/>
             </objects>
-            <point key="canvasLocation" x="3002" y="2657"/>
+            <point key="canvasLocation" x="3001.5" y="2657"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="2np-EZ-Vjc">

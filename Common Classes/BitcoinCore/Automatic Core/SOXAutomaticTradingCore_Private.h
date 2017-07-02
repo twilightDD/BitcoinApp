@@ -25,6 +25,8 @@
 
 @property (nonatomic) BOOL executeBuyTrades;
 @property (nonatomic) BOOL executeSellTrades;
+@property (nonatomic) BOOL executeAutomaticTradesForBuyTrades;
+@property (nonatomic) BOOL executeAutomaticTradesForSellTrades;
 @property (nonatomic) BOOL executeBalanceTradesForBuyTrades;
 @property (nonatomic) BOOL executeBalanceTradesForSellTrades;
 

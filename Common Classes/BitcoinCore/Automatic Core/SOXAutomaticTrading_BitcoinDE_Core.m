@@ -63,13 +63,34 @@
     switch (orderType) {
         case BitcoinDE_BuyOrderType: {
             core.executeBuyTrades = executeTrades;
-            [core informBuyDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE TRADE %@ !!!"
+            [core informBuyDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE TRADES %@ !!!"
                                              , executeTrades ? @"enabled" : @"disabled"]];
             break;
         }
         case BitcoinDE_SellOrderType: {
             core.executeSellTrades = executeTrades;
-            [core informSellDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE TRADE %@ !!!"
+            [core informSellDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE TRADES %@ !!!"
+                                             , executeTrades ? @"enabled" : @"disabled"]];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
++ (void)executeAutomaticTrades:(BOOL)executeTrades forOrderType:(BitcoinDE_OrderType)orderType {
+    SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
+
+    switch (orderType) {
+        case BitcoinDE_BuyOrderType: {
+            core.executeAutomaticTradesForBuyTrades = executeTrades;
+            [core informBuyDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE AUTOMATIC TRADES %@ !!!"
+                                             , executeTrades ? @"enabled" : @"disabled"]];
+            break;
+        }
+        case BitcoinDE_SellOrderType: {
+            core.executeAutomaticTradesForSellTrades = executeTrades;
+            [core informSellDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE AUTOMATIC TRADES %@ !!!"
                                               , executeTrades ? @"enabled" : @"disabled"]];
             break;
         }
@@ -84,13 +105,13 @@
     switch (orderType) {
         case BitcoinDE_BuyOrderType: {
             core.executeBalanceTradesForBuyTrades = executeBalanceTrades;
-            [core informBuyDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE BALANCE TRADE %@ !!!"
+            [core informBuyDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE BALANCE TRADES %@ !!!"
                                              , executeBalanceTrades ? @"enabled" : @"disabled"]];
             break;
         }
         case BitcoinDE_SellOrderType: {
             core.executeBalanceTradesForSellTrades = executeBalanceTrades;
-            [core informSellDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE BALANCE TRADE %@ !!!"
+            [core informSellDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE BALANCE TRADES %@ !!!"
                                               , executeBalanceTrades ? @"enabled" : @"disabled"]];
             break;
         }
@@ -309,7 +330,7 @@
                           , [SOXFormatters currencyStringForNumber:priceForBTCAmountToBuy roundingMode:NSNumberFormatterRoundDown]];
         [self informBuyDelegateWithNote:note];
 
-        if (self.executeBuyTrades) {
+        if (self.executeAutomaticTradesForBuyTrades) {
             note = [NSString stringWithFormat:@"EXECUTE BUY allowed => TRY BUY."];
             NSDictionary *parameters = [SOXTradeJob_BitcoinDE_Data parameterAutomaticTradingForOrderID:orderToBuy.orderInformation_orderID
                                                                                              orderType:BitcoinDE_BuyOrderType
@@ -354,7 +375,7 @@
                           , [SOXFormatters currencyStringForNumber:priceForBTCAmountToSell roundingMode:NSNumberFormatterRoundDown]];
         [self informSellDelegateWithNote:note];
 
-        if (self.executeSellTrades) {
+        if (self.executeAutomaticTradesForSellTrades) {
             note = [NSString stringWithFormat:@"EXECUTE SELL allowed => TRY SELL."];
 
             NSDictionary *parameters = [SOXTradeJob_BitcoinDE_Data parameterAutomaticTradingForOrderID:orderToSell.orderInformation_orderID
@@ -1142,7 +1163,7 @@
                                                                                       bitcoinAmount:sellOrder.orderInformation_maxAmount
                                                                                               price:sellOrder.orderInformation_price];
 
-    [self fakeServerAnswerForSellParameters:balanceParameters];
+    [self fakeServerAnswerForSellParameters:autoParameters];
 }
 
 - (void)fakeServerAnswerForBuyParameters:(NSDictionary *)parameters {
