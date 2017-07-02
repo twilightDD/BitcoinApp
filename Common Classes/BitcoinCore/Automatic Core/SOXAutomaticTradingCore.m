@@ -665,7 +665,8 @@
 
 #pragma mark | Helpers
 - (void)checkForBalanceTradesForBoughtTrades {
-    if (self.runningAutomaticBuyTradeParameters.count == 0
+    if (self.executeBalanceTradesForBuyTrades
+        && self.runningAutomaticBuyTradeParameters.count == 0
         && self.runningBalanceBuyTradeParameters.count == 0
         && self.boughtTradeParametersBacklog.count > 0) {
         [self createBalanceTradesForBoughtTrades];
@@ -673,7 +674,8 @@
 }
 
 - (void)checkForBalanceTradesForSoldTrades {
-    if (self.runningAutomaticSellTradeParameters.count == 0
+    if (self.executeBalanceTradesForSellTrades
+        && self.runningAutomaticSellTradeParameters.count == 0
         && self.runningBalanceSellTradeParameters.count == 0
         && self.soldTradeParametersBacklog.count > 0) {
         [self createBalanceTradesForSoldTrades];
