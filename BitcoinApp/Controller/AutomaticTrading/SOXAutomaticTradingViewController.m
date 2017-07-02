@@ -100,6 +100,15 @@
         maxInvestmentText = @"0.2";
         maxInvestmentDescriptionText = @"Max. Investment";
     }
+    else {
+        showAutomaticTradingAreaButtonTitle   = @"Error - no orderType";
+        startAutomaticButtonTitle = @"Error - no orderType";
+        executeTradesButtonTitle  = @"Error - no orderType";
+        useMaxReservationButtonTitle = @"Error - no orderType";
+
+        maxInvestmentText = @"0";
+        maxInvestmentDescriptionText = @"Error - no orderType";
+    }
 
     self.showAutomaticTradingAreaButton.state = 0;
     self.showAutomaticTradingAreaButton.title = showAutomaticTradingAreaButtonTitle;

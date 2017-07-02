@@ -11,10 +11,7 @@
 
 #import "SOXKeys_BitcoinDE.h"
 
-#import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXSocketIO_BitcoinDE_Core.h"
-
-#import "SOXMarket_BitcoinDE_DefTypes.h"
 
 #import "SOXAccountInfoData.h"
 #import "SOXShowOrderbook_BitcoinDE_Data.h"

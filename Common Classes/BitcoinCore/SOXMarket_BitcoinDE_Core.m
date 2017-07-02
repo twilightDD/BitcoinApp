@@ -197,6 +197,7 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
         }
         else {
             [errorMessage appendErrorDescripton:@"Data for JSON is nil"];
+            return nil;
         }
         // check for error in json deserialization
         [errorMessage checkJsonError:jsonError];

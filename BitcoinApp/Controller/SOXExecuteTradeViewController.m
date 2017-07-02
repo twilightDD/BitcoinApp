@@ -381,7 +381,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
         }
     }
     else {
-        self.executeTradeButton.title = @"No orderType";
+        executeTradeButtonText = @"No orderType";
     }
     self.executeTradeButton.title = executeTradeButtonText;
 }
