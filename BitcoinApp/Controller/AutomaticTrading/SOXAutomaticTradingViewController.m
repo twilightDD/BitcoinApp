@@ -256,7 +256,7 @@
 - (void)logLine:(NSString *)line {
     self.log = [self.log stringByAppendingString:@"\n"];
     NSString *lineWithDate = [NSString stringWithFormat:@"%@: %@"
-                              , [SOXFormatters shortDateMediumTimeStringForDate:[NSDate date]]
+                              , [SOXFormatters shortDateLongTimeStringForDate:[NSDate date]]
                               , line];
     self.log = [self.log stringByAppendingString:lineWithDate];
     

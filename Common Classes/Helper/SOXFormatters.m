@@ -70,7 +70,15 @@
     });
     return dateFormatterShortDateMediumTime;
 }
-
++ (NSDateFormatter *)dateFormatterShortDateLongTime {
+    static dispatch_once_t pred;
+    static NSDateFormatter *dateFormatterShortDateLongTime = nil;
+    dispatch_once(&pred, ^{
+        dateFormatterShortDateLongTime = [[NSDateFormatter alloc] init];
+        [dateFormatterShortDateLongTime setDateFormat:@"dd.MM.yy hh:mm:ss:SSS"];
+    });
+    return dateFormatterShortDateLongTime;
+}
 
 #pragma mark - Static NumberFormatters
 + (NSNumberFormatter *)currencyFormatter {
@@ -176,6 +184,15 @@
     }
 
     NSString *dateString = [[SOXFormatters dateFormatterShortDateMediumTime] stringFromDate:date];
+    return dateString;
+}
+
++ (NSString *)shortDateLongTimeStringForDate:(NSDate *)date {
+    if (!date) {
+        return @"";
+    }
+
+    NSString *dateString = [[SOXFormatters dateFormatterShortDateLongTime] stringFromDate:date];
     return dateString;
 }
 

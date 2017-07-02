@@ -18,6 +18,7 @@
 + (NSString *)rfc3339DateTimeStringDate:(NSDate *)date;
 + (NSString *)shortDateShortTimeStringForDate:(NSDate *)date;
 + (NSString *)shortDateMediumTimeStringForDate:(NSDate *)date;
++ (NSString *)shortDateLongTimeStringForDate:(NSDate *)date;
 
 #pragma mark - Currency methods
 + (NSDecimalNumber *)currencyNumberForNumber:(NSDecimalNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode;
