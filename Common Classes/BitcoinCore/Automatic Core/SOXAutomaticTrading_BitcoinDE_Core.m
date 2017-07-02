@@ -179,7 +179,7 @@
         return;
     }
 
-    SOXAutomaticTradingCore *tradingCore = [SOXAutomaticTradingCore sharedTradingCore];
+    SOXAutomaticTradingCore *tradingCore = [self sharedTradingCore];
 
     switch (orderType) {
         case BitcoinDE_BuyOrderType:
@@ -324,83 +324,140 @@
 - (void)tryToBuy:(SOXShowOrderbookData *)orderToBuy btcAmountToBuy:(NSDecimalNumber *)btcAmountToBuy {
     if (btcAmountToBuy
         && [btcAmountToBuy isGreaterThan:[NSDecimalNumber zero]]) {
-        NSDecimalNumber *priceForBTCAmountToBuy = [btcAmountToBuy decimalNumberByMultiplyingBy:orderToBuy.orderInformation_price];
-        NSString *note = [NSString stringWithFormat:@"BUY btcAmount: %@ for %@"
-                          , [SOXFormatters stringForBTCNumber:btcAmountToBuy]
-                          , [SOXFormatters currencyStringForNumber:priceForBTCAmountToBuy roundingMode:NSNumberFormatterRoundDown]];
-        [self informBuyDelegateWithNote:note];
 
-        if (self.executeAutomaticTradesForBuyTrades) {
-            note = [NSString stringWithFormat:@"EXECUTE BUY allowed => TRY BUY."];
-            NSDictionary *parameters = [SOXTradeJob_BitcoinDE_Data parameterAutomaticTradingForOrderID:orderToBuy.orderInformation_orderID
-                                                                                             orderType:BitcoinDE_BuyOrderType
-                                                                                         bitcoinAmount:btcAmountToBuy
-                                                                                                 price:orderToBuy.orderInformation_price];
+        // create buyParameters
+        NSDecimalNumber *priceForBTCAmountToBuy = [btcAmountToBuy decimalNumberByMultiplyingBy:orderToBuy.orderInformation_price
+                                                                                  withBehavior:[SOXFormatters btcNumberHandler]];
+        NSDictionary *buyParameters = [SOXTradeJob_BitcoinDE_Data parameterAutomaticTradingForOrderID:orderToBuy.orderInformation_orderID
+                                                                                            orderType:BitcoinDE_BuyOrderType
+                                                                                        bitcoinAmount:btcAmountToBuy
+                                                                                                price:orderToBuy.orderInformation_price];
 
-
-            [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
-                                                    withParameter:parameters
-                                                        respondTo:self];
-            [self playSound];
+        { // DEBUG
+            NSString *note = [NSString stringWithFormat:@"BUY btcAmount: %@ for %@"
+                              , [SOXFormatters stringForBTCNumber:btcAmountToBuy]
+                              , [SOXFormatters currencyStringForNumber:priceForBTCAmountToBuy roundingMode:NSNumberFormatterRoundDown]];
+            [self informBuyDelegateWithNote:note];
         }
-        else {
-            note = [NSString stringWithFormat:@"EXECUTE BUY not allowed - so I don't buy"];
-            // TODO: Fake
-            {
-                note = [note stringByAppendingString:@" - BUT try BALANCE methods ;)"];
 
-
+        if (self.executeBuyTrades) {
+            { // DEBUG
+                NSString *note = [NSString stringWithFormat:@"executeBuyTrades allowed"];
+                [self informBuyDelegateWithNote:note];
             }
 
-            NSBeep();
-        }
+            if (self.executeAutomaticTradesForBuyTrades) {
+                { // DEBUG
+                    NSString *note = [NSString stringWithFormat:@"autoBUY allowed => EXECUTE BUY NOW."];
+                    [self informBuyDelegateWithNote:note];
+                }
 
-        [self informBuyDelegateWithNote:note];
+                [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
+                                                        withParameter:buyParameters
+                                                            respondTo:self];
+            }
+            else {
+                { // DEBUG
+                    NSString *note = [NSString stringWithFormat:@"autoBUY not allowed - so I don't buy"];
+                    [self informBuyDelegateWithNote:note];
+                }
+            }
+        }
+        else {
+            { // DEBUG
+                NSString *note = [NSString stringWithFormat:@"executeBuyTrades not allowed"];
+                [self informBuyDelegateWithNote:note];
+            }
+            if (self.executeBalanceTradesForBuyTrades) {
+                {
+                    { // DEBUG
+                        NSString *note = [NSString stringWithFormat:@"autoBUY not allowed, but I fake and try to balance out ;)"];
+                        [self informBuyDelegateWithNote:note];
+                    }
+                    [self fakeServerAnswerForBuyParameters:buyParameters];
+                }
+            }
+        }
     }
     else {
-        NSString *note = [NSString stringWithFormat:@"NO BUY - btcAmountToBuy is not valid: %@"
-                          , btcAmountToBuy];
-        [self informBuyDelegateWithNote:note];
+        { // DEBUG
+            NSString *note = [NSString stringWithFormat:@"NO BUY - btcAmountToBuy is not valid: %@"
+                              , btcAmountToBuy];
+            [self informBuyDelegateWithNote:note];
+        }
     }
 
-    [self informBuyDelegateWithNote:@"------"];
+    [self informBuyDelegateWithNote:@"   ------"];
 }
 
 - (void)tryToSell:(SOXShowOrderbookData *)orderToSell btcAmountToSell:(NSDecimalNumber *)btcAmountToSell {
     if (btcAmountToSell
         && [btcAmountToSell isGreaterThan:[NSDecimalNumber zero]]) {
-        NSDecimalNumber *priceForBTCAmountToSell = [btcAmountToSell decimalNumberByMultiplyingBy:orderToSell.orderInformation_price];
-        NSString *note = [NSString stringWithFormat:@"SELL btcAmount: %@ for %@"
-                          , [SOXFormatters stringForBTCNumber:btcAmountToSell]
-                          , [SOXFormatters currencyStringForNumber:priceForBTCAmountToSell roundingMode:NSNumberFormatterRoundDown]];
-        [self informSellDelegateWithNote:note];
 
-        if (self.executeAutomaticTradesForSellTrades) {
-            note = [NSString stringWithFormat:@"EXECUTE SELL allowed => TRY SELL."];
-
-            NSDictionary *parameters = [SOXTradeJob_BitcoinDE_Data parameterAutomaticTradingForOrderID:orderToSell.orderInformation_orderID
+        // create sellParameters
+        NSDecimalNumber *priceForBTCAmountToSell = [btcAmountToSell decimalNumberByMultiplyingBy:orderToSell.orderInformation_price
+                                                                                    withBehavior:[SOXFormatters currencyNumberHandler]];
+        NSDictionary *sellParameters = [SOXTradeJob_BitcoinDE_Data parameterAutomaticTradingForOrderID:orderToSell.orderInformation_orderID
                                                                                              orderType:BitcoinDE_SellOrderType
                                                                                          bitcoinAmount:btcAmountToSell
                                                                                                  price:orderToSell.orderInformation_price];
 
-            [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
-                                                    withParameter:parameters
-                                                        respondTo:self];
-            [self playSound];
-        }
-        else {
-            note = [NSString stringWithFormat:@"EXECUTE SELL not allowed - so I don't sell."];
-            NSBeep();
+        { // DEBUG
+            NSString *note = [NSString stringWithFormat:@"SELL btcAmount: %@ for %@"
+                              , [SOXFormatters stringForBTCNumber:btcAmountToSell]
+                              , [SOXFormatters currencyStringForNumber:priceForBTCAmountToSell roundingMode:NSNumberFormatterRoundDown]];
+            [self informSellDelegateWithNote:note];
         }
 
-        [self informSellDelegateWithNote:note];
+        if (self.executeSellTrades) {
+            { // DEBUG
+                NSString *note = [NSString stringWithFormat:@"executeSellTrades allowed"];
+                [self informSellDelegateWithNote:note];
+            }
+
+            if (self.executeAutomaticTradesForSellTrades) {
+                { // DEBUG
+                    NSString *note = [NSString stringWithFormat:@"autoSELL allowed => EXECUTE SELL NOW."];
+                    [self informSellDelegateWithNote:note];
+                }
+
+                [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
+                                                        withParameter:sellParameters
+                                                            respondTo:self];
+            }
+            else {
+                { // DEBUG
+                    NSString *note = [NSString stringWithFormat:@"autoSELL not allowed - so I don't sell"];
+                    [self informSellDelegateWithNote:note];
+                }
+            }
+        }
+        else {
+            { // DEBUG
+                NSString *note = [NSString stringWithFormat:@"executeSellTrades not allowed"];
+                [self informSellDelegateWithNote:note];
+            }
+            if (self.executeBalanceTradesForSellTrades) {
+                {
+                    { // DEBUG
+                        NSString *note = [NSString stringWithFormat:@"autoSELL not allowed, but I fake and try to balance out ;)"];
+                        [self informSellDelegateWithNote:note];
+                    }
+                    [self fakeServerAnswerForSellParameters:sellParameters];
+                }
+            }
+        }
     }
     else {
-        NSString *note = [NSString stringWithFormat:@"NO SELL - btcAmountToSell is not valid: %@"
-                          , btcAmountToSell];
-        [self informSellDelegateWithNote:note];
+        { // DEBUG
+            NSString *note = [NSString stringWithFormat:@"NO SELL - btcAmountToSell is not valid: %@"
+                              , btcAmountToSell];
+            [self informSellDelegateWithNote:note];
+        }
     }
-    [self informSellDelegateWithNote:@"------"];
+
+    [self informSellDelegateWithNote:@"   ------"];
+    // ------------------------------------
 }
 
 #pragma mark - Balance trade methods
@@ -492,9 +549,12 @@
             // for all buyBacklogs: add buyBTC and calculate average price
             NSDecimalNumber *bitcoinAmount = [backlogParameter objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount];
             NSDecimalNumber *price         = [backlogParameter objectForKey:BitcoinDE_ExecuteTrade_Price];
-            NSDecimalNumber *volume        = [bitcoinAmount decimalNumberByMultiplyingBy:price];
-            NSDecimalNumber *average       = [volume decimalNumberByDividingBy:buyBTCSum];
-            averagePrice = [averagePrice decimalNumberByAdding:average];
+            NSDecimalNumber *volume        = [bitcoinAmount decimalNumberByMultiplyingBy:price
+                                              withBehavior:[SOXFormatters currencyNumberHandler]];
+            NSDecimalNumber *average       = [volume decimalNumberByDividingBy:buyBTCSum
+                                                                  withBehavior:[SOXFormatters currencyNumberHandler]];
+            averagePrice = [averagePrice decimalNumberByAdding:average
+                                                  withBehavior:[SOXFormatters currencyNumberHandler]];
 
             { // DEBUG
                 NSString *note = [NSString stringWithFormat:@"btc: %@ - price: %@"
@@ -755,9 +815,12 @@
             // for all buyBacklogs: add buyBTC and calculate average price
             NSDecimalNumber *bitcoinAmount = buyBalanceTradeParameter.orderInformation_maxAmount;
             NSDecimalNumber *price         = buyBalanceTradeParameter.orderInformation_price;
-            NSDecimalNumber *average = [bitcoinAmount decimalNumberByMultiplyingBy:price];
-            average = [average decimalNumberByDividingBy:buyBTCSum];
-            averagePrice = [averagePrice decimalNumberByAdding:average];
+            NSDecimalNumber *average = [bitcoinAmount decimalNumberByMultiplyingBy:price
+                                                                      withBehavior:[SOXFormatters currencyNumberHandler]];
+            average = [average decimalNumberByDividingBy:buyBTCSum
+                                            withBehavior:[SOXFormatters currencyNumberHandler]];
+            averagePrice = [averagePrice decimalNumberByAdding:average
+                                                  withBehavior:[SOXFormatters currencyNumberHandler]];
         }
         NSLog(@"buySum: %@ averagePrice: %@", buyBTCSum, averagePrice);
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
@@ -1215,12 +1278,16 @@
     NSDecimalNumber *sellBTCBacklog = [self sumOfBitcoinsOfParameters:self.boughtTradeParametersBacklog];
 
 
-    NSDecimalNumber *effectiveBacklog = [buyBTCBacklog decimalNumberBySubtracting:sellBTCBacklog];
+    NSDecimalNumber *effectiveBacklog = [buyBTCBacklog decimalNumberBySubtracting:sellBTCBacklog
+                                                                     withBehavior:[SOXFormatters btcNumberHandler]];
 
-    NSDecimalNumber *estBTC = [self.availableBitcoinAmountBeforeBannerUpdate decimalNumberByAdding:effectiveBacklog];
+    NSDecimalNumber *estBTC = [self.availableBitcoinAmountBeforeBannerUpdate decimalNumberByAdding:effectiveBacklog
+                                                                                      withBehavior:[SOXFormatters btcNumberHandler]];
     NSDecimalNumber *btcSpectrum = [NSDecimalNumber decimalNumberWithString:@"0.0000001"];
-    NSDecimalNumber *estBTClow = [estBTC decimalNumberBySubtracting:btcSpectrum];
-    NSDecimalNumber *estBTChigh = [estBTC decimalNumberByAdding:btcSpectrum];
+    NSDecimalNumber *estBTClow = [estBTC decimalNumberBySubtracting:btcSpectrum
+                                                       withBehavior:[SOXFormatters btcNumberHandler]];
+    NSDecimalNumber *estBTChigh = [estBTC decimalNumberByAdding:btcSpectrum
+                                                   withBehavior:[SOXFormatters btcNumberHandler]];
 
     SOXAccountInfoData *accountInfoData = [serverAnswer objectForKey:ServerAnswerPayloadKey];
     NSDecimalNumber *newAvailBTC = accountInfoData.btcBalance_availableAmount;

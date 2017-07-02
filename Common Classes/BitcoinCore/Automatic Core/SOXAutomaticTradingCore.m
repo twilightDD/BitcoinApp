@@ -42,6 +42,13 @@
     [self setRunningAutomaticSellTradeParameters:[NSMutableArray array]];
     [self setRunningBalanceBuyTradeParameters:[NSMutableArray array]];
     [self setRunningBalanceSellTradeParameters:[NSMutableArray array]];
+
+    self.executeBuyTrades = NO;
+    self.executeSellTrades = NO;
+    self.executeAutomaticTradesForBuyTrades = NO;
+    self.executeAutomaticTradesForSellTrades = NO;
+    self.executeBalanceTradesForBuyTrades = NO;
+    self.executeBalanceTradesForSellTrades = NO;
 }
 
 #pragma mark - Manual setters
@@ -145,19 +152,19 @@
                                   , effectivInterestRate];
 
     if ([effectivInterestRate isLessThan:self.buyInterestRate]) {
-        NSString *note = [NSString stringWithFormat:@"no buy %@", statisticForNote];
-        [self informBuyDelegateWithNote:note];
+        { // DEBUG
+            NSString *note = [NSString stringWithFormat:@"no buy %@", statisticForNote];
+            [self informBuyDelegateWithNote:note];
+        }
         return NO;
     }
     else {
-        // check for potential balance trade orders in sellOrderBook
-        
+        { // DEBUG
+            [self informBuyDelegateWithNote:@"   ------"];
+            NSString *note = [NSString stringWithFormat:@"TRY TO BUY %@", statisticForNote];
+            [self informBuyDelegateWithNote:note];
+        }
 
-
-        [self informBuyDelegateWithNote:@"------"];
-        NSString *note = [NSString stringWithFormat:@"TRY TO BUY %@", statisticForNote];
-
-        [self informBuyDelegateWithNote:note];
         NSDecimalNumber *btcAmountToBuy= [self btcBuyAmountForOrder:dataOfInterest];
         [self tryToBuy:dataOfInterest btcAmountToBuy:btcAmountToBuy];
         return YES;
@@ -236,7 +243,8 @@
 
         NSDecimalNumber *volumeToBuy = [SOXFormatters lesserDecimalNumberFrom:orderToBuy.orderInformation_maxVolume
                                                                           and:availableFidorAmount];
-        btcAmountToBuy = [volumeToBuy decimalNumberByDividingBy:orderToBuy.orderInformation_price];
+        btcAmountToBuy = [volumeToBuy decimalNumberByDividingBy:orderToBuy.orderInformation_price
+                                                   withBehavior:[SOXFormatters btcNumberHandler]];
     }
 
     if (btcAmountToBuy) {
@@ -376,7 +384,8 @@
 
     // add fee to price
     NSDecimalNumber *fee = [NSDecimalNumber decimalNumberWithString:@"1.008016"];
-    NSDecimalNumber *soldPriceWithFee = [soldPrice decimalNumberByDividingBy:fee];
+    NSDecimalNumber *soldPriceWithFee = [soldPrice decimalNumberByDividingBy:fee
+                                                                withBehavior:[SOXFormatters currencyNumberHandler]];
 
     { // DEBUG
         NSString *note = [NSString stringWithFormat:@"soldPriceWithFee (0,8%%): %@"
@@ -424,7 +433,8 @@
                                                                                            bitcoinAmount:amountToBuy
                                                                                                    price:buyOrder.orderInformation_price];
             [balanceBuyParameters addObject:buyParameters];
-            remainingBitcoinAmountToBuy = [remainingBitcoinAmountToBuy decimalNumberBySubtracting:amountToBuy];
+            remainingBitcoinAmountToBuy = [remainingBitcoinAmountToBuy decimalNumberBySubtracting:amountToBuy
+                                                                                     withBehavior:[SOXFormatters btcNumberHandler]];
 
             { // DEBUG
                 NSString *note = [NSString stringWithFormat:@"=> amountToBuy %@ => remainingBitcoinAmountToBuy %@"
@@ -523,7 +533,8 @@
 
     // add fee to price
     NSDecimalNumber *fee = [NSDecimalNumber decimalNumberWithString:@"1.008016"];
-    NSDecimalNumber *boughtPriceWithFee = [boughtPrice decimalNumberByMultiplyingBy:fee];
+    NSDecimalNumber *boughtPriceWithFee = [boughtPrice decimalNumberByMultiplyingBy:fee
+                                                                       withBehavior:[SOXFormatters currencyNumberHandler]];
 
     { // DEBUG
         NSString *note = [NSString stringWithFormat:@"boughtPriceWithFee (0,8%%): %@"
@@ -571,7 +582,8 @@
                                                                                            bitcoinAmount:amountToSell
                                                                                                    price:sellOrder.orderInformation_price];
             [balanceSellParameters addObject:sellParameters];
-            remainingBitcoinAmountToSell = [remainingBitcoinAmountToSell decimalNumberBySubtracting:amountToSell];
+            remainingBitcoinAmountToSell = [remainingBitcoinAmountToSell decimalNumberBySubtracting:amountToSell
+                                                                                       withBehavior:[SOXFormatters btcNumberHandler]];
 
             { // DEBUG
                 NSString *note = [NSString stringWithFormat:@"=> amountToSell %@ => remainingBitcoinAmountToSell %@"
@@ -782,7 +794,8 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         SOXShowOrderbookData *bestOrderData = self.buyOrderBook.firstObject;
         NSDecimalNumber *bestOrderDataPrice = bestOrderData.orderInformation_price;
-        NSDecimalNumber *buyLowerThanPrice = [bestOrderDataPrice decimalNumberByMultiplyingBy:self.buyInterestFactor];
+        NSDecimalNumber *buyLowerThanPrice = [bestOrderDataPrice decimalNumberByMultiplyingBy:self.buyInterestFactor
+                                                                                 withBehavior:[SOXFormatters currencyNumberHandler]];
         NSString *status = [NSString stringWithFormat:@"Best: price %@, buy less than %@",
                             [SOXFormatters currencyStringForNumber:bestOrderDataPrice roundingMode:NSNumberFormatterRoundDown]
                             , [SOXFormatters currencyStringForNumber:buyLowerThanPrice roundingMode:NSNumberFormatterRoundDown]];
@@ -795,7 +808,8 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         SOXShowOrderbookData *bestOrderData = self.sellOrderBook.firstObject;
         NSDecimalNumber *bestOrderDataPrice = bestOrderData.orderInformation_price;
-        NSDecimalNumber *sellGreaterThanPrice = [bestOrderDataPrice decimalNumberByMultiplyingBy:self.sellInterestFactor];
+        NSDecimalNumber *sellGreaterThanPrice = [bestOrderDataPrice decimalNumberByMultiplyingBy:self.sellInterestFactor
+                                                                                    withBehavior:[SOXFormatters currencyNumberHandler]];
         NSString *status = [NSString stringWithFormat:@"Best: price %@, sell greater than %@",
                             [SOXFormatters currencyStringForNumber:bestOrderDataPrice roundingMode:NSNumberFormatterRoundDown]
                             , [SOXFormatters currencyStringForNumber:sellGreaterThanPrice roundingMode:NSNumberFormatterRoundDown]];
