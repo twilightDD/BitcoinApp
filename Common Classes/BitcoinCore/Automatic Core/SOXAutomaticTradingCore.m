@@ -328,6 +328,18 @@
 #pragma mark | Balance trade methods
 - (NSDecimalNumber *)potentialBuyBalanceTradeAmountForSellAmount:(NSDecimalNumber *)sellAmount
                                                     forSellPrice:(NSDecimalNumber *)sellPrice {
+    if (!self.executeBalanceTradesForSellTrades) {
+        { // DEBUG
+            [self informSellDelegateWithNote:@"---------------------------------"];
+            NSString *note = [NSString stringWithFormat:@"start potentialBuyBalanceTradeAmountForSellAmount"];
+            [self informSellDelegateWithNote:note];
+            note = [NSString stringWithFormat:@"executeBalanceTradesForSellTrades == NO => we may sell without restriction"];
+            [self informSellDelegateWithNote:note];
+            [self informSellDelegateWithNote:@"---------------------------------"];
+        }
+        return sellAmount;
+    }
+
     { // DEBUG
         [self informSellDelegateWithNote:@"---------------------------------"];
         NSString *note = [NSString stringWithFormat:@"start potentialBuyBalanceTradeAmountForSellAmount"];
@@ -461,6 +473,19 @@
 
 - (NSDecimalNumber *)potentialSellBalanceTradeAmountForBuyAmount:(NSDecimalNumber *)buyAmount
                                                      forBuyPrice:(NSDecimalNumber *)buyPrice {
+
+    if (!self.executeBalanceTradesForBuyTrades) {
+        { // DEBUG
+            [self informBuyDelegateWithNote:@"---------------------------------"];
+            NSString *note = [NSString stringWithFormat:@"start potentialBuyBalanceTradeAmountForSellAmount"];
+            [self informBuyDelegateWithNote:note];
+            note = [NSString stringWithFormat:@"executeBalanceTradesForBuyTrades == NO => we may buy without restriction"];
+            [self informBuyDelegateWithNote:note];
+            [self informBuyDelegateWithNote:@"---------------------------------"];
+        }
+        return buyAmount;
+    }
+
     { // DEBUG
         [self informBuyDelegateWithNote:@"---------------------------------"];
         NSString *note = [NSString stringWithFormat:@"start potentialSellBalanceTradeAmountForBuyAmount"];
