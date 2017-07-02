@@ -208,6 +208,13 @@
 
 - (IBAction)executeAutomaticTradesAction:(NSButton *)sender {
     self.executeAutomaticTrades = !self.executeAutomaticTrades;
+
+    if (self.executeAutomaticTrades) {}
+    else {
+        self.executeBalanceTrades = NO;
+        [SOXAutomaticTrading_BitcoinDE_Core executeBalanceTrades:NO
+                                                    forOrderType:self.orderType];
+    }
     [SOXAutomaticTrading_BitcoinDE_Core executeAutomaticTrades:self.executeAutomaticTrades
                                                   forOrderType:self.orderType];
 }
@@ -215,13 +222,11 @@
 - (IBAction)executeBalanceTradesAction:(NSButton *)sender {
     self.executeBalanceTrades = !self.executeBalanceTrades;
     [SOXAutomaticTrading_BitcoinDE_Core executeBalanceTrades:self.executeBalanceTrades
-                                                    forOrderType:self.orderType];
+                                                forOrderType:self.orderType];
 }
 
 - (IBAction)startAutomaticAction:(NSButton *)sender {
     self.automaticTradingIsRunning = !self.automaticTradingIsRunning;
-    self.executeAutomaticTradesButton.enabled = sender.state;
-    self.executeBalanceTradesButton.enabled = sender.state;
     if (self.automaticTradingIsRunning) {
         sender.title = @"Stop";
         self.statusTextField.stringValue = @"Fetching base data ...";

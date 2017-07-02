@@ -4424,6 +4424,7 @@ Gw
                                         </buttonCell>
                                         <connections>
                                             <action selector="executeAutomaticTradesAction:" target="cwM-7M-FeE" id="X1V-aM-H5l"/>
+                                            <binding destination="cwM-7M-FeE" name="enabled" keyPath="self.automaticTradingIsRunning" id="Uft-zL-gh4"/>
                                             <outlet property="nextKeyView" destination="3fd-l3-d7n" id="OMB-0S-gqg"/>
                                         </connections>
                                     </button>
@@ -4435,6 +4436,7 @@ Gw
                                         </buttonCell>
                                         <connections>
                                             <action selector="executeBalanceTradesAction:" target="cwM-7M-FeE" id="Rhe-IQ-RJD"/>
+                                            <binding destination="cwM-7M-FeE" name="enabled" keyPath="self.executeAutomaticTrades" id="OK5-7v-f6c"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -4521,6 +4523,7 @@ Gw
                 </viewController>
                 <customObject id="Wqd-Md-RGQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="3AY-bf-m6w"/>
+                <userDefaultsController id="TJ3-ff-5FK"/>
             </objects>
             <point key="canvasLocation" x="3001.5" y="2657"/>
         </scene>
