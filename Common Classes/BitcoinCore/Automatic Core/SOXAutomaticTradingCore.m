@@ -634,6 +634,11 @@
 }
 
 #pragma mark | Subclass dummies
++ (BOOL)registerForWebSocketUpdates {
+    [SOXAutomaticTradingCore missedImplementation:@"+ (BOOL)registerForWebSocketUpdates"];
+    return NO;
+}
+
 - (void)addBuyBacklogForRemainingBitcoinAmountToBuy:(NSDecimalNumber *)remainingBitcoinAmountToBuy
                                        forSoldPrice:(NSDecimalNumber *)soldPrice {
     [SOXAutomaticTradingCore missedImplementation:
@@ -798,12 +803,19 @@
 - (void)updateBuyStatus {
     dispatch_async(dispatch_get_main_queue(), ^{
         SOXShowOrderbookData *bestOrderData = self.buyOrderBook.firstObject;
-        NSDecimalNumber *bestOrderDataPrice = bestOrderData.orderInformation_price;
-        NSDecimalNumber *buyLowerThanPrice = [bestOrderDataPrice decimalNumberByMultiplyingBy:self.buyInterestFactor
-                                                                                 withBehavior:[SOXFormatters currencyNumberHandler]];
-        NSString *status = [NSString stringWithFormat:@"Best: price %@, buy less than %@",
-                            [SOXFormatters currencyStringForNumber:bestOrderDataPrice roundingMode:NSNumberFormatterRoundDown]
-                            , [SOXFormatters currencyStringForNumber:buyLowerThanPrice roundingMode:NSNumberFormatterRoundDown]];
+        NSString *status;
+        if (bestOrderData) {
+            NSDecimalNumber *bestOrderDataPrice = bestOrderData.orderInformation_price;
+            NSDecimalNumber *buyLowerThanPrice = [bestOrderDataPrice decimalNumberByMultiplyingBy:self.buyInterestFactor
+                                                                                     withBehavior:[SOXFormatters currencyNumberHandler]];
+             status = [NSString stringWithFormat:@"Best: price %@, buy less than %@"
+                                , [SOXFormatters currencyStringForNumber:bestOrderDataPrice roundingMode:NSNumberFormatterRoundDown]
+                                , [SOXFormatters currencyStringForNumber:buyLowerThanPrice roundingMode:NSNumberFormatterRoundDown]];
+        }
+        else {
+            status = @"An error occured! No buyOrderBook";
+        }
+
         [self informBuyDelegateWithStatus:status];
         [self informBuyDelegateWithNote:status];
     });
@@ -812,15 +824,74 @@
 - (void)updateSellStatus {
     dispatch_async(dispatch_get_main_queue(), ^{
         SOXShowOrderbookData *bestOrderData = self.sellOrderBook.firstObject;
-        NSDecimalNumber *bestOrderDataPrice = bestOrderData.orderInformation_price;
-        NSDecimalNumber *sellGreaterThanPrice = [bestOrderDataPrice decimalNumberByMultiplyingBy:self.sellInterestFactor
-                                                                                    withBehavior:[SOXFormatters currencyNumberHandler]];
-        NSString *status = [NSString stringWithFormat:@"Best: price %@, sell greater than %@",
-                            [SOXFormatters currencyStringForNumber:bestOrderDataPrice roundingMode:NSNumberFormatterRoundDown]
-                            , [SOXFormatters currencyStringForNumber:sellGreaterThanPrice roundingMode:NSNumberFormatterRoundDown]];
+        NSString *status;
+        if (bestOrderData) {
+            NSDecimalNumber *bestOrderDataPrice = bestOrderData.orderInformation_price;
+            NSDecimalNumber *sellGreaterThanPrice = [bestOrderDataPrice decimalNumberByMultiplyingBy:self.sellInterestFactor
+                                                                                        withBehavior:[SOXFormatters currencyNumberHandler]];
+            status = [NSString stringWithFormat:@"Best: price %@, sell greater than %@"
+                      , [SOXFormatters currencyStringForNumber:bestOrderDataPrice roundingMode:NSNumberFormatterRoundDown]
+                      , [SOXFormatters currencyStringForNumber:sellGreaterThanPrice roundingMode:NSNumberFormatterRoundDown]];
+        }
+        else {
+            status = @"An error occured! No sellOrderBook";
+        }
+
         [self informSellDelegateWithStatus:status];
         [self informSellDelegateWithNote:status];
     });
+}
+
+#pragma mark - SOXSocketIOCoreProtocol
+- (void)socketIODidConnect:(NSString *)socketStatus {
+    [self informBuyDelegateWithNote:socketStatus];
+    [self informSellDelegateWithNote:socketStatus];
+    if (self.socketIODidDisconnectAppeared) {
+        self.socketIODidDisconnectAppeared = NO;
+        [[self class] registerForWebSocketUpdates];
+    }
+}
+
+- (void)socketIODidDisconnect:(NSString *)socketStatus {
+    [self informBuyDelegateWithNote:socketStatus];
+    [self informSellDelegateWithNote:socketStatus];
+
+    // Flush all orderBooks
+    if (!self.socketIODidDisconnectAppeared) {
+        { // DEBUG
+            NSString *note = [NSString stringWithFormat:@"Going to flush all orderBooks. Count of orderBooks before:\n"
+                              "%tu buyOrderBook\n"
+                              "%tu buySEPAOrderBook\n"
+                              "%tu sellOrderBook\n"
+                              "%tu sellSEPAOrderBook",
+                              self.buyOrderBook.count, self.buySEPAOrderBook.count, self.sellOrderBook.count, self.sellSEPAOrderBook.count];
+            [self informBuyDelegateWithNote:note];
+            [self informSellDelegateWithNote:note];
+        }
+
+        [self.buyOrderBook removeAllObjects];
+        [self.buySEPAOrderBook removeAllObjects];
+        [self.sellOrderBook removeAllObjects];
+        [self.sellSEPAOrderBook removeAllObjects];
+
+        [self updateBuyStatus];
+        [self updateSellStatus];
+
+        { // DEBUG
+            NSString *note = [NSString stringWithFormat:@"Did flush all orderBooks. Count of orderBooks after:\n"
+                              "%tu buyOrderBook\n"
+                              "%tu buySEPAOrderBook\n"
+                              "%tu sellOrderBook\n"
+                              "%tu sellSEPAOrderBook\n"
+                              "------------------------",
+                              self.buyOrderBook.count, self.buySEPAOrderBook.count, self.sellOrderBook.count, self.sellSEPAOrderBook.count];
+            [self informBuyDelegateWithNote:note];
+            [self informSellDelegateWithNote:note];
+        }
+    }
+
+    self.socketIODidDisconnectAppeared = YES;
+    self.automaticTradingIsRunning = NO;
 }
 
 @end

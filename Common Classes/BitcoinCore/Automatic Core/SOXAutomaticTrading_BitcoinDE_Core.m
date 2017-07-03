@@ -24,9 +24,6 @@
 #pragma mark | Properties
 @property (strong, nonatomic) id requestShowAccountInfoNotification;
 
-@property (nonatomic) BOOL automaticTradingIsRunning;
-@property (nonatomic) BOOL waitingForBannerUpdate;
-
 @property (strong, nonatomic) NSDecimalNumber *debugNewAvailBTC; // TODO: debug
 
 @property (nonatomic) BOOL useBannerUpdateMechanicForBalanceTrades; // to use toggle balance trade mechanic
@@ -913,16 +910,6 @@
 }
 
 #pragma mark - SOXSocketIOCoreProtocol
-- (void)socketIODidConnect:(NSString *)socketStatus {
-    [self informBuyDelegateWithNote:socketStatus];
-    [self informSellDelegateWithNote:socketStatus];
-}
-
-- (void)socketIODidDisconnect:(NSString *)socketStatus {
-    [self informBuyDelegateWithNote:socketStatus];
-    [self informSellDelegateWithNote:socketStatus];
-}
-
 - (void)addedOrder:(SOXShowOrderbookData *)addOrderData {
     if (!addOrderData.tradingPartnerInformation_isKYCFull) {
         NSLog(@"### NO KYC: orderID: %@, type: %@, minA: %@, maxA: %@"
