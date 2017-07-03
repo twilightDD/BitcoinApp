@@ -245,13 +245,15 @@
                                                                           and:availableFidorAmount];
         btcAmountToBuy = [volumeToBuy decimalNumberByDividingBy:orderToBuy.orderInformation_price
                                                    withBehavior:[SOXFormatters btcNumberHandler]];
+        // TODO:
+        // btcAmountToBuy < minAmount
     }
 
     if (btcAmountToBuy) {
         // TODO: compare to offer minAmount
-        NSDecimalNumber *potentialSellBalanceTradeAmount = [self potentialSellBalanceTradeAmountForBuyAmount:btcAmountToBuy
-                                                                                                 forBuyPrice:orderToBuy.orderInformation_price];
-        btcAmountToBuy = potentialSellBalanceTradeAmount;
+        btcAmountToBuy = [self potentialSellBalanceTradeAmountForBuyAmount:btcAmountToBuy
+                                                               forBuyPrice:orderToBuy.orderInformation_price];
+
 
         /*
          28.06.17, 13:34:27: TRY TO SELL - type order - ID A4TNUM - minAmo 0,10 ₿ - maxAmo 0,20 ₿ - p0 2.199,00 € - p1 2.197,36 € - iR 0.074
@@ -532,12 +534,12 @@
     NSDecimalNumber *remainingBitcoinAmountToSell = [boughtBTCAmount copy];
 
     // add fee to price
-    NSDecimalNumber *fee = [NSDecimalNumber decimalNumberWithString:@"1.008016"];
+    NSDecimalNumber *fee = [NSDecimalNumber decimalNumberWithString:@"1.004"];
     NSDecimalNumber *boughtPriceWithFee = [boughtPrice decimalNumberByMultiplyingBy:fee
                                                                        withBehavior:[SOXFormatters currencyNumberHandler]];
 
     { // DEBUG
-        NSString *note = [NSString stringWithFormat:@"boughtPriceWithFee (0,8%%): %@"
+        NSString *note = [NSString stringWithFormat:@"boughtPriceWithFee (0,4%%): %@"
                           , boughtPriceWithFee];
         [self informBuyDelegateWithNote:note];
     }
@@ -693,8 +695,8 @@
 
 - (void)unSuccessfulBalanceBuyTrade:(NSDictionary *)tradeParameters {
     [self.runningBalanceBuyTradeParameters removeObject:tradeParameters];
-    [self.boughtTradeParametersBacklog addObject:tradeParameters];
-    [self checkForBalanceTradesForBoughtTrades];
+    [self.soldTradeParametersBacklog addObject:tradeParameters];
+    [self checkForBalanceTradesForSoldTrades];
 }
 
 - (void)successfulBalanceSellTrade:(NSDictionary *)tradeParameters {
@@ -704,8 +706,8 @@
 
 - (void)unSuccessfulBalanceSellTrade:(NSDictionary *)tradeParameters {
     [self.runningBalanceSellTradeParameters removeObject:tradeParameters];
-    [self.soldTradeParametersBacklog addObject:tradeParameters];
-    [self checkForBalanceTradesForSoldTrades];
+    [self.boughtTradeParametersBacklog addObject:tradeParameters];
+    [self checkForBalanceTradesForBoughtTrades];
 }
 
 #pragma mark | Helpers
@@ -713,6 +715,7 @@
     if (self.executeBalanceTradesForBuyTrades
         && self.runningAutomaticBuyTradeParameters.count == 0
         && self.runningBalanceBuyTradeParameters.count == 0
+        && self.runningBalanceSellTradeParameters.count == 0
         && self.boughtTradeParametersBacklog.count > 0) {
         [self createBalanceTradesForBoughtTrades];
     }
@@ -722,7 +725,9 @@
     if (self.executeBalanceTradesForSellTrades
         && self.runningAutomaticSellTradeParameters.count == 0
         && self.runningBalanceSellTradeParameters.count == 0
+        && self.runningBalanceBuyTradeParameters.count == 0
         && self.soldTradeParametersBacklog.count > 0) {
+        // TODO:
         [self createBalanceTradesForSoldTrades];
     }
 }

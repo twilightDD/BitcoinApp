@@ -352,9 +352,10 @@
                     [self informBuyDelegateWithNote:note];
                 }
 
-//                [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
-//                                                        withParameter:buyParameters
-//                                                            respondTo:self];
+                [self.runningBalanceBuyTradeParameters addObject:buyParameters];
+                [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
+                                                        withParameter:buyParameters
+                                                            respondTo:self];
             }
             else {
                 { // DEBUG
@@ -374,6 +375,7 @@
                         NSString *note = [NSString stringWithFormat:@"autoBUY not allowed, but I fake and try to balance out ;)"];
                         [self informBuyDelegateWithNote:note];
                     }
+                    [self.runningBalanceBuyTradeParameters addObject:buyParameters];
                     [self fakeServerAnswerForBuyParameters:buyParameters];
                 }
             }
@@ -472,13 +474,14 @@
     boughtBTCSum = [boughtBTCSum decimalNumberByMultiplyingBy:bitcoinFee
                                                  withBehavior:[SOXFormatters btcNumberHandler]];
 
+    // TODO: ist das hier die richtige Stelle (s.u)
     [self.boughtTradeParametersBacklog removeAllObjects];
 
     if ([boughtBTCSum isGreaterThan:[NSDecimalNumber zero]] ) {
-        NSDictionary *substitutedBuyParameters = [SOXTradeJob_BitcoinDE_Data parameterAutomaticTradingForOrderID:@"substitutedBuyOrder"
-                                                                                                       orderType:BitcoinDE_BuyOrderType
-                                                                                                   bitcoinAmount:boughtBTCSum
-                                                                                                           price:averagePrice];
+        NSDictionary *substitutedBuyParameters = [SOXTradeJob_BitcoinDE_Data parameterBalanceTradingForOrderID:@"substitutedBuyOrder"
+                                                                                                     orderType:BitcoinDE_BuyOrderType
+                                                                                                 bitcoinAmount:boughtBTCSum
+                                                                                                         price:averagePrice];
         { // DEBUG
             NSString *note = [NSString stringWithFormat:@"createBalanceTradesForBoughtTrades - substituteBuyParameters:\n%@"
                               , substitutedBuyParameters];
@@ -486,7 +489,11 @@
         }
 
         [self createBalanceTradesForTradeParameters:substitutedBuyParameters];
+        // TODO: oder nicht doch lieber erst hier?
     }
+
+    // TODO: oder hier?
+
 }
 
 - (void)createBalanceTradesForSoldTrades {
@@ -505,10 +512,10 @@
     [self.soldTradeParametersBacklog removeAllObjects];
 
     if ([soldBTCSum isGreaterThan:[NSDecimalNumber zero]] ) {
-        NSDictionary *substituteSellParameters = [SOXTradeJob_BitcoinDE_Data parameterAutomaticTradingForOrderID:@"substitutedSellOrder"
-                                                                                                      orderType:BitcoinDE_SellOrderType
-                                                                                                  bitcoinAmount:soldBTCSum
-                                                                                                          price:averagePrice];
+        NSDictionary *substituteSellParameters = [SOXTradeJob_BitcoinDE_Data parameterBalanceTradingForOrderID:@"substitutedSellOrder"
+                                                                                                     orderType:BitcoinDE_SellOrderType
+                                                                                                 bitcoinAmount:soldBTCSum
+                                                                                                         price:averagePrice];
         { // DEBUG
             NSString *note = [NSString stringWithFormat:@"createBalanceTradesForSoldTrades - substituteSellParameters:\n%@",
                               substituteSellParameters];
@@ -641,13 +648,14 @@
                                    forOrderType:(BitcoinDE_OrderType)orderType {
     NSDecimalNumber *sum = [NSDecimalNumber zero];
     for (NSDictionary *parameters in parametersToExecute) {
-        { // Debug logout
+        { // DEBUG
             if (orderType == BitcoinDE_BuyOrderType) {
                 NSString *note = [NSString stringWithFormat:@"BuyBlanceTrade: ID %@ - amount %@"
                                   , [parameters objectForKey:BitcoinDE_ExecuteTrade_OrderID]
                                   , [parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]];
                 sum = [sum decimalNumberByAdding:[parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]];
                 [self informSellDelegateWithNote:note];
+
             }
             else if (orderType == BitcoinDE_SellOrderType) {
                 NSString *note = [NSString stringWithFormat:@"SellBalanceTrade: ID %@ - amount %@"
@@ -655,45 +663,70 @@
                                   , [parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]];
                 sum = [sum decimalNumberByAdding:[parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]];
                 [self informBuyDelegateWithNote:note];
+
             }
         }
 
         // Execute BalanceTrade
-        {
-            NSString *note = [NSString stringWithFormat:@"Try to execute - ID: %@ - price: %@ - amount: %@"
-                              , [parameters objectForKey:BitcoinDE_ExecuteTrade_OrderID]
-                              , [parameters objectForKey:BitcoinDE_ExecuteTrade_Price]
-                              , [parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]
-                              ];
-            if (orderType == BitcoinDE_BuyOrderType) {
-                if (self.executeBuyTrades
-                    && self.executeSellTrades
-                    && self.executeBalanceTradesForBuyTrades) {
+        if (orderType == BitcoinDE_BuyOrderType) {
+            if (self.executeBuyTrades
+                && self.executeBalanceTradesForSellTrades) {
+                { // DEBUG
+                    NSString *note = [NSString stringWithFormat:@"Try to execute buyBalance for sold - ID: %@ - price: %@ - amount: %@"
+                                      , [parameters objectForKey:BitcoinDE_ExecuteTrade_OrderID]
+                                      , [parameters objectForKey:BitcoinDE_ExecuteTrade_Price]
+                                      , [parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]
+                                      ];
                     [self informSellDelegateWithNote:note];
-//                    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
-//                                                            withParameter:parameters
-//                                                                respondTo:self];
+
+                }
+
+                [self.runningBalanceBuyTradeParameters addObject:parameters];
+                [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
+                                                        withParameter:parameters
+                                                            respondTo:self];
+
+            }
+            else {
+                { // DEBUG
+                    [self informSellDelegateWithNote:@"We should never read this, but: Execute Balance Trades for sell not allowed (if you can read this: inform Peter"];
                 }
             }
-            else if (orderType == BitcoinDE_SellOrderType) {
-                if (self.executeBuyTrades
-                     && self.executeSellTrades
-                     && self.executeBalanceTradesForSellTrades) {
+        }
+        else if (orderType == BitcoinDE_SellOrderType) {
+            if (self.executeBuyTrades
+                && self.executeBalanceTradesForBuyTrades) {
+                { // DEBUG
+                    NSString *note = [NSString stringWithFormat:@"Try to execute sellBalance for bought - ID: %@ - price: %@ - amount: %@"
+                                      , [parameters objectForKey:BitcoinDE_ExecuteTrade_OrderID]
+                                      , [parameters objectForKey:BitcoinDE_ExecuteTrade_Price]
+                                      , [parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]
+                                      ];
                     [self informBuyDelegateWithNote:note];
-//                    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
-//                                                            withParameter:parameters
-//                                                                respondTo:self];
+                }
+
+                [self.runningBalanceSellTradeParameters addObject:parameters];
+
+                [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
+                                                        withParameter:parameters
+                                                            respondTo:self];
+            }
+            else {
+                { // DEBUG
+                    [self informBuyDelegateWithNote:@"We should never read this, but: Execute Balance Trades for buy not allowed (if you can read this: inform Peter"];
                 }
             }
         }
     }
 
-    NSString *note = [NSString stringWithFormat:@"Balances - sum of amount: %@", sum];
-    if (orderType == BitcoinDE_BuyOrderType) {
-        [self informSellDelegateWithNote:note];
-    }
-    else if (orderType == BitcoinDE_SellOrderType) {
-        [self informBuyDelegateWithNote:note];
+    { // DEBUG
+        NSString *note = [NSString stringWithFormat:@"Balances - sum of amount: %@", sum];
+        if (orderType == BitcoinDE_BuyOrderType) {
+            [self informSellDelegateWithNote:note];
+        }
+        else if (orderType == BitcoinDE_SellOrderType) {
+            [self informBuyDelegateWithNote:note];
+        }
     }
 }
 
@@ -892,7 +925,11 @@
 
 - (void)addedOrder:(SOXShowOrderbookData *)addOrderData {
     if (!addOrderData.tradingPartnerInformation_isKYCFull) {
-        NSLog(@"### NO KYC: orderID: %@", addOrderData.orderInformation_orderID);
+        NSLog(@"### NO KYC: orderID: %@, type: %@, minA: %@, maxA: %@"
+              , addOrderData.orderInformation_orderID
+              , addOrderData.orderInformation_type
+              , addOrderData.orderInformation_minAmount
+              , addOrderData.orderInformation_maxAmount);
         return;
     }
 
@@ -1091,18 +1128,19 @@
         [self.buyOrderBook addObject:addOrderData];
         self.buyOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:self.buyOrderBook
                                                                    forOrderType:BitcoinDE_BuyOrderType];
-
-        NSString *note = [NSString stringWithFormat:@"+ added buy (bOB.count: %tu)- ID: %@ - pO: %@ - type: offer - idx %tu - p: %@ - minA: %@ - maxA: %@ - iR %@"
-                          , self.buyOrderBook.count
-                          , addOrderDataOrderID
-                          , addOrderData.orderRequirements_paymentOption
-                          , [self.buyOrderBook indexOfObject:addOrderData]
-                          , addOrderDataPrice
-                          , addOrderData.orderInformation_minAmount
-                          , addOrderData.orderInformation_maxAmount
-                          , [self effectiveBuyInterestRateForData:addOrderData
-                                                  toReferenceData:self.buyOrderBook.firstObject]];
-        [self informBuyDelegateWithNote:note];
+        { // DEBUG
+            NSString *note = [NSString stringWithFormat:@"+ added buy (bOB.count: %tu)- ID: %@ - pO: %@ - type: offer - idx %tu - p: %@ - minA: %@ - maxA: %@ - iR %@"
+                              , self.buyOrderBook.count
+                              , addOrderDataOrderID
+                              , addOrderData.orderRequirements_paymentOption
+                              , [self.buyOrderBook indexOfObject:addOrderData]
+                              , addOrderDataPrice
+                              , addOrderData.orderInformation_minAmount
+                              , addOrderData.orderInformation_maxAmount
+                              , [self effectiveBuyInterestRateForData:addOrderData
+                                                      toReferenceData:self.buyOrderBook.firstObject]];
+            [self informBuyDelegateWithNote:note];
+        }
 
         BOOL tryToAutoBuy = NO;
         if ([[self.buyOrderBook objectAtIndex:0] isEqual:addOrderData]) {
@@ -1120,8 +1158,6 @@
                 [self createBalanceTradesForBoughtTrades];
                 [self informBuyDelegateWithNote:@"~~~~~~~~~~~~~~~~"];
         }
-
-
     }
     // Sell
     else if ([orderInformationType isEqualToString:BitcoinDE_WebSocket_SellOrderType]) {
@@ -1157,15 +1193,6 @@
             [self informBuyDelegateWithNote:@"createBalanceTradesForSoldTrades: try to create new buyBalanceTrades to even sellAutoTrade backlog"];
             [self createBalanceTradesForSoldTrades];
             [self informBuyDelegateWithNote:@"~~~~~~~~~~~~~~~~"];
-        }
-        if (self.buyOrderBook.count > 0
-            && self.sellOrderBook.count > 0) {
-//            { // TODO: Fake
-//                if (!self.executeBalanceTradesForSellTrades) {
-//                    SOXShowOrderbookData *sellOrder = [self.sellOrderBook objectAtIndex:0];
-//                    [self createFakeServerAnswerForSellOrder:sellOrder];
-//                }
-//            }
         }
     }
 }
