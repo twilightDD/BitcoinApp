@@ -127,23 +127,25 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
                                                                                                                             urlResponse:response
                                                                                                                                   error:error
                                                                                                                            errorMessage:errorMessage];
-
-                                                                    if (serverCommandType == BitcoinDE_ShowAccountInfoCommandType) {
-                                                                        [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_RequestShowAccountInfo
-                                                                                                                            object:serverAnswer];
-                                                                    }
-                                                                    else if (serverCommandType == BitcoinDE_ShowRatesCommandType) {
-                                                                        [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_RequestShowRates
-                                                                                                                            object:serverAnswer];
-                                                                    } else {
-                                                                        // Send answer to asking controller
-                                                                        if ([controller respondsToSelector:@selector(answerOfServerRequest:)]) {
-                                                                            // NSURLSessionTask has its own thread
-                                                                            [controller performSelectorOnMainThread:@selector(answerOfServerRequest:)
-                                                                                                         withObject:serverAnswer
-                                                                                                      waitUntilDone:NO];
+                                                                    if (serverAnswer) {
+                                                                        if (serverCommandType == BitcoinDE_ShowAccountInfoCommandType) {
+                                                                            [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_RequestShowAccountInfo
+                                                                                                                                object:serverAnswer];
                                                                         }
-                                                                        
+                                                                        else if (serverCommandType == BitcoinDE_ShowRatesCommandType) {
+                                                                            [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_RequestShowRates
+                                                                                                                                object:serverAnswer];
+                                                                        } else {
+                                                                            // Send answer to asking controller
+                                                                            if ([controller respondsToSelector:@selector(answerOfServerRequest:)]) {
+                                                                                // NSURLSessionTask has its own thread
+                                                                                [controller performSelectorOnMainThread:@selector(answerOfServerRequest:)
+                                                                                                             withObject:serverAnswer
+                                                                                                          waitUntilDone:NO];
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    if (errorMessage.hasError) {
                                                                         // Error handling
                                                                         NSObject *delegateForErrorMessages = [SOXMarket_BitcoinDE_Core sharedCore].delegateForErrorMessages;
                                                                         if (errorMessage.hasError
@@ -197,6 +199,7 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
         }
         else {
             [errorMessage appendErrorDescripton:@"Data for JSON is nil"];
+            // TODO: return somethind with an ErrorMessage
             return nil;
         }
         // check for error in json deserialization
@@ -228,8 +231,26 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
         else {
             id payload = [SOXDataConverter_BitcoinDE payloadForServerDictionary:payloadDictionary
                                                                forServerCommand:serverCommandType];
-            [serverAnswer setObject:payload
-                             forKey:ServerAnswerPayloadKey];
+            if (payload) {
+                [serverAnswer setObject:payload
+                                 forKey:ServerAnswerPayloadKey];
+            }
+            else {
+                NSString *payloadErrorMsg = [NSString stringWithFormat:@"PAYLOAD is nil for serverCommandType %tu (%@)"
+                                             , serverCommandType, [NSDate date]];
+                NSString *logErrorMsg = [NSString stringWithFormat:@"PAYLOAD is nil for serverCommandType %tu(%@)\n"
+                                         "payloadDictionary %@\n"
+                                         "response %@\n"
+                                         "error %@"
+                                         , serverCommandType
+                                         , [NSDate date]
+                                         , payloadDictionary
+                                         , response
+                                         , error];
+                NSLog(@"%@", logErrorMsg);
+                [errorMessage appendErrorDescripton:payloadErrorMsg];
+                serverAnswer = nil;
+            }
         }
     }
     return [serverAnswer copy];

@@ -35,6 +35,7 @@
 
 #pragma mark Properties
 @property (strong, nonatomic) NSMutableArray *orderBook;
+@property (nonatomic) BOOL socketIODidDisconnectAppeared;
 
 @end
 
@@ -171,6 +172,21 @@
 }
 
 #pragma mark - SOXSocketIOCoreProtocol
+- (void)socketIODidConnect:(NSString *)socketStatus {
+    if (self.socketIODidDisconnectAppeared) {
+        self.socketIODidDisconnectAppeared = NO;
+        [self requestServerData];
+    }
+}
+
+- (void)socketIODidDisconnect:(NSString *)socketStatus {
+    self.socketIODidDisconnectAppeared = YES;
+
+    // Flush orderBooks
+    [self.orderBook removeAllObjects];
+    [self.orderBookArrayController rearrangeObjects];
+}
+
 - (void)addedOrder:(SOXShowOrderbookData *)addOrderData {
     [self.orderBookArrayController addObject:addOrderData];
     [self.orderBookArrayController rearrangeObjects];

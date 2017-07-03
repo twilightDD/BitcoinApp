@@ -75,7 +75,7 @@
     static NSDateFormatter *dateFormatterShortDateLongTime = nil;
     dispatch_once(&pred, ^{
         dateFormatterShortDateLongTime = [[NSDateFormatter alloc] init];
-        [dateFormatterShortDateLongTime setDateFormat:@"dd.MM.yy hh:mm:ss:SSS"];
+        [dateFormatterShortDateLongTime setDateFormat:@"dd.MM.yy HH:mm:ss:SSS"];
     });
     return dateFormatterShortDateLongTime;
 }

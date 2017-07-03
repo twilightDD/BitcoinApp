@@ -15,6 +15,8 @@
 
 @interface SOXAutomaticTradingCore ()
 
+@property (nonatomic) BOOL socketIODidDisconnectAppeared;
+
 @property (strong, nonatomic) NSHashTable *buyDelegates;
 @property (strong, nonatomic) NSHashTable *sellDelegates;
 
@@ -22,6 +24,9 @@
 @property (strong, nonatomic) NSMutableArray *sellOrderBook;
 @property (strong, nonatomic) NSMutableSet *buySEPAOrderBook; // as cache for SEPA offers
 @property (strong, nonatomic) NSMutableSet *sellSEPAOrderBook;  // as cache for SEPA orders
+
+@property (nonatomic) BOOL automaticTradingIsRunning;
+@property (nonatomic) BOOL waitingForBannerUpdate;
 
 @property (nonatomic) BOOL executeBuyTrades;
 @property (nonatomic) BOOL executeSellTrades;
