@@ -349,7 +349,10 @@
                     [self informBuyDelegateWithNote:note];
                 }
 
-                [self.runningBalanceBuyTradeParameters addObject:buyParameters];
+                [self.runningAutomaticBuyTradeParameters addObject:buyParameters];
+
+                [self informBuyDelegateAboutRunningQueues];
+
                 [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
                                                         withParameter:buyParameters
                                                             respondTo:self];
@@ -359,9 +362,11 @@
                     NSString *note = [NSString stringWithFormat:@"autoBUY not allowed - so I don't buy"];
                     [self informBuyDelegateWithNote:note];
                 }
+                // TODO: automatic Trading OFF
             }
         }
         else {
+            // TODO: autoTrade is running OFF
             { // DEBUG
                 NSString *note = [NSString stringWithFormat:@"executeBuyTrades not allowed"];
                 [self informBuyDelegateWithNote:note];
@@ -420,9 +425,13 @@
                     [self informSellDelegateWithNote:note];
                 }
 
-//                [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
-//                                                        withParameter:sellParameters
-//                                                            respondTo:self];
+                [self.runningAutomaticSellTradeParameters addObject:sellParameters];
+
+                [self informSellDelegateAboutRunningQueues];
+
+                [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
+                                                        withParameter:sellParameters
+                                                            respondTo:self];
             }
             else {
                 { // DEBUG
@@ -782,6 +791,7 @@
                 }
             }
             else {
+                // TODO: autotrade OFF
                 if (orderType == BitcoinDE_BuyOrderType) {
                     [self unSuccessfulAutomaticBuyTrade:tradeParameters];
                 }
@@ -1115,8 +1125,10 @@
         [self.buyOrderBook addObject:addOrderData];
         self.buyOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:self.buyOrderBook
                                                                    forOrderType:BitcoinDE_BuyOrderType];
+
+        SOXShowOrderbookData *firstBuyOrderBookData = self.buyOrderBook.firstObject;
         { // DEBUG
-            NSString *note = [NSString stringWithFormat:@"+ added buy (bOB.count: %tu)- ID: %@ - pO: %@ - type: offer - idx %tu - p: %@ - minA: %@ - maxA: %@ - iR %@"
+            NSString *note = [NSString stringWithFormat:@"+ added buy (bOB.count: %tu)- ID: %@ - pO: %@ - type: offer - idx %tu - p: %@ - minA: %@ - maxA: %@ - p@idx0: %@ - iR %@"
                               , self.buyOrderBook.count
                               , addOrderDataOrderID
                               , addOrderData.orderRequirements_paymentOption
@@ -1124,20 +1136,36 @@
                               , addOrderDataPrice
                               , addOrderData.orderInformation_minAmount
                               , addOrderData.orderInformation_maxAmount
+                              , [SOXFormatters currencyStringForNumber:firstBuyOrderBookData.orderInformation_price
+                                                          roundingMode:NSNumberFormatterRoundDown]
                               , [self effectiveBuyInterestRateForData:addOrderData
-                                                      toReferenceData:self.buyOrderBook.firstObject]];
+                                                      toReferenceData:firstBuyOrderBookData ]];
             [self informBuyDelegateWithNote:note];
         }
 
-        BOOL tryToAutoBuy = NO;
+        // Update Status text, if needed
         if ([[self.buyOrderBook objectAtIndex:0] isEqual:addOrderData]) {
             [self updateBuyStatus];
+        }
+
+        if (self.runningAutomaticBuyTradeParameters.count > 0
+            || self.runningAutomaticSellTradeParameters.count > 0
+            || self.runningBalanceSellTradeParameters.count > 0
+            || self.runningBalanceBuyTradeParameters.count > 0) {
+
+            [self informBuyDelegateAboutRunningQueues];
+
+            return;
+        }
+
+
+        // Look for interesting new orders
+        BOOL tryToAutoBuy = NO;
+        if ([[self.buyOrderBook objectAtIndex:0] isEqual:addOrderData]) {
             tryToAutoBuy = [self checkForBuyableOrder];
         }
 
         if (!tryToAutoBuy
-            && self.runningAutomaticSellTradeParameters.count == 0
-            && self.runningBalanceSellTradeParameters.count == 0
 //            && !self.waitingForBannerUpdate
             && self.boughtTradeParametersBacklog.count > 0) {
                 [self informBuyDelegateWithNote:@"~~~~~~~~~~~~~~~~"];
@@ -1152,7 +1180,8 @@
         self.sellOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:self.sellOrderBook
                                                                     forOrderType:BitcoinDE_SellOrderType];
 
-        NSString *note = [NSString stringWithFormat:@"+ added sell (sOB.count: %tu)- ID: %@ - pO: %@ - type: offer - idx %tu - p: %@ - minA: %@ - maxA: %@ - iR %@"
+        SOXShowOrderbookData *firstSellOrderBookData = self.sellOrderBook.firstObject;
+        NSString *note = [NSString stringWithFormat:@"+ added sell (sOB.count: %tu)- ID: %@ - pO: %@ - type: offer - idx %tu - p: %@ - minA: %@ - maxA: %@ - p@idx0: %@ - iR %@"
                           , self.sellOrderBook.count
                           , addOrderDataOrderID
                           , addOrderData.orderRequirements_paymentOption
@@ -1160,19 +1189,35 @@
                           , addOrderDataPrice
                           , addOrderData.orderInformation_minAmount
                           , addOrderData.orderInformation_maxAmount
+                          , [SOXFormatters currencyStringForNumber:firstSellOrderBookData.orderInformation_price
+                                                      roundingMode:NSNumberFormatterRoundDown]
                           , [self effectiveSellInterestRateForData:addOrderData
-                                                   toReferenceData:self.sellOrderBook.firstObject]];
+                                                   toReferenceData:firstSellOrderBookData]];
         [self informSellDelegateWithNote:note];
+
+        // Update Status text, if needed
+        if ([[self.sellOrderBook objectAtIndex:0] isEqual:addOrderData]) {
+            [self updateSellStatus];
+        }
+
+        if (self.runningAutomaticBuyTradeParameters.count > 0
+            || self.runningAutomaticSellTradeParameters.count > 0
+            || self.runningBalanceSellTradeParameters.count > 0
+            || self.runningBalanceBuyTradeParameters.count > 0) {
+
+            [self informSellDelegateAboutRunningQueues];
+
+            return;
+        }
+
+        // Look for interesting new orders
 
         BOOL tryToAutoSell = NO;
         if ([[self.sellOrderBook objectAtIndex:0] isEqual:addOrderData]) {
-            [self updateSellStatus];
             tryToAutoSell = [self checkForSellableOrder];
         }
 
         if (!tryToAutoSell
-            && self.runningAutomaticBuyTradeParameters.count == 0
-            && self.runningBalanceBuyTradeParameters.count == 0
 //            && !self.waitingForBannerUpdate
             && self.soldTradeParametersBacklog.count > 0) {
             // create balancePayments
@@ -1195,9 +1240,10 @@
                                                              toReferenceData:[self.buyOrderBook objectAtIndex:1]];
         }
 
-        NSString *note = [NSString stringWithFormat:@"~ new SEPA (bSepa.count: %tu): type offer - order - orderID: %@ - payO: %@ - IR %@"
+        NSString *note = [NSString stringWithFormat:@"~ new SEPA (bSepa.count: %tu): type offer - orderID: %@ - price: %@ € - payO: %@ - IR %@"
                           , self.buySEPAOrderBook.count
                           , addSEPAOrderData.orderInformation_orderID
+                          , addSEPAOrderData.orderInformation_price
                           , addSEPAOrderData.orderRequirements_paymentOption
                           , effectiveBuyInterestRate ? effectiveBuyInterestRate : @"NaN (buyOrderBook has too less entries"];
         [self informBuyDelegateWithNote:note];
@@ -1209,9 +1255,10 @@
             effectiveSellInterestRate = [self effectiveSellInterestRateForData:addSEPAOrderData
                                                                toReferenceData:[self.sellOrderBook objectAtIndex:1]];
         }
-        NSString *note = [NSString stringWithFormat:@"~ new SEPA (sSepa.count: %tu): type order - orderID: %@ - payO: %@ - IR %@"
+        NSString *note = [NSString stringWithFormat:@"~ new SEPA (sSepa.count: %tu): type order - orderID: %@ - price: %@ € - payO: %@ - IR %@"
                           , self.sellSEPAOrderBook.count
                           , addSEPAOrderData.orderInformation_orderID
+                          , addSEPAOrderData.orderInformation_price
                           , addSEPAOrderData.orderRequirements_paymentOption
                           , effectiveSellInterestRate ? effectiveSellInterestRate : @"NaN (sellOrderBook has too less entries"];
         [self informSellDelegateWithNote:note];
@@ -1261,6 +1308,7 @@
 }
 
 - (void)fakeServerAnswerForSellParameters:(NSDictionary *)parameters {
+    [self.runningAutomaticSellTradeParameters addObject:parameters];
     NSMutableDictionary *fakeAnswerDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                            @(BitcoinDE_ExecuteTrade), ServerAnswerServerCommandKey
                                            , parameters, ServerAnswerParametersKey

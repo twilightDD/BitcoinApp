@@ -140,7 +140,8 @@
 
     SOXShowOrderbookData *dataOfInterest  = [self.buyOrderBook objectAtIndex:0];
     SOXShowOrderbookData *referenceData   = [self.buyOrderBook objectAtIndex:1];
-    NSDecimalNumber *effectivInterestRate = [self effectiveBuyInterestRateForData:dataOfInterest toReferenceData:referenceData];
+    NSDecimalNumber *effectivInterestRate = [self effectiveBuyInterestRateForData:dataOfInterest
+                                                                  toReferenceData:referenceData];
 
     NSString *statisticForNote = [NSString stringWithFormat:@"- type %@ - ID %@ - minAmo %@ - maxAmo %@ - p0 %@ - p1 %@ - iR %@"
                                   , dataOfInterest.orderInformation_type
@@ -153,7 +154,7 @@
 
     if ([effectivInterestRate isLessThan:self.buyInterestRate]) {
         { // DEBUG
-            NSString *note = [NSString stringWithFormat:@"no buy %@", statisticForNote];
+            NSString *note = [NSString stringWithFormat:@"no buy (iR to less) %@", statisticForNote];
             [self informBuyDelegateWithNote:note];
         }
         return NO;
@@ -165,8 +166,12 @@
             [self informBuyDelegateWithNote:note];
         }
 
+        // TODO: autoTrade is running ON
         NSDecimalNumber *btcAmountToBuy= [self btcBuyAmountForOrder:dataOfInterest];
-        [self tryToBuy:dataOfInterest btcAmountToBuy:btcAmountToBuy];
+        if (btcAmountToBuy) {
+            // TODO: autoTrade is running ON
+            [self tryToBuy:dataOfInterest btcAmountToBuy:btcAmountToBuy];
+        }
         return YES;
     }
 }
@@ -193,7 +198,7 @@
                                   , effectivInterestRate];
 
     if ([effectivInterestRate isLessThan:self.sellInterestRate]) {
-        NSString *note = [NSString stringWithFormat:@"no sell %@", statisticForNote];
+        NSString *note = [NSString stringWithFormat:@"no sell (iR to less) %@", statisticForNote];
         [self informSellDelegateWithNote:note];
         return NO;
     }
@@ -717,6 +722,7 @@
 
 #pragma mark | Helpers
 - (void)checkForBalanceTradesForBoughtTrades {
+    [self informBuyDelegateAboutRunningQueues];
     if (self.executeBalanceTradesForBuyTrades
         && self.runningAutomaticBuyTradeParameters.count == 0
         && self.runningBalanceBuyTradeParameters.count == 0
@@ -727,6 +733,7 @@
 }
 
 - (void)checkForBalanceTradesForSoldTrades {
+    [self informSellDelegateAboutRunningQueues];
     if (self.executeBalanceTradesForSellTrades
         && self.runningAutomaticSellTradeParameters.count == 0
         && self.runningBalanceSellTradeParameters.count == 0
@@ -808,9 +815,11 @@
             NSDecimalNumber *bestOrderDataPrice = bestOrderData.orderInformation_price;
             NSDecimalNumber *buyLowerThanPrice = [bestOrderDataPrice decimalNumberByMultiplyingBy:self.buyInterestFactor
                                                                                      withBehavior:[SOXFormatters currencyNumberHandler]];
-             status = [NSString stringWithFormat:@"Best: price %@, buy less than %@"
-                                , [SOXFormatters currencyStringForNumber:bestOrderDataPrice roundingMode:NSNumberFormatterRoundDown]
-                                , [SOXFormatters currencyStringForNumber:buyLowerThanPrice roundingMode:NSNumberFormatterRoundDown]];
+            status = [NSString stringWithFormat:@"Bestprice %@, buy < %@\naBuy %tu bSell %tu"
+                      , [SOXFormatters currencyStringForNumber:bestOrderDataPrice roundingMode:NSNumberFormatterRoundDown]
+                      , [SOXFormatters currencyStringForNumber:buyLowerThanPrice roundingMode:NSNumberFormatterRoundDown]
+                      , self.runningAutomaticBuyTradeParameters.count
+                      , self.runningBalanceSellTradeParameters.count];
         }
         else {
             status = @"An error occured! No buyOrderBook";
@@ -829,9 +838,11 @@
             NSDecimalNumber *bestOrderDataPrice = bestOrderData.orderInformation_price;
             NSDecimalNumber *sellGreaterThanPrice = [bestOrderDataPrice decimalNumberByMultiplyingBy:self.sellInterestFactor
                                                                                         withBehavior:[SOXFormatters currencyNumberHandler]];
-            status = [NSString stringWithFormat:@"Best: price %@, sell greater than %@"
+            status = [NSString stringWithFormat:@"Bestprice %@, sell > %@\naSell %tu bBuy %tu"
                       , [SOXFormatters currencyStringForNumber:bestOrderDataPrice roundingMode:NSNumberFormatterRoundDown]
-                      , [SOXFormatters currencyStringForNumber:sellGreaterThanPrice roundingMode:NSNumberFormatterRoundDown]];
+                      , [SOXFormatters currencyStringForNumber:sellGreaterThanPrice roundingMode:NSNumberFormatterRoundDown]
+                      , self.runningAutomaticSellTradeParameters.count
+                      , self.runningBalanceBuyTradeParameters.count];
         }
         else {
             status = @"An error occured! No sellOrderBook";
@@ -840,6 +851,24 @@
         [self informSellDelegateWithStatus:status];
         [self informSellDelegateWithNote:status];
     });
+}
+
+- (NSString *)runningQueueNote {
+    NSString *runningQueueNote = [NSString stringWithFormat:@"RUNNING.count: aBuy %tu - aSell %tu - bBuy %tu - bSell %tu - bBacklog %tu - sBacklog %tu"
+                                  , self.runningAutomaticBuyTradeParameters.count
+                                  , self.runningAutomaticSellTradeParameters.count
+                                  , self.runningBalanceBuyTradeParameters.count
+                                  , self.runningBalanceSellTradeParameters.count
+                                  , self.boughtTradeParametersBacklog.count
+                                  , self.soldTradeParametersBacklog.count];
+    return runningQueueNote;
+}
+
+- (void)informBuyDelegateAboutRunningQueues {
+    [self informBuyDelegateWithNote:[self runningQueueNote]];
+}
+- (void)informSellDelegateAboutRunningQueues {
+    [self informSellDelegateWithNote:[self runningQueueNote]];
 }
 
 #pragma mark - SOXSocketIOCoreProtocol

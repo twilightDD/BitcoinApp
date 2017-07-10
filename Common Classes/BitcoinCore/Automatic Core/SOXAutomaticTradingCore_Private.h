@@ -105,5 +105,7 @@
 #pragma mark | Helpers
 - (void)updateBuyStatus;
 - (void)updateSellStatus;
+- (void)informBuyDelegateAboutRunningQueues;
+- (void)informSellDelegateAboutRunningQueues;
 
 @end
