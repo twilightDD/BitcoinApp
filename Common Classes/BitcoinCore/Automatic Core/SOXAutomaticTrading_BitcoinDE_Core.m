@@ -313,8 +313,8 @@
 }
 #pragma mark - Private methods
 - (void)playSound {
-    NSSound *mySound = [NSSound soundNamed:@"ka-ching"];
-    [mySound play];
+//    NSSound *mySound = [NSSound soundNamed:@"ka-ching"];
+//    [mySound play];
 }
 
 
