@@ -170,13 +170,21 @@
             [self informBuyDelegateWithNote:note];
         }
 
-        // TODO: autoTrade is running ON
         NSDecimalNumber *btcAmountToBuy= [self btcBuyAmountForOrder:dataOfInterest];
-        if (btcAmountToBuy) {
-            // TODO: autoTrade is running ON
+        if (btcAmountToBuy
+            && [btcAmountToBuy isGreaterThanOrEqualTo:dataOfInterest.orderInformation_minAmount]) {
             [self tryToBuy:dataOfInterest btcAmountToBuy:btcAmountToBuy];
+            return YES;
         }
-        return YES;
+        else {
+            { // DEBUG
+                NSString *note = [NSString stringWithFormat:@"Can't buy: btcAmountToBuy %@ is less than order.minAmount (%@)"
+                                  , [SOXFormatters stringForBTCNumber:btcAmountToBuy]
+                                  , [SOXFormatters stringForBTCNumber:dataOfInterest.orderInformation_minAmount]];
+                [self informBuyDelegateWithNote:note];
+            }
+            return NO;
+        }
     }
 }
 
@@ -202,18 +210,34 @@
                                   , effectivInterestRate];
 
     if ([effectivInterestRate isLessThan:self.sellInterestRate]) {
-        NSString *note = [NSString stringWithFormat:@"no sell (iR to less) %@", statisticForNote];
-        [self informSellDelegateWithNote:note];
+        { // DEBUG
+            NSString *note = [NSString stringWithFormat:@"no sell (iR to less) %@", statisticForNote];
+            [self informSellDelegateWithNote:note];
+        }
         return NO;
     }
     else {
-        [self informSellDelegateWithNote:@"------"];
-        NSString *note = [NSString stringWithFormat:@"TRY TO SELL %@", statisticForNote];
-        [self informSellDelegateWithNote:note];
+        { // DEBUG
+            [self informSellDelegateWithNote:@"------"];
+            NSString *note = [NSString stringWithFormat:@"TRY TO SELL %@", statisticForNote];
+            [self informSellDelegateWithNote:note];
+        }
 
         NSDecimalNumber *btcAmountToSell = [self btcSellAmountForOrder:dataOfInterest];
-        [self tryToSell:dataOfInterest btcAmountToSell:btcAmountToSell];
-        return YES;
+        if (btcAmountToSell
+            && [btcAmountToSell isGreaterThanOrEqualTo:dataOfInterest.orderInformation_minAmount]) {
+            [self tryToSell:dataOfInterest btcAmountToSell:btcAmountToSell];
+            return YES;
+        }
+        else {
+            { // DEBUG
+                NSString *note = [NSString stringWithFormat:@"Can't sell: btcAmountToSell %@ is less than order.minAmount (%@)"
+                                  , [SOXFormatters stringForBTCNumber:btcAmountToSell]
+                                  , [SOXFormatters stringForBTCNumber:dataOfInterest.orderInformation_minAmount]];
+                [self informSellDelegateWithNote:note];
+            }
+            return NO;
+        }
     }
 }
 

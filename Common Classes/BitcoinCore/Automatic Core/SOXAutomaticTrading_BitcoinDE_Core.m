@@ -1342,6 +1342,8 @@
 }
 
 - (void)fakeServerAnswerForBuyParameters:(NSDictionary *)parameters {
+    [self.runningAutomaticBuyTradeParameters addObject:parameters];
+
     NSMutableDictionary *fakeAnswerDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                            @(BitcoinDE_ExecuteTrade), ServerAnswerServerCommandKey
                                            , parameters, ServerAnswerParametersKey
@@ -1356,6 +1358,7 @@
 
 - (void)fakeServerAnswerForSellParameters:(NSDictionary *)parameters {
     [self.runningAutomaticSellTradeParameters addObject:parameters];
+    
     NSMutableDictionary *fakeAnswerDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                            @(BitcoinDE_ExecuteTrade), ServerAnswerServerCommandKey
                                            , parameters, ServerAnswerParametersKey
