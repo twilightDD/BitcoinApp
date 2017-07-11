@@ -24,6 +24,8 @@
 @property (strong, nonatomic) NSMutableArray *sellOrderBook;
 @property (strong, nonatomic) NSMutableSet *buySEPAOrderBook; // as cache for SEPA offers
 @property (strong, nonatomic) NSMutableSet *sellSEPAOrderBook;  // as cache for SEPA orders
+@property (strong, nonatomic) NSMutableArray *buyOrderBookInExecution;
+@property (strong, nonatomic) NSMutableArray *sellOrderBookInExecution;
 
 @property (nonatomic) BOOL automaticTradingIsRunning;
 @property (nonatomic) BOOL waitingForBannerUpdate;

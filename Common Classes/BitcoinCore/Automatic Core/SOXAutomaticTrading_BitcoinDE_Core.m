@@ -350,6 +350,8 @@
                 }
 
                 [self.runningAutomaticBuyTradeParameters addObject:buyParameters];
+                [self.buyOrderBook removeObject:orderToBuy];
+                [self.buyOrderBookInExecution addObject:orderToBuy];
 
                 [self informBuyDelegateAboutRunningQueues];
 
@@ -362,11 +364,9 @@
                     NSString *note = [NSString stringWithFormat:@"autoBUY not allowed - so I don't buy"];
                     [self informBuyDelegateWithNote:note];
                 }
-                // TODO: automatic Trading OFF
             }
         }
         else {
-            // TODO: autoTrade is running OFF
             { // DEBUG
                 NSString *note = [NSString stringWithFormat:@"executeBuyTrades not allowed"];
                 [self informBuyDelegateWithNote:note];
@@ -426,6 +426,8 @@
                 }
 
                 [self.runningAutomaticSellTradeParameters addObject:sellParameters];
+                [self.sellOrderBook removeObject:orderToSell];
+                [self.sellOrderBookInExecution addObject:orderToSell];
 
                 [self informSellDelegateAboutRunningQueues];
 
@@ -688,6 +690,15 @@
                 }
 
                 [self.runningBalanceBuyTradeParameters addObject:parameters];
+
+                // move buyOrderBookData
+                {
+                    SOXShowOrderbookData *buyOrderBookData = [self orderWithOrderID:[parameters objectForKey:BitcoinDE_ExecuteTrade_OrderID]
+                                                                      fromOrderBook:self.buyOrderBook];
+                    [self.buyOrderBookInExecution addObject:buyOrderBookData];
+                    [self.buyOrderBook removeObject:buyOrderBookData];
+                }
+
                 [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
                                                         withParameter:parameters
                                                             respondTo:self];
@@ -712,6 +723,14 @@
                 }
 
                 [self.runningBalanceSellTradeParameters addObject:parameters];
+
+                // move sellOrderBookData
+                {
+                    SOXShowOrderbookData *sellOrderBookData = [self orderWithOrderID:[parameters objectForKey:BitcoinDE_ExecuteTrade_OrderID]
+                                                                      fromOrderBook:self.sellOrderBook];
+                    [self.sellOrderBookInExecution addObject:sellOrderBookData];
+                    [self.sellOrderBook removeObject:sellOrderBookData];
+                }
 
                 [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
                                                         withParameter:parameters
@@ -955,7 +974,7 @@
         NSLog(@"%@", noteExtension);
     }
     // buyOrderBook
-    SOXShowOrderbookData *orderToRemove = [self orderToRemoveWithOrderID:orderID fromOrderBook:self.buyOrderBook];
+    SOXShowOrderbookData *orderToRemove = [self orderWithOrderID:orderID fromOrderBook:self.buyOrderBook];
     if (orderToRemove) {
         NSUInteger idx = [self.buyOrderBook indexOfObject:orderToRemove];
         [self.buyOrderBook removeObject:orderToRemove];
@@ -976,7 +995,7 @@
     }
 
     // sellOrderBook
-    orderToRemove = [self orderToRemoveWithOrderID:orderID fromOrderBook:self.sellOrderBook];
+    orderToRemove = [self orderWithOrderID:orderID fromOrderBook:self.sellOrderBook];
     if (orderToRemove) {
         NSUInteger idx = [self.sellOrderBook indexOfObject:orderToRemove];
         [self.sellOrderBook removeObject:orderToRemove];
@@ -997,7 +1016,7 @@
     }
 
     // buySEPAOrderBook
-    orderToRemove = [self orderToRemoveWithOrderID:orderID fromOrderBook:self.buySEPAOrderBook.allObjects];
+    orderToRemove = [self orderWithOrderID:orderID fromOrderBook:self.buySEPAOrderBook.allObjects];
     if (orderToRemove) {
         [self.buySEPAOrderBook removeObject:orderToRemove];
         note = [NSString stringWithFormat:@"~ removed SEPA order - orderID %@ - buySEPAOB.count: %tu"
@@ -1011,12 +1030,40 @@
     }
 
     // sellSEPAOrderBook
-    orderToRemove = [self orderToRemoveWithOrderID:orderID fromOrderBook:self.sellSEPAOrderBook.allObjects];
+    orderToRemove = [self orderWithOrderID:orderID fromOrderBook:self.sellSEPAOrderBook.allObjects];
     if (orderToRemove) {
         [self.sellSEPAOrderBook removeObject:orderToRemove];
         note = [NSString stringWithFormat:@"~ removed SEPA order - orderID %@ - sellSEPAOB.count: %tu"
                 , orderID
                 , self.sellSEPAOrderBook.count];
+        if (noteExtension) {
+            note = [note stringByAppendingString:noteExtension];
+        }
+        [self informSellDelegateWithNote:note];
+        return;
+    }
+
+    // buyOrderBookInExecution
+    orderToRemove = [self orderWithOrderID:orderID fromOrderBook:self.buyOrderBookInExecution];
+    if (orderToRemove) {
+        [self.buyOrderBookInExecution removeObject:orderToRemove];
+        note = [NSString stringWithFormat:@"~ removed EXECUTED order - orderID %@ - buyOrderBookInExecution.count: %tu"
+                , orderID
+                , self.buyOrderBookInExecution.count];
+        if (noteExtension) {
+            note = [note stringByAppendingString:noteExtension];
+        }
+        [self informBuyDelegateWithNote:note];
+        return;
+    }
+
+    // sellOrderBookInExecution
+    orderToRemove = [self orderWithOrderID:orderID fromOrderBook:self.sellOrderBookInExecution];
+    if (orderToRemove) {
+        [self.sellOrderBookInExecution removeObject:orderToRemove];
+        note = [NSString stringWithFormat:@"~ removed EXECUTED order - orderID %@ - sellOrderBookInExecution.count: %tu"
+                , orderID
+                , self.sellOrderBookInExecution.count];
         if (noteExtension) {
             note = [note stringByAppendingString:noteExtension];
         }
@@ -1075,7 +1122,7 @@
     return NO;
 }
 
-- (SOXShowOrderbookData *)orderToRemoveWithOrderID:(NSString *)orderID fromOrderBook:(NSArray <SOXShowOrderbookData*> *)orderBook {
+- (SOXShowOrderbookData *)orderWithOrderID:(NSString *)orderID fromOrderBook:(NSArray <SOXShowOrderbookData*> *)orderBook {
     __block SOXShowOrderbookData *orderToRemove = nil;
     // check for orderbookData with correct orderID
     [orderBook enumerateObjectsUsingBlock:^(SOXShowOrderbookData * _Nonnull orderbookData, NSUInteger idx, BOOL * _Nonnull stop) {

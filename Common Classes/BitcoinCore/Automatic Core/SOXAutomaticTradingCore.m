@@ -32,8 +32,12 @@
     [self setBuyInterestFactor:[NSDecimalNumber one]];
     [self setSellInterestRate:[NSDecimalNumber one]];
     [self setSellInterestFactor:[NSDecimalNumber one]];
+
     [self setBuySEPAOrderBook:[NSMutableSet set]];
     [self setSellSEPAOrderBook:[NSMutableSet set]];
+
+    [self setBuyOrderBookInExecution:[NSMutableArray array]];
+    [self setSellOrderBookInExecution:[NSMutableArray array]];
 
     [self setBoughtTradeParametersBacklog:[NSMutableArray array]];
     [self setSoldTradeParametersBacklog:[NSMutableArray array]];
@@ -739,7 +743,6 @@
         && self.runningBalanceSellTradeParameters.count == 0
         && self.runningBalanceBuyTradeParameters.count == 0
         && self.soldTradeParametersBacklog.count > 0) {
-        // TODO:
         [self createBalanceTradesForSoldTrades];
     }
 }
