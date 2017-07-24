@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "SOXSocketIO_BitcoinDE_Core.h"
 @protocol SOXAutomaticTradingCoreProtocol <NSObject>
 
 - (void)logLine:(NSString *)line;
@@ -19,7 +20,7 @@
 
 @interface SOXAutomaticTradingCore : NSObject
 
-@property (weak, nonatomic) id <SOXAutomaticTradingCoreProtocol> delegate;
+@property (weak, nonatomic) id <SOXAutomaticTradingCoreProtocol, SOXSocketIOCoreProtocol, SOXSocketIOCoreStatusProtocol> delegate;
 
 + (instancetype)sharedTradingCore;
 

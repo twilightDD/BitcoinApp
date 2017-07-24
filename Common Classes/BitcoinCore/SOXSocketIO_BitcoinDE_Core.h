@@ -19,6 +19,12 @@
 
 @end
 
+@protocol SOXSocketIOCoreStatusProtocol <NSObject>
+- (void)socketIODidConnect:(NSString *)socketStatus;
+- (void)socketIODidDisconnect:(NSString *)socketStatus;
+- (void)socketIOError:(NSString *)socketError;
+@end
+
 @interface SOXSocketIO_BitcoinDE_Core : NSObject
 
 + (void)registerForAllOrderUpdatesWithDelegate:(id <SOXSocketIOCoreProtocol>)delegate;

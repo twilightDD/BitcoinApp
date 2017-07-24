@@ -898,7 +898,7 @@
     [self informSellDelegateWithNote:[self runningQueueNote]];
 }
 
-#pragma mark - SOXSocketIOCoreProtocol
+#pragma mark - SOXSocketIOCoreStatusProtocol
 - (void)socketIODidConnect:(NSString *)socketStatus {
     [self informBuyDelegateWithNote:socketStatus];
     [self informSellDelegateWithNote:socketStatus];
@@ -948,6 +948,11 @@
 
     self.socketIODidDisconnectAppeared = YES;
     self.automaticTradingIsRunning = NO;
+}
+
+- (void)socketIOError:(NSString *)socketError {
+    [self informBuyDelegateWithNote:socketError];
+    [self informSellDelegateWithNote:socketError];
 }
 
 @end

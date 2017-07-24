@@ -148,6 +148,7 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
     [[NSRunLoop mainRunLoop] addTimer:ratesReloadTimer forMode:NSDefaultRunLoopMode];
 
 }
+
 #pragma mark SocketIODelegate
 
 - (void)socketIODidConnect:(SocketIO *)socket {
@@ -305,6 +306,26 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
 
 - (void) socketIO:(SocketIO *)socket onError:(NSError *)error {
     NSLog(@"~~~~~ socketIO: %@ onError:\n%@", socket, error);
+
+    SEL socketIODidDisconnect = NSSelectorFromString(@"socketIOError:");
+    NSString *note = [NSString stringWithFormat:@"*** socketIO onError:\n%@", error.localizedDescription];
+    for (NSObject *delegate in self.delegateForBuyOrderUpdates) {
+        if ([delegate respondsToSelector:socketIODidDisconnect]) {
+            [delegate performSelectorOnMainThread:socketIODidDisconnect
+                                       withObject:note
+                                    waitUntilDone:NO];
+        }
+
+    }
+    for (NSObject *delegate in self.delegateForSellOrderUpdates) {
+        if ([delegate respondsToSelector:socketIODidDisconnect]) {
+            [delegate performSelectorOnMainThread:socketIODidDisconnect
+                                       withObject:note
+                                    waitUntilDone:NO];
+        }
+    }
+
+
     [SOXSocketIO_BitcoinDE_Core restartWebSocketCore];
 }
 
