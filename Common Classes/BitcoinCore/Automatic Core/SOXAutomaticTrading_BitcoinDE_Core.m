@@ -1400,7 +1400,7 @@
     self.btcAfterBannerUpdateHigh = [estBTC decimalNumberByAdding:btcSpectrum
                                                      withBehavior:[SOXFormatters btcNumberHandler]];
     { // DEBUG
-        NSString *note = [NSString stringWithFormat:@"Start Banner Update - bBack: %@ sBack: %@ diff: %@ estL: %@ est: %@ estH: %@"
+        NSString *note = [NSString stringWithFormat:@"Start Banner Update after Auto - bBack: %@ sBack: %@ diff: %@ estL: %@ est: %@ estH: %@"
                           , buyBTCBacklog
                           , sellBTCBacklog
                           , effectiveBacklog
@@ -1417,6 +1417,57 @@
 
     }
 
+
+    // update banner
+    self.waitingForBannerUpdate = YES;
+    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountInfoCommandType
+                                            withParameter:nil
+                                                respondTo:nil];
+}
+
+- (void)updateBannerAfterSuccessfulBalanceTrades {
+    // calculate banner low and high spectrum values
+
+    NSDecimalNumber *bitcoinFee = [NSDecimalNumber decimalNumberWithString:@"0.996"];
+
+    // successfulBalanceBuyTradeParameters => we get BTC
+    NSDecimalNumber *boughtBalanceBTCAmount = [self sumOfBitcoinsOfParameters:self.successfulBalanceBuyTradeParameters];
+    boughtBalanceBTCAmount = [boughtBalanceBTCAmount decimalNumberByDividingBy:bitcoinFee
+                                                      withBehavior:[SOXFormatters btcNumberHandler]];
+
+    // successfulBalanceSellTradeParameters  => we loose BTC
+    NSDecimalNumber *soldBalanceBTCAmount = [self sumOfBitcoinsOfParameters:self.successfulBalanceSellTradeParameters];
+    soldBalanceBTCAmount = [soldBalanceBTCAmount decimalNumberByMultiplyingBy:bitcoinFee
+                                                                 withBehavior:[SOXFormatters btcNumberHandler]];
+
+    NSDecimalNumber *effectiveBTCChangeAmount = [boughtBalanceBTCAmount decimalNumberBySubtracting:soldBalanceBTCAmount
+                                                                                      withBehavior:[SOXFormatters btcNumberHandler]];
+
+    NSDecimalNumber *estBTC = [self.availableBitcoinAmountBeforeBannerUpdate decimalNumberByAdding:effectiveBTCChangeAmount
+                                                                                      withBehavior:[SOXFormatters btcNumberHandler]];
+
+    NSDecimalNumber *btcSpectrum = [NSDecimalNumber decimalNumberWithString:@"0.000001"];
+    self.btcAfterBannerUpdateLow = [estBTC decimalNumberBySubtracting:btcSpectrum
+                                                         withBehavior:[SOXFormatters btcNumberHandler]];
+    self.btcAfterBannerUpdateHigh = [estBTC decimalNumberByAdding:btcSpectrum
+                                                     withBehavior:[SOXFormatters btcNumberHandler]];
+    { // DEBUG
+        NSString *note = [NSString stringWithFormat:@"Start Banner Update after Balances - bought: %@ sold: %@ diff: %@ estL: %@ est: %@ estH: %@"
+                          , boughtBalanceBTCAmount
+                          , soldBalanceBTCAmount
+                          , effectiveBTCChangeAmount
+                          , self.btcAfterBannerUpdateLow
+                          , estBTC
+                          , self.btcAfterBannerUpdateHigh
+                          ];
+        if (self.successfulBalanceBuyTradeParameters.count > 0) {
+            [self informSellDelegateWithNote:note];
+        }
+        if (self.successfulBalanceSellTradeParameters.count > 0) {
+            [self informBuyDelegateWithNote:note];
+        }
+
+    }
 
     // update banner
     self.waitingForBannerUpdate = YES;

@@ -53,6 +53,8 @@
 
 @property (strong, nonatomic) NSMutableArray *boughtTradeParametersBacklog; // buy parameters we have to balance out
 @property (strong, nonatomic) NSMutableArray *soldTradeParametersBacklog;   // sell parameters we have to balance out
+@property (strong, nonatomic) NSMutableArray *successfulBalanceBuyTradeParameters;
+@property (strong, nonatomic) NSMutableArray *successfulBalanceSellTradeParameters;
 
 - (void)setupProperties;
 
@@ -68,6 +70,7 @@
 
 #pragma mark - Banner update methods
 - (void)updateBannerAfterSuccessfulAutomaticTrade;
+- (void)updateBannerAfterSuccessfulBalanceTrades;
 
 #pragma mark - Automatic trading methods
 - (BOOL)checkForBuyableOrder;

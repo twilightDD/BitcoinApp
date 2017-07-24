@@ -41,6 +41,8 @@
 
     [self setBoughtTradeParametersBacklog:[NSMutableArray array]];
     [self setSoldTradeParametersBacklog:[NSMutableArray array]];
+    [self setSuccessfulBalanceBuyTradeParameters:[NSMutableArray array]];
+    [self setSuccessfulBalanceSellTradeParameters:[NSMutableArray array]];
 
     [self setRunningAutomaticBuyTradeParameters:[NSMutableArray array]];
     [self setRunningAutomaticSellTradeParameters:[NSMutableArray array]];
@@ -726,6 +728,7 @@
 #pragma mark | Balance trade responses
 - (void)successfulBalanceBuyTrade:(NSDictionary *)tradeParameters {
     [self.runningBalanceBuyTradeParameters removeObject:tradeParameters];
+    [self.successfulBalanceBuyTradeParameters addObject:tradeParameters];
     [self checkForBalanceTradesForSoldTrades];
 }
 
@@ -737,6 +740,7 @@
 
 - (void)successfulBalanceSellTrade:(NSDictionary *)tradeParameters {
     [self.runningBalanceSellTradeParameters removeObject:tradeParameters];
+    [self.successfulBalanceSellTradeParameters addObject:tradeParameters];
     [self checkForBalanceTradesForBoughtTrades];
 }
 
@@ -749,23 +753,33 @@
 #pragma mark | Helpers
 - (void)checkForBalanceTradesForBoughtTrades {
     [self informBuyDelegateAboutRunningQueues];
-    if (self.executeBalanceTradesForBuyTrades
-        && self.runningAutomaticBuyTradeParameters.count == 0
-        && self.runningBalanceBuyTradeParameters.count == 0
-        && self.runningBalanceSellTradeParameters.count == 0
+    if (!self.executeBalanceTradesForBuyTrades) {
+        return;
+    }
+
+    if (self.runningBalanceSellTradeParameters.count == 0
         && self.boughtTradeParametersBacklog.count > 0) {
         [self createBalanceTradesForBoughtTrades];
+    }
+    else if (self.runningBalanceSellTradeParameters.count == 0
+             && self.successfulBalanceSellTradeParameters.count > 0) {
+        [self updateBannerAfterSuccessfulBalanceTrades];
     }
 }
 
 - (void)checkForBalanceTradesForSoldTrades {
     [self informSellDelegateAboutRunningQueues];
-    if (self.executeBalanceTradesForSellTrades
-        && self.runningAutomaticSellTradeParameters.count == 0
-        && self.runningBalanceSellTradeParameters.count == 0
-        && self.runningBalanceBuyTradeParameters.count == 0
+    if (!self.executeBalanceTradesForSellTrades) {
+        return;
+    }
+
+    if (self.runningBalanceBuyTradeParameters.count == 0
         && self.soldTradeParametersBacklog.count > 0) {
         [self createBalanceTradesForSoldTrades];
+    }
+    else if (self.runningBalanceBuyTradeParameters.count == 0
+             && self.successfulBalanceBuyTradeParameters.count > 0) {
+        [self updateBannerAfterSuccessfulBalanceTrades];
     }
 }
 
