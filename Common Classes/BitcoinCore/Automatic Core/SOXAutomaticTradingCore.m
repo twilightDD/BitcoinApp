@@ -706,7 +706,6 @@
 - (void)successfulAutomaticBuyTrade:(NSDictionary *)tradeParameters {
     [self.runningAutomaticBuyTradeParameters removeObject:tradeParameters];
     [self.boughtTradeParametersBacklog addObject:tradeParameters];
-    [self checkForBalanceTradesForBoughtTrades];
 }
 
 - (void)unSuccessfulAutomaticBuyTrade:(NSDictionary *)tradeParameters {
@@ -717,7 +716,6 @@
 - (void)successfulAutomaticSellTrade:(NSDictionary *)tradeParameters {
     [self.runningAutomaticSellTradeParameters removeObject:tradeParameters];
     [self.soldTradeParametersBacklog addObject:tradeParameters];
-    [self checkForBalanceTradesForSoldTrades];
 }
 
 - (void)unSuccessfulAutomaticSellTrade:(NSDictionary *)tradeParameters {
@@ -728,7 +726,7 @@
 #pragma mark | Balance trade responses
 - (void)successfulBalanceBuyTrade:(NSDictionary *)tradeParameters {
     [self.runningBalanceBuyTradeParameters removeObject:tradeParameters];
-    [self checkForBalanceTradesForBoughtTrades];
+    [self checkForBalanceTradesForSoldTrades];
 }
 
 - (void)unSuccessfulBalanceBuyTrade:(NSDictionary *)tradeParameters {
@@ -739,7 +737,7 @@
 
 - (void)successfulBalanceSellTrade:(NSDictionary *)tradeParameters {
     [self.runningBalanceSellTradeParameters removeObject:tradeParameters];
-    [self checkForBalanceTradesForSoldTrades];
+    [self checkForBalanceTradesForBoughtTrades];
 }
 
 - (void)unSuccessfulBalanceSellTrade:(NSDictionary *)tradeParameters {

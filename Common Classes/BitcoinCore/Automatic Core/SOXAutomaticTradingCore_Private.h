@@ -66,6 +66,9 @@
 - (NSDecimalNumber *)effectiveSellInterestRateForPrice:(NSDecimalNumber *)priceOfInterest
                                       toReferencePrice:(NSDecimalNumber *)referencePrice;
 
+#pragma mark - Banner update methods
+- (void)updateBannerAfterSuccessfulAutomaticTrade;
+
 #pragma mark - Automatic trading methods
 - (BOOL)checkForBuyableOrder;
 - (BOOL)checkForSellableOrder;
