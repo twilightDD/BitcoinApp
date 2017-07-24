@@ -708,6 +708,10 @@
 - (void)successfulAutomaticBuyTrade:(NSDictionary *)tradeParameters {
     [self.runningAutomaticBuyTradeParameters removeObject:tradeParameters];
     [self.boughtTradeParametersBacklog addObject:tradeParameters];
+
+    // balance trades after banner update
+    self.availableBitcoinAmountBeforeBannerUpdate = [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount;
+    [self updateBannerAfterSuccessfulAutomaticBuyTrade];
 }
 
 - (void)unSuccessfulAutomaticBuyTrade:(NSDictionary *)tradeParameters {
@@ -718,6 +722,7 @@
 - (void)successfulAutomaticSellTrade:(NSDictionary *)tradeParameters {
     [self.runningAutomaticSellTradeParameters removeObject:tradeParameters];
     [self.soldTradeParametersBacklog addObject:tradeParameters];
+    [self checkForBalanceTradesForSoldTrades];
 }
 
 - (void)unSuccessfulAutomaticSellTrade:(NSDictionary *)tradeParameters {

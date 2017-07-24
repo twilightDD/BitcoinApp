@@ -69,7 +69,7 @@
                                       toReferencePrice:(NSDecimalNumber *)referencePrice;
 
 #pragma mark - Banner update methods
-- (void)updateBannerAfterSuccessfulAutomaticTrade;
+- (void)updateBannerAfterSuccessfulAutomaticBuyTrade;
 - (void)updateBannerAfterSuccessfulBalanceTrades;
 
 #pragma mark - Automatic trading methods
