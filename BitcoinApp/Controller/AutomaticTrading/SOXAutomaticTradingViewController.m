@@ -119,21 +119,21 @@
 
     self.startAutomaticButton.title = startAutomaticButtonTitle;
 
-    self.executeTradesButton.state = NSControlStateValueOff;
+    self.executeTradesButton.state = NSOffState;
     self.executeTradesButton.title = executeTradesButtonTitle;
     self.executeTrades = NO;
 
-    self.executeAutomaticTradesButton.state = NSControlStateValueOff;
+    self.executeAutomaticTradesButton.state = NSOffState;
     self.executeAutomaticTradesButton.title = executeAutomaticTradesButtonTitle;
     self.executeAutomaticTradesButton.enabled = NO;
     self.executeAutomaticTrades = NO;
 
-    self.executeBalanceTradesButton.state = NSControlStateValueOff;
+    self.executeBalanceTradesButton.state = NSOffState;
     self.executeBalanceTradesButton.title = executeBalanceTradesButtonTitle;
     self.executeBalanceTradesButton.enabled = NO;
     self.executeBalanceTrades = NO;
 
-    self.useMaxReservationButton.state = NSControlStateValueOff;
+    self.useMaxReservationButton.state = NSOffState;
     self.useMaxReservationButton.title = useMaxReservationButtonTitle;
 
     self.clearLogButton.title = clearLogButtonTitle;
