@@ -280,35 +280,11 @@
                                                                           and:availableFidorAmount];
         btcAmountToBuy = [volumeToBuy decimalNumberByDividingBy:orderToBuy.orderInformation_price
                                                    withBehavior:[SOXFormatters btcNumberHandler]];
-        // TODO:
-        // btcAmountToBuy < minAmount
     }
 
     if (btcAmountToBuy) {
-        // TODO: compare to offer minAmount
         btcAmountToBuy = [self potentialSellBalanceTradeAmountForBuyAmount:btcAmountToBuy
                                                                forBuyPrice:orderToBuy.orderInformation_price];
-
-
-        /*
-         28.06.17, 13:34:27: TRY TO SELL - type order - ID A4TNUM - minAmo 0,10 ₿ - maxAmo 0,20 ₿ - p0 2.199,00 € - p1 2.197,36 € - iR 0.074
-         28.06.17, 13:34:27: ----------------------------
-         28.06.17, 13:34:27: Start potentialBuyBalanceTradeAmountForSellAmount: 0.11257325 sellPrice: 2199
-         28.06.17, 13:34:27: sellPriceWithFee: 2207.796
-         28.06.17, 13:34:27: buyOrder.orderInformation_price: 2198 (idx: 0)
-         28.06.17, 13:34:27: [buyOrder.orderInformation_minAmount 0.08 isLessThanOrEqualTo:remainingBitcoinAmount 0.11257325] => look for amountToBuy
-         28.06.17, 13:34:27: amountToBuy 0.08 => new remainingBitcoinAmount 0.03257325
-         28.06.17, 13:34:27: buyOrder.orderInformation_price: 2200 (idx: 1)
-         28.06.17, 13:34:27: buyOrder.orderInformation_price: 2200 (idx: 2)
-         28.06.17, 13:34:27: buyOrder.orderInformation_price: 2200 (idx: 3)
-         28.06.17, 13:34:27: buyOrder.orderInformation_price: 2219 (idx: 4)
-         28.06.17, 13:34:27: buyOrder.orderInformation_price isGreaterThan:sellPriceWithFee => break
-         28.06.17, 13:34:27: potentialBuyBalanceTradeAmount = 0.08 => return this value
-         28.06.17, 13:34:27: ----------------------------
-         28.06.17, 13:34:27: SELL possible: orderMinAmo 0,10 ₿ < avaBTC 0,11257325 ₿ (figure out btcToBuyAmount now ...) potBuyAmount: 0.08
-         28.06.17, 13:34:27: SELL btcAmount: 0,08 ₿ for 175,92 €
-         28.06.17, 13:34:27: EXECUTE SELL not allowed - so I don't sell.
-         */
     }
 
     note = [note stringByAppendingString:[NSString stringWithFormat:@" potSellAmount: %@"
@@ -357,14 +333,12 @@
     }
 
     if (btcAmountToSell) {
-        NSDecimalNumber *potentialBuyBalanceTradeAmount = [self potentialBuyBalanceTradeAmountForSellAmount:btcAmountToSell
-                                                                                               forSellPrice:orderToSell.orderInformation_price];
-        btcAmountToSell = potentialBuyBalanceTradeAmount;
+        btcAmountToSell = [self potentialBuyBalanceTradeAmountForSellAmount:btcAmountToSell
+                                                               forSellPrice:orderToSell.orderInformation_price];
     }
 
     note = [note stringByAppendingString:[NSString stringWithFormat:@" potBuyAmount: %@"
                                           , btcAmountToSell]];
-
 
     [self informSellDelegateWithNote:note];
     return btcAmountToSell;
@@ -391,11 +365,16 @@
         [self informSellDelegateWithNote:note];
     }
 
+    NSDecimalNumber *fee = [NSDecimalNumber decimalNumberWithString:@"0.996"];
+    sellAmount = [sellAmount decimalNumberByDividingBy:fee
+                                          withBehavior:[SOXFormatters btcNumberHandler]];
     NSMutableArray *potentialBuyBalanceTradeParameters = [self buyBalanceTradeParametersForSellAmount:sellAmount
                                                                                          forSellPrice:sellPrice
                                                                             createPotentialParameters:YES];
 
     NSDecimalNumber *buyBalanceTradeAmount = [self sumOfBitcoinsOfParameters:potentialBuyBalanceTradeParameters];
+    buyBalanceTradeAmount = [buyBalanceTradeAmount decimalNumberByMultiplyingBy:fee
+                                                                   withBehavior:[SOXFormatters btcNumberHandler]];
 
     { // DEBUG
         NSString *note = [NSString stringWithFormat:@"found buyBalanceTradeAmount %@"
@@ -411,7 +390,7 @@
                                  createPotentialParameters:(BOOL)createPotentialParameters {
     { // DEBUG
         [self informSellDelegateWithNote:@"   ----------------------------"];
-        NSString *note = [NSString stringWithFormat:@"Start buyBalanceTradeParametersForSellAmount: %@ forSellPrice: %@"
+        NSString *note = [NSString stringWithFormat:@"Start buyBalanceTradeParametersForSellAmount: %@ - forSellPrice: %@"
                           , soldBTCAmount
                           , soldPrice];
         [self informSellDelegateWithNote:note];
@@ -539,11 +518,20 @@
         [self informBuyDelegateWithNote:note];
     }
 
+    // consider fee
+
+    NSDecimalNumber *fee = [NSDecimalNumber decimalNumberWithString:@"0.996"];
+    buyAmount = [buyAmount decimalNumberByMultiplyingBy:fee
+                                           withBehavior:[SOXFormatters btcNumberHandler]];
+
     NSMutableArray *potentialSellBalanceTradeParameters = [self sellBalanceTradeParametersForBuyAmount:buyAmount
                                                                                            forBuyPrice:buyPrice
                                                                              createPotentialParameters:YES];
 
     NSDecimalNumber *sellBalanceTradeAmount = [self sumOfBitcoinsOfParameters:potentialSellBalanceTradeParameters];
+    sellBalanceTradeAmount = [sellBalanceTradeAmount decimalNumberByDividingBy:fee
+                                                                  withBehavior:[SOXFormatters btcNumberHandler]];
+
 
     { // DEBUG
         NSString *note = [NSString stringWithFormat:@"found potentialSellBalanceTradeAmountForBuyAmount %@"
@@ -560,7 +548,7 @@
 
     { // DEBUG
         [self informBuyDelegateWithNote:@"   ----------------------------"];
-        NSString *note = [NSString stringWithFormat:@"Start sellBalanceTradeParametersForBuyAmount: %@ forBuyPrice: %@"
+        NSString *note = [NSString stringWithFormat:@"Start sellBalanceTradeParametersForBuyAmount: %@ - forBuyPrice: %@"
                           , boughtBTCAmount
                           , boughtPrice];
         [self informBuyDelegateWithNote:note];
