@@ -44,8 +44,6 @@
 @property (strong, nonatomic) NSDecimalNumber *sellInterestFactor;
 @property (strong, nonatomic) NSDecimalNumber *sellMaximalBTCInvestment;
 
-@property (strong, nonatomic) NSDecimalNumber *availableBitcoinAmountBeforeBannerUpdate;
-
 @property (strong, nonatomic) NSMutableArray *runningAutomaticBuyTradeParameters;
 @property (strong, nonatomic) NSMutableArray *runningAutomaticSellTradeParameters;
 @property (strong, nonatomic) NSMutableArray *runningBalanceBuyTradeParameters;

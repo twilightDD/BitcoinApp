@@ -1389,7 +1389,7 @@
         NSDecimalNumber *effectiveBacklog = [buyBTCBacklog decimalNumberBySubtracting:sellBTCBacklog
                                                                          withBehavior:[SOXFormatters btcNumberHandler]];
 
-        NSDecimalNumber *estBTC = [self.availableBitcoinAmountBeforeBannerUpdate decimalNumberBySubtracting:effectiveBacklog
+        NSDecimalNumber *estBTC = [[SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount decimalNumberBySubtracting:effectiveBacklog
                                                                                                withBehavior:[SOXFormatters btcNumberHandler]];
 
         NSDecimalNumber *btcSpectrum = [NSDecimalNumber decimalNumberWithString:@"0.000001"];
@@ -1429,6 +1429,7 @@
 
 - (void)updateBannerAfterSuccessfulBalanceTrades {
     self.expectBTCChange = YES;
+    self.expectAvailFidorChange = YES;
 
     // calculate banner low and high spectrum values
 
@@ -1438,9 +1439,6 @@
     NSDecimalNumber *boughtBalanceBTCAmount = [self sumOfBitcoinsOfParameters:self.successfulBalanceBuyTradeParameters];
     boughtBalanceBTCAmount = [boughtBalanceBTCAmount decimalNumberByDividingBy:bitcoinFee
                                                       withBehavior:[SOXFormatters btcNumberHandler]];
-    if ([boughtBalanceBTCAmount isGreaterThan:[NSDecimalNumber zero]]) {
-        self.expectAvailFidorChange = YES;
-    }
 
     // successfulBalanceSellTradeParameters  => we loose BTC
     NSDecimalNumber *soldBalanceBTCAmount = [self sumOfBitcoinsOfParameters:self.successfulBalanceSellTradeParameters];
@@ -1450,8 +1448,8 @@
     NSDecimalNumber *effectiveBTCChangeAmount = [boughtBalanceBTCAmount decimalNumberBySubtracting:soldBalanceBTCAmount
                                                                                       withBehavior:[SOXFormatters btcNumberHandler]];
 
-    NSDecimalNumber *estBTC = [self.availableBitcoinAmountBeforeBannerUpdate decimalNumberByAdding:effectiveBTCChangeAmount
-                                                                                      withBehavior:[SOXFormatters btcNumberHandler]];
+    NSDecimalNumber *estBTC = [[SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount decimalNumberByAdding:effectiveBTCChangeAmount
+                                                                                                     withBehavior:[SOXFormatters btcNumberHandler]];
 
     NSDecimalNumber *btcSpectrum = [NSDecimalNumber decimalNumberWithString:@"0.000001"];
     self.btcAfterBannerUpdateLow = [estBTC decimalNumberBySubtracting:btcSpectrum
@@ -1490,7 +1488,20 @@
 
     SOXAccountInfoData *accountInfoData = [serverAnswer objectForKey:ServerAnswerPayloadKey];
     NSDecimalNumber *newAvailBTC = accountInfoData.btcBalance_availableAmount;
+    NSDecimalNumber *newAvailableFidorAmount = accountInfoData.bankReservation_availableAmount;
 
+    {// DEBUG
+        NSString *note = [NSString stringWithFormat:@"BannerUpdate! - availBTC: %@ - availFidor: %@"
+                          , newAvailBTC
+                          , newAvailableFidorAmount];
+        if (self.boughtTradeParametersBacklog.count > 0) {
+            [self informBuyDelegateWithNote:note];
+        }
+        if (self.soldTradeParametersBacklog.count > 0) {
+            [self informSellDelegateWithNote:note];
+        }
+
+    }
 
     // weil wir nur ein estimatedBTC haben, es aber zu kleinen Abweichungen kommen kann,
     // wird hier mit einer "Unschärfe" gearbeitet um den neuen availBTCAmount zu prüfen
@@ -1503,31 +1514,40 @@
         self.btcAfterBannerUpdateLow = nil;
         self.btcAfterBannerUpdateHigh = nil;
 
-        NSString *note = [NSString stringWithFormat:@"BannerUpdated SUCCESSFUL! - new availBTC is %@"
-                          , newAvailBTC];
-        if (self.boughtTradeParametersBacklog.count > 0) {
-            [self informBuyDelegateWithNote:note];
-            [self createBalanceTradesForBoughtTrades];
-        }
-        if (self.soldTradeParametersBacklog.count > 0) {
-            [self informSellDelegateWithNote:note];
-            [self createBalanceTradesForSoldTrades];
+        { // DEBUG
+            NSString *note = [NSString stringWithFormat:@"Updated availBTC - new availBTC is %@"
+                              , newAvailBTC];
+            if (self.boughtTradeParametersBacklog.count > 0) {
+                [self informBuyDelegateWithNote:note];
+            }
+            if (self.soldTradeParametersBacklog.count > 0) {
+                [self informSellDelegateWithNote:note];
+            }
         }
     }
     
-    if (self.expectAvailFidorChange) {
-        NSDecimalNumber *newAvailableFidorAmount = accountInfoData.bankReservation_availableAmount;
-        if (newAvailableFidorAmount < [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount) {
-            self.expectAvailFidorChange = NO;
+    if (self.expectAvailFidorChange
+        && newAvailableFidorAmount < [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount) {
+        { // DEBUG
+            NSString *note = [NSString stringWithFormat:@"Updated availFidor - new availFidor is %@"
+                              , newAvailableFidorAmount];
+            if (self.boughtTradeParametersBacklog.count > 0) {
+                [self informBuyDelegateWithNote:note];
+                [self createBalanceTradesForBoughtTrades];
+            }
+            if (self.soldTradeParametersBacklog.count > 0) {
+                [self informSellDelegateWithNote:note];
+                [self createBalanceTradesForSoldTrades];
+            }
         }
+            self.expectAvailFidorChange = NO;
     }
 
     if (self.expectAvailFidorChange
         || self.expectBTCChange) {
 
-        NSString *note = [NSString stringWithFormat:@"BannerUpdated UNsuccessful! - update banner again (right now)"];
-
         { // DEBUG
+            NSString *note = [NSString stringWithFormat:@"BannerUpdated UNsuccessful! - update banner again (right now)"];
             if (self.boughtTradeParametersBacklog.count > 0) {
                 [self informBuyDelegateWithNote:note];
             }
@@ -1542,6 +1562,19 @@
     }
     else {
         self.waitingForBannerUpdate = NO;
+        NSString *note = [NSString stringWithFormat:@"Banner update complete"];
+        if (self.boughtTradeParametersBacklog.count > 0) {
+            { // DEBUG
+                [self informBuyDelegateWithNote:note];
+            }
+            [self createBalanceTradesForBoughtTrades];
+        }
+        if (self.soldTradeParametersBacklog.count > 0) {
+            { // DEBUG
+                [self informSellDelegateWithNote:note];
+            }
+            [self createBalanceTradesForSoldTrades];
+        }
     }
 }
 

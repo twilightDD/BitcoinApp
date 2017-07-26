@@ -710,7 +710,6 @@
     [self.boughtTradeParametersBacklog addObject:tradeParameters];
 
     // balance trades after banner update
-    self.availableBitcoinAmountBeforeBannerUpdate = [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount;
     [self updateBannerAfterSuccessfulAutomaticBuyTrade];
 }
 
