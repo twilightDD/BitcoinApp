@@ -1202,6 +1202,10 @@
             return;
         }
 
+        if (self.waitingForBannerUpdate) {
+            [self informBuyDelegateWithNote:@"waitingForBannerUpdate: so we don't look for buyable orders anymore"];
+            return;
+        }
 
         // Look for interesting new orders
         BOOL tryToAutoBuy = NO;
@@ -1210,7 +1214,6 @@
         }
 
         if (!tryToAutoBuy
-//            && !self.waitingForBannerUpdate
             && self.boughtTradeParametersBacklog.count > 0) {
                 [self informBuyDelegateWithNote:@"~~~~~~~~~~~~~~~~"];
                 [self informBuyDelegateWithNote:@"createBalanceTradesForBoughtTrades: try to create new sellBalanceTrades to even buyAutoTradeBacklog"];
@@ -1255,6 +1258,10 @@
         }
 
         // Look for interesting new orders
+        if (self.waitingForBannerUpdate) {
+            [self informSellDelegateWithNote:@"waitingForBannerUpdate: so we don't look for sellable orders anymore"];
+            return;
+        }
 
         BOOL tryToAutoSell = NO;
         if ([[self.sellOrderBook objectAtIndex:0] isEqual:addOrderData]) {
@@ -1560,7 +1567,9 @@
                                                     respondTo:nil];
     }
     else {
-        self.waitingForBannerUpdate = NO;
+        // TODO: a poor mans kill switch for "autotrade only once"
+//        self.waitingForBannerUpdate = NO;
+
         NSString *note = [NSString stringWithFormat:@"Banner update complete"];
         if (self.boughtTradeParametersBacklog.count > 0) {
             { // DEBUG
