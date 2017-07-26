@@ -1262,13 +1262,12 @@
         }
 
         if (!tryToAutoSell
-//            && !self.waitingForBannerUpdate
             && self.soldTradeParametersBacklog.count > 0) {
             // create balancePayments
-            [self informBuyDelegateWithNote:@"~~~~~~~~~~~~~~~~"];
-            [self informBuyDelegateWithNote:@"createBalanceTradesForSoldTrades: try to create new buyBalanceTrades to even sellAutoTrade backlog"];
+            [self informSellDelegateWithNote:@"~~~~~~~~~~~~~~~~"];
+            [self informSellDelegateWithNote:@"createBalanceTradesForSoldTrades: try to create new buyBalanceTrades to even sellAutoTrade backlog"];
             [self createBalanceTradesForSoldTrades];
-            [self informBuyDelegateWithNote:@"~~~~~~~~~~~~~~~~"];
+            [self informSellDelegateWithNote:@"~~~~~~~~~~~~~~~~"];
         }
     }
 }
