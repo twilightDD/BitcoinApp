@@ -64,7 +64,7 @@
         core.buyInterestRate = buyInterestRate;
         NSDecimalNumber *buyInterestRatePercent = [buyInterestRate decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"100"]];
         core.buyInterestFactor = [[NSDecimalNumber one] decimalNumberBySubtracting:buyInterestRatePercent];
-        NSString *note = [NSString stringWithFormat:@"UPDATE VALUE: Set interest factor to %@", core.buyInterestRate];
+        NSString *note = [NSString stringWithFormat:@"UPDATE VALUE: Set interest rate to %@%%", core.buyInterestRate];
         [core informBuyDelegateWithNote:note];
 
         [core updateBuyStatus];
@@ -77,7 +77,7 @@
         core.sellInterestRate = sellInterestRate;
         NSDecimalNumber *sellInterestRatePercent = [sellInterestRate decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"100"]];
         core.sellInterestFactor = [[NSDecimalNumber one] decimalNumberByAdding:sellInterestRatePercent];
-        NSString *note = [NSString stringWithFormat:@"UPDATE VALUE: Set interest factor to %@", core.sellInterestRate];
+        NSString *note = [NSString stringWithFormat:@"UPDATE VALUE: Set interest rate to %@%%", core.sellInterestRate];
         [core informSellDelegateWithNote:note];
 
         [core updateSellStatus];
@@ -405,7 +405,8 @@
         [self informSellDelegateWithNote:note];
     }
 
-    NSDecimalNumber *fee = [NSDecimalNumber decimalNumberWithString:@"0.996"];
+    // we get 0,8% less bitcoins than we buy!
+    NSDecimalNumber *fee = [NSDecimalNumber decimalNumberWithString:@"0.992"];
     sellAmount = [sellAmount decimalNumberByDividingBy:fee
                                           withBehavior:[SOXFormatters btcNumberHandler]];
     NSMutableArray *potentialBuyBalanceTradeParameters = [self buyBalanceTradeParametersForSellAmount:sellAmount
@@ -439,7 +440,7 @@
     NSDecimalNumber *remainingBitcoinAmountToBuy = [soldBTCAmount copy];
 
     // add fee to price
-    NSDecimalNumber *fee = [NSDecimalNumber decimalNumberWithString:@"1.008016"];
+    NSDecimalNumber *fee = [NSDecimalNumber decimalNumberWithString:@"1.008"];
     NSDecimalNumber *soldPriceWithFee = [soldPrice decimalNumberByDividingBy:fee
                                                                 withBehavior:[SOXFormatters currencyNumberHandler]];
 
@@ -558,9 +559,8 @@
         [self informBuyDelegateWithNote:note];
     }
 
-    // consider fee
-
-    NSDecimalNumber *fee = [NSDecimalNumber decimalNumberWithString:@"0.996"];
+    // consider fee - we get 0,8% less bitcoins than we buy!
+    NSDecimalNumber *fee = [NSDecimalNumber decimalNumberWithString:@"0.992"];
     buyAmount = [buyAmount decimalNumberByMultiplyingBy:fee
                                            withBehavior:[SOXFormatters btcNumberHandler]];
 
@@ -596,13 +596,13 @@
 
     NSDecimalNumber *remainingBitcoinAmountToSell = [boughtBTCAmount copy];
 
-    // add fee to price
-    NSDecimalNumber *fee = [NSDecimalNumber decimalNumberWithString:@"1.004"];
+    // add fee to price - we get 0,8% less bitcoins than we buy!
+    NSDecimalNumber *fee = [NSDecimalNumber decimalNumberWithString:@"1.008"];
     NSDecimalNumber *boughtPriceWithFee = [boughtPrice decimalNumberByMultiplyingBy:fee
                                                                        withBehavior:[SOXFormatters currencyNumberHandler]];
 
     { // DEBUG
-        NSString *note = [NSString stringWithFormat:@"boughtPriceWithFee (0,4%%): %@"
+        NSString *note = [NSString stringWithFormat:@"boughtPriceWithFee (0,8%%): %@"
                           , boughtPriceWithFee];
         [self informBuyDelegateWithNote:note];
     }

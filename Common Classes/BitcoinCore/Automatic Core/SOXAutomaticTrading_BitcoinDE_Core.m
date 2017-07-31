@@ -478,8 +478,8 @@
     NSDecimalNumber *boughtBTCSum = [self.boughtTradeParametersBacklog valueForKeyPath:keyPath];
     NSDecimalNumber *averagePrice = [self averagePriceOfBacklogParameters:self.boughtTradeParametersBacklog];
 
-    // consider fee
-    NSDecimalNumber *bitcoinFee = [NSDecimalNumber decimalNumberWithString:@"0.996"];
+    // consider fee - we get 0,8% less bitcoins than we buy!
+    NSDecimalNumber *bitcoinFee = [NSDecimalNumber decimalNumberWithString:@"0.992"];
     boughtBTCSum = [boughtBTCSum decimalNumberByMultiplyingBy:bitcoinFee
                                                  withBehavior:[SOXFormatters btcNumberHandler]];
 
@@ -513,8 +513,8 @@
     NSDecimalNumber *soldBTCSum = [self.soldTradeParametersBacklog valueForKeyPath:keyPath];
     NSDecimalNumber *averagePrice = [self averagePriceOfBacklogParameters:self.soldTradeParametersBacklog];
 
-    // consider fee -> we have to buy more than we sold
-    NSDecimalNumber *bitcoinFee = [NSDecimalNumber decimalNumberWithString:@"0.996"];
+    // consider fee -> we have to buy more than we sold - we get 0,8% less bitcoins than we buy!
+    NSDecimalNumber *bitcoinFee = [NSDecimalNumber decimalNumberWithString:@"0.992"];
     soldBTCSum = [soldBTCSum decimalNumberByDividingBy:bitcoinFee
                                              withBehavior:[SOXFormatters btcNumberHandler]];
 
@@ -1380,7 +1380,7 @@
     {
         self.expectBTCChange = YES;
 
-        NSDecimalNumber *bitcoinFee = [NSDecimalNumber decimalNumberWithString:@"0.996"];
+        NSDecimalNumber *bitcoinFee = [NSDecimalNumber decimalNumberWithString:@"0.992"];
 
         // soldTradeParametersBacklog => we have to balance out (buy)
         NSDecimalNumber *buyBTCBacklog = [self sumOfBitcoinsOfParameters:self.soldTradeParametersBacklog];
@@ -1439,7 +1439,7 @@
 
     // calculate banner low and high spectrum values
 
-    NSDecimalNumber *bitcoinFee = [NSDecimalNumber decimalNumberWithString:@"0.996"];
+    NSDecimalNumber *bitcoinFee = [NSDecimalNumber decimalNumberWithString:@"0.992"];
 
     // successfulBalanceBuyTradeParameters => we get BTC
     NSDecimalNumber *boughtBalanceBTCAmount = [self sumOfBitcoinsOfParameters:self.successfulBalanceBuyTradeParameters];
