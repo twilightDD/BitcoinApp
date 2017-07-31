@@ -168,7 +168,27 @@
     else {
         { // DEBUG
             [self informBuyDelegateWithNote:@"   ------"];
-            NSString *note = [NSString stringWithFormat:@"TRY TO BUY %@", statisticForNote];
+
+            __block NSString *note = [NSString stringWithFormat:@"TRY TO BUY %@\nSELLORDERBOOK", statisticForNote];
+            // log first items of sellOrderBook
+            [self.sellOrderBook enumerateObjectsUsingBlock:^(SOXShowOrderbookData * _Nonnull sellOrderbookData,
+                                                            NSUInteger idx,
+                                                            BOOL * _Nonnull stop) {
+                note = [note stringByAppendingString:
+                        [NSString stringWithFormat:@"\nidx: %tu - oID: %@ - p: %@ - minA: %@ - maxA: %@ - payO: %@"
+                         , idx
+                         , sellOrderbookData.orderInformation_orderID
+                         , [SOXFormatters currencyStringForNumber:sellOrderbookData.orderInformation_price roundingMode:NSNumberFormatterRoundHalfUp]
+                         , [SOXFormatters stringForBTCNumber:sellOrderbookData.orderInformation_minAmount]
+                         , [SOXFormatters stringForBTCNumber:sellOrderbookData.orderInformation_maxAmount]
+                         , sellOrderbookData.orderRequirements_paymentOption]
+                        ];
+
+                if (idx > 10) {
+                    *stop = YES;
+                }
+            }];
+
             [self informBuyDelegateWithNote:note];
         }
 
@@ -221,8 +241,28 @@
     else {
         { // DEBUG
             [self informSellDelegateWithNote:@"------"];
-            NSString *note = [NSString stringWithFormat:@"TRY TO SELL %@", statisticForNote];
+            __block NSString *note = [NSString stringWithFormat:@"TRY TO SELL %@\nBUYORDERBOOK", statisticForNote];
+
+            // log first items of buyOrderBook
+            [self.buyOrderBook enumerateObjectsUsingBlock:^(SOXShowOrderbookData * _Nonnull buyOrderbookData,
+                                                            NSUInteger idx,
+                                                            BOOL * _Nonnull stop) {
+                note = [note stringByAppendingString:
+                        [NSString stringWithFormat:@"\nidx: %tu - oID: %@ - p: %@ - minA: %@ - maxA: %@ - payO: %@"
+                         , idx
+                         , buyOrderbookData.orderInformation_orderID
+                         , [SOXFormatters currencyStringForNumber:buyOrderbookData.orderInformation_price roundingMode:NSNumberFormatterRoundHalfUp]
+                         , [SOXFormatters stringForBTCNumber:buyOrderbookData.orderInformation_minAmount]
+                         , [SOXFormatters stringForBTCNumber:buyOrderbookData.orderInformation_maxAmount]
+                         , buyOrderbookData.orderRequirements_paymentOption]
+                        ];
+
+                if (idx > 10) {
+                    *stop = YES;
+                }
+            }];
             [self informSellDelegateWithNote:note];
+
         }
 
         NSDecimalNumber *btcAmountToSell = [self btcSellAmountForOrder:dataOfInterest];
