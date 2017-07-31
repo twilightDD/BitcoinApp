@@ -55,6 +55,8 @@
             payload = [SOXMyOrderBook_BitcoinDE_Data myOrderBookDataForCreateInfoDictionary:payloadDictionary];
             break;
         case BitcoinDE_ExecuteTrade:
+            payload = @"Das ist nur ein Payloaddummy. Bei success bekommen wir keine Payload, aber wir brauchen irgendwas, "
+            "was als Payload fungiert, weil sonst gibt es einen Fehler und der BalanceTrade wird nicht ausgeführt";
             break;
         default:
             // error
