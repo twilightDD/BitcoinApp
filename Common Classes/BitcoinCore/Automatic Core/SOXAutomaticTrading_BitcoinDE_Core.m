@@ -630,8 +630,16 @@
     }
 
     // Execute Balance Trades
+    BitcoinDE_OrderType executeBalanceType = BitcoinDE_UnknownOrderType;
+    if (automaticTradeHadOrderType == BitcoinDE_BuyOrderType) {
+        executeBalanceType = BitcoinDE_SellOrderType;
+    }
+    else {
+        executeBalanceType = BitcoinDE_BuyOrderType;
+    }
+
     [self tryToExecuteBalanceTradesWithParameters:parametersToExecute
-                                     forOrderType:automaticTradeHadOrderType];
+                                     forOrderType:executeBalanceType];
 }
 
 - (void)addBuyBacklogForRemainingBitcoinAmountToBuy:(NSDecimalNumber *)remainingBitcoinAmountToBuy
