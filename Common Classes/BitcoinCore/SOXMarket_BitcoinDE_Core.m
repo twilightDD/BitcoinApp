@@ -49,7 +49,7 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 
 //@property (weak, nonatomic) id delegateForRequests;
 @property (weak, nonatomic) id <SOXBannerDataProtocol> delegateForBannerUpdates;
-@property (weak, nonatomic) NSObject <SOXMarketCoreErrorProtocol> *delegateForErrorMessages;
+@property (weak, nonatomic, readwrite) NSObject <SOXMarketCoreErrorProtocol> *delegateForErrorMessages;
 @property (weak, nonatomic) NSObject <SOXStatusBarUpdateProtocol> *delegateForStatusBarUpdates;
 
 #pragma mark | Network Queue handling
@@ -71,7 +71,7 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 @implementation SOXMarket_BitcoinDE_Core
 
 #pragma mark Public Class methods
-+ (instancetype _Nonnull)sharedCore {
++ (SOXMarket_BitcoinDE_Core * _Nonnull)sharedCore {
     static SOXMarket_BitcoinDE_Core *sharedCore;
     
     static dispatch_once_t pred;

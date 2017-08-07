@@ -61,6 +61,8 @@ FOUNDATION_EXPORT NSString *const _Nonnull HTTPMethodPOSTKey;
 @property (strong, nonatomic) NSDecimalNumber * _Nullable availableBitcoinAmount;
 @property (strong, nonatomic) NSDecimalNumber * _Nullable availableFidorAmount;
 
+@property (weak, nonatomic, readonly) NSObject <SOXMarketCoreErrorProtocol> * _Nullable delegateForErrorMessages;
+
 - (void)startRequests;
 
 /**
@@ -68,7 +70,7 @@ FOUNDATION_EXPORT NSString *const _Nonnull HTTPMethodPOSTKey;
  *
  *  @return The Core.
  */
-+ (instancetype _Nonnull)sharedCore;
++ (SOXMarket_BitcoinDE_Core * _Nonnull)sharedCore;
 
 + (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
                       withParameter:(NSDictionary * _Nullable)parameterDictionary
