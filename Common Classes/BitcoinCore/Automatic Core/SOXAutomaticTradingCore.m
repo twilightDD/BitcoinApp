@@ -403,6 +403,29 @@
         [self informSellDelegateWithNote:@"---------------------------------"];
         NSString *note = [NSString stringWithFormat:@"start potentialBuyBalanceTradeAmountForSellAmount"];
         [self informSellDelegateWithNote:note];
+
+        // log first items of buyOrderBook
+        __block NSString *note2 = [NSString stringWithFormat:@"\nBUYORDERBOOK"];
+        [self.buyOrderBook enumerateObjectsUsingBlock:^(SOXShowOrderbookData * _Nonnull buyOrderbookData,
+                                                        NSUInteger idx,
+                                                        BOOL * _Nonnull stop) {
+            note2 = [note2 stringByAppendingString:
+                     [NSString stringWithFormat:@"\nidx: %tu - oID: %@ - p: %@ - minA: %@ - maxA: %@ - payO: %@"
+                      , idx
+                      , buyOrderbookData.orderInformation_orderID
+                      , [SOXFormatters currencyStringForNumber:buyOrderbookData.orderInformation_price roundingMode:NSNumberFormatterRoundHalfUp]
+                      , [SOXFormatters stringForBTCNumber:buyOrderbookData.orderInformation_minAmount]
+                      , [SOXFormatters stringForBTCNumber:buyOrderbookData.orderInformation_maxAmount]
+                      , buyOrderbookData.orderRequirements_paymentOption]
+                     ];
+
+            if (idx > 9) {
+                *stop = YES;
+            }
+        }];
+        [self informSellDelegateWithNote:note2];
+
+
     }
 
     // we get 0,8% less bitcoins than we buy!
@@ -557,6 +580,27 @@
         [self informBuyDelegateWithNote:@"---------------------------------"];
         NSString *note = [NSString stringWithFormat:@"start potentialSellBalanceTradeAmountForBuyAmount"];
         [self informBuyDelegateWithNote:note];
+
+        // log first items of sellOrderBook
+        __block NSString *note2 = [NSString stringWithFormat:@"\nSELLORDERBOOK"];
+        [self.sellOrderBook enumerateObjectsUsingBlock:^(SOXShowOrderbookData * _Nonnull sellOrderbookData,
+                                                         NSUInteger idx,
+                                                         BOOL * _Nonnull stop) {
+            note2 = [note2 stringByAppendingString:
+                     [NSString stringWithFormat:@"\nidx: %tu - oID: %@ - p: %@ - minA: %@ - maxA: %@ - payO: %@"
+                      , idx
+                      , sellOrderbookData.orderInformation_orderID
+                      , [SOXFormatters currencyStringForNumber:sellOrderbookData.orderInformation_price roundingMode:NSNumberFormatterRoundHalfUp]
+                      , [SOXFormatters stringForBTCNumber:sellOrderbookData.orderInformation_minAmount]
+                      , [SOXFormatters stringForBTCNumber:sellOrderbookData.orderInformation_maxAmount]
+                      , sellOrderbookData.orderRequirements_paymentOption]
+                     ];
+
+            if (idx > 9) {
+                *stop = YES;
+            }
+        }];
+        [self informBuyDelegateWithNote:note2];
     }
 
     // consider fee - we get 0,8% less bitcoins than we buy!

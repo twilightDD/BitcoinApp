@@ -478,7 +478,7 @@
         { // DEBUG
             NSString *note = [NSString stringWithFormat:@"createBalanceTradesForBoughtTrades - substituteBuyParameters:\n%@"
                               , substitutedBuyParameters];
-            [self informSellDelegateWithNote:note];
+            [self informBuyDelegateWithNote:note];
         }
 
         [self createBalanceTradesForTradeParameters:substitutedBuyParameters];
@@ -523,16 +523,16 @@
     { // DEBUG
 
         if (tradeParametersBacklog == self.boughtTradeParametersBacklog) {
-            [self informSellDelegateWithNote:@".............."];
+            [self informBuyDelegateWithNote:@".............."];
             NSString *note = [NSString stringWithFormat:@"createBuyBalanceTrades - calc average values - buyBalanceTradeParametersBacklog.count: %tu"
                               , self.boughtTradeParametersBacklog.count];
-            [self informSellDelegateWithNote:note];
+            [self informBuyDelegateWithNote:note];
         }
         else {
-            [self informBuyDelegateWithNote:@".............."];
+            [self informSellDelegateWithNote:@".............."];
             NSString *note = [NSString stringWithFormat:@"createSellBalanceTrades - calc average values - buyBalanceTradeParametersBacklog.count: %tu"
                               , self.soldTradeParametersBacklog.count];
-            [self informBuyDelegateWithNote:note];
+            [self informSellDelegateWithNote:note];
         }
     }
 
@@ -561,10 +561,10 @@
                                   , bitcoinAmount
                                   , price];
                 if (tradeParametersBacklog == self.boughtTradeParametersBacklog) {
-                    [self informSellDelegateWithNote:note];
+                    [self informBuyDelegateWithNote:note];
                 }
                 else {
-                    [self informBuyDelegateWithNote:note];
+                    [self informSellDelegateWithNote:note];
                 }
             }
         }
@@ -575,12 +575,12 @@
                           , buyBTCSum
                           , averagePrice];
         if (tradeParametersBacklog == self.boughtTradeParametersBacklog) {
-            [self informSellDelegateWithNote:note];
-            [self informSellDelegateWithNote:@".............."];
-        }
-        else {
             [self informBuyDelegateWithNote:note];
             [self informBuyDelegateWithNote:@".............."];
+        }
+        else {
+            [self informSellDelegateWithNote:note];
+            [self informSellDelegateWithNote:@".............."];
         }
     }
 
@@ -1383,10 +1383,10 @@
                               , self.btcAfterBannerUpdateHigh
                               ];
             if (self.boughtTradeParametersBacklog.count > 0) {
-                [self informSellDelegateWithNote:note];
+                [self informBuyDelegateWithNote:note];
             }
             if (self.soldTradeParametersBacklog.count > 0) {
-                [self informBuyDelegateWithNote:note];
+                [self informSellDelegateWithNote:note];
             }
 
         }
