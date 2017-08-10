@@ -375,16 +375,6 @@
                 NSString *note = [NSString stringWithFormat:@"executeBuyTrades not allowed"];
                 [self informBuyDelegateWithNote:note];
             }
-            if (self.executeBalanceTradesForBuyTrades) {
-                {
-                    { // DEBUG
-                        NSString *note = [NSString stringWithFormat:@"autoBUY not allowed, but I fake and try to balance out ;)"];
-                        [self informBuyDelegateWithNote:note];
-                    }
-                    [self.runningBalanceBuyTradeParameters addObject:buyParameters];
-                    [self fakeServerAnswerForBuyParameters:buyParameters];
-                }
-            }
         }
     }
     else {
@@ -450,15 +440,6 @@
             { // DEBUG
                 NSString *note = [NSString stringWithFormat:@"executeSellTrades not allowed"];
                 [self informSellDelegateWithNote:note];
-            }
-            if (self.executeBalanceTradesForSellTrades) {
-                {
-                    { // DEBUG
-                        NSString *note = [NSString stringWithFormat:@"autoSELL not allowed, but I fake and try to balance out ;)"];
-                        [self informSellDelegateWithNote:note];
-                    }
-                    [self fakeServerAnswerForSellParameters:sellParameters];
-                }
             }
         }
     }
@@ -1362,65 +1343,6 @@
                           , effectiveSellInterestRate ? effectiveSellInterestRate : @"NaN (sellOrderBook has too less entries"];
         [self informSellDelegateWithNote:note];
     }
-}
-
-#pragma mark - FAKE
-- (void)createFakeServerAnswerForBuyOrder:(SOXShowOrderbookData *)buyOrder {
-    NSDictionary *autoParameters = [SOXTradeJob_BitcoinDE_Data parameterAutomaticTradingForOrderID:buyOrder.orderInformation_orderID
-                                                                                     orderType:BitcoinDE_BuyOrderType
-                                                                                 bitcoinAmount:buyOrder.orderInformation_maxAmount
-                                                                                         price:buyOrder.orderInformation_price];
-
-    NSDictionary *balanceParameters = [SOXTradeJob_BitcoinDE_Data parameterBalanceTradingForOrderID:buyOrder.orderInformation_orderID
-                                                                                          orderType:BitcoinDE_BuyOrderType
-                                                                                      bitcoinAmount:buyOrder.orderInformation_maxAmount
-                                                                                              price:buyOrder.orderInformation_price];
-
-    [self fakeServerAnswerForBuyParameters:autoParameters];
-}
-
-- (void)createFakeServerAnswerForSellOrder:(SOXShowOrderbookData *)sellOrder {
-    NSDictionary *autoParameters = [SOXTradeJob_BitcoinDE_Data parameterAutomaticTradingForOrderID:sellOrder.orderInformation_orderID
-                                                                                         orderType:BitcoinDE_SellOrderType
-                                                                                     bitcoinAmount:sellOrder.orderInformation_maxAmount
-                                                                                             price:sellOrder.orderInformation_price];
-
-    NSDictionary *balanceParameters = [SOXTradeJob_BitcoinDE_Data parameterBalanceTradingForOrderID:sellOrder.orderInformation_orderID
-                                                                                          orderType:BitcoinDE_SellOrderType
-                                                                                      bitcoinAmount:sellOrder.orderInformation_maxAmount
-                                                                                              price:sellOrder.orderInformation_price];
-
-    [self fakeServerAnswerForSellParameters:autoParameters];
-}
-
-- (void)fakeServerAnswerForBuyParameters:(NSDictionary *)parameters {
-    [self.runningAutomaticBuyTradeParameters addObject:parameters];
-
-    NSMutableDictionary *fakeAnswerDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                           @(BitcoinDE_ExecuteTrade), ServerAnswerServerCommandKey
-                                           , parameters, ServerAnswerParametersKey
-                                           //, @"error", ServerAnswerErrorKey
-                                           , nil];
-
-    NSString *note = [NSString stringWithFormat:@"!!! FAKE TRADE !!!"];
-    [self informBuyDelegateWithNote:note];
-
-    [self answerOfServerRequest:fakeAnswerDict];
-}
-
-- (void)fakeServerAnswerForSellParameters:(NSDictionary *)parameters {
-    [self.runningAutomaticSellTradeParameters addObject:parameters];
-    
-    NSMutableDictionary *fakeAnswerDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                           @(BitcoinDE_ExecuteTrade), ServerAnswerServerCommandKey
-                                           , parameters, ServerAnswerParametersKey
-                                           //, @"error", ServerAnswerErrorKey
-                                           , nil];
-
-    NSString *note = [NSString stringWithFormat:@"!!! FAKE TRADE !!!"];
-    [self informSellDelegateWithNote:note];
-
-    [self answerOfServerRequest:fakeAnswerDict];
 }
 
 #pragma mark - Banner updates
