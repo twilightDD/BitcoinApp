@@ -797,7 +797,6 @@
     // Answer for execute Trade
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ExecuteTrade)]) {
 
-
         NSDictionary *tradeParameters = [answerOfServerRequest objectForKey:ServerAnswerParametersKey]; // parameters of executed trade
 
         NSString *orderTypeString = [tradeParameters objectForKey:BitcoinDE_ExecuteTrade_Type];  //=> buy oder sell
@@ -1399,9 +1398,7 @@
 
     // update banner
     self.waitingForBannerUpdate = YES;
-    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountInfoCommandType
-                                            withParameter:nil
-                                                respondTo:nil];
+    [self updateBanner];
 }
 
 - (void)updateBannerAfterSuccessfulBalanceTrades {
@@ -1453,6 +1450,19 @@
 
     // update banner
     self.waitingForBannerUpdate = YES;
+    [self updateBanner];
+}
+
+- (void)updateBanner {
+    { // DEBUG
+        NSString *note = [NSString stringWithFormat:@"Execute Bannerupdate now."];
+        if (self.boughtTradeParametersBacklog.count > 0) {
+            [self informBuyDelegateWithNote:note];
+        }
+        else if (self.soldTradeParametersBacklog.count > 0) {
+            [self informSellDelegateWithNote:note];
+        }
+    }
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountInfoCommandType
                                             withParameter:nil
                                                 respondTo:nil];
@@ -1468,9 +1478,9 @@
     NSDecimalNumber *newAvailableFidorAmount = accountInfoData.bankReservation_availableAmount;
 
     {// DEBUG
-        NSString *note = [NSString stringWithFormat:@"BannerUpdate! - availBTC: %@ - availFidor: %@"
-                          , newAvailBTC
-                          , newAvailableFidorAmount];
+        NSString *note = [NSString stringWithFormat:@"BannerUpdate arrived with values: availBTC %@ - availFidor %@"
+                          , [SOXFormatters stringForBTCNumber:newAvailBTC]
+                          , [SOXFormatters currencyStringForNumber:newAvailableFidorAmount roundingMode:NSNumberFormatterRoundHalfUp]];
         if (self.boughtTradeParametersBacklog.count > 0) {
             [self informBuyDelegateWithNote:note];
         }
@@ -1524,7 +1534,7 @@
         || self.expectBTCChange) {
 
         { // DEBUG
-            NSString *note = [NSString stringWithFormat:@"BannerUpdated UNsuccessful! - update banner again (right now)"];
+            NSString *note = [NSString stringWithFormat:@"BannerUpdated UNsuccessful! - update banner again in 1 sec"];
             if (self.boughtTradeParametersBacklog.count > 0) {
                 [self informBuyDelegateWithNote:note];
             }
@@ -1532,10 +1542,15 @@
                 [self informSellDelegateWithNote:note];
             }
         }
-
-        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountInfoCommandType
-                                                withParameter:nil
-                                                    respondTo:nil];
+        //
+        NSTimer *creditTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                                target:self
+                                                              selector:@selector(updateBanner)
+                                                              userInfo:nil
+                                                               repeats:NO];
+        creditTimer.tolerance = 0.05;
+        [[NSRunLoop mainRunLoop] addTimer:creditTimer
+                                  forMode:NSDefaultRunLoopMode];
     }
     else {
         // TODO: a poor mans kill switch for "autotrade only once"
