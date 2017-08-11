@@ -878,6 +878,9 @@
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowBuyOrderbookCommandType)]) {
         NSMutableArray *buyOrderBookDatas = [NSMutableArray array];
         for (SOXShowOrderbook_BitcoinDE_Data *orderBookData in orderBookDatas) {
+            
+
+
             if ([self checkForExpressOrder:orderBookData]) {
                 [buyOrderBookDatas addObject:orderBookData];
             }
@@ -972,6 +975,13 @@
               , addOrderData.orderInformation_type
               , addOrderData.orderInformation_minAmount
               , addOrderData.orderInformation_maxAmount);
+        return;
+    }
+
+    if (![addOrderData.orderInformation_tradingPair isEqualToString:BitcoinDE_BitcoinOriginal]) {
+        NSLog(@"### tradingPair is %@ - we don't support it right now"
+              , addOrderData.orderInformation_tradingPair);
+        NSBeep();
         return;
     }
 

@@ -188,6 +188,13 @@
 }
 
 - (void)addedOrder:(SOXShowOrderbookData *)addOrderData {
+    if (![addOrderData.orderInformation_tradingPair isEqualToString:BitcoinDE_BitcoinOriginal]) {
+        NSLog(@"addedOrder in %@ - tradingPair is %@ - we don't support it right now"
+              , [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:self.orderType]
+              , addOrderData.orderInformation_tradingPair);
+        return;
+    }
+
     [self.orderBookArrayController addObject:addOrderData];
     [self.orderBookArrayController rearrangeObjects];
 }

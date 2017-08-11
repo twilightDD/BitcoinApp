@@ -14,6 +14,10 @@
 NSString *const BitcoinDE_Notification_RequestShowAccountInfo   = @"Notification_RequestShowAccountInfo";
 NSString *const BitcoinDE_Notification_RequestShowRates         = @"Notification_RequestShowRates";
 
+#pragma mark - Bitcoin flavours
+NSString *const BitcoinDE_BitcoinOriginal   = @"btceur";
+NSString *const BitcoinDE_BitcoinCash       = @"bcheur";
+
 #pragma mark - BitcoinDE_ExecuteTrade
 NSString *const BitcoinDE_ExecuteTrade_OrderID          = @"order_id";
 NSString *const BitcoinDE_ExecuteTrade_Type             = @"type";

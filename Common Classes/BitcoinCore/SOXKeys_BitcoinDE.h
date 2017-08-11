@@ -14,6 +14,10 @@
 FOUNDATION_EXPORT NSString *const BitcoinDE_Notification_RequestShowAccountInfo;
 FOUNDATION_EXPORT NSString *const BitcoinDE_Notification_RequestShowRates;
 
+#pragma mark - Bitcoin flavours
+FOUNDATION_EXPORT NSString *const BitcoinDE_BitcoinOriginal;
+FOUNDATION_EXPORT NSString *const BitcoinDE_BitcoinCash;
+
 #pragma mark - BitcoinDE_ExecuteTrade
 FOUNDATION_EXPORT NSString *const BitcoinDE_ExecuteTrade_OrderID;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ExecuteTrade_Type;
