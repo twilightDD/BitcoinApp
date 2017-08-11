@@ -15,6 +15,7 @@
 @property (strong, nonatomic, readonly) NSString   *orderInformation_orderID;
 @property (strong, nonatomic, readonly) NSString   *orderInformation_socketOrderObjectID;
 @property (strong, nonatomic, readonly) NSString   *orderInformation_type;
+@property (strong, nonatomic, readonly) NSString   *orderInformation_tradingPair;
 @property (strong, nonatomic, readonly) NSDecimalNumber   *orderInformation_maxAmount;
 @property (strong, nonatomic, readonly) NSDecimalNumber   *orderInformation_minAmount;
 @property (strong, nonatomic, readonly) NSDecimalNumber   *orderInformation_price;

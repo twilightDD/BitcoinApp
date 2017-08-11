@@ -19,6 +19,7 @@
 @property (strong, nonatomic, readwrite) NSString   *orderInformation_orderID;
 @property (strong, nonatomic, readwrite) NSString   *orderInformation_socketOrderObjectID;
 @property (strong, nonatomic, readwrite) NSString   *orderInformation_type;
+@property (strong, nonatomic, readwrite) NSString   *orderInformation_tradingPair;
 @property (strong, nonatomic, readwrite) NSDecimalNumber   *orderInformation_maxAmount;
 @property (strong, nonatomic, readwrite) NSDecimalNumber   *orderInformation_minAmount;
 @property (strong, nonatomic, readwrite) NSDecimalNumber   *orderInformation_price;
@@ -45,7 +46,7 @@
 #pragma mark - Implementation
 @implementation SOXShowOrderbook_BitcoinDE_Data
 #pragma mark Synthesize
-@synthesize orderInformation_orderID, orderInformation_socketOrderObjectID, orderInformation_type, orderInformation_maxAmount, orderInformation_minAmount, orderInformation_price, orderInformation_maxVolume, orderInformation_minVolume, orderInformation_orderRequirementsFullfilled;
+@synthesize orderInformation_orderID, orderInformation_socketOrderObjectID, orderInformation_type, orderInformation_tradingPair, orderInformation_maxAmount, orderInformation_minAmount, orderInformation_price, orderInformation_maxVolume, orderInformation_minVolume, orderInformation_orderRequirementsFullfilled;
 @synthesize tradingPartnerInformation_username, tradingPartnerInformation_isKYCFull, tradingPartnerInformation_trustLevel, tradingPartnerInformation_bankName, tradingPartnerInformation_bic, tradingPartnerInformation_rating, tradingPartnerInformation_amountTrades;
 @synthesize orderRequirements_minTrustLevel, orderRequirements_onlyKYCFull, orderRequirements_seatOfBank, orderRequirements_paymentOption;
 
@@ -118,6 +119,7 @@
     orderbookData.orderInformation_orderID = [addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_OrderID];
     orderbookData.orderInformation_socketOrderObjectID = [addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_SocketObjectID];
     orderbookData.orderInformation_type = [addOrderSocketIODictionary objectForKey:BitcoinDE_ShowMyOrders_Type];
+    orderbookData.orderInformation_tradingPair = [addOrderSocketIODictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPair];
     orderbookData.orderInformation_maxAmount = [NSDecimalNumber decimalNumberWithDecimal:[[addOrderSocketIODictionary objectForKey:@"amount"] decimalValue]];
     orderbookData.orderInformation_minAmount = [NSDecimalNumber decimalNumberWithDecimal:[[addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_MinAmount]  decimalValue]];
     orderbookData.orderInformation_price = [NSDecimalNumber decimalNumberWithDecimal:[[addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_Price]  decimalValue]];
@@ -202,6 +204,7 @@
     {
         self.orderInformation_orderID                      = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderID];
         self.orderInformation_type                         = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_Type];
+        self.orderInformation_tradingPair                  = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPair];
         self.orderInformation_maxAmount                    = [NSDecimalNumber decimalNumberWithDecimal:[[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MaxAmount] decimalValue]];
         self.orderInformation_minAmount                    = [NSDecimalNumber decimalNumberWithDecimal:[[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MinAmount] decimalValue]];
         self.orderInformation_price                        = [NSDecimalNumber decimalNumberWithDecimal:[[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_Price] decimalValue]];

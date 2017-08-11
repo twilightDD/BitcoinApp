@@ -133,6 +133,7 @@ NSString *const BitcoinDE_ShowOrderbook_MainKey = @"orders";
 #pragma mark | Order
 NSString *const BitcoinDE_ShowOrderbook_OrderID                     = @"order_id";
 NSString *const BitcoinDE_ShowOrderbook_Type                        = @"type";
+NSString *const BitcoinDE_ShowOrderbook_TradingPair                 = @"trading_pair";
 NSString *const BitcoinDE_ShowOrderbook_MaxAmount                   = @"max_amount";
 NSString *const BitcoinDE_ShowOrderbook_MinAmount                   = @"min_amount";
 NSString *const BitcoinDE_ShowOrderbook_Price                       = @"price";

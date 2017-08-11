@@ -134,6 +134,7 @@ FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_MainKey;
 #pragma mark | Order
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_OrderID;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_Type;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_TradingPair;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_MaxAmount;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_MinAmount;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_Price;
