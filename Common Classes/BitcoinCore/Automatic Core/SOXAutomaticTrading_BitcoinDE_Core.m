@@ -461,14 +461,12 @@
     NSString *keyPath = [NSString stringWithFormat:@"@sum.%@", BitcoinDE_ExecuteTrade_BitcoinAmount];
     NSDecimalNumber *boughtBTCSum = [self.boughtTradeParametersBacklog valueForKeyPath:keyPath];
     NSDecimalNumber *averagePrice = [self averagePriceOfBacklogParameters:self.boughtTradeParametersBacklog];
+    [self.boughtTradeParametersBacklog removeAllObjects];
 
     // consider fee - we get 0,8% less bitcoins than we buy!
     NSDecimalNumber *bitcoinFee = [NSDecimalNumber decimalNumberWithString:@"0.992"];
     boughtBTCSum = [boughtBTCSum decimalNumberByMultiplyingBy:bitcoinFee
                                                  withBehavior:[SOXFormatters btcNumberHandler]];
-
-    // TODO: ist das hier die richtige Stelle (s.u)
-    [self.boughtTradeParametersBacklog removeAllObjects];
 
     if ([boughtBTCSum isGreaterThan:[NSDecimalNumber zero]] ) {
         NSDictionary *substitutedBuyParameters = [SOXTradeJob_BitcoinDE_Data parameterBalanceTradingForOrderID:@"substitutedBuyOrder"
@@ -482,11 +480,7 @@
         }
 
         [self createBalanceTradesForTradeParameters:substitutedBuyParameters];
-        // TODO: oder nicht doch lieber erst hier?
     }
-
-    // TODO: oder hier?
-
 }
 
 - (void)createBalanceTradesForSoldTrades {
@@ -1403,17 +1397,16 @@
     }
     // CHANGES IN FIDOR:
     {
-        self.expectAvailFidorChange = YES;
+        //self.expectAvailFidorChange = YES;
     }
 
     // update banner
-    self.waitingForBannerUpdate = YES;
     [self updateBanner];
 }
 
 - (void)updateBannerAfterSuccessfulBalanceTrades {
     self.expectBTCChange = YES;
-    self.expectAvailFidorChange = YES;
+    //self.expectAvailFidorChange = YES;
 
     // calculate banner low and high spectrum values
 
@@ -1459,7 +1452,6 @@
     }
 
     // update banner
-    self.waitingForBannerUpdate = YES;
     [self updateBanner];
 }
 
@@ -1473,6 +1465,7 @@
             [self informSellDelegateWithNote:note];
         }
     }
+    self.waitingForBannerUpdate = YES;
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountInfoCommandType
                                             withParameter:nil
                                                 respondTo:nil];
@@ -1482,6 +1475,9 @@
     if (!self.waitingForBannerUpdate) {
         return;
     }
+
+    // because we got banner update right now
+//    self.waitingForBannerUpdate = NO;
 
     SOXAccountInfoData *accountInfoData = [serverAnswer objectForKey:ServerAnswerPayloadKey];
     NSDecimalNumber *newAvailBTC = accountInfoData.btcBalance_availableAmount;

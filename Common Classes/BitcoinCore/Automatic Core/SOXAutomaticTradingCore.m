@@ -778,6 +778,12 @@
 #pragma mark - Handle (un)successful trade responses
 #pragma mark | Auto trade responses
 - (void)successfulAutomaticBuyTrade:(NSDictionary *)tradeParameters {
+    { // DEBUG
+        NSString *note = [NSString stringWithFormat:@"successfulAutomaticBuyTrade tradeParameters:\n%@",
+                          tradeParameters];
+        [self informBuyDelegateWithNote:note];
+    }
+
     [self.runningAutomaticBuyTradeParameters removeObject:tradeParameters];
     [self.boughtTradeParametersBacklog addObject:tradeParameters];
 
@@ -786,41 +792,78 @@
 }
 
 - (void)unSuccessfulAutomaticBuyTrade:(NSDictionary *)tradeParameters {
+    { // DEBUG
+        NSString *note = [NSString stringWithFormat:@"unSuccessfulAutomaticBuyTrade tradeParameters:\n%@",
+                          tradeParameters];
+        [self informBuyDelegateWithNote:note];
+    }
     [self.runningAutomaticBuyTradeParameters removeObject:tradeParameters];
     [self checkForBalanceTradesForBoughtTrades];
 }
 
 - (void)successfulAutomaticSellTrade:(NSDictionary *)tradeParameters {
+    { // DEBUG
+        NSString *note = [NSString stringWithFormat:@"successfulAutomaticSellTrade tradeParameters:\n%@",
+                          tradeParameters];
+        [self informSellDelegateWithNote:note];
+    }
     [self.runningAutomaticSellTradeParameters removeObject:tradeParameters];
     [self.soldTradeParametersBacklog addObject:tradeParameters];
     [self checkForBalanceTradesForSoldTrades];
 }
 
 - (void)unSuccessfulAutomaticSellTrade:(NSDictionary *)tradeParameters {
+    { // DEBUG
+        NSString *note = [NSString stringWithFormat:@"unSuccessfulAutomaticSellTrade tradeParameters:\n%@",
+                          tradeParameters];
+        [self informSellDelegateWithNote:note];
+    }
     [self.runningAutomaticSellTradeParameters removeObject:tradeParameters];
     [self checkForBalanceTradesForSoldTrades];
 }
 
 #pragma mark | Balance trade responses
 - (void)successfulBalanceBuyTrade:(NSDictionary *)tradeParameters {
+    { // DEBUG
+        NSString *note = [NSString stringWithFormat:@"successfulBalanceBuyTrade tradeParameters:\n%@",
+                          tradeParameters];
+        [self informSellDelegateWithNote:note];
+    }
+
     [self.runningBalanceBuyTradeParameters removeObject:tradeParameters];
     [self.successfulBalanceBuyTradeParameters addObject:tradeParameters];
     [self checkForBalanceTradesForSoldTrades];
 }
 
 - (void)unSuccessfulBalanceBuyTrade:(NSDictionary *)tradeParameters {
+    { // DEBUG
+        NSString *note = [NSString stringWithFormat:@"unSuccessfulBalanceBuyTrade tradeParameters:\n%@",
+                          tradeParameters];
+        [self informSellDelegateWithNote:note];
+    }
+
     [self.runningBalanceBuyTradeParameters removeObject:tradeParameters];
     [self.soldTradeParametersBacklog addObject:tradeParameters];
     [self checkForBalanceTradesForSoldTrades];
 }
 
 - (void)successfulBalanceSellTrade:(NSDictionary *)tradeParameters {
+    { // DEBUG
+        NSString *note = [NSString stringWithFormat:@"successfulBalanceSellTrade tradeParameters:\n%@",
+                          tradeParameters];
+        [self informBuyDelegateWithNote:note];
+    }
     [self.runningBalanceSellTradeParameters removeObject:tradeParameters];
     [self.successfulBalanceSellTradeParameters addObject:tradeParameters];
     [self checkForBalanceTradesForBoughtTrades];
 }
 
 - (void)unSuccessfulBalanceSellTrade:(NSDictionary *)tradeParameters {
+    { // DEBUG
+        NSString *note = [NSString stringWithFormat:@"unSuccessfulBalanceSellTrade tradeParameters:\n%@",
+                          tradeParameters];
+        [self informBuyDelegateWithNote:note];
+    }
     [self.runningBalanceSellTradeParameters removeObject:tradeParameters];
     [self.boughtTradeParametersBacklog addObject:tradeParameters];
     [self checkForBalanceTradesForBoughtTrades];
@@ -832,13 +875,34 @@
     if (!self.executeBalanceTradesForBuyTrades) {
         return;
     }
+    { // DEBUG
+        NSString *note = [NSString stringWithFormat:@"checkForBalanceTradesForBoughtTrades:\n"
+                          "self.runningBalanceSellTradeParameters.count:    %tu"
+                          "self.successfulBalanceSellTradeParameters.count: %tu"
+                          , self.runningBalanceSellTradeParameters.count
+                          , self.successfulBalanceSellTradeParameters.count];
+        [self informBuyDelegateWithNote:note];
+    }
 
     if (self.runningBalanceSellTradeParameters.count == 0
         && self.boughtTradeParametersBacklog.count > 0) {
+        {// DEBUG
+            NSString *note = [NSString stringWithFormat:@"checkForBalanceTradesForBoughtTrades\n"
+                              "self.boughtTradeParametersBacklog.count: %tu"
+                              , self.boughtTradeParametersBacklog.count];
+            [self informBuyDelegateWithNote:note];
+        }
         [self createBalanceTradesForBoughtTrades];
     }
     else if (self.runningBalanceSellTradeParameters.count == 0
              && self.successfulBalanceSellTradeParameters.count > 0) {
+        {// DEBUG
+            NSString *note = [NSString stringWithFormat:@"checkForBalanceTradesForBoughtTrades\n"
+                              "self.successfulBalanceSellTradeParameters.count: %tu (removed now)"
+                              , self.successfulBalanceSellTradeParameters.count];
+            [self informBuyDelegateWithNote:note];
+        }
+        [self.successfulBalanceSellTradeParameters removeAllObjects];
         [self updateBannerAfterSuccessfulBalanceTrades];
     }
 }
@@ -848,13 +912,32 @@
     if (!self.executeBalanceTradesForSellTrades) {
         return;
     }
-
+    { // DEBUG
+        NSString *note = [NSString stringWithFormat:@"checkForBalanceTradesForSoldTrades:\n"
+                          "self.runningBalanceBuyTradeParameters.count:    %tu"
+                          "self.soldTradeParametersBacklog.count: %tu"
+                          , self.runningBalanceSellTradeParameters.count
+                          , self.successfulBalanceSellTradeParameters.count];
+        [self informSellDelegateWithNote:note];
+    }
     if (self.runningBalanceBuyTradeParameters.count == 0
         && self.soldTradeParametersBacklog.count > 0) {
+        {// DEBUG
+            NSString *note = [NSString stringWithFormat:@"checkForBalanceTradesForSoldTrades:\n"
+                              "self.soldTradeParametersBacklog.count: %tu"
+                              , self.boughtTradeParametersBacklog.count];
+            [self informSellDelegateWithNote:note];
+        }
         [self createBalanceTradesForSoldTrades];
     }
     else if (self.runningBalanceBuyTradeParameters.count == 0
              && self.successfulBalanceBuyTradeParameters.count > 0) {
+        {// DEBUG
+            NSString *note = [NSString stringWithFormat:@"checkForBalanceTradesForSoldTrades\n"
+                              "self.successfulBalanceBuyTradeParameters.count: %tu (removed now)"
+                              , self.successfulBalanceBuyTradeParameters.count];
+            [self informSellDelegateWithNote:note];
+        }
         [self updateBannerAfterSuccessfulBalanceTrades];
     }
 }
