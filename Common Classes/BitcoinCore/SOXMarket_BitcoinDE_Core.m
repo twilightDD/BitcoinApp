@@ -10,9 +10,13 @@
 
 #import "SOXKeys_BitcoinDE.h"
 #import "SOXHash.h"
+#import "SOXFormatters.h"
 
 #import "SOXDataConverter_BitcoinDE.h"
 #import "SOXErrorMessage_BitcoinDE.h"
+
+#import "SOXAccountInfoData.h"
+#import "SOXRatesData.h"
 
 #pragma mark - Keys
 NSString *const _Nonnull ServerAnswerServerCommandKey = @"ServerCommand";
@@ -129,10 +133,25 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
                                                                                                                            errorMessage:errorMessage];
                                                                     if (serverAnswer) {
                                                                         if (serverCommandType == BitcoinDE_ShowAccountInfoCommandType) {
+                                                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                                                SOXAccountInfoData *accountInfoData = [serverAnswer objectForKey:ServerAnswerPayloadKey];
+                                                                                NSLog(@"^^^^^^ Account Info Update arrived:\ntotalAmount: %@\navailAmount: %@\nreserAmount: %@"
+                                                                                      , [SOXFormatters stringForBTCNumber:accountInfoData.btcBalance_totalAmount]
+                                                                                      , [SOXFormatters stringForBTCNumber:accountInfoData.btcBalance_availableAmount]
+                                                                                      , [SOXFormatters stringForBTCNumber:accountInfoData.btcBalance_reservedAmount]);
+                                                                            });
                                                                             [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_RequestShowAccountInfo
                                                                                                                                 object:serverAnswer];
+
                                                                         }
                                                                         else if (serverCommandType == BitcoinDE_ShowRatesCommandType) {
+                                                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                                                SOXRatesData *ratesData = [serverAnswer objectForKey:ServerAnswerPayloadKey];
+                                                                                NSLog(@"^^^^^^ Rates Update arrived:\ntotalAmount: %@\navailAmount: %@\nreserAmount: %@"
+                                                                                      , [SOXFormatters currencyStringForNumber:ratesData.rate_weighted roundingMode:NSNumberFormatterRoundHalfUp]
+                                                                                      , [SOXFormatters currencyStringForNumber:ratesData.rate_weighted_3h roundingMode:NSNumberFormatterRoundHalfUp]
+                                                                                      , [SOXFormatters currencyStringForNumber:ratesData.rate_weighted_12h roundingMode:NSNumberFormatterRoundHalfUp]);
+                                                                            });
                                                                             [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_RequestShowRates
                                                                                                                                 object:serverAnswer];
                                                                         } else {
