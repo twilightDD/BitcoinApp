@@ -877,10 +877,12 @@
     }
     { // DEBUG
         NSString *note = [NSString stringWithFormat:@"checkForBalanceTradesForBoughtTrades:\n"
-                          "self.runningBalanceSellTradeParameters.count:    %tu"
-                          "self.successfulBalanceSellTradeParameters.count: %tu"
+                          "self.runningBalanceSellTradeParameters.count:    %tu\n"
+                          "self.successfulBalanceSellTradeParameters.count: %tu\n"
+                          "self.boughtTradeParametersBacklog.count:         %tu"
                           , self.runningBalanceSellTradeParameters.count
-                          , self.successfulBalanceSellTradeParameters.count];
+                          , self.successfulBalanceSellTradeParameters.count
+                          , self.boughtTradeParametersBacklog.count];
         [self informBuyDelegateWithNote:note];
     }
 
@@ -914,10 +916,12 @@
     }
     { // DEBUG
         NSString *note = [NSString stringWithFormat:@"checkForBalanceTradesForSoldTrades:\n"
-                          "self.runningBalanceBuyTradeParameters.count:    %tu"
-                          "self.soldTradeParametersBacklog.count: %tu"
+                          "self.runningBalanceBuyTradeParameters.count:     %tu\n"
+                          "self.successfulBalanceSellTradeParameters.count: %tu\n"
+                          "self.soldTradeParametersBacklog.count:           %tu"
                           , self.runningBalanceSellTradeParameters.count
-                          , self.successfulBalanceSellTradeParameters.count];
+                          , self.successfulBalanceSellTradeParameters.count
+                          , self.soldTradeParametersBacklog.count];
         [self informSellDelegateWithNote:note];
     }
     if (self.runningBalanceBuyTradeParameters.count == 0
