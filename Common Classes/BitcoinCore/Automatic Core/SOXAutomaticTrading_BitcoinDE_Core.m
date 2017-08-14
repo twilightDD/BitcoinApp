@@ -973,26 +973,57 @@
         if ([addOrderData.orderInformation_type isEqualToString:BitcoinDE_WebSocket_BuyOrderType]) {
             // Check for doublettes
             if ([SOXMarketHelper existOrderBookData:addOrderData inOrderBook:self.buyOrderBook]) {
-                NSString *note = [NSString stringWithFormat:@"+ don't add buy, because it exists already in buyOrderBook - ID: %@ - maxA: %@ p: %@"
-                                  , addOrderData.orderInformation_orderID
-                                  , addOrderData.orderInformation_maxAmount
-                                  , addOrderData.orderInformation_price];
-                [self informBuyDelegateWithNote:note];
+                { // DEBUG
+                    NSString *note = [NSString stringWithFormat:@"### don't add buy, because it exists already in buyOrderBook - ID: %@ - maxA: %@ p: %@"
+                                      , addOrderData.orderInformation_orderID
+                                      , addOrderData.orderInformation_maxAmount
+                                      , addOrderData.orderInformation_price];
+                    [self informBuyDelegateWithNote:note];
+                }
+                return;
+            }
+            else if ([SOXMarketHelper existOrderBookData:addOrderData inOrderBook:self.buySEPAOrderBook.allObjects]) {
+                { // DEBUG
+                    NSString *note = [NSString stringWithFormat:@"### don't add sepaBuy, because it exists already in buySEPAOrderBook - ID: %@ - maxA: %@ p: %@"
+                                      , addOrderData.orderInformation_orderID
+                                      , addOrderData.orderInformation_maxAmount
+                                      , addOrderData.orderInformation_price];
+                    [self informBuyDelegateWithNote:note];
+                }
                 return;
             }
         }
         else if ([addOrderData.orderInformation_type isEqualToString:BitcoinDE_WebSocket_SellOrderType]) {
             // Check for doublettes
             if ([SOXMarketHelper existOrderBookData:addOrderData inOrderBook:self.sellOrderBook]) {
-                NSString *note = [NSString stringWithFormat:@"+ don't add sell, because it exists already in sellOrderBook - ID: %@ - maxA: %@ p: %@"
-                                  , addOrderData.orderInformation_orderID
-                                  , addOrderData.orderInformation_maxAmount
-                                  , addOrderData.orderInformation_price];
-                [self informSellDelegateWithNote:note];
+                { // DEBUG
+                    NSString *note = [NSString stringWithFormat:@"### don't add sell, because it exists already in sellOrderBook - ID: %@ - maxA: %@ p: %@"
+                                      , addOrderData.orderInformation_orderID
+                                      , addOrderData.orderInformation_maxAmount
+                                      , addOrderData.orderInformation_price];
+                    [self informSellDelegateWithNote:note];
+                }
+                return;
+            }
+            else if ([SOXMarketHelper existOrderBookData:addOrderData inOrderBook:self.sellSEPAOrderBook.allObjects]) {
+                { // DEBUG
+                    NSString *note = [NSString stringWithFormat:@"### don't add sepaSell, because it exists already in sellSEPAOrderBook - ID: %@ - maxA: %@ p: %@"
+                                      , addOrderData.orderInformation_orderID
+                                      , addOrderData.orderInformation_maxAmount
+                                      , addOrderData.orderInformation_price];
+                    [self informSellDelegateWithNote:note];
+                }
                 return;
             }
         }
         else {
+            NSString *note = [NSString stringWithFormat:@"### STRANGED - addOrder has no valid type: %@ - ID: %@ - maxA: %@ - p: %@"
+                             , addOrderData.orderInformation_type
+                              , addOrderData.orderInformation_orderID
+                              , addOrderData.orderInformation_maxAmount
+                              , addOrderData.orderInformation_price];
+            [self informBuyDelegateWithNote:note];
+            [self informSellDelegateWithNote:note];
             return;
         }
     }
