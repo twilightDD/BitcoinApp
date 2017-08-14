@@ -13,6 +13,8 @@
 #import "SOXShowOrderbookData.h"
 #import "SOXTradeJob_BitcoinDE_Data.h"
 
+#import "SOXKeys_BitcoinDE.h"
+
 @interface SOXAutomaticTradingCore ()
 
 @property (nonatomic) BOOL socketIODidDisconnectAppeared;

@@ -509,9 +509,10 @@
             NSDecimalNumber *amountToBuy = [SOXFormatters lesserDecimalNumberFrom:remainingBitcoinAmountToBuy
                                                                                and:buyOrder.orderInformation_maxAmount];
             NSDictionary *buyParameters = [SOXTradeJob_BitcoinDE_Data parameterBalanceTradingForOrderID:buyOrder.orderInformation_orderID
-                                                                                               orderType:BitcoinDE_BuyOrderType
-                                                                                           bitcoinAmount:amountToBuy
-                                                                                                   price:buyOrder.orderInformation_price];
+                                                                                              orderType:BitcoinDE_BuyOrderType
+                                                                                          bitcoinAmount:amountToBuy
+                                                                                                  price:buyOrder.orderInformation_price
+                                                                                    automaticTradePrice:soldPrice];
             [balanceBuyParameters addObject:buyParameters];
             remainingBitcoinAmountToBuy = [remainingBitcoinAmountToBuy decimalNumberBySubtracting:amountToBuy
                                                                                      withBehavior:[SOXFormatters btcNumberHandler]];
@@ -689,7 +690,8 @@
             NSDictionary *sellParameters = [SOXTradeJob_BitcoinDE_Data parameterBalanceTradingForOrderID:sellOrder.orderInformation_orderID
                                                                                                orderType:BitcoinDE_SellOrderType
                                                                                            bitcoinAmount:amountToSell
-                                                                                                   price:sellOrder.orderInformation_price];
+                                                                                                   price:sellOrder.orderInformation_price
+                                                                                     automaticTradePrice:boughtPrice];
             [balanceSellParameters addObject:sellParameters];
             remainingBitcoinAmountToSell = [remainingBitcoinAmountToSell decimalNumberBySubtracting:amountToSell
                                                                                        withBehavior:[SOXFormatters btcNumberHandler]];
@@ -785,7 +787,19 @@
     }
 
     [self.runningAutomaticBuyTradeParameters removeObject:tradeParameters];
-    [self.boughtTradeParametersBacklog addObject:tradeParameters];
+
+    NSMutableDictionary *tradeParametersWithFee = [tradeParameters mutableCopy];
+
+    { // calculate bitcoins with fee
+        NSDecimalNumber *boughtBitcoins = [tradeParameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount];
+        NSDecimalNumber *bitcoinFee = [NSDecimalNumber decimalNumberWithString:@"0.992"];
+        NSDecimalNumber *balanceBitcoins = [boughtBitcoins decimalNumberByMultiplyingBy:bitcoinFee
+                                                                           withBehavior:[SOXFormatters btcNumberHandler]];
+
+        [tradeParametersWithFee setObject:balanceBitcoins forKey:BitcoinDE_ExecuteTrade_BitcoinAmount];
+        // TODO:  consider fee for price here ?!
+    }
+    [self.boughtTradeParametersBacklog addObject:[tradeParametersWithFee copy]];
 
     // balance trades after banner update
     [self updateBannerAfterSuccessfulAutomaticBuyTrade];
@@ -808,7 +822,20 @@
         [self informSellDelegateWithNote:note];
     }
     [self.runningAutomaticSellTradeParameters removeObject:tradeParameters];
-    [self.soldTradeParametersBacklog addObject:tradeParameters];
+
+    NSMutableDictionary *tradeParametersWithFee = [tradeParameters mutableCopy];
+
+    { // calculate bitcoins with fee
+        NSDecimalNumber *boughtBitcoins = [tradeParameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount];
+        NSDecimalNumber *bitcoinFee = [NSDecimalNumber decimalNumberWithString:@"0.992"];
+        NSDecimalNumber *balanceBitcoins = [boughtBitcoins decimalNumberByDividingBy:bitcoinFee
+                                                                        withBehavior:[SOXFormatters btcNumberHandler]];
+
+        [tradeParametersWithFee setObject:balanceBitcoins forKey:BitcoinDE_ExecuteTrade_BitcoinAmount];
+        // TODO:  consider fee for price here ?!
+    }
+    [self.soldTradeParametersBacklog addObject:[tradeParametersWithFee copy]];
+    
     [self checkForBalanceTradesForSoldTrades];
 }
 
