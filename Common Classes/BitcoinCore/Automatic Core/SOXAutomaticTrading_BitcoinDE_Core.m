@@ -960,8 +960,11 @@
     // check for TradingPair
     {
         if (![addOrderData.orderInformation_tradingPair isEqualToString:BitcoinDE_BitcoinOriginal]) {
-            NSLog(@"### tradingPair is %@ - we don't support it right now"
-                  , addOrderData.orderInformation_tradingPair);
+            NSLog(@"### tradingPair is %@ - we don't support it right now - ID: %@ - maxA: %@ - p: %@"
+                  , addOrderData.orderInformation_tradingPair
+                  , addOrderData.orderInformation_orderID
+                  , addOrderData.orderInformation_maxAmount
+                  , addOrderData.orderInformation_price);
             NSBeep();
             return;
         }
