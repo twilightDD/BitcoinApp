@@ -1586,7 +1586,7 @@
             }
         }
         //
-        NSTimer *creditTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+        NSTimer *creditTimer = [NSTimer scheduledTimerWithTimeInterval:2.0
                                                                 target:self
                                                               selector:@selector(updateBanner)
                                                               userInfo:nil
