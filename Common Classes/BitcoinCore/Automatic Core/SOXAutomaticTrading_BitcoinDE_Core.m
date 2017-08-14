@@ -10,6 +10,7 @@
 #import "SOXAutomaticTradingCore_Private.h"
 
 #import "SOXKeys_BitcoinDE.h"
+#import "SOXMarketHelper.h"
 
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXSocketIO_BitcoinDE_Core.h"
@@ -963,20 +964,56 @@
 
 #pragma mark - SOXSocketIOCoreProtocol
 - (void)addedOrder:(SOXShowOrderbookData *)addOrderData {
-    if (!addOrderData.tradingPartnerInformation_isKYCFull) {
-        NSLog(@"### NO KYC: orderID: %@, type: %@, minA: %@, maxA: %@"
-              , addOrderData.orderInformation_orderID
-              , addOrderData.orderInformation_type
-              , addOrderData.orderInformation_minAmount
-              , addOrderData.orderInformation_maxAmount);
-        return;
+    // Check for KYC
+    {
+        if (!addOrderData.tradingPartnerInformation_isKYCFull) {
+            NSLog(@"### NO KYC: orderID: %@, type: %@, minA: %@, maxA: %@"
+                  , addOrderData.orderInformation_orderID
+                  , addOrderData.orderInformation_type
+                  , addOrderData.orderInformation_minAmount
+                  , addOrderData.orderInformation_maxAmount);
+            return;
+        }
     }
 
-    if (![addOrderData.orderInformation_tradingPair isEqualToString:BitcoinDE_BitcoinOriginal]) {
-        NSLog(@"### tradingPair is %@ - we don't support it right now"
-              , addOrderData.orderInformation_tradingPair);
-        NSBeep();
-        return;
+    // check for TradingPair
+    {
+        if (![addOrderData.orderInformation_tradingPair isEqualToString:BitcoinDE_BitcoinOriginal]) {
+            NSLog(@"### tradingPair is %@ - we don't support it right now"
+                  , addOrderData.orderInformation_tradingPair);
+            NSBeep();
+            return;
+        }
+    }
+
+    // Check for doublets
+    {
+        // check for type for performance reasons
+        if ([addOrderData.orderInformation_type isEqualToString:BitcoinDE_WebSocket_BuyOrderType]) {
+            // Check for doublettes
+            if ([SOXMarketHelper existOrderBookData:addOrderData inOrderBook:self.buyOrderBook]) {
+                NSString *note = [NSString stringWithFormat:@"+ don't add buy, because it exists already in buyOrderBook - ID: %@ - maxA: %@ p: %@"
+                                  , addOrderData.orderInformation_orderID
+                                  , addOrderData.orderInformation_maxAmount
+                                  , addOrderData.orderInformation_price];
+                [self informBuyDelegateWithNote:note];
+                return;
+            }
+        }
+        else if ([addOrderData.orderInformation_type isEqualToString:BitcoinDE_WebSocket_SellOrderType]) {
+            // Check for doublettes
+            if ([SOXMarketHelper existOrderBookData:addOrderData inOrderBook:self.sellOrderBook]) {
+                NSString *note = [NSString stringWithFormat:@"+ don't add sell, because it exists already in sellOrderBook - ID: %@ - maxA: %@ p: %@"
+                                  , addOrderData.orderInformation_orderID
+                                  , addOrderData.orderInformation_maxAmount
+                                  , addOrderData.orderInformation_price];
+                [self informSellDelegateWithNote:note];
+                return;
+            }
+        }
+        else {
+            return;
+        }
     }
 
     if ([self checkForExpressOrder:addOrderData]) {
