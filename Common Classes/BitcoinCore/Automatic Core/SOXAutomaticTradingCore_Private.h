@@ -51,8 +51,8 @@
 @property (strong, nonatomic) NSMutableArray *runningBalanceBuyTradeParameters;
 @property (strong, nonatomic) NSMutableArray *runningBalanceSellTradeParameters;
 
-@property (strong, nonatomic) NSMutableArray *boughtTradeParametersBacklog; // buy parameters we have to balance out
-@property (strong, nonatomic) NSMutableArray *soldTradeParametersBacklog;   // sell parameters we have to balance out
+@property (strong, nonatomic) NSMutableArray *successfulAutomaticBuyTradeParameters; // buy parameters we have to balance out
+@property (strong, nonatomic) NSMutableArray *successfulAutomaticSellTradeParameters;   // sell parameters we have to balance out
 @property (strong, nonatomic) NSMutableArray *successfulBalanceBuyTradeParameters;
 @property (strong, nonatomic) NSMutableArray *successfulBalanceSellTradeParameters;
 

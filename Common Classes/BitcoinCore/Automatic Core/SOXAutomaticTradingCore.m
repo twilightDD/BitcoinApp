@@ -39,8 +39,8 @@
     [self setBuyOrderBookInExecution:[NSMutableArray array]];
     [self setSellOrderBookInExecution:[NSMutableArray array]];
 
-    [self setBoughtTradeParametersBacklog:[NSMutableArray array]];
-    [self setSoldTradeParametersBacklog:[NSMutableArray array]];
+    [self setSuccessfulAutomaticBuyTradeParameters:[NSMutableArray array]];
+    [self setSuccessfulAutomaticSellTradeParameters:[NSMutableArray array]];
     [self setSuccessfulBalanceBuyTradeParameters:[NSMutableArray array]];
     [self setSuccessfulBalanceSellTradeParameters:[NSMutableArray array]];
 
@@ -799,7 +799,7 @@
         [tradeParametersWithFee setObject:balanceBitcoins forKey:BitcoinDE_ExecuteTrade_BitcoinAmount];
         // TODO:  consider fee for price here ?!
     }
-    [self.boughtTradeParametersBacklog addObject:[tradeParametersWithFee copy]];
+    [self.successfulAutomaticBuyTradeParameters addObject:[tradeParametersWithFee copy]];
 
     // balance trades after banner update
     [self updateBannerAfterSuccessfulAutomaticBuyTrade];
@@ -834,7 +834,7 @@
         [tradeParametersWithFee setObject:balanceBitcoins forKey:BitcoinDE_ExecuteTrade_BitcoinAmount];
         // TODO:  consider fee for price here ?!
     }
-    [self.soldTradeParametersBacklog addObject:[tradeParametersWithFee copy]];
+    [self.successfulAutomaticSellTradeParameters addObject:[tradeParametersWithFee copy]];
     
     [self checkForBalanceTradesForSoldTrades];
 }
@@ -882,7 +882,7 @@
     }
 
     [self.runningBalanceBuyTradeParameters removeObject:tradeParameters];
-    [self.soldTradeParametersBacklog addObject:tradeParameters];
+    [self.successfulAutomaticSellTradeParameters addObject:tradeParameters];
     [self checkForBalanceTradesForSoldTrades];
 }
 
@@ -905,7 +905,7 @@
         [self informBuyDelegateWithNote:note];
     }
     [self.runningBalanceSellTradeParameters removeObject:tradeParameters];
-    [self.boughtTradeParametersBacklog addObject:tradeParameters];
+    [self.successfulAutomaticBuyTradeParameters addObject:tradeParameters];
     [self checkForBalanceTradesForBoughtTrades];
 }
 
@@ -922,17 +922,17 @@
                           "self.boughtTradeParametersBacklog.count:         %tu"
                           , self.runningBalanceSellTradeParameters.count
                           , self.successfulBalanceSellTradeParameters.count
-                          , self.boughtTradeParametersBacklog.count];
+                          , self.successfulAutomaticBuyTradeParameters.count];
         [self informBuyDelegateWithNote:note];
     }
 
     if (self.runningAutomaticBuyTradeParameters.count == 0
         && self.runningBalanceSellTradeParameters.count == 0
-        && self.boughtTradeParametersBacklog.count > 0) {
+        && self.successfulAutomaticBuyTradeParameters.count > 0) {
         {// DEBUG
             NSString *note = [NSString stringWithFormat:@"checkForBalanceTradesForBoughtTrades\n"
                               "self.boughtTradeParametersBacklog.count: %tu"
-                              , self.boughtTradeParametersBacklog.count];
+                              , self.successfulAutomaticBuyTradeParameters.count];
             [self informBuyDelegateWithNote:note];
         }
         [self createBalanceTradesForBoughtTrades];
@@ -963,16 +963,16 @@
                           "self.soldTradeParametersBacklog.count:           %tu"
                           , self.runningBalanceSellTradeParameters.count
                           , self.successfulBalanceSellTradeParameters.count
-                          , self.soldTradeParametersBacklog.count];
+                          , self.successfulAutomaticSellTradeParameters.count];
         [self informSellDelegateWithNote:note];
     }
     if (self.runningAutomaticSellTradeParameters.count == 0
         && self.runningBalanceBuyTradeParameters.count == 0
-        && self.soldTradeParametersBacklog.count > 0) {
+        && self.successfulAutomaticSellTradeParameters.count > 0) {
         {// DEBUG
             NSString *note = [NSString stringWithFormat:@"checkForBalanceTradesForSoldTrades:\n"
                               "self.soldTradeParametersBacklog.count: %tu"
-                              , self.boughtTradeParametersBacklog.count];
+                              , self.successfulAutomaticBuyTradeParameters.count];
             [self informSellDelegateWithNote:note];
         }
         [self createBalanceTradesForSoldTrades];
@@ -1106,8 +1106,8 @@
                                   , self.runningAutomaticSellTradeParameters.count
                                   , self.runningBalanceBuyTradeParameters.count
                                   , self.runningBalanceSellTradeParameters.count
-                                  , self.boughtTradeParametersBacklog.count
-                                  , self.soldTradeParametersBacklog.count];
+                                  , self.successfulAutomaticBuyTradeParameters.count
+                                  , self.successfulAutomaticSellTradeParameters.count];
     return runningQueueNote;
 }
 
