@@ -1402,18 +1402,10 @@
     {
         self.expectBTCChange = YES;
 
-        NSDecimalNumber *bitcoinFee = [NSDecimalNumber decimalNumberWithString:@"0.992"];
-
         // soldTradeParametersBacklog => we have to balance out (buy)
         NSDecimalNumber *buyBTCBacklog = [self sumOfBitcoinsOfParameters:self.soldTradeParametersBacklog];
-        buyBTCBacklog = [buyBTCBacklog decimalNumberByDividingBy:bitcoinFee
-                                                    withBehavior:[SOXFormatters btcNumberHandler]];
-
         // boughtTradeParametersBacklog  => we have to balance out (sell)
         NSDecimalNumber *sellBTCBacklog = [self sumOfBitcoinsOfParameters:self.boughtTradeParametersBacklog];
-        sellBTCBacklog = [sellBTCBacklog decimalNumberByMultiplyingBy:bitcoinFee
-                                                         withBehavior:[SOXFormatters btcNumberHandler]];
-
         NSDecimalNumber *effectiveBacklog = [buyBTCBacklog decimalNumberBySubtracting:sellBTCBacklog
                                                                          withBehavior:[SOXFormatters btcNumberHandler]];
 
@@ -1457,19 +1449,10 @@
     //self.expectAvailFidorChange = YES;
 
     // calculate banner low and high spectrum values
-
-    NSDecimalNumber *bitcoinFee = [NSDecimalNumber decimalNumberWithString:@"0.992"];
-
     // successfulBalanceBuyTradeParameters => we get BTC
     NSDecimalNumber *boughtBalanceBTCAmount = [self sumOfBitcoinsOfParameters:self.successfulBalanceBuyTradeParameters];
-    boughtBalanceBTCAmount = [boughtBalanceBTCAmount decimalNumberByDividingBy:bitcoinFee
-                                                      withBehavior:[SOXFormatters btcNumberHandler]];
-
     // successfulBalanceSellTradeParameters  => we loose BTC
     NSDecimalNumber *soldBalanceBTCAmount = [self sumOfBitcoinsOfParameters:self.successfulBalanceSellTradeParameters];
-    soldBalanceBTCAmount = [soldBalanceBTCAmount decimalNumberByMultiplyingBy:bitcoinFee
-                                                                 withBehavior:[SOXFormatters btcNumberHandler]];
-
     NSDecimalNumber *effectiveBTCChangeAmount = [boughtBalanceBTCAmount decimalNumberBySubtracting:soldBalanceBTCAmount
                                                                                       withBehavior:[SOXFormatters btcNumberHandler]];
 

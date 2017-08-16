@@ -826,10 +826,10 @@
     NSMutableDictionary *tradeParametersWithFee = [tradeParameters mutableCopy];
 
     { // calculate bitcoins with fee
-        NSDecimalNumber *boughtBitcoins = [tradeParameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount];
+        NSDecimalNumber *soldBitcoins = [tradeParameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount];
         NSDecimalNumber *bitcoinFee = [NSDecimalNumber decimalNumberWithString:@"0.992"];
-        NSDecimalNumber *balanceBitcoins = [boughtBitcoins decimalNumberByDividingBy:bitcoinFee
-                                                                        withBehavior:[SOXFormatters btcNumberHandler]];
+        NSDecimalNumber *balanceBitcoins = [soldBitcoins decimalNumberByDividingBy:bitcoinFee
+                                                                      withBehavior:[SOXFormatters btcNumberHandler]];
 
         [tradeParametersWithFee setObject:balanceBitcoins forKey:BitcoinDE_ExecuteTrade_BitcoinAmount];
         // TODO:  consider fee for price here ?!
@@ -858,7 +858,19 @@
     }
 
     [self.runningBalanceBuyTradeParameters removeObject:tradeParameters];
-    [self.successfulBalanceBuyTradeParameters addObject:tradeParameters];
+
+    NSMutableDictionary *tradeParametersWithFee = [tradeParameters mutableCopy];
+    { // calculate bitcoins with fee
+        NSDecimalNumber *boughtBitcoins = [tradeParameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount];
+        NSDecimalNumber *bitcoinFee = [NSDecimalNumber decimalNumberWithString:@"0.992"];
+        NSDecimalNumber *balanceBitcoins = [boughtBitcoins decimalNumberByMultiplyingBy:bitcoinFee
+                                                                           withBehavior:[SOXFormatters btcNumberHandler]];
+
+        [tradeParametersWithFee setObject:balanceBitcoins forKey:BitcoinDE_ExecuteTrade_BitcoinAmount];
+        // TODO:  consider fee for price here ?!
+    }
+
+    [self.successfulBalanceBuyTradeParameters addObject:[tradeParametersWithFee copy]];
     [self checkForBalanceTradesForSoldTrades];
 }
 
@@ -880,6 +892,7 @@
                           tradeParameters];
         [self informBuyDelegateWithNote:note];
     }
+
     [self.runningBalanceSellTradeParameters removeObject:tradeParameters];
     [self.successfulBalanceSellTradeParameters addObject:tradeParameters];
     [self checkForBalanceTradesForBoughtTrades];
