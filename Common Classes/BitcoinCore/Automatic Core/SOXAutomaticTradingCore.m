@@ -926,7 +926,8 @@
         [self informBuyDelegateWithNote:note];
     }
 
-    if (self.runningBalanceSellTradeParameters.count == 0
+    if (self.runningAutomaticBuyTradeParameters.count == 0
+        && self.runningBalanceSellTradeParameters.count == 0
         && self.boughtTradeParametersBacklog.count > 0) {
         {// DEBUG
             NSString *note = [NSString stringWithFormat:@"checkForBalanceTradesForBoughtTrades\n"
@@ -936,7 +937,8 @@
         }
         [self createBalanceTradesForBoughtTrades];
     }
-    else if (self.runningBalanceSellTradeParameters.count == 0
+    else if (self.runningAutomaticBuyTradeParameters.count == 0
+             && self.runningBalanceSellTradeParameters.count == 0
              && self.successfulBalanceSellTradeParameters.count > 0) {
         {// DEBUG
             NSString *note = [NSString stringWithFormat:@"checkForBalanceTradesForBoughtTrades\n"
@@ -944,7 +946,7 @@
                               , self.successfulBalanceSellTradeParameters.count];
             [self informBuyDelegateWithNote:note];
         }
-        [self.successfulBalanceSellTradeParameters removeAllObjects];
+
         [self updateBannerAfterSuccessfulBalanceTrades];
     }
 }
@@ -964,7 +966,8 @@
                           , self.soldTradeParametersBacklog.count];
         [self informSellDelegateWithNote:note];
     }
-    if (self.runningBalanceBuyTradeParameters.count == 0
+    if (self.runningAutomaticSellTradeParameters.count == 0
+        && self.runningBalanceBuyTradeParameters.count == 0
         && self.soldTradeParametersBacklog.count > 0) {
         {// DEBUG
             NSString *note = [NSString stringWithFormat:@"checkForBalanceTradesForSoldTrades:\n"
@@ -974,7 +977,8 @@
         }
         [self createBalanceTradesForSoldTrades];
     }
-    else if (self.runningBalanceBuyTradeParameters.count == 0
+    else if (self.runningAutomaticSellTradeParameters.count == 0
+             && self.runningBalanceBuyTradeParameters.count == 0
              && self.successfulBalanceBuyTradeParameters.count > 0) {
         {// DEBUG
             NSString *note = [NSString stringWithFormat:@"checkForBalanceTradesForSoldTrades\n"
@@ -982,6 +986,7 @@
                               , self.successfulBalanceBuyTradeParameters.count];
             [self informSellDelegateWithNote:note];
         }
+
         [self updateBannerAfterSuccessfulBalanceTrades];
     }
 }
