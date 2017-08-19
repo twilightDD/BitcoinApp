@@ -40,6 +40,7 @@
     NSMutableDictionary *parameterAutomaticTrading = [parameters mutableCopy];
     [parameterAutomaticTrading setObject:@YES forKey:BitcoinDE_ExecuteTrade_IsAutomaticTrade];
     [parameterAutomaticTrading setObject:price forKey:BitcoinDE_ExecuteTrade_Price];
+    [parameterAutomaticTrading setObject:price forKey:BitcoinDE_ExecuteTrade_AutomaticTradePrice];
 
     return [parameterAutomaticTrading copy];
 }
