@@ -65,7 +65,7 @@
 }
 
 - (IBAction)addOrderAction:(NSButton *)sender {
-    NSLog(@"addOrderAction");
+    DDLogInfo(@"addOrderAction");
     
     NSStoryboard *storyBoard = [NSStoryboard storyboardWithName:@"MacMain" bundle:nil];
     SOXCreateNewOrderViewController *viewC = [storyBoard instantiateControllerWithIdentifier:@"CreateNewOrderIdentifier"];
@@ -122,7 +122,7 @@
                                                                 delegate:self];
     }
     else {
-        NSLog(@"SOXOrdersViewController - (void)viewWillAppear : self.orderType has wrong type");
+        DDLogInfo(@"SOXOrdersViewController - (void)viewWillAppear : self.orderType has wrong type");
     }
 }
 
@@ -144,7 +144,7 @@
     NSUInteger selectionIndex = self.orderBookArrayController.selectionIndex;
     NSArray *selectedObjects = self.orderBookArrayController.selectedObjects;
     
-    NSLog(@"\nclickedRow %ti\nselectionIndex %tu\nselectedObjects\n%@",clickedRow, selectionIndex, selectedObjects );
+    DDLogInfo(@"\nclickedRow %ti\nselectionIndex %tu\nselectedObjects\n%@",clickedRow, selectionIndex, selectedObjects );
     
     SOXShowOrderbook_BitcoinDE_Data *selectedOrderBookData = selectedObjects.firstObject;
     if (!selectedOrderBookData) {
@@ -189,7 +189,7 @@
 
 - (void)addedOrder:(SOXShowOrderbookData *)addOrderData {
     if (![addOrderData.orderInformation_tradingPair isEqualToString:BitcoinDE_BitcoinOriginal]) {
-        NSLog(@"addedOrder in %@ - tradingPair is %@ - we don't support it right now"
+        DDLogInfo(@"addedOrder in %@ - tradingPair is %@ - we don't support it right now"
               , [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:self.orderType]
               , addOrderData.orderInformation_tradingPair);
         return;

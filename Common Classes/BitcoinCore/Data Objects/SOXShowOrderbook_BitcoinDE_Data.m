@@ -191,7 +191,7 @@
             newPaymentOption = 1;
         }
         else { // (is_trade_by_fidor_reservation_allowed == 0 && is_trade_by_sepa_allowed == 0)
-            NSLog(@"Sollte nicht vorkommen");
+            DDLogInfo(@"Sollte nicht vorkommen");
         }
     }
     

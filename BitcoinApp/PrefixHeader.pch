@@ -27,13 +27,13 @@ _Pragma("clang diagnostic pop")
 
 #pragma mark - Time measurement
 #define TICK NSDate * startTime = [NSDate date];
-#define TOCK NSLog(@"Elapsed Time: %f", [[NSDate date] timeIntervalSinceDate:startTime]);
-#define TOCKwithComment(...) NSLog(@"Elapsed Time on %@:  %f", ## __VA_ARGS__, [[NSDate date] timeIntervalSinceDate:startTime]);
+#define TOCK DDLogInfo(@"Elapsed Time: %f", [[NSDate date] timeIntervalSinceDate:startTime]);
+#define TOCKwithComment(...) DDLogInfo(@"Elapsed Time on %@:  %f", ## __VA_ARGS__, [[NSDate date] timeIntervalSinceDate:startTime]);
 
 #define TICK2 NSDate * startTime2 = [NSDate date];
-#define TOCK2 NSLog(@"Elapsed Time: %f", [[NSDate date] timeIntervalSinceDate:startTime2]);
-#define TOCK2withComment(...) NSLog(@"Elapsed Time on %@:  %f", ## __VA_ARGS__, [[NSDate date] timeIntervalSinceDate:startTime2]);
+#define TOCK2 DDLogInfo(@"Elapsed Time: %f", [[NSDate date] timeIntervalSinceDate:startTime2]);
+#define TOCK2withComment(...) DDLogInfo(@"Elapsed Time on %@:  %f", ## __VA_ARGS__, [[NSDate date] timeIntervalSinceDate:startTime2]);
 
 #define TICK3 NSDate * startTime3 = [NSDate date];
-#define TOCK3 NSLog(@"Elapsed Time: %f", [[NSDate date] timeIntervalSinceDate:startTime3]);
-#define TOCK3withComment(...) NSLog(@"Elapsed Time on %@:  %f", ## __VA_ARGS__, [[NSDate date] timeIntervalSinceDate:startTime3]);
+#define TOCK3 DDLogInfo(@"Elapsed Time: %f", [[NSDate date] timeIntervalSinceDate:startTime3]);
+#define TOCK3withComment(...) DDLogInfo(@"Elapsed Time on %@:  %f", ## __VA_ARGS__, [[NSDate date] timeIntervalSinceDate:startTime3]);

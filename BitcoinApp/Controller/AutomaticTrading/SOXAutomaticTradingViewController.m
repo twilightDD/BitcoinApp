@@ -185,7 +185,7 @@
                                           forUpdatesForOrderType:self.orderType];
     }
     else {
-        NSLog(@"ERROR - no orderType set");
+        DDLogInfo(@"ERROR - no orderType set");
     }
 }
 
@@ -254,7 +254,7 @@
     NSText* fieldEditor               = valueField.currentEditor;
     
     id newValue = ( fieldEditor != nil ? [fieldFormatter numberFromString:fieldEditor.string] : valueField.objectValue );
-    NSLog(@"newValue: %@", newValue);
+    DDLogInfo(@"newValue: %@", newValue);
     if (valueField == self.minInterestTextField) { // %
         switch (self.orderType) {
             case BitcoinDE_BuyOrderType:

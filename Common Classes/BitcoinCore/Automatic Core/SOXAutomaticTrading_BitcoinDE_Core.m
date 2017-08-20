@@ -169,7 +169,7 @@
         }
             break;
         default:
-            NSLog(@"ERROR - (void)registerForUpdatesForType:(BitcoinDE_OrderType)orderType");
+            DDLogInfo(@"ERROR - (void)registerForUpdatesForType:(BitcoinDE_OrderType)orderType");
             break;
     }
 
@@ -191,7 +191,7 @@
             [tradingCore.sellDelegates removeObject:controller];
             break;
         default:
-            NSLog(@"ERROR - (void)registerForUpdatesForType:(BitcoinDE_OrderType)orderType");
+            DDLogInfo(@"ERROR - (void)registerForUpdatesForType:(BitcoinDE_OrderType)orderType");
             break;
     }
 
@@ -757,7 +757,7 @@
 - (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest {
     id errorMessage = [answerOfServerRequest objectForKey:ServerAnswerErrorKey];
     if (errorMessage) {
-        NSLog(@"SOXAutomaticTrading_BitcoinDE_Core - answerOfServerRequest with error:\n%@", errorMessage);
+        DDLogInfo(@"SOXAutomaticTrading_BitcoinDE_Core - answerOfServerRequest with error:\n%@", errorMessage);
 
     }
 
@@ -867,7 +867,7 @@
                 [self.buySEPAOrderBook addObject:orderBookData];
             }
 
-            NSLog(@"answer buy: %@ %@ - payOp: %@"
+            DDLogInfo(@"answer buy: %@ %@ - payOp: %@"
                   , orderBookData.orderInformation_orderID
                   , orderBookData.tradingPartnerInformation_isKYCFull ? @"YES" : @"NO"
                   , orderBookData.orderRequirements_paymentOption);
@@ -890,7 +890,7 @@
             averagePrice = [averagePrice decimalNumberByAdding:average
                                                   withBehavior:[SOXFormatters currencyNumberHandler]];
         }
-        NSLog(@"buySum: %@ averagePrice: %@", buyBTCSum, averagePrice);
+        DDLogInfo(@"buySum: %@ averagePrice: %@", buyBTCSum, averagePrice);
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
                                                                 delegate:core];
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
@@ -919,7 +919,7 @@
                 [self informSellDelegateWithNote:note];
                 [self.sellSEPAOrderBook addObject:orderBookData];
             }
-            NSLog(@"answer buy: %@ %@ - payOp: %@"
+            DDLogInfo(@"answer buy: %@ %@ - payOp: %@"
                   , orderBookData.orderInformation_orderID
                   , orderBookData.tradingPartnerInformation_isKYCFull ? @"YES" : @"NO"
                   , orderBookData.orderRequirements_paymentOption);
@@ -948,7 +948,7 @@
     // Check for KYC
     {
         if (!addOrderData.tradingPartnerInformation_isKYCFull) {
-            NSLog(@"### NO KYC: orderID: %@, type: %@, minA: %@, maxA: %@"
+            DDLogInfo(@"### NO KYC: orderID: %@, type: %@, minA: %@, maxA: %@"
                   , addOrderData.orderInformation_orderID
                   , addOrderData.orderInformation_type
                   , addOrderData.orderInformation_minAmount
@@ -960,7 +960,7 @@
     // check for TradingPair
     {
         if (![addOrderData.orderInformation_tradingPair isEqualToString:BitcoinDE_BitcoinOriginal]) {
-            NSLog(@"### tradingPair is %@ - we don't support it right now - ID: %@ - maxA: %@ - p: %@"
+            DDLogInfo(@"### tradingPair is %@ - we don't support it right now - ID: %@ - maxA: %@ - p: %@"
                   , addOrderData.orderInformation_tradingPair
                   , addOrderData.orderInformation_orderID
                   , addOrderData.orderInformation_maxAmount
@@ -1036,9 +1036,9 @@
 }
 
 - (void)removedOrderWithOrderID:(NSDictionary *)payloadDictionary {
-    NSLog(@"--------------------");
-    NSLog(@"payload:\n%@", payloadDictionary);
-    NSLog(@"--------------------");
+    DDLogInfo(@"--------------------");
+    DDLogInfo(@"payload:\n%@", payloadDictionary);
+    DDLogInfo(@"--------------------");
     NSString *orderID = [payloadDictionary objectForKey:BitcoinDE_WebSocket_RemoveOrder_OrderID];
     NSString *note = nil;
     NSString *noteExtension = nil;
@@ -1049,7 +1049,7 @@
                          , [SOXFormatters stringForBTCNumber:amount]
                          , [SOXFormatters currencyStringForNumber:price
                                                      roundingMode:NSNumberFormatterRoundHalfUp]];
-        NSLog(@"%@", noteExtension);
+        DDLogInfo(@"%@", noteExtension);
     }
     // buyOrderBook
     SOXShowOrderbookData *orderToRemove = [self orderWithOrderID:orderID fromOrderBook:self.buyOrderBook];

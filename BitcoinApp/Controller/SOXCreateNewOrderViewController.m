@@ -244,7 +244,7 @@
                                                                                      payment_option:[SOXPreferenceCenter defaultPaymentOptionForCreateOrder]
                                                                                        seat_of_bank:[SOXPreferenceCenter defaultTradingCountries]];
         
-        NSLog(@"Parameters:\n%@", parameters);
+        DDLogInfo(@"Parameters:\n%@", parameters);
         
         [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_CreateOrderType
                                                 withParameter:parameters
@@ -266,7 +266,7 @@
 
 - (IBAction)trustLevelAction:(NSButton *)sender {
     self.trustLevel = sender.tag;
-    NSLog(@"selected Trust Level: %tu", self.trustLevel);
+    DDLogInfo(@"selected Trust Level: %tu", self.trustLevel);
 }
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
@@ -312,7 +312,7 @@
     NSText* textFieldEditor               = textField.currentEditor;
     
     id newValue = ( textFieldEditor != nil ? [textFieldFormatter numberFromString:textFieldEditor.string] : textField.objectValue );
-    NSLog(@"NewValue: %@ (class: %@)", newValue, [newValue class]);
+    DDLogInfo(@"NewValue: %@ (class: %@)", newValue, [newValue class]);
 
     if (textField == self.amountTextField) {
         _amount = newValue;

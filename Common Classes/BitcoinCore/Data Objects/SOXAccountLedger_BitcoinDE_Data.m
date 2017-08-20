@@ -106,7 +106,7 @@ static NSString *AccountLedgerParameter_PageKey         = @"page";
             orderTypeString = BitcoinDE_AccountLedgerParameter_OutgoingFeeVoluntaryOrderTypeKey;
             break;
         default:
-            NSLog(@"Unknown BitcoinDE_AccountLedgerParameter_OrderType: %tu", orderType);
+            DDLogInfo(@"Unknown BitcoinDE_AccountLedgerParameter_OrderType: %tu", orderType);
             break;
     };
     

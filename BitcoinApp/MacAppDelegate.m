@@ -33,13 +33,26 @@
         [DDLog addLogger:fileLogger];
     }
 
+    DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     DDLogInfo(@"applicationDidFinishLaunching");
+    DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
 }
 
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     // Insert code here to tear down your application
+    DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    DDLogInfo(@"applicationWillTerminate");
+    DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 }
 
 
@@ -118,7 +131,7 @@
         }
         error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
         [[NSApplication sharedApplication] presentError:error];
-        NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+        DDLogInfo(@"Unresolved error %@, %@", error, error.userInfo);
         abort();
     }
     return _persistentStoreCoordinator;
@@ -147,7 +160,7 @@
     NSManagedObjectContext *context = self.managedObjectContext;
 
     if (![context commitEditing]) {
-        NSLog(@"%@:%@ unable to commit editing before saving", [self class], NSStringFromSelector(_cmd));
+        DDLogInfo(@"%@:%@ unable to commit editing before saving", [self class], NSStringFromSelector(_cmd));
     }
     
     NSError *error = nil;
@@ -170,7 +183,7 @@
     }
     
     if (![context commitEditing]) {
-        NSLog(@"%@:%@ unable to commit editing to terminate", [self class], NSStringFromSelector(_cmd));
+        DDLogInfo(@"%@:%@ unable to commit editing to terminate", [self class], NSStringFromSelector(_cmd));
         return NSTerminateCancel;
     }
     

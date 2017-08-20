@@ -65,7 +65,7 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
                 [[SOXSocketIO_BitcoinDE_Core sharedCore].delegateForRemoveOrderUpdates addObject:delegate];
                 break;
             default:
-                NSLog(@"ERROR: registerForOrderUpdatesForUpdateType - unknown type");
+                DDLogInfo(@"ERROR: registerForOrderUpdatesForUpdateType - unknown type");
                 break;
         }
         
@@ -120,7 +120,7 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
 
 + (void)restartWebSocketCore {
     NSString *info = @"~~~~~ Try to restart WebSocket Connection in 20 seconds ~~~~~";
-    NSLog(@"%@", info);
+    DDLogInfo(@"%@", info);
 
     SEL socketIODidDisconnect = NSSelectorFromString(@"socketIODidDisconnect:");
     for (NSObject *delegate in [[SOXSocketIO_BitcoinDE_Core sharedCore] delegateForBuyOrderUpdates]) {
@@ -152,7 +152,7 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
 #pragma mark SocketIODelegate
 
 - (void)socketIODidConnect:(SocketIO *)socket {
-    NSLog(@"~~~~~ socketIODidConnect");
+    DDLogInfo(@"~~~~~ socketIODidConnect");
     SEL socketIODidConnectSelector = NSSelectorFromString(@"socketIODidConnect:");
     NSString *note = @"*** socketIODidConnect";
     for (NSObject *delegate in self.delegateForBuyOrderUpdates) {
@@ -173,7 +173,7 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
 }
 
 - (void) socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error {
-    NSLog(@"~~~~~ socketIODidDisconnect: %@ disconnectedWithError:\n%@", socket, error);
+    DDLogInfo(@"~~~~~ socketIODidDisconnect: %@ disconnectedWithError:\n%@", socket, error);
 
     SEL socketIODidDisconnect = NSSelectorFromString(@"socketIODidDisconnect:");
     NSString *note = [NSString stringWithFormat:@"*** socketIODidDisconnect with Error:\n%@", error.localizedDescription];
@@ -196,11 +196,11 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
 }
 
 - (void) socketIO:(SocketIO *)socket didReceiveMessage:(SocketIOPacket *)packet {
-    NSLog(@"~~~~~ socketIO: %@ didReceiveMessage:\n%@", socket, packet);
+    DDLogInfo(@"~~~~~ socketIO: %@ didReceiveMessage:\n%@", socket, packet);
 }
 
 - (void) socketIO:(SocketIO *)socket didReceiveJSON:(SocketIOPacket *)packet {
-    NSLog(@"~~~~~ socketIO: %@ didReceiveJSON:\n%@", socket, packet);
+    DDLogInfo(@"~~~~~ socketIO: %@ didReceiveJSON:\n%@", socket, packet);
 }
 
 - (void) socketIO:(SocketIO *)socket didReceiveEvent:(SocketIOPacket *)packet {
@@ -215,7 +215,7 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
         for (NSDictionary *packetDictionary in packetArguments) {
             SOXShowOrderbookData *addOrderData = [SOXShowOrderbook_BitcoinDE_Data orderBookDataForSocketIODictionary:packetDictionary];
             if (!addOrderData) {
-                NSLog(@"nil");
+                DDLogInfo(@"nil");
             }
             if ([addOrderData.orderInformation_type isEqualToString:BitcoinDE_WebSocket_BuyOrderType]) {
                 for (NSObject *delegate in self.delegateForBuyOrderUpdates) {
@@ -239,13 +239,13 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
                 }
             }
             else {
-                NSLog(@"socketIO:didReceiveEvent: BitcoinDE_WebSocket_AddOrder_MainKey -> unknown type: %@", addOrderData.orderInformation_type);
+                DDLogInfo(@"socketIO:didReceiveEvent: BitcoinDE_WebSocket_AddOrder_MainKey -> unknown type: %@", addOrderData.orderInformation_type);
             }
         }
     }
 
     else if ([packet.name isEqualToString:BitcoinDE_WebSocket_RemoveOrder_MainKey]) {
-        NSLog(@"SocketIO: remove_order");
+        DDLogInfo(@"SocketIO: remove_order");
         // TODO: Todo: siehe Doku, for eigene Angebote, die (teilweise) verkauft wurden
         for (NSDictionary *packetDictionary in packetArguments) {
             for (NSObject *delegate in self.delegateForRemoveOrderUpdates) {
@@ -294,18 +294,18 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
     }
     else {
         // TODO: error handling
-        NSLog(@"unbekannter Name: %@", packet.name);
+        DDLogInfo(@"unbekannter Name: %@", packet.name);
     }
 }
 
 - (void) socketIO:(SocketIO *)socket didSendMessage:(SocketIOPacket *)packet {
-    // NSLog(@"socketIO: %@ didSendMessage:\n%@", socket, packet);
+    // DDLogInfo(@"socketIO: %@ didSendMessage:\n%@", socket, packet);
     
     
 }
 
 - (void) socketIO:(SocketIO *)socket onError:(NSError *)error {
-    NSLog(@"~~~~~ socketIO: %@ onError:\n%@", socket, error);
+    DDLogInfo(@"~~~~~ socketIO: %@ onError:\n%@", socket, error);
 
     SEL socketIODidDisconnect = NSSelectorFromString(@"socketIOError:");
     NSString *note = [NSString stringWithFormat:@"*** socketIO onError:\n%@", error.localizedDescription];

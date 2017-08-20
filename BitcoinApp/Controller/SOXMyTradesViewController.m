@@ -147,16 +147,16 @@
 
 #pragma mark - Action methods
 - (IBAction)orderTypeButtonAction:(NSButton *)sender {
-    NSLog(@"tag: %ti", sender.tag);
+    DDLogInfo(@"tag: %ti", sender.tag);
     self.selectedOrderType = sender.tag;
 }
 
 - (IBAction)tradeStateButtonAction:(NSButton *)sender {
-    NSLog(@"tag: %ti", sender.tag);
+    DDLogInfo(@"tag: %ti", sender.tag);
     self.selectedTradeStateType = sender.tag;
 }
 - (IBAction)startDatePickerAction:(NSDatePicker *)sender {
-    NSLog(@"startDatePickerAction %@", sender.dateValue);
+    DDLogInfo(@"startDatePickerAction %@", sender.dateValue);
     
     //gather current calendar
     NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -173,11 +173,11 @@
     selectedStartDateComponents.year  = inputDateComponents.year;
 
     self.selectedStartDate = [calendar dateFromComponents:selectedStartDateComponents];
-    NSLog(@"final StartDate: %@", self.selectedStartDate);
+    DDLogInfo(@"final StartDate: %@", self.selectedStartDate);
 }
 
 - (IBAction)endDatePickerAction:(NSDatePicker *)sender {
-    NSLog(@"endDatePickerAction %@", sender.dateValue);
+    DDLogInfo(@"endDatePickerAction %@", sender.dateValue);
     
     //gather current calendar
     NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -198,7 +198,7 @@
     selectedEndDateComponents.second = 59;
     
     self.selectedEndDate = [calendar dateFromComponents:selectedEndDateComponents];
-    NSLog(@"final EndDate: %@", self.selectedEndDate);
+    DDLogInfo(@"final EndDate: %@", self.selectedEndDate);
 }
 
 - (IBAction)fetchDataButtonAction:(NSButton *)sender {

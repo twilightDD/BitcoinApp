@@ -271,8 +271,8 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     }
     amountToTradeTextFieldFormatter.maximum = [maximum decimalNumberByAdding:formatterCorrection];
 
-    NSLog(@"Formatter bounds - min: %@ - max: %@", amountToTradeTextFieldFormatter.minimum, amountToTradeTextFieldFormatter.maximum);
-    NSLog(@"~~~");
+    DDLogInfo(@"Formatter bounds - min: %@ - max: %@", amountToTradeTextFieldFormatter.minimum, amountToTradeTextFieldFormatter.maximum);
+    DDLogInfo(@"~~~");
 }
 
 - (void)setupUI {
@@ -584,7 +584,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 
 #pragma mark - NSControlTextEditingDelegate
 - (BOOL)control:(NSControl *)control isValidObject:(id)obj {
-    NSLog(@"isValidObject %@", obj);
+    DDLogInfo(@"isValidObject %@", obj);
     return YES;
 }
 
@@ -594,7 +594,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     NSText* fieldEditor = valueField.currentEditor;
     
     id newValue = ( fieldEditor!=nil ? [fieldFormatter numberFromString:fieldEditor.string] : valueField.objectValue );
-    NSLog(@"newValuenewValuenewValue: %@", newValue);
+    DDLogInfo(@"newValuenewValuenewValue: %@", newValue);
     _amountToTrade = newValue;
 }
 

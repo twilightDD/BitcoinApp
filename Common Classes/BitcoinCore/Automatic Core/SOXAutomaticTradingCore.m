@@ -1010,6 +1010,9 @@
 #pragma mark - Inform delegates
 - (void)informBuyDelegateWithNote:(NSString *)note {
     if (note) {
+        NSString *lumberjackNote = [@"buyDele: " stringByAppendingString:note];
+        DDLogInfo(@"%@",lumberjackNote);
+
         for (NSObject <SOXAutomaticTradingCoreProtocol> *delegate in self.buyDelegates) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [delegate performSelector:@selector(logLine:)
@@ -1020,7 +1023,11 @@
     }
 }
 - (void)informSellDelegateWithNote:(NSString *)note {
+
     if (note) {
+        NSString *lumberjackNote = [@"sellDele: " stringByAppendingString:note];
+        DDLogInfo(@"%@",lumberjackNote);
+
         for (NSObject <SOXAutomaticTradingCoreProtocol> *delegate in self.sellDelegates) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [delegate performSelector:@selector(logLine:)
