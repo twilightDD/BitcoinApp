@@ -750,12 +750,14 @@
 
 - (void)addBuyBacklogForRemainingBitcoinAmountToBuy:(NSDecimalNumber *)remainingBitcoinAmountToBuy
                                        forSoldPrice:(NSDecimalNumber *)soldPrice {
+    return;
     [SOXAutomaticTradingCore missedImplementation:
      @"- (void)addBuyBacklogForRemainingBitcoinAmountToBuy:(NSDecimalNumber *)remainingBitcoinAmountToBuy "
      "forSoldPrice:(NSDecimalNumber *)soldPrice"];
 }
 - (void)addSellBacklogForRemainingBitcoinAmountToSell:(NSDecimalNumber *)remainingBitcoinAmountToSell
                                        forBoughtPrice:(NSDecimalNumber *)boughtPrice {
+    return;
     [SOXAutomaticTradingCore missedImplementation:
      @"- (void)addSellBacklogForRemainingBitcoinAmountToSell:(NSDecimalNumber *)remainingBitcoinAmountToSell "
      "forBoughtPrice:(NSDecimalNumber *)boughtPrice"];
