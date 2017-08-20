@@ -1,15 +1,23 @@
 PODS:
+  - CocoaLumberjack (3.2.0):
+    - CocoaLumberjack/Default (= 3.2.0)
+    - CocoaLumberjack/Extensions (= 3.2.0)
+  - CocoaLumberjack/Default (3.2.0)
+  - CocoaLumberjack/Extensions (3.2.0):
+    - CocoaLumberjack/Default
   - socket.IO (0.5.2):
     - SocketRocket (~> 0.2)
   - SocketRocket (0.5.1)
 
 DEPENDENCIES:
+  - CocoaLumberjack
   - socket.IO
 
 SPEC CHECKSUMS:
+  CocoaLumberjack: 9b4aed7073d242f29cc2f62068d995faf67f703a
   socket.IO: eaaaea33481d8a81d8f78e331f0c72ba44758036
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
 
-PODFILE CHECKSUM: 24effcf222f6282712700c47c7633d6243175f22
+PODFILE CHECKSUM: 4f4033452bde8866751720ed86e787777bbe87ec
 
 COCOAPODS: 1.2.1

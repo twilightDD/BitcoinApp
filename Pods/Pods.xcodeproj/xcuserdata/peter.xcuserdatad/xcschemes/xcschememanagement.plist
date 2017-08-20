@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>CocoaLumberjack.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-iOS BitcoinApp.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -36,37 +41,6 @@
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>06F5968A81683E740E7AAEA32DE7C5D2</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>17663DF249A2FC5E6F4ACA68E08715E9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>241DD13D3785E535F85DE2EEBF16DADD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>499F7001A2008CEAE4E73EBC374354FC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>4BF0E323CB0FE0E45F4D7C37A5BF0679</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FB91A11E29E761CC5B05BD735709B9D9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-	</dict>
+	<dict/>
 </dict>
 </plist>
