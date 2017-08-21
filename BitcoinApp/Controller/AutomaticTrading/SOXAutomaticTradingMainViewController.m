@@ -40,10 +40,12 @@ static NSString *EmbedAutomaticSellSegueKey = @"EmbedAutomaticSellSegue";
     if ([segue.identifier isEqualToString:EmbedAutomaticBuySegueKey]) {
         SOXAutomaticTradingViewController *destinationViewController = segue.destinationController;
         destinationViewController.orderType = BitcoinDE_BuyOrderType;
+        destinationViewController.bitcoinCurrencyType = self.bitcoinCurrencyType;
     }
     else if ([segue.identifier isEqualToString:EmbedAutomaticSellSegueKey]) {
         SOXAutomaticTradingViewController *destinationViewController = segue.destinationController;
         destinationViewController.orderType = BitcoinDE_SellOrderType;
+        destinationViewController.bitcoinCurrencyType = self.bitcoinCurrencyType;
     }
 }
 

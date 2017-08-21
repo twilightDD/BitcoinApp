@@ -11,13 +11,13 @@
 
 @interface SOXAutomaticTrading_BitcoinDE_Core : SOXAutomaticTradingCore
 
-+ (void)executeTrades:(BOOL)executeTrades forOrderType:(BitcoinDE_OrderType)orderType;
-+ (void)executeAutomaticTrades:(BOOL)executeAutomaticTrades forOrderType:(BitcoinDE_OrderType)orderType;
-+ (void)executeBalanceTrades:(BOOL)executeBalanceTrades forOrderType:(BitcoinDE_OrderType)orderType;
+- (void)executeTrades:(BOOL)executeTrades forOrderType:(BitcoinDE_OrderType)orderType;
+- (void)executeAutomaticTrades:(BOOL)executeAutomaticTrades forOrderType:(BitcoinDE_OrderType)orderType;
+- (void)executeBalanceTrades:(BOOL)executeBalanceTrades forOrderType:(BitcoinDE_OrderType)orderType;
 
-+ (void)registerController:(id <SOXAutomaticTradingCoreProtocol>)controller
+- (void)registerController:(id <SOXAutomaticTradingCoreProtocol>)controller
     forUpdatesForOrderType:(BitcoinDE_OrderType)orderType;
-+ (void)deRegisterController:(id)controller
+- (void)deRegisterController:(id)controller
       forUpdatesForOrderType:(BitcoinDE_OrderType)orderType;
 
 

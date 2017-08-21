@@ -8,7 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+#import "SOXAutomaticTradingCoreManager.h"
+
 #import "SOXSocketIO_BitcoinDE_Core.h"
+#import "SOXMarket_DefTypes.h"
+
 @protocol SOXAutomaticTradingCoreProtocol <NSObject>
 
 - (void)logLine:(NSString *)line;
@@ -21,15 +25,17 @@
 @interface SOXAutomaticTradingCore : NSObject
 
 @property (weak, nonatomic) id <SOXAutomaticTradingCoreProtocol, SOXSocketIOCoreProtocol, SOXSocketIOCoreStatusProtocol> delegate;
+@property (nonatomic) BitcoinCurrencyType bitcoinCurrencyType;
 
-+ (instancetype)sharedTradingCore;
+//+ (instancetype)sharedTradingCore;
+- (void)setupProperties;
 
 - (void)startAutomaticTrading;
 - (void)stopAutomaticTrading;
 
-+ (void)setBuyInterestRate:(NSDecimalNumber *)buyInterestRate;
-+ (void)setSellInterestRate:(NSDecimalNumber *)sellInterestRate;
-+ (void)setBuyMaximalFidorAmount:(NSDecimalNumber *)buyMaximalEuro;
-+ (void)setSellMaximalBTCAmount:(NSDecimalNumber *)sellMaximalBTC;
+- (void)setBuyInterestRate:(NSDecimalNumber *)buyInterestRate;
+- (void)setSellInterestRate:(NSDecimalNumber *)sellInterestRate;
+- (void)setBuyMaximalFidorAmount:(NSDecimalNumber *)buyMaximalEuro;
+- (void)setSellMaximalBTCAmount:(NSDecimalNumber *)sellMaximalBTC;
 
 @end

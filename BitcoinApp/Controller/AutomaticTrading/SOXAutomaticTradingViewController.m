@@ -160,29 +160,29 @@
 - (void)startAutomaticTrading {
     NSDecimalNumber *maximalFidorAmount = self.maxInvestmentTextField.objectValue;
     NSDecimalNumber *interestRate = self.minInterestTextField.objectValue;
+
+    SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTradingCoreManager coreForBitcoinCurrency:self.bitcoinCurrencyType];
     switch (self.orderType) {
         case BitcoinDE_BuyOrderType:
-            [SOXAutomaticTrading_BitcoinDE_Core setBuyMaximalFidorAmount:maximalFidorAmount];
-            [SOXAutomaticTrading_BitcoinDE_Core setBuyInterestRate:interestRate];
+            [core setBuyMaximalFidorAmount:maximalFidorAmount];
+            [core setBuyInterestRate:interestRate];
             break;
         case BitcoinDE_SellOrderType:
-            [SOXAutomaticTrading_BitcoinDE_Core setSellMaximalBTCAmount:maximalFidorAmount];
-            [SOXAutomaticTrading_BitcoinDE_Core setSellInterestRate:interestRate];
+            [core setSellMaximalBTCAmount:maximalFidorAmount];
+            [core setSellInterestRate:interestRate];
             break;
         default:
             return;
             break;
     }
 
-    [SOXAutomaticTrading_BitcoinDE_Core registerController:self
-                                    forUpdatesForOrderType:self.orderType];
-
+    [core registerController:self forUpdatesForOrderType:self.orderType];
 }
 
 - (void)stopAutomaticTrading {
     if (self.orderType) {
-        [SOXAutomaticTrading_BitcoinDE_Core deRegisterController:self
-                                          forUpdatesForOrderType:self.orderType];
+        SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTradingCoreManager coreForBitcoinCurrency:self.bitcoinCurrencyType];
+        [core deRegisterController:self forUpdatesForOrderType:self.orderType];
     }
     else {
         DDLogInfo(@"ERROR - no orderType set");
@@ -202,27 +202,29 @@
 
 - (IBAction)executeTradesAction:(NSButton *)sender {
     self.executeTrades = !self.executeTrades;
-    [SOXAutomaticTrading_BitcoinDE_Core executeTrades:self.executeTrades
-                                         forOrderType:self.orderType];
+    SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTradingCoreManager coreForBitcoinCurrency:self.bitcoinCurrencyType];
+    [core executeTrades:self.executeTrades forOrderType:self.orderType];
 }
 
 - (IBAction)executeAutomaticTradesAction:(NSButton *)sender {
     self.executeAutomaticTrades = !self.executeAutomaticTrades;
 
-    if (self.executeAutomaticTrades) {}
+    SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTradingCoreManager coreForBitcoinCurrency:self.bitcoinCurrencyType];
+    if (self.executeAutomaticTrades) {
+
+    }
     else {
         self.executeBalanceTrades = NO;
-        [SOXAutomaticTrading_BitcoinDE_Core executeBalanceTrades:NO
-                                                    forOrderType:self.orderType];
+        [core executeBalanceTrades:NO forOrderType:self.orderType];
     }
-    [SOXAutomaticTrading_BitcoinDE_Core executeAutomaticTrades:self.executeAutomaticTrades
-                                                  forOrderType:self.orderType];
+    [core executeAutomaticTrades:self.executeAutomaticTrades forOrderType:self.orderType];
 }
 
 - (IBAction)executeBalanceTradesAction:(NSButton *)sender {
     self.executeBalanceTrades = !self.executeBalanceTrades;
-    [SOXAutomaticTrading_BitcoinDE_Core executeBalanceTrades:self.executeBalanceTrades
-                                                forOrderType:self.orderType];
+    
+    SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTradingCoreManager coreForBitcoinCurrency:self.bitcoinCurrencyType];
+    [core executeBalanceTrades:self.executeBalanceTrades forOrderType:self.orderType];
 }
 
 - (IBAction)startAutomaticAction:(NSButton *)sender {
@@ -248,20 +250,21 @@
 
 #pragma mark - NSControlTextEditingDelegate
 -(void)controlTextDidEndEditing:(NSNotification *)notification {
-//- (void)controlTextDidChange:(NSNotification *)notification {
     NSTextField* valueField           = notification.object;
     NSNumberFormatter* fieldFormatter = valueField.formatter;
     NSText* fieldEditor               = valueField.currentEditor;
     
     id newValue = ( fieldEditor != nil ? [fieldFormatter numberFromString:fieldEditor.string] : valueField.objectValue );
     DDLogInfo(@"newValue: %@", newValue);
+
+    SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTradingCoreManager coreForBitcoinCurrency:self.bitcoinCurrencyType];
     if (valueField == self.minInterestTextField) { // %
         switch (self.orderType) {
             case BitcoinDE_BuyOrderType:
-                [SOXAutomaticTrading_BitcoinDE_Core setBuyInterestRate:newValue];
+                [core setBuyInterestRate:newValue];
                 break;
             case BitcoinDE_SellOrderType:
-                [SOXAutomaticTrading_BitcoinDE_Core setSellInterestRate:newValue];
+                [core setSellInterestRate:newValue];
             default:
                 break;
         }
@@ -269,10 +272,10 @@
     else if (valueField == self.maxInvestmentTextField) { // €
         switch (self.orderType) {
             case BitcoinDE_BuyOrderType:
-                [SOXAutomaticTrading_BitcoinDE_Core setBuyMaximalFidorAmount:newValue];
+                [core setBuyMaximalFidorAmount:newValue];
                 break;
             case BitcoinDE_SellOrderType:
-                [SOXAutomaticTrading_BitcoinDE_Core setSellMaximalBTCAmount:newValue];
+                [core setSellMaximalBTCAmount:newValue];
             default:
                 break;
         }

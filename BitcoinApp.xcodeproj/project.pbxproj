@@ -93,6 +93,10 @@
 		D0B9A3351E895EA0008860ED /* NSAttributedString+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B9A3331E895EA0008860ED /* NSAttributedString+URL.m */; };
 		D0B9A3381E89934D008860ED /* NSTextField+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B9A3371E89934D008860ED /* NSTextField+URL.m */; };
 		D0B9A3391E89934D008860ED /* NSTextField+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B9A3371E89934D008860ED /* NSTextField+URL.m */; };
+		D0C1CF7D1F4B8952005D2C03 /* SOXAutomaticTradingCoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C1CF7C1F4B8952005D2C03 /* SOXAutomaticTradingCoreManager.m */; };
+		D0C1CF7E1F4B8952005D2C03 /* SOXAutomaticTradingCoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C1CF7C1F4B8952005D2C03 /* SOXAutomaticTradingCoreManager.m */; };
+		D0C1CF811F4B8A5B005D2C03 /* SOXMarket_DefTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C1CF801F4B8A5B005D2C03 /* SOXMarket_DefTypes.m */; };
+		D0C1CF821F4B8A5B005D2C03 /* SOXMarket_DefTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C1CF801F4B8A5B005D2C03 /* SOXMarket_DefTypes.m */; };
 		D0E5C4FF1E80801D00352985 /* SOXBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E5C4FD1E80801D00352985 /* SOXBannerViewController.m */; };
 		D0E5C5031E809C9800352985 /* SOXKeys_BitcoinDE.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E5C5021E809C9800352985 /* SOXKeys_BitcoinDE.m */; };
 		D0E5C5041E809C9800352985 /* SOXKeys_BitcoinDE.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E5C5021E809C9800352985 /* SOXKeys_BitcoinDE.m */; };
@@ -233,6 +237,10 @@
 		D0B9A3331E895EA0008860ED /* NSAttributedString+URL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+URL.m"; sourceTree = "<group>"; };
 		D0B9A3361E89934D008860ED /* NSTextField+URL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTextField+URL.h"; sourceTree = "<group>"; };
 		D0B9A3371E89934D008860ED /* NSTextField+URL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTextField+URL.m"; sourceTree = "<group>"; };
+		D0C1CF7B1F4B8952005D2C03 /* SOXAutomaticTradingCoreManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXAutomaticTradingCoreManager.h; sourceTree = "<group>"; };
+		D0C1CF7C1F4B8952005D2C03 /* SOXAutomaticTradingCoreManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXAutomaticTradingCoreManager.m; sourceTree = "<group>"; };
+		D0C1CF7F1F4B8A5B005D2C03 /* SOXMarket_DefTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXMarket_DefTypes.h; sourceTree = "<group>"; };
+		D0C1CF801F4B8A5B005D2C03 /* SOXMarket_DefTypes.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXMarket_DefTypes.m; sourceTree = "<group>"; };
 		D0E5C4FC1E80801D00352985 /* SOXBannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXBannerViewController.h; sourceTree = "<group>"; };
 		D0E5C4FD1E80801D00352985 /* SOXBannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXBannerViewController.m; sourceTree = "<group>"; };
 		D0E5C5011E809C9800352985 /* SOXKeys_BitcoinDE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXKeys_BitcoinDE.h; sourceTree = "<group>"; };
@@ -376,6 +384,8 @@
 				D0270AE31E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m */,
 				D0E5C5011E809C9800352985 /* SOXKeys_BitcoinDE.h */,
 				D0E5C5021E809C9800352985 /* SOXKeys_BitcoinDE.m */,
+				D0C1CF7F1F4B8A5B005D2C03 /* SOXMarket_DefTypes.h */,
+				D0C1CF801F4B8A5B005D2C03 /* SOXMarket_DefTypes.m */,
 				D0A33F901F42079D0042B2A7 /* SOXMarketHelper.h */,
 				D0A33F911F42079D0042B2A7 /* SOXMarketHelper.m */,
 				D08086791E9D0B6900373F09 /* Automatic Core */,
@@ -510,6 +520,8 @@
 		D08086791E9D0B6900373F09 /* Automatic Core */ = {
 			isa = PBXGroup;
 			children = (
+				D0C1CF7B1F4B8952005D2C03 /* SOXAutomaticTradingCoreManager.h */,
+				D0C1CF7C1F4B8952005D2C03 /* SOXAutomaticTradingCoreManager.m */,
 				D080867A1E9D0B7F00373F09 /* SOXAutomaticTradingCore.h */,
 				D080867B1E9D0B7F00373F09 /* SOXAutomaticTradingCore.m */,
 				D01B2CB51EF6835300A8FF4B /* SOXAutomaticTradingCore_Private.h */,
@@ -967,8 +979,10 @@
 				D08086771E9CECAC00373F09 /* SOXMarket_BitcoinDE_DefTypes.m in Sources */,
 				D02ED5AE1E814CA600AA9448 /* SOXDataConverter_BitcoinDE.m in Sources */,
 				D063E9201E74BF97006E2D17 /* MacViewController.m in Sources */,
+				D0C1CF7D1F4B8952005D2C03 /* SOXAutomaticTradingCoreManager.m in Sources */,
 				D0E5C5031E809C9800352985 /* SOXKeys_BitcoinDE.m in Sources */,
 				D08ABF121E9C270D0059825F /* SOXCreateNewOrderViewController.m in Sources */,
+				D0C1CF811F4B8A5B005D2C03 /* SOXMarket_DefTypes.m in Sources */,
 				D0AA14F31E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m in Sources */,
 				D063E91D1E74BF97006E2D17 /* main.m in Sources */,
 				D02ED5BA1E81546800AA9448 /* SOXAccountInfoData.m in Sources */,
@@ -1014,6 +1028,7 @@
 				D090304E1EB1F4FC00775E05 /* SOXPaymentOptionValueTransformer.m in Sources */,
 				D049C4521E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.m in Sources */,
 				D08086781E9CECAC00373F09 /* SOXMarket_BitcoinDE_DefTypes.m in Sources */,
+				D0C1CF7E1F4B8952005D2C03 /* SOXAutomaticTradingCoreManager.m in Sources */,
 				D049C45C1E7712E6003CBF36 /* SOXHash.m in Sources */,
 				D049C45A1E7712E6003CBF36 /* SOXConstants.m in Sources */,
 				D0B942B11E8AF1D600EF7434 /* SOXErrorMessage_BitcoinDE.m in Sources */,
@@ -1030,6 +1045,7 @@
 				D02ED5B71E8152F900AA9448 /* SOXRatesData.m in Sources */,
 				D08ABF0F1E9C03040059825F /* SOXPreferenceCenter.m in Sources */,
 				D0B3F1321E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m in Sources */,
+				D0C1CF821F4B8A5B005D2C03 /* SOXMarket_DefTypes.m in Sources */,
 				D080867D1E9D0B7F00373F09 /* SOXAutomaticTradingCore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

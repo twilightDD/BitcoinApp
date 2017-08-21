@@ -58,47 +58,53 @@
 }
 
 #pragma mark - Manual setters
-+ (void)setBuyInterestRate:(NSDecimalNumber *)buyInterestRate {
+- (void)setBuyInterestRate:(NSDecimalNumber *)buyInterestRate {
     if (buyInterestRate) {
-        SOXAutomaticTradingCore *core = [self sharedTradingCore];
-        core.buyInterestRate = buyInterestRate;
+        _buyInterestRate = buyInterestRate;
         NSDecimalNumber *buyInterestRatePercent = [buyInterestRate decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"100"]];
-        core.buyInterestFactor = [[NSDecimalNumber one] decimalNumberBySubtracting:buyInterestRatePercent];
-        NSString *note = [NSString stringWithFormat:@"UPDATE VALUE: Set interest rate to %@%%", core.buyInterestRate];
-        [core informBuyDelegateWithNote:note];
+        self.buyInterestFactor = [[NSDecimalNumber one] decimalNumberBySubtracting:buyInterestRatePercent];
+        [self updateBuyStatus];
 
-        [core updateBuyStatus];
+        { // DEBUG
+            NSString *note = [NSString stringWithFormat:@"UPDATE VALUE: Set interest rate to %@%%", self.buyInterestRate];
+            [self informBuyDelegateWithNote:note];
+        }
     }
 }
 
-+ (void)setSellInterestRate:(NSDecimalNumber *)sellInterestRate {
+- (void)setSellInterestRate:(NSDecimalNumber *)sellInterestRate {
     if (sellInterestRate) {
-        SOXAutomaticTradingCore *core = [self sharedTradingCore];
-        core.sellInterestRate = sellInterestRate;
+        _sellInterestRate = sellInterestRate;
         NSDecimalNumber *sellInterestRatePercent = [sellInterestRate decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"100"]];
-        core.sellInterestFactor = [[NSDecimalNumber one] decimalNumberByAdding:sellInterestRatePercent];
-        NSString *note = [NSString stringWithFormat:@"UPDATE VALUE: Set interest rate to %@%%", core.sellInterestRate];
-        [core informSellDelegateWithNote:note];
+        self.sellInterestFactor = [[NSDecimalNumber one] decimalNumberByAdding:sellInterestRatePercent];
+        [self updateSellStatus];
 
-        [core updateSellStatus];
+        { // DEBUG
+            NSString *note = [NSString stringWithFormat:@"UPDATE VALUE: Set interest rate to %@%%", self.sellInterestRate];
+            [self informSellDelegateWithNote:note];
+        }
     }
 }
 
-+ (void)setBuyMaximalFidorAmount:(NSDecimalNumber *)buyMaximalEuro {
+- (void)setBuyMaximalFidorAmount:(NSDecimalNumber *)buyMaximalEuro {
     if (buyMaximalEuro) {
-        SOXAutomaticTradingCore *core = [self sharedTradingCore];
-        core.buyMaximalFidorAmountInvestment = buyMaximalEuro;
-        NSString *note = [NSString stringWithFormat:@"UPDATE VALUE: Set maximal trading volume to %@ €", buyMaximalEuro];
-        [core informBuyDelegateWithNote:note];
+        self.buyMaximalFidorAmountInvestment = buyMaximalEuro;
+
+        { // DEBUG
+            NSString *note = [NSString stringWithFormat:@"UPDATE VALUE: Set maximal trading volume to %@ €", buyMaximalEuro];
+            [self informBuyDelegateWithNote:note];
+        }
     }
 }
 
-+ (void)setSellMaximalBTCAmount:(NSDecimalNumber *)sellMaximalBTC {
+- (void)setSellMaximalBTCAmount:(NSDecimalNumber *)sellMaximalBTC {
     if (sellMaximalBTC) {
-        SOXAutomaticTradingCore *core = [self sharedTradingCore];
-        core.sellMaximalBTCInvestment = sellMaximalBTC;
-        NSString *note = [NSString stringWithFormat:@"UPDATE VALUE: Set maximal trading amount to %@ BTC", sellMaximalBTC];
-        [core informSellDelegateWithNote:note];
+        self.sellMaximalBTCInvestment = sellMaximalBTC;
+
+        { // DEBUG
+            NSString *note = [NSString stringWithFormat:@"UPDATE VALUE: Set maximal trading amount to %@ BTC", sellMaximalBTC];
+            [self informSellDelegateWithNote:note];
+        }
     }
 }
 

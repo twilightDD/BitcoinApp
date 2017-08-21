@@ -7,7 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import "SOXMarket_DefTypes.h"
 @interface SOXAutomaticTradingMainViewController : NSViewController
+
+@property (nonatomic) BitcoinCurrencyType bitcoinCurrencyType;
 
 @end

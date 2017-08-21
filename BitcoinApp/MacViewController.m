@@ -12,6 +12,10 @@
 #import "SOXSocketIO_BitcoinDE_Core.h"
 
 #import "SOXOrdersViewController.h"
+#import "SOXAutomaticTradingMainViewController.h"
+
+#import "SOXKeys_BitcoinDE.h"
+#import "SOXMarket_DefTypes.h"
 
 static NSString *BannerContainerViewSegueKey          = @"BannerContainerViewSegue";
 static NSString *ShowMyOrdersContainerSegueKey        = @"ShowMyOrdersContainerSegue";
@@ -19,6 +23,9 @@ static NSString *OrdersViewControllerBuySegueKey      = @"OrdersViewControllerBu
 static NSString *OrdersViewControllerSellSegueKey     = @"OrdersViewControllerSellSegue";    // TabView.0
 static NSString *AccountLedgerViewControllerSegueKey  = @"AccountLedgerViewControllerSegue"; // TabView.1
 static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewControllerSegue";// TabView.2
+
+static NSString *BTCautomaticTradeSegueKey = @"BTCautomaticTradeSegue";// TabView.7
+static NSString *BCHautomaticTradeSegueKey = @"BCHautomaticTradeSegue";// TabView.8
 
 #pragma mark - Interface
 @interface MacViewController () <SOXCreditUpdateProtocol, SOXStatusBarUpdateProtocol>
@@ -52,7 +59,7 @@ static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewCont
     // Configure TabView
     {
         NSTabViewItem *item0 = [self.bottomTabView tabViewItemAtIndex:0];
-        item0.label = @"Buy and Sell";
+        item0.label = @"BTC/EUR";
         NSTabViewItem *item1 = [self.bottomTabView tabViewItemAtIndex:1];
         item1.label = @"My Active Orders";
         NSTabViewItem *item2 = [self.bottomTabView tabViewItemAtIndex:2];
@@ -66,7 +73,9 @@ static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewCont
         NSTabViewItem *item6 = [self.bottomTabView tabViewItemAtIndex:6];
         item6.label = @"Reporting";
         NSTabViewItem *item7 = [self.bottomTabView tabViewItemAtIndex:7];
-        item7.label = @"Rich mode";
+        item7.label = @"BTC Auto";
+        NSTabViewItem *item8 = [self.bottomTabView tabViewItemAtIndex:8];
+        item8.label = @"BCH Auto";
         // debug
         //[self.bottomTabView removeTabViewItem:item6];
         
@@ -83,7 +92,16 @@ static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewCont
         SOXOrdersViewController *viewC = segue.destinationController;
         viewC.orderType = BitcoinDE_SellOrderType;
     }
+    else if ([segue.identifier isEqualToString:BTCautomaticTradeSegueKey]) {
+        SOXAutomaticTradingMainViewController *viewC = segue.destinationController;
+        viewC.bitcoinCurrencyType = Bitcoin_BitcoinDE_BitcoinOriginal_CurrencyType;
+    }
+    else if ([segue.identifier isEqualToString:BCHautomaticTradeSegueKey]) {
+        SOXAutomaticTradingMainViewController *viewC = segue.destinationController;
+        viewC.bitcoinCurrencyType = Bitcoin_BitcoinDE_BitcoinCash_CurrencyType;
+    }
 }
+
 #pragma mark - Action methods
 - (IBAction)startRequests:(NSButton *)sender {
     [[SOXMarket_BitcoinDE_Core sharedCore] startRequests];
