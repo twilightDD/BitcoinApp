@@ -294,7 +294,10 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
     }
     else {
         // TODO: error handling
-        DDLogInfo(@"unbekannter Name: %@", packet.name);
+        DDLogInfo(@"--- START ---");
+        DDLogInfo(@"socketIO:didReceiveEvent: - unknown event name: %@", packet.name);
+        DDLogInfo(@"packetArguments:\n%@", packetArguments);
+        DDLogInfo(@"--- END ---");
     }
 }
 
