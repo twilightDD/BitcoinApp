@@ -1292,6 +1292,14 @@
         BOOL tryToAutoBuy = NO;
         if ([[self.buyOrderBook objectAtIndex:0] isEqual:addOrderData]) {
             tryToAutoBuy = [self checkForBuyableOrder];
+            if (tryToAutoBuy) {
+                { // DEBUG
+                    NSString *note = [NSString stringWithFormat:@"- removed new order from buyOrderBook (we bought it!)"];
+                    [self informBuyDelegateWithNote:note];
+                }
+                [self.buyOrderBook removeObject:addOrderData];
+                [self updateBuyStatus];
+            }
         }
 
         if (!tryToAutoBuy
@@ -1349,6 +1357,14 @@
         BOOL tryToAutoSell = NO;
         if ([[self.sellOrderBook objectAtIndex:0] isEqual:addOrderData]) {
             tryToAutoSell = [self checkForSellableOrder];
+
+            { // DEBUG
+                NSString *note = [NSString stringWithFormat:@"- removed new order from sellOrderBook (we sold it!)"];
+                [self informSellDelegateWithNote:note];
+            }
+
+            [self.sellOrderBook removeObject:addOrderData];
+            [self updateSellStatus];
         }
 
         if (!tryToAutoSell
