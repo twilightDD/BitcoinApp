@@ -201,7 +201,7 @@
     static dispatch_once_t pred;
     static NSDecimalNumberHandler *currencyNumberHandler = nil;
     dispatch_once(&pred, ^{
-        currencyNumberHandler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown
+        currencyNumberHandler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundPlain
                                                                                        scale:2
                                                                             raiseOnExactness:YES
                                                                              raiseOnOverflow:YES
@@ -234,7 +234,7 @@
     static dispatch_once_t pred;
     static NSDecimalNumberHandler *btcNumberHandler = nil;
     dispatch_once(&pred, ^{
-        btcNumberHandler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown
+        btcNumberHandler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundPlain
                                                                                   scale:8
                                                                        raiseOnExactness:YES
                                                                         raiseOnOverflow:YES
