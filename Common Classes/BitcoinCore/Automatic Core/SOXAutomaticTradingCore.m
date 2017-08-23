@@ -285,6 +285,7 @@
 
 - (NSDecimalNumber *)btcBuyAmountForOrder:(SOXShowOrderbookData *)orderToBuy {
     NSDecimalNumber *orderToBuyMinVolume = orderToBuy.orderInformation_minVolume;
+    NSDecimalNumber *orderToBuyMaxVolume = orderToBuy.orderInformation_maxVolume;
 
     // consider user given maxFidorAmount
     NSDecimalNumber *availableFidorAmount = [[SOXMarket_BitcoinDE_Core sharedCore] availableFidorAmount];
@@ -309,6 +310,14 @@
                 , [SOXFormatters currencyStringForNumber:availableFidorAmount roundingMode:NSNumberFormatterRoundDown]];
 
         btcAmountToBuy = orderToBuy.orderInformation_minAmount;
+    }
+    else if ([orderToBuyMaxVolume isEqual:availableFidorAmount]) {
+        // minVolume = availableAmount => buy minAmount
+        note = [NSString stringWithFormat:@"BUY possible: order_maxVol %@ = avaFidor %@ (buy order.maxAmount)"
+                , [SOXFormatters currencyStringForNumber:orderToBuyMaxVolume roundingMode:NSNumberFormatterRoundDown]
+                , [SOXFormatters currencyStringForNumber:availableFidorAmount roundingMode:NSNumberFormatterRoundDown]];
+
+        btcAmountToBuy = orderToBuy.orderInformation_maxAmount;
     }
     else if ([orderToBuyMinVolume isLessThan:availableFidorAmount]) {
         // minVolume < availableAmount => buy more than minAmount (figure out, how much)
@@ -338,6 +347,7 @@
     NSDecimalNumber *btcAmountToSell;
 
     NSDecimalNumber *orderMinAmountToSell = orderToSell.orderInformation_minAmount;
+    NSDecimalNumber *orderMaxAmountToSell = orderToSell.orderInformation_maxAmount;
 
     NSDecimalNumber *availableBTCAmount = [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount;
     if (self.sellMaximalBTCInvestment) {
@@ -360,6 +370,13 @@
                 , [SOXFormatters stringForBTCNumber:availableBTCAmount]];
 
         btcAmountToSell = orderToSell.orderInformation_minAmount;
+    }
+    else if ([orderMaxAmountToSell isEqualToNumber:availableBTCAmount]) {
+        note = [NSString stringWithFormat:@"SELL possible: orderMaxAmo %@ = avaBTC %@ (sell order.maxAmount)"
+                , [SOXFormatters stringForBTCNumber:orderMinAmountToSell]
+                , [SOXFormatters stringForBTCNumber:availableBTCAmount]];
+
+        btcAmountToSell = orderToSell.orderInformation_maxAmount;
     }
     else if ([orderMinAmountToSell isLessThan:availableBTCAmount]) {
         // minAmountToSell < availableBTCAmount => sell more than minAmount (figure out, how much)
