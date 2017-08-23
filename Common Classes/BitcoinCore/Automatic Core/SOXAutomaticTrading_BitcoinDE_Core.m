@@ -329,7 +329,7 @@
 
         // create buyParameters
         NSDecimalNumber *priceForBTCAmountToBuy = [btcAmountToBuy decimalNumberByMultiplyingBy:orderToBuy.orderInformation_price
-                                                                                  withBehavior:[SOXFormatters btcNumberHandler]];
+                                                                                  withBehavior:[SOXFormatters currencyNumberHandler]];
         NSDictionary *buyParameters = [SOXTradeJob_BitcoinDE_Data parameterAutomaticTradingForOrderID:orderToBuy.orderInformation_orderID
                                                                                             orderType:BitcoinDE_BuyOrderType
                                                                                         bitcoinAmount:btcAmountToBuy
