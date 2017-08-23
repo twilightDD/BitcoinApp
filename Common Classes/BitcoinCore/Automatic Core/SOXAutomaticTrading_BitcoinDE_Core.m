@@ -356,6 +356,7 @@
 
                 [self.runningAutomaticBuyTradeParameters addObject:buyParameters];
                 [self.buyOrderBook removeObject:orderToBuy];
+                [self updateBuyStatus];
                 [self.buyOrderBookInExecution addObject:orderToBuy];
 
                 [self informBuyDelegateAboutRunningQueues];
@@ -422,6 +423,7 @@
 
                 [self.runningAutomaticSellTradeParameters addObject:sellParameters];
                 [self.sellOrderBook removeObject:orderToSell];
+                [self updateSellStatus];
                 [self.sellOrderBookInExecution addObject:orderToSell];
 
                 [self informSellDelegateAboutRunningQueues];
@@ -919,7 +921,7 @@
                 [self informSellDelegateWithNote:note];
                 [self.sellSEPAOrderBook addObject:orderBookData];
             }
-            DDLogInfo(@"answer buy: %@ %@ - payOp: %@"
+            DDLogInfo(@"answer sell: %@ %@ - payOp: %@"
                   , orderBookData.orderInformation_orderID
                   , orderBookData.tradingPartnerInformation_isKYCFull ? @"YES" : @"NO"
                   , orderBookData.orderRequirements_paymentOption);
@@ -1292,14 +1294,7 @@
         BOOL tryToAutoBuy = NO;
         if ([[self.buyOrderBook objectAtIndex:0] isEqual:addOrderData]) {
             tryToAutoBuy = [self checkForBuyableOrder];
-            if (tryToAutoBuy) {
-                { // DEBUG
-                    NSString *note = [NSString stringWithFormat:@"- removed new order from buyOrderBook (we bought it!)"];
-                    [self informBuyDelegateWithNote:note];
-                }
-                [self.buyOrderBook removeObject:addOrderData];
-                [self updateBuyStatus];
-            }
+            [self updateBuyStatus];
         }
 
         if (!tryToAutoBuy
@@ -1357,13 +1352,6 @@
         BOOL tryToAutoSell = NO;
         if ([[self.sellOrderBook objectAtIndex:0] isEqual:addOrderData]) {
             tryToAutoSell = [self checkForSellableOrder];
-
-            { // DEBUG
-                NSString *note = [NSString stringWithFormat:@"- removed new order from sellOrderBook (we sold it!)"];
-                [self informSellDelegateWithNote:note];
-            }
-
-            [self.sellOrderBook removeObject:addOrderData];
             [self updateSellStatus];
         }
 
@@ -1593,7 +1581,7 @@
         || self.expectBTCChange) {
 
         { // DEBUG
-            NSString *note = [NSString stringWithFormat:@"BannerUpdated UNsuccessful! - update banner again in 1 sec"];
+            NSString *note = [NSString stringWithFormat:@"BannerUpdated UNsuccessful! - update banner again in 2 sec"];
             if (self.successfulAutomaticBuyTradeParameters.count > 0) {
                 [self informBuyDelegateWithNote:note];
             }
