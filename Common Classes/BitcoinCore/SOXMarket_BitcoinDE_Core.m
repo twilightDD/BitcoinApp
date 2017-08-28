@@ -215,9 +215,19 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
             payloadDictionary = [NSJSONSerialization JSONObjectWithData:data
                                                                 options:0
                                                                   error:&jsonError];
+            if (!payloadDictionary) {
+                NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                
+                DDLogError(@"answerDictionaryForServerCommand - payloadDictionary for %tu is nil => dataAsString:\n%@"
+                           , serverCommandType
+                           , dataString);
+                payloadDictionary = [NSDictionary dictionary];
+            }
         }
         else {
             [errorMessage appendErrorDescripton:@"Data for JSON is nil"];
+            DDLogError(@"answerDictionaryForServerCommand - data for %tu is nil"
+                       , serverCommandType);
             // TODO: return somethind with an ErrorMessage
             return nil;
         }
