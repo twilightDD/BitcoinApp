@@ -28,8 +28,9 @@
         [DDLog addLogger:[DDASLLogger sharedInstance]]; // ASL = Apple System Logs
 
         DDFileLogger *fileLogger = [[DDFileLogger alloc] init]; // File Logger
+        fileLogger.maximumFileSize = 0; // no file size limitation
         fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
-        fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
+        fileLogger.logFileManager.maximumNumberOfLogFiles = 14;
         [DDLog addLogger:fileLogger];
     }
 
