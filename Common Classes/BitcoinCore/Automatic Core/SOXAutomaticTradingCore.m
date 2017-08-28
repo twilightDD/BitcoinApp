@@ -144,12 +144,13 @@
         return NO;
     }
 
-    SOXShowOrderbookData *dataOfInterest  = [self.buyOrderBook objectAtIndex:0];
-    SOXShowOrderbookData *referenceData   = [self.buyOrderBook objectAtIndex:1];
+    SOXShowOrderbookData *dataOfInterest  = self.buyOrderBook.firstObject;
+//    SOXShowOrderbookData *referenceData   = [self.buyOrderBook objectAtIndex:1];
+    SOXShowOrderbookData *referenceData   = self.sellOrderBook.firstObject;
     NSDecimalNumber *effectivInterestRate = [self effectiveBuyInterestRateForData:dataOfInterest
                                                                   toReferenceData:referenceData];
 
-    NSString *statisticForNote = [NSString stringWithFormat:@"- type %@ - ID %@ - minAmo %@ - maxAmo %@ - p0 %@ - p1 %@ - iR %@"
+    NSString *statisticForNote = [NSString stringWithFormat:@"- type %@ - ID %@ - minAmo %@ - maxAmo %@ - buyP0 %@ - sellP0 %@ - iR %@"
                                   , dataOfInterest.orderInformation_type
                                   , dataOfInterest.orderInformation_orderID
                                   , [SOXFormatters stringForBTCNumber:dataOfInterest.orderInformation_minAmount]
@@ -218,11 +219,12 @@
         return NO;
     }
 
-    SOXShowOrderbookData *dataOfInterest  = [self.sellOrderBook objectAtIndex:0];
-    SOXShowOrderbookData *referenceData   = [self.sellOrderBook objectAtIndex:1];
+    SOXShowOrderbookData *dataOfInterest  = self.sellOrderBook.firstObject;
+//    SOXShowOrderbookData *referenceData   = [self.sellOrderBook objectAtIndex:1];
+    SOXShowOrderbookData *referenceData   = self.sellOrderBook.firstObject;
     NSDecimalNumber *effectivInterestRate = [self effectiveSellInterestRateForData:dataOfInterest toReferenceData:referenceData];
 
-    NSString *statisticForNote = [NSString stringWithFormat:@"- type %@ - ID %@ - minAmo %@ - maxAmo %@ - p0 %@ - p1 %@ - iR %@"
+    NSString *statisticForNote = [NSString stringWithFormat:@"- type %@ - ID %@ - minAmo %@ - maxAmo %@ - p0 %@ - buyP0 %@ - iR %@"
                                   , dataOfInterest.orderInformation_type
                                   , dataOfInterest.orderInformation_orderID
                                   , [SOXFormatters stringForBTCNumber:dataOfInterest.orderInformation_minAmount]

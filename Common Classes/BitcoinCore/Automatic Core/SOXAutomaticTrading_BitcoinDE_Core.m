@@ -1253,9 +1253,10 @@
         self.buyOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:self.buyOrderBook
                                                                    forOrderType:BitcoinDE_BuyOrderType];
 
-        SOXShowOrderbookData *firstBuyOrderBookData = self.buyOrderBook.firstObject;
+//        SOXShowOrderbookData *firstBuyOrderBookData = self.buyOrderBook.firstObject;
+        SOXShowOrderbookData *firstSellOrderBookData = self.sellOrderBook.firstObject;
         { // DEBUG
-            NSString *note = [NSString stringWithFormat:@"+ added buy (bOB.count: %tu)- ID: %@ - pO: %@ - type: offer - idx %tu - p: %@ - minA: %@ - maxA: %@ - p@idx0: %@ - iR %@"
+            NSString *note = [NSString stringWithFormat:@"+ added buy (bOB.count: %tu)- ID: %@ - pO: %@ - type: offer - idx %tu - p: %@ - minA: %@ - maxA: %@ - sell@idx0: %@ - iR %@"
                               , self.buyOrderBook.count
                               , addOrderDataOrderID
                               , addOrderData.orderRequirements_paymentOption
@@ -1263,10 +1264,10 @@
                               , addOrderDataPrice
                               , addOrderData.orderInformation_minAmount
                               , addOrderData.orderInformation_maxAmount
-                              , [SOXFormatters currencyStringForNumber:firstBuyOrderBookData.orderInformation_price
+                              , [SOXFormatters currencyStringForNumber:firstSellOrderBookData.orderInformation_price
                                                           roundingMode:NSNumberFormatterRoundDown]
                               , [self effectiveBuyInterestRateForData:addOrderData
-                                                      toReferenceData:firstBuyOrderBookData ]];
+                                                      toReferenceData:firstSellOrderBookData]];
             [self informBuyDelegateWithNote:note];
         }
 
@@ -1311,9 +1312,10 @@
         self.sellOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:self.sellOrderBook
                                                                     forOrderType:BitcoinDE_SellOrderType];
 
-        SOXShowOrderbookData *firstSellOrderBookData = self.sellOrderBook.firstObject;
+//        SOXShowOrderbookData *firstSellOrderBookData = self.sellOrderBook.firstObject;
+        SOXShowOrderbookData *firstBuyOrderBookData = self.buyOrderBook.firstObject;
         { // DEBUG
-            NSString *note = [NSString stringWithFormat:@"+ added sell (sOB.count: %tu)- ID: %@ - pO: %@ - type: offer - idx %tu - p: %@ - minA: %@ - maxA: %@ - p@idx0: %@ - iR %@"
+            NSString *note = [NSString stringWithFormat:@"+ added sell (sOB.count: %tu)- ID: %@ - pO: %@ - type: offer - idx %tu - p: %@ - minA: %@ - maxA: %@ - buy@idx0: %@ - iR %@"
                               , self.sellOrderBook.count
                               , addOrderDataOrderID
                               , addOrderData.orderRequirements_paymentOption
@@ -1321,10 +1323,10 @@
                               , addOrderDataPrice
                               , addOrderData.orderInformation_minAmount
                               , addOrderData.orderInformation_maxAmount
-                              , [SOXFormatters currencyStringForNumber:firstSellOrderBookData.orderInformation_price
+                              , [SOXFormatters currencyStringForNumber:firstBuyOrderBookData.orderInformation_price
                                                           roundingMode:NSNumberFormatterRoundDown]
                               , [self effectiveSellInterestRateForData:addOrderData
-                                                       toReferenceData:firstSellOrderBookData]];
+                                                       toReferenceData:firstBuyOrderBookData]];
             [self informSellDelegateWithNote:note];
         }
 
