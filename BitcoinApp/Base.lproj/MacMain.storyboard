@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13122.19"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13189.4"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
@@ -672,6 +672,9 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <connections>
+                            <outlet property="delegate" destination="B8D-0N-5wS" id="nDV-5x-lCf"/>
+                        </connections>
                     </window>
                     <connections>
                         <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
@@ -3108,10 +3111,9 @@ Gw
                                             </constraints>
                                             <datePickerCell key="cell" borderStyle="bezel" alignment="left" datePickerStyle="clockAndCalendar" id="0hB-Uj-F6T">
                                                 <font key="font" metaFont="system"/>
-                                                <calendarDate key="date" timeIntervalSinceReferenceDate="-595929600" calendarFormat="%Y-%m-%d %H:%M:%S %z">
-                                                    <!--1982-02-12 08:00:00 -0800-->
-                                                    <timeZone key="timeZone" name="US/Pacific"/>
-                                                </calendarDate>
+                                                <date key="date" timeIntervalSinceReferenceDate="-595929600">
+                                                    <!--1982-02-12 16:00:00 +0000-->
+                                                </date>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <datePickerElements key="datePickerElements" year="YES" month="YES" day="YES" hour="YES" minute="YES"/>
@@ -4572,7 +4574,7 @@ Gw
         <image name="NSRefreshTemplate" width="11" height="15"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZEn-rF-4RA"/>
         <segue reference="z6P-Xb-vu3"/>
+        <segue reference="ZEn-rF-4RA"/>
     </inferredMetricsTieBreakers>
 </document>
