@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13189.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
@@ -938,6 +938,7 @@
                             <constraint firstAttribute="trailing" secondItem="ljh-CW-puG" secondAttribute="trailing" constant="20" id="ZrP-wd-2ba"/>
                             <constraint firstAttribute="trailing" secondItem="6TX-DJ-6MW" secondAttribute="trailing" constant="20" id="fIv-oS-Ift"/>
                             <constraint firstItem="CSm-MP-mkG" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="nfg-cA-a2k"/>
+                            <constraint firstItem="6TX-DJ-6MW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="pzu-nN-vgX"/>
                             <constraint firstAttribute="trailing" secondItem="CSm-MP-mkG" secondAttribute="trailing" constant="20" id="reb-tP-K6x"/>
                             <constraint firstItem="ljh-CW-puG" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="uEz-3t-LXb"/>
                             <constraint firstItem="B9m-IQ-OSo" firstAttribute="top" secondItem="CSm-MP-mkG" secondAttribute="bottom" constant="16" id="yWP-zG-RBt"/>
@@ -1704,7 +1705,7 @@
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PVj-VZ-YfL">
                                 <rect key="frame" x="713" y="19" width="22" height="23"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="22" id="cwZ-uS-0D9"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="22" id="cwZ-uS-0D9"/>
                                     <constraint firstAttribute="height" constant="21" id="iaz-Ch-ENY"/>
                                 </constraints>
                                 <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRefreshTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="o4X-kK-Nvj">
@@ -2006,8 +2007,24 @@
                                     <binding destination="t8U-TY-Pcr" name="enabled" keyPath="selectedObjects.@count" id="J3r-4M-cN3"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RDI-CU-Zjp">
+                                <rect key="frame" x="436" y="67" width="89" height="32"/>
+                                <buttonCell key="cell" type="push" title="Change" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mbq-zU-5iW">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="changeButtonAction:" target="q7D-iu-Op3" id="qKa-Fc-Py3"/>
+                                    <binding destination="t8U-TY-Pcr" name="enabled" keyPath="selectedObjects.@count" id="4ZH-Ph-O4A">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">SOXSingleSelectionValueTransformer</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="hfD-y1-lfC" firstAttribute="leading" secondItem="RDI-CU-Zjp" secondAttribute="leading" id="35k-zQ-Jm6"/>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="leading" secondItem="dVf-cd-9K7" secondAttribute="trailing" constant="16" id="44W-Pd-PcN"/>
                             <constraint firstAttribute="trailing" secondItem="wNc-yI-m0l" secondAttribute="trailing" constant="23" id="6dy-yd-Mzi"/>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="trailing" secondItem="hfD-y1-lfC" secondAttribute="trailing" id="AXt-l0-V1r"/>
@@ -2017,14 +2034,17 @@
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="top" secondItem="hfD-y1-lfC" secondAttribute="bottom" constant="12" symbolic="YES" id="RYQ-fU-VC7"/>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="leading" secondItem="hfD-y1-lfC" secondAttribute="leading" id="RZ3-tW-jPJ"/>
                             <constraint firstItem="djv-Fe-LAU" firstAttribute="top" secondItem="dVf-cd-9K7" secondAttribute="top" constant="23" id="Xdn-oB-fft"/>
+                            <constraint firstItem="hfD-y1-lfC" firstAttribute="top" secondItem="RDI-CU-Zjp" secondAttribute="bottom" constant="12" id="afa-6T-ssN"/>
                             <constraint firstItem="djv-Fe-LAU" firstAttribute="bottom" secondItem="dVf-cd-9K7" secondAttribute="bottom" id="aun-FS-fVB"/>
                             <constraint firstItem="djv-Fe-LAU" firstAttribute="trailing" secondItem="dVf-cd-9K7" secondAttribute="trailing" id="h6r-Rf-XbF"/>
                             <constraint firstAttribute="bottom" secondItem="wNc-yI-m0l" secondAttribute="bottom" constant="8" id="njI-bu-QXY"/>
                             <constraint firstAttribute="bottom" secondItem="dVf-cd-9K7" secondAttribute="bottom" constant="8" id="o9W-WE-DLd"/>
+                            <constraint firstItem="hfD-y1-lfC" firstAttribute="trailing" secondItem="RDI-CU-Zjp" secondAttribute="trailing" id="qIe-wv-b4b"/>
                             <constraint firstItem="djv-Fe-LAU" firstAttribute="leading" secondItem="dVf-cd-9K7" secondAttribute="leading" id="zkW-pa-GiK"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="changeButton" destination="RDI-CU-Zjp" id="4OS-hO-5YI"/>
                         <outlet property="circularProgressIndicator" destination="sQ4-6W-phR" id="zPb-8v-Wc2"/>
                         <outlet property="myOrderArrayController" destination="t8U-TY-Pcr" id="eUx-bd-GSy"/>
                         <outlet property="reloadButton" destination="wNc-yI-m0l" id="dzN-3N-kBl"/>
@@ -4471,12 +4491,14 @@ Gw
                                     <constraint firstItem="vmD-DK-nO2" firstAttribute="baseline" secondItem="4sC-Co-fvX" secondAttribute="baseline" id="gUN-OW-KWu"/>
                                     <constraint firstItem="9Xe-Tk-Z3f" firstAttribute="leading" secondItem="WgR-KD-pyB" secondAttribute="leading" constant="20" id="iKL-MH-uPy"/>
                                     <constraint firstItem="4sC-Co-fvX" firstAttribute="trailing" secondItem="Jr3-wH-a3M" secondAttribute="trailing" id="lvE-re-mdV"/>
+                                    <constraint firstItem="fe2-pf-czM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WgR-KD-pyB" secondAttribute="leading" constant="20" symbolic="YES" id="mRY-eg-m7P"/>
                                     <constraint firstItem="Keq-IK-Ka9" firstAttribute="trailing" secondItem="NLc-ce-lrH" secondAttribute="trailing" id="mYT-fx-Kkt"/>
                                     <constraint firstItem="vmD-DK-nO2" firstAttribute="leading" secondItem="8d9-sH-1hz" secondAttribute="leading" id="npf-YS-m5K"/>
                                     <constraint firstItem="4sC-Co-fvX" firstAttribute="top" secondItem="Jr3-wH-a3M" secondAttribute="bottom" constant="8" id="qEN-Rw-Az1"/>
                                     <constraint firstItem="8d9-sH-1hz" firstAttribute="baseline" secondItem="Jr3-wH-a3M" secondAttribute="baseline" id="vKI-YB-AtA"/>
                                     <constraint firstAttribute="trailing" secondItem="3fd-l3-d7n" secondAttribute="trailing" constant="20" id="xse-ev-OAV"/>
                                     <constraint firstItem="Jr3-wH-a3M" firstAttribute="leading" secondItem="8d9-sH-1hz" secondAttribute="trailing" constant="8" symbolic="YES" id="y1k-rb-PcG"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9Xe-Tk-Z3f" secondAttribute="trailing" constant="20" symbolic="YES" id="yxL-b7-VEq"/>
                                 </constraints>
                             </customView>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="iO2-U9-jE2">

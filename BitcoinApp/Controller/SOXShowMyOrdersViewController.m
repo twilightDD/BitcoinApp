@@ -10,10 +10,12 @@
 #import "SOXAbstractViewController_Private.h"
 
 #import "SOXMyOrderDetailsViewController.h"
+#import "SOXCreateNewOrderViewController.h"
 
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXMyOrderBook_BitcoinDE_Data.h"
 #import "SOXTradeJob_BitcoinDE_Data.h"
+#import "SOXMarket_BitcoinDE_DefTypes.h"
 
 #import "SOXFormatters.h"
 
@@ -21,11 +23,12 @@ NSString *const PresentMyTradesSegueKey = @"PresentMyTradesSegue";
 NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 
 #pragma mark - Interface
-@interface SOXShowMyOrdersViewController () <SOXMarketCoreServerRequestProtocol, NSTableViewDelegate>
+@interface SOXShowMyOrdersViewController () <SOXChangeOrderProtocol, SOXMarketCoreServerRequestProtocol, NSTableViewDelegate>
 
 #pragma mark IBOutlets
 @property (weak) IBOutlet NSTableView *tableView;
 
+@property (weak) IBOutlet NSButton *changeButton;
 @property (weak) IBOutlet NSButton *reloadButton;
 @property (weak) IBOutlet NSButton *removeButton;
 
@@ -56,8 +59,9 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 #pragma mark - Private methods
 - (void)setupUI {    
     {
-        self.reloadButton.title = @"Reload";
+        self.changeButton.title = @"Change order";
         self.removeButton.title = @"Remove order";
+        self.reloadButton.title = @"Reload";
     }
     
     {
@@ -69,6 +73,24 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowMyOrdersCommandType
                                             withParameter:nil
                                                 respondTo:self];
+}
+
+- (void)removeOrderBookDatas:(NSArray <SOXMyOrderBook_BitcoinDE_Data *> *)ordersToRemove {
+    if (ordersToRemove.count == 1) {
+        self.changeButton.enabled = NO;
+        self.removeButton.enabled = NO;
+        [self enableSpinningWheel];
+
+        self.countOfMyOrderBook_BitcoinDE_DatasToDelete = ordersToRemove.count;
+
+        // get parameterDictionaries for data to delete
+        NSArray *myOrderBookParametersToDelete = [SOXMyOrderBook_BitcoinDE_Data parametersForDeletingMyOrderBookDatas:ordersToRemove];
+        for (NSDictionary *myOrderBookParameter in myOrderBookParametersToDelete) {
+            [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_RemoveOrderType
+                                                    withParameter:myOrderBookParameter
+                                                        respondTo:self];
+        }
+    }
 }
 
 #pragma mark - Table view methods
@@ -100,18 +122,20 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
         if (errors.count == 0) {
             self.countOfDeletedMyOrderBook_BitcoinDE_Datas++;
             if (self.countOfMyOrderBook_BitcoinDE_DatasToDelete == self.countOfDeletedMyOrderBook_BitcoinDE_Datas) {
-                
+
                 // Start tableView update
                 [self requestServerData];
-                
                 // inform user
                 [self informUserAboutDeletion:self.countOfDeletedMyOrderBook_BitcoinDE_Datas];
+
+
                 // reset counters
                 self.countOfMyOrderBook_BitcoinDE_DatasToDelete = 0;
                 self.countOfDeletedMyOrderBook_BitcoinDE_Datas  = 0;
+
+                [[SOXMarket_BitcoinDE_Core sharedCore] startBannerUpdate];
             }
         }
-        
     }
 }
 
@@ -125,16 +149,36 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 }
 
 #pragma mark - Action methods
+
+- (IBAction)changeButtonAction:(NSButton *)sender {
+    NSArray <SOXMyOrderBook_BitcoinDE_Data *> *selectedDatas = self.myOrderArrayController.selectedObjects;
+
+    if (selectedDatas.count == 1) {
+        SOXMyOrderBook_BitcoinDE_Data *orderBookDataToReplace = selectedDatas.firstObject;
+
+        BitcoinDE_OrderType orderType = [SOXMarket_BitcoinDE_DefTypes orderTypeForOrderTypeString:orderBookDataToReplace.orderInformation_type];
+        
+        NSStoryboard *storyBoard = [NSStoryboard storyboardWithName:@"MacMain" bundle:nil];
+        SOXCreateNewOrderViewController *viewC = [storyBoard instantiateControllerWithIdentifier:@"CreateNewOrderIdentifier"];
+        viewC.orderType = orderType;
+        viewC.orderBookDataToReplace = orderBookDataToReplace;
+        viewC.delegate = self;
+
+        [self presentViewControllerAsSheet:viewC];
+    }
+}
+
 - (IBAction)removeButtonAction:(NSButton *)sender {
     NSArray <SOXMyOrderBook_BitcoinDE_Data *> *selectedDatas = self.myOrderArrayController.selectedObjects;
-    // get parameterDictionaries for data to delete
-    NSArray *myOrderBookParametersToDelete = [SOXMyOrderBook_BitcoinDE_Data parametersForDeletingMyOrderBookDatas:selectedDatas];
-    //
-    self.countOfMyOrderBook_BitcoinDE_DatasToDelete = myOrderBookParametersToDelete.count;
-    if (self.countOfMyOrderBook_BitcoinDE_DatasToDelete > 0) {
+    if (selectedDatas.count > 0) {
+        self.changeButton.enabled = NO;
         self.removeButton.enabled = NO;
         [self enableSpinningWheel];
-    
+
+        self.countOfMyOrderBook_BitcoinDE_DatasToDelete = selectedDatas.count;
+
+        // get parameterDictionaries for data to delete
+        NSArray *myOrderBookParametersToDelete = [SOXMyOrderBook_BitcoinDE_Data parametersForDeletingMyOrderBookDatas:selectedDatas];
         for (NSDictionary *myOrderBookParameter in myOrderBookParametersToDelete) {
             [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_RemoveOrderType
                                                     withParameter:myOrderBookParameter
@@ -148,5 +192,10 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
     [self requestServerData];
 }
 
+#pragma mark - SOXChangeOrderProtocol
+- (void)orderWasChanged:(NSString *)oldOrderID newOrderID:(NSString *)newOrderID {
+    [self requestServerData];
+    [[SOXMarket_BitcoinDE_Core sharedCore] startBannerUpdate];
+}
 
 @end

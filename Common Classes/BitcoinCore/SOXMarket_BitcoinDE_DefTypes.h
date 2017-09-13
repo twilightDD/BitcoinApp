@@ -60,4 +60,5 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_UpdateType) {
 + (BitcoinDE_OrderType)orderTypeForOrderTypeString:(NSString *)orderTypeString;
 + (NSString *)paymentOptionStringForPaymentOption:(BitcoinDE_PaymentOption)paymentOption;
 + (NSString *)trustLevelStringForTrustLevel:(BitcoinDE_TrustLevel)trustLevel;
++ (BitcoinDE_TrustLevel)trustLevelForTrustLevelString:(NSString *)trustLevelString;
 @end

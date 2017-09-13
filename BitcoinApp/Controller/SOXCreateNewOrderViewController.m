@@ -84,13 +84,26 @@
     }
     
     self.trustLevel = [SOXPreferenceCenter defaultTrustLevelNewOrder];
+
+    // In den OrderBookDatas stehen die Sachen leider nicht drin ...
+//    self.onlyKYCButton.state = self.formerOrderBookData ?
+//        self.formerOrderBookData.orderRequirements_onlyKYCFull :
+//        YES;
+//    self.reNewOrderButton.state = self.formerOrderBookData ?
+//        self.formerOrderBookData.orderInformation_newOrderForRemainingAmount :
+//        YES;
+
     self.validInput = NO;
     [self setupUI];
     
     // Default values (for bindings)
     {
-        self.amount = [NSDecimalNumber decimalNumberWithString:@"0.05"];
-        self.minAmount = [NSDecimalNumber decimalNumberWithString:@"0.05"];
+        self.amount = self.orderBookDataToReplace ?
+            [NSDecimalNumber decimalNumberWithDecimal:self.orderBookDataToReplace.orderInformation_maxAmount.decimalValue] :
+            [NSDecimalNumber decimalNumberWithString:@"0.05"];
+        self.minAmount = self.orderBookDataToReplace ?
+            [NSDecimalNumber decimalNumberWithDecimal:self.orderBookDataToReplace.orderInformation_minAmount.decimalValue] :
+            [NSDecimalNumber decimalNumberWithString:@"0.05"];
         self.minimalPossibleAmount = [NSDecimalNumber decimalNumberWithString:@"0.05"];
         
         self.minimalPossiblePrice = [[SOXMarket_BitcoinDE_Core sharedCore] rate_weighted_half];
@@ -106,19 +119,23 @@
                                                 [SOXFormatters currencyStringForNumber:self.minimalPossiblePrice
                                                                           roundingMode:NSNumberFormatterRoundUp]];
         }
-        
-        /* Bedingungen:
-         #1 Please correct the purchase price per bitcoin.
-            The price shall not be less than 50% of the current market rate.
-         #2 The value of the amount of bitcoin may not be lower than than €60.00
-         */
-        if (self.orderType == BitcoinDE_BuyOrderType){
-            self.price = [[SOXMarket_BitcoinDE_Core sharedCore] rate_weighted_half];
-        }
-        else if (self.orderType == BitcoinDE_SellOrderType) {
-            self.price = [[SOXMarket_BitcoinDE_Core sharedCore] rate_weighted];
-        }
 
+        if (!self.orderBookDataToReplace) {
+            /* Bedingungen:
+             #1 Please correct the purchase price per bitcoin.
+             The price shall not be less than 50% of the current market rate.
+             #2 The value of the amount of bitcoin may not be lower than than €60.00
+             */
+            if (self.orderType == BitcoinDE_BuyOrderType){
+                self.price = [[SOXMarket_BitcoinDE_Core sharedCore] rate_weighted_half];
+            }
+            else if (self.orderType == BitcoinDE_SellOrderType) {
+                self.price = [[SOXMarket_BitcoinDE_Core sharedCore] rate_weighted];
+            }
+        }
+        else {
+            self.price = [NSDecimalNumber decimalNumberWithDecimal:self.orderBookDataToReplace.orderInformation_price.decimalValue];
+        }
         [self validateInputs];
     }
 }
@@ -233,22 +250,31 @@
 #pragma mark - Action methods
 - (IBAction)createOrderAction:(NSButton *)sender {
     if (self.isInputValid) {
-        NSDictionary *parameters = [SOXMyOrderBook_BitcoinDE_Data parameterForNewOrderWithOrderType:self.orderType
-                                                                                         max_amount:@(self.amountTextField.doubleValue)
-                                                                                         min_amount:@(self.minAmountTextField.doubleValue)
-                                                                                              price:@(self.priceTextField.doubleValue)
-                                                                                       end_datetime:self.endDatePicker.dateValue
-                                                                     new_order_for_remaining_amount:self.reNewOrderButton.state
-                                                                                    min_trust_level:self.trustLevel
-                                                                                      only_kyc_full:self.reNewOrderButton.state
-                                                                                     payment_option:[SOXPreferenceCenter defaultPaymentOptionForCreateOrder]
-                                                                                       seat_of_bank:[SOXPreferenceCenter defaultTradingCountries]];
-        
-        DDLogInfo(@"Parameters:\n%@", parameters);
-        
-        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_CreateOrderType
-                                                withParameter:parameters
-                                                    respondTo:self];
+        if (self.orderBookDataToReplace) {
+            NSDictionary *myOrderBookParameter = [SOXMyOrderBook_BitcoinDE_Data parameterForDeletingOrderWithOrderID:self.orderBookDataToReplace.orderInformation_orderID];
+            [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_RemoveOrderType
+                                                    withParameter:myOrderBookParameter
+                                                        respondTo:self];
+        }
+        else {
+
+            NSDictionary *parameters = [SOXMyOrderBook_BitcoinDE_Data parameterForNewOrderWithOrderType:self.orderType
+                                                                                             max_amount:@(self.amountTextField.doubleValue)
+                                                                                             min_amount:@(self.minAmountTextField.doubleValue)
+                                                                                                  price:@(self.priceTextField.doubleValue)
+                                                                                           end_datetime:self.endDatePicker.dateValue
+                                                                         new_order_for_remaining_amount:self.reNewOrderButton.state
+                                                                                        min_trust_level:self.trustLevel
+                                                                                          only_kyc_full:self.reNewOrderButton.state
+                                                                                         payment_option:[SOXPreferenceCenter defaultPaymentOptionForCreateOrder]
+                                                                                           seat_of_bank:[SOXPreferenceCenter defaultTradingCountries]];
+
+            DDLogInfo(@"Parameters:\n%@", parameters);
+
+            [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_CreateOrderType
+                                                    withParameter:parameters
+                                                        respondTo:self];
+        }
     }
     else {
         // inform user
@@ -273,6 +299,7 @@
 -(void)answerOfServerRequest:(NSDictionary *)answerOfServerRequest {
     // on Error: do nothing (error message will be displayed by bitcoinCore)
     if ([answerOfServerRequest objectForKey:ServerAnswerErrorKey]) {
+        self.orderBookDataToReplace = nil; // in case our order was sold/bought
         return;
     }
     
@@ -294,14 +321,23 @@
                 informativeText = @"There is no orderID";
                 alertStyle      = NSAlertStyleWarning;
             }
-            
-            NSAlert *alert = [[NSAlert alloc] init];
-            alert.messageText     = messageText;
-            alert.informativeText = informativeText;
-            alert.alertStyle      = alertStyle;
-            [alert runModal];
+
+            if (self.delegate) {
+                [self.delegate orderWasChanged:nil newOrderID:newOrderID];
+            }
+            else {
+                NSAlert *alert = [[NSAlert alloc] init];
+                alert.messageText     = messageText;
+                alert.informativeText = informativeText;
+                alert.alertStyle      = alertStyle;
+                [alert runModal];
+            }
             [self dismissViewController:self];
         }
+    }
+    else if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_RemoveOrderType)]) {
+        self.orderBookDataToReplace = nil;
+        [self createOrderAction:nil];
     }
 }
 

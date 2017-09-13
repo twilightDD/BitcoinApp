@@ -9,9 +9,21 @@
 #import <Cocoa/Cocoa.h>
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
+@class SOXMyOrderBook_BitcoinDE_Data;
+
+@protocol SOXChangeOrderProtocol
+
+- (void)orderWasChanged:(NSString *)oldOrderID newOrderID:(NSString *)newOrderID;
+
+@end
+
+
 @interface SOXCreateNewOrderViewController : NSViewController
+
+@property (weak, nonatomic) id <SOXChangeOrderProtocol> delegate;
 
 // TODO: doublette of type OrdersType (@see SOXOrdersViewController)
 @property (nonatomic) BitcoinDE_OrderType orderType;
+@property (weak, nonatomic) SOXMyOrderBook_BitcoinDE_Data *orderBookDataToReplace;
 
 @end
