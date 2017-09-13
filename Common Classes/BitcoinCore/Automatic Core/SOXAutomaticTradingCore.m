@@ -798,6 +798,14 @@
     [SOXAutomaticTradingCore missedImplementation:@"- (void)tryToSell:(SOXShowOrderbookData *)orderToSell btcAmountToSell:(NSDecimalNumber *)btcAmountToSell"];
 }
 
+- (void)updateBannerAfterSuccessfulAutomaticBuyTrade {
+    [SOXAutomaticTradingCore missedImplementation:@"- (void)updateBannerAfterSuccessfulAutomaticBuyTrade"];
+}
+
+- (void)updateBannerAfterSuccessfulBalanceTrades {
+    [SOXAutomaticTradingCore missedImplementation:@"- (void)updateBannerAfterSuccessfulBalanceTrades"];
+}
+
 #pragma mark - Handle (un)successful trade responses
 #pragma mark | Auto trade responses
 - (void)successfulAutomaticBuyTrade:(NSDictionary *)tradeParameters {

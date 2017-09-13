@@ -78,7 +78,7 @@ FOUNDATION_EXPORT NSString *const _Nonnull HTTPMethodPOSTKey;
 
 #pragma mark | Status handling
 + (void)registerForCreditUpdates:(id <SOXCreditUpdateProtocol> _Nullable) delegateForCreditUpdates;
-+ (void)registerForStatusBarUpdates:(id <SOXCreditUpdateProtocol> _Nullable) delegateForStatusBarUpdates;
++ (void)registerForStatusBarUpdates:(id <SOXStatusBarUpdateProtocol> _Nullable) delegateForStatusBarUpdates;
 
 #pragma mark | Error handling
 + (void)registerForErrorMessages:(id <SOXMarketCoreErrorProtocol> _Nullable)delegateForErrorMessages;

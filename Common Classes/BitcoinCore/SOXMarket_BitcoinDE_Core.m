@@ -54,7 +54,7 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 //@property (weak, nonatomic) id delegateForRequests;
 @property (weak, nonatomic) id <SOXBannerDataProtocol> delegateForBannerUpdates;
 @property (weak, nonatomic, readwrite) NSObject <SOXMarketCoreErrorProtocol> *delegateForErrorMessages;
-@property (weak, nonatomic) NSObject <SOXStatusBarUpdateProtocol> *delegateForStatusBarUpdates;
+@property (weak, nonatomic) NSObject <SOXStatusBarUpdateProtocol>  *_Nullable delegateForStatusBarUpdates;
 
 #pragma mark | Network Queue handling
 @property (strong, nonatomic) NSMutableArray <NSDictionary *> *defaultNetworkQueue;
@@ -187,7 +187,7 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
     [SOXMarket_BitcoinDE_Core sharedCore].delegateForCreditUpdates = delegateForCreditUpdates;
 }
 
-+ (void)registerForStatusBarUpdates:(id <SOXCreditUpdateProtocol> _Nullable) delegateForStatusBarUpdates {
++ (void)registerForStatusBarUpdates:(id <SOXStatusBarUpdateProtocol> _Nullable) delegateForStatusBarUpdates {
     [SOXMarket_BitcoinDE_Core sharedCore].delegateForStatusBarUpdates = delegateForStatusBarUpdates;
 }
 
