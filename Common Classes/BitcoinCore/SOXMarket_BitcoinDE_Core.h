@@ -63,7 +63,7 @@ FOUNDATION_EXPORT NSString *const _Nonnull HTTPMethodPOSTKey;
 
 @property (weak, nonatomic, readonly) NSObject <SOXMarketCoreErrorProtocol> * _Nullable delegateForErrorMessages;
 
-- (void)startRequests;
+- (void)startBannerUpdate;
 
 /**
  *  Singleton.

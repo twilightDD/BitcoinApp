@@ -245,14 +245,14 @@
 }
 
 - (void)startRatesReloadTimer {
-    DDLogInfo(@"***** NEW RATE: %@", [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted);
-    
-    NSTimer *ratesReloadTimer  = [NSTimer scheduledTimerWithTimeInterval:600
-                                                                     target:self
-                                                                   selector:@selector(requestServerData)
-                                                                   userInfo:nil
-                                                                    repeats:NO];
-    [[NSRunLoop mainRunLoop] addTimer:ratesReloadTimer forMode:NSDefaultRunLoopMode];
+//    DDLogInfo(@"***** NEW RATE: %@", [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted);
+//    
+//    NSTimer *ratesReloadTimer  = [NSTimer scheduledTimerWithTimeInterval:600
+//                                                                     target:self
+//                                                                   selector:@selector(requestServerData)
+//                                                                   userInfo:nil
+//                                                                    repeats:NO];
+//    [[NSRunLoop mainRunLoop] addTimer:ratesReloadTimer forMode:NSDefaultRunLoopMode];
 }
 
 

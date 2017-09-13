@@ -919,7 +919,7 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 
 
 #pragma mark - Private Instance Methods
-- (void)startRequests {
+- (void)startBannerUpdate {
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountInfoCommandType
                                             withParameter:nil
                                                 respondTo:nil];

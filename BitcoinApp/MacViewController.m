@@ -38,7 +38,7 @@ static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewCont
     [super viewDidLoad];
 
     [self setupUI];
-    [[SOXMarket_BitcoinDE_Core sharedCore] startRequests];
+    [[SOXMarket_BitcoinDE_Core sharedCore] startBannerUpdate];
     
 }
 
@@ -86,7 +86,7 @@ static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewCont
 }
 #pragma mark - Action methods
 - (IBAction)startRequests:(NSButton *)sender {
-    [[SOXMarket_BitcoinDE_Core sharedCore] startRequests];
+    [[SOXMarket_BitcoinDE_Core sharedCore] startBannerUpdate];
 }
 
 #pragma mark - SOXCreditUpdateProtocol
