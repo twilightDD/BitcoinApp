@@ -2700,7 +2700,7 @@ Gw
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" headerView="UdI-6x-40i" id="ukh-mk-8h8">
-                                            <rect key="frame" x="0.0" y="0.0" width="997" height="236"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1124" height="236"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2722,7 +2722,23 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.positionDetails_Date" id="PbE-yU-s9t"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="40" minWidth="40" maxWidth="1000" id="1zU-O8-OQu">
+                                                <tableColumn identifier="" width="80" minWidth="80" maxWidth="3.4028234663852886e+38" id="cXe-Ul-YnM">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="orderID">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="EYq-WT-2gV">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.tradeDetails_Trade_id" id="fP0-wO-mcf"/>
+                                                    </connections>
+                                                </tableColumn>
+                                                <tableColumn editable="NO" width="80" minWidth="80" maxWidth="1000" id="1zU-O8-OQu">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="type">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2745,7 +2761,7 @@ Gw
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="GPr-AB-fhu">
-                                                        <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="8" currencyCode="BTC" currencySymbol="BTC" internationalCurrencySymbol="BTC" id="IgC-77-s3S"/>
+                                                        <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="iry-AJ-eEQ" userLabel="SOXBitcoinFormatter" customClass="SOXBitcoinFormatter"/>
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2762,7 +2778,7 @@ Gw
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="ZNW-NU-Mr0">
-                                                        <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="8" currencyCode="BTC" currencySymbol="BTC" internationalCurrencySymbol="BTC" id="dhq-mM-La6"/>
+                                                        <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="PeP-wf-yKd" userLabel="SOXBitcoinFormatter" customClass="SOXBitcoinFormatter"/>
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2796,7 +2812,7 @@ Gw
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="WnT-kl-MAK">
-                                                        <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="nVy-c8-JYI" userLabel="SOXBitcoinFormatter" customClass="SOXBitcoinFormatter"/>
+                                                        <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="eNR-mv-1Gd" userLabel="SOXBitcoinFormatter" customClass="SOXBitcoinFormatter"/>
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2813,7 +2829,7 @@ Gw
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="hlE-9o-gdV">
-                                                        <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="f00-wl-zgb" userLabel="SOXBitcoinFormatter" customClass="SOXBitcoinFormatter"/>
+                                                        <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="PRT-Og-4ad" userLabel="SOXBitcoinFormatter" customClass="SOXBitcoinFormatter"/>
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2857,6 +2873,19 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.tradeDetails_Euro_after_fee" id="3ij-ul-cbK"/>
                                                     </connections>
                                                 </tableColumn>
+                                                <tableColumn width="1" minWidth="1" maxWidth="1" id="OzP-ju-tIh" userLabel="Empty column">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="1YC-TY-7B0">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                </tableColumn>
                                             </tableColumns>
                                         </tableView>
                                     </subviews>
@@ -2874,7 +2903,7 @@ Gw
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="UdI-6x-40i">
-                                    <rect key="frame" x="0.0" y="0.0" width="997" height="23"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1124" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
