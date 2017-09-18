@@ -113,12 +113,44 @@
 #pragma mark - Interest Rate methods
 - (NSDecimalNumber *)effectiveBuyInterestRateForData:(SOXShowOrderbookData *)orderOfInterestData
                                      toReferenceData:(SOXShowOrderbookData *)referenceData {
+    NSDecimalNumber *priceOfInterest = orderOfInterestData.orderInformation_price;
+    NSDecimalNumber *referencePrice = referenceData.orderInformation_price;
+
+    if (!priceOfInterest
+        || !referencePrice
+        || priceOfInterest == [NSDecimalNumber zero]
+        || referencePrice == [NSDecimalNumber zero]) {
+        NSString *note = [NSString stringWithFormat:@"ERROR - priceOfInterest %@ (orderID: %@) - referencePrice %@ (orderID: %@)"
+                          , priceOfInterest
+                          , orderOfInterestData.orderInformation_orderID
+                          , referencePrice
+                          , referenceData.orderInformation_orderID];
+        [self informBuyDelegateWithNote:note];
+        return [NSDecimalNumber zero];
+    }
+
     return [self effectiveBuyInterestRateForPrice:orderOfInterestData.orderInformation_price
                                  toReferencePrice:referenceData.orderInformation_price];
 }
 
 - (NSDecimalNumber *)effectiveSellInterestRateForData:(SOXShowOrderbookData *)orderOfInterestData
                                       toReferenceData:(SOXShowOrderbookData *)referenceData {
+    NSDecimalNumber *priceOfInterest = orderOfInterestData.orderInformation_price;
+    NSDecimalNumber *referencePrice = referenceData.orderInformation_price;
+
+    if (!priceOfInterest
+        || !referencePrice
+        || priceOfInterest == [NSDecimalNumber zero]
+        || referencePrice == [NSDecimalNumber zero]) {
+        NSString *note = [NSString stringWithFormat:@"ERROR - priceOfInterest %@ (orderID: %@) - referencePrice %@ (orderID: %@)"
+                          , priceOfInterest
+                          , orderOfInterestData.orderInformation_orderID
+                          , referencePrice
+                          , referenceData.orderInformation_orderID];
+        [self informSellDelegateWithNote:note];
+        return [NSDecimalNumber zero];
+    }
+
     return [self effectiveSellInterestRateForPrice:orderOfInterestData.orderInformation_price
                                   toReferencePrice:referenceData.orderInformation_price];
 }
