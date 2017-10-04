@@ -8,6 +8,9 @@
 
 #import "SOXMarket_BitcoinDE_Core.h"
 
+#import "MacAppDelegate.h"
+#import "SOXErrorWindowController.h"
+
 #import "SOXKeys_BitcoinDE.h"
 #import "SOXHash.h"
 #import "SOXFormatters.h"
@@ -164,16 +167,13 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
                                                                             }
                                                                         }
                                                                     }
+
                                                                     if (errorMessage.hasError) {
-                                                                        // Error handling
-                                                                        NSObject *delegateForErrorMessages = [SOXMarket_BitcoinDE_Core sharedCore].delegateForErrorMessages;
-                                                                        if (errorMessage.hasError
-                                                                            && [delegateForErrorMessages respondsToSelector:@selector(presentErrorMessage:)]) {
-                                                                            // NSURLSessionTask has its own thread
-                                                                            [delegateForErrorMessages performSelectorOnMainThread:@selector(presentErrorMessage:)
-                                                                                                                       withObject:errorMessage
-                                                                                                                    waitUntilDone:NO];
-                                                                        }
+                                                                        MacAppDelegate* appDelegate = (MacAppDelegate*)[[NSApplication sharedApplication] delegate];
+                                                                        SOXErrorWindowController *errorWindowController = appDelegate.errorWindowController;
+                                                                        [errorWindowController performSelectorOnMainThread:@selector(showErrorMessage:)
+                                                                                                                withObject:errorMessage
+                                                                                                             waitUntilDone:NO];
                                                                     }
                                                                 }];
 

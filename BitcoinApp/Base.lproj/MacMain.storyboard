@@ -637,6 +637,13 @@
                                                 <action selector="arrangeInFront:" target="Ady-hI-5gd" id="DRN-fu-gQh"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="JRH-DP-FPK"/>
+                                        <menuItem title="Error log" id="Uxb-RX-U9H">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="showErrorLogWindow:" target="Voe-Tx-rLC" id="TAc-Pe-u3P"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>

@@ -10,7 +10,12 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
+#import "SOXErrorWindowController.h"
+
+
 @interface MacAppDelegate ()
+
+@property (readwrite, strong, nonatomic) SOXErrorWindowController *errorWindowController;
 
 - (IBAction)saveAction:(id)sender;
 
@@ -42,8 +47,11 @@
     DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
-}
+    { //Prepare error log window
+        self.errorWindowController = [[SOXErrorWindowController alloc] initWithWindowNibName:@"SOXErrorWindowController"];
+    }
 
+}
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     // Insert code here to tear down your application
@@ -56,6 +64,10 @@
     DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 }
 
+#pragma mark - Action methods
+- (IBAction)showErrorLogWindow:(NSMenuItem *)sender {
+    [self.errorWindowController showWindow:self];
+}
 
 #pragma mark - Core Data stack
 
