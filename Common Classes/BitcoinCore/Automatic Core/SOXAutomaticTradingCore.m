@@ -873,6 +873,15 @@
         [self informBuyDelegateWithNote:note];
     }
     [self.runningAutomaticBuyTradeParameters removeObject:tradeParameters];
+
+    // Buy trade was not successful, but maybe the faster buyer did not bought the whole bunch of coins
+    // So let's look for a replacement order in orderBook.
+    { // DEBUG
+        NSString *note = [NSString stringWithFormat:@"Look for replacement order for unsuccessful autoBuy trade"];
+        [self informBuyDelegateWithNote:note];
+    }
+    [self checkForBuyableOrder];
+
     [self checkForBalanceTradesForBoughtTrades];
 }
 
@@ -907,6 +916,15 @@
         [self informSellDelegateWithNote:note];
     }
     [self.runningAutomaticSellTradeParameters removeObject:tradeParameters];
+
+    // Buy trade was not successful, but maybe the faster buyer did not bought the whole bunch of coins
+    // So let's look for a replacement order in orderBook.
+    { // DEBUG
+        NSString *note = [NSString stringWithFormat:@"Look for replacement order for unsuccessful autoSell trade"];
+        [self informSellDelegateWithNote:note];
+    }
+    [self checkForSellableOrder];
+
     [self checkForBalanceTradesForSoldTrades];
 }
 
