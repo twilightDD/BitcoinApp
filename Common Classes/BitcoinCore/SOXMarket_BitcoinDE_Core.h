@@ -59,6 +59,7 @@ FOUNDATION_EXPORT NSString *const _Nonnull HTTPMethodPOSTKey;
 @property (strong, nonatomic) NSDecimalNumber * _Nullable rate_weighted;
 @property (strong, nonatomic) NSDecimalNumber * _Nullable rate_weighted_half;
 @property (strong, nonatomic) NSDecimalNumber * _Nullable availableBitcoinAmount;
+@property (strong, nonatomic) NSDecimalNumber * _Nullable reservedBitcoinAmount;
 @property (strong, nonatomic) NSDecimalNumber * _Nullable availableFidorAmount;
 
 @property (weak, nonatomic, readonly) NSObject <SOXMarketCoreErrorProtocol> * _Nullable delegateForErrorMessages;

@@ -203,6 +203,7 @@
             self.btcBalanceReservedAmountTextField.objectValue  = accountInfoData.btcBalance_reservedAmount;
             
             [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount = accountInfoData.btcBalance_availableAmount;
+            [SOXMarket_BitcoinDE_Core sharedCore].reservedBitcoinAmount = accountInfoData.btcBalance_reservedAmount;
             self.btcBalanceTotalAmount = accountInfoData.btcBalance_totalAmount;
         }
         
