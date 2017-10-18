@@ -238,6 +238,10 @@
                                                                                             }
                                                ];
 
+
+    // TODO: quickfix to get a banner update after socket reconnect
+    [[SOXMarket_BitcoinDE_Core sharedCore] startBannerUpdate];
+
     core.automaticTradingIsRunning = YES;
 
     return YES;
