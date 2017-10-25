@@ -906,7 +906,7 @@
     }
     [self.successfulAutomaticSellTradeParameters addObject:[tradeParametersWithFee copy]];
     
-    [self checkForBalanceTradesForSoldTrades];
+    [self checkForBalanceTradesForSoldTrades]; // no banner update needed, we just balance out
 }
 
 - (void)unSuccessfulAutomaticSellTrade:(NSDictionary *)tradeParameters {

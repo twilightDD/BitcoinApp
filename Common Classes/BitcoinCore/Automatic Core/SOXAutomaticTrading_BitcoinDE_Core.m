@@ -1446,7 +1446,8 @@
         self.availableBTCAfterBannerUpdateHigh = [estBTC decimalNumberByAdding:btcSpectrum
                                                          withBehavior:[SOXFormatters btcNumberHandler]];
         { // DEBUG
-            NSString *note = [NSString stringWithFormat:@"Start Banner Update after Auto - bBack: %@ sBack: %@ diff: %@ estL: %@ est: %@ estH: %@"
+            NSString *note = [NSString stringWithFormat:@"Start Banner Update after Auto - availBTC: %@ bBack: %@ sBack: %@ diff: %@ estL: %@ est: %@ estH: %@"
+                              , [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount
                               , buyBTCBacklog
                               , sellBTCBacklog
                               , effectiveBacklog
