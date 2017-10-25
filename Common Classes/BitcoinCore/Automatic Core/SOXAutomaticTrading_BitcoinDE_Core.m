@@ -1626,6 +1626,15 @@
         }
         //
         if (!self.creditTimer) {
+            { // DEBUG
+                NSString *note = [NSString stringWithFormat:@"New creditTimer created"];
+                if (self.successfulAutomaticBuyTradeParameters.count > 0) {
+                    [self informBuyDelegateWithNote:note];
+                }
+                else if (self.successfulAutomaticSellTradeParameters.count > 0) {
+                    [self informSellDelegateWithNote:note];
+                }
+            }
             self.creditTimer = [NSTimer scheduledTimerWithTimeInterval:2.0
                                                                 target:self
                                                               selector:@selector(updateBanner)
@@ -1635,8 +1644,45 @@
             [[NSRunLoop mainRunLoop] addTimer:self.creditTimer
                                       forMode:NSDefaultRunLoopMode];
         }
+        else {
+            { // DEBUG
+                NSString *note = [NSString stringWithFormat:@"existing creditTimer - so no new one created."];
+                if (self.successfulAutomaticBuyTradeParameters.count > 0) {
+                    [self informBuyDelegateWithNote:note];
+                }
+                else if (self.successfulAutomaticSellTradeParameters.count > 0) {
+                    [self informSellDelegateWithNote:note];
+                }
+            }
+        }
     }
     else {
+        if (self.creditTimer) {
+            { // DEBUG
+                NSString *note = [NSString stringWithFormat:@"should never happen: existing creditTimer after successful banner update - so kill it"];
+                if (self.successfulAutomaticBuyTradeParameters.count > 0) {
+                    [self informBuyDelegateWithNote:note];
+                }
+                else if (self.successfulAutomaticSellTradeParameters.count > 0) {
+                    [self informSellDelegateWithNote:note];
+                }
+            }
+
+            [self.creditTimer invalidate];
+            self.creditTimer = nil;
+        } else {
+            { // DEBUG
+                NSString *note = [NSString stringWithFormat:@"should be standard case: no existing creditTimer after successful banner update - do nothing"];
+                if (self.successfulAutomaticBuyTradeParameters.count > 0) {
+                    [self informBuyDelegateWithNote:note];
+                }
+                else if (self.successfulAutomaticSellTradeParameters.count > 0) {
+                    [self informSellDelegateWithNote:note];
+                }
+            }
+        }
+
+
         if (self.successfulAutomaticBuyTradeParameters.count > 0) {
             { // DEBUG
                 NSString *note = [NSString stringWithFormat:@"Banner update after %tu autoBuy(s) trade complete"
