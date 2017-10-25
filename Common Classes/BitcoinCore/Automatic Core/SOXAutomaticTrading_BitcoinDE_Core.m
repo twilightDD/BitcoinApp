@@ -39,6 +39,8 @@
 @property (nonatomic) BOOL expectReservedBTCChange;
 @property (nonatomic) BOOL expectAvailFidorChange;
 
+@property (strong, nonatomic) NSTimer *creditTimer;
+
 @end
 
 #pragma mark - Implementation
@@ -1505,6 +1507,10 @@
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountInfoCommandType
                                             withParameter:nil
                                                 respondTo:nil];
+    if (self.creditTimer) {
+        [self.creditTimer invalidate];
+        self.creditTimer = nil;
+    }
 }
 
 - (void)bannerWasUpdated:(NSDictionary *)serverAnswer {
@@ -1530,10 +1536,9 @@
             [self informBuyDelegateWithNote:note];
         }
         if (self.successfulAutomaticSellTradeParameters.count > 0
-            || self.successfulBalanceBuyTradeParameters > 0) {
+            || self.successfulBalanceBuyTradeParameters.count > 0) {
             [self informSellDelegateWithNote:note];
         }
-
     }
 
     // weil wir nur ein estimatedBTC haben, es aber zu kleinen Abweichungen kommen kann,
@@ -1557,6 +1562,9 @@
 
         self.availableBTCAfterBannerUpdateLow = nil;
         self.availableBTCAfterBannerUpdateHigh = nil;
+
+        [self.creditTimer invalidate];
+        self.creditTimer = nil;
     }
 
     // weil wir nur ein estimatedBTC haben, es aber zu kleinen Abweichungen kommen kann,
@@ -1580,6 +1588,9 @@
 
         self.reservedBTCAfterBannerUpdateLow = nil;
         self.reservedBTCAfterBannerUpdateHigh = nil;
+
+        [self.creditTimer invalidate];
+        self.creditTimer = nil;
     }
 
 
@@ -1614,14 +1625,16 @@
             }
         }
         //
-        NSTimer *creditTimer = [NSTimer scheduledTimerWithTimeInterval:2.0
+        if (!self.creditTimer) {
+            self.creditTimer = [NSTimer scheduledTimerWithTimeInterval:2.0
                                                                 target:self
                                                               selector:@selector(updateBanner)
                                                               userInfo:nil
                                                                repeats:NO];
-        creditTimer.tolerance = 0.05;
-        [[NSRunLoop mainRunLoop] addTimer:creditTimer
-                                  forMode:NSDefaultRunLoopMode];
+            self.creditTimer.tolerance = 0.05;
+            [[NSRunLoop mainRunLoop] addTimer:self.creditTimer
+                                      forMode:NSDefaultRunLoopMode];
+        }
     }
     else {
         if (self.successfulAutomaticBuyTradeParameters.count > 0) {
