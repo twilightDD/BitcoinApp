@@ -1508,8 +1508,28 @@
                                             withParameter:nil
                                                 respondTo:nil];
     if (self.creditTimer) {
+        { // DEBUG
+            NSString *note = [NSString stringWithFormat:@"- (void)updateBanner: creditTimer invalidated"];
+            if (self.successfulAutomaticBuyTradeParameters.count > 0) {
+                [self informBuyDelegateWithNote:note];
+            }
+            else if (self.successfulAutomaticSellTradeParameters.count > 0) {
+                [self informSellDelegateWithNote:note];
+            }
+        }
+        
         [self.creditTimer invalidate];
         self.creditTimer = nil;
+    }
+    else {
+        // DEBUG
+        NSString *note = [NSString stringWithFormat:@"- (void)updateBanner: creditTimer not existing"];
+        if (self.successfulAutomaticBuyTradeParameters.count > 0) {
+            [self informBuyDelegateWithNote:note];
+        }
+        else if (self.successfulAutomaticSellTradeParameters.count > 0) {
+            [self informSellDelegateWithNote:note];
+        }
     }
 }
 
