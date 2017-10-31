@@ -1655,7 +1655,7 @@
                     [self informSellDelegateWithNote:note];
                 }
             }
-            self.creditTimer = [NSTimer scheduledTimerWithTimeInterval:2.0
+            self.creditTimer = [NSTimer scheduledTimerWithTimeInterval:1.9
                                                                 target:self
                                                               selector:@selector(updateBanner)
                                                               userInfo:nil
