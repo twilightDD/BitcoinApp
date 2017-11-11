@@ -63,5 +63,6 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_UpdateType) {
 + (BitcoinDE_TrustLevel)trustLevelForTrustLevelString:(NSString *)trustLevelString;
 
 + (NSString *)tradingPairStringForCurrencyType:(SOXMarket_CurrencyType)currencyType;
-
++ (NSString *)tradingPairShortStringForCurrencyType:(SOXMarket_CurrencyType)currencyType;
++ (SOXMarket_CurrencyType)currencyTypeForTradingPairString:(NSString *)tradingPairString;
 @end

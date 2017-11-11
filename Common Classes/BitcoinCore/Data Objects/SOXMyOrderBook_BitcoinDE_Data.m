@@ -17,6 +17,8 @@
 #pragma mark | Order Details
 @property (strong, nonatomic, readwrite) NSString *orderInformation_orderID;
 @property (strong, nonatomic, readwrite) NSString *orderInformation_type;
+@property (strong, nonatomic, readwrite) NSString *orderInformation_tradingPair;
+@property (nonatomic, readwrite) SOXMarket_CurrencyType orderInformation_currencyType;
 @property (strong, nonatomic, readwrite) NSNumber *orderInformation_maxAmount;
 @property (strong, nonatomic, readwrite) NSNumber *orderInformation_minAmount;
 @property (strong, nonatomic, readwrite) NSNumber *orderInformation_price;
@@ -41,7 +43,7 @@
 
 
 @implementation SOXMyOrderBook_BitcoinDE_Data
-@synthesize orderInformation_orderID, orderInformation_type, orderInformation_maxAmount, orderInformation_minAmount, orderInformation_price, orderInformation_maxVolume, orderInformation_minVolume, orderInformation_createdAt, orderInformation_endDateTime, orderInformation_newOrderForRemainingAmount, orderInformation_state;
+@synthesize orderInformation_orderID, orderInformation_type, orderInformation_tradingPair, orderInformation_currencyType, orderInformation_maxAmount, orderInformation_minAmount, orderInformation_price, orderInformation_maxVolume, orderInformation_minVolume, orderInformation_createdAt, orderInformation_endDateTime, orderInformation_newOrderForRemainingAmount, orderInformation_state;
 @synthesize orderRequirements_minTrustLevel, orderRequirements_onlyKYCFull, orderRequirements_paymentOption, orderRequirements_seatOfBank;
 @synthesize page_current, page_last;
 
@@ -137,6 +139,8 @@
     {
         self.orderInformation_orderID                       = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_OrderID];
         self.orderInformation_type                          = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_Type];
+        self.orderInformation_tradingPair                   = [myOrderDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPair];
+        self.orderInformation_currencyType                  = [SOXMarket_BitcoinDE_DefTypes currencyTypeForTradingPairString:self.orderInformation_tradingPair];
         self.orderInformation_maxAmount                     = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MaxAmount];
         self.orderInformation_minAmount                     = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MinAmount];
         self.orderInformation_price                         = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_Price];

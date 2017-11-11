@@ -18,7 +18,7 @@ typedef NS_ENUM (NSInteger, SOXMarket_CurrencyType) {
 
 @interface SOXMarket_DefTypes : NSObject
 
-+ (NSString *)stringForCurrencyType:(SOXMarket_CurrencyType )currencyType;
-+ (NSString *)shortStringForCurrencyType:(SOXMarket_CurrencyType )currencyType;
++ (NSString *)stringForCurrencyType:(SOXMarket_CurrencyType)currencyType;
++ (NSString *)shortStringForCurrencyType:(SOXMarket_CurrencyType)currencyType;
 
 @end

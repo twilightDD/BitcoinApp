@@ -1787,14 +1787,14 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" headerView="2F9-Ce-VdL" id="kdt-bX-tib">
-                                            <rect key="frame" x="0.0" y="0.0" width="814" height="233"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="857" height="233"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn editable="NO" width="40" minWidth="40" maxWidth="1000" id="T6P-2d-aZO">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="type">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="currency">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -1806,7 +1806,28 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
-                                                        <binding destination="t8U-TY-Pcr" name="value" keyPath="arrangedObjects.orderInformation_type" id="vac-CA-PdW">
+                                                        <binding destination="t8U-TY-Pcr" name="value" keyPath="arrangedObjects.orderInformation_currencyType" id="YHL-66-IsE">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                                <string key="NSValueTransformerName">SOXShortTradingPairValueTransformer</string>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
+                                                </tableColumn>
+                                                <tableColumn editable="NO" width="40" minWidth="40" maxWidth="1000" id="i86-vH-MYd">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="type">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="2FV-dv-Xy9">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="t8U-TY-Pcr" name="value" keyPath="arrangedObjects.orderInformation_type" id="yuK-2l-7B8">
                                                             <dictionary key="options">
                                                                 <bool key="NSConditionallySetsEditable" value="YES"/>
                                                             </dictionary>
@@ -1977,7 +1998,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="2F9-Ce-VdL">
-                                    <rect key="frame" x="0.0" y="0.0" width="814" height="23"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="857" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
@@ -2077,6 +2098,9 @@
                             <constraint firstItem="Bel-6d-h19" firstAttribute="top" secondItem="djv-Fe-LAU" secondAttribute="top" id="4Ip-vo-ho0"/>
                             <constraint firstItem="RDI-CU-Zjp" firstAttribute="trailing" secondItem="Bel-6d-h19" secondAttribute="trailing" id="6QV-a6-crB"/>
                             <constraint firstAttribute="trailing" secondItem="wNc-yI-m0l" secondAttribute="trailing" constant="23" id="6dy-yd-Mzi"/>
+                            <constraint firstItem="RDI-CU-Zjp" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ppn-gm-gOg" secondAttribute="bottom" constant="20" symbolic="YES" id="6wy-cu-oM9"/>
+                            <constraint firstItem="ntl-bH-YU6" firstAttribute="trailing" secondItem="Bel-6d-h19" secondAttribute="trailing" id="75f-YL-Qmz"/>
+                            <constraint firstItem="ppn-gm-gOg" firstAttribute="trailing" secondItem="Bel-6d-h19" secondAttribute="trailing" id="7VF-Ut-3MI"/>
                             <constraint firstItem="vXn-t1-4Jn" firstAttribute="width" secondItem="Bel-6d-h19" secondAttribute="width" id="8ey-Q3-wsU"/>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="trailing" secondItem="hfD-y1-lfC" secondAttribute="trailing" id="AXt-l0-V1r"/>
                             <constraint firstItem="dVf-cd-9K7" firstAttribute="leading" secondItem="d9Y-Go-gwW" secondAttribute="leading" constant="20" symbolic="YES" id="AwV-Ul-N11"/>
@@ -2089,6 +2113,7 @@
                             <constraint firstItem="ppn-gm-gOg" firstAttribute="width" secondItem="ntl-bH-YU6" secondAttribute="width" id="YYv-kv-JPk"/>
                             <constraint firstItem="hfD-y1-lfC" firstAttribute="top" secondItem="RDI-CU-Zjp" secondAttribute="bottom" constant="12" id="afa-6T-ssN"/>
                             <constraint firstItem="djv-Fe-LAU" firstAttribute="bottom" secondItem="dVf-cd-9K7" secondAttribute="bottom" id="aun-FS-fVB"/>
+                            <constraint firstItem="vXn-t1-4Jn" firstAttribute="trailing" secondItem="Bel-6d-h19" secondAttribute="trailing" id="bWR-5i-iQe"/>
                             <constraint firstItem="ppn-gm-gOg" firstAttribute="leading" secondItem="ntl-bH-YU6" secondAttribute="leading" id="cy0-YA-ikS"/>
                             <constraint firstItem="ppn-gm-gOg" firstAttribute="top" secondItem="ntl-bH-YU6" secondAttribute="bottom" constant="6" id="d0c-dH-fy3"/>
                             <constraint firstItem="vXn-t1-4Jn" firstAttribute="leading" secondItem="Bel-6d-h19" secondAttribute="leading" id="gOO-OG-pyv"/>
