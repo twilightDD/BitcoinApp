@@ -22,7 +22,7 @@
 - (id)transformedValue:(id)value {
     if ([value isKindOfClass:[NSNumber class]]) {
         NSNumber *currencyTypeNumber = value;
-        SOXMarket_CurrencyType currencyType = currencyTypeNumber.integerValue;
+        BitcoinDE_CurrencyType currencyType = currencyTypeNumber.integerValue;
         NSString *transformedValue = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringForCurrencyType:currencyType];
         return transformedValue;
     }

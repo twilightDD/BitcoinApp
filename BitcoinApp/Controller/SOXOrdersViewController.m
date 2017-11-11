@@ -102,6 +102,7 @@
     }
     
     NSDictionary *parameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:self.orderType
+                                                                        currencyType:BitcoinDE_CurrencyTypeBitcoinCash
                                                               onlyExpressPaymentOption:NO];
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:serverCommand
                                             withParameter:parameters
@@ -188,7 +189,7 @@
 }
 
 - (void)addedOrder:(SOXShowOrderbookData *)addOrderData {
-    if (![addOrderData.orderInformation_tradingPair isEqualToString:BitcoinDE_BitcoinOriginal]) {
+    if (![addOrderData.orderInformation_tradingPair isEqualToString:BitcoinDE_TradingPair_BitcoinOriginal]) {
         DDLogInfo(@"addedOrder in %@ - tradingPair is %@ - we don't support it right now"
               , [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:self.orderType]
               , addOrderData.orderInformation_tradingPair);

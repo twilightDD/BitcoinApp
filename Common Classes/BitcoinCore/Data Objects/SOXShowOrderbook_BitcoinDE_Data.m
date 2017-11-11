@@ -64,12 +64,18 @@
 }
 
 + (NSDictionary *)parametersForOrderType:(BitcoinDE_OrderType)orderType
+                            currencyType:(BitcoinDE_CurrencyType)currencyType
                 onlyExpressPaymentOption:(BOOL)onlyExpressPaymentOption {
+    // orderType
     NSString *orderTypeString = [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:orderType];
-    
+
+    // currencyType
+    NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType];
+
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
                                 orderTypeString, BitcoinDE_ShowOrderbook_Type
                                 , @(onlyExpressPaymentOption), @"only_express_orders"
+                                , currencyTypeString, BitcoinDE_ShowOrderbook_TradingPair
                                 , nil];
 
     return parameters;

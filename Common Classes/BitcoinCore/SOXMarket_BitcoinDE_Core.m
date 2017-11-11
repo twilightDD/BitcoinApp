@@ -890,7 +890,7 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
     static dispatch_once_t pred;
     
     dispatch_once(&pred, ^{
-        baseURLString = @"https://api.bitcoin.de/v1";
+        baseURLString = @"https://api.bitcoin.de/v2";
     });
     
     return baseURLString;
@@ -916,6 +916,16 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 
 #pragma mark - Private Instance Methods
 - (void)startBannerUpdate {
+    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountInfoCommandType
+                                            withParameter:nil
+                                                respondTo:nil];
+    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowRatesCommandType
+                                            withParameter:nil
+                                                respondTo:nil];
+}
+
+- (void)startBannerUpdateForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+//    NSDictionary *parameters = []
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountInfoCommandType
                                             withParameter:nil
                                                 respondTo:nil];

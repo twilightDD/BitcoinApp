@@ -53,6 +53,12 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_UpdateType) {
     , BitcoinDE_UpdateType_RemoveOrderChanges
 };
 
+typedef NS_ENUM (NSInteger, BitcoinDE_CurrencyType) {
+    BitcoinDE_CurrencyTypeUnknown = 0
+    , BitcoinDE_CurrencyTypeBitcoin = 1000
+    , BitcoinDE_CurrencyTypeBitcoinCash = 1100
+    , BitcoinDE_CurrencyTypeEthereum = 2000
+};
 
 @interface SOXMarket_BitcoinDE_DefTypes : SOXMarket_DefTypes
 
@@ -62,7 +68,7 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_UpdateType) {
 + (NSString *)trustLevelStringForTrustLevel:(BitcoinDE_TrustLevel)trustLevel;
 + (BitcoinDE_TrustLevel)trustLevelForTrustLevelString:(NSString *)trustLevelString;
 
-+ (NSString *)tradingPairStringForCurrencyType:(SOXMarket_CurrencyType)currencyType;
-+ (NSString *)tradingPairShortStringForCurrencyType:(SOXMarket_CurrencyType)currencyType;
-+ (SOXMarket_CurrencyType)currencyTypeForTradingPairString:(NSString *)tradingPairString;
++ (NSString *)tradingPairStringForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
++ (NSString *)tradingPairShortStringForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
++ (BitcoinDE_CurrencyType)currencyTypeForTradingPairString:(NSString *)tradingPairString;
 @end

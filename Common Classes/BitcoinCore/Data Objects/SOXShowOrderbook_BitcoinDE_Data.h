@@ -14,6 +14,7 @@
 + (NSDictionary *)parametersForAutoTradingForOrderType:(BitcoinDE_OrderType)orderType;
 
 + (NSDictionary *)parametersForOrderType:(BitcoinDE_OrderType)orderType
+                            currencyType:(BitcoinDE_CurrencyType)currencyType
                 onlyExpressPaymentOption:(BOOL)onlyExpressPaymentOption;
 
 + (NSDictionary *)parametersForOrderType:(BitcoinDE_OrderType)orderType

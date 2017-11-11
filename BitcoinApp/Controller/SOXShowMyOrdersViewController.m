@@ -164,7 +164,7 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 
 #pragma mark - Action methods
 - (IBAction)changeCurrencyAction:(NSButton *)sender {
-    SOXMarket_CurrencyType currencyType = sender.tag;
+    BitcoinDE_CurrencyType currencyType = sender.tag;
 
     NSString *selectedTradingPairCurrencyString = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType];
     self.selectedTradingPairString = selectedTradingPairCurrencyString;

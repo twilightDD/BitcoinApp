@@ -236,8 +236,11 @@
            // [self startRatesReloadTimer];
         }
     }
-    
-    if (self.btcBalanceTotalAmount && [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted ) {
+    ;
+    if (self.btcBalanceTotalAmount
+        && [self.btcBalanceTotalAmount isNotEqualTo:[NSDecimalNumber notANumber]]
+        && [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted
+        && [[SOXMarket_BitcoinDE_Core sharedCore].rate_weighted isNotEqualTo:[NSDecimalNumber notANumber]]) {
         NSDecimalNumber *coinValue = [self.btcBalanceTotalAmount decimalNumberByMultiplyingBy:[SOXMarket_BitcoinDE_Core sharedCore].rate_weighted ];
         self.coinValueTextField.stringValue = [SOXFormatters currencyStringForNumber:coinValue
                                                                         roundingMode:NSNumberFormatterRoundUp];

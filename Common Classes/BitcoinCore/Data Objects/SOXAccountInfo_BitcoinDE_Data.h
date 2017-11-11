@@ -10,6 +10,19 @@
 
 FOUNDATION_EXPORT NSString *const BannerDataKey;
 
+@interface SOXBitcoinDE_Balance : NSObject
+@property (strong, nonatomic, readonly) NSDecimalNumber *totalAmount;
+@property (strong, nonatomic, readonly) NSDecimalNumber *availableAmount;
+@property (strong, nonatomic, readonly) NSDecimalNumber *reservedAmount;
+@end
+
+@interface SOXBitcoinDE_Allocation : NSObject
+@property (strong, nonatomic, readonly) NSDecimalNumber *allocation_percent;
+@property (strong, nonatomic, readonly) NSDecimalNumber *allocation_max_eur_volume;
+@property (strong, nonatomic, readonly) NSDecimalNumber *allocation_eur_volume_open_orders;
+@end
+
+
 @interface SOXAccountInfo_BitcoinDE_Data : SOXAccountInfoData
 
 + (instancetype)accountInfoDataForAccountInfoDictionary:(NSDictionary *)accountInfoDictionary;

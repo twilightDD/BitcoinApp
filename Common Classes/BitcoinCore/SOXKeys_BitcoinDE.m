@@ -15,8 +15,9 @@ NSString *const BitcoinDE_Notification_RequestShowAccountInfo   = @"Notification
 NSString *const BitcoinDE_Notification_RequestShowRates         = @"Notification_RequestShowRates";
 
 #pragma mark - Bitcoin flavours
-NSString *const BitcoinDE_BitcoinOriginal   = @"btceur";
-NSString *const BitcoinDE_BitcoinCash       = @"bcheur";
+NSString *const BitcoinDE_TradingPair_BitcoinOriginal   = @"btceur";
+NSString *const BitcoinDE_TradingPair_BitcoinCash       = @"bcheur";
+NSString *const BitcoinDE_TradingPair_Ethereum          = @"etheur";
 
 #pragma mark - BitcoinDE_ExecuteTrade
 NSString *const BitcoinDE_ExecuteTrade_OrderID              = @"order_id";
@@ -29,10 +30,10 @@ NSString *const BitcoinDE_ExecuteTrade_AutomaticTradePrice  = @"automaticTradePr
 #pragma mark - BitcoinDE_ShowAccountInfo
 NSString *const BitcoinDE_ShowAccountInfo_MainKey = @"data";
 #pragma mark | BTC-Balance
-NSString *const BitcoinDE_ShowAccountInfoBTCBalance_btc_balance       = @"btc_balance";
-NSString *const BitcoinDE_ShowAccountInfoBTCBalance_total_amount      = @"total_amount";
-NSString *const BitcoinDE_ShowAccountInfoBTCBalance_available_amount  = @"available_amount";
-NSString *const BitcoinDE_ShowAccountInfoBTCBalance_reserved_amount   = @"reserved_amount";
+NSString *const BitcoinDE_ShowAccountInfo_Balances                  = @"balances";
+NSString *const BitcoinDE_ShowAccountInfo_Balance_total_amount      = @"total_amount";
+NSString *const BitcoinDE_ShowAccountInfo_Balance_available_amount  = @"available_amount";
+NSString *const BitcoinDE_ShowAccountInfo_Balance_reserved_amount   = @"reserved_amount";
 
 #pragma mark | Fidor-Reservation
 NSString *const BitcoinDE_ShowAccountInfoFidorReservation_fidor_reservation   = @"fidor_reservation";
@@ -40,6 +41,10 @@ NSString *const BitcoinDE_ShowAccountInfoFidorReservation_total_amount        = 
 NSString *const BitcoinDE_ShowAccountInfoFidorReservation_available_amount    = @"available_amount";
 NSString *const BitcoinDE_ShowAccountInfoFidorReservation_reserved_at         = @"reserved_at";
 NSString *const BitcoinDE_ShowAccountInfoFidorReservation_valid_until         = @"valid_until";
+NSString *const BitcoinDE_ShowAccountInfoFidorReservation_allocation          = @"allocation";
+NSString *const BitcoinDE_ShowAccountInfoFidorReservation_allocation_percent  = @"percent";
+NSString *const BitcoinDE_ShowAccountInfoFidorReservation_allocation_max_eur_volume = @"max_eur_volume";
+NSString *const BitcoinDE_ShowAccountInfoFidorReservation_allocation_eur_volume_open_orders = @"eur_volume_open_orders";
 
 #pragma mark | Encrypted-Information
 NSString *const BitcoinDE_ShowAccountInfoEncryptedInformation_encrypted_information   = @"encrypted_information";

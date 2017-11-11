@@ -18,7 +18,7 @@
 @property (strong, nonatomic, readwrite) NSString *orderInformation_orderID;
 @property (strong, nonatomic, readwrite) NSString *orderInformation_type;
 @property (strong, nonatomic, readwrite) NSString *orderInformation_tradingPair;
-@property (nonatomic, readwrite) SOXMarket_CurrencyType orderInformation_currencyType;
+@property (nonatomic, readwrite) BitcoinDE_CurrencyType orderInformation_currencyType;
 @property (strong, nonatomic, readwrite) NSNumber *orderInformation_maxAmount;
 @property (strong, nonatomic, readwrite) NSNumber *orderInformation_minAmount;
 @property (strong, nonatomic, readwrite) NSNumber *orderInformation_price;

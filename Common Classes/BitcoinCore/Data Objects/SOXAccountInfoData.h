@@ -14,6 +14,9 @@
 @property (strong, nonatomic, readonly) NSDecimalNumber *btcBalance_availableAmount;
 @property (strong, nonatomic, readonly) NSDecimalNumber *btcBalance_reservedAmount;
 
+@property (strong, nonatomic, readonly) NSDictionary *tradingPairBalances;
+@property (strong, nonatomic, readonly) NSDictionary *tradingPairAllocations;
+
 @property (nonatomic, readonly) BOOL bankReservation_exists;
 @property (strong, nonatomic, readonly) NSDecimalNumber *bankReservation_totalAmount;
 @property (strong, nonatomic, readonly) NSDecimalNumber *bankReservation_availableAmount;

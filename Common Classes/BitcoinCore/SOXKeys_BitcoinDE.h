@@ -15,8 +15,9 @@ FOUNDATION_EXPORT NSString *const BitcoinDE_Notification_RequestShowAccountInfo;
 FOUNDATION_EXPORT NSString *const BitcoinDE_Notification_RequestShowRates;
 
 #pragma mark - Bitcoin flavours
-FOUNDATION_EXPORT NSString *const BitcoinDE_BitcoinOriginal;
-FOUNDATION_EXPORT NSString *const BitcoinDE_BitcoinCash;
+FOUNDATION_EXPORT NSString *const BitcoinDE_TradingPair_BitcoinOriginal;
+FOUNDATION_EXPORT NSString *const BitcoinDE_TradingPair_BitcoinCash;
+FOUNDATION_EXPORT NSString *const BitcoinDE_TradingPair_Ethereum;
 
 #pragma mark - BitcoinDE_ExecuteTrade
 FOUNDATION_EXPORT NSString *const BitcoinDE_ExecuteTrade_OrderID;
@@ -29,10 +30,10 @@ FOUNDATION_EXPORT NSString *const BitcoinDE_ExecuteTrade_AutomaticTradePrice;
 #pragma mark - BitcoinDE_ShowAccountInfo
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfo_MainKey;
 #pragma mark | BTC-Balance
-FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfoBTCBalance_btc_balance;
-FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfoBTCBalance_total_amount;
-FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfoBTCBalance_available_amount;
-FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfoBTCBalance_reserved_amount;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfo_Balances;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfo_Balance_total_amount;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfo_Balance_available_amount;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfo_Balance_reserved_amount;
 
 #pragma mark | Fidor-Reservation
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfoFidorReservation_fidor_reservation;
@@ -40,6 +41,10 @@ FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfoFidorReservation_tota
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfoFidorReservation_available_amount;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfoFidorReservation_reserved_at;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfoFidorReservation_valid_until;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfoFidorReservation_allocation;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfoFidorReservation_allocation_percent;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfoFidorReservation_allocation_max_eur_volume;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfoFidorReservation_allocation_eur_volume_open_orders;
 
 #pragma mark | Encrypted-Information
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountInfoEncryptedInformation_encrypted_information;

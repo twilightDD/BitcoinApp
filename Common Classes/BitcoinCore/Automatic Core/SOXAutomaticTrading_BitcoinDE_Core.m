@@ -213,18 +213,20 @@
 
     { // get buyOrderBook
         NSDictionary *buyParameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:BitcoinDE_BuyOrderType
+                                                                                 currencyType:BitcoinDE_CurrencyTypeBitcoin
                                                                      onlyExpressPaymentOption:YES];
-
+        
         NSMutableDictionary *newBuyParameters = [buyParameters mutableCopy];
         [newBuyParameters setObject:@1 forKey:BitcoinDE_ShowMyOrders_OrderRequirements_OnlyKYCFull];
-
+        
         [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType
                                                 withParameter:[newBuyParameters copy]
                                                     respondTo:core];
     }
-
+    
     { // get sellOrderBook
         NSDictionary *sellParameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:BitcoinDE_SellOrderType
+                                                                                  currencyType:BitcoinDE_CurrencyTypeBitcoin
                                                                       onlyExpressPaymentOption:YES];
         
         NSMutableDictionary *newSellParameters = [sellParameters mutableCopy];
@@ -983,7 +985,7 @@
 
     // check for TradingPair
     {
-        if (![addOrderData.orderInformation_tradingPair isEqualToString:BitcoinDE_BitcoinOriginal]) {
+        if (![addOrderData.orderInformation_tradingPair isEqualToString:BitcoinDE_TradingPair_BitcoinOriginal]) {
             DDLogInfo(@"### tradingPair is %@ - we don't support it right now - ID: %@ - maxA: %@ - p: %@"
                   , addOrderData.orderInformation_tradingPair
                   , addOrderData.orderInformation_orderID

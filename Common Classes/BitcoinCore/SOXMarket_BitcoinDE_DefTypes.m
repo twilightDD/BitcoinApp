@@ -87,23 +87,22 @@
     return [[trustLevelDescription objectForKey:trustLevelString] unsignedIntegerValue];
 }
 
-+ (NSString *)tradingPairStringForCurrencyType:(SOXMarket_CurrencyType)currencyType {
++ (NSString *)tradingPairStringForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
     NSString *tradingPairStringForCurrencyType = [[self tradingPairCurrencyTypeDictionary] objectForKey:@(currencyType)];
     return tradingPairStringForCurrencyType;
 }
 
-+ (NSString *)tradingPairShortStringForCurrencyType:(SOXMarket_CurrencyType)currencyType {
++ (NSString *)tradingPairShortStringForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
     static NSDictionary    *tradingPairShortStringsForCurrencyType;
 
     static dispatch_once_t pred;
 
     dispatch_once(&pred, ^{
         tradingPairShortStringsForCurrencyType = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                  @"???", @(SOXMarket_CurrencyTypeUnknown)
-                                                  , @"btc", @(SOXMarket_CurrencyTypeBitcoin)
-                                                  , @"bch", @(SOXMarket_CurrencyTypeBitcoinCash)
-                                                  , @"eth", @(SOXMarket_CurrencyTypeEthereum)
-                                                  , @"multi", @(SOXMarket_CurrencyTypeAll)
+                                                  @"???", @(BitcoinDE_CurrencyTypeUnknown)
+                                                  , @"BTC", @(BitcoinDE_CurrencyTypeBitcoin)
+                                                  , @"BCH", @(BitcoinDE_CurrencyTypeBitcoinCash)
+                                                  , @"EHT", @(BitcoinDE_CurrencyTypeEthereum)
                                                   , nil];
     });
 
@@ -111,12 +110,12 @@
     return tradingPairShortStringForCurrencyType;
 }
 
-+ (SOXMarket_CurrencyType)currencyTypeForTradingPairString:(NSString *)tradingPairString {
++ (BitcoinDE_CurrencyType)currencyTypeForTradingPairString:(NSString *)tradingPairString {
     NSArray *currencyTypes = [[self tradingPairCurrencyTypeDictionary] allKeysForObject:tradingPairString];
     NSAssert(currencyTypes.count < 2, @"more than one key for given object");
 
     NSNumber *currencyTypeNumber = currencyTypes.firstObject;
-    SOXMarket_CurrencyType currencyType = currencyTypeNumber.integerValue;
+    BitcoinDE_CurrencyType currencyType = currencyTypeNumber.integerValue;
 
     return currencyType;
 }
@@ -128,9 +127,9 @@
 
     dispatch_once(&pred, ^{
         tradingPairStringsForCurrencyTyp = [NSDictionary dictionaryWithObjectsAndKeys:
-                                            @"btceur", @(SOXMarket_CurrencyTypeBitcoin)
-                                            , @"bcheur", @(SOXMarket_CurrencyTypeBitcoinCash)
-                                            , @"etheur", @(SOXMarket_CurrencyTypeEthereum)
+                                            @"btceur", @(BitcoinDE_CurrencyTypeBitcoin)
+                                            , @"bcheur", @(BitcoinDE_CurrencyTypeBitcoinCash)
+                                            , @"etheur", @(BitcoinDE_CurrencyTypeEthereum)
                                             , nil];
     });
 
