@@ -93,7 +93,7 @@
     if (self.orderType == BitcoinDE_BuyOrderType) {
         showAutomaticTradingAreaButtonTitle = @"Buy automatically";
         startAutomaticButtonTitle           = @"Start Automatic Buy";
-        useMaxReservationButtonTitle        = @"Use Maximal Fidor reservation";
+        useMaxReservationButtonTitle        = @"Use max";
         maxInvestmentText                   = @"200";
         maxInvestmentDescriptionText        = @"Max. Investment";
 
@@ -101,7 +101,7 @@
     else if (self.orderType == BitcoinDE_SellOrderType) {
         showAutomaticTradingAreaButtonTitle = @"Sell automatically";
         startAutomaticButtonTitle           = @"Start Automatic Sell";
-        useMaxReservationButtonTitle        = @"Use Maximal BTC amount";
+        useMaxReservationButtonTitle        = @"Use Max";
         maxInvestmentText                   = @"0.2";
         maxInvestmentDescriptionText        = @"Max. Investment";
     }
