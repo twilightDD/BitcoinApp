@@ -7,9 +7,12 @@
 //
 
 #import "SOXRatesData.h"
+#import "SOXMarket_BitcoinDE_DefTypes.h"
 
 @interface SOXRates_BitcoinDE_Data : SOXRatesData
 
 + (SOXRatesData *)rateDataForRateInfoDictionary:(NSDictionary *)payloadDictionary;
+
++ (NSDictionary *)parametersForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 
 @end

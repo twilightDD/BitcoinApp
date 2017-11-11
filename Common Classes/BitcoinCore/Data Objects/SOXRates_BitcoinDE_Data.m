@@ -10,6 +10,7 @@
 
 #import "SOXKeys_BitcoinDE.h"
 
+
 #pragma mark - Interface
 @interface SOXRates_BitcoinDE_Data ()
 
@@ -32,6 +33,14 @@
     [rateData setupDataForRateInfoDictionary:payloadDictionary];
     
     return rateData;
+}
+
++ (NSDictionary *)parametersForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    NSString *tradingPairString = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType];
+    NSDictionary *parametersForCurrencyType = [NSDictionary dictionaryWithObject:tradingPairString
+                                                                          forKey:BitcoinDE_ShowOrderbook_TradingPair];
+
+    return parametersForCurrencyType;
 }
 
 #pragma mark - Instance methods
