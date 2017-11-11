@@ -87,4 +87,21 @@
     return [[trustLevelDescription objectForKey:trustLevelString] unsignedIntegerValue];
 }
 
++ (NSString *)tradingPairStringForCurrencyType:(SOXMarket_CurrencyType)currencyType {
+    static NSDictionary    *tradingPairStringsForCurrencyTyp;
+
+    static dispatch_once_t pred;
+
+    dispatch_once(&pred, ^{
+        tradingPairStringsForCurrencyTyp = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 @"btceur", @(SOXMarket_CurrencyTypeBitcoin)
+                                 , @"bcheur", @(SOXMarket_CurrencyTypeBitcoinCash)
+                                 , @"etheur", @(SOXMarket_CurrencyTypeEthereum)
+                                 , nil];
+    });
+
+    NSString *tradingPairStringForCurrencyType = [tradingPairStringsForCurrencyTyp objectForKey:@(currencyType)];
+    return tradingPairStringForCurrencyType;
+}
+
 @end

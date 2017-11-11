@@ -28,6 +28,12 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 #pragma mark IBOutlets
 @property (weak) IBOutlet NSTableView *tableView;
 
+@property (weak) IBOutlet NSButton *currencyAllButton;
+@property (weak) IBOutlet NSButton *currencyBTCButton;
+@property (weak) IBOutlet NSButton *currencyBCHButton;
+@property (weak) IBOutlet NSButton *currencyETHButton;
+
+
 @property (weak) IBOutlet NSButton *changeButton;
 @property (weak) IBOutlet NSButton *reloadButton;
 @property (weak) IBOutlet NSButton *removeButton;
@@ -36,6 +42,9 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 
 #pragma mark Properties
 @property (strong, nonatomic) NSMutableArray <SOXMyOrderBook_BitcoinDE_Data *> *myOrderBook;
+
+@property (nonatomic, copy) NSString *selectedTradingPairString;
+
 @property (nonatomic) NSInteger countOfMyOrderBook_BitcoinDE_DatasToDelete;
 @property (nonatomic) NSInteger countOfDeletedMyOrderBook_BitcoinDE_Datas;
 
@@ -70,8 +79,13 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 }
 
 - (void)requestServerData {
+    NSDictionary *parameters = nil;
+    if (self.selectedTradingPairString.length > 0) {
+        parameters = [NSDictionary dictionaryWithObject:self.selectedTradingPairString
+                                                 forKey:@"trading_pair"];
+    }
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowMyOrdersCommandType
-                                            withParameter:nil
+                                            withParameter:parameters
                                                 respondTo:self];
 }
 
@@ -149,6 +163,13 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 }
 
 #pragma mark - Action methods
+- (IBAction)changeCurrencyAction:(NSButton *)sender {
+    SOXMarket_CurrencyType currencyType = sender.tag;
+
+    NSString *selectedTradingPairCurrencyString = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType];
+    self.selectedTradingPairString = selectedTradingPairCurrencyString;
+    [self requestServerData];
+}
 
 - (IBAction)changeButtonAction:(NSButton *)sender {
     NSArray <SOXMyOrderBook_BitcoinDE_Data *> *selectedDatas = self.myOrderArrayController.selectedObjects;

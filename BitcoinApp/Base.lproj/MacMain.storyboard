@@ -1993,6 +1993,46 @@
                                     <constraint firstItem="sQ4-6W-phR" firstAttribute="centerY" secondItem="djv-Fe-LAU" secondAttribute="centerY" id="XW8-kO-4A8"/>
                                 </constraints>
                             </customView>
+                            <button verticalHuggingPriority="750" tag="100000" translatesAutoresizingMaskIntoConstraints="NO" id="Bel-6d-h19">
+                                <rect key="frame" x="441" y="240" width="80" height="18"/>
+                                <buttonCell key="cell" type="radio" title="All" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="EHy-6k-P2w">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="changeCurrencyAction:" target="q7D-iu-Op3" id="7wu-Tf-Yha"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" tag="1000" translatesAutoresizingMaskIntoConstraints="NO" id="vXn-t1-4Jn">
+                                <rect key="frame" x="441" y="218" width="80" height="18"/>
+                                <buttonCell key="cell" type="radio" title="BTC" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Dnx-B1-2OL">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="changeCurrencyAction:" target="q7D-iu-Op3" id="Lcf-i2-aEr"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" tag="1100" translatesAutoresizingMaskIntoConstraints="NO" id="ntl-bH-YU6">
+                                <rect key="frame" x="441" y="196" width="80" height="18"/>
+                                <buttonCell key="cell" type="radio" title="BCH" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="HJR-ab-mL0">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="changeCurrencyAction:" target="q7D-iu-Op3" id="ruP-iW-0c1"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" tag="2000" translatesAutoresizingMaskIntoConstraints="NO" id="ppn-gm-gOg">
+                                <rect key="frame" x="441" y="174" width="80" height="18"/>
+                                <buttonCell key="cell" type="radio" title="ETH" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="ZL1-os-9yR">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="changeCurrencyAction:" target="q7D-iu-Op3" id="YPe-Hl-Y74"/>
+                                </connections>
+                            </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wNc-yI-m0l">
                                 <rect key="frame" x="436" y="1" width="89" height="32"/>
                                 <buttonCell key="cell" type="push" title="Reload" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kJw-36-s8I">
@@ -2032,27 +2072,43 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="hfD-y1-lfC" firstAttribute="leading" secondItem="RDI-CU-Zjp" secondAttribute="leading" id="35k-zQ-Jm6"/>
+                            <constraint firstItem="ntl-bH-YU6" firstAttribute="leading" secondItem="vXn-t1-4Jn" secondAttribute="leading" id="3jt-Sg-pwi"/>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="leading" secondItem="dVf-cd-9K7" secondAttribute="trailing" constant="16" id="44W-Pd-PcN"/>
+                            <constraint firstItem="Bel-6d-h19" firstAttribute="top" secondItem="djv-Fe-LAU" secondAttribute="top" id="4Ip-vo-ho0"/>
+                            <constraint firstItem="RDI-CU-Zjp" firstAttribute="trailing" secondItem="Bel-6d-h19" secondAttribute="trailing" id="6QV-a6-crB"/>
                             <constraint firstAttribute="trailing" secondItem="wNc-yI-m0l" secondAttribute="trailing" constant="23" id="6dy-yd-Mzi"/>
+                            <constraint firstItem="vXn-t1-4Jn" firstAttribute="width" secondItem="Bel-6d-h19" secondAttribute="width" id="8ey-Q3-wsU"/>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="trailing" secondItem="hfD-y1-lfC" secondAttribute="trailing" id="AXt-l0-V1r"/>
                             <constraint firstItem="dVf-cd-9K7" firstAttribute="leading" secondItem="d9Y-Go-gwW" secondAttribute="leading" constant="20" symbolic="YES" id="AwV-Ul-N11"/>
                             <constraint firstItem="dVf-cd-9K7" firstAttribute="top" secondItem="d9Y-Go-gwW" secondAttribute="top" constant="20" symbolic="YES" id="GHS-ea-bq1"/>
                             <constraint firstItem="hfD-y1-lfC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="pXN-85-eeM" secondAttribute="top" constant="20" id="GZ5-Ej-Yxn"/>
+                            <constraint firstItem="ntl-bH-YU6" firstAttribute="width" secondItem="vXn-t1-4Jn" secondAttribute="width" id="Hwj-YK-3jb"/>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="top" secondItem="hfD-y1-lfC" secondAttribute="bottom" constant="12" symbolic="YES" id="RYQ-fU-VC7"/>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="leading" secondItem="hfD-y1-lfC" secondAttribute="leading" id="RZ3-tW-jPJ"/>
                             <constraint firstItem="djv-Fe-LAU" firstAttribute="top" secondItem="dVf-cd-9K7" secondAttribute="top" constant="23" id="Xdn-oB-fft"/>
+                            <constraint firstItem="ppn-gm-gOg" firstAttribute="width" secondItem="ntl-bH-YU6" secondAttribute="width" id="YYv-kv-JPk"/>
                             <constraint firstItem="hfD-y1-lfC" firstAttribute="top" secondItem="RDI-CU-Zjp" secondAttribute="bottom" constant="12" id="afa-6T-ssN"/>
                             <constraint firstItem="djv-Fe-LAU" firstAttribute="bottom" secondItem="dVf-cd-9K7" secondAttribute="bottom" id="aun-FS-fVB"/>
+                            <constraint firstItem="ppn-gm-gOg" firstAttribute="leading" secondItem="ntl-bH-YU6" secondAttribute="leading" id="cy0-YA-ikS"/>
+                            <constraint firstItem="ppn-gm-gOg" firstAttribute="top" secondItem="ntl-bH-YU6" secondAttribute="bottom" constant="6" id="d0c-dH-fy3"/>
+                            <constraint firstItem="vXn-t1-4Jn" firstAttribute="leading" secondItem="Bel-6d-h19" secondAttribute="leading" id="gOO-OG-pyv"/>
                             <constraint firstItem="djv-Fe-LAU" firstAttribute="trailing" secondItem="dVf-cd-9K7" secondAttribute="trailing" id="h6r-Rf-XbF"/>
+                            <constraint firstItem="RDI-CU-Zjp" firstAttribute="leading" secondItem="Bel-6d-h19" secondAttribute="leading" id="mUV-hM-CvI"/>
+                            <constraint firstItem="vXn-t1-4Jn" firstAttribute="top" secondItem="Bel-6d-h19" secondAttribute="bottom" constant="6" id="mds-s0-9Ec"/>
                             <constraint firstAttribute="bottom" secondItem="wNc-yI-m0l" secondAttribute="bottom" constant="8" id="njI-bu-QXY"/>
                             <constraint firstAttribute="bottom" secondItem="dVf-cd-9K7" secondAttribute="bottom" constant="8" id="o9W-WE-DLd"/>
                             <constraint firstItem="hfD-y1-lfC" firstAttribute="trailing" secondItem="RDI-CU-Zjp" secondAttribute="trailing" id="qIe-wv-b4b"/>
                             <constraint firstItem="djv-Fe-LAU" firstAttribute="leading" secondItem="dVf-cd-9K7" secondAttribute="leading" id="zkW-pa-GiK"/>
+                            <constraint firstItem="ntl-bH-YU6" firstAttribute="top" secondItem="vXn-t1-4Jn" secondAttribute="bottom" constant="6" id="zvW-hD-1br"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="changeButton" destination="RDI-CU-Zjp" id="4OS-hO-5YI"/>
                         <outlet property="circularProgressIndicator" destination="sQ4-6W-phR" id="zPb-8v-Wc2"/>
+                        <outlet property="currencyAllButton" destination="Bel-6d-h19" id="JNE-5K-LPx"/>
+                        <outlet property="currencyBCHButton" destination="ntl-bH-YU6" id="vP4-qM-ayH"/>
+                        <outlet property="currencyBTCButton" destination="vXn-t1-4Jn" id="XFG-rC-HDy"/>
+                        <outlet property="currencyETHButton" destination="ppn-gm-gOg" id="oZo-KY-Pa4"/>
                         <outlet property="myOrderArrayController" destination="t8U-TY-Pcr" id="eUx-bd-GSy"/>
                         <outlet property="reloadButton" destination="wNc-yI-m0l" id="dzN-3N-kBl"/>
                         <outlet property="removeButton" destination="hfD-y1-lfC" id="bG9-EL-gug"/>

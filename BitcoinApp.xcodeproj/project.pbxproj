@@ -46,6 +46,8 @@
 		D049C4611E7721AC003CBF36 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D049C45E1E7721AC003CBF36 /* Fabric.framework */; };
 		D049C4621E7721AC003CBF36 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D049C45F1E7721AC003CBF36 /* Crashlytics.framework */; };
 		D049C4631E7721AC003CBF36 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D049C45F1E7721AC003CBF36 /* Crashlytics.framework */; };
+		D05B23D61FB76CBB004BAA6E /* SOXMarket_DefTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = D05B23D51FB76CBB004BAA6E /* SOXMarket_DefTypes.m */; };
+		D05B23D71FB76CBB004BAA6E /* SOXMarket_DefTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = D05B23D51FB76CBB004BAA6E /* SOXMarket_DefTypes.m */; };
 		D0631F071E89BB5C007ED75A /* SOXShowMyOrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0631F061E89BB5C007ED75A /* SOXShowMyOrdersViewController.m */; };
 		D0631F0A1E89C1EA007ED75A /* SOXMyOrderBookData.m in Sources */ = {isa = PBXBuildFile; fileRef = D0631F091E89C1EA007ED75A /* SOXMyOrderBookData.m */; };
 		D0631F0B1E89C1EA007ED75A /* SOXMyOrderBookData.m in Sources */ = {isa = PBXBuildFile; fileRef = D0631F091E89C1EA007ED75A /* SOXMyOrderBookData.m */; };
@@ -171,6 +173,8 @@
 		D049C4581E7712E6003CBF36 /* SOXHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXHash.m; sourceTree = "<group>"; };
 		D049C45E1E7721AC003CBF36 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		D049C45F1E7721AC003CBF36 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		D05B23D41FB76CBB004BAA6E /* SOXMarket_DefTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXMarket_DefTypes.h; sourceTree = "<group>"; };
+		D05B23D51FB76CBB004BAA6E /* SOXMarket_DefTypes.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXMarket_DefTypes.m; sourceTree = "<group>"; };
 		D0631F051E89BB5C007ED75A /* SOXShowMyOrdersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXShowMyOrdersViewController.h; sourceTree = "<group>"; };
 		D0631F061E89BB5C007ED75A /* SOXShowMyOrdersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXShowMyOrdersViewController.m; sourceTree = "<group>"; };
 		D0631F081E89C1EA007ED75A /* SOXMyOrderBookData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXMyOrderBookData.h; sourceTree = "<group>"; };
@@ -380,6 +384,8 @@
 			children = (
 				D049C44F1E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.h */,
 				D049C4501E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.m */,
+				D05B23D41FB76CBB004BAA6E /* SOXMarket_DefTypes.h */,
+				D05B23D51FB76CBB004BAA6E /* SOXMarket_DefTypes.m */,
 				D08086751E9CECAC00373F09 /* SOXMarket_BitcoinDE_DefTypes.h */,
 				D08086761E9CECAC00373F09 /* SOXMarket_BitcoinDE_DefTypes.m */,
 				D0270AE21E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.h */,
@@ -979,6 +985,7 @@
 				D0B9A3341E895EA0008860ED /* NSAttributedString+URL.m in Sources */,
 				D0B942B01E8AF1D600EF7434 /* SOXErrorMessage_BitcoinDE.m in Sources */,
 				D08ABF0E1E9C03040059825F /* SOXPreferenceCenter.m in Sources */,
+				D05B23D61FB76CBB004BAA6E /* SOXMarket_DefTypes.m in Sources */,
 				D080867C1E9D0B7F00373F09 /* SOXAutomaticTradingCore.m in Sources */,
 				D0631F0A1E89C1EA007ED75A /* SOXMyOrderBookData.m in Sources */,
 				D032EA4F1EE8A71200D9EFBA /* SOXAutomaticTrading_BitcoinDE_Core.m in Sources */,
@@ -1057,6 +1064,7 @@
 				D08ABF0F1E9C03040059825F /* SOXPreferenceCenter.m in Sources */,
 				D0D0E2191F69C92E005FBEDF /* SOXSingleSelectionValueTransformer.m in Sources */,
 				D0B3F1321E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m in Sources */,
+				D05B23D71FB76CBB004BAA6E /* SOXMarket_DefTypes.m in Sources */,
 				D080867D1E9D0B7F00373F09 /* SOXAutomaticTradingCore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

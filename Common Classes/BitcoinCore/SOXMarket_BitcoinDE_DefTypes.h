@@ -6,7 +6,7 @@
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "SOXMarket_DefTypes.h"
 
 typedef NS_ENUM (NSUInteger, BitcoinDE_ServerCommandType) {
     UnknownCommand = 0
@@ -54,11 +54,14 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_UpdateType) {
 };
 
 
-@interface SOXMarket_BitcoinDE_DefTypes : NSObject
+@interface SOXMarket_BitcoinDE_DefTypes : SOXMarket_DefTypes
 
 + (NSString *)orderTypeStringForOrderType:(BitcoinDE_OrderType)orderType;
 + (BitcoinDE_OrderType)orderTypeForOrderTypeString:(NSString *)orderTypeString;
 + (NSString *)paymentOptionStringForPaymentOption:(BitcoinDE_PaymentOption)paymentOption;
 + (NSString *)trustLevelStringForTrustLevel:(BitcoinDE_TrustLevel)trustLevel;
 + (BitcoinDE_TrustLevel)trustLevelForTrustLevelString:(NSString *)trustLevelString;
+
++ (NSString *)tradingPairStringForCurrencyType:(SOXMarket_CurrencyType)currencyType;
+
 @end
