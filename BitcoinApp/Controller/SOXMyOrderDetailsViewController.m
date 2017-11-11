@@ -95,10 +95,10 @@
     }
     
     {
-        self.orderIDTextField.stringValue = self.myOrder.orderInformation_orderID;
+//        self.orderIDTextField.stringValue = self.myOrder.orderInformation_orderID;
         self.typeTextField.stringValue = self.myOrder.orderInformation_type;
-        self.maxAmountTextField.stringValue = self.myOrder.orderInformation_maxAmount.stringValue;
-        self.minAmountTextField.stringValue = self.myOrder.orderInformation_minAmount.stringValue;
+        self.maxAmountTextField.doubleValue = self.myOrder.orderInformation_maxAmount.doubleValue;
+        self.minAmountTextField.doubleValue = self.myOrder.orderInformation_minAmount.doubleValue;
         self.priceTextField.doubleValue = self.myOrder.orderInformation_price.doubleValue;
         self.maxVolumeTextField.doubleValue = self.myOrder.orderInformation_maxVolume.doubleValue;
         self.minVolumeTextField.doubleValue = self.myOrder.orderInformation_minVolume.doubleValue;
@@ -123,8 +123,11 @@
         if (!seatsOfBank) {
             seatsOfBankString = @"-";
         }
+        else if ([seatsOfBank containsObject:@"DE"] ) {
+            seatsOfBankString = [NSString stringWithFormat:@"DE + %tu andere", seatsOfBank.count - 1];
+        }
         else {
-            seatsOfBankString = [seatsOfBank componentsJoinedByString:@", "];
+            seatsOfBankString = [NSString stringWithFormat:@"Kein DE + %tu andere", seatsOfBank.count -1];
         }
         self.seatOfBankDTextField.stringValue = seatsOfBankString;
     }
@@ -133,9 +136,9 @@
         self.createdAtDescriptionTextField.stringValue = @"Created At";
         self.endDateTimeDescriptionTextField.stringValue = @"End Date";
         
-        NSString *createdAt = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:self.myOrder.orderInformation_createdAt];
+        NSString *createdAt = self.myOrder.orderInformation_createdAt;
         self.createdAtTextField.stringValue = createdAt ? createdAt : @"-";
-        NSString *endDateTime = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:self.myOrder.orderInformation_endDateTime];
+        NSString *endDateTime = self.myOrder.orderInformation_endDateTime;
         self.endDateTimeTextField.stringValue = endDateTime ? endDateTime : @"-";
     }
 }

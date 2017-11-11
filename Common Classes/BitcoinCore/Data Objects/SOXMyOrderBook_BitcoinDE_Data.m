@@ -154,10 +154,11 @@
 
     // Order Requirements
     {
-        self.orderRequirements_minTrustLevel = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_OrderRequirements_MinTrustLevel];
-        self.orderRequirements_onlyKYCFull   = [[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_OrderRequirements_OnlyKYCFull] boolValue];
-        self.orderRequirements_paymentOption = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_OrderRequirements_PaymentOption];
-        self.orderRequirements_seatOfBank    = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_OrderRequirements_SeatOfBank];
+        NSDictionary *orderRequirementsDictionary = [myOrderDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderRequirements];
+        self.orderRequirements_minTrustLevel = [orderRequirementsDictionary objectForKey:BitcoinDE_ShowMyOrders_OrderRequirements_MinTrustLevel];
+        self.orderRequirements_onlyKYCFull   = [[orderRequirementsDictionary objectForKey:BitcoinDE_ShowMyOrders_OrderRequirements_OnlyKYCFull] boolValue];
+        self.orderRequirements_paymentOption = [orderRequirementsDictionary objectForKey:BitcoinDE_ShowMyOrders_OrderRequirements_PaymentOption];
+        self.orderRequirements_seatOfBank    = [orderRequirementsDictionary objectForKey:BitcoinDE_ShowMyOrders_OrderRequirements_SeatOfBank];
     }
     
     // Page information
