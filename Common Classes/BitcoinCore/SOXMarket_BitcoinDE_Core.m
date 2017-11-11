@@ -18,8 +18,8 @@
 #import "SOXDataConverter_BitcoinDE.h"
 #import "SOXErrorMessage_BitcoinDE.h"
 
-#import "SOXAccountInfoData.h"
-#import "SOXRatesData.h"
+#import "SOXAccountInfo_BitcoinDE_Data.h"
+#import "SOXRates_BitcoinDE_Data.h"
 
 #pragma mark - Keys
 NSString *const _Nonnull ServerAnswerServerCommandKey = @"ServerCommand";
@@ -916,21 +916,17 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 
 #pragma mark - Private Instance Methods
 - (void)startBannerUpdate {
-    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountInfoCommandType
-                                            withParameter:nil
-                                                respondTo:nil];
-    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowRatesCommandType
-                                            withParameter:nil
-                                                respondTo:nil];
+    [self startBannerUpdateForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
 }
 
 - (void)startBannerUpdateForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
-//    NSDictionary *parameters = []
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountInfoCommandType
                                             withParameter:nil
                                                 respondTo:nil];
+
+    NSDictionary *ratesParameters = [SOXRates_BitcoinDE_Data parametersForCurrencyType:currencyType];
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowRatesCommandType
-                                            withParameter:nil
+                                            withParameter:ratesParameters
                                                 respondTo:nil];
 }
 
