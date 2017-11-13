@@ -283,9 +283,12 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
                     for (NSObject *delegate in self.delegateForSellOrderUpdates) {
                         if ([delegate respondsToSelector:@selector(updateOrderWithSocketOrderObjectID:withValues:)]) {
                             // TODO: Perform in MainThread
-                            [delegate performSelector:@selector(updateOrderWithSocketOrderObjectID:withValues:)
-                                           withObject:objectOrderID
-                                           withObject:changesDictionary];
+
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [delegate performSelector:@selector(updateOrderWithSocketOrderObjectID:withValues:)
+                                               withObject:objectOrderID
+                                               withObject:changesDictionary];
+                            });
                         }
                     }
                 }
