@@ -1241,21 +1241,24 @@
     NSMutableArray *updatesOrders = [NSMutableArray array];
     for (SOXShowOrderbook_BitcoinDE_Data *orderbookData in orderBook) {
         if ([orderbookData.orderInformation_socketOrderObjectID isEqualToString:orderObjectID]) {
-            NSNumber *oldPaymentOption = orderbookData.orderRequirements_paymentOption;
+            NSNumber *oldPaymentOption = [orderbookData.orderRequirements_paymentOption copy];
+
             // ist data object mit orderObjectID vorhanden? Ja: updaten!
             [orderbookData updateOrderbookDataWith:changesDictionary];
             [updatesOrders addObject:orderbookData];
 
-            NSString *note = [NSString stringWithFormat:@"* update paymentOption - ID: %@ - oldPO: %@ - newPO: %@"
-                              , orderbookData.orderInformation_orderID
-                              , oldPaymentOption
-                              , orderbookData.orderRequirements_paymentOption];
-            NSString *orderInformationType = orderbookData.orderInformation_type;
-            if ([orderInformationType isEqualToString:BitcoinDE_WebSocket_BuyOrderType]) {
-                [self informBuyDelegateWithNote:note];
-            }
-            else if ([orderInformationType isEqualToString:BitcoinDE_WebSocket_SellOrderType]) {
-                [self informSellDelegateWithNote:note];
+            { // DEBUG
+                NSString *note = [NSString stringWithFormat:@"* update paymentOption - ID: %@ - oldPO: %@ - newPO: %@"
+                                  , orderbookData.orderInformation_orderID
+                                  , oldPaymentOption
+                                  , orderbookData.orderRequirements_paymentOption];
+                NSString *orderInformationType = orderbookData.orderInformation_type;
+                if ([orderInformationType isEqualToString:BitcoinDE_WebSocket_BuyOrderType]) {
+                    [self informBuyDelegateWithNote:note];
+                }
+                else if ([orderInformationType isEqualToString:BitcoinDE_WebSocket_SellOrderType]) {
+                    [self informSellDelegateWithNote:note];
+                }
             }
         }
     }
