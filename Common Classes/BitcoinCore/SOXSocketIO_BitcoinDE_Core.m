@@ -222,10 +222,6 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
                     [delegate performSelectorOnMainThread:@selector(addedOrder:)
                                                  withObject:addOrderData
                                               waitUntilDone:NO];
-
-//                    if ([delegate respondsToSelector:@selector(addedOrder:)]) {
-//                        [delegate performSelector:@selector(addedOrder:) withObject:addOrderData];
-//                    }
                 }
             }
             else if ([addOrderData.orderInformation_type isEqualToString:BitcoinDE_WebSocket_SellOrderType]) {
@@ -233,9 +229,6 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
                     [delegate performSelectorOnMainThread:@selector(addedOrder:)
                                                withObject:addOrderData
                                             waitUntilDone:NO];
-//                    if ([delegate respondsToSelector:@selector(addedOrder:)]) {
-//                        [delegate performSelector:@selector(addedOrder:) withObject:addOrderData];
-//                    }
                 }
             }
             else {
@@ -282,8 +275,6 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
                     // inform sell-delegates: WebSocket_UpdateOrder only for sell orders
                     for (NSObject *delegate in self.delegateForSellOrderUpdates) {
                         if ([delegate respondsToSelector:@selector(updateOrderWithSocketOrderObjectID:withValues:)]) {
-                            // TODO: Perform in MainThread
-
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 [delegate performSelector:@selector(updateOrderWithSocketOrderObjectID:withValues:)
                                                withObject:objectOrderID
