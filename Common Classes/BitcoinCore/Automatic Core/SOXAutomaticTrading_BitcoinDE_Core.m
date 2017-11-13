@@ -1180,37 +1180,35 @@
                                                              inOrderBook:self.buyOrderBook
                                                               withValues:changesDictionary];
     for (SOXShowOrderbookData *updatedOrder in updatesBuyOrders) {
+        [self.buyOrderBook removeObject:updatedOrder];
         [self addedOrder:updatedOrder];
-        [self.buySEPAOrderBook removeObject:updatedOrder];
     }
 
     // update sellOrders
     NSArray *updatesSellOrders = [self updateOrderWithSocketOrderObjectID:orderObjectID
                                                               inOrderBook:self.sellOrderBook
                                                                withValues:changesDictionary];
-
     for (SOXShowOrderbookData *updatedOrder in updatesSellOrders) {
+        [self.sellOrderBook removeObject:updatedOrder];
         [self addedOrder:updatedOrder];
-        [self.sellSEPAOrderBook removeObject:updatedOrder];
     }
 
     //  update buy SEPA orders
-    updatesBuyOrders = [self updateOrderWithSocketOrderObjectID:orderObjectID
-                                                    inOrderBook:[self.buySEPAOrderBook.allObjects mutableCopy]
-                                                     withValues:changesDictionary];
-    for (SOXShowOrderbookData *updatedOrder in updatesBuyOrders) {
-        [self addedOrder:updatedOrder];
+    NSArray *updatesBuySEPAOrders = [self updateOrderWithSocketOrderObjectID:orderObjectID
+                                                                 inOrderBook:[self.buySEPAOrderBook.allObjects mutableCopy]
+                                                                  withValues:changesDictionary];
+    for (SOXShowOrderbookData *updatedOrder in updatesBuySEPAOrders) {
         [self.buySEPAOrderBook removeObject:updatedOrder];
+        [self addedOrder:updatedOrder];
     }
 
-    //  update buy SEPA orders
-    updatesSellOrders = [self updateOrderWithSocketOrderObjectID:orderObjectID
-                                                     inOrderBook:[self.sellSEPAOrderBook.allObjects mutableCopy]
-                                                      withValues:changesDictionary];
-
-    for (SOXShowOrderbookData *updatedOrder in updatesSellOrders) {
-        [self addedOrder:updatedOrder];
+    //  update sell SEPA orders
+    NSArray *updatesSellSEPAOrders = [self updateOrderWithSocketOrderObjectID:orderObjectID
+                                                                  inOrderBook:[self.sellSEPAOrderBook.allObjects mutableCopy]
+                                                                   withValues:changesDictionary];
+    for (SOXShowOrderbookData *updatedOrder in updatesSellSEPAOrders) {
         [self.sellSEPAOrderBook removeObject:updatedOrder];
+        [self addedOrder:updatedOrder];
     }
 }
 
