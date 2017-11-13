@@ -36,6 +36,7 @@
         fileLogger.maximumFileSize = 0; // no file size limitation
         fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
         fileLogger.logFileManager.maximumNumberOfLogFiles = 14;
+        fileLogger.logFileManager.logFilesDiskQuota = 14 * 25 * 1024 * 1024; // 14 days * 25 MB per Day * 1024B * 1024 B =  367.001.600 Byte = 350 MB
         [DDLog addLogger:fileLogger];
     }
 
