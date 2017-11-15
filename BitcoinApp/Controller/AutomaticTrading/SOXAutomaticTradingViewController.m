@@ -43,6 +43,8 @@
 @property (weak) IBOutlet NSButton *clearLogButton;
 
 #pragma mark Properties
+@property (nonatomic, strong) SOXAutomaticTrading_BitcoinDE_Core *tradingCore;
+
 @property (nonatomic) BOOL automaticTradingIsRunning;
 @property (nonatomic) BOOL executeTrades;
 @property (nonatomic) BOOL executeAutomaticTrades;
@@ -158,31 +160,33 @@
 }
 
 - (void)startAutomaticTrading {
+    self.tradingCore = [[SOXAutomaticTrading_BitcoinDE_Core alloc] initForCurrencyTyp:self.currencyType];
+
     NSDecimalNumber *maximalFidorAmount = self.maxInvestmentTextField.objectValue;
     NSDecimalNumber *interestRate = self.minInterestTextField.objectValue;
     switch (self.orderType) {
         case BitcoinDE_BuyOrderType:
-            [SOXAutomaticTrading_BitcoinDE_Core setBuyMaximalFidorAmount:maximalFidorAmount];
-            [SOXAutomaticTrading_BitcoinDE_Core setBuyInterestRate:interestRate];
+            [self.tradingCore setBuyMaximalFidorAmount:maximalFidorAmount];
+            [self.tradingCore setBuyInterestRate:interestRate];
             break;
         case BitcoinDE_SellOrderType:
-            [SOXAutomaticTrading_BitcoinDE_Core setSellMaximalBTCAmount:maximalFidorAmount];
-            [SOXAutomaticTrading_BitcoinDE_Core setSellInterestRate:interestRate];
+            [self.tradingCore setSellMaximalBTCAmount:maximalFidorAmount];
+            [self.tradingCore setSellInterestRate:interestRate];
             break;
         default:
             return;
             break;
     }
 
-    [SOXAutomaticTrading_BitcoinDE_Core registerController:self
-                                    forUpdatesForOrderType:self.orderType];
+    [self.tradingCore registerController:self
+                  forUpdatesForOrderType:self.orderType];
 
 }
 
 - (void)stopAutomaticTrading {
     if (self.orderType) {
-        [SOXAutomaticTrading_BitcoinDE_Core deRegisterController:self
-                                          forUpdatesForOrderType:self.orderType];
+        [self.tradingCore deRegisterController:self
+                        forUpdatesForOrderType:self.orderType];
     }
     else {
         DDLogInfo(@"ERROR - no orderType set");
@@ -196,14 +200,14 @@
     
     if (self.automaticTradingIsRunning == YES
         && sender.state == NO) {
-       // [self.tradingCore startAutomaticTrading];
+        // [self.tradingCore startAutomaticTrading];
     }
 }
 
 - (IBAction)executeTradesAction:(NSButton *)sender {
     self.executeTrades = !self.executeTrades;
-    [SOXAutomaticTrading_BitcoinDE_Core executeTrades:self.executeTrades
-                                         forOrderType:self.orderType];
+    [self.tradingCore executeTrades:self.executeTrades
+                       forOrderType:self.orderType];
 }
 
 - (IBAction)executeAutomaticTradesAction:(NSButton *)sender {
@@ -212,17 +216,17 @@
     if (self.executeAutomaticTrades) {}
     else {
         self.executeBalanceTrades = NO;
-        [SOXAutomaticTrading_BitcoinDE_Core executeBalanceTrades:NO
-                                                    forOrderType:self.orderType];
+        [self.tradingCore executeBalanceTrades:NO
+                                  forOrderType:self.orderType];
     }
-    [SOXAutomaticTrading_BitcoinDE_Core executeAutomaticTrades:self.executeAutomaticTrades
-                                                  forOrderType:self.orderType];
+    [self.tradingCore executeAutomaticTrades:self.executeAutomaticTrades
+                                forOrderType:self.orderType];
 }
 
 - (IBAction)executeBalanceTradesAction:(NSButton *)sender {
     self.executeBalanceTrades = !self.executeBalanceTrades;
-    [SOXAutomaticTrading_BitcoinDE_Core executeBalanceTrades:self.executeBalanceTrades
-                                                forOrderType:self.orderType];
+    [self.tradingCore executeBalanceTrades:self.executeBalanceTrades
+                              forOrderType:self.orderType];
 }
 
 - (IBAction)startAutomaticAction:(NSButton *)sender {
@@ -258,10 +262,10 @@
     if (valueField == self.minInterestTextField) { // %
         switch (self.orderType) {
             case BitcoinDE_BuyOrderType:
-                [SOXAutomaticTrading_BitcoinDE_Core setBuyInterestRate:newValue];
+                [self.tradingCore setBuyInterestRate:newValue];
                 break;
             case BitcoinDE_SellOrderType:
-                [SOXAutomaticTrading_BitcoinDE_Core setSellInterestRate:newValue];
+                [self.tradingCore setSellInterestRate:newValue];
             default:
                 break;
         }
@@ -269,10 +273,10 @@
     else if (valueField == self.maxInvestmentTextField) { // €
         switch (self.orderType) {
             case BitcoinDE_BuyOrderType:
-                [SOXAutomaticTrading_BitcoinDE_Core setBuyMaximalFidorAmount:newValue];
+                [self.tradingCore setBuyMaximalFidorAmount:newValue];
                 break;
             case BitcoinDE_SellOrderType:
-                [SOXAutomaticTrading_BitcoinDE_Core setSellMaximalBTCAmount:newValue];
+                [self.tradingCore setSellMaximalBTCAmount:newValue];
             default:
                 break;
         }

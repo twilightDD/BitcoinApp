@@ -11,7 +11,10 @@
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXSocketIO_BitcoinDE_Core.h"
 
+#import "SOXMarket_BitcoinDE_DefTypes.h"
+
 #import "SOXOrdersViewController.h"
+#import "SOXAutomaticTradingMainViewController.h"
 
 static NSString *BannerContainerViewSegueKey          = @"BannerContainerViewSegue";
 static NSString *ShowMyOrdersContainerSegueKey        = @"ShowMyOrdersContainerSegue";
@@ -19,6 +22,10 @@ static NSString *OrdersViewControllerBuySegueKey      = @"OrdersViewControllerBu
 static NSString *OrdersViewControllerSellSegueKey     = @"OrdersViewControllerSellSegue";    // TabView.0
 static NSString *AccountLedgerViewControllerSegueKey  = @"AccountLedgerViewControllerSegue"; // TabView.1
 static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewControllerSegue";// TabView.2
+static NSString *AutomaticTradeBTCSegueKey = @"EmbedAutoTraderForBTC";
+static NSString *AutomaticTradeBCHSegueKey = @"EmbedAutoTraderForBCH";
+static NSString *AutomaticTradeETHSegueKey = @"EmbedAutoTraderForETH";
+
 
 #pragma mark - Interface
 @interface MacViewController () <SOXCreditUpdateProtocol, SOXStatusBarUpdateProtocol>
@@ -65,8 +72,7 @@ static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewCont
         item5.label = @"Chart";
         NSTabViewItem *item6 = [self.bottomTabView tabViewItemAtIndex:6];
         item6.label = @"Reporting";
-        NSTabViewItem *item7 = [self.bottomTabView tabViewItemAtIndex:7];
-        item7.label = @"Rich mode";
+
         // debug
         //[self.bottomTabView removeTabViewItem:item6];
         
@@ -83,7 +89,20 @@ static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewCont
         SOXOrdersViewController *viewC = segue.destinationController;
         viewC.orderType = BitcoinDE_SellOrderType;
     }
+    else if ([segue.identifier isEqualToString:AutomaticTradeBTCSegueKey]) {
+        SOXAutomaticTradingMainViewController *viewC = segue.destinationController;
+        viewC.currencyType = BitcoinDE_CurrencyTypeBitcoin;
+    }
+    else if ([segue.identifier isEqualToString:AutomaticTradeBCHSegueKey]) {
+        SOXAutomaticTradingMainViewController *viewC = segue.destinationController;
+        viewC.currencyType = BitcoinDE_CurrencyTypeBitcoinCash;
+    }
+    else if ([segue.identifier isEqualToString:AutomaticTradeETHSegueKey]) {
+        SOXAutomaticTradingMainViewController *viewC = segue.destinationController;
+        viewC.currencyType = BitcoinDE_CurrencyTypeEthereum;
+    }
 }
+
 #pragma mark - Action methods
 - (IBAction)startRequests:(NSButton *)sender {
     [[SOXMarket_BitcoinDE_Core sharedCore] startBannerUpdate];

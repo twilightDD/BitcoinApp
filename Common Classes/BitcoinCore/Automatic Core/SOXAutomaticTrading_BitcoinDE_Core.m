@@ -26,6 +26,10 @@
 @interface SOXAutomaticTrading_BitcoinDE_Core () <SOXMarketCoreServerRequestProtocol, SOXSocketIOCoreProtocol>
 
 #pragma mark | Properties
+@property (nonatomic) BitcoinDE_CurrencyType currencyType;
+@property (nonatomic, copy) NSString *currencyTypeString;
+
+
 @property (strong, nonatomic) id requestShowAccountInfoNotification;
 
 @property (strong, nonatomic) NSDecimalNumber *debugNewAvailBTC; // TODO: debug
@@ -45,59 +49,106 @@
 
 #pragma mark - Implementation
 @implementation SOXAutomaticTrading_BitcoinDE_Core
+#pragma mark - Init&Co.
+- (instancetype)initForCurrencyTyp:(BitcoinDE_CurrencyType)currencyType {
+    self = [super init];
+    if (self) {
+        self.currencyType = currencyType;
+        [self setupProperties];
+    }
+
+    return self;
+}
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self.requestShowAccountInfoNotification];
 }
 
-#pragma mark - Public class methods
-+ (instancetype)sharedTradingCore {
-    static id sharedTradingCore;
+#pragma mark - Public methods
+- (void)registerController:(id <SOXAutomaticTradingCoreProtocol>)controller
+    forUpdatesForOrderType:(BitcoinDE_OrderType)orderType {
 
-    static dispatch_once_t pred;
-
-    dispatch_once(&pred, ^{
-        sharedTradingCore = [SOXAutomaticTrading_BitcoinDE_Core new];
-        [sharedTradingCore setupProperties];
-    });
-
-    return sharedTradingCore;
-}
-
-+ (void)executeTrades:(BOOL)executeTrades forOrderType:(BitcoinDE_OrderType)orderType {
-    SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
+    if (!controller) {
+        return;
+    }
 
     switch (orderType) {
         case BitcoinDE_BuyOrderType: {
-            core.executeBuyTrades = executeTrades;
-            [core informBuyDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE TRADES %@ !!!"
-                                             , executeTrades ? @"enabled" : @"disabled"]];
-            break;
+            [self.buyDelegates addObject:controller];
+
+            NSString *note = [NSString stringWithFormat:@"START: Maximal Fidor trading amount %@"
+                              , [SOXFormatters currencyStringForNumber:self.buyMaximalFidorAmountInvestment
+                                                          roundingMode:NSNumberFormatterRoundDown]];
+            [self informBuyDelegateWithNote:note];
+            NSString *note2 = [NSString stringWithFormat:@"START: Interest rate %@%%", self.buyInterestRate];
+            [self informBuyDelegateWithNote:note2];
+            NSString *note3;
+            if ([self registerForWebSocketUpdates]) {
+                note3 = @"Fetching Orderbooks ...";
+            }
+            else {
+                note3 = @"Orderbooks already fetched";
+            }
+            [self informBuyDelegateWithNote:note3];
         }
+            break;
         case BitcoinDE_SellOrderType: {
-            core.executeSellTrades = executeTrades;
-            [core informSellDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE TRADES %@ !!!"
-                                             , executeTrades ? @"enabled" : @"disabled"]];
-            break;
+            [self.sellDelegates addObject:controller];
+            NSString *note = [NSString stringWithFormat:@"START: Maximal BTC trading amount %@ BTC"
+                              , [SOXFormatters stringForBTCNumber:self.sellMaximalBTCInvestment]];
+            [self informSellDelegateWithNote:note];
+
+            NSString *note2 = [NSString stringWithFormat:@"START: Interest rate %@%%", self.sellInterestRate];
+            [self informSellDelegateWithNote:note2];
+            NSString *note3;
+            if ([self registerForWebSocketUpdates]) {
+                note3 = @"Fetching Orderbooks ...";
+            }
+            else {
+                note3 = @"Orderbooks already fetched";
+            }
+            [self informSellDelegateWithNote:note3];
         }
+            break;
         default:
+            DDLogInfo(@"ERROR - (void)registerForUpdatesForType:(BitcoinDE_OrderType)orderType");
             break;
     }
 }
 
-+ (void)executeAutomaticTrades:(BOOL)executeTrades forOrderType:(BitcoinDE_OrderType)orderType {
-    SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
+- (void)deRegisterController:(id)controller forUpdatesForOrderType:(BitcoinDE_OrderType)orderType {
+    //    if (!controller) {
+    //        return;
+    //    }
+    //
+    //    SOXAutomaticTradingCore *tradingCore = [self sharedTradingCore];
+    //
+    //    switch (orderType) {
+    //        case BitcoinDE_BuyOrderType:
+    //            [tradingCore.buyDelegates removeObject:controller];
+    //            break;
+    //        case BitcoinDE_SellOrderType:
+    //            [tradingCore.sellDelegates removeObject:controller];
+    //            break;
+    //        default:
+    //            DDLogInfo(@"ERROR - (void)registerForUpdatesForType:(BitcoinDE_OrderType)orderType");
+    //            break;
+    //    }
+    //
+    //    [SOXAutomaticTrading_BitcoinDE_Core checkRegisterForSocketUpdatesStatus];
+}
 
+- (void)executeTrades:(BOOL)executeTrades forOrderType:(BitcoinDE_OrderType)orderType {
     switch (orderType) {
         case BitcoinDE_BuyOrderType: {
-            core.executeAutomaticTradesForBuyTrades = executeTrades;
-            [core informBuyDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE AUTOMATIC TRADES %@ !!!"
+            self.executeBuyTrades = executeTrades;
+            [self informBuyDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE TRADES %@ !!!"
                                              , executeTrades ? @"enabled" : @"disabled"]];
             break;
         }
         case BitcoinDE_SellOrderType: {
-            core.executeAutomaticTradesForSellTrades = executeTrades;
-            [core informSellDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE AUTOMATIC TRADES %@ !!!"
+            self.executeSellTrades = executeTrades;
+            [self informSellDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE TRADES %@ !!!"
                                               , executeTrades ? @"enabled" : @"disabled"]];
             break;
         }
@@ -106,19 +157,36 @@
     }
 }
 
-+ (void)executeBalanceTrades:(BOOL)executeBalanceTrades forOrderType:(BitcoinDE_OrderType)orderType {
-    SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
-
+- (void)executeAutomaticTrades:(BOOL)executeTrades forOrderType:(BitcoinDE_OrderType)orderType {
     switch (orderType) {
         case BitcoinDE_BuyOrderType: {
-            core.executeBalanceTradesForBuyTrades = executeBalanceTrades;
-            [core informBuyDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE BALANCE TRADES %@ !!!"
+            self.executeAutomaticTradesForBuyTrades = executeTrades;
+            [self informBuyDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE AUTOMATIC TRADES %@ !!!"
+                                             , executeTrades ? @"enabled" : @"disabled"]];
+            break;
+        }
+        case BitcoinDE_SellOrderType: {
+            self.executeAutomaticTradesForSellTrades = executeTrades;
+            [self informSellDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE AUTOMATIC TRADES %@ !!!"
+                                              , executeTrades ? @"enabled" : @"disabled"]];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+- (void)executeBalanceTrades:(BOOL)executeBalanceTrades forOrderType:(BitcoinDE_OrderType)orderType {
+    switch (orderType) {
+        case BitcoinDE_BuyOrderType: {
+            self.executeBalanceTradesForBuyTrades = executeBalanceTrades;
+            [self informBuyDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE BALANCE TRADES %@ !!!"
                                              , executeBalanceTrades ? @"enabled" : @"disabled"]];
             break;
         }
         case BitcoinDE_SellOrderType: {
-            core.executeBalanceTradesForSellTrades = executeBalanceTrades;
-            [core informSellDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE BALANCE TRADES %@ !!!"
+            self.executeBalanceTradesForSellTrades = executeBalanceTrades;
+            [self informSellDelegateWithNote:[NSString stringWithFormat:@"!!! EXECUTE BALANCE TRADES %@ !!!"
                                               , executeBalanceTrades ? @"enabled" : @"disabled"]];
             break;
         }
@@ -127,93 +195,21 @@
     }
 }
 
-+ (void)registerController:(id <SOXAutomaticTradingCoreProtocol>)controller
-    forUpdatesForOrderType:(BitcoinDE_OrderType)orderType {
-
-    if (!controller) {
-        return;
-    }
-
-    SOXAutomaticTradingCore *tradingCore = [self sharedTradingCore];
-    switch (orderType) {
-        case BitcoinDE_BuyOrderType: {
-            [tradingCore.buyDelegates addObject:controller];
-
-            NSString *note = [NSString stringWithFormat:@"START: Maximal Fidor trading amount %@"
-                              , [SOXFormatters currencyStringForNumber:tradingCore.buyMaximalFidorAmountInvestment
-                                                          roundingMode:NSNumberFormatterRoundDown]];
-            [tradingCore informBuyDelegateWithNote:note];
-            NSString *note2 = [NSString stringWithFormat:@"START: Interest rate %@%%", tradingCore.buyInterestRate];
-            [tradingCore informBuyDelegateWithNote:note2];
-            NSString *note3;
-            if ([SOXAutomaticTrading_BitcoinDE_Core registerForWebSocketUpdates]) {
-                note3 = @"Fetching Orderbooks ...";
-            }
-            else {
-                note3 = @"Orderbooks already fetched";
-            }
-            [tradingCore informBuyDelegateWithNote:note3];
-        }
-            break;
-        case BitcoinDE_SellOrderType: {
-            [tradingCore.sellDelegates addObject:controller];
-            NSString *note = [NSString stringWithFormat:@"START: Maximal BTC trading amount %@ BTC"
-                              , [SOXFormatters stringForBTCNumber:tradingCore.sellMaximalBTCInvestment]];
-            [tradingCore informSellDelegateWithNote:note];
-
-            NSString *note2 = [NSString stringWithFormat:@"START: Interest rate %@%%", tradingCore.sellInterestRate];
-            [tradingCore informSellDelegateWithNote:note2];
-            NSString *note3;
-            if ([SOXAutomaticTrading_BitcoinDE_Core registerForWebSocketUpdates]) {
-                note3 = @"Fetching Orderbooks ...";
-            }
-            else {
-                note3 = @"Orderbooks already fetched";
-            }
-            [tradingCore informSellDelegateWithNote:note3];
-        }
-            break;
-        default:
-            DDLogInfo(@"ERROR - (void)registerForUpdatesForType:(BitcoinDE_OrderType)orderType");
-            break;
-    }
-
-
-}
-
-+ (void)deRegisterController:(id)controller forUpdatesForOrderType:(BitcoinDE_OrderType)orderType {
-    if (!controller) {
-        return;
-    }
-
-    SOXAutomaticTradingCore *tradingCore = [self sharedTradingCore];
-
-    switch (orderType) {
-        case BitcoinDE_BuyOrderType:
-            [tradingCore.buyDelegates removeObject:controller];
-            break;
-        case BitcoinDE_SellOrderType:
-            [tradingCore.sellDelegates removeObject:controller];
-            break;
-        default:
-            DDLogInfo(@"ERROR - (void)registerForUpdatesForType:(BitcoinDE_OrderType)orderType");
-            break;
-    }
-
-    [SOXAutomaticTrading_BitcoinDE_Core checkRegisterForSocketUpdatesStatus];
+#pragma mark - Private methods
+- (void)setupProperties {
+    [super setupProperties];
+    self.currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:self.currencyType];
 }
 
 #pragma mark - WebSocket methods
-+ (BOOL)registerForWebSocketUpdates {
-    SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
-
-    if (core.automaticTradingIsRunning) {
+- (BOOL)registerForWebSocketUpdates {
+    if (self.automaticTradingIsRunning) {
         return NO;
     }
 
     { // get buyOrderBook
         NSDictionary *buyParameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:BitcoinDE_BuyOrderType
-                                                                                 currencyType:BitcoinDE_CurrencyTypeBitcoin
+                                                                                 currencyType:self.currencyType
                                                                      onlyExpressPaymentOption:YES];
         
         NSMutableDictionary *newBuyParameters = [buyParameters mutableCopy];
@@ -221,27 +217,27 @@
         
         [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType
                                                 withParameter:[newBuyParameters copy]
-                                                    respondTo:core];
+                                                    respondTo:self];
     }
     
     { // get sellOrderBook
         NSDictionary *sellParameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:BitcoinDE_SellOrderType
-                                                                                  currencyType:BitcoinDE_CurrencyTypeBitcoin
+                                                                                  currencyType:self.currencyType
                                                                       onlyExpressPaymentOption:YES];
         
         NSMutableDictionary *newSellParameters = [sellParameters mutableCopy];
         [newSellParameters setObject:@1 forKey:BitcoinDE_ShowMyOrders_OrderRequirements_OnlyKYCFull];
         [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType
                                                 withParameter:[newSellParameters copy]
-                                                    respondTo:core];
+                                                    respondTo:self];
     }
 
     // register for banner update notifications
-    core.requestShowAccountInfoNotification = [[NSNotificationCenter defaultCenter] addObserverForName:BitcoinDE_Notification_RequestShowAccountInfo
+    self.requestShowAccountInfoNotification = [[NSNotificationCenter defaultCenter] addObserverForName:BitcoinDE_Notification_RequestShowAccountInfo
                                                                                                 object:nil
                                                                                                  queue:[NSOperationQueue mainQueue]
                                                                                             usingBlock:^(NSNotification * _Nonnull note) {
-                                                                                                [core bannerWasUpdated:note.object];
+                                                                                                [self bannerWasUpdated:note.object];
                                                                                             }
                                                ];
 
@@ -249,46 +245,45 @@
     // TODO: quickfix to get a banner update after socket reconnect
     [[SOXMarket_BitcoinDE_Core sharedCore] startBannerUpdate];
 
-    core.automaticTradingIsRunning = YES;
+    self.automaticTradingIsRunning = YES;
 
     return YES;
 }
 
-+ (void)checkRegisterForSocketUpdatesStatus {
-    SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
+- (void)checkRegisterForSocketUpdatesStatus {
 
     // buy updates
-    if (core.buyDelegates.count > 0) {
+    if (self.buyDelegates.count > 0) {
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
-                                                                delegate:core];
+                                                                delegate:self];
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
-                                                                delegate:core];
+                                                                delegate:self];
     }
     else {
         [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
-                                                                  delegate:core];
+                                                                  delegate:self];
     }
 
     // sell updates
-    if (core.sellDelegates.count > 0) {
+    if (self.sellDelegates.count > 0) {
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
-                                                                delegate:core];
+                                                                delegate:self];
 
     }
     else {
         [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
-                                                                  delegate:core];
+                                                                  delegate:self];
     }
 
     // remove updates
-    if (core.buyDelegates.count == 0
-        && core.sellDelegates.count == 0) {
+    if (self.buyDelegates.count == 0
+        && self.sellDelegates.count == 0) {
         [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
-                                                                  delegate:core];
+                                                                  delegate:self];
     }
     else {
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
-                                                                delegate:core];
+                                                                delegate:self];
     }
 }
 
@@ -327,6 +322,8 @@
 
     return orderBookDatas;
 }
+
+
 #pragma mark - Private methods
 - (void)playSound {
 //    NSSound *mySound = [NSSound soundNamed:@"ka-ching"];
@@ -868,7 +865,6 @@
         return;
     }
 
-    SOXAutomaticTrading_BitcoinDE_Core *core = [SOXAutomaticTrading_BitcoinDE_Core sharedTradingCore];
     NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
 
     NSMutableArray <SOXShowOrderbook_BitcoinDE_Data *> *orderBookDatas;
@@ -918,9 +914,9 @@
         }
         DDLogInfo(@"buySum: %@ averagePrice: %@", buyBTCSum, averagePrice);
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
-                                                                delegate:core];
+                                                                delegate:self];
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
-                                                                delegate:core];
+                                                                delegate:self];
 
         SOXShowOrderbook_BitcoinDE_Data *dataOfInterest = self.buyOrderBook.firstObject;
         NSString *note = [NSString stringWithFormat:@"START in BUY - firstObject: type %@ oID %@ minAmount %@ price %@",
@@ -954,9 +950,9 @@
         self.sellOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:sellOrderBookDatas
                                                                     forOrderType:BitcoinDE_SellOrderType];
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
-                                                                delegate:core];
+                                                                delegate:self];
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
-                                                                delegate:core];
+                                                                delegate:self];
 
         SOXShowOrderbook_BitcoinDE_Data *dataOfInterest = self.sellOrderBook.firstObject;
         NSString *note = [NSString stringWithFormat:@"START in SELL - firstObject: type %@ oID %@ minAmount %@ price %@",
