@@ -1071,7 +1071,8 @@
 #pragma mark - Inform delegates
 - (void)informBuyDelegateWithNote:(NSString *)note {
     if (note) {
-        DDLogInfo(@"buyDele: %@"
+        DDLogInfo(@"%@ buyDele: %@"
+                  , [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringForCurrencyType:self.currencyType]
                   , note);
 
         for (NSObject <SOXAutomaticTradingCoreProtocol> *delegate in self.buyDelegates) {
@@ -1086,7 +1087,8 @@
 - (void)informSellDelegateWithNote:(NSString *)note {
 
     if (note) {
-        DDLogInfo(@"sellDele: %@"
+        DDLogInfo(@"%@ sellDele: %@"
+                  , [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringForCurrencyType:self.currencyType]
                   , note);
 
         for (NSObject <SOXAutomaticTradingCoreProtocol> *delegate in self.sellDelegates) {
