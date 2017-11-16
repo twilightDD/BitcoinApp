@@ -153,7 +153,7 @@
     
     // Rates stack
     {
-        self.ratesHeadlineTextField.stringValue = @"Weighted Bitcoin Rates";
+        self.ratesHeadlineTextField.stringValue = @"Weighted Coin Rates";
         
         self.ratesRateWeightedDescriptionTextField.stringValue = @"Current";
         self.ratesRateWeighted3hDescriptionTextField.stringValue = @"Last 3 hours";
@@ -168,7 +168,7 @@
     {
         self.coinValueHeadlineTextField.stringValue = @"Coin value";
         
-        self.coinValueDescriptionTextField.stringValue = @"BTC value";
+        self.coinValueDescriptionTextField.stringValue = @"Value";
         self.coinValueTextField.stringValue = @"...";
         
         self.emptyDescriptionTextField.hidden = YES;
@@ -178,6 +178,10 @@
 }
 
 - (void)updateUIForCoinAmounts {
+    NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:self.currencyType];
+    self.btcBalanceHeadlineTextField.stringValue = [NSString stringWithFormat:@"My %@", currencyTypeString];
+
+
     SOXAccountInfo_BitcoinDE_Data *accountInfoData = (SOXAccountInfo_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].accountInfoData;
     self.btcBalanceTotalAmountTextField.objectValue     = [accountInfoData totalAmountForCurrencyType:self.currencyType];
     self.btcBalanceAvailableAmountTextField.objectValue = [accountInfoData availableAmountForCurrencyType:self.currencyType];
@@ -188,17 +192,11 @@
     SOXAccountInfo_BitcoinDE_Data *accountInfoData = (SOXAccountInfo_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].accountInfoData;
     if (accountInfoData.bankReservation_exists) {
         self.fidorReservationValuesAndDescriptionStackView.hidden = NO;
-        
-        { // Total amount
-            self.fidorReservationTotalAmountTextField.doubleValue = [accountInfoData allocationMaxEurVolumeForCurrency:self.currencyType].doubleValue ;
-        }
-        { // Available amount
-            self.fidorReservationAvailableAmountTextField.doubleValue = [accountInfoData allocationEurVolumeOpenOrdersForCurrency:self.currencyType].doubleValue;
-        }
-        { // Valid until
-            NSString *validUntilString = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:accountInfoData.bankReservation_validUntil];
-            self.fidorReservationValidUntilTextField.stringValue = validUntilString;
-        }
+
+        self.fidorReservationTotalAmountTextField.doubleValue = [accountInfoData allocationMaxEurVolumeForCurrency:self.currencyType].doubleValue ;
+        self.fidorReservationAvailableAmountTextField.doubleValue = [accountInfoData allocationEurVolumeOpenOrdersForCurrency:self.currencyType].doubleValue;
+        NSString *validUntilString = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:accountInfoData.bankReservation_validUntil];
+        self.fidorReservationValidUntilTextField.stringValue = validUntilString;
     }
     else {
         self.fidorReservationValuesAndDescriptionStackView.hidden = YES;
@@ -210,6 +208,19 @@
     self.ratesRateWeightedTextField.objectValue     = [ratesData rateWeightedForCurrencyType:self.currencyType];
     self.ratesRateWeighted3hTextField.objectValue   = [ratesData rateWeighted3hForCurrencyType:self.currencyType];
     self.ratesRateWeighted12hTextField.objectValue  = [ratesData rateWeighted12hForCurrencyType:self.currencyType];
+
+    NSDecimalNumber *totalCoinAmount = [SOXMarket_BitcoinDE_Core totalAmountForCurrencyType:self.currencyType];
+    NSDecimalNumber *rateWeighted = [SOXMarket_BitcoinDE_Core rateWeightedForCurrencyType:self.currencyType];
+    if (totalCoinAmount
+        && [totalCoinAmount isNotEqualTo:[NSDecimalNumber notANumber]]
+        && rateWeighted
+        && [rateWeighted isNotEqualTo:[NSDecimalNumber notANumber]]) {
+        NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:self.currencyType];
+        self.coinValueHeadlineTextField.stringValue = [NSString stringWithFormat:@"Value of my %@", currencyTypeString];
+        NSDecimalNumber *coinValue = [totalCoinAmount decimalNumberByMultiplyingBy:rateWeighted ];
+        self.coinValueTextField.stringValue = [SOXFormatters currencyStringForNumber:coinValue
+                                                                        roundingMode:NSNumberFormatterRoundUp];
+    }
 }
 
 #pragma mark - Notification methods
@@ -227,55 +238,21 @@
 - (void)answerOfServerRequest:(NSDictionary *)answerOfServerRequest {
 
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowAccountInfoCommandType)]) {
-        SOXAccountInfo_BitcoinDE_Data *accountInfoData = (SOXAccountInfo_BitcoinDE_Data*)[SOXMarket_BitcoinDE_Core sharedCore].accountInfoData;
-        //  btc_balance
-        {
-            self.btcBalanceTotalAmountTextField.objectValue     = accountInfoData.btcBalance_totalAmount;
-            self.btcBalanceAvailableAmountTextField.objectValue = accountInfoData.btcBalance_availableAmount;
-            self.btcBalanceReservedAmountTextField.objectValue  = accountInfoData.btcBalance_reservedAmount;
-
-            self.btcBalanceTotalAmount = accountInfoData.btcBalance_totalAmount;
-        }
-        
-        // fidor_reservation
-        {
-            
-            //[SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount = accountInfoData.bankReservation_availableAmount;
-            [self updateUIForCoinAmounts];
-            [self updateUIForAllocations];
-        }
+        [self updateUIForCoinAmounts];
+        [self updateUIForAllocations];
     }
     else if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowRatesCommandType)]) {
-        SOXRates_BitcoinDE_Data *ratesData = (SOXRates_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].ratesData;
         [self updateUIForRates];
-
-
-//        //  rates
-//        {
-//            self.ratesRateWeightedTextField.objectValue     = ratesData.rate_weighted;
-//            self.ratesRateWeighted3hTextField.objectValue   = ratesData.rate_weighted_3h;
-//            self.ratesRateWeighted12hTextField.objectValue  = ratesData.rate_weighted_12h;
-//
-//            // set values on SOXMarket_BitcoinDE_Core
-//            {
-//                [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted = ratesData.rate_weighted;
-//
-//
-//                NSDecimalNumber *rate_weighted_half         = [ratesData.rate_weighted decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"2"]];
-//                NSDecimalNumber *rate_weighted_half_rounded = [SOXFormatters currencyNumberForNumber:rate_weighted_half
-//                                                                                        roundingMode:NSNumberFormatterRoundUp];
-//                [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted_half = rate_weighted_half_rounded;
-//            }
-
-           // [self startRatesReloadTimer];
-//        }
+        // [self startRatesReloadTimer];
     }
 
-    if (self.btcBalanceTotalAmount
-        && [self.btcBalanceTotalAmount isNotEqualTo:[NSDecimalNumber notANumber]]
-        && [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted
-        && [[SOXMarket_BitcoinDE_Core sharedCore].rate_weighted isNotEqualTo:[NSDecimalNumber notANumber]]) {
-        NSDecimalNumber *coinValue = [self.btcBalanceTotalAmount decimalNumberByMultiplyingBy:[SOXMarket_BitcoinDE_Core sharedCore].rate_weighted ];
+    NSDecimalNumber *totalCoinAmount = [SOXMarket_BitcoinDE_Core totalAmountForCurrencyType:self.currencyType];
+    NSDecimalNumber *rateWeighted = [SOXMarket_BitcoinDE_Core rateWeightedForCurrencyType:self.currencyType];
+    if (totalCoinAmount
+        && [totalCoinAmount isNotEqualTo:[NSDecimalNumber notANumber]]
+        && rateWeighted
+        && [rateWeighted isNotEqualTo:[NSDecimalNumber notANumber]]) {
+        NSDecimalNumber *coinValue = [totalCoinAmount decimalNumberByMultiplyingBy:rateWeighted ];
         self.coinValueTextField.stringValue = [SOXFormatters currencyStringForNumber:coinValue
                                                                         roundingMode:NSNumberFormatterRoundUp];
     }

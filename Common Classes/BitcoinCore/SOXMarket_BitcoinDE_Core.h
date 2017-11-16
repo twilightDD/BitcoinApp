@@ -57,8 +57,8 @@ FOUNDATION_EXPORT NSString *const _Nonnull HTTPMethodPOSTKey;
 
 
 @interface SOXMarket_BitcoinDE_Core : NSObject
-@property (strong, nonatomic) NSDecimalNumber * _Nullable rate_weighted;
-@property (strong, nonatomic) NSDecimalNumber * _Nullable rate_weighted_half;
+//@property (strong, nonatomic) NSDecimalNumber * _Nullable rate_weighted;
+//@property (strong, nonatomic) NSDecimalNumber * _Nullable rate_weighted_half;
 
 
 @property (strong, nonatomic) SOXAccountInfoData * _Nullable accountInfoData;
@@ -73,6 +73,11 @@ FOUNDATION_EXPORT NSString *const _Nonnull HTTPMethodPOSTKey;
 + (NSDecimalNumber * _Nullable)totalAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 + (NSDecimalNumber * _Nullable)availableAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 + (NSDecimalNumber * _Nullable)reservedAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
+
++ (NSDecimalNumber * _Nullable)rateWeightedForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
++ (NSDecimalNumber * _Nullable)rateWeighted3hForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
++ (NSDecimalNumber * _Nullable)rateWeighted12hForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
++ (NSDecimalNumber * _Nullable)rateWeightedHalfForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 
 - (void)startBannerUpdate;
 

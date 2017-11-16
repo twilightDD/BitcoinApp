@@ -94,9 +94,6 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
         sharedCore.runningRequests = [NSMutableArray array];
         sharedCore.networkRequestCounter = 0;
         sharedCore.maxCredits = 0;
-        
-        sharedCore.rate_weighted      = [NSDecimalNumber decimalNumberWithString:@"0"];
-        sharedCore.rate_weighted_half = [NSDecimalNumber decimalNumberWithString:@"0"];
     });
     return sharedCore;
 }
@@ -132,6 +129,25 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
     return [accountInfoData reservedAmountForCurrencyType:currencyType];
 }
 
++ (NSDecimalNumber * _Nullable)rateWeightedForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    SOXRates_BitcoinDE_Data *ratesData = (SOXRates_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].ratesData;
+    return [ratesData rateWeightedForCurrencyType:currencyType];
+}
+
++ (NSDecimalNumber * _Nullable)rateWeighted3hForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    SOXRates_BitcoinDE_Data *ratesData = (SOXRates_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].ratesData;
+    return [ratesData rateWeighted3hForCurrencyType:currencyType];
+}
+
++ (NSDecimalNumber * _Nullable)rateWeighted12hForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    SOXRates_BitcoinDE_Data *ratesData = (SOXRates_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].ratesData;
+    return [ratesData rateWeighted12hForCurrencyType:currencyType];
+}
+
++ (NSDecimalNumber * _Nullable)rateWeightedHalfForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    SOXRates_BitcoinDE_Data *ratesData = (SOXRates_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].ratesData;
+    return [ratesData rateWeightedHalfForCurrencyType:currencyType];
+}
 
 + (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
                       withParameter:(NSDictionary * _Nullable)parameterDictionary

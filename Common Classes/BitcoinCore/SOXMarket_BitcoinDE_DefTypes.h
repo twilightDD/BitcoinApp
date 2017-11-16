@@ -70,5 +70,6 @@ typedef NS_ENUM (NSInteger, BitcoinDE_CurrencyType) {
 
 + (NSString *)tradingPairStringForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 + (NSString *)tradingPairShortStringForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
++ (NSString *)tradingPairNaturalStringForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 + (BitcoinDE_CurrencyType)currencyTypeForTradingPairString:(NSString *)tradingPairString;
 @end

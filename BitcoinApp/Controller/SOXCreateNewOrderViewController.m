@@ -106,7 +106,7 @@
             [NSDecimalNumber decimalNumberWithString:@"0.05"];
         self.minimalPossibleAmount = [NSDecimalNumber decimalNumberWithString:@"0.05"];
         
-        self.minimalPossiblePrice = [[SOXMarket_BitcoinDE_Core sharedCore] rate_weighted_half];
+        self.minimalPossiblePrice = [SOXMarket_BitcoinDE_Core rateWeightedHalfForCurrencyType:self.currencyType];
         // condition #1
         {
             // setting numberFormatter minimum value
@@ -127,10 +127,10 @@
              #2 The value of the amount of bitcoin may not be lower than than €60.00
              */
             if (self.orderType == BitcoinDE_BuyOrderType){
-                self.price = [[SOXMarket_BitcoinDE_Core sharedCore] rate_weighted_half];
+                self.price = [SOXMarket_BitcoinDE_Core rateWeightedHalfForCurrencyType:self.currencyType];
             }
             else if (self.orderType == BitcoinDE_SellOrderType) {
-                self.price = [[SOXMarket_BitcoinDE_Core sharedCore] rate_weighted];
+                self.price = [SOXMarket_BitcoinDE_Core rateWeightedForCurrencyType:self.currencyType];
             }
         }
         else {

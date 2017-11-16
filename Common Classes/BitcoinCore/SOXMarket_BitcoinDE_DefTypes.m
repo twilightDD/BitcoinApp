@@ -110,6 +110,25 @@
     return tradingPairShortStringForCurrencyType;
 }
 
++ (NSString *)tradingPairNaturalStringForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    static NSDictionary    *tradingPairNaturalStringsForCurrencyType;
+
+    static dispatch_once_t pred;
+
+    dispatch_once(&pred, ^{
+        tradingPairNaturalStringsForCurrencyType = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                    @"Unbekannt", @(BitcoinDE_CurrencyTypeUnknown)
+                                                    , @"Bitcoins", @(BitcoinDE_CurrencyTypeBitcoin)
+                                                    , @"Bitcoin Cashs", @(BitcoinDE_CurrencyTypeBitcoinCash)
+                                                    , @"Ethereums", @(BitcoinDE_CurrencyTypeEthereum)
+                                                    , nil];
+    });
+
+    NSString *tradingPairNaturalStringForCurrencyType = [tradingPairNaturalStringsForCurrencyType objectForKey:@(currencyType)];
+    return tradingPairNaturalStringForCurrencyType;
+}
+
+
 + (BitcoinDE_CurrencyType)currencyTypeForTradingPairString:(NSString *)tradingPairString {
     NSArray *currencyTypes = [[self tradingPairCurrencyTypeDictionary] allKeysForObject:tradingPairString];
     NSAssert(currencyTypes.count < 2, @"more than one key for given object");
