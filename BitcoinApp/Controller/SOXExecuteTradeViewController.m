@@ -95,8 +95,8 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     self.mayExecuteTrade        = NO;
     self.defaultPaymentOption   = [SOXPreferenceCenter defaultPaymentOptionForExecuteTrade];
     self.orderBookPaymentOption = self.orderBookData.orderRequirements_paymentOption.unsignedIntegerValue;
-    self.availableBitcoinAmount = [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount;
-    self.availableFidorAmount   = [SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount;
+    self.availableBitcoinAmount = [SOXMarket_BitcoinDE_Core availableAmountForCurrencyType:self.currencyType];
+    self.availableFidorAmount   = [SOXMarket_BitcoinDE_Core allocationMaxEurVolumeForCurrency:self.currencyType];
     // TODO: Debug availFidorAmount = 500
     //self.availableFidorAmount   = [NSDecimalNumber decimalNumberWithString:@"500"];
 

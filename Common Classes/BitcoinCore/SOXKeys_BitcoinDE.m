@@ -13,6 +13,7 @@
 #pragma mark - Notifications
 NSString *const BitcoinDE_Notification_RequestShowAccountInfo   = @"Notification_RequestShowAccountInfo";
 NSString *const BitcoinDE_Notification_RequestShowRates         = @"Notification_RequestShowRates";
+NSString *const BitcoinDE_Notification_PresentBannerInformationForCurrency = @"Notification_PresentBannerInformationForCurrency";
 
 #pragma mark - Bitcoin flavours
 NSString *const BitcoinDE_TradingPair_BitcoinOriginal   = @"btceur";
@@ -171,6 +172,7 @@ NSString *const BitcoinDE_ShowOrderbook_OrderRequirements_PaymentOptions    = @"
 #pragma mark - BitcoinDE_ShowRates
 NSString *const BitcoinDE_ShowRates_MainKey = @"rates";
 #pragma mark | Rates
+NSString *const BitcoinDE_ShowRates_rate_trading_pair = @"trading_pair";
 NSString *const BitcoinDE_ShowRates_rate_weighted     = @"rate_weighted";
 NSString *const BitcoinDE_ShowRates_rate_weighted_3h  = @"rate_weighted_3h";
 NSString *const BitcoinDE_ShowRates_rate_weighted_12h = @"rate_weighted_12h";

@@ -11,8 +11,8 @@
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXKeys_BitcoinDE.h"
 
-#import "SOXAccountInfoData.h"
-#import "SOXRatesData.h"
+#import "SOXAccountInfo_BitcoinDE_Data.h"
+#import "SOXRates_BitcoinDE_Data.h"
 
 #import "SOXFormatters.h"
 
@@ -63,10 +63,12 @@
 #pragma mark - Properties
 // Values to calculate wealth
 @property (strong, nonatomic) NSDecimalNumber *btcBalanceTotalAmount;
+@property (nonatomic) BitcoinDE_CurrencyType currencyType;
 
 // Notifications
 @property (strong, nonatomic) id requestShowAccountInfoNotification;
 @property (strong, nonatomic) id requestShowRatesNotification;
+@property (strong, nonatomic) id presentBannerInformationForCurrencyNotification;
 
 @end
 
@@ -76,7 +78,8 @@
 #pragma mark Init&Co.
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.currencyType = BitcoinDE_CurrencyTypeBitcoin;
+
     [self registerOberservers];
     [self setupUI];
 }
@@ -84,6 +87,7 @@
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self.requestShowAccountInfoNotification];
     [[NSNotificationCenter defaultCenter] removeObserver:self.requestShowRatesNotification];
+    [[NSNotificationCenter defaultCenter] removeObserver:self.presentBannerInformationForCurrencyNotification];
 }
 
 #pragma mark - Private methods
@@ -108,6 +112,15 @@
                                                                                           [self answerOfServerRequest:note.object];
                                                                                       }
                                          ];
+
+    self.presentBannerInformationForCurrencyNotification = [[NSNotificationCenter defaultCenter] addObserverForName:BitcoinDE_Notification_PresentBannerInformationForCurrency
+                                                                                                object:nil
+                                                                                                 queue:mainQueue
+                                                                                            usingBlock:^(NSNotification * _Nonnull note) {
+                                                                                                strongify(self)
+                                                                                                [self presentBannerForCurrencyType:note];
+                                                                                            }
+                                                            ];
 }
 
 - (void)setupUI {
@@ -128,8 +141,8 @@
     {
         self.fidorReservationHeadlineTextField.stringValue = @"Fidor Bank reservation";
         
-        self.fidorReservationTotalAmountDescriptionTextField.stringValue = @"Total amount";
-        self.fidorReservationAvailableAmountDescriptionTextField.stringValue = @"Available amount";
+        self.fidorReservationTotalAmountDescriptionTextField.stringValue = @"Max Euro";
+        self.fidorReservationAvailableAmountDescriptionTextField.stringValue = @"Open orders";
         self.fidorReservationValidUntilDescriptionTextField.stringValue = @"Valid unitl";
         
         self.fidorReservationTotalAmountTextField.stringValue = @"...";
@@ -164,16 +177,23 @@
     }
 }
 
-- (void)updateUIForBankReservationWithAccountInfoData:(SOXAccountInfoData *)accountInfoData {
+- (void)updateUIForCoinAmounts {
+    SOXAccountInfo_BitcoinDE_Data *accountInfoData = (SOXAccountInfo_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].accountInfoData;
+    self.btcBalanceTotalAmountTextField.objectValue     = [accountInfoData totalAmountForCurrencyType:self.currencyType];
+    self.btcBalanceAvailableAmountTextField.objectValue = [accountInfoData availableAmountForCurrencyType:self.currencyType];
+    self.btcBalanceReservedAmountTextField.objectValue  = [accountInfoData reservedAmountForCurrencyType:self.currencyType];
+}
+
+- (void)updateUIForAllocations {
+    SOXAccountInfo_BitcoinDE_Data *accountInfoData = (SOXAccountInfo_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].accountInfoData;
     if (accountInfoData.bankReservation_exists) {
         self.fidorReservationValuesAndDescriptionStackView.hidden = NO;
         
         { // Total amount
-            self.fidorReservationTotalAmountDescriptionTextField.stringValue = @"Total amount";
-            self.fidorReservationTotalAmountTextField.doubleValue = accountInfoData.bankReservation_totalAmount.doubleValue;
+            self.fidorReservationTotalAmountTextField.doubleValue = [accountInfoData allocationMaxEurVolumeForCurrency:self.currencyType].doubleValue ;
         }
         { // Available amount
-            self.fidorReservationAvailableAmountTextField.doubleValue = accountInfoData.bankReservation_availableAmount.doubleValue;
+            self.fidorReservationAvailableAmountTextField.doubleValue = [accountInfoData allocationEurVolumeOpenOrdersForCurrency:self.currencyType].doubleValue;
         }
         { // Valid until
             NSString *validUntilString = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:accountInfoData.bankReservation_validUntil];
@@ -182,61 +202,75 @@
     }
     else {
         self.fidorReservationValuesAndDescriptionStackView.hidden = YES;
-        
-        // DEBUG Fidor Reservation for testing
-//        self.fidorReservationValuesAndDescriptionStackView.hidden = NO;
-//        [SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount = [NSDecimalNumber decimalNumberWithString:@"300"];
-//        self.fidorReservationAvailableAmountTextField.stringValue = @"Debug: 300€";
     }
 }
+
+- (void)updateUIForRates {
+    SOXRates_BitcoinDE_Data *ratesData = (SOXRates_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].ratesData;
+    self.ratesRateWeightedTextField.objectValue     = [ratesData rateWeightedForCurrencyType:self.currencyType];
+    self.ratesRateWeighted3hTextField.objectValue   = [ratesData rateWeighted3hForCurrencyType:self.currencyType];
+    self.ratesRateWeighted12hTextField.objectValue  = [ratesData rateWeighted12hForCurrencyType:self.currencyType];
+}
+
+#pragma mark - Notification methods
+- (void)presentBannerForCurrencyType:(NSNotification *)notification {
+    NSNumber *currencyTypeNumber = notification.object;
+    self.currencyType = currencyTypeNumber.unsignedIntegerValue;
+
+    [self updateUIForCoinAmounts];
+    [self updateUIForAllocations];
+    [self updateUIForRates];
+}
+
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
 - (void)answerOfServerRequest:(NSDictionary *)answerOfServerRequest {
 
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowAccountInfoCommandType)]) {
-        SOXAccountInfoData *accountInfoData = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
-        
+        SOXAccountInfo_BitcoinDE_Data *accountInfoData = (SOXAccountInfo_BitcoinDE_Data*)[SOXMarket_BitcoinDE_Core sharedCore].accountInfoData;
         //  btc_balance
         {
             self.btcBalanceTotalAmountTextField.objectValue     = accountInfoData.btcBalance_totalAmount;
             self.btcBalanceAvailableAmountTextField.objectValue = accountInfoData.btcBalance_availableAmount;
             self.btcBalanceReservedAmountTextField.objectValue  = accountInfoData.btcBalance_reservedAmount;
-            
-            [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount = accountInfoData.btcBalance_availableAmount;
-            [SOXMarket_BitcoinDE_Core sharedCore].reservedBitcoinAmount = accountInfoData.btcBalance_reservedAmount;
+
             self.btcBalanceTotalAmount = accountInfoData.btcBalance_totalAmount;
         }
         
         // fidor_reservation
         {
             
-            [SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount = accountInfoData.bankReservation_availableAmount;
-            [self updateUIForBankReservationWithAccountInfoData:accountInfoData];
+            //[SOXMarket_BitcoinDE_Core sharedCore].availableFidorAmount = accountInfoData.bankReservation_availableAmount;
+            [self updateUIForCoinAmounts];
+            [self updateUIForAllocations];
         }
     }
     else if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowRatesCommandType)]) {
-        SOXRatesData *ratesData = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
-        //  rates
-        {
-            self.ratesRateWeightedTextField.objectValue     = ratesData.rate_weighted;
-            self.ratesRateWeighted3hTextField.objectValue   = ratesData.rate_weighted_3h;
-            self.ratesRateWeighted12hTextField.objectValue  = ratesData.rate_weighted_12h;
-            
-            // set values on SOXMarket_BitcoinDE_Core
-            {
-                [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted = ratesData.rate_weighted;
-            
-                
-                NSDecimalNumber *rate_weighted_half         = [ratesData.rate_weighted decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"2"]];
-                NSDecimalNumber *rate_weighted_half_rounded = [SOXFormatters currencyNumberForNumber:rate_weighted_half
-                                                                                        roundingMode:NSNumberFormatterRoundUp];
-                [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted_half = rate_weighted_half_rounded;
-            }
-            
+        SOXRates_BitcoinDE_Data *ratesData = (SOXRates_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].ratesData;
+        [self updateUIForRates];
+
+
+//        //  rates
+//        {
+//            self.ratesRateWeightedTextField.objectValue     = ratesData.rate_weighted;
+//            self.ratesRateWeighted3hTextField.objectValue   = ratesData.rate_weighted_3h;
+//            self.ratesRateWeighted12hTextField.objectValue  = ratesData.rate_weighted_12h;
+//
+//            // set values on SOXMarket_BitcoinDE_Core
+//            {
+//                [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted = ratesData.rate_weighted;
+//
+//
+//                NSDecimalNumber *rate_weighted_half         = [ratesData.rate_weighted decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"2"]];
+//                NSDecimalNumber *rate_weighted_half_rounded = [SOXFormatters currencyNumberForNumber:rate_weighted_half
+//                                                                                        roundingMode:NSNumberFormatterRoundUp];
+//                [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted_half = rate_weighted_half_rounded;
+//            }
+
            // [self startRatesReloadTimer];
-        }
+//        }
     }
-    ;
+
     if (self.btcBalanceTotalAmount
         && [self.btcBalanceTotalAmount isNotEqualTo:[NSDecimalNumber notANumber]]
         && [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted
@@ -248,6 +282,7 @@
     
 }
 
+#pragma mark - Reload Timer
 - (void)startRatesReloadTimer {
 //    DDLogInfo(@"***** NEW RATE: %@", [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted);
 //    

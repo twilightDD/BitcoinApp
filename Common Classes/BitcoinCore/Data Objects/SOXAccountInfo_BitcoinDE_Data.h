@@ -7,6 +7,7 @@
 //
 
 #import "SOXAccountInfoData.h"
+#import "SOXMarket_BitcoinDE_DefTypes.h"
 
 FOUNDATION_EXPORT NSString *const BannerDataKey;
 
@@ -26,5 +27,13 @@ FOUNDATION_EXPORT NSString *const BannerDataKey;
 @interface SOXAccountInfo_BitcoinDE_Data : SOXAccountInfoData
 
 + (instancetype)accountInfoDataForAccountInfoDictionary:(NSDictionary *)accountInfoDictionary;
+
+- (NSDecimalNumber *)allocationPercentForCurrency:(BitcoinDE_CurrencyType)currencyType;
+- (NSDecimalNumber *)allocationMaxEurVolumeForCurrency:(BitcoinDE_CurrencyType)currencyType;
+- (NSDecimalNumber *)allocationEurVolumeOpenOrdersForCurrency:(BitcoinDE_CurrencyType)currencyType;
+
+- (NSDecimalNumber *)totalAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
+- (NSDecimalNumber *)availableAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
+- (NSDecimalNumber *)reservedAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 
 @end

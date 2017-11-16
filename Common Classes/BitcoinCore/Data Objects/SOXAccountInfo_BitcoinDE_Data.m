@@ -73,7 +73,51 @@
     return bannerData;
 }
 
-#pragma mark - Instance methods
+#pragma mark - Public methods
+- (NSDecimalNumber *)allocationPercentForCurrency:(BitcoinDE_CurrencyType)currencyType {
+    SOXBitcoinDE_Allocation *tradingPairAllocation = [self tradingPairAllocationForCurrency:currencyType];
+    NSDecimalNumber *allocationPercentForCurrency = tradingPairAllocation.allocation_percent;
+
+    return allocationPercentForCurrency;
+}
+
+- (NSDecimalNumber *)allocationMaxEurVolumeForCurrency:(BitcoinDE_CurrencyType)currencyType {
+    SOXBitcoinDE_Allocation *tradingPairAllocation = [self tradingPairAllocationForCurrency:currencyType];
+    NSDecimalNumber *allocationMaxEurVolumeForCurrency = tradingPairAllocation.allocation_max_eur_volume;
+
+    return allocationMaxEurVolumeForCurrency;
+}
+
+- (NSDecimalNumber *)allocationEurVolumeOpenOrdersForCurrency:(BitcoinDE_CurrencyType)currencyType {
+    SOXBitcoinDE_Allocation *tradingPairAllocation = [self tradingPairAllocationForCurrency:currencyType];
+    NSDecimalNumber *allocationEurVolumeOpenOrdersForCurrency = tradingPairAllocation.allocation_eur_volume_open_orders;
+
+    return allocationEurVolumeOpenOrdersForCurrency;
+}
+
+- (NSDecimalNumber *)totalAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    SOXBitcoinDE_Balance *tradingPairBalance = [self tradingPairBalanceForCurrencyType:currencyType];
+    NSDecimalNumber *totalAmountForCurrencyType = tradingPairBalance.totalAmount;
+
+    return totalAmountForCurrencyType;
+}
+
+- (NSDecimalNumber *)availableAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    SOXBitcoinDE_Balance *tradingPairBalance = [self tradingPairBalanceForCurrencyType:currencyType];
+    NSDecimalNumber *availableAmountForCurrencyType = tradingPairBalance.availableAmount;
+
+    return availableAmountForCurrencyType;
+}
+
+- (NSDecimalNumber *)reservedAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    SOXBitcoinDE_Balance *tradingPairBalance = [self tradingPairBalanceForCurrencyType:currencyType];
+    NSDecimalNumber *reservedAmountForCurrencyType = tradingPairBalance.reservedAmount;
+
+    return reservedAmountForCurrencyType;
+}
+
+
+#pragma mark - Private methods
 - (void)setupDataForAccountInfoDictionary:(NSDictionary *)accountInfoDictionary {
     NSDictionary *dataDict = [accountInfoDictionary objectForKey:BitcoinDE_ShowAccountInfo_MainKey];
 
@@ -92,7 +136,6 @@
         }];
 
         self.tradingPairBalances = [tradingPairBalancesHelper copy];
-        NSLog(@"");
     }
     // Fidor information
     {
@@ -129,6 +172,20 @@
         self.bankInformation_bicFull = [encrypted_Information objectForKey:BitcoinDE_ShowAccountInfoEncryptedInformation_bic_full];
         self.bankInformation_UID = [encrypted_Information objectForKey:BitcoinDE_ShowAccountInfoEncryptedInformation_uid];
     }
+}
+
+- (SOXBitcoinDE_Allocation *)tradingPairAllocationForCurrency:(BitcoinDE_CurrencyType)currencyType {
+    NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringForCurrencyType:currencyType];
+    SOXBitcoinDE_Allocation *tradingPairAllocationForCurrency = [self.tradingPairAllocations objectForKey:currencyTypeString];
+
+    return tradingPairAllocationForCurrency;
+}
+
+- (SOXBitcoinDE_Balance *)tradingPairBalanceForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringForCurrencyType:currencyType];
+    SOXBitcoinDE_Balance *tradingPairBalanceForCurrencyType  = [self.tradingPairBalances objectForKey:currencyTypeString];
+
+    return tradingPairBalanceForCurrencyType;
 }
 
 

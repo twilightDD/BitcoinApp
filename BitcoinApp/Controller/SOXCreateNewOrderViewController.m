@@ -154,7 +154,7 @@
         self.titleTextField.stringValue                 = @"Create new sell order";
         self.amountDescriptionTextField.stringValue     = @"Amount to sell";
         // input textFields uses bindings
-        self.availableAmountTextField.stringValue          = [NSString stringWithFormat:@"Available: %@", [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount];
+        self.availableAmountTextField.stringValue          = [NSString stringWithFormat:@"Available: %@", [SOXMarket_BitcoinDE_Core availableAmountForCurrencyType:self.currencyType]];
     }
     else {
         self.titleTextField.stringValue                 = @"ERROR - no type given!";

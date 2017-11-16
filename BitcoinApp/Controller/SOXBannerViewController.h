@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "SOXMarket_BitcoinDE_DefTypes.h"
 @interface SOXBannerViewController : NSViewController
 
 @end

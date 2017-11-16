@@ -100,9 +100,9 @@
     dispatch_once(&pred, ^{
         tradingPairShortStringsForCurrencyType = [NSDictionary dictionaryWithObjectsAndKeys:
                                                   @"???", @(BitcoinDE_CurrencyTypeUnknown)
-                                                  , @"BTC", @(BitcoinDE_CurrencyTypeBitcoin)
-                                                  , @"BCH", @(BitcoinDE_CurrencyTypeBitcoinCash)
-                                                  , @"EHT", @(BitcoinDE_CurrencyTypeEthereum)
+                                                  , @"btc", @(BitcoinDE_CurrencyTypeBitcoin)
+                                                  , @"bch", @(BitcoinDE_CurrencyTypeBitcoinCash)
+                                                  , @"eth", @(BitcoinDE_CurrencyTypeEthereum)
                                                   , nil];
     });
 

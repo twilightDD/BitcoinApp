@@ -17,6 +17,10 @@
 
 @interface SOXAutomaticTradingCore ()
 
+@property (nonatomic) BitcoinDE_CurrencyType currencyType;
+@property (nonatomic, copy) NSString *currencyTypeString;
+
+
 @property (nonatomic) BOOL socketIODidDisconnectAppeared;
 
 @property (strong, nonatomic) NSHashTable *buyDelegates;

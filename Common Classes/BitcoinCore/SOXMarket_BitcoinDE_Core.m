@@ -76,7 +76,10 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 
 #pragma mark - Implementation
 @implementation SOXMarket_BitcoinDE_Core
+-(void)setRatesData:(SOXRatesData *)ratesData {
+    _ratesData = ratesData;
 
+}
 #pragma mark Public Class methods
 + (SOXMarket_BitcoinDE_Core * _Nonnull)sharedCore {
     static SOXMarket_BitcoinDE_Core *sharedCore;
@@ -98,6 +101,36 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
     return sharedCore;
 }
 
+
++ (NSDecimalNumber * _Nullable)allocationPercentForCurrency:(BitcoinDE_CurrencyType)currencyType {
+    SOXAccountInfo_BitcoinDE_Data *accountInfoData = (SOXAccountInfo_BitcoinDE_Data*)[SOXMarket_BitcoinDE_Core sharedCore].accountInfoData;
+    return [accountInfoData allocationPercentForCurrency:currencyType];
+}
+
++ (NSDecimalNumber * _Nullable)allocationMaxEurVolumeForCurrency:(BitcoinDE_CurrencyType)currencyType {
+    SOXAccountInfo_BitcoinDE_Data *accountInfoData = (SOXAccountInfo_BitcoinDE_Data*)[SOXMarket_BitcoinDE_Core sharedCore].accountInfoData;
+    return [accountInfoData allocationMaxEurVolumeForCurrency:currencyType];
+}
+
++ (NSDecimalNumber * _Nullable)allocationEurVolumeOpenOrdersForCurrency:(BitcoinDE_CurrencyType)currencyType {
+    SOXAccountInfo_BitcoinDE_Data *accountInfoData = (SOXAccountInfo_BitcoinDE_Data*)[SOXMarket_BitcoinDE_Core sharedCore].accountInfoData;
+    return [accountInfoData allocationEurVolumeOpenOrdersForCurrency:currencyType];
+}
+
++ (NSDecimalNumber * _Nullable)totalAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    SOXAccountInfo_BitcoinDE_Data *accountInfoData = (SOXAccountInfo_BitcoinDE_Data*)[SOXMarket_BitcoinDE_Core sharedCore].accountInfoData;
+    return [accountInfoData totalAmountForCurrencyType:currencyType];
+}
+
++ (NSDecimalNumber * _Nullable)availableAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    SOXAccountInfo_BitcoinDE_Data *accountInfoData = (SOXAccountInfo_BitcoinDE_Data*)[SOXMarket_BitcoinDE_Core sharedCore].accountInfoData;
+    return [accountInfoData availableAmountForCurrencyType:currencyType];
+}
+
++ (NSDecimalNumber * _Nullable)reservedAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    SOXAccountInfo_BitcoinDE_Data *accountInfoData = (SOXAccountInfo_BitcoinDE_Data*)[SOXMarket_BitcoinDE_Core sharedCore].accountInfoData;
+    return [accountInfoData reservedAmountForCurrencyType:currencyType];
+}
 
 
 + (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
@@ -127,17 +160,22 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
                                                                                                     ,[SOXMarket_BitcoinDE_Core descriptionForServerCommandType:serverCommandType]];
                                                                     
                                                                     SOXErrorMessage_BitcoinDE *errorMessage = [[SOXErrorMessage_BitcoinDE alloc] initWithServerRequestTitle:serverRequestTitle];
-                                                                    
-                                                                    NSDictionary *serverAnswer = [self answerDictionaryForServerCommand:serverCommandType
-                                                                                                                             parameters:parameterDictionary
-                                                                                                                               withData:data
-                                                                                                                            urlResponse:response
-                                                                                                                                  error:error
-                                                                                                                           errorMessage:errorMessage];
+                                                                    __block NSDictionary *serverAnswer;
+                                                                    dispatch_sync(dispatch_get_main_queue(), ^{
+                                                                        serverAnswer = [self answerDictionaryForServerCommand:serverCommandType
+                                                                                                                   parameters:parameterDictionary
+                                                                                                                     withData:data
+                                                                                                                  urlResponse:response
+                                                                                                                        error:error
+                                                                                                                 errorMessage:errorMessage];
+                                                                    });
                                                                     if (serverAnswer) {
                                                                         if (serverCommandType == BitcoinDE_ShowAccountInfoCommandType) {
+                                                                            SOXAccountInfoData *accountInfoData = [serverAnswer objectForKey:ServerAnswerPayloadKey];
+                                                                            [SOXMarket_BitcoinDE_Core sharedCore].accountInfoData = accountInfoData;
+
                                                                             dispatch_async(dispatch_get_main_queue(), ^{
-                                                                                SOXAccountInfoData *accountInfoData = [serverAnswer objectForKey:ServerAnswerPayloadKey];
+
                                                                                 DDLogInfo(@"^^^^^^ Account Info Update arrived:\ntotalAmount: %@\navailAmount: %@\nreserAmount: %@ \n(networkRequestCounter: %tu)"
                                                                                           , [SOXFormatters stringForBTCNumber:accountInfoData.btcBalance_totalAmount]
                                                                                           , [SOXFormatters stringForBTCNumber:accountInfoData.btcBalance_availableAmount]
@@ -149,13 +187,15 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 
                                                                         }
                                                                         else if (serverCommandType == BitcoinDE_ShowRatesCommandType) {
+                                                                            SOXRatesData *ratesData = [serverAnswer objectForKey:ServerAnswerPayloadKey];
+
                                                                             dispatch_async(dispatch_get_main_queue(), ^{
-                                                                                SOXRatesData *ratesData = [serverAnswer objectForKey:ServerAnswerPayloadKey];
-                                                                                DDLogInfo(@"^^^^^^ Rates Update arrived:\ntotalAmount: %@\navailAmount: %@\nreserAmount: %@\n(networkRequestCounter: %tu)"
-                                                                                      , [SOXFormatters currencyStringForNumber:ratesData.rate_weighted roundingMode:NSNumberFormatterRoundHalfUp]
-                                                                                      , [SOXFormatters currencyStringForNumber:ratesData.rate_weighted_3h roundingMode:NSNumberFormatterRoundHalfUp]
-                                                                                      , [SOXFormatters currencyStringForNumber:ratesData.rate_weighted_12h roundingMode:NSNumberFormatterRoundHalfUp]
-                                                                                      , networkRequestCounter);
+
+//                                                                                DDLogInfo(@"^^^^^^ Rates Update arrived:\ntotalAmount: %@\navailAmount: %@\nreserAmount: %@\n(networkRequestCounter: %tu)"
+//                                                                                      , [SOXFormatters currencyStringForNumber:ratesData.rate_weighted roundingMode:NSNumberFormatterRoundHalfUp]
+//                                                                                      , [SOXFormatters currencyStringForNumber:ratesData.rate_weighted_3h roundingMode:NSNumberFormatterRoundHalfUp]
+//                                                                                      , [SOXFormatters currencyStringForNumber:ratesData.rate_weighted_12h roundingMode:NSNumberFormatterRoundHalfUp]
+//                                                                                      , networkRequestCounter);
                                                                             });
                                                                             [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_RequestShowRates
                                                                                                                                 object:serverAnswer];
@@ -881,8 +921,6 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
     return commandCreditCosts;
 }
 
-
-
 #pragma mark - Manual getter
 + (NSString *)baseURLString {
     static NSString        *baseURLString;
@@ -916,13 +954,16 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 
 #pragma mark - Private Instance Methods
 - (void)startBannerUpdate {
-    [self startBannerUpdateForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
-}
-
-- (void)startBannerUpdateForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountInfoCommandType
                                             withParameter:nil
                                                 respondTo:nil];
+    [self startBannerUpdateForCurrencyType:BitcoinDE_CurrencyTypeBitcoin];
+    [self startBannerUpdateForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
+    [self startBannerUpdateForCurrencyType:BitcoinDE_CurrencyTypeEthereum];
+}
+
+- (void)startBannerUpdateForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+
 
     NSDictionary *ratesParameters = [SOXRates_BitcoinDE_Data parametersForCurrencyType:currencyType];
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowRatesCommandType

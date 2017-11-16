@@ -24,6 +24,7 @@
 
 // TODO: doublette of type OrdersType (@see SOXOrdersViewController)
 @property (nonatomic) BitcoinDE_OrderType orderType;
+@property (nonatomic) BitcoinDE_CurrencyType currencyType;
 @property (weak, nonatomic) SOXMyOrderBook_BitcoinDE_Data *orderBookDataToReplace;
 
 @end

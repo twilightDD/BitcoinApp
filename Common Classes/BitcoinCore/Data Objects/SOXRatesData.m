@@ -8,6 +8,21 @@
 
 #import "SOXRatesData.h"
 
+@interface SOXRatesData ()
+
+@property (strong, nonatomic, readwrite) NSMutableDictionary *rates;
+
+@end
+
 @implementation SOXRatesData
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.rates = [NSMutableDictionary dictionary];
+    }
+
+    return self;
+}
 
 @end

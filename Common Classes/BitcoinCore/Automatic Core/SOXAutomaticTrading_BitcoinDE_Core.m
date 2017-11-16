@@ -26,8 +26,6 @@
 @interface SOXAutomaticTrading_BitcoinDE_Core () <SOXMarketCoreServerRequestProtocol, SOXSocketIOCoreProtocol>
 
 #pragma mark | Properties
-@property (nonatomic) BitcoinDE_CurrencyType currencyType;
-@property (nonatomic, copy) NSString *currencyTypeString;
 
 
 @property (strong, nonatomic) id requestShowAccountInfoNotification;
@@ -82,12 +80,16 @@
             [self informBuyDelegateWithNote:note];
             NSString *note2 = [NSString stringWithFormat:@"START: Interest rate %@%%", self.buyInterestRate];
             [self informBuyDelegateWithNote:note2];
-            NSString *note3;
+            NSString *note3 = [NSString stringWithFormat:@"Automatic for %@ availAllocation: %@"
+                               , self.currencyTypeString
+                               , [SOXMarket_BitcoinDE_Core allocationMaxEurVolumeForCurrency:self.currencyType]];
+
+            NSString *note10;
             if ([self registerForWebSocketUpdates]) {
-                note3 = @"Fetching Orderbooks ...";
+                note10 = @"Fetching Orderbooks ...";
             }
             else {
-                note3 = @"Orderbooks already fetched";
+                note10 = @"Orderbooks already fetched";
             }
             [self informBuyDelegateWithNote:note3];
         }
@@ -331,7 +333,7 @@
 }
 
 - (void)keepReservedBTCAmount {
-    NSDecimalNumber *reservedBTCAmount = [SOXMarket_BitcoinDE_Core sharedCore].reservedBitcoinAmount;
+    NSDecimalNumber *reservedBTCAmount = [SOXMarket_BitcoinDE_Core reservedAmountForCurrencyType:self.currencyType];
 
     NSDecimalNumber *btcSpectrum = [NSDecimalNumber decimalNumberWithString:@"0.000001"];
     self.reservedBTCAfterBannerUpdateLow = [reservedBTCAmount decimalNumberBySubtracting:btcSpectrum
@@ -1438,8 +1440,9 @@
         NSDecimalNumber *effectiveBacklog = [buyBTCBacklog decimalNumberBySubtracting:sellBTCBacklog
                                                                          withBehavior:[SOXFormatters btcNumberHandler]];
 
-        NSDecimalNumber *estBTC = [[SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount decimalNumberBySubtracting:effectiveBacklog
-                                                                                               withBehavior:[SOXFormatters btcNumberHandler]];
+        NSDecimalNumber *availCoinAmount = [SOXMarket_BitcoinDE_Core availableAmountForCurrencyType:self.currencyType];
+        NSDecimalNumber *estBTC = [availCoinAmount decimalNumberBySubtracting:effectiveBacklog
+                                                                 withBehavior:[SOXFormatters btcNumberHandler]];
 
         NSDecimalNumber *btcSpectrum = [NSDecimalNumber decimalNumberWithString:@"0.000001"];
         self.availableBTCAfterBannerUpdateLow = [estBTC decimalNumberBySubtracting:btcSpectrum
@@ -1448,7 +1451,7 @@
                                                          withBehavior:[SOXFormatters btcNumberHandler]];
         { // DEBUG
             NSString *note = [NSString stringWithFormat:@"Start Banner Update after Auto - availBTC: %@ bBack: %@ sBack: %@ diff: %@ estL: %@ est: %@ estH: %@"
-                              , [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount
+                              , availCoinAmount
                               , buyBTCBacklog
                               , sellBTCBacklog
                               , effectiveBacklog
@@ -1614,7 +1617,7 @@
 
 
     if (self.expectAvailFidorChange
-        && newAvailableFidorAmount < [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount) {
+        && newAvailableFidorAmount < [SOXMarket_BitcoinDE_Core availableAmountForCurrencyType:self.currencyType]) {
         { // DEBUG
             NSString *note = [NSString stringWithFormat:@"Updated availFidor - new availFidor is %@"
                               , newAvailableFidorAmount];

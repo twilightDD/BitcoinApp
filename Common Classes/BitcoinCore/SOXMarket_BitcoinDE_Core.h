@@ -10,6 +10,7 @@
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
 @class SOXErrorMessage_BitcoinDE;
+@class SOXAccountInfoData, SOXRatesData;
 
 FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerServerCommandKey;
 FOUNDATION_EXPORT NSString *const _Nonnull ServerAnswerPayloadKey;
@@ -58,11 +59,20 @@ FOUNDATION_EXPORT NSString *const _Nonnull HTTPMethodPOSTKey;
 @interface SOXMarket_BitcoinDE_Core : NSObject
 @property (strong, nonatomic) NSDecimalNumber * _Nullable rate_weighted;
 @property (strong, nonatomic) NSDecimalNumber * _Nullable rate_weighted_half;
-@property (strong, nonatomic) NSDecimalNumber * _Nullable availableBitcoinAmount;
-@property (strong, nonatomic) NSDecimalNumber * _Nullable reservedBitcoinAmount;
-@property (strong, nonatomic) NSDecimalNumber * _Nullable availableFidorAmount;
+
+
+@property (strong, nonatomic) SOXAccountInfoData * _Nullable accountInfoData;
+@property (strong, nonatomic) SOXRatesData * _Nullable ratesData;
 
 @property (weak, nonatomic, readonly) NSObject <SOXMarketCoreErrorProtocol> * _Nullable delegateForErrorMessages;
+
++ (NSDecimalNumber * _Nullable)allocationPercentForCurrency:(BitcoinDE_CurrencyType)currencyType;
++ (NSDecimalNumber * _Nullable)allocationMaxEurVolumeForCurrency:(BitcoinDE_CurrencyType)currencyType;
++ (NSDecimalNumber * _Nullable)allocationEurVolumeOpenOrdersForCurrency:(BitcoinDE_CurrencyType)currencyType;
+
++ (NSDecimalNumber * _Nullable)totalAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
++ (NSDecimalNumber * _Nullable)availableAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
++ (NSDecimalNumber * _Nullable)reservedAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 
 - (void)startBannerUpdate;
 

@@ -13,6 +13,7 @@
 #pragma mark - Notifications
 FOUNDATION_EXPORT NSString *const BitcoinDE_Notification_RequestShowAccountInfo;
 FOUNDATION_EXPORT NSString *const BitcoinDE_Notification_RequestShowRates;
+FOUNDATION_EXPORT NSString *const BitcoinDE_Notification_PresentBannerInformationForCurrency;
 
 #pragma mark - Bitcoin flavours
 FOUNDATION_EXPORT NSString *const BitcoinDE_TradingPair_BitcoinOriginal;
@@ -172,6 +173,7 @@ FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_OrderRequirements_Paym
 #pragma mark - BitcoinDE_ShowRates
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowRates_MainKey;
 #pragma mark | Rates
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowRates_rate_trading_pair;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowRates_rate_weighted;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowRates_rate_weighted_3h;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowRates_rate_weighted_12h;

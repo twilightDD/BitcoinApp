@@ -8,13 +8,25 @@
 
 #import "SOXRates_BitcoinDE_Data.h"
 
+#import "SOXMarket_BitcoinDE_Core.h"
+
 #import "SOXKeys_BitcoinDE.h"
 
+#pragma mark - SOXBitcoinDE_Rate
+@interface SOXBitcoinDE_Rate ()
+@property (strong, nonatomic, readwrite) NSDecimalNumber *rate_weighted;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *rate_weighted_3h;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *rate_weighted_12h;
+@end
+
+@implementation SOXBitcoinDE_Rate
+@end
 
 #pragma mark - Interface
 @interface SOXRates_BitcoinDE_Data ()
 
 #pragma mark Properties
+@property (strong, nonatomic, readwrite) NSMutableDictionary *rates;
 @property (strong, nonatomic, readwrite) NSDecimalNumber *rate_weighted;
 @property (strong, nonatomic, readwrite) NSDecimalNumber *rate_weighted_3h;
 @property (strong, nonatomic, readwrite) NSDecimalNumber *rate_weighted_12h;
@@ -23,6 +35,9 @@
 
 #pragma mark - Implementation
 @implementation SOXRates_BitcoinDE_Data
+
+@synthesize rates;
+
 #pragma mark Synthesize
 @synthesize rate_weighted, rate_weighted_3h, rate_weighted_12h;
 
@@ -43,13 +58,58 @@
     return parametersForCurrencyType;
 }
 
+#pragma mark - Public methods
+- (NSDecimalNumber *)rateWeightedForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    SOXBitcoinDE_Rate *rate = [self rateForCurrencyType:currencyType];
+    NSDecimalNumber *rateWeightedForCurrencyType = rate.rate_weighted;
+
+    return rateWeightedForCurrencyType;
+}
+
+- (NSDecimalNumber *)rateWeighted3hForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    SOXBitcoinDE_Rate *rate = [self rateForCurrencyType:currencyType];
+    NSDecimalNumber *rateWeighted3hForCurrencyType = rate.rate_weighted_3h;
+
+    return rateWeighted3hForCurrencyType;
+}
+
+- (NSDecimalNumber *)rateWeighted12hForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    SOXBitcoinDE_Rate *rate = [self rateForCurrencyType:currencyType];
+    NSDecimalNumber *rateWeighted12hForCurrencyType = rate.rate_weighted_12h;
+
+    return rateWeighted12hForCurrencyType;
+}
+
+
 #pragma mark - Instance methods
 - (void)setupDataForRateInfoDictionary:(NSDictionary *)payloadDictionary {
+    // get ratesData from core (if not existing: create it)
+    // Tricky thing: for each trading pair we get a separate server answer!
+    SOXRates_BitcoinDE_Data *ratesData = (SOXRates_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].ratesData;
+    if (!ratesData) {
+        ratesData = [[SOXRates_BitcoinDE_Data alloc] init];
+        [SOXMarket_BitcoinDE_Core sharedCore].ratesData = ratesData;
+    }
+
     NSDictionary *ratesDictionary = [payloadDictionary objectForKey:BitcoinDE_ShowRates_MainKey];
-    // NSString to NSNumber
-    self.rate_weighted = [NSDecimalNumber decimalNumberWithString:[ratesDictionary objectForKey:BitcoinDE_ShowRates_rate_weighted]];
-    self.rate_weighted_3h = [NSDecimalNumber decimalNumberWithString:[ratesDictionary objectForKey:BitcoinDE_ShowRates_rate_weighted_3h]];
-    self.rate_weighted_12h = [NSDecimalNumber decimalNumberWithString:[ratesDictionary objectForKey:BitcoinDE_ShowRates_rate_weighted_12h]];
+    SOXBitcoinDE_Rate *rate = [[SOXBitcoinDE_Rate alloc] init];
+    {
+        // NSString to NSNumber
+        rate.rate_weighted = [NSDecimalNumber decimalNumberWithString:[ratesDictionary objectForKey:BitcoinDE_ShowRates_rate_weighted]];
+        rate.rate_weighted_3h = [NSDecimalNumber decimalNumberWithString:[ratesDictionary objectForKey:BitcoinDE_ShowRates_rate_weighted_3h]];
+        rate.rate_weighted_12h = [NSDecimalNumber decimalNumberWithString:[ratesDictionary objectForKey:BitcoinDE_ShowRates_rate_weighted_12h]];
+    }
+    [ratesData.rates setObject:rate
+                        forKey:[payloadDictionary objectForKey:BitcoinDE_ShowRates_rate_trading_pair]];
+}
+
+- (SOXBitcoinDE_Rate *)rateForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType];
+    SOXRates_BitcoinDE_Data *ratesData = (SOXRates_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].ratesData;
+    SOXBitcoinDE_Rate *rateForCurrencyType = [ratesData.rates objectForKey:currencyTypeString];
+
+    return rateForCurrencyType;
+
 }
 
 @end

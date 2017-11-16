@@ -10,6 +10,8 @@
 
 #import "SOXAutomaticTradingViewController.h"
 
+#import "SOXKeys_BitcoinDE.h"
+
 static NSString *EmbedAutomaticBuySegueKey  = @"EmbedAutomaticBuySegue";
 static NSString *EmbedAutomaticSellSegueKey = @"EmbedAutomaticSellSegue";
 
@@ -34,6 +36,12 @@ static NSString *EmbedAutomaticSellSegueKey = @"EmbedAutomaticSellSegue";
     [super viewDidLoad];
 
     [self setupUI];
+}
+
+-(void)viewWillAppear {
+    [super viewWillAppear];
+    [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
+                                                        object:@(self.currencyType)];
 }
 
 - (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender {

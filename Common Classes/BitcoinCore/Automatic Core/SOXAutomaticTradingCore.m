@@ -306,7 +306,7 @@
     NSDecimalNumber *orderToBuyMaxVolume = orderToBuy.orderInformation_maxVolume;
 
     // consider user given maxFidorAmount
-    NSDecimalNumber *availableFidorAmount = [[SOXMarket_BitcoinDE_Core sharedCore] availableFidorAmount];
+    NSDecimalNumber *availableFidorAmount = [SOXMarket_BitcoinDE_Core allocationMaxEurVolumeForCurrency:self.currencyType];
     if (self.buyMaximalFidorAmountInvestment) {
         availableFidorAmount = [SOXFormatters lesserDecimalNumberFrom:self.buyMaximalFidorAmountInvestment
                                                                   and:availableFidorAmount];
@@ -367,7 +367,7 @@
     NSDecimalNumber *orderMinAmountToSell = orderToSell.orderInformation_minAmount;
     NSDecimalNumber *orderMaxAmountToSell = orderToSell.orderInformation_maxAmount;
 
-    NSDecimalNumber *availableBTCAmount = [SOXMarket_BitcoinDE_Core sharedCore].availableBitcoinAmount;
+    NSDecimalNumber *availableBTCAmount = [SOXMarket_BitcoinDE_Core availableAmountForCurrencyType:self.currencyType];
     if (self.sellMaximalBTCInvestment) {
         availableBTCAmount = [SOXFormatters lesserDecimalNumberFrom:self.sellMaximalBTCInvestment
                                                                 and:availableBTCAmount];
