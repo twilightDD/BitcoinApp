@@ -78,11 +78,14 @@
                               , [SOXFormatters currencyStringForNumber:self.buyMaximalFidorAmountInvestment
                                                           roundingMode:NSNumberFormatterRoundDown]];
             [self informBuyDelegateWithNote:note];
+
             NSString *note2 = [NSString stringWithFormat:@"START: Interest rate %@%%", self.buyInterestRate];
             [self informBuyDelegateWithNote:note2];
+
             NSString *note3 = [NSString stringWithFormat:@"Automatic for %@ availAllocation: %@"
                                , self.currencyTypeString
                                , [SOXMarket_BitcoinDE_Core allocationMaxEurVolumeForCurrency:self.currencyType]];
+            [self informBuyDelegateWithNote:note3];
 
             NSString *note10;
             if ([self registerForWebSocketUpdates]) {
@@ -91,7 +94,7 @@
             else {
                 note10 = @"Orderbooks already fetched";
             }
-            [self informBuyDelegateWithNote:note3];
+            [self informBuyDelegateWithNote:note10];
         }
             break;
         case BitcoinDE_SellOrderType: {
@@ -102,14 +105,20 @@
 
             NSString *note2 = [NSString stringWithFormat:@"START: Interest rate %@%%", self.sellInterestRate];
             [self informSellDelegateWithNote:note2];
-            NSString *note3;
+
+            NSString *note3 = [NSString stringWithFormat:@"Automatic for %@ availCoins: %@"
+                               , self.currencyTypeString
+                               , [SOXMarket_BitcoinDE_Core availableAmountForCurrencyType:self.currencyType]];
+            [self informSellDelegateWithNote:note3];
+
+            NSString *note10;
             if ([self registerForWebSocketUpdates]) {
-                note3 = @"Fetching Orderbooks ...";
+                note10 = @"Fetching Orderbooks ...";
             }
             else {
-                note3 = @"Orderbooks already fetched";
+                note10 = @"Orderbooks already fetched";
             }
-            [self informSellDelegateWithNote:note3];
+            [self informSellDelegateWithNote:note10];
         }
             break;
         default:
