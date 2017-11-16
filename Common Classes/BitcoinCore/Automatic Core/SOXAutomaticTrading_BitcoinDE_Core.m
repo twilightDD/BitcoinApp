@@ -998,7 +998,7 @@
                   , addOrderData.orderInformation_orderID
                   , addOrderData.orderInformation_maxAmount
                   , addOrderData.orderInformation_price);
-            NSBeep();
+            //NSBeep();
             return;
         }
     }
