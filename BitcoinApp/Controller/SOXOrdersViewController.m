@@ -104,7 +104,7 @@
     }
     
     NSDictionary *parameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:self.orderType
-                                                                        currencyType:BitcoinDE_CurrencyTypeBitcoinCash
+                                                                        currencyType:BitcoinDE_CurrencyTypeBitcoin
                                                               onlyExpressPaymentOption:NO];
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:serverCommand
                                             withParameter:parameters
