@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "SOXMarket_BitcoinDE_DefTypes.h"
+
 typedef NS_ENUM (NSUInteger, BitcoinDE_AccountLedgerParameter_OrderType) {
     BitcoinDE_AccountLedgerParameter_UnknownOrderType = 0
     , BitcoinDE_AccountLedgerParameter_AllOrderType
@@ -43,6 +45,7 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_AccountLedgerParameter_OrderType) {
 + (NSMutableArray *)accountLedgerDataArrayForAccountLedgerDictionary:(NSDictionary *)payloadDictionary;
 
 + (NSDictionary *)parameterForOrderType:(BitcoinDE_AccountLedgerParameter_OrderType)orderType
+                        forCurrencyType:(BitcoinDE_CurrencyType)currencyType
                               startDate:(NSDate *)startDate
                                 endDate:(NSDate *)endDate
                                    page:(NSInteger)page;

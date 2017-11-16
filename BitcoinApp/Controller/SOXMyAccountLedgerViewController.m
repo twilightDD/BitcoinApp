@@ -60,6 +60,7 @@
     [self enableSpinningWheel];
     
     NSDictionary *parameter = [SOXAccountLedger_BitcoinDE_Data parameterForOrderType:BitcoinDE_AccountLedgerParameter_AllOrderType
+                                                                     forCurrencyType:BitcoinDE_CurrencyTypeBitcoin
                                                                            startDate:[NSDate dateWithTimeIntervalSinceNow:-4320000]
                                                                              endDate:nil
                                                                                 page:1];

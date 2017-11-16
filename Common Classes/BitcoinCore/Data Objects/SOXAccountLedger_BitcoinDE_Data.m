@@ -26,6 +26,7 @@ static NSString *BitcoinDE_AccountLedgerParameter_KickbackOrderTypeKey = @"kickb
 static NSString *BitcoinDE_AccountLedgerParameter_OutgoingFeeVoluntaryOrderTypeKey = @"outgoing_fee_voluntary";
 
 static NSString *AccountLedgerParameter_TypeKey         = @"type";
+static NSString *AccountLedgerParameter_Currency        = @"currency";
 static NSString *AccountLedgerParameter_DateStartKey    = @"datetime_start";
 static NSString *AccountLedgerParameter_DateEndKey      = @"datetime_end";
 static NSString *AccountLedgerParameter_PageKey         = @"page";
@@ -64,6 +65,7 @@ static NSString *AccountLedgerParameter_PageKey         = @"page";
 }
 
 + (NSDictionary *)parameterForOrderType:(BitcoinDE_AccountLedgerParameter_OrderType)orderType
+                        forCurrencyType:(BitcoinDE_CurrencyType)currencyType
                               startDate:(NSDate *)startDate
                                 endDate:(NSDate *)endDate
                                    page:(NSInteger)page {
@@ -109,7 +111,9 @@ static NSString *AccountLedgerParameter_PageKey         = @"page";
             DDLogInfo(@"Unknown BitcoinDE_AccountLedgerParameter_OrderType: %tu", orderType);
             break;
     };
-    
+
+    NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringForCurrencyType:currencyType];
+
     NSString *startDateString = [SOXFormatters rfc3339DateTimeStringDate:startDate];
     NSString *endDateString   = [SOXFormatters rfc3339DateTimeStringDate:endDate];
     
@@ -120,6 +124,7 @@ static NSString *AccountLedgerParameter_PageKey         = @"page";
 
     NSDictionary *parameterDict = [NSDictionary dictionaryWithObjectsAndKeys:
                                    orderTypeString,       AccountLedgerParameter_TypeKey
+                                   , currencyTypeString, AccountLedgerParameter_Currency
                                    //, startDateString,     AccountLedgerParameter_DateStartKey
                                    //, endDateString,       AccountLedgerParameter_DateEndKey
                                    , pageNumber,          AccountLedgerParameter_PageKey
