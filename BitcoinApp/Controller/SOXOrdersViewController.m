@@ -54,9 +54,11 @@
     [SOXMarket_BitcoinDE_Core registerForErrorMessages:self];
     
     [self setupUI];
-   
-    
+
     [self.tableView setDoubleAction:@selector(tableViewDoubleAction:)];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
+                                                        object:@(BitcoinDE_CurrencyTypeBitcoin)];
 }
 
 #pragma mark - Action methods

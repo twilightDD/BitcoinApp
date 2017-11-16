@@ -12,6 +12,9 @@
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXAccountLedger_BitcoinDE_Data.h"
 
+#import "SOXKeys_BitcoinDE.h"
+#import "SOXMarket_BitcoinDE_DefTypes.h"
+
 #pragma mark - Interface
 @interface SOXMyAccountLedgerViewController () <SOXMarketCoreServerRequestProtocol>
 #pragma mark IBOutlets
@@ -42,6 +45,9 @@
     
     [self setupUI];
     [self requestServerData];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
+                                                        object:@(BitcoinDE_CurrencyTypeBitcoin)];
 }
 
 #pragma mark - Private methods

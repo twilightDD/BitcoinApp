@@ -12,6 +12,9 @@
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXMyTrades_BitcoinDE_Data.h"
 
+#import "SOXKeys_BitcoinDE.h"
+#import "SOXMarket_BitcoinDE_DefTypes.h"
+
 #pragma mark - Interface
 @interface SOXMyTradesViewController () <SOXMarketCoreServerRequestProtocol>
 
@@ -97,6 +100,9 @@
     self.selectedPage = 1;
     
     [self setupUI];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
+                                                        object:@(BitcoinDE_CurrencyTypeBitcoin)];
 }
 
 #pragma mark - Private methods

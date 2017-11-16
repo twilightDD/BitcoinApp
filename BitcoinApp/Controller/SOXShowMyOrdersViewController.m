@@ -16,6 +16,7 @@
 #import "SOXMyOrderBook_BitcoinDE_Data.h"
 #import "SOXTradeJob_BitcoinDE_Data.h"
 #import "SOXMarket_BitcoinDE_DefTypes.h"
+#import "SOXKeys_BitcoinDE.h"
 
 #import "SOXFormatters.h"
 
@@ -63,6 +64,9 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
     [self setupUI];
     [self enableSpinningWheel]; // has to be here
     [self requestServerData];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
+                                                        object:@(BitcoinDE_CurrencyTypeBitcoin)];
 }
 
 #pragma mark - Private methods
