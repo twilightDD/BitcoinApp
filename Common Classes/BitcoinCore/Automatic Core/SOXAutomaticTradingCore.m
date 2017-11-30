@@ -53,6 +53,44 @@
     self.executeBalanceTradesForSellTrades = NO;
 }
 
+- (void)flushAllOrderBooks {
+    if (!self.socketIODidDisconnectAppeared) {
+        { // DEBUG
+            NSString *note = [NSString stringWithFormat:@"Going to flush all orderBooks. Count of orderBooks before:\n"
+                              "%tu buyOrderBook\n"
+                              "%tu buySEPAOrderBook\n"
+                              "%tu sellOrderBook\n"
+                              "%tu sellSEPAOrderBook",
+                              self.buyOrderBook.count, self.buySEPAOrderBook.count, self.sellOrderBook.count, self.sellSEPAOrderBook.count];
+            [self informBuyDelegateWithNote:note];
+            [self informSellDelegateWithNote:note];
+        }
+
+        [self.buyOrderBook removeAllObjects];
+        [self.buySEPAOrderBook removeAllObjects];
+        [self.sellOrderBook removeAllObjects];
+        [self.sellSEPAOrderBook removeAllObjects];
+
+        [self updateBuyStatus];
+        [self updateSellStatus];
+
+        { // DEBUG
+            NSString *note = [NSString stringWithFormat:@"Did flush all orderBooks. Count of orderBooks after:\n"
+                              "%tu buyOrderBook\n"
+                              "%tu buySEPAOrderBook\n"
+                              "%tu sellOrderBook\n"
+                              "%tu sellSEPAOrderBook\n"
+                              "------------------------",
+                              self.buyOrderBook.count, self.buySEPAOrderBook.count, self.sellOrderBook.count, self.sellSEPAOrderBook.count];
+            [self informBuyDelegateWithNote:note];
+            [self informSellDelegateWithNote:note];
+        }
+    }
+
+    self.socketIODidDisconnectAppeared = YES;
+    self.automaticTradingIsRunning = NO;
+}
+
 #pragma mark - Manual setters
 - (void)setBuyInterestRate:(NSDecimalNumber *)buyInterestRate {
     if (buyInterestRate) {
@@ -1127,8 +1165,9 @@
 
 #pragma mark | Helpers
 - (void)updateBuyStatus {
+
+    SOXShowOrderbookData *bestOrderData = self.buyOrderBook.firstObject;
     dispatch_async(dispatch_get_main_queue(), ^{
-        SOXShowOrderbookData *bestOrderData = self.buyOrderBook.firstObject;
         NSString *status;
         if (bestOrderData) {
             NSDecimalNumber *bestOrderDataPrice = bestOrderData.orderInformation_price;
@@ -1205,41 +1244,7 @@
     [self informSellDelegateWithNote:socketStatus];
 
     // Flush all orderBooks
-    if (!self.socketIODidDisconnectAppeared) {
-        { // DEBUG
-            NSString *note = [NSString stringWithFormat:@"Going to flush all orderBooks. Count of orderBooks before:\n"
-                              "%tu buyOrderBook\n"
-                              "%tu buySEPAOrderBook\n"
-                              "%tu sellOrderBook\n"
-                              "%tu sellSEPAOrderBook",
-                              self.buyOrderBook.count, self.buySEPAOrderBook.count, self.sellOrderBook.count, self.sellSEPAOrderBook.count];
-            [self informBuyDelegateWithNote:note];
-            [self informSellDelegateWithNote:note];
-        }
-
-        [self.buyOrderBook removeAllObjects];
-        [self.buySEPAOrderBook removeAllObjects];
-        [self.sellOrderBook removeAllObjects];
-        [self.sellSEPAOrderBook removeAllObjects];
-
-        [self updateBuyStatus];
-        [self updateSellStatus];
-
-        { // DEBUG
-            NSString *note = [NSString stringWithFormat:@"Did flush all orderBooks. Count of orderBooks after:\n"
-                              "%tu buyOrderBook\n"
-                              "%tu buySEPAOrderBook\n"
-                              "%tu sellOrderBook\n"
-                              "%tu sellSEPAOrderBook\n"
-                              "------------------------",
-                              self.buyOrderBook.count, self.buySEPAOrderBook.count, self.sellOrderBook.count, self.sellSEPAOrderBook.count];
-            [self informBuyDelegateWithNote:note];
-            [self informSellDelegateWithNote:note];
-        }
-    }
-
-    self.socketIODidDisconnectAppeared = YES;
-    self.automaticTradingIsRunning = NO;
+    [self flushAllOrderBooks];
 }
 
 - (void)socketIOError:(NSString *)socketError {

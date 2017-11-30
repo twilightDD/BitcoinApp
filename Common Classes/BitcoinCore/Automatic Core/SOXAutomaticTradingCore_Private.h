@@ -61,6 +61,7 @@
 @property (strong, nonatomic) NSMutableArray *successfulBalanceSellTradeParameters;
 
 - (void)setupProperties;
+- (void)flushAllOrderBooks;
 
 #pragma mark - Interest Rate methods
 - (NSDecimalNumber *)effectiveBuyInterestRateForData:(SOXShowOrderbookData *)orderOfInterestData

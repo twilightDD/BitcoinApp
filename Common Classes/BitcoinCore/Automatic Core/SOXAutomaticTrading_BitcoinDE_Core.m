@@ -42,6 +42,7 @@
 @property (nonatomic) BOOL expectAvailFidorChange;
 
 @property (strong, nonatomic) NSTimer *creditTimer;
+@property (strong, nonatomic) NSTimer *reloadOrderBooksTimer;
 
 @end
 
@@ -88,7 +89,7 @@
             [self informBuyDelegateWithNote:note3];
 
             NSString *note10;
-            if ([self registerForWebSocketUpdates]) {
+            if ([self fetchOrderBooks]) {
                 note10 = @"Fetching Orderbooks ...";
             }
             else {
@@ -112,7 +113,7 @@
             [self informSellDelegateWithNote:note3];
 
             NSString *note10;
-            if ([self registerForWebSocketUpdates]) {
+            if ([self fetchOrderBooks]) {
                 note10 = @"Fetching Orderbooks ...";
             }
             else {
@@ -125,6 +126,8 @@
             DDLogInfo(@"ERROR - (void)registerForUpdatesForType:(BitcoinDE_OrderType)orderType");
             break;
     }
+
+    [self startOrderBooksUpdateTimer];
 }
 
 - (void)deRegisterController:(id)controller forUpdatesForOrderType:(BitcoinDE_OrderType)orderType {
@@ -212,8 +215,51 @@
     self.currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:self.currencyType];
 }
 
+- (void)startOrderBooksUpdateTimer {
+    if (!self.reloadOrderBooksTimer) {
+        weakify(self);
+        self.reloadOrderBooksTimer = [NSTimer timerWithTimeInterval:15
+                                                            repeats:YES
+                                                              block:^(NSTimer * _Nonnull timer) {
+                                                                  strongify(self);
+                                                                  { // DEBUG
+                                                                      NSString *note = @"reloadOrderBooksTimer says: Time's up";
+                                                                      [self informBuyDelegateWithNote:note];
+                                                                      [self informSellDelegateWithNote:note];
+                                                                  }
+
+                                                                  // don't update orderBooks while autoTrading
+                                                                  if (self.runningAutomaticBuyTradeParameters.count > 0
+                                                                      || self.runningAutomaticSellTradeParameters.count > 0
+                                                                      || self.runningBalanceSellTradeParameters.count > 0
+                                                                      || self.runningBalanceBuyTradeParameters.count > 0) {
+
+                                                                      [self informBuyDelegateAboutRunningQueues];
+                                                                      [self informSellDelegateAboutRunningQueues];
+
+                                                                      return;
+                                                                  }
+
+                                                                  // Update all orderBooks
+                                                                  [self flushAllOrderBooks];
+                                                                  [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
+                                                                                                                            delegate:self];
+                                                                  [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
+                                                                                                                            delegate:self];
+                                                                  [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
+                                                                                                                            delegate:self];
+                                                                  [self fetchOrderBooks];
+                                                                  self.socketIODidDisconnectAppeared = NO;
+                                                              }];
+
+        self.reloadOrderBooksTimer.tolerance = 1;
+        [[NSRunLoop mainRunLoop] addTimer:self.reloadOrderBooksTimer
+                                  forMode:NSDefaultRunLoopMode];
+    }
+}
+
 #pragma mark - WebSocket methods
-- (BOOL)registerForWebSocketUpdates {
+- (BOOL)fetchOrderBooks {
     if (self.automaticTradingIsRunning) {
         return NO;
     }
@@ -244,14 +290,15 @@
     }
 
     // register for banner update notifications
-    self.requestShowAccountInfoNotification = [[NSNotificationCenter defaultCenter] addObserverForName:BitcoinDE_Notification_RequestShowAccountInfo
-                                                                                                object:nil
-                                                                                                 queue:[NSOperationQueue mainQueue]
-                                                                                            usingBlock:^(NSNotification * _Nonnull note) {
-                                                                                                [self bannerWasUpdated:note.object];
-                                                                                            }
-                                               ];
-
+    if (self.requestShowAccountInfoNotification == nil) {
+        self.requestShowAccountInfoNotification = [[NSNotificationCenter defaultCenter] addObserverForName:BitcoinDE_Notification_RequestShowAccountInfo
+                                                                                                    object:nil
+                                                                                                     queue:[NSOperationQueue mainQueue]
+                                                                                                usingBlock:^(NSNotification * _Nonnull note) {
+                                                                                                    [self bannerWasUpdated:note.object];
+                                                                                                }
+                                                   ];
+    }
 
     // TODO: quickfix to get a banner update after socket reconnect
     [[SOXMarket_BitcoinDE_Core sharedCore] startBannerUpdate];
@@ -267,8 +314,8 @@
     if (self.buyDelegates.count > 0) {
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
                                                                 delegate:self];
-        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
-                                                                delegate:self];
+//        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
+//                                                                delegate:self];
     }
     else {
         [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges

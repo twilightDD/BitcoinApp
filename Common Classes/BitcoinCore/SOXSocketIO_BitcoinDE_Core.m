@@ -78,10 +78,19 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
 + (void)unRegisterForOrderUpdatesForUpdateType:(BitcoinDE_UpdateType)bitcoinDE_UpdateType
                                       delegate:(id <SOXSocketIOCoreProtocol>)delegate {
     SOXSocketIO_BitcoinDE_Core *core = [SOXSocketIO_BitcoinDE_Core sharedCore];
-    
-    [core.delegateForBuyOrderUpdates removeObject:delegate];
-    [core.delegateForSellOrderUpdates removeObject:delegate];
-    [core.delegateForRemoveOrderUpdates removeObject:delegate];
+    switch (bitcoinDE_UpdateType) {
+        case BitcoinDE_UpdateType_BuyOrderChanges:
+            [core.delegateForBuyOrderUpdates removeObject:delegate];
+            break;
+        case BitcoinDE_UpdateType_SellOrderChanges:
+            [core.delegateForSellOrderUpdates removeObject:delegate];
+            break;
+        case BitcoinDE_UpdateType_RemoveOrderChanges:
+            [core.delegateForRemoveOrderUpdates removeObject:delegate];
+            break;
+        default:
+            break;
+    }
     
     if (core.delegateForBuyOrderUpdates.count == 0
         && core.delegateForSellOrderUpdates.count == 0
