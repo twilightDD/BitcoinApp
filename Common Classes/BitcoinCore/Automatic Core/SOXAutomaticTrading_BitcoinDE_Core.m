@@ -218,7 +218,7 @@
 - (void)startOrderBooksUpdateTimer {
     if (!self.reloadOrderBooksTimer) {
         weakify(self);
-        self.reloadOrderBooksTimer = [NSTimer timerWithTimeInterval:15
+        self.reloadOrderBooksTimer = [NSTimer timerWithTimeInterval:600
                                                             repeats:YES
                                                               block:^(NSTimer * _Nonnull timer) {
                                                                   strongify(self);
