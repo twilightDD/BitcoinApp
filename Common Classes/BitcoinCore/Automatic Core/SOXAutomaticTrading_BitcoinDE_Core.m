@@ -992,7 +992,7 @@
 
     // check for TradingPair
     {
-        if (![addOrderData.orderInformation_tradingPair isEqualToString:BitcoinDE_TradingPair_BitcoinOriginal]) {
+        if (![addOrderData.orderInformation_tradingPair isEqualToString:self.currencyTypeString]) {
             DDLogInfo(@"### tradingPair is %@ - we don't support it right now - ID: %@ - maxA: %@ - p: %@"
                   , addOrderData.orderInformation_tradingPair
                   , addOrderData.orderInformation_orderID
@@ -1001,6 +1001,7 @@
             //NSBeep();
             return;
         }
+
     }
 
     if ([self checkForExpressOrder:addOrderData]) {
