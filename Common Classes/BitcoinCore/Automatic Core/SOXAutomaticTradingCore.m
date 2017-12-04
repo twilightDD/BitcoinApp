@@ -585,7 +585,8 @@
                                                                                               orderType:BitcoinDE_BuyOrderType
                                                                                           bitcoinAmount:amountToBuy
                                                                                                   price:buyOrder.orderInformation_price
-                                                                                    automaticTradePrice:soldPrice];
+                                                                                    automaticTradePrice:soldPrice
+                                                                                        forCurrencyType:self.currencyType];
             [balanceBuyParameters addObject:buyParameters];
             remainingBitcoinAmountToBuy = [remainingBitcoinAmountToBuy decimalNumberBySubtracting:amountToBuy
                                                                                      withBehavior:[SOXFormatters btcNumberHandler]];
@@ -764,7 +765,8 @@
                                                                                                orderType:BitcoinDE_SellOrderType
                                                                                            bitcoinAmount:amountToSell
                                                                                                    price:sellOrder.orderInformation_price
-                                                                                     automaticTradePrice:boughtPrice];
+                                                                                     automaticTradePrice:boughtPrice
+                                                                                         forCurrencyType:self.currencyType];
             [balanceSellParameters addObject:sellParameters];
             remainingBitcoinAmountToSell = [remainingBitcoinAmountToSell decimalNumberBySubtracting:amountToSell
                                                                                        withBehavior:[SOXFormatters btcNumberHandler]];

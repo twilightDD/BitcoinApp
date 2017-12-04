@@ -84,10 +84,12 @@ static NSString *AutomaticTradeETHSegueKey = @"EmbedAutoTraderForETH";
     if ([segue.identifier isEqualToString:OrdersViewControllerBuySegueKey]) {
         SOXOrdersViewController *viewC = segue.destinationController;
         viewC.orderType = BitcoinDE_BuyOrderType;
+        viewC.currencyType = BitcoinDE_CurrencyTypeBitcoin; // TODO: fix currencies
     }
     else if ([segue.identifier isEqualToString:OrdersViewControllerSellSegueKey]) {
         SOXOrdersViewController *viewC = segue.destinationController;
         viewC.orderType = BitcoinDE_SellOrderType;
+        viewC.currencyType = BitcoinDE_CurrencyTypeBitcoin; // TODO: fix currencies
     }
     else if ([segue.identifier isEqualToString:AutomaticTradeBTCSegueKey]) {
         SOXAutomaticTradingMainViewController *viewC = segue.destinationController;

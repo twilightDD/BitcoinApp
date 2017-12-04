@@ -12,5 +12,6 @@
 @interface SOXOrdersViewController : SOXAbstractViewController
 
 @property (nonatomic) BitcoinDE_OrderType orderType;
+@property (nonatomic) BitcoinDE_CurrencyType currencyType;
 
 @end

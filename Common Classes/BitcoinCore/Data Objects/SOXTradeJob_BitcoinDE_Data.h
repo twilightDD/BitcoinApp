@@ -18,17 +18,20 @@
 
 + (NSDictionary *)parameterForOrderID:(NSString *)orderID
                             orderType:(BitcoinDE_OrderType)orderType
-                          bitcoinAmount:(NSNumber *)bitcoinAmount;
+                        bitcoinAmount:(NSNumber *)bitcoinAmount
+                      forCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 
 + (NSDictionary *)parameterAutomaticTradingForOrderID:(NSString *)orderID
                                             orderType:(BitcoinDE_OrderType)orderType
                                         bitcoinAmount:(NSNumber *)bitcoinAmount
-                                                price:(NSDecimalNumber *)price;
+                                                price:(NSDecimalNumber *)price
+                                      forCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 
 + (NSDictionary *)parameterBalanceTradingForOrderID:(NSString *)orderID
                                           orderType:(BitcoinDE_OrderType)orderType
                                       bitcoinAmount:(NSNumber *)bitcoinAmount
                                               price:(NSDecimalNumber *)price
-                                automaticTradePrice:(NSDecimalNumber *)automaticTradePrice;
+                                automaticTradePrice:(NSDecimalNumber *)automaticTradePrice
+                                    forCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 
 @end

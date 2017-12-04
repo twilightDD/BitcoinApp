@@ -13,18 +13,23 @@
 
 + (NSDictionary *)parameterForOrderID:(NSString *)orderID
                             orderType:(BitcoinDE_OrderType)orderType
-                        bitcoinAmount:(NSNumber *)bitcoinAmount{
+                        bitcoinAmount:(NSNumber *)bitcoinAmount
+                      forCurrencyType:(BitcoinDE_CurrencyType)currencyType {
     if (!orderID
         || orderID.length == 0
         || (orderType != BitcoinDE_BuyOrderType && orderType != BitcoinDE_SellOrderType)) {
         return nil;
     }
-    
+
+    // currencyType
+    NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType];
+
     NSString *orderTypeString = [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:orderType];
     NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:
                                orderID, BitcoinDE_ExecuteTrade_OrderID
-                               ,orderTypeString, BitcoinDE_ExecuteTrade_Type
+                               , orderTypeString, BitcoinDE_ExecuteTrade_Type
                                , bitcoinAmount, BitcoinDE_ExecuteTrade_BitcoinAmount
+                               , currencyTypeString, BitcoinDE_ShowOrderbook_TradingPair
                                , nil];
     
     return parameter;
@@ -33,10 +38,13 @@
 + (NSDictionary *)parameterAutomaticTradingForOrderID:(NSString *)orderID
                                             orderType:(BitcoinDE_OrderType)orderType
                                         bitcoinAmount:(NSNumber *)bitcoinAmount
-                                                price:(NSDecimalNumber *)price {
+                                                price:(NSDecimalNumber *)price
+                                      forCurrencyType:(BitcoinDE_CurrencyType)currencyType {
     NSDictionary *parameters = [self parameterForOrderID:orderID
                                                orderType:orderType
-                                          bitcoinAmount:bitcoinAmount];
+                                          bitcoinAmount:bitcoinAmount
+                                         forCurrencyType:currencyType];
+
     NSMutableDictionary *parameterAutomaticTrading = [parameters mutableCopy];
     [parameterAutomaticTrading setObject:@YES forKey:BitcoinDE_ExecuteTrade_IsAutomaticTrade];
     [parameterAutomaticTrading setObject:price forKey:BitcoinDE_ExecuteTrade_Price];
@@ -49,10 +57,14 @@
                                           orderType:(BitcoinDE_OrderType)orderType
                                       bitcoinAmount:(NSNumber *)bitcoinAmount
                                               price:(NSDecimalNumber *)price
-                                automaticTradePrice:(NSDecimalNumber *)automaticTradePrice {
+                                automaticTradePrice:(NSDecimalNumber *)automaticTradePrice
+                                    forCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+
     NSDictionary *parameters = [self parameterForOrderID:orderID
                                                orderType:orderType
-                                           bitcoinAmount:bitcoinAmount];
+                                           bitcoinAmount:bitcoinAmount
+                                         forCurrencyType:currencyType];
+
     NSMutableDictionary *parameterAutomaticTrading = [parameters mutableCopy];
     [parameterAutomaticTrading setObject:@NO forKey:BitcoinDE_ExecuteTrade_IsAutomaticTrade];
     [parameterAutomaticTrading setObject:price forKey:BitcoinDE_ExecuteTrade_Price];

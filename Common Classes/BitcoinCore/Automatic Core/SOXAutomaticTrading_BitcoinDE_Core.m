@@ -408,7 +408,8 @@
         NSDictionary *buyParameters = [SOXTradeJob_BitcoinDE_Data parameterAutomaticTradingForOrderID:orderToBuy.orderInformation_orderID
                                                                                             orderType:BitcoinDE_BuyOrderType
                                                                                         bitcoinAmount:btcAmountToBuy
-                                                                                                price:orderToBuy.orderInformation_price];
+                                                                                                price:orderToBuy.orderInformation_price
+                                                                                      forCurrencyType:self.currencyType];
 
         { // DEBUG
             NSString *note = [NSString stringWithFormat:@"BUY btcAmount: %@ for %@"
@@ -477,7 +478,8 @@
         NSDictionary *sellParameters = [SOXTradeJob_BitcoinDE_Data parameterAutomaticTradingForOrderID:orderToSell.orderInformation_orderID
                                                                                              orderType:BitcoinDE_SellOrderType
                                                                                          bitcoinAmount:btcAmountToSell
-                                                                                                 price:orderToSell.orderInformation_price];
+                                                                                                 price:orderToSell.orderInformation_price
+                                                                                       forCurrencyType:self.currencyType];
 
         { // DEBUG
             NSString *note = [NSString stringWithFormat:@"SELL btcAmount: %@ for %@"
@@ -551,7 +553,8 @@
                                                                                                      orderType:BitcoinDE_BuyOrderType
                                                                                                  bitcoinAmount:boughtBTCSum
                                                                                                          price:averageAutomaticBoughtPrice
-                                                                                           automaticTradePrice:averageAutomaticBoughtPrice];
+                                                                                           automaticTradePrice:averageAutomaticBoughtPrice
+                                                                                               forCurrencyType:self.currencyType];
         { // DEBUG
             NSString *note = [NSString stringWithFormat:@"createBalanceTradesForBoughtTrades - substituteBuyParameters:\n%@"
                               , substitutedBuyParameters];
@@ -575,7 +578,8 @@
                                                                                                      orderType:BitcoinDE_SellOrderType
                                                                                                  bitcoinAmount:soldBTCSum
                                                                                                          price:averageAutomaticSoldPrice
-                                                                                           automaticTradePrice:averageAutomaticSoldPrice];
+                                                                                           automaticTradePrice:averageAutomaticSoldPrice
+                                                                                               forCurrencyType:self.currencyType];
         { // DEBUG
             NSString *note = [NSString stringWithFormat:@"createBalanceTradesForSoldTrades - substituteSellParameters:\n%@",
                               substituteSellParameters];

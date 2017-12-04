@@ -153,9 +153,11 @@
     if (!selectedOrderBookData) {
         return;
     }
+
     NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"MacMain" bundle:nil];
     SOXExecuteTradeViewController *viewC = [storyboard instantiateControllerWithIdentifier:@"ExecuteTradeViewControllerIdentifier"];
     viewC.orderType = self.orderType;
+    viewC.currencyType = self.currencyType;
     viewC.orderBookData = selectedOrderBookData;
     [self presentViewControllerAsSheet:viewC];
 }

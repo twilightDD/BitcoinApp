@@ -480,7 +480,8 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     NSDictionary *parameterDictionary;
     parameterDictionary = [SOXTradeJob_BitcoinDE_Data parameterForOrderID:self.orderBookData.orderInformation_orderID
                                                                 orderType:self.orderType
-                                                            bitcoinAmount:self.amountToTrade];
+                                                            bitcoinAmount:self.amountToTrade
+                                                          forCurrencyType:self.currencyType];
     
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
                                             withParameter:parameterDictionary
