@@ -10,9 +10,10 @@
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
 @class SOXShowOrderbookData;
+@class SocketIOPacket;
 
 @protocol SOXSocketIOCoreProtocol <NSObject>
-
+- (void)performance_addedOrder:(SOXShowOrderbookData *)addOrderData;
 - (void)addedOrder:(SOXShowOrderbookData *)addOrderData;
 - (void)removedOrderWithOrderID:(NSDictionary *)payloadDictionary;
 - (void)updateOrderWithSocketOrderObjectID:(NSString *)orderID withValues:(NSDictionary *)changesDictionary;
@@ -26,6 +27,9 @@
 @end
 
 @interface SOXSocketIO_BitcoinDE_Core : NSObject
+
+// performance testing
++ (void)performance_TestPacket:(SocketIOPacket *)testPacket; 
 
 + (void)registerForAllOrderUpdatesWithDelegate:(id <SOXSocketIOCoreProtocol>)delegate;
 + (void)registerForOrderUpdatesForUpdateType:(BitcoinDE_UpdateType)bitcoinDE_UpdateType

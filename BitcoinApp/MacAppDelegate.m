@@ -30,7 +30,7 @@
 
     { // CocoaLumberjack
         [DDLog addLogger:[DDTTYLogger sharedInstance]]; // TTY = Xcode console
-        [DDLog addLogger:[DDASLLogger sharedInstance]]; // ASL = Apple System Logs
+//        [DDLog addLogger:[DDASLLogger sharedInstance]]; // ASL = Apple System Logs
 
         DDFileLogger *fileLogger = [[DDFileLogger alloc] init]; // File Logger
         fileLogger.maximumFileSize = 0; // no file size limitation

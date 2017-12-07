@@ -112,6 +112,7 @@
 }
 
 - (void)registerForWebSocketUpdates {
+    return;
     if (self.orderType == BitcoinDE_BuyOrderType) {
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
                                                                 delegate:self];

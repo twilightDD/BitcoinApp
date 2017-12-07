@@ -8,6 +8,8 @@
 
 #import "SOXSocketIO_BitcoinDE_Core.h"
 
+#import "DebuggingFunctions.h"
+
 #import "SOXKeys_BitcoinDE.h"
 
 #import "SOXShowOrderbook_BitcoinDE_Data.h"
@@ -33,6 +35,9 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
 @property (strong, nonatomic) NSHashTable *delegateForRemoveOrderUpdates;
 
 @property (nonatomic) BOOL socketIsRunning;
+
+#pragma mark | Performance testing
+@property (strong, nonatomic) SocketIOPacket *testPacket;
 
 @end
 
@@ -97,6 +102,40 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
         && core.delegateForRemoveOrderUpdates.count == 0) {
        // [SOXSocketIO_BitcoinDE_Core stopWebSocketCore];
     }
+}
+
+#pragma mark | Perfomance testing
++ (void)performance_TestPacket:(SocketIOPacket *)testPacket {
+    SOXSocketIO_BitcoinDE_Core *socketCore = [SOXSocketIO_BitcoinDE_Core sharedCore];
+    if (socketCore.testPacket == nil) {
+        NSBeep();
+        socketCore.testPacket = testPacket;
+        [socketCore.socketIO disconnect];
+        [socketCore startPerformanceTest];
+    }
+}
+
+- (void)startPerformanceTest {
+    NSLog(@"startPerformanceTest");
+
+    CGFloat time = timeBlock(^{
+        for (int a = 0; a < 100; a++) {
+            [self socketIO:self.socketIO didReceiveEvent:self.testPacket];
+
+
+        }
+    });
+    NSLog(@"timeblock time: %f", time);
+
+
+//    for (int a = 0; a < 2; a++) {
+//        TICK
+//        [self socketIO:self.socketIO didReceiveEvent:self.testPacket];
+//        NSString *note = [NSString stringWithFormat:@"round %i", a];
+//        TOCKwithComment(note);
+//    }
+
+
 }
 
 #pragma mark - Private class methods
@@ -183,7 +222,7 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
 
 - (void) socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error {
     DDLogInfo(@"~~~~~ socketIODidDisconnect: %@ disconnectedWithError:\n%@", socket, error);
-
+    return;
     SEL socketIODidDisconnect = NSSelectorFromString(@"socketIODidDisconnect:");
     NSString *note = [NSString stringWithFormat:@"*** socketIODidDisconnect with Error:\n%@", error.localizedDescription];
     for (NSObject *delegate in self.delegateForBuyOrderUpdates) {
@@ -213,7 +252,6 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
 }
 
 - (void) socketIO:(SocketIO *)socket didReceiveEvent:(SocketIOPacket *)packet {
-    
     NSArray <NSDictionary *> *packetArguments = packet.args;
     if (!packetArguments) {
         return;
@@ -227,10 +265,43 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
                 DDLogInfo(@"nil");
             }
             if ([addOrderData.orderInformation_type isEqualToString:BitcoinDE_WebSocket_BuyOrderType]) {
-                for (NSObject *delegate in self.delegateForBuyOrderUpdates) {
-                    [delegate performSelectorOnMainThread:@selector(addedOrder:)
-                                                 withObject:addOrderData
-                                              waitUntilDone:NO];
+                {
+                    if (self.testPacket == nil
+                        && [addOrderData.orderInformation_tradingPair isEqualToString:@"btceur"]) {
+                        SocketIOPacket *myOwnPacket = [[SocketIOPacket alloc] init];
+
+                        myOwnPacket.type = [packet.type copy];
+                        myOwnPacket.pId = [packet.pId copy];
+                        myOwnPacket.ack = [packet.ack copy];
+                        myOwnPacket.name = [packet.name copy];
+                        myOwnPacket.data = [packet.data copy];
+
+                        NSArray *args = packet.args;
+                        NSDictionary *argDict = args.firstObject;
+
+                        NSMutableDictionary *mutableArgDict = [argDict mutableCopy];
+                        [mutableArgDict setObject:@"8000" forKey:@"price"];
+                        [mutableArgDict setObject:@"2" forKey:@"amount"];
+                        [mutableArgDict setObject:@"0.02" forKey:@"min_amount"];
+                        [mutableArgDict setObject:@1 forKey:@"is_kyc_ful"];
+                        [mutableArgDict setObject:@"abcdefgh" forKey:@"order_id"];
+                        myOwnPacket.args = [NSArray arrayWithObject:[mutableArgDict copy]];
+
+
+
+                        myOwnPacket.endpoint = [packet.endpoint copy];
+
+                        [SOXSocketIO_BitcoinDE_Core performance_TestPacket:myOwnPacket];
+                        return;
+                    }
+                }
+
+                for (NSObject <SOXSocketIOCoreProtocol> *delegate in self.delegateForBuyOrderUpdates) {
+                    [delegate performance_addedOrder:addOrderData];
+
+//                    [delegate performSelectorOnMainThread:@selector(performance_addedOrder:)
+//                                                 withObject:addOrderData
+//                                              waitUntilDone:NO];
                 }
             }
             else if ([addOrderData.orderInformation_type isEqualToString:BitcoinDE_WebSocket_SellOrderType]) {

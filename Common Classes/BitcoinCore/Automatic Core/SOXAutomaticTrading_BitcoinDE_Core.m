@@ -467,14 +467,14 @@
                     [self informBuyDelegateWithNote:note];
                 }
 
-                [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
-                                                        withParameter:buyParameters
-                                                            respondTo:self];
+//                [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
+//                                                        withParameter:buyParameters
+//                                                            respondTo:self];
 
-                [self.runningAutomaticBuyTradeParameters addObject:buyParameters];
+                //[self.runningAutomaticBuyTradeParameters addObject:buyParameters];
                 [self.buyOrderBook removeObject:orderToBuy];
                 [self updateBuyStatus];
-                [self.buyOrderBookInExecution addObject:orderToBuy];
+                //[self.buyOrderBookInExecution addObject:orderToBuy];
 
                 [self informBuyDelegateAboutRunningQueues];
 
@@ -537,9 +537,9 @@
                     [self informSellDelegateWithNote:note];
                 }
 
-                [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
-                                                        withParameter:sellParameters
-                                                            respondTo:self];
+//                [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
+//                                                        withParameter:sellParameters
+//                                                            respondTo:self];
 
                 [self.runningAutomaticSellTradeParameters addObject:sellParameters];
                 [self.sellOrderBook removeObject:orderToSell];
@@ -1065,6 +1065,21 @@
 }
 
 #pragma mark - SOXSocketIOCoreProtocol
+- (void)performance_addedOrder:(SOXShowOrderbookData *)addOrderData {
+
+    NSLog(@"performance_addedOrder - buyOrderBook.count %tu", self.buyOrderBook.count);
+
+    if (self.buyOrderBook.count > 1) {
+        [self.buyOrderBook removeObjectAtIndex:0];
+        NSLog(@"didRemove - buyOrderBook.count %tu", self.buyOrderBook.count);
+    }
+
+
+    [self addedOrder:addOrderData];
+    NSLog(@"didAdd - buyOrderBook.count %tu", self.buyOrderBook.count);
+
+}
+
 - (void)addedOrder:(SOXShowOrderbookData *)addOrderData {
     // Check for KYC
     {

@@ -1110,6 +1110,8 @@
 
 #pragma mark - Inform delegates
 - (void)informBuyDelegateWithNote:(NSString *)note {
+
+     // mach_absolute_time
     if (note) {
         DDLogInfo(@"%@ buyDele: %@"
                   , [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringForCurrencyType:self.currencyType]
