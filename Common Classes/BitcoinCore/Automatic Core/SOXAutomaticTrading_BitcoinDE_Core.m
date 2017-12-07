@@ -1067,16 +1067,16 @@
 #pragma mark - SOXSocketIOCoreProtocol
 - (void)performance_addedOrder:(SOXShowOrderbookData *)addOrderData {
 
-    NSLog(@"performance_addedOrder - buyOrderBook.count %tu", self.buyOrderBook.count);
+//    NSLog(@"performance_addedOrder - buyOrderBook.count %tu", self.buyOrderBook.count);
 
     if (self.buyOrderBook.count > 1) {
         [self.buyOrderBook removeObjectAtIndex:0];
-        NSLog(@"didRemove - buyOrderBook.count %tu", self.buyOrderBook.count);
+//        NSLog(@"didRemove - buyOrderBook.count %tu", self.buyOrderBook.count);
     }
 
 
     [self addedOrder:addOrderData];
-    NSLog(@"didAdd - buyOrderBook.count %tu", self.buyOrderBook.count);
+//    NSLog(@"didAdd - buyOrderBook.count %tu", self.buyOrderBook.count);
 
 }
 
@@ -1113,13 +1113,13 @@
             if ([addOrderData.orderInformation_type isEqualToString:BitcoinDE_WebSocket_BuyOrderType]) {
                 // Check for doublettes
                 if ([SOXMarketHelper existOrderBookData:addOrderData inOrderBook:self.buyOrderBook]) {
-                    { // DEBUG
-                        NSString *note = [NSString stringWithFormat:@"### don't add buy, because it exists already in buyOrderBook - ID: %@ - maxA: %@ p: %@"
-                                          , addOrderData.orderInformation_orderID
-                                          , addOrderData.orderInformation_maxAmount
-                                          , addOrderData.orderInformation_price];
-                        [self informBuyDelegateWithNote:note];
-                    }
+//                    { // DEBUG
+//                        NSString *note = [NSString stringWithFormat:@"### don't add buy, because it exists already in buyOrderBook - ID: %@ - maxA: %@ p: %@"
+//                                          , addOrderData.orderInformation_orderID
+//                                          , addOrderData.orderInformation_maxAmount
+//                                          , addOrderData.orderInformation_price];
+//                        [self informBuyDelegateWithNote:note];
+//                    }
                     return;
                 }
             }
@@ -1127,11 +1127,11 @@
                 // Check for doublettes
                 if ([SOXMarketHelper existOrderBookData:addOrderData inOrderBook:self.sellOrderBook]) {
                     { // DEBUG
-                        NSString *note = [NSString stringWithFormat:@"### don't add sell, because it exists already in sellOrderBook - ID: %@ - maxA: %@ p: %@"
-                                          , addOrderData.orderInformation_orderID
-                                          , addOrderData.orderInformation_maxAmount
-                                          , addOrderData.orderInformation_price];
-                        [self informSellDelegateWithNote:note];
+//                        NSString *note = [NSString stringWithFormat:@"### don't add sell, because it exists already in sellOrderBook - ID: %@ - maxA: %@ p: %@"
+//                                          , addOrderData.orderInformation_orderID
+//                                          , addOrderData.orderInformation_maxAmount
+//                                          , addOrderData.orderInformation_price];
+//                        [self informSellDelegateWithNote:note];
                     }
                     return;
                 }
@@ -1391,25 +1391,25 @@
 
 //        SOXShowOrderbookData *firstBuyOrderBookData = self.buyOrderBook.firstObject;
         SOXShowOrderbookData *firstSellOrderBookData = self.sellOrderBook.firstObject;
-        { // DEBUG
-            NSString *note = [NSString stringWithFormat:@"+ added buy (bOB.count: %tu)- ID: %@ - pO: %@ - type: offer - idx %tu - p: %@ - minA: %@ - maxA: %@ - sell@idx0: %@ - iR %@"
-                              , self.buyOrderBook.count
-                              , addOrderDataOrderID
-                              , addOrderData.orderRequirements_paymentOption
-                              , [self.buyOrderBook indexOfObject:addOrderData]
-                              , addOrderDataPrice
-                              , addOrderData.orderInformation_minAmount
-                              , addOrderData.orderInformation_maxAmount
-                              , [SOXFormatters currencyStringForNumber:firstSellOrderBookData.orderInformation_price
-                                                          roundingMode:NSNumberFormatterRoundDown]
-                              , [self effectiveBuyInterestRateForData:addOrderData
-                                                      toReferenceData:firstSellOrderBookData]];
-            [self informBuyDelegateWithNote:note];
-        }
+//        { // DEBUG
+//            NSString *note = [NSString stringWithFormat:@"+ added buy (bOB.count: %tu)- ID: %@ - pO: %@ - type: offer - idx %tu - p: %@ - minA: %@ - maxA: %@ - sell@idx0: %@ - iR %@"
+//                              , self.buyOrderBook.count
+//                              , addOrderDataOrderID
+//                              , addOrderData.orderRequirements_paymentOption
+//                              , [self.buyOrderBook indexOfObject:addOrderData]
+//                              , addOrderDataPrice
+//                              , addOrderData.orderInformation_minAmount
+//                              , addOrderData.orderInformation_maxAmount
+//                              , [SOXFormatters currencyStringForNumber:firstSellOrderBookData.orderInformation_price
+//                                                          roundingMode:NSNumberFormatterRoundDown]
+//                              , [self effectiveBuyInterestRateForData:addOrderData
+//                                                      toReferenceData:firstSellOrderBookData]];
+//            [self informBuyDelegateWithNote:note];
+//        }
 
         // Update Status text, if needed
         if ([[self.buyOrderBook objectAtIndex:0] isEqual:addOrderData]) {
-            [self updateBuyStatus];
+            //[self updateBuyStatus];
         }
 
         if (self.runningAutomaticBuyTradeParameters.count > 0
