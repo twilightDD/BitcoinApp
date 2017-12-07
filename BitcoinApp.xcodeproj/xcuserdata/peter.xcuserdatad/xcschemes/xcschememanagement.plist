@@ -4,10 +4,15 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>iOS BitcoinApp.xcscheme</key>
+		<key>Release FAST mac BitcoinApp.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
+		</dict>
+		<key>iOS BitcoinApp.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 		<key>mac BitcoinApp.xcscheme</key>
 		<dict>
