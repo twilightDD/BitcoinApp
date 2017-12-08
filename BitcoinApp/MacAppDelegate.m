@@ -29,8 +29,10 @@
     [Fabric with:@[[Crashlytics class]]];
 
     { // CocoaLumberjack
+#ifdef DEBUG
         [DDLog addLogger:[DDTTYLogger sharedInstance]]; // TTY = Xcode console
         [DDLog addLogger:[DDASLLogger sharedInstance]]; // ASL = Apple System Logs
+#endif
 
         DDFileLogger *fileLogger = [[DDFileLogger alloc] init]; // File Logger
         fileLogger.maximumFileSize = 0; // no file size limitation
