@@ -47,6 +47,7 @@
 @synthesize orderRequirements_minTrustLevel, orderRequirements_onlyKYCFull, orderRequirements_paymentOption, orderRequirements_seatOfBank;
 @synthesize page_current, page_last;
 
+#pragma mark - OrderBook Object creation
 + (NSMutableArray *)myOrderbookDataArrayForMyOrderbookDictionary:(NSDictionary *)payloadDictionary {
     NSMutableArray *myOrderbookDataArray = [NSMutableArray array];
     
@@ -68,26 +69,11 @@
     return myOrderBookData;
 }
 
-+ (NSArray <NSDictionary *> *)parametersForDeletingMyOrderBookDatas:(NSArray <SOXMyOrderBook_BitcoinDE_Data *>*)myOrderBookDatas {
-    NSMutableArray *parameters = [NSMutableArray array];
-    for (SOXMyOrderBook_BitcoinDE_Data *myOrderBookData in myOrderBookDatas) {
-        NSString *myOrderbookDataOrderID = myOrderBookData.orderInformation_orderID;
-        NSDictionary *parameter = [SOXMyOrderBook_BitcoinDE_Data parameterForDeletingOrderWithOrderID:myOrderbookDataOrderID];
-        [parameters addObject:parameter];
-    }
-    
-    return [parameters copy];
-}
 
-+ (NSDictionary *)parameterForDeletingOrderWithOrderID:(NSString *)orderID {
-    NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:
-                               orderID, @"order_id"
-                               , nil];
-    
-    return parameter;
-}
-
+#pragma mark - Parameter methods
+#pragma mark | Create new order
 + (NSDictionary *)parameterForNewOrderWithOrderType:(BitcoinDE_OrderType)orderType
+                                       currencyType:(BitcoinDE_CurrencyType)currencyType
                                          max_amount:(NSNumber *)max_amount
                                          min_amount:(NSNumber *)min_amount
                                               price:(NSNumber *)price
@@ -99,12 +85,14 @@
                                        seat_of_bank:(NSArray <NSString *> *)seat_of_bank {
     
     
-    NSString *typeString = [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:orderType];
+    NSString *orderTypeString = [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:orderType];
+    NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType];
     NSString *minTrustLevelAsString = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:min_trust_level];
     //NSString *endDateString = [SOXDateFormatter rfc3339DateTimeStringDate:end_datetime];
     
     NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:
-                               typeString, @"type"
+                               orderTypeString, @"type"
+                               , currencyTypeString, BitcoinDE_ShowOrderbook_TradingPair
                                , max_amount , @"max_amount"
                                ,price , @"price"
                                ,min_amount , @"min_amount"
@@ -123,6 +111,26 @@
         parameter = [mutableParameter copy];
     }
     return parameter;
+}
+
+#pragma mark | Delete Orders
++ (NSDictionary *)parameterForDeletingOrderWithOrderBookData:(SOXMyOrderBook_BitcoinDE_Data *)myOrderBookData {
+    NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:
+                               myOrderBookData.orderInformation_orderID , BitcoinDE_ShowOrderbook_OrderID
+                               ,myOrderBookData.orderInformation_tradingPair , BitcoinDE_ShowOrderbook_TradingPair
+                               , nil];
+
+    return parameter;
+}
+
++ (NSArray <NSDictionary *> *)parametersForDeletingMyOrderBookDatas:(NSArray <SOXMyOrderBook_BitcoinDE_Data *>*)myOrderBookDatas {
+    NSMutableArray *parameters = [NSMutableArray array];
+    for (SOXMyOrderBook_BitcoinDE_Data *myOrderBookData in myOrderBookDatas) {
+        NSDictionary *parameter = [SOXMyOrderBook_BitcoinDE_Data parameterForDeletingOrderWithOrderBookData:myOrderBookData];
+        [parameters addObject:parameter];
+    }
+
+    return [parameters copy];
 }
 
 #pragma mark - Class methods

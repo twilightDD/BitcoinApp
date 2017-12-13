@@ -14,11 +14,10 @@
 + (NSMutableArray *)myOrderbookDataArrayForMyOrderbookDictionary:(NSDictionary *)payloadDictionary;
 + (NSDictionary *)myOrderBookDataForCreateInfoDictionary:(NSDictionary *)payloadDictionary;
 
-+ (NSDictionary *)parameterForDeletingOrderWithOrderID:(NSString *)orderID;
-
-+ (NSArray <NSDictionary *> *)parametersForDeletingMyOrderBookDatas:(NSArray <SOXMyOrderBook_BitcoinDE_Data *>*)myOrderBookDatas;
-
+#pragma mark - Parameter methods
+#pragma mark | Create new order
 + (NSDictionary *)parameterForNewOrderWithOrderType:(BitcoinDE_OrderType)orderType
+                                       currencyType:(BitcoinDE_CurrencyType)currencyType
                                          max_amount:(NSNumber *)max_amount
                                          min_amount:(NSNumber *)min_amount
                                               price:(NSNumber *)price
@@ -28,6 +27,12 @@
                                       only_kyc_full:(BOOL)only_kyc_full
                                      payment_option:(BitcoinDE_PaymentOption )payment_option
                                        seat_of_bank:(NSArray <NSString *> *)seat_of_bank;
+
+#pragma mark | Delete Orders
+//+ (NSDictionary *)parameterForDeletingOrderWithOrderID:(NSString *)orderID;
++ (NSDictionary *)parameterForDeletingOrderWithOrderBookData:(SOXMyOrderBook_BitcoinDE_Data *)myOrderBookData;
++ (NSArray <NSDictionary *> *)parametersForDeletingMyOrderBookDatas:(NSArray <SOXMyOrderBook_BitcoinDE_Data *>*)myOrderBookDatas;
+
 
 
 @end

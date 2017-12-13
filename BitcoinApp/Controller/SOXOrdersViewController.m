@@ -72,6 +72,7 @@
     NSStoryboard *storyBoard = [NSStoryboard storyboardWithName:@"MacMain" bundle:nil];
     SOXCreateNewOrderViewController *viewC = [storyBoard instantiateControllerWithIdentifier:@"CreateNewOrderIdentifier"];
     viewC.orderType = self.orderType;
+    viewC.currencyType = self.currencyType;
     
     [self presentViewControllerAsSheet:viewC];
 }
@@ -81,11 +82,11 @@
     {
         if (self.orderType == BitcoinDE_BuyOrderType) {
             self.titleTextField.stringValue                     = @"Buy";
-            self.addOrderButton.title                           = @"Add Buy Order";
+            self.addOrderButton.title                           = @"I'd like to buy";
         }
         else if (self.orderType == BitcoinDE_SellOrderType) {
             self.titleTextField.stringValue                     = @"Sell";
-            self.addOrderButton.title                           = @"Add Sell Order";
+            self.addOrderButton.title                           = @"I'd like to sell";
         }
     }
     

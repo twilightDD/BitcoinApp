@@ -182,10 +182,11 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
         SOXMyOrderBook_BitcoinDE_Data *orderBookDataToReplace = selectedDatas.firstObject;
 
         BitcoinDE_OrderType orderType = [SOXMarket_BitcoinDE_DefTypes orderTypeForOrderTypeString:orderBookDataToReplace.orderInformation_type];
-        
+        BitcoinDE_CurrencyType currencyType = [SOXMarket_BitcoinDE_DefTypes currencyTypeForTradingPairString:orderBookDataToReplace.orderInformation_tradingPair];
         NSStoryboard *storyBoard = [NSStoryboard storyboardWithName:@"MacMain" bundle:nil];
         SOXCreateNewOrderViewController *viewC = [storyBoard instantiateControllerWithIdentifier:@"CreateNewOrderIdentifier"];
         viewC.orderType = orderType;
+        viewC.currencyType = currencyType;
         viewC.orderBookDataToReplace = orderBookDataToReplace;
         viewC.delegate = self;
 

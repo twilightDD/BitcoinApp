@@ -251,7 +251,7 @@
 - (IBAction)createOrderAction:(NSButton *)sender {
     if (self.isInputValid) {
         if (self.orderBookDataToReplace) {
-            NSDictionary *myOrderBookParameter = [SOXMyOrderBook_BitcoinDE_Data parameterForDeletingOrderWithOrderID:self.orderBookDataToReplace.orderInformation_orderID];
+            NSDictionary *myOrderBookParameter = [SOXMyOrderBook_BitcoinDE_Data parameterForDeletingOrderWithOrderBookData:self.orderBookDataToReplace];
             [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_RemoveOrderType
                                                     withParameter:myOrderBookParameter
                                                         respondTo:self];
@@ -259,6 +259,7 @@
         else {
 
             NSDictionary *parameters = [SOXMyOrderBook_BitcoinDE_Data parameterForNewOrderWithOrderType:self.orderType
+                                                                                           currencyType:self.currencyType
                                                                                              max_amount:@(self.amountTextField.doubleValue)
                                                                                              min_amount:@(self.minAmountTextField.doubleValue)
                                                                                                   price:@(self.priceTextField.doubleValue)

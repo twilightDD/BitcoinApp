@@ -488,8 +488,13 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
         
         NSString *httpMethod = [SOXMarket_BitcoinDE_Core sharedCore].httpMethod;
         if ([httpMethod isEqualToString:HTTPMethodDELETEKey]) {
-            NSArray *orderIDs = parameterDictionary.allValues;
-            url_encoded_query_string = orderIDs.firstObject;
+            NSMutableArray *parameters = [NSMutableArray array];
+            for (NSString *key in allKeys) {
+                NSString *parameter = [parameterDictionary objectForKey:key];
+                [parameters addObject:parameter];
+            }
+            // join pairs with "/"
+            url_encoded_query_string = [parameters componentsJoinedByString:@"/"];
         }
         else {//if ([httpMethod isEqualToString:HTTPMethodPOSTKey]) {
             // create "parameter=value" pairs
