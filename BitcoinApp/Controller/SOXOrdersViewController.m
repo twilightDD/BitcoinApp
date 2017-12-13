@@ -21,7 +21,7 @@
 #import "SOXPreferenceCenter.h"
 
 #pragma mark - Interface
-@interface SOXOrdersViewController () <SOXMarketCoreServerRequestProtocol, SOXMarketCoreErrorProtocol, SOXSocketIOCoreProtocol, NSTableViewDelegate>
+@interface SOXOrdersViewController () <SOXMarketCoreServerRequestProtocol, SOXMarketCoreErrorProtocol, SOXSocketIOCoreProtocol, SOXChangeOrderProtocol, NSTableViewDelegate>
 
 #pragma mark IBOutlets
 @property (weak) IBOutlet NSTextField *titleTextField;
@@ -74,6 +74,7 @@
     SOXCreateNewOrderViewController *viewC = [storyBoard instantiateControllerWithIdentifier:@"CreateNewOrderIdentifier"];
     viewC.orderType = self.orderType;
     viewC.currencyType = self.currencyType;
+    viewC.delegate = self;
     
     [self presentViewControllerAsSheet:viewC];
 }
@@ -243,6 +244,12 @@
         alert.alertStyle = NSAlertStyleCritical;
         [alert runModal];
     }
+}
+
+#pragma mark - SOXChangeOrderProtocol
+- (void)orderWasChanged:(NSString *)oldOrderID newOrderID:(NSString *)newOrderID {
+    // TODO: orderbook views will be empty - but why?!?!?!
+  //  [[SOXMarket_BitcoinDE_Core sharedCore] startBannerUpdate];
 }
 
 @end
