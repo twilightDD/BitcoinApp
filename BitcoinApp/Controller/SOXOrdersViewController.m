@@ -36,7 +36,7 @@
 #pragma mark Properties
 @property (strong, nonatomic) NSMutableArray *orderBook;
 @property (nonatomic) BOOL socketIODidDisconnectAppeared;
-
+@property (nonatomic, copy) NSString *currencyTypeString;
 @end
 
 #pragma mark - Implementation
@@ -45,7 +45,8 @@
 #pragma mark Init&Co.
 - (void)viewDidLoad {
     [super viewDidLoad];
-     [self requestServerData];
+    self.currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:self.currencyType];
+    [self requestServerData];
 }
 
 - (void)viewWillAppear {
@@ -58,7 +59,7 @@
     [self.tableView setDoubleAction:@selector(tableViewDoubleAction:)];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
-                                                        object:@(BitcoinDE_CurrencyTypeBitcoin)];
+                                                        object:@(self.currencyType)];
 }
 
 #pragma mark - Action methods
@@ -105,7 +106,7 @@
     }
     
     NSDictionary *parameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:self.orderType
-                                                                        currencyType:BitcoinDE_CurrencyTypeBitcoin
+                                                                          currencyType:self.currencyType
                                                               onlyExpressPaymentOption:NO];
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:serverCommand
                                             withParameter:parameters
@@ -194,7 +195,7 @@
 }
 
 - (void)addedOrder:(SOXShowOrderbookData *)addOrderData {
-    if (![addOrderData.orderInformation_tradingPair isEqualToString:BitcoinDE_TradingPair_BitcoinOriginal]) {
+    if (![addOrderData.orderInformation_tradingPair isEqualToString:self.currencyTypeString]) {
         DDLogInfo(@"addedOrder in %@ - tradingPair is %@ - we don't support it right now"
               , [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:self.orderType]
               , addOrderData.orderInformation_tradingPair);
