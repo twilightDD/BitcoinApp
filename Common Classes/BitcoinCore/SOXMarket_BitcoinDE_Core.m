@@ -980,14 +980,14 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountInfoCommandType
                                             withParameter:nil
                                                 respondTo:nil];
-    double delayInSeconds = 0.1;
+    double delayInSeconds = 0.2;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         DDLogInfo(@"get rates BitcoinDE_CurrencyTypeBitcoin %f", [[NSDate date] timeIntervalSince1970]);
         [self startBannerUpdateForCurrencyType:BitcoinDE_CurrencyTypeBitcoin];
     });
 
-    double delayInSeconds2 = 0.2;
+    double delayInSeconds2 = 0.4;
     dispatch_time_t popTime2 = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds2 * NSEC_PER_SEC));
     dispatch_after(popTime2, dispatch_get_main_queue(), ^(void){
         DDLogInfo(@"get rates BitcoinDE_CurrencyTypeBitcoinCash %f", [[NSDate date] timeIntervalSince1970]);
@@ -995,7 +995,7 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
         });
 
 
-    double delayInSeconds3 = 0.3;
+    double delayInSeconds3 = 0.6;
     dispatch_time_t popTime3 = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds3 * NSEC_PER_SEC));
     dispatch_after(popTime3, dispatch_get_main_queue(), ^(void){
         DDLogInfo(@"get rates BitcoinDE_CurrencyTypeEthereum %f", [[NSDate date] timeIntervalSince1970]);

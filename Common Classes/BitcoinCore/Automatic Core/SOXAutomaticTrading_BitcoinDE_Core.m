@@ -318,7 +318,7 @@
     }
 
     // get sellOrderBook
-    double delayInSeconds = 0.2;
+    double delayInSeconds = 0.4;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         {
@@ -347,7 +347,7 @@
                                                    ];
     }
 
-    double delayInSeconds2 = 0.4;
+    double delayInSeconds2 = 0.6;
     dispatch_time_t popTime2 = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds2 * NSEC_PER_SEC));
     dispatch_after(popTime2, dispatch_get_main_queue(), ^(void){
         DDLogInfo(@"get banner %f", [[NSDate date] timeIntervalSince1970]);
