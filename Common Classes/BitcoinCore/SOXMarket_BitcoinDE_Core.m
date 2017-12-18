@@ -975,40 +975,42 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 }
 
 
-#pragma mark - Private Instance Methods
-- (void)startBannerUpdate {
+#pragma mark - Banner Update Methods
+- (void)startAccountInfoUpdate {
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountInfoCommandType
                                             withParameter:nil
                                                 respondTo:nil];
+}
+
+- (void)startAllRatesUpdate {
     double delayInSeconds = 0.2;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         DDLogInfo(@"get rates BitcoinDE_CurrencyTypeBitcoin %f", [[NSDate date] timeIntervalSince1970]);
-        [self startBannerUpdateForCurrencyType:BitcoinDE_CurrencyTypeBitcoin];
+        [self startRatesUpdateForCurrencyType:BitcoinDE_CurrencyTypeBitcoin];
     });
 
     double delayInSeconds2 = 0.4;
     dispatch_time_t popTime2 = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds2 * NSEC_PER_SEC));
     dispatch_after(popTime2, dispatch_get_main_queue(), ^(void){
         DDLogInfo(@"get rates BitcoinDE_CurrencyTypeBitcoinCash %f", [[NSDate date] timeIntervalSince1970]);
-        [self startBannerUpdateForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
-        });
+        [self startRatesUpdateForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
+    });
 
 
     double delayInSeconds3 = 0.6;
     dispatch_time_t popTime3 = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds3 * NSEC_PER_SEC));
     dispatch_after(popTime3, dispatch_get_main_queue(), ^(void){
         DDLogInfo(@"get rates BitcoinDE_CurrencyTypeEthereum %f", [[NSDate date] timeIntervalSince1970]);
-        [self startBannerUpdateForCurrencyType:BitcoinDE_CurrencyTypeEthereum];
+        [self startRatesUpdateForCurrencyType:BitcoinDE_CurrencyTypeEthereum];
     });
 }
 
-- (void)startBannerUpdateForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+- (void)startRatesUpdateForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
     NSDictionary *ratesParameters = [SOXRates_BitcoinDE_Data parametersForCurrencyType:currencyType];
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowRatesCommandType
                                             withParameter:ratesParameters
                                                 respondTo:nil];
 }
-
 
 @end

@@ -352,7 +352,7 @@
     dispatch_after(popTime2, dispatch_get_main_queue(), ^(void){
         DDLogInfo(@"get banner %f", [[NSDate date] timeIntervalSince1970]);
         // TODO: quickfix to get a banner update after socket reconnect
-        [[SOXMarket_BitcoinDE_Core sharedCore] startBannerUpdate];
+        [[SOXMarket_BitcoinDE_Core sharedCore] startAccountInfoUpdate];
     });
 
 

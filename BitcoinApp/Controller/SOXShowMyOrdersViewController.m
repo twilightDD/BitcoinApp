@@ -151,7 +151,7 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
                 self.countOfMyOrderBook_BitcoinDE_DatasToDelete = 0;
                 self.countOfDeletedMyOrderBook_BitcoinDE_Datas  = 0;
 
-                [[SOXMarket_BitcoinDE_Core sharedCore] startBannerUpdate];
+                [[SOXMarket_BitcoinDE_Core sharedCore] startAccountInfoUpdate];
             }
         }
     }
@@ -221,7 +221,7 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 #pragma mark - SOXChangeOrderProtocol
 - (void)orderWasChanged:(NSString *)oldOrderID newOrderID:(NSString *)newOrderID {
     [self requestServerData];
-    [[SOXMarket_BitcoinDE_Core sharedCore] startBannerUpdate];
+    [[SOXMarket_BitcoinDE_Core sharedCore] startAccountInfoUpdate];
 }
 
 @end

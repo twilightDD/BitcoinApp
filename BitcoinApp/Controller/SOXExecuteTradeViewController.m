@@ -572,7 +572,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 #pragma mark - SOXMarketCoreServerRequestProtocol
 - (void)answerOfServerRequest:(NSDictionary *)answerOfServerRequest {
     if (![answerOfServerRequest valueForKey:ServerAnswerErrorKey]) {
-        [[SOXMarket_BitcoinDE_Core sharedCore] startBannerUpdate];
+        [[SOXMarket_BitcoinDE_Core sharedCore] startAccountInfoUpdate];
         // No error means success
         NSAlert *alert = [[NSAlert alloc] init];
         [alert addButtonWithTitle:@"Okay"];
