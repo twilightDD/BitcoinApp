@@ -252,10 +252,13 @@
     // Update all orderBooks
     [self flushAllOrderBooks];
     [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
+                                                       forCurrencyType:self.currencyType
                                                               delegate:self];
     [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
+                                                       forCurrencyType:self.currencyType
                                                               delegate:self];
     [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
+                                                       forCurrencyType:self.currencyType
                                                               delegate:self];
     [self fetchOrderBooks];
     self.socketIODidDisconnectAppeared = NO;
@@ -326,23 +329,27 @@
     // buy updates
     if (self.buyDelegates.count > 0) {
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
+                                                         forCurrencyType:self.currencyType
                                                                 delegate:self];
 //        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
 //                                                                delegate:self];
     }
     else {
         [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
+                                                           forCurrencyType:self.currencyType
                                                                   delegate:self];
     }
 
     // sell updates
     if (self.sellDelegates.count > 0) {
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
+                                                         forCurrencyType:self.currencyType
                                                                 delegate:self];
 
     }
     else {
         [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
+                                                           forCurrencyType:self.currencyType
                                                                   delegate:self];
     }
 
@@ -350,10 +357,12 @@
     if (self.buyDelegates.count == 0
         && self.sellDelegates.count == 0) {
         [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
+                                                           forCurrencyType:self.currencyType
                                                                   delegate:self];
     }
     else {
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
+                                                         forCurrencyType:self.currencyType
                                                                 delegate:self];
     }
 }
@@ -1038,8 +1047,10 @@
         }
         DDLogInfo(@"buySum: %@ averagePrice: %@", buyBTCSum, averagePrice);
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
+                                                         forCurrencyType:self.currencyType
                                                                 delegate:self];
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
+                                                         forCurrencyType:self.currencyType
                                                                 delegate:self];
 
         SOXShowOrderbook_BitcoinDE_Data *dataOfInterest = self.buyOrderBook.firstObject;
@@ -1076,8 +1087,10 @@
         self.sellOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:sellOrderBookDatas
                                                                     forOrderType:BitcoinDE_SellOrderType];
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
+                                                         forCurrencyType:self.currencyType
                                                                 delegate:self];
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
+                                                         forCurrencyType:self.currencyType
                                                                 delegate:self];
 
         SOXShowOrderbook_BitcoinDE_Data *dataOfInterest = self.sellOrderBook.firstObject;

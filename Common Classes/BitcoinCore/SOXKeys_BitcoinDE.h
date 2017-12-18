@@ -185,6 +185,7 @@ FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_UpdateOrder_MainKey;
 
 FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_BuyOrderType;
 FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_SellOrderType;
+FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_TradingPair;
 
 #pragma mark | Add_Order
 FOUNDATION_EXPORT NSString *const BitcoinDE_WebSocket_AddOrder_OrderID;

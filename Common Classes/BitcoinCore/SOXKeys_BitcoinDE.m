@@ -184,6 +184,7 @@ NSString *const BitcoinDE_WebSocket_UpdateOrder_MainKey = @"refresh_express_opti
 
 NSString *const BitcoinDE_WebSocket_BuyOrderType        = @"offer";
 NSString *const BitcoinDE_WebSocket_SellOrderType       = @"order";
+NSString *const BitcoinDE_WebSocket_TradingPair         = @"trading_pair";
 
 
 #pragma mark | Add_Order

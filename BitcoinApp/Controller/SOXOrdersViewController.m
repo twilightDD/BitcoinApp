@@ -117,14 +117,18 @@
 - (void)registerForWebSocketUpdates {
     if (self.orderType == BitcoinDE_BuyOrderType) {
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
+                                                         forCurrencyType:self.currencyType
                                                                 delegate:self];
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
+                                                         forCurrencyType:self.currencyType
                                                                 delegate:self];
     }
     else if (self.orderType == BitcoinDE_SellOrderType) {
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
+                                                         forCurrencyType:self.currencyType
                                                                 delegate:self];
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
+                                                         forCurrencyType:self.currencyType
                                                                 delegate:self];
     }
     else {

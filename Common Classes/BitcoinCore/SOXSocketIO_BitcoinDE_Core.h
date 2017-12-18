@@ -27,11 +27,16 @@
 
 @interface SOXSocketIO_BitcoinDE_Core : NSObject
 
-+ (void)registerForAllOrderUpdatesWithDelegate:(id <SOXSocketIOCoreProtocol>)delegate;
-+ (void)registerForOrderUpdatesForUpdateType:(BitcoinDE_UpdateType)bitcoinDE_UpdateType
-                                    delegate:(id <SOXSocketIOCoreProtocol>)delegate;
+//+ (void)registerForAllOrderUpdatesWithDelegate:(id <SOXSocketIOCoreProtocol>)delegate;
+//+ (void)registerForOrderUpdatesForUpdateType:(BitcoinDE_UpdateType)bitcoinDE_UpdateType
+//                                    delegate:(id <SOXSocketIOCoreProtocol>)delegate;
 + (void)unRegisterForOrderUpdatesForUpdateType:(BitcoinDE_UpdateType)bitcoinDE_UpdateType
+                               forCurrencyType:(BitcoinDE_CurrencyType)currencyType
                                       delegate:(id <SOXSocketIOCoreProtocol>)delegate;
+
++ (void)registerForOrderUpdatesForUpdateType:(BitcoinDE_UpdateType)bitcoinDE_UpdateType
+                             forCurrencyType:(BitcoinDE_CurrencyType)currencyType
+                                    delegate:(id <SOXSocketIOCoreProtocol>)delegate;
 
 @property (weak, nonatomic) id <SOXSocketIOCoreProtocol> delegate;
 @end
