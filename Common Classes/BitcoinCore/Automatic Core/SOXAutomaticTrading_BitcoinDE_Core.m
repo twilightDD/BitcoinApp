@@ -219,47 +219,11 @@
 
 - (void)startOrderBooksUpdateTimer {
     if (!self.reloadOrderBooksTimer) {
-        weakify(self);
-
-        self.reloadOrderBooksTimer = [NSTimer timerWithTimeInterval:600
+        self.reloadOrderBooksTimer = [NSTimer timerWithTimeInterval:800
                                                              target:self
                                                            selector:@selector(orderBooksUpdateTimerFired)
                                                            userInfo:nil
                                                             repeats:YES];
-
-//        self.reloadOrderBooksTimer = [NSTimer timerWithTimeInterval:600
-//                                                            repeats:YES
-//                                                              block:^(NSTimer * _Nonnull timer) {
-//                                                                  strongify(self);
-//                                                                  { // DEBUG
-//                                                                      NSString *note = @"reloadOrderBooksTimer says: Time's up";
-//                                                                      [self informBuyDelegateWithNote:note];
-//                                                                      [self informSellDelegateWithNote:note];
-//                                                                  }
-//
-//                                                                  // don't update orderBooks while autoTrading
-//                                                                  if (self.runningAutomaticBuyTradeParameters.count > 0
-//                                                                      || self.runningAutomaticSellTradeParameters.count > 0
-//                                                                      || self.runningBalanceSellTradeParameters.count > 0
-//                                                                      || self.runningBalanceBuyTradeParameters.count > 0) {
-//
-//                                                                      [self informBuyDelegateAboutRunningQueues];
-//                                                                      [self informSellDelegateAboutRunningQueues];
-//
-//                                                                      return;
-//                                                                  }
-//
-//                                                                  // Update all orderBooks
-//                                                                  [self flushAllOrderBooks];
-//                                                                  [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
-//                                                                                                                            delegate:self];
-//                                                                  [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
-//                                                                                                                            delegate:self];
-//                                                                  [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
-//                                                                                                                            delegate:self];
-//                                                                  [self fetchOrderBooks];
-//                                                                  self.socketIODidDisconnectAppeared = NO;
-//                                                              }];
 
         self.reloadOrderBooksTimer.tolerance = 1;
         [[NSRunLoop mainRunLoop] addTimer:self.reloadOrderBooksTimer
