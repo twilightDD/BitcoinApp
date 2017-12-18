@@ -303,38 +303,43 @@
         return NO;
     }
 
-    { // get buyOrderBook
-        DDLogInfo(@"get buyOrderBook %f", [[NSDate date] timeIntervalSince1970]);
-        NSDictionary *buyParameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:BitcoinDE_BuyOrderType
-                                                                                 currencyType:self.currencyType
-                                                                     onlyExpressPaymentOption:YES];
-        
-        NSMutableDictionary *newBuyParameters = [buyParameters mutableCopy];
-        [newBuyParameters setObject:@1 forKey:BitcoinDE_ShowMyOrders_OrderRequirements_OnlyKYCFull];
-        
-        [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType
-                                                withParameter:[newBuyParameters copy]
-                                                    respondTo:self];
-    }
+  
 
-    // get sellOrderBook
-    double delayInSeconds = 0.4;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        {
-            DDLogInfo(@"get sellOrderBook %f", [[NSDate date] timeIntervalSince1970]);
-            NSDictionary *sellParameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:BitcoinDE_SellOrderType
-                                                                                      currencyType:self.currencyType
-                                                                          onlyExpressPaymentOption:YES];
+    // get buyOrderBook
+    [self fetchBuyOrderBook]; // after receiving buyOrdeBook, we fetch for sellOrderBook automatically
 
-            NSMutableDictionary *newSellParameters = [sellParameters mutableCopy];
-            [newSellParameters setObject:@1 forKey:BitcoinDE_ShowMyOrders_OrderRequirements_OnlyKYCFull];
-            [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType
-                                                    withParameter:[newSellParameters copy]
-                                                        respondTo:self];
-        }
-    });
+    return YES;
+}
 
+- (void)fetchBuyOrderBook {
+    NSLog(@">>>>> fetchBuyOrderBook");
+    NSDictionary *buyParameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:BitcoinDE_BuyOrderType
+                                                                             currencyType:self.currencyType
+                                                                 onlyExpressPaymentOption:YES];
+
+    NSMutableDictionary *newBuyParameters = [buyParameters mutableCopy];
+    [newBuyParameters setObject:@1 forKey:BitcoinDE_ShowMyOrders_OrderRequirements_OnlyKYCFull];
+
+    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowBuyOrderbookCommandType
+                                            withParameter:[newBuyParameters copy]
+                                                respondTo:self];
+}
+
+- (void)fetchSellOrderBook {
+    NSLog(@">>>>> fetchSellOrderBook");
+    NSDictionary *sellParameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:BitcoinDE_SellOrderType
+                                                                              currencyType:self.currencyType
+                                                                  onlyExpressPaymentOption:YES];
+
+    NSMutableDictionary *newSellParameters = [sellParameters mutableCopy];
+    [newSellParameters setObject:@1 forKey:BitcoinDE_ShowMyOrders_OrderRequirements_OnlyKYCFull];
+    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowSellOrderbookCommandType
+                                            withParameter:[newSellParameters copy]
+                                                respondTo:self];
+}
+
+- (void)fetchAccountInfos {
+    NSLog(@">>>>> fetchAccountInfos");
 
     // register for banner update notifications
     if (self.requestShowAccountInfoNotification == nil) {
@@ -347,19 +352,9 @@
                                                    ];
     }
 
-    double delayInSeconds2 = 0.6;
-    dispatch_time_t popTime2 = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds2 * NSEC_PER_SEC));
-    dispatch_after(popTime2, dispatch_get_main_queue(), ^(void){
-        DDLogInfo(@"get banner %f", [[NSDate date] timeIntervalSince1970]);
-        // TODO: quickfix to get a banner update after socket reconnect
-        [[SOXMarket_BitcoinDE_Core sharedCore] startAccountInfoUpdate];
-    });
-
-
+    [[SOXMarket_BitcoinDE_Core sharedCore] startAccountInfoUpdate];
 
     self.automaticTradingIsRunning = YES;
-
-    return YES;
 }
 
 - (void)checkRegisterForSocketUpdatesStatus {
@@ -1093,6 +1088,8 @@
 
         [self updateBuyStatus];
 
+        // after buyOrderBook get sellOrderBook
+        [self fetchSellOrderBook];
     }
     else if([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowSellOrderbookCommandType)]) {
         NSMutableArray *sellOrderBookDatas = [NSMutableArray array];
@@ -1127,6 +1124,9 @@
                           , dataOfInterest.orderInformation_price];
         [self informSellDelegateWithNote:note];
         [self updateSellStatus];
+
+        // after sellOrderBook get accountInfos
+        [self fetchAccountInfos];
     }
 }
 
