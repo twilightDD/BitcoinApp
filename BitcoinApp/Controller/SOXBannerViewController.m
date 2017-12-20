@@ -193,8 +193,8 @@
     if (accountInfoData.bankReservation_exists) {
         self.fidorReservationValuesAndDescriptionStackView.hidden = NO;
 
-        self.fidorReservationTotalAmountTextField.doubleValue = [accountInfoData allocationMaxEurVolumeForCurrency:self.currencyType].doubleValue ;
-        self.fidorReservationAvailableAmountTextField.doubleValue = [accountInfoData allocationEurVolumeOpenOrdersForCurrency:self.currencyType].doubleValue;
+        self.fidorReservationTotalAmountTextField.doubleValue = [accountInfoData allocationMaxEurVolumeForCurrencyType:self.currencyType].doubleValue ;
+        self.fidorReservationAvailableAmountTextField.doubleValue = [accountInfoData allocationEurVolumeOpenOrdersForCurrencyType:self.currencyType].doubleValue;
         NSString *validUntilString = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:accountInfoData.bankReservation_validUntil];
         self.fidorReservationValidUntilTextField.stringValue = validUntilString;
     }

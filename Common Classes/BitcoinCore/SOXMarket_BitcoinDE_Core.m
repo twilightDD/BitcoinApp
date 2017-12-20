@@ -101,17 +101,17 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 
 + (NSDecimalNumber * _Nullable)allocationPercentForCurrency:(BitcoinDE_CurrencyType)currencyType {
     SOXAccountInfo_BitcoinDE_Data *accountInfoData = (SOXAccountInfo_BitcoinDE_Data*)[SOXMarket_BitcoinDE_Core sharedCore].accountInfoData;
-    return [accountInfoData allocationPercentForCurrency:currencyType];
+    return [accountInfoData allocationPercentForCurrencyType:currencyType];
 }
 
 + (NSDecimalNumber * _Nullable)allocationMaxEurVolumeForCurrency:(BitcoinDE_CurrencyType)currencyType {
     SOXAccountInfo_BitcoinDE_Data *accountInfoData = (SOXAccountInfo_BitcoinDE_Data*)[SOXMarket_BitcoinDE_Core sharedCore].accountInfoData;
-    return [accountInfoData allocationMaxEurVolumeForCurrency:currencyType];
+    return [accountInfoData allocationMaxEurVolumeForCurrencyType:currencyType];
 }
 
 + (NSDecimalNumber * _Nullable)allocationEurVolumeOpenOrdersForCurrency:(BitcoinDE_CurrencyType)currencyType {
     SOXAccountInfo_BitcoinDE_Data *accountInfoData = (SOXAccountInfo_BitcoinDE_Data*)[SOXMarket_BitcoinDE_Core sharedCore].accountInfoData;
-    return [accountInfoData allocationEurVolumeOpenOrdersForCurrency:currencyType];
+    return [accountInfoData allocationEurVolumeOpenOrdersForCurrencyType:currencyType];
 }
 
 + (NSDecimalNumber * _Nullable)totalAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType {

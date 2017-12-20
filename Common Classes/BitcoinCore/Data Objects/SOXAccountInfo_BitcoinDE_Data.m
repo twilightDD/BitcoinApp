@@ -68,21 +68,21 @@
 }
 
 #pragma mark - Public methods
-- (NSDecimalNumber *)allocationPercentForCurrency:(BitcoinDE_CurrencyType)currencyType {
+- (NSDecimalNumber *)allocationPercentForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
     SOXBitcoinDE_Allocation *tradingPairAllocation = [self tradingPairAllocationForCurrency:currencyType];
     NSDecimalNumber *allocationPercentForCurrency = tradingPairAllocation.allocation_percent;
 
     return allocationPercentForCurrency;
 }
 
-- (NSDecimalNumber *)allocationMaxEurVolumeForCurrency:(BitcoinDE_CurrencyType)currencyType {
+- (NSDecimalNumber *)allocationMaxEurVolumeForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
     SOXBitcoinDE_Allocation *tradingPairAllocation = [self tradingPairAllocationForCurrency:currencyType];
     NSDecimalNumber *allocationMaxEurVolumeForCurrency = tradingPairAllocation.allocation_max_eur_volume;
 
     return allocationMaxEurVolumeForCurrency;
 }
 
-- (NSDecimalNumber *)allocationEurVolumeOpenOrdersForCurrency:(BitcoinDE_CurrencyType)currencyType {
+- (NSDecimalNumber *)allocationEurVolumeOpenOrdersForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
     SOXBitcoinDE_Allocation *tradingPairAllocation = [self tradingPairAllocationForCurrency:currencyType];
     NSDecimalNumber *allocationEurVolumeOpenOrdersForCurrency = tradingPairAllocation.allocation_eur_volume_open_orders;
 

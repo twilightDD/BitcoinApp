@@ -28,9 +28,9 @@ FOUNDATION_EXPORT NSString *const BannerDataKey;
 
 + (instancetype)accountInfoDataForAccountInfoDictionary:(NSDictionary *)accountInfoDictionary;
 
-- (NSDecimalNumber *)allocationPercentForCurrency:(BitcoinDE_CurrencyType)currencyType;
-- (NSDecimalNumber *)allocationMaxEurVolumeForCurrency:(BitcoinDE_CurrencyType)currencyType;
-- (NSDecimalNumber *)allocationEurVolumeOpenOrdersForCurrency:(BitcoinDE_CurrencyType)currencyType;
+- (NSDecimalNumber *)allocationPercentForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
+- (NSDecimalNumber *)allocationMaxEurVolumeForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
+- (NSDecimalNumber *)allocationEurVolumeOpenOrdersForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 
 - (NSDecimalNumber *)totalAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 - (NSDecimalNumber *)availableAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
