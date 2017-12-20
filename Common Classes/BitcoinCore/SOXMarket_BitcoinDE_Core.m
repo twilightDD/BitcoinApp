@@ -187,17 +187,30 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
                                                                     });
                                                                     if (serverAnswer) {
                                                                         if (serverCommandType == BitcoinDE_ShowAccountInfoCommandType) {
-                                                                            SOXAccountInfoData *accountInfoData = [serverAnswer objectForKey:ServerAnswerPayloadKey];
+                                                                            SOXAccountInfo_BitcoinDE_Data *accountInfoData = [serverAnswer objectForKey:ServerAnswerPayloadKey];
                                                                             [SOXMarket_BitcoinDE_Core sharedCore].accountInfoData = accountInfoData;
-
+/*
                                                                             dispatch_async(dispatch_get_main_queue(), ^{
-
-                                                                                DDLogInfo(@"^^^^^^ Account Info Update arrived:\ntotalAmount: %@\navailAmount: %@\nreserAmount: %@ \n(networkRequestCounter: %tu)"
-                                                                                          , [SOXFormatters stringForBTCNumber:accountInfoData.btcBalance_totalAmount]
-                                                                                          , [SOXFormatters stringForBTCNumber:accountInfoData.btcBalance_availableAmount]
-                                                                                          , [SOXFormatters stringForBTCNumber:accountInfoData.btcBalance_reservedAmount]
-                                                                                          , networkRequestCounter);
+                                                                                NSString *note = [NSString stringWithFormat:@"^^^^^^ Account Info Update arrived (BTC):\ntotalAmount: %@\navailAmount: %@\nreserAmount: %@ \n(networkRequestCounter: %tu)"
+                                                                                          , [SOXFormatters stringForBTCNumber:[accountInfoData totalAmountForCurrencyType:BitcoinDE_CurrencyTypeBitcoin]]
+                                                                                          , [SOXFormatters stringForBTCNumber:[accountInfoData availableAmountForCurrencyType:BitcoinDE_CurrencyTypeBitcoin]]
+                                                                                          , [SOXFormatters stringForBTCNumber:[accountInfoData reservedAmountForCurrencyType:BitcoinDE_CurrencyTypeBitcoin]]
+                                                                                          , networkRequestCounter];
+                                                                                DDLogInfo(@"%@", note);
+                                                                                note = [NSString stringWithFormat:@"^^^^^^ Account Info Update arrived (BCH):\ntotalAmount: %@\navailAmount: %@\nreserAmount: %@ \n(networkRequestCounter: %tu)"
+                                                                                        , [SOXFormatters stringForBTCNumber:[accountInfoData totalAmountForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash]]
+                                                                                        , [SOXFormatters stringForBTCNumber:[accountInfoData availableAmountForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash]]
+                                                                                        , [SOXFormatters stringForBTCNumber:[accountInfoData reservedAmountForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash]]
+                                                                                        , networkRequestCounter];
+                                                                                DDLogInfo(@"%@", note);
+                                                                                note = [NSString stringWithFormat:@"^^^^^^ Account Info Update arrived (ETH):\ntotalAmount: %@\navailAmount: %@\nreserAmount: %@ \n(networkRequestCounter: %tu)"
+                                                                                        , [SOXFormatters stringForBTCNumber:[accountInfoData totalAmountForCurrencyType:BitcoinDE_CurrencyTypeEthereum]]
+                                                                                        , [SOXFormatters stringForBTCNumber:[accountInfoData availableAmountForCurrencyType:BitcoinDE_CurrencyTypeEthereum]]
+                                                                                        , [SOXFormatters stringForBTCNumber:[accountInfoData reservedAmountForCurrencyType:BitcoinDE_CurrencyTypeEthereum]]
+                                                                                        , networkRequestCounter];
+                                                                                DDLogInfo(@"%@", note);
                                                                             });
+ */
                                                                             [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_RequestShowAccountInfo
                                                                                                                                 object:serverAnswer];
 
