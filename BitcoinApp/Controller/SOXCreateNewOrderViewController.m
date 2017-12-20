@@ -104,7 +104,7 @@
         self.minAmount = self.orderBookDataToReplace ?
             [NSDecimalNumber decimalNumberWithDecimal:self.orderBookDataToReplace.orderInformation_minAmount.decimalValue] :
             [NSDecimalNumber decimalNumberWithString:@"0.05"];
-        self.minimalPossibleAmount = [NSDecimalNumber decimalNumberWithString:@"0.05"];
+        self.minimalPossibleAmount = [NSDecimalNumber decimalNumberWithString:@"0.00001"];
         
         self.minimalPossiblePrice = [SOXMarket_BitcoinDE_Core rateWeightedHalfForCurrencyType:self.currencyType];
         // condition #1
