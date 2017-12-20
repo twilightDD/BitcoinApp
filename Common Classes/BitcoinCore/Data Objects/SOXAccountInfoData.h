@@ -10,10 +10,6 @@
 
 @interface SOXAccountInfoData : NSObject
 
-@property (strong, nonatomic, readonly) NSDecimalNumber *btcBalance_totalAmount;
-@property (strong, nonatomic, readonly) NSDecimalNumber *btcBalance_availableAmount;
-@property (strong, nonatomic, readonly) NSDecimalNumber *btcBalance_reservedAmount;
-
 @property (strong, nonatomic, readonly) NSDictionary *tradingPairBalances;
 @property (strong, nonatomic, readonly) NSDictionary *tradingPairAllocations;
 

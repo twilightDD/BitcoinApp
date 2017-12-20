@@ -35,11 +35,6 @@
 @interface SOXAccountInfo_BitcoinDE_Data ()
 
 #pragma mark Properties
-
-@property (strong, nonatomic, readwrite) NSDecimalNumber *btcBalance_totalAmount;
-@property (strong, nonatomic, readwrite) NSDecimalNumber *btcBalance_availableAmount;
-@property (strong, nonatomic, readwrite) NSDecimalNumber *btcBalance_reservedAmount;
-
 @property (strong, nonatomic, readwrite) NSDictionary *tradingPairBalances;
 @property (strong, nonatomic, readwrite) NSDictionary *tradingPairAllocations;
 
@@ -59,7 +54,6 @@
 @implementation SOXAccountInfo_BitcoinDE_Data
 
 #pragma mark Synthesize
-@synthesize btcBalance_totalAmount, btcBalance_availableAmount, btcBalance_reservedAmount;
 @synthesize tradingPairBalances, tradingPairAllocations;
 @synthesize bankReservation_exists, bankReservation_totalAmount, bankReservation_availableAmount, bankReservation_reservedAt, bankReservation_validUntil;
 @synthesize bankInformation_bicShort, bankInformation_bicFull, bankInformation_UID;
