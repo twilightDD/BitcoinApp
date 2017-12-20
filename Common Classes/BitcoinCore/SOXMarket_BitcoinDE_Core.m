@@ -239,6 +239,9 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
     [SOXMarket_BitcoinDE_Core addNSURLSessionTask:getTask
                                  forServerCommand:serverCommandType
                             networkRequestCounter:[SOXMarket_BitcoinDE_Core sharedCore].networkRequestCounter];
+
+    DDLogInfo(@"getTask.currentRequest.URL: %@", getTask.currentRequest.URL);
+    DDLogInfo(@"getTask.originalRequest.URL: %@", getTask.originalRequest.URL);
 }
 
 #pragma mark | Status bar handling
@@ -511,7 +514,7 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 //        };
     }
 
-    DDLogInfo(@"url_encoded_query string\n%@",url_encoded_query_string);
+   // DDLogInfo(@"url_encoded_query string\n%@",url_encoded_query_string);
 //    DDLogInfo(@"url_encoded_query string\n%s",url_encoded_query_string.UTF8String);
     
     [SOXMarket_BitcoinDE_Core sharedCore].url_encoded_query_string = url_encoded_query_string;
@@ -536,7 +539,7 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
         url = [url stringByAppendingString:@"?"];
         url = [url stringByAppendingString:url_encoded_query_string];
     }
-    DDLogInfo(@"url\n%@",url);
+    //DDLogInfo(@"url\n%@",url);
     core.url = url;
 }
 
@@ -691,8 +694,8 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
             [[SOXMarket_BitcoinDE_Core sharedCore].delegateForStatusBarUpdates statusBarUpdated:statusBarString];
         }
         else {
-            DDLogInfo(@"### START NEXT NSURLSessionTask (credits before resume: %ti)"
-                  , [SOXMarket_BitcoinDE_Core sharedCore].currentCredits);
+//            DDLogInfo(@"### WILL START NEXT NSURLSessionTask (credits before resume: %ti)"
+//                  , [SOXMarket_BitcoinDE_Core sharedCore].currentCredits);
 
             [SOXMarket_BitcoinDE_Core sharedCore].networkQueueIsRunning = YES;
 
@@ -700,8 +703,9 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
             [SOXMarket_BitcoinDE_Core sharedCore].currentCredits = [SOXMarket_BitcoinDE_Core sharedCore].currentCredits - [self creditCostsForServerCommandType:serverCommandType];
 
             [nextTask resume];
-            DDLogInfo(@"### START NEXT NSURLSessionTask (credits after resume: %ti)"
-                  , [SOXMarket_BitcoinDE_Core sharedCore].currentCredits);
+            DDLogInfo(@"### DID START NEXT NSURLSessionTask (credits after resume: %ti) with complete URL \n%@"
+                      , [SOXMarket_BitcoinDE_Core sharedCore].currentCredits
+                      , nextTask.currentRequest.URL);
 
             [networkQueue removeObject:nextTaskDictionary];
             [sharedCore.runningRequests addObject:nextTaskDictionary];
