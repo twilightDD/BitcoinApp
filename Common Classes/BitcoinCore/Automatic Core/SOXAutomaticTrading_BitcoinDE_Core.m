@@ -19,7 +19,7 @@
 
 #import "SOXErrorMessage_BitcoinDE.h"
 
-#import "SOXAccountInfoData.h"
+#import "SOXAccountInfo_BitcoinDE_Data.h"
 #import "SOXShowOrderbook_BitcoinDE_Data.h"
 
 @import AppKit;
@@ -1684,10 +1684,10 @@
     // because we got banner update right now
 //    self.waitingForBannerUpdate = NO;
 
-    SOXAccountInfoData *accountInfoData = [serverAnswer objectForKey:ServerAnswerPayloadKey];
-    NSDecimalNumber *newAvailBTC = accountInfoData.btcBalance_availableAmount;
-    NSDecimalNumber *newReservedBTC = accountInfoData.btcBalance_reservedAmount;
-    NSDecimalNumber *newAvailableFidorAmount = accountInfoData.bankReservation_availableAmount;
+    SOXAccountInfo_BitcoinDE_Data *accountInfoData = [serverAnswer objectForKey:ServerAnswerPayloadKey];
+    NSDecimalNumber *newAvailBTC = [accountInfoData availableAmountForCurrencyType:self.currencyType];
+    NSDecimalNumber *newReservedBTC = [accountInfoData reservedAmountForCurrencyType:self.currencyType];
+    NSDecimalNumber *newAvailableFidorAmount = [accountInfoData allocationMaxEurVolumeForCurrencyType:self.currencyType];
 
     {// DEBUG
         NSString *note = [NSString stringWithFormat:@"BannerUpdate arrived with values: availBTC %@ - reservedBTC %@ - availFidor %@"
