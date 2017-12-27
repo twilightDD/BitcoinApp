@@ -53,11 +53,12 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_UpdateType) {
     , BitcoinDE_UpdateType_RemoveOrderChanges
 };
 
-typedef NS_ENUM (NSInteger, BitcoinDE_CurrencyType) {
+typedef NS_ENUM (NSInteger, BitcoinDE_CurrencyType) { // used in MacMain.storyboard / SOXShowMyOrdersViewController
     BitcoinDE_CurrencyTypeUnknown = 0
-    , BitcoinDE_CurrencyTypeBitcoin = 1000
-    , BitcoinDE_CurrencyTypeBitcoinCash = 1100
-    , BitcoinDE_CurrencyTypeEthereum = 2000
+    , BitcoinDE_CurrencyTypeBitcoin = 1
+    , BitcoinDE_CurrencyTypeBitcoinCash = 2
+    , BitcoinDE_CurrencyTypeEthereum = 3
+    , BitcoinDE_CurrencyType_EndOfType
 };
 
 @interface SOXMarket_BitcoinDE_DefTypes : SOXMarket_DefTypes
@@ -72,4 +73,5 @@ typedef NS_ENUM (NSInteger, BitcoinDE_CurrencyType) {
 + (NSString *)tradingPairShortStringForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 + (NSString *)tradingPairNaturalStringForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 + (BitcoinDE_CurrencyType)currencyTypeForTradingPairString:(NSString *)tradingPairString;
+
 @end

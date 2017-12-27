@@ -69,7 +69,63 @@ static NSString *AccountLedgerParameter_PageKey         = @"page";
                               startDate:(NSDate *)startDate
                                 endDate:(NSDate *)endDate
                                    page:(NSInteger)page {
-    NSString *orderTypeString;
+    NSString *orderTypeString = [self orderTypeStringForOrderType:orderType];
+
+    NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringForCurrencyType:currencyType];
+    NSString *startDateString = [SOXFormatters rfc3339DateTimeStringDate:startDate];
+    NSString *endDateString   = [SOXFormatters rfc3339DateTimeStringDate:endDate];
+    
+    NSNumber *pageNumber = @(page);
+// DOKU Format gemäß RFC 3339 (Bsp: 2015-01-20T15:00:00+02:00)
+    startDateString = @"2015-01-20T15:00:00Z"; //@"2017-10-06T00:00:00+02:00";
+    endDateString   = @"2017-12-27T10:45:11Z"; // @"2017-12-12T00:00:00+02:00";
+
+    NSDictionary *parameterDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                   orderTypeString,       AccountLedgerParameter_TypeKey
+                                   , currencyTypeString,  AccountLedgerParameter_Currency
+//                                   , startDateString,     AccountLedgerParameter_DateStartKey
+//                                   , endDateString,       AccountLedgerParameter_DateEndKey
+                                   , pageNumber,          AccountLedgerParameter_PageKey
+                                   , nil];
+    
+    return parameterDict;
+}
+
++ (NSString *)titleForAccountLedgerOrderType:(BitcoinDE_AccountLedgerParameter_OrderType)orderType {
+    static NSArray *titlesForAccountLedgerOrderType;
+
+    static dispatch_once_t pred;
+
+    dispatch_once(&pred, ^{
+        titlesForAccountLedgerOrderType = @[@"Unknown"
+                                            , @"All"
+                                            , @"Buy"
+                                            , @"Sell"
+                                            , @"Inpayment"
+                                            , @"Payout"
+                                            , @"Affiliate"
+                                            , @"Welcome btc"
+                                            , @"Buy Yubikey"
+                                            , @"Buy Goldshop"
+                                            , @"Buy Diamondshop"
+                                            , @"Kickback"
+                                            , @"Outgoing_fee_voluntary"
+                                            ];
+    });
+    NSString *titleForAccountLedgerOrderType = [titlesForAccountLedgerOrderType objectAtIndex:orderType];
+    return titleForAccountLedgerOrderType;
+}
+
+#pragma mark - Private Class methods
++ (SOXAccountLedger_BitcoinDE_Data *)accountLedgerDataForAccountLedgerDictionary:(NSDictionary *)aAccountLedgerDictionary {
+    SOXAccountLedger_BitcoinDE_Data *accountLedgerData = [[SOXAccountLedger_BitcoinDE_Data alloc] init];
+    [accountLedgerData setupMyAccountLedgerDataForAccountLedgerDictionary:aAccountLedgerDictionary];
+    
+    return accountLedgerData;
+}
+
++ (NSString *)orderTypeStringForOrderType:(BitcoinDE_AccountLedgerParameter_OrderType)orderType {
+    NSString *orderTypeString = nil;
     switch (orderType) {
         case BitcoinDE_AccountLedgerParameter_AllOrderType:
             orderTypeString = BitcoinDE_AccountLedgerParameter_AllOrderTypeKey;
@@ -112,33 +168,7 @@ static NSString *AccountLedgerParameter_PageKey         = @"page";
             break;
     };
 
-    NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringForCurrencyType:currencyType];
-
-    NSString *startDateString = [SOXFormatters rfc3339DateTimeStringDate:startDate];
-    NSString *endDateString   = [SOXFormatters rfc3339DateTimeStringDate:endDate];
-    
-    NSNumber *pageNumber = @(page);
-
-    startDateString = @"2017-08-06T00:00:00+02:00";
-    endDateString   = @"2017-08-12T00:00:00+02:00";
-
-    NSDictionary *parameterDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                   orderTypeString,       AccountLedgerParameter_TypeKey
-                                   , currencyTypeString, AccountLedgerParameter_Currency
-                                   //, startDateString,     AccountLedgerParameter_DateStartKey
-                                   //, endDateString,       AccountLedgerParameter_DateEndKey
-                                   , pageNumber,          AccountLedgerParameter_PageKey
-                                   , nil];
-    
-    return parameterDict;
-}
-
-#pragma mark - Private Class methods
-+ (SOXAccountLedger_BitcoinDE_Data *)accountLedgerDataForAccountLedgerDictionary:(NSDictionary *)aAccountLedgerDictionary {
-    SOXAccountLedger_BitcoinDE_Data *accountLedgerData = [[SOXAccountLedger_BitcoinDE_Data alloc] init];
-    [accountLedgerData setupMyAccountLedgerDataForAccountLedgerDictionary:aAccountLedgerDictionary];
-    
-    return accountLedgerData;
+    return orderTypeString;
 }
 
 #pragma mark - Instance methods

@@ -25,6 +25,15 @@
 @property (weak) IBOutlet NSButton *pageForwardButton;
 @property (weak) IBOutlet NSTextField *pageIndicatorTextField;
 
+@property (weak) IBOutlet NSTextField *currencyTypeSelectionLabel;
+@property (weak) IBOutlet NSPopUpButton *currencyTypeSelectionPopUpButton;
+
+@property (weak) IBOutlet NSTextField *typeLabel;
+@property (weak) IBOutlet NSPopUpButton *typePopUpButton;
+
+@property (weak) IBOutlet NSButton *reloadButton;
+
+
 @property (strong) IBOutlet NSArrayController *accountLedgerArrayController;
 
 #pragma mark Properties
@@ -44,7 +53,7 @@
     [super viewWillAppear];
     
     [self setupUI];
-    [self requestServerData];
+    //[self requestServerData];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
                                                         object:@(BitcoinDE_CurrencyTypeBitcoin)];
@@ -53,16 +62,44 @@
 #pragma mark - Private methods
 - (void)setupUI {    
     self.pageContainerView.hidden = YES;
+
+    // CurrencyType Selection
+    self.currencyTypeSelectionLabel.stringValue = @"Select Currency";
+    [self.currencyTypeSelectionPopUpButton removeAllItems];
+    for (BitcoinDE_CurrencyType idx = BitcoinDE_CurrencyTypeUnknown + 1
+         ; idx < BitcoinDE_CurrencyType_EndOfType
+         ; idx++) {
+        [self.currencyTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:idx]];
+    }
+
+    // Type Selection
+    self.typeLabel.stringValue = @"Select Type";
+    [self.typePopUpButton removeAllItems];
+    for (BitcoinDE_AccountLedgerParameter_OrderType idx = BitcoinDE_AccountLedgerParameter_UnknownOrderType + 1
+         ; idx < BitcoinDE_AccountLedgerParameter_EndOfType
+         ; idx++) {
+        [self.typePopUpButton addItemWithTitle:[SOXAccountLedger_BitcoinDE_Data titleForAccountLedgerOrderType:idx]];
+    }
+
+    self.reloadButton.title = @"Reload";
 }
 
+#pragma mark - Action methods
+- (IBAction)reloadButtonAction:(NSButton *)sender {
+    [self requestServerData];
+}
+
+#pragma mark - Network stuff
 
 - (void)requestServerData {
     [self enableSpinningWheel];
-    
-    NSDictionary *parameter = [SOXAccountLedger_BitcoinDE_Data parameterForOrderType:BitcoinDE_AccountLedgerParameter_AllOrderType
-                                                                     forCurrencyType:BitcoinDE_CurrencyTypeBitcoin
-                                                                           startDate:[NSDate dateWithTimeIntervalSinceNow:-4320000]
-                                                                             endDate:nil
+    BitcoinDE_CurrencyType currencyTypeIndex = [self.currencyTypeSelectionPopUpButton indexOfSelectedItem] + 1;
+    BitcoinDE_AccountLedgerParameter_OrderType orderTypeIndex =  [self.typePopUpButton indexOfSelectedItem] + 1 ;
+
+    NSDictionary *parameter = [SOXAccountLedger_BitcoinDE_Data parameterForOrderType:orderTypeIndex
+                                                                     forCurrencyType:currencyTypeIndex
+                                                                           startDate:[NSDate dateWithTimeIntervalSinceNow:-10320000]
+                                                                             endDate:[NSDate dateWithTimeIntervalSinceNow:-4320000]
                                                                                 page:1];
     
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountLedgerType

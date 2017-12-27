@@ -24,6 +24,7 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_AccountLedgerParameter_OrderType) {
     , BitcoinDE_AccountLedgerParameter_BuyDiamondshopOrderType
     , BitcoinDE_AccountLedgerParameter_KickbackOrderType
     , BitcoinDE_AccountLedgerParameter_OutgoingFeeVoluntaryOrderType
+    , BitcoinDE_AccountLedgerParameter_EndOfType
 };
 
 
@@ -50,4 +51,6 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_AccountLedgerParameter_OrderType) {
                                 endDate:(NSDate *)endDate
                                    page:(NSInteger)page;
 
+
++ (NSString *)titleForAccountLedgerOrderType:(BitcoinDE_AccountLedgerParameter_OrderType)orderType;
 @end
