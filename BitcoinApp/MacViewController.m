@@ -64,11 +64,11 @@ static NSString *AutomaticTradeETHSegueKey = @"EmbedAutoTraderForETH";
     // Configure TabView
     {
         NSTabViewItem *item0 = [self.bottomTabView tabViewItemAtIndex:0];
-        item0.label = @"BuS Bitcoin";
+        item0.label = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoin];
         NSTabViewItem *item1 = [self.bottomTabView tabViewItemAtIndex:1];
-        item1.label = @"BuS Bitcoin Cash";
+        item1.label = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
         NSTabViewItem *item2 = [self.bottomTabView tabViewItemAtIndex:2];
-        item2.label = @"BuS Ethereum";
+        item2.label = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeEthereum];
         NSTabViewItem *item3 = [self.bottomTabView tabViewItemAtIndex:3];
         item3.label = @"My Active Orders";
         NSTabViewItem *item4 = [self.bottomTabView tabViewItemAtIndex:4];

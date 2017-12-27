@@ -118,9 +118,9 @@
     dispatch_once(&pred, ^{
         tradingPairNaturalStringsForCurrencyType = [NSDictionary dictionaryWithObjectsAndKeys:
                                                     @"Unbekannt", @(BitcoinDE_CurrencyTypeUnknown)
-                                                    , @"Bitcoins", @(BitcoinDE_CurrencyTypeBitcoin)
-                                                    , @"Bitcoin Cashs", @(BitcoinDE_CurrencyTypeBitcoinCash)
-                                                    , @"Ethereums", @(BitcoinDE_CurrencyTypeEthereum)
+                                                    , @"Bitcoin", @(BitcoinDE_CurrencyTypeBitcoin)
+                                                    , @"Bitcoin Cash", @(BitcoinDE_CurrencyTypeBitcoinCash)
+                                                    , @"Ethereum", @(BitcoinDE_CurrencyTypeEthereum)
                                                     , nil];
     });
 
