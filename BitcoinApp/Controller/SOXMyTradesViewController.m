@@ -41,15 +41,6 @@
 @property (weak) IBOutlet NSTextField *stateTypeSelectionLabel;
 @property (weak) IBOutlet NSPopUpButton *stateTypeSelectionPopUpButton;
 
-// - order type
-//@property (weak) IBOutlet NSTextField *orderTypeTextField;
-//@property (weak) IBOutlet NSButton *orderTypeBuyRadioButton;
-//@property (weak) IBOutlet NSButton *orderTypeSellRadioButton;
-// - trade state
-//@property (weak) IBOutlet NSTextField *tradeStateTextField;
-//@property (weak) IBOutlet NSButton *tradeStateSuccessfulRadioButton;
-//@property (weak) IBOutlet NSButton *tradeStatePendingRadioButton;
-//@property (weak) IBOutlet NSButton *tradeStateCancelledRadioButton;
 // - start date
 @property (weak) IBOutlet NSTextField *startDateTextField;
 @property (weak) IBOutlet NSDatePicker *startDateDatePicker;
@@ -61,10 +52,9 @@
 @property (strong) IBOutlet NSArrayController *myTradesArrayController;
 
 #pragma mark Properties
-@property (nonatomic) NSInteger selectedOrderType;
-@property (nonatomic) NSInteger selectedTradeStateType;
 @property (strong, nonatomic) NSDate *selectedStartDate;
 @property (strong, nonatomic) NSDate *selectedEndDate;
+
 @property (nonatomic) NSInteger selectedPage;
 
 @property (strong, nonatomic) NSMutableArray *myTrades;
@@ -77,14 +67,6 @@
 #pragma mark Init&Co.
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do view setup here.
-}
-
-- (void)viewWillAppear {
-    [super viewWillAppear];
-    
-    self.selectedOrderType      = BitcoinDE_MyTradeHistoryParameter_BuyOrderType;
-    self.selectedTradeStateType = BitcoinDE_MyTradeHistoryParameter_SuccessfulTradeStateType;
    
     {
         self.selectedStartDate      = [NSDate dateWithTimeInterval:-1*60*60*24*7 sinceDate:[NSDate date]];

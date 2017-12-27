@@ -171,14 +171,6 @@ static NSString *MyTradeHistoryParameter_PageKey = @"page";
     if (page) {
         [parameterDictHelper setObject:page forKey:MyTradeHistoryParameter_PageKey];
     }
-
-    NSDictionary *parameterDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                   orderType,       MyTradeHistoryParameter_TypeKey
-                                   , tradeState,    MyTradeHistoryParameter_StateKey
-                                   , startDate,     MyTradeHistoryParameter_DateStartKey
-                                   , endDate,       MyTradeHistoryParameter_DateEndKey
-                                   , page,          MyTradeHistoryParameter_PageKey
-                                   , nil];
     
     return [parameterDictHelper copy];
 }
