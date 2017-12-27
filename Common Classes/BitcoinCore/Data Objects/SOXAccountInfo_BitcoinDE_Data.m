@@ -136,7 +136,8 @@
         NSDictionary *fidor_reservation = [dataDict objectForKey:BitcoinDE_ShowAccountInfoFidorReservation_fidor_reservation];
         if (fidor_reservation) {
             self.bankReservation_exists = YES;
-            self.bankReservation_totalAmount = [NSDecimalNumber decimalNumberWithDecimal:[[fidor_reservation objectForKey:BitcoinDE_ShowAccountInfoFidorReservation_total_amount] decimalValue ]];
+            self.bankReservation_totalAmount = [NSDecimalNumber decimalNumberWithDecimal:
+                                                [[fidor_reservation objectForKey:BitcoinDE_ShowAccountInfoFidorReservation_total_amount] decimalValue ]];
             self.bankReservation_availableAmount = [NSDecimalNumber decimalNumberWithDecimal:[[fidor_reservation objectForKey:BitcoinDE_ShowAccountInfoFidorReservation_available_amount] decimalValue]];
             self.bankReservation_reservedAt = [fidor_reservation objectForKey:BitcoinDE_ShowAccountInfoFidorReservation_reserved_at];
             self.bankReservation_validUntil = [fidor_reservation objectForKey:BitcoinDE_ShowAccountInfoFidorReservation_valid_until];
@@ -146,9 +147,12 @@
             NSMutableDictionary *tradingPairAllocationsHelper = [NSMutableDictionary dictionary];
             [fidor_allocations enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull currencyShort, NSDictionary * _Nonnull allocationDict, BOOL * _Nonnull stop) {
                 SOXBitcoinDE_Allocation *allocation = [[SOXBitcoinDE_Allocation alloc] init];
-                allocation.allocation_percent = [allocationDict objectForKey:BitcoinDE_ShowAccountInfoFidorReservation_allocation_percent];
-                allocation.allocation_max_eur_volume = [allocationDict objectForKey:BitcoinDE_ShowAccountInfoFidorReservation_allocation_max_eur_volume];
-                allocation.allocation_eur_volume_open_orders = [allocationDict objectForKey:BitcoinDE_ShowAccountInfoFidorReservation_allocation_eur_volume_open_orders];
+                allocation.allocation_percent = [NSDecimalNumber decimalNumberWithDecimal:
+                                                  [[allocationDict objectForKey:BitcoinDE_ShowAccountInfoFidorReservation_allocation_percent] decimalValue]];
+                allocation.allocation_max_eur_volume = [NSDecimalNumber decimalNumberWithDecimal:
+                                                        [[allocationDict objectForKey:BitcoinDE_ShowAccountInfoFidorReservation_allocation_max_eur_volume] decimalValue]];
+                allocation.allocation_eur_volume_open_orders = [NSDecimalNumber decimalNumberWithDecimal:
+                                                                [[allocationDict objectForKey:BitcoinDE_ShowAccountInfoFidorReservation_allocation_eur_volume_open_orders] decimalValue]];
                 [tradingPairAllocationsHelper setObject:allocation
                                                  forKey:currencyShort];
             }];
