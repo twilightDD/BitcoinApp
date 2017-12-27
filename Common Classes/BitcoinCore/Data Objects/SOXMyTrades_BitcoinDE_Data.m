@@ -16,6 +16,7 @@ static NSString *MyTradeHistoryParameter_OrderTypeSellKey = @"sell";
 
 static NSString *MyTradeHistoryParameter_TypeKey = @"type";
 static NSString *MyTradeHistoryParameter_StateKey = @"state";
+static NSString *MyTradeHistoryParameter_TradingPair = @"trading_pair";
 static NSString *MyTradeHistoryParameter_DateStartKey = @"date_start";
 static NSString *MyTradeHistoryParameter_DateEndKey = @"date_end";
 static NSString *MyTradeHistoryParameter_PageKey = @"page";
@@ -51,6 +52,7 @@ static NSString *MyTradeHistoryParameter_PageKey = @"page";
 
 + (NSDictionary *)parameterForOrderType:(BitcoinDE_MyTradeHistoryParameter_OrderType)orderType
                              tradeState:(BitcoinDE_MyTradeHistoryParameter_TradeStateType)tradeState
+                           currencyType:(BitcoinDE_CurrencyType)currencyType
                               startDate:(NSDate *)startDate
                                 endDate:(NSDate *)endDate
                                    page:(NSInteger)page {
@@ -80,7 +82,9 @@ static NSString *MyTradeHistoryParameter_PageKey = @"page";
         default:
             break;
     }
-    
+
+    NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType];
+
     NSString *startDateString = [SOXFormatters rfc3339DateTimeStringDate:startDate];
     NSString *endDateString   = [SOXFormatters rfc3339DateTimeStringDate:endDate];
     
@@ -88,6 +92,7 @@ static NSString *MyTradeHistoryParameter_PageKey = @"page";
     
     return [self parameterDictionaryForOrderType:orderTypeString
                                       tradeState:tradeStateNumber
+                                    currencyType:currencyTypeString
                                        startDate:startDateString
                                          endDate:endDateString
                                             page:pageNumber];
@@ -104,13 +109,69 @@ static NSString *MyTradeHistoryParameter_PageKey = @"page";
     return myTradesDataArray;
 }
 
++ (NSString *)titleForOrderType:(BitcoinDE_MyTradeHistoryParameter_OrderType)orderType {
+    static NSArray *titlesForOrderType;
+    static dispatch_once_t pred;
+    dispatch_once(&pred, ^{
+        titlesForOrderType = @[@"Unknown"
+                               , @"All"
+                               , @"Buy"
+                               , @"Sell"
+                               ];
+    });
+
+    NSString *titleForOrderType = [titlesForOrderType objectAtIndex:orderType];
+    return titleForOrderType;
+}
+
++ (NSString *)titleForTradeStateType:(BitcoinDE_MyTradeHistoryParameter_TradeStateType)tradeStateType {
+    static NSArray *titlesForTradeStateType;
+    static dispatch_once_t pred;
+    dispatch_once(&pred, ^{
+        titlesForTradeStateType = @[@"Unknown"
+                                    , @"Successful"
+                                    , @"Pending"
+                                    , @"Cancelled"
+                                    ];
+    });
+
+    NSString *titleForTradeStateType = [titlesForTradeStateType objectAtIndex:tradeStateType];
+    return titleForTradeStateType;
+}
 
 #pragma mark - Private class methods
 + (NSDictionary *)parameterDictionaryForOrderType:(NSString *)orderType
                                        tradeState:(NSNumber *)tradeState
+                                     currencyType:(NSString *)currencyType
                                         startDate:(NSString *)startDate
                                           endDate:(NSString *)endDate
                                              page:(NSNumber *)page {
+    NSMutableDictionary *parameterDictHelper = [NSMutableDictionary dictionary];
+
+    if (orderType) {
+        [parameterDictHelper setObject:orderType forKey:MyTradeHistoryParameter_TypeKey];
+    }
+
+    if (tradeState) {
+        [parameterDictHelper setObject:tradeState forKey:MyTradeHistoryParameter_StateKey];
+    }
+
+    if (currencyType) {
+        [parameterDictHelper setObject:currencyType forKey:MyTradeHistoryParameter_TradingPair];
+    }
+
+    if (startDate) {
+        [parameterDictHelper setObject:startDate forKey:MyTradeHistoryParameter_DateStartKey];
+    }
+
+    if (endDate) {
+        [parameterDictHelper setObject:endDate forKey:MyTradeHistoryParameter_DateEndKey];
+    }
+
+    if (page) {
+        [parameterDictHelper setObject:page forKey:MyTradeHistoryParameter_PageKey];
+    }
+
     NSDictionary *parameterDict = [NSDictionary dictionaryWithObjectsAndKeys:
                                    orderType,       MyTradeHistoryParameter_TypeKey
                                    , tradeState,    MyTradeHistoryParameter_StateKey
@@ -119,7 +180,7 @@ static NSString *MyTradeHistoryParameter_PageKey = @"page";
                                    , page,          MyTradeHistoryParameter_PageKey
                                    , nil];
     
-    return parameterDict;
+    return [parameterDictHelper copy];
 }
 
 + (SOXMyTrades_BitcoinDE_Data *)myTradeDataFormyTradeHistoryDictionary:(NSDictionary *)tradeDetailsDictionary {

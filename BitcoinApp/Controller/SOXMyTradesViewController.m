@@ -29,15 +29,27 @@
 @property (weak) IBOutlet NSTextField *pageIndicatorTextField;
 
 // Parameter
+// - currency type
+@property (weak) IBOutlet NSTextField *currencyTypeSelectionLabel;
+@property (weak) IBOutlet NSPopUpButton *currencyTypeSelectionPopUpButton;
+
 // - order type
-@property (weak) IBOutlet NSTextField *orderTypeTextField;
-@property (weak) IBOutlet NSButton *orderTypeBuyRadioButton;
-@property (weak) IBOutlet NSButton *orderTypeSellRadioButton;
+@property (weak) IBOutlet NSTextField *tradingTypeSelectionLabel;
+@property (weak) IBOutlet NSPopUpButton *tradingTypeSelectionPopUpButton;
+
 // - trade state
-@property (weak) IBOutlet NSTextField *tradeStateTextField;
-@property (weak) IBOutlet NSButton *tradeStateSuccessfulRadioButton;
-@property (weak) IBOutlet NSButton *tradeStatePendingRadioButton;
-@property (weak) IBOutlet NSButton *tradeStateCancelledRadioButton;
+@property (weak) IBOutlet NSTextField *stateTypeSelectionLabel;
+@property (weak) IBOutlet NSPopUpButton *stateTypeSelectionPopUpButton;
+
+// - order type
+//@property (weak) IBOutlet NSTextField *orderTypeTextField;
+//@property (weak) IBOutlet NSButton *orderTypeBuyRadioButton;
+//@property (weak) IBOutlet NSButton *orderTypeSellRadioButton;
+// - trade state
+//@property (weak) IBOutlet NSTextField *tradeStateTextField;
+//@property (weak) IBOutlet NSButton *tradeStateSuccessfulRadioButton;
+//@property (weak) IBOutlet NSButton *tradeStatePendingRadioButton;
+//@property (weak) IBOutlet NSButton *tradeStateCancelledRadioButton;
 // - start date
 @property (weak) IBOutlet NSTextField *startDateTextField;
 @property (weak) IBOutlet NSDatePicker *startDateDatePicker;
@@ -112,16 +124,32 @@
     self.fetchDataButton.title = @"Fetch data";
     
     { // Radio buttons
-        self.orderTypeTextField.stringValue     = @"Order type";
-        self.orderTypeBuyRadioButton.title      = @"Buy";
-        self.orderTypeBuyRadioButton.state      = NSOnState;
-        self.orderTypeSellRadioButton.title     = @"Sell";
-        
-        self.tradeStateTextField.stringValue        = @"Trade state";
-        self.tradeStateSuccessfulRadioButton.title  = @"Successful";
-        self.tradeStateSuccessfulRadioButton.state  = NSOnState;
-        self.tradeStatePendingRadioButton.title     = @"Pending";
-        self.tradeStateCancelledRadioButton.title   = @"Cancelled";
+        // currency selection
+        self.currencyTypeSelectionLabel.stringValue = @"Selection currency";
+        [self.currencyTypeSelectionPopUpButton removeAllItems];
+        for (BitcoinDE_CurrencyType idx = BitcoinDE_CurrencyTypeUnknown + 1
+             ; idx < BitcoinDE_CurrencyType_EndOfType
+             ; idx++) {
+            [self.currencyTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:idx]];
+        }
+
+        // tradingType selection
+        self.tradingTypeSelectionLabel.stringValue = @"Select type";
+        [self.tradingTypeSelectionPopUpButton removeAllItems];
+        for (BitcoinDE_MyTradeHistoryParameter_OrderType idx = BitcoinDE_MyTradeHistoryParameter_UnknownOrderType + 1
+             ; idx < BitcoinDE_MyTradeHistoryParameter_EndOfOrderType
+             ; idx++) {
+            [self.tradingTypeSelectionPopUpButton addItemWithTitle:[SOXMyTrades_BitcoinDE_Data titleForOrderType:idx]];
+        }
+
+        // state selection
+        self.stateTypeSelectionLabel.stringValue = @"Select state";
+        [self.stateTypeSelectionPopUpButton removeAllItems];
+        for (BitcoinDE_MyTradeHistoryParameter_TradeStateType idx = BitcoinDE_MyTradeHistoryParameter_UnknownTradeStateType + 1
+             ; idx < BitcoinDE_MyTradeHistoryParameter_EndOfTradeStateType
+             ; idx++) {
+            [self.stateTypeSelectionPopUpButton addItemWithTitle:[SOXMyTrades_BitcoinDE_Data titleForTradeStateType:idx]];
+        }
     }
     
     { // date picker
@@ -152,15 +180,6 @@
 }
 
 #pragma mark - Action methods
-- (IBAction)orderTypeButtonAction:(NSButton *)sender {
-    DDLogInfo(@"tag: %ti", sender.tag);
-    self.selectedOrderType = sender.tag;
-}
-
-- (IBAction)tradeStateButtonAction:(NSButton *)sender {
-    DDLogInfo(@"tag: %ti", sender.tag);
-    self.selectedTradeStateType = sender.tag;
-}
 - (IBAction)startDatePickerAction:(NSDatePicker *)sender {
     DDLogInfo(@"startDatePickerAction %@", sender.dateValue);
     
@@ -209,8 +228,14 @@
 
 - (IBAction)fetchDataButtonAction:(NSButton *)sender {
     [self enableSpinningWheel];
-    NSDictionary *parameterDictionary = [SOXMyTrades_BitcoinDE_Data parameterForOrderType:self.selectedOrderType
-                                                                               tradeState:self.selectedTradeStateType
+
+    BitcoinDE_CurrencyType currencyType = [self.currencyTypeSelectionPopUpButton indexOfSelectedItem] + 1;
+    BitcoinDE_MyTradeHistoryParameter_OrderType orderType = [self.tradingTypeSelectionPopUpButton indexOfSelectedItem] + 1;
+    BitcoinDE_MyTradeHistoryParameter_TradeStateType tradeStateType = [self.stateTypeSelectionPopUpButton indexOfSelectedItem] + 1;
+
+    NSDictionary *parameterDictionary = [SOXMyTrades_BitcoinDE_Data parameterForOrderType:orderType
+                                                                               tradeState:tradeStateType
+                                                                             currencyType:currencyType
                                                                                 startDate:self.selectedStartDate
                                                                                   endDate:self.selectedEndDate
                                                                                      page:self.selectedPage];

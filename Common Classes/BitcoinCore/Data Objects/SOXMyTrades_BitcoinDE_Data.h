@@ -7,18 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SOXMarket_BitcoinDE_DefTypes.h"
 
 typedef NS_ENUM (NSUInteger, BitcoinDE_MyTradeHistoryParameter_OrderType) {
     BitcoinDE_MyTradeHistoryParameter_UnknownOrderType = 0
-    , BitcoinDE_MyTradeHistoryParameter_BuyOrderType   = 1
-    , BitcoinDE_MyTradeHistoryParameter_SellOrderType  = 2
+    , BitcoinDE_MyTradeHistoryParameter_AllOrderType
+    , BitcoinDE_MyTradeHistoryParameter_BuyOrderType
+    , BitcoinDE_MyTradeHistoryParameter_SellOrderType
+    , BitcoinDE_MyTradeHistoryParameter_EndOfOrderType
 };
 
 typedef NS_ENUM (NSUInteger, BitcoinDE_MyTradeHistoryParameter_TradeStateType) {
     BitcoinDE_MyTradeHistoryParameter_UnknownTradeStateType       = 0
-    , BitcoinDE_MyTradeHistoryParameter_SuccessfulTradeStateType  = 1
-    , BitcoinDE_MyTradeHistoryParameter_PendingTradeStateType     = 2
-    , BitcoinDE_MyTradeHistoryParameter_CancelledTradeStateType   = 3
+    , BitcoinDE_MyTradeHistoryParameter_SuccessfulTradeStateType
+    , BitcoinDE_MyTradeHistoryParameter_PendingTradeStateType
+    , BitcoinDE_MyTradeHistoryParameter_CancelledTradeStateType
+    , BitcoinDE_MyTradeHistoryParameter_EndOfTradeStateType
 };
 
 
@@ -50,10 +54,14 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_MyTradeHistoryParameter_TradeStateType) {
 
 + (NSDictionary *)parameterForOrderType:(BitcoinDE_MyTradeHistoryParameter_OrderType)orderType
                              tradeState:(BitcoinDE_MyTradeHistoryParameter_TradeStateType)tradeState
+                           currencyType:(BitcoinDE_CurrencyType)currencyType
                               startDate:(NSDate *)startDate
                                 endDate:(NSDate *)endDate
                                    page:(NSInteger)page;
 
 + (NSMutableArray *)myTradesDataArrayForMyTradeHistoryDictionary:(NSDictionary *)payloadDictionary;
+
++ (NSString *)titleForOrderType:(BitcoinDE_MyTradeHistoryParameter_OrderType)orderType;
++ (NSString *)titleForTradeStateType:(BitcoinDE_MyTradeHistoryParameter_TradeStateType)tradeStateType;
 
 @end
