@@ -1605,14 +1605,18 @@
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="SKK-NL-EJ0">
-                                                        <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="Bl0-6q-NoN" userLabel="SOXBitcoinFormatter" customClass="SOXBitcoinFormatter"/>
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
-                                                        <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_maxAmount" id="xfr-H7-NS6"/>
+                                                        <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.self" id="EgF-KE-mQ5">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                                <string key="NSValueTransformerName">SOXMaxAmountWithShortCurrencyValueTransformer</string>
+                                                            </dictionary>
+                                                        </binding>
                                                     </connections>
                                                 </tableColumn>
                                                 <tableColumn editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="gdz-ZB-REf">
@@ -1639,14 +1643,18 @@
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="gVT-HG-s1y">
-                                                        <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="P2c-9v-uew" userLabel="SOXBitcoinFormatter" customClass="SOXBitcoinFormatter"/>
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
-                                                        <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_minAmount" id="Wwb-xO-ImZ"/>
+                                                        <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.self" id="eKH-Zg-fcD">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                                <string key="NSValueTransformerName">SOXMinAmountWithShortCurrencyValueTransformer</string>
+                                                            </dictionary>
+                                                        </binding>
                                                     </connections>
                                                 </tableColumn>
                                                 <tableColumn editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="ZJI-GQ-9iw">

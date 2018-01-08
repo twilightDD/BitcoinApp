@@ -12,6 +12,7 @@
 
 #pragma mark - Number Formatters
 + (NSNumberFormatter *)bitcoinNumberFormatter;
++ (NSNumberFormatter *)bitcoinNumberWithoutCurrencySymbolFormatter;
 
 #pragma mark - Date methods
 + (NSString *)stringDateTimeStringForRFC3339DateTimeString:(NSString *)rfc3339DateTimeString;

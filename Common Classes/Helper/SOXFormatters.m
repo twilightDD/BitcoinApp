@@ -115,6 +115,21 @@
     return btcFormatter;
 }
 
++ (NSNumberFormatter *)bitcoinNumberWithoutCurrencySymbolFormatter {
+    static dispatch_once_t pred;
+    static NSNumberFormatter *btcFormatter = nil;
+    dispatch_once(&pred, ^{
+        btcFormatter = [NSNumberFormatter new];
+
+        btcFormatter.minimumIntegerDigits = 1;
+        btcFormatter.minimumFractionDigits = 2;
+        btcFormatter.maximumFractionDigits = 8;
+
+        btcFormatter.locale= [NSLocale autoupdatingCurrentLocale];
+    });
+    return btcFormatter;
+}
+
 + (NSNumberFormatter *)fractionNumberFormatter {
     static dispatch_once_t pred;
     static NSNumberFormatter *fractionNumberFormatter = nil;

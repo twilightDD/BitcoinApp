@@ -9,6 +9,8 @@
 #import "SOXShortTradingPairValueTransformer.h"
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
+
+
 @implementation SOXShortTradingPairValueTransformer
 
 + (Class)transformedValueClass {
