@@ -1834,13 +1834,13 @@
             <objects>
                 <viewController id="q7D-iu-Op3" customClass="SOXShowMyOrdersViewController" sceneMemberID="viewController">
                     <view key="view" id="d9Y-Go-gwW">
-                        <rect key="frame" x="0.0" y="0.0" width="542" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="732" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVf-cd-9K7">
-                                <rect key="frame" x="20" y="8" width="406" height="272"/>
+                                <rect key="frame" x="20" y="8" width="596" height="272"/>
                                 <clipView key="contentView" id="pXN-85-eeM">
-                                    <rect key="frame" x="1" y="0.0" width="404" height="256"/>
+                                    <rect key="frame" x="1" y="0.0" width="594" height="256"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" headerView="2F9-Ce-VdL" id="kdt-bX-tib">
@@ -1919,16 +1919,16 @@
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="SDq-cE-juy">
-                                                        <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="sVc-q0-Ito" userLabel="SOXBitcoinFormatter" customClass="SOXBitcoinFormatter"/>
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
-                                                        <binding destination="t8U-TY-Pcr" name="value" keyPath="arrangedObjects.orderInformation_maxAmount" id="vFM-fK-WRr">
+                                                        <binding destination="t8U-TY-Pcr" name="value" keyPath="arrangedObjects.self" id="iY6-E2-me0">
                                                             <dictionary key="options">
                                                                 <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                                <string key="NSValueTransformerName">SOXMaxAmountWithShortCurrencyValueTransformer</string>
                                                             </dictionary>
                                                         </binding>
                                                     </connections>
@@ -1961,16 +1961,16 @@
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="Lw6-rz-lWN">
-                                                        <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="Hhe-jH-Ft7" userLabel="SOXBitcoinFormatter" customClass="SOXBitcoinFormatter"/>
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
-                                                        <binding destination="t8U-TY-Pcr" name="value" keyPath="arrangedObjects.orderInformation_minAmount" id="10j-iJ-3Rg">
+                                                        <binding destination="t8U-TY-Pcr" name="value" keyPath="arrangedObjects.self" id="n8w-kV-dDE">
                                                             <dictionary key="options">
                                                                 <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                                <string key="NSValueTransformerName">SOXMinAmountWithShortCurrencyValueTransformer</string>
                                                             </dictionary>
                                                         </binding>
                                                     </connections>
@@ -2047,7 +2047,7 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="ink-sr-cHK"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="z69-5g-yDr">
-                                    <rect key="frame" x="1" y="256" width="404" height="15"/>
+                                    <rect key="frame" x="1" y="256" width="594" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="Jgd-vM-SQi">
@@ -2060,10 +2060,10 @@
                                 </tableHeaderView>
                             </scrollView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="djv-Fe-LAU" userLabel="SpinningBackgroundView">
-                                <rect key="frame" x="20" y="8" width="406" height="249"/>
+                                <rect key="frame" x="20" y="8" width="596" height="249"/>
                                 <subviews>
                                     <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="sQ4-6W-phR">
-                                        <rect key="frame" x="195" y="117" width="16" height="16"/>
+                                        <rect key="frame" x="290" y="117" width="16" height="16"/>
                                     </progressIndicator>
                                 </subviews>
                                 <constraints>
@@ -2072,7 +2072,7 @@
                                 </constraints>
                             </customView>
                             <button verticalHuggingPriority="750" tag="100000" translatesAutoresizingMaskIntoConstraints="NO" id="Bel-6d-h19">
-                                <rect key="frame" x="441" y="240" width="80" height="18"/>
+                                <rect key="frame" x="631" y="240" width="80" height="18"/>
                                 <buttonCell key="cell" type="radio" title="All" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="EHy-6k-P2w">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -2082,7 +2082,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="vXn-t1-4Jn">
-                                <rect key="frame" x="441" y="218" width="80" height="18"/>
+                                <rect key="frame" x="631" y="218" width="80" height="18"/>
                                 <buttonCell key="cell" type="radio" title="BTC" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Dnx-B1-2OL">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -2092,7 +2092,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="ntl-bH-YU6">
-                                <rect key="frame" x="441" y="196" width="80" height="18"/>
+                                <rect key="frame" x="631" y="196" width="80" height="18"/>
                                 <buttonCell key="cell" type="radio" title="BCH" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="HJR-ab-mL0">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -2102,7 +2102,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="ppn-gm-gOg">
-                                <rect key="frame" x="441" y="174" width="80" height="18"/>
+                                <rect key="frame" x="631" y="174" width="80" height="18"/>
                                 <buttonCell key="cell" type="radio" title="ETH" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="ZL1-os-9yR">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -2112,7 +2112,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wNc-yI-m0l">
-                                <rect key="frame" x="436" y="1" width="89" height="32"/>
+                                <rect key="frame" x="626" y="1" width="89" height="32"/>
                                 <buttonCell key="cell" type="push" title="Reload" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kJw-36-s8I">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -2122,7 +2122,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hfD-y1-lfC">
-                                <rect key="frame" x="436" y="34" width="89" height="32"/>
+                                <rect key="frame" x="626" y="34" width="89" height="32"/>
                                 <buttonCell key="cell" type="push" title="Remove" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Eyb-Fv-J8I">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -2133,7 +2133,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RDI-CU-Zjp">
-                                <rect key="frame" x="436" y="67" width="89" height="32"/>
+                                <rect key="frame" x="626" y="67" width="89" height="32"/>
                                 <buttonCell key="cell" type="push" title="Change" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mbq-zU-5iW">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -2206,7 +2206,7 @@
                 </arrayController>
                 <userDefaultsController id="NkV-w9-bXQ"/>
             </objects>
-            <point key="canvasLocation" x="-1106" y="1635"/>
+            <point key="canvasLocation" x="-1201" y="1635"/>
         </scene>
         <!--Automatic Trading Main View Controller-->
         <scene sceneID="mpl-WA-2gF">
