@@ -276,19 +276,26 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 }
 
 - (void)setupUI {
+
+    BitcoinDE_CurrencyType currencyType = [SOXMarket_BitcoinDE_DefTypes currencyTypeForTradingPairString:self.orderBookData.orderInformation_tradingPair];
+    NSString *shortCurrencyString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringForCurrencyType:currencyType];
+
+
     // orderBookData
     {
         self.tradingPartnerInformationDescriptionTextField.stringValue = @"Trading partner";
-        self.priceDescriptionTextField.stringValue      = @"Price per BTC";
-        self.minBTCDescriptionTextField.stringValue     = @"Minimum BTC";
-        self.maxBTCDescriptionTextField.stringValue     = @"Maximum BTC";
+        self.priceDescriptionTextField.stringValue      = [NSString stringWithFormat:@"Price per %@", shortCurrencyString];
+        self.minBTCDescriptionTextField.stringValue     = [NSString stringWithFormat:@"Minimum %@", shortCurrencyString];
+        self.maxBTCDescriptionTextField.stringValue     = [NSString stringWithFormat:@"Maximum %@", shortCurrencyString];
         self.minVolumeDescriptionTextField.stringValue  = @"Minimum Volume";
         self.maxVolumeDescriptionTextField.stringValue  = @"Maximum Volume";
         self.orderIDTextDescriptionField.stringValue    = @"Order ID";
         
         self.priceTextField.doubleValue     = self.orderBookData.orderInformation_price.doubleValue ? : -1;
-        self.minBTCTextField.doubleValue    = self.orderBookData.orderInformation_minAmount.doubleValue ? : -1;
-        self.maxBTCTextField.doubleValue    = self.orderBookData.orderInformation_maxAmount.doubleValue ? : -1;
+        /* uses bindings:
+         self.minBTCTextField.doubleValue    = self.orderBookData.orderInformation_minAmount.doubleValue ? : -1;
+         self.maxBTCTextField.doubleValue    = self.orderBookData.orderInformation_maxAmount.doubleValue ? : -1;
+         */
         self.minVolumeTextField.doubleValue = self.orderBookData.orderInformation_minVolume.doubleValue ? : -1;
         self.maxVolumeTextField.doubleValue = self.orderBookData.orderInformation_maxVolume.doubleValue ? : -1;
         self.orderIDTextField.stringValue   = self.orderBookData.orderInformation_orderID ? : @" - ";
@@ -322,17 +329,17 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
         titleText = [NSString stringWithFormat:@"Buy bitcoins (%@)"
                      , [SOXMarket_BitcoinDE_DefTypes paymentOptionStringForPaymentOption:self.orderBookPaymentOption]];
         amountToTradeDescriptionText = @"Buy bitcoins";
-        minimumBTCAmountButtonText = @"Min BTC";
-        maximalFidorBTCAmountButtonText = @"Max BTC for reservation";
-        maximalOrderBTCAmountButtonText = @"Max BTC from order";
+        minimumBTCAmountButtonText = [NSString stringWithFormat:@"Min %@", shortCurrencyString];
+        maximalFidorBTCAmountButtonText = [NSString stringWithFormat:@"Max %@ for reservation", shortCurrencyString];
+        maximalOrderBTCAmountButtonText = [NSString stringWithFormat:@"Max %@ from order", shortCurrencyString];
     }
     else if (self.orderType == BitcoinDE_SellOrderType) {
         titleText = [NSString stringWithFormat:@"Sell bitcoins (%@)"
                      , [SOXMarket_BitcoinDE_DefTypes paymentOptionStringForPaymentOption:self.orderBookPaymentOption]];
         amountToTradeDescriptionText = @"Sell bitcoins";
-        minimumBTCAmountButtonText = @"Min BTC";
-        maximalFidorBTCAmountButtonText = @"Max available BTC ";
-        maximalOrderBTCAmountButtonText = @"Max BTC from order";
+        minimumBTCAmountButtonText = [NSString stringWithFormat:@"Min %@", shortCurrencyString];
+        maximalFidorBTCAmountButtonText = [NSString stringWithFormat:@"Max available %@", shortCurrencyString];
+        maximalOrderBTCAmountButtonText = [NSString stringWithFormat:@"Max %@ from order", shortCurrencyString];
     }
     else {
         return;

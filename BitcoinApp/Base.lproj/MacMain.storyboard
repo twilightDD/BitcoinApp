@@ -3646,20 +3646,32 @@ Gw
                                                     <textField horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KLr-XX-aty">
                                                         <rect key="frame" x="-2" y="100" width="55" height="17"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="min BTC" id="u3R-ly-bl4">
-                                                            <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="8d0-EA-dDp" userLabel="SOXBitcoinFormatter" customClass="SOXBitcoinFormatter"/>
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
+                                                        <connections>
+                                                            <binding destination="f8g-UU-ziE" name="value" keyPath="self.orderBookData" id="0za-5h-Mtr">
+                                                                <dictionary key="options">
+                                                                    <string key="NSValueTransformerName">SOXMinAmountWithShortCurrencyValueTransformer</string>
+                                                                </dictionary>
+                                                            </binding>
+                                                        </connections>
                                                     </textField>
                                                     <textField horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="itc-bY-XU5">
                                                         <rect key="frame" x="-2" y="75" width="59" height="17"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Max BTC" id="f2q-F8-FjX">
-                                                            <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="gZ9-oZ-W9l" userLabel="SOXBitcoinFormatter" customClass="SOXBitcoinFormatter"/>
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
+                                                        <connections>
+                                                            <binding destination="f8g-UU-ziE" name="value" keyPath="self.orderBookData" id="kWR-To-6cn">
+                                                                <dictionary key="options">
+                                                                    <string key="NSValueTransformerName">SOXMaxAmountWithShortCurrencyValueTransformer</string>
+                                                                </dictionary>
+                                                            </binding>
+                                                        </connections>
                                                     </textField>
                                                     <textField horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ytD-1Y-I0f">
                                                         <rect key="frame" x="-2" y="50" width="75" height="17"/>
@@ -4095,6 +4107,7 @@ Gw
                 <userDefaultsController id="BZP-X4-Etp"/>
                 <userDefaultsController id="2uj-Lz-301"/>
                 <userDefaultsController id="Xdu-6B-eBT"/>
+                <userDefaultsController id="dMp-nv-Aj6"/>
             </objects>
             <point key="canvasLocation" x="-1852" y="2629.5"/>
         </scene>
