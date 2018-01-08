@@ -4112,12 +4112,12 @@ Gw
         <scene sceneID="GHY-7L-bja">
             <objects>
                 <viewController id="TPt-gD-CmY" customClass="SOXMyTradesViewController" sceneMemberID="viewController">
-                    <view key="view" id="O2L-9r-szs">
-                        <rect key="frame" x="0.0" y="0.0" width="608" height="448"/>
+                    <view key="view" misplaced="YES" id="O2L-9r-szs">
+                        <rect key="frame" x="0.0" y="0.0" width="1079" height="448"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="gUV-FX-0N4">
-                                <rect key="frame" x="250" y="20" width="109" height="21"/>
+                                <rect key="frame" x="450" y="20" width="109" height="21"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sti-1t-PUj">
                                         <rect key="frame" x="66" y="-7" width="49" height="32"/>
@@ -4155,13 +4155,13 @@ Gw
                                 </constraints>
                             </customView>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBg-iH-I78">
-                                <rect key="frame" x="20" y="49" width="400" height="391"/>
+                                <rect key="frame" x="20" y="49" width="800" height="391"/>
                                 <clipView key="contentView" id="BrC-vm-Cig">
-                                    <rect key="frame" x="1" y="0.0" width="398" height="375"/>
+                                    <rect key="frame" x="1" y="0.0" width="798" height="375"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" headerView="yYE-bp-FYh" id="fVk-ot-ntz">
-                                            <rect key="frame" x="0.0" y="0.0" width="641" height="352"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="984" height="352"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -4234,6 +4234,48 @@ Gw
                                                         <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.volume" id="Ujb-ep-A2A"/>
                                                     </connections>
                                                 </tableColumn>
+                                                <tableColumn editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="Sq4-67-wDP">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Fee Euro">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="seF-So-UMD">
+                                                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="uDG-Uj-o6N"/>
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.feeEur" id="SyG-IU-yjz">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
+                                                </tableColumn>
+                                                <tableColumn editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="oao-Re-rUN">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Fee Coins">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="oIy-gy-sgn">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.self" id="dfS-xM-BIE">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                                <string key="NSValueTransformerName">SOXFeeCoinValueTransformer</string>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
+                                                </tableColumn>
                                                 <tableColumn identifier="" editable="NO" width="40" minWidth="10" maxWidth="3.4028234663852886e+38" id="Xlf-UH-PMB">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="state">
                                                         <font key="font" metaFont="smallSystem"/>
@@ -4266,7 +4308,7 @@ Gw
                                                         <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.successfullyFinishedAt" id="pwm-AS-dDj"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="o7A-jb-8It">
+                                                <tableColumn identifier="" editable="NO" width="277" minWidth="10" maxWidth="3.4028234663852886e+38" id="o7A-jb-8It">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="username">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -4287,11 +4329,11 @@ Gw
                                     </subviews>
                                 </clipView>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="400" placeholder="YES" id="usW-lx-QXA"/>
+                                    <constraint firstAttribute="width" constant="800" placeholder="YES" id="usW-lx-QXA"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="xb2-Lh-Lqv"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="tHp-vn-sWu">
-                                    <rect key="frame" x="1" y="375" width="398" height="15"/>
+                                    <rect key="frame" x="1" y="375" width="798" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="dLY-Pc-uKb">
@@ -4299,15 +4341,15 @@ Gw
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="yYE-bp-FYh">
-                                    <rect key="frame" x="0.0" y="0.0" width="641" height="23"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="984" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="Kn5-TW-Ng0" userLabel="SpinningBackgroundView">
-                                <rect key="frame" x="20" y="49" width="400" height="368"/>
+                                <rect key="frame" x="20" y="49" width="800" height="368"/>
                                 <subviews>
                                     <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="tc2-os-6sk">
-                                        <rect key="frame" x="192" y="176" width="16" height="16"/>
+                                        <rect key="frame" x="392" y="176" width="16" height="16"/>
                                     </progressIndicator>
                                 </subviews>
                                 <constraints>
@@ -4316,7 +4358,7 @@ Gw
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="YVJ-te-weM">
-                                <rect key="frame" x="428" y="92" width="160" height="348"/>
+                                <rect key="frame" x="828" y="92" width="160" height="348"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BAO-9i-ubM">
                                         <rect key="frame" x="33" y="117" width="109" height="17"/>
@@ -4463,7 +4505,7 @@ Gw
                                 </constraints>
                             </customView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eTK-pp-sYM">
-                                <rect key="frame" x="485" y="13" width="106" height="32"/>
+                                <rect key="frame" x="885" y="13" width="106" height="32"/>
                                 <buttonCell key="cell" type="push" title="Fetch Data" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EV7-fK-DOm">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -4537,7 +4579,7 @@ Gw
                 </arrayController>
                 <userDefaultsController id="j00-vA-Ddo"/>
             </objects>
-            <point key="canvasLocation" x="527" y="1698"/>
+            <point key="canvasLocation" x="990.5" y="1698"/>
         </scene>
         <!--Automatic Trading View Controller-->
         <scene sceneID="lPU-HL-3jH">

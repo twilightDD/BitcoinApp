@@ -124,6 +124,8 @@ FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_CreatedAt;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_SuccessfullyFinishedAt;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_CancelledAt;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_PaymentMethod;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_TradingPair;
+
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_TradingPartnerInformation;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_TradingPartnerInformation_Username;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_TradingPartnerInformation_IsKYCFull;

@@ -42,6 +42,8 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_MyTradeHistoryParameter_TradeStateType) {
 @property (strong, nonatomic, readonly) NSString *successfullyFinishedAt;
 @property (strong, nonatomic, readonly) NSString *cancelledAt;
 @property (strong, nonatomic, readonly) NSNumber *paymentMethod;
+@property (strong, nonatomic, readonly) NSString *trading_pair;
+
 @property (strong, nonatomic, readonly) NSString *tradingPartnerInfo_Username;
 @property (nonatomic, readonly)         BOOL tradingPartnerInfo_IsKYCFull;
 @property (strong, nonatomic, readonly) NSString *tradingPartnerInfo_TrustLevel;

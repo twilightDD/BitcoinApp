@@ -123,6 +123,8 @@ NSString *const BitcoinDE_ShowMyTrades_CreatedAt                               =
 NSString *const BitcoinDE_ShowMyTrades_SuccessfullyFinishedAt                  = @"successfully_finished_at";
 NSString *const BitcoinDE_ShowMyTrades_CancelledAt                             = @"cancelled_at";
 NSString *const BitcoinDE_ShowMyTrades_PaymentMethod                           = @"payment_method";
+NSString *const BitcoinDE_ShowMyTrades_TradingPair                             = @"trading_pair";
+
 NSString *const BitcoinDE_ShowMyTrades_TradingPartnerInformation               = @"trading_partner_information";
 NSString *const BitcoinDE_ShowMyTrades_TradingPartnerInformation_Username      = @"username";
 NSString *const BitcoinDE_ShowMyTrades_TradingPartnerInformation_IsKYCFull     = @"is_kyc_full";

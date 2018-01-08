@@ -37,6 +37,8 @@ static NSString *MyTradeHistoryParameter_PageKey = @"page";
 @property (strong, nonatomic, readwrite) NSString *successfullyFinishedAt;
 @property (strong, nonatomic, readwrite) NSString *cancelledAt;
 @property (strong, nonatomic, readwrite) NSNumber *paymentMethod;
+@property (strong, nonatomic, readwrite) NSString *trading_pair;
+
 @property (strong, nonatomic, readwrite) NSString *tradingPartnerInfo_Username;
 @property (nonatomic, readwrite)         BOOL      tradingPartnerInfo_IsKYCFull;
 @property (strong, nonatomic, readwrite) NSString *tradingPartnerInfo_TrustLevel;
@@ -200,6 +202,7 @@ static NSString *MyTradeHistoryParameter_PageKey = @"page";
         self.successfullyFinishedAt         = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:[tDD objectForKey:BitcoinDE_ShowMyTrades_SuccessfullyFinishedAt]];
         self.cancelledAt                    = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:[tDD objectForKey:BitcoinDE_ShowMyTrades_CancelledAt]];
         self.paymentMethod                  = [tDD objectForKey:BitcoinDE_ShowMyTrades_PaymentMethod];
+        self.trading_pair                   = [tDD objectForKey:BitcoinDE_ShowMyTrades_TradingPair];
     }
     
     // Trading Partner Information
