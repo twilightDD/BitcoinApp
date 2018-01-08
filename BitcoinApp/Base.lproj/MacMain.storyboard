@@ -1089,7 +1089,6 @@
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KMw-dO-CSw">
                                                                             <rect key="frame" x="-2" y="46" width="42" height="19"/>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Label" id="W9V-xS-iBA">
-                                                                                <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="cRu-Rv-PTR" userLabel="SOXBitcoinFormatter" customClass="SOXBitcoinFormatter"/>
                                                                                 <font key="font" metaFont="system" size="15"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -1098,7 +1097,6 @@
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="raD-o5-ndz">
                                                                             <rect key="frame" x="-2" y="23" width="42" height="19"/>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Label" id="xq0-HA-Am4">
-                                                                                <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="dpF-Ez-qYJ" userLabel="SOXBitcoinFormatter" customClass="SOXBitcoinFormatter"/>
                                                                                 <font key="font" metaFont="system" size="15"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -1107,7 +1105,6 @@
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VTX-vr-jAB">
                                                                             <rect key="frame" x="-2" y="0.0" width="42" height="19"/>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Label" id="ODW-Kz-VfU">
-                                                                                <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="UZV-ty-r5Q" userLabel="SOXBitcoinFormatter" customClass="SOXBitcoinFormatter"/>
                                                                                 <font key="font" metaFont="system" size="15"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

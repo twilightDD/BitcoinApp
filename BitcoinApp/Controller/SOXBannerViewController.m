@@ -180,12 +180,26 @@
 - (void)updateUIForCoinAmounts {
     NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:self.currencyType];
     self.btcBalanceHeadlineTextField.stringValue = [NSString stringWithFormat:@"My %@", currencyTypeString];
-
+    
+    NSString *currencyTypeShortString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringForCurrencyType:self.currencyType];
 
     SOXAccountInfo_BitcoinDE_Data *accountInfoData = (SOXAccountInfo_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].accountInfoData;
-    self.btcBalanceTotalAmountTextField.objectValue     = [accountInfoData totalAmountForCurrencyType:self.currencyType];
-    self.btcBalanceAvailableAmountTextField.objectValue = [accountInfoData availableAmountForCurrencyType:self.currencyType];
-    self.btcBalanceReservedAmountTextField.objectValue  = [accountInfoData reservedAmountForCurrencyType:self.currencyType];
+
+
+    NSDecimalNumber *btcBalanceTotalAmount         = [accountInfoData totalAmountForCurrencyType:self.currencyType];
+    NSDecimalNumber *btcBalanceAvailableAmountText = [accountInfoData availableAmountForCurrencyType:self.currencyType];
+    NSDecimalNumber *btcBalanceReservedAmountText  = [accountInfoData reservedAmountForCurrencyType:self.currencyType];
+
+
+    self.btcBalanceTotalAmountTextField.objectValue     = [NSString stringWithFormat:@"%@ %@"
+                                                           , [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:btcBalanceTotalAmount]
+                                                           , currencyTypeShortString];
+    self.btcBalanceAvailableAmountTextField.objectValue = [NSString stringWithFormat:@"%@ %@"
+                                                           , [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:btcBalanceAvailableAmountText]
+                                                           , currencyTypeShortString];
+    self.btcBalanceReservedAmountTextField.objectValue  = [NSString stringWithFormat:@"%@ %@"
+                                                           , [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:btcBalanceReservedAmountText]
+                                                           , currencyTypeShortString];
 }
 
 - (void)updateUIForAllocations {
