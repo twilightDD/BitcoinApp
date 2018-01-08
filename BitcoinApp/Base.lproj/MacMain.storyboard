@@ -4161,7 +4161,7 @@ Gw
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" headerView="yYE-bp-FYh" id="fVk-ot-ntz">
-                                            <rect key="frame" x="0.0" y="0.0" width="984" height="352"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1034" height="352"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -4276,7 +4276,7 @@ Gw
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="40" minWidth="10" maxWidth="3.4028234663852886e+38" id="Xlf-UH-PMB">
+                                                <tableColumn identifier="" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="Xlf-UH-PMB">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="state">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -4289,7 +4289,12 @@ Gw
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
-                                                        <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.state" id="X5q-1p-P5p"/>
+                                                        <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.state" id="oZN-49-Gzb">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                                <string key="NSValueTransformerName">SOXStateValueTransformer</string>
+                                                            </dictionary>
+                                                        </binding>
                                                     </connections>
                                                 </tableColumn>
                                                 <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="rTc-2h-niy">
@@ -4341,7 +4346,7 @@ Gw
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="yYE-bp-FYh">
-                                    <rect key="frame" x="0.0" y="0.0" width="984" height="23"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1034" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>

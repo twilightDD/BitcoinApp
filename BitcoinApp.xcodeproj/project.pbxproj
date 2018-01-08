@@ -103,6 +103,8 @@
 		D0BCFCA520041496004F9E57 /* SOXMaxAmountWithShortCurrencyValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BCFCA320041496004F9E57 /* SOXMaxAmountWithShortCurrencyValueTransformer.m */; };
 		D0BCFCA8200423F8004F9E57 /* SOXFeeCoinValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BCFCA7200423F8004F9E57 /* SOXFeeCoinValueTransformer.m */; };
 		D0BCFCA9200423F8004F9E57 /* SOXFeeCoinValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BCFCA7200423F8004F9E57 /* SOXFeeCoinValueTransformer.m */; };
+		D0BCFCAC20042620004F9E57 /* SOXStateValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BCFCAB20042620004F9E57 /* SOXStateValueTransformer.m */; };
+		D0BCFCAD20042620004F9E57 /* SOXStateValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BCFCAB20042620004F9E57 /* SOXStateValueTransformer.m */; };
 		D0D0E2181F69C92E005FBEDF /* SOXSingleSelectionValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D0E2171F69C92E005FBEDF /* SOXSingleSelectionValueTransformer.m */; };
 		D0D0E2191F69C92E005FBEDF /* SOXSingleSelectionValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D0E2171F69C92E005FBEDF /* SOXSingleSelectionValueTransformer.m */; };
 		D0E5C4FF1E80801D00352985 /* SOXBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E5C4FD1E80801D00352985 /* SOXBannerViewController.m */; };
@@ -257,6 +259,8 @@
 		D0BCFCA320041496004F9E57 /* SOXMaxAmountWithShortCurrencyValueTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXMaxAmountWithShortCurrencyValueTransformer.m; sourceTree = "<group>"; };
 		D0BCFCA6200423F8004F9E57 /* SOXFeeCoinValueTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXFeeCoinValueTransformer.h; sourceTree = "<group>"; };
 		D0BCFCA7200423F8004F9E57 /* SOXFeeCoinValueTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXFeeCoinValueTransformer.m; sourceTree = "<group>"; };
+		D0BCFCAA20042620004F9E57 /* SOXStateValueTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXStateValueTransformer.h; sourceTree = "<group>"; };
+		D0BCFCAB20042620004F9E57 /* SOXStateValueTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXStateValueTransformer.m; sourceTree = "<group>"; };
 		D0D0E2161F69C92E005FBEDF /* SOXSingleSelectionValueTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXSingleSelectionValueTransformer.h; sourceTree = "<group>"; };
 		D0D0E2171F69C92E005FBEDF /* SOXSingleSelectionValueTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXSingleSelectionValueTransformer.m; sourceTree = "<group>"; };
 		D0E5C4FC1E80801D00352985 /* SOXBannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXBannerViewController.h; sourceTree = "<group>"; };
@@ -566,6 +570,8 @@
 				D0BCFCA320041496004F9E57 /* SOXMaxAmountWithShortCurrencyValueTransformer.m */,
 				D0BCFCA6200423F8004F9E57 /* SOXFeeCoinValueTransformer.h */,
 				D0BCFCA7200423F8004F9E57 /* SOXFeeCoinValueTransformer.m */,
+				D0BCFCAA20042620004F9E57 /* SOXStateValueTransformer.h */,
+				D0BCFCAB20042620004F9E57 /* SOXStateValueTransformer.m */,
 			);
 			path = Transformers;
 			sourceTree = "<group>";
@@ -1004,6 +1010,7 @@
 				D08086741E9CEC5D00373F09 /* SOXAutomaticTradingViewController.m in Sources */,
 				D0631F0E1E89C1FD007ED75A /* SOXMyOrderBook_BitcoinDE_Data.m in Sources */,
 				D05B23DA1FB777C7004BAA6E /* SOXShortTradingPairValueTransformer.m in Sources */,
+				D0BCFCAC20042620004F9E57 /* SOXStateValueTransformer.m in Sources */,
 				D049C4511E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.m in Sources */,
 				D049C45B1E7712E6003CBF36 /* SOXHash.m in Sources */,
 				D0A33F921F42079D0042B2A7 /* SOXMarketHelper.m in Sources */,
@@ -1075,6 +1082,7 @@
 				D0A33F931F42079D0042B2A7 /* SOXMarketHelper.m in Sources */,
 				D0E5C5041E809C9800352985 /* SOXKeys_BitcoinDE.m in Sources */,
 				D090304E1EB1F4FC00775E05 /* SOXPaymentOptionValueTransformer.m in Sources */,
+				D0BCFCAD20042620004F9E57 /* SOXStateValueTransformer.m in Sources */,
 				D049C4521E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.m in Sources */,
 				D08086781E9CECAC00373F09 /* SOXMarket_BitcoinDE_DefTypes.m in Sources */,
 				D049C45C1E7712E6003CBF36 /* SOXHash.m in Sources */,
