@@ -12,6 +12,7 @@
 
 #import "SOXFormatters.h"
 
+#import "SOXMyOrderBookData.h"
 #import "SOXShowOrderbookData.h"
 
 @implementation SOXMinAmountWithShortCurrencyValueTransformer
@@ -24,10 +25,22 @@
 }
 
 - (id)transformedValue:(id)value {
+    NSNumber *minAmount = nil;
+    NSString *tradingPair = nil;
+
     if ([value isKindOfClass:[SOXShowOrderbookData class]]) {
         SOXShowOrderbookData *orderbookData = value;
-        NSDecimalNumber *minAmount = [orderbookData orderInformation_minAmount];
-        BitcoinDE_CurrencyType currencyType = [SOXMarket_BitcoinDE_DefTypes currencyTypeForTradingPairString:orderbookData.orderInformation_tradingPair];
+        minAmount = [orderbookData orderInformation_minAmount];
+        tradingPair = orderbookData.orderInformation_tradingPair;
+    }
+    else if ([value isKindOfClass:[SOXMyOrderBookData class]]) {
+        SOXMyOrderBookData *myOrderBookData = value;
+        minAmount = [myOrderBookData orderInformation_minAmount];
+        tradingPair = myOrderBookData.orderInformation_tradingPair;
+    }
+
+    if (minAmount && tradingPair) {
+        BitcoinDE_CurrencyType currencyType = [SOXMarket_BitcoinDE_DefTypes currencyTypeForTradingPairString:tradingPair];
         NSString *shortCurrencyString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringForCurrencyType:currencyType];
 
         NSString *result = [NSString stringWithFormat:@"%@ %@"
@@ -38,4 +51,5 @@
 
     return @"Error";
 }
+
 @end
