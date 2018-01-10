@@ -4190,14 +4190,18 @@ Gw
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="tbP-Lh-Fuh">
-                                                        <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="aO9-kd-H6F" userLabel="SOXBitcoinFormatter" customClass="SOXBitcoinFormatter"/>
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
-                                                        <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.amount" id="cla-gJ-pp6"/>
+                                                        <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.self" id="e1j-oX-q9q">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                                <string key="NSValueTransformerName">SOXMyTradeAmountValueTransformer</string>
+                                                            </dictionary>
+                                                        </binding>
                                                     </connections>
                                                 </tableColumn>
                                                 <tableColumn identifier="" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="XAz-Ru-WnC">
