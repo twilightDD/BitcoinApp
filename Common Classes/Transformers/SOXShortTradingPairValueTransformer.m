@@ -25,7 +25,7 @@
     if ([value isKindOfClass:[NSNumber class]]) {
         NSNumber *currencyTypeNumber = value;
         BitcoinDE_CurrencyType currencyType = currencyTypeNumber.integerValue;
-        NSString *transformedValue = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringForCurrencyType:currencyType];
+        NSString *transformedValue = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:currencyType];
         return transformedValue;
     }
 

@@ -1120,7 +1120,7 @@
 - (void)informBuyDelegateWithNote:(NSString *)note {
     if (note) {
         DDLogInfo(@"%@ buyDele: %@"
-                  , [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringForCurrencyType:self.currencyType]
+                  , [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringLowerCaseForCurrencyType:self.currencyType]
                   , note);
 
         for (NSObject <SOXAutomaticTradingCoreProtocol> *delegate in self.buyDelegates) {
@@ -1136,7 +1136,7 @@
 
     if (note) {
         DDLogInfo(@"%@ sellDele: %@"
-                  , [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringForCurrencyType:self.currencyType]
+                  , [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringLowerCaseForCurrencyType:self.currencyType]
                   , note);
 
         for (NSObject <SOXAutomaticTradingCoreProtocol> *delegate in self.sellDelegates) {

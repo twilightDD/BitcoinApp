@@ -92,7 +92,7 @@
     return tradingPairStringForCurrencyType;
 }
 
-+ (NSString *)tradingPairShortStringForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
++ (NSString *)tradingPairShortStringLowerCaseForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
     static NSDictionary    *tradingPairShortStringsForCurrencyType;
 
     static dispatch_once_t pred;
@@ -103,6 +103,24 @@
                                                   , @"btc", @(BitcoinDE_CurrencyTypeBitcoin)
                                                   , @"bch", @(BitcoinDE_CurrencyTypeBitcoinCash)
                                                   , @"eth", @(BitcoinDE_CurrencyTypeEthereum)
+                                                  , nil];
+    });
+
+    NSString *tradingPairShortStringForCurrencyType = [tradingPairShortStringsForCurrencyType objectForKey:@(currencyType)];
+    return tradingPairShortStringForCurrencyType;
+}
+
++ (NSString *)tradingPairShortStringUpperCaseForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    static NSDictionary    *tradingPairShortStringsForCurrencyType;
+
+    static dispatch_once_t pred;
+
+    dispatch_once(&pred, ^{
+        tradingPairShortStringsForCurrencyType = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                  @"???", @(BitcoinDE_CurrencyTypeUnknown)
+                                                  , @"BTC", @(BitcoinDE_CurrencyTypeBitcoin)
+                                                  , @"BCH", @(BitcoinDE_CurrencyTypeBitcoinCash)
+                                                  , @"ETH", @(BitcoinDE_CurrencyTypeEthereum)
                                                   , nil];
     });
 

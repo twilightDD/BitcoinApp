@@ -36,7 +36,7 @@
 
     if (feeAmount && tradingPair) {
         BitcoinDE_CurrencyType currencyType = [SOXMarket_BitcoinDE_DefTypes currencyTypeForTradingPairString:tradingPair];
-        NSString *shortCurrencyString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringForCurrencyType:currencyType];
+        NSString *shortCurrencyString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:currencyType];
 
         NSString *result = [NSString stringWithFormat:@"%@ %@"
                             , [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:feeAmount]

@@ -173,14 +173,14 @@
 }
 
 - (SOXBitcoinDE_Allocation *)tradingPairAllocationForCurrency:(BitcoinDE_CurrencyType)currencyType {
-    NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringForCurrencyType:currencyType];
+    NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringLowerCaseForCurrencyType:currencyType];
     SOXBitcoinDE_Allocation *tradingPairAllocationForCurrency = [self.tradingPairAllocations objectForKey:currencyTypeString];
 
     return tradingPairAllocationForCurrency;
 }
 
 - (SOXBitcoinDE_Balance *)tradingPairBalanceForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
-    NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringForCurrencyType:currencyType];
+    NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringLowerCaseForCurrencyType:currencyType];
     SOXBitcoinDE_Balance *tradingPairBalanceForCurrencyType  = [self.tradingPairBalances objectForKey:currencyTypeString];
 
     return tradingPairBalanceForCurrencyType;

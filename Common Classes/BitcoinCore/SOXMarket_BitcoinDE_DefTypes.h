@@ -70,7 +70,8 @@ typedef NS_ENUM (NSInteger, BitcoinDE_CurrencyType) { // used in MacMain.storybo
 + (BitcoinDE_TrustLevel)trustLevelForTrustLevelString:(NSString *)trustLevelString;
 
 + (NSString *)tradingPairStringForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
-+ (NSString *)tradingPairShortStringForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
++ (NSString *)tradingPairShortStringLowerCaseForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
++ (NSString *)tradingPairShortStringUpperCaseForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 + (NSString *)tradingPairNaturalStringForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 + (BitcoinDE_CurrencyType)currencyTypeForTradingPairString:(NSString *)tradingPairString;
 

@@ -71,7 +71,7 @@ static NSString *AccountLedgerParameter_PageKey         = @"page";
                                    page:(NSInteger)page {
     NSString *orderTypeString = [self orderTypeStringForOrderType:orderType];
 
-    NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringForCurrencyType:currencyType];
+    NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringLowerCaseForCurrencyType:currencyType];
     NSString *startDateString = [SOXFormatters rfc3339DateTimeStringDate:startDate];
     NSString *endDateString   = [SOXFormatters rfc3339DateTimeStringDate:endDate];
     
