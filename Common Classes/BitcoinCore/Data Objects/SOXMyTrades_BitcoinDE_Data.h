@@ -30,11 +30,11 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_MyTradeHistoryParameter_TradeStateType) {
 
 @property (strong, nonatomic, readonly) NSString *tradeID;
 @property (strong, nonatomic, readonly) NSString *type;
-@property (strong, nonatomic, readonly) NSNumber *amount;
-@property (strong, nonatomic, readonly) NSNumber *price;
-@property (strong, nonatomic, readonly) NSNumber *volume;
-@property (strong, nonatomic, readonly) NSNumber *feeEur;
-@property (strong, nonatomic, readonly) NSNumber *feeBTC;
+@property (strong, nonatomic, readonly) NSDecimalNumber *amount;
+@property (strong, nonatomic, readonly) NSDecimalNumber *price;
+@property (strong, nonatomic, readonly) NSDecimalNumber *volume;
+@property (strong, nonatomic, readonly) NSDecimalNumber *feeEur;
+@property (strong, nonatomic, readonly) NSDecimalNumber *feeBTC;
 @property (strong, nonatomic, readonly) NSString *aNewOrderIDForRemainingAmount;
 @property (strong, nonatomic, readonly) NSNumber *state;
 @property (strong, nonatomic, readonly) NSString *myRatingForTradingPartner;

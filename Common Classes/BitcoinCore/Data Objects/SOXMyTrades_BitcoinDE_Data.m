@@ -25,11 +25,11 @@ static NSString *MyTradeHistoryParameter_PageKey = @"page";
 
 @property (strong, nonatomic, readwrite) NSString *tradeID;
 @property (strong, nonatomic, readwrite) NSString *type;
-@property (strong, nonatomic, readwrite) NSNumber *amount;
-@property (strong, nonatomic, readwrite) NSNumber *price;
-@property (strong, nonatomic, readwrite) NSNumber *volume;
-@property (strong, nonatomic, readwrite) NSNumber *feeEur;
-@property (strong, nonatomic, readwrite) NSNumber *feeBTC;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *amount;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *price;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *volume;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *feeEur;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *feeBTC;
 @property (strong, nonatomic, readwrite) NSString *aNewOrderIDForRemainingAmount;
 @property (strong, nonatomic, readwrite) NSNumber *state;
 @property (strong, nonatomic, readwrite) NSString *myRatingForTradingPartner;
@@ -190,11 +190,12 @@ static NSString *MyTradeHistoryParameter_PageKey = @"page";
     {
         self.tradeID                        = [tDD objectForKey:BitcoinDE_ShowMyTrades_TradeID];
         self.type                           = [tDD objectForKey:BitcoinDE_ShowMyTrades_Type];
-        self.amount                         = [tDD objectForKey:BitcoinDE_ShowMyTrades_Amount];
-        self.price                          = [tDD objectForKey:BitcoinDE_ShowMyTrades_Price];
-        self.volume                         = [tDD objectForKey:BitcoinDE_ShowMyTrades_Volume];
-        self.feeEur                         = [tDD objectForKey:BitcoinDE_ShowMyTrades_FeeEur];
-        self.feeBTC                         = [tDD objectForKey:BitcoinDE_ShowMyTrades_FeeBTC];
+
+        self.amount                         = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Amount]];
+        self.price                          = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Price]];
+        self.volume                         = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Volume]];
+        self.feeEur                         = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_FeeEur]];
+        self.feeBTC                         = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_FeeBTC]];
         self.aNewOrderIDForRemainingAmount  = [tDD objectForKey:BitcoinDE_ShowMyTrades_NewOrderIDForRemainingAmount];
         self.state                          = [tDD objectForKey:BitcoinDE_ShowMyTrades_State];
         self.myRatingForTradingPartner      = [tDD objectForKey:BitcoinDE_ShowMyTrades_MyRatingForTradingPartner];
@@ -217,6 +218,18 @@ static NSString *MyTradeHistoryParameter_PageKey = @"page";
         self.tradingPartnerInfo_amountTrades    = [tPI objectForKey:BitcoinDE_ShowMyTrades_TradingPartnerInformation_AmountTrades];
         self.tradingPartnerInfo_Rating          = [tPI objectForKey:BitcoinDE_ShowMyTrades_TradingPartnerInformation_Rating];
     }
+}
+
+- (NSDecimalNumber *)convertToNumber:(id)value {
+    NSDecimalNumber *convertToNumber = nil;
+    if ([value isKindOfClass:[NSString class]]) {
+        convertToNumber = [NSDecimalNumber decimalNumberWithString:value];
+    }
+    else if ([value isKindOfClass:[NSNumber class]]) {
+        convertToNumber = [NSDecimalNumber decimalNumberWithDecimal:[(NSNumber *)value decimalValue]];
+    }
+
+    return convertToNumber;
 }
 
 @end
