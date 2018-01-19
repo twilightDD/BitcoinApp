@@ -2115,8 +2115,8 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="djv-Fe-LAU" userLabel="SpinningBackgroundView">
-                                <rect key="frame" x="20" y="8" width="596" height="249"/>
+                            <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="djv-Fe-LAU" userLabel="SpinningBackgroundView">
+                                <rect key="frame" x="20" y="8" width="495" height="249"/>
                                 <subviews>
                                     <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="sQ4-6W-phR">
                                         <rect key="frame" x="290" y="117" width="16" height="16"/>
@@ -2159,7 +2159,7 @@
                             </button>
                             <button verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="ppn-gm-gOg">
                                 <rect key="frame" x="631" y="174" width="80" height="18"/>
-                                <buttonCell key="cell" type="radio" title="ETH" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="ZL1-os-9yR">
+                                <buttonCell key="cell" type="radio" title="BTG" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="ZL1-os-9yR">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -2203,6 +2203,16 @@
                                     </binding>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="6XF-Uv-cBE">
+                                <rect key="frame" x="631" y="152" width="80" height="18"/>
+                                <buttonCell key="cell" type="radio" title="ETH" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="M2w-xB-L7I">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="changeCurrencyAction:" target="q7D-iu-Op3" id="UVK-e4-UZs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="hfD-y1-lfC" firstAttribute="leading" secondItem="RDI-CU-Zjp" secondAttribute="leading" id="35k-zQ-Jm6"/>
@@ -2217,6 +2227,8 @@
                             <constraint firstItem="vXn-t1-4Jn" firstAttribute="width" secondItem="Bel-6d-h19" secondAttribute="width" id="8ey-Q3-wsU"/>
                             <constraint firstItem="wNc-yI-m0l" firstAttribute="trailing" secondItem="hfD-y1-lfC" secondAttribute="trailing" id="AXt-l0-V1r"/>
                             <constraint firstItem="dVf-cd-9K7" firstAttribute="leading" secondItem="d9Y-Go-gwW" secondAttribute="leading" constant="20" symbolic="YES" id="AwV-Ul-N11"/>
+                            <constraint firstItem="6XF-Uv-cBE" firstAttribute="trailing" secondItem="ppn-gm-gOg" secondAttribute="trailing" id="DU6-jn-eyu"/>
+                            <constraint firstItem="6XF-Uv-cBE" firstAttribute="top" secondItem="ppn-gm-gOg" secondAttribute="bottom" constant="6" id="EKJ-dB-Fi9"/>
                             <constraint firstItem="dVf-cd-9K7" firstAttribute="top" secondItem="d9Y-Go-gwW" secondAttribute="top" constant="20" symbolic="YES" id="GHS-ea-bq1"/>
                             <constraint firstItem="hfD-y1-lfC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="pXN-85-eeM" secondAttribute="top" constant="20" id="GZ5-Ej-Yxn"/>
                             <constraint firstItem="ntl-bH-YU6" firstAttribute="width" secondItem="vXn-t1-4Jn" secondAttribute="width" id="Hwj-YK-3jb"/>
@@ -2231,6 +2243,7 @@
                             <constraint firstItem="ppn-gm-gOg" firstAttribute="top" secondItem="ntl-bH-YU6" secondAttribute="bottom" constant="6" id="d0c-dH-fy3"/>
                             <constraint firstItem="vXn-t1-4Jn" firstAttribute="leading" secondItem="Bel-6d-h19" secondAttribute="leading" id="gOO-OG-pyv"/>
                             <constraint firstItem="djv-Fe-LAU" firstAttribute="trailing" secondItem="dVf-cd-9K7" secondAttribute="trailing" id="h6r-Rf-XbF"/>
+                            <constraint firstItem="6XF-Uv-cBE" firstAttribute="leading" secondItem="ppn-gm-gOg" secondAttribute="leading" id="hQs-Xt-l87"/>
                             <constraint firstItem="RDI-CU-Zjp" firstAttribute="leading" secondItem="Bel-6d-h19" secondAttribute="leading" id="mUV-hM-CvI"/>
                             <constraint firstItem="vXn-t1-4Jn" firstAttribute="top" secondItem="Bel-6d-h19" secondAttribute="bottom" constant="6" id="mds-s0-9Ec"/>
                             <constraint firstAttribute="bottom" secondItem="wNc-yI-m0l" secondAttribute="bottom" constant="8" id="njI-bu-QXY"/>
@@ -2246,7 +2259,8 @@
                         <outlet property="currencyAllButton" destination="Bel-6d-h19" id="JNE-5K-LPx"/>
                         <outlet property="currencyBCHButton" destination="ntl-bH-YU6" id="vP4-qM-ayH"/>
                         <outlet property="currencyBTCButton" destination="vXn-t1-4Jn" id="XFG-rC-HDy"/>
-                        <outlet property="currencyETHButton" destination="ppn-gm-gOg" id="oZo-KY-Pa4"/>
+                        <outlet property="currencyBTGButton" destination="ppn-gm-gOg" id="gaK-r0-WRE"/>
+                        <outlet property="currencyETHButton" destination="6XF-Uv-cBE" id="0Tm-Lp-UoT"/>
                         <outlet property="myOrderArrayController" destination="t8U-TY-Pcr" id="eUx-bd-GSy"/>
                         <outlet property="reloadButton" destination="wNc-yI-m0l" id="dzN-3N-kBl"/>
                         <outlet property="removeButton" destination="hfD-y1-lfC" id="bG9-EL-gug"/>

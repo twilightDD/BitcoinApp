@@ -32,6 +32,7 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 @property (weak) IBOutlet NSButton *currencyAllButton;
 @property (weak) IBOutlet NSButton *currencyBTCButton;
 @property (weak) IBOutlet NSButton *currencyBCHButton;
+@property (weak) IBOutlet NSButton *currencyBTGButton;
 @property (weak) IBOutlet NSButton *currencyETHButton;
 
 
