@@ -1000,27 +1000,19 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 }
 
 - (void)startAllRatesUpdate {
-    double delayInSeconds = 0.2;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        DDLogInfo(@"get rates BitcoinDE_CurrencyTypeBitcoin %f", [[NSDate date] timeIntervalSince1970]);
-        [self startRatesUpdateForCurrencyType:BitcoinDE_CurrencyTypeBitcoin];
-    });
-
-    double delayInSeconds2 = 0.4;
-    dispatch_time_t popTime2 = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds2 * NSEC_PER_SEC));
-    dispatch_after(popTime2, dispatch_get_main_queue(), ^(void){
-        DDLogInfo(@"get rates BitcoinDE_CurrencyTypeBitcoinCash %f", [[NSDate date] timeIntervalSince1970]);
-        [self startRatesUpdateForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
-    });
-
-
-    double delayInSeconds3 = 0.6;
-    dispatch_time_t popTime3 = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds3 * NSEC_PER_SEC));
-    dispatch_after(popTime3, dispatch_get_main_queue(), ^(void){
-        DDLogInfo(@"get rates BitcoinDE_CurrencyTypeEthereum %f", [[NSDate date] timeIntervalSince1970]);
-        [self startRatesUpdateForCurrencyType:BitcoinDE_CurrencyTypeEthereum];
-    });
+    // rates for each currencyType
+    for (BitcoinDE_CurrencyType idx = BitcoinDE_CurrencyTypeUnknown + 1
+         ; idx < BitcoinDE_CurrencyType_EndOfType
+         ; idx++) {
+        double delayInSeconds = 0.2 * (double)idx;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            DDLogInfo(@"BannerUpdate: get rates for currency %@ (delay: %f)"
+                      , [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:idx]
+                      , delayInSeconds);
+            [self startRatesUpdateForCurrencyType:idx];
+        });
+    }
 }
 
 - (void)startRatesUpdateForCurrencyType:(BitcoinDE_CurrencyType)currencyType {

@@ -18,17 +18,20 @@
 
 static NSString *BannerContainerViewSegueKey          = @"BannerContainerViewSegue";
 static NSString *ShowMyOrdersContainerSegueKey        = @"ShowMyOrdersContainerSegue";
-static NSString *OrdersViewControllerBuyBTCSegueKey      = @"OrdersViewControllerBuyBTCSegue";     // TabView.0
-static NSString *OrdersViewControllerSellBTCSegueKey     = @"OrdersViewControllerSellBTCSegue";    // TabView.0
-static NSString *OrdersViewControllerBuyBCHSegueKey      = @"OrdersViewControllerBuyBCHSegue";     // TabView.1
-static NSString *OrdersViewControllerSellBCHSegueKey     = @"OrdersViewControllerSellBCHSegue";    // TabView.1
-static NSString *OrdersViewControllerBuyETHSegueKey      = @"OrdersViewControllerBuyETHSegue";     // TabView.2
-static NSString *OrdersViewControllerSellETHSegueKey     = @"OrdersViewControllerSellETHSegue";    // TabView.2
+static NSString *OrdersViewControllerBuyBTCSegueKey      = @"OrdersViewControllerBuyBTCSegue";      // TabView.0
+static NSString *OrdersViewControllerSellBTCSegueKey     = @"OrdersViewControllerSellBTCSegue";     // TabView.0
+static NSString *OrdersViewControllerBuyBCHSegueKey      = @"OrdersViewControllerBuyBCHSegue";      // TabView.1
+static NSString *OrdersViewControllerSellBCHSegueKey     = @"OrdersViewControllerSellBCHSegue";     // TabView.1
+static NSString *OrdersViewControllerBuyBTGSegueKey      = @"OrdersViewControllerBuyBTGSegue";      // TabView.2
+static NSString *OrdersViewControllerSellBTGSegueKey     = @"OrdersViewControllerSellBTGSegue";     // TabView.2
+static NSString *OrdersViewControllerBuyETHSegueKey      = @"OrdersViewControllerBuyETHSegue";      // TabView.3
+static NSString *OrdersViewControllerSellETHSegueKey     = @"OrdersViewControllerSellETHSegue";     // TabView.3
 
 static NSString *AccountLedgerViewControllerSegueKey  = @"AccountLedgerViewControllerSegue";
 static NSString *MyTradeHistoryViewControllerSegueKey = @"MyTradeHistoryViewControllerSegue";
 static NSString *AutomaticTradeBTCSegueKey = @"EmbedAutoTraderForBTC";
 static NSString *AutomaticTradeBCHSegueKey = @"EmbedAutoTraderForBCH";
+static NSString *AutomaticTradeBTGSegueKey = @"EmbedAutoTraderForBTG";
 static NSString *AutomaticTradeETHSegueKey = @"EmbedAutoTraderForETH";
 
 
@@ -68,13 +71,15 @@ static NSString *AutomaticTradeETHSegueKey = @"EmbedAutoTraderForETH";
         NSTabViewItem *item1 = [self.bottomTabView tabViewItemAtIndex:1];
         item1.label = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
         NSTabViewItem *item2 = [self.bottomTabView tabViewItemAtIndex:2];
-        item2.label = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeEthereum];
+        item2.label = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoinGold];
         NSTabViewItem *item3 = [self.bottomTabView tabViewItemAtIndex:3];
-        item3.label = @"My Active Orders";
+        item3.label = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeEthereum];
         NSTabViewItem *item4 = [self.bottomTabView tabViewItemAtIndex:4];
-        item4.label = @"Account ledger";
+        item4.label = @"My Active Orders";
         NSTabViewItem *item5 = [self.bottomTabView tabViewItemAtIndex:5];
-        item5.label = @"My Trade History";
+        item5.label = @"Account ledger";
+        NSTabViewItem *item6 = [self.bottomTabView tabViewItemAtIndex:6];
+        item6.label = @"My Trade History";
 
 
         // debug
@@ -105,6 +110,16 @@ static NSString *AutomaticTradeETHSegueKey = @"EmbedAutoTraderForETH";
         viewC.orderType = BitcoinDE_SellOrderType;
         viewC.currencyType = BitcoinDE_CurrencyTypeBitcoinCash;
     }
+    else if ([segue.identifier isEqualToString:OrdersViewControllerBuyBTGSegueKey]) {
+        SOXOrdersViewController *viewC = segue.destinationController;
+        viewC.orderType = BitcoinDE_BuyOrderType;
+        viewC.currencyType = BitcoinDE_CurrencyTypeBitcoinGold;
+    }
+    else if ([segue.identifier isEqualToString:OrdersViewControllerSellBTGSegueKey]) {
+        SOXOrdersViewController *viewC = segue.destinationController;
+        viewC.orderType = BitcoinDE_SellOrderType;
+        viewC.currencyType = BitcoinDE_CurrencyTypeBitcoinGold;
+    }
     else if ([segue.identifier isEqualToString:OrdersViewControllerBuyETHSegueKey]) {
         SOXOrdersViewController *viewC = segue.destinationController;
         viewC.orderType = BitcoinDE_BuyOrderType;
@@ -122,6 +137,10 @@ static NSString *AutomaticTradeETHSegueKey = @"EmbedAutoTraderForETH";
     else if ([segue.identifier isEqualToString:AutomaticTradeBCHSegueKey]) {
         SOXAutomaticTradingMainViewController *viewC = segue.destinationController;
         viewC.currencyType = BitcoinDE_CurrencyTypeBitcoinCash;
+    }
+    else if ([segue.identifier isEqualToString:AutomaticTradeBTGSegueKey]) {
+        SOXAutomaticTradingMainViewController *viewC = segue.destinationController;
+        viewC.currencyType = BitcoinDE_CurrencyTypeBitcoinGold;
     }
     else if ([segue.identifier isEqualToString:AutomaticTradeETHSegueKey]) {
         SOXAutomaticTradingMainViewController *viewC = segue.destinationController;

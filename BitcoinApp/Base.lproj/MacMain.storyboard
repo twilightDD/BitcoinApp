@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
@@ -784,6 +784,42 @@
                                             </constraints>
                                         </view>
                                     </tabViewItem>
+                                    <tabViewItem label="TabBTG" identifier="1" id="aNV-f4-fkc">
+                                        <view key="view" id="aOW-l4-o1D">
+                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="Tqa-sT-oZ4">
+                                                    <rect key="frame" x="0.0" y="0.0" width="449" height="413"/>
+                                                    <connections>
+                                                        <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerBuyBTGSegue" id="LXx-OU-juS"/>
+                                                    </connections>
+                                                </containerView>
+                                                <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="BSc-zK-nRx">
+                                                    <rect key="frame" x="455" y="12" width="5" height="389"/>
+                                                </box>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="tnT-zA-U5o">
+                                                    <rect key="frame" x="466" y="0.0" width="448" height="413"/>
+                                                    <connections>
+                                                        <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerSellBTGSegue" id="cqk-5J-dmQ"/>
+                                                    </connections>
+                                                </containerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="BSc-zK-nRx" firstAttribute="leading" secondItem="Tqa-sT-oZ4" secondAttribute="trailing" constant="8" symbolic="YES" id="BzA-zn-nSj"/>
+                                                <constraint firstItem="tnT-zA-U5o" firstAttribute="top" secondItem="aOW-l4-o1D" secondAttribute="top" id="Coe-pR-Myl"/>
+                                                <constraint firstItem="BSc-zK-nRx" firstAttribute="top" secondItem="aOW-l4-o1D" secondAttribute="top" constant="12" symbolic="YES" id="Geb-C0-116"/>
+                                                <constraint firstAttribute="bottom" secondItem="Tqa-sT-oZ4" secondAttribute="bottom" id="Ijq-9u-iRs"/>
+                                                <constraint firstAttribute="bottom" secondItem="BSc-zK-nRx" secondAttribute="bottom" constant="12" symbolic="YES" id="NCO-UQ-qb8"/>
+                                                <constraint firstItem="BSc-zK-nRx" firstAttribute="centerX" secondItem="aOW-l4-o1D" secondAttribute="centerX" id="PTF-pQ-z33"/>
+                                                <constraint firstItem="Tqa-sT-oZ4" firstAttribute="top" secondItem="aOW-l4-o1D" secondAttribute="top" id="Tcg-PJ-Zne"/>
+                                                <constraint firstItem="Tqa-sT-oZ4" firstAttribute="leading" secondItem="aOW-l4-o1D" secondAttribute="leading" id="Z7x-4C-xNH"/>
+                                                <constraint firstItem="tnT-zA-U5o" firstAttribute="leading" secondItem="BSc-zK-nRx" secondAttribute="trailing" constant="8" symbolic="YES" id="aXm-8I-qEx"/>
+                                                <constraint firstAttribute="trailing" secondItem="tnT-zA-U5o" secondAttribute="trailing" id="gXR-SW-fah"/>
+                                                <constraint firstAttribute="bottom" secondItem="tnT-zA-U5o" secondAttribute="bottom" id="oPb-8x-OER"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
                                     <tabViewItem label="TabETH" identifier="1" id="xJ0-3F-ffY">
                                         <view key="view" id="i9q-n5-DdU">
                                             <rect key="frame" x="10" y="33" width="914" height="413"/>
@@ -880,7 +916,7 @@
                                             </constraints>
                                         </view>
                                     </tabViewItem>
-                                    <tabViewItem label="BTC" identifier="" id="ucc-xu-QEr" userLabel="Rich mode">
+                                    <tabViewItem label="BTC" identifier="" id="ucc-xu-QEr">
                                         <view key="view" id="KtV-3h-LnT">
                                             <rect key="frame" x="10" y="33" width="914" height="413"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -900,7 +936,7 @@
                                             </constraints>
                                         </view>
                                     </tabViewItem>
-                                    <tabViewItem label="BCH" identifier="" id="j0B-3G-QB4" userLabel="Rich mode">
+                                    <tabViewItem label="BCH" identifier="" id="j0B-3G-QB4">
                                         <view key="view" id="YoS-dT-aaC">
                                             <rect key="frame" x="10" y="33" width="914" height="413"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -920,7 +956,27 @@
                                             </constraints>
                                         </view>
                                     </tabViewItem>
-                                    <tabViewItem label="ETH" identifier="" id="prg-W5-5Mn" userLabel="Rich mode">
+                                    <tabViewItem label="BTG" identifier="" id="MG6-Ar-fVj">
+                                        <view key="view" id="V3q-F9-d6O">
+                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="Ab4-V2-fR1">
+                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="413"/>
+                                                    <connections>
+                                                        <segue destination="lQp-qx-buJ" kind="embed" identifier="EmbedAutoTraderForBTG" id="u1b-rW-w36"/>
+                                                    </connections>
+                                                </containerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Ab4-V2-fR1" secondAttribute="trailing" id="amh-7v-wyT"/>
+                                                <constraint firstAttribute="bottom" secondItem="Ab4-V2-fR1" secondAttribute="bottom" id="hLe-7J-Al1"/>
+                                                <constraint firstItem="Ab4-V2-fR1" firstAttribute="leading" secondItem="V3q-F9-d6O" secondAttribute="leading" id="hSz-gc-Dsy"/>
+                                                <constraint firstItem="Ab4-V2-fR1" firstAttribute="top" secondItem="V3q-F9-d6O" secondAttribute="top" id="hwy-O5-Ref"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="ETH" identifier="" id="prg-W5-5Mn">
                                         <view key="view" id="g1H-rJ-sge">
                                             <rect key="frame" x="10" y="33" width="914" height="413"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1827,7 +1883,7 @@
                 </arrayController>
                 <userDefaultsController representsSharedInstance="YES" id="fA4-JS-frA"/>
             </objects>
-            <point key="canvasLocation" x="-1196" y="1121"/>
+            <point key="canvasLocation" x="-1320" y="1142"/>
         </scene>
         <!--Show My Orders View Controller-->
         <scene sceneID="FDl-hu-vIc">
@@ -4852,7 +4908,7 @@ Gw
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="z6P-Xb-vu3"/>
-        <segue reference="a0J-g0-9pE"/>
-        <segue reference="yi4-A3-JOD"/>
+        <segue reference="u1b-rW-w36"/>
+        <segue reference="Fh9-LT-kpw"/>
     </inferredMetricsTieBreakers>
 </document>

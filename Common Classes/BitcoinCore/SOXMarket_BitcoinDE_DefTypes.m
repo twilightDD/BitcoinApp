@@ -102,6 +102,7 @@
                                                   @"???", @(BitcoinDE_CurrencyTypeUnknown)
                                                   , @"btc", @(BitcoinDE_CurrencyTypeBitcoin)
                                                   , @"bch", @(BitcoinDE_CurrencyTypeBitcoinCash)
+                                                  , @"btg", @(BitcoinDE_CurrencyTypeBitcoinGold)
                                                   , @"eth", @(BitcoinDE_CurrencyTypeEthereum)
                                                   , nil];
     });
@@ -120,6 +121,7 @@
                                                   @"???", @(BitcoinDE_CurrencyTypeUnknown)
                                                   , @"BTC", @(BitcoinDE_CurrencyTypeBitcoin)
                                                   , @"BCH", @(BitcoinDE_CurrencyTypeBitcoinCash)
+                                                  , @"BTG", @(BitcoinDE_CurrencyTypeBitcoinGold)
                                                   , @"ETH", @(BitcoinDE_CurrencyTypeEthereum)
                                                   , nil];
     });
@@ -138,6 +140,7 @@
                                                     @"Unbekannt", @(BitcoinDE_CurrencyTypeUnknown)
                                                     , @"Bitcoin", @(BitcoinDE_CurrencyTypeBitcoin)
                                                     , @"Bitcoin Cash", @(BitcoinDE_CurrencyTypeBitcoinCash)
+                                                    , @"Bitcoin Gold", @(BitcoinDE_CurrencyTypeBitcoinGold)
                                                     , @"Ethereum", @(BitcoinDE_CurrencyTypeEthereum)
                                                     , nil];
     });
@@ -166,6 +169,7 @@
         tradingPairStringsForCurrencyTyp = [NSDictionary dictionaryWithObjectsAndKeys:
                                             @"btceur", @(BitcoinDE_CurrencyTypeBitcoin)
                                             , @"bcheur", @(BitcoinDE_CurrencyTypeBitcoinCash)
+                                            , @"btgeur", @(BitcoinDE_CurrencyTypeBitcoinGold)
                                             , @"etheur", @(BitcoinDE_CurrencyTypeEthereum)
                                             , nil];
     });
