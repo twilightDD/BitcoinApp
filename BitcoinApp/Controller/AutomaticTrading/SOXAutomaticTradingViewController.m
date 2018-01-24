@@ -89,7 +89,7 @@
 
     NSString *maxInvestmentText;
     NSString *maxInvestmentDescriptionText;
-    NSString *minInterestText                   = @"0.01";
+    NSString *minInterestText                   = @"4";
     NSString *minInterestDescriptionText        = @"Min. Interest Rate [%]";
 
     if (self.orderType == BitcoinDE_BuyOrderType) {
@@ -146,13 +146,13 @@
 
     self.maxInvestmentTextField.objectValue             = [NSDecimalNumber decimalNumberWithString:maxInvestmentText];
     NSNumberFormatter *formatter                        = self.maxInvestmentTextField.formatter;
-    formatter.minimum                                   = [NSDecimalNumber zero];
-    formatter.maximum                                   = [NSDecimalNumber decimalNumberWithString:@"100000"];
+    formatter.minimum                                   = [NSDecimalNumber decimalNumberWithString:@"60"];
+    formatter.maximum                                   = [NSDecimalNumber decimalNumberWithString:@"25000"];
 
     self.minInterestDescriptionTextField.stringValue = minInterestDescriptionText;
     self.minInterestTextField.objectValue            = [NSDecimalNumber decimalNumberWithString:minInterestText];
     NSNumberFormatter *formatter2                    = self.minInterestTextField.formatter;
-    formatter2.minimum                               = [NSDecimalNumber decimalNumberWithString:minInterestText];
+    formatter2.minimum                               = [NSDecimalNumber decimalNumberWithString:@"1"];
     formatter2.maximum                               = [NSDecimalNumber decimalNumberWithString:@"100"];
 
     self.logDescriptionTextField.stringValue = @"Log output";
