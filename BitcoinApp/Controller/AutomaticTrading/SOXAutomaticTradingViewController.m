@@ -8,9 +8,12 @@
 
 #import "SOXAutomaticTradingViewController.h"
 
+#import "SOXAccountInfo_BitcoinDE_Data.h"
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXAutomaticTrading_BitcoinDE_Core.h"
 #import "SOXShowOrderbook_BitcoinDE_Data.h"
+
+#import "SOXKeys_BitcoinDE.h"
 
 #import "SOXFormatters.h"
 
@@ -53,6 +56,10 @@
 @property (strong, nonatomic) NSString *log;
 
 @property (nonatomic) double currentLimit;
+
+#pragma mark Notifications
+@property (strong, nonatomic) id requestShowAccountInfoNotification;
+
 @end
 
 @implementation SOXAutomaticTradingViewController
@@ -61,11 +68,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
-    
+    [self registerOberservers];
+
     self.log = @"";
 }
 
-#pragma mark - Public methods
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self.requestShowAccountInfoNotification];
+}
+
+#pragma mark - Notification methods
+- (void)registerOberservers {
+    NSOperationQueue *mainQueue = [NSOperationQueue mainQueue];
+
+    weakify(self)
+    self.requestShowAccountInfoNotification = [[NSNotificationCenter defaultCenter] addObserverForName:BitcoinDE_Notification_RequestShowAccountInfo
+                                                                                                object:nil
+                                                                                                 queue:mainQueue
+                                                                                            usingBlock:^(NSNotification * _Nonnull note) {
+                                                                                                strongify(self)
+                                                                                                [self updateMaxInvestment];
+                                                                                            }
+                                               ];
+}
 
 #pragma mark - Private methods
 - (void)setupUI {
@@ -193,6 +218,13 @@
     }
 }
 
+- (void)updateMaxInvestment {
+    if (self.useMaxReservationButton.state == NSControlStateValueOn) {
+        NSDecimalNumber *availableFidorAmount = [SOXMarket_BitcoinDE_Core allocationMaxEurVolumeForCurrency:self.currencyType];
+        self.maxInvestmentTextField.objectValue = availableFidorAmount;
+    }
+}
+
 #pragma mark - Action methods
 - (IBAction)showAutomaticTradingAreaAction:(NSButton *)sender {
     self.automaticBackgroundView.hidden = !sender.state;
@@ -244,6 +276,11 @@
 }
 
 - (IBAction)useMaxReservation:(NSButton *)sender {
+    if (sender.state == NSControlStateValueOn) {
+        NSDecimalNumber *availableFidorAmount = [SOXMarket_BitcoinDE_Core allocationMaxEurVolumeForCurrency:self.currencyType];
+        self.maxInvestmentTextField.objectValue = availableFidorAmount;
+    }
+    self.maxInvestmentTextField.enabled = !sender.state;
 }
 
 - (IBAction)clearLogAction:(NSButton *)sender {
