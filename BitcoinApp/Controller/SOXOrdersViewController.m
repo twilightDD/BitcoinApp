@@ -171,8 +171,25 @@
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
 - (void)answerOfServerRequest:(NSDictionary *)answerOfServerRequest {
+    NSArray *errorArray = [answerOfServerRequest objectForKey:ServerAnswerErrorKey];
+    if (errorArray) {
+        DDLogInfo(@"SOXAutomaticTrading_BitcoinDE_Core - answerOfServerRequest with error:\n%@", errorArray);
+    }
+
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowBuyOrderbookCommandType)]
         || [[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowSellOrderbookCommandType)]) {
+
+        // Request server data again on nonce error
+        if (errorArray) {
+            NSNumber *errorCode = [errorArray.firstObject objectForKey:@"code"];
+            if ([errorCode isEqualToNumber:@4]) {
+                DDLogInfo(@"ErrorCode 4 - requestServerData %tu",
+                          self.orderType);
+                [self requestServerData];
+                return;
+            }
+        }
+
         NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
         NSMutableArray *orderBook = [SOXShowOrderbook_BitcoinDE_Data orderbookDataArrayForShowOrderbookDictionary:payloadDictionary];
         self.orderBook = orderBook;
