@@ -911,9 +911,9 @@
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
 - (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest {
-    id errorMessage = [answerOfServerRequest objectForKey:ServerAnswerErrorKey];
-    if (errorMessage) {
-        DDLogInfo(@"SOXAutomaticTrading_BitcoinDE_Core - answerOfServerRequest with error:\n%@", errorMessage);
+    NSArray *errorArray = [answerOfServerRequest objectForKey:ServerAnswerErrorKey];
+    if (errorArray) {
+        DDLogInfo(@"SOXAutomaticTrading_BitcoinDE_Core - answerOfServerRequest with error:\n%@", errorArray);
 
     }
 
@@ -927,7 +927,7 @@
 
         { // Inform user about success status
             NSString *note;
-            if (errorMessage) {
+            if (errorArray) {
                 note = @"Trade UNSUCCESSFUL: ";
             }
             else {
@@ -960,7 +960,7 @@
 
         BOOL wasAutoTrade = [[tradeParameters objectForKey:BitcoinDE_ExecuteTrade_IsAutomaticTrade] isEqualTo:@YES];
         if (wasAutoTrade) {
-            if (!errorMessage) {
+            if (!errorArray) {
                 if (orderType == BitcoinDE_BuyOrderType) {
                     [self successfulAutomaticBuyTrade:tradeParameters];
                 }
@@ -977,8 +977,8 @@
                 }
             }
         }
-        else {
-            if (!errorMessage) {
+        else { // Balance trades
+            if (!errorArray) {
                 if (orderType == BitcoinDE_BuyOrderType) {
                     [self successfulBalanceBuyTrade:tradeParameters];
                 }
@@ -987,11 +987,12 @@
                 }
             }
             else {
+                NSNumber *errorCode = [errorArray.firstObject objectForKey:@"code"];
                 if (orderType == BitcoinDE_BuyOrderType) {
-                    [self unSuccessfulBalanceBuyTrade:tradeParameters];
+                    [self unSuccessfulBalanceBuyTrade:tradeParameters errorCode:errorCode];
                 }
                 else {
-                    [self unSuccessfulBalanceSellTrade:tradeParameters];
+                    [self unSuccessfulBalanceSellTrade:tradeParameters errorCode:errorCode];
                 }
             }
         }

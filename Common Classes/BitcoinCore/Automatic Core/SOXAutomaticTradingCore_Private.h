@@ -95,6 +95,9 @@
                                                forBuyPrice:(NSDecimalNumber *)boughtPrice
                                  createPotentialParameters:(BOOL)createPotentialParameters;
 
+- (void)tryToExecuteBalanceTradesWithParameters:(NSArray *)parametersToExecute
+                                   forOrderType:(BitcoinDE_OrderType)orderType;
+
 #pragma mark - Math Helpers
 - (NSDecimalNumber *)sumOfBitcoinsOfParameters:(NSArray <NSDictionary *>*)parameter;
 
@@ -107,8 +110,8 @@
 #pragma mark | Balance trades
 - (void)successfulBalanceBuyTrade:(NSDictionary *)tradeParameters;
 - (void)successfulBalanceSellTrade:(NSDictionary *)tradeParameters;
-- (void)unSuccessfulBalanceBuyTrade:(NSDictionary *)tradeParameters;
-- (void)unSuccessfulBalanceSellTrade:(NSDictionary *)tradeParameters;
+- (void)unSuccessfulBalanceBuyTrade:(NSDictionary *)tradeParameters errorCode:(NSNumber *)errorCode;
+- (void)unSuccessfulBalanceSellTrade:(NSDictionary *)tradeParameters errorCode:(NSNumber *)errorCode;
 
 #pragma mark - Inform delegates
 - (void)informBuyDelegateWithNote:(NSString *)note;

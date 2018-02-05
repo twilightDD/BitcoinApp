@@ -985,16 +985,33 @@
     [self checkForBalanceTradesForSoldTrades];
 }
 
-- (void)unSuccessfulBalanceBuyTrade:(NSDictionary *)tradeParameters {
+- (void)unSuccessfulBalanceBuyTrade:(NSDictionary *)tradeParameters errorCode:(NSNumber *)errorCode {
     { // DEBUG
         NSString *note = [NSString stringWithFormat:@"unSuccessfulBalanceBuyTrade tradeParameters:\n%@",
                           tradeParameters];
         [self informSellDelegateWithNote:note];
     }
 
+    // remove from stack
     [self.runningBalanceBuyTradeParameters removeObject:tradeParameters];
-    [self.successfulAutomaticSellTradeParameters addObject:tradeParameters];
-    [self checkForBalanceTradesForSoldTrades];
+
+    // on invalide nonce error retry to balance
+    if ([errorCode isEqualToNumber:@4]) {
+        { // DEBUG
+            NSString *note = [NSString stringWithFormat:@"retry balanceBuy"];
+            [self informSellDelegateWithNote:note];
+        }
+        NSString *orderTypeString = [tradeParameters objectForKey:BitcoinDE_ExecuteTrade_Type];  //=> buy oder sell
+        BitcoinDE_OrderType orderType = [SOXMarket_BitcoinDE_DefTypes orderTypeForOrderTypeString:orderTypeString];
+
+
+        [self tryToExecuteBalanceTradesWithParameters:@[tradeParameters]
+                                         forOrderType:orderType];
+    }
+    else {
+        [self.successfulAutomaticSellTradeParameters addObject:tradeParameters];
+        [self checkForBalanceTradesForSoldTrades];
+    }
 }
 
 - (void)successfulBalanceSellTrade:(NSDictionary *)tradeParameters {
@@ -1009,15 +1026,30 @@
     [self checkForBalanceTradesForBoughtTrades];
 }
 
-- (void)unSuccessfulBalanceSellTrade:(NSDictionary *)tradeParameters {
+- (void)unSuccessfulBalanceSellTrade:(NSDictionary *)tradeParameters errorCode:(NSNumber *)errorCode {
     { // DEBUG
         NSString *note = [NSString stringWithFormat:@"unSuccessfulBalanceSellTrade tradeParameters:\n%@",
                           tradeParameters];
         [self informBuyDelegateWithNote:note];
     }
     [self.runningBalanceSellTradeParameters removeObject:tradeParameters];
-    [self.successfulAutomaticBuyTradeParameters addObject:tradeParameters];
-    [self checkForBalanceTradesForBoughtTrades];
+
+    // on invalide nonce error retry to balance
+    if ([errorCode isEqualToNumber:@4]) {
+        { // DEBUG
+            NSString *note = [NSString stringWithFormat:@"retry balanceSell"];
+            [self informBuyDelegateWithNote:note];
+        }
+
+        NSString *orderTypeString = [tradeParameters objectForKey:BitcoinDE_ExecuteTrade_Type];  //=> buy oder sell
+        BitcoinDE_OrderType orderType = [SOXMarket_BitcoinDE_DefTypes orderTypeForOrderTypeString:orderTypeString];
+        [self tryToExecuteBalanceTradesWithParameters:@[tradeParameters]
+                                         forOrderType:orderType];
+    }
+    else {
+        [self.successfulAutomaticBuyTradeParameters addObject:tradeParameters];
+        [self checkForBalanceTradesForBoughtTrades];
+    }
 }
 
 #pragma mark | Helpers
