@@ -297,7 +297,7 @@
 
 #pragma mark - NSControlTextEditingDelegate
 -(void)controlTextDidEndEditing:(NSNotification *)notification {
-//- (void)controlTextDidChange:(NSNotification *)notification {
+    //- (void)controlTextDidChange:(NSNotification *)notification {
     NSTextField* valueField           = notification.object;
     NSNumberFormatter* fieldFormatter = valueField.formatter;
     NSText* fieldEditor               = valueField.currentEditor;

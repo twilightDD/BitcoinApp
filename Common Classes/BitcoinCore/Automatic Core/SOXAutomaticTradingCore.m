@@ -25,19 +25,19 @@
     [self setBuyDelegates:[[NSHashTable alloc] init]];
     [self setBuyInterestRate:[NSDecimalNumber one]];
     [self setBuyInterestFactor:[NSDecimalNumber one]];
-
+    
     [self setBuySEPAOrderBook:[NSMutableSet set]];
     [self setSellSEPAOrderBook:[NSMutableSet set]];
-
+    
     [self setBuyOrderBookInExecution:[NSMutableArray array]];
     [self setSellOrderBookInExecution:[NSMutableArray array]];
-
+    
     [self setSuccessfulAutomaticBuyTradeParameters:[NSMutableArray array]];
     [self setSuccessfulBalanceSellTradeParameters:[NSMutableArray array]];
-
+    
     [self setRunningAutomaticBuyTradeParameters:[NSMutableArray array]];
     [self setRunningBalanceSellTradeParameters:[NSMutableArray array]];
-
+    
     self.executeBuyTrades = NO;
     self.executeAutomaticTradesForBuyTrades = NO;
     self.executeBalanceTradesForBuyTrades = NO;
@@ -54,14 +54,14 @@
                               self.buyOrderBook.count, self.buySEPAOrderBook.count, self.sellOrderBook.count, self.sellSEPAOrderBook.count];
             [self informBuyDelegateWithNote:note];
         }
-
+        
         [self.buyOrderBook removeAllObjects];
         [self.buySEPAOrderBook removeAllObjects];
         [self.sellOrderBook removeAllObjects];
         [self.sellSEPAOrderBook removeAllObjects];
-
+        
         [self updateBuyStatus];
-
+        
         { // DEBUG
             NSString *note = [NSString stringWithFormat:@"Did flush all orderBooks. Count of orderBooks after:\n"
                               "%tu buyOrderBook\n"
@@ -73,7 +73,7 @@
             [self informBuyDelegateWithNote:note];
         }
     }
-
+    
     self.socketIODidDisconnectAppeared = YES;
     self.automaticTradingIsRunning = NO;
 }
@@ -86,7 +86,7 @@
         self.buyInterestFactor = [[NSDecimalNumber one] decimalNumberBySubtracting:buyInterestRatePercent];
         NSString *note = [NSString stringWithFormat:@"UPDATE VALUE: Set interest rate to %@%%", self.buyInterestRate];
         [self informBuyDelegateWithNote:note];
-
+        
         [self updateBuyStatus];
     }
 }
@@ -104,7 +104,7 @@
                                      toReferenceData:(SOXShowOrderbookData *)referenceData {
     NSDecimalNumber *priceOfInterest = orderOfInterestData.orderInformation_price;
     NSDecimalNumber *referencePrice = referenceData.orderInformation_price;
-
+    
     if (!priceOfInterest
         || !referencePrice
         || priceOfInterest == [NSDecimalNumber zero]
@@ -117,7 +117,7 @@
         [self informBuyDelegateWithNote:note];
         return [NSDecimalNumber zero];
     }
-
+    
     return [self effectiveBuyInterestRateForPrice:orderOfInterestData.orderInformation_price
                                  toReferencePrice:referenceData.orderInformation_price];
 }
@@ -126,7 +126,7 @@
                                       toReferenceData:(SOXShowOrderbookData *)referenceData {
     NSDecimalNumber *priceOfInterest = orderOfInterestData.orderInformation_price;
     NSDecimalNumber *referencePrice = referenceData.orderInformation_price;
-
+    
     if (!priceOfInterest
         || !referencePrice
         || priceOfInterest == [NSDecimalNumber zero]
@@ -139,7 +139,7 @@
         [self informBuyDelegateWithNote:note];
         return [NSDecimalNumber zero];
     }
-
+    
     return [self effectiveSellInterestRateForPrice:orderOfInterestData.orderInformation_price
                                   toReferencePrice:referenceData.orderInformation_price];
 }
@@ -164,12 +164,12 @@
         [self informBuyDelegateWithNote:note];
         return NO;
     }
-
+    
     SOXShowOrderbookData *dataOfInterest  = self.buyOrderBook.firstObject;
     SOXShowOrderbookData *referenceData   = self.sellOrderBook.firstObject;
     NSDecimalNumber *effectivInterestRate = [self effectiveBuyInterestRateForData:dataOfInterest
                                                                   toReferenceData:referenceData];
-
+    
     if ([effectivInterestRate isLessThan:self.buyInterestRate]) {
         { // DEBUG
             NSString *statisticForNote = [NSString stringWithFormat:@"- type %@ - ID %@ - minAmo %@ - maxAmo %@ - buyP0 %@ - sellP0 %@ - iR %@"
@@ -207,14 +207,14 @@
 - (NSDecimalNumber *)btcBuyAmountForOrder:(SOXShowOrderbookData *)orderToBuy {
     NSDecimalNumber *orderToBuyMinVolume = orderToBuy.orderInformation_minVolume;
     NSDecimalNumber *orderToBuyMaxVolume = orderToBuy.orderInformation_maxVolume;
-
+    
     // consider user given maxFidorAmount
     NSDecimalNumber *availableFidorAmount = [SOXMarket_BitcoinDE_Core allocationMaxEurVolumeForCurrency:self.currencyType];
     if (self.buyMaximalFidorAmountInvestment) {
         availableFidorAmount = [SOXFormatters lesserDecimalNumberFrom:self.buyMaximalFidorAmountInvestment
                                                                   and:availableFidorAmount];
     }
-
+    
     NSDecimalNumber *btcAmountToBuy = nil;
     NSString *note = @"Error in tryToExecuteBuyOrder";
     if ([orderToBuyMinVolume isGreaterThan:availableFidorAmount]) {
@@ -223,7 +223,7 @@
                 , [SOXFormatters currencyStringForNumber:orderToBuyMinVolume roundingMode:NSNumberFormatterRoundDown]
                 , [SOXFormatters currencyStringForNumber:availableFidorAmount roundingMode:NSNumberFormatterRoundDown]];
         [self informBuyDelegateWithNote:note];
-
+        
     }
     else if ([orderToBuyMinVolume isEqual:availableFidorAmount]) {
         // minVolume = availableAmount => buy minAmount
@@ -240,60 +240,60 @@
         btcAmountToBuy = [volumeToBuy decimalNumberByDividingBy:orderToBuy.orderInformation_price
                                                    withBehavior:[SOXFormatters btcNumberHandler]];
     }
-
+    
     if (btcAmountToBuy) {
         btcAmountToBuy = [self potentialSellBalanceTradeAmountForBuyAmount:btcAmountToBuy
                                                                forBuyPrice:orderToBuy.orderInformation_price];
     }
-
+    
     return btcAmountToBuy;
 }
 
 #pragma mark | Balance trade methods
 - (NSDecimalNumber *)potentialSellBalanceTradeAmountForBuyAmount:(NSDecimalNumber *)buyAmount
                                                      forBuyPrice:(NSDecimalNumber *)buyPrice {
-
+    
     // if no balanceSell is allowed, buy all
     if (!self.executeBalanceTradesForBuyTrades) {
         return buyAmount;
     }
-
+    
     // consider fee - we get 0,8% less bitcoins than we buy!
     NSDecimalNumber *fee = [NSDecimalNumber decimalNumberWithString:@"0.992"];
     buyAmount = [buyAmount decimalNumberByMultiplyingBy:fee
                                            withBehavior:[SOXFormatters btcNumberHandler]];
-
+    
     NSMutableArray *potentialSellBalanceTradeParameters = [self sellBalanceTradeParametersForBuyAmount:buyAmount
                                                                                            forBuyPrice:buyPrice
                                                                              createPotentialParameters:YES];
-
+    
     NSDecimalNumber *sellBalanceTradeAmount = [self sumOfBitcoinsOfParameters:potentialSellBalanceTradeParameters];
     sellBalanceTradeAmount = [sellBalanceTradeAmount decimalNumberByDividingBy:fee
                                                                   withBehavior:[SOXFormatters btcNumberHandler]];
-
+    
     return sellBalanceTradeAmount;
 }
 
 - (NSMutableArray *)sellBalanceTradeParametersForBuyAmount:(NSDecimalNumber *)boughtBTCAmount
                                                forBuyPrice:(NSDecimalNumber *)boughtPrice
                                  createPotentialParameters:(BOOL)createPotentialParameters {
-
+    
     NSDecimalNumber *remainingBitcoinAmountToSell = [boughtBTCAmount copy];
-
+    
     // add fee to price - we get 0,8% less bitcoins than we buy!
     NSDecimalNumber *fee = [NSDecimalNumber decimalNumberWithString:@"1.008"];
     NSDecimalNumber *boughtPriceWithFee = [boughtPrice decimalNumberByMultiplyingBy:fee
                                                                        withBehavior:[SOXFormatters currencyNumberHandler]];
-
+    
     NSMutableArray *balanceSellParameters = [NSMutableArray array];
-
+    
     for (NSUInteger idx = 0; idx < self.sellOrderBook.count; idx++) {
         SOXShowOrderbookData *sellOrder = [self.sellOrderBook objectAtIndex:idx];
-
+        
         if ([sellOrder.orderInformation_price isLessThan:boughtPriceWithFee]) {
             break;
         }
-
+        
         if ([sellOrder.orderInformation_minAmount isLessThanOrEqualTo:remainingBitcoinAmountToSell]) {
             // create sellParameter
             NSDecimalNumber *amountToSell = [SOXFormatters lesserDecimalNumberFrom:remainingBitcoinAmountToSell
@@ -307,7 +307,7 @@
             [balanceSellParameters addObject:sellParameters];
             remainingBitcoinAmountToSell = [remainingBitcoinAmountToSell decimalNumberBySubtracting:amountToSell
                                                                                        withBehavior:[SOXFormatters btcNumberHandler]];
-
+            
             if ([remainingBitcoinAmountToSell isEqualTo:[NSDecimalNumber zero]]) {
                 break;
             }
@@ -324,14 +324,14 @@
             }
         }
     }
-
+    
     if (!createPotentialParameters) {
         if ([remainingBitcoinAmountToSell isGreaterThan:[NSDecimalNumber zero]]) {
             [self addSellBacklogForRemainingBitcoinAmountToSell:remainingBitcoinAmountToSell
                                                  forBoughtPrice:boughtPrice];
         }
     }
-
+    
     return balanceSellParameters;
 }
 
@@ -374,7 +374,7 @@
 - (void)tryToExecuteBalanceTradesWithParameters:(NSArray *)parametersToExecute
                                    forOrderType:(BitcoinDE_OrderType)orderType {
     [SOXAutomaticTradingCore missedImplementation:@"- (void)tryToExecuteBalanceTradesWithParameters:(NSArray *)parametersToExecute "
-                                                   "forOrderType:(BitcoinDE_OrderType)orderType"];
+     "forOrderType:(BitcoinDE_OrderType)orderType"];
 }
 
 - (void)updateBannerAfterSuccessfulAutomaticBuyTrade {
@@ -393,22 +393,22 @@
                           tradeParameters];
         [self informBuyDelegateWithNote:note];
     }
-
+    
     [self.runningAutomaticBuyTradeParameters removeObject:tradeParameters];
-
+    
     NSMutableDictionary *tradeParametersWithFee = [tradeParameters mutableCopy];
-
+    
     { // calculate bitcoins with fee
         NSDecimalNumber *boughtBitcoins = [tradeParameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount];
         NSDecimalNumber *bitcoinFee = [NSDecimalNumber decimalNumberWithString:@"0.992"];
         NSDecimalNumber *balanceBitcoins = [boughtBitcoins decimalNumberByMultiplyingBy:bitcoinFee
                                                                            withBehavior:[SOXFormatters btcNumberHandler]];
-
+        
         [tradeParametersWithFee setObject:balanceBitcoins forKey:BitcoinDE_ExecuteTrade_BitcoinAmount];
         // TODO:  consider fee for price here ?!
     }
     [self.successfulAutomaticBuyTradeParameters addObject:[tradeParametersWithFee copy]];
-
+    
     // balance trades after banner update
     [self updateBannerAfterSuccessfulAutomaticBuyTrade];
 }
@@ -420,7 +420,7 @@
         [self informBuyDelegateWithNote:note];
     }
     [self.runningAutomaticBuyTradeParameters removeObject:tradeParameters];
-
+    
     // Buy trade was not successful, but maybe the faster buyer did not bought the whole bunch of coins
     // So let's look for a replacement order in orderBook.
     { // DEBUG
@@ -428,7 +428,7 @@
         [self informBuyDelegateWithNote:note];
     }
     [self checkForBuyableOrder];
-
+    
     [self checkForBalanceTradesForBoughtTrades];
 }
 
@@ -439,7 +439,7 @@
                           tradeParameters];
         [self informBuyDelegateWithNote:note];
     }
-
+    
     [self.runningBalanceSellTradeParameters removeObject:tradeParameters];
     [self.successfulBalanceSellTradeParameters addObject:tradeParameters];
     [self checkForBalanceTradesForBoughtTrades];
@@ -452,14 +452,14 @@
         [self informBuyDelegateWithNote:note];
     }
     [self.runningBalanceSellTradeParameters removeObject:tradeParameters];
-
+    
     // on invalide nonce error retry to balance
     if ([errorCode isEqualToNumber:@4]) {
         { // DEBUG
             NSString *note = [NSString stringWithFormat:@"retry balanceSell"];
             [self informBuyDelegateWithNote:note];
         }
-
+        
         NSString *orderTypeString = [tradeParameters objectForKey:BitcoinDE_ExecuteTrade_Type];  //=> buy oder sell
         BitcoinDE_OrderType orderType = [SOXMarket_BitcoinDE_DefTypes orderTypeForOrderTypeString:orderTypeString];
         [self tryToExecuteBalanceTradesWithParameters:@[tradeParameters]
@@ -477,7 +477,7 @@
     if (!self.executeBalanceTradesForBuyTrades) {
         return;
     }
-
+    
     { // DEBUG
         NSString *note = [NSString stringWithFormat:@"checkForBalanceTradesForBoughtTrades:\n"
                           "self.runningBalanceSellTradeParameters.count:    %tu\n"
@@ -488,7 +488,7 @@
                           , self.successfulAutomaticBuyTradeParameters.count];
         [self informBuyDelegateWithNote:note];
     }
-
+    
     if (self.runningAutomaticBuyTradeParameters.count == 0
         && self.runningBalanceSellTradeParameters.count == 0
         && self.successfulAutomaticBuyTradeParameters.count > 0) {
@@ -509,7 +509,7 @@
                               , self.successfulBalanceSellTradeParameters.count];
             [self informBuyDelegateWithNote:note];
         }
-
+        
         [self updateBannerAfterSuccessfulBalanceTrades];
     }
 }
@@ -520,10 +520,10 @@
         || parameters.count == 0) {
         return [NSDecimalNumber zero];
     }
-
+    
     NSString *sumOfBitcoinsKeyPath = [NSString stringWithFormat:@"@sum.%@", @"amount"];
     NSDecimalNumber *sumOfBitcoins = [parameters valueForKeyPath:sumOfBitcoinsKeyPath];
-
+    
     return sumOfBitcoins;
 }
 
@@ -534,7 +534,7 @@
         DDLogInfo(@"%@ buyDele: %@"
                   , [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringLowerCaseForCurrencyType:self.currencyType]
                   , note);
-
+        
         for (NSObject <SOXAutomaticTradingCoreProtocol> *delegate in self.buyDelegates) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [delegate performSelector:@selector(logLine:)
@@ -559,7 +559,7 @@
 
 #pragma mark | Helpers
 - (void)updateBuyStatus {
-
+    
     SOXShowOrderbookData *bestOrderData = self.buyOrderBook.firstObject;
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *status;
@@ -576,7 +576,7 @@
         else {
             status = @"An error occured! No buyOrderBook";
         }
-
+        
         [self informBuyDelegateWithStatus:status];
         [self informBuyDelegateWithNote:status];
     });
@@ -605,7 +605,7 @@
 
 - (void)socketIODidDisconnect:(NSString *)socketStatus {
     [self informBuyDelegateWithNote:socketStatus];
-
+    
     // Flush all orderBooks
     [self flushAllOrderBooks];
 }
