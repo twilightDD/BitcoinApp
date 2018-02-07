@@ -46,6 +46,8 @@
 @property (weak) IBOutlet NSButton *clearLogButton;
 
 #pragma mark Properties
+@property (nonatomic) BitcoinDE_OrderType orderType;
+
 @property (nonatomic, strong) SOXAutomaticTrading_BitcoinDE_Core *tradingCore;
 
 @property (nonatomic) BOOL automaticTradingIsRunning;
@@ -67,10 +69,19 @@
 #pragma mark - Init&Co.
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.orderType = BitcoinDE_BuyOrderType;
+
     [self setupUI];
     [self registerOberservers];
 
     self.log = @"";
+}
+
+- (void)viewWillAppear {
+    [super viewWillAppear];
+    [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
+                                                        object:@(self.currencyType)];
 }
 
 - (void)dealloc {
@@ -194,11 +205,8 @@
             [self.tradingCore setBuyMaximalFidorAmount:maximalFidorAmount];
             [self.tradingCore setBuyInterestRate:interestRate];
             break;
-        case BitcoinDE_SellOrderType:
-            [self.tradingCore setSellMaximalBTCAmount:maximalFidorAmount];
-            [self.tradingCore setSellInterestRate:interestRate];
-            break;
         default:
+            NSAssert(NO, @"wrong orderType");
             return;
             break;
     }
@@ -301,9 +309,8 @@
             case BitcoinDE_BuyOrderType:
                 [self.tradingCore setBuyInterestRate:newValue];
                 break;
-            case BitcoinDE_SellOrderType:
-                [self.tradingCore setSellInterestRate:newValue];
             default:
+                NSAssert(NO, @"wrong orderType");
                 break;
         }
     }
@@ -312,9 +319,8 @@
             case BitcoinDE_BuyOrderType:
                 [self.tradingCore setBuyMaximalFidorAmount:newValue];
                 break;
-            case BitcoinDE_SellOrderType:
-                [self.tradingCore setSellMaximalBTCAmount:newValue];
             default:
+                NSAssert(NO, @"wrong orderType");
                 break;
         }
     }

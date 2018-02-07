@@ -13,7 +13,6 @@
 #import "SOXKeys_BitcoinDE.h"
 
 static NSString *EmbedAutomaticBuySegueKey  = @"EmbedAutomaticBuySegue";
-static NSString *EmbedAutomaticSellSegueKey = @"EmbedAutomaticSellSegue";
 
 #pragma mark - Interface
 @interface SOXAutomaticTradingMainViewController ()
@@ -47,13 +46,8 @@ static NSString *EmbedAutomaticSellSegueKey = @"EmbedAutomaticSellSegue";
 - (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:EmbedAutomaticBuySegueKey]) {
         SOXAutomaticTradingViewController *destinationViewController = segue.destinationController;
-        destinationViewController.orderType = BitcoinDE_BuyOrderType;
-        destinationViewController.currencyType = self.currencyType;
-    }
-    else if ([segue.identifier isEqualToString:EmbedAutomaticSellSegueKey]) {
-        SOXAutomaticTradingViewController *destinationViewController = segue.destinationController;
-        destinationViewController.orderType = BitcoinDE_SellOrderType;
-        destinationViewController.currencyType = self.currencyType;
+//        destinationViewController.orderType = BitcoinDE_BuyOrderType;
+//        destinationViewController.currencyType = self.currencyType;
     }
 }
 

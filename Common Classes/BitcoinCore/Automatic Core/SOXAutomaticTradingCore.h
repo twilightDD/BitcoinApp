@@ -23,8 +23,6 @@
 @property (weak, nonatomic) id <SOXAutomaticTradingCoreProtocol, SOXSocketIOCoreProtocol, SOXSocketIOCoreStatusProtocol> delegate;
 
 - (void)setBuyInterestRate:(NSDecimalNumber *)buyInterestRate;
-- (void)setSellInterestRate:(NSDecimalNumber *)sellInterestRate;
 - (void)setBuyMaximalFidorAmount:(NSDecimalNumber *)buyMaximalEuro;
-- (void)setSellMaximalBTCAmount:(NSDecimalNumber *)sellMaximalBTC;
 
 @end
