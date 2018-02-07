@@ -188,9 +188,11 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
                                                                     if (serverAnswer) {
                                                                         if (serverCommandType == BitcoinDE_ShowAccountInfoCommandType) {
                                                                             SOXAccountInfo_BitcoinDE_Data *accountInfoData = [serverAnswer objectForKey:ServerAnswerPayloadKey];
-                                                                            [SOXMarket_BitcoinDE_Core sharedCore].accountInfoData = accountInfoData;
-                                                                            [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_RequestShowAccountInfo
-                                                                                                                                object:serverAnswer];
+                                                                            if (accountInfoData) {
+                                                                                [SOXMarket_BitcoinDE_Core sharedCore].accountInfoData = accountInfoData;
+                                                                                [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_RequestShowAccountInfo
+                                                                                                                                    object:serverAnswer];
+                                                                            }
 
                                                                         }
                                                                         else if (serverCommandType == BitcoinDE_ShowRatesCommandType) {
