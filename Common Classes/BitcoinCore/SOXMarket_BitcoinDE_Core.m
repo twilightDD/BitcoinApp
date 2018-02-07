@@ -297,8 +297,11 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
         }
         else if (!error && errorMessage.hasError) {
             // on error on executeTrade there is no error! (Warum auch immer)
-            [serverAnswer setObject:[payloadDictionary objectForKey:@"errors"]
-                             forKey:ServerAnswerErrorKey];
+            id errorsObject = [payloadDictionary objectForKey:@"errors"];
+            if (errorsObject) {
+                [serverAnswer setObject:errorsObject
+                                 forKey:ServerAnswerErrorKey];
+            }
         }
         else {
             id payload = [SOXDataConverter_BitcoinDE payloadForServerDictionary:payloadDictionary
