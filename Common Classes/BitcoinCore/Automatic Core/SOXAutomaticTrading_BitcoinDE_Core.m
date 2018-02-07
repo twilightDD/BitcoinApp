@@ -781,9 +781,6 @@
 
     // Logging
     NSDecimalNumber *sum = [NSDecimalNumber zero];
-    SOXErrorMessage_BitcoinDE *errorMessage = [[SOXErrorMessage_BitcoinDE alloc] init];
-    errorMessage.serverRequestTitle = [NSString stringWithFormat:@"tryToExecuteBalanceTradesWithParameters for orderType: %@"
-                                       , [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:orderType]];
 
     for (NSDictionary *parameters in parametersToExecute) {
         { // DEBUG
@@ -823,15 +820,14 @@
                     SOXShowOrderbookData *buyOrderBookData = [self orderWithOrderID:[parameters objectForKey:BitcoinDE_ExecuteTrade_OrderID]
                                                                       fromOrderBook:self.buyOrderBook];
                     if (!buyOrderBookData) {
-                        NSString *note = [NSString stringWithFormat:@"Could not found buyBalanceOrder in buyOrderBook - ID: %@ - price: %@ - amount: %@"
-                                          , [parameters objectForKey:BitcoinDE_ExecuteTrade_OrderID]
-                                          , [parameters objectForKey:BitcoinDE_ExecuteTrade_Price]
-                                          , [parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]
-                                          ];
                         { // DEBUG
+                            NSString *note = [NSString stringWithFormat:@"Could not found buyBalanceOrder in buyOrderBook - ID: %@ - price: %@ - amount: %@"
+                                              , [parameters objectForKey:BitcoinDE_ExecuteTrade_OrderID]
+                                              , [parameters objectForKey:BitcoinDE_ExecuteTrade_Price]
+                                              , [parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]
+                                              ];
                             [self informSellDelegateWithNote:note];
                         }
-                        [errorMessage appendErrorDescripton:note];
 
                         break;
                     }
@@ -866,16 +862,14 @@
                     SOXShowOrderbookData *sellOrderBookData = [self orderWithOrderID:[parameters objectForKey:BitcoinDE_ExecuteTrade_OrderID]
                                                                       fromOrderBook:self.sellOrderBook];
                     if (!sellOrderBookData) {
-                        NSString *note = [NSString stringWithFormat:@"Could not found sellBalanceOrder in sellOrderBook - ID: %@ - price: %@ - amount: %@"
-                                          , [parameters objectForKey:BitcoinDE_ExecuteTrade_OrderID]
-                                          , [parameters objectForKey:BitcoinDE_ExecuteTrade_Price]
-                                          , [parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]
-                                          ];
                         { // DEBUG
+                            NSString *note = [NSString stringWithFormat:@"Could not found sellBalanceOrder in sellOrderBook - ID: %@ - price: %@ - amount: %@"
+                                              , [parameters objectForKey:BitcoinDE_ExecuteTrade_OrderID]
+                                              , [parameters objectForKey:BitcoinDE_ExecuteTrade_Price]
+                                              , [parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]
+                                              ];
                             [self informBuyDelegateWithNote:note];
                         }
-                        [errorMessage appendErrorDescripton:note];
-
                         break;
                     }
                     [self.sellOrderBookInExecution addObject:sellOrderBookData];
@@ -898,14 +892,6 @@
         else if (orderType == BitcoinDE_SellOrderType) {
             [self informBuyDelegateWithNote:note];
         }
-    }
-
-    NSObject *delegateForErrorMessages = [SOXMarket_BitcoinDE_Core sharedCore].delegateForErrorMessages;
-    if (errorMessage.hasError
-        && [delegateForErrorMessages respondsToSelector:@selector(presentErrorMessage:)]) {
-        [delegateForErrorMessages performSelectorOnMainThread:@selector(presentErrorMessage:)
-                                                   withObject:errorMessage
-                                                waitUntilDone:NO];
     }
 }
 
