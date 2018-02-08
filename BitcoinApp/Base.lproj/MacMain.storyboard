@@ -709,25 +709,25 @@
                                 </connections>
                             </containerView>
                             <tabView translatesAutoresizingMaskIntoConstraints="NO" id="B9m-IQ-OSo">
-                                <rect key="frame" x="13" y="65" width="934" height="459"/>
+                                <rect key="frame" x="13" y="65" width="934" height="446"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="TabBTC" identifier="1" id="eLR-ge-YSa">
                                         <view key="view" id="kJ0-KF-JIj">
-                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
+                                            <rect key="frame" x="10" y="33" width="914" height="400"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="A8Q-hU-Lrd">
-                                                    <rect key="frame" x="0.0" y="0.0" width="449" height="413"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="449" height="400"/>
                                                     <connections>
                                                         <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerBuyBTCSegue" id="ZEn-rF-4RA"/>
                                                     </connections>
                                                 </containerView>
                                                 <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Tu7-dB-5fP">
-                                                    <rect key="frame" x="455" y="12" width="5" height="389"/>
+                                                    <rect key="frame" x="455" y="12" width="5" height="376"/>
                                                 </box>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="ovw-tP-oiM">
-                                                    <rect key="frame" x="466" y="0.0" width="448" height="413"/>
+                                                    <rect key="frame" x="466" y="0.0" width="448" height="400"/>
                                                     <connections>
                                                         <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerSellBTCSegue" id="Sxs-iN-Wh5"/>
                                                     </connections>
@@ -999,8 +999,8 @@
                                 </tabViewItems>
                             </tabView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6TX-DJ-6MW">
-                                <rect key="frame" x="865" y="503" width="81" height="32"/>
-                                <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xcl-lN-ZGg">
+                                <rect key="frame" x="818" y="502" width="128" height="32"/>
+                                <buttonCell key="cell" type="push" title="Reload Banner" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xcl-lN-ZGg">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1045,18 +1045,18 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="CSm-MP-mkG" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="19" id="0tE-OE-4Hw"/>
+                            <constraint firstItem="B9m-IQ-OSo" firstAttribute="top" secondItem="6TX-DJ-6MW" secondAttribute="bottom" constant="4" id="1Gx-3q-g84"/>
                             <constraint firstItem="ljh-CW-puG" firstAttribute="top" secondItem="B9m-IQ-OSo" secondAttribute="bottom" constant="16" symbolic="YES" id="1pN-iI-EwZ"/>
                             <constraint firstItem="B9m-IQ-OSo" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="2yw-fd-kfL"/>
                             <constraint firstAttribute="trailing" secondItem="B9m-IQ-OSo" secondAttribute="trailing" constant="20" symbolic="YES" id="5lN-Sj-40p"/>
                             <constraint firstAttribute="bottom" secondItem="ljh-CW-puG" secondAttribute="bottom" constant="20" id="KFI-fy-mUx"/>
-                            <constraint firstItem="6TX-DJ-6MW" firstAttribute="top" secondItem="CSm-MP-mkG" secondAttribute="bottom" constant="3" id="Ke1-Jq-UQR"/>
+                            <constraint firstItem="6TX-DJ-6MW" firstAttribute="top" secondItem="CSm-MP-mkG" secondAttribute="bottom" constant="4" id="Ke1-Jq-UQR"/>
                             <constraint firstAttribute="trailing" secondItem="ljh-CW-puG" secondAttribute="trailing" constant="20" id="ZrP-wd-2ba"/>
                             <constraint firstAttribute="trailing" secondItem="6TX-DJ-6MW" secondAttribute="trailing" constant="20" id="fIv-oS-Ift"/>
                             <constraint firstItem="CSm-MP-mkG" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="nfg-cA-a2k"/>
                             <constraint firstItem="6TX-DJ-6MW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="pzu-nN-vgX"/>
                             <constraint firstAttribute="trailing" secondItem="CSm-MP-mkG" secondAttribute="trailing" constant="20" id="reb-tP-K6x"/>
                             <constraint firstItem="ljh-CW-puG" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="uEz-3t-LXb"/>
-                            <constraint firstItem="B9m-IQ-OSo" firstAttribute="top" secondItem="CSm-MP-mkG" secondAttribute="bottom" constant="16" id="yWP-zG-RBt"/>
                         </constraints>
                     </view>
                     <connections>
