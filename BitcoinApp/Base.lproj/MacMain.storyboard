@@ -2115,8 +2115,8 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
-                            <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="djv-Fe-LAU" userLabel="SpinningBackgroundView">
-                                <rect key="frame" x="20" y="8" width="495" height="249"/>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="djv-Fe-LAU" userLabel="SpinningBackgroundView">
+                                <rect key="frame" x="20" y="8" width="596" height="249"/>
                                 <subviews>
                                     <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="sQ4-6W-phR">
                                         <rect key="frame" x="290" y="117" width="16" height="16"/>
@@ -2731,6 +2731,7 @@ Gw
                             <constraint firstAttribute="trailing" secondItem="MeR-xF-X5m" secondAttribute="trailing" constant="20" id="bk9-4L-i5H"/>
                             <constraint firstItem="sTF-mD-d0O" firstAttribute="leading" secondItem="cBr-EW-8U5" secondAttribute="leading" constant="20" id="grY-Nd-8fb"/>
                             <constraint firstItem="MeR-xF-X5m" firstAttribute="top" secondItem="cBr-EW-8U5" secondAttribute="top" constant="20" id="k6K-pb-m5S"/>
+                            <constraint firstItem="Iwe-JG-ddR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cBr-EW-8U5" secondAttribute="leading" constant="20" symbolic="YES" id="kVT-52-PWV"/>
                             <constraint firstItem="MeR-xF-X5m" firstAttribute="leading" secondItem="cBr-EW-8U5" secondAttribute="leading" constant="20" id="m7D-CR-CCl"/>
                         </constraints>
                     </view>
@@ -2808,7 +2809,7 @@ Gw
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="q0G-qt-NQb" firstAttribute="leading" secondItem="fz1-cL-cKI" secondAttribute="trailing" constant="8" symbolic="YES" id="1Tn-Xu-ETf"/>
+                                    <constraint firstItem="q0G-qt-NQb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fz1-cL-cKI" secondAttribute="trailing" constant="8" symbolic="YES" id="1Tn-Xu-ETf"/>
                                     <constraint firstAttribute="bottom" secondItem="fz1-cL-cKI" secondAttribute="bottom" id="JR3-Ev-d5M"/>
                                     <constraint firstAttribute="trailing" secondItem="VA2-Va-dtt" secondAttribute="trailing" id="NTG-Ou-PJu"/>
                                     <constraint firstItem="q0G-qt-NQb" firstAttribute="centerX" secondItem="CvW-je-qdf" secondAttribute="centerX" id="O3P-2u-d7v"/>
@@ -3368,7 +3369,7 @@ Gw
                                             </datePickerCell>
                                         </datePicker>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="I1S-WB-efT">
-                                            <rect key="frame" x="99" y="176" width="58" height="17"/>
+                                            <rect key="frame" x="99" y="176" width="144" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="End date" id="s7w-QP-5bI">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -3387,6 +3388,7 @@ Gw
                                     <constraints>
                                         <constraint firstItem="5tt-E2-Y2e" firstAttribute="top" secondItem="Yxd-wM-TZl" secondAttribute="top" constant="45" id="2Cg-Yi-UBy"/>
                                         <constraint firstItem="Mzv-eg-HWw" firstAttribute="top" secondItem="I1S-WB-efT" secondAttribute="bottom" constant="8" symbolic="YES" id="4WV-jL-nIb"/>
+                                        <constraint firstItem="I1S-WB-efT" firstAttribute="trailing" secondItem="Mzv-eg-HWw" secondAttribute="trailing" id="4ml-cP-5mw"/>
                                         <constraint firstItem="nfn-lu-b8i" firstAttribute="trailing" secondItem="dlV-kR-ppO" secondAttribute="trailing" id="5l6-JF-R86"/>
                                         <constraint firstItem="aIf-ZL-8JB" firstAttribute="top" secondItem="ehG-Ud-cJJ" secondAttribute="bottom" constant="22" id="6X6-Gb-e3U"/>
                                         <constraint firstItem="ehG-Ud-cJJ" firstAttribute="leading" secondItem="Yxd-wM-TZl" secondAttribute="leading" constant="20" id="9fZ-PS-9eV"/>
@@ -3451,6 +3453,7 @@ Gw
                             <constraint firstItem="w8c-KB-of4" firstAttribute="top" secondItem="Yxd-wM-TZl" secondAttribute="bottom" constant="20" id="20e-wC-Wnj"/>
                             <constraint firstItem="Gf2-SM-5g3" firstAttribute="baseline" secondItem="Bqf-Fe-k9G" secondAttribute="baseline" id="2zQ-Ut-wX6"/>
                             <constraint firstItem="f6Y-1R-M4X" firstAttribute="baseline" secondItem="Bqf-Fe-k9G" secondAttribute="baseline" id="49i-St-E7J"/>
+                            <constraint firstItem="w8c-KB-of4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mWb-Gs-3Vc" secondAttribute="trailing" id="7ZE-P7-gnc"/>
                             <constraint firstItem="zII-rh-hZI" firstAttribute="baseline" secondItem="ZMe-eq-kHL" secondAttribute="baseline" id="7ps-aL-EUU"/>
                             <constraint firstItem="3LD-JI-7kF" firstAttribute="trailing" secondItem="C7b-w6-4AT" secondAttribute="trailing" id="AFc-Bg-JcJ"/>
                             <constraint firstItem="ZMe-eq-kHL" firstAttribute="leading" secondItem="zII-rh-hZI" secondAttribute="trailing" constant="8" symbolic="YES" id="Bfs-to-s9Y"/>
@@ -4093,8 +4096,8 @@ Gw
         <scene sceneID="GHY-7L-bja">
             <objects>
                 <viewController id="TPt-gD-CmY" customClass="SOXMyTradesViewController" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="O2L-9r-szs">
-                        <rect key="frame" x="0.0" y="0.0" width="1079" height="448"/>
+                    <view key="view" id="O2L-9r-szs">
+                        <rect key="frame" x="0.0" y="0.0" width="1008" height="448"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="gUV-FX-0N4">
@@ -4373,7 +4376,7 @@ Gw
                                         </connections>
                                     </datePicker>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lmi-FD-D5R">
-                                        <rect key="frame" x="33" y="50" width="60" height="17"/>
+                                        <rect key="frame" x="33" y="50" width="109" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="End Date" id="UKl-eR-iu3">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -4473,6 +4476,7 @@ Gw
                                     <constraint firstItem="nqX-Dn-yZ7" firstAttribute="leading" secondItem="pKc-mr-Hgr" secondAttribute="leading" id="K1u-vF-nJv"/>
                                     <constraint firstAttribute="trailing" secondItem="3PB-Fa-ykA" secondAttribute="trailing" constant="20" symbolic="YES" id="KYh-fI-HMg"/>
                                     <constraint firstItem="nqX-Dn-yZ7" firstAttribute="top" secondItem="pKc-mr-Hgr" secondAttribute="bottom" constant="20" id="Kvw-bj-byZ"/>
+                                    <constraint firstItem="lmi-FD-D5R" firstAttribute="trailing" secondItem="BAO-9i-ubM" secondAttribute="trailing" id="Qgw-su-qTZ"/>
                                     <constraint firstItem="pKc-mr-Hgr" firstAttribute="top" secondItem="Pcl-og-lKY" secondAttribute="bottom" constant="8" id="Qnb-qG-Ner"/>
                                     <constraint firstAttribute="bottom" secondItem="MFP-Wg-jot" secondAttribute="bottom" constant="20" id="SXZ-by-h0y"/>
                                     <constraint firstItem="MFP-Wg-jot" firstAttribute="top" secondItem="lmi-FD-D5R" secondAttribute="bottom" constant="8" id="W5X-oU-qdn"/>
