@@ -360,10 +360,6 @@
     [SOXAutomaticTradingCore missedImplementation:@"- (void)createBalanceTradesForBoughtTrades"];
 }
 
-- (void)createBalanceTradesForSoldTrades {
-    [SOXAutomaticTradingCore missedImplementation:@"- (void)createBalanceTradesForSoldTrades"];
-}
-
 - (void)tryToBuy:(SOXShowOrderbookData *)orderToBuy btcAmountToBuy:(NSDecimalNumber *)btcAmountToBuy {
     [SOXAutomaticTradingCore missedImplementation:@"- (void)tryToBuy:(SOXShowOrderbookData *)orderToBuy btcAmountToBuy:(NSDecimalNumber *)btcAmountToBuy"];
 }
