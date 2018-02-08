@@ -61,6 +61,8 @@ static NSString *AutomaticTradeETHSegueKey = @"EmbedAutoTraderForETH";
     [super viewWillAppear];
     [SOXMarket_BitcoinDE_Core registerForCreditUpdates:self];
     [SOXMarket_BitcoinDE_Core registerForStatusBarUpdates:self];
+
+    self.view.window.title = @"ONLY AUTOMATIC BUY";
 }
 #pragma mark - Private methods
 - (void)setupUI {
