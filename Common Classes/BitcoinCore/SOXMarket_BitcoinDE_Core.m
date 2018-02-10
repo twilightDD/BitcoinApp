@@ -196,13 +196,21 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
     NSURLSessionTask *getTask = [[NSURLSession sharedSession] dataTaskWithRequest:request
                                                                 completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                                                                     strongify(self)
-                                                                    //[SOXMarket_BitcoinDE_Core startNextNSURLSessionTask];
+
                                                                     [SOXMarket_BitcoinDE_Core incomingResponseForNetworkRequestCounter:networkRequestCounter];
+
+                                                                    // Erro handling
                                                                     NSString *serverRequestTitle = [NSString stringWithFormat:@"%tu (%@)",
                                                                                                     serverCommandType
                                                                                                     ,[SOXMarket_BitcoinDE_Core descriptionForServerCommandType:serverCommandType]];
+                                                                    if (parameterDictionary.allKeys.count > 0) {
+                                                                        NSString *furtherTitle = [NSString stringWithFormat:@" - pair: %@"
+                                                                                                  , [parameterDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPair]];
+                                                                        serverRequestTitle = [serverRequestTitle stringByAppendingString:furtherTitle];
+                                                                    }
                                                                     
                                                                     SOXErrorMessage_BitcoinDE *errorMessage = [[SOXErrorMessage_BitcoinDE alloc] initWithServerRequestTitle:serverRequestTitle];
+                                                                    
                                                                     __block NSDictionary *serverAnswer;
                                                                     dispatch_sync(dispatch_get_main_queue(), ^{
                                                                         serverAnswer = [self answerDictionaryForServerCommand:serverCommandType
