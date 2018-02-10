@@ -51,8 +51,13 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 @property (copy, nonatomic) NSString *post_parameter_md5_hashed_url_encoded_query_string;
 @property (copy, nonatomic) NSString *hmac_data;
 @property (copy, nonatomic) NSString *hmac;
+
 @property (copy, nonatomic) NSString *api_key;
 @property (copy, nonatomic) NSString *api_secret;
+@property (nonatomic) NSUInteger api_Pointer;
+@property (strong, nonatomic) NSArray *apiKeys;
+@property (strong, nonatomic) NSArray *apiSecrets;
+@property (nonatomic) NSUInteger api_PointerLimit;
 
 //@property (weak, nonatomic) id delegateForRequests;
 @property (weak, nonatomic) id <SOXBannerDataProtocol> delegateForBannerUpdates;
@@ -94,10 +99,32 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
         sharedCore.runningRequests = [NSMutableArray array];
         sharedCore.networkRequestCounter = 0;
         sharedCore.maxCredits = 0;
+
+
+        sharedCore.apiKeys = @[@"db8b38266d2f955fa96f19064f60a4c8"
+                               ,@"297e59623f025f4ec408ae3746c2d0c0"
+                               ,@"121055f18ae3145a4967a2a81fd27588"
+                               ,@"27a05ba57a576673361f553027624924"
+                               ,@"5f10e0d81135be6b66b2351415d45d56"
+                               ,@"8a5c1797d474d1df1fdb5670d294c87d"
+                               ,@"fe685a64ad93ed913c9844a9bdba22a6"
+                               ,@"93410617ae2b3f2ae21b570b384937da"
+                               ,@"57af63fdb27ec51e8c573d69c6864a54"];
+        sharedCore.apiSecrets = @[@"a4ebc1d021b88bba3c8b79ba4b93b1045dea0cc7"
+                                  ,@"a34b05518343374df7d847e5ff62f27ff784ecba"
+                                  ,@"24c09a5164bb0c9a0d1c75df0bd24750a95e24a4"
+                                  ,@"5c623ea45829ca42c5d848eb416c085e79666f35"
+                                  ,@"cdf43478f26bd444c8bc4a152a3a8f1eb4de1882"
+                                  ,@"ee5d6d5bea014abb30c2997ffa17de2499ccf43a"
+                                  ,@"2e34691411be451be978a6d501e100e2bafe74bd"
+                                  ,@"ae5f5e1914a617414b5f8314b26fa348727c2ef1"
+                                  ,@"bcc14a72ae6de0ae6b090c532c33cfe55bc2bc73"];
+
+        sharedCore.api_Pointer = 0;
+        sharedCore.api_PointerLimit = sharedCore.apiKeys.count;
     });
     return sharedCore;
 }
-
 
 + (NSDecimalNumber * _Nullable)allocationPercentForCurrency:(BitcoinDE_CurrencyType)currencyType {
     SOXAccountInfo_BitcoinDE_Data *accountInfoData = (SOXAccountInfo_BitcoinDE_Data*)[SOXMarket_BitcoinDE_Core sharedCore].accountInfoData;
@@ -402,7 +429,6 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
                                    parameters:(NSDictionary * _Nullable)parameterDictionary {
     [SOXMarket_BitcoinDE_Core prepareRequestDataForServerCommand:serverCommandType
                                                    withParameter:parameterDictionary];
-
     NSURLRequest *request = [SOXMarket_BitcoinDE_Core createRequest];
     return request;
 }
@@ -410,6 +436,8 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 #pragma mark | Helper
 + (void)prepareRequestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
                              withParameter:(NSDictionary * _Nullable)parameterDictionary {
+
+    [[SOXMarket_BitcoinDE_Core sharedCore] increaseApiPointer]; // use mulptiple key:secret pairs
     // reset values
     {
         [SOXMarket_BitcoinDE_Core sharedCore].uri = nil;
@@ -947,23 +975,23 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
     return baseURLString;
 }
 
-+ (NSString *)apiKey {
-    return @"db8b38266d2f955fa96f19064f60a4c8";
-}
-
-+ (NSString *)apiSecret {
-    return @"a4ebc1d021b88bba3c8b79ba4b93b1045dea0cc7";
-}
-
-#pragma mark | Instance getters
+#pragma mark | Key and Secret handling
 - (NSString *)api_key {
-    return [SOXMarket_BitcoinDE_Core apiKey];
+    NSString *api_key = [self.apiKeys objectAtIndex:self.api_Pointer];
+    return api_key;
 }
 
 - (NSString *)api_secret {
-    return [SOXMarket_BitcoinDE_Core apiSecret];
+    NSString *api_secret = [self.apiSecrets objectAtIndex:self.api_Pointer];
+    return api_secret;
 }
 
+- (void)increaseApiPointer {
+    self.api_Pointer++;
+    if (self.api_Pointer >= self.api_PointerLimit) {
+        self.api_Pointer = 0;
+    }
+}
 
 #pragma mark - Banner Update Methods
 - (void)startAccountInfoUpdate {
