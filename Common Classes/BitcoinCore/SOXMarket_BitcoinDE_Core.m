@@ -109,7 +109,8 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
                                ,@"8a5c1797d474d1df1fdb5670d294c87d"
                                ,@"fe685a64ad93ed913c9844a9bdba22a6"
                                ,@"93410617ae2b3f2ae21b570b384937da"
-                               ,@"57af63fdb27ec51e8c573d69c6864a54"];
+                               ,@"57af63fdb27ec51e8c573d69c6864a54"
+                               ,@"4510b2f92c2007bc1496b98079beae7c"];
         sharedCore.apiSecrets = @[@"a4ebc1d021b88bba3c8b79ba4b93b1045dea0cc7"
                                   ,@"a34b05518343374df7d847e5ff62f27ff784ecba"
                                   ,@"24c09a5164bb0c9a0d1c75df0bd24750a95e24a4"
@@ -118,7 +119,8 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
                                   ,@"ee5d6d5bea014abb30c2997ffa17de2499ccf43a"
                                   ,@"2e34691411be451be978a6d501e100e2bafe74bd"
                                   ,@"ae5f5e1914a617414b5f8314b26fa348727c2ef1"
-                                  ,@"bcc14a72ae6de0ae6b090c532c33cfe55bc2bc73"];
+                                  ,@"bcc14a72ae6de0ae6b090c532c33cfe55bc2bc73"
+                                  ,@"db5ee0f6a25847b8efc4e899c2fb85c567906a38"];
 
         sharedCore.api_Pointer = 0;
         sharedCore.api_PointerLimit = sharedCore.apiKeys.count;
