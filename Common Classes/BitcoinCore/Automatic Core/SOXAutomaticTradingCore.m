@@ -908,11 +908,14 @@
 
     // Buy trade was not successful, but maybe the faster buyer did not bought the whole bunch of coins
     // So let's look for a replacement order in orderBook.
-    { // DEBUG
-        NSString *note = [NSString stringWithFormat:@"Look for replacement order for unsuccessful autoBuy trade"];
-        [self informBuyDelegateWithNote:note];
-    }
-    [self checkForBuyableOrder];
+    // 12.2.18: disabled code: wir hatten eine Kaskade von "Wir versuchen den Ersatztrade" und waren jedesmal
+    //          zu langsam; bekamen dann den darauffolgenden Ersatz auch nicht, da wir noch auf die Antwort
+    //          des 1. Ersatztrades warten
+//    { // DEBUG
+//        NSString *note = [NSString stringWithFormat:@"Look for replacement order for unsuccessful autoBuy trade"];
+//        [self informBuyDelegateWithNote:note];
+//    }
+//    [self checkForBuyableOrder];
 
     [self checkForBalanceTradesForBoughtTrades];
 }
