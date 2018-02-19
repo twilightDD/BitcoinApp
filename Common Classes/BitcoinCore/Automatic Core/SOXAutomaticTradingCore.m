@@ -522,7 +522,7 @@
 #pragma mark - Inform delegates
 - (void)informBuyDelegateWithNote:(NSString *)note {
     if (note) {
-        DDLogInfo(@"%@ buyDele: %@"
+        DDLogInfo(@"%@: %@"
                   , [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringLowerCaseForCurrencyType:self.currencyType]
                   , note);
 
