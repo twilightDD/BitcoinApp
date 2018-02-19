@@ -14,7 +14,7 @@
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
 #import "SOXOrdersViewController.h"
-#import "SOXAutomaticTradingMainViewController.h"
+#import "SOXAutomaticTradingViewController.h"
 
 static NSString *BannerContainerViewSegueKey          = @"BannerContainerViewSegue";
 static NSString *ShowMyOrdersContainerSegueKey        = @"ShowMyOrdersContainerSegue";
@@ -131,19 +131,19 @@ static NSString *AutomaticTradeETHSegueKey = @"EmbedAutoTraderForETH";
         viewC.currencyType = BitcoinDE_CurrencyTypeEthereum;
     }
     else if ([segue.identifier isEqualToString:AutomaticTradeBTCSegueKey]) {
-        SOXAutomaticTradingMainViewController *viewC = segue.destinationController;
+        SOXAutomaticTradingViewController *viewC = segue.destinationController;
         viewC.currencyType = BitcoinDE_CurrencyTypeBitcoin;
     }
     else if ([segue.identifier isEqualToString:AutomaticTradeBCHSegueKey]) {
-        SOXAutomaticTradingMainViewController *viewC = segue.destinationController;
+        SOXAutomaticTradingViewController *viewC = segue.destinationController;
         viewC.currencyType = BitcoinDE_CurrencyTypeBitcoinCash;
     }
     else if ([segue.identifier isEqualToString:AutomaticTradeBTGSegueKey]) {
-        SOXAutomaticTradingMainViewController *viewC = segue.destinationController;
+        SOXAutomaticTradingViewController *viewC = segue.destinationController;
         viewC.currencyType = BitcoinDE_CurrencyTypeBitcoinGold;
     }
     else if ([segue.identifier isEqualToString:AutomaticTradeETHSegueKey]) {
-        SOXAutomaticTradingMainViewController *viewC = segue.destinationController;
+        SOXAutomaticTradingViewController *viewC = segue.destinationController;
         viewC.currencyType = BitcoinDE_CurrencyTypeEthereum;
     }
 }

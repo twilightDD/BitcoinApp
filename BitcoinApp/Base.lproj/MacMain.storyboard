@@ -924,7 +924,7 @@
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="Fs1-UN-uNY">
                                                     <rect key="frame" x="0.0" y="0.0" width="914" height="413"/>
                                                     <connections>
-                                                        <segue destination="lQp-qx-buJ" kind="embed" identifier="EmbedAutoTraderForBTC" id="y6d-HU-csy"/>
+                                                        <segue destination="cwM-7M-FeE" kind="embed" identifier="EmbedAutoTraderForBTC" id="Hbf-fd-iIm"/>
                                                     </connections>
                                                 </containerView>
                                             </subviews>
@@ -944,7 +944,7 @@
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="xQR-8N-Xna">
                                                     <rect key="frame" x="0.0" y="0.0" width="914" height="413"/>
                                                     <connections>
-                                                        <segue destination="lQp-qx-buJ" kind="embed" identifier="EmbedAutoTraderForBCH" id="ub1-3H-mKb"/>
+                                                        <segue destination="cwM-7M-FeE" kind="embed" identifier="EmbedAutoTraderForBCH" id="IXN-hH-jj1"/>
                                                     </connections>
                                                 </containerView>
                                             </subviews>
@@ -964,7 +964,7 @@
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="Ab4-V2-fR1">
                                                     <rect key="frame" x="0.0" y="0.0" width="914" height="413"/>
                                                     <connections>
-                                                        <segue destination="lQp-qx-buJ" kind="embed" identifier="EmbedAutoTraderForBTG" id="u1b-rW-w36"/>
+                                                        <segue destination="cwM-7M-FeE" kind="embed" identifier="EmbedAutoTraderForBTG" id="Af4-4a-k8V"/>
                                                     </connections>
                                                 </containerView>
                                             </subviews>
@@ -984,7 +984,7 @@
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="9nY-r8-CKk">
                                                     <rect key="frame" x="0.0" y="0.0" width="914" height="413"/>
                                                     <connections>
-                                                        <segue destination="lQp-qx-buJ" kind="embed" identifier="EmbedAutoTraderForETH" id="a0J-g0-9pE"/>
+                                                        <segue destination="cwM-7M-FeE" kind="embed" identifier="EmbedAutoTraderForETH" id="gQD-Dm-8uX"/>
                                                     </connections>
                                                 </containerView>
                                             </subviews>
@@ -2277,95 +2277,6 @@
                 <userDefaultsController id="NkV-w9-bXQ"/>
             </objects>
             <point key="canvasLocation" x="-1201" y="1635"/>
-        </scene>
-        <!--Automatic Trading Main View Controller-->
-        <scene sceneID="mpl-WA-2gF">
-            <objects>
-                <viewController id="lQp-qx-buJ" customClass="SOXAutomaticTradingMainViewController" sceneMemberID="viewController">
-                    <view key="view" id="WJc-vY-5SM">
-                        <rect key="frame" x="0.0" y="0.0" width="1073" height="363"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <button verticalHuggingPriority="251" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="OuI-8v-tHE">
-                                <rect key="frame" x="18" y="339" width="1037" height="18"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="14" id="AE4-dG-7R5"/>
-                                </constraints>
-                                <buttonCell key="cell" type="check" title="Enable rich mode - Don't say I didn't warn you!" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="OlJ-8V-Pia">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="enableAutomaticTradingAction:" target="lQp-qx-buJ" id="spW-G3-NEv"/>
-                                </connections>
-                            </button>
-                            <box title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="jG4-yh-sCd">
-                                <rect key="frame" x="17" y="4" width="1039" height="329"/>
-                                <view key="contentView" id="ysR-Q5-i7p">
-                                    <rect key="frame" x="2" y="2" width="1035" height="312"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <stackView distribution="fillEqually" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zjK-tG-6lo">
-                                            <rect key="frame" x="0.0" y="0.0" width="1035" height="312"/>
-                                            <subviews>
-                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="hGd-B5-cMg">
-                                                    <rect key="frame" x="0.0" y="0.0" width="509" height="312"/>
-                                                    <connections>
-                                                        <segue destination="cwM-7M-FeE" kind="embed" identifier="EmbedAutomaticBuySegue" id="hbW-vl-Eu4"/>
-                                                    </connections>
-                                                </containerView>
-                                                <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="3kb-VW-lux">
-                                                    <rect key="frame" x="515" y="0.0" width="5" height="312"/>
-                                                </box>
-                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="WVP-M3-a5q">
-                                                    <rect key="frame" x="526" y="0.0" width="509" height="312"/>
-                                                    <connections>
-                                                        <segue destination="cwM-7M-FeE" kind="embed" identifier="EmbedAutomaticSellSegue" id="z6P-Xb-vu3"/>
-                                                    </connections>
-                                                </containerView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="300" id="LBm-qD-ueq"/>
-                                            </constraints>
-                                            <visibilityPriorities>
-                                                <integer value="1000"/>
-                                                <integer value="1000"/>
-                                                <integer value="1000"/>
-                                            </visibilityPriorities>
-                                            <customSpacing>
-                                                <real value="3.4028234663852886e+38"/>
-                                                <real value="3.4028234663852886e+38"/>
-                                                <real value="3.4028234663852886e+38"/>
-                                            </customSpacing>
-                                        </stackView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="zjK-tG-6lo" firstAttribute="leading" secondItem="ysR-Q5-i7p" secondAttribute="leading" id="QlZ-L0-dnq"/>
-                                        <constraint firstAttribute="trailing" secondItem="zjK-tG-6lo" secondAttribute="trailing" id="VSJ-3l-sQJ"/>
-                                        <constraint firstItem="zjK-tG-6lo" firstAttribute="top" secondItem="ysR-Q5-i7p" secondAttribute="top" id="ZV9-24-J7Y"/>
-                                        <constraint firstAttribute="bottom" secondItem="zjK-tG-6lo" secondAttribute="bottom" id="vDB-3A-lrB"/>
-                                    </constraints>
-                                </view>
-                            </box>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="jG4-yh-sCd" firstAttribute="leading" secondItem="WJc-vY-5SM" secondAttribute="leading" constant="20" symbolic="YES" id="HcQ-s3-uho"/>
-                            <constraint firstItem="OuI-8v-tHE" firstAttribute="top" secondItem="WJc-vY-5SM" secondAttribute="top" constant="8" id="L9h-fc-xvp"/>
-                            <constraint firstItem="jG4-yh-sCd" firstAttribute="top" secondItem="OuI-8v-tHE" secondAttribute="bottom" constant="8" id="UyH-wM-Zt3"/>
-                            <constraint firstAttribute="trailing" secondItem="OuI-8v-tHE" secondAttribute="trailing" constant="20" symbolic="YES" id="Zib-Qf-DBW"/>
-                            <constraint firstAttribute="trailing" secondItem="jG4-yh-sCd" secondAttribute="trailing" constant="20" symbolic="YES" id="vqf-ca-l3m"/>
-                            <constraint firstItem="OuI-8v-tHE" firstAttribute="leading" secondItem="WJc-vY-5SM" secondAttribute="leading" constant="20" symbolic="YES" id="wEX-R4-5D7"/>
-                            <constraint firstAttribute="bottom" secondItem="jG4-yh-sCd" secondAttribute="bottom" constant="8" id="zMh-TU-1zv"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="automaticTradingBox" destination="jG4-yh-sCd" id="l1l-iB-6Yx"/>
-                        <outlet property="enableAutomaticTradingButton" destination="OuI-8v-tHE" id="rCb-xe-fCk"/>
-                    </connections>
-                </viewController>
-                <customObject id="tSY-Dr-lBg" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1504" y="404"/>
         </scene>
         <!--My Order Details View Controller-->
         <scene sceneID="mTb-3W-ATq">
@@ -4913,7 +4824,7 @@ Gw
                 <userDefaultsController id="3AY-bf-m6w"/>
                 <userDefaultsController id="TJ3-ff-5FK"/>
             </objects>
-            <point key="canvasLocation" x="1504" y="1016"/>
+            <point key="canvasLocation" x="1213" y="883"/>
         </scene>
     </scenes>
     <resources>
@@ -4921,8 +4832,7 @@ Gw
         <image name="NSRefreshTemplate" width="11" height="15"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="z6P-Xb-vu3"/>
-        <segue reference="u1b-rW-w36"/>
+        <segue reference="gQD-Dm-8uX"/>
         <segue reference="Fh9-LT-kpw"/>
     </inferredMetricsTieBreakers>
 </document>

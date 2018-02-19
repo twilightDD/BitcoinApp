@@ -48,6 +48,8 @@
 #pragma mark Properties
 @property (nonatomic, strong) SOXAutomaticTrading_BitcoinDE_Core *tradingCore;
 
+//@property (nonatomic) BitcoinDE_OrderType orderType;
+
 @property (nonatomic) BOOL automaticTradingIsRunning;
 @property (nonatomic) BOOL executeTrades;
 @property (nonatomic) BOOL executeAutomaticTrades;
@@ -67,10 +69,16 @@
 #pragma mark - Init&Co.
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     [self setupUI];
     [self registerOberservers];
 
     self.log = @"";
+}
+- (void)viewWillAppear {
+    [super viewWillAppear];
+    [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
+                                                        object:@(self.currencyType)];
 }
 
 - (void)dealloc {
@@ -94,52 +102,23 @@
 
 #pragma mark - Private methods
 - (void)setupUI {
-    if (self.orderType == BitcoinDE_UnknownOrderType) {
-        self.logTextView.string = @"Error - no self.orderType";
-        return;
-    }
-
     { // On startup hide view
         self.automaticBackgroundView.hidden = YES; // disable on startup
         self.executeTradesButton.hidden = YES;
     }
 
-    NSString *showAutomaticTradingAreaButtonTitle;
-    NSString *startAutomaticButtonTitle;
+    NSString *showAutomaticTradingAreaButtonTitle = @"Buy automatically";
+    NSString *startAutomaticButtonTitle         = @"Start Automatic Buy";
     NSString *executeTradesButtonTitle          = @"Execute trades";
     NSString *executeAutomaticTradesButtonTitle = @"Execute Automatic Trades";
     NSString *executeBalanceTradesButtonTitle   = @"Execute Balance Trades";
-    NSString *useMaxReservationButtonTitle;
+    NSString *useMaxReservationButtonTitle      = @"Use max";
     NSString *clearLogButtonTitle               = @"Clear log";
 
-    NSString *maxInvestmentText;
-    NSString *maxInvestmentDescriptionText;
+    NSString *maxInvestmentText                 = @"200";
+    NSString *maxInvestmentDescriptionText      = @"Max. Investment";
     NSString *minInterestText                   = @"4";
     NSString *minInterestDescriptionText        = @"Min. Interest Rate [%]";
-
-    if (self.orderType == BitcoinDE_BuyOrderType) {
-        showAutomaticTradingAreaButtonTitle = @"Buy automatically";
-        startAutomaticButtonTitle           = @"Start Automatic Buy";
-        useMaxReservationButtonTitle        = @"Use max";
-        maxInvestmentText                   = @"200";
-        maxInvestmentDescriptionText        = @"Max. Investment";
-
-    }
-    else if (self.orderType == BitcoinDE_SellOrderType) {
-        showAutomaticTradingAreaButtonTitle = @"Sell automatically";
-        startAutomaticButtonTitle           = @"Start Automatic Sell";
-        useMaxReservationButtonTitle        = @"Use Max";
-        maxInvestmentText                   = @"0.2";
-        maxInvestmentDescriptionText        = @"Max. Investment";
-    }
-    else {
-        showAutomaticTradingAreaButtonTitle = @"Error - no orderType";
-        startAutomaticButtonTitle           = @"Error - no orderType";
-        executeAutomaticTradesButtonTitle   = @"Error - no orderType";
-        useMaxReservationButtonTitle        = @"Error - no orderType";
-        maxInvestmentText                   = @"0";
-        maxInvestmentDescriptionText        = @"Error - no orderType";
-    }
 
     self.showAutomaticTradingAreaButton.state = 0;
     self.showAutomaticTradingAreaButton.title = showAutomaticTradingAreaButtonTitle;
@@ -189,33 +168,17 @@
 
     NSDecimalNumber *maximalFidorAmount = self.maxInvestmentTextField.objectValue;
     NSDecimalNumber *interestRate = self.minInterestTextField.objectValue;
-    switch (self.orderType) {
-        case BitcoinDE_BuyOrderType:
-            [self.tradingCore setBuyMaximalFidorAmount:maximalFidorAmount];
-            [self.tradingCore setBuyInterestRate:interestRate];
-            break;
-        case BitcoinDE_SellOrderType:
-            [self.tradingCore setSellMaximalBTCAmount:maximalFidorAmount];
-            [self.tradingCore setSellInterestRate:interestRate];
-            break;
-        default:
-            return;
-            break;
-    }
+
+    [self.tradingCore setBuyMaximalFidorAmount:maximalFidorAmount];
+    [self.tradingCore setBuyInterestRate:interestRate];
 
     [self.tradingCore registerController:self
-                  forUpdatesForOrderType:self.orderType];
-
+                  forUpdatesForOrderType:BitcoinDE_BuyOrderType];
 }
 
 - (void)stopAutomaticTrading {
-    if (self.orderType) {
-        [self.tradingCore deRegisterController:self
-                        forUpdatesForOrderType:self.orderType];
-    }
-    else {
-        DDLogInfo(@"ERROR - no orderType set");
-    }
+    [self.tradingCore deRegisterController:self
+                    forUpdatesForOrderType:BitcoinDE_BuyOrderType];
 }
 
 - (void)updateMaxInvestment {
@@ -239,26 +202,28 @@
 - (IBAction)executeTradesAction:(NSButton *)sender {
     self.executeTrades = !self.executeTrades;
     [self.tradingCore executeTrades:self.executeTrades
-                       forOrderType:self.orderType];
+                       forOrderType:BitcoinDE_BuyOrderType];
 }
 
 - (IBAction)executeAutomaticTradesAction:(NSButton *)sender {
     self.executeAutomaticTrades = !self.executeAutomaticTrades;
 
+    // disable balance, if autoTrade is turned off
     if (self.executeAutomaticTrades) {}
     else {
         self.executeBalanceTrades = NO;
         [self.tradingCore executeBalanceTrades:NO
-                                  forOrderType:self.orderType];
+                                  forOrderType:BitcoinDE_BuyOrderType];
     }
+
     [self.tradingCore executeAutomaticTrades:self.executeAutomaticTrades
-                                forOrderType:self.orderType];
+                                forOrderType:BitcoinDE_BuyOrderType];
 }
 
 - (IBAction)executeBalanceTradesAction:(NSButton *)sender {
     self.executeBalanceTrades = !self.executeBalanceTrades;
     [self.tradingCore executeBalanceTrades:self.executeBalanceTrades
-                              forOrderType:self.orderType];
+                              forOrderType:BitcoinDE_BuyOrderType];
 }
 
 - (IBAction)startAutomaticAction:(NSButton *)sender {
@@ -289,36 +254,19 @@
 
 #pragma mark - NSControlTextEditingDelegate
 -(void)controlTextDidEndEditing:(NSNotification *)notification {
-//- (void)controlTextDidChange:(NSNotification *)notification {
     NSTextField* valueField           = notification.object;
     NSNumberFormatter* fieldFormatter = valueField.formatter;
     NSText* fieldEditor               = valueField.currentEditor;
     
     id newValue = ( fieldEditor != nil ? [fieldFormatter numberFromString:fieldEditor.string] : valueField.objectValue );
     DDLogInfo(@"newValue: %@", newValue);
+
     if (valueField == self.minInterestTextField) { // %
-        switch (self.orderType) {
-            case BitcoinDE_BuyOrderType:
-                [self.tradingCore setBuyInterestRate:newValue];
-                break;
-            case BitcoinDE_SellOrderType:
-                [self.tradingCore setSellInterestRate:newValue];
-            default:
-                break;
-        }
+        [self.tradingCore setBuyInterestRate:newValue];
     }
     else if (valueField == self.maxInvestmentTextField) { // €
-        switch (self.orderType) {
-            case BitcoinDE_BuyOrderType:
-                [self.tradingCore setBuyMaximalFidorAmount:newValue];
-                break;
-            case BitcoinDE_SellOrderType:
-                [self.tradingCore setSellMaximalBTCAmount:newValue];
-            default:
-                break;
-        }
+        [self.tradingCore setBuyMaximalFidorAmount:newValue];
     }
-    
 }
 
 #pragma mark - SOXAutomaticTradingCoreProtocol
