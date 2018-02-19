@@ -1355,15 +1355,20 @@
             [self createBalanceTradesForBoughtTrades];
         }
 
-        if (self.successfulBalanceSellTradeParameters > 0) {
+        if (self.successfulBalanceSellTradeParameters.count > 0) {
             { // DEBUG
-                NSString *note = [NSString stringWithFormat:@"Banner update after sellBalance %tu trade(s) complete"
+                NSString *note = [NSString stringWithFormat:@"Banner update after %tu sellBalance trade(s) complete"
                                   , self.successfulBalanceSellTradeParameters.count];
                 [self informBuyDelegateWithNote:note];
             }
             [self.successfulBalanceSellTradeParameters removeAllObjects];
-            // TODO: a poor mans kill switch for "autotrade only once"
-            //        self.waitingForBannerUpdate = NO;
+
+            // A poor mans kill switch for "autotrade only once"
+            { // DEBUG
+                NSString *note = [NSString stringWithFormat:@"Banner update after balances is done so: self.waitingForBannerUpdate = NO;"];
+                [self informBuyDelegateWithNote:note];
+            }
+            self.waitingForBannerUpdate = NO;
         }
     }
 }
