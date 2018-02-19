@@ -172,13 +172,11 @@
     [self.tradingCore setBuyMaximalFidorAmount:maximalFidorAmount];
     [self.tradingCore setBuyInterestRate:interestRate];
 
-    [self.tradingCore registerController:self
-                  forUpdatesForOrderType:BitcoinDE_BuyOrderType];
+    [self.tradingCore registerControllerForUpdates:self];
 }
 
 - (void)stopAutomaticTrading {
-    [self.tradingCore deRegisterController:self
-                    forUpdatesForOrderType:BitcoinDE_BuyOrderType];
+    [self.tradingCore deRegisterControllerForUpdates:self];
 }
 
 - (void)updateMaxInvestment {
@@ -201,8 +199,7 @@
 
 - (IBAction)executeTradesAction:(NSButton *)sender {
     self.executeTrades = !self.executeTrades;
-    [self.tradingCore executeTrades:self.executeTrades
-                       forOrderType:BitcoinDE_BuyOrderType];
+    [self.tradingCore executeTrades:self.executeTrades];
 }
 
 - (IBAction)executeAutomaticTradesAction:(NSButton *)sender {
@@ -212,18 +209,15 @@
     if (self.executeAutomaticTrades) {}
     else {
         self.executeBalanceTrades = NO;
-        [self.tradingCore executeBalanceTrades:NO
-                                  forOrderType:BitcoinDE_BuyOrderType];
+        [self.tradingCore executeBalanceTrades:NO];
     }
 
-    [self.tradingCore executeAutomaticTrades:self.executeAutomaticTrades
-                                forOrderType:BitcoinDE_BuyOrderType];
+    [self.tradingCore executeAutomaticTrades:self.executeAutomaticTrades];
 }
 
 - (IBAction)executeBalanceTradesAction:(NSButton *)sender {
     self.executeBalanceTrades = !self.executeBalanceTrades;
-    [self.tradingCore executeBalanceTrades:self.executeBalanceTrades
-                              forOrderType:BitcoinDE_BuyOrderType];
+    [self.tradingCore executeBalanceTrades:self.executeBalanceTrades];
 }
 
 - (IBAction)startAutomaticAction:(NSButton *)sender {
