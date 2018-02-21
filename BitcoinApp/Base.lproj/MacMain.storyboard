@@ -4148,6 +4148,22 @@ Gw
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
+                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="rTc-2h-niy">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="date">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="Ydm-NV-TjI">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.successfullyFinishedAt" id="pwm-AS-dDj"/>
+                                                    </connections>
+                                                </tableColumn>
                                                 <tableColumn editable="NO" width="40" minWidth="40" maxWidth="1000" id="dqm-22-bHF">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="type">
                                                         <font key="font" metaFont="smallSystem"/>
@@ -4280,22 +4296,6 @@ Gw
                                                                 <string key="NSValueTransformerName">SOXStateValueTransformer</string>
                                                             </dictionary>
                                                         </binding>
-                                                    </connections>
-                                                </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="rTc-2h-niy">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="date">
-                                                        <font key="font" metaFont="smallSystem"/>
-                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    </tableHeaderCell>
-                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="Ydm-NV-TjI">
-                                                        <font key="font" metaFont="system"/>
-                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                    <connections>
-                                                        <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.successfullyFinishedAt" id="pwm-AS-dDj"/>
                                                     </connections>
                                                 </tableColumn>
                                                 <tableColumn identifier="" editable="NO" width="277" minWidth="10" maxWidth="3.4028234663852886e+38" id="o7A-jb-8It">
