@@ -71,6 +71,12 @@
 		D021509620474AEC005A0932 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D063E9241E74BF97006E2D17 /* Assets.xcassets */; };
 		D021509720474AEC005A0932 /* MacMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D063E9261E74BF97006E2D17 /* MacMain.storyboard */; };
 		D021509820474AEC005A0932 /* SOXErrorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0EB0E531F855B54004839C2 /* SOXErrorWindowController.xib */; };
+		D02150A32047594D005A0932 /* SOXCashflowWithShortCurrencyValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D02150A22047594D005A0932 /* SOXCashflowWithShortCurrencyValueTransformer.m */; };
+		D02150A42047594D005A0932 /* SOXCashflowWithShortCurrencyValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D02150A22047594D005A0932 /* SOXCashflowWithShortCurrencyValueTransformer.m */; };
+		D02150A52047594D005A0932 /* SOXCashflowWithShortCurrencyValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D02150A22047594D005A0932 /* SOXCashflowWithShortCurrencyValueTransformer.m */; };
+		D02150A820475965005A0932 /* SOXBalanceWithShortCurrencyValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D02150A720475965005A0932 /* SOXBalanceWithShortCurrencyValueTransformer.m */; };
+		D02150A920475965005A0932 /* SOXBalanceWithShortCurrencyValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D02150A720475965005A0932 /* SOXBalanceWithShortCurrencyValueTransformer.m */; };
+		D02150AA20475965005A0932 /* SOXBalanceWithShortCurrencyValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D02150A720475965005A0932 /* SOXBalanceWithShortCurrencyValueTransformer.m */; };
 		D0270AE41E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m in Sources */ = {isa = PBXBuildFile; fileRef = D0270AE31E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m */; };
 		D0270AE51E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m in Sources */ = {isa = PBXBuildFile; fileRef = D0270AE31E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m */; };
 		D02ED5AC1E814CA600AA9448 /* SOXAccountInfo_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D02ED5A91E814CA600AA9448 /* SOXAccountInfo_BitcoinDE_Data.m */; };
@@ -208,6 +214,10 @@
 		D01F589D1E8495D200C170F7 /* SOXFormatters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXFormatters.m; sourceTree = "<group>"; };
 		D021509F20474AEC005A0932 /* mac BitcoinApp Peter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mac BitcoinApp Peter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D02150A020474AED005A0932 /* mac BitcoinApp copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "mac BitcoinApp copy-Info.plist"; path = "/Users/peter/Documents/GEWERBE/Projekte/KGleupold/Code/mac BitcoinApp copy-Info.plist"; sourceTree = "<absolute>"; };
+		D02150A12047594D005A0932 /* SOXCashflowWithShortCurrencyValueTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXCashflowWithShortCurrencyValueTransformer.h; sourceTree = "<group>"; };
+		D02150A22047594D005A0932 /* SOXCashflowWithShortCurrencyValueTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXCashflowWithShortCurrencyValueTransformer.m; sourceTree = "<group>"; };
+		D02150A620475965005A0932 /* SOXBalanceWithShortCurrencyValueTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXBalanceWithShortCurrencyValueTransformer.h; sourceTree = "<group>"; };
+		D02150A720475965005A0932 /* SOXBalanceWithShortCurrencyValueTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXBalanceWithShortCurrencyValueTransformer.m; sourceTree = "<group>"; };
 		D0270AE21E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXSocketIO_BitcoinDE_Core.h; sourceTree = "<group>"; };
 		D0270AE31E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXSocketIO_BitcoinDE_Core.m; sourceTree = "<group>"; };
 		D02ED5A81E814CA600AA9448 /* SOXAccountInfo_BitcoinDE_Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXAccountInfo_BitcoinDE_Data.h; sourceTree = "<group>"; };
@@ -642,6 +652,10 @@
 				D0BCFCA7200423F8004F9E57 /* SOXFeeCoinValueTransformer.m */,
 				D09759752006BFBE008A4334 /* SOXMyTradeAmountValueTransformer.h */,
 				D09759762006BFBE008A4334 /* SOXMyTradeAmountValueTransformer.m */,
+				D02150A12047594D005A0932 /* SOXCashflowWithShortCurrencyValueTransformer.h */,
+				D02150A22047594D005A0932 /* SOXCashflowWithShortCurrencyValueTransformer.m */,
+				D02150A620475965005A0932 /* SOXBalanceWithShortCurrencyValueTransformer.h */,
+				D02150A720475965005A0932 /* SOXBalanceWithShortCurrencyValueTransformer.m */,
 				D0BCFCAA20042620004F9E57 /* SOXStateValueTransformer.h */,
 				D0BCFCAB20042620004F9E57 /* SOXStateValueTransformer.m */,
 			);
@@ -1200,10 +1214,12 @@
 				D021507C20474AEC005A0932 /* MacViewController.m in Sources */,
 				D021507D20474AEC005A0932 /* SOXKeys_BitcoinDE.m in Sources */,
 				D021507E20474AEC005A0932 /* SOXCreateNewOrderViewController.m in Sources */,
+				D02150A42047594D005A0932 /* SOXCashflowWithShortCurrencyValueTransformer.m in Sources */,
 				D021507F20474AEC005A0932 /* SOXMyTrades_BitcoinDE_Data.m in Sources */,
 				D021508020474AEC005A0932 /* main.m in Sources */,
 				D021508120474AEC005A0932 /* SOXAccountInfoData.m in Sources */,
 				D021508220474AEC005A0932 /* SOXRatesData.m in Sources */,
+				D02150A920475965005A0932 /* SOXBalanceWithShortCurrencyValueTransformer.m in Sources */,
 				D021508320474AEC005A0932 /* SOXMaxAmountWithShortCurrencyValueTransformer.m in Sources */,
 				D021508420474AEC005A0932 /* SOXBannerViewController.m in Sources */,
 				D021508520474AEC005A0932 /* SOXMyOrderDetailsViewController.m in Sources */,
@@ -1258,10 +1274,12 @@
 				D063E9201E74BF97006E2D17 /* MacViewController.m in Sources */,
 				D0E5C5031E809C9800352985 /* SOXKeys_BitcoinDE.m in Sources */,
 				D08ABF121E9C270D0059825F /* SOXCreateNewOrderViewController.m in Sources */,
+				D02150A32047594D005A0932 /* SOXCashflowWithShortCurrencyValueTransformer.m in Sources */,
 				D0AA14F31E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m in Sources */,
 				D063E91D1E74BF97006E2D17 /* main.m in Sources */,
 				D02ED5BA1E81546800AA9448 /* SOXAccountInfoData.m in Sources */,
 				D02ED5B61E8152F900AA9448 /* SOXRatesData.m in Sources */,
+				D02150A820475965005A0932 /* SOXBalanceWithShortCurrencyValueTransformer.m in Sources */,
 				D0BCFCA420041496004F9E57 /* SOXMaxAmountWithShortCurrencyValueTransformer.m in Sources */,
 				D0E5C4FF1E80801D00352985 /* SOXBannerViewController.m in Sources */,
 				D03289921E8A2C7C006F15F0 /* SOXMyOrderDetailsViewController.m in Sources */,
@@ -1302,11 +1320,13 @@
 				D02ED5BB1E81546800AA9448 /* SOXAccountInfoData.m in Sources */,
 				D05B23DB1FB777C7004BAA6E /* SOXShortTradingPairValueTransformer.m in Sources */,
 				D0B9A3351E895EA0008860ED /* NSAttributedString+URL.m in Sources */,
+				D02150A52047594D005A0932 /* SOXCashflowWithShortCurrencyValueTransformer.m in Sources */,
 				D02ED5AF1E814CA600AA9448 /* SOXDataConverter_BitcoinDE.m in Sources */,
 				D0A33F931F42079D0042B2A7 /* SOXMarketHelper.m in Sources */,
 				D09759782006BFBE008A4334 /* SOXMyTradeAmountValueTransformer.m in Sources */,
 				D0E5C5041E809C9800352985 /* SOXKeys_BitcoinDE.m in Sources */,
 				D090304E1EB1F4FC00775E05 /* SOXPaymentOptionValueTransformer.m in Sources */,
+				D02150AA20475965005A0932 /* SOXBalanceWithShortCurrencyValueTransformer.m in Sources */,
 				D0BCFCAD20042620004F9E57 /* SOXStateValueTransformer.m in Sources */,
 				D049C4521E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.m in Sources */,
 				D08086781E9CECAC00373F09 /* SOXMarket_BitcoinDE_DefTypes.m in Sources */,

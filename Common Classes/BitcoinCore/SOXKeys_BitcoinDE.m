@@ -72,6 +72,7 @@ NSString *const BitcoinDE_ShowAccountLedger_Trade_BTC_AfterFee      = @"after_fe
 NSString *const BitcoinDE_ShowAccountLedger_Trade_Euro              = @"euro";
 NSString *const BitcoinDE_ShowAccountLedger_Trade_Euro_BeforeFee    = @"before_fee";
 NSString *const BitcoinDE_ShowAccountLedger_Trade_Euro_AfterFee     = @"after_fee";
+NSString *const BitcoinDE_ShowAccountLedger_Trading_Pair            = @"trading_pair";
 
 #pragma mark | Page Details
 NSString *const BitcoinDE_ShowAccountLedger_Page            = @"page";

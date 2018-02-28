@@ -47,6 +47,7 @@ static NSString *AccountLedgerParameter_PageKey         = @"page";
 @property (strong, nonatomic, readwrite) NSString *tradeDetails_BTC_after_fee;
 @property (strong, nonatomic, readwrite) NSString *tradeDetails_Euro_before_fee;
 @property (strong, nonatomic, readwrite) NSString *tradeDetails_Euro_after_fee;
+@property (strong, nonatomic, readwrite) NSString *tradeDetails_trading_pair;
 
 @end
 
@@ -187,12 +188,17 @@ static NSString *AccountLedgerParameter_PageKey         = @"page";
         if (tradeDetails) {
             self.tradeDetails_Trade_id = [tradeDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_TradeID];
             self.tradeDetails_Price = [tradeDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_Price];
+            self.tradeDetails_trading_pair =[tradeDetails objectForKey:BitcoinDE_ShowAccountLedger_Trading_Pair];
+
             NSDictionary *btcDetails = [tradeDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_BTC];
             self.tradeDetails_BTC_before_fee = [btcDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_BTC_BeforeFee];
             self.tradeDetails_BTC_after_fee = [btcDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_BTC_AfterFee];
+
             NSDictionary *euroDetails = [tradeDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_Euro];
             self.tradeDetails_Euro_before_fee = [euroDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_Euro_BeforeFee];
             self.tradeDetails_Euro_after_fee = [euroDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_BTC_AfterFee];
+
+
         }
     }
 }

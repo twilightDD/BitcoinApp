@@ -42,6 +42,7 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_AccountLedgerParameter_OrderType) {
 @property (strong, nonatomic, readonly) NSString *tradeDetails_BTC_after_fee;
 @property (strong, nonatomic, readonly) NSString *tradeDetails_Euro_before_fee;
 @property (strong, nonatomic, readonly) NSString *tradeDetails_Euro_after_fee;
+@property (strong, nonatomic, readonly) NSString *tradeDetails_trading_pair;
 
 + (NSMutableArray *)accountLedgerDataArrayForAccountLedgerDictionary:(NSDictionary *)payloadDictionary;
 
