@@ -82,9 +82,16 @@ static NSString *AutomaticTradeETHSegueKey = @"EmbedAutoTraderForETH";
         item6.label = @"My Trade History";
 
 
-        // debug
-        //[self.bottomTabView removeTabViewItem:item6];
-        
+#if PETER
+        NSTabViewItem *item10 = [self.bottomTabView tabViewItemAtIndex:10];
+        [self.bottomTabView removeTabViewItem:item10];
+        NSTabViewItem *item9 = [self.bottomTabView tabViewItemAtIndex:9];
+        [self.bottomTabView removeTabViewItem:item9];
+        NSTabViewItem *item8 = [self.bottomTabView tabViewItemAtIndex:8];
+        [self.bottomTabView removeTabViewItem:item8];
+        NSTabViewItem *item7 = [self.bottomTabView tabViewItemAtIndex:7];
+        [self.bottomTabView removeTabViewItem:item7];
+#endif
     }
 }
 

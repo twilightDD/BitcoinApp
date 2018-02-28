@@ -100,7 +100,10 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
         sharedCore.networkRequestCounter = 0;
         sharedCore.maxCredits = 0;
 
-
+#if PETER
+        sharedCore.apiKeys = @[@"key"];
+        sharedCore.apiSecrets = @[@"secret"];
+#else
         sharedCore.apiKeys = @[@"db8b38266d2f955fa96f19064f60a4c8"
                                ,@"297e59623f025f4ec408ae3746c2d0c0"
                                ,@"121055f18ae3145a4967a2a81fd27588"
@@ -121,7 +124,7 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
                                   ,@"ae5f5e1914a617414b5f8314b26fa348727c2ef1"
                                   ,@"bcc14a72ae6de0ae6b090c532c33cfe55bc2bc73"
                                   ,@"db5ee0f6a25847b8efc4e899c2fb85c567906a38"];
-
+#endif
         sharedCore.api_Pointer = 0;
         sharedCore.api_PointerLimit = sharedCore.apiKeys.count;
     });
