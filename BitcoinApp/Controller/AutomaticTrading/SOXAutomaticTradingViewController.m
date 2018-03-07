@@ -26,6 +26,7 @@
 @property (weak) IBOutlet NSButton *executeTradesButton;
 @property (weak) IBOutlet NSButton *executeAutomaticTradesButton;
 @property (weak) IBOutlet NSButton *executeBalanceTradesButton;
+@property (weak) IBOutlet NSButton *disableLogOutputButton;
 
 @property (weak) IBOutlet NSTextField *statusTextField;
 
@@ -54,6 +55,7 @@
 @property (nonatomic) BOOL executeTrades;
 @property (nonatomic) BOOL executeAutomaticTrades;
 @property (nonatomic) BOOL executeBalanceTrades;
+@property (nonatomic) BOOL logLogOutput;
 
 @property (strong, nonatomic) NSString *log;
 
@@ -105,11 +107,13 @@
     { // On startup hide view
         self.automaticBackgroundView.hidden = YES; // disable on startup
         self.executeTradesButton.hidden = YES;
+        self.disableLogOutputButton.hidden = YES;
     }
 
     NSString *showAutomaticTradingAreaButtonTitle = @"Buy automatically";
     NSString *startAutomaticButtonTitle         = @"Start Automatic Buy";
     NSString *executeTradesButtonTitle          = @"Execute trades";
+    NSString *disableLogOutputButtonTitle       = @"Enable log output";
     NSString *executeAutomaticTradesButtonTitle = @"Execute Automatic Trades";
     NSString *executeBalanceTradesButtonTitle   = @"Execute Balance Trades";
     NSString *useMaxReservationButtonTitle      = @"Use max";
@@ -128,6 +132,10 @@
     self.executeTradesButton.state = NSOffState;
     self.executeTradesButton.title = executeTradesButtonTitle;
     self.executeTrades = NO;
+
+    self.logLogOutput = YES;
+    self.disableLogOutputButton.state = self.logLogOutput;
+    self.disableLogOutputButton.title = disableLogOutputButtonTitle;
 
     self.executeAutomaticTradesButton.state = NSOffState;
     self.executeAutomaticTradesButton.title = executeAutomaticTradesButtonTitle;
@@ -190,6 +198,7 @@
 - (IBAction)showAutomaticTradingAreaAction:(NSButton *)sender {
     self.automaticBackgroundView.hidden = !sender.state;
     self.executeTradesButton.hidden = !sender.state;
+    self.disableLogOutputButton.hidden = !sender.state;
     
     if (self.automaticTradingIsRunning == YES
         && sender.state == NO) {
@@ -245,6 +254,16 @@
 - (IBAction)clearLogAction:(NSButton *)sender {
 }
 
+- (IBAction)disableLogOutputAction:(NSButton *)sender {
+    if (sender.state == NSControlStateValueOff) {
+        [self logLine:@"#### DISABLE LOG OUTPUT NOW ####"];
+    }
+    else {
+        [self logLine:@"#### ENABLE LOG OUTPUT NOW ####"];
+    }
+
+    self.logLogOutput = sender.state;
+}
 
 #pragma mark - NSControlTextEditingDelegate
 -(void)controlTextDidEndEditing:(NSNotification *)notification {
@@ -265,6 +284,10 @@
 
 #pragma mark - SOXAutomaticTradingCoreProtocol
 - (void)logLine:(NSString *)line {
+    if (self.logLogOutput == NO) {
+        return;
+    }
+
     self.log = [self.log stringByAppendingString:@"\n"];
     NSString *lineWithDate = [NSString stringWithFormat:@"%@: %@"
                               , [SOXFormatters shortDateLongTimeStringForDate:[NSDate date]]

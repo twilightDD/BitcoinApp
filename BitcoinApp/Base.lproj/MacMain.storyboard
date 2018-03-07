@@ -4794,23 +4794,36 @@ Gw
                                     <action selector="executeTradesAction:" target="cwM-7M-FeE" id="u2X-iI-7lN"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Geh-ol-m1t">
+                                <rect key="frame" x="362" y="430" width="61" height="18"/>
+                                <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="wGI-hb-Pp0">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="disableLogOutputAction:" target="cwM-7M-FeE" id="wci-io-bEW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="fVP-xb-zlr" firstAttribute="top" secondItem="Kgl-De-aER" secondAttribute="top" constant="20" id="4bn-fO-qMR"/>
                             <constraint firstItem="WgR-KD-pyB" firstAttribute="top" secondItem="fVP-xb-zlr" secondAttribute="bottom" constant="8" id="D6C-fE-AB8"/>
                             <constraint firstItem="WgR-KD-pyB" firstAttribute="leading" secondItem="Kgl-De-aER" secondAttribute="leading" id="DRu-wb-P2E"/>
                             <constraint firstItem="fVP-xb-zlr" firstAttribute="baseline" secondItem="iO2-U9-jE2" secondAttribute="baseline" id="HDi-A8-7Fd"/>
-                            <constraint firstItem="pFG-pr-Jvw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iO2-U9-jE2" secondAttribute="trailing" constant="8" symbolic="YES" id="OEJ-Jj-cyv"/>
                             <constraint firstItem="iO2-U9-jE2" firstAttribute="leading" secondItem="fVP-xb-zlr" secondAttribute="trailing" constant="8" id="WMb-xj-Amy"/>
+                            <constraint firstItem="Geh-ol-m1t" firstAttribute="leading" secondItem="iO2-U9-jE2" secondAttribute="trailing" constant="8" id="cf7-Th-M3Y"/>
                             <constraint firstAttribute="trailing" secondItem="pFG-pr-Jvw" secondAttribute="trailing" constant="20" id="dbL-s2-bHg"/>
                             <constraint firstAttribute="trailing" secondItem="WgR-KD-pyB" secondAttribute="trailing" id="gtM-Zp-y8d"/>
                             <constraint firstAttribute="bottom" secondItem="WgR-KD-pyB" secondAttribute="bottom" id="mG6-UZ-tov"/>
                             <constraint firstItem="pFG-pr-Jvw" firstAttribute="baseline" secondItem="fVP-xb-zlr" secondAttribute="baseline" id="pGy-h6-iAO"/>
                             <constraint firstItem="fVP-xb-zlr" firstAttribute="leading" secondItem="Kgl-De-aER" secondAttribute="leading" constant="20" id="tkU-fs-0Sx"/>
+                            <constraint firstItem="Geh-ol-m1t" firstAttribute="baseline" secondItem="iO2-U9-jE2" secondAttribute="baseline" id="zEN-uu-0TG"/>
+                            <constraint firstItem="pFG-pr-Jvw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Geh-ol-m1t" secondAttribute="trailing" constant="8" symbolic="YES" id="zMp-7c-pvR"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="automaticBackgroundView" destination="WgR-KD-pyB" id="uaj-We-1XA"/>
+                        <outlet property="disableLogOutputButton" destination="Geh-ol-m1t" id="x0q-z6-ZDJ"/>
                         <outlet property="executeAutomaticTradesButton" destination="NLc-ce-lrH" id="Gi0-dk-jkF"/>
                         <outlet property="executeBalanceTradesButton" destination="Keq-IK-Ka9" id="bwM-kI-L4i"/>
                         <outlet property="executeTradesButton" destination="iO2-U9-jE2" id="Lff-BS-UHg"/>
