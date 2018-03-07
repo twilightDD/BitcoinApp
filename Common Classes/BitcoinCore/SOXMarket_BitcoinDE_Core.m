@@ -101,8 +101,8 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
         sharedCore.maxCredits = 0;
 
 #if PETER
-        sharedCore.apiKeys = @[@"key"];
-        sharedCore.apiSecrets = @[@"secret"];
+        sharedCore.apiKeys = @[@"ac80762c443ee36c6d8edea28be22a52"];
+        sharedCore.apiSecrets = @[@"9b7076a0bea40908af7c71cfb62bfdedf6dfb42f"];
 #else
         sharedCore.apiKeys = @[@"db8b38266d2f955fa96f19064f60a4c8"
                                ,@"297e59623f025f4ec408ae3746c2d0c0"
