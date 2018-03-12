@@ -61,6 +61,12 @@
         [self.sellSEPAOrderBook removeAllObjects];
 
         [self updateBuyStatus];
+        for (NSObject <SOXAutomaticTradingCoreProtocol> *delegate in self.buyDelegates) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [delegate performSelector:@selector(flushLogView)];
+            });
+        }
+
 
         { // DEBUG
             NSString *note = [NSString stringWithFormat:@"Did flush all orderBooks. Count of orderBooks after:\n"
@@ -72,6 +78,7 @@
                               self.buyOrderBook.count, self.buySEPAOrderBook.count, self.sellOrderBook.count, self.sellSEPAOrderBook.count];
             [self informBuyDelegateWithNote:note];
         }
+
     }
 
     self.socketIODidDisconnectAppeared = YES;

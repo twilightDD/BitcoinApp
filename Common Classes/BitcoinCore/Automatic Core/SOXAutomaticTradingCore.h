@@ -13,6 +13,7 @@
 
 - (void)logLine:(NSString *)line;
 - (void)statusUpdate:(NSString *)status;
+- (void)flushLogView;
 - (void)automaticTradingDidBegin;
 - (void)automaticTradingDidStop;
 

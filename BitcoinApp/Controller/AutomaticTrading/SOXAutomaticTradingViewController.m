@@ -304,6 +304,11 @@
     self.statusTextField.stringValue = status;
 }
 
+- (void)flushLogView {
+    self.log = @"";
+    [self logLine:@"Log view flushed"];
+}
+
 - (void)automaticTradingDidBegin {
     self.statusTextField.stringValue = @"Automatic trading started";
 }
