@@ -6,7 +6,8 @@
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+//#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
 @interface SOXSingleSelectionValueTransformer : NSValueTransformer
 

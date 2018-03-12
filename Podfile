@@ -6,7 +6,9 @@ target 'iOS BitcoinApp' do
   # use_frameworks!
 
   # Pods for iOS BitcoinApp
-
+  pod 'socket.IO'
+  pod 'CocoaLumberjack'
+  
   target 'iOS BitcoinAppTests' do
     inherit! :search_paths
     # Pods for testing

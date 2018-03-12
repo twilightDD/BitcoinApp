@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FA5F38FDB503CB8DBF803559D5AEEF89"
-               BlueprintName = "Pods-iOS BitcoinApp"
+               BlueprintIdentifier = "C14C5851499C1EFF2ADEE4959C2CC7AF"
+               BlueprintName = "CocoaLumberjack-iOS"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libPods-iOS BitcoinApp.a">
+               BuildableName = "libCocoaLumberjack-iOS.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

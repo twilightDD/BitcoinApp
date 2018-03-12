@@ -216,6 +216,7 @@
 
     NSDecimalNumber *btcAmountToBuy = nil;
     NSString *note = @"Error in tryToExecuteBuyOrder";
+
     if ([orderToBuyMinVolume isGreaterThan:availableFidorAmount]) {
         // minVolume > availableAmount => no buy possible
         note = [NSString stringWithFormat:@"NO BUY possible: order_minVol %@ > avaFidor %@ (not enough fidor amount)"

@@ -9,7 +9,12 @@
 /* Begin PBXBuildFile section */
 		2B050008052C0074E160ABF6 /* libPods-iOS BitcoinAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A243607ED1705CCF7ABD64B7 /* libPods-iOS BitcoinAppTests.a */; };
 		5F29BF12BEB45F346C4E59FB /* libPods-mac BitcoinAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B79D58838F5047E63DA16D /* libPods-mac BitcoinAppTests.a */; };
+		AE426418BDC50F14FE5A0C7E /* libPods-mac BitcoinApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 337C676324C43B0D3C145DF6 /* libPods-mac BitcoinApp.a */; };
 		B9F68ED00EF1147E8A37D564 /* libPods-mac BitcoinApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 337C676324C43B0D3C145DF6 /* libPods-mac BitcoinApp.a */; };
+		D007AE1120509AF900F5121F /* SOXCoinBalanceCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D007AE1020509AF900F5121F /* SOXCoinBalanceCollectionViewController.m */; };
+		D007AE1920509B5800F5121F /* SOXCoinBalanceCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D007AE1720509B5800F5121F /* SOXCoinBalanceCollectionViewCell.m */; };
+		D007AE1A20509B5800F5121F /* SOXCoinBalanceCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D007AE1820509B5800F5121F /* SOXCoinBalanceCollectionViewCell.xib */; };
+		D007AE202050A51E00F5121F /* NSDecimalNumber+Compare.m in Sources */ = {isa = PBXBuildFile; fileRef = D007AE1F2050A51E00F5121F /* NSDecimalNumber+Compare.m */; };
 		D00FF1371EA03B71008BCD63 /* SOXTradeJob_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D00FF1361EA03B71008BCD63 /* SOXTradeJob_BitcoinDE_Data.m */; };
 		D00FF1381EA03B71008BCD63 /* SOXTradeJob_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D00FF1361EA03B71008BCD63 /* SOXTradeJob_BitcoinDE_Data.m */; };
 		D01F589E1E8495D200C170F7 /* SOXFormatters.m in Sources */ = {isa = PBXBuildFile; fileRef = D01F589D1E8495D200C170F7 /* SOXFormatters.m */; };
@@ -65,7 +70,6 @@
 		D021508E20474AEC005A0932 /* SOXMyTradeAmountValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D09759762006BFBE008A4334 /* SOXMyTradeAmountValueTransformer.m */; };
 		D021508F20474AEC005A0932 /* SOXAbstractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0962CCB1E945906004FFF62 /* SOXAbstractViewController.m */; };
 		D021509020474AEC005A0932 /* SOXErrorWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EB0E521F855B54004839C2 /* SOXErrorWindowController.m */; };
-		D021509220474AEC005A0932 /* libPods-mac BitcoinApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 337C676324C43B0D3C145DF6 /* libPods-mac BitcoinApp.a */; };
 		D021509320474AEC005A0932 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D049C45F1E7721AC003CBF36 /* Crashlytics.framework */; };
 		D021509420474AEC005A0932 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D049C45E1E7721AC003CBF36 /* Fabric.framework */; };
 		D021509620474AEC005A0932 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D063E9241E74BF97006E2D17 /* Assets.xcassets */; };
@@ -158,9 +162,7 @@
 		D0B942B01E8AF1D600EF7434 /* SOXErrorMessage_BitcoinDE.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B942AF1E8AF1D600EF7434 /* SOXErrorMessage_BitcoinDE.m */; };
 		D0B942B11E8AF1D600EF7434 /* SOXErrorMessage_BitcoinDE.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B942AF1E8AF1D600EF7434 /* SOXErrorMessage_BitcoinDE.m */; };
 		D0B9A3341E895EA0008860ED /* NSAttributedString+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B9A3331E895EA0008860ED /* NSAttributedString+URL.m */; };
-		D0B9A3351E895EA0008860ED /* NSAttributedString+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B9A3331E895EA0008860ED /* NSAttributedString+URL.m */; };
 		D0B9A3381E89934D008860ED /* NSTextField+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B9A3371E89934D008860ED /* NSTextField+URL.m */; };
-		D0B9A3391E89934D008860ED /* NSTextField+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B9A3371E89934D008860ED /* NSTextField+URL.m */; };
 		D0BCFC9F20041468004F9E57 /* SOXMinAmountWithShortCurrencyValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BCFC9E20041468004F9E57 /* SOXMinAmountWithShortCurrencyValueTransformer.m */; };
 		D0BCFCA020041468004F9E57 /* SOXMinAmountWithShortCurrencyValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BCFC9E20041468004F9E57 /* SOXMinAmountWithShortCurrencyValueTransformer.m */; };
 		D0BCFCA420041496004F9E57 /* SOXMaxAmountWithShortCurrencyValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BCFCA320041496004F9E57 /* SOXMaxAmountWithShortCurrencyValueTransformer.m */; };
@@ -200,13 +202,20 @@
 		1D525E43B974F9030875B65E /* Pods-iOS BitcoinApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS BitcoinApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOS BitcoinApp/Pods-iOS BitcoinApp.debug.xcconfig"; sourceTree = "<group>"; };
 		228030D7B20EAE4885C436F0 /* Pods-iOS BitcoinAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS BitcoinAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOS BitcoinAppTests/Pods-iOS BitcoinAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		337C676324C43B0D3C145DF6 /* libPods-mac BitcoinApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mac BitcoinApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		37D371778071890D6F33AABF /* Pods-mac BitcoinApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mac BitcoinApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-mac BitcoinApp/Pods-mac BitcoinApp.release.xcconfig"; sourceTree = "<group>"; };
 		58B79D58838F5047E63DA16D /* libPods-mac BitcoinAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mac BitcoinAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC4280E57323ABE03DD1721 /* Pods-mac BitcoinAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mac BitcoinAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mac BitcoinAppTests/Pods-mac BitcoinAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		947A1782FED753EB8662D82B /* Pods-mac BitcoinApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mac BitcoinApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-mac BitcoinApp/Pods-mac BitcoinApp.release.xcconfig"; sourceTree = "<group>"; };
 		A243607ED1705CCF7ABD64B7 /* libPods-iOS BitcoinAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOS BitcoinAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B30DF34ECAF33459973BF538 /* Pods-mac BitcoinAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mac BitcoinAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mac BitcoinAppTests/Pods-mac BitcoinAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B7B5F5E2E05175F4B0DF93A6 /* Pods-iOS BitcoinAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS BitcoinAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOS BitcoinAppTests/Pods-iOS BitcoinAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		C4B6EA76C6E9993DA0945AD1 /* Pods-iOS BitcoinApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS BitcoinApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOS BitcoinApp/Pods-iOS BitcoinApp.release.xcconfig"; sourceTree = "<group>"; };
+		D007AE0F20509AF900F5121F /* SOXCoinBalanceCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXCoinBalanceCollectionViewController.h; sourceTree = "<group>"; };
+		D007AE1020509AF900F5121F /* SOXCoinBalanceCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXCoinBalanceCollectionViewController.m; sourceTree = "<group>"; };
+		D007AE1620509B5800F5121F /* SOXCoinBalanceCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXCoinBalanceCollectionViewCell.h; sourceTree = "<group>"; };
+		D007AE1720509B5800F5121F /* SOXCoinBalanceCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXCoinBalanceCollectionViewCell.m; sourceTree = "<group>"; };
+		D007AE1820509B5800F5121F /* SOXCoinBalanceCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SOXCoinBalanceCollectionViewCell.xib; sourceTree = "<group>"; };
+		D007AE1E2050A51E00F5121F /* NSDecimalNumber+Compare.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDecimalNumber+Compare.h"; sourceTree = "<group>"; };
+		D007AE1F2050A51E00F5121F /* NSDecimalNumber+Compare.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDecimalNumber+Compare.m"; sourceTree = "<group>"; };
 		D00FF1351EA03B71008BCD63 /* SOXTradeJob_BitcoinDE_Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXTradeJob_BitcoinDE_Data.h; sourceTree = "<group>"; };
 		D00FF1361EA03B71008BCD63 /* SOXTradeJob_BitcoinDE_Data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXTradeJob_BitcoinDE_Data.m; sourceTree = "<group>"; };
 		D01B2CB51EF6835300A8FF4B /* SOXAutomaticTradingCore_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXAutomaticTradingCore_Private.h; sourceTree = "<group>"; };
@@ -341,7 +350,7 @@
 		D0EB0E521F855B54004839C2 /* SOXErrorWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXErrorWindowController.m; sourceTree = "<group>"; };
 		D0EB0E531F855B54004839C2 /* SOXErrorWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SOXErrorWindowController.xib; sourceTree = "<group>"; };
 		DF45B40D8F59179007F987AF /* libPods-iOS BitcoinApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOS BitcoinApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E0FF04F4CB73C1CC881C418A /* Pods-mac BitcoinApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mac BitcoinApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mac BitcoinApp/Pods-mac BitcoinApp.debug.xcconfig"; sourceTree = "<group>"; };
+		E3D9DF530BA3FEF813835FEB /* Pods-mac BitcoinApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mac BitcoinApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mac BitcoinApp/Pods-mac BitcoinApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -349,7 +358,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D021509220474AEC005A0932 /* libPods-mac BitcoinApp.a in Frameworks */,
 				D021509320474AEC005A0932 /* Crashlytics.framework in Frameworks */,
 				D021509420474AEC005A0932 /* Fabric.framework in Frameworks */,
 			);
@@ -362,6 +370,7 @@
 				B9F68ED00EF1147E8A37D564 /* libPods-mac BitcoinApp.a in Frameworks */,
 				D049C4621E7721AC003CBF36 /* Crashlytics.framework in Frameworks */,
 				D049C4601E7721AC003CBF36 /* Fabric.framework in Frameworks */,
+				AE426418BDC50F14FE5A0C7E /* libPods-mac BitcoinApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +414,25 @@
 				58B79D58838F5047E63DA16D /* libPods-mac BitcoinAppTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D007AE0E20509ACB00F5121F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D007AE0F20509AF900F5121F /* SOXCoinBalanceCollectionViewController.h */,
+				D007AE1020509AF900F5121F /* SOXCoinBalanceCollectionViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D007AE1220509B1D00F5121F /* CellClasses */ = {
+			isa = PBXGroup;
+			children = (
+				D007AE1620509B5800F5121F /* SOXCoinBalanceCollectionViewCell.h */,
+				D007AE1720509B5800F5121F /* SOXCoinBalanceCollectionViewCell.m */,
+				D007AE1820509B5800F5121F /* SOXCoinBalanceCollectionViewCell.xib */,
+			);
+			path = CellClasses;
 			sourceTree = "<group>";
 		};
 		D02ED5A71E814CA600AA9448 /* Data Objects */ = {
@@ -583,6 +611,8 @@
 		D063E9421E74C024006E2D17 /* iOS BitcoinApp */ = {
 			isa = PBXGroup;
 			children = (
+				D007AE1220509B1D00F5121F /* CellClasses */,
+				D007AE0E20509ACB00F5121F /* Controller */,
 				D063E9461E74C024006E2D17 /* IOSAppDelegate.h */,
 				D063E9471E74C024006E2D17 /* IOSAppDelegate.m */,
 				D063E9491E74C024006E2D17 /* ViewController.h */,
@@ -678,6 +708,8 @@
 				D0B9A3331E895EA0008860ED /* NSAttributedString+URL.m */,
 				D0B9A3361E89934D008860ED /* NSTextField+URL.h */,
 				D0B9A3371E89934D008860ED /* NSTextField+URL.m */,
+				D007AE1E2050A51E00F5121F /* NSDecimalNumber+Compare.h */,
+				D007AE1F2050A51E00F5121F /* NSDecimalNumber+Compare.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -700,10 +732,10 @@
 				C4B6EA76C6E9993DA0945AD1 /* Pods-iOS BitcoinApp.release.xcconfig */,
 				228030D7B20EAE4885C436F0 /* Pods-iOS BitcoinAppTests.debug.xcconfig */,
 				B7B5F5E2E05175F4B0DF93A6 /* Pods-iOS BitcoinAppTests.release.xcconfig */,
-				E0FF04F4CB73C1CC881C418A /* Pods-mac BitcoinApp.debug.xcconfig */,
-				37D371778071890D6F33AABF /* Pods-mac BitcoinApp.release.xcconfig */,
 				B30DF34ECAF33459973BF538 /* Pods-mac BitcoinAppTests.debug.xcconfig */,
 				5DC4280E57323ABE03DD1721 /* Pods-mac BitcoinAppTests.release.xcconfig */,
+				E3D9DF530BA3FEF813835FEB /* Pods-mac BitcoinApp.debug.xcconfig */,
+				947A1782FED753EB8662D82B /* Pods-mac BitcoinApp.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -715,12 +747,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D021509C20474AEC005A0932 /* Build configuration list for PBXNativeTarget "mac BitcoinApp Peter" */;
 			buildPhases = (
-				D021505C20474AEC005A0932 /* [CP] Check Pods Manifest.lock */,
 				D021505D20474AEC005A0932 /* Sources */,
 				D021509120474AEC005A0932 /* Frameworks */,
 				D021509520474AEC005A0932 /* Resources */,
-				D021509920474AEC005A0932 /* [CP] Embed Pods Frameworks */,
-				D021509A20474AEC005A0932 /* [CP] Copy Pods Resources */,
 				D021509B20474AEC005A0932 /* Fabric */,
 			);
 			buildRules = (
@@ -906,6 +935,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D063E9561E74C024006E2D17 /* LaunchScreen.storyboard in Resources */,
+				D007AE1A20509B5800F5121F /* SOXCoinBalanceCollectionViewCell.xib in Resources */,
 				D063E9531E74C024006E2D17 /* Assets.xcassets in Resources */,
 				D063E94E1E74C024006E2D17 /* Main.storyboard in Resources */,
 			);
@@ -1002,13 +1032,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-mac BitcoinAppTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		62C842283017EA2D9584446E /* [CP] Check Pods Manifest.lock */ = {
@@ -1017,13 +1050,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOS BitcoinApp-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		797DD56F299FE78AE6F2FFDD /* [CP] Check Pods Manifest.lock */ = {
@@ -1032,13 +1068,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-mac BitcoinApp-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		92089FAFA2034AE0C08A0812 /* [CP] Check Pods Manifest.lock */ = {
@@ -1047,13 +1086,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOS BitcoinAppTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9F1DE0B5C9E645F3FB8B8F6B /* [CP] Embed Pods Frameworks */ = {
@@ -1084,51 +1126,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mac BitcoinAppTests/Pods-mac BitcoinAppTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D021505C20474AEC005A0932 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		D021509920474AEC005A0932 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mac BitcoinApp/Pods-mac BitcoinApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D021509A20474AEC005A0932 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mac BitcoinApp/Pods-mac BitcoinApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D021509B20474AEC005A0932 /* Fabric */ = {
@@ -1313,19 +1310,18 @@
 				D02ED5BF1E817CFE00AA9448 /* SOXShowOrderbookData.m in Sources */,
 				D063E94B1E74C024006E2D17 /* ViewController.m in Sources */,
 				D02ED5B31E814CF100AA9448 /* SOXRates_BitcoinDE_Data.m in Sources */,
-				D0B9A3391E89934D008860ED /* NSTextField+URL.m in Sources */,
 				D0BCFCA520041496004F9E57 /* SOXMaxAmountWithShortCurrencyValueTransformer.m in Sources */,
 				D0270AE51E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m in Sources */,
 				D02ED5C31E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m in Sources */,
 				D02ED5BB1E81546800AA9448 /* SOXAccountInfoData.m in Sources */,
 				D05B23DB1FB777C7004BAA6E /* SOXShortTradingPairValueTransformer.m in Sources */,
-				D0B9A3351E895EA0008860ED /* NSAttributedString+URL.m in Sources */,
 				D02150A52047594D005A0932 /* SOXCashflowWithShortCurrencyValueTransformer.m in Sources */,
 				D02ED5AF1E814CA600AA9448 /* SOXDataConverter_BitcoinDE.m in Sources */,
 				D0A33F931F42079D0042B2A7 /* SOXMarketHelper.m in Sources */,
 				D09759782006BFBE008A4334 /* SOXMyTradeAmountValueTransformer.m in Sources */,
 				D0E5C5041E809C9800352985 /* SOXKeys_BitcoinDE.m in Sources */,
 				D090304E1EB1F4FC00775E05 /* SOXPaymentOptionValueTransformer.m in Sources */,
+				D007AE1920509B5800F5121F /* SOXCoinBalanceCollectionViewCell.m in Sources */,
 				D02150AA20475965005A0932 /* SOXBalanceWithShortCurrencyValueTransformer.m in Sources */,
 				D0BCFCAD20042620004F9E57 /* SOXStateValueTransformer.m in Sources */,
 				D049C4521E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.m in Sources */,
@@ -1334,6 +1330,7 @@
 				D049C45A1E7712E6003CBF36 /* SOXConstants.m in Sources */,
 				D0B942B11E8AF1D600EF7434 /* SOXErrorMessage_BitcoinDE.m in Sources */,
 				D0B8B4DD1EFA903900FB4747 /* SOXBitcoinFormatter.m in Sources */,
+				D007AE1120509AF900F5121F /* SOXCoinBalanceCollectionViewController.m in Sources */,
 				D0631F0F1E89C1FD007ED75A /* SOXMyOrderBook_BitcoinDE_Data.m in Sources */,
 				D063E9481E74C024006E2D17 /* IOSAppDelegate.m in Sources */,
 				D032EA501EE8A71200D9EFBA /* SOXAutomaticTrading_BitcoinDE_Core.m in Sources */,
@@ -1351,6 +1348,7 @@
 				D05B23D71FB76CBB004BAA6E /* SOXMarket_DefTypes.m in Sources */,
 				D0BCFCA9200423F8004F9E57 /* SOXFeeCoinValueTransformer.m in Sources */,
 				D080867D1E9D0B7F00373F09 /* SOXAutomaticTradingCore.m in Sources */,
+				D007AE202050A51E00F5121F /* NSDecimalNumber+Compare.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1407,7 +1405,6 @@
 /* Begin XCBuildConfiguration section */
 		D021509D20474AEC005A0932 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E0FF04F4CB73C1CC881C418A /* Pods-mac BitcoinApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1433,7 +1430,6 @@
 		};
 		D021509E20474AEC005A0932 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37D371778071890D6F33AABF /* Pods-mac BitcoinApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1552,7 +1548,7 @@
 		};
 		D063E9381E74BF97006E2D17 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E0FF04F4CB73C1CC881C418A /* Pods-mac BitcoinApp.debug.xcconfig */;
+			baseConfigurationReference = E3D9DF530BA3FEF813835FEB /* Pods-mac BitcoinApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1578,7 +1574,7 @@
 		};
 		D063E9391E74BF97006E2D17 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37D371778071890D6F33AABF /* Pods-mac BitcoinApp.release.xcconfig */;
+			baseConfigurationReference = 947A1782FED753EB8662D82B /* Pods-mac BitcoinApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
