@@ -10,13 +10,13 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
-#import "SOXErrorWindowController.h"
+#import "SOXLogWindowController.h"
 
 
 @interface MacAppDelegate ()
 
-@property (readwrite, strong, nonatomic) SOXErrorWindowController *errorWindowController;
-@property (readwrite, strong, nonatomic) SOXErrorWindowController *eventWindowController;
+@property (readwrite, strong, nonatomic) SOXLogWindowController *errorWindowController;
+@property (readwrite, strong, nonatomic) SOXLogWindowController *eventWindowController;
 
 - (IBAction)saveAction:(id)sender;
 
@@ -52,8 +52,10 @@
     DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
     { //Prepare error log window
-        self.errorWindowController = [[SOXErrorWindowController alloc] initWithWindowNibName:@"SOXErrorWindowController" windowTitle:@"Errors"];
-        self.eventWindowController = [[SOXErrorWindowController alloc] initWithWindowNibName:@"SOXErrorWindowController" windowTitle:@"Events"];
+        self.errorWindowController = [[SOXLogWindowController alloc] initWithWindowNibName:SOXLogWindowControllerNibKey
+                                                                               windowTitle:@"Errors"];
+        self.eventWindowController = [[SOXLogWindowController alloc] initWithWindowNibName:SOXLogWindowControllerNibKey
+                                                                               windowTitle:@"Events"];
     }
 
 }

@@ -10,8 +10,9 @@
 
 @class SOXErrorMessage_BitcoinDE;
 
-@interface SOXErrorWindowController : NSWindowController
+static NSString *SOXLogWindowControllerNibKey = @"SOXLogWindowController";
 
+@interface SOXLogWindowController : NSWindowController
 
 - (instancetype)initWithWindowNibName:(NSNibName)windowNibName windowTitle:(NSString *)windowTitle;
 

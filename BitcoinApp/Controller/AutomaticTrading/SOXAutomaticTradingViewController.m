@@ -18,7 +18,7 @@
 #import "MacAppDelegate.h"
 
 #import "SOXFormatters.h"
-#import "SOXErrorWindowController.h"
+#import "SOXLogWindowController.h"
 
 #pragma mark - Interface
 @interface SOXAutomaticTradingViewController () <SOXAutomaticTradingCoreProtocol>
@@ -305,7 +305,7 @@
 
 - (void)logEventLine:(NSString *)line {
     MacAppDelegate* appDelegate = (MacAppDelegate*)[[NSApplication sharedApplication] delegate];
-    SOXErrorWindowController *errorWindowController = appDelegate.eventWindowController;
+    SOXLogWindowController *errorWindowController = appDelegate.eventWindowController;
     [errorWindowController performSelectorOnMainThread:@selector(showMessage:)
                                             withObject:line
                                          waitUntilDone:NO];

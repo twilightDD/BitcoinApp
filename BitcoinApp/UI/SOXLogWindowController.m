@@ -6,33 +6,33 @@
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
 
-#import "SOXErrorWindowController.h"
+#import "SOXLogWindowController.h"
 
 #import "SOXErrorMessage_BitcoinDE.h"
 
 #import "SOXFormatters.h"
 
 #pragma mark - Interface
-@interface SOXErrorWindowController ()
+@interface SOXLogWindowController ()
 
 #pragma mark | IBOutlets
-@property (unsafe_unretained) IBOutlet NSTextView  *errorTextView;
-@property (weak) IBOutlet NSScrollView *errorTextScrollView;
+@property (unsafe_unretained) IBOutlet NSTextView  *logTextView;
+@property (weak) IBOutlet NSScrollView *logScrollView;
 @property (weak) IBOutlet NSButton *clearTextViewButton;
 
 #pragma mark | Properties
 
-@property (strong, nonatomic) NSString *errorLogString;
+@property (strong, nonatomic) NSString *logString;
 
 @end
 
 #pragma mark - Implementation
-@implementation SOXErrorWindowController
+@implementation SOXLogWindowController
 
 #pragma mark Init&Co.
 - (void)windowDidLoad {
     [super windowDidLoad];
-    self.errorLogString = @"";
+    self.logString = @"";
 }
 
 #pragma mark - Public methods
@@ -52,41 +52,41 @@
     NSString *lineWithDate = [NSString stringWithFormat:@"%@"
                               , [SOXFormatters shortDateLongTimeStringForDate:[NSDate date]]];
 
-    self.errorLogString = [self.errorLogString stringByAppendingString:@"\n-----------\n"];
-    self.errorLogString = [self.errorLogString stringByAppendingString:lineWithDate];
-    self.errorLogString = [self.errorLogString stringByAppendingString:@" - serverRequestTitle: "];
-    self.errorLogString = [self.errorLogString stringByAppendingString:errorMessage.serverRequestTitle];
-    self.errorLogString = [self.errorLogString stringByAppendingString:@"\n"];
-    self.errorLogString = [self.errorLogString stringByAppendingString:errorMessage.errorMessage];
+    self.logString = [self.logString stringByAppendingString:@"\n-----------\n"];
+    self.logString = [self.logString stringByAppendingString:lineWithDate];
+    self.logString = [self.logString stringByAppendingString:@" - serverRequestTitle: "];
+    self.logString = [self.logString stringByAppendingString:errorMessage.serverRequestTitle];
+    self.logString = [self.logString stringByAppendingString:@"\n"];
+    self.logString = [self.logString stringByAppendingString:errorMessage.errorMessage];
 
-    [self updateErrorTextView];
+    [self updateTextView];
 }
 
 - (void)showMessage:(NSString *)messageString {
-    self.errorLogString = [self.errorLogString stringByAppendingString:@"\n-----------\n"];
+    self.logString = [self.logString stringByAppendingString:@"\n-----------\n"];
 
     NSString *lineWithDate = [NSString stringWithFormat:@"%@"
                               , [SOXFormatters shortDateLongTimeStringForDate:[NSDate date]]];
-    self.errorLogString = [self.errorLogString stringByAppendingString:lineWithDate];
+    self.logString = [self.logString stringByAppendingString:lineWithDate];
 
-    self.errorLogString = [self.errorLogString stringByAppendingString:messageString];
+    self.logString = [self.logString stringByAppendingString:messageString];
 
-    [self updateErrorTextView];
+    [self updateTextView];
 }
 
 #pragma mark - Private methods
-- (void)updateErrorTextView {
-    self.errorTextView.string = self.errorLogString;
-    NSPoint pt = NSMakePoint(0.0, [[self.errorTextScrollView documentView]
+- (void)updateTextView {
+    self.logTextView.string = self.logString;
+    NSPoint pt = NSMakePoint(0.0, [[self.logScrollView documentView]
                                    bounds].size.height);
-    [self.errorTextScrollView.documentView scrollPoint:pt];
+    [self.logScrollView.documentView scrollPoint:pt];
 }
 
 
 #pragma mark - Action methods
-- (IBAction)clearErrorTextViewAction:(NSButton *)sender {
-    self.errorLogString = @"";
-    [self updateErrorTextView];
+- (IBAction)clearTextViewAction:(NSButton *)sender {
+    self.logString = @"";
+    [self updateTextView];
 }
 
 - (IBAction)saveLogAction:(NSButton *)sender {
@@ -99,7 +99,7 @@
     NSString *filePathWithExtension = [filePath stringByAppendingPathExtension:@"txt"];
 
     NSError *writeError = nil;
-    [self.errorLogString writeToFile:filePathWithExtension
+    [self.logString writeToFile:filePathWithExtension
                           atomically:YES
                             encoding:NSStringEncodingConversionAllowLossy
                                error:&writeError];

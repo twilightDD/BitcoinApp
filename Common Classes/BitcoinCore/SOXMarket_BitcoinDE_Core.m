@@ -9,7 +9,7 @@
 #import "SOXMarket_BitcoinDE_Core.h"
 
 #import "MacAppDelegate.h"
-#import "SOXErrorWindowController.h"
+#import "SOXLogWindowController.h"
 
 #import "SOXKeys_BitcoinDE.h"
 #import "SOXHash.h"
@@ -251,7 +251,7 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 
                                                                     if (errorMessage.hasError) {
                                                                         MacAppDelegate* appDelegate = (MacAppDelegate*)[[NSApplication sharedApplication] delegate];
-                                                                        SOXErrorWindowController *errorWindowController = appDelegate.errorWindowController;
+                                                                        SOXLogWindowController *errorWindowController = appDelegate.errorWindowController;
                                                                         [errorWindowController performSelectorOnMainThread:@selector(showErrorMessage:)
                                                                                                                 withObject:errorMessage
                                                                                                              waitUntilDone:NO];

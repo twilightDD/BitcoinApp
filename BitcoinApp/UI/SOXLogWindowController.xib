@@ -6,11 +6,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="SOXErrorWindowController">
+        <customObject id="-2" userLabel="File's Owner" customClass="SOXLogWindowController">
             <connections>
                 <outlet property="clearTextViewButton" destination="zpX-cs-ojE" id="m3O-cP-Tu3"/>
-                <outlet property="errorTextScrollView" destination="owk-u5-hPs" id="bDx-u4-Cfe"/>
-                <outlet property="errorTextView" destination="P8f-Cj-bPe" id="1wZ-rJ-lzh"/>
+                <outlet property="logScrollView" destination="owk-u5-hPs" id="US1-ej-75n"/>
+                <outlet property="logTextView" destination="P8f-Cj-bPe" id="mKX-So-XPx"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -32,7 +32,7 @@
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="clearErrorTextViewAction:" target="-2" id="YuT-xn-w2n"/>
+                            <action selector="clearTextViewAction:" target="-2" id="6Db-Qd-AOj"/>
                         </connections>
                     </button>
                     <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="owk-u5-hPs">

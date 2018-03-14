@@ -64,13 +64,13 @@
 		D021508D20474AEC005A0932 /* SOXExecuteTradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D07E7B361EA5175D00AB50A5 /* SOXExecuteTradeViewController.m */; };
 		D021508E20474AEC005A0932 /* SOXMyTradeAmountValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D09759762006BFBE008A4334 /* SOXMyTradeAmountValueTransformer.m */; };
 		D021508F20474AEC005A0932 /* SOXAbstractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0962CCB1E945906004FFF62 /* SOXAbstractViewController.m */; };
-		D021509020474AEC005A0932 /* SOXErrorWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EB0E521F855B54004839C2 /* SOXErrorWindowController.m */; };
+		D021509020474AEC005A0932 /* SOXLogWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EB0E521F855B54004839C2 /* SOXLogWindowController.m */; };
 		D021509220474AEC005A0932 /* libPods-mac BitcoinApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 337C676324C43B0D3C145DF6 /* libPods-mac BitcoinApp.a */; };
 		D021509320474AEC005A0932 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D049C45F1E7721AC003CBF36 /* Crashlytics.framework */; };
 		D021509420474AEC005A0932 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D049C45E1E7721AC003CBF36 /* Fabric.framework */; };
 		D021509620474AEC005A0932 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D063E9241E74BF97006E2D17 /* Assets.xcassets */; };
 		D021509720474AEC005A0932 /* MacMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D063E9261E74BF97006E2D17 /* MacMain.storyboard */; };
-		D021509820474AEC005A0932 /* SOXErrorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0EB0E531F855B54004839C2 /* SOXErrorWindowController.xib */; };
+		D021509820474AEC005A0932 /* SOXLogWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0EB0E531F855B54004839C2 /* SOXLogWindowController.xib */; };
 		D02150A32047594D005A0932 /* SOXCashflowWithShortCurrencyValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D02150A22047594D005A0932 /* SOXCashflowWithShortCurrencyValueTransformer.m */; };
 		D02150A42047594D005A0932 /* SOXCashflowWithShortCurrencyValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D02150A22047594D005A0932 /* SOXCashflowWithShortCurrencyValueTransformer.m */; };
 		D02150A52047594D005A0932 /* SOXCashflowWithShortCurrencyValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D02150A22047594D005A0932 /* SOXCashflowWithShortCurrencyValueTransformer.m */; };
@@ -174,8 +174,8 @@
 		D0E5C4FF1E80801D00352985 /* SOXBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E5C4FD1E80801D00352985 /* SOXBannerViewController.m */; };
 		D0E5C5031E809C9800352985 /* SOXKeys_BitcoinDE.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E5C5021E809C9800352985 /* SOXKeys_BitcoinDE.m */; };
 		D0E5C5041E809C9800352985 /* SOXKeys_BitcoinDE.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E5C5021E809C9800352985 /* SOXKeys_BitcoinDE.m */; };
-		D0EB0E541F855B54004839C2 /* SOXErrorWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EB0E521F855B54004839C2 /* SOXErrorWindowController.m */; };
-		D0EB0E551F855B54004839C2 /* SOXErrorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0EB0E531F855B54004839C2 /* SOXErrorWindowController.xib */; };
+		D0EB0E541F855B54004839C2 /* SOXLogWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EB0E521F855B54004839C2 /* SOXLogWindowController.m */; };
+		D0EB0E551F855B54004839C2 /* SOXLogWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0EB0E531F855B54004839C2 /* SOXLogWindowController.xib */; };
 		E5CAD54D01A6BF912CFA3BE9 /* libPods-iOS BitcoinApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF45B40D8F59179007F987AF /* libPods-iOS BitcoinApp.a */; };
 /* End PBXBuildFile section */
 
@@ -337,9 +337,9 @@
 		D0E5C4FD1E80801D00352985 /* SOXBannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXBannerViewController.m; sourceTree = "<group>"; };
 		D0E5C5011E809C9800352985 /* SOXKeys_BitcoinDE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXKeys_BitcoinDE.h; sourceTree = "<group>"; };
 		D0E5C5021E809C9800352985 /* SOXKeys_BitcoinDE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXKeys_BitcoinDE.m; sourceTree = "<group>"; };
-		D0EB0E511F855B54004839C2 /* SOXErrorWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXErrorWindowController.h; sourceTree = "<group>"; };
-		D0EB0E521F855B54004839C2 /* SOXErrorWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXErrorWindowController.m; sourceTree = "<group>"; };
-		D0EB0E531F855B54004839C2 /* SOXErrorWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SOXErrorWindowController.xib; sourceTree = "<group>"; };
+		D0EB0E511F855B54004839C2 /* SOXLogWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXLogWindowController.h; sourceTree = "<group>"; };
+		D0EB0E521F855B54004839C2 /* SOXLogWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXLogWindowController.m; sourceTree = "<group>"; };
+		D0EB0E531F855B54004839C2 /* SOXLogWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SOXLogWindowController.xib; sourceTree = "<group>"; };
 		DF45B40D8F59179007F987AF /* libPods-iOS BitcoinApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOS BitcoinApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0FF04F4CB73C1CC881C418A /* Pods-mac BitcoinApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mac BitcoinApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mac BitcoinApp/Pods-mac BitcoinApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -685,9 +685,9 @@
 		D0EB0E4E1F8551E9004839C2 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				D0EB0E511F855B54004839C2 /* SOXErrorWindowController.h */,
-				D0EB0E521F855B54004839C2 /* SOXErrorWindowController.m */,
-				D0EB0E531F855B54004839C2 /* SOXErrorWindowController.xib */,
+				D0EB0E511F855B54004839C2 /* SOXLogWindowController.h */,
+				D0EB0E521F855B54004839C2 /* SOXLogWindowController.m */,
+				D0EB0E531F855B54004839C2 /* SOXLogWindowController.xib */,
 			);
 			name = UI;
 			path = BitcoinApp/UI;
@@ -880,7 +880,7 @@
 			files = (
 				D021509620474AEC005A0932 /* Assets.xcassets in Resources */,
 				D021509720474AEC005A0932 /* MacMain.storyboard in Resources */,
-				D021509820474AEC005A0932 /* SOXErrorWindowController.xib in Resources */,
+				D021509820474AEC005A0932 /* SOXLogWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -890,7 +890,7 @@
 			files = (
 				D063E9251E74BF97006E2D17 /* Assets.xcassets in Resources */,
 				D063E9281E74BF97006E2D17 /* MacMain.storyboard in Resources */,
-				D0EB0E551F855B54004839C2 /* SOXErrorWindowController.xib in Resources */,
+				D0EB0E551F855B54004839C2 /* SOXLogWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1233,7 +1233,7 @@
 				D021508D20474AEC005A0932 /* SOXExecuteTradeViewController.m in Sources */,
 				D021508E20474AEC005A0932 /* SOXMyTradeAmountValueTransformer.m in Sources */,
 				D021508F20474AEC005A0932 /* SOXAbstractViewController.m in Sources */,
-				D021509020474AEC005A0932 /* SOXErrorWindowController.m in Sources */,
+				D021509020474AEC005A0932 /* SOXLogWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1293,7 +1293,7 @@
 				D07E7B381EA5175D00AB50A5 /* SOXExecuteTradeViewController.m in Sources */,
 				D09759772006BFBE008A4334 /* SOXMyTradeAmountValueTransformer.m in Sources */,
 				D0962CCC1E945906004FFF62 /* SOXAbstractViewController.m in Sources */,
-				D0EB0E541F855B54004839C2 /* SOXErrorWindowController.m in Sources */,
+				D0EB0E541F855B54004839C2 /* SOXLogWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
