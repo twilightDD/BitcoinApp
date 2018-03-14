@@ -390,11 +390,13 @@
                 }];
 
                 [self informBuyDelegateWithNote:note];
+                [self informEventLogWithNote:note];
             }
             else {
                 { // DEBUG
                     NSString *note = [NSString stringWithFormat:@"autoBUY not allowed - so I don't buy"];
                     [self informBuyDelegateWithNote:note];
+                    [self informEventLogWithNote:note];
                 }
             }
         }
@@ -402,6 +404,7 @@
             { // DEBUG
                 NSString *note = [NSString stringWithFormat:@"executeBuyTrades not allowed"];
                 [self informBuyDelegateWithNote:note];
+                [self informEventLogWithNote:note];
             }
         }
     }
@@ -410,6 +413,7 @@
             NSString *note = [NSString stringWithFormat:@"NO BUY - btcAmountToBuy is not valid: %@"
                               , btcAmountToBuy];
             [self informBuyDelegateWithNote:note];
+            [self informEventLogWithNote:note];
         }
     }
 

@@ -113,6 +113,8 @@
 
 #pragma mark - Inform delegates
 - (void)informBuyDelegateWithNote:(NSString *)note;
+- (void)informEventLogWithNote:(NSString *)note;
+
 //- (void)informSellDelegateWithNote:(NSString *)note;
 - (void)informBuyDelegateWithStatus:(NSString *)status;
 //- (void)informSellDelegateWithStatus:(NSString *)status;

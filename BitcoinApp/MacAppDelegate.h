@@ -13,6 +13,7 @@
 @interface MacAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (readonly, strong, nonatomic) SOXErrorWindowController *errorWindowController;
+@property (readonly, strong, nonatomic) SOXErrorWindowController *eventWindowController;
 
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;

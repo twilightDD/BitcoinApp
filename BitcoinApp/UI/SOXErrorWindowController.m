@@ -62,6 +62,18 @@
     [self updateErrorTextView];
 }
 
+- (void)showMessage:(NSString *)messageString {
+    self.errorLogString = [self.errorLogString stringByAppendingString:@"\n-----------\n"];
+
+    NSString *lineWithDate = [NSString stringWithFormat:@"%@"
+                              , [SOXFormatters shortDateLongTimeStringForDate:[NSDate date]]];
+    self.errorLogString = [self.errorLogString stringByAppendingString:lineWithDate];
+
+    self.errorLogString = [self.errorLogString stringByAppendingString:messageString];
+
+    [self updateErrorTextView];
+}
+
 #pragma mark - Private methods
 - (void)updateErrorTextView {
     self.errorTextView.string = self.errorLogString;

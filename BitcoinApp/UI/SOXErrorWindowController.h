@@ -16,5 +16,6 @@
 - (instancetype)initWithWindowNibName:(NSNibName)windowNibName windowTitle:(NSString *)windowTitle;
 
 - (void)showErrorMessage:(SOXErrorMessage_BitcoinDE *)errorMessage;
+- (void)showMessage:(NSString *)messageString;
 
 @end

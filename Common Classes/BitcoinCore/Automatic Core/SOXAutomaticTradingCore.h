@@ -12,6 +12,8 @@
 @protocol SOXAutomaticTradingCoreProtocol <NSObject>
 
 - (void)logLine:(NSString *)line;
+- (void)logEventLine:(NSString *)line;
+
 - (void)statusUpdate:(NSString *)status;
 - (void)flushLogView;
 - (void)automaticTradingDidBegin;

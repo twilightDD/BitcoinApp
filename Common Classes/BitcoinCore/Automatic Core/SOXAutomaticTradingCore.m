@@ -389,6 +389,7 @@
         NSString *note = [NSString stringWithFormat:@"successfulAutomaticBuyTrade tradeParameters:\n%@",
                           tradeParameters];
         [self informBuyDelegateWithNote:note];
+        [self informEventLogWithNote:note];
     }
 
     [self.runningAutomaticBuyTradeParameters removeObject:tradeParameters];
@@ -415,6 +416,7 @@
         NSString *note = [NSString stringWithFormat:@"unSuccessfulAutomaticBuyTrade tradeParameters:\n%@",
                           tradeParameters];
         [self informBuyDelegateWithNote:note];
+        [self informEventLogWithNote:note];
     }
     [self.runningAutomaticBuyTradeParameters removeObject:tradeParameters];
 
@@ -438,6 +440,7 @@
         NSString *note = [NSString stringWithFormat:@"successfulBalanceSellTrade tradeParameters:\n%@",
                           tradeParameters];
         [self informBuyDelegateWithNote:note];
+        [self informEventLogWithNote:note];
     }
 
     [self.runningBalanceSellTradeParameters removeObject:tradeParameters];
@@ -450,6 +453,7 @@
         NSString *note = [NSString stringWithFormat:@"unSuccessfulBalanceSellTrade tradeParameters:\n%@",
                           tradeParameters];
         [self informBuyDelegateWithNote:note];
+        [self informEventLogWithNote:note];
     }
     [self.runningBalanceSellTradeParameters removeObject:tradeParameters];
 
@@ -549,6 +553,22 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [delegate performSelector:@selector(statusUpdate:)
                                withObject:status
+                 ];
+            });
+        }
+    }
+}
+
+- (void)informEventLogWithNote:(NSString *)note {
+    if (note) {
+        DDLogInfo(@"%@: %@"
+                  , [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringLowerCaseForCurrencyType:self.currencyType]
+                  , note);
+
+        for (NSObject <SOXAutomaticTradingCoreProtocol> *delegate in self.buyDelegates) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [delegate performSelector:@selector(logEventLine:)
+                               withObject:note
                  ];
             });
         }

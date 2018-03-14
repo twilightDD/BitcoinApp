@@ -15,7 +15,10 @@
 
 #import "SOXKeys_BitcoinDE.h"
 
+#import "MacAppDelegate.h"
+
 #import "SOXFormatters.h"
+#import "SOXErrorWindowController.h"
 
 #pragma mark - Interface
 @interface SOXAutomaticTradingViewController () <SOXAutomaticTradingCoreProtocol>
@@ -298,6 +301,14 @@
     NSPoint pt = NSMakePoint(0.0, [[self.logTextScrollView documentView]
                                    bounds].size.height);
     [self.logTextScrollView.documentView scrollPoint:pt];
+}
+
+- (void)logEventLine:(NSString *)line {
+    MacAppDelegate* appDelegate = (MacAppDelegate*)[[NSApplication sharedApplication] delegate];
+    SOXErrorWindowController *errorWindowController = appDelegate.eventWindowController;
+    [errorWindowController performSelectorOnMainThread:@selector(showMessage:)
+                                            withObject:line
+                                         waitUntilDone:NO];
 }
 
 - (void)statusUpdate:(NSString *)status {
