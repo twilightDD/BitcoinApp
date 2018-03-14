@@ -12,6 +12,9 @@
 
 @interface SOXErrorWindowController : NSWindowController
 
+
+- (instancetype)initWithWindowNibName:(NSNibName)windowNibName windowTitle:(NSString *)windowTitle;
+
 - (void)showErrorMessage:(SOXErrorMessage_BitcoinDE *)errorMessage;
 
 @end

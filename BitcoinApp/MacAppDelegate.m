@@ -16,6 +16,7 @@
 @interface MacAppDelegate ()
 
 @property (readwrite, strong, nonatomic) SOXErrorWindowController *errorWindowController;
+@property (readwrite, strong, nonatomic) SOXErrorWindowController *eventWindowController;
 
 - (IBAction)saveAction:(id)sender;
 
@@ -51,7 +52,8 @@
     DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
     { //Prepare error log window
-        self.errorWindowController = [[SOXErrorWindowController alloc] initWithWindowNibName:@"SOXErrorWindowController"];
+        self.errorWindowController = [[SOXErrorWindowController alloc] initWithWindowNibName:@"SOXErrorWindowController" windowTitle:@"Errors"];
+        self.eventWindowController = [[SOXErrorWindowController alloc] initWithWindowNibName:@"SOXErrorWindowController" windowTitle:@"Events"];
     }
 
 }
@@ -70,6 +72,10 @@
 #pragma mark - Action methods
 - (IBAction)showErrorLogWindow:(NSMenuItem *)sender {
     [self.errorWindowController showWindow:self];
+}
+
+- (IBAction)showEventLogWindow:(NSMenuItem *)sender {
+    [self.eventWindowController showWindow:self];
 }
 
 #pragma mark - Core Data stack

@@ -36,6 +36,15 @@
 }
 
 #pragma mark - Public methods
+- (instancetype)initWithWindowNibName:(NSNibName)windowNibName windowTitle:(NSString *)windowTitle {
+    self = [super initWithWindowNibName:windowNibName];
+
+    self.window.title = windowTitle;
+    [self.window setIsVisible:NO];
+
+    return self;
+}
+
 - (void)showErrorMessage:(SOXErrorMessage_BitcoinDE *)errorMessage {
 //    if (!self.window.isVisible) {
         [self showWindow:nil];
