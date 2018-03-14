@@ -89,4 +89,24 @@
     [self updateErrorTextView];
 }
 
+- (IBAction)saveLogAction:(NSButton *)sender {
+
+    NSString *desktopDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+
+    NSString *dateString = [[NSDate date] description];
+    NSString *fileName = [self.window.title stringByAppendingString:dateString];
+    NSString *filePath = [desktopDirectoryPath stringByAppendingPathComponent:fileName];
+    NSString *filePathWithExtension = [filePath stringByAppendingPathExtension:@"txt"];
+
+    NSError *writeError = nil;
+    [self.errorLogString writeToFile:filePathWithExtension
+                          atomically:YES
+                            encoding:NSStringEncodingConversionAllowLossy
+                               error:&writeError];
+    if (writeError) {
+        NSLog(@"WRITE ERROR %@", writeError.localizedDescription);
+    }
+}
+
+
 @end

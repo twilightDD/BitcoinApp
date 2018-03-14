@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -21,7 +21,7 @@
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="480" height="262"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
-            <view key="contentView" wantsLayer="YES" misplaced="YES" id="se5-gp-TjO">
+            <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="480" height="262"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -65,13 +65,27 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yw8-hm-F29">
+                        <rect key="frame" x="21" y="18" width="44" height="25"/>
+                        <buttonCell key="cell" type="roundTextured" title="Save" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="obW-MB-DS3">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="saveLogAction:" target="-2" id="wkm-f3-8mO"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="yw8-hm-F29" firstAttribute="leading" secondItem="P8f-Cj-bPe" secondAttribute="leading" id="0BM-EI-Z58"/>
+                    <constraint firstItem="zpX-cs-ojE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yw8-hm-F29" secondAttribute="trailing" constant="8" symbolic="YES" id="0uv-2j-4Xm"/>
                     <constraint firstAttribute="bottom" secondItem="zpX-cs-ojE" secondAttribute="bottom" constant="20" id="7TL-Uz-nZ8"/>
                     <constraint firstItem="zpX-cs-ojE" firstAttribute="top" secondItem="owk-u5-hPs" secondAttribute="bottom" constant="8" id="9II-Kq-4uo"/>
                     <constraint firstItem="owk-u5-hPs" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="ChS-oG-G0p"/>
+                    <constraint firstItem="yw8-hm-F29" firstAttribute="baseline" secondItem="zpX-cs-ojE" secondAttribute="baseline" id="F8c-M1-kgP"/>
                     <constraint firstAttribute="trailing" secondItem="owk-u5-hPs" secondAttribute="trailing" constant="20" id="Ng4-nx-KxQ"/>
                     <constraint firstAttribute="trailing" secondItem="zpX-cs-ojE" secondAttribute="trailing" constant="20" id="ZS5-Bz-eJX"/>
+                    <constraint firstItem="yw8-hm-F29" firstAttribute="top" secondItem="P8f-Cj-bPe" secondAttribute="bottom" constant="9" id="cuk-TR-a8X"/>
                     <constraint firstItem="owk-u5-hPs" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="y51-UW-HxI"/>
                 </constraints>
             </view>
