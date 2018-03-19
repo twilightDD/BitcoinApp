@@ -19,14 +19,14 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="480" height="262"/>
+            <rect key="contentRect" x="196" y="240" width="488" height="308"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="480" height="262"/>
+                <rect key="frame" x="0.0" y="0.0" width="488" height="308"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zpX-cs-ojE">
-                        <rect key="frame" x="414" y="18" width="46" height="25"/>
+                        <rect key="frame" x="422" y="18" width="46" height="25"/>
                         <buttonCell key="cell" type="roundTextured" title="Clear" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KQa-J1-2ob">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -36,32 +36,31 @@
                         </connections>
                     </button>
                     <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="owk-u5-hPs">
-                        <rect key="frame" x="20" y="50" width="440" height="192"/>
+                        <rect key="frame" x="20" y="50" width="448" height="238"/>
                         <clipView key="contentView" id="VIx-Uw-pjW">
-                            <rect key="frame" x="1" y="1" width="423" height="190"/>
+                            <rect key="frame" x="1" y="1" width="431" height="236"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="P8f-Cj-bPe">
-                                    <rect key="frame" x="0.0" y="0.0" width="423" height="190"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="431" height="236"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="423" height="190"/>
-                                    <size key="maxSize" width="463" height="10000000"/>
+                                    <size key="minSize" width="431" height="236"/>
+                                    <size key="maxSize" width="647" height="10000000"/>
                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                 </textView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </clipView>
                         <constraints>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="ISw-Ie-h5a"/>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="XGQ-kK-SSv"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="PIM-wz-oNx"/>
                         </constraints>
                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="AtJ-h5-9KV">
                             <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="b8w-00-ngG">
-                            <rect key="frame" x="424" y="1" width="15" height="190"/>
+                            <rect key="frame" x="432" y="1" width="15" height="236"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
@@ -77,22 +76,21 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="yw8-hm-F29" firstAttribute="leading" secondItem="P8f-Cj-bPe" secondAttribute="leading" id="0BM-EI-Z58"/>
-                    <constraint firstItem="zpX-cs-ojE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yw8-hm-F29" secondAttribute="trailing" constant="8" symbolic="YES" id="0uv-2j-4Xm"/>
-                    <constraint firstAttribute="bottom" secondItem="zpX-cs-ojE" secondAttribute="bottom" constant="20" id="7TL-Uz-nZ8"/>
-                    <constraint firstItem="zpX-cs-ojE" firstAttribute="top" secondItem="owk-u5-hPs" secondAttribute="bottom" constant="8" id="9II-Kq-4uo"/>
-                    <constraint firstItem="owk-u5-hPs" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="ChS-oG-G0p"/>
-                    <constraint firstItem="yw8-hm-F29" firstAttribute="baseline" secondItem="zpX-cs-ojE" secondAttribute="baseline" id="F8c-M1-kgP"/>
-                    <constraint firstAttribute="trailing" secondItem="owk-u5-hPs" secondAttribute="trailing" constant="20" id="Ng4-nx-KxQ"/>
-                    <constraint firstAttribute="trailing" secondItem="zpX-cs-ojE" secondAttribute="trailing" constant="20" id="ZS5-Bz-eJX"/>
-                    <constraint firstItem="yw8-hm-F29" firstAttribute="top" secondItem="P8f-Cj-bPe" secondAttribute="bottom" constant="9" id="cuk-TR-a8X"/>
-                    <constraint firstItem="owk-u5-hPs" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="y51-UW-HxI"/>
+                    <constraint firstItem="owk-u5-hPs" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" symbolic="YES" id="6q6-QU-qMo"/>
+                    <constraint firstAttribute="trailing" secondItem="owk-u5-hPs" secondAttribute="trailing" constant="20" symbolic="YES" id="8Vn-9Q-uao"/>
+                    <constraint firstItem="owk-u5-hPs" firstAttribute="trailing" secondItem="zpX-cs-ojE" secondAttribute="trailing" id="DcI-CC-c46"/>
+                    <constraint firstItem="zpX-cs-ojE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yw8-hm-F29" secondAttribute="trailing" constant="100" id="M1r-kl-8WE"/>
+                    <constraint firstItem="owk-u5-hPs" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" symbolic="YES" id="bTC-fI-ET8"/>
+                    <constraint firstItem="yw8-hm-F29" firstAttribute="baseline" secondItem="zpX-cs-ojE" secondAttribute="baseline" id="fzu-K4-dvH"/>
+                    <constraint firstItem="yw8-hm-F29" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="21" id="jFZ-RR-fWv"/>
+                    <constraint firstAttribute="bottom" secondItem="yw8-hm-F29" secondAttribute="bottom" constant="20" symbolic="YES" id="l63-7H-xtM"/>
+                    <constraint firstItem="yw8-hm-F29" firstAttribute="top" secondItem="owk-u5-hPs" secondAttribute="bottom" constant="8" symbolic="YES" id="yer-Rt-FIn"/>
                 </constraints>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="-139" y="126"/>
+            <point key="canvasLocation" x="-135" y="149"/>
         </window>
     </objects>
 </document>
