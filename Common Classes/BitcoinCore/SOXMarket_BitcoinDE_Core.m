@@ -104,26 +104,27 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
         sharedCore.apiKeys = @[@"ac80762c443ee36c6d8edea28be22a52"];
         sharedCore.apiSecrets = @[@"9b7076a0bea40908af7c71cfb62bfdedf6dfb42f"];
 #else
-        sharedCore.apiKeys = @[@"db8b38266d2f955fa96f19064f60a4c8"
-                               ,@"297e59623f025f4ec408ae3746c2d0c0"
-                               ,@"121055f18ae3145a4967a2a81fd27588"
-                               ,@"27a05ba57a576673361f553027624924"
-                               ,@"5f10e0d81135be6b66b2351415d45d56"
-                               ,@"8a5c1797d474d1df1fdb5670d294c87d"
-                               ,@"fe685a64ad93ed913c9844a9bdba22a6"
-                               ,@"93410617ae2b3f2ae21b570b384937da"
-                               ,@"57af63fdb27ec51e8c573d69c6864a54"
-                               ,@"4510b2f92c2007bc1496b98079beae7c"];
-        sharedCore.apiSecrets = @[@"a4ebc1d021b88bba3c8b79ba4b93b1045dea0cc7"
-                                  ,@"a34b05518343374df7d847e5ff62f27ff784ecba"
-                                  ,@"24c09a5164bb0c9a0d1c75df0bd24750a95e24a4"
-                                  ,@"5c623ea45829ca42c5d848eb416c085e79666f35"
-                                  ,@"cdf43478f26bd444c8bc4a152a3a8f1eb4de1882"
-                                  ,@"ee5d6d5bea014abb30c2997ffa17de2499ccf43a"
-                                  ,@"2e34691411be451be978a6d501e100e2bafe74bd"
-                                  ,@"ae5f5e1914a617414b5f8314b26fa348727c2ef1"
-                                  ,@"bcc14a72ae6de0ae6b090c532c33cfe55bc2bc73"
-                                  ,@"db5ee0f6a25847b8efc4e899c2fb85c567906a38"];
+        // last change: 25.06.2018
+        sharedCore.apiKeys = @[@"682a336bd3b7a57cac62a609698719cf"
+                               ,@"6c231fc2f51d581b05391fea32f8993c"
+                               ,@"12bae445a73ea666d179d34406af7805"
+                               ,@"6a5a9aa31af7363f59d9e91de1deccbe"
+                               ,@"1cd6d2bad928fd6ab4cef2ce8f19e791"
+                               ,@"b03655d9edbab687de87ee12405985a4"
+                               ,@"484e31d7b736853725e7ff0e98f6c705"
+                               ,@"06b1cee8e3e73aaf6ad45659a6cbf580"
+                               ,@"b7fb7136c3314a4d698c68e1df05fe0a"
+                               ,@"281f159c4dfd18e80b198c2709eb1942"];
+        sharedCore.apiSecrets = @[@"1e5ee72479b48283d5e795bdbb144119bcab2d78"
+                                  ,@"ac577e6f200a5c0043b537596fd0e302786a5218"
+                                  ,@"232200877339400ac3e9a94d0482848564f793af"
+                                  ,@"98c93aaf5e9d9e901c42c965ff6b040509843c13"
+                                  ,@"c8f540c117073965b111ad926586e39d4d96531e"
+                                  ,@"6270272446b1332d9c45db7f11db47612c939fdb"
+                                  ,@"73223048fb087f4fee004874ebda488c113aa2c5"
+                                  ,@"4c8c6b938933409cfdb009d1d87b967fb10bbfdf"
+                                  ,@"c0704f3e2f637c9849a263df6731f466db87a6bc"
+                                  ,@"c4ac430f5f57cfada0a0413a4ea3b8b7e2335dff"];
 #endif
         sharedCore.api_Pointer = 0;
         sharedCore.api_PointerLimit = sharedCore.apiKeys.count;
