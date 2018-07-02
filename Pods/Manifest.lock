@@ -5,19 +5,22 @@ PODS:
   - CocoaLumberjack/Default (3.2.0)
   - CocoaLumberjack/Extensions (3.2.0):
     - CocoaLumberjack/Default
+  - SAMKeychain (1.5.3)
   - socket.IO (0.5.2):
     - SocketRocket (~> 0.2)
   - SocketRocket (0.5.1)
 
 DEPENDENCIES:
   - CocoaLumberjack
+  - SAMKeychain
   - socket.IO
 
 SPEC CHECKSUMS:
   CocoaLumberjack: 9b4aed7073d242f29cc2f62068d995faf67f703a
+  SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   socket.IO: eaaaea33481d8a81d8f78e331f0c72ba44758036
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
 
-PODFILE CHECKSUM: 4f4033452bde8866751720ed86e787777bbe87ec
+PODFILE CHECKSUM: 0df9db3388dc9be7817ee50d03e922f89c9ad368
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.4.0

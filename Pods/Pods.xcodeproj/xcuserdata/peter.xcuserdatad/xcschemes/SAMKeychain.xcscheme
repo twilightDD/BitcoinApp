@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "13ED48F77BE171F634B33B2C630864FA"
-               BlueprintName = "Pods-mac BitcoinApp"
+               BlueprintIdentifier = "0A6C57A982FA4BBF86A336ACE33DD90C"
+               BlueprintName = "SAMKeychain"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libPods-mac BitcoinApp.a">
+               BuildableName = "libSAMKeychain.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
