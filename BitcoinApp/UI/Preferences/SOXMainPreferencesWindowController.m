@@ -30,6 +30,7 @@
 @property (strong) IBOutlet NSButton *addKeySecretPairButton;
 
 @property (strong) IBOutlet NSButton *removeKeySecretPairButton;
+@property (strong) IBOutlet NSTableView *tableView;
 
 @end
 
@@ -40,7 +41,7 @@
     [super windowDidLoad];
 
     self.keysAndSecrets = [[NSMutableArray array] init];
-    for (NSUInteger a = 0; a<10; a++) {
+    for (NSUInteger a = 0; a<8; a++) {
         Doof *newDoof = [[Doof alloc] init];
         newDoof.apiKey = [NSString stringWithFormat:@"key %tu", a];
         newDoof.apiSecret = [NSString stringWithFormat:@"secret %tu", a];
@@ -48,24 +49,7 @@
         [self.keysAndSecrets addObject:newDoof];
     }
 
-//    self.keysAndSecrets = [NSMutableArray arrayWithObjects:@"1",@"2",@"3", nil];
-
     [self.keysAndSecretsArrayController rearrangeObjects];
-//
-
-
-
-//    self.keysAndSecrets = [NSMutableArray arrayWithObjects:
-//                           [NSDictionary dictionaryWithObject:@"secret1" forKey:@"key1"]
-//                           , [NSDictionary dictionaryWithObject:@"secret2" forKey:@"key2"]
-//                           , [NSDictionary dictionaryWithObject:@"secret3" forKey:@"key3"]
-//                           , [NSDictionary dictionaryWithObject:@"secret4" forKey:@"key4"]
-//                           , nil];
-
-}
-
--(void)showWindow:(id)sender {
-    [super showWindow:sender];
 }
 
 #pragma mark - Action methods
@@ -75,13 +59,18 @@
         [self.keysAndSecrets addObject:newDoof];
         [self.keysAndSecretsArrayController rearrangeObjects];
 
+        [self.tableView editColumn:0
+                               row:self.keysAndSecrets.count-1
+                         withEvent:nil
+                            select:YES];
     }
-
 }
+
 - (IBAction)removeKeySecretPairButtonAction:(NSButton *)sender {
-    NSArray *selectedKeySecretPairs = self.keysAndSecretsArrayController.selectedObjects;
-    [self.keysAndSecrets removeObjectsInArray:selectedKeySecretPairs];
+    NSIndexSet *selectedRowIndexes = self.tableView.selectedRowIndexes;
+    [self.keysAndSecrets removeObjectsAtIndexes:selectedRowIndexes];
     [self.keysAndSecretsArrayController rearrangeObjects];
-
+    [self.tableView deselectAll:nil];
 }
+
 @end
