@@ -27,10 +27,15 @@
 
 @property (strong, nonatomic) NSMutableArray *keysAndSecrets;
 @property (strong) IBOutlet NSArrayController *keysAndSecretsArrayController;
-@property (strong) IBOutlet NSButton *addKeySecretPairButton;
 
-@property (strong) IBOutlet NSButton *removeKeySecretPairButton;
 @property (strong) IBOutlet NSTableView *tableView;
+@property (strong) IBOutlet NSButton *addKeySecretPairButton;
+@property (strong) IBOutlet NSButton *removeKeySecretPairButton;
+
+@property (strong) IBOutlet NSButton *saveButton;
+@property (strong) IBOutlet NSButton *dismissButton;
+
+
 
 @end
 
@@ -71,6 +76,10 @@
     [self.keysAndSecrets removeObjectsAtIndexes:selectedRowIndexes];
     [self.keysAndSecretsArrayController rearrangeObjects];
     [self.tableView deselectAll:nil];
+}
+- (IBAction)saveButtonAction:(NSButton *)sender {
+}
+- (IBAction)dismissButtonAction:(NSButtonCell *)sender {
 }
 
 @end

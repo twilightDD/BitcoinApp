@@ -9,8 +9,10 @@
         <customObject id="-2" userLabel="File's Owner" customClass="SOXMainPreferencesWindowController">
             <connections>
                 <outlet property="addKeySecretPairButton" destination="9CD-E4-3io" id="cdI-Ma-bjq"/>
+                <outlet property="dismissButton" destination="yul-yh-tGe" id="aJb-MY-NhT"/>
                 <outlet property="keysAndSecretsArrayController" destination="czZ-l1-3ln" id="cdO-91-qfp"/>
                 <outlet property="removeKeySecretPairButton" destination="b4P-Vw-xxH" id="A2s-Ga-CoP"/>
+                <outlet property="saveButton" destination="WPW-KL-4xR" id="j0G-n5-hmR"/>
                 <outlet property="tableView" destination="wr9-ba-lEe" id="NGz-YH-GmN"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
@@ -119,15 +121,40 @@
                             <action selector="removeKeySecretPairButtonAction:" target="-2" id="RbX-Fi-7zE"/>
                         </connections>
                     </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WPW-KL-4xR">
+                        <rect key="frame" x="834" y="13" width="70" height="32"/>
+                        <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hnV-S6-jfJ">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="saveButtonAction:" target="-2" id="WJ2-S7-TgF"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yul-yh-tGe">
+                        <rect key="frame" x="747" y="13" width="87" height="32"/>
+                        <buttonCell key="cell" type="push" title="Dismiss" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8co-gX-SAq">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <connections>
+                                <action selector="dismissButtonAction:" target="-2" id="GO4-IC-iGj"/>
+                            </connections>
+                        </buttonCell>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="WPW-KL-4xR" firstAttribute="top" secondItem="wr9-ba-lEe" secondAttribute="bottom" constant="31" id="CPs-pj-N4K"/>
                     <constraint firstAttribute="bottom" secondItem="b4P-Vw-xxH" secondAttribute="bottom" constant="50" id="EF7-kq-ehR"/>
                     <constraint firstItem="4m1-kn-aJ4" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" symbolic="YES" id="Glq-1D-aky"/>
+                    <constraint firstAttribute="trailing" secondItem="WPW-KL-4xR" secondAttribute="trailing" constant="20" id="VBE-I9-B2i"/>
+                    <constraint firstAttribute="bottom" secondItem="WPW-KL-4xR" secondAttribute="bottom" constant="20" id="XeF-Cl-KkO"/>
                     <constraint firstItem="9CD-E4-3io" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="19" id="aCp-2A-cy9"/>
                     <constraint firstAttribute="trailing" secondItem="4m1-kn-aJ4" secondAttribute="trailing" constant="20" symbolic="YES" id="hQ0-Pw-XsM"/>
                     <constraint firstAttribute="bottom" secondItem="9CD-E4-3io" secondAttribute="bottom" constant="51" id="m7T-Ow-yG2"/>
+                    <constraint firstItem="yul-yh-tGe" firstAttribute="centerY" secondItem="WPW-KL-4xR" secondAttribute="centerY" id="pWX-Qr-iWF"/>
                     <constraint firstItem="b4P-Vw-xxH" firstAttribute="leading" secondItem="9CD-E4-3io" secondAttribute="trailing" constant="1" id="vN3-Z2-i3b"/>
                     <constraint firstItem="b4P-Vw-xxH" firstAttribute="top" secondItem="4m1-kn-aJ4" secondAttribute="bottom" id="wj2-gR-gJI"/>
+                    <constraint firstItem="WPW-KL-4xR" firstAttribute="leading" secondItem="yul-yh-tGe" secondAttribute="trailing" constant="12" id="xNU-lE-qPK"/>
                     <constraint firstItem="4m1-kn-aJ4" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" symbolic="YES" id="yrH-Jv-viS"/>
                 </constraints>
             </view>
