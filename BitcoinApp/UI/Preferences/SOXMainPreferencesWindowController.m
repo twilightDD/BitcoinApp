@@ -8,6 +8,7 @@
 
 #import "SOXMainPreferencesWindowController.h"
 
+#import "SAMKeychain.h"
 
 @interface Doof : NSObject
 
@@ -18,14 +19,12 @@
 
 @implementation Doof
 
-- (IBAction)addKeySecretPairButton:(NSButton *)sender {
-}
 @end
 
 
 @interface SOXMainPreferencesWindowController ()
 
-@property (strong, nonatomic) NSMutableArray *keysAndSecrets;
+@property (strong, nonatomic) NSMutableArray <NSMutableDictionary*> *keysAndSecrets;
 @property (strong) IBOutlet NSArrayController *keysAndSecretsArrayController;
 
 @property (strong) IBOutlet NSTableView *tableView;
@@ -46,12 +45,15 @@
     [super windowDidLoad];
 
     self.keysAndSecrets = [[NSMutableArray array] init];
+    NSString *keyKey = @"key";
+    NSString *secretKey = @"secret";
     for (NSUInteger a = 0; a<8; a++) {
-        Doof *newDoof = [[Doof alloc] init];
-        newDoof.apiKey = [NSString stringWithFormat:@"key %tu", a];
-        newDoof.apiSecret = [NSString stringWithFormat:@"secret %tu", a];
+        NSMutableDictionary *newDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                        [NSString stringWithFormat:@"key %tu", a], keyKey
+                                        , [NSString stringWithFormat:@"secret %tu", a], secretKey
+                                        , nil];
 
-        [self.keysAndSecrets addObject:newDoof];
+        [self.keysAndSecrets addObject:newDict];
     }
 
     [self.keysAndSecretsArrayController rearrangeObjects];
@@ -60,8 +62,14 @@
 #pragma mark - Action methods
 - (IBAction)addKeySecretPairButtonAction:(NSButton *)sender {
     if (self.keysAndSecrets.count < 10) {
-        Doof *newDoof = [[Doof alloc] init];
-        [self.keysAndSecrets addObject:newDoof];
+        NSString *keyKey = @"key";
+        NSString *secretKey = @"secret";
+        NSUInteger count = self.keysAndSecrets.count;
+        NSMutableDictionary *newDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                        [NSString stringWithFormat:@"key %tu", count], keyKey
+                                        , [NSString stringWithFormat:@"secret %tu", count], secretKey
+                                        , nil];
+        [self.keysAndSecrets addObject:newDict];
         [self.keysAndSecretsArrayController rearrangeObjects];
 
         [self.tableView editColumn:0
@@ -78,8 +86,29 @@
     [self.tableView deselectAll:nil];
 }
 - (IBAction)saveButtonAction:(NSButton *)sender {
+    NSError *error = nil;
+
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self.keysAndSecrets
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    [SAMKeychain setPasswordData:jsonData
+                      forService:@"BitcoinService"
+                         account:@"BitcounAccount"];
 }
+
 - (IBAction)dismissButtonAction:(NSButtonCell *)sender {
+    NSError *error = nil;
+
+    NSData *data = [SAMKeychain passwordDataForService:@"BitcoinService"
+                                account:@"BitcounAccount"];
+    if (data) {
+        NSMutableArray *array = [NSJSONSerialization JSONObjectWithData:data
+                                                                options:NSJSONReadingMutableContainers
+                                                                  error:&error];
+        self.keysAndSecrets = [array mutableCopy];
+        [self.keysAndSecretsArrayController rearrangeObjects];
+    }
+
 }
 
 @end
