@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
@@ -26,7 +26,11 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                            <connections>
+                                                <action selector="showPreferencesWindow:" target="Voe-Tx-rLC" id="XeJ-5w-G6X"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -674,7 +678,7 @@
                 <customObject id="Voe-Tx-rLC" customClass="MacAppDelegate"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="-227" y="-102"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -1640,7 +1644,7 @@
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn editable="NO" width="90" minWidth="40" maxWidth="1000" id="5J2-fg-U3a">
+                                                <tableColumn identifier="" editable="NO" width="90" minWidth="40" maxWidth="1000" id="5J2-fg-U3a">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Price">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1657,7 +1661,7 @@
                                                         <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_price" id="oS0-E4-Kk3"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="5bU-JA-imQ">
+                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="5bU-JA-imQ">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Max. Amount">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1678,7 +1682,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="gdz-ZB-REf">
+                                                <tableColumn identifier="" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="gdz-ZB-REf">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Max. Volume">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1695,7 +1699,7 @@
                                                         <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_maxVolume" id="cza-50-EUc"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="UPh-EJ-q2O">
+                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="UPh-EJ-q2O">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Min. Amount">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1716,7 +1720,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="ZJI-GQ-9iw">
+                                                <tableColumn identifier="" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="ZJI-GQ-9iw">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Min. Volume">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1733,7 +1737,7 @@
                                                         <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_minVolume" id="rpE-42-Tgh"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="140" minWidth="10" maxWidth="3.4028234663852886e+38" id="i1d-J7-uwz">
+                                                <tableColumn identifier="" editable="NO" width="140" minWidth="10" maxWidth="3.4028234663852886e+38" id="i1d-J7-uwz">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Payment options">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1754,7 +1758,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="40" minWidth="10" maxWidth="3.4028234663852886e+38" id="zyz-M6-5GS">
+                                                <tableColumn identifier="" editable="NO" width="40" minWidth="10" maxWidth="3.4028234663852886e+38" id="zyz-M6-5GS">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="type">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1912,7 +1916,7 @@
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn editable="NO" width="40" minWidth="40" maxWidth="1000" id="T6P-2d-aZO">
+                                                <tableColumn identifier="" editable="NO" width="40" minWidth="40" maxWidth="1000" id="T6P-2d-aZO">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="currency">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1933,7 +1937,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="40" minWidth="40" maxWidth="1000" id="i86-vH-MYd">
+                                                <tableColumn identifier="" editable="NO" width="40" minWidth="40" maxWidth="1000" id="i86-vH-MYd">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="type">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1953,7 +1957,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="9ff-Ke-frs">
+                                                <tableColumn identifier="" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="9ff-Ke-frs">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="price">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1974,7 +1978,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="a7f-p9-2VM">
+                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="a7f-p9-2VM">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="max_amount">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1995,7 +1999,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="CL9-A3-qKx">
+                                                <tableColumn identifier="" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="CL9-A3-qKx">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="max_volume">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2016,7 +2020,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="tWX-0r-NaC">
+                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="tWX-0r-NaC">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="min_amount">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2037,7 +2041,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="90" minWidth="40" maxWidth="1000" id="1L4-9n-cDS">
+                                                <tableColumn identifier="" editable="NO" width="90" minWidth="40" maxWidth="1000" id="1L4-9n-cDS">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="min_volume">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2058,7 +2062,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="Btb-GV-QJk">
+                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="Btb-GV-QJk">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="created_at">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2078,7 +2082,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="bq1-PX-EAf">
+                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="bq1-PX-EAf">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="end_datetime">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2838,7 +2842,7 @@ Gw
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn editable="NO" width="120" minWidth="40" maxWidth="1000" id="eh3-HK-OCG">
+                                                <tableColumn identifier="" editable="NO" width="120" minWidth="40" maxWidth="1000" id="eh3-HK-OCG">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="date">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2870,7 +2874,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.tradeDetails_Trade_id" id="fP0-wO-mcf"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="80" minWidth="80" maxWidth="1000" id="1zU-O8-OQu">
+                                                <tableColumn identifier="" editable="NO" width="80" minWidth="80" maxWidth="1000" id="1zU-O8-OQu">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="type">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -3013,7 +3017,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.tradeDetails_Euro_after_fee" id="3ij-ul-cbK"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn width="1" minWidth="1" maxWidth="1" id="OzP-ju-tIh" userLabel="Empty column">
+                                                <tableColumn identifier="" width="1" minWidth="1" maxWidth="1" id="OzP-ju-tIh" userLabel="Empty column">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -3171,12 +3175,12 @@ Gw
         <scene sceneID="UM8-a9-Vdn">
             <objects>
                 <viewController storyboardIdentifier="CreateNewOrderIdentifier" id="UMb-sB-suB" customClass="SOXCreateNewOrderViewController" sceneMemberID="viewController">
-                    <view key="view" id="1na-89-Udh">
-                        <rect key="frame" x="0.0" y="0.0" width="731" height="336"/>
+                    <view key="view" misplaced="YES" id="1na-89-Udh">
+                        <rect key="frame" x="0.0" y="0.0" width="730" height="336"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="aWc-gU-d53">
-                                <rect key="frame" x="18" y="297" width="695" height="19"/>
+                                <rect key="frame" x="18" y="297" width="694" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="750" constant="100" id="GVl-e8-flT"/>
                                 </constraints>
@@ -3187,7 +3191,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="zII-rh-hZI">
-                                <rect key="frame" x="30" y="240" width="118" height="17"/>
+                                <rect key="frame" x="30" y="240" width="117" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="5Hh-V6-pRE"/>
                                 </constraints>
@@ -3198,7 +3202,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="ZMe-eq-kHL">
-                                <rect key="frame" x="154" y="237" width="120" height="22"/>
+                                <rect key="frame" x="153" y="237" width="120" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="QhG-9S-MIe"/>
                                 </constraints>
@@ -3217,7 +3221,7 @@ Gw
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="C7b-w6-4AT">
-                                <rect key="frame" x="280" y="240" width="154" height="17"/>
+                                <rect key="frame" x="279" y="240" width="154" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="Zg9-Xu-a5I"/>
                                 </constraints>
@@ -3228,7 +3232,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Gf2-SM-5g3">
-                                <rect key="frame" x="30" y="210" width="118" height="17"/>
+                                <rect key="frame" x="30" y="210" width="117" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="8Tc-gZ-nEp"/>
                                 </constraints>
@@ -3239,7 +3243,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Bqf-Fe-k9G">
-                                <rect key="frame" x="154" y="207" width="120" height="22"/>
+                                <rect key="frame" x="153" y="207" width="120" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="lvR-e7-Gp5"/>
                                 </constraints>
@@ -3258,7 +3262,7 @@ Gw
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="f6Y-1R-M4X">
-                                <rect key="frame" x="280" y="210" width="154" height="17"/>
+                                <rect key="frame" x="279" y="210" width="154" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="Y2K-0H-ajz"/>
                                 </constraints>
@@ -3269,7 +3273,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="tOu-s3-kGk">
-                                <rect key="frame" x="30" y="180" width="118" height="17"/>
+                                <rect key="frame" x="30" y="180" width="117" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="0Dn-Xl-BuI"/>
                                 </constraints>
@@ -3280,7 +3284,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="DMa-qt-pqL">
-                                <rect key="frame" x="154" y="177" width="120" height="22"/>
+                                <rect key="frame" x="153" y="177" width="120" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="btM-QD-IcI"/>
                                 </constraints>
@@ -3299,7 +3303,7 @@ Gw
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="3LD-JI-7kF">
-                                <rect key="frame" x="280" y="180" width="154" height="17"/>
+                                <rect key="frame" x="279" y="180" width="154" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="6Vl-gx-jLj"/>
                                 </constraints>
@@ -3310,7 +3314,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <box horizontalCompressionResistancePriority="1000" title="Options" translatesAutoresizingMaskIntoConstraints="NO" id="kfE-Jk-12m">
-                                <rect key="frame" x="449" y="59" width="265" height="230"/>
+                                <rect key="frame" x="448" y="59" width="265" height="230"/>
                                 <view key="contentView" id="Yxd-wM-TZl">
                                     <rect key="frame" x="2" y="2" width="261" height="213"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3441,7 +3445,7 @@ Gw
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="w8c-KB-of4">
-                                <rect key="frame" x="546" y="13" width="171" height="32"/>
+                                <rect key="frame" x="545" y="13" width="171" height="32"/>
                                 <buttonCell key="cell" type="push" title="Create Buy/Sell Order" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="db6-Ic-HPL">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -3452,7 +3456,7 @@ Gw
                                 </connections>
                             </button>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="9u6-HK-LcK">
-                                <rect key="frame" x="32" y="139" width="402" height="17"/>
+                                <rect key="frame" x="32" y="139" width="401" height="17"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Buy Hinweis auf PaymentOption über Webeinstellung" id="8GY-lH-553">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -3910,7 +3914,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fno-wR-f3q">
-                                <rect key="frame" x="376" y="13" width="88" height="32"/>
+                                <rect key="frame" x="377" y="13" width="87" height="32"/>
                                 <buttonCell key="cell" type="push" title="Buy/sell" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UN9-n3-Xcy">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -4178,7 +4182,7 @@ Gw
                                                         <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.successfullyFinishedAt" id="pwm-AS-dDj"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="40" minWidth="40" maxWidth="1000" id="dqm-22-bHF">
+                                                <tableColumn identifier="" editable="NO" width="40" minWidth="40" maxWidth="1000" id="dqm-22-bHF">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="type">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -4194,7 +4198,7 @@ Gw
                                                         <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.type" id="OJp-Yf-Zxq"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="120" minWidth="40" maxWidth="1000" id="4MZ-GR-MVY">
+                                                <tableColumn identifier="" editable="NO" width="120" minWidth="40" maxWidth="1000" id="4MZ-GR-MVY">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="amount">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -4249,7 +4253,7 @@ Gw
                                                         <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.volume" id="Ujb-ep-A2A"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="Sq4-67-wDP">
+                                                <tableColumn identifier="" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="Sq4-67-wDP">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Fee Euro">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -4270,7 +4274,7 @@ Gw
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="oao-Re-rUN">
+                                                <tableColumn identifier="" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="oao-Re-rUN">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Fee Coins">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>

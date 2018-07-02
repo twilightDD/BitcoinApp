@@ -11,12 +11,13 @@
 #import <Crashlytics/Crashlytics.h>
 
 #import "SOXLogWindowController.h"
-
+#import "SOXMainPreferencesWindowController.h"
 
 @interface MacAppDelegate ()
 
 @property (readwrite, strong, nonatomic) SOXLogWindowController *errorWindowController;
 @property (readwrite, strong, nonatomic) SOXLogWindowController *eventWindowController;
+@property (readwrite, strong, nonatomic) SOXMainPreferencesWindowController *preferenceWindowController;
 
 - (IBAction)saveAction:(id)sender;
 
@@ -56,6 +57,8 @@
                                                                                windowTitle:@"Errors"];
         self.eventWindowController = [[SOXLogWindowController alloc] initWithWindowNibName:SOXLogWindowControllerNibKey
                                                                                windowTitle:@"Events"];
+        self.preferenceWindowController = [[SOXMainPreferencesWindowController alloc] initWithWindowNibName:@"SOXMainPreferencesWindowController"
+                                                                                                windowTitle:@"Preferences"];
     }
 
 }
@@ -78,6 +81,10 @@
 
 - (IBAction)showEventLogWindow:(NSMenuItem *)sender {
     [self.eventWindowController showWindow:self];
+}
+
+- (IBAction)showPreferencesWindow:(NSMenuItem *)sender {
+    [self.preferenceWindowController showWindow:self];
 }
 
 #pragma mark - Core Data stack

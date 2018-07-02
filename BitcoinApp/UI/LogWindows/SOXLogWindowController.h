@@ -6,15 +6,15 @@
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import "SOXWindowController.h"
 
 @class SOXErrorMessage_BitcoinDE;
 
 static NSString *SOXLogWindowControllerNibKey = @"SOXLogWindowController";
 
-@interface SOXLogWindowController : NSWindowController
+@interface SOXLogWindowController : SOXWindowController
 
-- (instancetype)initWithWindowNibName:(NSNibName)windowNibName windowTitle:(NSString *)windowTitle;
+
 
 - (void)showErrorMessage:(SOXErrorMessage_BitcoinDE *)errorMessage;
 - (void)showMessage:(NSString *)messageString;
