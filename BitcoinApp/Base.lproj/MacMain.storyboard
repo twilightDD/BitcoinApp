@@ -2125,8 +2125,8 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
-                            <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="djv-Fe-LAU" userLabel="SpinningBackgroundView">
-                                <rect key="frame" x="20" y="8" width="495" height="249"/>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="djv-Fe-LAU" userLabel="SpinningBackgroundView">
+                                <rect key="frame" x="20" y="8" width="596" height="249"/>
                                 <subviews>
                                     <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="sQ4-6W-phR">
                                         <rect key="frame" x="290" y="117" width="16" height="16"/>
@@ -3175,7 +3175,7 @@ Gw
         <scene sceneID="UM8-a9-Vdn">
             <objects>
                 <viewController storyboardIdentifier="CreateNewOrderIdentifier" id="UMb-sB-suB" customClass="SOXCreateNewOrderViewController" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="1na-89-Udh">
+                    <view key="view" id="1na-89-Udh">
                         <rect key="frame" x="0.0" y="0.0" width="730" height="336"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
