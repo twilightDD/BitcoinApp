@@ -55,6 +55,8 @@
 }
 
 - (void)showMessage:(NSString *)messageString {
+    [self showWindow:nil];
+    
     self.logString = [self.logString stringByAppendingString:@"\n-----------\n"];
 
     NSString *lineWithDate = [NSString stringWithFormat:@"%@"

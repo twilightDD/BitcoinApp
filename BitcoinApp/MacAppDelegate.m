@@ -64,8 +64,23 @@
     }
 
     // startup Preferences core
+    
     [SOXPreferencesCore startupPreferencesCore];
 
+    if ([SOXPreferencesCore validKeychain] == NO) {
+        // we don't have any valid api/secret pair in keychain => don't send anything
+        // User beschimpfen
+        [self.errorWindowController showMessage: @"Keine Keychain items"];
+
+        NSAlert *alert = [[NSAlert alloc] init];
+        alert.messageText = @"No keychain items existing";
+        alert.informativeText = @"First add api information in prefs";
+        alert.alertStyle = NSAlertStyleCritical;
+        [alert runModal];
+
+        // open prefs
+        [self.preferenceWindowController showWindow:self];
+    }
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {

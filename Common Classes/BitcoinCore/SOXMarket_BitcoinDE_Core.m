@@ -705,6 +705,12 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 }
 
 + (void)startNextNSURLSessionTask {
+    if ([SOXPreferencesCore validKeychain] == NO) {
+        // we don't have any valid api/secret pair in keychain => don't send anything
+        // User beschimpfen
+
+        return;
+    }
 //    return; // KILL SWITCH
 
     SOXMarket_BitcoinDE_Core *sharedCore = [SOXMarket_BitcoinDE_Core sharedCore];

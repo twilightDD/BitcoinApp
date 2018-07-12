@@ -15,7 +15,7 @@
 #pragma mark - Interface
 @interface SOXPreferencesCore ()
 
-@property (nonatomic) BOOL validKeychain;
+@property (nonatomic) BOOL validKeychainBool;
 @property (strong, nonatomic, nonnull) NSMutableArray <NSMutableDictionary*> *keysAndSecrets;
 
 @end
@@ -30,7 +30,9 @@
 }
 
 + (BOOL)validKeychain {
-    BOOL validKeychain = [[SOXPreferencesCore sharedCore] validKeychain];
+//    return NO; // Test switch
+
+    BOOL validKeychain = [[SOXPreferencesCore sharedCore] validKeychainBool];
     return validKeychain;
 }
 
@@ -40,14 +42,27 @@
 }
 
 + (NSString *)apiKeyAtIndex:(NSUInteger)index {
-    NSMutableDictionary *keysAndSecretDictionary = [[SOXPreferencesCore sharedCore].keysAndSecrets objectAtIndex:index];
-    NSString *key = [keysAndSecretDictionary objectForKey:APIUserKey];
+    NSString *key = @"computer sagt nein zu key";
+
+    NSMutableArray *keysAndSecrets = [SOXPreferencesCore sharedCore].keysAndSecrets;
+
+    if (keysAndSecrets.count >=  1) {
+        NSMutableDictionary *keysAndSecretDictionary = [[SOXPreferencesCore sharedCore].keysAndSecrets objectAtIndex:index];
+        key = [keysAndSecretDictionary objectForKey:APIUserKey];
+    }
+
     return key;
 }
 
 + (NSString *)apiSecretAtIndex:(NSUInteger)index {
-    NSMutableDictionary *keysAndSecretDictionary = [[SOXPreferencesCore sharedCore].keysAndSecrets objectAtIndex:index];
-    NSString *secret = [keysAndSecretDictionary objectForKey:APISecretKey];
+    NSString *secret = @"computer sagt nein zu secret";
+
+    NSMutableArray *keysAndSecrets = [SOXPreferencesCore sharedCore].keysAndSecrets;
+
+    if (keysAndSecrets.count >=  1) {
+        NSMutableDictionary *keysAndSecretDictionary = [[SOXPreferencesCore sharedCore].keysAndSecrets objectAtIndex:index];
+        secret = [keysAndSecretDictionary objectForKey:APISecretKey];
+    }
     return secret;
 }
 
@@ -61,6 +76,7 @@
         sharedCore = [[self class] new];
         sharedCore.keysAndSecrets = [NSMutableArray array];
         [sharedCore loadFromKeychain];
+
     });
 
     return sharedCore;
@@ -70,6 +86,8 @@
 
 #pragma mark | Keychain methods
 - (void)loadFromKeychain {
+    self.validKeychainBool = NO;
+
     NSError *error = nil;
 
     NSData *data = [SAMKeychain passwordDataForService:@"BitcoinService"
@@ -79,6 +97,13 @@
                                                                 options:NSJSONReadingMutableContainers
                                                                   error:&error];
         self.keysAndSecrets = [array mutableCopy];
+
+        // TODO: check for _really_ valid keychain items!
+        // - lenght
+        // - only lowerCases or figures
+        if (self.keysAndSecrets.count > 0) {
+            self.validKeychainBool = YES;
+        }
     }
     else {
         self.keysAndSecrets = [NSMutableArray array];
