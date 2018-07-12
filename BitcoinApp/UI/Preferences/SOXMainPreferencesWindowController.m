@@ -54,6 +54,9 @@
         self.keysAndSecrets = [array mutableCopy];
         [self.keysAndSecretsArrayController rearrangeObjects];
     }
+    else {
+        self.keysAndSecrets = [NSMutableArray array];
+    }
 }
 
 - (void)saveToKeychain {
@@ -69,7 +72,7 @@
 
 #pragma mark - Action methods
 - (IBAction)addKeySecretPairButtonAction:(NSButton *)sender {
-    if (self.keysAndSecrets.count < 10) {
+    if (self.keysAndSecrets.count < 11) {
         NSMutableDictionary *newDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                         [NSString stringWithFormat:@"enter key"], APIUserKey
                                         , [NSString stringWithFormat:@"enter secret"], APISecretKey
