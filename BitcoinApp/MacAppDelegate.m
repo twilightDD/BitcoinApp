@@ -10,6 +10,8 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
+#import "SOXPreferencesCore.h"
+
 #import "SOXLogWindowController.h"
 #import "SOXMainPreferencesWindowController.h"
 
@@ -60,6 +62,9 @@
         self.preferenceWindowController = [[SOXMainPreferencesWindowController alloc] initWithWindowNibName:@"SOXMainPreferencesWindowController"
                                                                                                 windowTitle:@"Preferences"];
     }
+
+    // startup Preferences core
+    [SOXPreferencesCore startupPreferencesCore];
 
 }
 

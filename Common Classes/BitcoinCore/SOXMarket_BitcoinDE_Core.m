@@ -9,6 +9,9 @@
 #import "SOXMarket_BitcoinDE_Core.h"
 
 #import "MacAppDelegate.h"
+
+#import "SOXPreferencesCore.h"
+
 #import "SOXLogWindowController.h"
 
 #import "SOXKeys_BitcoinDE.h"
@@ -55,8 +58,9 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 @property (copy, nonatomic) NSString *api_key;
 @property (copy, nonatomic) NSString *api_secret;
 @property (nonatomic) NSUInteger api_Pointer;
-@property (strong, nonatomic) NSArray *apiKeys;
-@property (strong, nonatomic) NSArray *apiSecrets;
+// Keychain
+//@property (strong, nonatomic) NSArray *apiKeys;
+//@property (strong, nonatomic) NSArray *apiSecrets;
 @property (nonatomic) NSUInteger api_PointerLimit;
 
 //@property (weak, nonatomic) id delegateForRequests;
@@ -100,34 +104,36 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
         sharedCore.networkRequestCounter = 0;
         sharedCore.maxCredits = 0;
 
+        // Keychain
 #if PETER
-        sharedCore.apiKeys = @[@"ac80762c443ee36c6d8edea28be22a52"];
-        sharedCore.apiSecrets = @[@"9b7076a0bea40908af7c71cfb62bfdedf6dfb42f"];
+//        sharedCore.apiKeys = @[@"ac80762c443ee36c6d8edea28be22a52"];
+//        sharedCore.apiSecrets = @[@"9b7076a0bea40908af7c71cfb62bfdedf6dfb42f"];
 #else
         // last change: 25.06.2018
-        sharedCore.apiKeys = @[@"682a336bd3b7a57cac62a609698719cf"
-                               ,@"6c231fc2f51d581b05391fea32f8993c"
-                               ,@"12bae445a73ea666d179d34406af7805"
-                               ,@"6a5a9aa31af7363f59d9e91de1deccbe"
-                               ,@"1cd6d2bad928fd6ab4cef2ce8f19e791"
-                               ,@"b03655d9edbab687de87ee12405985a4"
-                               ,@"484e31d7b736853725e7ff0e98f6c705"
-                               ,@"06b1cee8e3e73aaf6ad45659a6cbf580"
-                               ,@"b7fb7136c3314a4d698c68e1df05fe0a"
-                               ,@"281f159c4dfd18e80b198c2709eb1942"];
-        sharedCore.apiSecrets = @[@"1e5ee72479b48283d5e795bdbb144119bcab2d78"
-                                  ,@"ac577e6f200a5c0043b537596fd0e302786a5218"
-                                  ,@"232200877339400ac3e9a94d0482848564f793af"
-                                  ,@"98c93aaf5e9d9e901c42c965ff6b040509843c13"
-                                  ,@"c8f540c117073965b111ad926586e39d4d96531e"
-                                  ,@"6270272446b1332d9c45db7f11db47612c939fdb"
-                                  ,@"73223048fb087f4fee004874ebda488c113aa2c5"
-                                  ,@"4c8c6b938933409cfdb009d1d87b967fb10bbfdf"
-                                  ,@"c0704f3e2f637c9849a263df6731f466db87a6bc"
-                                  ,@"c4ac430f5f57cfada0a0413a4ea3b8b7e2335dff"];
+//        sharedCore.apiKeys = @[@"682a336bd3b7a57cac62a609698719cf"
+//                               ,@"6c231fc2f51d581b05391fea32f8993c"
+//                               ,@"12bae445a73ea666d179d34406af7805"
+//                               ,@"6a5a9aa31af7363f59d9e91de1deccbe"
+//                               ,@"1cd6d2bad928fd6ab4cef2ce8f19e791"
+//                               ,@"b03655d9edbab687de87ee12405985a4"
+//                               ,@"484e31d7b736853725e7ff0e98f6c705"
+//                               ,@"06b1cee8e3e73aaf6ad45659a6cbf580"
+//                               ,@"b7fb7136c3314a4d698c68e1df05fe0a"
+//                               ,@"281f159c4dfd18e80b198c2709eb1942"];
+//        sharedCore.apiSecrets = @[@"1e5ee72479b48283d5e795bdbb144119bcab2d78"
+//                                  ,@"ac577e6f200a5c0043b537596fd0e302786a5218"
+//                                  ,@"232200877339400ac3e9a94d0482848564f793af"
+//                                  ,@"98c93aaf5e9d9e901c42c965ff6b040509843c13"
+//                                  ,@"c8f540c117073965b111ad926586e39d4d96531e"
+//                                  ,@"6270272446b1332d9c45db7f11db47612c939fdb"
+//                                  ,@"73223048fb087f4fee004874ebda488c113aa2c5"
+//                                  ,@"4c8c6b938933409cfdb009d1d87b967fb10bbfdf"
+//                                  ,@"c0704f3e2f637c9849a263df6731f466db87a6bc"
+//                                  ,@"c4ac430f5f57cfada0a0413a4ea3b8b7e2335dff"];
 #endif
         sharedCore.api_Pointer = 0;
-        sharedCore.api_PointerLimit = sharedCore.apiKeys.count;
+        // Keychain
+        sharedCore.api_PointerLimit = [SOXPreferencesCore countOfValidKeychainItems];
     });
     return sharedCore;
 }
@@ -699,6 +705,8 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 }
 
 + (void)startNextNSURLSessionTask {
+//    return; // KILL SWITCH
+
     SOXMarket_BitcoinDE_Core *sharedCore = [SOXMarket_BitcoinDE_Core sharedCore];
 
     // Get next task
@@ -991,12 +999,16 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 
 #pragma mark | Key and Secret handling
 - (NSString *)api_key {
-    NSString *api_key = [self.apiKeys objectAtIndex:self.api_Pointer];
+    // Keychain
+//    NSString *api_key = [self.apiKeys objectAtIndex:self.api_Pointer];
+    NSString *api_key = [SOXPreferencesCore apiKeyAtIndex:self.api_Pointer];
     return api_key;
 }
 
 - (NSString *)api_secret {
-    NSString *api_secret = [self.apiSecrets objectAtIndex:self.api_Pointer];
+    // Keychain
+//    NSString *api_secret = [self.apiSecrets objectAtIndex:self.api_Pointer];
+    NSString *api_secret = [SOXPreferencesCore apiSecretAtIndex:self.api_Pointer];
     return api_secret;
 }
 

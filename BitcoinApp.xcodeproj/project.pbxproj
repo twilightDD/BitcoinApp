@@ -114,6 +114,8 @@
 		D049C4611E7721AC003CBF36 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D049C45E1E7721AC003CBF36 /* Fabric.framework */; };
 		D049C4621E7721AC003CBF36 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D049C45F1E7721AC003CBF36 /* Crashlytics.framework */; };
 		D049C4631E7721AC003CBF36 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D049C45F1E7721AC003CBF36 /* Crashlytics.framework */; };
+		D04BF87020F7E3CC004255D8 /* SOXPreferencesCore.m in Sources */ = {isa = PBXBuildFile; fileRef = D04BF86F20F7E3CC004255D8 /* SOXPreferencesCore.m */; };
+		D04BF87120F7E3CC004255D8 /* SOXPreferencesCore.m in Sources */ = {isa = PBXBuildFile; fileRef = D04BF86F20F7E3CC004255D8 /* SOXPreferencesCore.m */; };
 		D05B23D61FB76CBB004BAA6E /* SOXMarket_DefTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = D05B23D51FB76CBB004BAA6E /* SOXMarket_DefTypes.m */; };
 		D05B23D71FB76CBB004BAA6E /* SOXMarket_DefTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = D05B23D51FB76CBB004BAA6E /* SOXMarket_DefTypes.m */; };
 		D05B23DA1FB777C7004BAA6E /* SOXShortTradingPairValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D05B23D91FB777C7004BAA6E /* SOXShortTradingPairValueTransformer.m */; };
@@ -268,6 +270,8 @@
 		D049C4581E7712E6003CBF36 /* SOXHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXHash.m; sourceTree = "<group>"; };
 		D049C45E1E7721AC003CBF36 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		D049C45F1E7721AC003CBF36 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		D04BF86E20F7E3CC004255D8 /* SOXPreferencesCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXPreferencesCore.h; sourceTree = "<group>"; };
+		D04BF86F20F7E3CC004255D8 /* SOXPreferencesCore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXPreferencesCore.m; sourceTree = "<group>"; };
 		D05B23D41FB76CBB004BAA6E /* SOXMarket_DefTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXMarket_DefTypes.h; sourceTree = "<group>"; };
 		D05B23D51FB76CBB004BAA6E /* SOXMarket_DefTypes.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXMarket_DefTypes.m; sourceTree = "<group>"; };
 		D05B23D81FB777C7004BAA6E /* SOXShortTradingPairValueTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXShortTradingPairValueTransformer.h; sourceTree = "<group>"; };
@@ -537,6 +541,8 @@
 				D0A33F911F42079D0042B2A7 /* SOXMarketHelper.m */,
 				D08086791E9D0B6900373F09 /* Automatic Core */,
 				D02ED5A71E814CA600AA9448 /* Data Objects */,
+				D04BF86E20F7E3CC004255D8 /* SOXPreferencesCore.h */,
+				D04BF86F20F7E3CC004255D8 /* SOXPreferencesCore.m */,
 			);
 			path = BitcoinCore;
 			sourceTree = "<group>";
@@ -1219,6 +1225,7 @@
 				D021507620474AEC005A0932 /* SOXOrdersViewController.m in Sources */,
 				D021507720474AEC005A0932 /* SOXRates_BitcoinDE_Data.m in Sources */,
 				D021507820474AEC005A0932 /* SOXShowOrderbookData.m in Sources */,
+				D04BF87120F7E3CC004255D8 /* SOXPreferencesCore.m in Sources */,
 				D021507920474AEC005A0932 /* SOXAccountInfo_BitcoinDE_Data.m in Sources */,
 				D021507A20474AEC005A0932 /* SOXMarket_BitcoinDE_DefTypes.m in Sources */,
 				D021507B20474AEC005A0932 /* SOXDataConverter_BitcoinDE.m in Sources */,
@@ -1282,6 +1289,7 @@
 				D0331D531E7CAEFF008C0244 /* SOXOrdersViewController.m in Sources */,
 				D02ED5B21E814CF100AA9448 /* SOXRates_BitcoinDE_Data.m in Sources */,
 				D02ED5BE1E817CFE00AA9448 /* SOXShowOrderbookData.m in Sources */,
+				D04BF87020F7E3CC004255D8 /* SOXPreferencesCore.m in Sources */,
 				D02ED5AC1E814CA600AA9448 /* SOXAccountInfo_BitcoinDE_Data.m in Sources */,
 				D08086771E9CECAC00373F09 /* SOXMarket_BitcoinDE_DefTypes.m in Sources */,
 				D02ED5AE1E814CA600AA9448 /* SOXDataConverter_BitcoinDE.m in Sources */,
