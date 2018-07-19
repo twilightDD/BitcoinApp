@@ -68,6 +68,18 @@
     [self updateTextView];
 }
 
+- (void)presentErrorMessage:(SOXErrorMessage_BitcoinDE *)errorMessage {
+    [self showErrorMessage:errorMessage];
+    // we don't have any valid api/secret pair in keychain => don't send anything
+    // User beschimpfen
+
+    NSAlert *alert = [[NSAlert alloc] init];
+    alert.messageText = errorMessage.serverRequestTitle;
+    alert.informativeText = errorMessage.errorMessage;
+    alert.alertStyle = NSAlertStyleCritical;
+    [alert runModal];
+}
+
 #pragma mark - Private methods
 - (void)updateTextView {
     self.logTextView.string = self.logString;

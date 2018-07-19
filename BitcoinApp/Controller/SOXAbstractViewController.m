@@ -8,6 +8,9 @@
 
 #import "SOXAbstractViewController.h"
 
+#import "SOXLogWindowController.h"
+#import "MacAppDelegate.h"
+
 @interface SOXAbstractViewController ()
 
 @property (weak) IBOutlet NSView *spinningBackgroundView;
@@ -34,6 +37,19 @@
 - (void)disableSpinningWheel {
     self.spinningBackgroundView.hidden = YES;
     [self.circularProgressIndicator stopAnimation:nil];
+}
+
+#pragma mark - SOXMarketCoreServerRequestProtocol
+- (void)answerOfServerRequest:(NSDictionary *)answerOfServerRequest {
+    NSAssert(NO, @"Must be implemented in subClass");
+}
+
+- (void)presentErrorWithErrorDictionary:(SOXErrorMessage_BitcoinDE *)errorMessage {
+    MacAppDelegate* appDelegate = (MacAppDelegate*)[[NSApplication sharedApplication] delegate];
+    SOXLogWindowController *errorWindowController = appDelegate.errorWindowController;
+    [errorWindowController performSelectorOnMainThread:@selector(presentErrorMessage:)
+                                            withObject:errorMessage
+                                         waitUntilDone:NO];
 }
 
 @end

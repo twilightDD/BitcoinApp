@@ -72,7 +72,7 @@
 
 #pragma mark - Action methods
 - (IBAction)addKeySecretPairButtonAction:(NSButton *)sender {
-    if (self.keysAndSecrets.count < 11) {
+    if (self.keysAndSecrets.count < 10) {
         NSMutableDictionary *newDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                         [NSString stringWithFormat:@"enter key"], APIUserKey
                                         , [NSString stringWithFormat:@"enter secret"], APISecretKey

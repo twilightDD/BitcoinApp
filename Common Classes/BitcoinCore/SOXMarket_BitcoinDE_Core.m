@@ -191,6 +191,18 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 + (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
                       withParameter:(NSDictionary * _Nullable)parameterDictionary
                           respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nullable)controller {
+
+    // Check for valid apiKey/Secret-pairs in keychain
+    if ([SOXPreferencesCore validKeychain] == NO) {
+        SOXErrorMessage_BitcoinDE *errorMessage = [[SOXErrorMessage_BitcoinDE alloc] initWithServerRequestTitle:@"No keys and secrets!"];
+        errorMessage.errorMessage = @"Use Preference pane.";
+
+        [controller presentErrorWithErrorDictionary:errorMessage];
+
+        return;
+    }
+
+
     NSURLRequest * request = [self requestForServerCommandType:serverCommandType
                                                     parameters:parameterDictionary];
 

@@ -12,6 +12,8 @@
 
 #import "SOXPreferencesCore.h"
 
+#import "SOXErrorMessage_BitcoinDE.h"
+
 #import "SOXLogWindowController.h"
 #import "SOXMainPreferencesWindowController.h"
 
@@ -68,15 +70,9 @@
     [SOXPreferencesCore startupPreferencesCore];
 
     if ([SOXPreferencesCore validKeychain] == NO) {
-        // we don't have any valid api/secret pair in keychain => don't send anything
-        // User beschimpfen
-        [self.errorWindowController showMessage: @"Keine Keychain items"];
-
-        NSAlert *alert = [[NSAlert alloc] init];
-        alert.messageText = @"No keychain items existing";
-        alert.informativeText = @"First add api information in prefs";
-        alert.alertStyle = NSAlertStyleCritical;
-        [alert runModal];
+        SOXErrorMessage_BitcoinDE *errorMessage = [[SOXErrorMessage_BitcoinDE alloc] initWithServerRequestTitle:@"No keys and secrets!"];
+        errorMessage.errorMessage = @"Use Preference pane.";
+        [self.errorWindowController presentErrorMessage:errorMessage];
 
         // open prefs
         [self.preferenceWindowController showWindow:self];

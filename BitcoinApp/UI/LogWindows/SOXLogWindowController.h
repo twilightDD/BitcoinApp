@@ -19,4 +19,6 @@ static NSString *SOXLogWindowControllerNibKey = @"SOXLogWindowController";
 - (void)showErrorMessage:(SOXErrorMessage_BitcoinDE *)errorMessage;
 - (void)showMessage:(NSString *)messageString;
 
+- (void)presentErrorMessage:(SOXErrorMessage_BitcoinDE *)errorMessage;
+
 @end

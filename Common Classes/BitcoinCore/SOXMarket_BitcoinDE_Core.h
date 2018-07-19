@@ -28,6 +28,7 @@ FOUNDATION_EXPORT NSString *const _Nonnull HTTPMethodPOSTKey;
 @protocol SOXMarketCoreServerRequestProtocol <NSObject>
 
 - (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest;
+- (void)presentErrorWithErrorDictionary:(SOXErrorMessage_BitcoinDE *)errorMessage;
 
 @end
 
