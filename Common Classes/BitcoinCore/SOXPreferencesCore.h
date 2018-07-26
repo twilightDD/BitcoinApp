@@ -18,4 +18,10 @@
 + (NSString *)apiKeyAtIndex:(NSUInteger)index;
 + (NSString *)apiSecretAtIndex:(NSUInteger)index;
 
++ (BOOL)validateKey:(NSString *)key;
++ (BOOL)validateSecret:(NSString *)key;
+
++ (BOOL)saveKeysAndSecrets:(NSMutableArray <NSMutableDictionary*> *)keysAndSecrets;
++ (NSMutableArray <NSMutableDictionary*> *)keysAndSecrets;
+
 @end

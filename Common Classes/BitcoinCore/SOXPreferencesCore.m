@@ -66,6 +66,41 @@
     return secret;
 }
 
++ (NSMutableArray <NSMutableDictionary*> *)keysAndSecrets {
+    return [SOXPreferencesCore sharedCore].keysAndSecrets;
+}
+
++ (BOOL)saveKeysAndSecrets:(NSMutableArray <NSMutableDictionary*> *)keysAndSecrets{
+    SOXPreferencesCore *preferenceCore = [SOXPreferencesCore sharedCore];
+    preferenceCore.keysAndSecrets = keysAndSecrets;
+
+    BOOL success = [preferenceCore saveToKeychain];
+
+    return success;
+}
+
++ (BOOL)validateKey:(NSString *)key {
+    // 32
+    if (key.length != 32) {
+        return NO;
+    }
+
+    BOOL validateCharacterSets = [self validateCharacterSetsForString:key];
+
+    return validateCharacterSets;
+}
+
++ (BOOL)validateSecret:(NSString *)secret {
+    // 40
+    if (secret.length != 40) {
+        return NO;
+    }
+
+    BOOL validateCharacterSets = [self validateCharacterSetsForString:secret];
+
+    return validateCharacterSets;
+}
+
 #pragma mark - Private Class methods
 + (SOXPreferencesCore * _Nonnull)sharedCore {
     static SOXPreferencesCore *sharedCore;
@@ -82,7 +117,38 @@
     return sharedCore;
 }
 
++ (BOOL)validateCharacterSetsForString:(NSString *)string {
+
+    // nur Kleinbuchstaben ODER Zahlen
+    NSCharacterSet *upperCaseSet = [NSCharacterSet uppercaseLetterCharacterSet];
+    if ([string rangeOfCharacterFromSet:upperCaseSet].location != NSNotFound) {
+        return NO;
+    }
+
+    NSCharacterSet *whitespaceAndNewlineCharacterSet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    if ([string rangeOfCharacterFromSet:whitespaceAndNewlineCharacterSet].location != NSNotFound) {
+        return NO;
+    }
+
+    NSCharacterSet *illegalCharacterSet = [NSCharacterSet illegalCharacterSet];
+    if ([string rangeOfCharacterFromSet:illegalCharacterSet].location != NSNotFound) {
+        return NO;
+    }
+    
+    NSCharacterSet *punctuationCharacterSet = [NSCharacterSet punctuationCharacterSet];
+    if ([string rangeOfCharacterFromSet:punctuationCharacterSet].location != NSNotFound) {
+        return NO;
+    }
+
+    return YES;
+}
+
 #pragma mark - Private Instance methods
+
+- (BOOL)validKeychainBool {
+    BOOL validKeychainBool = self.keysAndSecrets.count > 0;
+    return validKeychainBool;
+}
 
 #pragma mark | Keychain methods
 - (void)loadFromKeychain {
@@ -110,15 +176,21 @@
     }
 }
 
-- (void)saveToKeychain {
+- (BOOL)saveToKeychain {
     NSError *error = nil;
 
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self.keysAndSecrets
                                                        options:NSJSONWritingPrettyPrinted
                                                          error:&error];
-    [SAMKeychain setPasswordData:jsonData
+    BOOL success = [SAMKeychain setPasswordData:jsonData
                       forService:@"BitcoinService"
                          account:@"BitcounAccount"];
+
+    if (error) {
+        NSLog(@"Error on preference save: %@", error.localizedDescription);
+    }
+
+    return success;
 }
 
 @end
