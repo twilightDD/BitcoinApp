@@ -8,14 +8,21 @@
 
 #import "SOXMainPreferencesWindowController.h"
 
-#import "SAMKeychain.h"
+#import "SOXPreferencesCore.h"
+
+#import "MacAppDelegate.h"
+#import "SOXLogWindowController.h"
 
 #import "SOXConstants.h"
 
 #pragma mark - Interface
 @interface SOXMainPreferencesWindowController ()
 
+#pragma mark | properties
 @property (strong, nonatomic) NSMutableArray <NSMutableDictionary*> *keysAndSecrets;
+@property (strong, nonatomic) SOXLogWindowController *errorWindowController;
+
+#pragma mark | Outlets
 @property (strong) IBOutlet NSArrayController *keysAndSecretsArrayController;
 
 @property (strong) IBOutlet NSTableView *tableView;
@@ -33,6 +40,7 @@
 #pragma mark Init&Co.
 - (void)windowDidLoad {
     [super windowDidLoad];
+    self.errorWindowController = [(MacAppDelegate*)[[NSApplication sharedApplication] delegate] errorWindowController];
 }
 
 - (void)showWindow:(id)sender {
@@ -43,31 +51,17 @@
 
 #pragma mark - Keychain methods
 - (void)loadFromKeychain {
-    NSError *error = nil;
+    // ask PreferenceCore
+    self.keysAndSecrets = [SOXPreferencesCore keysAndSecrets];
 
-    NSData *data = [SAMKeychain passwordDataForService:@"BitcoinService"
-                                               account:@"BitcounAccount"];
-    if (data) {
-        NSMutableArray *array = [NSJSONSerialization JSONObjectWithData:data
-                                                                options:NSJSONReadingMutableContainers
-                                                                  error:&error];
-        self.keysAndSecrets = [array mutableCopy];
-        [self.keysAndSecretsArrayController rearrangeObjects];
-    }
-    else {
-        self.keysAndSecrets = [NSMutableArray array];
-    }
+    [self.keysAndSecretsArrayController rearrangeObjects];
 }
 
 - (void)saveToKeychain {
-    NSError *error = nil;
+    BOOL success = [SOXPreferencesCore saveKeysAndSecrets:self.keysAndSecrets];
+    if (success == NO) {
 
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self.keysAndSecrets
-                                                       options:NSJSONWritingPrettyPrinted
-                                                         error:&error];
-    [SAMKeychain setPasswordData:jsonData
-                      forService:@"BitcoinService"
-                         account:@"BitcounAccount"];
+    }
 }
 
 #pragma mark - Action methods
@@ -96,7 +90,15 @@
 }
 
 - (IBAction)saveButtonAction:(NSButton *)sender {
-    [self saveToKeychain];
+    BOOL validationResult = [self validateKeysAndSecretsInput];
+    if (validationResult) {
+        [self saveToKeychain];
+        [self.errorWindowController showMessage:@" Saved to keychain"];
+    }
+    else {
+        // TODO: Fehlermeldung bringen
+        [self.errorWindowController showMessage:@" ->>>>>>> NO save to keychain"];
+    }
 }
 
 - (IBAction)dismissButtonAction:(NSButtonCell *)sender {
@@ -115,6 +117,59 @@
     }
 
     [self.keysAndSecretsArrayController rearrangeObjects];
+}
+
+#pragma mark - Private methods
+- (BOOL)validateKeysAndSecretsInput {
+    __block BOOL validationResult = YES;
+
+    __block NSMutableArray *invalidInputs = [NSMutableArray array];
+
+    [self.keysAndSecrets enumerateObjectsUsingBlock:^(NSMutableDictionary * _Nonnull dictionary,
+                                                      NSUInteger rowCount,
+                                                      BOOL * _Nonnull stop) {
+        NSString *key = [dictionary objectForKey:APIUserKey];
+        BOOL validateKey = [SOXPreferencesCore validateKey:key];
+
+        NSString *secret = [dictionary objectForKey:APISecretKey];
+        BOOL validateSecret = [SOXPreferencesCore validateSecret:secret];
+
+        validationResult = validationResult && validateKey && validateSecret;
+
+        NSMutableDictionary *invalidColumns = [NSMutableDictionary dictionary];
+        if (validateKey == NO) {
+            [invalidColumns setObject:@(rowCount)
+                               forKey:@"row"];
+            [invalidColumns setObject:[NSNull null]
+                               forKey:APIUserKey];
+        }
+        if (validateSecret == NO) {
+            [invalidColumns setObject:@(rowCount)
+                               forKey:@"row"];
+            [invalidColumns setObject:[NSNull null]
+                               forKey:APISecretKey];
+        }
+        if (invalidColumns.allKeys.count > 0) {
+            [invalidInputs addObject:invalidColumns];
+        }
+    }];
+
+//    if (invalidInputs.count > 0) {
+//        [invalidInputs enumerateObjectsUsingBlock:^(NSMutableDictionary * _Nonnull dict,
+//                                                    NSUInteger idx,
+//                                                    BOOL * _Nonnull stop) {
+//            NSNumber *row = [dict objectForKey:@"row"];
+//            id errorInKey = [dict objectForKey:APIUserKey];
+//            id errorInSecret = [dict objectForKey:APISecretKey];
+//
+//
+//
+//
+//        }];
+//    }
+
+
+    return validationResult;
 }
 
 @end
