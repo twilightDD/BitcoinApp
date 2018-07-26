@@ -53,6 +53,7 @@
 @property (weak) IBOutlet NSButton *cancelButton;
 @property (weak) IBOutlet NSButton *createOrderButton;
 
+@property (strong) IBOutlet NSTextField *manualEndDate;
 
 #pragma mark Properties
 @property (nonatomic) BitcoinDE_TrustLevel trustLevel;
@@ -154,7 +155,7 @@
         self.titleTextField.stringValue                 = @"Create new sell order";
         self.amountDescriptionTextField.stringValue     = @"Amount to sell";
         // input textFields uses bindings
-        self.availableAmountTextField.stringValue          = [NSString stringWithFormat:@"Available: %@", [SOXMarket_BitcoinDE_Core availableAmountForCurrencyType:self.currencyType]];
+        self.availableAmountTextField.stringValue       = [NSString stringWithFormat:@"Available: %@", [SOXMarket_BitcoinDE_Core availableAmountForCurrencyType:self.currencyType]];
     }
     else {
         self.titleTextField.stringValue                 = @"ERROR - no type given!";
@@ -257,23 +258,47 @@
                                                         respondTo:self];
         }
         else {
+//
+//            NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+//            NSDate *endDate = self.endDatePicker.dateValue;
+//            NSDateComponents *endDateCmponents = [gregorianCalendar components:NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay
+//                                                                      fromDate:endDate];
+//
+//
+//            NSDateComponents *newEndDateComponents = [[NSDateComponents alloc] init];
+//            newEndDateComponents.day = endDateCmponents.day;
+//            newEndDateComponents.month = endDateCmponents.month;
+//            newEndDateComponents.year = endDateCmponents.year;
+//            newEndDateComponents.hour = 23;
+//            newEndDateComponents.minute = 45;
+//            newEndDateComponents.second = 0;
+//
+//            NSDate *newEndDate = [gregorianCalendar dateFromComponents:newEndDateComponents];
+
+            NSDate *newEndDate = [NSDate date];
 
             NSDictionary *parameters = [SOXMyOrderBook_BitcoinDE_Data parameterForNewOrderWithOrderType:self.orderType
                                                                                            currencyType:self.currencyType
                                                                                              max_amount:@(self.amountTextField.doubleValue)
                                                                                              min_amount:@(self.minAmountTextField.doubleValue)
                                                                                                   price:@(self.priceTextField.doubleValue)
-                                                                                           end_datetime:self.endDatePicker.dateValue
+                                                                                           end_datetime:newEndDate
                                                                          new_order_for_remaining_amount:self.reNewOrderButton.state
                                                                                         min_trust_level:self.trustLevel
                                                                                           only_kyc_full:self.reNewOrderButton.state
                                                                                          payment_option:[SOXPreferenceCenter defaultPaymentOptionForCreateOrder]
                                                                                            seat_of_bank:[SOXPreferenceCenter defaultTradingCountries]];
 
-            DDLogInfo(@"Parameters:\n%@", parameters);
+            NSString *manualEndDateString = self.manualEndDate.stringValue;
+
+            NSMutableDictionary *paramatersManualEndDate = [parameters mutableCopy];
+            [paramatersManualEndDate setValue:manualEndDateString forKey:@"end_datetime"];
+
+
+            DDLogInfo(@"Parameters:\n%@", paramatersManualEndDate);
 
             [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_CreateOrderType
-                                                    withParameter:parameters
+                                                    withParameter:paramatersManualEndDate
                                                         respondTo:self];
         }
     }

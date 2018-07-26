@@ -88,15 +88,18 @@
     NSString *orderTypeString = [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:orderType];
     NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType];
     NSString *minTrustLevelAsString = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:min_trust_level];
-    //NSString *endDateString = [SOXDateFormatter rfc3339DateTimeStringDate:end_datetime];
-    
+    NSString *endDateString = [SOXFormatters rfc3339DateTimeStringDate:end_datetime];
+
+    endDateString = @"2018-08-18T22:";
+
+
     NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:
                                orderTypeString, @"type"
                                , currencyTypeString, BitcoinDE_ShowOrderbook_TradingPair
                                , max_amount , @"max_amount"
                                ,price , @"price"
                                ,min_amount , @"min_amount"
-//                               ,endDateString , @"end_datetime"
+                               ,endDateString , @"end_datetime"
                                ,@(new_order_for_remaining_amount) , @"new_order_for_remaining_amount"
                                ,minTrustLevelAsString , @"min_trust_level"
                                ,@(only_kyc_full) , @"only_kyc_full"

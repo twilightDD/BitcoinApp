@@ -3463,6 +3463,14 @@ Gw
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UGt-PO-eVM">
+                                <rect key="frame" x="34" y="102" width="397" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Q3T-hu-q4h">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Bqf-Fe-k9G" firstAttribute="top" secondItem="ZMe-eq-kHL" secondAttribute="bottom" constant="8" id="1Lt-Tg-noW"/>
@@ -3486,10 +3494,12 @@ Gw
                             <constraint firstItem="Bqf-Fe-k9G" firstAttribute="leading" secondItem="Gf2-SM-5g3" secondAttribute="trailing" constant="8" symbolic="YES" id="Z0W-Tr-ppK"/>
                             <constraint firstItem="ZMe-eq-kHL" firstAttribute="top" secondItem="aWc-gU-d53" secondAttribute="bottom" constant="38" id="Znf-az-ZiB"/>
                             <constraint firstAttribute="trailing" secondItem="kfE-Jk-12m" secondAttribute="trailing" constant="20" symbolic="YES" id="ZpA-Vs-uOs"/>
+                            <constraint firstItem="UGt-PO-eVM" firstAttribute="leading" secondItem="9u6-HK-LcK" secondAttribute="leading" id="a1e-4L-rkP"/>
                             <constraint firstItem="f6Y-1R-M4X" firstAttribute="leading" secondItem="Bqf-Fe-k9G" secondAttribute="trailing" constant="8" symbolic="YES" id="eHb-rB-KPK"/>
                             <constraint firstItem="9u6-HK-LcK" firstAttribute="top" secondItem="DMa-qt-pqL" secondAttribute="bottom" constant="21" id="fP2-u8-fjo"/>
                             <constraint firstItem="kfE-Jk-12m" firstAttribute="leading" secondItem="C7b-w6-4AT" secondAttribute="trailing" constant="20" id="fsP-Qr-FOC"/>
                             <constraint firstItem="tOu-s3-kGk" firstAttribute="trailing" secondItem="Gf2-SM-5g3" secondAttribute="trailing" id="gRl-nk-0zt"/>
+                            <constraint firstItem="UGt-PO-eVM" firstAttribute="top" secondItem="9u6-HK-LcK" secondAttribute="bottom" constant="15" id="hf1-WX-2pk"/>
                             <constraint firstItem="C7b-w6-4AT" firstAttribute="leading" secondItem="ZMe-eq-kHL" secondAttribute="trailing" constant="8" symbolic="YES" id="iEh-u4-lgB"/>
                             <constraint firstAttribute="trailing" secondItem="w8c-KB-of4" secondAttribute="trailing" constant="20" symbolic="YES" id="igs-Ig-bL4"/>
                             <constraint firstItem="kfE-Jk-12m" firstAttribute="top" secondItem="aWc-gU-d53" secondAttribute="bottom" constant="8" symbolic="YES" id="jsW-c3-U7U"/>
@@ -3501,6 +3511,7 @@ Gw
                             <constraint firstItem="DMa-qt-pqL" firstAttribute="leading" secondItem="tOu-s3-kGk" secondAttribute="trailing" constant="8" symbolic="YES" id="pQt-Ds-lEW"/>
                             <constraint firstItem="Gf2-SM-5g3" firstAttribute="leading" secondItem="zII-rh-hZI" secondAttribute="leading" id="pUl-Jn-Dj3"/>
                             <constraint firstAttribute="bottom" secondItem="mWb-Gs-3Vc" secondAttribute="bottom" constant="20" id="vZv-f8-iLF"/>
+                            <constraint firstItem="UGt-PO-eVM" firstAttribute="trailing" secondItem="9u6-HK-LcK" secondAttribute="trailing" id="vcM-Iq-uwo"/>
                             <constraint firstItem="3LD-JI-7kF" firstAttribute="centerY" secondItem="DMa-qt-pqL" secondAttribute="centerY" id="vyH-ub-UBZ"/>
                             <constraint firstAttribute="trailing" secondItem="aWc-gU-d53" secondAttribute="trailing" constant="20" id="x2O-V0-42x"/>
                             <constraint firstItem="C7b-w6-4AT" firstAttribute="baseline" secondItem="ZMe-eq-kHL" secondAttribute="baseline" id="zqZ-ie-kez"/>
@@ -3516,6 +3527,7 @@ Gw
                         <outlet property="endDateDescriptionTextField" destination="I1S-WB-efT" id="3q3-Ei-iHO"/>
                         <outlet property="endDatePicker" destination="Mzv-eg-HWw" id="syV-fc-Qb9"/>
                         <outlet property="goldTrustLevelButton" destination="nfn-lu-b8i" id="Ojz-bP-qN0"/>
+                        <outlet property="manualEndDate" destination="UGt-PO-eVM" id="zhJ-Xa-HaM"/>
                         <outlet property="minAmountDescriptionTextField" destination="Gf2-SM-5g3" id="AxS-J4-9tZ"/>
                         <outlet property="minAmountHintTextField" destination="f6Y-1R-M4X" id="r7i-gT-pTY"/>
                         <outlet property="minAmountTextField" destination="Bqf-Fe-k9G" id="UMI-Ap-Vhf"/>
@@ -3534,7 +3546,7 @@ Gw
                 <customObject id="X15-X3-ZW6" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="ELZ-ho-4GV"/>
             </objects>
-            <point key="canvasLocation" x="-1870.5" y="2077"/>
+            <point key="canvasLocation" x="-1871" y="2077"/>
         </scene>
         <!--Execute Trade View Controller-->
         <scene sceneID="z37-1q-W32">
