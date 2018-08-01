@@ -95,7 +95,7 @@
     }
     
     {
-//        self.orderIDTextField.stringValue = self.myOrder.orderInformation_orderID;
+        self.orderIDTextField.stringValue = self.myOrder.orderInformation_orderID;
         self.typeTextField.stringValue = self.myOrder.orderInformation_type;
         self.maxAmountTextField.doubleValue = self.myOrder.orderInformation_maxAmount.doubleValue;
         self.minAmountTextField.doubleValue = self.myOrder.orderInformation_minAmount.doubleValue;

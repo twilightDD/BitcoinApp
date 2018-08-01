@@ -289,17 +289,26 @@
                                                                                          payment_option:[SOXPreferenceCenter defaultPaymentOptionForCreateOrder]
                                                                                            seat_of_bank:[SOXPreferenceCenter defaultTradingCountries]];
 
-            NSString *manualEndDateString = self.manualEndDate.stringValue;
+            {
 
-            NSMutableDictionary *paramatersManualEndDate = [parameters mutableCopy];
-            [paramatersManualEndDate setValue:manualEndDateString forKey:@"end_datetime"];
+                NSString *manualEndDateString = self.manualEndDate.stringValue;
+
+                NSMutableDictionary *paramatersManualEndDate = [parameters mutableCopy];
+                [paramatersManualEndDate setValue:manualEndDateString forKey:@"end_datetime"];
 
 
-            DDLogInfo(@"Parameters:\n%@", paramatersManualEndDate);
+                DDLogInfo(@"Parameters:\n%@", paramatersManualEndDate);
 
-            [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_CreateOrderType
-                                                    withParameter:paramatersManualEndDate
-                                                        respondTo:self];
+                [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_CreateOrderType
+                                                        withParameter:paramatersManualEndDate
+                                                            respondTo:self];
+
+
+            }
+
+//            [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_CreateOrderType
+//                                                    withParameter:parameters
+//                                                        respondTo:self];
         }
     }
     else {
