@@ -10,4 +10,7 @@
 
 @interface SOXMyTradesViewController : SOXAbstractViewController
 
+
+
+
 @end

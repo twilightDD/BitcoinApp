@@ -11,6 +11,7 @@
 
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXMyTrades_BitcoinDE_Data.h"
+#import "SOXPage_BitcoinDE_Data.h"
 
 #import "SOXKeys_BitcoinDE.h"
 #import "SOXMarket_BitcoinDE_DefTypes.h"
@@ -55,9 +56,12 @@
 @property (strong, nonatomic) NSDate *selectedStartDate;
 @property (strong, nonatomic) NSDate *selectedEndDate;
 
-@property (nonatomic) NSInteger selectedPage;
+@property (nonatomic) NSInteger currentPage;
+@property (nonatomic) NSInteger lastPage;
+@property (nonatomic) NSInteger nextPage;
 
 @property (strong, nonatomic) NSMutableArray *myTrades;
+@property (strong, nonatomic) NSMutableDictionary *myTradesPaged;
 
 @end
 
@@ -91,8 +95,9 @@
     
     
     self.selectedEndDate        = [NSDate date];
-    self.selectedPage = 1;
-    
+
+
+    [self resetPagingValues];
     [self setupUI];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
@@ -101,7 +106,7 @@
 
 #pragma mark - Private methods
 - (void)setupUI {
-    self.pageContainerView.hidden = YES;
+    self.pageContainerView.hidden = NO;
     
     self.fetchDataButton.title = @"Fetch data";
     
@@ -210,6 +215,46 @@
 
 - (IBAction)fetchDataButtonAction:(NSButton *)sender {
     [self enableSpinningWheel];
+    [self resetPagingValues];
+    [self loadNextPage];
+}
+
+#pragma mark - SOXMarketCoreServerRequestProtocol
+- (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest {
+    if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowMyTradesType)]) {
+        NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
+        SOXPage_BitcoinDE_Data *pageData = [SOXPage_BitcoinDE_Data pageDataForPayloadDictionary:payloadDictionary];
+
+        self.lastPage = pageData.pageLast;
+        self.currentPage = pageData.pageCurrent;
+
+        NSMutableArray *myTrades = [SOXMyTrades_BitcoinDE_Data myTradesDataArrayForMyTradeHistoryDictionary:payloadDictionary];
+        [self.myTradesPaged setObject:myTrades
+                               forKey:@(self.currentPage)];
+        self.myTrades = [self allTrades];
+
+        [self disableSpinningWheel];
+    }
+}
+
+#pragma mark - Paging
+- (void)resetPagingValues {
+    self.myTradesPaged = [NSMutableDictionary dictionary];
+    self.nextPage = 1;
+    self.currentPage = 1;
+    self.lastPage = 1;
+    [self updatePagingUI];
+}
+
+
+- (void)loadNextPage {
+    NSMutableArray *nextPageCache = [self.myTradesPaged objectForKey:@(self.nextPage)];
+    if (nextPageCache) {
+        self.myTrades = nextPageCache;
+        self.currentPage = self.nextPage;
+        return;
+    }
+
 
     BitcoinDE_CurrencyType currencyType = [self.currencyTypeSelectionPopUpButton indexOfSelectedItem] + 1;
     BitcoinDE_MyTradeHistoryParameter_OrderType orderType = [self.tradingTypeSelectionPopUpButton indexOfSelectedItem] + 1;
@@ -220,21 +265,46 @@
                                                                              currencyType:currencyType
                                                                                 startDate:self.selectedStartDate
                                                                                   endDate:self.selectedEndDate
-                                                                                     page:self.selectedPage];
+                                                                                     page:self.nextPage];
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowMyTradesType
                                             withParameter:parameterDictionary
                                                 respondTo:self];
 }
 
-#pragma mark - SOXMarketCoreServerRequestProtocol
-- (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest {
-    if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowMyTradesType)]) {
-        NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
-        NSMutableArray *myTrades = [SOXMyTrades_BitcoinDE_Data myTradesDataArrayForMyTradeHistoryDictionary:payloadDictionary];
-        self.myTrades = myTrades;
-        
-        [self disableSpinningWheel];
+- (IBAction)previousPageAction:(NSButton *)sender {
+    self.nextPage = self.currentPage - 1;
+    [self loadNextPage];
+}
+
+- (IBAction)nextPageAction:(NSButton *)sender {
+    self.nextPage = self.currentPage + 1;
+    [self loadNextPage];
+}
+
+
+- (void)setCurrentPage:(NSInteger)currentPage {
+    _currentPage = currentPage;
+
+    [self updatePagingUI];
+}
+
+- (void)updatePagingUI {
+    self.pageForwardButton.enabled = self.currentPage < self.lastPage;
+    self.pageBackwardButton.enabled = self.currentPage > 1;
+    self.pageIndicatorTextField.stringValue = [NSString stringWithFormat:@"%ti/%ti"
+                                               , self.currentPage
+                                               , self.lastPage];
+}
+
+- (NSMutableArray *)allTrades {
+    NSMutableArray *allTrades = [NSMutableArray array];
+    NSArray *sortedTradePageKeys = [self.myTradesPaged.allKeys sortedArrayUsingSelector:@selector(compare:)];
+    for (NSNumber *sortIndex in sortedTradePageKeys) {
+        [allTrades addObjectsFromArray:[self.myTradesPaged objectForKey:sortIndex]];
     }
+
+
+    return allTrades;
 }
 
 @end
