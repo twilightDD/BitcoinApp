@@ -25,6 +25,7 @@
 
 // Page selector
 @property (strong) IBOutlet NSButton *loadMoreTradeDatasButton;
+@property (strong) IBOutlet NSButton *loadAllTradeDatasButton;
 
 
 // Parameter
@@ -59,6 +60,7 @@
 @property (strong, nonatomic) NSDate *selectedEndDate;
 
 @property (nonatomic) NSInteger currentPage;
+@property (nonatomic) BOOL shouldLoadAllTradeDatas;
 
 @property (strong, nonatomic) NSMutableArray *myTrades;
 
@@ -70,6 +72,8 @@
 #pragma mark Init&Co.
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.shouldLoadAllTradeDatas = NO;
 
     // Defaults for types
     self.selectedCurrencyType = BitcoinDE_CurrencyTypeBitcoin;
@@ -156,6 +160,7 @@
 
     // Load more trades (paging)
     self.loadMoreTradeDatasButton.enabled = NO;
+    self.loadAllTradeDatasButton.enabled = NO;
     
     {
         [self.tableView setDoubleAction:@selector(tableViewDoubleAction:)];
@@ -276,26 +281,51 @@
     self.loadMoreTradeDatasButton.enabled = NO;
     [self loadNextPage];
 }
+- (IBAction)loadAllTradeDatasAction:(NSButton *)sender {
+    self.shouldLoadAllTradeDatas = YES;
+    self.loadMoreTradeDatasButton.enabled = NO;
+    self.loadAllTradeDatasButton.enabled = NO;
+    [self loadNextPage];
+}
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
 - (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest {
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowMyTradesType)]) {
         NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
 
-        // Page information
-        {
-            SOXPage_BitcoinDE_Data *pageData = [SOXPage_BitcoinDE_Data pageDataForPayloadDictionary:payloadDictionary];
-            self.currentPage = pageData.pageCurrent;
-
-            BOOL enableLoadMoreTradDatasButton = self.currentPage != pageData.pageLast;
-            self.loadMoreTradeDatasButton.enabled = enableLoadMoreTradDatasButton;
-
-        }
-
         NSMutableArray *myTrades = [SOXMyTrades_BitcoinDE_Data myTradesDataArrayForMyTradeHistoryDictionary:payloadDictionary];
         [self.myTrades addObjectsFromArray:myTrades];
         [self.myTradesArrayController rearrangeObjects];
-        [self disableSpinningWheel];
+
+        // Page information
+
+        SOXPage_BitcoinDE_Data *pageData = [SOXPage_BitcoinDE_Data pageDataForPayloadDictionary:payloadDictionary];
+        self.currentPage = pageData.pageCurrent;
+
+        BOOL enableLoadMoreTradDatasButton = self.currentPage != pageData.pageLast;
+        self.loadMoreTradeDatasButton.enabled = enableLoadMoreTradDatasButton;
+        self.loadAllTradeDatasButton.enabled = enableLoadMoreTradDatasButton;
+        
+        if (enableLoadMoreTradDatasButton) {
+            self.loadMoreTradeDatasButton.hidden = NO;
+            self.loadAllTradeDatasButton.hidden = NO;
+            self.loadAllTradeDatasButton.title = [NSString stringWithFormat:@"Load all (%ti pages left)"
+                                                  , pageData.pageLast - pageData.pageCurrent];
+        }
+        else {
+            self.loadMoreTradeDatasButton.hidden = YES;
+            self.loadAllTradeDatasButton.hidden = YES;
+        }
+
+        if (self.shouldLoadAllTradeDatas == YES
+            && enableLoadMoreTradDatasButton == YES) {
+            [self loadNextPage];
+        }
+        else {
+            self.shouldLoadAllTradeDatas = NO;
+            [self disableSpinningWheel];
+
+        }
     }
 }
 
