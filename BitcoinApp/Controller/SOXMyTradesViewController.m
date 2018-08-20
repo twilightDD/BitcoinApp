@@ -159,8 +159,8 @@
     }
 
     // Load more trades (paging)
-    self.loadMoreTradeDatasButton.enabled = NO;
-    self.loadAllTradeDatasButton.enabled = NO;
+    self.loadMoreTradeDatasButton.hidden = YES;
+    self.loadAllTradeDatasButton.hidden = YES;
     
     {
         [self.tableView setDoubleAction:@selector(tableViewDoubleAction:)];
@@ -303,12 +303,14 @@
         self.currentPage = pageData.pageCurrent;
 
         BOOL enableLoadMoreTradDatasButton = self.currentPage != pageData.pageLast;
-        self.loadMoreTradeDatasButton.enabled = enableLoadMoreTradDatasButton;
-        self.loadAllTradeDatasButton.enabled = enableLoadMoreTradDatasButton;
-        
+
+
         if (enableLoadMoreTradDatasButton) {
             self.loadMoreTradeDatasButton.hidden = NO;
+            self.loadMoreTradeDatasButton.enabled = enableLoadMoreTradDatasButton;
             self.loadAllTradeDatasButton.hidden = NO;
+            self.loadAllTradeDatasButton.enabled = enableLoadMoreTradDatasButton;
+
             self.loadAllTradeDatasButton.title = [NSString stringWithFormat:@"Load all (%ti pages left)"
                                                   , pageData.pageLast - pageData.pageCurrent];
         }
@@ -332,6 +334,8 @@
 #pragma mark - Paging
 - (void)loadNextPage {
     self.currentPage = self.currentPage + 1;
+    self.loadMoreTradeDatasButton.enabled = NO;
+    self.loadAllTradeDatasButton.enabled = NO;
 
     NSDictionary *parameterDictionary = [SOXMyTrades_BitcoinDE_Data parameterForOrderType:self.selectedOrderType
                                                                                tradeState:self.selectedTradeStateType
