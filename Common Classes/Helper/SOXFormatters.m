@@ -159,6 +159,11 @@
 
 #pragma mark - Public methods
 #pragma mark | Date methods
++ (NSDate *)dateTimeStringForRFC3339DateTimeString:(NSString *)rfc3339DateTimeString {
+    NSDate *date = [[SOXFormatters dateFormatterDecodeRFC3339] dateFromString:rfc3339DateTimeString];
+    return date;
+}
+
 + (NSString *)stringDateTimeStringForRFC3339DateTimeString:(NSString *)rfc3339DateTimeString {
     // Returns a user-visible date time string that corresponds to the
     // specified RFC 3339 date time string. Note that this does not handle
