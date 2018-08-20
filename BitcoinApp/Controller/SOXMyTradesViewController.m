@@ -51,11 +51,14 @@
 @property (strong) IBOutlet NSArrayController *myTradesArrayController;
 
 #pragma mark Properties
+@property (nonatomic) BitcoinDE_CurrencyType selectedCurrencyType;
+@property (nonatomic) BitcoinDE_MyTradeHistoryParameter_OrderType selectedOrderType;
+@property (nonatomic) BitcoinDE_MyTradeHistoryParameter_TradeStateType selectedTradeStateType;
+
 @property (strong, nonatomic) NSDate *selectedStartDate;
 @property (strong, nonatomic) NSDate *selectedEndDate;
 
 @property (nonatomic) NSInteger currentPage;
-@property (nonatomic) NSInteger lastPage;
 
 @property (strong, nonatomic) NSMutableArray *myTrades;
 
@@ -67,7 +70,13 @@
 #pragma mark Init&Co.
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+
+    // Defaults for types
+    self.selectedCurrencyType = BitcoinDE_CurrencyTypeBitcoin;
+    self.selectedOrderType = BitcoinDE_MyTradeHistoryParameter_AllOrderType;
+    self.selectedTradeStateType = BitcoinDE_MyTradeHistoryParameter_SuccessfulTradeStateType;
+
+    // StartDate
     {
         self.selectedStartDate      = [NSDate dateWithTimeInterval:-1*60*60*24*7 sinceDate:[NSDate date]];
         
@@ -88,14 +97,17 @@
         startDateComponents.second = 0;
         self.selectedStartDate = [calendar dateFromComponents:startDateComponents];
     }
-    
-    
+
     self.selectedEndDate        = [NSDate date];
 
     [self setupUI];
+}
+
+- (void)viewWillAppear {
+    [super viewWillAppear];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
-                                                        object:@(BitcoinDE_CurrencyTypeBitcoin)];
+                                                        object:@(self.selectedCurrencyType)];
 }
 
 #pragma mark - Private methods
@@ -142,11 +154,22 @@
         self.endDateDatePicker.locale = [NSLocale autoupdatingCurrentLocale];
     }
 
+    // Load more trades (paging)
     self.loadMoreTradeDatasButton.enabled = NO;
     
     {
         [self.tableView setDoubleAction:@selector(tableViewDoubleAction:)];
     }
+}
+
+- (void)resetTradeDatas {
+    // reset tableView
+    self.myTrades = [NSMutableArray array];
+    [self.myTradesArrayController rearrangeObjects];
+
+    // reset paging
+    self.currentPage = 0;
+    self.loadMoreTradeDatasButton.enabled = NO;
 }
 
 #pragma mark - Table view methods
@@ -161,6 +184,37 @@
 }
 
 #pragma mark - Action methods
+
+- (IBAction)currencyTypPopUpButtonAction:(NSPopUpButton *)sender {
+    BitcoinDE_CurrencyType newCurrencyType = sender.indexOfSelectedItem + 1;
+
+    if (newCurrencyType != self.selectedCurrencyType) {
+        self.selectedCurrencyType = newCurrencyType;
+        [self resetTradeDatas];
+
+        [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
+                                                            object:@(newCurrencyType)];
+    }
+}
+
+- (IBAction)orderTypePopUpButtonAction:(NSPopUpButton *)sender {
+    BitcoinDE_MyTradeHistoryParameter_OrderType newOrderType = sender.indexOfSelectedItem + 1;
+
+    if (newOrderType != self.selectedOrderType) {
+        self.selectedOrderType = newOrderType;
+        [self resetTradeDatas];
+    }
+}
+
+- (IBAction)statePopUpButtonAction:(NSPopUpButton *)sender {
+    BitcoinDE_MyTradeHistoryParameter_TradeStateType newTradeState = sender.indexOfSelectedItem + 1;
+    if (newTradeState != self.selectedTradeStateType) {
+        self.selectedTradeStateType = newTradeState;
+        [self resetTradeDatas];
+    }
+}
+
+
 - (IBAction)startDatePickerAction:(NSDatePicker *)sender {
     DDLogInfo(@"startDatePickerAction %@", sender.dateValue);
     
@@ -231,11 +285,10 @@
         // Page information
         {
             SOXPage_BitcoinDE_Data *pageData = [SOXPage_BitcoinDE_Data pageDataForPayloadDictionary:payloadDictionary];
-
-            self.lastPage = pageData.pageLast;
             self.currentPage = pageData.pageCurrent;
 
-            self.loadMoreTradeDatasButton.enabled = self.currentPage != self.lastPage;
+            BOOL enableLoadMoreTradDatasButton = self.currentPage != pageData.pageLast;
+            self.loadMoreTradeDatasButton.enabled = enableLoadMoreTradDatasButton;
 
         }
 
@@ -248,15 +301,11 @@
 
 #pragma mark - Paging
 - (void)loadNextPage {
-    BitcoinDE_CurrencyType currencyType = [self.currencyTypeSelectionPopUpButton indexOfSelectedItem] + 1;
-    BitcoinDE_MyTradeHistoryParameter_OrderType orderType = [self.tradingTypeSelectionPopUpButton indexOfSelectedItem] + 1;
-    BitcoinDE_MyTradeHistoryParameter_TradeStateType tradeStateType = [self.stateTypeSelectionPopUpButton indexOfSelectedItem] + 1;
-
     self.currentPage = self.currentPage + 1;
 
-    NSDictionary *parameterDictionary = [SOXMyTrades_BitcoinDE_Data parameterForOrderType:orderType
-                                                                               tradeState:tradeStateType
-                                                                             currencyType:currencyType
+    NSDictionary *parameterDictionary = [SOXMyTrades_BitcoinDE_Data parameterForOrderType:self.selectedOrderType
+                                                                               tradeState:self.selectedTradeStateType
+                                                                             currencyType:self.selectedCurrencyType
                                                                                 startDate:self.selectedStartDate
                                                                                   endDate:self.selectedEndDate
                                                                                      page:self.currentPage];
