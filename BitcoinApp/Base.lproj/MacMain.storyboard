@@ -4135,50 +4135,6 @@ Gw
                         <rect key="frame" x="0.0" y="0.0" width="1079" height="448"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="gUV-FX-0N4">
-                                <rect key="frame" x="450" y="20" width="109" height="21"/>
-                                <subviews>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sti-1t-PUj">
-                                        <rect key="frame" x="66" y="-7" width="49" height="32"/>
-                                        <buttonCell key="cell" type="push" title="&gt;" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gaT-5d-IvV">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="nextPageAction:" target="TPt-gD-CmY" id="s22-qh-paX"/>
-                                        </connections>
-                                    </button>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y6K-Hy-WRK">
-                                        <rect key="frame" x="43" y="3" width="23" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="1/2" id="H79-dd-7Kh">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RKp-If-3ih">
-                                        <rect key="frame" x="-6" y="-7" width="49" height="32"/>
-                                        <buttonCell key="cell" type="push" title="&lt;" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="i01-61-J61">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="previousPageAction:" target="TPt-gD-CmY" id="1of-rU-lD3"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="sti-1t-PUj" secondAttribute="trailing" id="CLY-ok-ec7"/>
-                                    <constraint firstAttribute="bottom" secondItem="RKp-If-3ih" secondAttribute="bottom" id="ELu-mo-0SJ"/>
-                                    <constraint firstItem="y6K-Hy-WRK" firstAttribute="leading" secondItem="RKp-If-3ih" secondAttribute="trailing" constant="8" symbolic="YES" id="KCJ-wz-Trk"/>
-                                    <constraint firstItem="RKp-If-3ih" firstAttribute="top" secondItem="gUV-FX-0N4" secondAttribute="top" id="WoQ-xv-qfe"/>
-                                    <constraint firstItem="y6K-Hy-WRK" firstAttribute="centerX" secondItem="gUV-FX-0N4" secondAttribute="centerX" id="ZJX-K9-jNl"/>
-                                    <constraint firstItem="RKp-If-3ih" firstAttribute="baseline" secondItem="y6K-Hy-WRK" secondAttribute="baseline" id="d1f-BP-IzR"/>
-                                    <constraint firstItem="y6K-Hy-WRK" firstAttribute="baseline" secondItem="sti-1t-PUj" secondAttribute="baseline" id="dtQ-xb-QEN"/>
-                                    <constraint firstItem="sti-1t-PUj" firstAttribute="leading" secondItem="y6K-Hy-WRK" secondAttribute="trailing" constant="8" symbolic="YES" id="q6h-Ta-Pf8"/>
-                                    <constraint firstItem="RKp-If-3ih" firstAttribute="leading" secondItem="gUV-FX-0N4" secondAttribute="leading" id="vP4-Ly-MgO"/>
-                                </constraints>
-                            </customView>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBg-iH-I78">
                                 <rect key="frame" x="20" y="49" width="800" height="391"/>
                                 <clipView key="contentView" id="BrC-vm-Cig">
@@ -4564,11 +4520,20 @@ Gw
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fbw-0U-lWs">
+                                <rect key="frame" x="721" y="13" width="105" height="32"/>
+                                <buttonCell key="cell" type="push" title="Load more" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="h2f-l2-ke8">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="loadMoreTradeDatasAction:" target="TPt-gD-CmY" id="Uop-ub-YUz"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="gUV-FX-0N4" firstAttribute="centerX" secondItem="O2L-9r-szs" secondAttribute="centerX" id="5eV-Bd-Zzs"/>
+                            <constraint firstItem="fbw-0U-lWs" firstAttribute="top" secondItem="Kn5-TW-Ng0" secondAttribute="bottom" constant="8" id="2zz-Ng-jEh"/>
                             <constraint firstAttribute="trailing" secondItem="eTK-pp-sYM" secondAttribute="trailing" constant="23" id="9z6-av-3cS"/>
-                            <constraint firstItem="gUV-FX-0N4" firstAttribute="top" secondItem="rBg-iH-I78" secondAttribute="bottom" constant="8" symbolic="YES" id="GLD-Ed-rlO"/>
                             <constraint firstItem="Kn5-TW-Ng0" firstAttribute="bottom" secondItem="rBg-iH-I78" secondAttribute="bottom" id="IKf-5L-YUy"/>
                             <constraint firstItem="eTK-pp-sYM" firstAttribute="top" relation="greaterThanOrEqual" secondItem="YVJ-te-weM" secondAttribute="bottom" constant="20" symbolic="YES" id="MHI-Jx-h0O"/>
                             <constraint firstItem="Kn5-TW-Ng0" firstAttribute="trailing" secondItem="rBg-iH-I78" secondAttribute="trailing" id="MlC-9S-w2z"/>
@@ -4576,8 +4541,9 @@ Gw
                             <constraint firstAttribute="trailing" secondItem="YVJ-te-weM" secondAttribute="trailing" constant="20" symbolic="YES" id="UGb-ae-UuZ"/>
                             <constraint firstItem="rBg-iH-I78" firstAttribute="leading" secondItem="O2L-9r-szs" secondAttribute="leading" constant="20" symbolic="YES" id="Zsz-X7-UpV"/>
                             <constraint firstItem="rBg-iH-I78" firstAttribute="top" secondItem="O2L-9r-szs" secondAttribute="top" constant="8" id="ayY-Wr-vac"/>
-                            <constraint firstAttribute="bottom" secondItem="gUV-FX-0N4" secondAttribute="bottom" constant="20" symbolic="YES" id="n2m-nW-KwW"/>
+                            <constraint firstAttribute="bottom" secondItem="fbw-0U-lWs" secondAttribute="bottom" constant="20" id="jcs-LW-q91"/>
                             <constraint firstItem="Kn5-TW-Ng0" firstAttribute="leading" secondItem="rBg-iH-I78" secondAttribute="leading" id="pDa-Z4-1Cn"/>
+                            <constraint firstItem="fbw-0U-lWs" firstAttribute="trailing" secondItem="Kn5-TW-Ng0" secondAttribute="trailing" id="pgC-ft-UYq"/>
                             <constraint firstItem="YVJ-te-weM" firstAttribute="leading" secondItem="rBg-iH-I78" secondAttribute="trailing" constant="8" symbolic="YES" id="sVF-Dw-XJv"/>
                             <constraint firstItem="YVJ-te-weM" firstAttribute="top" secondItem="rBg-iH-I78" secondAttribute="top" id="x4r-9R-1i1"/>
                             <constraint firstAttribute="bottom" secondItem="eTK-pp-sYM" secondAttribute="bottom" constant="20" id="xRz-B5-9Do"/>
@@ -4590,11 +4556,8 @@ Gw
                         <outlet property="endDateDatePicker" destination="MFP-Wg-jot" id="gUW-73-PAe"/>
                         <outlet property="endDateTextField" destination="lmi-FD-D5R" id="4zS-X8-jbJ"/>
                         <outlet property="fetchDataButton" destination="eTK-pp-sYM" id="hyA-rp-jbn"/>
+                        <outlet property="loadMoreTradeDatasButton" destination="fbw-0U-lWs" id="yN6-TS-bbB"/>
                         <outlet property="myTradesArrayController" destination="sb6-Q3-A24" id="31u-Mf-WDq"/>
-                        <outlet property="pageBackwardButton" destination="RKp-If-3ih" id="xCL-X3-U0E"/>
-                        <outlet property="pageContainerView" destination="gUV-FX-0N4" id="ABW-Ui-6P3"/>
-                        <outlet property="pageForwardButton" destination="sti-1t-PUj" id="lNw-Yx-ZQc"/>
-                        <outlet property="pageIndicatorTextField" destination="y6K-Hy-WRK" id="VNr-3i-xL8"/>
                         <outlet property="spinningBackgroundView" destination="Kn5-TW-Ng0" id="DBz-iW-vuk"/>
                         <outlet property="startDateDatePicker" destination="UsC-be-eAW" id="tZu-F9-5mX"/>
                         <outlet property="startDateTextField" destination="BAO-9i-ubM" id="jaa-k8-anr"/>

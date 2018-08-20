@@ -24,10 +24,8 @@
 @property (weak) IBOutlet NSButton *fetchDataButton;
 
 // Page selector
-@property (weak) IBOutlet NSView *pageContainerView;
-@property (weak) IBOutlet NSButton *pageBackwardButton;
-@property (weak) IBOutlet NSButton *pageForwardButton;
-@property (weak) IBOutlet NSTextField *pageIndicatorTextField;
+@property (strong) IBOutlet NSButton *loadMoreTradeDatasButton;
+
 
 // Parameter
 // - currency type
@@ -58,10 +56,8 @@
 
 @property (nonatomic) NSInteger currentPage;
 @property (nonatomic) NSInteger lastPage;
-@property (nonatomic) NSInteger nextPage;
 
 @property (strong, nonatomic) NSMutableArray *myTrades;
-@property (strong, nonatomic) NSMutableDictionary *myTradesPaged;
 
 @end
 
@@ -96,8 +92,6 @@
     
     self.selectedEndDate        = [NSDate date];
 
-
-    [self resetPagingValues];
     [self setupUI];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
@@ -106,8 +100,6 @@
 
 #pragma mark - Private methods
 - (void)setupUI {
-    self.pageContainerView.hidden = NO;
-    
     self.fetchDataButton.title = @"Fetch data";
     
     { // Radio buttons
@@ -149,6 +141,8 @@
         self.endDateDatePicker.dateValue    = self.selectedEndDate;
         self.endDateDatePicker.locale = [NSLocale autoupdatingCurrentLocale];
     }
+
+    self.loadMoreTradeDatasButton.enabled = NO;
     
     {
         [self.tableView setDoubleAction:@selector(tableViewDoubleAction:)];
@@ -215,7 +209,17 @@
 
 - (IBAction)fetchDataButtonAction:(NSButton *)sender {
     [self enableSpinningWheel];
-    [self resetPagingValues];
+
+    // reset all fetched datas
+    self.loadMoreTradeDatasButton.enabled = NO;
+
+    self.myTrades = [NSMutableArray array];
+    self.currentPage = 0;
+
+    [self loadNextPage];
+}
+- (IBAction)loadMoreTradeDatasAction:(NSButton *)sender {
+    self.loadMoreTradeDatasButton.enabled = NO;
     [self loadNextPage];
 }
 
@@ -223,88 +227,42 @@
 - (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest {
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowMyTradesType)]) {
         NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
-        SOXPage_BitcoinDE_Data *pageData = [SOXPage_BitcoinDE_Data pageDataForPayloadDictionary:payloadDictionary];
 
-        self.lastPage = pageData.pageLast;
-        self.currentPage = pageData.pageCurrent;
+        // Page information
+        {
+            SOXPage_BitcoinDE_Data *pageData = [SOXPage_BitcoinDE_Data pageDataForPayloadDictionary:payloadDictionary];
+
+            self.lastPage = pageData.pageLast;
+            self.currentPage = pageData.pageCurrent;
+
+            self.loadMoreTradeDatasButton.enabled = self.currentPage != self.lastPage;
+
+        }
 
         NSMutableArray *myTrades = [SOXMyTrades_BitcoinDE_Data myTradesDataArrayForMyTradeHistoryDictionary:payloadDictionary];
-        [self.myTradesPaged setObject:myTrades
-                               forKey:@(self.currentPage)];
-        self.myTrades = [self allTrades];
-
+        [self.myTrades addObjectsFromArray:myTrades];
+        [self.myTradesArrayController rearrangeObjects];
         [self disableSpinningWheel];
     }
 }
 
 #pragma mark - Paging
-- (void)resetPagingValues {
-    self.myTradesPaged = [NSMutableDictionary dictionary];
-    self.nextPage = 1;
-    self.currentPage = 1;
-    self.lastPage = 1;
-    [self updatePagingUI];
-}
-
-
 - (void)loadNextPage {
-    NSMutableArray *nextPageCache = [self.myTradesPaged objectForKey:@(self.nextPage)];
-    if (nextPageCache) {
-        self.myTrades = nextPageCache;
-        self.currentPage = self.nextPage;
-        return;
-    }
-
-
     BitcoinDE_CurrencyType currencyType = [self.currencyTypeSelectionPopUpButton indexOfSelectedItem] + 1;
     BitcoinDE_MyTradeHistoryParameter_OrderType orderType = [self.tradingTypeSelectionPopUpButton indexOfSelectedItem] + 1;
     BitcoinDE_MyTradeHistoryParameter_TradeStateType tradeStateType = [self.stateTypeSelectionPopUpButton indexOfSelectedItem] + 1;
+
+    self.currentPage = self.currentPage + 1;
 
     NSDictionary *parameterDictionary = [SOXMyTrades_BitcoinDE_Data parameterForOrderType:orderType
                                                                                tradeState:tradeStateType
                                                                              currencyType:currencyType
                                                                                 startDate:self.selectedStartDate
                                                                                   endDate:self.selectedEndDate
-                                                                                     page:self.nextPage];
+                                                                                     page:self.currentPage];
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowMyTradesType
                                             withParameter:parameterDictionary
                                                 respondTo:self];
-}
-
-- (IBAction)previousPageAction:(NSButton *)sender {
-    self.nextPage = self.currentPage - 1;
-    [self loadNextPage];
-}
-
-- (IBAction)nextPageAction:(NSButton *)sender {
-    self.nextPage = self.currentPage + 1;
-    [self loadNextPage];
-}
-
-
-- (void)setCurrentPage:(NSInteger)currentPage {
-    _currentPage = currentPage;
-
-    [self updatePagingUI];
-}
-
-- (void)updatePagingUI {
-    self.pageForwardButton.enabled = self.currentPage < self.lastPage;
-    self.pageBackwardButton.enabled = self.currentPage > 1;
-    self.pageIndicatorTextField.stringValue = [NSString stringWithFormat:@"%ti/%ti"
-                                               , self.currentPage
-                                               , self.lastPage];
-}
-
-- (NSMutableArray *)allTrades {
-    NSMutableArray *allTrades = [NSMutableArray array];
-    NSArray *sortedTradePageKeys = [self.myTradesPaged.allKeys sortedArrayUsingSelector:@selector(compare:)];
-    for (NSNumber *sortIndex in sortedTradePageKeys) {
-        [allTrades addObjectsFromArray:[self.myTradesPaged objectForKey:sortIndex]];
-    }
-
-
-    return allTrades;
 }
 
 @end
