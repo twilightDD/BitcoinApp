@@ -9,6 +9,8 @@
 #import "SOXMyTradesViewController.h"
 #import "SOXAbstractViewController_Private.h"
 
+#import "SOXMyOrderDetailsViewController.h"
+
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXMyTrades_BitcoinDE_Data.h"
 #import "SOXPage_BitcoinDE_Data.h"
@@ -29,16 +31,9 @@
 
 
 // Parameter
-// - currency type
-@property (weak) IBOutlet NSTextField *currencyTypeSelectionLabel;
+// - types
 @property (weak) IBOutlet NSPopUpButton *currencyTypeSelectionPopUpButton;
-
-// - order type
-@property (weak) IBOutlet NSTextField *tradingTypeSelectionLabel;
 @property (weak) IBOutlet NSPopUpButton *tradingTypeSelectionPopUpButton;
-
-// - trade state
-@property (weak) IBOutlet NSTextField *stateTypeSelectionLabel;
 @property (weak) IBOutlet NSPopUpButton *stateTypeSelectionPopUpButton;
 
 // - start date
@@ -90,7 +85,6 @@
         NSDateComponents *startDateComponents = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear)
                                                             fromDate:self.selectedStartDate];
         
-        
         //set date components
         startDateComponents.day   = startDateComponents.day;
         startDateComponents.month = startDateComponents.month;
@@ -120,7 +114,6 @@
     
     { // Radio buttons
         // currency selection
-        self.currencyTypeSelectionLabel.stringValue = @"Selection currency";
         [self.currencyTypeSelectionPopUpButton removeAllItems];
         for (BitcoinDE_CurrencyType idx = BitcoinDE_CurrencyTypeUnknown + 1
              ; idx < BitcoinDE_CurrencyType_EndOfType
@@ -129,7 +122,6 @@
         }
 
         // tradingType selection
-        self.tradingTypeSelectionLabel.stringValue = @"Select type";
         [self.tradingTypeSelectionPopUpButton removeAllItems];
         for (BitcoinDE_MyTradeHistoryParameter_OrderType idx = BitcoinDE_MyTradeHistoryParameter_UnknownOrderType + 1
              ; idx < BitcoinDE_MyTradeHistoryParameter_EndOfOrderType
@@ -138,7 +130,6 @@
         }
 
         // state selection
-        self.stateTypeSelectionLabel.stringValue = @"Select state";
         [self.stateTypeSelectionPopUpButton removeAllItems];
         for (BitcoinDE_MyTradeHistoryParameter_TradeStateType idx = BitcoinDE_MyTradeHistoryParameter_UnknownTradeStateType + 1
              ; idx < BitcoinDE_MyTradeHistoryParameter_EndOfTradeStateType
@@ -161,10 +152,6 @@
     // Load more trades (paging)
     self.loadMoreTradeDatasButton.hidden = YES;
     self.loadAllTradeDatasButton.hidden = YES;
-    
-    {
-        [self.tableView setDoubleAction:@selector(tableViewDoubleAction:)];
-    }
 }
 
 - (void)resetTradeDatas {
@@ -177,19 +164,7 @@
     self.loadMoreTradeDatasButton.enabled = NO;
 }
 
-#pragma mark - Table view methods
-- (void)tableViewDoubleAction:(NSTableView *)tableView {
-//    NSArray <SOXMyOrderBook_BitcoinDE_Data *> *selectedObjects = [self.myOrderArrayController selectedObjects];
-//    SOXMyOrderBook_BitcoinDE_Data *selectedMyOrder = selectedObjects.firstObject;
-//    
-//    NSStoryboard *storyBoard = [NSStoryboard storyboardWithName:@"MacMain" bundle:nil];
-//    SOXMyOrderDetailsViewController *viewC = [storyBoard instantiateControllerWithIdentifier:@"MyOrderDetailsViewControllerIdentifier"];
-//    viewC.myOrder = selectedMyOrder;
-//    [self presentViewControllerAsSheet:viewC];
-}
-
 #pragma mark - Action methods
-
 - (IBAction)currencyTypPopUpButtonAction:(NSPopUpButton *)sender {
     BitcoinDE_CurrencyType newCurrencyType = sender.indexOfSelectedItem + 1;
 
@@ -221,8 +196,6 @@
 
 
 - (IBAction)startDatePickerAction:(NSDatePicker *)sender {
-    DDLogInfo(@"startDatePickerAction %@", sender.dateValue);
-    
     //gather current calendar
     NSCalendar *calendar = [NSCalendar currentCalendar];
     
@@ -238,12 +211,9 @@
     selectedStartDateComponents.year  = inputDateComponents.year;
 
     self.selectedStartDate = [calendar dateFromComponents:selectedStartDateComponents];
-    DDLogInfo(@"final StartDate: %@", self.selectedStartDate);
 }
 
 - (IBAction)endDatePickerAction:(NSDatePicker *)sender {
-    DDLogInfo(@"endDatePickerAction %@", sender.dateValue);
-    
     //gather current calendar
     NSCalendar *calendar = [NSCalendar currentCalendar];
     
@@ -263,28 +233,24 @@
     selectedEndDateComponents.second = 59;
     
     self.selectedEndDate = [calendar dateFromComponents:selectedEndDateComponents];
-    DDLogInfo(@"final EndDate: %@", self.selectedEndDate);
 }
 
 - (IBAction)fetchDataButtonAction:(NSButton *)sender {
     [self enableSpinningWheel];
 
     // reset all fetched datas
-    self.loadMoreTradeDatasButton.enabled = NO;
-
     self.myTrades = [NSMutableArray array];
     self.currentPage = 0;
 
     [self loadNextPage];
 }
+
 - (IBAction)loadMoreTradeDatasAction:(NSButton *)sender {
-    self.loadMoreTradeDatasButton.enabled = NO;
     [self loadNextPage];
 }
+
 - (IBAction)loadAllTradeDatasAction:(NSButton *)sender {
     self.shouldLoadAllTradeDatas = YES;
-    self.loadMoreTradeDatasButton.enabled = NO;
-    self.loadAllTradeDatasButton.enabled = NO;
     [self loadNextPage];
 }
 
@@ -298,18 +264,18 @@
         [self.myTradesArrayController rearrangeObjects];
 
         // Page information
-
         SOXPage_BitcoinDE_Data *pageData = [SOXPage_BitcoinDE_Data pageDataForPayloadDictionary:payloadDictionary];
         self.currentPage = pageData.pageCurrent;
 
         BOOL enableLoadMoreTradDatasButton = self.currentPage != pageData.pageLast;
 
-
+        // enable load more buttons, if needed
         if (enableLoadMoreTradDatasButton) {
             self.loadMoreTradeDatasButton.hidden = NO;
             self.loadMoreTradeDatasButton.enabled = enableLoadMoreTradDatasButton;
             self.loadAllTradeDatasButton.hidden = NO;
             self.loadAllTradeDatasButton.enabled = enableLoadMoreTradDatasButton;
+
 
             self.loadAllTradeDatasButton.title = [NSString stringWithFormat:@"Load all (%ti pages left)"
                                                   , pageData.pageLast - pageData.pageCurrent];
@@ -319,6 +285,7 @@
             self.loadAllTradeDatasButton.hidden = YES;
         }
 
+        // automatically load further pages, if possible
         if (self.shouldLoadAllTradeDatas == YES
             && enableLoadMoreTradDatasButton == YES) {
             [self loadNextPage];
@@ -326,17 +293,16 @@
         else {
             self.shouldLoadAllTradeDatas = NO;
             [self disableSpinningWheel];
-
         }
     }
 }
 
 #pragma mark - Paging
 - (void)loadNextPage {
-    self.currentPage = self.currentPage + 1;
     self.loadMoreTradeDatasButton.enabled = NO;
     self.loadAllTradeDatasButton.enabled = NO;
 
+    self.currentPage = self.currentPage + 1;
     NSDictionary *parameterDictionary = [SOXMyTrades_BitcoinDE_Data parameterForOrderType:self.selectedOrderType
                                                                                tradeState:self.selectedTradeStateType
                                                                              currencyType:self.selectedCurrencyType
