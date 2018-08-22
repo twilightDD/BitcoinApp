@@ -11,6 +11,8 @@
 
 #import "SOXMyOrderDetailsViewController.h"
 
+#import "SOXFormatters.h"
+
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXMyTrades_BitcoinDE_Data.h"
 #import "SOXPage_BitcoinDE_Data.h"
@@ -75,28 +77,9 @@
     self.selectedOrderType = BitcoinDE_MyTradeHistoryParameter_AllOrderType;
     self.selectedTradeStateType = BitcoinDE_MyTradeHistoryParameter_SuccessfulTradeStateType;
 
-    // StartDate
-    {
-        self.selectedStartDate      = [NSDate dateWithTimeInterval:-1*60*60*24*7 sinceDate:[NSDate date]];
-        
-        NSCalendar *calendar = [NSCalendar currentCalendar];
-        
-        //gather date components from date
-        NSDateComponents *startDateComponents = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear)
-                                                            fromDate:self.selectedStartDate];
-        
-        //set date components
-        startDateComponents.day   = startDateComponents.day;
-        startDateComponents.month = startDateComponents.month;
-        startDateComponents.year  = startDateComponents.year;
-        
-        startDateComponents.hour   = 0;
-        startDateComponents.minute = 0;
-        startDateComponents.second = 0;
-        self.selectedStartDate = [calendar dateFromComponents:startDateComponents];
-    }
-
-    self.selectedEndDate        = [NSDate date];
+    // dates
+    self.selectedStartDate = [SOXFormatters dateTimeStringForRFC3339DateTimeString:@"2000-01-01T02:00:00+02:00" ];
+    self.selectedEndDate = [NSDate date];
 
     [self setupUI];
 }
@@ -165,6 +148,7 @@
 }
 
 #pragma mark - Action methods
+#pragma mark | Settings
 - (IBAction)currencyTypPopUpButtonAction:(NSPopUpButton *)sender {
     BitcoinDE_CurrencyType newCurrencyType = sender.indexOfSelectedItem + 1;
 
@@ -193,7 +177,6 @@
         [self resetTradeDatas];
     }
 }
-
 
 - (IBAction)startDatePickerAction:(NSDatePicker *)sender {
     //gather current calendar
@@ -235,23 +218,34 @@
     self.selectedEndDate = [calendar dateFromComponents:selectedEndDateComponents];
 }
 
-- (IBAction)fetchDataButtonAction:(NSButton *)sender {
-    [self enableSpinningWheel];
-
-    // reset all fetched datas
-    self.myTrades = [NSMutableArray array];
-    self.currentPage = 0;
+#pragma mark - Fetch and load buttons
+- (IBAction)loadAllTradeDatasAction:(NSButton *)sender {
+    self.shouldLoadAllTradeDatas = YES;
+    self.fetchDataButton.title = @"Cancel";
 
     [self loadNextPage];
 }
 
 - (IBAction)loadMoreTradeDatasAction:(NSButton *)sender {
+    self.fetchDataButton.enabled = NO;
+
     [self loadNextPage];
 }
 
-- (IBAction)loadAllTradeDatasAction:(NSButton *)sender {
-    self.shouldLoadAllTradeDatas = YES;
-    [self loadNextPage];
+- (IBAction)fetchDataButtonAction:(NSButton *)sender {
+    self.fetchDataButton.enabled = NO;
+    if (self.shouldLoadAllTradeDatas == YES) {
+        self.shouldLoadAllTradeDatas = NO;
+    }
+    else {
+        [self enableSpinningWheel];
+
+        // reset all fetched datas
+        self.myTrades = [NSMutableArray array];
+        self.currentPage = 0;
+
+        [self loadNextPage];
+    }
 }
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
@@ -292,6 +286,8 @@
         }
         else {
             self.shouldLoadAllTradeDatas = NO;
+            self.fetchDataButton.title = @"Fetch data";
+            self.fetchDataButton.enabled = YES;
             [self disableSpinningWheel];
         }
     }
