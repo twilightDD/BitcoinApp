@@ -20,24 +20,11 @@
 #pragma mark IBOutlets
 @property (weak) IBOutlet NSTableView *tableView;
 
-@property (weak) IBOutlet NSView *pageContainerView;
-@property (weak) IBOutlet NSButton *pageBackwardButton;
-@property (weak) IBOutlet NSButton *pageForwardButton;
-@property (weak) IBOutlet NSTextField *pageIndicatorTextField;
-
-@property (weak) IBOutlet NSTextField *currencyTypeSelectionLabel;
-@property (weak) IBOutlet NSPopUpButton *currencyTypeSelectionPopUpButton;
-
-@property (weak) IBOutlet NSTextField *typeLabel;
 @property (weak) IBOutlet NSPopUpButton *typePopUpButton;
 
-@property (weak) IBOutlet NSButton *reloadButton;
-
-
-@property (strong) IBOutlet NSArrayController *accountLedgerArrayController;
-
 #pragma mark Properties
-@property (strong, nonatomic) NSMutableArray *accountLedger;
+@property (nonatomic) BitcoinDE_AccountLedgerParameter_OrderType selectedOrderType;
+
 @end
 
 #pragma mark - Implementation
@@ -46,13 +33,14 @@
 #pragma mark Init&Co.
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do view setup here.
+
+    self.selectedOrderType = BitcoinDE_AccountLedgerParameter_AllOrderType;
 }
 
 - (void)viewWillAppear {
     [super viewWillAppear];
     
-    [self setupUI];
+
     //[self requestServerData];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
@@ -61,43 +49,34 @@
 
 #pragma mark - Private methods
 - (void)setupUI {    
-    self.pageContainerView.hidden = YES;
-
-    // CurrencyType Selection
-    self.currencyTypeSelectionLabel.stringValue = @"Select Currency";
-    [self.currencyTypeSelectionPopUpButton removeAllItems];
-    for (BitcoinDE_CurrencyType idx = BitcoinDE_CurrencyTypeUnknown + 1
-         ; idx < BitcoinDE_CurrencyType_EndOfType
-         ; idx++) {
-        [self.currencyTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:idx]];
-    }
+    [super setupUI];
 
     // Type Selection
-    self.typeLabel.stringValue = @"Select Type";
     [self.typePopUpButton removeAllItems];
     for (BitcoinDE_AccountLedgerParameter_OrderType idx = BitcoinDE_AccountLedgerParameter_UnknownOrderType + 1
          ; idx < BitcoinDE_AccountLedgerParameter_EndOfType
          ; idx++) {
         [self.typePopUpButton addItemWithTitle:[SOXAccountLedger_BitcoinDE_Data titleForAccountLedgerOrderType:idx]];
     }
-
-    self.reloadButton.title = @"Reload";
 }
 
 #pragma mark - Action methods
-- (IBAction)reloadButtonAction:(NSButton *)sender {
-    [self requestServerData];
+
+- (IBAction)typePopUpButtonAction:(NSPopUpButton *)sender {
+    BitcoinDE_AccountLedgerParameter_OrderType newOrderType = sender.indexOfSelectedItem + 1;
+
+    if (newOrderType != self.selectedOrderType) {
+        self.selectedOrderType = newOrderType;
+        [self resetTradeDatas];
+    }
 }
 
-#pragma mark - Network stuff
+#pragma mark - Next Page Data
+- (void)loadNextPage {
+    [super loadNextPage];
 
-- (void)requestServerData {
-    [self enableSpinningWheel];
-    BitcoinDE_CurrencyType currencyTypeIndex = [self.currencyTypeSelectionPopUpButton indexOfSelectedItem] + 1;
-    BitcoinDE_AccountLedgerParameter_OrderType orderTypeIndex =  [self.typePopUpButton indexOfSelectedItem] + 1 ;
-
-    NSDictionary *parameter = [SOXAccountLedger_BitcoinDE_Data parameterForOrderType:orderTypeIndex
-                                                                     forCurrencyType:currencyTypeIndex
+    NSDictionary *parameter = [SOXAccountLedger_BitcoinDE_Data parameterForOrderType:self.selectedOrderType
+                                                                     forCurrencyType:self.selectedCurrencyType
                                                                            startDate:[NSDate dateWithTimeIntervalSinceNow:-10320000]
                                                                              endDate:[NSDate dateWithTimeIntervalSinceNow:-4320000]
                                                                                 page:1];
@@ -111,10 +90,14 @@
 - (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest {
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowAccountLedgerType)]) {
         NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
-        NSMutableArray *accountLedger = [SOXAccountLedger_BitcoinDE_Data accountLedgerDataArrayForAccountLedgerDictionary:payloadDictionary];
-        self.accountLedger = accountLedger;
-        
+        NSMutableArray *accountLedgerDatas = [SOXAccountLedger_BitcoinDE_Data accountLedgerDataArrayForAccountLedgerDictionary:payloadDictionary];
+
+        [self.arrayControllerDatas addObjectsFromArray:accountLedgerDatas];
+        [self.arrayController rearrangeObjects];
+
         [self disableSpinningWheel];
+
+        [self updatePagingButtons:payloadDictionary];
     }
 }
 

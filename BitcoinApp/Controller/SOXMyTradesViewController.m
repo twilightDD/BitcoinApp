@@ -33,7 +33,7 @@
 
 // Parameter
 // - types
-@property (weak) IBOutlet NSPopUpButton *currencyTypeSelectionPopUpButton;
+//@property (weak) IBOutlet NSPopUpButton *currencyTypeSelectionPopUpButton;
 @property (weak) IBOutlet NSPopUpButton *tradingTypeSelectionPopUpButton;
 @property (weak) IBOutlet NSPopUpButton *stateTypeSelectionPopUpButton;
 
@@ -44,18 +44,15 @@
 @property (weak) IBOutlet NSTextField *endDateTextField;
 @property (weak) IBOutlet NSDatePicker *endDateDatePicker;
 
-// Array controller
-@property (strong) IBOutlet NSArrayController *myTradesArrayController;
 
-#pragma mark Properties
-@property (nonatomic) BitcoinDE_CurrencyType selectedCurrencyType;
-@property (nonatomic) BitcoinDE_MyTradeHistoryParameter_OrderType selectedOrderType;
-@property (nonatomic) BitcoinDE_MyTradeHistoryParameter_TradeStateType selectedTradeStateType;
+
+
 
 @property (strong, nonatomic) NSDate *selectedStartDate;
 @property (strong, nonatomic) NSDate *selectedEndDate;
 
-
+@property (nonatomic) BitcoinDE_MyTradeHistoryParameter_OrderType selectedOrderType;
+@property (nonatomic) BitcoinDE_MyTradeHistoryParameter_TradeStateType selectedTradeStateType;
 
 
 
@@ -69,18 +66,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.shouldLoadAllTradeDatas = NO;
-
     // Defaults for types
-    self.selectedCurrencyType = BitcoinDE_CurrencyTypeBitcoin;
     self.selectedOrderType = BitcoinDE_MyTradeHistoryParameter_AllOrderType;
     self.selectedTradeStateType = BitcoinDE_MyTradeHistoryParameter_SuccessfulTradeStateType;
 
     // dates
     self.selectedStartDate = [SOXFormatters dateTimeStringForRFC3339DateTimeString:@"2000-01-01T02:00:00+02:00" ];
     self.selectedEndDate = [NSDate date];
-
-    [self setupUI];
 }
 
 - (void)viewWillAppear {
@@ -93,18 +85,8 @@
 #pragma mark - Private methods
 - (void)setupUI {
     [super setupUI];
-    
-    
-    
-    { // Radio buttons
-        // currency selection
-        [self.currencyTypeSelectionPopUpButton removeAllItems];
-        for (BitcoinDE_CurrencyType idx = BitcoinDE_CurrencyTypeUnknown + 1
-             ; idx < BitcoinDE_CurrencyType_EndOfType
-             ; idx++) {
-            [self.currencyTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:idx]];
-        }
 
+    { // buttons
         // tradingType selection
         [self.tradingTypeSelectionPopUpButton removeAllItems];
         for (BitcoinDE_MyTradeHistoryParameter_OrderType idx = BitcoinDE_MyTradeHistoryParameter_UnknownOrderType + 1
@@ -134,30 +116,8 @@
     }
 }
 
-- (void)resetTradeDatas {
-    // reset tableView
-    self.arrayControllerDatas = [NSMutableArray array];
-    [self.myTradesArrayController rearrangeObjects];
-
-    // reset paging
-    self.currentPage = 0;
-    self.loadMoreTradeDatasButton.enabled = NO;
-}
-
 #pragma mark - Action methods
 #pragma mark | Settings
-- (IBAction)currencyTypPopUpButtonAction:(NSPopUpButton *)sender {
-    BitcoinDE_CurrencyType newCurrencyType = sender.indexOfSelectedItem + 1;
-
-    if (newCurrencyType != self.selectedCurrencyType) {
-        self.selectedCurrencyType = newCurrencyType;
-        [self resetTradeDatas];
-
-        [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
-                                                            object:@(newCurrencyType)];
-    }
-}
-
 - (IBAction)orderTypePopUpButtonAction:(NSPopUpButton *)sender {
     BitcoinDE_MyTradeHistoryParameter_OrderType newOrderType = sender.indexOfSelectedItem + 1;
 
@@ -215,8 +175,6 @@
     self.selectedEndDate = [calendar dateFromComponents:selectedEndDateComponents];
 }
 
-
-
 #pragma mark - SOXMarketCoreServerRequestProtocol
 - (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest {
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowMyTradesType)]) {
@@ -224,7 +182,7 @@
 
         NSMutableArray *myTrades = [SOXMyTrades_BitcoinDE_Data myTradesDataArrayForMyTradeHistoryDictionary:payloadDictionary];
         [self.arrayControllerDatas addObjectsFromArray:myTrades];
-        [self.myTradesArrayController rearrangeObjects];
+        [self.arrayController rearrangeObjects];
 
         // Page information
         [self updatePagingButtons:payloadDictionary];
