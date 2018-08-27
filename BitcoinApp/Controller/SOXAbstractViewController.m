@@ -28,6 +28,7 @@
                                                                                    blue:0
                                                                                   alpha:0.1].CGColor;
 }
+#pragma mark - Spinning Wheel
 
 - (void)enableSpinningWheel {
     self.spinningBackgroundView.hidden = NO;
@@ -38,6 +39,8 @@
     self.spinningBackgroundView.hidden = YES;
     [self.circularProgressIndicator stopAnimation:nil];
 }
+
+
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
 - (void)answerOfServerRequest:(NSDictionary *)answerOfServerRequest {

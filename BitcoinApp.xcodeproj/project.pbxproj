@@ -116,6 +116,8 @@
 		D049C4631E7721AC003CBF36 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D049C45F1E7721AC003CBF36 /* Crashlytics.framework */; };
 		D04BF87020F7E3CC004255D8 /* SOXPreferencesCore.m in Sources */ = {isa = PBXBuildFile; fileRef = D04BF86F20F7E3CC004255D8 /* SOXPreferencesCore.m */; };
 		D04BF87120F7E3CC004255D8 /* SOXPreferencesCore.m in Sources */ = {isa = PBXBuildFile; fileRef = D04BF86F20F7E3CC004255D8 /* SOXPreferencesCore.m */; };
+		D0565BD521348DF7002E0E21 /* SOXPagingAbstractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0565BD421348DF7002E0E21 /* SOXPagingAbstractViewController.m */; };
+		D0565BD621348DF7002E0E21 /* SOXPagingAbstractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0565BD421348DF7002E0E21 /* SOXPagingAbstractViewController.m */; };
 		D05B23D61FB76CBB004BAA6E /* SOXMarket_DefTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = D05B23D51FB76CBB004BAA6E /* SOXMarket_DefTypes.m */; };
 		D05B23D71FB76CBB004BAA6E /* SOXMarket_DefTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = D05B23D51FB76CBB004BAA6E /* SOXMarket_DefTypes.m */; };
 		D05B23DA1FB777C7004BAA6E /* SOXShortTradingPairValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D05B23D91FB777C7004BAA6E /* SOXShortTradingPairValueTransformer.m */; };
@@ -276,6 +278,8 @@
 		D049C45F1E7721AC003CBF36 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		D04BF86E20F7E3CC004255D8 /* SOXPreferencesCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXPreferencesCore.h; sourceTree = "<group>"; };
 		D04BF86F20F7E3CC004255D8 /* SOXPreferencesCore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXPreferencesCore.m; sourceTree = "<group>"; };
+		D0565BD321348DF7002E0E21 /* SOXPagingAbstractViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXPagingAbstractViewController.h; sourceTree = "<group>"; };
+		D0565BD421348DF7002E0E21 /* SOXPagingAbstractViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXPagingAbstractViewController.m; sourceTree = "<group>"; };
 		D05B23D41FB76CBB004BAA6E /* SOXMarket_DefTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXMarket_DefTypes.h; sourceTree = "<group>"; };
 		D05B23D51FB76CBB004BAA6E /* SOXMarket_DefTypes.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXMarket_DefTypes.m; sourceTree = "<group>"; };
 		D05B23D81FB777C7004BAA6E /* SOXShortTradingPairValueTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXShortTradingPairValueTransformer.h; sourceTree = "<group>"; };
@@ -516,6 +520,8 @@
 				D03289971E8A4C44006F15F0 /* SOXMyAccountLedgerViewController.m */,
 				D0962CCA1E945906004FFF62 /* SOXAbstractViewController.h */,
 				D0962CCB1E945906004FFF62 /* SOXAbstractViewController.m */,
+				D0565BD321348DF7002E0E21 /* SOXPagingAbstractViewController.h */,
+				D0565BD421348DF7002E0E21 /* SOXPagingAbstractViewController.m */,
 				D0962CCD1E945967004FFF62 /* SOXAbstractViewController_Private.h */,
 				D08ABF101E9C270D0059825F /* SOXCreateNewOrderViewController.h */,
 				D08ABF111E9C270D0059825F /* SOXCreateNewOrderViewController.m */,
@@ -1211,6 +1217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D021505E20474AEC005A0932 /* BitcoinApp.xcdatamodeld in Sources */,
+				D0565BD621348DF7002E0E21 /* SOXPagingAbstractViewController.m in Sources */,
 				D021505F20474AEC005A0932 /* SOXAccountLedger_BitcoinDE_Data.m in Sources */,
 				D021506020474AEC005A0932 /* SOXBitcoinFormatter.m in Sources */,
 				D021506120474AEC005A0932 /* SOXMinAmountWithShortCurrencyValueTransformer.m in Sources */,
@@ -1277,6 +1284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D063E9231E74BF97006E2D17 /* BitcoinApp.xcdatamodeld in Sources */,
+				D0565BD521348DF7002E0E21 /* SOXPagingAbstractViewController.m in Sources */,
 				D0B3F1311E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m in Sources */,
 				D0B8B4DC1EFA903900FB4747 /* SOXBitcoinFormatter.m in Sources */,
 				D0BCFC9F20041468004F9E57 /* SOXMinAmountWithShortCurrencyValueTransformer.m in Sources */,

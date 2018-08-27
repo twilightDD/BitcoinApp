@@ -4567,7 +4567,7 @@ Gw
                 <customObject id="hHl-2S-Jgz" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController objectClassName="SOXMyTrades_BitcoinDE_Data" id="sb6-Q3-A24" userLabel="MyTradesArrayController">
                     <connections>
-                        <binding destination="TPt-gD-CmY" name="contentArray" keyPath="self.myTrades" id="NLn-E2-LIH"/>
+                        <binding destination="TPt-gD-CmY" name="contentArray" keyPath="self.arrayControllerDatas" id="z3t-Uo-jzR"/>
                     </connections>
                 </arrayController>
                 <userDefaultsController id="j00-vA-Ddo"/>

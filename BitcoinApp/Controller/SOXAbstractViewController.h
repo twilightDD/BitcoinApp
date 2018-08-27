@@ -11,4 +11,7 @@
 
 @interface SOXAbstractViewController : NSViewController <SOXMarketCoreServerRequestProtocol>
 
+- (void)enableSpinningWheel;
+- (void)disableSpinningWheel;
+
 @end
