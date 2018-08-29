@@ -226,8 +226,9 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 
 #pragma mark - SOXChangeOrderProtocol
 - (void)orderWasChanged:(NSString *)oldOrderID newOrderID:(NSString *)newOrderID {
-//    [self requestServerData];
     [[SOXMarket_BitcoinDE_Core sharedCore] startAccountInfoUpdate];
+    [self resetTradeDatas];
+    [self loadNextPage];
 }
 
 @end
