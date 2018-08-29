@@ -189,7 +189,7 @@
 
     dispatch_once(&pred, ^{
         orderStateTypeDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                            @"expired", @(BitcoinDE_OrderStateTypeExpired)
+                                            @"Expired", @(BitcoinDE_OrderStateTypeExpired)
                                             , @"Cancelled", @(BitcoinDE_OrderStateTypeCancelled)
                                             , @"Pending", @(BitcoinDE_OrderStateTypePending)
                                             , nil];
