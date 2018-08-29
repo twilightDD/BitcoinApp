@@ -2188,17 +2188,6 @@
                                     <action selector="loadAllTradeDatasAction:" target="q7D-iu-Op3" id="nGx-On-8GO"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hfD-y1-lfC">
-                                <rect key="frame" x="636" y="120" width="89" height="32"/>
-                                <buttonCell key="cell" type="push" title="Remove" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Eyb-Fv-J8I">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="removeButtonAction:" target="q7D-iu-Op3" id="4U7-wK-ZI2"/>
-                                    <binding destination="t8U-TY-Pcr" name="enabled" keyPath="selectedObjects.@count" id="J3r-4M-cN3"/>
-                                </connections>
-                            </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RDI-CU-Zjp">
                                 <rect key="frame" x="636" y="153" width="89" height="32"/>
                                 <buttonCell key="cell" type="push" title="Change" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mbq-zU-5iW">
@@ -2207,11 +2196,24 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="changeButtonAction:" target="q7D-iu-Op3" id="qKa-Fc-Py3"/>
+                                    <binding destination="q7D-iu-Op3" name="hidden" keyPath="self.selectedOrderStateType" previousBinding="4ZH-Ph-O4A" id="aKT-YZ-gDg"/>
                                     <binding destination="t8U-TY-Pcr" name="enabled" keyPath="selectedObjects.@count" id="4ZH-Ph-O4A">
                                         <dictionary key="options">
                                             <string key="NSValueTransformerName">SOXSingleSelectionValueTransformer</string>
                                         </dictionary>
                                     </binding>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hfD-y1-lfC">
+                                <rect key="frame" x="636" y="120" width="89" height="32"/>
+                                <buttonCell key="cell" type="push" title="Remove" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Eyb-Fv-J8I">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="removeButtonAction:" target="q7D-iu-Op3" id="4U7-wK-ZI2"/>
+                                    <binding destination="q7D-iu-Op3" name="hidden" keyPath="self.selectedOrderStateType" previousBinding="J3r-4M-cN3" id="QfY-OG-Zfw"/>
+                                    <binding destination="t8U-TY-Pcr" name="enabled" keyPath="selectedObjects.@count" id="J3r-4M-cN3"/>
                                 </connections>
                             </button>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="Q5n-fU-Wsf">
