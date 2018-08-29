@@ -129,6 +129,8 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
 - (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest {
+    [self disableSpinningWheel];
+
     if ([answerOfServerRequest valueForKey:ServerAnswerErrorKey]) {
         return;
     }
@@ -138,8 +140,7 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
         NSMutableArray *myOrderBookDatas = [SOXMyOrderBook_BitcoinDE_Data myOrderbookDataArrayForMyOrderbookDictionary:payloadDictionary];
         [self.arrayControllerDatas addObjectsFromArray:myOrderBookDatas];
         [self.arrayController rearrangeObjects];
-        
-        [self disableSpinningWheel];
+
         // Page information
         [self updatePagingButtons:payloadDictionary];
     }
@@ -150,7 +151,8 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
             if (self.countOfMyOrderBook_BitcoinDE_DatasToDelete == self.countOfDeletedMyOrderBook_BitcoinDE_Datas) {
 
                 // Start tableView update
-//                [self requestServerData];
+                [self resetTradeDatas];
+                [self loadNextPage];
                 // inform user
                 [self informUserAboutDeletion:self.countOfDeletedMyOrderBook_BitcoinDE_Datas];
 
