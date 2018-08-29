@@ -29,6 +29,7 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_OrderType) {
     BitcoinDE_UnknownOrderType
     , BitcoinDE_BuyOrderType
     , BitcoinDE_SellOrderType
+    , BitcoinDE_OrderType_EndOfType
 };
 
 typedef NS_ENUM (NSUInteger, BitcoinDE_TrustLevel) {
@@ -62,6 +63,22 @@ typedef NS_ENUM (NSInteger, BitcoinDE_CurrencyType) { // used in MacMain.storybo
     , BitcoinDE_CurrencyType_EndOfType
 };
 
+//typedef NS_ENUM (NSInteger, BitcoinDE_OrderStateType) {
+//    BitcoinDE_OrderStateTypeUnknown = -3
+//    , BitcoinDE_OrderStateTypeExpired = -2// -2 => ausgelaufen
+//    , BitcoinDE_OrderStateTypeCancelled = -1// -1 => abgebrochen
+//    , BitcoinDE_OrderStateTypePending = 0 // 0 => auf Markt verfügbar
+//    , BitcoinDE_OrderStateType_EndOfType
+//};
+
+typedef NS_ENUM (NSInteger, BitcoinDE_OrderStateType) {
+    BitcoinDE_OrderStateTypeUnknown = 1
+    , BitcoinDE_OrderStateTypePending = 0 // 0 => auf Markt verfügbar
+    , BitcoinDE_OrderStateTypeCancelled = -1// -1 => abgebrochen
+    , BitcoinDE_OrderStateTypeExpired = -2// -2 => ausgelaufen
+    , BitcoinDE_OrderStateType_EndOfType = -3
+};
+
 @interface SOXMarket_BitcoinDE_DefTypes : SOXMarket_DefTypes
 
 + (NSString *)orderTypeStringForOrderType:(BitcoinDE_OrderType)orderType;
@@ -75,5 +92,7 @@ typedef NS_ENUM (NSInteger, BitcoinDE_CurrencyType) { // used in MacMain.storybo
 + (NSString *)tradingPairShortStringUpperCaseForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 + (NSString *)tradingPairNaturalStringForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 + (BitcoinDE_CurrencyType)currencyTypeForTradingPairString:(NSString *)tradingPairString;
+
++ (NSString *)orderStateTypeStringForOrderstateType:(BitcoinDE_OrderStateType)orderStateType; 
 
 @end

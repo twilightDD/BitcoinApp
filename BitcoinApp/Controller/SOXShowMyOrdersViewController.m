@@ -14,6 +14,7 @@
 
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXMyOrderBook_BitcoinDE_Data.h"
+#import "SOXMyTrades_BitcoinDE_Data.h"
 #import "SOXTradeJob_BitcoinDE_Data.h"
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 #import "SOXKeys_BitcoinDE.h"
@@ -29,23 +30,13 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 #pragma mark IBOutlets
 @property (weak) IBOutlet NSTableView *tableView;
 
-@property (weak) IBOutlet NSButton *currencyAllButton;
-@property (weak) IBOutlet NSButton *currencyBTCButton;
-@property (weak) IBOutlet NSButton *currencyBCHButton;
-@property (weak) IBOutlet NSButton *currencyBTGButton;
-@property (weak) IBOutlet NSButton *currencyETHButton;
-
+@property (weak) IBOutlet NSPopUpButton *orderStateTypeSelectionPopUpButton;
 
 @property (weak) IBOutlet NSButton *changeButton;
-@property (weak) IBOutlet NSButton *reloadButton;
 @property (weak) IBOutlet NSButton *removeButton;
 
-@property (strong) IBOutlet NSArrayController *myOrderArrayController;
-
 #pragma mark Properties
-@property (strong, nonatomic) NSMutableArray <SOXMyOrderBook_BitcoinDE_Data *> *myOrderBook;
-
-@property (nonatomic, copy) NSString *selectedTradingPairString;
+@property (nonatomic) BitcoinDE_OrderStateType selectedOrderStateType;
 
 @property (nonatomic) NSInteger countOfMyOrderBook_BitcoinDE_DatasToDelete;
 @property (nonatomic) NSInteger countOfDeletedMyOrderBook_BitcoinDE_Datas;
@@ -57,25 +48,33 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 #pragma mark Init&Co.
 - (void)viewDidLoad {
     [super viewDidLoad];
-}
 
-- (void)viewWillAppear {
-    [super viewWillAppear];
-    
-    [self setupUI];
-    [self enableSpinningWheel]; // has to be here
-    [self requestServerData];
+    self.selectedOrderStateType = BitcoinDE_OrderStateTypeUnknown; // means: "All" is selected per default
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
-                                                        object:@(BitcoinDE_CurrencyTypeBitcoin)];
+    // for debugging
+    self.startDateDatePicker.enabled = NO;
+    self.endDateDatePicker.enabled = NO;
 }
 
 #pragma mark - Private methods
-- (void)setupUI {    
+- (void)setupUI {
+    [super setupUI];
+
+    { // buttons
+        // orderStateType selection
+        [self.orderStateTypeSelectionPopUpButton removeAllItems];
+
+        [self.orderStateTypeSelectionPopUpButton addItemWithTitle:@"All"];
+        for (BitcoinDE_OrderStateType idx = BitcoinDE_OrderStateTypeUnknown - 1
+             ; idx > BitcoinDE_OrderStateType_EndOfType
+             ; idx--) {
+            [self.orderStateTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes orderStateTypeStringForOrderstateType:idx]];
+        }
+    }
+
     {
         self.changeButton.title = @"Change order";
         self.removeButton.title = @"Remove order";
-        self.reloadButton.title = @"Reload";
     }
     
     {
@@ -83,12 +82,19 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
     }
 }
 
-- (void)requestServerData {
-    NSDictionary *parameters = nil;
-    if (self.selectedTradingPairString.length > 0) {
-        parameters = [NSDictionary dictionaryWithObject:self.selectedTradingPairString
-                                                 forKey:@"trading_pair"];
-    }
+- (void)loadNextPage {
+    [super loadNextPage];
+
+    NSDictionary *parameters = [SOXMyOrderBook_BitcoinDE_Data parameterForOrderType:self.selectedOrderType
+                                                                       currencyType:self.selectedCurrencyType
+                                                                         orderState:self.selectedOrderStateType
+                                                                          startDate:self.selectedStartDate
+                                                                            endDate:self.selectedEndDate
+                                                                               page:self.currentPage];
+//    if (self.selectedTradingPairString.length > 0) {
+//        parameters = [NSDictionary dictionaryWithObject:self.selectedTradingPairString
+//                                                 forKey:@"trading_pair"];
+//    }
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowMyOrdersCommandType
                                             withParameter:parameters
                                                 respondTo:self];
@@ -114,7 +120,7 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 
 #pragma mark - Table view methods
 - (void)tableViewDoubleAction:(NSTableView *)tableView {
-    NSArray <SOXMyOrderBook_BitcoinDE_Data *> *selectedObjects = [self.myOrderArrayController selectedObjects];
+    NSArray <SOXMyOrderBook_BitcoinDE_Data *> *selectedObjects = [self.arrayController selectedObjects];
     SOXMyOrderBook_BitcoinDE_Data *selectedMyOrder = selectedObjects.firstObject;
     
     NSStoryboard *storyBoard = [NSStoryboard storyboardWithName:@"MacMain" bundle:nil];
@@ -131,10 +137,13 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
     
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowMyOrdersCommandType)]) {
         NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
-        NSMutableArray *myOrderBook = [SOXMyOrderBook_BitcoinDE_Data myOrderbookDataArrayForMyOrderbookDictionary:payloadDictionary];
-        self.myOrderBook = myOrderBook;
+        NSMutableArray *myOrderBookDatas = [SOXMyOrderBook_BitcoinDE_Data myOrderbookDataArrayForMyOrderbookDictionary:payloadDictionary];
+        [self.arrayControllerDatas addObjectsFromArray:myOrderBookDatas];
+        [self.arrayController rearrangeObjects];
         
         [self disableSpinningWheel];
+        // Page information
+        [self updatePagingButtons:payloadDictionary];
     }
     else if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_RemoveOrderType)]){
         NSDictionary *errors = [answerOfServerRequest objectForKey:ServerAnswerErrorKey];
@@ -143,7 +152,7 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
             if (self.countOfMyOrderBook_BitcoinDE_DatasToDelete == self.countOfDeletedMyOrderBook_BitcoinDE_Datas) {
 
                 // Start tableView update
-                [self requestServerData];
+//                [self requestServerData];
                 // inform user
                 [self informUserAboutDeletion:self.countOfDeletedMyOrderBook_BitcoinDE_Datas];
 
@@ -168,16 +177,17 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 }
 
 #pragma mark - Action methods
-- (IBAction)changeCurrencyAction:(NSButton *)sender {
-    BitcoinDE_CurrencyType currencyType = sender.tag;
+- (IBAction)orderStateTypePopUpButtonAction:(NSPopUpButton *)sender {
+    BitcoinDE_OrderStateType orderStateType = (sender.indexOfSelectedItem - 1) * -1;
 
-    NSString *selectedTradingPairCurrencyString = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType];
-    self.selectedTradingPairString = selectedTradingPairCurrencyString;
-    [self requestServerData];
+    if (orderStateType != self.selectedOrderStateType) {
+        self.selectedOrderStateType = orderStateType;
+        [self resetTradeDatas];
+    }
 }
 
 - (IBAction)changeButtonAction:(NSButton *)sender {
-    NSArray <SOXMyOrderBook_BitcoinDE_Data *> *selectedDatas = self.myOrderArrayController.selectedObjects;
+    NSArray <SOXMyOrderBook_BitcoinDE_Data *> *selectedDatas = self.arrayController.selectedObjects;
 
     if (selectedDatas.count == 1) {
         SOXMyOrderBook_BitcoinDE_Data *orderBookDataToReplace = selectedDatas.firstObject;
@@ -196,7 +206,7 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 }
 
 - (IBAction)removeButtonAction:(NSButton *)sender {
-    NSArray <SOXMyOrderBook_BitcoinDE_Data *> *selectedDatas = self.myOrderArrayController.selectedObjects;
+    NSArray <SOXMyOrderBook_BitcoinDE_Data *> *selectedDatas = self.arrayController.selectedObjects;
     if (selectedDatas.count > 0) {
         self.changeButton.enabled = NO;
         self.removeButton.enabled = NO;
@@ -214,14 +224,9 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
     }
 }
 
-- (IBAction)reloadButtonAction:(NSButton *)sender {
-    [self enableSpinningWheel];
-    [self requestServerData];
-}
-
 #pragma mark - SOXChangeOrderProtocol
 - (void)orderWasChanged:(NSString *)oldOrderID newOrderID:(NSString *)newOrderID {
-    [self requestServerData];
+//    [self requestServerData];
     [[SOXMarket_BitcoinDE_Core sharedCore] startAccountInfoUpdate];
 }
 

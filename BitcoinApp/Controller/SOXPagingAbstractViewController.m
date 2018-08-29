@@ -8,9 +8,12 @@
 
 #import "SOXPagingAbstractViewController.h"
 
-#import "SOXPage_BitcoinDE_Data.h"
+#import "SOXFormatters.h"
 
 #import "SOXKeys_BitcoinDE.h"
+
+#import "SOXPage_BitcoinDE_Data.h"
+
 
 @implementation SOXPagingAbstractViewController
 
@@ -20,7 +23,18 @@
     self.shouldLoadAllTradeDatas = NO;
     self.selectedCurrencyType = BitcoinDE_CurrencyTypeBitcoin;
 
+    // dates
+    self.selectedStartDate = [SOXFormatters dateTimeStringForRFC3339DateTimeString:@"2000-01-01T02:00:00+02:00" ];
+    self.selectedEndDate = [NSDate date];
+
     [self setupUI];
+}
+
+- (void)viewWillAppear {
+    [super viewWillAppear];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
+                                                        object:@(self.selectedCurrencyType)];
 }
 
 - (void)setupUI {
@@ -32,6 +46,26 @@
          ; idx < BitcoinDE_CurrencyType_EndOfType
          ; idx++) {
         [self.currencyTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:idx]];
+    }
+
+    // tradingType selection
+    [self.tradingTypeSelectionPopUpButton removeAllItems];
+    [self.tradingTypeSelectionPopUpButton addItemWithTitle:@"All"];
+    for (BitcoinDE_OrderType idx = BitcoinDE_UnknownOrderType + 1
+         ; idx < BitcoinDE_OrderType_EndOfType
+         ; idx++) {
+        [self.tradingTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:idx]];
+    }
+
+    { // date picker
+        self.startDateTextField.stringValue = @"Start date";
+        self.startDateDatePicker.dateValue  = self.selectedStartDate;
+        self.startDateDatePicker.locale = [NSLocale autoupdatingCurrentLocale];
+
+
+        self.endDateTextField.stringValue   = @"End date";
+        self.endDateDatePicker.dateValue    = self.selectedEndDate;
+        self.endDateDatePicker.locale = [NSLocale autoupdatingCurrentLocale];
     }
 }
 
@@ -108,6 +142,55 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
                                                             object:@(newCurrencyType)];
     }
+}
+
+- (IBAction)orderTypePopUpButtonAction:(NSPopUpButton *)sender {
+    BitcoinDE_OrderType newOrderType = sender.indexOfSelectedItem;
+
+    if (newOrderType != self.selectedOrderType) {
+        self.selectedOrderType = newOrderType;
+        [self resetTradeDatas];
+    }
+}
+
+- (IBAction)startDatePickerAction:(NSDatePicker *)sender {
+    //gather current calendar
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+
+    //gather date components from date
+    NSDateComponents *inputDateComponents = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear)
+                                                        fromDate:sender.dateValue];
+
+    NSDateComponents *selectedStartDateComponents = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond)
+                                                                fromDate:self.selectedStartDate];
+    //set date components
+    selectedStartDateComponents.day   = inputDateComponents.day;
+    selectedStartDateComponents.month = inputDateComponents.month;
+    selectedStartDateComponents.year  = inputDateComponents.year;
+
+    self.selectedStartDate = [calendar dateFromComponents:selectedStartDateComponents];
+}
+
+- (IBAction)endDatePickerAction:(NSDatePicker *)sender {
+    //gather current calendar
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+
+    //gather date components from date
+    NSDateComponents *inputDateComponents = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear)
+                                                        fromDate:sender.dateValue];
+
+    NSDateComponents *selectedEndDateComponents = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond)
+                                                              fromDate:[NSDate date]];
+    //set date components
+    selectedEndDateComponents.day   = inputDateComponents.day;
+    selectedEndDateComponents.month = inputDateComponents.month;
+    selectedEndDateComponents.year  = inputDateComponents.year;
+
+    selectedEndDateComponents.hour   = 23;
+    selectedEndDateComponents.minute = 59;
+    selectedEndDateComponents.second = 59;
+
+    self.selectedEndDate = [calendar dateFromComponents:selectedEndDateComponents];
 }
 
 #pragma mark - Fetch and load buttons

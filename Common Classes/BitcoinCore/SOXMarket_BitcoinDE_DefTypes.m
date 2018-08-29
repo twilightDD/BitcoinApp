@@ -177,4 +177,25 @@
     return tradingPairStringsForCurrencyTyp;
 }
 
++ (NSString *)orderStateTypeStringForOrderstateType:(BitcoinDE_OrderStateType)orderStateType {
+    NSString *orderStateTypeString = [[self orderStateTypeDictionary] objectForKey:@(orderStateType)];
+    return orderStateTypeString;
+}
+
++ (NSDictionary *)orderStateTypeDictionary {
+    static NSDictionary    *orderStateTypeDictionary;
+
+    static dispatch_once_t pred;
+
+    dispatch_once(&pred, ^{
+        orderStateTypeDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                            @"expired", @(BitcoinDE_OrderStateTypeExpired)
+                                            , @"Cancelled", @(BitcoinDE_OrderStateTypeCancelled)
+                                            , @"Pending", @(BitcoinDE_OrderStateTypePending)
+                                            , nil];
+    });
+
+    return orderStateTypeDictionary;
+}
+
 @end

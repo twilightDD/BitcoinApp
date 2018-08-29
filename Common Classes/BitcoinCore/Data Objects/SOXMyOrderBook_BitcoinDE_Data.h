@@ -33,6 +33,10 @@
 + (NSDictionary *)parameterForDeletingOrderWithOrderBookData:(SOXMyOrderBook_BitcoinDE_Data *)myOrderBookData;
 + (NSArray <NSDictionary *> *)parametersForDeletingMyOrderBookDatas:(NSArray <SOXMyOrderBook_BitcoinDE_Data *>*)myOrderBookDatas;
 
-
-
++ (NSDictionary *)parameterForOrderType:(BitcoinDE_OrderType)orderType
+                           currencyType:(BitcoinDE_CurrencyType)currencyType
+                             orderState:(BitcoinDE_OrderStateType)orderState
+                              startDate:(NSDate *)startDate
+                                endDate:(NSDate *)endDate
+                                   page:(NSInteger )page;
 @end

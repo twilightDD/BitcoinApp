@@ -11,8 +11,6 @@
 
 #import "SOXMyOrderDetailsViewController.h"
 
-#import "SOXFormatters.h"
-
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXMyTrades_BitcoinDE_Data.h"
 
@@ -32,30 +30,9 @@
 
 
 // Parameter
-// - types
-//@property (weak) IBOutlet NSPopUpButton *currencyTypeSelectionPopUpButton;
-@property (weak) IBOutlet NSPopUpButton *tradingTypeSelectionPopUpButton;
 @property (weak) IBOutlet NSPopUpButton *stateTypeSelectionPopUpButton;
 
-// - start date
-@property (weak) IBOutlet NSTextField *startDateTextField;
-@property (weak) IBOutlet NSDatePicker *startDateDatePicker;
-// - end date
-@property (weak) IBOutlet NSTextField *endDateTextField;
-@property (weak) IBOutlet NSDatePicker *endDateDatePicker;
-
-
-
-
-
-@property (strong, nonatomic) NSDate *selectedStartDate;
-@property (strong, nonatomic) NSDate *selectedEndDate;
-
-@property (nonatomic) BitcoinDE_MyTradeHistoryParameter_OrderType selectedOrderType;
 @property (nonatomic) BitcoinDE_MyTradeHistoryParameter_TradeStateType selectedTradeStateType;
-
-
-
 
 @end
 
@@ -69,17 +46,6 @@
     // Defaults for types
     self.selectedOrderType = BitcoinDE_MyTradeHistoryParameter_AllOrderType;
     self.selectedTradeStateType = BitcoinDE_MyTradeHistoryParameter_SuccessfulTradeStateType;
-
-    // dates
-    self.selectedStartDate = [SOXFormatters dateTimeStringForRFC3339DateTimeString:@"2000-01-01T02:00:00+02:00" ];
-    self.selectedEndDate = [NSDate date];
-}
-
-- (void)viewWillAppear {
-    [super viewWillAppear];
-
-    [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
-                                                        object:@(self.selectedCurrencyType)];
 }
 
 #pragma mark - Private methods
@@ -87,14 +53,6 @@
     [super setupUI];
 
     { // buttons
-        // tradingType selection
-        [self.tradingTypeSelectionPopUpButton removeAllItems];
-        for (BitcoinDE_MyTradeHistoryParameter_OrderType idx = BitcoinDE_MyTradeHistoryParameter_UnknownOrderType + 1
-             ; idx < BitcoinDE_MyTradeHistoryParameter_EndOfOrderType
-             ; idx++) {
-            [self.tradingTypeSelectionPopUpButton addItemWithTitle:[SOXMyTrades_BitcoinDE_Data titleForOrderType:idx]];
-        }
-
         // state selection
         [self.stateTypeSelectionPopUpButton removeAllItems];
         for (BitcoinDE_MyTradeHistoryParameter_TradeStateType idx = BitcoinDE_MyTradeHistoryParameter_UnknownTradeStateType + 1
@@ -103,76 +61,16 @@
             [self.stateTypeSelectionPopUpButton addItemWithTitle:[SOXMyTrades_BitcoinDE_Data titleForTradeStateType:idx]];
         }
     }
-    
-    { // date picker
-        self.startDateTextField.stringValue = @"Start date";
-        self.startDateDatePicker.dateValue  = self.selectedStartDate;
-        self.startDateDatePicker.locale = [NSLocale autoupdatingCurrentLocale];
-        
-        
-        self.endDateTextField.stringValue   = @"End date";
-        self.endDateDatePicker.dateValue    = self.selectedEndDate;
-        self.endDateDatePicker.locale = [NSLocale autoupdatingCurrentLocale];
-    }
 }
 
 #pragma mark - Action methods
 #pragma mark | Settings
-- (IBAction)orderTypePopUpButtonAction:(NSPopUpButton *)sender {
-    BitcoinDE_MyTradeHistoryParameter_OrderType newOrderType = sender.indexOfSelectedItem + 1;
-
-    if (newOrderType != self.selectedOrderType) {
-        self.selectedOrderType = newOrderType;
-        [self resetTradeDatas];
-    }
-}
-
 - (IBAction)statePopUpButtonAction:(NSPopUpButton *)sender {
     BitcoinDE_MyTradeHistoryParameter_TradeStateType newTradeState = sender.indexOfSelectedItem + 1;
     if (newTradeState != self.selectedTradeStateType) {
         self.selectedTradeStateType = newTradeState;
         [self resetTradeDatas];
     }
-}
-
-- (IBAction)startDatePickerAction:(NSDatePicker *)sender {
-    //gather current calendar
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    
-    //gather date components from date
-    NSDateComponents *inputDateComponents = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear)
-                                                        fromDate:sender.dateValue];
-    
-    NSDateComponents *selectedStartDateComponents = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond)
-                                                                fromDate:self.selectedStartDate];
-    //set date components
-    selectedStartDateComponents.day   = inputDateComponents.day;
-    selectedStartDateComponents.month = inputDateComponents.month;
-    selectedStartDateComponents.year  = inputDateComponents.year;
-
-    self.selectedStartDate = [calendar dateFromComponents:selectedStartDateComponents];
-}
-
-- (IBAction)endDatePickerAction:(NSDatePicker *)sender {
-    //gather current calendar
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    
-    //gather date components from date
-    NSDateComponents *inputDateComponents = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear)
-                                                        fromDate:sender.dateValue];
-    
-    NSDateComponents *selectedEndDateComponents = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond)
-                                                              fromDate:[NSDate date]];
-    //set date components
-    selectedEndDateComponents.day   = inputDateComponents.day;
-    selectedEndDateComponents.month = inputDateComponents.month;
-    selectedEndDateComponents.year  = inputDateComponents.year;
-    
-    selectedEndDateComponents.hour   = 23;
-    selectedEndDateComponents.minute = 59;
-    selectedEndDateComponents.second = 59;
-    
-    self.selectedEndDate = [calendar dateFromComponents:selectedEndDateComponents];
 }
 
 #pragma mark - SOXMarketCoreServerRequestProtocol

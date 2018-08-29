@@ -11,6 +11,18 @@
 #import "SOXFormatters.h"
 #import "SOXKeys_BitcoinDE.h"
 
+#import "SOXMyTrades_BitcoinDE_Data.h"
+
+static NSString *MyOrderBookParameter_OrderTypeBuyKey = @"buy";
+static NSString *MyOrderBookParameter_OrderTypeSellKey = @"sell";
+
+static NSString *MyOrderBookParameter_OrderTypeKey = @"type";
+static NSString *MyOrderBookParameter_CurrencyType = @"trading_pair";
+static NSString *MyOrderBookParameter_OrderStateKey = @"state";
+static NSString *MyOrderBookParameter_DateStartKey = @"date_start";
+static NSString *MyOrderBookParameter_DateEndKey = @"date_end";
+static NSString *MyOrderBookParameter_PageKey = @"page";
+
 @interface SOXMyOrderBook_BitcoinDE_Data()
 
 #pragma mark Properties
@@ -131,6 +143,84 @@
     }
 
     return [parameters copy];
+}
+
++ (NSDictionary *)parameterForOrderType:(BitcoinDE_OrderType)orderType
+                           currencyType:(BitcoinDE_CurrencyType)currencyType
+                             orderState:(BitcoinDE_OrderStateType)orderState
+                              startDate:(NSDate *)startDate
+                                endDate:(NSDate *)endDate
+                                   page:(NSInteger )page {
+    NSString *orderTypeString;
+    switch (orderType) {
+        case BitcoinDE_BuyOrderType:
+            orderTypeString = MyOrderBookParameter_OrderTypeBuyKey;
+            break;
+        case BitcoinDE_SellOrderType:
+            orderTypeString = MyOrderBookParameter_OrderTypeSellKey;
+        default:
+            break;
+    }
+
+    NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType];
+
+    NSNumber *orderStateNumber;
+    switch (orderState) {
+        case BitcoinDE_OrderStateTypeUnknown:
+        case BitcoinDE_OrderStateType_EndOfType:
+            break;
+        default:
+            orderStateNumber = @(orderState);
+            break;
+    }
+
+    NSString *startDateString = nil; //[SOXFormatters rfc3339DateTimeStringDate:startDate];
+    NSString *endDateString   = nil; //[SOXFormatters rfc3339DateTimeStringDate:endDate];
+
+    NSNumber *pageNumber = @(page);
+
+    return [self parameterDictionaryForOrderType:orderTypeString
+                                    currencyType:currencyTypeString
+                                      orderState:orderStateNumber
+                                       startDate:startDateString
+                                         endDate:endDateString
+                                            page:pageNumber];
+
+}
+
++ (NSDictionary *)parameterDictionaryForOrderType:(NSString *)orderTypeString
+                                     currencyType:(NSString *)currencyTypeString
+                                       orderState:(NSNumber *)orderStateNumber
+                                        startDate:(NSString *)startDateString
+                                          endDate:(NSString *)endDateString
+                                             page:(NSNumber *)pageNumber {
+    NSMutableDictionary *parameterDictHelper = [NSMutableDictionary dictionary];
+
+    if (orderTypeString) {
+        [parameterDictHelper setObject:orderTypeString forKey:MyOrderBookParameter_OrderTypeKey];
+    }
+
+    if (currencyTypeString) {
+        [parameterDictHelper setObject:currencyTypeString forKey:MyOrderBookParameter_CurrencyType];
+    }
+
+    if (orderStateNumber) {
+        [parameterDictHelper setObject:orderStateNumber forKey:MyOrderBookParameter_OrderStateKey];
+    }
+
+    if (startDateString) {
+        [parameterDictHelper setObject:startDateString forKey:MyOrderBookParameter_DateStartKey];
+    }
+
+    if (endDateString) {
+        [parameterDictHelper setObject:endDateString forKey:MyOrderBookParameter_DateEndKey];
+    }
+
+    if (pageNumber) {
+        [parameterDictHelper setObject:pageNumber forKey:MyOrderBookParameter_PageKey];
+    }
+
+    return [parameterDictHelper copy];
 }
 
 #pragma mark - Class methods

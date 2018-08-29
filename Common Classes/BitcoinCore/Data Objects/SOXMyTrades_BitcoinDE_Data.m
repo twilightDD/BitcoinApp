@@ -52,7 +52,7 @@ static NSString *MyTradeHistoryParameter_PageKey = @"page";
 
 @implementation SOXMyTrades_BitcoinDE_Data
 
-+ (NSDictionary *)parameterForOrderType:(BitcoinDE_MyTradeHistoryParameter_OrderType)orderType
++ (NSDictionary *)parameterForOrderType:(BitcoinDE_OrderType)orderType
                              tradeState:(BitcoinDE_MyTradeHistoryParameter_TradeStateType)tradeState
                            currencyType:(BitcoinDE_CurrencyType)currencyType
                               startDate:(NSDate *)startDate
@@ -61,10 +61,10 @@ static NSString *MyTradeHistoryParameter_PageKey = @"page";
 
     NSString *orderTypeString;
     switch (orderType) {
-        case BitcoinDE_MyTradeHistoryParameter_BuyOrderType:
+        case BitcoinDE_BuyOrderType:
             orderTypeString = MyTradeHistoryParameter_OrderTypeBuyKey;
             break;
-        case BitcoinDE_MyTradeHistoryParameter_SellOrderType:
+        case BitcoinDE_SellOrderType:
             orderTypeString = MyTradeHistoryParameter_OrderTypeSellKey;
         default:
             break;
