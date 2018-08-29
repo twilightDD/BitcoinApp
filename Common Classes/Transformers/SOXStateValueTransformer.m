@@ -25,6 +25,9 @@
         NSNumber *state = value;
         NSString *stateString = nil;
         switch (state.integerValue) {
+            case -2:
+                stateString = @"Expired";
+                break;
             case -1:
                 stateString = @"Cancelled";
                 break;
