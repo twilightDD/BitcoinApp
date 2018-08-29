@@ -49,7 +49,7 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.selectedOrderStateType = BitcoinDE_OrderStateTypeUnknown; // means: "All" is selected per default
+    self.selectedOrderStateType = BitcoinDE_OrderStateTypePending;
 
     // for debugging
     self.startDateDatePicker.enabled = NO;
@@ -63,8 +63,6 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
     { // buttons
         // orderStateType selection
         [self.orderStateTypeSelectionPopUpButton removeAllItems];
-
-        [self.orderStateTypeSelectionPopUpButton addItemWithTitle:@"All"];
         for (BitcoinDE_OrderStateType idx = BitcoinDE_OrderStateTypeUnknown - 1
              ; idx > BitcoinDE_OrderStateType_EndOfType
              ; idx--) {
@@ -178,7 +176,7 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 
 #pragma mark - Action methods
 - (IBAction)orderStateTypePopUpButtonAction:(NSPopUpButton *)sender {
-    BitcoinDE_OrderStateType orderStateType = (sender.indexOfSelectedItem - 1) * -1;
+    BitcoinDE_OrderStateType orderStateType = sender.indexOfSelectedItem * -1;
 
     if (orderStateType != self.selectedOrderStateType) {
         self.selectedOrderStateType = orderStateType;
