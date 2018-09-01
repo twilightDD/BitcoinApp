@@ -20,10 +20,10 @@
 #pragma mark IBOutlets
 @property (weak) IBOutlet NSTableView *tableView;
 
-@property (weak) IBOutlet NSPopUpButton *typePopUpButton;
+@property (weak) IBOutlet NSPopUpButton *accountLedgerOrderTypePopUpButton;
 
 #pragma mark Properties
-@property (nonatomic) BitcoinDE_AccountLedgerParameter_OrderType selectedOrderType;
+@property (nonatomic) BitcoinDE_AccountLedgerParameter_OrderType selectedAccountLedgerOrderType;
 
 @end
 
@@ -34,7 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.selectedOrderType = BitcoinDE_AccountLedgerParameter_AllOrderType;
+    self.selectedAccountLedgerOrderType = BitcoinDE_AccountLedgerParameter_AllOrderType;
 }
 
 - (void)viewWillAppear {
@@ -44,7 +44,7 @@
     //[self requestServerData];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
-                                                        object:@(BitcoinDE_CurrencyTypeBitcoin)];
+                                                        object:@(self.selectedCurrencyType)];
 }
 
 #pragma mark - Private methods
@@ -52,21 +52,20 @@
     [super setupUI];
 
     // Type Selection
-    [self.typePopUpButton removeAllItems];
+    [self.accountLedgerOrderTypePopUpButton removeAllItems];
     for (BitcoinDE_AccountLedgerParameter_OrderType idx = BitcoinDE_AccountLedgerParameter_UnknownOrderType + 1
          ; idx < BitcoinDE_AccountLedgerParameter_EndOfType
          ; idx++) {
-        [self.typePopUpButton addItemWithTitle:[SOXAccountLedger_BitcoinDE_Data titleForAccountLedgerOrderType:idx]];
+        [self.accountLedgerOrderTypePopUpButton addItemWithTitle:[SOXAccountLedger_BitcoinDE_Data titleForAccountLedgerOrderType:idx]];
     }
 }
 
 #pragma mark - Action methods
+- (IBAction)accountLedgerOrderTypePopUpButtonAction:(NSPopUpButton *)sender {
+    BitcoinDE_AccountLedgerParameter_OrderType newAccountLedgerOrderType = sender.indexOfSelectedItem + 1;
 
-- (IBAction)typePopUpButtonAction:(NSPopUpButton *)sender {
-    BitcoinDE_AccountLedgerParameter_OrderType newOrderType = sender.indexOfSelectedItem + 1;
-
-    if (newOrderType != self.selectedOrderType) {
-        self.selectedOrderType = newOrderType;
+    if (newAccountLedgerOrderType != self.selectedAccountLedgerOrderType) {
+        self.selectedAccountLedgerOrderType = newAccountLedgerOrderType;
         [self resetTradeDatas];
     }
 }
@@ -75,7 +74,7 @@
 - (void)loadNextPage {
     [super loadNextPage];
 
-    NSDictionary *parameter = [SOXAccountLedger_BitcoinDE_Data parameterForOrderType:self.selectedOrderType
+    NSDictionary *parameter = [SOXAccountLedger_BitcoinDE_Data parameterForOrderType:self.selectedAccountLedgerOrderType
                                                                      forCurrencyType:self.selectedCurrencyType
                                                                            startDate:[NSDate dateWithTimeIntervalSinceNow:-10320000]
                                                                              endDate:[NSDate dateWithTimeIntervalSinceNow:-4320000]
