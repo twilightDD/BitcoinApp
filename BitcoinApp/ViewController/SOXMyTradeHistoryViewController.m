@@ -30,8 +30,10 @@
 
 
 // Parameter
+@property (weak) IBOutlet NSPopUpButton *tradeHistoryOrderTypeSelectionPopUpButton;
 @property (weak) IBOutlet NSPopUpButton *stateTypeSelectionPopUpButton;
 
+@property (nonatomic) BitcoinDE_MyTradeHistoryParameter_OrderType selectedTradeHistoryOrderType;
 @property (nonatomic) BitcoinDE_MyTradeHistoryParameter_TradeStateType selectedTradeStateType;
 
 @end
@@ -44,7 +46,7 @@
     [super viewDidLoad];
 
     // Defaults for types
-    self.selectedOrderType = BitcoinDE_MyTradeHistoryParameter_AllOrderType;
+    self.selectedTradeHistoryOrderType = BitcoinDE_MyTradeHistoryParameter_AllOrderType;
     self.selectedTradeStateType = BitcoinDE_MyTradeHistoryParameter_SuccessfulTradeStateType;
 }
 
@@ -53,6 +55,15 @@
     [super setupUI];
 
     { // buttons
+
+        // tradeHistoryOrderType selection
+        [self.tradeHistoryOrderTypeSelectionPopUpButton removeAllItems];
+        for (BitcoinDE_MyTradeHistoryParameter_OrderType idx = BitcoinDE_MyTradeHistoryParameter_UnknownOrderType + 1
+             ; idx < BitcoinDE_MyTradeHistoryParameter_EndOfOrderType
+             ; idx++) {
+            [self.tradeHistoryOrderTypeSelectionPopUpButton addItemWithTitle:[SOXMyTrades_BitcoinDE_Data titleForOrderType:idx]];
+        }
+
         // state selection
         [self.stateTypeSelectionPopUpButton removeAllItems];
         for (BitcoinDE_MyTradeHistoryParameter_TradeStateType idx = BitcoinDE_MyTradeHistoryParameter_UnknownTradeStateType + 1
@@ -65,6 +76,14 @@
 
 #pragma mark - Action methods
 #pragma mark | Settings
+- (IBAction)tradeHistoryOrderTypePopUpButtonAction:(NSPopUpButton *)sender {
+    BitcoinDE_MyTradeHistoryParameter_OrderType newOrderType = sender.indexOfSelectedItem + 1;
+    if (newOrderType != self.selectedTradeHistoryOrderType) {
+        self.selectedTradeHistoryOrderType = newOrderType;
+        [self resetTradeDatas];
+    }
+}
+
 - (IBAction)statePopUpButtonAction:(NSPopUpButton *)sender {
     BitcoinDE_MyTradeHistoryParameter_TradeStateType newTradeState = sender.indexOfSelectedItem + 1;
     if (newTradeState != self.selectedTradeStateType) {
@@ -90,7 +109,7 @@
 - (void)loadNextPage {
     [super loadNextPage];
 
-    NSDictionary *parameterDictionary = [SOXMyTrades_BitcoinDE_Data parameterForOrderType:self.selectedOrderType
+    NSDictionary *parameterDictionary = [SOXMyTrades_BitcoinDE_Data parameterForOrderType:self.selectedTradeHistoryOrderType
                                                                                tradeState:self.selectedTradeStateType
                                                                              currencyType:self.selectedCurrencyType
                                                                                 startDate:self.selectedStartDate

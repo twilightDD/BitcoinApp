@@ -54,7 +54,7 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_MyTradeHistoryParameter_TradeStateType) {
 @property (strong, nonatomic, readonly) NSNumber *tradingPartnerInfo_Rating;
 
 
-+ (NSDictionary *)parameterForOrderType:(BitcoinDE_OrderType)orderType
++ (NSDictionary *)parameterForOrderType:(BitcoinDE_MyTradeHistoryParameter_OrderType)orderType
                              tradeState:(BitcoinDE_MyTradeHistoryParameter_TradeStateType)tradeState
                            currencyType:(BitcoinDE_CurrencyType)currencyType
                               startDate:(NSDate *)startDate

@@ -52,7 +52,7 @@ static NSString *MyTradeHistoryParameter_PageKey = @"page";
 
 @implementation SOXMyTrades_BitcoinDE_Data
 
-+ (NSDictionary *)parameterForOrderType:(BitcoinDE_OrderType)orderType
++ (NSDictionary *)parameterForOrderType:(BitcoinDE_MyTradeHistoryParameter_OrderType)orderType
                              tradeState:(BitcoinDE_MyTradeHistoryParameter_TradeStateType)tradeState
                            currencyType:(BitcoinDE_CurrencyType)currencyType
                               startDate:(NSDate *)startDate
@@ -61,10 +61,10 @@ static NSString *MyTradeHistoryParameter_PageKey = @"page";
 
     NSString *orderTypeString;
     switch (orderType) {
-        case BitcoinDE_BuyOrderType:
+        case BitcoinDE_MyTradeHistoryParameter_BuyOrderType:
             orderTypeString = MyTradeHistoryParameter_OrderTypeBuyKey;
             break;
-        case BitcoinDE_SellOrderType:
+        case BitcoinDE_MyTradeHistoryParameter_SellOrderType:
             orderTypeString = MyTradeHistoryParameter_OrderTypeSellKey;
         default:
             break;
@@ -142,36 +142,36 @@ static NSString *MyTradeHistoryParameter_PageKey = @"page";
 }
 
 #pragma mark - Private class methods
-+ (NSDictionary *)parameterDictionaryForOrderType:(NSString *)orderType
-                                       tradeState:(NSNumber *)tradeState
-                                     currencyType:(NSString *)currencyType
-                                        startDate:(NSString *)startDate
-                                          endDate:(NSString *)endDate
-                                             page:(NSNumber *)page {
++ (NSDictionary *)parameterDictionaryForOrderType:(NSString *)orderTypeString
+                                       tradeState:(NSNumber *)tradeStateNumber
+                                     currencyType:(NSString *)currencyTypeString
+                                        startDate:(NSString *)startDateString
+                                          endDate:(NSString *)endDateString
+                                             page:(NSNumber *)pageNumber {
     NSMutableDictionary *parameterDictHelper = [NSMutableDictionary dictionary];
 
-    if (orderType) {
-        [parameterDictHelper setObject:orderType forKey:MyTradeHistoryParameter_TypeKey];
+    if (orderTypeString) {
+        [parameterDictHelper setObject:orderTypeString forKey:MyTradeHistoryParameter_TypeKey];
     }
 
-    if (tradeState) {
-        [parameterDictHelper setObject:tradeState forKey:MyTradeHistoryParameter_StateKey];
+    if (tradeStateNumber) {
+        [parameterDictHelper setObject:tradeStateNumber forKey:MyTradeHistoryParameter_StateKey];
     }
 
-    if (currencyType) {
-        [parameterDictHelper setObject:currencyType forKey:MyTradeHistoryParameter_TradingPair];
+    if (currencyTypeString) {
+        [parameterDictHelper setObject:currencyTypeString forKey:MyTradeHistoryParameter_TradingPair];
     }
 
-    if (startDate) {
-        [parameterDictHelper setObject:startDate forKey:MyTradeHistoryParameter_DateStartKey];
+    if (startDateString) {
+        [parameterDictHelper setObject:startDateString forKey:MyTradeHistoryParameter_DateStartKey];
     }
 
-    if (endDate) {
-        [parameterDictHelper setObject:endDate forKey:MyTradeHistoryParameter_DateEndKey];
+    if (endDateString) {
+        [parameterDictHelper setObject:endDateString forKey:MyTradeHistoryParameter_DateEndKey];
     }
 
-    if (page) {
-        [parameterDictHelper setObject:page forKey:MyTradeHistoryParameter_PageKey];
+    if (pageNumber) {
+        [parameterDictHelper setObject:pageNumber forKey:MyTradeHistoryParameter_PageKey];
     }
     
     return [parameterDictHelper copy];
