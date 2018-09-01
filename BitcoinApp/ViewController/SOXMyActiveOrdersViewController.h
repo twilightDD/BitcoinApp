@@ -8,6 +8,6 @@
 
 #import "SOXPagingAbstractViewController.h"
 
-@interface SOXShowMyOrdersViewController : SOXPagingAbstractViewController
+@interface SOXMyActiveOrdersViewController : SOXPagingAbstractViewController
 
 @end

@@ -1896,10 +1896,10 @@
             </objects>
             <point key="canvasLocation" x="-1320" y="1142"/>
         </scene>
-        <!--Show My Orders View Controller-->
+        <!--My Active Orders View Controller-->
         <scene sceneID="FDl-hu-vIc">
             <objects>
-                <viewController id="q7D-iu-Op3" customClass="SOXShowMyOrdersViewController" sceneMemberID="viewController">
+                <viewController id="q7D-iu-Op3" customClass="SOXMyActiveOrdersViewController" sceneMemberID="viewController">
                     <view key="view" id="d9Y-Go-gwW">
                         <rect key="frame" x="0.0" y="0.0" width="819" height="401"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2217,12 +2217,12 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="changeButtonAction:" target="q7D-iu-Op3" id="qKa-Fc-Py3"/>
-                                    <binding destination="q7D-iu-Op3" name="hidden" keyPath="self.selectedOrderStateType" previousBinding="4ZH-Ph-O4A" id="aKT-YZ-gDg"/>
                                     <binding destination="t8U-TY-Pcr" name="enabled" keyPath="selectedObjects.@count" id="4ZH-Ph-O4A">
                                         <dictionary key="options">
                                             <string key="NSValueTransformerName">SOXSingleSelectionValueTransformer</string>
                                         </dictionary>
                                     </binding>
+                                    <binding destination="q7D-iu-Op3" name="hidden" keyPath="self.selectedOrderStateType" previousBinding="4ZH-Ph-O4A" id="aKT-YZ-gDg"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hfD-y1-lfC">
@@ -2233,8 +2233,8 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="removeButtonAction:" target="q7D-iu-Op3" id="4U7-wK-ZI2"/>
-                                    <binding destination="q7D-iu-Op3" name="hidden" keyPath="self.selectedOrderStateType" previousBinding="J3r-4M-cN3" id="QfY-OG-Zfw"/>
                                     <binding destination="t8U-TY-Pcr" name="enabled" keyPath="selectedObjects.@count" id="J3r-4M-cN3"/>
+                                    <binding destination="q7D-iu-Op3" name="hidden" keyPath="self.selectedOrderStateType" previousBinding="J3r-4M-cN3" id="QfY-OG-Zfw"/>
                                 </connections>
                             </button>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="Q5n-fU-Wsf">
@@ -4204,10 +4204,10 @@ Gw
             </objects>
             <point key="canvasLocation" x="-1852" y="2629.5"/>
         </scene>
-        <!--My Trades View Controller-->
+        <!--My Trade History View Controller-->
         <scene sceneID="GHY-7L-bja">
             <objects>
-                <viewController id="TPt-gD-CmY" customClass="SOXMyTradesViewController" sceneMemberID="viewController">
+                <viewController id="TPt-gD-CmY" customClass="SOXMyTradeHistoryViewController" sceneMemberID="viewController">
                     <view key="view" id="O2L-9r-szs">
                         <rect key="frame" x="0.0" y="0.0" width="1090" height="448"/>
                         <autoresizingMask key="autoresizingMask"/>

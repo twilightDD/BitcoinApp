@@ -6,7 +6,7 @@
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
 
-#import "SOXShowMyOrdersViewController.h"
+#import "SOXMyActiveOrdersViewController.h"
 #import "SOXAbstractViewController_Private.h"
 
 #import "SOXMyOrderDetailsViewController.h"
@@ -25,7 +25,7 @@ NSString *const PresentMyTradesSegueKey = @"PresentMyTradesSegue";
 NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 
 #pragma mark - Interface
-@interface SOXShowMyOrdersViewController () <SOXChangeOrderProtocol, SOXMarketCoreServerRequestProtocol, NSTableViewDelegate>
+@interface SOXMyActiveOrdersViewController () <SOXChangeOrderProtocol, SOXMarketCoreServerRequestProtocol, NSTableViewDelegate>
 
 #pragma mark IBOutlets
 @property (weak) IBOutlet NSTableView *tableView;
@@ -44,7 +44,7 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 @end
 
 #pragma mark - Implementation
-@implementation SOXShowMyOrdersViewController
+@implementation SOXMyActiveOrdersViewController
 #pragma mark Init&Co.
 - (void)viewDidLoad {
     [super viewDidLoad];

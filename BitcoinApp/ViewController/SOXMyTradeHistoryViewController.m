@@ -6,7 +6,7 @@
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
 
-#import "SOXMyTradesViewController.h"
+#import "SOXMyTradeHistoryViewController.h"
 #import "SOXAbstractViewController_Private.h"
 
 #import "SOXMyOrderDetailsViewController.h"
@@ -18,7 +18,7 @@
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
 #pragma mark - Interface
-@interface SOXMyTradesViewController () <SOXMarketCoreServerRequestProtocol>
+@interface SOXMyTradeHistoryViewController () <SOXMarketCoreServerRequestProtocol>
 
 #pragma mark IBOutlets
 @property (weak) IBOutlet NSTableView *tableView;
@@ -37,7 +37,7 @@
 @end
 
 #pragma mark - Implementation
-@implementation SOXMyTradesViewController
+@implementation SOXMyTradeHistoryViewController
 
 #pragma mark Init&Co.
 - (void)viewDidLoad {
