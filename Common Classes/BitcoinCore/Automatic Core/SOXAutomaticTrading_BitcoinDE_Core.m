@@ -751,10 +751,6 @@
     }
 }
 
-- (void)presentErrorWithErrorDictionary:(SOXErrorMessage_BitcoinDE *)errorMessage {
-
-}
-
 #pragma mark - SOXSocketIOCoreProtocol
 - (void)addedOrder:(SOXShowOrderbookData *)addOrderData {
     // Check for KYC

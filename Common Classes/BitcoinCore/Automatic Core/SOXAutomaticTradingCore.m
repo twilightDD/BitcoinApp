@@ -407,7 +407,7 @@
     }
     [self.successfulAutomaticBuyTradeParameters addObject:[tradeParametersWithFee copy]];
 
-    // balance trades after banner update
+    // balance trades after banner update - after successful banner update we will balance out
     [self updateBannerAfterSuccessfulAutomaticBuyTrade];
 }
 
