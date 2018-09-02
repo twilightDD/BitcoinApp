@@ -200,7 +200,11 @@
     __block NSString *exportString = [columnTitles componentsJoinedByString:@";"];
     exportString = [exportString stringByAppendingString:@"\n"];
 
-    [self.arrayController.arrangedObjects enumerateObjectsUsingBlock:^(id  _Nonnull dataObj, NSUInteger dataIdx, BOOL * _Nonnull stop) {
+    NSArray *arrayControllerObjects = self.arrayController.selectedObjects;
+    if (arrayControllerObjects.count == 0) {
+        arrayControllerObjects = self.arrayController.arrangedObjects;
+    }
+    [arrayControllerObjects enumerateObjectsUsingBlock:^(id  _Nonnull dataObj, NSUInteger dataIdx, BOOL * _Nonnull stop) {
         [columnTitles enumerateObjectsUsingBlock:^(NSString * _Nonnull columnTitle, NSUInteger columnIdx, BOOL * _Nonnull stop) {
             id valueForColumnTitle = [dataObj valueForKey:columnTitle];
             if (valueForColumnTitle) {
