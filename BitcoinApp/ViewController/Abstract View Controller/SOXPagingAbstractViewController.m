@@ -221,4 +221,13 @@
     }
 }
 
+#pragma - Pasteboard
+- (void)addToPasteBoard:(NSString *)pasteboardString {
+    NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
+    [pasteboard clearContents];
+
+    [pasteboard setString:pasteboardString
+                  forType:NSPasteboardTypeString];
+}
+
 @end

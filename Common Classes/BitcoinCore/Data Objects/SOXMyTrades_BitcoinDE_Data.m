@@ -141,6 +141,58 @@ static NSString *MyTradeHistoryParameter_PageKey = @"page";
     return titleForTradeStateType;
 }
 
+#pragma mark | Pasteboard
++ (NSString *)pasteboardStringForTrades:(NSArray <SOXMyTrades_BitcoinDE_Data *> *)trades {
+
+    /*
+     Datum    OrderID    BTC bestellt    BTC (Zu/Abgang)    Kickback    Fehlersumme    €/BTC    Volumen        Summe    Ertrag    Ertrag pP.    Rate    Anmerkung*/
+
+    NSString *pbString = @"";
+    for (SOXMyTrades_BitcoinDE_Data *trade in trades) {
+        BOOL isBuyTrade = [trade.type isEqualToString:MyTradeHistoryParameter_OrderTypeBuyKey];
+        
+        // Datum
+        NSDate *date = trade.successfullyFinishedAt;
+        pbString = [pbString stringByAppendingString:[SOXFormatters shortDateMediumTimeStringForDate:date]];
+        pbString = [pbString stringByAppendingString:@"\t"];
+
+        // OrderID
+        pbString = [pbString stringByAppendingString:trade.tradeID];
+        pbString = [pbString stringByAppendingString:@"\t"];
+
+        // BTC bestellt
+        NSString *amountString = [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:trade.amount];
+        if (isBuyTrade) {
+            pbString = [pbString stringByAppendingString:amountString];
+        }
+        pbString = [pbString stringByAppendingString:@"\t"];
+
+        // BTC Zu/Abgang
+        if (isBuyTrade == NO) {
+            pbString = [pbString stringByAppendingString:@"-"];
+            pbString = [pbString stringByAppendingString:amountString];
+        }
+        pbString = [pbString stringByAppendingString:@"\t"];
+
+        // Kickback
+        pbString = [pbString stringByAppendingString:@"\t"];
+
+        // Fehlersumme
+        pbString = [pbString stringByAppendingString:@"\t"];
+
+        // Preis (€/Coin)
+        NSString *priceString = [SOXFormatters currencyStringForNumber:trade.price
+                                                           roundingMode:NSNumberFormatterRoundHalfUp];
+        pbString = [pbString stringByAppendingString:priceString];
+        pbString = [pbString stringByAppendingString:@"\t"];
+
+        // thats all
+        pbString = [pbString stringByAppendingString:@"\n"];
+    }
+
+    return pbString;
+}
+
 #pragma mark - Private class methods
 + (NSDictionary *)parameterDictionaryForOrderType:(NSString *)orderTypeString
                                        tradeState:(NSNumber *)tradeStateNumber

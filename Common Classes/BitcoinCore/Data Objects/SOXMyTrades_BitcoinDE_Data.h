@@ -66,4 +66,5 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_MyTradeHistoryParameter_TradeStateType) {
 + (NSString *)titleForOrderType:(BitcoinDE_MyTradeHistoryParameter_OrderType)orderType;
 + (NSString *)titleForTradeStateType:(BitcoinDE_MyTradeHistoryParameter_TradeStateType)tradeStateType;
 
++ (NSString *)pasteboardStringForTrades:(NSArray <SOXMyTrades_BitcoinDE_Data *> *)trades;
 @end

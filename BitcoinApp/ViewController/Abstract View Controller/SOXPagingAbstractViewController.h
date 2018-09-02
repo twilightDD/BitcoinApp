@@ -46,4 +46,6 @@
 - (void)resetTradeDatas;
 - (void)loadNextPage;
 - (void)updatePagingButtons:(NSDictionary *)payloadDictionary;
+
+- (void)addToPasteBoard:(NSString *)pasteboardString;
 @end

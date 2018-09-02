@@ -120,4 +120,12 @@
                                                 respondTo:self];
 }
 
+#pragma mark - Pasteboard handling
+- (void)copy:(id)sender {
+    NSArray <SOXMyTrades_BitcoinDE_Data *> *selectedTrades = self.arrayController.selectedObjects;
+
+    NSString *pasteboardString = [SOXMyTrades_BitcoinDE_Data pasteboardStringForTrades:selectedTrades];
+    [self addToPasteBoard:pasteboardString];
+}
+
 @end
