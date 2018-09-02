@@ -193,23 +193,30 @@
     self.selectedEndDate = [calendar dateFromComponents:selectedEndDateComponents];
 }
 - (IBAction)exportButtonAction:(NSButton *)sender {
-    TICK
+    // get columnTitles
     NSArray <NSString *> *columnTitles = [self.tableView.tableColumns valueForKey:@"identifier"];
     NSUInteger columnTitlesCount = columnTitles.count - 1;
 
-    __block NSString *exportString = [columnTitles componentsJoinedByString:@";"];
-    exportString = [exportString stringByAppendingString:@"\n"];
-
+    // get objects to export
     NSArray *arrayControllerObjects = self.arrayController.selectedObjects;
     if (arrayControllerObjects.count == 0) {
         arrayControllerObjects = self.arrayController.arrangedObjects;
     }
-    [arrayControllerObjects enumerateObjectsUsingBlock:^(id  _Nonnull dataObj, NSUInteger dataIdx, BOOL * _Nonnull stop) {
+    NSUInteger dataObjectsCounts = arrayControllerObjects.count - 1;
+
+    // first line in a csv are headers
+    __block NSString *exportString = [columnTitles componentsJoinedByString:@";"];
+    exportString = [exportString stringByAppendingString:@"\n"];
+
+    // enum objects
+    [arrayControllerObjects enumerateObjectsUsingBlock:^(id _Nonnull dataObj, NSUInteger dataIdx, BOOL * _Nonnull stop) {
+        // enum columns
         [columnTitles enumerateObjectsUsingBlock:^(NSString * _Nonnull columnTitle, NSUInteger columnIdx, BOOL * _Nonnull stop) {
+            // get value for columnTitle and convert it to string
             id valueForColumnTitle = [dataObj valueForKey:columnTitle];
             if (valueForColumnTitle) {
+                // convert to string, if needed
                 if ([valueForColumnTitle isKindOfClass:[NSNumber class]]) {
-
                     if ([columnTitle containsString:@"volume"]
                         || [columnTitle containsString:@"price"]
                         || [columnTitle containsString:@"Eur"]) {
@@ -224,19 +231,25 @@
                         valueForColumnTitle = [valueForColumnTitle stringValue];
                     }
                 }
-                if ([valueForColumnTitle isKindOfClass:[NSDate class]]) {
+                else if ([valueForColumnTitle isKindOfClass:[NSDate class]]) {
                     valueForColumnTitle = [SOXFormatters shortDateShortTimeStringForDate:valueForColumnTitle];
                 }
+
                 exportString = [exportString stringByAppendingString:valueForColumnTitle];
             }
+
+            // there is no separator after the last value
             if (columnIdx < columnTitlesCount) {
                 exportString = [exportString stringByAppendingString:@";"];
             }
-
         }];
-        exportString = [exportString stringByAppendingString:@"\n"];
+
+        // next line for next object
+        if (dataIdx < dataObjectsCounts) {
+            exportString = [exportString stringByAppendingString:@"\n"];
+        }
     }];
-    TOCKwithComment(@"Exporttime");
+
     [self addToPasteBoard:exportString];
 
     NSSavePanel *savePanel = [NSSavePanel savePanel];
@@ -244,6 +257,10 @@
         if (result == NSFileHandlingPanelOKButton) {
             NSError *error = nil;
             NSURL *selectedURL = savePanel.URL;
+            NSString *fileExtension = selectedURL.pathExtension;
+            if (fileExtension.length == 0) {
+                selectedURL = [selectedURL URLByAppendingPathExtension:@"csv"];
+            }
             [exportString writeToURL:selectedURL
                           atomically:YES
                             encoding:NSUTF16StringEncoding
@@ -254,7 +271,6 @@
 
         }
     }];
-
 }
 
 #pragma mark - Fetch and load buttons
