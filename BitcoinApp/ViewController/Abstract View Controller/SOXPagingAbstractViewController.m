@@ -235,6 +235,22 @@
     TOCKwithComment(@"Exporttime");
     [self addToPasteBoard:exportString];
 
+    NSSavePanel *savePanel = [NSSavePanel savePanel];
+    [savePanel beginWithCompletionHandler:^(NSModalResponse result) {
+        if (result == NSFileHandlingPanelOKButton) {
+            NSError *error = nil;
+            NSURL *selectedURL = savePanel.URL;
+            [exportString writeToURL:selectedURL
+                          atomically:YES
+                            encoding:NSUTF16StringEncoding
+                               error:&error];
+            if (error) {
+                NSLog(@"%@", error.localizedDescription);
+            }
+
+        }
+    }];
+
 }
 
 #pragma mark - Fetch and load buttons
@@ -273,5 +289,6 @@
     [pasteboard setString:pasteboardString
                   forType:NSPasteboardTypeString];
 }
+
 
 @end
