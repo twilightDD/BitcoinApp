@@ -182,7 +182,7 @@ static NSString *MyTradeHistoryParameter_PageKey = @"page";
 
         // Preis (€/Coin)
         NSString *priceString = [SOXFormatters currencyStringForNumber:trade.price
-                                                           roundingMode:NSNumberFormatterRoundHalfUp];
+                                                           roundingMode:NSNumberFormatterRoundHalfEven];
         pbString = [pbString stringByAppendingString:priceString];
         pbString = [pbString stringByAppendingString:@"\t"];
 
