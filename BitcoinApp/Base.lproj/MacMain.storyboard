@@ -4230,7 +4230,7 @@ Gw
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="rTc-2h-niy">
+                                                <tableColumn identifier="successfullyFinishedAt" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="rTc-2h-niy">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="date">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -4247,7 +4247,7 @@ Gw
                                                         <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.successfullyFinishedAt" id="pwm-AS-dDj"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="60" minWidth="60" maxWidth="1000" id="dqm-22-bHF">
+                                                <tableColumn identifier="tradeID" editable="NO" width="60" minWidth="60" maxWidth="1000" id="dqm-22-bHF">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="orderID">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -4263,7 +4263,7 @@ Gw
                                                         <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.tradeID" id="tFv-AP-2Gd"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="40" minWidth="40" maxWidth="1000" id="nVE-Pr-WdH">
+                                                <tableColumn identifier="type" editable="NO" width="40" minWidth="40" maxWidth="1000" id="nVE-Pr-WdH">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="type">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -4279,7 +4279,7 @@ Gw
                                                         <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.type" id="53e-fL-Bcg"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="120" minWidth="40" maxWidth="1000" id="4MZ-GR-MVY">
+                                                <tableColumn identifier="amount" editable="NO" width="120" minWidth="40" maxWidth="1000" id="4MZ-GR-MVY">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="amount">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -4300,7 +4300,7 @@ Gw
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="XAz-Ru-WnC">
+                                                <tableColumn identifier="price" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="XAz-Ru-WnC">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="price">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -4317,7 +4317,7 @@ Gw
                                                         <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.price" id="9l9-Bx-0em"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="oKA-rf-IhP">
+                                                <tableColumn identifier="volume" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="oKA-rf-IhP">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="volume">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -4334,7 +4334,7 @@ Gw
                                                         <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.volume" id="Ujb-ep-A2A"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="Sq4-67-wDP">
+                                                <tableColumn identifier="feeEur" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="Sq4-67-wDP">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Fee Euro">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -4355,7 +4355,7 @@ Gw
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="oao-Re-rUN">
+                                                <tableColumn identifier="feeBTC" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="oao-Re-rUN">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Fee Coins">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -4376,7 +4376,7 @@ Gw
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="Xlf-UH-PMB">
+                                                <tableColumn identifier="state" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="Xlf-UH-PMB">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="state">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -4397,7 +4397,7 @@ Gw
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="277" minWidth="10" maxWidth="3.4028234663852886e+38" id="o7A-jb-8It">
+                                                <tableColumn identifier="tradingPartnerInfo_Username" editable="NO" width="277" minWidth="10" maxWidth="3.4028234663852886e+38" id="o7A-jb-8It">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="username">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -4614,11 +4614,22 @@ Gw
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MFP-Wg-jot" secondAttribute="trailing" constant="20" symbolic="YES" id="xdF-X5-E9R"/>
                                 </constraints>
                             </customView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M0s-F6-zxD">
+                                <rect key="frame" x="822" y="212" width="80" height="32"/>
+                                <buttonCell key="cell" type="push" title="Export" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dNr-rg-Dx1">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="exportButtonAction:" target="TPt-gD-CmY" id="xvg-cZ-o4O"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Njb-t7-0sg" secondAttribute="trailing" constant="20" symbolic="YES" id="6i1-au-cfz"/>
                             <constraint firstItem="VqT-e0-LLc" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vKx-Ap-gY0" secondAttribute="bottom" constant="25" id="7dP-3s-BJG"/>
                             <constraint firstAttribute="trailing" secondItem="eTK-pp-sYM" secondAttribute="trailing" constant="23" id="9z6-av-3cS"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="M0s-F6-zxD" secondAttribute="trailing" constant="20" id="ATH-SD-4t8"/>
                             <constraint firstAttribute="bottom" secondItem="Kn5-TW-Ng0" secondAttribute="bottom" constant="20" symbolic="YES" id="E0h-1Z-sYM"/>
                             <constraint firstItem="VqT-e0-LLc" firstAttribute="trailing" secondItem="fbw-0U-lWs" secondAttribute="trailing" id="FNZ-6N-GAR"/>
                             <constraint firstItem="Kn5-TW-Ng0" firstAttribute="bottom" secondItem="rBg-iH-I78" secondAttribute="bottom" id="IKf-5L-YUy"/>
@@ -4635,9 +4646,12 @@ Gw
                             <constraint firstItem="rBg-iH-I78" firstAttribute="top" secondItem="O2L-9r-szs" secondAttribute="top" constant="8" id="ayY-Wr-vac"/>
                             <constraint firstItem="vKx-Ap-gY0" firstAttribute="top" secondItem="O2L-9r-szs" secondAttribute="top" id="b7h-xw-iUG"/>
                             <constraint firstItem="fbw-0U-lWs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Kn5-TW-Ng0" secondAttribute="trailing" constant="8" symbolic="YES" id="gaB-Bo-Wxg"/>
+                            <constraint firstItem="VqT-e0-LLc" firstAttribute="top" relation="greaterThanOrEqual" secondItem="M0s-F6-zxD" secondAttribute="bottom" constant="12" symbolic="YES" id="iQz-r4-2xZ"/>
                             <constraint firstItem="eTK-pp-sYM" firstAttribute="top" secondItem="fbw-0U-lWs" secondAttribute="bottom" constant="12" symbolic="YES" id="ief-lz-4q0"/>
+                            <constraint firstItem="M0s-F6-zxD" firstAttribute="top" secondItem="vKx-Ap-gY0" secondAttribute="bottom" constant="13" id="jFY-7J-nuK"/>
                             <constraint firstItem="eTK-pp-sYM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Kn5-TW-Ng0" secondAttribute="trailing" constant="8" symbolic="YES" id="oLQ-Y2-vxd"/>
                             <constraint firstItem="Kn5-TW-Ng0" firstAttribute="leading" secondItem="rBg-iH-I78" secondAttribute="leading" id="pDa-Z4-1Cn"/>
+                            <constraint firstItem="M0s-F6-zxD" firstAttribute="leading" secondItem="rBg-iH-I78" secondAttribute="trailing" constant="8" id="qF4-sB-3I3"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5QE-bS-GI6" secondAttribute="trailing" constant="20" symbolic="YES" id="s29-V0-0bu"/>
                             <constraint firstAttribute="trailing" secondItem="vKx-Ap-gY0" secondAttribute="trailing" id="v5C-ol-fEe"/>
                             <constraint firstAttribute="bottom" secondItem="eTK-pp-sYM" secondAttribute="bottom" constant="20" id="xRz-B5-9Do"/>

@@ -192,6 +192,50 @@
 
     self.selectedEndDate = [calendar dateFromComponents:selectedEndDateComponents];
 }
+- (IBAction)exportButtonAction:(NSButton *)sender {
+    TICK
+    NSArray <NSString *> *columnTitles = [self.tableView.tableColumns valueForKey:@"identifier"];
+    NSUInteger columnTitlesCount = columnTitles.count - 1;
+
+    __block NSString *exportString = [columnTitles componentsJoinedByString:@";"];
+    exportString = [exportString stringByAppendingString:@"\n"];
+
+    [self.arrayController.arrangedObjects enumerateObjectsUsingBlock:^(id  _Nonnull dataObj, NSUInteger dataIdx, BOOL * _Nonnull stop) {
+        [columnTitles enumerateObjectsUsingBlock:^(NSString * _Nonnull columnTitle, NSUInteger columnIdx, BOOL * _Nonnull stop) {
+            id valueForColumnTitle = [dataObj valueForKey:columnTitle];
+            if (valueForColumnTitle) {
+                if ([valueForColumnTitle isKindOfClass:[NSNumber class]]) {
+
+                    if ([columnTitle containsString:@"volume"]
+                        || [columnTitle containsString:@"price"]
+                        || [columnTitle containsString:@"Eur"]) {
+                        valueForColumnTitle = [SOXFormatters currencyStringForNumber:valueForColumnTitle
+                                                                        roundingMode:NSNumberFormatterRoundHalfEven];
+                    }
+                    else if ([columnTitle containsString:@"amount"]
+                            || [columnTitle containsString:@"BTC"]) {
+                        valueForColumnTitle = [[SOXFormatters bitcoinNumberFormatter] stringFromNumber:valueForColumnTitle];
+                    }
+                    else {
+                        valueForColumnTitle = [valueForColumnTitle stringValue];
+                    }
+                }
+                if ([valueForColumnTitle isKindOfClass:[NSDate class]]) {
+                    valueForColumnTitle = [SOXFormatters shortDateShortTimeStringForDate:valueForColumnTitle];
+                }
+                exportString = [exportString stringByAppendingString:valueForColumnTitle];
+            }
+            if (columnIdx < columnTitlesCount) {
+                exportString = [exportString stringByAppendingString:@";"];
+            }
+
+        }];
+        exportString = [exportString stringByAppendingString:@"\n"];
+    }];
+    TOCKwithComment(@"Exporttime");
+    [self addToPasteBoard:exportString];
+
+}
 
 #pragma mark - Fetch and load buttons
 - (IBAction)loadAllTradeDatasAction:(NSButton *)sender {
