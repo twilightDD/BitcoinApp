@@ -28,8 +28,6 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 @interface SOXMyActiveOrdersViewController () <SOXChangeOrderProtocol, SOXMarketCoreServerRequestProtocol, NSTableViewDelegate>
 
 #pragma mark IBOutlets
-@property (weak) IBOutlet NSTableView *tableView;
-
 @property (weak) IBOutlet NSPopUpButton *orderStateTypeSelectionPopUpButton;
 
 @property (weak) IBOutlet NSButton *changeButton;

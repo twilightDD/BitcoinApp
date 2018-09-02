@@ -21,14 +21,6 @@
 @interface SOXMyTradeHistoryViewController () <SOXMarketCoreServerRequestProtocol>
 
 #pragma mark IBOutlets
-@property (weak) IBOutlet NSTableView *tableView;
-
-
-//// Page selector
-//@property (strong) IBOutlet NSButton *loadMoreTradeDatasButton;
-//@property (strong) IBOutlet NSButton *loadAllTradeDatasButton;
-
-
 // Parameter
 @property (weak) IBOutlet NSPopUpButton *tradeHistoryOrderTypeSelectionPopUpButton;
 @property (weak) IBOutlet NSPopUpButton *stateTypeSelectionPopUpButton;

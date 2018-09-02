@@ -18,8 +18,6 @@
 #pragma mark - Interface
 @interface SOXMyAccountLedgerViewController () <SOXMarketCoreServerRequestProtocol>
 #pragma mark IBOutlets
-@property (weak) IBOutlet NSTableView *tableView;
-
 @property (weak) IBOutlet NSPopUpButton *accountLedgerOrderTypePopUpButton;
 
 #pragma mark Properties
