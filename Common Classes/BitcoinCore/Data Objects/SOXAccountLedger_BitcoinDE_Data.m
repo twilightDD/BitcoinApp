@@ -36,18 +36,18 @@ static NSString *AccountLedgerParameter_PageKey         = @"page";
 @interface SOXAccountLedger_BitcoinDE_Data ()
 
 #pragma mark Properties
-@property (strong, nonatomic, readwrite) NSString *positionDetails_Date;
+@property (strong, nonatomic, readwrite) NSDate *positionDetails_Date;
 @property (strong, nonatomic, readwrite) NSString *positionDetails_Type;
 @property (strong, nonatomic, readwrite) NSString *positionDetails_Reference;
-@property (strong, nonatomic, readwrite) NSString *positionDetails_Cashflow;
-@property (strong, nonatomic, readwrite) NSString *positionDetails_Balance;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *positionDetails_Cashflow;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *positionDetails_Balance;
 
 @property (strong, nonatomic, readwrite) NSString *tradeDetails_Trade_id;
-@property (strong, nonatomic, readwrite) NSString *tradeDetails_Price;
-@property (strong, nonatomic, readwrite) NSString *tradeDetails_BTC_before_fee;
-@property (strong, nonatomic, readwrite) NSString *tradeDetails_BTC_after_fee;
-@property (strong, nonatomic, readwrite) NSString *tradeDetails_Euro_before_fee;
-@property (strong, nonatomic, readwrite) NSString *tradeDetails_Euro_after_fee;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *tradeDetails_Price;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *tradeDetails_BTC_before_fee;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *tradeDetails_BTC_after_fee;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *tradeDetails_Euro_before_fee;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *tradeDetails_Euro_after_fee;
 @property (strong, nonatomic, readwrite) NSString *tradeDetails_trading_pair;
 
 @end
@@ -55,12 +55,15 @@ static NSString *AccountLedgerParameter_PageKey         = @"page";
 #pragma mark - Implementation
 @implementation SOXAccountLedger_BitcoinDE_Data
 
-+ (NSMutableArray *)accountLedgerDataArrayForAccountLedgerDictionary:(NSDictionary *)payloadDictionary {
++ (NSMutableArray *)accountLedgerDataArrayForAccountLedgerDictionary:(NSDictionary *)payloadDictionary
+                                                     forCurrencyType:(BitcoinDE_CurrencyType)currencyType {
     NSMutableArray *accountLedgerDataArray = [NSMutableArray array];
     
-    NSDictionary *accountLedgerDictionaries = [payloadDictionary objectForKey:BitcoinDE_ShowAccountLedger_Main];
+    NSArray *accountLedgerDictionaries = [payloadDictionary objectForKey:BitcoinDE_ShowAccountLedger_Main];
     for (NSDictionary *aAccountLedgerDictionary in accountLedgerDictionaries) {
-        [accountLedgerDataArray addObject:[self accountLedgerDataForAccountLedgerDictionary:aAccountLedgerDictionary]];
+        [accountLedgerDataArray addObject:[self accountLedgerDataForAccountLedgerDictionary:aAccountLedgerDictionary
+                                                                            forCurrencyType:currencyType]
+         ];
     }
     
     return accountLedgerDataArray;
@@ -121,9 +124,11 @@ static NSString *AccountLedgerParameter_PageKey         = @"page";
 }
 
 #pragma mark - Private Class methods
-+ (SOXAccountLedger_BitcoinDE_Data *)accountLedgerDataForAccountLedgerDictionary:(NSDictionary *)aAccountLedgerDictionary {
++ (SOXAccountLedger_BitcoinDE_Data *)accountLedgerDataForAccountLedgerDictionary:(NSDictionary *)aAccountLedgerDictionary
+                                                                 forCurrencyType:(BitcoinDE_CurrencyType)currencyType {
     SOXAccountLedger_BitcoinDE_Data *accountLedgerData = [[SOXAccountLedger_BitcoinDE_Data alloc] init];
-    [accountLedgerData setupMyAccountLedgerDataForAccountLedgerDictionary:aAccountLedgerDictionary];
+    [accountLedgerData setupMyAccountLedgerDataForAccountLedgerDictionary:aAccountLedgerDictionary
+                                                          forCurrencyType:currencyType];
     
     return accountLedgerData;
 }
@@ -176,31 +181,34 @@ static NSString *AccountLedgerParameter_PageKey         = @"page";
 }
 
 #pragma mark - Instance methods
-- (void)setupMyAccountLedgerDataForAccountLedgerDictionary:(NSDictionary *)aAccountLedgerDictionary {
+- (void)setupMyAccountLedgerDataForAccountLedgerDictionary:(NSDictionary *)aAccountLedgerDictionary
+                                           forCurrencyType:(BitcoinDE_CurrencyType)currencyType {
     { // Ledger Position Details
-        self.positionDetails_Date = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:[aAccountLedgerDictionary objectForKey:BitcoinDE_ShowAccountLedger_Date]];
+        self.positionDetails_Date = [SOXFormatters dateForRFC3339DateTimeString:[aAccountLedgerDictionary objectForKey:BitcoinDE_ShowAccountLedger_Date]];
         self.positionDetails_Type = [aAccountLedgerDictionary objectForKey:BitcoinDE_ShowAccountLedger_Type];
         self.positionDetails_Reference = [aAccountLedgerDictionary objectForKey:BitcoinDE_ShowAccountLedger_Reference];
-        self.positionDetails_Cashflow = [aAccountLedgerDictionary objectForKey:BitcoinDE_ShowAccountLedger_Cashflow];
-        self.positionDetails_Balance = [aAccountLedgerDictionary objectForKey:BitcoinDE_ShowAccountLedger_Balance];
+        self.positionDetails_Cashflow = [self convertToNumber:[aAccountLedgerDictionary objectForKey:BitcoinDE_ShowAccountLedger_Cashflow]];
+        self.positionDetails_Balance = [self convertToNumber:[aAccountLedgerDictionary objectForKey:BitcoinDE_ShowAccountLedger_Balance]];
     }
     
     { // Trade details
         NSDictionary *tradeDetails = [aAccountLedgerDictionary objectForKey:BitcoinDE_ShowAccountLedger_Trade];
         if (tradeDetails) {
             self.tradeDetails_Trade_id = [tradeDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_TradeID];
-            self.tradeDetails_Price = [tradeDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_Price];
-            self.tradeDetails_trading_pair =[tradeDetails objectForKey:BitcoinDE_ShowAccountLedger_Trading_Pair];
+            self.tradeDetails_Price = [self convertToNumber:[tradeDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_Price]];
+            self.tradeDetails_trading_pair = [tradeDetails objectForKey:BitcoinDE_ShowAccountLedger_Trading_Pair];
 
             NSDictionary *btcDetails = [tradeDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_BTC];
-            self.tradeDetails_BTC_before_fee = [btcDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_BTC_BeforeFee];
-            self.tradeDetails_BTC_after_fee = [btcDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_BTC_AfterFee];
+            self.tradeDetails_BTC_before_fee = [self convertToNumber:[btcDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_BTC_BeforeFee]];
+            self.tradeDetails_BTC_after_fee = [self convertToNumber:[btcDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_BTC_AfterFee]];
 
             NSDictionary *euroDetails = [tradeDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_Euro];
-            self.tradeDetails_Euro_before_fee = [euroDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_Euro_BeforeFee];
-            self.tradeDetails_Euro_after_fee = [euroDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_BTC_AfterFee];
+            self.tradeDetails_Euro_before_fee = [self convertToNumber:[euroDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_Euro_BeforeFee]];
+            self.tradeDetails_Euro_after_fee = [self convertToNumber:[euroDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_BTC_AfterFee]];
 
-
+        }
+        else {
+            self.tradeDetails_trading_pair = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType];
         }
     }
 }

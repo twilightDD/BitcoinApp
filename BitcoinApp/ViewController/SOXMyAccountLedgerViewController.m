@@ -87,7 +87,8 @@
 - (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest {
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowAccountLedgerType)]) {
         NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
-        NSMutableArray *accountLedgerDatas = [SOXAccountLedger_BitcoinDE_Data accountLedgerDataArrayForAccountLedgerDictionary:payloadDictionary];
+        NSMutableArray *accountLedgerDatas = [SOXAccountLedger_BitcoinDE_Data accountLedgerDataArrayForAccountLedgerDictionary:payloadDictionary
+                                              forCurrencyType:self.selectedCurrencyType];
 
         [self.arrayControllerDatas addObjectsFromArray:accountLedgerDatas];
         [self.arrayController rearrangeObjects];

@@ -31,21 +31,22 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_AccountLedgerParameter_OrderType) {
 
 @interface SOXAccountLedger_BitcoinDE_Data : SOXAbstractData
 
-@property (strong, nonatomic, readonly) NSString *positionDetails_Date;
-@property (strong, nonatomic, readonly) NSString *positionDetails_Type;
-@property (strong, nonatomic, readonly) NSString *positionDetails_Reference;
-@property (strong, nonatomic, readonly) NSString *positionDetails_Cashflow;
-@property (strong, nonatomic, readonly) NSString *positionDetails_Balance;
+@property (strong, nonatomic, readonly) NSDate *positionDetails_Date; // Datum
+@property (strong, nonatomic, readonly) NSString *positionDetails_Type; // NSNumber
+@property (strong, nonatomic, readonly) NSString *positionDetails_Reference; // NSString
+@property (strong, nonatomic, readonly) NSDecimalNumber *positionDetails_Cashflow; // NSNumber
+@property (strong, nonatomic, readonly) NSDecimalNumber *positionDetails_Balance; // Number
 
-@property (strong, nonatomic, readonly) NSString *tradeDetails_Trade_id;
-@property (strong, nonatomic, readonly) NSString *tradeDetails_Price;
-@property (strong, nonatomic, readonly) NSString *tradeDetails_BTC_before_fee;
-@property (strong, nonatomic, readonly) NSString *tradeDetails_BTC_after_fee;
-@property (strong, nonatomic, readonly) NSString *tradeDetails_Euro_before_fee;
-@property (strong, nonatomic, readonly) NSString *tradeDetails_Euro_after_fee;
-@property (strong, nonatomic, readonly) NSString *tradeDetails_trading_pair;
+@property (strong, nonatomic, readonly) NSString *tradeDetails_Trade_id; // string
+@property (strong, nonatomic, readonly) NSDecimalNumber *tradeDetails_Price; // number
+@property (strong, nonatomic, readonly) NSDecimalNumber *tradeDetails_BTC_before_fee; // number
+@property (strong, nonatomic, readonly) NSDecimalNumber *tradeDetails_BTC_after_fee; // number
+@property (strong, nonatomic, readonly) NSDecimalNumber *tradeDetails_Euro_before_fee; // number
+@property (strong, nonatomic, readonly) NSDecimalNumber *tradeDetails_Euro_after_fee; // number
+@property (strong, nonatomic, readonly) NSString *tradeDetails_trading_pair; // string
 
-+ (NSMutableArray *)accountLedgerDataArrayForAccountLedgerDictionary:(NSDictionary *)payloadDictionary;
++ (NSMutableArray *)accountLedgerDataArrayForAccountLedgerDictionary:(NSDictionary *)payloadDictionary
+                                                     forCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 
 + (NSDictionary *)parameterForOrderType:(BitcoinDE_AccountLedgerParameter_OrderType)orderType
                         forCurrencyType:(BitcoinDE_CurrencyType)currencyType

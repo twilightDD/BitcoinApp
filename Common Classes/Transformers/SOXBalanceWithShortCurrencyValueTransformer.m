@@ -23,7 +23,7 @@
 }
 
 - (id)transformedValue:(id)value {
-    NSString *balance = nil;
+    NSDecimalNumber *balance = nil;
     NSString *tradingPair = nil;
 
     if ([value isKindOfClass:[SOXAccountLedger_BitcoinDE_Data class]]) {
@@ -37,7 +37,7 @@
         NSString *shortCurrencyString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:currencyType];
 
         NSString *result = [NSString stringWithFormat:@"%@ %@"
-                            , balance
+                            , [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:balance]
                             , shortCurrencyString];
         return result;
     }

@@ -2931,7 +2931,7 @@ Gw
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" headerView="UdI-6x-40i" id="ukh-mk-8h8">
-                                            <rect key="frame" x="0.0" y="0.0" width="1124" height="430"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="878" height="430"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2944,6 +2944,7 @@ Gw
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="9z9-wK-XNr">
+                                                        <dateFormatter key="formatter" dateStyle="short" timeStyle="short" id="G9V-cu-BBC"/>
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -3044,40 +3045,6 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.tradeDetails_Price" id="aG8-pm-BRt"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="tradeDetails_BTC_before_fee" editable="NO" width="120" minWidth="10" maxWidth="1100" id="CdC-Ba-H0W">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="btc before fee">
-                                                        <font key="font" metaFont="smallSystem"/>
-                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    </tableHeaderCell>
-                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="WnT-kl-MAK">
-                                                        <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="eNR-mv-1Gd" userLabel="SOXBitcoinFormatter" customClass="SOXBitcoinFormatter"/>
-                                                        <font key="font" metaFont="system"/>
-                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                    <connections>
-                                                        <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.tradeDetails_BTC_before_fee" id="zbd-YA-nhG"/>
-                                                    </connections>
-                                                </tableColumn>
-                                                <tableColumn identifier="tradeDetails_BTC_after_fee" editable="NO" width="120" minWidth="10" maxWidth="1100" id="xCf-ac-UJ6">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="btc after fee">
-                                                        <font key="font" metaFont="smallSystem"/>
-                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    </tableHeaderCell>
-                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="hlE-9o-gdV">
-                                                        <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="PRT-Og-4ad" userLabel="SOXBitcoinFormatter" customClass="SOXBitcoinFormatter"/>
-                                                        <font key="font" metaFont="system"/>
-                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                    <connections>
-                                                        <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.tradeDetails_BTC_after_fee" id="FVB-Ee-Xt9"/>
-                                                    </connections>
-                                                </tableColumn>
                                                 <tableColumn identifier="tradeDetails_Euro_before_fee" editable="NO" width="120" minWidth="10" maxWidth="1100" id="uNg-0S-NHy">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="euro before fee">
                                                         <font key="font" metaFont="smallSystem"/>
@@ -3142,7 +3109,7 @@ Gw
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="UdI-6x-40i">
-                                    <rect key="frame" x="0.0" y="0.0" width="1124" height="23"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="878" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
