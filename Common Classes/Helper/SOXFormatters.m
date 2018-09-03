@@ -122,7 +122,7 @@
         btcFormatter = [NSNumberFormatter new];
 
         btcFormatter.minimumIntegerDigits = 1;
-        btcFormatter.minimumFractionDigits = 2;
+        btcFormatter.minimumFractionDigits = 8;
         btcFormatter.maximumFractionDigits = 8;
 
         btcFormatter.locale= [NSLocale autoupdatingCurrentLocale];
