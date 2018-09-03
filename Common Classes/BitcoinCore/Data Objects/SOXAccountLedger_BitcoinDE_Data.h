@@ -6,8 +6,9 @@
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "SOXAbstractData.h"
 
+#import "SOXMarket_DefTypes.h"
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
 typedef NS_ENUM (NSUInteger, BitcoinDE_AccountLedgerParameter_OrderType) {
@@ -28,7 +29,7 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_AccountLedgerParameter_OrderType) {
 };
 
 
-@interface SOXAccountLedger_BitcoinDE_Data : NSObject
+@interface SOXAccountLedger_BitcoinDE_Data : SOXAbstractData
 
 @property (strong, nonatomic, readonly) NSString *positionDetails_Date;
 @property (strong, nonatomic, readonly) NSString *positionDetails_Type;

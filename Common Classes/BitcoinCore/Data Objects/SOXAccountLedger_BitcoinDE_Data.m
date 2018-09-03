@@ -7,6 +7,7 @@
 //
 
 #import "SOXAccountLedger_BitcoinDE_Data.h"
+#import "SOXAbstractData_Private.h"
 
 #import "SOXKeys_BitcoinDE.h"
 

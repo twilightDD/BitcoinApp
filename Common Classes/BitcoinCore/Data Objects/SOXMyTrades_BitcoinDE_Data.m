@@ -7,6 +7,8 @@
 //
 
 #import "SOXMyTrades_BitcoinDE_Data.h"
+#import "SOXAbstractData_Private.h"
+
 
 #import "SOXFormatters.h"
 #import "SOXKeys_BitcoinDE.h"
@@ -21,7 +23,7 @@ static NSString *MyTradeHistoryParameter_DateStartKey = @"date_start";
 static NSString *MyTradeHistoryParameter_DateEndKey = @"date_end";
 static NSString *MyTradeHistoryParameter_PageKey = @"page";
 
-@interface SOXMyTrades_BitcoinDE_Data ()
+@interface SOXMyTrades_BitcoinDE_Data () 
 
 @property (strong, nonatomic, readwrite) NSString *tradeID;
 @property (strong, nonatomic, readwrite) NSString *type;
@@ -252,7 +254,7 @@ static NSString *MyTradeHistoryParameter_PageKey = @"page";
         self.state                          = [tDD objectForKey:BitcoinDE_ShowMyTrades_State];
         self.myRatingForTradingPartner      = [tDD objectForKey:BitcoinDE_ShowMyTrades_MyRatingForTradingPartner];
         self.createdAt                      = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:[tDD objectForKey:BitcoinDE_ShowMyTrades_CreatedAt]];
-        self.successfullyFinishedAt         = [SOXFormatters dateTimeStringForRFC3339DateTimeString:[tDD objectForKey:BitcoinDE_ShowMyTrades_SuccessfullyFinishedAt]];
+        self.successfullyFinishedAt         = [SOXFormatters dateForRFC3339DateTimeString:[tDD objectForKey:BitcoinDE_ShowMyTrades_SuccessfullyFinishedAt]];
         self.cancelledAt                    = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:[tDD objectForKey:BitcoinDE_ShowMyTrades_CancelledAt]];
         self.paymentMethod                  = [tDD objectForKey:BitcoinDE_ShowMyTrades_PaymentMethod];
         self.trading_pair                   = [tDD objectForKey:BitcoinDE_ShowMyTrades_TradingPair];
@@ -272,16 +274,6 @@ static NSString *MyTradeHistoryParameter_PageKey = @"page";
     }
 }
 
-- (NSDecimalNumber *)convertToNumber:(id)value {
-    NSDecimalNumber *convertToNumber = nil;
-    if ([value isKindOfClass:[NSString class]]) {
-        convertToNumber = [NSDecimalNumber decimalNumberWithString:value];
-    }
-    else if ([value isKindOfClass:[NSNumber class]]) {
-        convertToNumber = [NSDecimalNumber decimalNumberWithDecimal:[(NSNumber *)value decimalValue]];
-    }
 
-    return convertToNumber;
-}
 
 @end

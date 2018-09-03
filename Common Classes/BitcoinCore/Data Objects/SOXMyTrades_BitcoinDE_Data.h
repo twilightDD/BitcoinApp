@@ -6,7 +6,7 @@
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "SOXAbstractData.h"
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
 typedef NS_ENUM (NSUInteger, BitcoinDE_MyTradeHistoryParameter_OrderType) {
@@ -26,7 +26,7 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_MyTradeHistoryParameter_TradeStateType) {
 };
 
 
-@interface SOXMyTrades_BitcoinDE_Data : NSObject
+@interface SOXMyTrades_BitcoinDE_Data : SOXAbstractData
 
 @property (strong, nonatomic, readonly) NSString *tradeID;
 @property (strong, nonatomic, readonly) NSString *type;
