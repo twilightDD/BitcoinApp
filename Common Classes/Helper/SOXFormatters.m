@@ -159,7 +159,7 @@
 
 #pragma mark - Public methods
 #pragma mark | Date methods
-+ (NSDate *)dateTimeStringForRFC3339DateTimeString:(NSString *)rfc3339DateTimeString {
++ (NSDate *)dateForRFC3339DateTimeString:(NSString *)rfc3339DateTimeString {
     NSDate *date = [[SOXFormatters dateFormatterDecodeRFC3339] dateFromString:rfc3339DateTimeString];
     return date;
 }
