@@ -251,12 +251,6 @@
                             valueForColumnTitle = [SOXFormatters currencyStringForNumber:valueForColumnTitle
                                                                             roundingMode:NSNumberFormatterRoundHalfEven];
                         }
-                        else if ([columnTitle containsString:@"amount"]
-                                 || [columnTitle containsString:@"BTC"]
-                                 || [columnTitle containsString:@"Cash"]
-                                 || [columnTitle containsString:@"Balance"]) {
-                            valueForColumnTitle = [[SOXFormatters bitcoinNumberFormatter] stringFromNumber:valueForColumnTitle];
-                        }
                         else {
                             valueForColumnTitle = [valueForColumnTitle stringValue];
                         }
