@@ -12,8 +12,6 @@
 
 @interface SOXPagingAbstractViewController : SOXAbstractViewController
 
-// Outlets
-@property (weak) IBOutlet NSTableView *tableView;
 // - Parameter
 @property (weak) IBOutlet NSPopUpButton *currencyTypeSelectionPopUpButton;
 @property (weak) IBOutlet NSPopUpButton *tradingTypeSelectionPopUpButton;
