@@ -17,6 +17,7 @@
 
 @implementation SOXPagingAbstractViewController
 
+#pragma mark - Init & Co.
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -37,6 +38,7 @@
                                                         object:@(self.selectedCurrencyType)];
 }
 
+#pragma mark - Public methods
 - (void)setupUI {
     [self resetPagingButtons];
 
@@ -69,6 +71,7 @@
     }
 }
 
+#pragma mark Paging
 - (void)resetPagingButtons {
     self.fetchDataButton.title = @"Fetch data";
     self.loadMoreTradeDatasButton.hidden = YES;
@@ -85,7 +88,6 @@
     [self resetPagingButtons];
 }
 
-#pragma mark - Paging
 - (void)loadNextPage {
     [self enableSpinningWheel];
     
@@ -131,7 +133,29 @@
     }
 }
 
-#pragma mark - Settings
+#pragma mark - Private methods
+- (void)saveString:(NSString *)stringToSave {
+    NSSavePanel *savePanel = [NSSavePanel savePanel];
+    savePanel.allowedFileTypes = @[@"csv"];
+
+    [savePanel beginWithCompletionHandler:^(NSModalResponse result) {
+        if (result == NSFileHandlingPanelOKButton) {
+            NSError *error = nil;
+            NSURL *selectedURL = savePanel.URL;
+            [stringToSave writeToURL:selectedURL
+                          atomically:YES
+                            encoding:NSUTF16StringEncoding
+                               error:&error];
+            if (error) {
+                NSLog(@"%@", error.localizedDescription);
+            }
+
+        }
+    }];
+}
+
+#pragma mark - Action methods
+#pragma mark Settings
 - (IBAction)currencyTypPopUpButtonAction:(NSPopUpButton *)sender {
     BitcoinDE_CurrencyType newCurrencyType = sender.indexOfSelectedItem + 1;
 
@@ -192,28 +216,8 @@
 
     self.selectedEndDate = [calendar dateFromComponents:selectedEndDateComponents];
 }
-- (void)saveString:(NSString *)exportString {
-    NSSavePanel *savePanel = [NSSavePanel savePanel];
-    [savePanel beginWithCompletionHandler:^(NSModalResponse result) {
-        if (result == NSFileHandlingPanelOKButton) {
-            NSError *error = nil;
-            NSURL *selectedURL = savePanel.URL;
-            NSString *fileExtension = selectedURL.pathExtension;
-            if (fileExtension.length == 0) {
-                selectedURL = [selectedURL URLByAppendingPathExtension:@"csv"];
-            }
-            [exportString writeToURL:selectedURL
-                          atomically:YES
-                            encoding:NSUTF16StringEncoding
-                               error:&error];
-            if (error) {
-                NSLog(@"%@", error.localizedDescription);
-            }
 
-        }
-    }];
-}
-
+#pragma mark Export
 - (IBAction)exportButtonAction:(NSButton *)sender {
     // get columnTitles
     NSArray <NSString *> *columnTitles = [self.tableView.tableColumns valueForKey:@"identifier"];
@@ -277,7 +281,7 @@
     [self saveString:exportString];
 }
 
-#pragma mark - Fetch and load buttons
+#pragma mark Fetch and load buttons
 - (IBAction)loadAllTradeDatasAction:(NSButton *)sender {
     self.shouldLoadAllTradeDatas = YES;
     self.fetchDataButton.title = @"Cancel";
