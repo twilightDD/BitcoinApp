@@ -192,6 +192,28 @@
 
     self.selectedEndDate = [calendar dateFromComponents:selectedEndDateComponents];
 }
+- (void)saveString:(NSString *)exportString {
+    NSSavePanel *savePanel = [NSSavePanel savePanel];
+    [savePanel beginWithCompletionHandler:^(NSModalResponse result) {
+        if (result == NSFileHandlingPanelOKButton) {
+            NSError *error = nil;
+            NSURL *selectedURL = savePanel.URL;
+            NSString *fileExtension = selectedURL.pathExtension;
+            if (fileExtension.length == 0) {
+                selectedURL = [selectedURL URLByAppendingPathExtension:@"csv"];
+            }
+            [exportString writeToURL:selectedURL
+                          atomically:YES
+                            encoding:NSUTF16StringEncoding
+                               error:&error];
+            if (error) {
+                NSLog(@"%@", error.localizedDescription);
+            }
+
+        }
+    }];
+}
+
 - (IBAction)exportButtonAction:(NSButton *)sender {
     // get columnTitles
     NSArray <NSString *> *columnTitles = [self.tableView.tableColumns valueForKey:@"identifier"];
@@ -252,25 +274,7 @@
 
     [self addToPasteBoard:exportString];
 
-    NSSavePanel *savePanel = [NSSavePanel savePanel];
-    [savePanel beginWithCompletionHandler:^(NSModalResponse result) {
-        if (result == NSFileHandlingPanelOKButton) {
-            NSError *error = nil;
-            NSURL *selectedURL = savePanel.URL;
-            NSString *fileExtension = selectedURL.pathExtension;
-            if (fileExtension.length == 0) {
-                selectedURL = [selectedURL URLByAppendingPathExtension:@"csv"];
-            }
-            [exportString writeToURL:selectedURL
-                          atomically:YES
-                            encoding:NSUTF16StringEncoding
-                               error:&error];
-            if (error) {
-                NSLog(@"%@", error.localizedDescription);
-            }
-
-        }
-    }];
+    [self saveString:exportString];
 }
 
 #pragma mark - Fetch and load buttons
