@@ -20,6 +20,21 @@
 
 @implementation SOXAbstractViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    for (NSTableColumn *column in self.tableView.tableColumns) {
+        NSFont *font = [NSFont systemFontOfSize:[NSFont systemFontSize]];
+
+        if ([NSFont respondsToSelector:@selector(monospacedDigitSystemFontOfSize:weight:)]) {
+            font = [NSFont monospacedDigitSystemFontOfSize:[NSFont systemFontSize]
+                                                    weight:NSFontWeightRegular];
+        }
+
+        [column.dataCell setFont:font];
+    }
+}
+
 - (void)viewWillAppear {
     [super viewWillAppear];
     self.spinningBackgroundView.hidden = YES;

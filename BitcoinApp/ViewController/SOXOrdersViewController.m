@@ -25,7 +25,6 @@
 
 #pragma mark IBOutlets
 @property (weak) IBOutlet NSTextField *titleTextField;
-@property (weak) IBOutlet NSTableView *tableView;
 
 @property (weak) IBOutlet NSButton *otherFilterButton;
 

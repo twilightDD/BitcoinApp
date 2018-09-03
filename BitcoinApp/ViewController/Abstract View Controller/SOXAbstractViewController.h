@@ -11,6 +11,8 @@
 
 @interface SOXAbstractViewController : NSViewController <SOXMarketCoreServerRequestProtocol>
 
+@property (weak) IBOutlet NSTableView *tableView;
+
 - (void)enableSpinningWheel;
 - (void)disableSpinningWheel;
 
