@@ -2937,7 +2937,7 @@ Gw
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="" editable="NO" width="120" minWidth="40" maxWidth="1000" id="eh3-HK-OCG">
+                                                <tableColumn identifier="positionDetails_Date" editable="NO" width="120" minWidth="40" maxWidth="1000" id="eh3-HK-OCG">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="date">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2953,7 +2953,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.positionDetails_Date" id="PbE-yU-s9t"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="80" minWidth="80" maxWidth="3.4028234663852886e+38" id="cXe-Ul-YnM">
+                                                <tableColumn identifier="tradeDetails_Trade_id" width="80" minWidth="80" maxWidth="3.4028234663852886e+38" id="cXe-Ul-YnM">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="orderID">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2969,7 +2969,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.tradeDetails_Trade_id" id="fP0-wO-mcf"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="80" minWidth="80" maxWidth="1000" id="1zU-O8-OQu">
+                                                <tableColumn identifier="positionDetails_Type" editable="NO" width="80" minWidth="80" maxWidth="1000" id="1zU-O8-OQu">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="type">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2985,7 +2985,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.positionDetails_Type" id="Kly-o3-M8L"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="NgY-vm-nuq">
+                                                <tableColumn identifier="positionDetails_Cashflow" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="NgY-vm-nuq">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Cashflow">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -3006,7 +3006,7 @@ Gw
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="2Wh-aE-M1a">
+                                                <tableColumn identifier="positionDetails_Balance" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="2Wh-aE-M1a">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="balance">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -3027,7 +3027,7 @@ Gw
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="axJ-uI-fQr">
+                                                <tableColumn identifier="tradeDetails_Price" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="axJ-uI-fQr">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="price">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -3044,7 +3044,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.tradeDetails_Price" id="aG8-pm-BRt"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="1100" id="CdC-Ba-H0W">
+                                                <tableColumn identifier="tradeDetails_BTC_before_fee" editable="NO" width="120" minWidth="10" maxWidth="1100" id="CdC-Ba-H0W">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="btc before fee">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -3061,7 +3061,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.tradeDetails_BTC_before_fee" id="zbd-YA-nhG"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="1100" id="xCf-ac-UJ6">
+                                                <tableColumn identifier="tradeDetails_BTC_after_fee" editable="NO" width="120" minWidth="10" maxWidth="1100" id="xCf-ac-UJ6">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="btc after fee">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -3078,7 +3078,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.tradeDetails_BTC_after_fee" id="FVB-Ee-Xt9"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="1100" id="uNg-0S-NHy">
+                                                <tableColumn identifier="tradeDetails_Euro_before_fee" editable="NO" width="120" minWidth="10" maxWidth="1100" id="uNg-0S-NHy">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="euro before fee">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -3095,7 +3095,7 @@ Gw
                                                         <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.tradeDetails_Euro_before_fee" id="hev-3c-vNG"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="1100" id="WMb-IW-VZq">
+                                                <tableColumn identifier="tradeDetails_Euro_after_fee" editable="NO" width="120" minWidth="10" maxWidth="1100" id="WMb-IW-VZq">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="euro after fee">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -3222,6 +3222,16 @@ Gw
                                     <action selector="loadAllTradeDatasAction:" target="d67-em-sMP" id="LVv-JU-0L7"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iT6-ej-cAq">
+                                <rect key="frame" x="851" y="366" width="80" height="32"/>
+                                <buttonCell key="cell" type="push" title="Export" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Mg1-9y-7Sb">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="exportButtonAction:" target="d67-em-sMP" id="k7M-jG-k2A"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="pFC-Y8-J9Q" firstAttribute="top" secondItem="Ecl-ne-kma" secondAttribute="bottom" constant="12" symbolic="YES" id="3ui-Zm-QIg"/>
@@ -3233,9 +3243,12 @@ Gw
                             <constraint firstItem="O6y-Sc-427" firstAttribute="leading" secondItem="Ohx-pB-HMv" secondAttribute="leading" id="GWT-Dk-HVw"/>
                             <constraint firstItem="Z8e-xi-0nB" firstAttribute="leading" secondItem="4oR-2z-iOV" secondAttribute="trailing" constant="8" symbolic="YES" id="NKU-ag-sck"/>
                             <constraint firstAttribute="trailing" secondItem="pFC-Y8-J9Q" secondAttribute="trailing" constant="20" id="NUL-rd-evQ"/>
+                            <constraint firstItem="iT6-ej-cAq" firstAttribute="leading" secondItem="fGp-j1-fNK" secondAttribute="trailing" constant="20" id="OEp-Yc-Nd9"/>
                             <constraint firstItem="Z8e-xi-0nB" firstAttribute="top" relation="greaterThanOrEqual" secondItem="O6y-Sc-427" secondAttribute="bottom" constant="25" id="Pdk-rb-PFN"/>
                             <constraint firstItem="4oR-2z-iOV" firstAttribute="top" secondItem="q6P-13-wzZ" secondAttribute="top" id="PrQ-FB-imn"/>
                             <constraint firstItem="4oR-2z-iOV" firstAttribute="trailing" secondItem="q6P-13-wzZ" secondAttribute="trailing" id="R5w-FU-DRf"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iT6-ej-cAq" secondAttribute="trailing" constant="20" symbolic="YES" id="SqX-1a-OlZ"/>
+                            <constraint firstItem="iT6-ej-cAq" firstAttribute="top" secondItem="O6y-Sc-427" secondAttribute="bottom" constant="20" id="W0r-XF-YTF"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="O6y-Sc-427" secondAttribute="trailing" constant="20" symbolic="YES" id="W6J-oU-80o"/>
                             <constraint firstItem="fGp-j1-fNK" firstAttribute="leading" secondItem="KG1-ac-oC6" secondAttribute="leading" constant="20" id="WO2-2V-g34"/>
                             <constraint firstAttribute="bottom" secondItem="fGp-j1-fNK" secondAttribute="bottom" constant="20" symbolic="YES" id="YbK-R4-puq"/>
@@ -3247,6 +3260,7 @@ Gw
                             <constraint firstItem="Z8e-xi-0nB" firstAttribute="trailing" secondItem="Ecl-ne-kma" secondAttribute="trailing" id="qHT-OG-xLv"/>
                             <constraint firstAttribute="bottom" secondItem="pFC-Y8-J9Q" secondAttribute="bottom" constant="20" symbolic="YES" id="qx8-N8-Rjo"/>
                             <constraint firstItem="pFC-Y8-J9Q" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fGp-j1-fNK" secondAttribute="trailing" constant="8" symbolic="YES" id="ukh-1w-Nfp"/>
+                            <constraint firstItem="Z8e-xi-0nB" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iT6-ej-cAq" secondAttribute="bottom" constant="12" symbolic="YES" id="xdT-8U-gZ4"/>
                         </constraints>
                     </view>
                     <connections>
@@ -3269,7 +3283,7 @@ Gw
                 </arrayController>
                 <userDefaultsController id="lEg-Nr-J4c"/>
             </objects>
-            <point key="canvasLocation" x="-165" y="1734"/>
+            <point key="canvasLocation" x="-165.5" y="1733.5"/>
         </scene>
         <!--Create New Order View Controller-->
         <scene sceneID="UM8-a9-Vdn">

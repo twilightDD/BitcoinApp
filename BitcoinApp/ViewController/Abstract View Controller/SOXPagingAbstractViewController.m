@@ -238,35 +238,39 @@
     [arrayControllerObjects enumerateObjectsUsingBlock:^(id _Nonnull dataObj, NSUInteger dataIdx, BOOL * _Nonnull stop) {
         // enum columns
         [columnTitles enumerateObjectsUsingBlock:^(NSString * _Nonnull columnTitle, NSUInteger columnIdx, BOOL * _Nonnull stop) {
-            // get value for columnTitle and convert it to string
-            id valueForColumnTitle = [dataObj valueForKey:columnTitle];
-            if (valueForColumnTitle) {
-                // convert to string, if needed
-                if ([valueForColumnTitle isKindOfClass:[NSNumber class]]) {
-                    if ([columnTitle containsString:@"volume"]
-                        || [columnTitle containsString:@"price"]
-                        || [columnTitle containsString:@"Eur"]) {
-                        valueForColumnTitle = [SOXFormatters currencyStringForNumber:valueForColumnTitle
-                                                                        roundingMode:NSNumberFormatterRoundHalfEven];
+            if (columnTitle.length > 0) {
+                // get value for columnTitle and convert it to string
+                id valueForColumnTitle = [dataObj valueForKey:columnTitle];
+                if (valueForColumnTitle) {
+                    // convert to string, if needed
+                    if ([valueForColumnTitle isKindOfClass:[NSNumber class]]) {
+                        if ([columnTitle containsString:@"volume"]
+                            || [columnTitle containsString:@"price"]
+                            || [columnTitle containsString:@"Price"]
+                            || [columnTitle containsString:@"Eur"]) {
+                            valueForColumnTitle = [SOXFormatters currencyStringForNumber:valueForColumnTitle
+                                                                            roundingMode:NSNumberFormatterRoundHalfEven];
+                        }
+                        else if ([columnTitle containsString:@"amount"]
+                                 || [columnTitle containsString:@"BTC"]
+                                 || [columnTitle containsString:@"Cash"]
+                                 || [columnTitle containsString:@"Balance"]) {
+                            valueForColumnTitle = [[SOXFormatters bitcoinNumberFormatter] stringFromNumber:valueForColumnTitle];
+                        }
+                        else {
+                            valueForColumnTitle = [valueForColumnTitle stringValue];
+                        }
                     }
-                    else if ([columnTitle containsString:@"amount"]
-                            || [columnTitle containsString:@"BTC"]) {
-                        valueForColumnTitle = [[SOXFormatters bitcoinNumberFormatter] stringFromNumber:valueForColumnTitle];
+                    else if ([valueForColumnTitle isKindOfClass:[NSDate class]]) {
+                        valueForColumnTitle = [SOXFormatters shortDateShortTimeStringForDate:valueForColumnTitle];
                     }
-                    else {
-                        valueForColumnTitle = [valueForColumnTitle stringValue];
-                    }
-                }
-                else if ([valueForColumnTitle isKindOfClass:[NSDate class]]) {
-                    valueForColumnTitle = [SOXFormatters shortDateShortTimeStringForDate:valueForColumnTitle];
+                    exportString = [exportString stringByAppendingString:valueForColumnTitle];
                 }
 
-                exportString = [exportString stringByAppendingString:valueForColumnTitle];
-            }
-
-            // there is no separator after the last value
-            if (columnIdx < columnTitlesCount) {
-                exportString = [exportString stringByAppendingString:@";"];
+                // there is no separator after the last value
+                if (columnIdx < columnTitlesCount) {
+                    exportString = [exportString stringByAppendingString:@";"];
+                }
             }
         }];
 
