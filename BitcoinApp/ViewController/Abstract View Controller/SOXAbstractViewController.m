@@ -16,6 +16,9 @@
 @property (weak) IBOutlet NSView *spinningBackgroundView;
 @property (weak) IBOutlet NSProgressIndicator *circularProgressIndicator;
 
+@property (strong) IBOutlet NSView *noDataBackgroundView;
+
+
 @end
 
 @implementation SOXAbstractViewController
@@ -33,6 +36,8 @@
 
         [column.dataCell setFont:font];
     }
+
+
 }
 
 - (void)viewWillAppear {
@@ -43,8 +48,8 @@
                                                                                    blue:0
                                                                                   alpha:0.1].CGColor;
 }
-#pragma mark - Spinning Wheel
 
+#pragma mark - Custom Views
 - (void)enableSpinningWheel {
     self.spinningBackgroundView.hidden = NO;
     [self.circularProgressIndicator startAnimation:nil];
@@ -55,6 +60,13 @@
     [self.circularProgressIndicator stopAnimation:nil];
 }
 
+- (void)presentNoDataView {
+    self.noDataBackgroundView.hidden = NO;
+}
+
+- (void)hideNoDataView {
+    self.noDataBackgroundView.hidden = YES;
+}
 
 
 #pragma mark - SOXMarketCoreServerRequestProtocol

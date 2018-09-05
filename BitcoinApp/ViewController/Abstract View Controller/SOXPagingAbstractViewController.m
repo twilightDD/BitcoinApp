@@ -94,6 +94,7 @@
 }
 
 - (void)loadNextPage {
+    [self hideNoDataView];
     [self enableSpinningWheel];
     
     self.loadMoreTradeDatasButton.enabled = NO;
@@ -135,6 +136,13 @@
         self.fetchDataButton.title = @"Fetch data";
         self.fetchDataButton.enabled = YES;
         [self disableSpinningWheel];
+    }
+
+    if (self.arrayControllerDatas.count == 0) {
+        [self presentNoDataView];
+    }
+    else {
+        [self hideNoDataView];
     }
 }
 
