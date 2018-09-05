@@ -32,6 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.selectedCurrencyType = BitcoinDE_CurrencyTypeBitcoin;
     self.selectedAccountLedgerOrderType = BitcoinDE_AccountLedgerParameter_AllOrderType;
 }
 
@@ -74,7 +75,7 @@
 #pragma mark - Next Page Data
 - (void)loadNextPage {
     [super loadNextPage];
-
+    
     NSDictionary *parameter = [SOXAccountLedger_BitcoinDE_Data parameterForOrderType:self.selectedAccountLedgerOrderType
                                                                      forCurrencyType:self.selectedCurrencyType
                                                                            startDate:[NSDate dateWithTimeIntervalSinceNow:-10320000]
