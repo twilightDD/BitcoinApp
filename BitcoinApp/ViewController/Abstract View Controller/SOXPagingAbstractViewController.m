@@ -34,6 +34,11 @@
 - (void)viewWillAppear {
     [super viewWillAppear];
 
+    if (self.arrayControllerDatas.count == 0) {
+        [self resetTradeDatas];
+        [self loadNextPage];
+    }
+
     [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
                                                         object:@(self.selectedCurrencyType)];
 }
