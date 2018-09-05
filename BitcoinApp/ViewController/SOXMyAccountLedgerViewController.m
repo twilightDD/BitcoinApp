@@ -49,6 +49,9 @@
 - (void)setupUI {    
     [super setupUI];
 
+    // Manipulate currency Selection
+    [self.currencyTypeSelectionPopUpButton removeItemAtIndex:0];
+    
     // Type Selection
     [self.accountLedgerOrderTypePopUpButton removeAllItems];
     for (BitcoinDE_AccountLedgerParameter_OrderType idx = BitcoinDE_AccountLedgerParameter_UnknownOrderType + 1

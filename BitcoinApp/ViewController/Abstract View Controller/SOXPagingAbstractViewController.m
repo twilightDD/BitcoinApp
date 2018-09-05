@@ -22,7 +22,7 @@
     [super viewDidLoad];
 
     self.shouldLoadAllTradeDatas = NO;
-    self.selectedCurrencyType = BitcoinDE_CurrencyTypeBitcoin;
+    self.selectedCurrencyType = BitcoinDE_CurrencyTypeUnknown;
 
     // dates
     self.selectedStartDate = [SOXFormatters dateForRFC3339DateTimeString:@"2000-01-01T02:00:00+02:00" ];
@@ -44,7 +44,7 @@
 
     // currency selection
     [self.currencyTypeSelectionPopUpButton removeAllItems];
-    for (BitcoinDE_CurrencyType idx = BitcoinDE_CurrencyTypeUnknown + 1
+    for (BitcoinDE_CurrencyType idx = BitcoinDE_CurrencyTypeUnknown
          ; idx < BitcoinDE_CurrencyType_EndOfType
          ; idx++) {
         [self.currencyTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:idx]];
@@ -158,6 +158,18 @@
 #pragma mark Settings
 - (IBAction)currencyTypPopUpButtonAction:(NSPopUpButton *)sender {
     BitcoinDE_CurrencyType newCurrencyType = sender.indexOfSelectedItem + 1;
+
+    // < EndType => on MyActiveOrders and MyTradeHistory
+    if (sender.itemArray.count < BitcoinDE_CurrencyType_EndOfType) {
+        newCurrencyType = sender.indexOfSelectedItem + 1;
+    }
+    // == 5 => on MyAccountLedger
+    else if (sender.itemArray.count == BitcoinDE_CurrencyType_EndOfType) {
+        newCurrencyType = sender.indexOfSelectedItem;
+    }
+    else {
+        NSAssert(NO, @"can't solve this.");
+    }
 
     if (newCurrencyType != self.selectedCurrencyType) {
         self.selectedCurrencyType = newCurrencyType;

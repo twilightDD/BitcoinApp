@@ -60,7 +60,7 @@ typedef NS_ENUM (NSInteger, BitcoinDE_CurrencyType) { // used in MacMain.storybo
     , BitcoinDE_CurrencyTypeBitcoinCash = 2
     , BitcoinDE_CurrencyTypeBitcoinGold = 3
     , BitcoinDE_CurrencyTypeEthereum = 4
-    , BitcoinDE_CurrencyType_EndOfType
+    , BitcoinDE_CurrencyType_EndOfType = 5
 };
 
 //typedef NS_ENUM (NSInteger, BitcoinDE_OrderStateType) {
