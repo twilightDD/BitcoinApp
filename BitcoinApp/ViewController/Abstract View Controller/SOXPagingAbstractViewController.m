@@ -159,6 +159,26 @@
     }];
 }
 
+- (NSDate *)formatDate:(NSDate *)date {
+    //gather current calendar
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+
+    //gather date components from date
+    NSDateComponents *inputDateComponents = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear)
+                                                        fromDate:date];
+
+    NSDateComponents *selectedStartDateComponents = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond)
+                                                                fromDate:[NSDate date]];
+    //set date components
+    selectedStartDateComponents.day   = inputDateComponents.day;
+    selectedStartDateComponents.month = inputDateComponents.month;
+    selectedStartDateComponents.year  = inputDateComponents.year;
+
+    NSDate *formatDate = [calendar dateFromComponents:selectedStartDateComponents];
+
+    return formatDate;
+}
+
 #pragma mark - Action methods
 #pragma mark Settings
 - (IBAction)currencyTypPopUpButtonAction:(NSPopUpButton *)sender {
@@ -168,7 +188,7 @@
     if (sender.itemArray.count < BitcoinDE_CurrencyType_EndOfType) {
         newCurrencyType = sender.indexOfSelectedItem + 1;
     }
-    // == 5 => on MyAccountLedger
+    // == EndType => on MyAccountLedger
     else if (sender.itemArray.count == BitcoinDE_CurrencyType_EndOfType) {
         newCurrencyType = sender.indexOfSelectedItem;
     }
@@ -195,43 +215,21 @@
 }
 
 - (IBAction)startDatePickerAction:(NSDatePicker *)sender {
-    //gather current calendar
-    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *newSelectedStartDate = [self formatDate:sender.dateValue];
 
-    //gather date components from date
-    NSDateComponents *inputDateComponents = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear)
-                                                        fromDate:sender.dateValue];
-
-    NSDateComponents *selectedStartDateComponents = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond)
-                                                                fromDate:self.selectedStartDate];
-    //set date components
-    selectedStartDateComponents.day   = inputDateComponents.day;
-    selectedStartDateComponents.month = inputDateComponents.month;
-    selectedStartDateComponents.year  = inputDateComponents.year;
-
-    self.selectedStartDate = [calendar dateFromComponents:selectedStartDateComponents];
+    if ([self.selectedStartDate isEqualToDate:newSelectedStartDate] == NO) {
+        self.selectedStartDate = newSelectedStartDate;
+        [self resetTradeDatas];
+    }
 }
 
 - (IBAction)endDatePickerAction:(NSDatePicker *)sender {
-    //gather current calendar
-    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *newSelectedEndDate = [self formatDate:sender.dateValue];
 
-    //gather date components from date
-    NSDateComponents *inputDateComponents = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear)
-                                                        fromDate:sender.dateValue];
-
-    NSDateComponents *selectedEndDateComponents = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond)
-                                                              fromDate:[NSDate date]];
-    //set date components
-    selectedEndDateComponents.day   = inputDateComponents.day;
-    selectedEndDateComponents.month = inputDateComponents.month;
-    selectedEndDateComponents.year  = inputDateComponents.year;
-
-    selectedEndDateComponents.hour   = 23;
-    selectedEndDateComponents.minute = 59;
-    selectedEndDateComponents.second = 59;
-
-    self.selectedEndDate = [calendar dateFromComponents:selectedEndDateComponents];
+    if ([self.selectedEndDate isEqualToDate:newSelectedEndDate] == NO) {
+        self.selectedEndDate = newSelectedEndDate;
+        [self resetTradeDatas];
+    }
 }
 
 #pragma mark Export
