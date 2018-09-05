@@ -174,8 +174,8 @@ static NSString *MyOrderBookParameter_PageKey = @"page";
             break;
     }
 
-    NSString *startDateString = nil; //[SOXFormatters rfc3339DateTimeStringDate:startDate];
-    NSString *endDateString   = nil; //[SOXFormatters rfc3339DateTimeStringDate:endDate];
+    NSString *startDateString = [SOXFormatters rfc3339DateTimeStringDate:startDate];
+    NSString *endDateString   = [SOXFormatters rfc3339DateTimeStringDate:endDate];
 
     NSNumber *pageNumber = @(page);
 

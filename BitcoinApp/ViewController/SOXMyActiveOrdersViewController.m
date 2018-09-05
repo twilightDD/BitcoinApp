@@ -48,10 +48,6 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
     [super viewDidLoad];
 
     self.selectedOrderStateType = BitcoinDE_OrderStateTypePending;
-
-    // for debugging
-    self.startDateDatePicker.enabled = NO;
-    self.endDateDatePicker.enabled = NO;
 }
 
 #pragma mark - Private methods
