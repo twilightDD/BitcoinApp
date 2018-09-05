@@ -1913,13 +1913,13 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" headerView="2F9-Ce-VdL" id="kdt-bX-tib">
-                                            <rect key="frame" x="0.0" y="0.0" width="1083" height="346"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1093" height="346"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="" editable="NO" width="60" minWidth="10" maxWidth="3.4028234663852886e+38" id="gje-je-9Nf">
+                                                <tableColumn identifier="" editable="NO" width="70" minWidth="10" maxWidth="3.4028234663852886e+38" id="gje-je-9Nf">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="OrderID">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2167,7 +2167,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="2F9-Ce-VdL">
-                                    <rect key="frame" x="0.0" y="0.0" width="1083" height="23"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1093" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>

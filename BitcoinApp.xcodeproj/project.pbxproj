@@ -535,9 +535,9 @@
 			children = (
 				D0962CCA1E945906004FFF62 /* SOXAbstractViewController.h */,
 				D0962CCB1E945906004FFF62 /* SOXAbstractViewController.m */,
+				D0962CCD1E945967004FFF62 /* SOXAbstractViewController_Private.h */,
 				D0565BD321348DF7002E0E21 /* SOXPagingAbstractViewController.h */,
 				D0565BD421348DF7002E0E21 /* SOXPagingAbstractViewController.m */,
-				D0962CCD1E945967004FFF62 /* SOXAbstractViewController_Private.h */,
 			);
 			path = "Abstract View Controller";
 			sourceTree = "<group>";
