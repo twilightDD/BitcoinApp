@@ -176,6 +176,7 @@
 
 + (NSDate *)dateBeforeMidnightForDate:(NSDate *)date {
     NSDateComponents *dateComponents = [self dateComponentsDayMonthYearFromDate:date];
+
     dateComponents.hour = 23;
     dateComponents.minute = 59;
     dateComponents.second = 59;
@@ -206,6 +207,15 @@
     }
     
     NSString *rfc = [[SOXFormatters dateFormatterEncodeRFC3339] stringFromDate:date];
+    return rfc;
+}
+
++ (NSString*)rfc3339DateTimeStringDate:(NSDate *)date addHours:(NSInteger)hoursToAdd {
+    if (!date) {
+        date = [NSDate date];
+    }
+    NSDate *dateByAddedHours = [self dateFromDate:date byAddingHours:hoursToAdd];
+    NSString *rfc = [[SOXFormatters dateFormatterEncodeRFC3339] stringFromDate:dateByAddedHours];
     return rfc;
 }
 
@@ -343,6 +353,24 @@
     NSDate *dateGregorian = [gregorianCalendar dateFromComponents:dateComponents];
 
     return dateGregorian;
+}
+
+#warning HACK!
++ (NSDate *)dateFromDate:(NSDate *)date
+           byAddingHours:(NSInteger )hoursToAdd {
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *inputDateComponents = [calendar components:(NSCalendarUnitDay
+                                                                  | NSCalendarUnitMonth
+                                                                  | NSCalendarUnitYear
+                                                                  | NSCalendarUnitHour
+                                                                  | NSCalendarUnitMinute
+                                                                  | NSCalendarUnitSecond)
+                                                        fromDate:date];
+    inputDateComponents.hour = inputDateComponents.hour + hoursToAdd;
+
+    NSDate *dateFromDate = [self dateGregorianFromDateComponents:inputDateComponents];
+    
+    return dateFromDate;
 }
 
 @end

@@ -175,7 +175,8 @@ static NSString *MyOrderBookParameter_PageKey = @"page";
     }
 
     NSString *startDateString = [SOXFormatters rfc3339DateTimeStringDate:startDate];
-    NSString *endDateString   = [SOXFormatters rfc3339DateTimeStringDate:endDate];
+#warning HACK!
+    NSString *endDateString   = [SOXFormatters rfc3339DateTimeStringDate:endDate addHours:2];
 
     NSNumber *pageNumber = @(page);
 
