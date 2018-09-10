@@ -164,6 +164,26 @@
     return date;
 }
 
++ (NSDate *)dateAtMidnightForDate:(NSDate *)date {
+    NSDateComponents *dateComponents = [self dateComponentsDayMonthYearFromDate:date];
+    dateComponents.hour = 0;
+    dateComponents.minute = 0;
+    dateComponents.second = 0;
+
+    NSDate *dateAtMidnightForDate = [self dateGregorianFromDateComponents:dateComponents];
+    return dateAtMidnightForDate;
+}
+
++ (NSDate *)dateBeforeMidnightForDate:(NSDate *)date {
+    NSDateComponents *dateComponents = [self dateComponentsDayMonthYearFromDate:date];
+    dateComponents.hour = 23;
+    dateComponents.minute = 59;
+    dateComponents.second = 59;
+
+    NSDate *dateBeforeMidnight = [self dateGregorianFromDateComponents:dateComponents];
+    return dateBeforeMidnight;
+}
+
 + (NSString *)stringDateTimeStringForRFC3339DateTimeString:(NSString *)rfc3339DateTimeString {
     // Returns a user-visible date time string that corresponds to the
     // specified RFC 3339 date time string. Note that this does not handle
@@ -296,6 +316,33 @@
     NSDecimalNumber *formattedInterestRate = [effectiveInterestRate decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"100"]
                                                                                     withBehavior:[SOXFormatters interestRateNumberHandler]];
     return formattedInterestRate;
+}
+
+#pragma mark - Private class methods
++ (NSDateComponents *)dateComponentsDayMonthYearFromDate:(NSDate *)date {
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *inputDateComponents = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear)
+                                                        fromDate:date];
+
+    NSDateComponents *dateComponentsDayMonthYear = [[NSDateComponents alloc] init];
+    //set date components
+    dateComponentsDayMonthYear.day   = inputDateComponents.day;
+    dateComponentsDayMonthYear.month = inputDateComponents.month;
+    dateComponentsDayMonthYear.year  = inputDateComponents.year;
+
+    return dateComponentsDayMonthYear;
+}
+
++ (NSDate *)dateGregorianFromDateComponents:(NSDateComponents *)dateComponents {
+    /* Warum gregorianischer Kalender?
+     damit aus dem Eingangswert 10.9.2018 23:59:59
+     ein Date 2018-09-10 23:59:59 +0000 wird
+     und nicht 2018-09-10 21:59:59 +0200 (bei currentLocale)
+     */
+    NSCalendar *gregorianCalendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+    NSDate *dateGregorian = [gregorianCalendar dateFromComponents:dateComponents];
+
+    return dateGregorian;
 }
 
 @end
