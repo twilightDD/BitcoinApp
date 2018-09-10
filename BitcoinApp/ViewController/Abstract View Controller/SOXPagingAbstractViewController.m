@@ -26,7 +26,7 @@
 
     // dates
     self.selectedStartDate = [SOXFormatters dateForRFC3339DateTimeString:@"2000-01-01T02:00:00+02:00" ];
-    self.selectedEndDate = [NSDate date];
+    self.selectedEndDate = [SOXFormatters dateBeforeMidnightForDate:[NSDate date]];
 
     [self setupUI];
 }
@@ -167,26 +167,6 @@
     }];
 }
 
-- (NSDate *)formatDate:(NSDate *)date {
-    //gather current calendar
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-
-    //gather date components from date
-    NSDateComponents *inputDateComponents = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear)
-                                                        fromDate:date];
-
-    NSDateComponents *selectedStartDateComponents = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond)
-                                                                fromDate:[NSDate date]];
-    //set date components
-    selectedStartDateComponents.day   = inputDateComponents.day;
-    selectedStartDateComponents.month = inputDateComponents.month;
-    selectedStartDateComponents.year  = inputDateComponents.year;
-
-    NSDate *formatDate = [calendar dateFromComponents:selectedStartDateComponents];
-
-    return formatDate;
-}
-
 #pragma mark - Action methods
 #pragma mark Settings
 - (IBAction)currencyTypPopUpButtonAction:(NSPopUpButton *)sender {
@@ -223,7 +203,7 @@
 }
 
 - (IBAction)startDatePickerAction:(NSDatePicker *)sender {
-    NSDate *newSelectedStartDate = [self formatDate:sender.dateValue];
+    NSDate *newSelectedStartDate = sender.dateValue;
 
     if ([self.selectedStartDate isEqualToDate:newSelectedStartDate] == NO) {
         self.selectedStartDate = newSelectedStartDate;
@@ -232,7 +212,7 @@
 }
 
 - (IBAction)endDatePickerAction:(NSDatePicker *)sender {
-    NSDate *newSelectedEndDate = [self formatDate:sender.dateValue];
+    NSDate *newSelectedEndDate = sender.dateValue;
 
     if ([self.selectedEndDate isEqualToDate:newSelectedEndDate] == NO) {
         self.selectedEndDate = newSelectedEndDate;
