@@ -278,7 +278,7 @@
 #pragma mark - SOXChangeOrderProtocol
 - (void)orderWasChanged:(NSString *)oldOrderID newOrderID:(NSString *)newOrderID {
     // TODO: orderbook views will be empty - but why?!?!?!
-  //  [[SOXMarket_BitcoinDE_Core sharedCore] startBannerUpdate];
+    [[SOXMarket_BitcoinDE_Core sharedCore] startAccountInfoUpdate];
 }
 
 @end
