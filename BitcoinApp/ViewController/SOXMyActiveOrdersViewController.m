@@ -126,6 +126,7 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
     [self disableSpinningWheel];
 
     if ([answerOfServerRequest valueForKey:ServerAnswerErrorKey]) {
+#warning  enable fetch button
         return;
     }
     
