@@ -326,13 +326,14 @@
             if (self.delegate) {
                 [self.delegate orderWasChanged:nil newOrderID:newOrderID];
             }
-            else {
-                NSAlert *alert = [[NSAlert alloc] init];
-                alert.messageText     = messageText;
-                alert.informativeText = informativeText;
-                alert.alertStyle      = alertStyle;
-                [alert runModal];
-            }
+
+            NSAlert *alert = [[NSAlert alloc] init];
+            alert.messageText     = messageText;
+            alert.informativeText = informativeText;
+            alert.alertStyle      = alertStyle;
+            [alert runModal];
+
+
             [self dismissViewController:self];
         }
     }
