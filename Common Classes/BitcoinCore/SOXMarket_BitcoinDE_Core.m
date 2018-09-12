@@ -48,20 +48,17 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 
 @property (copy, nonatomic) NSString *nonce;
 @property (copy, nonatomic) NSString *httpMethod;
-@property (copy, nonatomic) NSString *url_encoded_query_string;
+@property (copy, nonatomic) NSString *urlQueryString;
 @property (copy, nonatomic) NSString *uri;
 @property (copy, nonatomic) NSString *url;
-@property (copy, nonatomic) NSString *post_parameter_md5_hashed_url_encoded_query_string;
-@property (copy, nonatomic) NSString *hmac_data;
-@property (copy, nonatomic) NSString *hmac;
+@property (copy, nonatomic) NSString *postParameterMD5hashedURLQueryString;
+@property (copy, nonatomic) NSString *hmacDataString;
+@property (copy, nonatomic) NSString *hmacString;
 
-@property (copy, nonatomic) NSString *api_key;
-@property (copy, nonatomic) NSString *api_secret;
-@property (nonatomic) NSUInteger api_Pointer;
-// Keychain
-//@property (strong, nonatomic) NSArray *apiKeys;
-//@property (strong, nonatomic) NSArray *apiSecrets;
-@property (nonatomic) NSUInteger api_PointerLimit;
+@property (copy, nonatomic) NSString *apiKey;
+@property (copy, nonatomic) NSString *apiSecret;
+@property (nonatomic) NSUInteger apiPointer;
+@property (nonatomic) NSUInteger apiPointerLimit;
 
 //@property (weak, nonatomic) id delegateForRequests;
 @property (weak, nonatomic) id <SOXBannerDataProtocol> delegateForBannerUpdates;
@@ -131,9 +128,9 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 //                                  ,@"c0704f3e2f637c9849a263df6731f466db87a6bc"
 //                                  ,@"c4ac430f5f57cfada0a0413a4ea3b8b7e2335dff"];
 #endif
-        sharedCore.api_Pointer = 0;
+        sharedCore.apiPointer = 0;
         // Keychain
-        sharedCore.api_PointerLimit = [SOXPreferencesCore countOfValidKeychainItems];
+        sharedCore.apiPointerLimit = [SOXPreferencesCore countOfValidKeychainItems];
     });
     return sharedCore;
 }
@@ -474,28 +471,28 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
     {
         [SOXMarket_BitcoinDE_Core sharedCore].uri = nil;
         [SOXMarket_BitcoinDE_Core sharedCore].nonce = nil;
-        [SOXMarket_BitcoinDE_Core sharedCore].url_encoded_query_string = nil;
-        [SOXMarket_BitcoinDE_Core sharedCore].post_parameter_md5_hashed_url_encoded_query_string = nil;
+        [SOXMarket_BitcoinDE_Core sharedCore].urlQueryString = nil;
+        [SOXMarket_BitcoinDE_Core sharedCore].postParameterMD5hashedURLQueryString = nil;
         [SOXMarket_BitcoinDE_Core sharedCore].httpMethod = nil;
-        [SOXMarket_BitcoinDE_Core sharedCore].hmac_data = nil;
-        [SOXMarket_BitcoinDE_Core sharedCore].hmac = nil;
+        [SOXMarket_BitcoinDE_Core sharedCore].hmacDataString = nil;
+        [SOXMarket_BitcoinDE_Core sharedCore].hmacString = nil;
     }
 
     [SOXMarket_BitcoinDE_Core createHttpMethodForServerCommandType:serverCommandType];
     [SOXMarket_BitcoinDE_Core createURIForServerCommandType:serverCommandType];
     [SOXMarket_BitcoinDE_Core createNonceString];
     if (serverCommandType != BitcoinDE_ExecuteTrade) {
-        [SOXMarket_BitcoinDE_Core create_url_encoded_query_stringFromParameterDictionary:parameterDictionary];
+        [SOXMarket_BitcoinDE_Core createURLQueryStringFromParameterDictionary:parameterDictionary];
         [SOXMarket_BitcoinDE_Core createURL];
     }
     else {
         NSString *orderID = [parameterDictionary objectForKey:BitcoinDE_ExecuteTrade_OrderID];
 
-        // create_url_encoded_query_stringFromParameterDictionary
+        // create_urlQueryStringFromParameterDictionary
         {
             NSMutableDictionary *mutableParameterDictionary = [parameterDictionary mutableCopy];
             [mutableParameterDictionary removeObjectForKey:BitcoinDE_ExecuteTrade_OrderID];
-            [SOXMarket_BitcoinDE_Core create_url_encoded_query_stringFromParameterDictionary:[mutableParameterDictionary copy]];
+            [SOXMarket_BitcoinDE_Core createURLQueryStringFromParameterDictionary:[mutableParameterDictionary copy]];
         }
 
         // createURL
@@ -507,9 +504,9 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 
     }
 
-    [SOXMarket_BitcoinDE_Core createMD5Of_url_encoded_query_string];
-    [SOXMarket_BitcoinDE_Core createHmac_data];
-    [SOXMarket_BitcoinDE_Core createHMAC];
+    [SOXMarket_BitcoinDE_Core createMD5ofURLQueryString];
+    [SOXMarket_BitcoinDE_Core createHMACDataString];
+    [SOXMarket_BitcoinDE_Core createHMACString];
 }
 
 + (void)createURIForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType {
@@ -527,9 +524,9 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
     [SOXMarket_BitcoinDE_Core sharedCore].nonce = timeInMS;
 }
 
-+ (void)create_url_encoded_query_stringFromParameterDictionary:(NSDictionary *)parameterDictionary {
-    // BSP: url_encoded_query_string = 'max_amount=5.3&price=255.5&type=buy'
-    __block NSString *url_encoded_query_string = nil;
++ (void)createURLQueryStringFromParameterDictionary:(NSDictionary *)parameterDictionary {
+    // BSP: url_query_string = 'max_amount=5.3&price=255.5&type=buy'
+    __block NSString *urlQueryString = nil;
     if (parameterDictionary.allKeys.count > 0) {
         // get and sort parameterKeys
         NSArray *allKeys = parameterDictionary.allKeys;
@@ -543,7 +540,7 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
                 [parameters addObject:parameter];
             }
             // join pairs with "/"
-            url_encoded_query_string = [parameters componentsJoinedByString:@"/"];
+            urlQueryString = [parameters componentsJoinedByString:@"/"];
         }
         else {//if ([httpMethod isEqualToString:HTTPMethodPOSTKey]) {
             // create "parameter=value" pairs
@@ -555,15 +552,10 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
                 [parameters addObject:parameter];
             }
             // join pairs with "&"
-            url_encoded_query_string = [parameters componentsJoinedByString:@"&"];
+            urlQueryString = [parameters componentsJoinedByString:@"&"];
         }
-        //        else {
-        //            DDLogInfo(@"ERROR: httpMethod should be DELETE or POST but is %@",httpMethod);
-        //        };
     }
 
-    // DDLogInfo(@"url_encoded_query string\n%@",url_encoded_query_string);
-    //    DDLogInfo(@"url_encoded_query string\n%s",url_encoded_query_string.UTF8String);
     NSString *httpMethod = [SOXMarket_BitcoinDE_Core sharedCore].httpMethod;
     if ([httpMethod isEqualToString:HTTPMethodPOSTKey]
         || [[SOXMarket_BitcoinDE_Core sharedCore].uri isEqualToString:@"/account/ledger"]){
@@ -574,16 +566,16 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
                 NSMutableCharacterSet *chars = NSCharacterSet.URLQueryAllowedCharacterSet.mutableCopy;
                 [chars removeCharactersInRange:NSMakeRange(':', 1)]; // %3A
                 [chars removeCharactersInRange:NSMakeRange('+', 1)]; // %2B
-                NSString *a = [url_encoded_query_string stringByAddingPercentEncodingWithAllowedCharacters:chars];
+                NSString *a = [urlQueryString stringByAddingPercentEncodingWithAllowedCharacters:chars];
 
-                NSLog(@"\n#####\n%@\n%@\n#####", url_encoded_query_string, a);
+                NSLog(@"\n#####\n%@\n%@\n#####", urlQueryString, a);
 
-                url_encoded_query_string = a;
+                urlQueryString = a;
             }
         }];
     }
 
-    [SOXMarket_BitcoinDE_Core sharedCore].url_encoded_query_string = url_encoded_query_string;
+    [SOXMarket_BitcoinDE_Core sharedCore].urlQueryString = urlQueryString;
 }
 
 + (void)createURL {
@@ -592,36 +584,36 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
     
     NSString *baseURL = [SOXMarket_BitcoinDE_Core baseURLString];
     NSString *uri     = core.uri;
-    NSString *url_encoded_query_string = core.url_encoded_query_string;
+    NSString *urlQueryString = core.urlQueryString;
     NSString *httpMethod = core.httpMethod;
     
     NSString *url = nil;
     url = [NSString stringWithFormat:@"%@%@", baseURL, uri];
     
-    if (url_encoded_query_string && [httpMethod isEqualToString:HTTPMethodDELETEKey]) {
-        url = [url stringByAppendingString:url_encoded_query_string];
+    if (urlQueryString && [httpMethod isEqualToString:HTTPMethodDELETEKey]) {
+        url = [url stringByAppendingString:urlQueryString];
     }
-    else if (url_encoded_query_string && [httpMethod isEqualToString:HTTPMethodGETKey]) {
+    else if (urlQueryString && [httpMethod isEqualToString:HTTPMethodGETKey]) {
         url = [url stringByAppendingString:@"?"];
-        url = [url stringByAppendingString:url_encoded_query_string];
+        url = [url stringByAppendingString:urlQueryString];
     }
     //DDLogInfo(@"url\n%@",url);
     core.url = url;
 }
 
-+ (void)createMD5Of_url_encoded_query_string {
++ (void)createMD5ofURLQueryString {
     SOXMarket_BitcoinDE_Core *core = [SOXMarket_BitcoinDE_Core sharedCore];
     
     NSString *md5String = @"d41d8cd98f00b204e9800998ecf8427e"; // md5 for @""
     if ([core.httpMethod isEqualToString:HTTPMethodPOSTKey]) {
-        NSString *url_encoded_query_string = core.url_encoded_query_string;
-        if (url_encoded_query_string) {
-            md5String = [SOXHash md5StringForString:url_encoded_query_string];
+        NSString *urlQueryString = core.urlQueryString;
+        if (urlQueryString) {
+            md5String = [SOXHash md5StringForString:urlQueryString];
         }
     }
 
     //    DDLogInfo(@"md5 %@", md5String);
-    [SOXMarket_BitcoinDE_Core sharedCore].post_parameter_md5_hashed_url_encoded_query_string = md5String;
+    [SOXMarket_BitcoinDE_Core sharedCore].postParameterMD5hashedURLQueryString = md5String;
 }
 
 + (void)createHttpMethodForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType {
@@ -630,44 +622,43 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
     [SOXMarket_BitcoinDE_Core sharedCore].httpMethod = httpMethod;
 }
 
-+ (void)createHmac_data {
-    // hmac_data = http_method+'#'+uri+'#'+api_key+'#'+nonce+'#'+post_parameter_md5_hashed_url_encoded_query_string
++ (void)createHMACDataString {
+    // hmacDataString = http_method+'#'+uri+'#'+apiKey+'#'+nonce+'#'+post_parameter_md5_hashed_url_encoded_query_string
     SOXMarket_BitcoinDE_Core *core = [SOXMarket_BitcoinDE_Core sharedCore];
     
     NSString *httpMethod = core.httpMethod;
     NSString *url = core.url;
-    NSString *api_key = core.api_key;
+    NSString *apiKey = core.apiKey;
     NSString *nonce = core.nonce;
-    NSString *post_parameter_md5_hashed_url_encoded_query_string = core.post_parameter_md5_hashed_url_encoded_query_string;
+    NSString *postParameterMD5hashedURLQueryString = core.postParameterMD5hashedURLQueryString;
     
-    NSString *hmac_data = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@"
+    NSString *hmacDataString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@"
                            , httpMethod
                            , @"#"
                            , url
                            , @"#"
-                           , api_key
+                           , apiKey
                            , @"#"
                            , nonce
                            , @"#"
-                           , post_parameter_md5_hashed_url_encoded_query_string
+                           , postParameterMD5hashedURLQueryString
                            ];
-    //    DDLogInfo(@"hmac_data\n%@",hmac_data);
-    [SOXMarket_BitcoinDE_Core sharedCore].hmac_data = hmac_data;
+
+    [SOXMarket_BitcoinDE_Core sharedCore].hmacDataString = hmacDataString;
 }
 
-+ (void)createHMAC {
++ (void)createHMACString {
     SOXMarket_BitcoinDE_Core *core = [SOXMarket_BitcoinDE_Core sharedCore];
-    NSString *hmac_data  = core.hmac_data;
-    NSString *api_secret = core.api_secret;
+    NSString *hmacDataString  = core.hmacDataString;
+    NSString *apiSecret = core.apiSecret;
     
-    NSString *hmac = nil;
-    if (hmac_data) {
-        hmac = [SOXHash hexadecimalHMACForString:hmac_data
-                                         withKey:api_secret];
+    NSString *hmacString = nil;
+    if (hmacDataString) {
+        hmacString = [SOXHash hexadecimalHMACForString:hmacDataString
+                                               withKey:apiSecret];
     }
-    
-    //    DDLogInfo(@"hmac\n%@", hmac);
-    core.hmac = hmac;
+
+    core.hmacString = hmacString;
 }
 
 
@@ -676,19 +667,19 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
     
     NSString *httpMethod            = core.httpMethod;
     NSString *urlString             = core.url;
-    NSString *api_key               = core.api_key;
+    NSString *apiKey                = core.apiKey;
     NSString *nonce                 = core.nonce;
-    NSString *hmac                  = core.hmac;
-    NSString *postParametersString  = core.url_encoded_query_string;
+    NSString *hmacString            = core.hmacString;
+    NSString *postParametersString  = core.urlQueryString;
     
     NSURL *url = [NSURL URLWithString:urlString];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     {
         [request setHTTPMethod:httpMethod];
-        [request addValue:api_key           forHTTPHeaderField:@"X-API-KEY"];
+        [request addValue:apiKey            forHTTPHeaderField:@"X-API-KEY"];
         [request addValue:nonce             forHTTPHeaderField:@"X-API-NONCE"];
-        [request addValue:hmac              forHTTPHeaderField:@"X-API-SIGNATURE"];
+        [request addValue:hmacString        forHTTPHeaderField:@"X-API-SIGNATURE"];
         if (postParametersString
             && [httpMethod isEqualToString:HTTPMethodPOSTKey]) {
             [request setHTTPBody:[postParametersString dataUsingEncoding:NSUTF8StringEncoding]];
@@ -1036,24 +1027,24 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 }
 
 #pragma mark | Key and Secret handling
-- (NSString *)api_key {
+- (NSString *)apiKey {
     // Keychain
-//    NSString *api_key = [self.apiKeys objectAtIndex:self.api_Pointer];
-    NSString *api_key = [SOXPreferencesCore apiKeyAtIndex:self.api_Pointer];
-    return api_key;
+//    NSString *apiKey = [self.apiKeys objectAtIndex:self.apiPointer];
+    NSString *apiKey = [SOXPreferencesCore apiKeyAtIndex:self.apiPointer];
+    return apiKey;
 }
 
-- (NSString *)api_secret {
+- (NSString *)apiSecret {
     // Keychain
-//    NSString *api_secret = [self.apiSecrets objectAtIndex:self.api_Pointer];
-    NSString *api_secret = [SOXPreferencesCore apiSecretAtIndex:self.api_Pointer];
-    return api_secret;
+//    NSString *apiSecret = [self.apiSecrets objectAtIndex:self.apiPointer];
+    NSString *apiSecret = [SOXPreferencesCore apiSecretAtIndex:self.apiPointer];
+    return apiSecret;
 }
 
 - (void)increaseApiPointer {
-    self.api_Pointer++;
-    if (self.api_Pointer >= self.api_PointerLimit) {
-        self.api_Pointer = 0;
+    self.apiPointer++;
+    if (self.apiPointer >= self.apiPointerLimit) {
+        self.apiPointer = 0;
     }
 }
 
