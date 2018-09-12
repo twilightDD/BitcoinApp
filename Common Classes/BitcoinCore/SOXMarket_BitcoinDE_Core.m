@@ -529,7 +529,7 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 
 + (void)create_url_encoded_query_stringFromParameterDictionary:(NSDictionary *)parameterDictionary {
     // BSP: url_encoded_query_string = 'max_amount=5.3&price=255.5&type=buy'
-    NSString *url_encoded_query_string = nil;
+    __block NSString *url_encoded_query_string = nil;
     if (parameterDictionary.allKeys.count > 0) {
         // get and sort parameterKeys
         NSArray *allKeys = parameterDictionary.allKeys;
@@ -549,7 +549,9 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
             // create "parameter=value" pairs
             NSMutableArray *parameters = [NSMutableArray array];
             for (NSString *key in allKeys) {
-                NSString *parameter = [NSString stringWithFormat:@"%@=%@", key, [parameterDictionary objectForKey:key]];
+                NSString *parameter = [NSString stringWithFormat:@"%@=%@"
+                                       , key
+                                       , [parameterDictionary objectForKey:key]];
                 [parameters addObject:parameter];
             }
             // join pairs with "&"
@@ -562,7 +564,24 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 
     // DDLogInfo(@"url_encoded_query string\n%@",url_encoded_query_string);
     //    DDLogInfo(@"url_encoded_query string\n%s",url_encoded_query_string.UTF8String);
-    
+    NSString *httpMethod = [SOXMarket_BitcoinDE_Core sharedCore].httpMethod;
+    if ([httpMethod isEqualToString:HTTPMethodPOSTKey]) {
+        [parameterDictionary enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key
+                                                                 , id  _Nonnull obj
+                                                                 , BOOL * _Nonnull stop) {
+            if ([key containsString:@"date"]) {
+                NSMutableCharacterSet *chars = NSCharacterSet.URLQueryAllowedCharacterSet.mutableCopy;
+                [chars removeCharactersInRange:NSMakeRange(':', 1)]; // %3A
+                [chars removeCharactersInRange:NSMakeRange('+', 1)]; // %2B
+                NSString *a = [url_encoded_query_string stringByAddingPercentEncodingWithAllowedCharacters:chars];
+
+                NSLog(@"\n#####\n%@\n%@\n#####", url_encoded_query_string, a);
+
+                url_encoded_query_string = a;
+            }
+        }];
+    }
+
     [SOXMarket_BitcoinDE_Core sharedCore].url_encoded_query_string = url_encoded_query_string;
 }
 
