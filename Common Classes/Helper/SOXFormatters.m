@@ -31,6 +31,31 @@
     return sRFC3339DateFormatter;
 }
 
++ (NSDateFormatter *)dateFormatterEncodeGetRFC3339 {
+    static dispatch_once_t pred;
+    static NSDateFormatter *sRFC3339DateFormatter = nil;
+    dispatch_once(&pred, ^{
+        sRFC3339DateFormatter            = [[NSDateFormatter alloc] init];
+        sRFC3339DateFormatter.locale     = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+        sRFC3339DateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
+        sRFC3339DateFormatter.timeZone   = [NSTimeZone timeZoneForSecondsFromGMT:0]; // Get Z-Format
+    });
+
+    return sRFC3339DateFormatter;
+}
+
++ (NSDateFormatter *)dateFormatterEncodePostRFC3339 {
+    static dispatch_once_t pred;
+    static NSDateFormatter *sRFC3339DateFormatter = nil;
+    dispatch_once(&pred, ^{
+        sRFC3339DateFormatter            = [[NSDateFormatter alloc] init];
+        sRFC3339DateFormatter.locale     = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+        sRFC3339DateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
+    });
+
+    return sRFC3339DateFormatter;
+
+}
 + (NSDateFormatter *)dateFormatterEncodeRFC3339 {
     /*
      Format gemäß RFC 3339 (Bsp: 2015-01-20T15:00:00+02:00).
@@ -40,10 +65,14 @@
     static dispatch_once_t pred;
     static NSDateFormatter *sRFC3339DateFormatter = nil;
     dispatch_once(&pred, ^{
+
         sRFC3339DateFormatter            = [[NSDateFormatter alloc] init];
+
         sRFC3339DateFormatter.locale     = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
         sRFC3339DateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
-        sRFC3339DateFormatter.timeZone   = [NSTimeZone localTimeZone];
+//        sRFC3339DateFormatter.timeZone   = [NSTimeZone localTimeZone]; // Post 00:00 Format
+        sRFC3339DateFormatter.timeZone   = [NSTimeZone timeZoneForSecondsFromGMT:0]; // Get Z-Format
+
     });
 
     /* Result: 2018-09-17T21:45:00Z
@@ -231,6 +260,23 @@
     }
     
     return userVisibleDateTimeString;
+}
+
++ (NSString*)rfc3339GetDateTimeStringDate:(NSDate *)date {
+    if (!date) {
+        date = [NSDate date];
+    }
+
+    NSString *rfc = [[SOXFormatters dateFormatterEncodeGetRFC3339] stringFromDate:date];
+    return rfc;
+}
++ (NSString*)rfc3339PostDateTimeStringDate:(NSDate *)date {
+    if (!date) {
+        date = [NSDate date];
+    }
+
+    NSString *rfc = [[SOXFormatters dateFormatterEncodePostRFC3339] stringFromDate:date];
+    return rfc;
 }
 
 + (NSString*)rfc3339DateTimeStringDate:(NSDate *)date {

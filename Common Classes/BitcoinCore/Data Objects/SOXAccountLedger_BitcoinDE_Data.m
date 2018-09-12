@@ -79,18 +79,16 @@ static NSString *AccountLedgerParameter_PageKey         = @"page";
     NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringLowerCaseForCurrencyType:currencyType];
     NSNumber *pageNumber = @(page);
 
-//    NSString *startDateString = [SOXFormatters rfc3339DateTimeStringDate:startDate];
-//    NSString *endDateString   = [SOXFormatters rfc3339DateTimeStringDate:endDate];
-//
-//// DOKU Format gemäß RFC 3339 (Bsp: 2015-01-20T15:00:00+02:00)
-//    startDateString = @"2017-12-19T00:00:00"; //@"2017-10-06T00:00:00+02:00";
-//    endDateString   = @"2017-12-27T20:24:58Z"; // @"2017-12-12T00:00:00+02:00";
+    NSString *startDateString = [SOXFormatters rfc3339PostDateTimeStringDate:startDate];
+    NSString *endDateString   = [SOXFormatters rfc3339PostDateTimeStringDate:endDate];
+    startDateString = @"2018-07-25T00:00:00+02:00";
+    endDateString = @"2018-09-25T00:00:00+02:00";
 
     NSDictionary *parameterDict = [NSDictionary dictionaryWithObjectsAndKeys:
                                    orderTypeString,       AccountLedgerParameter_TypeKey
                                    , currencyTypeString,  AccountLedgerParameter_Currency
-//                                   , startDateString,     AccountLedgerParameter_DateStartKey
-//                                   , endDateString,       AccountLedgerParameter_DateEndKey
+                                   , startDateString,     AccountLedgerParameter_DateStartKey
+                                   , endDateString,       AccountLedgerParameter_DateEndKey
                                    , pageNumber,          AccountLedgerParameter_PageKey
                                    , nil];
     

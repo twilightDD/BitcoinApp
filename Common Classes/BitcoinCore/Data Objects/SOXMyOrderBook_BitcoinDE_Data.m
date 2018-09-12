@@ -100,7 +100,7 @@ static NSString *MyOrderBookParameter_PageKey = @"page";
     NSString *orderTypeString = [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:orderType];
     NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType];
     NSString *minTrustLevelAsString = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:min_trust_level];
-    NSString *endDateString = [SOXFormatters rfc3339DateTimeStringDate:end_datetime];
+    NSString *endDateString = [SOXFormatters rfc3339PostDateTimeStringDate:end_datetime];
     
     NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:
                                orderTypeString, @"type"
@@ -174,9 +174,9 @@ static NSString *MyOrderBookParameter_PageKey = @"page";
             break;
     }
 
-    NSString *startDateString = [SOXFormatters rfc3339DateTimeStringDate:startDate];
+    NSString *startDateString = [SOXFormatters rfc3339GetDateTimeStringDate:startDate];
 #warning HACK!
-    NSString *endDateString   = [SOXFormatters rfc3339DateTimeStringDate:endDate addHours:2];
+    NSString *endDateString   = [SOXFormatters rfc3339GetDateTimeStringDate:endDate];
 
     NSNumber *pageNumber = @(page);
 

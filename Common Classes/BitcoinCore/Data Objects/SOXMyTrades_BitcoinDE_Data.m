@@ -89,8 +89,8 @@ static NSString *MyTradeHistoryParameter_PageKey = @"page";
 
     NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType];
 
-    NSString *startDateString = [SOXFormatters rfc3339DateTimeStringDate:startDate];
-    NSString *endDateString   = [SOXFormatters rfc3339DateTimeStringDate:endDate];
+    NSString *startDateString = [SOXFormatters rfc3339GetDateTimeStringDate:startDate];
+    NSString *endDateString   = [SOXFormatters rfc3339GetDateTimeStringDate:endDate];
     
     NSNumber *pageNumber = @(page);
     
