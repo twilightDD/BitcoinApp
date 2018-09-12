@@ -49,6 +49,7 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 @property (copy, nonatomic) NSString *nonce;
 @property (copy, nonatomic) NSString *httpMethod;
 @property (copy, nonatomic) NSString *urlQueryString;
+@property (copy, nonatomic) NSString *urlEncodedQueryString;
 @property (copy, nonatomic) NSString *uri;
 @property (copy, nonatomic) NSString *url;
 @property (copy, nonatomic) NSString *postParameterMD5hashedURLQueryString;
@@ -472,6 +473,7 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
         [SOXMarket_BitcoinDE_Core sharedCore].uri = nil;
         [SOXMarket_BitcoinDE_Core sharedCore].nonce = nil;
         [SOXMarket_BitcoinDE_Core sharedCore].urlQueryString = nil;
+        [SOXMarket_BitcoinDE_Core sharedCore].urlEncodedQueryString = nil;
         [SOXMarket_BitcoinDE_Core sharedCore].postParameterMD5hashedURLQueryString = nil;
         [SOXMarket_BitcoinDE_Core sharedCore].httpMethod = nil;
         [SOXMarket_BitcoinDE_Core sharedCore].hmacDataString = nil;
@@ -556,26 +558,19 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
         }
     }
 
-    NSString *httpMethod = [SOXMarket_BitcoinDE_Core sharedCore].httpMethod;
-    if ([httpMethod isEqualToString:HTTPMethodPOSTKey]
-        || [[SOXMarket_BitcoinDE_Core sharedCore].uri isEqualToString:@"/account/ledger"]){
-        [parameterDictionary enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key
-                                                                 , id  _Nonnull obj
-                                                                 , BOOL * _Nonnull stop) {
-            if ([key containsString:@"date"]) {
-                NSMutableCharacterSet *chars = NSCharacterSet.URLQueryAllowedCharacterSet.mutableCopy;
-                [chars removeCharactersInRange:NSMakeRange(':', 1)]; // %3A
-                [chars removeCharactersInRange:NSMakeRange('+', 1)]; // %2B
-                NSString *a = [urlQueryString stringByAddingPercentEncodingWithAllowedCharacters:chars];
-
-                NSLog(@"\n#####\n%@\n%@\n#####", urlQueryString, a);
-
-                urlQueryString = a;
-            }
-        }];
-    }
-
     [SOXMarket_BitcoinDE_Core sharedCore].urlQueryString = urlQueryString;
+
+    // Encode urlQueryString in POST and AccountLedger
+    if ([[SOXMarket_BitcoinDE_Core sharedCore].httpMethod isEqualToString:HTTPMethodPOSTKey]
+        || [[SOXMarket_BitcoinDE_Core sharedCore].uri isEqualToString:@"/account/ledger"]){
+        NSMutableCharacterSet *chars = NSCharacterSet.URLQueryAllowedCharacterSet.mutableCopy;
+        [chars removeCharactersInRange:NSMakeRange(':', 1)]; // %3A
+        [chars removeCharactersInRange:NSMakeRange('+', 1)]; // %2B
+        NSString *urlEncodedQueryString = [urlQueryString stringByAddingPercentEncodingWithAllowedCharacters:chars];
+
+        [SOXMarket_BitcoinDE_Core sharedCore].urlQueryString = urlEncodedQueryString; // needed for POST (createOrder)
+        [SOXMarket_BitcoinDE_Core sharedCore].urlEncodedQueryString = urlEncodedQueryString;
+    }
 }
 
 + (void)createURL {
@@ -585,19 +580,29 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
     NSString *baseURL = [SOXMarket_BitcoinDE_Core baseURLString];
     NSString *uri     = core.uri;
     NSString *urlQueryString = core.urlQueryString;
+    NSString *urlEncodedQueryString = core.urlEncodedQueryString;
     NSString *httpMethod = core.httpMethod;
     
     NSString *url = nil;
     url = [NSString stringWithFormat:@"%@%@", baseURL, uri];
     
-    if (urlQueryString && [httpMethod isEqualToString:HTTPMethodDELETEKey]) {
+    if (urlQueryString
+        && [httpMethod isEqualToString:HTTPMethodDELETEKey]) {
         url = [url stringByAppendingString:urlQueryString];
     }
-    else if (urlQueryString && [httpMethod isEqualToString:HTTPMethodGETKey]) {
+    else if (urlEncodedQueryString
+             && [httpMethod isEqualToString:HTTPMethodGETKey]) {
+        // Account ledger needs urlEncodedQueryString
+        url = [url stringByAppendingString:@"?"];
+        url = [url stringByAppendingString:urlEncodedQueryString];
+    }
+    else if (urlQueryString
+             && [httpMethod isEqualToString:HTTPMethodGETKey]) {
+        // MyActiveTrades and MyTradeHistory need urlQueryString
         url = [url stringByAppendingString:@"?"];
         url = [url stringByAppendingString:urlQueryString];
     }
-    //DDLogInfo(@"url\n%@",url);
+
     core.url = url;
 }
 
