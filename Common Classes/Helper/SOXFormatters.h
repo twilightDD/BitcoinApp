@@ -18,6 +18,7 @@
 + (NSDate *)dateForRFC3339DateTimeString:(NSString *)rfc3339DateTimeString;
 + (NSDate *)dateAtMidnightForDate:(NSDate *)date;
 + (NSDate *)dateBeforeMidnightForDate:(NSDate *)date;
++ (NSDate *)dateQuarterBeforeMidnightForDate:(NSDate *)date;
 
 + (NSString *)stringDateTimeStringForRFC3339DateTimeString:(NSString *)rfc3339DateTimeString;
 + (NSString *)rfc3339DateTimeStringDate:(NSDate *)date;

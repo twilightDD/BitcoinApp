@@ -185,6 +185,17 @@
     return dateBeforeMidnight;
 }
 
++ (NSDate *)dateQuarterBeforeMidnightForDate:(NSDate *)date {
+    NSDateComponents *dateComponents = [self dateComponentsDayMonthYearFromDate:date];
+
+    dateComponents.hour = 23;
+    dateComponents.minute = 45;
+    dateComponents.second = 00;
+
+    NSDate *dateBeforeMidnight = [self dateFromDateComponents:dateComponents];
+    return dateBeforeMidnight;
+}
+
 + (NSString *)stringDateTimeStringForRFC3339DateTimeString:(NSString *)rfc3339DateTimeString {
     // Returns a user-visible date time string that corresponds to the
     // specified RFC 3339 date time string. Note that this does not handle
@@ -341,6 +352,13 @@
     dateComponentsDayMonthYear.year  = inputDateComponents.year;
 
     return dateComponentsDayMonthYear;
+}
+
++ (NSDate *)dateFromDateComponents:(NSDateComponents *)dateComponents {
+    NSCalendar *currentCalendar = [NSCalendar autoupdatingCurrentCalendar];
+    NSDate *dateFromDateComponents = [currentCalendar dateFromComponents:dateComponents];
+
+    return dateFromDateComponents;
 }
 
 + (NSDate *)dateGregorianFromDateComponents:(NSDateComponents *)dateComponents {
