@@ -26,7 +26,7 @@
         sRFC3339DateFormatter            = [[NSDateFormatter alloc] init];
         sRFC3339DateFormatter.locale     = [NSLocale autoupdatingCurrentLocale];
         sRFC3339DateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZ";
-        sRFC3339DateFormatter.timeZone   = [NSTimeZone timeZoneForSecondsFromGMT:0];
+        sRFC3339DateFormatter.timeZone   = [NSTimeZone localTimeZone];//[NSTimeZone timeZoneForSecondsFromGMT:0];
     });
     return sRFC3339DateFormatter;
 }
@@ -35,15 +35,36 @@
     /*
      Format gemäß RFC 3339 (Bsp: 2015-01-20T15:00:00+02:00).
      */
-    
+
+    // 2018-09-17T23:45:00+02:00
     static dispatch_once_t pred;
     static NSDateFormatter *sRFC3339DateFormatter = nil;
     dispatch_once(&pred, ^{
         sRFC3339DateFormatter            = [[NSDateFormatter alloc] init];
         sRFC3339DateFormatter.locale     = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
         sRFC3339DateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
+        sRFC3339DateFormatter.timeZone   = [NSTimeZone localTimeZone];
+    });
+
+    /* Result: 2018-09-17T21:45:00Z
+    dispatch_once(&pred, ^{
+        sRFC3339DateFormatter            = [[NSDateFormatter alloc] init];
+        sRFC3339DateFormatter.locale     = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+        sRFC3339DateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
         sRFC3339DateFormatter.timeZone   = [NSTimeZone timeZoneForSecondsFromGMT:0];
     });
+    */
+
+    /* Result: 2018-09-17T23:45:00GMT+02:00
+     sRFC3339DateFormatter            = [[NSDateFormatter alloc] init];
+     //        sRFC3339DateFormatter.locale     = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+     sRFC3339DateFormatter.locale     = [NSLocale autoupdatingCurrentLocale];
+     sRFC3339DateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZZZZZZZZZZZZZ";
+     sRFC3339DateFormatter.timeZone   = [NSTimeZone timeZoneForSecondsFromGMT:7200];
+
+     */
+
+
     return sRFC3339DateFormatter;
 }
 
