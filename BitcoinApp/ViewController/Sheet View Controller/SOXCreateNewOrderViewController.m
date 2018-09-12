@@ -192,7 +192,9 @@
     
     
     self.endDateDescriptionTextField.stringValue = @"Order should end";
-    self.endDatePicker.dateValue = [NSDate dateWithTimeIntervalSinceNow:5 * 24 * 60 * 60];
+    NSDate *dateIn5Days = [NSDate dateWithTimeIntervalSinceNow:5 * 24 * 60 * 60];
+    NSDate *dateQuarterBeforeMidnight = [SOXFormatters dateQuarterBeforeMidnightForDate:dateIn5Days];
+    self.endDatePicker.dateValue = dateQuarterBeforeMidnight;
    
     // Hint on buy: paymentOption depend on default via preferences on webside
     if (self.orderType == BitcoinDE_BuyOrderType) {
