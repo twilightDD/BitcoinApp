@@ -565,7 +565,8 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
     // DDLogInfo(@"url_encoded_query string\n%@",url_encoded_query_string);
     //    DDLogInfo(@"url_encoded_query string\n%s",url_encoded_query_string.UTF8String);
     NSString *httpMethod = [SOXMarket_BitcoinDE_Core sharedCore].httpMethod;
-    if ([httpMethod isEqualToString:HTTPMethodPOSTKey]) {
+    if ([httpMethod isEqualToString:HTTPMethodPOSTKey]
+        || [[SOXMarket_BitcoinDE_Core sharedCore].uri isEqualToString:@"/account/ledger"]){
         [parameterDictionary enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key
                                                                  , id  _Nonnull obj
                                                                  , BOOL * _Nonnull stop) {
