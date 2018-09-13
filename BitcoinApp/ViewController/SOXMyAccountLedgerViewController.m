@@ -12,6 +12,8 @@
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXAccountLedger_BitcoinDE_Data.h"
 
+#import "SOXFormatters.h"
+
 #import "SOXKeys_BitcoinDE.h"
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
@@ -34,13 +36,13 @@
 
     self.selectedCurrencyType = BitcoinDE_CurrencyTypeBitcoin;
     self.selectedAccountLedgerOrderType = BitcoinDE_AccountLedgerParameter_AllOrderType;
+
+    // AccountLedger allows no date in future or today
+    self.selectedEndDate = [SOXFormatters dateBeforeMidnightForDate:[NSDate dateWithTimeIntervalSinceNow:-86400]];
 }
 
 - (void)viewWillAppear {
     [super viewWillAppear];
-    
-
-    //[self requestServerData];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
                                                         object:@(self.selectedCurrencyType)];
@@ -50,15 +52,23 @@
 - (void)setupUI {    
     [super setupUI];
 
-    // Manipulate currency Selection
-    [self.currencyTypeSelectionPopUpButton removeItemAtIndex:0];
-    
+    // Manipulate currency Selection - AccountLedger don't allows "all currency"
+    {
+        [self.currencyTypeSelectionPopUpButton removeItemAtIndex:0];
+    }
     // Type Selection
-    [self.accountLedgerOrderTypePopUpButton removeAllItems];
-    for (BitcoinDE_AccountLedgerParameter_OrderType idx = BitcoinDE_AccountLedgerParameter_UnknownOrderType + 1
-         ; idx < BitcoinDE_AccountLedgerParameter_EndOfType
-         ; idx++) {
-        [self.accountLedgerOrderTypePopUpButton addItemWithTitle:[SOXAccountLedger_BitcoinDE_Data titleForAccountLedgerOrderType:idx]];
+    {
+        [self.accountLedgerOrderTypePopUpButton removeAllItems];
+        for (BitcoinDE_AccountLedgerParameter_OrderType idx = BitcoinDE_AccountLedgerParameter_UnknownOrderType + 1
+             ; idx < BitcoinDE_AccountLedgerParameter_EndOfType
+             ; idx++) {
+            [self.accountLedgerOrderTypePopUpButton addItemWithTitle:[SOXAccountLedger_BitcoinDE_Data titleForAccountLedgerOrderType:idx]];
+        }
+    }
+
+    // AccountLedger allows no date in future or today
+    {
+        self.endDateDatePicker.maxDate = [SOXFormatters dateBeforeMidnightForDate:[NSDate dateWithTimeIntervalSinceNow:-86400]];
     }
 }
 
@@ -78,9 +88,9 @@
     
     NSDictionary *parameter = [SOXAccountLedger_BitcoinDE_Data parameterForOrderType:self.selectedAccountLedgerOrderType
                                                                      forCurrencyType:self.selectedCurrencyType
-                                                                           startDate:[NSDate dateWithTimeIntervalSinceNow:-10320000]
-                                                                             endDate:[NSDate dateWithTimeIntervalSinceNow:-4320000]
-                                                                                page:1];
+                                                                           startDate:self.selectedStartDate
+                                                                             endDate:self.selectedEndDate
+                                                                                page:self.currentPage];
     
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountLedgerType
                                             withParameter:parameter

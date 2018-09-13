@@ -81,8 +81,6 @@ static NSString *AccountLedgerParameter_PageKey         = @"page";
 
     NSString *startDateString = [SOXFormatters rfc3339PostDateTimeStringDate:startDate];
     NSString *endDateString   = [SOXFormatters rfc3339PostDateTimeStringDate:endDate];
-    startDateString = @"2018-07-25T00:00:00+02:00";
-    endDateString = @"2018-09-25T00:00:00+02:00";
 
     NSDictionary *parameterDict = [NSDictionary dictionaryWithObjectsAndKeys:
                                    orderTypeString,       AccountLedgerParameter_TypeKey
