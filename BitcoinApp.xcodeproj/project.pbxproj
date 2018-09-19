@@ -144,6 +144,8 @@
 		D063E9531E74C024006E2D17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D063E9521E74C024006E2D17 /* Assets.xcassets */; };
 		D063E9561E74C024006E2D17 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D063E9541E74C024006E2D17 /* LaunchScreen.storyboard */; };
 		D063E9611E74C024006E2D17 /* iOS_BitcoinAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D063E9601E74C024006E2D17 /* iOS_BitcoinAppTests.m */; };
+		D07DA1972152E00C00F0416B /* SOXBoolNmberToWordValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D07DA1962152E00C00F0416B /* SOXBoolNmberToWordValueTransformer.m */; };
+		D07DA1982152E00C00F0416B /* SOXBoolNmberToWordValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D07DA1962152E00C00F0416B /* SOXBoolNmberToWordValueTransformer.m */; };
 		D07E7B381EA5175D00AB50A5 /* SOXExecuteTradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D07E7B361EA5175D00AB50A5 /* SOXExecuteTradeViewController.m */; };
 		D08086741E9CEC5D00373F09 /* SOXAutomaticTradingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D08086731E9CEC5D00373F09 /* SOXAutomaticTradingViewController.m */; };
 		D08086771E9CECAC00373F09 /* SOXMarket_BitcoinDE_DefTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = D08086761E9CECAC00373F09 /* SOXMarket_BitcoinDE_DefTypes.m */; };
@@ -322,6 +324,8 @@
 		D063E95C1E74C024006E2D17 /* iOS BitcoinAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS BitcoinAppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D063E9601E74C024006E2D17 /* iOS_BitcoinAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOS_BitcoinAppTests.m; sourceTree = "<group>"; };
 		D063E9621E74C024006E2D17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D07DA1952152E00C00F0416B /* SOXBoolNmberToWordValueTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXBoolNmberToWordValueTransformer.h; sourceTree = "<group>"; };
+		D07DA1962152E00C00F0416B /* SOXBoolNmberToWordValueTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXBoolNmberToWordValueTransformer.m; sourceTree = "<group>"; };
 		D07E7B351EA5175D00AB50A5 /* SOXExecuteTradeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXExecuteTradeViewController.h; sourceTree = "<group>"; };
 		D07E7B361EA5175D00AB50A5 /* SOXExecuteTradeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXExecuteTradeViewController.m; sourceTree = "<group>"; };
 		D08086721E9CEC5D00373F09 /* SOXAutomaticTradingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXAutomaticTradingViewController.h; sourceTree = "<group>"; };
@@ -747,6 +751,8 @@
 				D02150A720475965005A0932 /* SOXBalanceWithShortCurrencyValueTransformer.m */,
 				D0BCFCAA20042620004F9E57 /* SOXStateValueTransformer.h */,
 				D0BCFCAB20042620004F9E57 /* SOXStateValueTransformer.m */,
+				D07DA1952152E00C00F0416B /* SOXBoolNmberToWordValueTransformer.h */,
+				D07DA1962152E00C00F0416B /* SOXBoolNmberToWordValueTransformer.m */,
 			);
 			path = Transformers;
 			sourceTree = "<group>";
@@ -1262,6 +1268,7 @@
 				D021506F20474AEC005A0932 /* SOXPreferenceCenter.m in Sources */,
 				D021507020474AEC005A0932 /* SOXMarket_DefTypes.m in Sources */,
 				D021507120474AEC005A0932 /* SOXAutomaticTradingCore.m in Sources */,
+				D07DA1982152E00C00F0416B /* SOXBoolNmberToWordValueTransformer.m in Sources */,
 				D021507220474AEC005A0932 /* SOXMyOrderBookData.m in Sources */,
 				D021507320474AEC005A0932 /* SOXAutomaticTrading_BitcoinDE_Core.m in Sources */,
 				D021507420474AEC005A0932 /* SOXTradeJob_BitcoinDE_Data.m in Sources */,
@@ -1330,6 +1337,7 @@
 				D08ABF0E1E9C03040059825F /* SOXPreferenceCenter.m in Sources */,
 				D05B23D61FB76CBB004BAA6E /* SOXMarket_DefTypes.m in Sources */,
 				D080867C1E9D0B7F00373F09 /* SOXAutomaticTradingCore.m in Sources */,
+				D07DA1972152E00C00F0416B /* SOXBoolNmberToWordValueTransformer.m in Sources */,
 				D0631F0A1E89C1EA007ED75A /* SOXMyOrderBookData.m in Sources */,
 				D032EA4F1EE8A71200D9EFBA /* SOXAutomaticTrading_BitcoinDE_Core.m in Sources */,
 				D00FF1371EA03B71008BCD63 /* SOXTradeJob_BitcoinDE_Data.m in Sources */,
