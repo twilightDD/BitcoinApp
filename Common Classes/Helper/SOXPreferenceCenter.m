@@ -14,6 +14,10 @@
     return YES;
 }
 
++ (BOOL)new_order_for_remaining_amount {
+    return YES;
+}
+
 + (BitcoinDE_TrustLevel)defaultTrustLevelBuyOrder {
     return BitcoinDE_TrustLevelGold;
 }
