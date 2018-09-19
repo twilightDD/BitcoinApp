@@ -83,15 +83,17 @@
         return;
     }
     
-    self.trustLevel = [SOXPreferenceCenter defaultTrustLevelNewOrder];
+    self.trustLevel = self.orderBookDataToReplace ?
+      [SOXMarket_BitcoinDE_DefTypes trustLevelForTrustLevelString:self.orderBookDataToReplace.orderRequirements_minTrustLevel] :
+      [SOXPreferenceCenter defaultTrustLevelNewOrder];
 
     // In den OrderBookDatas stehen die Sachen leider nicht drin ...
-//    self.onlyKYCButton.state = self.formerOrderBookData ?
-//        self.formerOrderBookData.orderRequirements_onlyKYCFull :
-//        YES;
-//    self.reNewOrderButton.state = self.formerOrderBookData ?
-//        self.formerOrderBookData.orderInformation_newOrderForRemainingAmount :
-//        YES;
+    self.onlyKYCButton.state = self.orderBookDataToReplace ?
+        self.orderBookDataToReplace.orderRequirements_onlyKYCFull :
+        [SOXPreferenceCenter defaultKYCOnly];
+    self.reNewOrderButton.state = self.orderBookDataToReplace ?
+        self.orderBookDataToReplace.orderInformation_newOrderForRemainingAmount :
+        [SOXPreferenceCenter new_order_for_remaining_amount];
 
     self.validInput = NO;
     [self setupUI];
@@ -175,8 +177,10 @@
     self.trustLevelDescpriptionTextField.stringValue = @"Minimal Trust Level";
     self.bronceTrustLevelButton.title               = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelBronze];
     self.bronceTrustLevelButton.tag                 = BitcoinDE_TrustLevelBronze;
+
     self.silverTrustLevelButton.title               = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelSilver];
     self.silverTrustLevelButton.tag                 = BitcoinDE_TrustLevelSilver;
+
     self.goldTrustLevelButton.title                 = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelGold];
     self.goldTrustLevelButton.tag                   = BitcoinDE_TrustLevelGold;
     
@@ -189,12 +193,17 @@
     else if (self.goldTrustLevelButton.tag == self.trustLevel) {
         self.goldTrustLevelButton.state = 1;
     }
-    
-    
-    self.endDateDescriptionTextField.stringValue = @"Order should end";
-    NSDate *dateIn5Days = [NSDate dateWithTimeIntervalSinceNow:5 * 24 * 60 * 60];
-    NSDate *dateQuarterBeforeMidnight = [SOXFormatters dateQuarterBeforeMidnightForDate:dateIn5Days];
-    self.endDatePicker.dateValue = dateQuarterBeforeMidnight;
+
+    NSDate *endDate = nil;
+    if (self.orderBookDataToReplace) {
+        endDate = self.orderBookDataToReplace.orderInformation_endDateTime;
+    }
+    else {
+        self.endDateDescriptionTextField.stringValue = @"Order should end";
+        NSDate *dateIn5Days = [NSDate dateWithTimeIntervalSinceNow:5 * 24 * 60 * 60];
+        endDate = [SOXFormatters dateQuarterBeforeMidnightForDate:dateIn5Days];
+    }
+    self.endDatePicker.dateValue = endDate;
    
     // Hint on buy: paymentOption depend on default via preferences on webside
     if (self.orderType == BitcoinDE_BuyOrderType) {
