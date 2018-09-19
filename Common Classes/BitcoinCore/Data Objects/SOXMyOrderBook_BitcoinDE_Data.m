@@ -36,8 +36,8 @@ static NSString *MyOrderBookParameter_PageKey = @"page";
 @property (strong, nonatomic, readwrite) NSNumber *orderInformation_price;
 @property (strong, nonatomic, readwrite) NSNumber *orderInformation_maxVolume;
 @property (strong, nonatomic, readwrite) NSNumber *orderInformation_minVolume;
-@property (strong, nonatomic, readwrite) NSString *orderInformation_createdAt;
-@property (strong, nonatomic, readwrite) NSString *orderInformation_endDateTime;
+@property (strong, nonatomic, readwrite) NSDate   *orderInformation_createdAt;
+@property (strong, nonatomic, readwrite) NSDate   *orderInformation_endDateTime;
 @property (nonatomic, readwrite)         BOOL     orderInformation_newOrderForRemainingAmount;
 @property (strong, nonatomic, readwrite) NSNumber *orderInformation_state;
 
@@ -245,8 +245,8 @@ static NSString *MyOrderBookParameter_PageKey = @"page";
         self.orderInformation_price                         = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_Price];
         self.orderInformation_maxVolume                     = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MaxVolume];
         self.orderInformation_minVolume                     = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MinVolume];
-        self.orderInformation_createdAt                     = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_CreatedAt]];
-        self.orderInformation_endDateTime                   = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_EndDateTime]];
+        self.orderInformation_createdAt                     = [SOXFormatters dateForRFC3339DateTimeString:[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_CreatedAt]];
+        self.orderInformation_endDateTime                   = [SOXFormatters dateForRFC3339DateTimeString:[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_EndDateTime]];
         self.orderInformation_newOrderForRemainingAmount    = [[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_NewOrderForRemainingAmount] boolValue];
         self.orderInformation_state                         = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_State];
     }
