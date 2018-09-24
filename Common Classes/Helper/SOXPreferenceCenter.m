@@ -42,6 +42,12 @@
     return defaultTradingCountries;
 }
 
++ (NSControlStateValue )sepaPaymentOptionStateForOrderType:(BitcoinDE_OrderType)orderType
+                                              currencyType:(BitcoinDE_CurrencyType)currencyType {
+    return NSControlStateValueOn;
+}
+
+
 + (BOOL)secureExecuteTrade {
     return YES;
 }

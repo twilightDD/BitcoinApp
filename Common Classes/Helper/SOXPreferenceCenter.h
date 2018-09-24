@@ -19,7 +19,8 @@
 + (BitcoinDE_PaymentOption)defaultPaymentOptionForCreateOrder;
 + (BitcoinDE_PaymentOption)defaultPaymentOptionForExecuteTrade;
 + (NSArray *)defaultTradingCountries;
-
++ (NSControlStateValue )sepaPaymentOptionStateForOrderType:(BitcoinDE_OrderType)orderType
+                                              currencyType:(BitcoinDE_CurrencyType)currencyType;
 + (BOOL)secureExecuteTrade;
 
 @end

@@ -1832,7 +1832,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="addOrderAction:" target="ssU-Oy-97E" id="Rpj-oq-ebz"/>
+                                    <action selector="addOrderAction:" target="ssU-Oy-97E" id="O6S-2Q-ptJ"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PVj-VZ-YfL">
@@ -1846,7 +1846,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="reloadAction:" target="ssU-Oy-97E" id="rYY-te-ym5"/>
+                                    <action selector="reloadAction:" target="ssU-Oy-97E" id="vi3-TU-nAx"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gdg-Cq-pHV">
@@ -1856,6 +1856,16 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
+                            <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="gdN-Dd-MhL">
+                                <rect key="frame" x="85" y="22" width="61" height="18"/>
+                                <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="f7N-Eg-XMB">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="noSEPAPaymentOptionFilterButtonAction:" target="ssU-Oy-97E" id="3ve-Ct-Cbu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="PVj-VZ-YfL" secondAttribute="trailing" constant="20" id="0yC-1c-qVD"/>
@@ -1863,6 +1873,8 @@
                             <constraint firstAttribute="trailing" secondItem="UdF-MR-Kxs" secondAttribute="trailing" constant="20" symbolic="YES" id="7w3-gp-0Uc"/>
                             <constraint firstItem="7Rj-Aw-xee" firstAttribute="top" secondItem="49z-8y-L8q" secondAttribute="top" id="84r-Po-Ym2"/>
                             <constraint firstAttribute="trailing" secondItem="7Rj-Aw-xee" secondAttribute="trailing" constant="20" id="CvQ-DK-WGw"/>
+                            <constraint firstItem="Gdg-Cq-pHV" firstAttribute="baseline" secondItem="gdN-Dd-MhL" secondAttribute="baseline" id="DrY-lJ-fVH"/>
+                            <constraint firstItem="gdN-Dd-MhL" firstAttribute="leading" secondItem="Gdg-Cq-pHV" secondAttribute="trailing" constant="8" symbolic="YES" id="Dt9-Ca-AlH"/>
                             <constraint firstItem="UdF-MR-Kxs" firstAttribute="leading" secondItem="49z-8y-L8q" secondAttribute="leading" constant="20" symbolic="YES" id="LQo-HC-vbr"/>
                             <constraint firstAttribute="bottom" secondItem="Gdg-Cq-pHV" secondAttribute="bottom" constant="20" symbolic="YES" id="MKD-vJ-Ibd"/>
                             <constraint firstItem="AaQ-lx-Nnc" firstAttribute="trailing" secondItem="UdF-MR-Kxs" secondAttribute="trailing" id="MmL-3d-gOB"/>
@@ -1870,7 +1882,6 @@
                             <constraint firstItem="PVj-VZ-YfL" firstAttribute="leading" secondItem="mem-lt-z5X" secondAttribute="trailing" constant="8" symbolic="YES" id="RVg-3g-YE9"/>
                             <constraint firstItem="Gdg-Cq-pHV" firstAttribute="top" secondItem="AaQ-lx-Nnc" secondAttribute="bottom" constant="20" symbolic="YES" id="V8F-rK-T8a"/>
                             <constraint firstItem="AaQ-lx-Nnc" firstAttribute="top" secondItem="UdF-MR-Kxs" secondAttribute="top" constant="23" id="ZdF-KK-xfU"/>
-                            <constraint firstItem="mem-lt-z5X" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Gdg-Cq-pHV" secondAttribute="trailing" constant="12" symbolic="YES" id="cXs-rN-gHq"/>
                             <constraint firstAttribute="bottom" secondItem="PVj-VZ-YfL" secondAttribute="bottom" constant="20" id="jYk-V4-uHd"/>
                             <constraint firstItem="mem-lt-z5X" firstAttribute="centerY" secondItem="PVj-VZ-YfL" secondAttribute="centerY" id="n0I-cF-oRb"/>
                             <constraint firstItem="Gdg-Cq-pHV" firstAttribute="leading" secondItem="49z-8y-L8q" secondAttribute="leading" constant="20" symbolic="YES" id="pZo-XA-Auh"/>
@@ -1881,6 +1892,7 @@
                     <connections>
                         <outlet property="addOrderButton" destination="mem-lt-z5X" id="pmt-pj-gbv"/>
                         <outlet property="circularProgressIndicator" destination="eC6-v3-MYv" id="1GB-1p-FGS"/>
+                        <outlet property="noSEPAPaymentOptionFilterButton" destination="gdN-Dd-MhL" id="qFh-je-K2Q"/>
                         <outlet property="orderBookArrayController" destination="4Tj-Nm-93b" id="wMi-ZS-5XU"/>
                         <outlet property="otherFilterButton" destination="Gdg-Cq-pHV" id="fa8-dJ-MTf"/>
                         <outlet property="spinningBackgroundView" destination="AaQ-lx-Nnc" id="qcQ-v1-r3s"/>
@@ -1891,6 +1903,7 @@
                 <customObject id="Ixs-NX-vvZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController objectClassName="SOXShowOrderbookData" selectsInsertedObjects="NO" avoidsEmptySelection="NO" automaticallyRearrangesObjects="YES" id="4Tj-Nm-93b" userLabel="OrderBookArrayController">
                     <connections>
+                        <binding destination="ssU-Oy-97E" name="filterPredicate" keyPath="self.orderBookPredicate" id="E4e-tv-6Ba"/>
                         <binding destination="ssU-Oy-97E" name="contentArray" keyPath="self.orderBook" id="ODs-HG-gtx"/>
                     </connections>
                 </arrayController>
