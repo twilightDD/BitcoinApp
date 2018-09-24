@@ -42,14 +42,64 @@
     return defaultTradingCountries;
 }
 
+#pragma mark - No Sepa Filter Option on OrdersViewController
 + (NSControlStateValue )sepaPaymentOptionStateForOrderType:(BitcoinDE_OrderType)orderType
                                               currencyType:(BitcoinDE_CurrencyType)currencyType {
-    return NSControlStateValueOn;
+    NSControlStateValue sepaPaymentOptionState = NSControlStateValueOn;
+
+    { // look up at userDefaults
+        NSString *userDefaultKey = [self sepaPaymentOptionUserDefaultKeyForOrderType:orderType
+                                                                        currencyType:currencyType];
+        id noSepaFilterValue = [self userDefaultForKey:userDefaultKey];
+        if (noSepaFilterValue != nil
+            && [noSepaFilterValue isKindOfClass:[NSNumber class]]) {
+            sepaPaymentOptionState = [(NSNumber *)noSepaFilterValue boolValue] ? NSControlStateValueOn: NSControlStateValueOff;
+        }
+    }
+
+    return sepaPaymentOptionState;
+}
+
++ (void)setSepaPaymentFilterOption:(NSControlStateValue )state
+                      forOrderType:(BitcoinDE_OrderType)orderType
+                      currencyType:(BitcoinDE_CurrencyType)currencyType {
+    NSNumber *noSepaFilterValue = @NO;
+    if (state == NSControlStateValueOn) {
+        noSepaFilterValue = @YES;
+    }
+    NSString *userDefaultKey = [self sepaPaymentOptionUserDefaultKeyForOrderType:orderType
+                                                                    currencyType:currencyType];
+    [self setUserDefaultObject:noSepaFilterValue
+                        forKey:userDefaultKey];
 }
 
 
++ (NSString *)sepaPaymentOptionUserDefaultKeyForOrderType:(BitcoinDE_OrderType)orderType
+                                             currencyType:(BitcoinDE_CurrencyType)currencyType {
+    NSString *userDefaultKey = @"noSepaPaymentOptionFilter";
+    userDefaultKey = [userDefaultKey stringByAppendingString:@"_"];
+    userDefaultKey = [userDefaultKey stringByAppendingString:[SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType]];
+    userDefaultKey = [userDefaultKey stringByAppendingString:@"_"];
+    userDefaultKey = [userDefaultKey stringByAppendingString:[SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:orderType]];
+
+    return userDefaultKey;
+}
+
 + (BOOL)secureExecuteTrade {
     return YES;
+}
+
+#pragma mark - NSUserDefault access
++ (id )userDefaultForKey:(NSString *)key {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *userDefaultForKey = [userDefaults valueForKey:key];
+
+    return userDefaultForKey;
+}
+
++ (void)setUserDefaultObject:(id)object forKey:(NSString *)key {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:object forKey:key];
 }
 
 @end
