@@ -1905,6 +1905,7 @@
                     <connections>
                         <binding destination="ssU-Oy-97E" name="contentArray" keyPath="self.orderBook" id="ODs-HG-gtx"/>
                         <binding destination="ssU-Oy-97E" name="filterPredicate" keyPath="self.orderBookPredicate" id="E4e-tv-6Ba"/>
+                        <binding destination="ssU-Oy-97E" name="sortDescriptors" keyPath="self.sortDescriptorsForArrayController" previousBinding="E4e-tv-6Ba" id="DfI-R0-K9p"/>
                     </connections>
                 </arrayController>
                 <userDefaultsController representsSharedInstance="YES" id="fA4-JS-frA"/>

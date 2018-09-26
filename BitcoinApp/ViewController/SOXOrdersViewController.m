@@ -36,6 +36,7 @@
 
 #pragma mark Properties
 @property (strong, nonatomic) NSMutableArray *orderBook;
+@property (strong, nonatomic) NSArray *sortDescriptorsForArrayController;
 @property (strong, nonatomic) NSPredicate *orderBookPredicate;
 
 @property (nonatomic) BOOL socketIODidDisconnectAppeared;
@@ -56,8 +57,8 @@
     [self requestServerData];
 #endif
 
-    self.orderBookArrayController.sortDescriptors = [self sortDescriptorsForArrayController];
-    self.orderBookArrayController.filterPredicate = self.orderBookPredicate;
+//    self.orderBookArrayController.sortDescriptors = [self sortDescriptorsForArrayController];
+//    self.orderBookArrayController.filterPredicate = self.orderBookPredicate;
     self.orderBookArrayController.clearsFilterPredicateOnInsertion = NO;
 
     [SOXMarket_BitcoinDE_Core registerForErrorMessages:self];
@@ -67,6 +68,7 @@
     [self setupUI];
 
     [self updateOrderBookPredicate];
+    [self createSortDescriptorsForArrayController];
 }
 
 - (void)viewWillAppear {
@@ -166,20 +168,20 @@
     }
 }
 
-#pragma mark - Array Controller Descriptors
-- (NSArray *)sortDescriptorsForArrayController {
+#pragma mark | Array Controller Descriptors
+- (void)createSortDescriptorsForArrayController {
     BOOL ascending = NO;
     if (self.orderType == BitcoinDE_BuyOrderType) {
         ascending = YES;
     }
-    
+
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"orderInformation_price" ascending:ascending];
     NSArray *sortDesciptors = [NSArray arrayWithObjects:sort, nil];
-    
-    return sortDesciptors;
+
+    self.sortDescriptorsForArrayController = sortDesciptors;
 }
 
-#pragma mark - Array Controller Predicate Methods
+#pragma mark | Array Controller Predicate Methods
 - (void)updateOrderBookPredicate {
     if (self.paymentOptionPredicate) {
         self.orderBookPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[[self paymentOptionPredicate]
@@ -198,12 +200,6 @@
                                   " OR orderRequirements_paymentOption == %@"
                                   , @(BitcoinDE_PaymentOptionExpressOnly)
                                   , @(BitcoinDE_PaymentOptionExpressAndSepa)];
-        paymentOptionPredicate = [NSPredicate predicateWithFormat:
-                                  @"orderRequirements_paymentOption == %@"
-
-                                  , @(BitcoinDE_PaymentOptionSEPAOnly)
-                                  ];
-
         return paymentOptionPredicate;
     }
 
@@ -279,8 +275,7 @@
 
     // Flush orderBooks
     [self.orderBook removeAllObjects];
-//    self.orderBookArrayController.sortDescriptors = [self sortDescriptorsForArrayController];
-//    self.orderBookArrayController.filterPredicate = self.orderBookPredicate;
+
     [self.orderBookArrayController rearrangeObjects];
 }
 
@@ -294,19 +289,16 @@
 
     NSLog(@"addedOrder: %@", addOrderData.orderRequirements_paymentOption);
 
-    [self.orderBookArrayController addObject:addOrderData];
-//    self.orderBookArrayController.sortDescriptors = [self sortDescriptorsForArrayController];
-//    self.orderBookArrayController.filterPredicate = self.orderBookPredicate;
+    [self.orderBook addObject:addOrderData];
     [self.orderBookArrayController rearrangeObjects];
 }
 
 - (void)removedOrderWithOrderID:(NSDictionary *)payloadDictionary {
     NSString *orderID = [payloadDictionary objectForKey:BitcoinDE_WebSocket_RemoveOrder_OrderID];
-    NSArray *arrangedObjects = self.orderBookArrayController.arrangedObjects;
     NSMutableArray *foundOrders = [NSMutableArray array];
     
     // check for orderbookData with correct orderID
-    for (SOXShowOrderbookData *orderbookData in arrangedObjects) {
+    for (SOXShowOrderbookData *orderbookData in self.orderBook) {
         if ([orderbookData.orderInformation_orderID isEqualToString:orderID]) {
             [foundOrders addObject:orderbookData];
         }
@@ -314,16 +306,14 @@
     
     // remove orderbookData from arrayController
     for (id foundOrder in foundOrders) {
-        [self.orderBookArrayController removeObject:foundOrder];
+        [self.orderBook removeObject:foundOrder];
     }
-//
-//    self.orderBookArrayController.sortDescriptors = [self sortDescriptorsForArrayController];
-//    self.orderBookArrayController.filterPredicate = self.orderBookPredicate;
+
+    [self.orderBookArrayController rearrangeObjects];
 }
+
 -(void)updateOrderWithSocketOrderObjectID:(NSString *)orderObjectID withValues:(NSDictionary *)changesDictionary {
-    NSArray *arrangedObjects = self.orderBookArrayController.arrangedObjects;
-    
-    for (SOXShowOrderbook_BitcoinDE_Data *orderbookData in arrangedObjects) {
+    for (SOXShowOrderbook_BitcoinDE_Data *orderbookData in self.orderBook) {
         if ([orderbookData.orderInformation_socketOrderObjectID isEqualToString:orderObjectID]) {
             // ist data object mit orderObjectID vorhanden? Ja: updaten!
             [orderbookData updateOrderbookDataWith:changesDictionary];
