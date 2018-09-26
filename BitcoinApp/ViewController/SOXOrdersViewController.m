@@ -11,6 +11,7 @@
 
 #import "SOXCreateNewOrderViewController.h"
 #import "SOXExecuteTradeViewController.h"
+#import "SOXFilterOrderViewController.h"
 
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXSocketIO_BitcoinDE_Core.h"
@@ -54,7 +55,7 @@
 #if PETER
     // PETER = APP for AppStore
     // Automatic Trade version should not load orderBooks automatically.
-    [self requestServerData];
+   // [self requestServerData];
 #endif
 
 //    self.orderBookArrayController.sortDescriptors = [self sortDescriptorsForArrayController];
@@ -77,6 +78,13 @@
 
     [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
                                                         object:@(self.currencyType)];
+}
+
+- (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender {
+    if (segue.identifier == SOXFilterOrderViewControllerSegueKey) {
+        SOXFilterOrderViewController *viewController = segue.destinationController;
+        viewController.delegate = self;
+    }
 }
 
 #pragma mark - Action methods
