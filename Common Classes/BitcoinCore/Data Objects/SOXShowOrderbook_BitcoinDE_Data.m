@@ -35,6 +35,7 @@
 @property (strong, nonatomic, readwrite) NSString   *tradingPartnerInformation_bic;
 @property (strong, nonatomic, readwrite) NSNumber   *tradingPartnerInformation_rating;
 @property (strong, nonatomic, readwrite) NSNumber   *tradingPartnerInformation_amountTrades;
+@property (strong, nonatomic, readwrite) NSString   *tradingPartnerInformation_seatOfBank;
 
 #pragma mark | Order Requirements
 @property (strong, nonatomic, readwrite) NSString   *orderRequirements_minTrustLevel;
@@ -47,7 +48,7 @@
 @implementation SOXShowOrderbook_BitcoinDE_Data
 #pragma mark Synthesize
 @synthesize orderInformation_orderID, orderInformation_socketOrderObjectID, orderInformation_type, orderInformation_tradingPair, orderInformation_maxAmount, orderInformation_minAmount, orderInformation_price, orderInformation_maxVolume, orderInformation_minVolume, orderInformation_orderRequirementsFullfilled;
-@synthesize tradingPartnerInformation_username, tradingPartnerInformation_isKYCFull, tradingPartnerInformation_trustLevel, tradingPartnerInformation_bankName, tradingPartnerInformation_bic, tradingPartnerInformation_rating, tradingPartnerInformation_amountTrades;
+@synthesize tradingPartnerInformation_username, tradingPartnerInformation_isKYCFull, tradingPartnerInformation_trustLevel, tradingPartnerInformation_bankName, tradingPartnerInformation_bic, tradingPartnerInformation_rating, tradingPartnerInformation_amountTrades, tradingPartnerInformation_seatOfBank;
 @synthesize orderRequirements_minTrustLevel, orderRequirements_onlyKYCFull, orderRequirements_seatOfBank, orderRequirements_paymentOption;
 
 
@@ -140,6 +141,8 @@
     
     orderbookData.tradingPartnerInformation_isKYCFull = [[addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_IsKYCFull] boolValue];
     orderbookData.tradingPartnerInformation_bic = [addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_BICFull];
+    NSString *seatOfBank = [addOrderSocketIODictionary objectForKey:@"seat_of_bank_of_creator"];
+    orderbookData.tradingPartnerInformation_seatOfBank = [seatOfBank uppercaseString];
     
     return orderbookData;
 //    orderbookData.trade_to_sepa_country
@@ -229,6 +232,7 @@
         self.tradingPartnerInformation_bic          = [tradingPartnerInformation objectForKey:BitcoinDE_ShowOrderbook_TradingPartnerInformation_BIC];
         self.tradingPartnerInformation_rating       = [tradingPartnerInformation objectForKey:BitcoinDE_ShowOrderbook_TradingPartnerInformation_Rating];
         self.tradingPartnerInformation_amountTrades = [tradingPartnerInformation objectForKey:BitcoinDE_ShowOrderbook_TradingPartnerInformation_AmountTrades];
+        self.tradingPartnerInformation_seatOfBank = [tradingPartnerInformation objectForKey:@"seat_of_bank"];
     }
     
     // Order Requirements

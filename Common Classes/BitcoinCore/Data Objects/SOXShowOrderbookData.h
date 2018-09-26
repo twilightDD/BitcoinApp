@@ -31,6 +31,7 @@
 @property (strong, nonatomic, readonly) NSString   *tradingPartnerInformation_bic;
 @property (strong, nonatomic, readonly) NSNumber   *tradingPartnerInformation_rating;
 @property (strong, nonatomic, readonly) NSNumber   *tradingPartnerInformation_amountTrades;
+@property (strong, nonatomic, readonly) NSString   *tradingPartnerInformation_seatOfBank;
 
 #pragma mark | Order Requirements
 @property (strong, nonatomic, readonly) NSString   *orderRequirements_minTrustLevel;

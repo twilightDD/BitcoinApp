@@ -1639,7 +1639,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" headerView="r0K-dN-IBz" id="ILN-vM-hc0">
-                                            <rect key="frame" x="0.0" y="0.0" width="775" height="217"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="838" height="217"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1777,6 +1777,26 @@
                                                         <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.orderInformation_type" id="ckv-XP-6gp"/>
                                                     </connections>
                                                 </tableColumn>
+                                                <tableColumn identifier="" editable="NO" width="60" minWidth="10" maxWidth="3.4028234663852886e+38" id="oef-8a-YX5">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Seat of Bank">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="qSr-8f-7cU">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="4Tj-Nm-93b" name="value" keyPath="arrangedObjects.tradingPartnerInformation_seatOfBank" id="YWh-3P-Nar">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
+                                                </tableColumn>
                                                 <tableColumn identifier="" width="1" minWidth="1" maxWidth="1" id="xzu-Of-sPV" userLabel="Empty column">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                                         <font key="font" metaFont="smallSystem"/>
@@ -1809,7 +1829,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="r0K-dN-IBz">
-                                    <rect key="frame" x="0.0" y="0.0" width="775" height="23"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="838" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
@@ -1857,8 +1877,8 @@
                                 </buttonCell>
                             </button>
                             <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="gdN-Dd-MhL">
-                                <rect key="frame" x="85" y="22" width="61" height="18"/>
-                                <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="f7N-Eg-XMB">
+                                <rect key="frame" x="85" y="22" width="52" height="18"/>
+                                <buttonCell key="cell" type="check" title="sepa" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="f7N-Eg-XMB">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
