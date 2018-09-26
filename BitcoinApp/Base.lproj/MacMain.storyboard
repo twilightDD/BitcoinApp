@@ -1903,8 +1903,8 @@
                 <customObject id="Ixs-NX-vvZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController objectClassName="SOXShowOrderbookData" selectsInsertedObjects="NO" avoidsEmptySelection="NO" automaticallyRearrangesObjects="YES" id="4Tj-Nm-93b" userLabel="OrderBookArrayController">
                     <connections>
-                        <binding destination="ssU-Oy-97E" name="filterPredicate" keyPath="self.orderBookPredicate" id="E4e-tv-6Ba"/>
                         <binding destination="ssU-Oy-97E" name="contentArray" keyPath="self.orderBook" id="ODs-HG-gtx"/>
+                        <binding destination="ssU-Oy-97E" name="filterPredicate" keyPath="self.orderBookPredicate" id="E4e-tv-6Ba"/>
                     </connections>
                 </arrayController>
                 <userDefaultsController representsSharedInstance="YES" id="fA4-JS-frA"/>

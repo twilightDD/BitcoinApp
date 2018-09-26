@@ -56,6 +56,8 @@
     [self requestServerData];
 #endif
 
+    self.orderBookArrayController.sortDescriptors = [self sortDescriptorsForArrayController];
+    self.orderBookArrayController.filterPredicate = self.orderBookPredicate;
     self.orderBookArrayController.clearsFilterPredicateOnInsertion = NO;
 
     [SOXMarket_BitcoinDE_Core registerForErrorMessages:self];
@@ -79,6 +81,10 @@
 #pragma mark | Payment Options
 - (IBAction)noSEPAPaymentOptionFilterButtonAction:(NSButton *)sender {
     [self updateOrderBookPredicate];
+
+    [SOXPreferenceCenter setSepaPaymentFilterOption:sender.state
+                                       forOrderType:self.orderType
+                                       currencyType:self.currencyType];
 }
 
 #pragma mark |
@@ -192,6 +198,11 @@
                                   " OR orderRequirements_paymentOption == %@"
                                   , @(BitcoinDE_PaymentOptionExpressOnly)
                                   , @(BitcoinDE_PaymentOptionExpressAndSepa)];
+        paymentOptionPredicate = [NSPredicate predicateWithFormat:
+                                  @"orderRequirements_paymentOption == %@"
+
+                                  , @(BitcoinDE_PaymentOptionSEPAOnly)
+                                  ];
 
         return paymentOptionPredicate;
     }
@@ -246,8 +257,7 @@
         self.orderBook = orderBook;
 
         [self disableSpinningWheel];
-        self.orderBookArrayController.sortDescriptors = [self sortDescriptorsForArrayController];
-        self.orderBookArrayController.filterPredicate = self.orderBookPredicate;
+
 #if PETER
         // PETER = APP for AppStore
         // Automatic Trade version should not load orderBooks automatically.
@@ -269,8 +279,8 @@
 
     // Flush orderBooks
     [self.orderBook removeAllObjects];
-    self.orderBookArrayController.sortDescriptors = [self sortDescriptorsForArrayController];
-    self.orderBookArrayController.filterPredicate = self.orderBookPredicate;
+//    self.orderBookArrayController.sortDescriptors = [self sortDescriptorsForArrayController];
+//    self.orderBookArrayController.filterPredicate = self.orderBookPredicate;
     [self.orderBookArrayController rearrangeObjects];
 }
 
@@ -282,9 +292,11 @@
         return;
     }
 
+    NSLog(@"addedOrder: %@", addOrderData.orderRequirements_paymentOption);
+
     [self.orderBookArrayController addObject:addOrderData];
-    self.orderBookArrayController.sortDescriptors = [self sortDescriptorsForArrayController];
-    self.orderBookArrayController.filterPredicate = self.orderBookPredicate;
+//    self.orderBookArrayController.sortDescriptors = [self sortDescriptorsForArrayController];
+//    self.orderBookArrayController.filterPredicate = self.orderBookPredicate;
     [self.orderBookArrayController rearrangeObjects];
 }
 
@@ -304,9 +316,9 @@
     for (id foundOrder in foundOrders) {
         [self.orderBookArrayController removeObject:foundOrder];
     }
-
-    self.orderBookArrayController.sortDescriptors = [self sortDescriptorsForArrayController];
-    self.orderBookArrayController.filterPredicate = self.orderBookPredicate;
+//
+//    self.orderBookArrayController.sortDescriptors = [self sortDescriptorsForArrayController];
+//    self.orderBookArrayController.filterPredicate = self.orderBookPredicate;
 }
 -(void)updateOrderWithSocketOrderObjectID:(NSString *)orderObjectID withValues:(NSDictionary *)changesDictionary {
     NSArray *arrangedObjects = self.orderBookArrayController.arrangedObjects;
