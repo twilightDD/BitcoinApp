@@ -22,7 +22,7 @@
 #import "SOXPreferenceCenter.h"
 
 #pragma mark - Interface
-@interface SOXOrdersViewController () <SOXMarketCoreServerRequestProtocol, SOXMarketCoreErrorProtocol, SOXSocketIOCoreProtocol, SOXChangeOrderProtocol, NSTableViewDelegate>
+@interface SOXOrdersViewController () <SOXMarketCoreServerRequestProtocol, SOXMarketCoreErrorProtocol, SOXSocketIOCoreProtocol, SOXChangeOrderProtocol, NSTableViewDelegate, NSPopoverDelegate>
 
 #pragma mark IBOutlets
 @property (weak) IBOutlet NSTextField *titleTextField;
@@ -39,9 +39,12 @@
 @property (strong, nonatomic) NSMutableArray *orderBook;
 @property (strong, nonatomic) NSArray *sortDescriptorsForArrayController;
 @property (strong, nonatomic) NSPredicate *orderBookPredicate;
+@property (strong, nonatomic) NSPredicate *seatOfBankPredicate;
 
 @property (nonatomic) BOOL socketIODidDisconnectAppeared;
 @property (nonatomic, copy) NSString *currencyTypeString;
+
+@property (nonatomic, strong) NSPopover *furtherFilterPopover;
 @end
 
 #pragma mark - Implementation
@@ -80,13 +83,6 @@
                                                         object:@(self.currencyType)];
 }
 
-- (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender {
-    if (segue.identifier == SOXFilterOrderViewControllerSegueKey) {
-        SOXFilterOrderViewController *viewController = segue.destinationController;
-        viewController.delegate = self;
-    }
-}
-
 #pragma mark - Action methods
 #pragma mark | Payment Options
 - (IBAction)noSEPAPaymentOptionFilterButtonAction:(NSButton *)sender {
@@ -95,6 +91,30 @@
     [SOXPreferenceCenter setSepaPaymentFilterOption:sender.state
                                        forOrderType:self.orderType
                                        currencyType:self.currencyType];
+}
+
+- (IBAction)furtherFiltersAction:(NSButton *)sender {
+    // Create view controller
+    NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"MacMain"
+                                                         bundle:nil];
+    SOXFilterOrderViewController *viewController = [storyboard instantiateControllerWithIdentifier:@"SOXFilterOrderViewControllerIdentifier"];
+
+    // Create popover
+    self.furtherFilterPopover = [[NSPopover alloc] init];
+    [self.furtherFilterPopover setContentSize:NSMakeSize(200.0, 200.0)];
+    [self.furtherFilterPopover setBehavior:NSPopoverBehaviorTransient];
+    [self.furtherFilterPopover setAnimates:YES];
+    [self.furtherFilterPopover setContentViewController:viewController];
+    self.furtherFilterPopover.delegate = self;
+
+    // Convert point to main window coordinates
+    NSRect entryRect = [sender convertRect:sender.bounds
+                                    toView:[[NSApp mainWindow] contentView]];
+
+    // Show popover
+    [self.furtherFilterPopover showRelativeToRect:entryRect
+                                           ofView:[[NSApp mainWindow] contentView]
+                                    preferredEdge:NSMinYEdge];
 }
 
 #pragma mark |
@@ -194,6 +214,10 @@
     if (self.paymentOptionPredicate) {
         self.orderBookPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[[self paymentOptionPredicate]
                                                                                        ]];
+    }
+
+    if (self.seatOfBankPredicate) {
+        self.orderBookPredicate = self.seatOfBankPredicate;
     }
     else {
         self.orderBookPredicate = nil;
@@ -346,4 +370,25 @@
     [[SOXMarket_BitcoinDE_Core sharedCore] startAccountInfoUpdate];
 }
 
+#pragma mark - NSPopoverDelegate
+- (void)popoverDidClose:(NSNotification *)notification {
+
+    if (notification.object == self.furtherFilterPopover) {
+        SOXFilterOrderViewController *filterOrderViewController = (SOXFilterOrderViewController *)self.furtherFilterPopover.contentViewController;
+        NSArray *selectedCountryCodes = filterOrderViewController.selectedCountryCodes;
+        if (selectedCountryCodes.count > 0
+            && !self.seatOfBankPredicate) {
+            NSPredicate *seatOfBankPredicate = [NSPredicate predicateWithFormat:
+                                                @"tradingPartnerInformation_seatOfBank IN %@"
+                                                , selectedCountryCodes];
+            self.seatOfBankPredicate = seatOfBankPredicate;
+
+        }
+        else {
+            self.seatOfBankPredicate = nil;
+        }
+        [self updateOrderBookPredicate];
+    }
+
+}
 @end

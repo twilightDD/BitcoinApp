@@ -1876,7 +1876,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <segue destination="NT5-07-VYi" kind="popover" identifier="SOXFilterOrderViewControllerSegue" popoverAnchorView="Gdg-Cq-pHV" popoverBehavior="t" preferredEdge="maxY" id="TME-8u-MIJ"/>
+                                    <action selector="furtherFiltersAction:" target="ssU-Oy-97E" id="J0h-j5-EJ3"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="gdN-Dd-MhL">
@@ -5206,7 +5206,7 @@ Gw
         <!--Filter Order View Controller-->
         <scene sceneID="xFH-Tp-JmA">
             <objects>
-                <viewController id="NT5-07-VYi" customClass="SOXFilterOrderViewController" sceneMemberID="viewController">
+                <viewController identifier="SOXFilterOrderViewControllerIdentifier" storyboardIdentifier="SOXFilterOrderViewControllerIdentifier" id="NT5-07-VYi" customClass="SOXFilterOrderViewController" sceneMemberID="viewController">
                     <view key="view" id="eCx-9e-aa0">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="293"/>
                         <autoresizingMask key="autoresizingMask"/>

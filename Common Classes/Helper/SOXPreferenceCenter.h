@@ -26,4 +26,7 @@
                       currencyType:(BitcoinDE_CurrencyType)currencyType;
 + (BOOL)secureExecuteTrade;
 
++ (NSArray <NSString *> *)supportedCountryCodes;
++ (NSArray <NSString *> *)activeCountryCodes;
+
 @end

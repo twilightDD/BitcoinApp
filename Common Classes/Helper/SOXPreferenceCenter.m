@@ -89,6 +89,60 @@
     return YES;
 }
 
++ (NSArray <NSString *> *)supportedCountryCodes {
+    static dispatch_once_t pred;
+    static NSArray *supportedCountryCodes = nil;
+    dispatch_once(&pred, ^{
+        supportedCountryCodes = @[@"AT",
+                                  @"BE",
+                                  @"BG",
+                                  @"CH",
+                                  @"CY",
+                                  @"CZ",
+                                  @"DE",
+                                  @"DK",
+                                  @"EE",
+                                  @"ES",
+                                  @"FI",
+                                  @"FR",
+                                  @"GB",
+                                  @"GR",
+                                  @"HR",
+                                  @"HU",
+                                  @"IE",
+                                  @"IS",
+                                  @"IT",
+                                  @"LI",
+                                  @"LT",
+                                  @"LU",
+                                  @"LV",
+                                  @"MT",
+                                  @"MQ",
+                                  @"NL",
+                                  @"NO",
+                                  @"PL",
+                                  @"PT",
+                                  @"RO",
+                                  @"SE",
+                                  @"SI",
+                                  @"SK"
+                                  ];
+    });
+    return supportedCountryCodes;
+}
+
++ (NSArray <NSString *> *)activeCountryCodes {
+    static dispatch_once_t pred;
+    static NSArray *activeCountryCodes = nil;
+    dispatch_once(&pred, ^{
+        activeCountryCodes = @[@"AT",
+                                  @"BE",
+                                  @"DE",
+                                  @"SK"
+                                  ];
+    });
+    return activeCountryCodes;
+}
 #pragma mark - NSUserDefault access
 + (id )userDefaultForKey:(NSString *)key {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

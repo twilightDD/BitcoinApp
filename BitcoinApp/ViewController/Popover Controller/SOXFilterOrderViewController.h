@@ -12,6 +12,6 @@ static const NSString *SOXFilterOrderViewControllerSegueKey = @"SOXFilterOrderVi
 
 @interface SOXFilterOrderViewController : NSViewController
 
-@property (nonatomic, weak) id delegate;
+- (NSArray <NSString *> *)selectedCountryCodes;
 
 @end
