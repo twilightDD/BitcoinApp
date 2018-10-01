@@ -5210,37 +5210,6 @@ Gw
                     <view key="view" id="eCx-9e-aa0">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="293"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ovd-gH-UOJ">
-                                <rect key="frame" x="49" y="241" width="61" height="18"/>
-                                <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="CSy-ru-gI0">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eJH-FM-6Ld">
-                                <rect key="frame" x="49" y="215" width="61" height="18"/>
-                                <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Eyv-UU-xLQ">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qi8-ni-6KY">
-                                <rect key="frame" x="49" y="189" width="61" height="18"/>
-                                <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="gHo-zc-Q5O">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="eJH-FM-6Ld" firstAttribute="top" secondItem="Ovd-gH-UOJ" secondAttribute="bottom" constant="12" id="XlY-4V-WKI"/>
-                            <constraint firstItem="Ovd-gH-UOJ" firstAttribute="leading" secondItem="eCx-9e-aa0" secondAttribute="leading" constant="51" id="bg3-Y1-sB7"/>
-                            <constraint firstItem="Ovd-gH-UOJ" firstAttribute="leading" secondItem="eJH-FM-6Ld" secondAttribute="leading" id="e9A-8o-WKo"/>
-                            <constraint firstItem="Ovd-gH-UOJ" firstAttribute="top" secondItem="eCx-9e-aa0" secondAttribute="top" constant="36" id="niR-rK-62I"/>
-                            <constraint firstItem="eJH-FM-6Ld" firstAttribute="leading" secondItem="Qi8-ni-6KY" secondAttribute="leading" id="rRq-0G-eU6"/>
-                            <constraint firstItem="Qi8-ni-6KY" firstAttribute="top" secondItem="eJH-FM-6Ld" secondAttribute="bottom" constant="12" id="yM2-Zn-mcN"/>
-                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="92E-6z-4gq" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

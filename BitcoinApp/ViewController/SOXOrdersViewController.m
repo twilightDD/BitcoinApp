@@ -101,7 +101,7 @@
 
     // Create popover
     self.furtherFilterPopover = [[NSPopover alloc] init];
-    [self.furtherFilterPopover setContentSize:NSMakeSize(200.0, 200.0)];
+   // [self.furtherFilterPopover setContentSize:NSMakeSize(200.0, 200.0)];
     [self.furtherFilterPopover setBehavior:NSPopoverBehaviorTransient];
     [self.furtherFilterPopover setAnimates:YES];
     [self.furtherFilterPopover setContentViewController:viewController];
