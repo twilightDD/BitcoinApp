@@ -12,7 +12,7 @@
 
 @interface SOXFilterOrderViewController ()
 
-@property (strong, nonatomic) NSArray *countryButtons;
+@property (strong, nonatomic) NSArray <NSButton *> *countryButtons;
 
 @end
 
@@ -47,7 +47,7 @@
         countryButton.target = self;
         SEL countryButtonActionSelector = NSSelectorFromString(@"countryButtonAction:");
         countryButton.action = countryButtonActionSelector;
-        
+
         // set position
         {
             if (idx % 10 == 0) {
@@ -56,10 +56,9 @@
             }
             currentY = currentY + deltaY;
             countryButton.frame = CGRectMake(currentX, currentY, width, height);
-            [countryButtons addObject:countryButton];
         }
         [self.view addSubview:countryButton];
-        
+        [countryButtons addObject:countryButton];
     }];
     
     self.countryButtons = countryButtons.copy;
@@ -68,16 +67,12 @@
 
 - (NSArray <NSString *> *)selectedCountryCodes {
     NSArray <NSString *> *supportedCountryCodes = [SOXPreferenceCenter supportedCountryCodes];
-    
-    NSMutableArray *selectedCountryCodes = [NSMutableArray array];
-    [supportedCountryCodes enumerateObjectsUsingBlock:^(NSString * _Nonnull countryCode
-                                                        , NSUInteger idx
-                                                        , BOOL * _Nonnull stop) {
-        NSButton *countryButton = [self.countryButtons objectAtIndex:idx];
-        if (countryButton.state == NSControlStateValueOn) {
-            [selectedCountryCodes addObject:countryCode];
+
+    __block NSMutableArray *selectedCountryCodes = [NSMutableArray array];
+    [self.countryButtons enumerateObjectsUsingBlock:^(NSButton * _Nonnull button, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (button.state == NSControlStateValueOn) {
+            [selectedCountryCodes addObject:[supportedCountryCodes objectAtIndex:idx]];
         }
-        
     }];
     
     return selectedCountryCodes.copy;
