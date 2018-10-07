@@ -12,7 +12,6 @@
 
 
 static const NSString *SOXFilterOrderViewControllerSegueKey = @"SOXFilterOrderViewControllerSegue";
-
 static NSString *FilterOrderViewSelectedCountriesKey = @"selectedCountries";
 
 @protocol SOXFilterOrderViewControllerDelegate

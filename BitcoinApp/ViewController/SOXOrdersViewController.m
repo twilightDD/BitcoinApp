@@ -55,30 +55,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:self.currencyType];
-
+    
 #if PETER
     // PETER = APP for AppStore
     // Automatic Trade version should not load orderBooks automatically.
-   // [self requestServerData];
+    // [self requestServerData];
 #endif
-
-//    self.orderBookArrayController.sortDescriptors = [self sortDescriptorsForArrayController];
-//    self.orderBookArrayController.filterPredicate = self.orderBookPredicate;
+    
+    //    self.orderBookArrayController.sortDescriptors = [self sortDescriptorsForArrayController];
+    //    self.orderBookArrayController.filterPredicate = self.orderBookPredicate;
     self.orderBookArrayController.clearsFilterPredicateOnInsertion = NO;
-
+    
     [SOXMarket_BitcoinDE_Core registerForErrorMessages:self];
-
+    
     [self.tableView setDoubleAction:@selector(tableViewDoubleAction:)];
-
+    
     [self setupUI];
-
+    
     [self setupArrayController];
 }
 
 - (void)viewWillAppear {
     [super viewWillAppear];
-
-
+    
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
                                                         object:@(self.currencyType)];
 }
@@ -87,7 +87,7 @@
 #pragma mark | Payment Options
 - (IBAction)noSEPAPaymentOptionFilterButtonAction:(NSButton *)sender {
     [self updatePaymentOptionPredicate];
-
+    
     [SOXPreferenceCenter setSepaPaymentFilterOption:sender.state
                                        forOrderType:self.orderType
                                        currencyType:self.currencyType];
@@ -101,19 +101,19 @@
     viewController.delegate = self;
     viewController.orderType = self.orderType;
     viewController.currencyType = self.currencyType;
-
-
+    
+    
     // Create popover
     self.furtherFilterPopover = [[NSPopover alloc] init];
-   // [self.furtherFilterPopover setContentSize:NSMakeSize(200.0, 200.0)];
+    // [self.furtherFilterPopover setContentSize:NSMakeSize(200.0, 200.0)];
     [self.furtherFilterPopover setBehavior:NSPopoverBehaviorTransient];
     [self.furtherFilterPopover setAnimates:YES];
     [self.furtherFilterPopover setContentViewController:viewController];
-
+    
     // Convert point to main window coordinates
     NSRect entryRect = [sender convertRect:sender.bounds
                                     toView:[[NSApp mainWindow] contentView]];
-
+    
     // Show popover
     [self.furtherFilterPopover showRelativeToRect:entryRect
                                            ofView:[[NSApp mainWindow] contentView]
@@ -122,7 +122,7 @@
 
 #pragma mark |
 - (IBAction)reloadAction:(NSButton *)sender {
-   [self requestServerData];
+    [self requestServerData];
 }
 
 - (IBAction)addOrderAction:(NSButton *)sender {
@@ -212,10 +212,10 @@
     if (self.orderType == BitcoinDE_BuyOrderType) {
         ascending = YES;
     }
-
+    
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"orderInformation_price" ascending:ascending];
     NSArray *sortDesciptors = [NSArray arrayWithObjects:sort, nil];
-
+    
     self.sortDescriptorsForArrayController = sortDesciptors;
 }
 
@@ -225,11 +225,11 @@
     if (self.paymentOptionPredicate) {
         [subPredicates addObject:self.paymentOptionPredicate];
     }
-
+    
     if (self.seatOfBankPredicate) {
         [subPredicates addObject:self.seatOfBankPredicate];
     }
-
+    
     if (subPredicates.count > 0) {
         self.orderBookPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:subPredicates];
     }
@@ -247,7 +247,7 @@
                                   , @(BitcoinDE_PaymentOptionExpressOnly)
                                   , @(BitcoinDE_PaymentOptionExpressAndSepa)];
     }
-
+    
     self.paymentOptionPredicate = paymentOptionPredicate;
 }
 
@@ -255,10 +255,10 @@
     NSPredicate *selectedCountriesPredicate = nil;
     if (selectedCountryCodes.count > 0) {
         selectedCountriesPredicate = [NSPredicate predicateWithFormat:
-                                            @"tradingPartnerInformation_seatOfBank IN %@"
-                                            , selectedCountryCodes];
+                                      @"tradingPartnerInformation_seatOfBank IN %@"
+                                      , selectedCountryCodes];
     }
-
+    
     self.seatOfBankPredicate = selectedCountriesPredicate;
 }
 
@@ -285,7 +285,7 @@
     if (!selectedOrderBookData) {
         return;
     }
-
+    
     NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"MacMain" bundle:nil];
     SOXExecuteTradeViewController *viewC = [storyboard instantiateControllerWithIdentifier:@"ExecuteTradeViewControllerIdentifier"];
     viewC.orderType = self.orderType;
@@ -300,10 +300,10 @@
     if (errorArray) {
         DDLogInfo(@"SOXAutomaticTrading_BitcoinDE_Core - answerOfServerRequest with error:\n%@", errorArray);
     }
-
+    
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowBuyOrderbookCommandType)]
         || [[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowSellOrderbookCommandType)]) {
-
+        
         // Request server data again on nonce error
         if (errorArray) {
             NSNumber *errorCode = [errorArray.firstObject objectForKey:@"code"];
@@ -314,13 +314,13 @@
                 return;
             }
         }
-
+        
         NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
         NSMutableArray *orderBook = [SOXShowOrderbook_BitcoinDE_Data orderbookDataArrayForShowOrderbookDictionary:payloadDictionary];
         self.orderBook = orderBook;
-
+        
         [self disableSpinningWheel];
-
+        
 #if PETER
         // PETER = APP for AppStore
         // Automatic Trade version should not load orderBooks automatically.
@@ -339,23 +339,23 @@
 
 - (void)socketIODidDisconnect:(NSString *)socketStatus {
     self.socketIODidDisconnectAppeared = YES;
-
+    
     // Flush orderBooks
     [self.orderBook removeAllObjects];
-
+    
     [self.orderBookArrayController rearrangeObjects];
 }
 
 - (void)addedOrder:(SOXShowOrderbookData *)addOrderData {
     if (![addOrderData.orderInformation_tradingPair isEqualToString:self.currencyTypeString]) {
         DDLogInfo(@"addedOrder in %@ - tradingPair is %@ - we don't support it right now"
-              , [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:self.orderType]
-              , addOrderData.orderInformation_tradingPair);
+                  , [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:self.orderType]
+                  , addOrderData.orderInformation_tradingPair);
         return;
     }
-
+    
     NSLog(@"addedOrder: %@", addOrderData.orderRequirements_paymentOption);
-
+    
     [self.orderBook addObject:addOrderData];
     [self.orderBookArrayController rearrangeObjects];
 }
@@ -375,7 +375,7 @@
     for (id foundOrder in foundOrders) {
         [self.orderBook removeObject:foundOrder];
     }
-
+    
     [self.orderBookArrayController rearrangeObjects];
 }
 

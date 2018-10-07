@@ -34,9 +34,9 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
 }
 
 + (BitcoinDE_PaymentOption)defaultPaymentOptionForExecuteTrade {
-//    return BitcoinDE_PaymentOptionExpressOnly;
-//    return BitcoinDE_PaymentOptionSEPAOnly;
-        return BitcoinDE_PaymentOptionExpressAndSepa;
+    //    return BitcoinDE_PaymentOptionExpressOnly;
+    //    return BitcoinDE_PaymentOptionSEPAOnly;
+    return BitcoinDE_PaymentOptionExpressAndSepa;
 }
 
 + (BOOL)secureExecuteTrade {
@@ -47,7 +47,7 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
 + (NSControlStateValue )sepaPaymentOptionStateForOrderType:(BitcoinDE_OrderType)orderType
                                               currencyType:(BitcoinDE_CurrencyType)currencyType {
     NSControlStateValue sepaPaymentOptionState = NSControlStateValueOn;
-
+    
     { // look up at userDefaults
         NSString *userDefaultKey = [self userDefaultKeyForDomain:OrderViewControllerSEPAKey
                                                        orderType:orderType
@@ -58,7 +58,7 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
             sepaPaymentOptionState = [(NSNumber *)noSepaFilterValue boolValue] ? NSControlStateValueOn: NSControlStateValueOff;
         }
     }
-
+    
     return sepaPaymentOptionState;
 }
 
@@ -81,7 +81,7 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
 #pragma mark - Country Codes
 + (NSArray *)defaultTradingCountries {
     NSArray *defaultTradingCountries = [NSArray arrayWithObjects:@"DE", nil];
-
+    
     return defaultTradingCountries;
 }
 + (NSArray <NSString *> *)supportedCountryCodes {
@@ -127,34 +127,34 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
 }
 
 + (NSArray <NSString *> *)activeCountryCodesforOrderType:(BitcoinDE_OrderType)orderType
-                                          currencyType:(BitcoinDE_CurrencyType)currencyType {
+                                            currencyType:(BitcoinDE_CurrencyType)currencyType {
     NSString *userDefaultKey = [self userDefaultKeyForDomain:OrderViewControllerCountryCodeKey
                                                    orderType:orderType
                                                 currencyType:currencyType];
     NSArray *activeCountryCodes = [self userDefaultForKey:userDefaultKey];
-
+    
     return activeCountryCodes;
 }
 
 + (void)toggleActiveCountryCode:(NSString *)countryCode
-                forOrderType:(BitcoinDE_OrderType)orderType
-                currencyType:(BitcoinDE_CurrencyType)currencyType {
-
+                   forOrderType:(BitcoinDE_OrderType)orderType
+                   currencyType:(BitcoinDE_CurrencyType)currencyType {
+    
     // get existing values
     NSArray *userDefaultValue = [self activeCountryCodesforOrderType:orderType
-                                                      currencyType:currencyType];
+                                                        currencyType:currencyType];
     NSMutableArray *activeCountryCodes = [userDefaultValue mutableCopy];
     if (activeCountryCodes == nil) {
         activeCountryCodes = [NSMutableArray array];
     }
-
+    
     if ([activeCountryCodes containsObject:countryCode]) {
         [activeCountryCodes removeObject:countryCode];
     }
     else {
         [activeCountryCodes addObject:countryCode];
     }
-
+    
     NSString *userDefaultKey = [self userDefaultKeyForDomain:OrderViewControllerCountryCodeKey
                                                    orderType:orderType
                                                 currencyType:currencyType];
@@ -165,7 +165,7 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
 + (id )userDefaultForKey:(NSString *)key {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *userDefaultForKey = [userDefaults valueForKey:key];
-
+    
     return userDefaultForKey;
 }
 
@@ -188,7 +188,7 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
     userDefaultKey = [userDefaultKey stringByAppendingString:[SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType]];
     userDefaultKey = [userDefaultKey stringByAppendingString:@"_"];
     userDefaultKey = [userDefaultKey stringByAppendingString:[SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:orderType]];
-
+    
     return userDefaultKey;
 }
 @end

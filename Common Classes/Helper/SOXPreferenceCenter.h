@@ -31,7 +31,7 @@
 + (NSArray *)defaultTradingCountries;
 + (NSArray <NSString *> *)supportedCountryCodes;
 + (NSArray <NSString *> *)activeCountryCodesforOrderType:(BitcoinDE_OrderType)orderType
-                                          currencyType:(BitcoinDE_CurrencyType)currencyType;
+                                            currencyType:(BitcoinDE_CurrencyType)currencyType;
 + (void)toggleActiveCountryCode:(NSString *)countryCode
                    forOrderType:(BitcoinDE_OrderType)orderType
                    currencyType:(BitcoinDE_CurrencyType)currencyType;
