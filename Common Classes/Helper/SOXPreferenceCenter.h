@@ -18,15 +18,22 @@
 + (BitcoinDE_TrustLevel)defaultTrustLevelNewOrder;
 + (BitcoinDE_PaymentOption)defaultPaymentOptionForCreateOrder;
 + (BitcoinDE_PaymentOption)defaultPaymentOptionForExecuteTrade;
-+ (NSArray *)defaultTradingCountries;
++ (BOOL)secureExecuteTrade;
+
+#pragma mark - Sepa Payment Option
 + (NSControlStateValue )sepaPaymentOptionStateForOrderType:(BitcoinDE_OrderType)orderType
                                               currencyType:(BitcoinDE_CurrencyType)currencyType;
 + (void)setSepaPaymentFilterOption:(NSControlStateValue )state
                       forOrderType:(BitcoinDE_OrderType)orderType
                       currencyType:(BitcoinDE_CurrencyType)currencyType;
-+ (BOOL)secureExecuteTrade;
 
+#pragma mark - Country Codes
++ (NSArray *)defaultTradingCountries;
 + (NSArray <NSString *> *)supportedCountryCodes;
-+ (NSArray <NSString *> *)activeCountryCodes;
++ (NSArray <NSString *> *)activeCountryCodesforOrderType:(BitcoinDE_OrderType)orderType
+                                          currencyType:(BitcoinDE_CurrencyType)currencyType;
++ (void)toggleActiveCountryCode:(NSString *)countryCode
+                   forOrderType:(BitcoinDE_OrderType)orderType
+                   currencyType:(BitcoinDE_CurrencyType)currencyType;
 
 @end

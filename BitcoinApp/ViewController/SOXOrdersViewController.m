@@ -22,7 +22,7 @@
 #import "SOXPreferenceCenter.h"
 
 #pragma mark - Interface
-@interface SOXOrdersViewController () <SOXMarketCoreServerRequestProtocol, SOXMarketCoreErrorProtocol, SOXSocketIOCoreProtocol, SOXChangeOrderProtocol, NSTableViewDelegate, NSPopoverDelegate>
+@interface SOXOrdersViewController () <SOXMarketCoreServerRequestProtocol, SOXMarketCoreErrorProtocol, SOXSocketIOCoreProtocol, SOXChangeOrderProtocol, NSTableViewDelegate, SOXFilterOrderViewControllerDelegate>
 
 #pragma mark IBOutlets
 @property (weak) IBOutlet NSTextField *titleTextField;
@@ -39,6 +39,7 @@
 @property (strong, nonatomic) NSMutableArray *orderBook;
 @property (strong, nonatomic) NSArray *sortDescriptorsForArrayController;
 @property (strong, nonatomic) NSPredicate *orderBookPredicate;
+@property (strong, nonatomic) NSPredicate *paymentOptionPredicate;
 @property (strong, nonatomic) NSPredicate *seatOfBankPredicate;
 
 @property (nonatomic) BOOL socketIODidDisconnectAppeared;
@@ -71,8 +72,7 @@
 
     [self setupUI];
 
-    [self updateOrderBookPredicate];
-    [self createSortDescriptorsForArrayController];
+    [self setupArrayController];
 }
 
 - (void)viewWillAppear {
@@ -86,7 +86,7 @@
 #pragma mark - Action methods
 #pragma mark | Payment Options
 - (IBAction)noSEPAPaymentOptionFilterButtonAction:(NSButton *)sender {
-    [self updateOrderBookPredicate];
+    [self updatePaymentOptionPredicate];
 
     [SOXPreferenceCenter setSepaPaymentFilterOption:sender.state
                                        forOrderType:self.orderType
@@ -98,6 +98,10 @@
     NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"MacMain"
                                                          bundle:nil];
     SOXFilterOrderViewController *viewController = [storyboard instantiateControllerWithIdentifier:@"SOXFilterOrderViewControllerIdentifier"];
+    viewController.delegate = self;
+    viewController.orderType = self.orderType;
+    viewController.currencyType = self.currencyType;
+
 
     // Create popover
     self.furtherFilterPopover = [[NSPopover alloc] init];
@@ -105,7 +109,6 @@
     [self.furtherFilterPopover setBehavior:NSPopoverBehaviorTransient];
     [self.furtherFilterPopover setAnimates:YES];
     [self.furtherFilterPopover setContentViewController:viewController];
-    self.furtherFilterPopover.delegate = self;
 
     // Convert point to main window coordinates
     NSRect entryRect = [sender convertRect:sender.bounds
@@ -154,6 +157,13 @@
     self.noSEPAPaymentOptionFilterButton.state = noSEPAButtonControlState;
 }
 
+- (void)setupArrayController {
+    NSArray *selectedCountriesFromPrefs = [SOXPreferenceCenter activeCountryCodesforOrderType:self.orderType
+                                                                                 currencyType:self.currencyType];
+    [self updateSelectedCountriesPredicateForCounties:selectedCountriesFromPrefs];
+    [self updateOrderBookPredicate];
+    [self createSortDescriptorsForArrayController];
+}
 
 - (void)requestServerData {
     [self enableSpinningWheel];
@@ -211,31 +221,56 @@
 
 #pragma mark | Array Controller Predicate Methods
 - (void)updateOrderBookPredicate {
+    NSMutableArray *subPredicates = [NSMutableArray array];
     if (self.paymentOptionPredicate) {
-        self.orderBookPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[[self paymentOptionPredicate]
-                                                                                       ]];
+        [subPredicates addObject:self.paymentOptionPredicate];
     }
 
     if (self.seatOfBankPredicate) {
-        self.orderBookPredicate = self.seatOfBankPredicate;
+        [subPredicates addObject:self.seatOfBankPredicate];
+    }
+
+    if (subPredicates.count > 0) {
+        self.orderBookPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:subPredicates];
     }
     else {
         self.orderBookPredicate = nil;
     }
 }
 
-- (NSPredicate *)paymentOptionPredicate {
+- (void)updatePaymentOptionPredicate {
+    NSPredicate *paymentOptionPredicate = nil;
     if (self.noSEPAPaymentOptionFilterButton.state == NSControlStateValueOn) {
-        NSPredicate *paymentOptionPredicate;
         paymentOptionPredicate = [NSPredicate predicateWithFormat:
                                   @"orderRequirements_paymentOption == %@"
                                   " OR orderRequirements_paymentOption == %@"
                                   , @(BitcoinDE_PaymentOptionExpressOnly)
                                   , @(BitcoinDE_PaymentOptionExpressAndSepa)];
-        return paymentOptionPredicate;
     }
 
-    return nil;
+    self.paymentOptionPredicate = paymentOptionPredicate;
+}
+
+- (void)updateSelectedCountriesPredicateForCounties:(NSArray *)selectedCountryCodes {
+    NSPredicate *selectedCountriesPredicate = nil;
+    if (selectedCountryCodes.count > 0) {
+        selectedCountriesPredicate = [NSPredicate predicateWithFormat:
+                                            @"tradingPartnerInformation_seatOfBank IN %@"
+                                            , selectedCountryCodes];
+    }
+
+    self.seatOfBankPredicate = selectedCountriesPredicate;
+}
+
+#pragma mark - Manual Setters
+- (void)setPaymentOptionPredicate:(NSPredicate *)paymentOptionPredicate {
+    _paymentOptionPredicate = paymentOptionPredicate;
+    [self updateOrderBookPredicate];
+}
+
+-(void)setSeatOfBankPredicate:(NSPredicate *)seatOfBankPredicate {
+    _seatOfBankPredicate = seatOfBankPredicate;
+    [self updateOrderBookPredicate];
 }
 
 #pragma mark - Table view handling
@@ -370,25 +405,15 @@
     [[SOXMarket_BitcoinDE_Core sharedCore] startAccountInfoUpdate];
 }
 
-#pragma mark - NSPopoverDelegate
-- (void)popoverDidClose:(NSNotification *)notification {
-
-    if (notification.object == self.furtherFilterPopover) {
-        SOXFilterOrderViewController *filterOrderViewController = (SOXFilterOrderViewController *)self.furtherFilterPopover.contentViewController;
-        NSArray *selectedCountryCodes = filterOrderViewController.selectedCountryCodes;
-        if (selectedCountryCodes.count > 0
-            && !self.seatOfBankPredicate) {
-            NSPredicate *seatOfBankPredicate = [NSPredicate predicateWithFormat:
-                                                @"tradingPartnerInformation_seatOfBank IN %@"
-                                                , selectedCountryCodes];
-            self.seatOfBankPredicate = seatOfBankPredicate;
-
-        }
-        else {
-            self.seatOfBankPredicate = nil;
-        }
-        [self updateOrderBookPredicate];
+#pragma mark - SOXFilterOrderViewControllerDelegate
+- (void)filterSelectionChangedForKey:(NSString *)key withObject:(id)object {
+    if (key == FilterOrderViewSelectedCountriesKey) {
+        NSParameterAssert([object isKindOfClass:[NSArray class]]);
+        [self updateSelectedCountriesPredicateForCounties:object];
     }
-
+    else {
+        NSAssert(NO, @"Unknown key %@", key);
+    }
 }
+
 @end

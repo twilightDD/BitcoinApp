@@ -24,7 +24,8 @@
 
 
     NSArray <NSString *> *supportedCountryCodes = [SOXPreferenceCenter supportedCountryCodes];
-    NSArray <NSString *> *activeCountryCodes = [SOXPreferenceCenter activeCountryCodes];
+    NSSet <NSString *> *activeCountryCodes = [SOXPreferenceCenter activeCountryCodesforOrderType:self.orderType
+                                                                                    currencyType:self.currencyType];
 
     __block NSMutableArray *countryButtons = [NSMutableArray array];
 
@@ -44,28 +45,23 @@
                                                        target:nil
                                                        action:nil];
         countryButton.tag = idx;
+        countryButton.state = [activeCountryCodes containsObject:countryCode] ? NSControlStateValueOn : NSControlStateValueOff;
+        countryButton.target = self;
+        SEL countryButtonActionSelector = NSSelectorFromString(@"countryButtonAction:");
+        countryButton.action = countryButtonActionSelector;
 
-        if ([activeCountryCodes containsObject:countryCode]) {
-            countryButton.state = NSControlStateValueOn;
+
+        // set position
+        {
+
+            if (idx % 10 == 0) {
+                currentX = currentX + width;
+                currentY = basicY;
+            }
+            currentY = currentY + deltaY;
+            countryButton.frame = CGRectMake(currentX, currentY, width, height);
+            [countryButtons addObject:countryButton];
         }
-        else {
-            countryButton.state = NSControlStateValueOff;
-        }
-
-        NSLog(@" idx: %tu => rest %tu",idx,  idx % 10);
-
-        if (idx % 10 == 0) {
-            // nächste Spalte
-            currentX = currentX + width;
-            currentY = basicY;
-        }
-
-        currentY = currentY + deltaY;
-
-        countryButton.frame = CGRectMake(currentX, currentY, width, height);
-
-        [countryButtons addObject:countryButton];
-
         [self.view addSubview:countryButton];
 
     }];
@@ -89,6 +85,28 @@
     }];
 
     return selectedCountryCodes.copy;
-
 }
+
+#pragma mark - Action methods
+- (void)countryButtonAction:(NSButton *)button {
+    NSArray *selectedCountryCodes = [self selectedCountryCodes];
+    [self informDelegateForKey:FilterOrderViewSelectedCountriesKey
+                    withObject:selectedCountryCodes];
+
+    // Update userDefaults
+    NSString *countryCode = [[SOXPreferenceCenter supportedCountryCodes] objectAtIndex:button.tag];
+    [SOXPreferenceCenter toggleActiveCountryCode:countryCode
+                                    forOrderType:self.orderType
+                                    currencyType:self.currencyType];
+}
+
+#pragma mark - Inform delegate
+- (void)informDelegateForKey:(NSString *)key withObject:(id)object {
+    NSParameterAssert(key);
+    NSParameterAssert(object);
+
+    [self.delegate filterSelectionChangedForKey:key
+                                     withObject:object];
+}
+
 @end

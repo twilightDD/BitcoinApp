@@ -5207,7 +5207,7 @@ Gw
         <scene sceneID="xFH-Tp-JmA">
             <objects>
                 <viewController identifier="SOXFilterOrderViewControllerIdentifier" storyboardIdentifier="SOXFilterOrderViewControllerIdentifier" id="NT5-07-VYi" customClass="SOXFilterOrderViewController" sceneMemberID="viewController">
-                    <view key="view" id="eCx-9e-aa0">
+                    <view key="view" id="eCx-9e-aa0" customClass="SOXView">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="293"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </view>
