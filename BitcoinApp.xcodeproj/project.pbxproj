@@ -202,6 +202,8 @@
 		D0F70263216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F70260216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.m */; };
 		D0F70264216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F70261216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.xib */; };
 		D0F70265216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F70261216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.xib */; };
+		D0F70271216AEA8800BA7EDF /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F7026F216AEA8800BA7EDF /* MASPreferencesWindow.xib */; };
+		D0F70272216AEA8C00BA7EDF /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F7026F216AEA8800BA7EDF /* MASPreferencesWindow.xib */; };
 		D0FFEA5B212223E2000F09FF /* SOXPageData.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FFEA5A212223E2000F09FF /* SOXPageData.m */; };
 		D0FFEA5C212223E2000F09FF /* SOXPageData.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FFEA5A212223E2000F09FF /* SOXPageData.m */; };
 		D0FFEA5F212223F9000F09FF /* SOXPage_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FFEA5E212223F9000F09FF /* SOXPage_BitcoinDE_Data.m */; };
@@ -395,6 +397,7 @@
 		D0F7025F216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXKeysAndSecretPreferenceViewController.h; sourceTree = "<group>"; };
 		D0F70260216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXKeysAndSecretPreferenceViewController.m; sourceTree = "<group>"; };
 		D0F70261216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SOXKeysAndSecretPreferenceViewController.xib; sourceTree = "<group>"; };
+		D0F70270216AEA8800BA7EDF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Pods/MASPreferences/Framework/en.lproj/MASPreferencesWindow.xib; sourceTree = "<group>"; };
 		D0FFEA59212223E2000F09FF /* SOXPageData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXPageData.h; sourceTree = "<group>"; };
 		D0FFEA5A212223E2000F09FF /* SOXPageData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXPageData.m; sourceTree = "<group>"; };
 		D0FFEA5D212223F9000F09FF /* SOXPage_BitcoinDE_Data.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXPage_BitcoinDE_Data.h; sourceTree = "<group>"; };
@@ -643,6 +646,7 @@
 		D063E90C1E74BF97006E2D17 = {
 			isa = PBXGroup;
 			children = (
+				D0F7026F216AEA8800BA7EDF /* MASPreferencesWindow.xib */,
 				D049C4491E77082D003CBF36 /* Common Classes */,
 				D063E9171E74BF97006E2D17 /* Mac BitcoinApp */,
 				D063E9311E74BF97006E2D17 /* Mac BitcoinAppTests */,
@@ -1013,6 +1017,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0F70271216AEA8800BA7EDF /* MASPreferencesWindow.xib in Resources */,
 				D025897920E424FC0074CBC2 /* SOXMainPreferencesWindowController.xib in Resources */,
 				D021509620474AEC005A0932 /* Assets.xcassets in Resources */,
 				D021509720474AEC005A0932 /* MacMain.storyboard in Resources */,
@@ -1027,6 +1032,7 @@
 			files = (
 				D025897820E424FC0074CBC2 /* SOXMainPreferencesWindowController.xib in Resources */,
 				D063E9251E74BF97006E2D17 /* Assets.xcassets in Resources */,
+				D0F70272216AEA8C00BA7EDF /* MASPreferencesWindow.xib in Resources */,
 				D063E9281E74BF97006E2D17 /* MacMain.storyboard in Resources */,
 				D0EB0E551F855B54004839C2 /* SOXLogWindowController.xib in Resources */,
 				D0F70264216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.xib in Resources */,
@@ -1535,6 +1541,14 @@
 				D063E9551E74C024006E2D17 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D0F7026F216AEA8800BA7EDF /* MASPreferencesWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D0F70270216AEA8800BA7EDF /* en */,
+			);
+			name = MASPreferencesWindow.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
