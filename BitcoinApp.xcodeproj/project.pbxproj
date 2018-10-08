@@ -84,6 +84,10 @@
 		D025897F20E42AA50074CBC2 /* SOXWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D025897C20E42AA50074CBC2 /* SOXWindowController.m */; };
 		D0270AE41E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m in Sources */ = {isa = PBXBuildFile; fileRef = D0270AE31E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m */; };
 		D0270AE51E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m in Sources */ = {isa = PBXBuildFile; fileRef = D0270AE31E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m */; };
+		D02AA772216BF4A500F2EA95 /* SOXDebugPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D02AA770216BF4A500F2EA95 /* SOXDebugPreferencesViewController.m */; };
+		D02AA773216BF4A500F2EA95 /* SOXDebugPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D02AA770216BF4A500F2EA95 /* SOXDebugPreferencesViewController.m */; };
+		D02AA774216BF4A500F2EA95 /* SOXDebugPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D02AA771216BF4A500F2EA95 /* SOXDebugPreferencesViewController.xib */; };
+		D02AA775216BF4A500F2EA95 /* SOXDebugPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D02AA771216BF4A500F2EA95 /* SOXDebugPreferencesViewController.xib */; };
 		D02ED5AC1E814CA600AA9448 /* SOXAccountInfo_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D02ED5A91E814CA600AA9448 /* SOXAccountInfo_BitcoinDE_Data.m */; };
 		D02ED5AD1E814CA600AA9448 /* SOXAccountInfo_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D02ED5A91E814CA600AA9448 /* SOXAccountInfo_BitcoinDE_Data.m */; };
 		D02ED5AE1E814CA600AA9448 /* SOXDataConverter_BitcoinDE.m in Sources */ = {isa = PBXBuildFile; fileRef = D02ED5AB1E814CA600AA9448 /* SOXDataConverter_BitcoinDE.m */; };
@@ -263,6 +267,9 @@
 		D025897C20E42AA50074CBC2 /* SOXWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXWindowController.m; sourceTree = "<group>"; };
 		D0270AE21E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXSocketIO_BitcoinDE_Core.h; sourceTree = "<group>"; };
 		D0270AE31E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXSocketIO_BitcoinDE_Core.m; sourceTree = "<group>"; };
+		D02AA76F216BF4A500F2EA95 /* SOXDebugPreferencesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXDebugPreferencesViewController.h; sourceTree = "<group>"; };
+		D02AA770216BF4A500F2EA95 /* SOXDebugPreferencesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXDebugPreferencesViewController.m; sourceTree = "<group>"; };
+		D02AA771216BF4A500F2EA95 /* SOXDebugPreferencesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SOXDebugPreferencesViewController.xib; sourceTree = "<group>"; };
 		D02ED5A81E814CA600AA9448 /* SOXAccountInfo_BitcoinDE_Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXAccountInfo_BitcoinDE_Data.h; sourceTree = "<group>"; };
 		D02ED5A91E814CA600AA9448 /* SOXAccountInfo_BitcoinDE_Data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXAccountInfo_BitcoinDE_Data.m; sourceTree = "<group>"; };
 		D02ED5AA1E814CA600AA9448 /* SOXDataConverter_BitcoinDE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXDataConverter_BitcoinDE.h; sourceTree = "<group>"; };
@@ -847,6 +854,9 @@
 				D0F7027A216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.h */,
 				D0F7027B216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.m */,
 				D0F7027C216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.xib */,
+				D02AA76F216BF4A500F2EA95 /* SOXDebugPreferencesViewController.h */,
+				D02AA770216BF4A500F2EA95 /* SOXDebugPreferencesViewController.m */,
+				D02AA771216BF4A500F2EA95 /* SOXDebugPreferencesViewController.xib */,
 			);
 			path = PreferenceViewControllers;
 			sourceTree = "<group>";
@@ -1033,6 +1043,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D02AA775216BF4A500F2EA95 /* SOXDebugPreferencesViewController.xib in Resources */,
 				D0F70271216AEA8800BA7EDF /* MASPreferencesWindow.xib in Resources */,
 				D025897920E424FC0074CBC2 /* SOXMainPreferencesWindowController.xib in Resources */,
 				D021509620474AEC005A0932 /* Assets.xcassets in Resources */,
@@ -1047,6 +1058,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D02AA774216BF4A500F2EA95 /* SOXDebugPreferencesViewController.xib in Resources */,
 				D025897820E424FC0074CBC2 /* SOXMainPreferencesWindowController.xib in Resources */,
 				D063E9251E74BF97006E2D17 /* Assets.xcassets in Resources */,
 				D0F70272216AEA8C00BA7EDF /* MASPreferencesWindow.xib in Resources */,
@@ -1316,6 +1328,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D02AA773216BF4A500F2EA95 /* SOXDebugPreferencesViewController.m in Sources */,
 				D021505E20474AEC005A0932 /* BitcoinApp.xcdatamodeld in Sources */,
 				D0565BD621348DF7002E0E21 /* SOXPagingAbstractViewController.m in Sources */,
 				D021505F20474AEC005A0932 /* SOXAccountLedger_BitcoinDE_Data.m in Sources */,
@@ -1390,6 +1403,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D02AA772216BF4A500F2EA95 /* SOXDebugPreferencesViewController.m in Sources */,
 				D063E9231E74BF97006E2D17 /* BitcoinApp.xcdatamodeld in Sources */,
 				D0565BD521348DF7002E0E21 /* SOXPagingAbstractViewController.m in Sources */,
 				D0B3F1311E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m in Sources */,

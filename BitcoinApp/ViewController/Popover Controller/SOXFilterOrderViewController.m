@@ -21,19 +21,23 @@
 - (void)viewWillAppear {
     [super viewWillAppear];
 
+    [self setupCountryButtons];
+}
+
+- (void)setupCountryButtons {
     NSArray <NSString *> *supportedCountryCodes = [SOXPreferenceCenter supportedCountryCodes];
     NSArray <NSString *> *activeCountryCodes = [SOXPreferenceCenter activeCountryCodesforOrderType:self.orderType
-                                                                                    currencyType:self.currencyType];
-    
+                                                                                      currencyType:self.currencyType];
+
     __block NSMutableArray *countryButtons = [NSMutableArray array];
-    
+
     __block CGFloat basicX = 20;
     CGFloat basicY = 20;
     CGFloat deltaX = 58;
     CGFloat deltaY = 24;
     CGFloat height = 16;
     CGFloat width = 50;
-    
+
     __block CGFloat currentX = 0;
     __block CGFloat currentY = 0;
     [supportedCountryCodes enumerateObjectsUsingBlock:^(NSString * _Nonnull countryCode
@@ -60,10 +64,9 @@
         [self.view addSubview:countryButton];
         [countryButtons addObject:countryButton];
     }];
-    
+
     self.countryButtons = countryButtons.copy;
 }
-
 
 - (NSArray <NSString *> *)selectedCountryCodes {
     NSArray <NSString *> *supportedCountryCodes = [SOXPreferenceCenter supportedCountryCodes];

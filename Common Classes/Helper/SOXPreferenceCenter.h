@@ -11,6 +11,7 @@
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
 @interface SOXPreferenceCenter : NSObject
++ (void)resetAllSettings;
 
 + (BOOL)defaultKYCOnly;
 + (BOOL)new_order_for_remaining_amount;
@@ -32,6 +33,8 @@
 + (NSArray <NSString *> *)supportedCountryCodes;
 + (NSArray <NSString *> *)activeCountryCodesforOrderType:(BitcoinDE_OrderType)orderType
                                             currencyType:(BitcoinDE_CurrencyType)currencyType;
++ (NSArray <NSString *> *)activeCountryCodes;
++ (void)setActiveCountryCodes:(NSArray <NSString *> *)activeCountryCodes;
 + (void)toggleActiveCountryCode:(NSString *)countryCode
                    forOrderType:(BitcoinDE_OrderType)orderType
                    currencyType:(BitcoinDE_CurrencyType)currencyType;

@@ -20,6 +20,7 @@
 #import "MASPreferences.h"
 #import "SOXKeysAndSecretPreferenceViewController.h"
 #import "SOXSelectedCountriesPreferenceViewController.h"
+#import "SOXDebugPreferencesViewController.h"
 
 
 @interface MacAppDelegate ()
@@ -95,10 +96,12 @@
     = [[SOXSelectedCountriesPreferenceViewController alloc] initWithNibName:@"SOXSelectedCountriesPreferenceViewController"
                                                                      bundle:nil];
 
+    SOXDebugPreferencesViewController * debugPreferencesViewController = [[SOXDebugPreferencesViewController alloc] initWithNibName:@"SOXDebugPreferencesViewController" bundle:nil];
 
     NSArray *subPreferenceControllers = @[
                                           keyAndSecretPreferencesViewController,
                                           selectedCountriesPreferenceViewController,
+                                          debugPreferencesViewController,
                                           ];
 
     MASPreferencesWindowController *masPreferencesWindowController

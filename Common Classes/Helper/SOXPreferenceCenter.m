@@ -12,6 +12,37 @@ static NSString *OrderViewControllerSEPAKey = @"noSepaPaymentOptionFilter";
 static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
 
 @implementation SOXPreferenceCenter
++ (void)resetAllSettings {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *dictionaryRepresentation = [userDefaults dictionaryRepresentation];
+    NSLog(@"öööö dictionaryRepresentation öööö");
+    NSLog(@"keys before: %tu", dictionaryRepresentation.allKeys.count);
+
+
+    [self removeUserDefaultForKey:OrderViewControllerCountryCodeKey];
+
+    for (BitcoinDE_OrderType orderType = BitcoinDE_BuyOrderType;
+         orderType < BitcoinDE_OrderType_EndOfType;
+         orderType++) {
+        for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeBitcoin;
+             currencyType <BitcoinDE_CurrencyType_EndOfType;
+             currencyType++) {
+            NSString *userDefaultKey = [self userDefaultKeyForDomain:OrderViewControllerCountryCodeKey
+                                                           orderType:orderType
+                                                        currencyType:currencyType];
+            [self removeUserDefaultForKey:userDefaultKey];
+
+            userDefaultKey = [self userDefaultKeyForDomain:OrderViewControllerSEPAKey
+                                                 orderType:orderType
+                                              currencyType:currencyType];
+            [self removeUserDefaultForKey:userDefaultKey];
+        }
+    }
+    dictionaryRepresentation = [userDefaults dictionaryRepresentation];
+    NSLog(@"keys after: %tu", dictionaryRepresentation.allKeys.count);
+}
+
+
 
 + (BOOL)defaultKYCOnly {
     return YES;
@@ -80,10 +111,11 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
 
 #pragma mark - Country Codes
 + (NSArray *)defaultTradingCountries {
-    NSArray *defaultTradingCountries = [NSArray arrayWithObjects:@"DE", nil];
+    NSArray *defaultTradingCountries = [NSArray arrayWithObjects:@"AT", @"CH", @"DE", nil];
     
     return defaultTradingCountries;
 }
+
 + (NSArray <NSString *> *)supportedCountryCodes {
     static dispatch_once_t pred;
     static NSArray *supportedCountryCodes = nil;
@@ -135,6 +167,39 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
     
     return activeCountryCodes;
 }
+
++ (NSArray <NSString *> *)activeCountryCodes {
+    NSString *userDefaultKey = OrderViewControllerCountryCodeKey;
+    NSArray *userDefaultsValue = [self userDefaultForKey:userDefaultKey];
+    if (userDefaultsValue == nil) {
+        userDefaultsValue = [self defaultTradingCountries];
+        [self setUserDefaultObject:userDefaultsValue
+                            forKey:userDefaultKey];
+    }
+
+    return userDefaultsValue;
+}
+
++ (void)setActiveCountryCodes:(NSArray <NSString *> *)activeCountryCodes {
+    for (BitcoinDE_OrderType orderType = BitcoinDE_BuyOrderType;
+         orderType < BitcoinDE_OrderType_EndOfType;
+         orderType++) {
+        for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeBitcoin;
+             currencyType <BitcoinDE_CurrencyType_EndOfType;
+             currencyType++) {
+            NSString *userDefaultKey = [self userDefaultKeyForDomain:OrderViewControllerCountryCodeKey
+                                                           orderType:orderType
+                                                        currencyType:currencyType];
+            NSLog(@"orderType: %@ currencyType: %@, count of countryCodes: %tu"
+                  , [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:orderType]
+                  , [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType]
+                  , activeCountryCodes.count);
+            [self setUserDefaultObject:activeCountryCodes
+                                forKey:userDefaultKey];
+        }
+    }
+}
+
 
 + (void)toggleActiveCountryCode:(NSString *)countryCode
                    forOrderType:(BitcoinDE_OrderType)orderType
