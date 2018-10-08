@@ -190,14 +190,14 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
             NSString *userDefaultKey = [self userDefaultKeyForDomain:OrderViewControllerCountryCodeKey
                                                            orderType:orderType
                                                         currencyType:currencyType];
-            NSLog(@"orderType: %@ currencyType: %@, count of countryCodes: %tu"
-                  , [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:orderType]
-                  , [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType]
-                  , activeCountryCodes.count);
             [self setUserDefaultObject:activeCountryCodes
                                 forKey:userDefaultKey];
         }
     }
+
+    // Inform all orderViewControllers of changes in global "active country codes"-list
+    [[NSNotificationCenter defaultCenter] postNotificationName:ActiveCountryCodesPreferencesDidChangeNotification
+                                                        object:activeCountryCodes];
 }
 
 

@@ -46,6 +46,9 @@
 @property (nonatomic, copy) NSString *currencyTypeString;
 
 @property (nonatomic, strong) NSPopover *furtherFilterPopover;
+
+@property (strong, nonatomic) id activeCountryCodesPreferencesDidChangeObserver;
+
 @end
 
 #pragma mark - Implementation
@@ -73,6 +76,8 @@
     [self setupUI];
     
     [self setupArrayController];
+    
+    [self setupObservers];
 }
 
 - (void)viewWillAppear {
@@ -81,6 +86,10 @@
     
     [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
                                                         object:@(self.currencyType)];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self.activeCountryCodesPreferencesDidChangeObserver];
 }
 
 #pragma mark - Action methods
@@ -163,6 +172,17 @@
     [self updateSelectedCountriesPredicateForCounties:selectedCountriesFromPrefs];
     [self updateOrderBookPredicate];
     [self createSortDescriptorsForArrayController];
+}
+
+- (void)setupObservers {
+    self.activeCountryCodesPreferencesDidChangeObserver =
+    [[NSNotificationCenter defaultCenter] addObserverForName:ActiveCountryCodesPreferencesDidChangeNotification
+                                                      object:nil
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification * _Nonnull note) {
+                                                      NSArray *activeCountryCodes = note.object;
+                                                      [self updateSelectedCountriesPredicateForCounties:activeCountryCodes];
+                                                  }];
 }
 
 - (void)requestServerData {

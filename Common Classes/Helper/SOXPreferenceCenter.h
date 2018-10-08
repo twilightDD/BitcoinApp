@@ -10,6 +10,9 @@
 
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
+static NSString *ActiveCountryCodesPreferencesDidChangeNotification = @"ActiveCountryCodesPreferencesDidChangeNotification";
+
+
 @interface SOXPreferenceCenter : NSObject
 + (void)resetAllSettings;
 
