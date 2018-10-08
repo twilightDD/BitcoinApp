@@ -185,13 +185,4 @@
     return @"Keys and Secrets";
 }
 
-- (BOOL)hasResizableWidth {
-    return YES;
-}
-
-- (BOOL)hasResizableHeight {
-    return YES;
-}
-
-
 @end
