@@ -39,6 +39,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.errorWindowController = [(MacAppDelegate*)[[NSApplication sharedApplication] delegate] errorWindowController];
+
+    for (NSTableColumn *column in self.tableView.tableColumns) {
+        NSFont *font = [NSFont systemFontOfSize:[NSFont systemFontSize]];
+
+        if ([NSFont respondsToSelector:@selector(monospacedDigitSystemFontOfSize:weight:)]) {
+            font = [NSFont monospacedDigitSystemFontOfSize:[NSFont systemFontSize]
+                                                    weight:NSFontWeightRegular];
+        }
+
+        [column.dataCell setFont:font];
+    }
 }
 
 - (void)viewWillAppear {
@@ -170,11 +181,17 @@
 }
 
 #pragma mark - MASPreferencesViewController
-- (NSString *)viewIdentifier {
-    return NSStringFromClass([self class]);
-}
-
 - (NSString *)toolbarItemLabel {
     return @"Keys and Secrets";
 }
+
+- (BOOL)hasResizableWidth {
+    return YES;
+}
+
+- (BOOL)hasResizableHeight {
+    return YES;
+}
+
+
 @end
