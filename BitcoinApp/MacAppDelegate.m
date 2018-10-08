@@ -19,6 +19,7 @@
 // Prefs
 #import "MASPreferences.h"
 #import "SOXKeysAndSecretPreferenceViewController.h"
+#import "SOXSelectedCountriesPreferenceViewController.h"
 
 
 @interface MacAppDelegate ()
@@ -90,10 +91,14 @@
     = [[SOXKeysAndSecretPreferenceViewController alloc] initWithNibName:@"SOXKeysAndSecretPreferenceViewController"
                                                                  bundle:nil];
 
+    SOXSelectedCountriesPreferenceViewController *selectedCountriesPreferenceViewController
+    = [[SOXSelectedCountriesPreferenceViewController alloc] initWithNibName:@"SOXSelectedCountriesPreferenceViewController"
+                                                                     bundle:nil];
+
 
     NSArray *subPreferenceControllers = @[
                                           keyAndSecretPreferencesViewController,
-
+                                          selectedCountriesPreferenceViewController,
                                           ];
 
     MASPreferencesWindowController *masPreferencesWindowController

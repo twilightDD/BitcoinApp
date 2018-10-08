@@ -206,6 +206,10 @@
 		D0F70272216AEA8C00BA7EDF /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F7026F216AEA8800BA7EDF /* MASPreferencesWindow.xib */; };
 		D0F70276216AECE900BA7EDF /* SOXAbstractPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F70274216AECE900BA7EDF /* SOXAbstractPreferenceViewController.m */; };
 		D0F70277216AECE900BA7EDF /* SOXAbstractPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F70274216AECE900BA7EDF /* SOXAbstractPreferenceViewController.m */; };
+		D0F7027D216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F7027B216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.m */; };
+		D0F7027E216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F7027B216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.m */; };
+		D0F7027F216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F7027C216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.xib */; };
+		D0F70280216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F7027C216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.xib */; };
 		D0FFEA5B212223E2000F09FF /* SOXPageData.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FFEA5A212223E2000F09FF /* SOXPageData.m */; };
 		D0FFEA5C212223E2000F09FF /* SOXPageData.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FFEA5A212223E2000F09FF /* SOXPageData.m */; };
 		D0FFEA5F212223F9000F09FF /* SOXPage_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FFEA5E212223F9000F09FF /* SOXPage_BitcoinDE_Data.m */; };
@@ -402,6 +406,9 @@
 		D0F70270216AEA8800BA7EDF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Pods/MASPreferences/Framework/en.lproj/MASPreferencesWindow.xib; sourceTree = "<group>"; };
 		D0F70273216AECE900BA7EDF /* SOXAbstractPreferenceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXAbstractPreferenceViewController.h; sourceTree = "<group>"; };
 		D0F70274216AECE900BA7EDF /* SOXAbstractPreferenceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXAbstractPreferenceViewController.m; sourceTree = "<group>"; };
+		D0F7027A216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXSelectedCountriesPreferenceViewController.h; sourceTree = "<group>"; };
+		D0F7027B216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXSelectedCountriesPreferenceViewController.m; sourceTree = "<group>"; };
+		D0F7027C216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SOXSelectedCountriesPreferenceViewController.xib; sourceTree = "<group>"; };
 		D0FFEA59212223E2000F09FF /* SOXPageData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXPageData.h; sourceTree = "<group>"; };
 		D0FFEA5A212223E2000F09FF /* SOXPageData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXPageData.m; sourceTree = "<group>"; };
 		D0FFEA5D212223F9000F09FF /* SOXPage_BitcoinDE_Data.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXPage_BitcoinDE_Data.h; sourceTree = "<group>"; };
@@ -837,6 +844,9 @@
 				D0F7025F216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.h */,
 				D0F70260216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.m */,
 				D0F70261216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.xib */,
+				D0F7027A216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.h */,
+				D0F7027B216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.m */,
+				D0F7027C216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.xib */,
 			);
 			path = PreferenceViewControllers;
 			sourceTree = "<group>";
@@ -1028,6 +1038,7 @@
 				D021509620474AEC005A0932 /* Assets.xcassets in Resources */,
 				D021509720474AEC005A0932 /* MacMain.storyboard in Resources */,
 				D021509820474AEC005A0932 /* SOXLogWindowController.xib in Resources */,
+				D0F70280216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.xib in Resources */,
 				D0F70265216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1041,6 +1052,7 @@
 				D0F70272216AEA8C00BA7EDF /* MASPreferencesWindow.xib in Resources */,
 				D063E9281E74BF97006E2D17 /* MacMain.storyboard in Resources */,
 				D0EB0E551F855B54004839C2 /* SOXLogWindowController.xib in Resources */,
+				D0F7027F216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.xib in Resources */,
 				D0F70264216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1341,6 +1353,7 @@
 				D021507B20474AEC005A0932 /* SOXDataConverter_BitcoinDE.m in Sources */,
 				D025897720E424FC0074CBC2 /* SOXMainPreferencesWindowController.m in Sources */,
 				D0C512F7215C335800B2B4B0 /* SOXFilterOrderViewController.m in Sources */,
+				D0F7027E216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.m in Sources */,
 				D021507C20474AEC005A0932 /* MacViewController.m in Sources */,
 				D021507D20474AEC005A0932 /* SOXKeys_BitcoinDE.m in Sources */,
 				D0FFEA60212223F9000F09FF /* SOXPage_BitcoinDE_Data.m in Sources */,
@@ -1414,6 +1427,7 @@
 				D02ED5AE1E814CA600AA9448 /* SOXDataConverter_BitcoinDE.m in Sources */,
 				D025897620E424FC0074CBC2 /* SOXMainPreferencesWindowController.m in Sources */,
 				D0C512F6215C335800B2B4B0 /* SOXFilterOrderViewController.m in Sources */,
+				D0F7027D216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.m in Sources */,
 				D063E9201E74BF97006E2D17 /* MacViewController.m in Sources */,
 				D0E5C5031E809C9800352985 /* SOXKeys_BitcoinDE.m in Sources */,
 				D0FFEA5F212223F9000F09FF /* SOXPage_BitcoinDE_Data.m in Sources */,
