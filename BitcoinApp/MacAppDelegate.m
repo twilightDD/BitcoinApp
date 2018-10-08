@@ -15,13 +15,17 @@
 #import "SOXErrorMessage_BitcoinDE.h"
 
 #import "SOXLogWindowController.h"
-#import "SOXMainPreferencesWindowController.h"
+
+// Prefs
+#import "MASPreferences.h"
+#import "SOXKeysAndSecretPreferenceViewController.h"
+
 
 @interface MacAppDelegate ()
 
 @property (readwrite, strong, nonatomic) SOXLogWindowController *errorWindowController;
 @property (readwrite, strong, nonatomic) SOXLogWindowController *eventWindowController;
-@property (readwrite, strong, nonatomic) SOXMainPreferencesWindowController *preferenceWindowController;
+@property (strong, nonatomic) MASPreferencesWindowController *masPreferencesWindowController;
 
 - (IBAction)saveAction:(id)sender;
 
@@ -61,22 +65,42 @@
                                                                                windowTitle:@"Errors"];
         self.eventWindowController = [[SOXLogWindowController alloc] initWithWindowNibName:SOXLogWindowControllerNibKey
                                                                                windowTitle:@"Events"];
-        self.preferenceWindowController = [[SOXMainPreferencesWindowController alloc] initWithWindowNibName:@"SOXMainPreferencesWindowController"
-                                                                                                windowTitle:@"Preferences"];
+//        self.preferenceWindowController = [[SOXMainPreferencesWindowController alloc] initWithWindowNibName:@"SOXMainPreferencesWindowController"
+//                                                                                                windowTitle:@"Preferences"];
     }
 
     // startup Preferences core
     
     [SOXPreferencesCore startupPreferencesCore];
-
+    [self setupPreferenceWindow];
     if ([SOXPreferencesCore validKeychain] == NO) {
         SOXErrorMessage_BitcoinDE *errorMessage = [[SOXErrorMessage_BitcoinDE alloc] initWithServerRequestTitle:@"No keys and secrets!"];
         errorMessage.errorMessage = @"Use Preference pane.";
         [self.errorWindowController presentErrorMessage:errorMessage];
 
         // open prefs
-        [self.preferenceWindowController showWindow:self];
+        [self.masPreferencesWindowController showWindow:self];
     }
+}
+
+- (void)setupPreferenceWindow {
+
+    // Keys and Secrets
+    SOXKeysAndSecretPreferenceViewController *keyAndSecretPreferencesViewController
+    = [[SOXKeysAndSecretPreferenceViewController alloc] initWithNibName:@"SOXKeysAndSecretPreferenceViewController"
+                                                                 bundle:nil];
+
+
+    NSArray *subPreferenceControllers = @[
+                                          keyAndSecretPreferencesViewController,
+
+                                          ];
+
+    MASPreferencesWindowController *masPreferencesWindowController
+    = [[MASPreferencesWindowController alloc] initWithViewControllers:subPreferenceControllers
+                                                                title:@"Preferences"];
+
+    self.masPreferencesWindowController = masPreferencesWindowController;
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -100,7 +124,7 @@
 }
 
 - (IBAction)showPreferencesWindow:(NSMenuItem *)sender {
-    [self.preferenceWindowController showWindow:self];
+    [self.masPreferencesWindowController showWindow:self];
 }
 
 #pragma mark - Core Data stack

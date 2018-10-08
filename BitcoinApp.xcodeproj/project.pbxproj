@@ -198,6 +198,10 @@
 		D0F70256216ABC4800BA7EDF /* SOXView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F70255216ABC4800BA7EDF /* SOXView.m */; };
 		D0F70257216ABC4800BA7EDF /* SOXView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F70255216ABC4800BA7EDF /* SOXView.m */; };
 		D0F70259216AE0AF00BA7EDF /* libPods-mac BitcoinApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0F70258216AE0AF00BA7EDF /* libPods-mac BitcoinApp.a */; };
+		D0F70262216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F70260216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.m */; };
+		D0F70263216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F70260216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.m */; };
+		D0F70264216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F70261216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.xib */; };
+		D0F70265216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F70261216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.xib */; };
 		D0FFEA5B212223E2000F09FF /* SOXPageData.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FFEA5A212223E2000F09FF /* SOXPageData.m */; };
 		D0FFEA5C212223E2000F09FF /* SOXPageData.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FFEA5A212223E2000F09FF /* SOXPageData.m */; };
 		D0FFEA5F212223F9000F09FF /* SOXPage_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FFEA5E212223F9000F09FF /* SOXPage_BitcoinDE_Data.m */; };
@@ -388,6 +392,9 @@
 		D0F70254216ABC4800BA7EDF /* SOXView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXView.h; sourceTree = "<group>"; };
 		D0F70255216ABC4800BA7EDF /* SOXView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXView.m; sourceTree = "<group>"; };
 		D0F70258216AE0AF00BA7EDF /* libPods-mac BitcoinApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libPods-mac BitcoinApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0F7025F216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXKeysAndSecretPreferenceViewController.h; sourceTree = "<group>"; };
+		D0F70260216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXKeysAndSecretPreferenceViewController.m; sourceTree = "<group>"; };
+		D0F70261216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SOXKeysAndSecretPreferenceViewController.xib; sourceTree = "<group>"; };
 		D0FFEA59212223E2000F09FF /* SOXPageData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXPageData.h; sourceTree = "<group>"; };
 		D0FFEA5A212223E2000F09FF /* SOXPageData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXPageData.m; sourceTree = "<group>"; };
 		D0FFEA5D212223F9000F09FF /* SOXPage_BitcoinDE_Data.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXPage_BitcoinDE_Data.h; sourceTree = "<group>"; };
@@ -526,6 +533,7 @@
 		D03C90D1213AACB800F1E358 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				D0F7025A216AE34F00BA7EDF /* PreferenceViewControllers */,
 				D063E91E1E74BF97006E2D17 /* MacViewController.h */,
 				D063E91F1E74BF97006E2D17 /* MacViewController.m */,
 				D03C90D3213AAD1100F1E358 /* Sheet View Controller */,
@@ -813,6 +821,16 @@
 			path = BitcoinApp/WindowController;
 			sourceTree = SOURCE_ROOT;
 		};
+		D0F7025A216AE34F00BA7EDF /* PreferenceViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D0F7025F216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.h */,
+				D0F70260216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.m */,
+				D0F70261216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.xib */,
+			);
+			path = PreferenceViewControllers;
+			sourceTree = "<group>";
+		};
 		F08DFCF58FEDEB149ECE41C9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -999,6 +1017,7 @@
 				D021509620474AEC005A0932 /* Assets.xcassets in Resources */,
 				D021509720474AEC005A0932 /* MacMain.storyboard in Resources */,
 				D021509820474AEC005A0932 /* SOXLogWindowController.xib in Resources */,
+				D0F70265216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1010,6 +1029,7 @@
 				D063E9251E74BF97006E2D17 /* Assets.xcassets in Resources */,
 				D063E9281E74BF97006E2D17 /* MacMain.storyboard in Resources */,
 				D0EB0E551F855B54004839C2 /* SOXLogWindowController.xib in Resources */,
+				D0F70264216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1317,6 +1337,7 @@
 				D021508020474AEC005A0932 /* main.m in Sources */,
 				D021508120474AEC005A0932 /* SOXAccountInfoData.m in Sources */,
 				D0D0B3E120EAB27100F12A6B /* SOXTableView.m in Sources */,
+				D0F70263216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.m in Sources */,
 				D021508220474AEC005A0932 /* SOXRatesData.m in Sources */,
 				D02150A920475965005A0932 /* SOXBalanceWithShortCurrencyValueTransformer.m in Sources */,
 				D021508320474AEC005A0932 /* SOXMaxAmountWithShortCurrencyValueTransformer.m in Sources */,
@@ -1388,6 +1409,7 @@
 				D063E91D1E74BF97006E2D17 /* main.m in Sources */,
 				D02ED5BA1E81546800AA9448 /* SOXAccountInfoData.m in Sources */,
 				D0D0B3E020EAB27100F12A6B /* SOXTableView.m in Sources */,
+				D0F70262216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.m in Sources */,
 				D02ED5B61E8152F900AA9448 /* SOXRatesData.m in Sources */,
 				D02150A820475965005A0932 /* SOXBalanceWithShortCurrencyValueTransformer.m in Sources */,
 				D0BCFCA420041496004F9E57 /* SOXMaxAmountWithShortCurrencyValueTransformer.m in Sources */,
