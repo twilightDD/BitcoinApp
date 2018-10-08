@@ -185,4 +185,9 @@
     return @"Keys and Secrets";
 }
 
+- (NSImage *)toolbarItemImage {
+    NSImage *image = [NSImage imageNamed:@"keyAndSecret"];
+    return image;
+}
+
 @end

@@ -23,4 +23,9 @@
 - (NSString *)toolbarItemLabel {
     return @"Selected countries";
 }
+
+- (NSImage *)toolbarItemImage {
+    NSImage *image = [NSImage imageNamed:@"countries"];
+    return image;
+}
 @end
