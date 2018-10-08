@@ -197,6 +197,7 @@
 		D0EB0E551F855B54004839C2 /* SOXLogWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0EB0E531F855B54004839C2 /* SOXLogWindowController.xib */; };
 		D0F70256216ABC4800BA7EDF /* SOXView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F70255216ABC4800BA7EDF /* SOXView.m */; };
 		D0F70257216ABC4800BA7EDF /* SOXView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F70255216ABC4800BA7EDF /* SOXView.m */; };
+		D0F70259216AE0AF00BA7EDF /* libPods-mac BitcoinApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0F70258216AE0AF00BA7EDF /* libPods-mac BitcoinApp.a */; };
 		D0FFEA5B212223E2000F09FF /* SOXPageData.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FFEA5A212223E2000F09FF /* SOXPageData.m */; };
 		D0FFEA5C212223E2000F09FF /* SOXPageData.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FFEA5A212223E2000F09FF /* SOXPageData.m */; };
 		D0FFEA5F212223F9000F09FF /* SOXPage_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FFEA5E212223F9000F09FF /* SOXPage_BitcoinDE_Data.m */; };
@@ -223,12 +224,11 @@
 
 /* Begin PBXFileReference section */
 		1D525E43B974F9030875B65E /* Pods-iOS BitcoinApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS BitcoinApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOS BitcoinApp/Pods-iOS BitcoinApp.debug.xcconfig"; sourceTree = "<group>"; };
-		1EF80332609510C6689CEB57 /* Pods-mac BitcoinApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mac BitcoinApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-mac BitcoinApp/Pods-mac BitcoinApp.release.xcconfig"; sourceTree = "<group>"; };
 		228030D7B20EAE4885C436F0 /* Pods-iOS BitcoinAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS BitcoinAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOS BitcoinAppTests/Pods-iOS BitcoinAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		337C676324C43B0D3C145DF6 /* libPods-mac BitcoinApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mac BitcoinApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D0783C647FCF9A0CC7D4A86 /* Pods-mac BitcoinApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mac BitcoinApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mac BitcoinApp/Pods-mac BitcoinApp.debug.xcconfig"; sourceTree = "<group>"; };
 		58B79D58838F5047E63DA16D /* libPods-mac BitcoinAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mac BitcoinAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC4280E57323ABE03DD1721 /* Pods-mac BitcoinAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mac BitcoinAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mac BitcoinAppTests/Pods-mac BitcoinAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		7480465E0A6F485CDAC18AD1 /* Pods-mac BitcoinApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mac BitcoinApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-mac BitcoinApp/Pods-mac BitcoinApp.release.xcconfig"; sourceTree = "<group>"; };
 		A243607ED1705CCF7ABD64B7 /* libPods-iOS BitcoinAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOS BitcoinAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B30DF34ECAF33459973BF538 /* Pods-mac BitcoinAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mac BitcoinAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mac BitcoinAppTests/Pods-mac BitcoinAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B7B5F5E2E05175F4B0DF93A6 /* Pods-iOS BitcoinAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS BitcoinAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOS BitcoinAppTests/Pods-iOS BitcoinAppTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -387,11 +387,13 @@
 		D0EB0E531F855B54004839C2 /* SOXLogWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SOXLogWindowController.xib; sourceTree = "<group>"; };
 		D0F70254216ABC4800BA7EDF /* SOXView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXView.h; sourceTree = "<group>"; };
 		D0F70255216ABC4800BA7EDF /* SOXView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXView.m; sourceTree = "<group>"; };
+		D0F70258216AE0AF00BA7EDF /* libPods-mac BitcoinApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libPods-mac BitcoinApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0FFEA59212223E2000F09FF /* SOXPageData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXPageData.h; sourceTree = "<group>"; };
 		D0FFEA5A212223E2000F09FF /* SOXPageData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXPageData.m; sourceTree = "<group>"; };
 		D0FFEA5D212223F9000F09FF /* SOXPage_BitcoinDE_Data.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXPage_BitcoinDE_Data.h; sourceTree = "<group>"; };
 		D0FFEA5E212223F9000F09FF /* SOXPage_BitcoinDE_Data.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXPage_BitcoinDE_Data.m; sourceTree = "<group>"; };
 		DF45B40D8F59179007F987AF /* libPods-iOS BitcoinApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOS BitcoinApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E377D484F4EA8D742A434C45 /* Pods-mac BitcoinApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mac BitcoinApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mac BitcoinApp/Pods-mac BitcoinApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -399,6 +401,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0F70259216AE0AF00BA7EDF /* libPods-mac BitcoinApp.a in Frameworks */,
 				D0D0B3E420EAC0E700F12A6B /* Security.framework in Frameworks */,
 				D021509320474AEC005A0932 /* Crashlytics.framework in Frameworks */,
 				D021509420474AEC005A0932 /* Fabric.framework in Frameworks */,
@@ -448,6 +451,7 @@
 		181B8FDF53AF076D5A1A38BD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D0F70258216AE0AF00BA7EDF /* libPods-mac BitcoinApp.a */,
 				D0D0B3E220EAC0DD00F12A6B /* Security.framework */,
 				D049C45E1E7721AC003CBF36 /* Fabric.framework */,
 				D049C45F1E7721AC003CBF36 /* Crashlytics.framework */,
@@ -818,8 +822,8 @@
 				B7B5F5E2E05175F4B0DF93A6 /* Pods-iOS BitcoinAppTests.release.xcconfig */,
 				B30DF34ECAF33459973BF538 /* Pods-mac BitcoinAppTests.debug.xcconfig */,
 				5DC4280E57323ABE03DD1721 /* Pods-mac BitcoinAppTests.release.xcconfig */,
-				4D0783C647FCF9A0CC7D4A86 /* Pods-mac BitcoinApp.debug.xcconfig */,
-				1EF80332609510C6689CEB57 /* Pods-mac BitcoinApp.release.xcconfig */,
+				E377D484F4EA8D742A434C45 /* Pods-mac BitcoinApp.debug.xcconfig */,
+				7480465E0A6F485CDAC18AD1 /* Pods-mac BitcoinApp.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1248,10 +1252,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-mac BitcoinApp/Pods-mac BitcoinApp-resources.sh",
+				"${PODS_ROOT}/MASPreferences/Framework/en.lproj/MASPreferencesWindow.xib",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MASPreferencesWindow.nib",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1514,7 +1520,7 @@
 /* Begin XCBuildConfiguration section */
 		D021509D20474AEC005A0932 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4D0783C647FCF9A0CC7D4A86 /* Pods-mac BitcoinApp.debug.xcconfig */;
+			baseConfigurationReference = E377D484F4EA8D742A434C45 /* Pods-mac BitcoinApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1531,6 +1537,11 @@
 					"COCOAPODS=1",
 					"PETER=1",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"/**",
+					"\"${PODS_ROOT}/Headers/Public/CocoaLumberjack\"",
+				);
 				INFOPLIST_FILE = "mac BitcoinApp copy-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.2sox.BitcoinApp;
@@ -1540,7 +1551,7 @@
 		};
 		D021509E20474AEC005A0932 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1EF80332609510C6689CEB57 /* Pods-mac BitcoinApp.release.xcconfig */;
+			baseConfigurationReference = 7480465E0A6F485CDAC18AD1 /* Pods-mac BitcoinApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1551,6 +1562,11 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/BitcoinApp/PrefixHeader.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"/**",
+					"\"${PODS_ROOT}/Headers/Public/CocoaLumberjack\"",
+				);
 				INFOPLIST_FILE = "mac BitcoinApp copy-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.2sox.BitcoinApp;
@@ -1663,7 +1679,7 @@
 		};
 		D063E9381E74BF97006E2D17 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4D0783C647FCF9A0CC7D4A86 /* Pods-mac BitcoinApp.debug.xcconfig */;
+			baseConfigurationReference = E377D484F4EA8D742A434C45 /* Pods-mac BitcoinApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1689,7 +1705,7 @@
 		};
 		D063E9391E74BF97006E2D17 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1EF80332609510C6689CEB57 /* Pods-mac BitcoinApp.release.xcconfig */;
+			baseConfigurationReference = 7480465E0A6F485CDAC18AD1 /* Pods-mac BitcoinApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;

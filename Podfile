@@ -22,6 +22,7 @@ target 'mac BitcoinApp' do
   pod 'socket.IO'
   pod 'CocoaLumberjack'
   pod 'SAMKeychain'
+  pod 'MASPreferences'
   
   target 'mac BitcoinAppTests' do
     inherit! :search_paths
