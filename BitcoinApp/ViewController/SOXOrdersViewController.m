@@ -110,14 +110,13 @@
     viewController.delegate = self;
     viewController.orderType = self.orderType;
     viewController.currencyType = self.currencyType;
-    
-    
+
     // Create popover
     self.furtherFilterPopover = [[NSPopover alloc] init];
-    // [self.furtherFilterPopover setContentSize:NSMakeSize(200.0, 200.0)];
     [self.furtherFilterPopover setBehavior:NSPopoverBehaviorTransient];
     [self.furtherFilterPopover setAnimates:YES];
     [self.furtherFilterPopover setContentViewController:viewController];
+    [self.furtherFilterPopover setContentSize:NSMakeSize(725, 300)];
     
     // Convert point to main window coordinates
     NSRect entryRect = [sender convertRect:sender.bounds
