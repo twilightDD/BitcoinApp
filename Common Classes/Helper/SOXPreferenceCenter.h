@@ -32,7 +32,7 @@ static NSString *ActiveCountryCodesPreferencesDidChangeNotification = @"ActiveCo
                       currencyType:(BitcoinDE_CurrencyType)currencyType;
 
 #pragma mark - Country Codes
-+ (NSArray *)defaultTradingCountries;
++ (NSArray *)defaultCountryCodes;
 + (NSArray <NSString *> *)supportedCountryCodes;
 + (NSArray <NSString *> *)activeCountryCodesforOrderType:(BitcoinDE_OrderType)orderType
                                             currencyType:(BitcoinDE_CurrencyType)currencyType;

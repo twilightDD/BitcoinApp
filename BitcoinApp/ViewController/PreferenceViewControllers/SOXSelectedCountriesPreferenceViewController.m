@@ -124,7 +124,7 @@
     }
 
     NSArray <NSString *> *supportedCountryCodes = [SOXPreferenceCenter supportedCountryCodes];
-    NSArray <NSString *> *defaultTradingCountries = [SOXPreferenceCenter defaultTradingCountries];
+    NSArray <NSString *> *defaultTradingCountries = [SOXPreferenceCenter defaultCountryCodes];
     for (NSString *defaultTradingCountry in defaultTradingCountries) {
         NSUInteger idx = [supportedCountryCodes indexOfObject:defaultTradingCountry];
         NSButton *countryButton = [self.countryButtons objectAtIndex:idx];

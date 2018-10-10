@@ -279,7 +279,7 @@
                                                                                         min_trust_level:self.trustLevel
                                                                                           only_kyc_full:self.reNewOrderButton.state
                                                                                          payment_option:[SOXPreferenceCenter defaultPaymentOptionForCreateOrder]
-                                                                                           seat_of_bank:[SOXPreferenceCenter defaultTradingCountries]];
+                                                                                           seat_of_bank:[SOXPreferenceCenter defaultCountryCodes]];
 
             DDLogInfo(@"Parameters:\n%@", parameters);
 

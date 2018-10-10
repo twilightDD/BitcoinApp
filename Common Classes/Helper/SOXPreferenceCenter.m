@@ -110,7 +110,7 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
 
 
 #pragma mark - Country Codes
-+ (NSArray *)defaultTradingCountries {
++ (NSArray *)defaultCountryCodes {
     NSArray *defaultTradingCountries = [NSArray arrayWithObjects:@"AT", @"CH", @"DE", nil];
     
     return defaultTradingCountries;
@@ -172,7 +172,7 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
     NSString *userDefaultKey = OrderViewControllerCountryCodeKey;
     NSArray *userDefaultsValue = [self userDefaultForKey:userDefaultKey];
     if (userDefaultsValue == nil) {
-        userDefaultsValue = [self defaultTradingCountries];
+        userDefaultsValue = [self defaultCountryCodes];
         [self setUserDefaultObject:userDefaultsValue
                             forKey:userDefaultKey];
     }
