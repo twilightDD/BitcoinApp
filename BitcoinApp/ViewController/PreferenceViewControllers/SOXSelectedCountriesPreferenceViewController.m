@@ -118,6 +118,11 @@
 }
 
 - (IBAction)enableDefaultButtonAction:(NSButton *)sender {
+    // disable all buttons
+    for (NSButton *countyButton in self.countryButtons) {
+        countyButton.state = NSControlStateValueOff;
+    }
+
     NSArray <NSString *> *supportedCountryCodes = [SOXPreferenceCenter supportedCountryCodes];
     NSArray <NSString *> *defaultTradingCountries = [SOXPreferenceCenter defaultTradingCountries];
     for (NSString *defaultTradingCountry in defaultTradingCountries) {
