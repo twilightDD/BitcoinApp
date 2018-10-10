@@ -9,8 +9,7 @@
 #import "SOXSelectedCountriesPreferenceViewController.h"
 
 #import "SOXPreferenceCenter.h"
-
-@class SOXView;
+#import "SOXView.h"
 
 #pragma mark - Interface
 @interface SOXSelectedCountriesPreferenceViewController ()
@@ -48,24 +47,29 @@
 }
 
 - (void)setupCountryButtons {
+    self.countrySelectionView.autoresizingMask = NSViewWidthSizable;
+
     NSArray <NSString *> *supportedCountryCodes = [SOXPreferenceCenter supportedCountryCodes];
+    NSArray <NSString *> *supportedCountryNames = [SOXPreferenceCenter supportedCountryNames];
     NSArray <NSString *> *activeCountryCodes = [SOXPreferenceCenter activeCountryCodes];
 
     __block NSMutableArray *countryButtons = [NSMutableArray array];
 
-    __block CGFloat basicX = 20;
+    CGFloat basicX = 20;
     CGFloat basicY = 20;
     CGFloat deltaX = 58;
     CGFloat deltaY = 24;
     CGFloat height = 16;
-    CGFloat width = 50;
+    CGFloat width = 190;
 
-    __block CGFloat currentX = 0;
-    __block CGFloat currentY = 0;
+    __block CGFloat currentX = basicX;
+    __block CGFloat currentY = basicY;
+
     [supportedCountryCodes enumerateObjectsUsingBlock:^(NSString * _Nonnull countryCode
                                                         , NSUInteger idx
                                                         , BOOL * _Nonnull stop) {
-        NSButton *countryButton = [NSButton checkboxWithTitle:countryCode
+        NSString *countryName = [supportedCountryNames objectAtIndex:idx];
+        NSButton *countryButton = [NSButton checkboxWithTitle:countryName
                                                        target:nil
                                                        action:nil];
         countryButton.tag = idx;
@@ -76,15 +80,18 @@
 
         // set position
         {
-            if (idx % 10 == 0) {
+            if (idx % 10 == 0
+                && idx != 0) {
                 currentX = currentX + width;
                 currentY = basicY;
             }
             currentY = currentY + deltaY;
             countryButton.frame = CGRectMake(currentX, currentY, width, height);
         }
-        [self.view addSubview:countryButton];
+        [self.countrySelectionView addSubview:countryButton];
+
         [countryButtons addObject:countryButton];
+
     }];
 
     self.countryButtons = countryButtons.copy;
@@ -154,4 +161,8 @@
     NSImage *image = [NSImage imageNamed:@"countries"];
     return image;
 }
+
+//-(BOOL)hasResizableWidth {
+//    return YES;
+//}
 @end
