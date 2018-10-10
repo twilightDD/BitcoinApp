@@ -272,13 +272,9 @@
 }
 
 - (void)updateSelectedCountriesPredicateForCounties:(NSArray *)selectedCountryCodes {
-    NSPredicate *selectedCountriesPredicate = nil;
-    if (selectedCountryCodes.count > 0) {
-        selectedCountriesPredicate = [NSPredicate predicateWithFormat:
-                                      @"tradingPartnerInformation_seatOfBank IN %@"
-                                      , selectedCountryCodes];
-    }
-    
+    NSPredicate *selectedCountriesPredicate = [NSPredicate predicateWithFormat:
+                                               @"tradingPartnerInformation_seatOfBank IN %@"
+                                               , selectedCountryCodes];
     self.seatOfBankPredicate = selectedCountriesPredicate;
 }
 
