@@ -15,9 +15,6 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
 + (void)resetAllSettings {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *dictionaryRepresentation = [userDefaults dictionaryRepresentation];
-    NSLog(@"öööö dictionaryRepresentation öööö");
-    NSLog(@"keys before: %tu", dictionaryRepresentation.allKeys.count);
-
 
     [self removeUserDefaultForKey:OrderViewControllerCountryCodeKey];
 
@@ -39,7 +36,6 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
         }
     }
     dictionaryRepresentation = [userDefaults dictionaryRepresentation];
-    NSLog(@"keys after: %tu", dictionaryRepresentation.allKeys.count);
 }
 
 
@@ -224,6 +220,57 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
                                                    orderType:orderType
                                                 currencyType:currencyType];
     [self setUserDefaultObject:activeCountryCodes forKey:userDefaultKey];
+}
+
+#pragma mark - Countries
++ (NSArray <NSString *> *)supportedCountryNames {
+    static dispatch_once_t pred;
+    static NSArray *supportedCountryNames = nil;
+    dispatch_once(&pred, ^{
+        supportedCountryNames = @[@"AT Österreich",
+                                  @"BE Belgien",
+                                  @"BG Bulgarien",
+                                  @"CH Schweiz",
+                                  @"CY Zypern",
+                                  @"CZ Tschechische Republik",
+                                  @"DE Deutschland",
+                                  @"DK Dänemark",
+                                  @"EE Estland",
+                                  @"ES Spanien",
+                                  @"FI Finnland",
+                                  @"FR Frankreich",
+                                  @"GB Vereinigtes Königreich",
+                                  @"GR Griechenland",
+                                  @"HR Kroatien",
+                                  @"HU Ungarn",
+                                  @"IE Irland",
+                                  @"IS Island",
+                                  @"IT Italien",
+                                  @"LI Liechtenstein",
+                                  @"LT Litauen",
+                                  @"LU Luxemburg",
+                                  @"LV Lettland",
+                                  @"MQ Martinique",
+                                  @"MT Malta",
+                                  @"NL Niederlande",
+                                  @"NO Norwegen",
+                                  @"PL Polen",
+                                  @"PT Portugal",
+                                  @"RO Rumänien",
+                                  @"SE Schweden",
+                                  @"SI Slowenien",
+                                  @"SK Slowakei",
+                                  ];
+    });
+
+    return supportedCountryNames;
+}
+
++ (NSString *)countryNameForCountryCode:(NSString *)countryCode {
+    NSUInteger countryCodeIndex = [[self supportedCountryCodes] indexOfObject:countryCode];
+    NSString *countrName = [[self supportedCountryNames] objectAtIndex:countryCodeIndex];
+
+    return countrName;
 }
 
 #pragma mark - NSUserDefault access
