@@ -170,7 +170,7 @@
     NSArray *selectedCountriesFromPrefs = [SOXPreferenceCenter activeCountryCodesforOrderType:self.orderType
                                                                                  currencyType:self.currencyType];
     [self updateSelectedCountriesPredicateForCounties:selectedCountriesFromPrefs];
-    [self updateOrderBookPredicate];
+    [self updatePaymentOptionPredicate];
     [self createSortDescriptorsForArrayController];
 }
 
