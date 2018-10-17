@@ -148,13 +148,16 @@
 #pragma mark - Private methods
 - (void)setupUI {
     {
+        NSString *currencyString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:self.currencyType];
+        NSString *buySellString = [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:self.orderType];
+        self.addOrderButton.title = [NSString stringWithFormat:@"Create new %@ %@ order"
+                                     , currencyString
+                                     , buySellString];
         if (self.orderType == BitcoinDE_BuyOrderType) {
             self.titleTextField.stringValue                     = @"Buy";
-            self.addOrderButton.title                           = @"I'd like to buy";
         }
         else if (self.orderType == BitcoinDE_SellOrderType) {
             self.titleTextField.stringValue                     = @"Sell";
-            self.addOrderButton.title                           = @"I'd like to sell";
         }
     }
     
