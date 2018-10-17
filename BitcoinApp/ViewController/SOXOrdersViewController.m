@@ -28,9 +28,6 @@
 @property (weak) IBOutlet NSTextField *titleTextField;
 
 @property (weak) IBOutlet NSButton *otherFilterButton;
-@property (strong) IBOutlet NSButton *noSEPAPaymentOptionFilterButton;
-
-
 @property (weak) IBOutlet NSButton *addOrderButton;
 
 @property (strong) IBOutlet NSArrayController *orderBookArrayController;
@@ -93,15 +90,6 @@
 }
 
 #pragma mark - Action methods
-#pragma mark | Payment Options
-- (IBAction)noSEPAPaymentOptionFilterButtonAction:(NSButton *)sender {
-    [self updatePaymentOptionPredicate];
-    
-    [SOXPreferenceCenter setSepaPaymentFilterOption:sender.state
-                                       forOrderType:self.orderType
-                                       currencyType:self.currencyType];
-}
-
 - (IBAction)furtherFiltersAction:(NSButton *)sender {
     // Create view controller
     NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"MacMain"
@@ -162,17 +150,18 @@
     }
     
     self.otherFilterButton.title = @"Filters";
-    self.noSEPAPaymentOptionFilterButton.title = @"No SEPA";
-    NSControlStateValue noSEPAButtonControlState = [SOXPreferenceCenter sepaPaymentOptionStateForOrderType:self.orderType
-                                                                                              currencyType:self.currencyType];
-    self.noSEPAPaymentOptionFilterButton.state = noSEPAButtonControlState;
+    
 }
 
 - (void)setupArrayController {
     NSArray *selectedCountriesFromPrefs = [SOXPreferenceCenter activeCountryCodesforOrderType:self.orderType
                                                                                  currencyType:self.currencyType];
     [self updateSelectedCountriesPredicateForCounties:selectedCountriesFromPrefs];
-    [self updatePaymentOptionPredicate];
+
+    NSControlStateValue controlStateValue = [SOXPreferenceCenter sepaPaymentOptionStateForOrderType:self.orderType
+                                                                                       currencyType:self.currencyType];
+    [self updatePaymentOptionPredicateForControlStateValue:controlStateValue];
+
     [self createSortDescriptorsForArrayController];
 }
 
@@ -260,9 +249,9 @@
     }
 }
 
-- (void)updatePaymentOptionPredicate {
+- (void)updatePaymentOptionPredicateForControlStateValue:(NSControlStateValue)controlStateValue {
     NSPredicate *paymentOptionPredicate = nil;
-    if (self.noSEPAPaymentOptionFilterButton.state == NSControlStateValueOn) {
+    if (controlStateValue == NSControlStateValueOn) {
         paymentOptionPredicate = [NSPredicate predicateWithFormat:
                                   @"orderRequirements_paymentOption == %@"
                                   " OR orderRequirements_paymentOption == %@"
@@ -428,6 +417,11 @@
     if (key == FilterOrderViewSelectedCountriesKey) {
         NSParameterAssert([object isKindOfClass:[NSArray class]]);
         [self updateSelectedCountriesPredicateForCounties:object];
+    }
+    else if (key == FilterOrderViewNoSepaKey) {
+        NSParameterAssert([object isKindOfClass:[NSNumber class]]);
+        NSControlStateValue controlStateValue = [(NSNumber *)object integerValue];
+        [self updatePaymentOptionPredicateForControlStateValue:controlStateValue];
     }
     else {
         NSAssert(NO, @"Unknown key %@", key);

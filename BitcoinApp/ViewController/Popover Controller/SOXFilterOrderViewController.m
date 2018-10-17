@@ -11,6 +11,8 @@
 #import "SOXPreferenceCenter.h"
 
 @interface SOXFilterOrderViewController ()
+@property (strong) IBOutlet NSButton *noSepaButton;
+@property (strong) IBOutlet NSBox *selectCountriesBox;
 
 @property (strong, nonatomic) NSArray <NSButton *> *countryButtons;
 
@@ -21,18 +23,27 @@
 - (void)viewWillAppear {
     [super viewWillAppear];
 
+    [self setupNoSepaButton];
     [self setupCountryButtons];
+}
+
+- (void)setupNoSepaButton {
+    self.noSepaButton.title = @"No SEPA";
+    NSControlStateValue noSEPAButtonControlState = [SOXPreferenceCenter sepaPaymentOptionStateForOrderType:self.orderType
+                                                                                              currencyType:self.currencyType];
+    self.noSepaButton.state = noSEPAButtonControlState;
 }
 
 - (void)setupCountryButtons {
     NSArray <NSString *> *supportedCountryCodes = [SOXPreferenceCenter supportedCountryCodes];
     NSArray <NSString *> *supportedCountryNames = [SOXPreferenceCenter supportedCountryNames];
-    NSArray <NSString *> *activeCountryCodes = [SOXPreferenceCenter activeCountryCodes];
+    NSArray <NSString *> *activeCountryCodes = [SOXPreferenceCenter activeCountryCodesforOrderType:self.orderType
+                                                                                      currencyType:self.currencyType];
 
     __block NSMutableArray *countryButtons = [NSMutableArray array];
 
     CGFloat basicX = 20;
-    CGFloat basicY = 20;
+    CGFloat basicY = -10;
     CGFloat deltaX = 58;
     CGFloat deltaY = 24;
     CGFloat height = 16;
@@ -53,7 +64,7 @@
         countryButton.target = self;
         SEL countryButtonActionSelector = NSSelectorFromString(@"countryButtonAction:");
         countryButton.action = countryButtonActionSelector;
-
+        
         // set position
         {
             if (idx % 10 == 0
@@ -64,12 +75,15 @@
             currentY = currentY + deltaY;
             countryButton.frame = CGRectMake(currentX, currentY, width, height);
         }
-        [self.view addSubview:countryButton];
+
+        [countryButton needsLayout];
+        [self.selectCountriesBox addSubview:countryButton];
 
         [countryButtons addObject:countryButton];
 
     }];
 
+    [self.selectCountriesBox needsLayout];
     self.countryButtons = countryButtons.copy;
 }
 
@@ -97,6 +111,18 @@
     [SOXPreferenceCenter toggleActiveCountryCode:countryCode
                                     forOrderType:self.orderType
                                     currencyType:self.currencyType];
+}
+
+- (IBAction)noSepaButtonAction:(NSButton *)button {
+    NSControlStateValue state = button.state;
+
+    [self informDelegateForKey:FilterOrderViewNoSepaKey
+                    withObject:@(state)];
+
+    // Update user defalts
+    [SOXPreferenceCenter setSepaPaymentFilterOption:state
+                                       forOrderType:self.orderType
+                                       currencyType:self.currencyType];
 }
 
 #pragma mark - Inform delegate
