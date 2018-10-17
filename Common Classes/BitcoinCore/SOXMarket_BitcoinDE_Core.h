@@ -83,7 +83,7 @@ FOUNDATION_EXPORT NSString *const _Nonnull HTTPMethodPOSTKey;
 + (NSDecimalNumber * _Nullable)rateWeightedHalfForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 
 - (void)startAccountInfoUpdate;
-- (void)startAllRatesUpdate;
+- (NSInteger)startAllRatesUpdate;
 - (void)startRatesUpdateForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 
 /**

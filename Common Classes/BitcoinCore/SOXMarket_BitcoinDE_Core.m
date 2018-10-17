@@ -1060,7 +1060,7 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
                                                 respondTo:nil];
 }
 
-- (void)startAllRatesUpdate {
+- (NSInteger)startAllRatesUpdate {
     // rates for each currencyType
     for (BitcoinDE_CurrencyType idx = BitcoinDE_CurrencyTypeUnknown + 1
          ; idx < BitcoinDE_CurrencyType_EndOfType
@@ -1074,6 +1074,8 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
             [self startRatesUpdateForCurrencyType:idx];
         });
     }
+
+    return BitcoinDE_CurrencyType_EndOfType - 1;
 }
 
 - (void)startRatesUpdateForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
