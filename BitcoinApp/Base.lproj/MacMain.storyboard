@@ -1009,16 +1009,6 @@
                                     </tabViewItem>
                                 </tabViewItems>
                             </tabView>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6TX-DJ-6MW">
-                                <rect key="frame" x="865" y="503" width="81" height="32"/>
-                                <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xcl-lN-ZGg">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="startRequests:" target="XfG-lQ-9wD" id="7oO-NN-6vX"/>
-                                </connections>
-                            </button>
                             <box boxType="custom" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="ljh-CW-puG">
                                 <rect key="frame" x="20" y="20" width="920" height="39"/>
                                 <view key="contentView" id="7KU-hO-f7z">
@@ -1060,11 +1050,8 @@
                             <constraint firstItem="B9m-IQ-OSo" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="2yw-fd-kfL"/>
                             <constraint firstAttribute="trailing" secondItem="B9m-IQ-OSo" secondAttribute="trailing" constant="20" symbolic="YES" id="5lN-Sj-40p"/>
                             <constraint firstAttribute="bottom" secondItem="ljh-CW-puG" secondAttribute="bottom" constant="20" id="KFI-fy-mUx"/>
-                            <constraint firstItem="6TX-DJ-6MW" firstAttribute="top" secondItem="CSm-MP-mkG" secondAttribute="bottom" constant="3" id="Ke1-Jq-UQR"/>
                             <constraint firstAttribute="trailing" secondItem="ljh-CW-puG" secondAttribute="trailing" constant="20" id="ZrP-wd-2ba"/>
-                            <constraint firstAttribute="trailing" secondItem="6TX-DJ-6MW" secondAttribute="trailing" constant="20" id="fIv-oS-Ift"/>
                             <constraint firstItem="CSm-MP-mkG" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="nfg-cA-a2k"/>
-                            <constraint firstItem="6TX-DJ-6MW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="pzu-nN-vgX"/>
                             <constraint firstAttribute="trailing" secondItem="CSm-MP-mkG" secondAttribute="trailing" constant="20" id="reb-tP-K6x"/>
                             <constraint firstItem="ljh-CW-puG" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="uEz-3t-LXb"/>
                             <constraint firstItem="B9m-IQ-OSo" firstAttribute="top" secondItem="CSm-MP-mkG" secondAttribute="bottom" constant="16" id="yWP-zG-RBt"/>
@@ -1561,11 +1548,27 @@
                                                 <real value="3.4028234663852886e+38"/>
                                             </customSpacing>
                                         </stackView>
+                                        <button toolTip="Reload banner data" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="50d-QC-hTs">
+                                            <rect key="frame" x="464" y="4" width="20" height="22"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="20" id="HH4-5O-PWu"/>
+                                                <constraint firstAttribute="height" constant="20" id="oHp-e9-CuD"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRefreshTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="abx-xQ-LJK">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="updateBannerButtonAction:" target="QBX-OO-T9K" id="V7I-OG-pl2"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="J8O-sa-1lW" firstAttribute="top" secondItem="1i6-H3-iQT" secondAttribute="top" constant="8" id="9px-Km-QjJ"/>
                                         <constraint firstAttribute="bottom" secondItem="J8O-sa-1lW" secondAttribute="bottom" constant="8" id="APy-4x-bVB"/>
+                                        <constraint firstAttribute="bottom" secondItem="50d-QC-hTs" secondAttribute="bottom" constant="5" id="Rmc-XC-NF4"/>
                                         <constraint firstAttribute="trailing" secondItem="J8O-sa-1lW" secondAttribute="trailing" constant="8" id="cq0-Gr-pCT"/>
+                                        <constraint firstAttribute="trailing" secondItem="50d-QC-hTs" secondAttribute="trailing" constant="5" id="oM6-Gn-Oqk"/>
                                         <constraint firstItem="J8O-sa-1lW" firstAttribute="leading" secondItem="1i6-H3-iQT" secondAttribute="leading" constant="8" id="tJ7-s9-Znb"/>
                                     </constraints>
                                 </view>
@@ -1610,6 +1613,7 @@
                         <outlet property="ratesRateWeighted3hTextField" destination="fbO-bM-e6C" id="tmY-NH-2Uz"/>
                         <outlet property="ratesRateWeightedDescriptionTextField" destination="s1s-l7-ZDR" id="S1E-L0-hOe"/>
                         <outlet property="ratesRateWeightedTextField" destination="slR-4r-Xj5" id="ylo-K4-Cb4"/>
+                        <outlet property="updateBannerButton" destination="50d-QC-hTs" id="CeM-OE-Mfo"/>
                     </connections>
                 </viewController>
                 <customObject id="qFb-Ue-orS" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

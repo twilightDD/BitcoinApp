@@ -155,12 +155,6 @@ static NSString *AutomaticTradeETHSegueKey = @"EmbedAutoTraderForETH";
     }
 }
 
-#pragma mark - Action methods
-- (IBAction)startRequests:(NSButton *)sender {
-    [[SOXMarket_BitcoinDE_Core sharedCore] startAccountInfoUpdate];
-    [[SOXMarket_BitcoinDE_Core sharedCore] startAllRatesUpdate];
-}
-
 #pragma mark - SOXCreditUpdateProtocol
 - (void)creditValuesUpdated:(NSDictionary * _Nonnull)creditDicts {
     NSNumber *currentCredit = [creditDicts objectForKey:CreditUpdate_CurrentCreditsKey];
