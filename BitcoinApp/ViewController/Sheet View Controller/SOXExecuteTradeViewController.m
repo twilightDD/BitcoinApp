@@ -145,8 +145,6 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     // maxPossibleBTCAmountToTrade
     {
         {
-
-
             if (self.orderType == BitcoinDE_BuyOrderType) {
                 /*
                  Express => maxAvaFidor
@@ -224,21 +222,24 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
                 self.maxPossibleBTCAmountToTrade = [SOXFormatters lesserDecimalNumberFrom:self.orderBookData.orderInformation_maxAmount
                                                                                  and:self.availableBitcoinAmount];
 
+                NSString *coinAmountString = [NSString stringWithFormat:@"%@ %@"
+                                              , [SOXFormatters stringForBTCNumber:self.availableBitcoinAmount]
+                                              , [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:self.currencyType]];
                 if ([self.minAmountOrder isGreaterThan:self.maxPossibleBTCAmountToTrade]) {
                     self.userInformationText = [NSString stringWithFormat:@"Not enough bitcoins (%@)"
-                                                , [SOXFormatters stringForBTCNumber:self.availableBitcoinAmount]];
+                                                , coinAmountString];
                     self.executeTradeIsPossible = NO;
                 }
                 else if ([self.maxPossibleBTCAmountToTrade isLessThan:self.maxAmountOrder]) {
                     self.maxAmountOrder = nil;
                     self.userInformationText = [NSString stringWithFormat:@"You may sell all your bitcoins (%@)"
-                                                , [SOXFormatters stringForBTCNumber:self.availableBitcoinAmount]];
+                                                , coinAmountString];
                     self.executeTradeIsPossible = YES;
                 }
                 else {
                     self.maxPossibleBTCAmountToTrade = nil;
                     self.userInformationText = [NSString stringWithFormat:@"You may satisfy complete order (%@)"
-                                                , [SOXFormatters stringForBTCNumber:self.maxAmountOrder]];
+                                                , coinAmountString];
                     self.executeTradeIsPossible = YES;
                 }
 
@@ -260,8 +261,14 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     amountToTradeTextFieldFormatter.minimum = [self.minAmountOrder decimalNumberBySubtracting:formatterCorrection];
     NSDecimalNumber *maximum;
     if (self.maxPossibleBTCAmountToTrade && self.maxAmountOrder) {
-        maximum = [SOXFormatters lesserDecimalNumberFrom:self.maxPossibleBTCAmountToTrade
-                                                     and:self.maxAmountOrder];
+        // Express only
+        if (self.orderBookPaymentOption == BitcoinDE_PaymentOptionExpressOnly) {
+            maximum = [SOXFormatters lesserDecimalNumberFrom:self.maxPossibleBTCAmountToTrade
+                                                         and:self.maxAmountOrder];
+        }
+        else { // ExpressOrSepa
+            maximum = self.maxAmountOrder;
+        }
     }
     else if (self.maxPossibleBTCAmountToTrade) {
         maximum = self.maxPossibleBTCAmountToTrade;
@@ -280,6 +287,21 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     BitcoinDE_CurrencyType currencyType = [SOXMarket_BitcoinDE_DefTypes currencyTypeForTradingPairString:self.orderBookData.orderInformation_tradingPair];
     NSString *shortCurrencyString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:currencyType];
 
+    // monoSpaceFonts
+    {
+        CGFloat fontSize = [NSFont systemFontSize];
+        NSFont *monospacedFont = [NSFont systemFontOfSize:fontSize];
+
+        if ([NSFont respondsToSelector:@selector(monospacedDigitSystemFontOfSize:weight:)]) {
+            monospacedFont = [NSFont monospacedDigitSystemFontOfSize:fontSize
+                                                              weight:NSFontWeightRegular];
+        }
+        self.priceTextField.font = monospacedFont;
+        self.minBTCTextField.font = monospacedFont;
+        self.maxBTCTextField.font = monospacedFont;
+        self.minVolumeTextField.font = monospacedFont;
+        self.maxVolumeTextField.font = monospacedFont;
+    }
 
     // orderBookData
     {
@@ -363,7 +385,9 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 
 //    [self setupExecuteTradeButton];
     self.cancelButton.title = @"Cancel";
-    
+
+    // To Debugging set hidden NO
+    self.minMaxPossibleAmountTextField.hidden = YES;
     self.minMaxPossibleAmountTextField.stringValue = [NSString stringWithFormat:@"(min: %@, max: %@)",
                                                       [SOXFormatters stringForBTCNumber:self.orderBookData.orderInformation_minAmount],
                                                       [SOXFormatters stringForBTCNumber:self.maxPossibleBTCAmountToTrade]];
@@ -396,7 +420,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 - (void)toggleUIElements {
     self.amountToTradeDescriptionTextField.hidden   = !self.executeTradeIsPossible;
     self.amountToTradeTextField.hidden              = !self.executeTradeIsPossible;
-    self.minMaxPossibleAmountTextField.hidden       = !self.executeTradeIsPossible;
+//    self.minMaxPossibleAmountTextField.hidden       = !self.executeTradeIsPossible;
     self.volumeToTradeDescriptionTextField.hidden   = !self.executeTradeIsPossible;
     self.volumeToTradeTextField.hidden              = !self.executeTradeIsPossible;
     self.executeTradeButton.hidden                  = !self.executeTradeIsPossible;
@@ -451,9 +475,11 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
         // Express or Sepa
         if (self.orderBookPaymentOption == BitcoinDE_PaymentOptionExpressAndSepa
             && self.defaultPaymentOption == BitcoinDE_PaymentOptionExpressAndSepa) {
-            if ((self.maxPossibleBTCAmountToTrade && [self.amountToTrade isLessThanOrEqualTo:self.maxPossibleBTCAmountToTrade])
-                || (self.maxAmountOrder && [self.amountToTrade isLessThanOrEqualTo:self.maxAmountOrder])) {
+            if (self.maxPossibleBTCAmountToTrade && [self.amountToTrade isLessThanOrEqualTo:self.maxPossibleBTCAmountToTrade]) {
                 self.executePaymentOption = BitcoinDE_PaymentOptionExpressOnly;
+            }
+            else if (self.maxAmountOrder && [self.amountToTrade isLessThanOrEqualTo:self.maxAmountOrder]) {
+                self.executePaymentOption = BitcoinDE_PaymentOptionSEPAOnly;
             }
             else if (self.maxAmountOrder
                      && self.maxPossibleBTCAmountToTrade
@@ -503,11 +529,12 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
         // create strings
         NSString *executeTradeButtonTitle = self.executeTradeButton.title;
         NSString *cancelButtonTitle       = @"Cancel";
-        NSString *messageText             = @"Attention attention ihr Menschen!";
+        NSString *messageText             = @"Warning";
         NSDecimalNumber *volume           = [self.amountToTrade decimalNumberByMultiplyingBy:self.orderBookData.orderInformation_price];
-        NSString *informativeText         = [NSString stringWithFormat:@"You will %@ %@ bitcoins,\nworth %@ of real money.",
-                                             [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:self.orderType]
+        NSString *informativeText         = [NSString stringWithFormat:@"You will %@ %@ %@,\nworth %@ of real money."
+                                             , [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:self.orderType] // buy/sell
                                              , [SOXFormatters stringForBTCNumber:self.amountToTrade]
+                                             , [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:self.currencyType]
                                              , [SOXFormatters currencyStringForNumber:volume roundingMode:NSNumberFormatterRoundUp]
                                              ];
         // create alert

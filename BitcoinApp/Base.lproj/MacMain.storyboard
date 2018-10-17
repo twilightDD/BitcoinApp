@@ -3875,8 +3875,8 @@ Gw
                             <stackView distribution="fillEqually" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8JX-kG-xe7" userLabel="Order information">
                                 <rect key="frame" x="20" y="166" width="199" height="154"/>
                                 <subviews>
-                                    <stackView distribution="fillEqually" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2GF-4D-RKr">
-                                        <rect key="frame" x="0.0" y="0.0" width="176" height="154"/>
+                                    <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="13" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2GF-4D-RKr">
+                                        <rect key="frame" x="0.0" y="0.0" width="181" height="154"/>
                                         <subviews>
                                             <stackView distribution="fillEqually" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jXF-vw-v9b">
                                                 <rect key="frame" x="0.0" y="12" width="84" height="142"/>
@@ -3947,8 +3947,8 @@ Gw
                                                     <real value="3.4028234663852886e+38"/>
                                                 </customSpacing>
                                             </stackView>
-                                            <stackView distribution="fillEqually" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gyT-A4-fxR">
-                                                <rect key="frame" x="92" y="12" width="84" height="142"/>
+                                            <stackView distribution="fillEqually" orientation="vertical" alignment="trailing" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gyT-A4-fxR">
+                                                <rect key="frame" x="97" y="12" width="84" height="142"/>
                                                 <subviews>
                                                     <textField horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jYy-rP-Oiq">
                                                         <rect key="frame" x="-2" y="125" width="88" height="17"/>
@@ -3960,7 +3960,7 @@ Gw
                                                         </textFieldCell>
                                                     </textField>
                                                     <textField horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KLr-XX-aty">
-                                                        <rect key="frame" x="-2" y="100" width="55" height="17"/>
+                                                        <rect key="frame" x="31" y="100" width="55" height="17"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="min BTC" id="u3R-ly-bl4">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -3975,7 +3975,7 @@ Gw
                                                         </connections>
                                                     </textField>
                                                     <textField horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="itc-bY-XU5">
-                                                        <rect key="frame" x="-2" y="75" width="59" height="17"/>
+                                                        <rect key="frame" x="27" y="75" width="59" height="17"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Max BTC" id="f2q-F8-FjX">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -3990,7 +3990,7 @@ Gw
                                                         </connections>
                                                     </textField>
                                                     <textField horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ytD-1Y-I0f">
-                                                        <rect key="frame" x="-2" y="50" width="75" height="17"/>
+                                                        <rect key="frame" x="11" y="50" width="75" height="17"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Min Volume" id="hvZ-Aw-nXw">
                                                             <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="uLa-P2-1RD"/>
                                                             <font key="font" metaFont="system"/>
@@ -3999,7 +3999,7 @@ Gw
                                                         </textFieldCell>
                                                     </textField>
                                                     <textField horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NfI-oN-nPS">
-                                                        <rect key="frame" x="-2" y="25" width="78" height="17"/>
+                                                        <rect key="frame" x="8" y="25" width="78" height="17"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="max Volume" id="fFr-s7-Pel">
                                                             <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="N4w-mU-KCS"/>
                                                             <font key="font" metaFont="system"/>
@@ -4008,7 +4008,7 @@ Gw
                                                         </textFieldCell>
                                                     </textField>
                                                     <textField horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IwY-T0-562">
-                                                        <rect key="frame" x="-2" y="0.0" width="56" height="17"/>
+                                                        <rect key="frame" x="30" y="0.0" width="56" height="17"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Order ID" id="U7p-kf-ah8">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
