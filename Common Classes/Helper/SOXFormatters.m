@@ -157,10 +157,10 @@
         btcFormatter.maximumFractionDigits = 8;
 
         btcFormatter.locale= [NSLocale autoupdatingCurrentLocale];
-        btcFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
-        btcFormatter.currencySymbol = @"\u20BF";
-        btcFormatter.currencyCode = @"\u20BF";
-        btcFormatter.internationalCurrencySymbol = @"XBT";
+//        btcFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
+//        btcFormatter.currencySymbol = @"\u20BF";
+//        btcFormatter.currencyCode = @"\u20BF";
+//        btcFormatter.internationalCurrencySymbol = @"XBT";
     });
     return btcFormatter;
 }
