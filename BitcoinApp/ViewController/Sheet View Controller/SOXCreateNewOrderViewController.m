@@ -26,11 +26,12 @@
 
 @property (weak) IBOutlet NSTextField *amountDescriptionTextField;
 @property (weak) IBOutlet NSTextField *amountTextField;
-@property (weak) IBOutlet NSTextField *availableAmountTextField;
+@property (strong) IBOutlet NSButton *maxAmountButton;
+
 
 @property (weak) IBOutlet NSTextField *minAmountDescriptionTextField;
 @property (weak) IBOutlet NSTextField *minAmountTextField;
-@property (weak) IBOutlet NSTextField *minAmountHintTextField;
+
 
 @property (weak) IBOutlet NSTextField *priceDescriptionTextField;
 @property (weak) IBOutlet NSTextField *priceTextField;
@@ -151,16 +152,16 @@
 - (void)setupTexts {
     NSString *titleTextFieldText = @"Error";
     NSString *amountDescriptionTextFieldText = @"Error";
-    NSString *availableAmountTextFieldText = @"Error";
-    BOOL availableAmountTextFieldHiddenStatus = NO;
     NSString *createOrderButtonText = @"Error";
-
+    NSString *maxAmountButtonTitle = @"Error";
+    BOOL maxAmountButtonHidden = NO;
     NSString *cancelButtonText = @"Cancel";
 
-    if (self.orderType == BitcoinDE_BuyOrderType) {
-        availableAmountTextFieldHiddenStatus = YES;
-        amountDescriptionTextFieldText = @"Amount to buy";
 
+    NSString *shortCurrencyString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:self.currencyType];
+    if (self.orderType == BitcoinDE_BuyOrderType) {
+        amountDescriptionTextFieldText = @"Amount to buy";
+        maxAmountButtonHidden = YES;
         if (self.orderBookDataToReplace == nil) {
             titleTextFieldText = @"Create new buy order";
             createOrderButtonText = @"Create new buy order";
@@ -173,8 +174,8 @@
     else if (self.orderType == BitcoinDE_SellOrderType) {
         titleTextFieldText = @"Create new sell order";
         amountDescriptionTextFieldText = @"Amount to sell";
-        availableAmountTextFieldText = [NSString stringWithFormat:@"Available: %@"
-                                        , [SOXMarket_BitcoinDE_Core availableAmountForCurrencyType:self.currencyType]];
+        maxAmountButtonTitle = [NSString stringWithFormat:@"Max %@"
+                                , shortCurrencyString];
         if (self.orderBookDataToReplace == nil) {
             titleTextFieldText = @"Create new sell order";
             createOrderButtonText = @"Create new sell order";
@@ -187,10 +188,11 @@
 
     self.titleTextField.stringValue                 = titleTextFieldText;
     self.amountDescriptionTextField.stringValue     = amountDescriptionTextFieldText;
-    self.availableAmountTextField.stringValue       = availableAmountTextFieldText;
-    self.availableAmountTextField.hidden            = availableAmountTextFieldHiddenStatus;
-    self.cancelButton.title = cancelButtonText;
+    self.maxAmountButton.title = maxAmountButtonTitle;
+    self.maxAmountButton.hidden = maxAmountButtonHidden;
     self.createOrderButton.title = createOrderButtonText;
+
+    self.cancelButton.title = cancelButtonText;
 }
 
 - (void)setupUI {
@@ -199,7 +201,6 @@
     // ------------------
     
     self.minAmountDescriptionTextField.stringValue  = @"Minimal amount";
-    self.minAmountHintTextField.stringValue         = @"";
     
     self.priceDescriptionTextField.stringValue      = @"Price per BTC";
     self.volumeTextField.stringValue                = @"";
@@ -309,6 +310,19 @@
 }
 
 #pragma mark - Action methods
+- (IBAction)maxAmountButtonAction:(NSButton *)sender {
+    /* set new amount to:
+     - create: availAmount
+     - change: availAmount +self.orderBookDataToReplace.amount
+     */
+    NSDecimalNumber *newAmount = [[SOXMarket_BitcoinDE_Core availableAmountForCurrencyType:self.currencyType] copy];
+    if (self.orderBookDataToReplace) {
+        NSDecimalNumber *maxAmountOfOrderToReplace = [NSDecimalNumber decimalNumberWithDecimal:[self.orderBookDataToReplace.orderInformation_maxAmount decimalValue]];
+        newAmount = [newAmount decimalNumberByAdding:maxAmountOfOrderToReplace];
+    }
+    self.amount = newAmount;
+}
+
 - (IBAction)createOrderAction:(NSButton *)sender {
     if (self.isInputValid) {
         // create strings
