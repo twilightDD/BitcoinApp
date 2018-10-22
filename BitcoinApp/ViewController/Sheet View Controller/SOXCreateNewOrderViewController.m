@@ -281,36 +281,69 @@
     self.validInput = YES;
 }
 
+- (void)removeOldOrder {
+    NSDictionary *myOrderBookParameter = [SOXMyOrderBook_BitcoinDE_Data parameterForDeletingOrderWithOrderBookData:self.orderBookDataToReplace];
+    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_RemoveOrderType
+                                            withParameter:myOrderBookParameter
+                                                respondTo:self];
+}
+
+- (void)createNewOrder {
+    NSDictionary *parameters = [SOXMyOrderBook_BitcoinDE_Data parameterForNewOrderWithOrderType:self.orderType
+                                                                                   currencyType:self.currencyType
+                                                                                     max_amount:@(self.amountTextField.doubleValue)
+                                                                                     min_amount:@(self.minAmountTextField.doubleValue)
+                                                                                          price:@(self.priceTextField.doubleValue)
+                                                                                   end_datetime:self.endDatePicker.dateValue
+                                                                 new_order_for_remaining_amount:self.reNewOrderButton.state
+                                                                                min_trust_level:self.trustLevel
+                                                                                  only_kyc_full:self.reNewOrderButton.state
+                                                                                 payment_option:[SOXPreferenceCenter defaultPaymentOptionForCreateOrder]
+                                                                                   seat_of_bank:[SOXPreferenceCenter defaultCountryCodes]];
+
+    DDLogInfo(@"Parameters:\n%@", parameters);
+
+    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_CreateOrderType
+                                            withParameter:parameters
+                                                respondTo:self];
+}
 
 #pragma mark - Action methods
 - (IBAction)createOrderAction:(NSButton *)sender {
     if (self.isInputValid) {
+        // create strings
+        NSString *createOrderButtonTitle = self.createOrderButton.title;
+        NSString *cancelButtonTitle       = @"Cancel";
+        NSString *messageText             = @"Warning";
+        NSString *informativeText = @"ERROR";
         if (self.orderBookDataToReplace) {
-            NSDictionary *myOrderBookParameter = [SOXMyOrderBook_BitcoinDE_Data parameterForDeletingOrderWithOrderBookData:self.orderBookDataToReplace];
-            [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_RemoveOrderType
-                                                    withParameter:myOrderBookParameter
-                                                        respondTo:self];
+            informativeText = @"Do you really want to change the order?";
         }
         else {
-
-            NSDictionary *parameters = [SOXMyOrderBook_BitcoinDE_Data parameterForNewOrderWithOrderType:self.orderType
-                                                                                           currencyType:self.currencyType
-                                                                                             max_amount:@(self.amountTextField.doubleValue)
-                                                                                             min_amount:@(self.minAmountTextField.doubleValue)
-                                                                                                  price:@(self.priceTextField.doubleValue)
-                                                                                           end_datetime:self.endDatePicker.dateValue
-                                                                         new_order_for_remaining_amount:self.reNewOrderButton.state
-                                                                                        min_trust_level:self.trustLevel
-                                                                                          only_kyc_full:self.reNewOrderButton.state
-                                                                                         payment_option:[SOXPreferenceCenter defaultPaymentOptionForCreateOrder]
-                                                                                           seat_of_bank:[SOXPreferenceCenter defaultCountryCodes]];
-
-            DDLogInfo(@"Parameters:\n%@", parameters);
-
-            [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_CreateOrderType
-                                                    withParameter:parameters
-                                                        respondTo:self];
+            informativeText = @"Do you really want to create a new order?";
         }
+        // create alert
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:createOrderButtonTitle];
+        [alert addButtonWithTitle:cancelButtonTitle];
+        [alert setMessageText:messageText];
+        [alert setInformativeText:informativeText];
+        [alert setAlertStyle:NSWarningAlertStyle];
+
+        // present alert
+        weakify(self)
+        [alert beginSheetModalForWindow:self.view.window
+                      completionHandler:^(NSModalResponse returnCode) {
+                          strongify(self)
+                          if (returnCode == 1000) { // Execute trade
+                              if (self.orderBookDataToReplace) {
+                                  [self removeOldOrder];
+                              }
+                              else {
+                                  [self createNewOrder];
+                              }
+                          }
+                      }];
     }
     else {
         // inform user
@@ -374,7 +407,7 @@
     }
     else if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_RemoveOrderType)]) {
         self.orderBookDataToReplace = nil;
-        [self createOrderAction:nil];
+        [self createNewOrder];
     }
 }
 
