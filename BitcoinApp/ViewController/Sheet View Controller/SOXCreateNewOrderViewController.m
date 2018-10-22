@@ -82,22 +82,23 @@
         && self.orderType != BitcoinDE_SellOrderType) {
         return;
     }
-    
-    self.trustLevel = self.orderBookDataToReplace ?
-      [SOXMarket_BitcoinDE_DefTypes trustLevelForTrustLevelString:self.orderBookDataToReplace.orderRequirements_minTrustLevel] :
-      [SOXPreferenceCenter defaultTrustLevelNewOrder];
 
-    // In den OrderBookDatas stehen die Sachen leider nicht drin ...
-    self.onlyKYCButton.state = self.orderBookDataToReplace ?
+    [self setupUI];
+    self.validInput = NO;
+
+    // checkboxes in NSBox
+    {
+        self.trustLevel = self.orderBookDataToReplace ?
+        [SOXMarket_BitcoinDE_DefTypes trustLevelForTrustLevelString:self.orderBookDataToReplace.orderRequirements_minTrustLevel] :
+        [SOXPreferenceCenter defaultTrustLevelNewOrder];
+
+        self.onlyKYCButton.state = self.orderBookDataToReplace ?
         self.orderBookDataToReplace.orderRequirements_onlyKYCFull :
         [SOXPreferenceCenter defaultKYCOnly];
-    self.reNewOrderButton.state = self.orderBookDataToReplace ?
+        self.reNewOrderButton.state = self.orderBookDataToReplace ?
         self.orderBookDataToReplace.orderInformation_newOrderForRemainingAmount :
         [SOXPreferenceCenter new_order_for_remaining_amount];
-
-    self.validInput = NO;
-    [self setupUI];
-    
+    }
     // Default values (for bindings)
     {
         self.amount = self.orderBookDataToReplace ?
@@ -138,31 +139,64 @@
         else {
             self.price = [NSDecimalNumber decimalNumberWithDecimal:self.orderBookDataToReplace.orderInformation_price.decimalValue];
         }
-        [self validateInputs];
+
     }
+
+    [self validateInputs];
 }
 
 #pragma mark - Public methods
 
 #pragma mark - Private methods
-- (void)setupUI {
-    
+- (void)setupTexts {
+    NSString *titleTextFieldText = @"Error";
+    NSString *amountDescriptionTextFieldText = @"Error";
+    NSString *availableAmountTextFieldText = @"Error";
+    BOOL availableAmountTextFieldHiddenStatus = NO;
+    NSString *createOrderButtonText = @"Error";
+
+    NSString *cancelButtonText = @"Cancel";
+
     if (self.orderType == BitcoinDE_BuyOrderType) {
-        self.titleTextField.stringValue                 = @"Create new buy order";
-        self.amountDescriptionTextField.stringValue     = @"Amount to buy";
-        self.availableAmountTextField.hidden               = YES;
+        availableAmountTextFieldHiddenStatus = YES;
+        amountDescriptionTextFieldText = @"Amount to buy";
+
+        if (self.orderBookDataToReplace == nil) {
+            titleTextFieldText = @"Create new buy order";
+            createOrderButtonText = @"Create new buy order";
+        }
+        else {
+            titleTextFieldText = @"Change buy order";
+            createOrderButtonText = @"Change buy order";
+        }
     }
     else if (self.orderType == BitcoinDE_SellOrderType) {
-        self.titleTextField.stringValue                 = @"Create new sell order";
-        self.amountDescriptionTextField.stringValue     = @"Amount to sell";
-        // input textFields uses bindings
-        self.availableAmountTextField.stringValue          = [NSString stringWithFormat:@"Available: %@", [SOXMarket_BitcoinDE_Core availableAmountForCurrencyType:self.currencyType]];
+        titleTextFieldText = @"Create new sell order";
+        amountDescriptionTextFieldText = @"Amount to sell";
+        availableAmountTextFieldText = [NSString stringWithFormat:@"Available: %@"
+                                        , [SOXMarket_BitcoinDE_Core availableAmountForCurrencyType:self.currencyType]];
+        if (self.orderBookDataToReplace == nil) {
+            titleTextFieldText = @"Create new sell order";
+            createOrderButtonText = @"Create new sell order";
+        }
+        else {
+            titleTextFieldText = @"Change sell order";
+            createOrderButtonText = @"Change sell order";
+        }
     }
-    else {
-        self.titleTextField.stringValue                 = @"ERROR - no type given!";
-    }
-    
-    
+
+    self.titleTextField.stringValue                 = titleTextFieldText;
+    self.amountDescriptionTextField.stringValue     = amountDescriptionTextFieldText;
+    self.availableAmountTextField.stringValue       = availableAmountTextFieldText;
+    self.availableAmountTextField.hidden            = availableAmountTextFieldHiddenStatus;
+    self.cancelButton.title = cancelButtonText;
+    self.createOrderButton.title = createOrderButtonText;
+}
+
+- (void)setupUI {
+    [self setupTexts];
+
+    // ------------------
     
     self.minAmountDescriptionTextField.stringValue  = @"Minimal amount";
     self.minAmountHintTextField.stringValue         = @"";
@@ -194,6 +228,7 @@
         self.goldTrustLevelButton.state = 1;
     }
 
+    // ------------------
     NSDate *endDate = nil;
     if (self.orderBookDataToReplace) {
         endDate = self.orderBookDataToReplace.orderInformation_endDateTime;
@@ -204,7 +239,8 @@
         endDate = [SOXFormatters dateQuarterBeforeMidnightForDate:dateIn5Days];
     }
     self.endDatePicker.dateValue = endDate;
-   
+
+    // ------------------
     // Hint on buy: paymentOption depend on default via preferences on webside
     if (self.orderType == BitcoinDE_BuyOrderType) {
         self.paymentOptionHintTextField.stringValue = @"For type = \"buy\", it depends on you settings in \"Express Trade Settings\"";
@@ -212,19 +248,7 @@
     else if (self.orderType == BitcoinDE_SellOrderType) {
         self.paymentOptionHintTextField.hidden = YES;
     }
-    
-    
-    self.cancelButton.title = @"Cancel";
-    if (self.orderType == BitcoinDE_BuyOrderType) {
-        self.createOrderButton.title = @"Create new buy order";
-    }
-    else if (self.orderType == BitcoinDE_SellOrderType) {
-        self.createOrderButton.title = @"Create new sell order";
-    }
-    else {
-        self.createOrderButton.title = @"ERROR";
-        self.createOrderButton.enabled = NO;
-    }
+
 }
 
 - (void)validateInputs {
