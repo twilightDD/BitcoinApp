@@ -23,6 +23,7 @@ static NSString *ActiveCountryCodesPreferencesDidChangeNotification = @"ActiveCo
 + (BitcoinDE_PaymentOption)defaultPaymentOptionForCreateOrder;
 + (BitcoinDE_PaymentOption)defaultPaymentOptionForExecuteTrade;
 + (BOOL)secureExecuteTrade;
++ (NSDecimalNumber *)minimalVolume;
 
 #pragma mark - Sepa Payment Option
 + (NSControlStateValue )sepaPaymentOptionStateForOrderType:(BitcoinDE_OrderType)orderType

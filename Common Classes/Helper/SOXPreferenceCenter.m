@@ -70,6 +70,16 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
     return YES;
 }
 
++ (NSDecimalNumber *)minimalVolume {
+    static dispatch_once_t pred;
+    static NSDecimalNumber *minimalVolume = nil;
+    dispatch_once(&pred, ^{
+        minimalVolume = [NSDecimalNumber decimalNumberWithString:@"60"];
+    });
+
+    return minimalVolume;
+}
+
 #pragma mark - Sepa Payment Option
 + (NSControlStateValue )sepaPaymentOptionStateForOrderType:(BitcoinDE_OrderType)orderType
                                               currencyType:(BitcoinDE_CurrencyType)currencyType {
