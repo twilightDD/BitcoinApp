@@ -38,8 +38,7 @@
 
 @property (weak) IBOutlet NSTextField *priceDescriptionTextField;
 @property (weak) IBOutlet NSTextField *priceTextField;
-@property (weak) IBOutlet NSTextField *volumeTextField;
-
+@property (weak) IBOutlet NSTextField *priceLimitInformationTextField;
 
 @property (weak) IBOutlet NSBox *optionBox;
 @property (weak) IBOutlet NSButton *onlyKYCButton;
@@ -65,7 +64,7 @@
 @property (nonatomic) NSDecimalNumber *minAmount;
 @property (nonatomic) NSDecimalNumber *price;
 @property (nonatomic) NSDecimalNumber *minimalPossibleAmount;
-@property (nonatomic) NSDecimalNumber *minimalPossiblePrice;
+@property (nonatomic) NSDecimalNumber *priceLimit;
 
 @property (nonatomic, getter = isInputValid) BOOL validInput;
 
@@ -139,20 +138,9 @@
             [NSDecimalNumber decimalNumberWithDecimal:self.orderBookDataToReplace.orderInformation_minAmount.decimalValue] :
             [NSDecimalNumber decimalNumberWithString:@"0.05"];
         self.minimalPossibleAmount = [NSDecimalNumber decimalNumberWithString:@"0.00001"];
-        
-        self.minimalPossiblePrice = [SOXMarket_BitcoinDE_Core rateWeightedHalfForCurrencyType:self.currencyType];
-        // condition #1
-        {
-            // setting numberFormatter minimum value
-            NSNumberFormatter *priceFormatter = self.priceTextField.formatter;
-            // Stupid hack, but needed: subtract 0.001!
-            priceFormatter.minimum            = [self.minimalPossiblePrice decimalNumberBySubtracting:[NSDecimalNumber decimalNumberWithString:@"0.001"]];
-        
-            // inform user
-            self.volumeTextField.stringValue = [NSString stringWithFormat:@"Min. price: %@\n(50%% weighted rate)",
-                                                [SOXFormatters currencyStringForNumber:self.minimalPossiblePrice
-                                                                          roundingMode:NSNumberFormatterRoundUp]];
-        }
+
+        [self setupPriceLimit];
+
 
         if (!self.orderBookDataToReplace) {
             /* Bedingungen:
@@ -229,18 +217,16 @@
     [self setupTexts];
 
     // ------------------
-    
     self.minAmountDescriptionTextField.stringValue  = @"Minimal amount";
     
     self.priceDescriptionTextField.stringValue      = @"Price per BTC";
-    self.volumeTextField.stringValue                = @"";
+    self.priceLimitInformationTextField.stringValue                = @"";
     
     self.optionBox.title                            = @"Options";
     self.onlyKYCButton.title                        = @"Allow only fully identified Users";
     self.reNewOrderButton.title                     = @"Automatic residual purchase request";
     
     self.trustLevelDescpriptionTextField.stringValue = @"Minimal Trust Level";
-
 
     // ------------------
     NSDate *endDate = nil;
@@ -274,6 +260,27 @@
     }
 }
 
+- (void)setupPriceLimit {
+    NSString *volumeTextFieldText = @"Error";
+    if (self.orderType == BitcoinDE_BuyOrderType) {
+        self.priceLimit = [SOXMarket_BitcoinDE_Core rateWeightedHalfForCurrencyType:self.currencyType];
+        volumeTextFieldText = [NSString stringWithFormat:@"Min. price: %@\n(50%% weighted rate)"
+                               , [SOXFormatters currencyStringForNumber:self.priceLimit
+                                                           roundingMode:NSNumberFormatterRoundUp]];
+    }
+    else if (self.orderType == BitcoinDE_SellOrderType) {
+        self.priceLimit = [SOXMarket_BitcoinDE_Core rateWeightedDoubleForCurrencyType:self.currencyType];
+        volumeTextFieldText = [NSString stringWithFormat:@"Max. price: %@\n(200%% weighted rate)"
+                               , [SOXFormatters currencyStringForNumber:self.priceLimit
+                                                           roundingMode:NSNumberFormatterRoundDown]];
+    }
+    else {
+        NSAssert(NO, @"no valid orderType");
+    }
+
+    self.priceLimitInformationTextField.stringValue = volumeTextFieldText;
+}
+
 - (void)validateInputs {
     if (!self.minAmount && self.amount) {
         self.minAmount = [self.amount decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"2"]];
@@ -291,11 +298,14 @@
         return;
     }
     if (!self.price
-        || [self.price isLessThan:self.minimalPossiblePrice]) {
+        || [self.price isLessThan:[NSDecimalNumber zero]]
+        || (self.orderType == BitcoinDE_BuyOrderType && [self.price isLessThan:self.priceLimit])
+        || (self.orderType == BitcoinDE_SellOrderType && [self.price isGreaterThan:self.priceLimit])
+        ) {
         self.validInput = NO;
         return;
     }
-    
+
     NSDate *endDate = self.endDatePicker.dateValue;
     if ([endDate isLessThanOrEqualTo:[NSDate date]]) {
         self.validInput = NO;

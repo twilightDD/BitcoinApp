@@ -3572,9 +3572,7 @@ Gw
                                     <constraint firstAttribute="width" constant="120" id="btM-QD-IcI"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="fWS-ia-ani">
-                                    <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="currency" lenient="YES" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="aUR-aZ-Od9" userLabel="Currency Formatter">
-                                        <real key="maximum" value="100000"/>
-                                    </numberFormatter>
+                                    <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="currency" lenient="YES" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="aUR-aZ-Od9" userLabel="Currency Formatter"/>
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -3812,12 +3810,12 @@ Gw
                         <outlet property="optionBox" destination="kfE-Jk-12m" id="POb-58-vph"/>
                         <outlet property="paymentOptionHintTextField" destination="9u6-HK-LcK" id="gY5-M1-CnT"/>
                         <outlet property="priceDescriptionTextField" destination="tOu-s3-kGk" id="f6x-oo-mv0"/>
+                        <outlet property="priceLimitInformationTextField" destination="3LD-JI-7kF" id="YpZ-w4-izJ"/>
                         <outlet property="priceTextField" destination="DMa-qt-pqL" id="kH1-BY-30M"/>
                         <outlet property="reNewOrderButton" destination="ehG-Ud-cJJ" id="DWh-xK-d8f"/>
                         <outlet property="silverTrustLevelButton" destination="oFJ-jv-rrY" id="F40-jg-3sZ"/>
                         <outlet property="titleTextField" destination="aWc-gU-d53" id="fD6-Gn-yeS"/>
                         <outlet property="trustLevelDescpriptionTextField" destination="aIf-ZL-8JB" id="Cgs-Wq-fbD"/>
-                        <outlet property="volumeTextField" destination="3LD-JI-7kF" id="Hqg-gm-6VG"/>
                     </connections>
                 </viewController>
                 <customObject id="X15-X3-ZW6" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
