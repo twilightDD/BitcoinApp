@@ -17,6 +17,9 @@
 
 #import "SOXFormatters.h"
 
+#import "NSAttributedString+URL.h"
+#import "NSTextField+URL.h"
+
 #pragma mark - Interface
 @interface SOXCreateNewOrderViewController () <SOXMarketCoreServerRequestProtocol>
 
@@ -89,16 +92,43 @@
 
     // checkboxes in NSBox
     {
-        self.trustLevel = self.orderBookDataToReplace ?
-        [SOXMarket_BitcoinDE_DefTypes trustLevelForTrustLevelString:self.orderBookDataToReplace.orderRequirements_minTrustLevel] :
-        [SOXPreferenceCenter defaultTrustLevelNewOrder];
+        { // TrustLevel
+            self.trustLevel = self.orderBookDataToReplace ?
+            [SOXMarket_BitcoinDE_DefTypes trustLevelForTrustLevelString:self.orderBookDataToReplace.orderRequirements_minTrustLevel] :
+            [SOXPreferenceCenter defaultTrustLevelNewOrder];
 
-        self.onlyKYCButton.state = self.orderBookDataToReplace ?
-        self.orderBookDataToReplace.orderRequirements_onlyKYCFull :
-        [SOXPreferenceCenter defaultKYCOnly];
-        self.reNewOrderButton.state = self.orderBookDataToReplace ?
-        self.orderBookDataToReplace.orderInformation_newOrderForRemainingAmount :
-        [SOXPreferenceCenter new_order_for_remaining_amount];
+            self.bronceTrustLevelButton.title               = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelBronze];
+            self.bronceTrustLevelButton.tag                 = BitcoinDE_TrustLevelBronze;
+
+            self.silverTrustLevelButton.title               = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelSilver];
+            self.silverTrustLevelButton.tag                 = BitcoinDE_TrustLevelSilver;
+
+            self.goldTrustLevelButton.title                 = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelGold];
+            self.goldTrustLevelButton.tag                   = BitcoinDE_TrustLevelGold;
+
+            if (self.bronceTrustLevelButton.tag == self.trustLevel) {
+                self.bronceTrustLevelButton.state = 1;
+            }
+            else if (self.silverTrustLevelButton.tag == self.trustLevel) {
+                self.silverTrustLevelButton.state = 1;
+            }
+            else if (self.goldTrustLevelButton.tag == self.trustLevel) {
+                self.goldTrustLevelButton.state = 1;
+            }
+        }
+
+        { // OnlyKYC
+
+            self.onlyKYCButton.state = self.orderBookDataToReplace ?
+            self.orderBookDataToReplace.orderRequirements_onlyKYCFull :
+            [SOXPreferenceCenter defaultKYCOnly];
+        }
+
+        { // ReNew
+            self.reNewOrderButton.state = self.orderBookDataToReplace ?
+            self.orderBookDataToReplace.orderInformation_newOrderForRemainingAmount :
+            [SOXPreferenceCenter new_order_for_remaining_amount];
+        }
     }
     // Default values (for bindings)
     {
@@ -210,24 +240,7 @@
     self.reNewOrderButton.title                     = @"Automatic residual purchase request";
     
     self.trustLevelDescpriptionTextField.stringValue = @"Minimal Trust Level";
-    self.bronceTrustLevelButton.title               = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelBronze];
-    self.bronceTrustLevelButton.tag                 = BitcoinDE_TrustLevelBronze;
 
-    self.silverTrustLevelButton.title               = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelSilver];
-    self.silverTrustLevelButton.tag                 = BitcoinDE_TrustLevelSilver;
-
-    self.goldTrustLevelButton.title                 = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelGold];
-    self.goldTrustLevelButton.tag                   = BitcoinDE_TrustLevelGold;
-    
-    if (self.bronceTrustLevelButton.tag == self.trustLevel) {
-        self.bronceTrustLevelButton.state = 1;
-    }
-    else if (self.silverTrustLevelButton.tag == self.trustLevel) {
-        self.silverTrustLevelButton.state = 1;
-    }
-    else if (self.goldTrustLevelButton.tag == self.trustLevel) {
-        self.goldTrustLevelButton.state = 1;
-    }
 
     // ------------------
     NSDate *endDate = nil;
@@ -241,15 +254,24 @@
     }
     self.endDatePicker.dateValue = endDate;
 
+    // --------------------
+    [self setupPaymentOptionHint];
+}
+
+- (void)setupPaymentOptionHint {
     // ------------------
     // Hint on buy: paymentOption depend on default via preferences on webside
     if (self.orderType == BitcoinDE_BuyOrderType) {
-        self.paymentOptionHintTextField.stringValue = @"For type = \"buy\", it depends on you settings in \"Express Trade Settings\"";
+        self.paymentOptionHintTextField.allowsEditingTextAttributes = YES;
+        self.paymentOptionHintTextField.selectable = YES;
+
+        [self.paymentOptionHintTextField setHyperlinkFormattingFromString:@"Express Trade Settings"
+                                                            withURLString:@"https://www.bitcoin.de/de/express-trade/settings"];
+
     }
     else if (self.orderType == BitcoinDE_SellOrderType) {
         self.paymentOptionHintTextField.hidden = YES;
     }
-
 }
 
 - (void)validateInputs {
@@ -308,6 +330,8 @@
                                             withParameter:parameters
                                                 respondTo:self];
 }
+
+
 
 #pragma mark - Action methods
 - (IBAction)maxAmountButtonAction:(NSButton *)sender {
