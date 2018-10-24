@@ -373,7 +373,7 @@
 }
 
 + (NSString *)stringForBTCNumber:(NSDecimalNumber *)btcValue {
-    NSString *stringForBTCNumber = @"-";
+    NSString *stringForBTCNumber = @"0";
     
     if (btcValue) {
         NSNumberFormatter *btcFormatter = [SOXFormatters bitcoinNumberFormatter];
