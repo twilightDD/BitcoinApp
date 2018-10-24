@@ -27,19 +27,19 @@
 
 @property (weak) IBOutlet NSTextField *titleTextField;
 
+#pragma mark | Input fields
 @property (weak) IBOutlet NSTextField *amountDescriptionTextField;
 @property (weak) IBOutlet NSTextField *amountTextField;
 @property (strong) IBOutlet NSButton *maxAmountButton;
 
-
 @property (weak) IBOutlet NSTextField *minAmountDescriptionTextField;
 @property (weak) IBOutlet NSTextField *minAmountTextField;
-
 
 @property (weak) IBOutlet NSTextField *priceDescriptionTextField;
 @property (weak) IBOutlet NSTextField *priceTextField;
 @property (weak) IBOutlet NSTextField *priceLimitInformationTextField;
 
+#pragma mark | Box
 @property (weak) IBOutlet NSBox *optionBox;
 @property (weak) IBOutlet NSButton *onlyKYCButton;
 @property (weak) IBOutlet NSButton *reNewOrderButton;
@@ -53,7 +53,9 @@
 
 @property (weak) IBOutlet NSTextField *paymentOptionHintTextField;
 
+#pragma mark | Base line
 @property (weak) IBOutlet NSButton *cancelButton;
+@property (weak) IBOutlet NSTextField *volumeInformationLine;
 @property (weak) IBOutlet NSButton *createOrderButton;
 
 
@@ -162,11 +164,19 @@
     }
 
     [self validateInputs];
+    [self updateVolumeInformationLine];
+
 }
 
 #pragma mark - Public methods
 
 #pragma mark - Private methods
+- (void)setupUI {
+    [self setupTexts];
+    [self setupBox];
+
+}
+
 - (void)setupTexts {
     NSString *titleTextFieldText = @"Error";
     NSString *amountDescriptionTextFieldText = @"Error";
@@ -213,19 +223,16 @@
     self.cancelButton.title = cancelButtonText;
 }
 
-- (void)setupUI {
-    [self setupTexts];
-
-    // ------------------
+- (void)setupBox {
     self.minAmountDescriptionTextField.stringValue  = @"Minimal amount";
-    
+
     self.priceDescriptionTextField.stringValue      = @"Price per BTC";
     self.priceLimitInformationTextField.stringValue                = @"";
-    
+
     self.optionBox.title                            = @"Options";
     self.onlyKYCButton.title                        = @"Allow only fully identified Users";
     self.reNewOrderButton.title                     = @"Automatic residual purchase request";
-    
+
     self.trustLevelDescpriptionTextField.stringValue = @"Minimal Trust Level";
 
     // ------------------
@@ -281,6 +288,66 @@
     self.priceLimitInformationTextField.stringValue = volumeTextFieldText;
 }
 
+- (void)updateVolumeInformationLine {
+    NSDecimalNumber *priceAsDecimalNumber = [NSDecimalNumber decimalNumberWithDecimal:self.price.decimalValue] ? : [NSDecimalNumber zero];
+
+    NSDecimalNumber *amount = self.amount ? : [NSDecimalNumber zero];
+    NSDecimalNumber *volume = [priceAsDecimalNumber decimalNumberByMultiplyingBy:amount
+                                                          withBehavior:[SOXFormatters currencyNumberHandler]];
+
+    NSDecimalNumber *minAmount = self.minAmount ? : [NSDecimalNumber zero];
+    NSDecimalNumber *minVolume = [priceAsDecimalNumber decimalNumberByMultiplyingBy:minAmount
+                                                                       withBehavior:[SOXFormatters currencyNumberHandler]];
+
+    BOOL priceIsZero = [priceAsDecimalNumber isEqualToNumber:[NSDecimalNumber zero]];
+    BOOL priceToLess = [priceAsDecimalNumber isLessThan:self.priceLimit];
+    BOOL priceToHigh = [priceAsDecimalNumber isGreaterThan:self.priceLimit];
+    BOOL minAmountToLess = [minVolume isLessThan:[SOXPreferenceCenter minimalVolume]];
+    BOOL amountToLess = [volume isLessThan:[SOXPreferenceCenter minimalVolume]];
+
+    NSString *volumeInformation;
+    if (self.orderType == BitcoinDE_BuyOrderType
+        && priceToLess) {
+        volumeInformation = [NSString stringWithFormat:@"Price beneath minimal price (%@)"
+                             , [SOXFormatters currencyStringForNumber:self.priceLimit
+                                                         roundingMode:NSNumberFormatterRoundHalfUp]];
+    }
+    else if (self.orderType == BitcoinDE_SellOrderType
+             && priceToHigh) {
+        volumeInformation = [NSString stringWithFormat:@"Price above maximal price (%@)"
+                             , [SOXFormatters currencyStringForNumber:self.priceLimit
+                                                         roundingMode:NSNumberFormatterRoundHalfUp]];
+    }
+    else if (priceIsZero) {
+        volumeInformation = @"Confucius says:\nNo Price - No Profit";
+    }
+    else if (amountToLess) {
+        NSDecimalNumber *amountNeeded = [[SOXPreferenceCenter minimalVolume] decimalNumberByDividingBy:priceAsDecimalNumber
+                                                                                          withBehavior:[SOXFormatters btcNumberHandler]];
+        volumeInformation = [NSString stringWithFormat:@"Amount to less (min: %@)\nVolume must be grater than %@"
+                             , [SOXFormatters stringForBTCNumber:amountNeeded]
+                             , [SOXFormatters currencyStringForNumber:[SOXPreferenceCenter minimalVolume]
+                                                         roundingMode:NSNumberFormatterRoundHalfUp]];
+    }
+    else if (minAmountToLess) {
+        NSDecimalNumber *minAmountNeeded = [[SOXPreferenceCenter minimalVolume] decimalNumberByDividingBy:priceAsDecimalNumber
+                                                                                             withBehavior:[SOXFormatters btcNumberHandler]];
+        volumeInformation = [NSString stringWithFormat:@"Minimum amount to less (min: %@)\nVolume must be grater than %@"
+                             , [SOXFormatters stringForBTCNumber:minAmountNeeded]
+                             , [SOXFormatters currencyStringForNumber:[SOXPreferenceCenter minimalVolume]
+                                                         roundingMode:NSNumberFormatterRoundHalfUp]];
+    }
+    else {
+        volumeInformation = [NSString stringWithFormat:@"%@ %@ %@ for %@ equals %@"
+                             , [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:self.orderType]
+                             , [SOXFormatters stringForBTCNumber:self.amount]
+                             , [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:self.currencyType]
+                             , [SOXFormatters currencyStringForNumber:priceAsDecimalNumber roundingMode:NSNumberFormatterRoundHalfUp]
+                             , [SOXFormatters currencyStringForNumber:volume roundingMode:NSNumberFormatterRoundHalfUp]];
+    }
+    self.volumeInformationLine.stringValue = volumeInformation;
+}
+
 - (void)validateInputs {
     if (!self.minAmount && self.amount) {
         self.minAmount = [self.amount decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"2"]];
@@ -311,6 +378,7 @@
         self.validInput = NO;
         return;
     }
+
     self.validInput = YES;
 }
 
@@ -340,8 +408,6 @@
                                             withParameter:parameters
                                                 respondTo:self];
 }
-
-
 
 #pragma mark - Action methods
 - (IBAction)maxAmountButtonAction:(NSButton *)sender {
@@ -479,6 +545,7 @@
     }
 
     [self validateInputs];
+    [self updateVolumeInformationLine];
 }
 
 @end

@@ -3512,7 +3512,7 @@ Gw
                                     <constraint firstAttribute="width" constant="120" id="QhG-9S-MIe"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="" drawsBackground="YES" id="pxO-Gt-6Xk">
-                                    <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" roundingMode="down" minimumIntegerDigits="0" maximumIntegerDigits="2000000000" maximumFractionDigits="8" currencyCode="%" internationalCurrencySymbol="%" id="hki-rj-m5x" userLabel="BTCFormatter">
+                                    <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" generatesDecimalNumbers="YES" roundingMode="down" minimumIntegerDigits="0" maximumIntegerDigits="2000000000" maximumFractionDigits="8" currencyCode="%" internationalCurrencySymbol="%" id="hki-rj-m5x" userLabel="BTCFormatter">
                                         <real key="minimum" value="0.0"/>
                                     </numberFormatter>
                                     <font key="font" metaFont="system"/>
@@ -3542,7 +3542,7 @@ Gw
                                     <constraint firstAttribute="width" constant="120" id="lvR-e7-Gp5"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="nIm-Sl-F9a">
-                                    <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" roundingMode="down" minimumIntegerDigits="0" maximumIntegerDigits="2000000000" maximumFractionDigits="8" currencyCode="%" internationalCurrencySymbol="%" id="TzJ-sG-Byo" userLabel="BTCFormatter">
+                                    <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" generatesDecimalNumbers="YES" roundingMode="down" minimumIntegerDigits="0" maximumIntegerDigits="2000000000" maximumFractionDigits="8" currencyCode="%" internationalCurrencySymbol="%" id="TzJ-sG-Byo" userLabel="BTCFormatter">
                                         <real key="minimum" value="0.0"/>
                                     </numberFormatter>
                                     <font key="font" metaFont="system"/>
@@ -3758,6 +3758,17 @@ Gw
                                     </constraints>
                                 </view>
                             </box>
+                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3zw-PC-P9q">
+                                <rect key="frame" x="96" y="23" width="381" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="84" id="4zR-Ns-Mf6"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Buy/sell x coins for y € = z €" id="7PR-eW-3aY">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Bqf-Fe-k9G" firstAttribute="top" secondItem="ZMe-eq-kHL" secondAttribute="bottom" constant="8" id="1Lt-Tg-noW"/>
@@ -3771,6 +3782,7 @@ Gw
                             <constraint firstItem="aWc-gU-d53" firstAttribute="top" secondItem="1na-89-Udh" secondAttribute="top" constant="20" symbolic="YES" id="Cp2-1x-1IJ"/>
                             <constraint firstItem="Yxd-wM-TZl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="abT-OZ-xxM" secondAttribute="trailing" constant="20" id="Dbb-z0-Lbg"/>
                             <constraint firstAttribute="bottom" secondItem="w8c-KB-of4" secondAttribute="bottom" constant="20" symbolic="YES" id="Eli-HR-hHu"/>
+                            <constraint firstItem="3zw-PC-P9q" firstAttribute="leading" secondItem="mWb-Gs-3Vc" secondAttribute="trailing" constant="8" symbolic="YES" id="Fy2-SI-brO"/>
                             <constraint firstItem="zII-rh-hZI" firstAttribute="leading" secondItem="1na-89-Udh" secondAttribute="leading" constant="32" id="HAI-iF-ndY"/>
                             <constraint firstItem="Yxd-wM-TZl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZMe-eq-kHL" secondAttribute="trailing" constant="20" id="K0B-N5-xD6"/>
                             <constraint firstItem="aWc-gU-d53" firstAttribute="leading" secondItem="1na-89-Udh" secondAttribute="leading" constant="20" id="LmX-9g-bNM"/>
@@ -3781,11 +3793,13 @@ Gw
                             <constraint firstItem="Bqf-Fe-k9G" firstAttribute="leading" secondItem="Gf2-SM-5g3" secondAttribute="trailing" constant="8" symbolic="YES" id="Z0W-Tr-ppK"/>
                             <constraint firstItem="ZMe-eq-kHL" firstAttribute="top" secondItem="aWc-gU-d53" secondAttribute="bottom" constant="38" id="Znf-az-ZiB"/>
                             <constraint firstAttribute="trailing" secondItem="kfE-Jk-12m" secondAttribute="trailing" constant="20" symbolic="YES" id="ZpA-Vs-uOs"/>
+                            <constraint firstItem="w8c-KB-of4" firstAttribute="leading" secondItem="3zw-PC-P9q" secondAttribute="trailing" constant="8" symbolic="YES" id="dAB-6l-GCp"/>
                             <constraint firstItem="tOu-s3-kGk" firstAttribute="trailing" secondItem="Gf2-SM-5g3" secondAttribute="trailing" id="gRl-nk-0zt"/>
                             <constraint firstAttribute="trailing" secondItem="w8c-KB-of4" secondAttribute="trailing" constant="20" symbolic="YES" id="igs-Ig-bL4"/>
                             <constraint firstItem="3LD-JI-7kF" firstAttribute="top" secondItem="DMa-qt-pqL" secondAttribute="bottom" constant="8" id="j0a-Cu-6bd"/>
                             <constraint firstItem="kfE-Jk-12m" firstAttribute="top" secondItem="aWc-gU-d53" secondAttribute="bottom" constant="8" symbolic="YES" id="jsW-c3-U7U"/>
                             <constraint firstItem="Gf2-SM-5g3" firstAttribute="trailing" secondItem="zII-rh-hZI" secondAttribute="trailing" id="laF-4n-EdX"/>
+                            <constraint firstItem="3zw-PC-P9q" firstAttribute="baseline" secondItem="mWb-Gs-3Vc" secondAttribute="baseline" id="lmb-Cq-E0g"/>
                             <constraint firstItem="tOu-s3-kGk" firstAttribute="leading" secondItem="Gf2-SM-5g3" secondAttribute="leading" id="owy-hp-SFx"/>
                             <constraint firstItem="DMa-qt-pqL" firstAttribute="leading" secondItem="tOu-s3-kGk" secondAttribute="trailing" constant="8" symbolic="YES" id="pQt-Ds-lEW"/>
                             <constraint firstItem="Gf2-SM-5g3" firstAttribute="leading" secondItem="zII-rh-hZI" secondAttribute="leading" id="pUl-Jn-Dj3"/>
@@ -3816,6 +3830,7 @@ Gw
                         <outlet property="silverTrustLevelButton" destination="oFJ-jv-rrY" id="F40-jg-3sZ"/>
                         <outlet property="titleTextField" destination="aWc-gU-d53" id="fD6-Gn-yeS"/>
                         <outlet property="trustLevelDescpriptionTextField" destination="aIf-ZL-8JB" id="Cgs-Wq-fbD"/>
+                        <outlet property="volumeInformationLine" destination="3zw-PC-P9q" id="vKn-i6-qEB"/>
                     </connections>
                 </viewController>
                 <customObject id="X15-X3-ZW6" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
