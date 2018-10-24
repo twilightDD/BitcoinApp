@@ -289,15 +289,9 @@
 }
 
 - (void)updateVolumeInformationLine {
-    NSDecimalNumber *priceAsDecimalNumber = [NSDecimalNumber decimalNumberWithDecimal:self.price.decimalValue] ? : [NSDecimalNumber zero];
-
-    NSDecimalNumber *amount = self.amount ? : [NSDecimalNumber zero];
-    NSDecimalNumber *volume = [priceAsDecimalNumber decimalNumberByMultiplyingBy:amount
-                                                          withBehavior:[SOXFormatters currencyNumberHandler]];
-
-    NSDecimalNumber *minAmount = self.minAmount ? : [NSDecimalNumber zero];
-    NSDecimalNumber *minVolume = [priceAsDecimalNumber decimalNumberByMultiplyingBy:minAmount
-                                                                       withBehavior:[SOXFormatters currencyNumberHandler]];
+    NSDecimalNumber *priceAsDecimalNumber = [self priceNonNil];
+    NSDecimalNumber *volume = [self volumeNonNil];
+    NSDecimalNumber *minVolume = [self minVolumeNonNil];
 
     BOOL priceIsZero = [priceAsDecimalNumber isEqualToNumber:[NSDecimalNumber zero]];
     BOOL priceToLess = [priceAsDecimalNumber isLessThan:self.priceLimit];
@@ -306,7 +300,10 @@
     BOOL amountToLess = [volume isLessThan:[SOXPreferenceCenter minimalVolume]];
 
     NSString *volumeInformation;
-    if (self.orderType == BitcoinDE_BuyOrderType
+    if (priceIsZero) {
+        volumeInformation = @"Confucius says:\nNo Price - No Profit";
+    }
+    else if (self.orderType == BitcoinDE_BuyOrderType
         && priceToLess) {
         volumeInformation = [NSString stringWithFormat:@"Price beneath minimal price (%@)"
                              , [SOXFormatters currencyStringForNumber:self.priceLimit
@@ -317,9 +314,6 @@
         volumeInformation = [NSString stringWithFormat:@"Price above maximal price (%@)"
                              , [SOXFormatters currencyStringForNumber:self.priceLimit
                                                          roundingMode:NSNumberFormatterRoundHalfUp]];
-    }
-    else if (priceIsZero) {
-        volumeInformation = @"Confucius says:\nNo Price - No Profit";
     }
     else if (amountToLess) {
         NSDecimalNumber *amountNeeded = [[SOXPreferenceCenter minimalVolume] decimalNumberByDividingBy:priceAsDecimalNumber
@@ -345,15 +339,15 @@
                              , [SOXFormatters currencyStringForNumber:priceAsDecimalNumber roundingMode:NSNumberFormatterRoundHalfUp]
                              , [SOXFormatters currencyStringForNumber:volume roundingMode:NSNumberFormatterRoundHalfUp]];
     }
+
     self.volumeInformationLine.stringValue = volumeInformation;
 }
 
 - (void)validateInputs {
-    if (!self.minAmount && self.amount) {
-        self.minAmount = [self.amount decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"2"]];
-    }
-    else if (!self.minAmount && !self.amount) {
-        self.minAmount = [NSDecimalNumber decimalNumberWithString:@"0"];
+    if ([[self volumeNonNil] isLessThan:[SOXPreferenceCenter minimalVolume]]
+        || [[self minVolumeNonNil] isLessThan:[SOXPreferenceCenter minimalVolume]]) {
+        self.validInput = NO;
+        return;
     }
     
     if ([self.amount isLessThan:self.minimalPossibleAmount]) {
@@ -364,6 +358,7 @@
         self.validInput = NO;
         return;
     }
+
     if (!self.price
         || [self.price isLessThan:[NSDecimalNumber zero]]
         || (self.orderType == BitcoinDE_BuyOrderType && [self.price isLessThan:self.priceLimit])
@@ -408,6 +403,25 @@
                                             withParameter:parameters
                                                 respondTo:self];
 }
+#pragma mark | NonNill
+- (NSDecimalNumber *)priceNonNil {
+    NSDecimalNumber *priceNonNil = [NSDecimalNumber decimalNumberWithDecimal:self.price.decimalValue] ? : [NSDecimalNumber zero];
+    return priceNonNil;
+}
+
+- (NSDecimalNumber *)volumeNonNil {
+    NSDecimalNumber *amount = self.amount ? : [NSDecimalNumber zero];
+    NSDecimalNumber *volume = [[self priceNonNil] decimalNumberByMultiplyingBy:amount
+                                                                  withBehavior:[SOXFormatters currencyNumberHandler]];
+    return volume;
+}
+
+- (NSDecimalNumber *)minVolumeNonNil {
+    NSDecimalNumber *minAmount = self.minAmount ? : [NSDecimalNumber zero];
+    NSDecimalNumber *minVolume = [[self priceNonNil] decimalNumberByMultiplyingBy:minAmount
+                                                                       withBehavior:[SOXFormatters currencyNumberHandler]];
+    return minVolume;
+}
 
 #pragma mark - Action methods
 - (IBAction)maxAmountButtonAction:(NSButton *)sender {
@@ -421,6 +435,7 @@
         newAmount = [newAmount decimalNumberByAdding:maxAmountOfOrderToReplace];
     }
     self.amount = newAmount;
+    [self updateVolumeInformationLine];
 }
 
 - (IBAction)createOrderAction:(NSButton *)sender {
