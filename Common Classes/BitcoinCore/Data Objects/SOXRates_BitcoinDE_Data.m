@@ -20,6 +20,7 @@
 @property (strong, nonatomic, readwrite) NSDecimalNumber *rate_weighted_3h;
 @property (strong, nonatomic, readwrite) NSDecimalNumber *rate_weighted_12h;
 @property (strong, nonatomic, readwrite) NSDecimalNumber *rate_weighted_half;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *rate_weighted_double;
 @end
 
 @implementation SOXBitcoinDE_Rate
@@ -33,6 +34,8 @@
 @property (strong, nonatomic, readwrite) NSDecimalNumber *rate_weighted;
 @property (strong, nonatomic, readwrite) NSDecimalNumber *rate_weighted_3h;
 @property (strong, nonatomic, readwrite) NSDecimalNumber *rate_weighted_12h;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *rate_weighted_half;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *rate_weighted_double;
 
 @end
 
@@ -42,7 +45,7 @@
 @synthesize rates;
 
 #pragma mark Synthesize
-@synthesize rate_weighted, rate_weighted_3h, rate_weighted_12h;
+@synthesize rate_weighted, rate_weighted_3h, rate_weighted_12h, rate_weighted_half, rate_weighted_double;
 
 #pragma mark - Init & Co.
 + (SOXRatesData *)rateDataForRateInfoDictionary:(NSDictionary *)payloadDictionary {
@@ -85,9 +88,16 @@
 
 - (NSDecimalNumber *)rateWeightedHalfForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
     SOXBitcoinDE_Rate *rate = [self rateForCurrencyType:currencyType];
-    NSDecimalNumber *rateWeighted12hForCurrencyType = rate.rate_weighted_half;
+    NSDecimalNumber *rateWeightedHalfForCurrencyType = rate.rate_weighted_half;
 
-    return rateWeighted12hForCurrencyType;
+    return rateWeightedHalfForCurrencyType;
+}
+
+- (NSDecimalNumber *)rateWeightedDoubleForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    SOXBitcoinDE_Rate *rate = [self rateForCurrencyType:currencyType];
+    NSDecimalNumber *rateWeightedDoubleForCurrencyType = rate.rate_weighted_double;
+
+    return rateWeightedDoubleForCurrencyType;
 }
 
 #pragma mark - Instance methods
@@ -111,6 +121,10 @@
         NSDecimalNumber *rate_weighted_half = [rate.rate_weighted decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"2"]];
         rate.rate_weighted_half = [SOXFormatters currencyNumberForNumber:rate_weighted_half
                                                             roundingMode:NSNumberFormatterRoundUp];
+
+        NSDecimalNumber *rate_weighted_double = [rate.rate_weighted decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"2"]];
+        rate.rate_weighted_double = [SOXFormatters currencyNumberForNumber:rate_weighted_double
+                                                            roundingMode:NSNumberFormatterRoundDown];
     }
     [ratesData.rates setObject:rate
                         forKey:[payloadDictionary objectForKey:BitcoinDE_ShowRates_rate_trading_pair]];

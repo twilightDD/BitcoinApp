@@ -14,6 +14,7 @@
 @property (strong, nonatomic, readonly) NSDecimalNumber *rate_weighted_3h;
 @property (strong, nonatomic, readonly) NSDecimalNumber *rate_weighted_12h;
 @property (strong, nonatomic, readonly) NSDecimalNumber *rate_weighted_half;
+@property (strong, nonatomic, readonly) NSDecimalNumber *rate_weighted_double;
 @end
 
 
@@ -28,5 +29,6 @@
 - (NSDecimalNumber *)rateWeighted3hForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 - (NSDecimalNumber *)rateWeighted12hForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 - (NSDecimalNumber *)rateWeightedHalfForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
+- (NSDecimalNumber *)rateWeightedDoubleForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 
 @end

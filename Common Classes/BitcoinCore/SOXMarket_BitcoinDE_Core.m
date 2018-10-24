@@ -186,6 +186,11 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
     return [ratesData rateWeightedHalfForCurrencyType:currencyType];
 }
 
++ (NSDecimalNumber * _Nullable)rateWeightedDoubleForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    SOXRates_BitcoinDE_Data *ratesData = (SOXRates_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].ratesData;
+    return [ratesData rateWeightedDoubleForCurrencyType:currencyType];
+}
+
 + (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
                       withParameter:(NSDictionary * _Nullable)parameterDictionary
                           respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nullable)controller {
