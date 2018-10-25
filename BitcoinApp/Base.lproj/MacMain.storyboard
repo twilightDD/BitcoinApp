@@ -1084,7 +1084,7 @@
                                         <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="16" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J8O-sa-1lW">
                                             <rect key="frame" x="8" y="8" width="473" height="119"/>
                                             <subviews>
-                                                <stackView distribution="fillEqually" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IVL-DT-9oR" userLabel="BitcoinStack">
+                                                <stackView distribution="fillEqually" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IVL-DT-9oR" userLabel="Coin amount">
                                                     <rect key="frame" x="0.0" y="27" width="94" height="92"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EwQ-UD-qia">
@@ -1199,7 +1199,7 @@
                                                 <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="BIc-f8-Hqa">
                                                     <rect key="frame" x="108" y="0.0" width="5" height="119"/>
                                                 </box>
-                                                <stackView distribution="fillEqually" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rJL-Qj-YBC" userLabel="FidorStack">
+                                                <stackView distribution="fillEqually" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rJL-Qj-YBC" userLabel="Fidor">
                                                     <rect key="frame" x="127" y="27" width="93" height="92"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y2W-30-7eg">
@@ -1434,7 +1434,7 @@
                                                 <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="TDX-Hr-bOW">
                                                     <rect key="frame" x="361" y="0.0" width="5" height="119"/>
                                                 </box>
-                                                <stackView distribution="fillEqually" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aTk-QB-Ksu" userLabel="CreditStack">
+                                                <stackView distribution="fillEqually" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aTk-QB-Ksu" userLabel="Coin Value">
                                                     <rect key="frame" x="380" y="46" width="93" height="73"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zNQ-4W-MRR">
@@ -1590,22 +1590,21 @@
                         <outlet property="btcBalanceReservedAmountTextField" destination="VTX-vr-jAB" id="MuN-3e-p6x"/>
                         <outlet property="btcBalanceTotalAmountDescriptionTextField" destination="FIe-Bo-Niw" id="ErM-Iw-3Ya"/>
                         <outlet property="btcBalanceTotalAmountTextField" destination="KMw-dO-CSw" id="DV6-3Q-eWJ"/>
+                        <outlet property="btcBalanceValuesAndDescriptionStackView" destination="4Ya-WF-AmO" id="1WE-OU-R1J"/>
                         <outlet property="coinValueDescriptionTextField" destination="Q2f-6I-X6F" id="aro-nv-AdU"/>
                         <outlet property="coinValueHeadlineTextField" destination="zNQ-4W-MRR" id="8q2-eR-70n"/>
-                        <outlet property="coinValueStackView" destination="aTk-QB-Ksu" id="KAA-Ph-Ado"/>
                         <outlet property="coinValueTextField" destination="MNx-sU-WUO" id="SMc-cm-EPi"/>
+                        <outlet property="coinValueValuesAndDescriptionStackView" destination="C7I-8U-PBB" id="ArF-um-kqb"/>
                         <outlet property="emptyDescriptionTextField" destination="Swe-C7-ICY" id="LVG-39-5CE"/>
                         <outlet property="emptyTextField" destination="87r-AJ-JBl" id="xBb-Tc-TfV"/>
                         <outlet property="fidorReservationAvailableAmountDescriptionTextField" destination="7JW-Mt-ieO" id="hzB-x3-MZw"/>
                         <outlet property="fidorReservationAvailableAmountTextField" destination="WK5-8f-wXL" id="WVi-lk-XQ6"/>
-                        <outlet property="fidorReservationDescriptionStackView" destination="fst-V2-Q7l" id="d4R-kn-DbJ"/>
                         <outlet property="fidorReservationHeadlineTextField" destination="y2W-30-7eg" id="qpk-UL-uAt"/>
                         <outlet property="fidorReservationTotalAmountDescriptionTextField" destination="5vx-To-2TX" id="ovp-CQ-FmM"/>
                         <outlet property="fidorReservationTotalAmountTextField" destination="xe8-OM-npk" id="Bd2-CG-h0O"/>
                         <outlet property="fidorReservationValidUntilDescriptionTextField" destination="22b-3H-gvx" id="fm1-bg-Urz"/>
                         <outlet property="fidorReservationValidUntilTextField" destination="c12-YI-m1X" id="hso-89-naf"/>
                         <outlet property="fidorReservationValuesAndDescriptionStackView" destination="ZMP-KD-04C" id="ixD-Ur-LQ2"/>
-                        <outlet property="fidorReservationValuesStackView" destination="3PV-fR-X9N" id="xHc-gf-OGn"/>
                         <outlet property="ratesHeadlineTextField" destination="zfI-FP-Coh" id="EaM-Mq-7Na"/>
                         <outlet property="ratesRateWeighted12hDescriptionTextField" destination="JaA-na-sDd" id="Jv2-Kj-Sx7"/>
                         <outlet property="ratesRateWeighted12hTextField" destination="gNZ-JI-dug" id="o0p-P1-X2g"/>
@@ -1613,6 +1612,7 @@
                         <outlet property="ratesRateWeighted3hTextField" destination="fbO-bM-e6C" id="tmY-NH-2Uz"/>
                         <outlet property="ratesRateWeightedDescriptionTextField" destination="s1s-l7-ZDR" id="S1E-L0-hOe"/>
                         <outlet property="ratesRateWeightedTextField" destination="slR-4r-Xj5" id="ylo-K4-Cb4"/>
+                        <outlet property="ratesValuesAndDescriptionStackView" destination="HYv-AS-ksP" id="Tg9-Ys-TE8"/>
                         <outlet property="updateBannerButton" destination="50d-QC-hTs" id="CeM-OE-Mfo"/>
                     </connections>
                 </viewController>

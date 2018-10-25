@@ -21,6 +21,7 @@
 
 #pragma mark IBOutlets
 #pragma mark | accountInfoData (BTCBalance)
+@property (weak) IBOutlet NSStackView *btcBalanceValuesAndDescriptionStackView;
 @property (weak) IBOutlet NSTextField *btcBalanceHeadlineTextField;
 @property (weak) IBOutlet NSTextField *btcBalanceTotalAmountDescriptionTextField;
 @property (weak) IBOutlet NSTextField *btcBalanceTotalAmountTextField;
@@ -39,10 +40,8 @@
 @property (weak) IBOutlet NSTextField *fidorReservationValidUntilDescriptionTextField;
 @property (weak) IBOutlet NSTextField *fidorReservationValidUntilTextField;
 
-@property (weak) IBOutlet NSStackView *fidorReservationDescriptionStackView;
-@property (weak) IBOutlet NSStackView *fidorReservationValuesStackView;
-
 #pragma mark | ratesData
+@property (weak) IBOutlet NSStackView *ratesValuesAndDescriptionStackView;
 @property (weak) IBOutlet NSTextField *ratesHeadlineTextField;
 @property (weak) IBOutlet NSTextField *ratesRateWeightedDescriptionTextField;
 @property (weak) IBOutlet NSTextField *ratesRateWeightedTextField;
@@ -52,6 +51,7 @@
 @property (weak) IBOutlet NSTextField *ratesRateWeighted12hTextField;
 
 #pragma mark | Coin value data
+@property (weak) IBOutlet NSStackView *coinValueValuesAndDescriptionStackView;
 @property (weak) IBOutlet NSTextField *coinValueHeadlineTextField;
 @property (weak) IBOutlet NSTextField *coinValueDescriptionTextField;
 @property (weak) IBOutlet NSTextField *coinValueTextField;
@@ -59,7 +59,6 @@
 @property (weak) IBOutlet NSTextField *emptyTextField;// layout errors
 
 #pragma mark | Others
-@property (weak) IBOutlet NSStackView *coinValueStackView;
 @property (weak) IBOutlet NSButton *updateBannerButton;
 @property (nonatomic) NSInteger countOfAllRates;
 
@@ -193,41 +192,84 @@
 }
 
 - (void)updateUIForCoinAmounts {
-    NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:self.currencyType];
-    self.btcBalanceHeadlineTextField.stringValue = [NSString stringWithFormat:@"%@ amounts", currencyTypeString];
-    
-    NSString *currencyTypeShortString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:self.currencyType];
+    NSString *btcBalanceHeadlineText;
+    if (self.currencyType == BitcoinDE_CurrencyTypeUnknown) {
+        self.btcBalanceValuesAndDescriptionStackView.hidden = YES;
+        btcBalanceHeadlineText = @"Coin amount";
+    }
+    else {
+        self.btcBalanceValuesAndDescriptionStackView.hidden = NO;
+        NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:self.currencyType];
+        btcBalanceHeadlineText = [NSString stringWithFormat:@"%@ amounts", currencyTypeString];
+    }
+
+    self.btcBalanceHeadlineTextField.stringValue = btcBalanceHeadlineText;
+
 
     SOXAccountInfo_BitcoinDE_Data *accountInfoData = (SOXAccountInfo_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].accountInfoData;
-
-
     NSDecimalNumber *btcBalanceTotalAmount         = [accountInfoData totalAmountForCurrencyType:self.currencyType];
     NSDecimalNumber *btcBalanceAvailableAmountText = [accountInfoData availableAmountForCurrencyType:self.currencyType];
     NSDecimalNumber *btcBalanceReservedAmountText  = [accountInfoData reservedAmountForCurrencyType:self.currencyType];
 
-
-    self.btcBalanceTotalAmountTextField.objectValue     = [NSString stringWithFormat:@"%@ %@"
+    NSString *currencyTypeShortString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:self.currencyType];
+    self.btcBalanceTotalAmountTextField.stringValue     = [NSString stringWithFormat:@"%@ %@"
                                                            , [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:btcBalanceTotalAmount]
                                                            , currencyTypeShortString];
-    self.btcBalanceAvailableAmountTextField.objectValue = [NSString stringWithFormat:@"%@ %@"
+    self.btcBalanceAvailableAmountTextField.stringValue = [NSString stringWithFormat:@"%@ %@"
                                                            , [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:btcBalanceAvailableAmountText]
                                                            , currencyTypeShortString];
-    self.btcBalanceReservedAmountTextField.objectValue  = [NSString stringWithFormat:@"%@ %@"
+    self.btcBalanceReservedAmountTextField.stringValue  = [NSString stringWithFormat:@"%@ %@"
                                                            , [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:btcBalanceReservedAmountText]
                                                            , currencyTypeShortString];
 }
 
 - (void)updateUIForAllocations {
+    // Header
+    NSString *fidorReservationHeadlineText;
+    if (self.currencyType == BitcoinDE_CurrencyTypeUnknown) {
+        fidorReservationHeadlineText = @"Sum of Reservations";
+    }
+    else {
+        NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:self.currencyType];
+        fidorReservationHeadlineText = [NSString stringWithFormat:@"Reservation for %@"
+                                        , currencyTypeString];
+    }
+    self.fidorReservationHeadlineTextField.stringValue = fidorReservationHeadlineText;
+
+    // Reservation figures and date
     SOXAccountInfo_BitcoinDE_Data *accountInfoData = (SOXAccountInfo_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].accountInfoData;
     if (accountInfoData.bankReservation_exists) {
         self.fidorReservationValuesAndDescriptionStackView.hidden = NO;
 
-        NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:self.currencyType];
-        self.fidorReservationHeadlineTextField.stringValue = [NSString stringWithFormat:@"Reservation for %@"
-                                                              , currencyTypeString];
+        if (self.currencyType == BitcoinDE_CurrencyTypeUnknown) {
+            // Show sum of reservations
+            NSDecimalNumber *totalReservationAmount = [NSDecimalNumber zero];
+            NSDecimalNumber *availableReservationAmount = [NSDecimalNumber zero];
 
-        self.fidorReservationTotalAmountTextField.doubleValue = [accountInfoData allocationMaxEurVolumeForCurrencyType:self.currencyType].doubleValue ;
-        self.fidorReservationAvailableAmountTextField.doubleValue = [accountInfoData allocationEurVolumeOpenOrdersForCurrencyType:self.currencyType].doubleValue;
+            for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeUnknown + 1;
+                 currencyType < BitcoinDE_CurrencyType_EndOfType;
+                 currencyType++) {
+                totalReservationAmount = [totalReservationAmount decimalNumberByAdding:
+                                          [accountInfoData allocationMaxEurVolumeForCurrencyType:currencyType]];
+                availableReservationAmount = [availableReservationAmount decimalNumberByAdding:
+                                              [accountInfoData allocationEurVolumeOpenOrdersForCurrencyType:currencyType]];
+            }
+            self.fidorReservationTotalAmountTextField.doubleValue = totalReservationAmount.doubleValue;
+            self.fidorReservationAvailableAmountTextField.doubleValue = availableReservationAmount.doubleValue;
+
+
+        }
+        else {
+            // show reservation for selected currency
+            NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:self.currencyType];
+            self.fidorReservationHeadlineTextField.stringValue = [NSString stringWithFormat:@"Reservation for %@"
+                                                                  , currencyTypeString];
+
+            self.fidorReservationTotalAmountTextField.doubleValue = [accountInfoData allocationMaxEurVolumeForCurrencyType:self.currencyType].doubleValue ;
+            self.fidorReservationAvailableAmountTextField.doubleValue = [accountInfoData allocationEurVolumeOpenOrdersForCurrencyType:self.currencyType].doubleValue;
+        }
+
+        // Reservation end date
         NSString *validUntilString = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:accountInfoData.bankReservation_validUntil];
         self.fidorReservationValidUntilTextField.stringValue = validUntilString;
     }
@@ -237,26 +279,77 @@
 }
 
 - (void)updateUIForRates {
-     NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:self.currencyType];
-        self.ratesHeadlineTextField.stringValue = [NSString stringWithFormat:@"Weighted %@ rates"
-                                                   , currencyTypeString];
+    NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:self.currencyType];
 
-    SOXRates_BitcoinDE_Data *ratesData = (SOXRates_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].ratesData;
-    self.ratesRateWeightedTextField.objectValue     = [ratesData rateWeightedForCurrencyType:self.currencyType];
-    self.ratesRateWeighted3hTextField.objectValue   = [ratesData rateWeighted3hForCurrencyType:self.currencyType];
-    self.ratesRateWeighted12hTextField.objectValue  = [ratesData rateWeighted12hForCurrencyType:self.currencyType];
+    // Header
+    NSString *ratesHeadlineText;
+    if (self.currencyType == BitcoinDE_CurrencyTypeUnknown) {
+        ratesHeadlineText = @"Weighted rates";
+        self.ratesValuesAndDescriptionStackView.hidden = YES;
+    }
+    else {
+        ratesHeadlineText = [NSString stringWithFormat:@"Weighted %@ rates"
+                             , currencyTypeString];
+        self.ratesValuesAndDescriptionStackView.hidden = NO;
 
-    NSDecimalNumber *totalCoinAmount = [SOXMarket_BitcoinDE_Core totalAmountForCurrencyType:self.currencyType];
-    NSDecimalNumber *rateWeighted = [SOXMarket_BitcoinDE_Core rateWeightedForCurrencyType:self.currencyType];
-    if (totalCoinAmount
-        && [totalCoinAmount isNotEqualTo:[NSDecimalNumber notANumber]]
-        && rateWeighted
-        && [rateWeighted isNotEqualTo:[NSDecimalNumber notANumber]]) {
-        self.coinValueHeadlineTextField.stringValue = [NSString stringWithFormat:@"%@ value", currencyTypeString];
-        NSDecimalNumber *coinValue = [totalCoinAmount decimalNumberByMultiplyingBy:rateWeighted ];
-        self.coinValueTextField.stringValue = [SOXFormatters currencyStringForNumber:coinValue
+        // Rate figures
+        SOXRates_BitcoinDE_Data *ratesData = (SOXRates_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].ratesData;
+        self.ratesRateWeightedTextField.objectValue     = [ratesData rateWeightedForCurrencyType:self.currencyType];
+        self.ratesRateWeighted3hTextField.objectValue   = [ratesData rateWeighted3hForCurrencyType:self.currencyType];
+        self.ratesRateWeighted12hTextField.objectValue  = [ratesData rateWeighted12hForCurrencyType:self.currencyType];
+
+    }
+    self.ratesHeadlineTextField.stringValue = ratesHeadlineText;
+
+    // We know the rates so we can show the Volume of my coins
+    [self updateVolumeOfCoins];
+}
+
+- (void)updateVolumeOfCoins {
+    NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:self.currencyType];
+
+    NSString *coinValueHeadlineText;
+    NSDecimalNumber *totalVolume = [NSDecimalNumber zero];
+    if (self.currencyType == BitcoinDE_CurrencyTypeUnknown) {
+        coinValueHeadlineText = @"Sum of Values";
+
+        for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeUnknown + 1;
+             currencyType < BitcoinDE_CurrencyType_EndOfType;
+             currencyType++) {
+            NSDecimalNumber *totalCoinAmount = [SOXMarket_BitcoinDE_Core totalAmountForCurrencyType:currencyType];
+            NSDecimalNumber *rateWeighted = [SOXMarket_BitcoinDE_Core rateWeightedForCurrencyType:currencyType];
+            if (totalCoinAmount
+                && [totalCoinAmount isNotEqualTo:[NSDecimalNumber notANumber]]
+                && rateWeighted
+                && [rateWeighted isNotEqualTo:[NSDecimalNumber notANumber]]) {
+
+                NSDecimalNumber *coinValue = [totalCoinAmount decimalNumberByMultiplyingBy:rateWeighted ];
+                totalVolume = [totalVolume decimalNumberByAdding:coinValue];
+            }
+        }
+        self.coinValueTextField.stringValue = [SOXFormatters currencyStringForNumber:totalVolume
                                                                         roundingMode:NSNumberFormatterRoundUp];
     }
+    else {
+        coinValueHeadlineText = [NSString stringWithFormat:@"%@ Value"
+                             , currencyTypeString];
+        // Volume figures
+        NSDecimalNumber *totalCoinAmount = [SOXMarket_BitcoinDE_Core totalAmountForCurrencyType:self.currencyType];
+        NSDecimalNumber *rateWeighted = [SOXMarket_BitcoinDE_Core rateWeightedForCurrencyType:self.currencyType];
+        if (totalCoinAmount
+            && [totalCoinAmount isNotEqualTo:[NSDecimalNumber notANumber]]
+            && rateWeighted
+            && [rateWeighted isNotEqualTo:[NSDecimalNumber notANumber]]) {
+
+            totalVolume = [totalCoinAmount decimalNumberByMultiplyingBy:rateWeighted ];
+
+        }
+    }
+
+    self.coinValueHeadlineTextField.stringValue = coinValueHeadlineText;
+    self.coinValueTextField.stringValue = [SOXFormatters currencyStringForNumber:totalVolume
+                                                                    roundingMode:NSNumberFormatterRoundUp];
+
 }
 
 #pragma mark - Action methods
