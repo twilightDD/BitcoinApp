@@ -7,6 +7,7 @@
 //
 
 #import "SOXMyActiveOrdersViewController.h"
+#import "SOXStatisticsAbstractViewController_Private.h"
 #import "SOXAbstractViewController_Private.h"
 
 #import "SOXMyOrderDetailsViewController.h"
@@ -160,6 +161,8 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
             }
         }
     }
+
+    [self updateTradeStatistics];
 }
 
 #pragma mark - User information
