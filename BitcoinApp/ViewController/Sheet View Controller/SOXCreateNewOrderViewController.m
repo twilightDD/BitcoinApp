@@ -76,115 +76,95 @@
 @implementation SOXCreateNewOrderViewController
 
 #pragma mark Init&Co.
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do view setup here.
-}
-
 -(void)viewWillAppear {
     [super viewWillAppear];
+
+    // better save than sorry
     if (self.orderType != BitcoinDE_BuyOrderType
         && self.orderType != BitcoinDE_SellOrderType) {
         return;
     }
 
+    [self setupValues];
     [self setupUI];
-    self.validInput = NO;
-
-    // checkboxes in NSBox
-    {
-        { // TrustLevel
-            self.trustLevel = self.orderBookDataToReplace ?
-            [SOXMarket_BitcoinDE_DefTypes trustLevelForTrustLevelString:self.orderBookDataToReplace.orderRequirements_minTrustLevel] :
-            [SOXPreferenceCenter defaultTrustLevelNewOrder];
-
-            self.bronceTrustLevelButton.title               = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelBronze];
-            self.bronceTrustLevelButton.tag                 = BitcoinDE_TrustLevelBronze;
-
-            self.silverTrustLevelButton.title               = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelSilver];
-            self.silverTrustLevelButton.tag                 = BitcoinDE_TrustLevelSilver;
-
-            self.goldTrustLevelButton.title                 = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelGold];
-            self.goldTrustLevelButton.tag                   = BitcoinDE_TrustLevelGold;
-
-            if (self.bronceTrustLevelButton.tag == self.trustLevel) {
-                self.bronceTrustLevelButton.state = 1;
-            }
-            else if (self.silverTrustLevelButton.tag == self.trustLevel) {
-                self.silverTrustLevelButton.state = 1;
-            }
-            else if (self.goldTrustLevelButton.tag == self.trustLevel) {
-                self.goldTrustLevelButton.state = 1;
-            }
-        }
-
-        { // OnlyKYC
-
-            self.onlyKYCButton.state = self.orderBookDataToReplace ?
-            self.orderBookDataToReplace.orderRequirements_onlyKYCFull :
-            [SOXPreferenceCenter defaultKYCOnly];
-        }
-
-        { // ReNew
-            self.reNewOrderButton.state = self.orderBookDataToReplace ?
-            self.orderBookDataToReplace.orderInformation_newOrderForRemainingAmount :
-            [SOXPreferenceCenter new_order_for_remaining_amount];
-        }
-    }
-    // Default values (for bindings)
-    {
-        self.amount = self.orderBookDataToReplace ?
-            [NSDecimalNumber decimalNumberWithDecimal:self.orderBookDataToReplace.orderInformation_maxAmount.decimalValue] :
-            [NSDecimalNumber decimalNumberWithString:@"0.05"];
-        self.minAmount = self.orderBookDataToReplace ?
-            [NSDecimalNumber decimalNumberWithDecimal:self.orderBookDataToReplace.orderInformation_minAmount.decimalValue] :
-            [NSDecimalNumber decimalNumberWithString:@"0.05"];
-        self.minimalPossibleAmount = [NSDecimalNumber decimalNumberWithString:@"0.00001"];
-
-        [self setupPriceLimit];
-
-
-        if (!self.orderBookDataToReplace) {
-            /* Bedingungen:
-             #1 Please correct the purchase price per bitcoin.
-             The price shall not be less than 50% of the current market rate.
-             #2 The value of the amount of bitcoin may not be lower than than €60.00
-             */
-            if (self.orderType == BitcoinDE_BuyOrderType){
-                self.price = [SOXMarket_BitcoinDE_Core rateWeightedHalfForCurrencyType:self.currencyType];
-            }
-            else if (self.orderType == BitcoinDE_SellOrderType) {
-                self.price = [SOXMarket_BitcoinDE_Core rateWeightedForCurrencyType:self.currencyType];
-            }
-        }
-        else {
-            self.price = [NSDecimalNumber decimalNumberWithDecimal:self.orderBookDataToReplace.orderInformation_price.decimalValue];
-        }
-
-    }
-
     [self validateInputs];
-    [self updateVolumeInformationLine];
-
 }
 
-#pragma mark - Public methods
+#pragma mark - Setup methods
+#pragma mark | Values
+- (void)setupValues {
+    [self setupAmountValue];
+    [self setupMinAmountValue];
+    [self setupPriceLimitValue];
+    [self setupPriceValue];
+    [self setupTrustLevelValue];
+}
 
-#pragma mark - Private methods
+- (void)setupAmountValue {
+    self.amount = self.orderBookDataToReplace ?
+    [NSDecimalNumber decimalNumberWithDecimal:self.orderBookDataToReplace.orderInformation_maxAmount.decimalValue] :
+    [NSDecimalNumber decimalNumberWithString:@"0.05"];
+}
+
+- (void)setupMinAmountValue {
+    self.minAmount = self.orderBookDataToReplace ?
+    [NSDecimalNumber decimalNumberWithDecimal:self.orderBookDataToReplace.orderInformation_minAmount.decimalValue] :
+    [NSDecimalNumber decimalNumberWithString:@"0.05"];
+    self.minimalPossibleAmount = [NSDecimalNumber decimalNumberWithString:@"0.00001"];
+}
+
+
+- (void)setupPriceLimitValue {
+    switch (self.orderType) {
+        case BitcoinDE_BuyOrderType:
+            self.priceLimit = [SOXMarket_BitcoinDE_Core rateWeightedHalfForCurrencyType:self.currencyType];
+            break;
+        case BitcoinDE_SellOrderType:
+            self.priceLimit = [SOXMarket_BitcoinDE_Core rateWeightedDoubleForCurrencyType:self.currencyType];
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)setupPriceValue {
+    if (!self.orderBookDataToReplace) {
+        /* Bedingungen:
+         #1 Please correct the purchase price per bitcoin.
+         The price shall not be less than 50% of the current market rate.
+         #2 The value of the amount of bitcoin may not be lower than than €60.00
+         */
+        if (self.orderType == BitcoinDE_BuyOrderType){
+            self.price = [SOXMarket_BitcoinDE_Core rateWeightedHalfForCurrencyType:self.currencyType];
+        }
+        else if (self.orderType == BitcoinDE_SellOrderType) {
+            self.price = [SOXMarket_BitcoinDE_Core rateWeightedForCurrencyType:self.currencyType];
+        }
+    }
+    else {
+        self.price = [NSDecimalNumber decimalNumberWithDecimal:self.orderBookDataToReplace.orderInformation_price.decimalValue];
+    }
+}
+
+- (void)setupTrustLevelValue {
+    self.trustLevel = self.orderBookDataToReplace ?
+    [SOXMarket_BitcoinDE_DefTypes trustLevelForTrustLevelString:self.orderBookDataToReplace.orderRequirements_minTrustLevel] :
+    [SOXPreferenceCenter defaultTrustLevelNewOrder];
+}
+
+#pragma mark | UI
 - (void)setupUI {
-    [self setupTexts];
-    [self setupBox];
-
+    [self setupUITexts];
+    [self setupUIBox];
 }
 
-- (void)setupTexts {
+- (void)setupUITexts {
     NSString *titleTextFieldText = @"Error";
     NSString *amountDescriptionTextFieldText = @"Error";
     NSString *createOrderButtonText = @"Error";
     NSString *maxAmountButtonTitle = @"Error";
     BOOL maxAmountButtonHidden = NO;
     NSString *cancelButtonText = @"Cancel";
-
 
     NSString *shortCurrencyString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:self.currencyType];
     if (self.orderType == BitcoinDE_BuyOrderType) {
@@ -218,74 +198,142 @@
     self.amountDescriptionTextField.stringValue     = amountDescriptionTextFieldText;
     self.maxAmountButton.title = maxAmountButtonTitle;
     self.maxAmountButton.hidden = maxAmountButtonHidden;
-    self.createOrderButton.title = createOrderButtonText;
 
+    self.minAmountDescriptionTextField.stringValue  = @"Minimal amount";
+    self.priceDescriptionTextField.stringValue      = @"Price per BTC";
+
+    self.createOrderButton.title = createOrderButtonText;
     self.cancelButton.title = cancelButtonText;
+
+    // priceLimitInformationTextField
+    {
+        NSString *volumeTextFieldText = @"Error";
+        switch (self.orderType) {
+            case BitcoinDE_BuyOrderType:
+                volumeTextFieldText = [NSString stringWithFormat:@"Min. price: %@\n(50%% weighted rate)"
+                                       , [SOXFormatters currencyStringForNumber:self.priceLimit
+                                                                   roundingMode:NSNumberFormatterRoundUp]];
+                break;
+            case BitcoinDE_SellOrderType:
+                volumeTextFieldText = [NSString stringWithFormat:@"Max. price: %@\n(200%% weighted rate)"
+                                       , [SOXFormatters currencyStringForNumber:self.priceLimit
+                                                                   roundingMode:NSNumberFormatterRoundDown]];
+                break;
+            default:
+                break;
+        }
+        self.priceLimitInformationTextField.stringValue = volumeTextFieldText;
+    }
 }
 
-- (void)setupBox {
-    self.minAmountDescriptionTextField.stringValue  = @"Minimal amount";
-
-    self.priceDescriptionTextField.stringValue      = @"Price per BTC";
-    self.priceLimitInformationTextField.stringValue                = @"";
-
+- (void)setupUIBox {
+    // Strings
     self.optionBox.title                            = @"Options";
-    self.onlyKYCButton.title                        = @"Allow only fully identified Users";
-    self.reNewOrderButton.title                     = @"Automatic residual purchase request";
 
-    self.trustLevelDescpriptionTextField.stringValue = @"Minimal Trust Level";
+    [self setupUIBoxCheckboxes];
+    [self setupUIBoxDatePicker];
+    [self setupUIBoxPaymentOptionHint];
+}
 
-    // ------------------
+- (void)setupUIBoxCheckboxes {
+    { // OnlyKYC
+        self.onlyKYCButton.title = @"Allow only fully identified Users";
+        self.onlyKYCButton.state = self.orderBookDataToReplace ?
+        self.orderBookDataToReplace.orderRequirements_onlyKYCFull :
+        [SOXPreferenceCenter defaultKYCOnly];
+    }
+
+    { // ReNew
+        self.reNewOrderButton.title = @"Automatic residual purchase request";
+        self.reNewOrderButton.state = self.orderBookDataToReplace ?
+        self.orderBookDataToReplace.orderInformation_newOrderForRemainingAmount :
+        [SOXPreferenceCenter new_order_for_remaining_amount];
+    }
+
+    { // TrustLevel
+        self.trustLevelDescpriptionTextField.stringValue = @"Minimal Trust Level";
+        self.bronceTrustLevelButton.title               = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelBronze];
+        self.bronceTrustLevelButton.tag                 = BitcoinDE_TrustLevelBronze;
+
+        self.silverTrustLevelButton.title               = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelSilver];
+        self.silverTrustLevelButton.tag                 = BitcoinDE_TrustLevelSilver;
+
+        self.goldTrustLevelButton.title                 = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelGold];
+        self.goldTrustLevelButton.tag                   = BitcoinDE_TrustLevelGold;
+
+        if (self.bronceTrustLevelButton.tag == self.trustLevel) {
+            self.bronceTrustLevelButton.state = 1;
+        }
+        else if (self.silverTrustLevelButton.tag == self.trustLevel) {
+            self.silverTrustLevelButton.state = 1;
+        }
+        else if (self.goldTrustLevelButton.tag == self.trustLevel) {
+            self.goldTrustLevelButton.state = 1;
+        }
+    }
+}
+
+- (void)setupUIBoxDatePicker {
+    self.endDateDescriptionTextField.stringValue = @"Order should end";
+
     NSDate *endDate = nil;
     if (self.orderBookDataToReplace) {
         endDate = self.orderBookDataToReplace.orderInformation_endDateTime;
     }
     else {
-        self.endDateDescriptionTextField.stringValue = @"Order should end";
         NSDate *dateIn5Days = [NSDate dateWithTimeIntervalSinceNow:5 * 24 * 60 * 60];
         endDate = [SOXFormatters dateQuarterBeforeMidnightForDate:dateIn5Days];
     }
     self.endDatePicker.dateValue = endDate;
-
-    // --------------------
-    [self setupPaymentOptionHint];
 }
 
-- (void)setupPaymentOptionHint {
-    // ------------------
+- (void)setupUIBoxPaymentOptionHint {
     // Hint on buy: paymentOption depend on default via preferences on webside
     if (self.orderType == BitcoinDE_BuyOrderType) {
         self.paymentOptionHintTextField.allowsEditingTextAttributes = YES;
         self.paymentOptionHintTextField.selectable = YES;
-
         [self.paymentOptionHintTextField setHyperlinkFormattingFromString:@"Express Trade Settings"
                                                             withURLString:@"https://www.bitcoin.de/de/express-trade/settings"];
-
     }
     else if (self.orderType == BitcoinDE_SellOrderType) {
-        self.paymentOptionHintTextField.hidden = YES;
+        self.paymentOptionHintTextField.stringValue = @"Sell orders are alway Express Orders";
     }
 }
 
-- (void)setupPriceLimit {
-    NSString *volumeTextFieldText = @"Error";
-    if (self.orderType == BitcoinDE_BuyOrderType) {
-        self.priceLimit = [SOXMarket_BitcoinDE_Core rateWeightedHalfForCurrencyType:self.currencyType];
-        volumeTextFieldText = [NSString stringWithFormat:@"Min. price: %@\n(50%% weighted rate)"
-                               , [SOXFormatters currencyStringForNumber:self.priceLimit
-                                                           roundingMode:NSNumberFormatterRoundUp]];
+
+#pragma mark - Private methods
+- (void)validateInputs {
+    if ([[self volumeNonNil] isLessThan:[SOXPreferenceCenter minimalVolume]]
+        || [[self minVolumeNonNil] isLessThan:[SOXPreferenceCenter minimalVolume]]) {
+        self.validInput = NO;
+        return;
     }
-    else if (self.orderType == BitcoinDE_SellOrderType) {
-        self.priceLimit = [SOXMarket_BitcoinDE_Core rateWeightedDoubleForCurrencyType:self.currencyType];
-        volumeTextFieldText = [NSString stringWithFormat:@"Max. price: %@\n(200%% weighted rate)"
-                               , [SOXFormatters currencyStringForNumber:self.priceLimit
-                                                           roundingMode:NSNumberFormatterRoundDown]];
+    
+    if ([self.amount isLessThan:self.minimalPossibleAmount]) {
+        self.validInput = NO;
+        return;
     }
-    else {
-        NSAssert(NO, @"no valid orderType");
+    if ([self.amount isLessThan:self.minAmount]) {
+        self.validInput = NO;
+        return;
     }
 
-    self.priceLimitInformationTextField.stringValue = volumeTextFieldText;
+    if (!self.price
+        || [self.price isLessThan:[NSDecimalNumber zero]]
+        || (self.orderType == BitcoinDE_BuyOrderType && [self.price isLessThan:self.priceLimit])
+        || (self.orderType == BitcoinDE_SellOrderType && [self.price isGreaterThan:self.priceLimit])
+        ) {
+        self.validInput = NO;
+        return;
+    }
+
+    NSDate *endDate = self.endDatePicker.dateValue;
+    if ([endDate isLessThanOrEqualTo:[NSDate date]]) {
+        self.validInput = NO;
+        return;
+    }
+
+    self.validInput = YES;
 }
 
 - (void)updateVolumeInformationLine {
@@ -304,7 +352,7 @@
         volumeInformation = @"Confucius says:\nNo Price - No Profit";
     }
     else if (self.orderType == BitcoinDE_BuyOrderType
-        && priceToLess) {
+             && priceToLess) {
         volumeInformation = [NSString stringWithFormat:@"Price beneath minimal price (%@)"
                              , [SOXFormatters currencyStringForNumber:self.priceLimit
                                                          roundingMode:NSNumberFormatterRoundHalfUp]];
@@ -343,40 +391,6 @@
     self.volumeInformationLine.stringValue = volumeInformation;
 }
 
-- (void)validateInputs {
-    if ([[self volumeNonNil] isLessThan:[SOXPreferenceCenter minimalVolume]]
-        || [[self minVolumeNonNil] isLessThan:[SOXPreferenceCenter minimalVolume]]) {
-        self.validInput = NO;
-        return;
-    }
-    
-    if ([self.amount isLessThan:self.minimalPossibleAmount]) {
-        self.validInput = NO;
-        return;
-    }
-    if ([self.amount isLessThan:self.minAmount]) {
-        self.validInput = NO;
-        return;
-    }
-
-    if (!self.price
-        || [self.price isLessThan:[NSDecimalNumber zero]]
-        || (self.orderType == BitcoinDE_BuyOrderType && [self.price isLessThan:self.priceLimit])
-        || (self.orderType == BitcoinDE_SellOrderType && [self.price isGreaterThan:self.priceLimit])
-        ) {
-        self.validInput = NO;
-        return;
-    }
-
-    NSDate *endDate = self.endDatePicker.dateValue;
-    if ([endDate isLessThanOrEqualTo:[NSDate date]]) {
-        self.validInput = NO;
-        return;
-    }
-
-    self.validInput = YES;
-}
-
 - (void)removeOldOrder {
     NSDictionary *myOrderBookParameter = [SOXMyOrderBook_BitcoinDE_Data parameterForDeletingOrderWithOrderBookData:self.orderBookDataToReplace];
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_RemoveOrderType
@@ -397,13 +411,12 @@
                                                                                  payment_option:[SOXPreferenceCenter defaultPaymentOptionForCreateOrder]
                                                                                    seat_of_bank:[SOXPreferenceCenter defaultCountryCodes]];
 
-    DDLogInfo(@"Parameters:\n%@", parameters);
-
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_CreateOrderType
                                             withParameter:parameters
                                                 respondTo:self];
 }
-#pragma mark | NonNill
+
+#pragma mark - Special getter methods (nonnull)
 - (NSDecimalNumber *)priceNonNil {
     NSDecimalNumber *priceNonNil = [NSDecimalNumber decimalNumberWithDecimal:self.price.decimalValue] ? : [NSDecimalNumber zero];
     return priceNonNil;
@@ -419,8 +432,14 @@
 - (NSDecimalNumber *)minVolumeNonNil {
     NSDecimalNumber *minAmount = self.minAmount ? : [NSDecimalNumber zero];
     NSDecimalNumber *minVolume = [[self priceNonNil] decimalNumberByMultiplyingBy:minAmount
-                                                                       withBehavior:[SOXFormatters currencyNumberHandler]];
+                                                                     withBehavior:[SOXFormatters currencyNumberHandler]];
     return minVolume;
+}
+
+#pragma mark - Manual setters
+- (void)setValidInput:(BOOL)validInput {
+    _validInput = validInput;
+    [self updateVolumeInformationLine];
 }
 
 #pragma mark - Action methods
@@ -435,7 +454,7 @@
         newAmount = [newAmount decimalNumberByAdding:maxAmountOfOrderToReplace];
     }
     self.amount = newAmount;
-    [self updateVolumeInformationLine];
+    [self validateInputs];
 }
 
 - (IBAction)createOrderAction:(NSButton *)sender {
@@ -490,7 +509,6 @@
 
 - (IBAction)trustLevelAction:(NSButton *)sender {
     self.trustLevel = sender.tag;
-    DDLogInfo(@"selected Trust Level: %tu", self.trustLevel);
 }
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
@@ -530,7 +548,6 @@
             alert.alertStyle      = alertStyle;
             [alert runModal];
 
-
             [self dismissViewController:self];
         }
     }
@@ -547,7 +564,6 @@
     NSText* textFieldEditor               = textField.currentEditor;
     
     id newValue = ( textFieldEditor != nil ? [textFieldFormatter numberFromString:textFieldEditor.string] : textField.objectValue );
-    DDLogInfo(@"NewValue: %@ (class: %@)", newValue, [newValue class]);
 
     if (textField == self.amountTextField) {
         _amount = newValue;
@@ -560,7 +576,6 @@
     }
 
     [self validateInputs];
-    [self updateVolumeInformationLine];
 }
 
 @end

@@ -3720,7 +3720,7 @@ Gw
                                             <rect key="frame" x="18" y="11" width="77" height="34"/>
                                             <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Link to settings" id="8GY-lH-553">
                                                 <font key="font" metaFont="system"/>
-                                                <color key="textColor" name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
