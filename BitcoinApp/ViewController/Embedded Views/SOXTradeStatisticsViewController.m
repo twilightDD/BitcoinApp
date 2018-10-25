@@ -69,6 +69,9 @@
     if ([anyObject isKindOfClass:[SOXAccountLedger_BitcoinDE_Data class]]) {
         [self updateInfosForAccountLedgerDatas:selectedObjects];
     }
+    else {
+        [self setupUI];
+    }
 }
 
 - (void)updateInfosForAccountLedgerDatas:(NSArray <SOXAccountLedger_BitcoinDE_Data *> *)accountLedgerDatas {
