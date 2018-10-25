@@ -26,12 +26,28 @@
 }
 
 #pragma mark - NSTableViewDelegate
-- (void)tableViewSelectionDidChange:(NSNotification *)notification {
+- (void)tableViewSelectionIsChanging:(NSNotification *)notification {
+    // responds to mouse events only
     if (self.tableView == notification.object) {
-        [self.tradeStatisticsViewController updateInfosForArrangedObjects:self.arrayController.arrangedObjects
-                                                      withSelectedObjects:self.arrayController.selectedObjects
-                                                        forCurrencyString:@"bubus"];
+        [self updateTradeStatistics];
     }
+}
+
+- (void)tableViewSelectionDidChange:(NSNotification *)notification {
+    // Needed for selection changes via keyboard
+    if (self.tableView == notification.object) {
+        [self updateTradeStatistics];
+    }
+}
+
+- (void)updateTradeStatistics {
+    // in case of tableViewSelectionIsChanging the arrayController returns no selectedObjects
+    NSIndexSet *selectedRowIndexes = self.tableView.selectedRowIndexes;
+    NSArray *arrangedObjects = self.arrayController.arrangedObjects;
+    NSArray *selectedObjects = [arrangedObjects objectsAtIndexes:selectedRowIndexes];
+    [self.tradeStatisticsViewController updateInfosForArrangedObjects:arrangedObjects
+                                                  withSelectedObjects:selectedObjects
+                                                    forCurrencyString:@"bubus"];
 }
 
 @end
