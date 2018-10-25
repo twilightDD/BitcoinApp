@@ -5260,120 +5260,132 @@ Gw
             <objects>
                 <viewController id="IKC-h0-Xsn" customClass="SOXTradeStatisticsViewController" sceneMemberID="viewController">
                     <view key="view" id="HRf-uY-76j">
-                        <rect key="frame" x="0.0" y="0.0" width="730" height="131"/>
+                        <rect key="frame" x="0.0" y="0.0" width="867" height="131"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <stackView distribution="fillEqually" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dNQ-Pr-rSp">
-                                <rect key="frame" x="20" y="20" width="690" height="106"/>
-                                <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jrm-M6-lam">
-                                        <rect key="frame" x="-2" y="89" width="81" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Total count" id="deA-r0-Eww">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6zl-OP-GiD">
-                                        <rect key="frame" x="83" y="89" width="82" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="999999" id="LSP-Ot-KeX">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bZY-qK-AxW">
-                                        <rect key="frame" x="169" y="89" width="96" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Selected count" id="BgO-LR-fR6">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Io9-H6-iAo">
-                                        <rect key="frame" x="269" y="89" width="81" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="999999" id="10J-DM-HQ1">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PrA-tA-2sm">
-                                        <rect key="frame" x="354" y="89" width="82" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Coin sum" id="rnh-BZ-RVi">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cCo-1D-V9z">
-                                        <rect key="frame" x="440" y="89" width="81" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="999999" id="yXf-8n-zRq">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yXn-D6-wa0">
-                                        <rect key="frame" x="525" y="89" width="82" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Volume sum" id="pVk-Vu-q4U">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OE3-43-xbz">
-                                        <rect key="frame" x="611" y="89" width="81" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="999999" id="hPx-PL-zk4">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                </subviews>
-                                <visibilityPriorities>
-                                    <integer value="1000"/>
-                                    <integer value="1000"/>
-                                    <integer value="1000"/>
-                                    <integer value="1000"/>
-                                    <integer value="1000"/>
-                                    <integer value="1000"/>
-                                    <integer value="1000"/>
-                                    <integer value="1000"/>
-                                </visibilityPriorities>
-                                <customSpacing>
-                                    <real value="3.4028234663852886e+38"/>
-                                    <real value="3.4028234663852886e+38"/>
-                                    <real value="3.4028234663852886e+38"/>
-                                    <real value="3.4028234663852886e+38"/>
-                                    <real value="3.4028234663852886e+38"/>
-                                    <real value="3.4028234663852886e+38"/>
-                                    <real value="3.4028234663852886e+38"/>
-                                    <real value="3.4028234663852886e+38"/>
-                                </customSpacing>
-                            </stackView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cI8-Ot-qgK">
+                                <rect key="frame" x="775" y="109" width="74" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="ku0-Kl-Lee"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="9999/9999" id="oen-x8-GFO">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EZM-eH-QB6">
+                                <rect key="frame" x="18" y="109" width="65" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Coin sum:" id="nX0-rG-Spd">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="U9G-Om-HFU">
+                                <rect key="frame" x="87" y="109" width="79" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="7AJ-gg-n2v"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="0,12345678" id="Dnd-aq-9GQ">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TxL-Au-JIQ">
+                                <rect key="frame" x="174" y="109" width="82" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Volume sum:" id="gWY-pV-nr5">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dfJ-fZ-T5j">
+                                <rect key="frame" x="260" y="109" width="89" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="85" id="PUI-rH-vk2"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="999999,99 €" id="7Sa-Xz-VrH">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LmT-BO-JzD">
+                                <rect key="frame" x="357" y="109" width="59" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Fee sum:" id="DmQ-zx-pCu">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FDe-x9-6tH">
+                                <rect key="frame" x="420" y="109" width="89" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="85" id="GJq-z2-cSA"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="999999,99 €" id="040-lt-358">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qfz-ru-WCm">
+                                <rect key="frame" x="517" y="109" width="92" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Kickback sum:" id="PU3-1L-V8h">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hbz-rK-Qrb">
+                                <rect key="frame" x="613" y="109" width="79" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="DPA-QF-bLU"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="0,12345678" id="zlv-cZ-bhF">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="dNQ-Pr-rSp" firstAttribute="top" secondItem="HRf-uY-76j" secondAttribute="top" constant="5" id="2hD-oT-9yb"/>
-                            <constraint firstAttribute="bottom" secondItem="dNQ-Pr-rSp" secondAttribute="bottom" constant="20" symbolic="YES" id="BIq-l1-VSN"/>
-                            <constraint firstItem="dNQ-Pr-rSp" firstAttribute="leading" secondItem="HRf-uY-76j" secondAttribute="leading" constant="20" symbolic="YES" id="rUn-Yc-9aQ"/>
-                            <constraint firstAttribute="trailing" secondItem="dNQ-Pr-rSp" secondAttribute="trailing" constant="20" symbolic="YES" id="wBZ-Qf-p7D"/>
+                            <constraint firstItem="Hbz-rK-Qrb" firstAttribute="leading" secondItem="qfz-ru-WCm" secondAttribute="trailing" constant="8" symbolic="YES" id="IVZ-IL-U8J"/>
+                            <constraint firstAttribute="trailing" secondItem="cI8-Ot-qgK" secondAttribute="trailing" constant="20" id="NjJ-WS-sWx"/>
+                            <constraint firstItem="LmT-BO-JzD" firstAttribute="baseline" secondItem="dfJ-fZ-T5j" secondAttribute="baseline" id="VK0-eA-kdn"/>
+                            <constraint firstItem="dfJ-fZ-T5j" firstAttribute="leading" secondItem="TxL-Au-JIQ" secondAttribute="trailing" constant="8" symbolic="YES" id="b7b-V7-GdI"/>
+                            <constraint firstItem="TxL-Au-JIQ" firstAttribute="leading" secondItem="U9G-Om-HFU" secondAttribute="trailing" constant="12" id="fQa-VT-Y9S"/>
+                            <constraint firstItem="qfz-ru-WCm" firstAttribute="baseline" secondItem="FDe-x9-6tH" secondAttribute="baseline" id="fva-cE-qwq"/>
+                            <constraint firstItem="LmT-BO-JzD" firstAttribute="baseline" secondItem="FDe-x9-6tH" secondAttribute="baseline" id="hyT-dn-fpQ"/>
+                            <constraint firstItem="EZM-eH-QB6" firstAttribute="leading" secondItem="HRf-uY-76j" secondAttribute="leading" constant="20" id="kD6-Gi-XAw"/>
+                            <constraint firstItem="FDe-x9-6tH" firstAttribute="leading" secondItem="LmT-BO-JzD" secondAttribute="trailing" constant="8" symbolic="YES" id="kcr-fs-4im"/>
+                            <constraint firstItem="EZM-eH-QB6" firstAttribute="top" secondItem="HRf-uY-76j" secondAttribute="top" constant="5" id="kqd-Dc-Bhz"/>
+                            <constraint firstItem="qfz-ru-WCm" firstAttribute="leading" secondItem="FDe-x9-6tH" secondAttribute="trailing" constant="12" id="lOB-3K-0Ea"/>
+                            <constraint firstItem="LmT-BO-JzD" firstAttribute="leading" secondItem="dfJ-fZ-T5j" secondAttribute="trailing" constant="12" id="lkX-pG-7CR"/>
+                            <constraint firstItem="U9G-Om-HFU" firstAttribute="leading" secondItem="EZM-eH-QB6" secondAttribute="trailing" constant="8" symbolic="YES" id="oak-E5-6PK"/>
+                            <constraint firstItem="qfz-ru-WCm" firstAttribute="baseline" secondItem="Hbz-rK-Qrb" secondAttribute="baseline" id="ph9-n3-Ocv"/>
+                            <constraint firstItem="TxL-Au-JIQ" firstAttribute="baseline" secondItem="U9G-Om-HFU" secondAttribute="baseline" id="rmO-WT-hrx"/>
+                            <constraint firstItem="TxL-Au-JIQ" firstAttribute="baseline" secondItem="dfJ-fZ-T5j" secondAttribute="baseline" id="vPK-iV-MjA"/>
+                            <constraint firstItem="EZM-eH-QB6" firstAttribute="baseline" secondItem="U9G-Om-HFU" secondAttribute="baseline" id="w5N-2L-p4x"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="coinSumDescriptionTextField" destination="PrA-tA-2sm" id="Yho-Dk-knv"/>
-                        <outlet property="coinSumValueTextField" destination="cCo-1D-V9z" id="Ust-z4-WeR"/>
-                        <outlet property="selectedCountDescriptionTextField" destination="bZY-qK-AxW" id="F6z-gJ-YqM"/>
-                        <outlet property="selectedCountValueTextField" destination="Io9-H6-iAo" id="fIh-eh-eJL"/>
-                        <outlet property="totalCountDescriptionTextField" destination="jrm-M6-lam" id="Z8q-K4-hIT"/>
-                        <outlet property="totalCountValueTextField" destination="6zl-OP-GiD" id="gxf-db-9P2"/>
-                        <outlet property="volumeSumDescriptionTextField" destination="yXn-D6-wa0" id="FYq-Lx-il3"/>
-                        <outlet property="volumeSumValueTextField" destination="OE3-43-xbz" id="5kT-Rd-2uJ"/>
+                        <outlet property="coinSumDescriptionTextField" destination="EZM-eH-QB6" id="LAz-aO-GLw"/>
+                        <outlet property="coinSumValueTextField" destination="U9G-Om-HFU" id="Vpm-v0-iha"/>
+                        <outlet property="entryCountTextField" destination="cI8-Ot-qgK" id="Wcu-ly-u33"/>
+                        <outlet property="feeSumDescriptionTextField" destination="LmT-BO-JzD" id="y5K-ve-ixh"/>
+                        <outlet property="feeSumValueTextField" destination="FDe-x9-6tH" id="wrz-cQ-0LB"/>
+                        <outlet property="kickbackSumDescriptionTextField" destination="qfz-ru-WCm" id="K02-xu-iiy"/>
+                        <outlet property="kickbackSumValueTextField" destination="Hbz-rK-Qrb" id="9fv-7y-GK1"/>
+                        <outlet property="volumeSumDescriptionTextField" destination="TxL-Au-JIQ" id="qfO-ra-2YP"/>
+                        <outlet property="volumeSumValueTextField" destination="dfJ-fZ-T5j" id="4kn-5w-Ttf"/>
                     </connections>
                 </viewController>
                 <customObject id="HZO-bO-IqZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-188" y="2337.5"/>
+            <point key="canvasLocation" x="-256.5" y="2337.5"/>
         </scene>
     </scenes>
     <resources>

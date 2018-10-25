@@ -11,12 +11,10 @@
 #import "SOXAccountLedger_BitcoinDE_Data.h"
 #import "SOXAccountLedger_BitcoinDE_Data_Private.h"
 
-@interface SOXTradeStatisticsViewController ()
-@property (strong) IBOutlet NSTextField *totalCountDescriptionTextField;
-@property (strong) IBOutlet NSTextField *totalCountValueTextField;
+#import "SOXFormatters.h"
 
-@property (strong) IBOutlet NSTextField *selectedCountDescriptionTextField;
-@property (strong) IBOutlet NSTextField *selectedCountValueTextField;
+@interface SOXTradeStatisticsViewController ()
+@property (strong) IBOutlet NSTextField *entryCountTextField;
 
 @property (strong) IBOutlet NSTextField *coinSumDescriptionTextField;
 @property (strong) IBOutlet NSTextField *coinSumValueTextField;
@@ -24,16 +22,42 @@
 @property (strong) IBOutlet NSTextField *volumeSumDescriptionTextField;
 @property (strong) IBOutlet NSTextField *volumeSumValueTextField;
 
+@property (strong) IBOutlet NSTextField *feeSumDescriptionTextField;
+@property (strong) IBOutlet NSTextField *feeSumValueTextField;
+
+@property (strong) IBOutlet NSTextField *kickbackSumDescriptionTextField;
+@property (strong) IBOutlet NSTextField *kickbackSumValueTextField;
+
+
 @end
 
 @implementation SOXTradeStatisticsViewController
+#pragma mark Init & Co.
+- (void)viewWillAppear {
+    [super viewWillAppear];
+
+    [self setupUI];
+}
+
+- (void)setupUI {
+    self.coinSumDescriptionTextField.stringValue = @"Coin balance:";
+    self.volumeSumDescriptionTextField.stringValue = @"Volume balance:";
+    self.feeSumDescriptionTextField.stringValue = @"Fees:";
+    self.kickbackSumDescriptionTextField.stringValue = @"Kickbacks:";
+
+    self.coinSumValueTextField.stringValue = @"[-]";
+    self.volumeSumValueTextField.stringValue = @"[-]";
+    self.feeSumValueTextField.stringValue = @"[-]";
+    self.kickbackSumValueTextField.stringValue = @"[-]";
+}
 
 #pragma mark - Public Methods
 - (void)updateInfosForArrangedObjects:(NSArray *)arrangedObjects
                   withSelectedObjects:(NSArray *)selectedObjects
                     forCurrencyString:(NSString *)currencyString {
-    self.totalCountValueTextField.stringValue = [NSString stringWithFormat:@"%tu", arrangedObjects.count];
-    self.selectedCountValueTextField.stringValue = [NSString stringWithFormat:@"%tu", selectedObjects.count];
+    self.entryCountTextField.stringValue = [NSString stringWithFormat:@"%tu/%tu"
+                                            , selectedObjects.count
+                                            , arrangedObjects.count];
 
     [self updateInfosForSelectedObjects:selectedObjects];
 
@@ -52,13 +76,10 @@
     NSDecimalNumber *volumeBuySum = [NSDecimalNumber zero];
     NSDecimalNumber *volumeSellSum = [NSDecimalNumber zero];
     NSDecimalNumber *feeVolumeSum = [NSDecimalNumber zero];
-    for (SOXAccountLedger_BitcoinDE_Data *accountLedgerData in accountLedgerDatas) {
-        NSLog(@"%@", accountLedgerData.tradeDetails_Euro_before_fee);
-        NSLog(@"%@", accountLedgerData.tradeDetails_Euro_after_fee );
-        NSLog(@"%@", accountLedgerData.positionDetails_Cashflow    );
-        NSLog(@"%@", accountLedgerData.positionDetails_Type        );
-        NSLog(@"--");
+    NSDecimalNumber *kickbackSum = [NSDecimalNumber zero];
 
+    NSMutableSet *tradingPairs = [NSMutableSet set];
+    for (SOXAccountLedger_BitcoinDE_Data *accountLedgerData in accountLedgerDatas) {
 
         if ([accountLedgerData.positionDetails_Type isEqualToString:BitcoinDE_AccountLedgerParameter_AllOrderTypeKey]) {
 
@@ -97,28 +118,31 @@
 //
 //        }
         else if ([accountLedgerData.positionDetails_Type isEqualToString: BitcoinDE_AccountLedgerParameter_KickbackOrderTypeKey]) {
-
+            kickbackSum = [kickbackSum decimalNumberByAdding:accountLedgerData.positionDetails_Cashflow];
+            [tradingPairs addObject:accountLedgerData.tradeDetails_trading_pair];
         }
 //        else if (accountLedgerData.positionDetails_Type isEqualToString: BitcoinDE_AccountLedgerParameter_OutgoingFeeVoluntaryOrderTypeKey) {
 //
 //        }
 
-
-
-
-/*
- tradeDetails_Euro_before_fee
- tradeDetails_Euro_after_fee
- positionDetails_Cashflow
- positionDetails_Type
- */
     }
 
-    self.coinSumValueTextField.stringValue = coinSum.stringValue;
-    NSDecimalNumber *winLostSum = [volumeSellSum decimalNumberBySubtracting:volumeBuySum];
-    self.volumeSumValueTextField.stringValue = winLostSum.stringValue;
+    self.coinSumValueTextField.stringValue = [SOXFormatters stringForBTCNumber:coinSum];
 
-    self.selectedCountValueTextField.stringValue = feeVolumeSum.stringValue;
+    NSDecimalNumber *winLostSum = [volumeSellSum decimalNumberBySubtracting:volumeBuySum];
+    self.volumeSumValueTextField.stringValue = [SOXFormatters currencyStringForNumber:winLostSum
+                                                                         roundingMode:NSNumberFormatterRoundHalfUp];
+
+    self.feeSumValueTextField.stringValue = [SOXFormatters currencyStringForNumber:feeVolumeSum
+                                                                      roundingMode:NSNumberFormatterRoundHalfUp];
+
+    if (tradingPairs.count > 1) {
+        self.kickbackSumValueTextField.stringValue = @"[-]";
+    }
+    else {
+        self.kickbackSumValueTextField.stringValue = [SOXFormatters stringForBTCNumber:kickbackSum];
+    }
+
 
 }
 @end
