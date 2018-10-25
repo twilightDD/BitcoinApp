@@ -9,6 +9,7 @@
 #import "SOXTradeStatisticsViewController.h"
 
 #import "SOXAccountLedger_BitcoinDE_Data.h"
+#import "SOXAccountLedger_BitcoinDE_Data_Private.h"
 
 @interface SOXTradeStatisticsViewController ()
 @property (strong) IBOutlet NSTextField *totalCountDescriptionTextField;
