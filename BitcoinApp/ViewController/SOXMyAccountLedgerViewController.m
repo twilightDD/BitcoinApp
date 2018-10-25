@@ -111,6 +111,8 @@
         [self disableSpinningWheel];
 
         [self updatePagingButtons:payloadDictionary];
+
+        [self updateTradeStatistics];
     }
 }
 
