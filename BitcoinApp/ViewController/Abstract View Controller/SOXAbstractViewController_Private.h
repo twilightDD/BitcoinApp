@@ -6,11 +6,6 @@
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
 
-//#ifndef SOXAbstractViewController_Private_h
-//#define SOXAbstractViewController_Private_h
-//
-//
-//#endif /* SOXAbstractViewController_Private_h */
 #import "SOXAbstractViewController.h"
 
 @interface SOXAbstractViewController()
