@@ -357,6 +357,7 @@
 		D06DE29521824CC2002BC973 /* SOXStatisticsAbstractViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXStatisticsAbstractViewController.m; sourceTree = "<group>"; };
 		D06DE29821824D77002BC973 /* SOXStatisticsAbstractViewController_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXStatisticsAbstractViewController_Private.h; sourceTree = "<group>"; };
 		D06DE29921826219002BC973 /* SOXAccountLedger_BitcoinDE_Data_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXAccountLedger_BitcoinDE_Data_Private.h; sourceTree = "<group>"; };
+		D06DE29A21827518002BC973 /* SOXMyTrades_BitcoinDE_Data_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXMyTrades_BitcoinDE_Data_Private.h; sourceTree = "<group>"; };
 		D07DA1952152E00C00F0416B /* SOXBoolNmberToWordValueTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXBoolNmberToWordValueTransformer.h; sourceTree = "<group>"; };
 		D07DA1962152E00C00F0416B /* SOXBoolNmberToWordValueTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXBoolNmberToWordValueTransformer.m; sourceTree = "<group>"; };
 		D07E7B351EA5175D00AB50A5 /* SOXExecuteTradeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXExecuteTradeViewController.h; sourceTree = "<group>"; };
@@ -552,6 +553,7 @@
 				D0B942AF1E8AF1D600EF7434 /* SOXErrorMessage_BitcoinDE.m */,
 				D0AA14F11E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.h */,
 				D0AA14F21E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m */,
+				D06DE29A21827518002BC973 /* SOXMyTrades_BitcoinDE_Data_Private.h */,
 				D00FF1351EA03B71008BCD63 /* SOXTradeJob_BitcoinDE_Data.h */,
 				D00FF1361EA03B71008BCD63 /* SOXTradeJob_BitcoinDE_Data.m */,
 				D0FFEA59212223E2000F09FF /* SOXPageData.h */,

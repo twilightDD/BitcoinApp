@@ -8,6 +8,7 @@
 
 #import "SOXMyTradeHistoryViewController.h"
 #import "SOXAbstractViewController_Private.h"
+#import "SOXStatisticsAbstractViewController_Private.h"
 
 #import "SOXMyOrderDetailsViewController.h"
 
@@ -95,6 +96,8 @@
 
         // Page information
         [self updatePagingButtons:payloadDictionary];
+
+        [self updateTradeStatistics];
     }
 }
 

@@ -10,6 +10,8 @@
 
 #import "SOXAccountLedger_BitcoinDE_Data.h"
 #import "SOXAccountLedger_BitcoinDE_Data_Private.h"
+#import "SOXMyTrades_BitcoinDE_Data.h"
+#import "SOXMyTrades_BitcoinDE_Data_Private.h"
 
 #import "SOXFormatters.h"
 
@@ -33,8 +35,8 @@
 
 @implementation SOXTradeStatisticsViewController
 #pragma mark Init & Co.
-- (void)viewWillAppear {
-    [super viewWillAppear];
+- (void)viewDidLoad {
+    [super viewDidLoad];
 
     [self setupUI];
 }
@@ -68,6 +70,9 @@
     id anyObject = selectedObjects.firstObject;
     if ([anyObject isKindOfClass:[SOXAccountLedger_BitcoinDE_Data class]]) {
         [self updateInfosForAccountLedgerDatas:selectedObjects];
+    }
+    else if ([anyObject isKindOfClass:[SOXMyTrades_BitcoinDE_Data class]]) {
+        [self updateInfosForMyTradesDatas:selectedObjects];
     }
     else {
         [self setupUI];
@@ -145,7 +150,43 @@
     else {
         self.kickbackSumValueTextField.stringValue = [SOXFormatters stringForBTCNumber:kickbackSum];
     }
+}
 
+- (void)updateInfosForMyTradesDatas:(NSArray <SOXMyTrades_BitcoinDE_Data *> *)myTradeDatas {
+    /*
+     amount
+     volume
+     feeEur
+     */
+    NSDecimalNumber *coinSum = [NSDecimalNumber zero];
+    NSDecimalNumber *volumeBuySum = [NSDecimalNumber zero];
+    NSDecimalNumber *volumeSellSum = [NSDecimalNumber zero];
+    NSDecimalNumber *feeVolumeSum = [NSDecimalNumber zero];
+
+    for (SOXMyTrades_BitcoinDE_Data *myTradeData in myTradeDatas) {
+        if ([myTradeData.type isEqualToString:MyTradeHistoryParameter_OrderTypeBuyKey]) {
+            coinSum = [coinSum decimalNumberByAdding:myTradeData.amount];
+            NSDecimalNumber *volumeAfterFee = [myTradeData.volume decimalNumberBySubtracting:myTradeData.feeEur];
+            volumeBuySum = [volumeBuySum decimalNumberByAdding:volumeAfterFee];
+            feeVolumeSum = [feeVolumeSum decimalNumberByAdding:myTradeData.feeEur];
+        }
+        else if ([myTradeData.type isEqualToString:MyTradeHistoryParameter_OrderTypeSellKey]) {
+            coinSum = [coinSum decimalNumberBySubtracting:myTradeData.amount];
+            NSDecimalNumber *volumeAfterFee = [myTradeData.volume decimalNumberBySubtracting:myTradeData.feeEur];
+            volumeSellSum = [volumeSellSum decimalNumberByAdding:volumeAfterFee];
+            feeVolumeSum = [feeVolumeSum decimalNumberByAdding:myTradeData.feeEur];
+        }
+    }
+
+    self.coinSumValueTextField.stringValue = [SOXFormatters stringForBTCNumber:coinSum];
+
+    NSDecimalNumber *winLostSum = [volumeSellSum decimalNumberBySubtracting:volumeBuySum];
+    self.volumeSumValueTextField.stringValue = [SOXFormatters currencyStringForNumber:winLostSum
+                                                                         roundingMode:NSNumberFormatterRoundHalfUp];
+
+    self.feeSumValueTextField.stringValue = [SOXFormatters currencyStringForNumber:feeVolumeSum
+                                                                      roundingMode:NSNumberFormatterRoundHalfUp];
 
 }
+
 @end

@@ -6,8 +6,8 @@
 //  Copyright © 2017 2sox / Peter Hauke. All rights reserved.
 //
 
-#import "SOXPagingAbstractViewController.h"
+#import "SOXStatisticsAbstractViewController.h"
 
-@interface SOXMyTradeHistoryViewController : SOXPagingAbstractViewController
+@interface SOXMyTradeHistoryViewController : SOXStatisticsAbstractViewController
 
 @end
