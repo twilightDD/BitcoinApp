@@ -8,6 +8,7 @@
 
 #import "SOXMyAccountLedgerViewController.h"
 #import "SOXAbstractViewController_Private.h"
+#import "SOXStatisticsAbstractViewController_Private.h"
 
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXAccountLedger_BitcoinDE_Data.h"
