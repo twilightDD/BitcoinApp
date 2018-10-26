@@ -180,7 +180,6 @@
         }
     }
     else if (self.orderType == BitcoinDE_SellOrderType) {
-        titleTextFieldText = @"Create new sell order";
         amountDescriptionTextFieldText = @"Amount to sell";
         maxAmountButtonTitle = [NSString stringWithFormat:@"Max %@"
                                 , shortCurrencyString];
