@@ -7,6 +7,7 @@
 //
 
 #import "SOXStatisticsAbstractViewController.h"
+#import "SOXPagingAbstractViewController_Private.h"
 
 #import "SOXTradeStatisticsViewController.h"
 
@@ -20,6 +21,8 @@
 
 #pragma mark - Segue handling
 - (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender {
+    [super prepareForSegue:segue sender:sender]; // call superClass!
+
     if ([segue.destinationController isKindOfClass:[SOXTradeStatisticsViewController class]]) {
         self.tradeStatisticsViewController = segue.destinationController;
     }

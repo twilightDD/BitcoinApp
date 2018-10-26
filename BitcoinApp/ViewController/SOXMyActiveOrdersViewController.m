@@ -7,8 +7,9 @@
 //
 
 #import "SOXMyActiveOrdersViewController.h"
-#import "SOXStatisticsAbstractViewController_Private.h"
 #import "SOXAbstractViewController_Private.h"
+#import "SOXPagingAbstractViewController_Private.h"
+#import "SOXStatisticsAbstractViewController_Private.h"
 
 #import "SOXMyOrderDetailsViewController.h"
 #import "SOXCreateNewOrderViewController.h"

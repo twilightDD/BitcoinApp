@@ -7,6 +7,7 @@
 //
 
 #import "SOXPagingAbstractViewController.h"
+#import "SOXPagingAbstractViewController_Private.h"
 
 #import "SOXFormatters.h"
 
@@ -14,138 +15,87 @@
 
 #import "SOXPage_BitcoinDE_Data.h"
 
+@interface SOXPagingAbstractViewController ()
+
+#pragma mark | Properties
+@property (nonatomic) BOOL shouldLoadAllTradeDatas;
+
+@end
 
 @implementation SOXPagingAbstractViewController
 
 #pragma mark - Init & Co.
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.shouldLoadAllTradeDatas = NO;
-    self.selectedCurrencyType = BitcoinDE_CurrencyTypeUnknown;
-
-    // dates
-    self.selectedStartDate = [SOXFormatters dateForRFC3339DateTimeString:@"2000-01-01T02:00:00+02:00" ];
-    self.selectedEndDate = [SOXFormatters dateNextDayQuarterBeforeMidnightForDate:[NSDate date]];
+    self.arrayControllerDatas = [NSMutableArray array];
 
     [self setupUI];
 }
 
 - (void)viewWillAppear {
     [super viewWillAppear];
-
-    if (self.arrayControllerDatas.count == 0) {
-        [self resetTradeDatas];
-        [self loadNextPage];
-    }
+    [self setupUI];
+        if (self.arrayControllerDatas.count == 0) {
+            [self resetTradeDatas];
+            [self loadNextPage];
+        }
 
     [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
                                                         object:@(self.selectedCurrencyType)];
 }
 
+
+#pragma mark - Segue handling
+- (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender {
+    [super prepareForSegue:segue sender:sender]; // call superClass!
+
+    if ([segue.destinationController isKindOfClass:[SOXPagingViewController class]]) {
+        self.pagingViewController = segue.destinationController;
+        self.pagingViewController.delegate = self;
+
+    }
+}
+
 #pragma mark - Public methods
 - (void)setupUI {
-    [self resetPagingButtons];
+//    [self resetPagingButtons];
 
-    // currency selection
-    [self.currencyTypeSelectionPopUpButton removeAllItems];
-    for (BitcoinDE_CurrencyType idx = BitcoinDE_CurrencyTypeUnknown
-         ; idx < BitcoinDE_CurrencyType_EndOfType
-         ; idx++) {
-        [self.currencyTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:idx]];
-    }
+//    // currency selection
+//    [self.currencyTypeSelectionPopUpButton removeAllItems];
+//    for (BitcoinDE_CurrencyType idx = BitcoinDE_CurrencyTypeUnknown
+//         ; idx < BitcoinDE_CurrencyType_EndOfType
+//         ; idx++) {
+//        [self.currencyTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:idx]];
+//    }
+//
+//    // tradingType selection
+//    [self.tradingTypeSelectionPopUpButton removeAllItems];
+//    [self.tradingTypeSelectionPopUpButton addItemWithTitle:@"All"];
+//    for (BitcoinDE_OrderType idx = BitcoinDE_UnknownOrderType + 1
+//         ; idx < BitcoinDE_OrderType_EndOfType
+//         ; idx++) {
+//        [self.tradingTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:idx]];
+//    }
 
-    // tradingType selection
-    [self.tradingTypeSelectionPopUpButton removeAllItems];
-    [self.tradingTypeSelectionPopUpButton addItemWithTitle:@"All"];
-    for (BitcoinDE_OrderType idx = BitcoinDE_UnknownOrderType + 1
-         ; idx < BitcoinDE_OrderType_EndOfType
-         ; idx++) {
-        [self.tradingTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:idx]];
-    }
-
-    { // date picker
-        self.startDateTextField.stringValue = @"Start date";
-        self.startDateDatePicker.dateValue  = self.selectedStartDate;
-        self.startDateDatePicker.locale = [NSLocale autoupdatingCurrentLocale];
-
-
-        self.endDateTextField.stringValue   = @"End date";
-        self.endDateDatePicker.dateValue    = self.selectedEndDate;
-        self.endDateDatePicker.locale = [NSLocale autoupdatingCurrentLocale];
-    }
 }
 
 #pragma mark Paging
-- (void)resetPagingButtons {
-    self.fetchDataButton.title = @"Fetch data";
-    self.loadMoreTradeDatasButton.hidden = YES;
-    self.loadAllTradeDatasButton.hidden = YES;
-}
-
-- (void)resetTradeDatas {
-    // reset tableView
-    self.arrayControllerDatas = [NSMutableArray array];
-    [self.arrayController rearrangeObjects];
-
-    // reset paging
-    self.currentPage = 0;
-    [self resetPagingButtons];
-}
-
 - (void)loadNextPage {
     [self hideNoDataView];
     [self enableSpinningWheel];
-    
-    self.loadMoreTradeDatasButton.enabled = NO;
-    self.loadAllTradeDatasButton.enabled = NO;
+
     self.currentPage = self.currentPage + 1;
 
-    // loading in concrete subClass
+    [self.pagingViewController resetPagingButtons];
 }
 
-- (void)updatePagingButtons:(NSDictionary *)payloadDictionary {
-    SOXPage_BitcoinDE_Data *pageData = [SOXPage_BitcoinDE_Data pageDataForPayloadDictionary:payloadDictionary];
-    self.currentPage = pageData.pageCurrent;
+- (void)resetTradeDatas {
 
-    BOOL enableLoadMoreTradDatasButton = self.currentPage != pageData.pageLast;
-
-    // enable load more buttons, if needed
-    if (enableLoadMoreTradDatasButton) {
-        self.loadMoreTradeDatasButton.hidden = NO;
-        self.loadMoreTradeDatasButton.enabled = enableLoadMoreTradDatasButton;
-        self.loadAllTradeDatasButton.hidden = NO;
-        self.loadAllTradeDatasButton.enabled = enableLoadMoreTradDatasButton;
-
-
-        self.loadAllTradeDatasButton.title = [NSString stringWithFormat:@"Load all (%ti pages left)"
-                                              , pageData.pageLast - pageData.pageCurrent];
-    }
-    else {
-        self.loadMoreTradeDatasButton.hidden = YES;
-        self.loadAllTradeDatasButton.hidden = YES;
-    }
-
-    // automatically load further pages, if possible
-    if (self.shouldLoadAllTradeDatas == YES
-        && enableLoadMoreTradDatasButton == YES) {
-        [self loadNextPage];
-    }
-    else {
-        self.shouldLoadAllTradeDatas = NO;
-        self.fetchDataButton.title = @"Fetch data";
-        self.fetchDataButton.enabled = YES;
-        [self disableSpinningWheel];
-    }
-
-    if (self.arrayControllerDatas.count == 0) {
-        [self presentNoDataView];
-    }
-    else {
-        [self hideNoDataView];
-    }
 }
 
+- (void)resetPagingButtons {
+    [self.pagingViewController resetPagingButtons];
+}
 #pragma mark - Private methods
 - (void)saveString:(NSString *)stringToSave {
     NSSavePanel *savePanel = [NSSavePanel savePanel];
@@ -168,60 +118,9 @@
 }
 
 #pragma mark - Action methods
-#pragma mark Settings
-- (IBAction)currencyTypPopUpButtonAction:(NSPopUpButton *)sender {
-    BitcoinDE_CurrencyType newCurrencyType = sender.indexOfSelectedItem + 1;
-
-    // < EndType => on MyActiveOrders and MyTradeHistory
-    if (sender.itemArray.count < BitcoinDE_CurrencyType_EndOfType) {
-        newCurrencyType = sender.indexOfSelectedItem + 1;
-    }
-    // == EndType => on MyAccountLedger
-    else if (sender.itemArray.count == BitcoinDE_CurrencyType_EndOfType) {
-        newCurrencyType = sender.indexOfSelectedItem;
-    }
-    else {
-        NSAssert(NO, @"can't solve this.");
-    }
-
-    if (newCurrencyType != self.selectedCurrencyType) {
-        self.selectedCurrencyType = newCurrencyType;
-        [self resetTradeDatas];
-
-        [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
-                                                            object:@(newCurrencyType)];
-    }
-}
-
-- (IBAction)orderTypePopUpButtonAction:(NSPopUpButton *)sender {
-    BitcoinDE_OrderType newOrderType = sender.indexOfSelectedItem;
-
-    if (newOrderType != self.selectedOrderType) {
-        self.selectedOrderType = newOrderType;
-        [self resetTradeDatas];
-    }
-}
-
-- (IBAction)startDatePickerAction:(NSDatePicker *)sender {
-    NSDate *newSelectedStartDate = sender.dateValue;
-
-    if ([self.selectedStartDate isEqualToDate:newSelectedStartDate] == NO) {
-        self.selectedStartDate = newSelectedStartDate;
-        [self resetTradeDatas];
-    }
-}
-
-- (IBAction)endDatePickerAction:(NSDatePicker *)sender {
-    NSDate *newSelectedEndDate = sender.dateValue;
-
-    if ([self.selectedEndDate isEqualToDate:newSelectedEndDate] == NO) {
-        self.selectedEndDate = newSelectedEndDate;
-        [self resetTradeDatas];
-    }
-}
 
 #pragma mark Export
-- (IBAction)exportButtonAction:(NSButton *)sender {
+- (void)startExport {
     // get columnTitles
     NSArray <NSString *> *columnTitles = [self.tableView.tableColumns valueForKey:@"identifier"];
     NSUInteger columnTitlesCount = columnTitles.count - 1;
@@ -286,34 +185,24 @@
     [self addToPasteBoard:exportString];
 
     [self saveString:exportString];
+
 }
 
 #pragma mark Fetch and load buttons
-- (IBAction)loadAllTradeDatasAction:(NSButton *)sender {
+- (void)loadAllTradeDatas {
     self.shouldLoadAllTradeDatas = YES;
-    self.fetchDataButton.title = @"Cancel";
-
     [self loadNextPage];
 }
 
-- (IBAction)loadMoreTradeDatasAction:(NSButton *)sender {
-    self.fetchDataButton.enabled = NO;
-
+- (void)loadMoreTradeDatas {
     [self loadNextPage];
 }
 
-- (IBAction)fetchDataButtonAction:(NSButton *)sender {
-    self.fetchDataButton.enabled = NO;
-    if (self.shouldLoadAllTradeDatas == YES) {
-        self.shouldLoadAllTradeDatas = NO;
-    }
-    else {
-        // reset all fetched datas
-        self.arrayControllerDatas = [NSMutableArray array];
-        self.currentPage = 0;
+- (void)fetchDatas {
+    self.arrayControllerDatas = [NSMutableArray array];
+    self.currentPage = 0;
 
-        [self loadNextPage];
-    }
+    [self loadNextPage];
 }
 
 #pragma - Pasteboard
@@ -325,5 +214,20 @@
                   forType:NSPasteboardTypeString];
 }
 
+- (void)updatePagingButtons:(NSDictionary *)payloadDictionary {
+    if (self.arrayControllerDatas.count == 0) {
+        [self presentNoDataView];
+    }
+    else {
+        [self hideNoDataView];
+    }
+
+    [self.pagingViewController updatePagingButtons:payloadDictionary];
+
+}
+#pragma mark - SOXPagingViewControllerProtocol
+- (void)popupButtonAction:(NSPopUpButton *)sender {
+    NSAssert(NO, @"Implement in subclass");
+}
 
 @end

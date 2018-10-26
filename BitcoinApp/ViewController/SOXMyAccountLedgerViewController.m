@@ -8,6 +8,7 @@
 
 #import "SOXMyAccountLedgerViewController.h"
 #import "SOXAbstractViewController_Private.h"
+#import "SOXPagingAbstractViewController_Private.h"
 #import "SOXStatisticsAbstractViewController_Private.h"
 
 #import "SOXMarket_BitcoinDE_Core.h"
@@ -69,7 +70,7 @@
 
     // AccountLedger allows no date in future or today
     {
-        self.endDateDatePicker.maxDate = [SOXFormatters dateBeforeMidnightForDate:[NSDate dateWithTimeIntervalSinceNow:-86400]];
+        self.pagingViewController.endDateDatePicker.maxDate = [SOXFormatters dateBeforeMidnightForDate:[NSDate dateWithTimeIntervalSinceNow:-86400]];
     }
 }
 
