@@ -9,10 +9,11 @@
 #import "SOXPagingAbstractViewController.h"
 #import "SOXPagingAbstractViewController_Private.h"
 
+#import "SOXPagingViewController.h"
+
 #import "SOXFormatters.h"
 
 #import "SOXKeys_BitcoinDE.h"
-
 #import "SOXPage_BitcoinDE_Data.h"
 
 @interface SOXPagingAbstractViewController ()
@@ -52,7 +53,7 @@
     if ([segue.destinationController isKindOfClass:[SOXPagingViewController class]]) {
         self.pagingViewController = segue.destinationController;
         self.pagingViewController.delegate = self;
-
+        // TODO: setup popUpButtons
     }
 }
 
@@ -96,6 +97,23 @@
 - (void)resetPagingButtons {
     [self.pagingViewController resetPagingButtons];
 }
+#pragma mark - Manual getters
+- (NSDate *)selectedStartDate {
+    NSDate *selectedStartDate = self.pagingViewController.selectedStartDate;
+    if (selectedStartDate == nil) {
+        selectedStartDate = [NSDate date];
+    }
+    return selectedStartDate;
+}
+
+- (NSDate *)selectedEndDate {
+    NSDate *selectedEndDate = self.pagingViewController.selectedEndDate;
+    if (selectedEndDate == nil) {
+        selectedEndDate = [NSDate date];
+    }
+    return selectedEndDate;
+}
+
 #pragma mark - Private methods
 - (void)saveString:(NSString *)stringToSave {
     NSSavePanel *savePanel = [NSSavePanel savePanel];

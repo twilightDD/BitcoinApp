@@ -36,6 +36,14 @@
 @property (strong) IBOutlet NSButton *loadMoreTradeDatasButton;
 @property (strong) IBOutlet NSButton *fetchDataButton;
 
+#pragma mark | Properties
+@property (nonatomic, readwrite) BitcoinDE_CurrencyType selectedCurrencyType;
+@property (nonatomic, readwrite) BitcoinDE_OrderType selectedOrderType;
+@property (nonatomic, readwrite) BitcoinDE_AccountLedgerParameter_OrderType selectedAccountLedgerOrderType;
+@property (strong, nonatomic, readwrite) NSDate *selectedStartDate;
+@property (strong, nonatomic, readwrite) NSDate *selectedEndDate;
+
+
 @end
 
 #pragma mark - Implementation
@@ -49,8 +57,8 @@
     self.selectedCurrencyType = BitcoinDE_CurrencyTypeUnknown;
 
     // dates
-    self.delegate.selectedStartDate = [SOXFormatters dateForRFC3339DateTimeString:@"2000-01-01T02:00:00+02:00" ];
-    self.delegate.selectedEndDate = [SOXFormatters dateNextDayQuarterBeforeMidnightForDate:[NSDate date]];
+    self.selectedStartDate = [SOXFormatters dateForRFC3339DateTimeString:@"2000-01-01T02:00:00+02:00" ];
+    self.selectedEndDate = [SOXFormatters dateNextDayQuarterBeforeMidnightForDate:[NSDate date]];
 
     [self setupUI];
 }
@@ -61,31 +69,13 @@
 - (void)setupUI {
     [self resetPagingButtons];
 
-//    // currency selection
-//    [self.currencyTypeSelectionPopUpButton removeAllItems];
-//    for (BitcoinDE_CurrencyType idx = BitcoinDE_CurrencyTypeUnknown
-//         ; idx < BitcoinDE_CurrencyType_EndOfType
-//         ; idx++) {
-//        [self.currencyTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:idx]];
-//    }
-//
-//    // tradingType selection
-//    [self.tradingTypeSelectionPopUpButton removeAllItems];
-//    [self.tradingTypeSelectionPopUpButton addItemWithTitle:@"All"];
-//    for (BitcoinDE_OrderType idx = BitcoinDE_UnknownOrderType + 1
-//         ; idx < BitcoinDE_OrderType_EndOfType
-//         ; idx++) {
-//        [self.tradingTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:idx]];
-//    }
-
     { // date picker
         self.startDateTextField.stringValue = @"Start date";
-        self.startDateDatePicker.dateValue  = self.delegate.selectedStartDate;
+        self.startDateDatePicker.dateValue  = self.selectedStartDate;
         self.startDateDatePicker.locale = [NSLocale autoupdatingCurrentLocale];
 
-
         self.endDateTextField.stringValue   = @"End date";
-        self.endDateDatePicker.dateValue    = self.delegate.selectedEndDate;
+        self.endDateDatePicker.dateValue    = self.selectedEndDate;
         self.endDateDatePicker.locale = [NSLocale autoupdatingCurrentLocale];
     }
 }
@@ -186,8 +176,8 @@
 - (IBAction)startDatePickerAction:(NSDatePicker *)sender {
     NSDate *newSelectedStartDate = sender.dateValue;
 
-    if ([[self.delegate selectedStartDate] isEqualToDate:newSelectedStartDate] == NO) {
-        self.delegate.selectedStartDate = newSelectedStartDate;
+    if ([self.selectedStartDate isEqualToDate:newSelectedStartDate] == NO) {
+        self.selectedStartDate = newSelectedStartDate;
         [self resetTradeDatas];
     }
 }
@@ -195,8 +185,8 @@
 - (IBAction)endDatePickerAction:(NSDatePicker *)sender {
     NSDate *newSelectedEndDate = sender.dateValue;
 
-    if ([[self.delegate selectedEndDate] isEqualToDate:newSelectedEndDate] == NO) {
-        self.delegate.selectedEndDate = newSelectedEndDate;
+    if ([self.selectedEndDate isEqualToDate:newSelectedEndDate] == NO) {
+        self.selectedEndDate = newSelectedEndDate;
         [self resetTradeDatas];
     }
 }

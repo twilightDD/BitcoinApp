@@ -12,6 +12,7 @@
 
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
+
 @interface SOXPagingAbstractViewController : SOXAbstractViewController <SOXPagingViewControllerProtocol>
 
 

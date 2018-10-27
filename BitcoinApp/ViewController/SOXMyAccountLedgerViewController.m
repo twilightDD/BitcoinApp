@@ -21,11 +21,6 @@
 
 #pragma mark - Interface
 @interface SOXMyAccountLedgerViewController () <SOXMarketCoreServerRequestProtocol>
-#pragma mark IBOutlets
-@property (weak) IBOutlet NSPopUpButton *accountLedgerOrderTypePopUpButton;
-
-#pragma mark Properties
-@property (nonatomic) BitcoinDE_AccountLedgerParameter_OrderType selectedAccountLedgerOrderType;
 
 @end
 
@@ -39,8 +34,7 @@
     self.selectedCurrencyType = BitcoinDE_CurrencyTypeBitcoin;
     self.selectedAccountLedgerOrderType = BitcoinDE_AccountLedgerParameter_AllOrderType;
 
-    // AccountLedger allows no date in future or today
-    self.selectedEndDate = [SOXFormatters dateBeforeMidnightForDate:[NSDate dateWithTimeIntervalSinceNow:-86400]];
+
 }
 
 - (void)viewWillAppear {
@@ -54,23 +48,33 @@
 - (void)setupUI {    
     [super setupUI];
 
-    // Manipulate currency Selection - AccountLedger don't allows "all currency"
-    {
-        [self.currencyTypeSelectionPopUpButton removeItemAtIndex:0];
-    }
-    // Type Selection
-    {
+    { // buttons
+        // currency selection
+        self.currencyTypeSelectionPopUpButton = self.pagingViewController.firstSelectionPopUpButton;
+        [self.currencyTypeSelectionPopUpButton removeAllItems];
+        for (BitcoinDE_CurrencyType idx = BitcoinDE_CurrencyTypeBitcoin
+             ; idx < BitcoinDE_CurrencyType_EndOfType
+             ; idx++) {
+            [self.currencyTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:idx]];
+        }
+
+        // accountLedgerOrderType selection
+        self.accountLedgerOrderTypePopUpButton = self.pagingViewController.secondSelectionPopUpButton;
         [self.accountLedgerOrderTypePopUpButton removeAllItems];
         for (BitcoinDE_AccountLedgerParameter_OrderType idx = BitcoinDE_AccountLedgerParameter_UnknownOrderType + 1
              ; idx < BitcoinDE_AccountLedgerParameter_EndOfType
              ; idx++) {
             [self.accountLedgerOrderTypePopUpButton addItemWithTitle:[SOXAccountLedger_BitcoinDE_Data titleForAccountLedgerOrderType:idx]];
         }
+
+        // no third selection
+        self.pagingViewController.thirdSelectionPopUpButton.hidden = YES;
     }
 
     // AccountLedger allows no date in future or today
     {
-        self.pagingViewController.endDateDatePicker.maxDate = [SOXFormatters dateBeforeMidnightForDate:[NSDate dateWithTimeIntervalSinceNow:-86400]];
+//        self.selectedEndDate = [SOXFormatters dateBeforeMidnightForDate:[NSDate dateWithTimeIntervalSinceNow:-86400]];
+//        self.pagingViewController.endDateDatePicker.maxDate = self.selectedEndDate;
     }
 }
 
@@ -115,6 +119,27 @@
 
         [self updateTradeStatistics];
     }
+}
+
+#pragma mark - SOXPagingViewControllerProtocol
+- (void)popupButtonAction:(NSPopUpButton *)sender {
+    // currency selection
+    if (sender == self.currencyTypeSelectionPopUpButton) {
+        BitcoinDE_CurrencyType newCurrencyType = sender.indexOfSelectedItem + 1;
+        if (newCurrencyType != self.selectedCurrencyType) {
+            self.selectedCurrencyType = newCurrencyType;
+            [self resetPagingButtons];
+        }
+    }
+    // orderType selection
+    else if (sender == self.accountLedgerOrderTypePopUpButton) {
+        BitcoinDE_AccountLedgerParameter_OrderType newSelectedAccountLedgerOrderType = sender.indexOfSelectedItem + 1;
+        if (newSelectedAccountLedgerOrderType != self.selectedAccountLedgerOrderType) {
+            self.selectedAccountLedgerOrderType = newSelectedAccountLedgerOrderType;
+            [self resetPagingButtons];
+        }
+    }
+
 }
 
 @end

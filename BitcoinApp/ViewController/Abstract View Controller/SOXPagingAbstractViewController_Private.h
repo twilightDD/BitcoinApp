@@ -7,23 +7,27 @@
 //
 #import "SOXPagingAbstractViewController.h"
 
-#import "SOXPagingViewController.h"
+@class SOXPagingViewController;
+#import "SOXAccountLedger_BitcoinDE_Data.h"
 
 @interface SOXPagingAbstractViewController ()
 
 @property (strong) IBOutlet NSArrayController *arrayController;
 
+@property (weak) NSPopUpButton *accountLedgerOrderTypePopUpButton;
 @property (weak) NSPopUpButton *currencyTypeSelectionPopUpButton;
 @property (weak) NSPopUpButton *orderTypeSelectionPopUpButton;
 @property (weak) NSPopUpButton *tradeStateTypeSelectionPopUpButton;
 
-@property (strong, nonatomic) NSDate *selectedStartDate;
-@property (strong, nonatomic) NSDate *selectedEndDate;
-
 
 @property (strong, nonatomic) SOXPagingViewController *pagingViewController;
+
 @property (nonatomic) BitcoinDE_OrderType selectedOrderType;
 @property (nonatomic) BitcoinDE_CurrencyType selectedCurrencyType;
+@property (nonatomic) BitcoinDE_AccountLedgerParameter_OrderType selectedAccountLedgerOrderType;
+@property (strong, nonatomic, readonly) NSDate *selectedStartDate;
+@property (strong, nonatomic, readonly) NSDate *selectedEndDate;
+
 
 @property (strong, nonatomic) NSMutableArray *arrayControllerDatas;
 

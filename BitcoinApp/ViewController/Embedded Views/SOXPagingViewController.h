@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
+
 @class SOXPagingAbstractViewController;
 
 @protocol SOXPagingViewControllerProtocol
@@ -34,15 +35,11 @@
 @property (strong, readonly) IBOutlet NSPopUpButton *firstSelectionPopUpButton;
 @property (strong, readonly) IBOutlet NSPopUpButton *secondSelectionPopUpButton;
 @property (strong, readonly) IBOutlet NSPopUpButton *thirdSelectionPopUpButton;
-@property (strong, readonly) IBOutlet NSDatePicker *startDateDatePicker;
-@property (strong, readonly) IBOutlet NSDatePicker *endDateDatePicker;
 
 @property (weak) SOXPagingAbstractViewController <SOXPagingViewControllerProtocol> *delegate;
 
-//@property (strong, nonatomic) NSMutableArray *arrayControllerDatas;
-
-@property (nonatomic) BitcoinDE_CurrencyType selectedCurrencyType;
-@property (nonatomic) BitcoinDE_OrderType selectedOrderType;
+@property (strong, nonatomic, readonly) NSDate *selectedStartDate;
+@property (strong, nonatomic, readonly) NSDate *selectedEndDate;
 
 - (void)resetPagingButtons;
 - (void)updatePagingButtons;
