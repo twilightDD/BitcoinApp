@@ -23,21 +23,19 @@
 
 #import "SOXFormatters.h"
 
-NSString *const PresentMyTradesSegueKey = @"PresentMyTradesSegue";
-NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
+//NSString *const PresentMyTradesSegueKey = @"PresentMyTradesSegue";
+//NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
 
 #pragma mark - Interface
 @interface SOXMyActiveOrdersViewController () <SOXChangeOrderProtocol, SOXMarketCoreServerRequestProtocol, NSTableViewDelegate>
 
 #pragma mark IBOutlets
-@property (weak) IBOutlet NSPopUpButton *orderStateTypeSelectionPopUpButton;
+
 
 @property (weak) IBOutlet NSButton *changeButton;
 @property (weak) IBOutlet NSButton *removeButton;
 
 #pragma mark Properties
-@property (nonatomic) BitcoinDE_OrderStateType selectedOrderStateType;
-
 @property (nonatomic) NSInteger countOfMyOrderBook_BitcoinDE_DatasToDelete;
 @property (nonatomic) NSInteger countOfDeletedMyOrderBook_BitcoinDE_Datas;
 
@@ -57,7 +55,26 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
     [super setupUI];
 
     { // buttons
+        // currency selection
+        self.currencyTypeSelectionPopUpButton = self.pagingViewController.firstSelectionPopUpButton;
+        [self.currencyTypeSelectionPopUpButton removeAllItems];
+        for (BitcoinDE_CurrencyType idx = BitcoinDE_CurrencyTypeUnknown
+             ; idx < BitcoinDE_CurrencyType_EndOfType
+             ; idx++) {
+            [self.currencyTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:idx]];
+        }
+
+        // orderType selection
+        self.orderTypeSelectionPopUpButton = self.pagingViewController.secondSelectionPopUpButton;
+        [self.orderTypeSelectionPopUpButton removeAllItems];
+        for (BitcoinDE_OrderType idx = BitcoinDE_UnknownOrderType
+             ; idx < BitcoinDE_OrderType_EndOfType
+             ; idx++) {
+            [self.orderTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes titleForOrderType:idx]];
+        }
+
         // orderStateType selection
+        self.orderStateTypeSelectionPopUpButton = self.pagingViewController.thirdSelectionPopUpButton;
         [self.orderStateTypeSelectionPopUpButton removeAllItems];
         for (BitcoinDE_OrderStateType idx = BitcoinDE_OrderStateTypeUnknown - 1
              ; idx > BitcoinDE_OrderStateType_EndOfType
@@ -175,16 +192,9 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
     [alert runModal];
 }
 
+
+
 #pragma mark - Action methods
-- (IBAction)orderStateTypePopUpButtonAction:(NSPopUpButton *)sender {
-    BitcoinDE_OrderStateType orderStateType = sender.indexOfSelectedItem * -1;
-
-    if (orderStateType != self.selectedOrderStateType) {
-        self.selectedOrderStateType = orderStateType;
-        [self resetTradeDatas];
-    }
-}
-
 - (IBAction)changeButtonAction:(NSButton *)sender {
     NSArray <SOXMyOrderBook_BitcoinDE_Data *> *selectedDatas = self.arrayController.selectedObjects;
 
@@ -228,6 +238,35 @@ NSString *const PresentMyAccountSegueKey = @"PresentMyAccountSegue";
     [[SOXMarket_BitcoinDE_Core sharedCore] startAccountInfoUpdate];
     [self resetTradeDatas];
     [self loadNextPage];
+}
+
+#pragma mark - SOXPagingViewControllerProtocol
+- (void)popupButtonAction:(NSPopUpButton *)sender {
+    // currency selection
+    if (sender == self.currencyTypeSelectionPopUpButton) {
+        BitcoinDE_CurrencyType newCurrencyType = sender.indexOfSelectedItem;
+        if (newCurrencyType != self.selectedCurrencyType) {
+            self.selectedCurrencyType = newCurrencyType;
+            [self resetPagingButtons];
+        }
+    }
+    // orderType selection
+    else if (sender == self.orderTypeSelectionPopUpButton) {
+        BitcoinDE_OrderType newOrderType = sender.indexOfSelectedItem;
+        if (newOrderType != self.selectedOrderType) {
+            self.selectedOrderType = newOrderType;
+            [self resetPagingButtons];
+        }
+    }
+    // orderStateType
+    else if (sender == self.orderStateTypeSelectionPopUpButton) {
+        BitcoinDE_OrderStateType orderStateType = sender.indexOfSelectedItem * -1;
+
+        if (orderStateType != self.selectedOrderStateType) {
+            self.selectedOrderStateType = orderStateType;
+            [self resetTradeDatas];
+        }
+    }
 }
 
 @end

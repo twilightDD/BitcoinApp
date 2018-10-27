@@ -81,6 +81,7 @@ typedef NS_ENUM (NSInteger, BitcoinDE_OrderStateType) {
 
 @interface SOXMarket_BitcoinDE_DefTypes : SOXMarket_DefTypes
 
++ (NSString *)titleForOrderType:(BitcoinDE_OrderType)orderType;
 + (NSString *)orderTypeStringForOrderType:(BitcoinDE_OrderType)orderType;
 + (BitcoinDE_OrderType)orderTypeForOrderTypeString:(NSString *)orderTypeString;
 + (NSString *)paymentOptionStringForPaymentOption:(BitcoinDE_PaymentOption)paymentOption;

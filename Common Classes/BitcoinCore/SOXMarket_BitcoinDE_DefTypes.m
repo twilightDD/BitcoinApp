@@ -10,18 +10,42 @@
 
 @implementation SOXMarket_BitcoinDE_DefTypes
 
-+ (NSString *)orderTypeStringForOrderType:(BitcoinDE_OrderType)orderType {
++ (NSString *)titleForOrderType:(BitcoinDE_OrderType)orderType {
+    NSString *titleForOrderType = @"Error";
     switch (orderType) {
+        case BitcoinDE_UnknownOrderType:
+            titleForOrderType = @"All";
+            break;
         case  BitcoinDE_BuyOrderType:
-            return @"buy";
+            titleForOrderType = @"Buy";
             break;
         case  BitcoinDE_SellOrderType:
-            return @"sell";
+            titleForOrderType = @"Sell";
             break;
         default:
             return nil;
             break;
     }
+    return titleForOrderType;
+}
+
++ (NSString *)orderTypeStringForOrderType:(BitcoinDE_OrderType)orderType {
+    NSString *orderTypeStringForOrderType = @"Error";
+    switch (orderType) {
+        case BitcoinDE_UnknownOrderType:
+            orderTypeStringForOrderType = @"All";
+            break;
+        case  BitcoinDE_BuyOrderType:
+            orderTypeStringForOrderType = @"buy";
+            break;
+        case  BitcoinDE_SellOrderType:
+            orderTypeStringForOrderType = @"sell";
+            break;
+        default:
+            return nil;
+            break;
+    }
+    return orderTypeStringForOrderType;
 }
 
 + (BitcoinDE_OrderType)orderTypeForOrderTypeString:(NSString *)orderTypeString {
