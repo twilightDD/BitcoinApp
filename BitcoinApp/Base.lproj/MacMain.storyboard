@@ -4632,6 +4632,7 @@ Gw
                                     <constraint firstAttribute="trailing" secondItem="wmN-wb-h5d" secondAttribute="trailing" id="50g-d6-KIs"/>
                                     <constraint firstItem="VQY-Hv-5wf" firstAttribute="top" relation="greaterThanOrEqual" secondItem="cxf-nX-gbU" secondAttribute="bottom" constant="12" symbolic="YES" id="5E1-vn-Ohs"/>
                                     <constraint firstItem="eWy-9s-Qgd" firstAttribute="leading" secondItem="89s-RM-RkM" secondAttribute="leading" id="Czs-y7-UYu"/>
+                                    <constraint firstItem="wmN-wb-h5d" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="89s-RM-RkM" secondAttribute="leading" constant="20" symbolic="YES" id="NvG-ae-LFL"/>
                                     <constraint firstItem="YZT-bn-HTZ" firstAttribute="trailing" secondItem="wmN-wb-h5d" secondAttribute="trailing" id="OqF-Yd-Wrg"/>
                                     <constraint firstAttribute="bottom" secondItem="wmN-wb-h5d" secondAttribute="bottom" id="P4J-Em-XVv"/>
                                     <constraint firstItem="6TH-MB-LI0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YqK-DC-leQ" secondAttribute="trailing" constant="12" symbolic="YES" id="QGn-cF-Ee9"/>
@@ -4642,7 +4643,10 @@ Gw
                                     <constraint firstItem="wmN-wb-h5d" firstAttribute="top" secondItem="YZT-bn-HTZ" secondAttribute="bottom" constant="12" symbolic="YES" id="eIE-ab-LIm"/>
                                     <constraint firstItem="eWy-9s-Qgd" firstAttribute="top" secondItem="89s-RM-RkM" secondAttribute="top" id="hYt-RL-BaJ"/>
                                     <constraint firstItem="6TH-MB-LI0" firstAttribute="top" secondItem="eWy-9s-Qgd" secondAttribute="bottom" constant="20" symbolic="YES" id="ifN-i2-kG6"/>
+                                    <constraint firstItem="VQY-Hv-5wf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="89s-RM-RkM" secondAttribute="leading" constant="20" symbolic="YES" id="krb-VY-cap"/>
                                     <constraint firstItem="cxf-nX-gbU" firstAttribute="top" secondItem="YqK-DC-leQ" secondAttribute="bottom" constant="12" id="ocy-5y-lIj"/>
+                                    <constraint firstItem="6TH-MB-LI0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cxf-nX-gbU" secondAttribute="trailing" constant="12" symbolic="YES" id="prO-e1-atq"/>
+                                    <constraint firstItem="YZT-bn-HTZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="89s-RM-RkM" secondAttribute="leading" constant="20" symbolic="YES" id="rj0-7T-vWI"/>
                                     <constraint firstAttribute="trailing" secondItem="6TH-MB-LI0" secondAttribute="trailing" id="vMD-Lh-zub"/>
                                 </constraints>
                             </customView>
