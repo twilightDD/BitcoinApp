@@ -33,7 +33,6 @@
 
 @property (nonatomic) NSInteger currentPage;
 
-- (void)setupUI;
 - (void)updateControllerDatasWithDataObjects:(NSArray *)dataObjects
                         andPayloadDictionary:(NSDictionary *)payloadDictionary;
 

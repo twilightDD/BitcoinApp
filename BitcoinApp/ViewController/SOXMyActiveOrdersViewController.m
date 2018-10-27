@@ -52,8 +52,6 @@
 
 #pragma mark - Private methods
 - (void)setupUI {
-    [super setupUI];
-
     { // buttons
         // currency selection
         self.currencyTypeSelectionPopUpButton = self.pagingViewController.firstSelectionPopUpButton;
@@ -187,17 +185,6 @@
     alert.informativeText = [NSString stringWithFormat:@"%ti orders deleted.", countofDeletedObjects];
     alert.alertStyle = NSAlertStyleInformational;
     [alert runModal];
-}
-
-
-
-#pragma mark - Action methods
-- (IBAction)changeButtonAction:(NSButton *)sender {
-
-}
-
-- (IBAction)removeButtonAction:(NSButton *)sender {
-
 }
 
 #pragma mark - SOXChangeOrderProtocol

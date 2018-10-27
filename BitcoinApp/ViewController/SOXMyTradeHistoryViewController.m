@@ -40,9 +40,7 @@
 }
 
 #pragma mark - Private methods
-- (void)setupUI {
-    [super setupUI];
-    
+- (void)setupUI {    
     { // buttons
         // currency selection
         self.currencyTypeSelectionPopUpButton = self.pagingViewController.firstSelectionPopUpButton;

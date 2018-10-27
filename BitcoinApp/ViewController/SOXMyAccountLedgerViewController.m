@@ -26,35 +26,16 @@
 
 #pragma mark - Implementation
 @implementation SOXMyAccountLedgerViewController
-
 #pragma mark Init&Co.
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     self.selectedCurrencyType = BitcoinDE_CurrencyTypeBitcoin;
     self.selectedAccountLedgerOrderType = BitcoinDE_AccountLedgerParameter_AllOrderType;
-
-
-}
-
-- (void)viewWillAppear {
-    [super viewWillAppear];
-
-    [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
-                                                        object:@(self.selectedCurrencyType)];
-}
-
-#pragma mark - Segue handling
-- (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender {
-    [super prepareForSegue:segue sender:sender]; // call superClass!
-
-    [self.pagingViewController setSeparateEndDate:[SOXFormatters dateBeforeMidnightForDate:[NSDate dateWithTimeIntervalSinceNow:-86400]]];
 }
 
 #pragma mark - Private methods
 - (void)setupUI {    
-    [super setupUI];
-
     { // buttons
         // currency selection
         self.currencyTypeSelectionPopUpButton = self.pagingViewController.firstSelectionPopUpButton;
@@ -80,18 +61,8 @@
 
     // AccountLedger allows no date in future or today
     {
-//        self.selectedEndDate = [SOXFormatters dateBeforeMidnightForDate:[NSDate dateWithTimeIntervalSinceNow:-86400]];
-//        self.pagingViewController.endDateDatePicker.maxDate = self.selectedEndDate;
-    }
-}
-
-#pragma mark - Action methods
-- (IBAction)accountLedgerOrderTypePopUpButtonAction:(NSPopUpButton *)sender {
-    BitcoinDE_AccountLedgerParameter_OrderType newAccountLedgerOrderType = sender.indexOfSelectedItem + 1;
-
-    if (newAccountLedgerOrderType != self.selectedAccountLedgerOrderType) {
-        self.selectedAccountLedgerOrderType = newAccountLedgerOrderType;
-        [self resetTradeDatas];
+        NSDate *endDate = [SOXFormatters dateBeforeMidnightForDate:[NSDate dateWithTimeIntervalSinceNow:-86400]];
+        [self.pagingViewController setSeparateEndDate:endDate];
     }
 }
 
@@ -131,7 +102,7 @@
             [self resetTradeDatas];
         }
     }
-    // orderType selection
+    // accountLedgerOrderType selection
     else if (sender == self.accountLedgerOrderTypePopUpButton) {
         BitcoinDE_AccountLedgerParameter_OrderType newSelectedAccountLedgerOrderType = sender.indexOfSelectedItem + 1;
         if (newSelectedAccountLedgerOrderType != self.selectedAccountLedgerOrderType) {
@@ -139,7 +110,6 @@
             [self resetTradeDatas];
         }
     }
-
 }
 
 @end

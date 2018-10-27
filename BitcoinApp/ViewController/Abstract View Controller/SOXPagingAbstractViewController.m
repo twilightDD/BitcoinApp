@@ -24,22 +24,21 @@
 @end
 
 @implementation SOXPagingAbstractViewController
-
 #pragma mark - Init & Co.
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.arrayControllerDatas = [NSMutableArray array];
 
-    [self setupUI];
+
 }
 
 - (void)viewWillAppear {
     [super viewWillAppear];
-    [self setupUI];
-        if (self.arrayControllerDatas.count == 0) {
-            [self resetTradeDatas];
-            [self loadNextPage];
-        }
+[self setupUI];
+    if (self.arrayControllerDatas.count == 0) {
+        [self resetTradeDatas];
+        [self loadNextPage];
+    }
 
     [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
                                                         object:@(self.selectedCurrencyType)];
@@ -53,15 +52,11 @@
         self.pagingViewController = segue.destinationController;
         self.pagingViewController.delegate = self;
         // TODO: setup popUpButtons
+
     }
 }
 
 #pragma mark - Public methods
-- (void)setupUI {
-//    [self resetPagingButtons];
-
-}
-
 - (void)updateControllerDatasWithDataObjects:(NSArray *)dataObjects
                         andPayloadDictionary:(NSDictionary *)payloadDictionary {
     if (dataObjects.count > 0) {
@@ -137,6 +132,10 @@
 }
 
 #pragma mark - Private methods
+- (void)setupUI {
+    NSAssert(NO, @"Implement in concrete subclass");
+}
+
 - (void)updateTradeStatistics {
     NSAssert(NO, @"Is implemented in subclass SOXStatisticsAbstractViewController");
 }

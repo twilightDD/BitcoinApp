@@ -51,8 +51,6 @@
 
 #pragma mark - Implementation
 @implementation SOXPagingViewController
-
-
 #pragma mark - Init & Co.
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -62,14 +60,10 @@
 
     // dates
     self.selectedStartDate = [SOXFormatters dateForRFC3339DateTimeString:@"2000-01-01T02:00:00+02:00" ];
-    if (self.selectedEndDate == nil) {
-        self.selectedEndDate = [SOXFormatters dateNextDayQuarterBeforeMidnightForDate:[NSDate date]];
-    }
+    self.selectedEndDate = [SOXFormatters dateNextDayQuarterBeforeMidnightForDate:[NSDate date]];
 
     [self setupUI];
 }
-
-
 
 #pragma mark - Public methods
 - (void)setupUI {
@@ -94,6 +88,7 @@
     self.loadMoreTradeDatasButton.hidden = YES;
     self.loadAllTradeDatasButton.hidden = YES;
 }
+
 - (void)loadingPagingButton {
     self.fetchDataButton.title = @"Cancel";
 }
@@ -107,8 +102,7 @@
 - (void)updatePagingButtonsWithPageData:(SOXPage_BitcoinDE_Data *)pageData
                   whileLoadingMorePages:(BOOL)whileLoadingMorePages {
 
-    BOOL enableLoadMoreTradDatasButton = self.delegate.currentPage != pageData.pageLast;
-
+    // Enable buttons on multipage loading
     if (whileLoadingMorePages) {
         self.loadAllTradeDatasButton.enabled = NO;
         self.loadMoreTradeDatasButton.enabled = NO;
@@ -120,7 +114,8 @@
         self.fetchDataButton.title = @"Fetch data";
     }
 
-    // enable load more buttons, if needed
+    // hide buttons, if needed
+    BOOL enableLoadMoreTradDatasButton = self.delegate.currentPage != pageData.pageLast;
     if (enableLoadMoreTradDatasButton) {
         self.loadAllTradeDatasButton.hidden = NO;
         if (pageData) {
@@ -136,13 +131,13 @@
     }
 }
 
+// on accountLedger we need a different enddate (API fuck up)
 - (void)setSeparateEndDate:(NSDate *)selectedEndDate {
     if (selectedEndDate) {
         self.selectedEndDate = selectedEndDate;
         self.endDateDatePicker.dateValue = selectedEndDate;
     }
 }
-
 
 #pragma mark - Action methods
 #pragma mark Settings
@@ -167,6 +162,7 @@
         [self resetPagingButtons];
     }
 }
+
 #pragma mark Change/Remove order
 - (IBAction)changeOrderButtonAction:(NSButton *)sender {
     if ([self.delegate respondsToSelector:@selector(changeOrderButtonPressed)]) {
@@ -185,7 +181,7 @@
     if ([self.delegate respondsToSelector:@selector(exportButtonPressed)]) {
         [self.delegate exportButtonPressed];
     }
- }
+}
 
 #pragma mark Fetch and load buttons
 - (IBAction)loadAllTradeDatasAction:(NSButton *)sender {
