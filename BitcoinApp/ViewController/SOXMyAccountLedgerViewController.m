@@ -44,6 +44,13 @@
                                                         object:@(self.selectedCurrencyType)];
 }
 
+#pragma mark - Segue handling
+- (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender {
+    [super prepareForSegue:segue sender:sender]; // call superClass!
+
+    [self.pagingViewController setSeparateEndDate:[SOXFormatters dateBeforeMidnightForDate:[NSDate dateWithTimeIntervalSinceNow:-86400]]];
+}
+
 #pragma mark - Private methods
 - (void)setupUI {    
     [super setupUI];

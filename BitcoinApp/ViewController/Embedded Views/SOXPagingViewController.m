@@ -62,7 +62,9 @@
 
     // dates
     self.selectedStartDate = [SOXFormatters dateForRFC3339DateTimeString:@"2000-01-01T02:00:00+02:00" ];
-    self.selectedEndDate = [SOXFormatters dateNextDayQuarterBeforeMidnightForDate:[NSDate date]];
+    if (self.selectedEndDate == nil) {
+        self.selectedEndDate = [SOXFormatters dateNextDayQuarterBeforeMidnightForDate:[NSDate date]];
+    }
 
     [self setupUI];
 }
@@ -133,6 +135,14 @@
         self.fetchDataButton.title = @"Fetch data";
     }
 }
+
+- (void)setSeparateEndDate:(NSDate *)selectedEndDate {
+    if (selectedEndDate) {
+        self.selectedEndDate = selectedEndDate;
+        self.endDateDatePicker.dateValue = selectedEndDate;
+    }
+}
+
 
 #pragma mark - Action methods
 #pragma mark Settings

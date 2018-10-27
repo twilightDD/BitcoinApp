@@ -45,7 +45,6 @@
                                                         object:@(self.selectedCurrencyType)];
 }
 
-
 #pragma mark - Segue handling
 - (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender {
     [super prepareForSegue:segue sender:sender]; // call superClass!
