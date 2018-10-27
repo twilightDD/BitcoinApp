@@ -13,6 +13,7 @@
 @class SOXPage_BitcoinDE_Data;
 
 @protocol SOXPagingViewControllerProtocol
+- (void)pagingViewControllerDidLoad;
 - (void)popupButtonAction:(NSPopUpButton *)sender;
 
 - (void)loadAllTradeDatas;

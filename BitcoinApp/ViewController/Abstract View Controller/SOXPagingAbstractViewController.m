@@ -28,13 +28,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.arrayControllerDatas = [NSMutableArray array];
-
-
 }
 
 - (void)viewWillAppear {
     [super viewWillAppear];
-[self setupUI];
+
     if (self.arrayControllerDatas.count == 0) {
         [self resetTradeDatas];
         [self loadNextPage];
@@ -132,10 +130,6 @@
 }
 
 #pragma mark - Private methods
-- (void)setupUI {
-    NSAssert(NO, @"Implement in concrete subclass");
-}
-
 - (void)updateTradeStatistics {
     NSAssert(NO, @"Is implemented in subclass SOXStatisticsAbstractViewController");
 }
@@ -267,4 +261,7 @@
     NSAssert(NO, @"Implement in subclass");
 }
 
+- (void)pagingViewControllerDidLoad {
+    NSAssert(NO, @"Implement in subclass");
+}
 @end

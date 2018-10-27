@@ -51,46 +51,6 @@
 }
 
 #pragma mark - Private methods
-- (void)setupUI {
-    { // buttons
-        // currency selection
-        self.currencyTypeSelectionPopUpButton = self.pagingViewController.firstSelectionPopUpButton;
-        [self.currencyTypeSelectionPopUpButton removeAllItems];
-        for (BitcoinDE_CurrencyType idx = BitcoinDE_CurrencyTypeUnknown
-             ; idx < BitcoinDE_CurrencyType_EndOfType
-             ; idx++) {
-            [self.currencyTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:idx]];
-        }
-
-        // orderType selection
-        self.orderTypeSelectionPopUpButton = self.pagingViewController.secondSelectionPopUpButton;
-        [self.orderTypeSelectionPopUpButton removeAllItems];
-        for (BitcoinDE_OrderType idx = BitcoinDE_UnknownOrderType
-             ; idx < BitcoinDE_OrderType_EndOfType
-             ; idx++) {
-            [self.orderTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes titleForOrderType:idx]];
-        }
-
-        // orderStateType selection
-        self.orderStateTypeSelectionPopUpButton = self.pagingViewController.thirdSelectionPopUpButton;
-        [self.orderStateTypeSelectionPopUpButton removeAllItems];
-        for (BitcoinDE_OrderStateType idx = BitcoinDE_OrderStateTypeUnknown - 1
-             ; idx > BitcoinDE_OrderStateType_EndOfType
-             ; idx--) {
-            [self.orderStateTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes orderStateTypeStringForOrderstateType:idx]];
-        }
-    }
-
-    {
-        self.changeButton.title = @"Change order";
-        self.removeButton.title = @"Remove order";
-    }
-    
-    {
-        [self.tableView setDoubleAction:@selector(tableViewDoubleAction:)];
-    }
-}
-
 - (void)loadNextPage {
     [super loadNextPage];
 
@@ -195,6 +155,46 @@
 }
 
 #pragma mark - SOXPagingViewControllerProtocol
+- (void)pagingViewControllerDidLoad {
+    { // buttons
+        // currency selection
+        self.currencyTypeSelectionPopUpButton = self.pagingViewController.firstSelectionPopUpButton;
+        [self.currencyTypeSelectionPopUpButton removeAllItems];
+        for (BitcoinDE_CurrencyType idx = BitcoinDE_CurrencyTypeUnknown
+             ; idx < BitcoinDE_CurrencyType_EndOfType
+             ; idx++) {
+            [self.currencyTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:idx]];
+        }
+
+        // orderType selection
+        self.orderTypeSelectionPopUpButton = self.pagingViewController.secondSelectionPopUpButton;
+        [self.orderTypeSelectionPopUpButton removeAllItems];
+        for (BitcoinDE_OrderType idx = BitcoinDE_UnknownOrderType
+             ; idx < BitcoinDE_OrderType_EndOfType
+             ; idx++) {
+            [self.orderTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes titleForOrderType:idx]];
+        }
+
+        // orderStateType selection
+        self.orderStateTypeSelectionPopUpButton = self.pagingViewController.thirdSelectionPopUpButton;
+        [self.orderStateTypeSelectionPopUpButton removeAllItems];
+        for (BitcoinDE_OrderStateType idx = BitcoinDE_OrderStateTypeUnknown - 1
+             ; idx > BitcoinDE_OrderStateType_EndOfType
+             ; idx--) {
+            [self.orderStateTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes orderStateTypeStringForOrderstateType:idx]];
+        }
+    }
+
+    {
+        self.changeButton.title = @"Change order";
+        self.removeButton.title = @"Remove order";
+    }
+
+    {
+        [self.tableView setDoubleAction:@selector(tableViewDoubleAction:)];
+    }
+}
+
 - (void)popupButtonAction:(NSPopUpButton *)sender {
     // currency selection
     if (sender == self.currencyTypeSelectionPopUpButton) {
@@ -222,6 +222,7 @@
         }
     }
 }
+
 
 - (void)changeOrderButtonPressed {
     NSArray <SOXMyOrderBook_BitcoinDE_Data *> *selectedDatas = self.arrayController.selectedObjects;

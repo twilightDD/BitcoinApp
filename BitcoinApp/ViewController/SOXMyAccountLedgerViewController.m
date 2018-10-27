@@ -35,7 +35,33 @@
 }
 
 #pragma mark - Private methods
-- (void)setupUI {    
+- (void)loadNextPage {
+    [super loadNextPage];
+    
+    NSDictionary *parameter = [SOXAccountLedger_BitcoinDE_Data parameterForOrderType:self.selectedAccountLedgerOrderType
+                                                                     forCurrencyType:self.selectedCurrencyType
+                                                                           startDate:self.selectedStartDate
+                                                                             endDate:self.selectedEndDate
+                                                                                page:self.currentPage];
+    
+    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountLedgerType
+                                            withParameter:parameter
+                                                respondTo:self];
+}
+
+#pragma mark - SOXMarketCoreServerRequestProtocol
+- (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest {
+    if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowAccountLedgerType)]) {
+        NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
+        NSMutableArray *accountLedgerDatas = [SOXAccountLedger_BitcoinDE_Data accountLedgerDataArrayForAccountLedgerDictionary:payloadDictionary
+                                              forCurrencyType:self.selectedCurrencyType];
+        [self updateControllerDatasWithDataObjects:accountLedgerDatas
+                              andPayloadDictionary:payloadDictionary];
+    }
+}
+
+#pragma mark - SOXPagingViewControllerProtocol
+- (void)pagingViewControllerDidLoad {
     { // buttons
         // currency selection
         self.currencyTypeSelectionPopUpButton = self.pagingViewController.firstSelectionPopUpButton;
@@ -66,33 +92,6 @@
     }
 }
 
-#pragma mark - Next Page Data
-- (void)loadNextPage {
-    [super loadNextPage];
-    
-    NSDictionary *parameter = [SOXAccountLedger_BitcoinDE_Data parameterForOrderType:self.selectedAccountLedgerOrderType
-                                                                     forCurrencyType:self.selectedCurrencyType
-                                                                           startDate:self.selectedStartDate
-                                                                             endDate:self.selectedEndDate
-                                                                                page:self.currentPage];
-    
-    [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountLedgerType
-                                            withParameter:parameter
-                                                respondTo:self];
-}
-
-#pragma mark - SOXMarketCoreServerRequestProtocol
-- (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest {
-    if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowAccountLedgerType)]) {
-        NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
-        NSMutableArray *accountLedgerDatas = [SOXAccountLedger_BitcoinDE_Data accountLedgerDataArrayForAccountLedgerDictionary:payloadDictionary
-                                              forCurrencyType:self.selectedCurrencyType];
-        [self updateControllerDatasWithDataObjects:accountLedgerDatas
-                              andPayloadDictionary:payloadDictionary];
-    }
-}
-
-#pragma mark - SOXPagingViewControllerProtocol
 - (void)popupButtonAction:(NSPopUpButton *)sender {
     // currency selection
     if (sender == self.currencyTypeSelectionPopUpButton) {

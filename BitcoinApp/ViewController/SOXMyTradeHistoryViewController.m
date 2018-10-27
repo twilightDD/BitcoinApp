@@ -40,37 +40,6 @@
 }
 
 #pragma mark - Private methods
-- (void)setupUI {    
-    { // buttons
-        // currency selection
-        self.currencyTypeSelectionPopUpButton = self.pagingViewController.firstSelectionPopUpButton;
-        [self.currencyTypeSelectionPopUpButton removeAllItems];
-        for (BitcoinDE_CurrencyType idx = BitcoinDE_CurrencyTypeUnknown
-             ; idx < BitcoinDE_CurrencyType_EndOfType
-             ; idx++) {
-            [self.currencyTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:idx]];
-        }
-        
-        // orderType selection
-        self.orderTypeSelectionPopUpButton = self.pagingViewController.secondSelectionPopUpButton;
-        [self.orderTypeSelectionPopUpButton removeAllItems];
-        for (BitcoinDE_MyTradeHistoryParameter_OrderType idx = BitcoinDE_MyTradeHistoryParameter_UnknownOrderType + 1
-             ; idx < BitcoinDE_MyTradeHistoryParameter_EndOfOrderType
-             ; idx++) {
-            [self.orderTypeSelectionPopUpButton addItemWithTitle:[SOXMyTrades_BitcoinDE_Data titleForOrderType:idx]];
-        }
-        
-        // tradeState selection
-        self.tradeStateTypeSelectionPopUpButton = self.pagingViewController.thirdSelectionPopUpButton;
-        [self.tradeStateTypeSelectionPopUpButton removeAllItems];
-        for (BitcoinDE_MyTradeHistoryParameter_TradeStateType idx = BitcoinDE_MyTradeHistoryParameter_UnknownTradeStateType + 1
-             ; idx < BitcoinDE_MyTradeHistoryParameter_EndOfTradeStateType
-             ; idx++) {
-            [self.tradeStateTypeSelectionPopUpButton addItemWithTitle:[SOXMyTrades_BitcoinDE_Data titleForTradeStateType:idx]];
-        }
-    }
-}
-
 - (void)loadNextPage {
     [super loadNextPage];
     
@@ -106,6 +75,37 @@
 }
 
 #pragma mark - SOXPagingViewControllerProtocol
+- (void)pagingViewControllerDidLoad {
+    { // buttons
+        // currency selection
+        self.currencyTypeSelectionPopUpButton = self.pagingViewController.firstSelectionPopUpButton;
+        [self.currencyTypeSelectionPopUpButton removeAllItems];
+        for (BitcoinDE_CurrencyType idx = BitcoinDE_CurrencyTypeUnknown
+             ; idx < BitcoinDE_CurrencyType_EndOfType
+             ; idx++) {
+            [self.currencyTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:idx]];
+        }
+
+        // orderType selection
+        self.orderTypeSelectionPopUpButton = self.pagingViewController.secondSelectionPopUpButton;
+        [self.orderTypeSelectionPopUpButton removeAllItems];
+        for (BitcoinDE_MyTradeHistoryParameter_OrderType idx = BitcoinDE_MyTradeHistoryParameter_UnknownOrderType + 1
+             ; idx < BitcoinDE_MyTradeHistoryParameter_EndOfOrderType
+             ; idx++) {
+            [self.orderTypeSelectionPopUpButton addItemWithTitle:[SOXMyTrades_BitcoinDE_Data titleForOrderType:idx]];
+        }
+
+        // tradeState selection
+        self.tradeStateTypeSelectionPopUpButton = self.pagingViewController.thirdSelectionPopUpButton;
+        [self.tradeStateTypeSelectionPopUpButton removeAllItems];
+        for (BitcoinDE_MyTradeHistoryParameter_TradeStateType idx = BitcoinDE_MyTradeHistoryParameter_UnknownTradeStateType + 1
+             ; idx < BitcoinDE_MyTradeHistoryParameter_EndOfTradeStateType
+             ; idx++) {
+            [self.tradeStateTypeSelectionPopUpButton addItemWithTitle:[SOXMyTrades_BitcoinDE_Data titleForTradeStateType:idx]];
+        }
+    }
+}
+
 - (void)popupButtonAction:(NSPopUpButton *)sender {
     // currency selection
     if (sender == self.currencyTypeSelectionPopUpButton) {

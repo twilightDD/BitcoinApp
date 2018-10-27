@@ -68,7 +68,6 @@
 #pragma mark - Public methods
 - (void)setupUI {
     [self resetPagingButtons];
-
     { // date picker
         self.startDateTextField.stringValue = @"Start date";
         self.startDateDatePicker.dateValue  = self.selectedStartDate;
@@ -78,6 +77,9 @@
         self.endDateDatePicker.dateValue    = self.selectedEndDate;
         self.endDateDatePicker.locale = [NSLocale autoupdatingCurrentLocale];
     }
+
+    // delegates configure popupButtons
+    [self.delegate pagingViewControllerDidLoad];
 }
 
 #pragma mark Paging
