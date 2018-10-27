@@ -110,14 +110,8 @@
         NSMutableArray *accountLedgerDatas = [SOXAccountLedger_BitcoinDE_Data accountLedgerDataArrayForAccountLedgerDictionary:payloadDictionary
                                               forCurrencyType:self.selectedCurrencyType];
 
-        [self.arrayControllerDatas addObjectsFromArray:accountLedgerDatas];
-        [self.arrayController rearrangeObjects];
-
-        [self disableSpinningWheel];
-
-        [self updatePagingButtons:payloadDictionary];
-
-        [self updateTradeStatistics];
+        [self updateControllerDatasWithDataObjects:accountLedgerDatas
+                              andPayloadDictionary:payloadDictionary];
     }
 }
 

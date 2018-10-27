@@ -152,11 +152,8 @@
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowMyOrdersCommandType)]) {
         NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
         NSMutableArray *myOrderBookDatas = [SOXMyOrderBook_BitcoinDE_Data myOrderbookDataArrayForMyOrderbookDictionary:payloadDictionary];
-        [self.arrayControllerDatas addObjectsFromArray:myOrderBookDatas];
-        [self.arrayController rearrangeObjects];
-
-        // Page information
-        [self updatePagingButtons:payloadDictionary];
+        [self updateControllerDatasWithDataObjects:myOrderBookDatas
+                              andPayloadDictionary:payloadDictionary];
     }
     else if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_RemoveOrderType)]){
         NSDictionary *errors = [answerOfServerRequest objectForKey:ServerAnswerErrorKey];

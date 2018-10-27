@@ -61,23 +61,18 @@
 - (void)setupUI {
 //    [self resetPagingButtons];
 
-//    // currency selection
-//    [self.currencyTypeSelectionPopUpButton removeAllItems];
-//    for (BitcoinDE_CurrencyType idx = BitcoinDE_CurrencyTypeUnknown
-//         ; idx < BitcoinDE_CurrencyType_EndOfType
-//         ; idx++) {
-//        [self.currencyTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:idx]];
-//    }
-//
-//    // tradingType selection
-//    [self.tradingTypeSelectionPopUpButton removeAllItems];
-//    [self.tradingTypeSelectionPopUpButton addItemWithTitle:@"All"];
-//    for (BitcoinDE_OrderType idx = BitcoinDE_UnknownOrderType + 1
-//         ; idx < BitcoinDE_OrderType_EndOfType
-//         ; idx++) {
-//        [self.tradingTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:idx]];
-//    }
+}
 
+- (void)updateControllerDatasWithDataObjects:(NSArray *)dataObjects
+                        andPayloadDictionary:(NSDictionary *)payloadDictionary {
+    [self.arrayControllerDatas addObjectsFromArray:dataObjects];
+    [self.arrayController rearrangeObjects];
+
+    [self disableSpinningWheel];
+
+    [self updatePagingButtons:payloadDictionary];
+
+    [self updateTradeStatistics];
 }
 
 #pragma mark Paging
@@ -115,27 +110,9 @@
 }
 
 #pragma mark - Private methods
-- (void)saveString:(NSString *)stringToSave {
-    NSSavePanel *savePanel = [NSSavePanel savePanel];
-    savePanel.allowedFileTypes = @[@"csv"];
-
-    [savePanel beginWithCompletionHandler:^(NSModalResponse result) {
-        if (result == NSFileHandlingPanelOKButton) {
-            NSError *error = nil;
-            NSURL *selectedURL = savePanel.URL;
-            [stringToSave writeToURL:selectedURL
-                          atomically:YES
-                            encoding:NSUTF16StringEncoding
-                               error:&error];
-            if (error) {
-                NSLog(@"%@", error.localizedDescription);
-            }
-
-        }
-    }];
+- (void)updateTradeStatistics {
+    NSAssert(NO, @"Is implemented in subclass SOXStatisticsAbstractViewController");
 }
-
-#pragma mark - Action methods
 
 #pragma mark Export
 - (void)startExport {
@@ -204,6 +181,26 @@
 
     [self saveString:exportString];
 
+}
+
+- (void)saveString:(NSString *)stringToSave {
+    NSSavePanel *savePanel = [NSSavePanel savePanel];
+    savePanel.allowedFileTypes = @[@"csv"];
+
+    [savePanel beginWithCompletionHandler:^(NSModalResponse result) {
+        if (result == NSFileHandlingPanelOKButton) {
+            NSError *error = nil;
+            NSURL *selectedURL = savePanel.URL;
+            [stringToSave writeToURL:selectedURL
+                          atomically:YES
+                            encoding:NSUTF16StringEncoding
+                               error:&error];
+            if (error) {
+                NSLog(@"%@", error.localizedDescription);
+            }
+
+        }
+    }];
 }
 
 #pragma mark Fetch and load buttons

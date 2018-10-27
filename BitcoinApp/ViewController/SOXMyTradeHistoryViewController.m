@@ -94,12 +94,8 @@
         
         NSMutableArray *myTrades = [SOXMyTrades_BitcoinDE_Data myTradesDataArrayForMyTradeHistoryDictionary:payloadDictionary];
         [self.arrayControllerDatas addObjectsFromArray:myTrades];
-        [self.arrayController rearrangeObjects];
-        
-        // Page information
-        [self updatePagingButtons:payloadDictionary];
-        
-        [self updateTradeStatistics];
+        [self updateControllerDatasWithDataObjects:myTrades
+                              andPayloadDictionary:payloadDictionary];
     }
 }
 
