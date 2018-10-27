@@ -37,11 +37,11 @@
 - (void)updateControllerDatasWithDataObjects:(NSArray *)dataObjects
                         andPayloadDictionary:(NSDictionary *)payloadDictionary;
 
+- (void)loadNextPage;
 
-- (void)startExport;
+- (void)exportButtonPressed;
 - (void)addToPasteBoard:(NSString *)pasteboardString;
 
 - (void)updatePagingButtons:(NSDictionary *)payloadDictionary;
-- (void)resetPagingButtons;
 - (void)resetTradeDatas; // TODO: Rename
 @end

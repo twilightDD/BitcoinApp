@@ -193,6 +193,50 @@
 
 #pragma mark - Action methods
 - (IBAction)changeButtonAction:(NSButton *)sender {
+
+}
+
+- (IBAction)removeButtonAction:(NSButton *)sender {
+
+}
+
+#pragma mark - SOXChangeOrderProtocol
+- (void)orderWasChanged:(NSString *)oldOrderID newOrderID:(NSString *)newOrderID {
+    [[SOXMarket_BitcoinDE_Core sharedCore] startAccountInfoUpdate];
+    [self resetTradeDatas];
+    [self loadNextPage];
+}
+
+#pragma mark - SOXPagingViewControllerProtocol
+- (void)popupButtonAction:(NSPopUpButton *)sender {
+    // currency selection
+    if (sender == self.currencyTypeSelectionPopUpButton) {
+        BitcoinDE_CurrencyType newCurrencyType = sender.indexOfSelectedItem;
+        if (newCurrencyType != self.selectedCurrencyType) {
+            self.selectedCurrencyType = newCurrencyType;
+            [self resetTradeDatas];
+        }
+    }
+    // orderType selection
+    else if (sender == self.orderTypeSelectionPopUpButton) {
+        BitcoinDE_OrderType newOrderType = sender.indexOfSelectedItem;
+        if (newOrderType != self.selectedOrderType) {
+            self.selectedOrderType = newOrderType;
+            [self resetTradeDatas];
+        }
+    }
+    // orderStateType
+    else if (sender == self.orderStateTypeSelectionPopUpButton) {
+        BitcoinDE_OrderStateType orderStateType = sender.indexOfSelectedItem * -1;
+
+        if (orderStateType != self.selectedOrderStateType) {
+            self.selectedOrderStateType = orderStateType;
+            [self resetTradeDatas];
+        }
+    }
+}
+
+- (void)changeOrderButtonPressed {
     NSArray <SOXMyOrderBook_BitcoinDE_Data *> *selectedDatas = self.arrayController.selectedObjects;
 
     if (selectedDatas.count == 1) {
@@ -211,7 +255,7 @@
     }
 }
 
-- (IBAction)removeButtonAction:(NSButton *)sender {
+- (void)removeOrderButtonPressed {
     NSArray <SOXMyOrderBook_BitcoinDE_Data *> *selectedDatas = self.arrayController.selectedObjects;
     if (selectedDatas.count > 0) {
         self.changeButton.enabled = NO;
@@ -226,42 +270,6 @@
             [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_RemoveOrderType
                                                     withParameter:myOrderBookParameter
                                                         respondTo:self];
-        }
-    }
-}
-
-#pragma mark - SOXChangeOrderProtocol
-- (void)orderWasChanged:(NSString *)oldOrderID newOrderID:(NSString *)newOrderID {
-    [[SOXMarket_BitcoinDE_Core sharedCore] startAccountInfoUpdate];
-    [self resetTradeDatas];
-    [self loadNextPage];
-}
-
-#pragma mark - SOXPagingViewControllerProtocol
-- (void)popupButtonAction:(NSPopUpButton *)sender {
-    // currency selection
-    if (sender == self.currencyTypeSelectionPopUpButton) {
-        BitcoinDE_CurrencyType newCurrencyType = sender.indexOfSelectedItem;
-        if (newCurrencyType != self.selectedCurrencyType) {
-            self.selectedCurrencyType = newCurrencyType;
-            [self resetPagingButtons];
-        }
-    }
-    // orderType selection
-    else if (sender == self.orderTypeSelectionPopUpButton) {
-        BitcoinDE_OrderType newOrderType = sender.indexOfSelectedItem;
-        if (newOrderType != self.selectedOrderType) {
-            self.selectedOrderType = newOrderType;
-            [self resetPagingButtons];
-        }
-    }
-    // orderStateType
-    else if (sender == self.orderStateTypeSelectionPopUpButton) {
-        BitcoinDE_OrderStateType orderStateType = sender.indexOfSelectedItem * -1;
-
-        if (orderStateType != self.selectedOrderStateType) {
-            self.selectedOrderStateType = orderStateType;
-            [self resetTradeDatas];
         }
     }
 }

@@ -65,13 +65,41 @@
 
 - (void)updateControllerDatasWithDataObjects:(NSArray *)dataObjects
                         andPayloadDictionary:(NSDictionary *)payloadDictionary {
-    [self.arrayControllerDatas addObjectsFromArray:dataObjects];
-    [self.arrayController rearrangeObjects];
+    if (dataObjects.count > 0) {
+        [self.arrayControllerDatas addObjectsFromArray:dataObjects];
+        [self.arrayController rearrangeObjects];
+    }
 
-    [self disableSpinningWheel];
+    SOXPage_BitcoinDE_Data *pageData = [SOXPage_BitcoinDE_Data pageDataForPayloadDictionary:payloadDictionary];
+    if (pageData
+        && pageData.pageCurrent == pageData.pageLast) {
+        self.shouldLoadAllTradeDatas = NO;
+    }
 
-    [self updatePagingButtons:payloadDictionary];
+    // Load more data if needed
+    if (self.shouldLoadAllTradeDatas) {
+        [self loadNextPage];
+    }
 
+    // No Data View
+    if (self.arrayControllerDatas.count == 0) {
+        [self presentNoDataView];
+    }
+    else {
+        [self hideNoDataView];
+    }
+
+    // Spinning Wheel View
+    if (self.shouldLoadAllTradeDatas) {
+        [self enableSpinningWheel];
+    }
+    else {
+        [self disableSpinningWheel];
+    }
+
+    // Update embedded custom views
+    [self.pagingViewController updatePagingButtonsWithPageData:pageData
+                                         whileLoadingMorePages:self.shouldLoadAllTradeDatas];
     [self updateTradeStatistics];
 }
 
@@ -82,16 +110,16 @@
 
     self.currentPage = self.currentPage + 1;
 
-    [self.pagingViewController resetPagingButtons];
+    [self.pagingViewController loadingPagingButton];
+
+    // loading in concrete sublcass
 }
 
 - (void)resetTradeDatas {
-
-}
-
-- (void)resetPagingButtons {
+    self.arrayControllerDatas = [NSMutableArray array];
     [self.pagingViewController resetPagingButtons];
 }
+
 #pragma mark - Manual getters
 - (NSDate *)selectedStartDate {
     NSDate *selectedStartDate = self.pagingViewController.selectedStartDate;
@@ -115,7 +143,7 @@
 }
 
 #pragma mark Export
-- (void)startExport {
+- (void)exportButtonPressed {
     // get columnTitles
     NSArray <NSString *> *columnTitles = [self.tableView.tableColumns valueForKey:@"identifier"];
     NSUInteger columnTitlesCount = columnTitles.count - 1;
@@ -210,10 +238,17 @@
 }
 
 - (void)loadMoreTradeDatas {
+    self.shouldLoadAllTradeDatas = NO;
     [self loadNextPage];
 }
 
 - (void)fetchDatas {
+    if (self.shouldLoadAllTradeDatas) {
+        self.shouldLoadAllTradeDatas = NO;
+        [self updateControllerDatasWithDataObjects:nil
+                              andPayloadDictionary:nil];
+        return;
+    }
     self.arrayControllerDatas = [NSMutableArray array];
     self.currentPage = 0;
 
@@ -229,17 +264,6 @@
                   forType:NSPasteboardTypeString];
 }
 
-- (void)updatePagingButtons:(NSDictionary *)payloadDictionary {
-    if (self.arrayControllerDatas.count == 0) {
-        [self presentNoDataView];
-    }
-    else {
-        [self hideNoDataView];
-    }
-
-    [self.pagingViewController updatePagingButtons:payloadDictionary];
-
-}
 #pragma mark - SOXPagingViewControllerProtocol
 - (void)popupButtonAction:(NSPopUpButton *)sender {
     NSAssert(NO, @"Implement in subclass");

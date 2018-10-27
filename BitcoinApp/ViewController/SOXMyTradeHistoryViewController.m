@@ -93,9 +93,9 @@
         NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
         
         NSMutableArray *myTrades = [SOXMyTrades_BitcoinDE_Data myTradesDataArrayForMyTradeHistoryDictionary:payloadDictionary];
-        [self.arrayControllerDatas addObjectsFromArray:myTrades];
         [self updateControllerDatasWithDataObjects:myTrades
                               andPayloadDictionary:payloadDictionary];
+        
     }
 }
 
@@ -114,7 +114,7 @@
         BitcoinDE_CurrencyType newCurrencyType = sender.indexOfSelectedItem;
         if (newCurrencyType != self.selectedCurrencyType) {
             self.selectedCurrencyType = newCurrencyType;
-            [self resetPagingButtons];
+            [self resetTradeDatas];
         }
     }
     // orderType selection
@@ -122,7 +122,7 @@
         BitcoinDE_MyTradeHistoryParameter_OrderType newOrderType = sender.indexOfSelectedItem + 1;
         if (newOrderType != self.selectedTradeHistoryOrderType) {
             self.selectedTradeHistoryOrderType = newOrderType;
-            [self resetPagingButtons];
+            [self resetTradeDatas];
         }
     }
     // tradeState selection

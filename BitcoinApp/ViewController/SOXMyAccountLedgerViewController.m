@@ -109,7 +109,6 @@
         NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
         NSMutableArray *accountLedgerDatas = [SOXAccountLedger_BitcoinDE_Data accountLedgerDataArrayForAccountLedgerDictionary:payloadDictionary
                                               forCurrencyType:self.selectedCurrencyType];
-
         [self updateControllerDatasWithDataObjects:accountLedgerDatas
                               andPayloadDictionary:payloadDictionary];
     }
@@ -122,7 +121,7 @@
         BitcoinDE_CurrencyType newCurrencyType = sender.indexOfSelectedItem + 1;
         if (newCurrencyType != self.selectedCurrencyType) {
             self.selectedCurrencyType = newCurrencyType;
-            [self resetPagingButtons];
+            [self resetTradeDatas];
         }
     }
     // orderType selection
@@ -130,7 +129,7 @@
         BitcoinDE_AccountLedgerParameter_OrderType newSelectedAccountLedgerOrderType = sender.indexOfSelectedItem + 1;
         if (newSelectedAccountLedgerOrderType != self.selectedAccountLedgerOrderType) {
             self.selectedAccountLedgerOrderType = newSelectedAccountLedgerOrderType;
-            [self resetPagingButtons];
+            [self resetTradeDatas];
         }
     }
 

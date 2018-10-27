@@ -9,8 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
-
 @class SOXPagingAbstractViewController;
+@class SOXPage_BitcoinDE_Data;
 
 @protocol SOXPagingViewControllerProtocol
 - (void)popupButtonAction:(NSPopUpButton *)sender;
@@ -18,15 +18,13 @@
 - (void)loadAllTradeDatas;
 - (void)loadMoreTradeDatas;
 - (void)fetchDatas;
-- (void)startExport;
 
 - (void)resetTradeDatas;
-- (void)loadNextPage;
 
-- (void)presentNoDataView;
-- (void)hideNoDataView;
-- (void)enableSpinningWheel;
-- (void)disableSpinningWheel;
+@optional
+- (void)exportButtonPressed;
+- (void)changeOrderButtonPressed;
+- (void)removeOrderButtonPressed;
 
 @end
 
@@ -41,12 +39,9 @@
 @property (strong, nonatomic, readonly) NSDate *selectedStartDate;
 @property (strong, nonatomic, readonly) NSDate *selectedEndDate;
 
+- (void)loadingPagingButton;
 - (void)resetPagingButtons;
-- (void)updatePagingButtons;
-- (void)updatePagingButtons:(NSDictionary *)payload;
-
-//- (void)updatePagingButtons:(NSDictionary *)payloadDictionary;
-//- (void)resetPagingButtons;
-//- (void)resetTradeDatas; // TODO: Rename
+- (void)updatePagingButtonsWithPageData:(SOXPage_BitcoinDE_Data *)pageData
+                  whileLoadingMorePages:(BOOL)whileLoadingMorePages ;
 
 @end

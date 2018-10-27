@@ -23,12 +23,14 @@
 @property (strong, readwrite) IBOutlet NSPopUpButton *secondSelectionPopUpButton;
 @property (strong, readwrite) IBOutlet NSPopUpButton *thirdSelectionPopUpButton;
 
-// - start date
 @property (strong) IBOutlet NSTextField *startDateTextField;
 @property (strong, readwrite) IBOutlet NSDatePicker *startDateDatePicker;
-// - end date
 @property (strong) IBOutlet NSTextField *endDateTextField;
 @property (strong, readwrite) IBOutlet NSDatePicker *endDateDatePicker;
+
+@property (strong) IBOutlet NSButton *changeOrderButton;
+@property (strong) IBOutlet NSButton *removeOrderButton;
+
 
 @property (strong) IBOutlet NSButton *exportButton;
 
@@ -43,6 +45,7 @@
 @property (strong, nonatomic, readwrite) NSDate *selectedStartDate;
 @property (strong, nonatomic, readwrite) NSDate *selectedEndDate;
 
+@property (nonatomic) BOOL shouldLoadAllTradeDatas;
 
 @end
 
@@ -55,6 +58,7 @@
     [super viewDidLoad];
 
     self.selectedCurrencyType = BitcoinDE_CurrencyTypeUnknown;
+    self.shouldLoadAllTradeDatas = NO;
 
     // dates
     self.selectedStartDate = [SOXFormatters dateForRFC3339DateTimeString:@"2000-01-01T02:00:00+02:00" ];
@@ -88,50 +92,47 @@
     self.loadMoreTradeDatasButton.hidden = YES;
     self.loadAllTradeDatasButton.hidden = YES;
 }
-
-- (void)resetTradeDatas {
-//    self.currentPage = 0;
-    [self resetPagingButtons];
+- (void)loadingPagingButton {
+    self.fetchDataButton.title = @"Cancel";
 }
 
+- (void)setAllPagingButtonsEnabled:(BOOL)enabled {
+    self.loadAllTradeDatasButton.enabled = enabled;
+    self.loadMoreTradeDatasButton.enabled = enabled;
+    self.fetchDataButton.enabled = enabled;
+}
 
-- (void)updatePagingButtons:(NSDictionary *)payloadDictionary {
-    SOXPage_BitcoinDE_Data *pageData = [SOXPage_BitcoinDE_Data pageDataForPayloadDictionary:payloadDictionary];
+- (void)updatePagingButtonsWithPageData:(SOXPage_BitcoinDE_Data *)pageData
+                  whileLoadingMorePages:(BOOL)whileLoadingMorePages {
 
     BOOL enableLoadMoreTradDatasButton = self.delegate.currentPage != pageData.pageLast;
 
+    if (whileLoadingMorePages) {
+        self.loadAllTradeDatasButton.enabled = NO;
+        self.loadMoreTradeDatasButton.enabled = NO;
+    }
+    else {
+        self.loadAllTradeDatasButton.enabled = YES;
+        self.loadMoreTradeDatasButton.enabled = YES;
+        self.fetchDataButton.enabled = YES;
+        self.fetchDataButton.title = @"Fetch data";
+    }
+
     // enable load more buttons, if needed
     if (enableLoadMoreTradDatasButton) {
-        self.loadMoreTradeDatasButton.hidden = NO;
-        self.loadMoreTradeDatasButton.enabled = enableLoadMoreTradDatasButton;
         self.loadAllTradeDatasButton.hidden = NO;
-        self.loadAllTradeDatasButton.enabled = enableLoadMoreTradDatasButton;
-
-
-        self.loadAllTradeDatasButton.title = [NSString stringWithFormat:@"Load all (%ti pages left)"
-                                              , pageData.pageLast - pageData.pageCurrent];
+        if (pageData) {
+            self.loadAllTradeDatasButton.title = [NSString stringWithFormat:@"Load all (%ti pages left)"
+                                                  , pageData.pageLast - pageData.pageCurrent];
+        }
+        self.loadMoreTradeDatasButton.hidden = NO;
     }
     else {
         self.loadMoreTradeDatasButton.hidden = YES;
         self.loadAllTradeDatasButton.hidden = YES;
+        self.fetchDataButton.title = @"Fetch data";
     }
-
-//    // automatically load further pages, if possible
-//    if (self.shouldLoadAllTradeDatas == YES
-//        && enableLoadMoreTradDatasButton == YES) {
-//        [self loadNextPage];
-//    }
-//    else {
-//        self.shouldLoadAllTradeDatas = NO;
-//        self.fetchDataButton.title = @"Fetch data";
-//        self.fetchDataButton.enabled = YES;
-//        [self.delegate disableSpinningWheel];
-//    }
-
-
 }
-
-
 
 #pragma mark - Action methods
 #pragma mark Settings
@@ -139,46 +140,12 @@
     [self.delegate popupButtonAction:sender];
 }
 
-- (IBAction)firstPopUpButtonAction:(NSPopUpButton *)sender {
-//    [self.delegate popUpButtonAction:sender];
-    BitcoinDE_CurrencyType newCurrencyType = sender.indexOfSelectedItem + 1;
-
-    // < EndType => on MyActiveOrders and MyTradeHistory
-    if (sender.itemArray.count < BitcoinDE_CurrencyType_EndOfType) {
-        newCurrencyType = sender.indexOfSelectedItem + 1;
-    }
-    // == EndType => on MyAccountLedger
-    else if (sender.itemArray.count == BitcoinDE_CurrencyType_EndOfType) {
-        newCurrencyType = sender.indexOfSelectedItem;
-    }
-    else {
-        NSAssert(NO, @"can't solve this.");
-    }
-
-    if (newCurrencyType != self.selectedCurrencyType) {
-        self.selectedCurrencyType = newCurrencyType;
-        [self resetTradeDatas];
-
-        [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
-                                                            object:@(newCurrencyType)];
-    }
-}
-
-- (IBAction)orderTypePopUpButtonAction:(NSPopUpButton *)sender {
-    BitcoinDE_OrderType newOrderType = sender.indexOfSelectedItem;
-
-    if (newOrderType != self.selectedOrderType) {
-        self.selectedOrderType = newOrderType;
-        [self resetTradeDatas];
-    }
-}
-
 - (IBAction)startDatePickerAction:(NSDatePicker *)sender {
     NSDate *newSelectedStartDate = sender.dateValue;
 
     if ([self.selectedStartDate isEqualToDate:newSelectedStartDate] == NO) {
         self.selectedStartDate = newSelectedStartDate;
-        [self resetTradeDatas];
+        [self resetPagingButtons];
     }
 }
 
@@ -187,29 +154,44 @@
 
     if ([self.selectedEndDate isEqualToDate:newSelectedEndDate] == NO) {
         self.selectedEndDate = newSelectedEndDate;
-        [self resetTradeDatas];
+        [self resetPagingButtons];
+    }
+}
+#pragma mark Change/Remove order
+- (IBAction)changeOrderButtonAction:(NSButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(changeOrderButtonPressed)]) {
+        [self.delegate changeOrderButtonPressed];
+    }
+}
+
+- (IBAction)removeOrderButtonAction:(NSButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(removeOrderButtonPressed)]) {
+        [self.delegate removeOrderButtonPressed];
     }
 }
 
 #pragma mark Export
 - (IBAction)exportButtonAction:(NSButton *)sender {
-    [self.delegate startExport];
+    if ([self.delegate respondsToSelector:@selector(exportButtonPressed)]) {
+        [self.delegate exportButtonPressed];
+    }
  }
 
 #pragma mark Fetch and load buttons
 - (IBAction)loadAllTradeDatasAction:(NSButton *)sender {
+    [self setAllPagingButtonsEnabled:NO];
     self.fetchDataButton.enabled = YES;
     self.fetchDataButton.title = @"Cancel";
     [self.delegate loadAllTradeDatas];
 }
 
 - (IBAction)loadMoreTradeDatasAction:(NSButton *)sender {
-    self.fetchDataButton.enabled = NO;
+    [self setAllPagingButtonsEnabled:NO];
     [self.delegate loadNextPage];
 }
 
 - (IBAction)fetchDataButtonAction:(NSButton *)sender {
-    self.fetchDataButton.enabled = NO;
+    [self setAllPagingButtonsEnabled:NO];
     [self.delegate fetchDatas];
 }
 
