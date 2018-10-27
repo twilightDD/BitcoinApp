@@ -4602,11 +4602,6 @@ Gw
                                         </buttonCell>
                                         <connections>
                                             <action selector="changeOrderButtonAction:" target="nDB-rg-Ckf" id="lMu-L2-fNT"/>
-                                            <binding destination="nDB-rg-Ckf" name="enabled" keyPath="self.delegate.arrayController.selectedObjects.@count" id="Z1B-JL-Lzr">
-                                                <dictionary key="options">
-                                                    <string key="NSValueTransformerName">NSIsNil</string>
-                                                </dictionary>
-                                            </binding>
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cxf-nX-gbU">

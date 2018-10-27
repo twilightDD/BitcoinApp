@@ -105,6 +105,19 @@
     [self presentViewControllerAsSheet:viewC];
 }
 
+- (void)updateChangeAndRemoveOrderButtons {
+    self.changeOrderButton.enabled = NO;
+    self.removeOrderButton.enabled = NO;
+
+    NSInteger numberOfSelectedRows = [self.tableView numberOfSelectedRows];
+    if (numberOfSelectedRows == 1) {
+        self.changeOrderButton.enabled = numberOfSelectedRows;
+    }
+    if (numberOfSelectedRows > 0) {
+        self.removeOrderButton.enabled = numberOfSelectedRows;
+    }
+}
+
 #pragma mark - SOXMarketCoreServerRequestProtocol
 - (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest {
     [self disableSpinningWheel];
@@ -146,14 +159,21 @@
 }
 
 #pragma mark - NSTableViewDelegate
-//- (void)tableViewSelectionDidChange:(NSNotification *)notification {
-//    [super tableViewSelectionDidChange:notification];
-//    if (notification.object == self.tableView) {
-//        NSInteger numberOfSelectedRows = [self.tableView numberOfSelectedRows];
-//        self.changeOrderButton.enabled = numberOfSelectedRows;
-//        self.removeOrderButton.enabled = numberOfSelectedRows;
-//    }
-//}
+- (void)tableViewSelectionIsChanging:(NSNotification *)notification {
+    [super tableViewSelectionIsChanging:notification];
+
+    // responds to mouse events only
+    if (self.tableView == notification.object) {
+        [self updateChangeAndRemoveOrderButtons];
+    }
+}
+- (void)tableViewSelectionDidChange:(NSNotification *)notification {
+    [super tableViewSelectionDidChange:notification];
+    
+    if (notification.object == self.tableView) {
+        [self updateChangeAndRemoveOrderButtons];
+    }
+}
 
 #pragma mark - SOXChangeOrderProtocol
 - (void)orderWasChanged:(NSString *)oldOrderID newOrderID:(NSString *)newOrderID {
@@ -196,14 +216,12 @@
     {
         self.changeOrderButton = self.pagingViewController.changeOrderButton;
         self.changeOrderButton.hidden = NO;
+        self.changeOrderButton.enabled = NO;
         self.changeOrderButton.title = @"Change order";
-//        [self.changeOrderButton bind:NSEnabledBinding
-//                            toObject:self.arrayController
-//                         withKeyPath:@"selection.@count"
-//                             options:nil];
 
         self.removeOrderButton = self.pagingViewController.removeOrderButton;
         self.removeOrderButton.hidden = NO;
+        self.removeOrderButton.enabled = NO;
         self.removeOrderButton.title = @"Remove order";
     }
 
@@ -231,11 +249,14 @@
     }
     // orderStateType
     else if (sender == self.orderStateTypeSelectionPopUpButton) {
-        BitcoinDE_OrderStateType orderStateType = sender.indexOfSelectedItem * -1;
+        BitcoinDE_OrderStateType newOrderStateType = sender.indexOfSelectedItem * -1;
 
-        if (orderStateType != self.selectedOrderStateType) {
-            self.selectedOrderStateType = orderStateType;
+        if (newOrderStateType != self.selectedOrderStateType) {
+            self.selectedOrderStateType = newOrderStateType;
             [self resetTradeDatas];
+            BOOL hideChangeAndRemoveButtons = newOrderStateType != BitcoinDE_OrderStateTypePending;
+            self.changeOrderButton.hidden = hideChangeAndRemoveButtons;
+            self.removeOrderButton.hidden = hideChangeAndRemoveButtons;
         }
     }
 }
