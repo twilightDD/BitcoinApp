@@ -31,11 +31,10 @@
 
 #pragma mark IBOutlets
 
-
-@property (weak) IBOutlet NSButton *changeButton;
-@property (weak) IBOutlet NSButton *removeButton;
-
 #pragma mark Properties
+@property (weak) NSButton *changeOrderButton;
+@property (weak) NSButton *removeOrderButton;
+
 @property (nonatomic) NSInteger countOfMyOrderBook_BitcoinDE_DatasToDelete;
 @property (nonatomic) NSInteger countOfDeletedMyOrderBook_BitcoinDE_Datas;
 
@@ -71,8 +70,8 @@
 
 - (void)removeOrderBookDatas:(NSArray <SOXMyOrderBook_BitcoinDE_Data *> *)ordersToRemove {
     if (ordersToRemove.count == 1) {
-        self.changeButton.enabled = NO;
-        self.removeButton.enabled = NO;
+        self.changeOrderButton.enabled = NO;
+        self.removeOrderButton.enabled = NO;
         [self enableSpinningWheel];
 
         self.countOfMyOrderBook_BitcoinDE_DatasToDelete = ordersToRemove.count;
@@ -87,7 +86,15 @@
     }
 }
 
-#pragma mark - Table view methods
+- (void)informUserAboutDeletion:(NSInteger)countofDeletedObjects {
+    NSAlert *alert = [[NSAlert alloc] init];
+    alert.messageText = @"Deletion successfull";
+    alert.informativeText = [NSString stringWithFormat:@"%ti orders deleted.", countofDeletedObjects];
+    alert.alertStyle = NSAlertStyleInformational;
+    [alert runModal];
+}
+
+#pragma mark | Table view methods
 - (void)tableViewDoubleAction:(NSTableView *)tableView {
     NSArray <SOXMyOrderBook_BitcoinDE_Data *> *selectedObjects = [self.arrayController selectedObjects];
     SOXMyOrderBook_BitcoinDE_Data *selectedMyOrder = selectedObjects.firstObject;
@@ -138,14 +145,15 @@
     [self updateTradeStatistics];
 }
 
-#pragma mark - User information
-- (void)informUserAboutDeletion:(NSInteger)countofDeletedObjects {
-    NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = @"Deletion successfull";
-    alert.informativeText = [NSString stringWithFormat:@"%ti orders deleted.", countofDeletedObjects];
-    alert.alertStyle = NSAlertStyleInformational;
-    [alert runModal];
-}
+#pragma mark - NSTableViewDelegate
+//- (void)tableViewSelectionDidChange:(NSNotification *)notification {
+//    [super tableViewSelectionDidChange:notification];
+//    if (notification.object == self.tableView) {
+//        NSInteger numberOfSelectedRows = [self.tableView numberOfSelectedRows];
+//        self.changeOrderButton.enabled = numberOfSelectedRows;
+//        self.removeOrderButton.enabled = numberOfSelectedRows;
+//    }
+//}
 
 #pragma mark - SOXChangeOrderProtocol
 - (void)orderWasChanged:(NSString *)oldOrderID newOrderID:(NSString *)newOrderID {
@@ -156,7 +164,7 @@
 
 #pragma mark - SOXPagingViewControllerProtocol
 - (void)pagingViewControllerDidLoad {
-    { // buttons
+    { // popUp buttons
         // currency selection
         self.currencyTypeSelectionPopUpButton = self.pagingViewController.firstSelectionPopUpButton;
         [self.currencyTypeSelectionPopUpButton removeAllItems];
@@ -186,8 +194,17 @@
     }
 
     {
-        self.changeButton.title = @"Change order";
-        self.removeButton.title = @"Remove order";
+        self.changeOrderButton = self.pagingViewController.changeOrderButton;
+        self.changeOrderButton.hidden = NO;
+        self.changeOrderButton.title = @"Change order";
+//        [self.changeOrderButton bind:NSEnabledBinding
+//                            toObject:self.arrayController
+//                         withKeyPath:@"selection.@count"
+//                             options:nil];
+
+        self.removeOrderButton = self.pagingViewController.removeOrderButton;
+        self.removeOrderButton.hidden = NO;
+        self.removeOrderButton.title = @"Remove order";
     }
 
     {
@@ -246,8 +263,8 @@
 - (void)removeOrderButtonPressed {
     NSArray <SOXMyOrderBook_BitcoinDE_Data *> *selectedDatas = self.arrayController.selectedObjects;
     if (selectedDatas.count > 0) {
-        self.changeButton.enabled = NO;
-        self.removeButton.enabled = NO;
+        self.changeOrderButton.enabled = NO;
+        self.removeOrderButton.enabled = NO;
         [self enableSpinningWheel];
 
         self.countOfMyOrderBook_BitcoinDE_DatasToDelete = selectedDatas.count;

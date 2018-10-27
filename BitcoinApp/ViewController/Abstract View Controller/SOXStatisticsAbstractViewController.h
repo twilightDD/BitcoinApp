@@ -8,6 +8,6 @@
 
 #import "SOXPagingAbstractViewController.h"
 
-@interface SOXStatisticsAbstractViewController : SOXPagingAbstractViewController
+@interface SOXStatisticsAbstractViewController : SOXPagingAbstractViewController <NSTableViewDelegate>
 
 @end

@@ -68,6 +68,11 @@
 #pragma mark - Public methods
 - (void)setupUI {
     [self resetPagingButtons];
+
+    // hide buttons not needed in every view
+    self.changeOrderButton.hidden = YES;
+    self.removeOrderButton.hidden = YES;
+
     { // date picker
         self.startDateTextField.stringValue = @"Start date";
         self.startDateDatePicker.dateValue  = self.selectedStartDate;
