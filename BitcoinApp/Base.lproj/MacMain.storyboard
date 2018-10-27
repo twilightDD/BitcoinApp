@@ -2318,7 +2318,7 @@
                                 </connections>
                             </containerView>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="Wss-SR-un0">
-                                <rect key="frame" x="528" y="42" width="283" height="351"/>
+                                <rect key="frame" x="536" y="42" width="275" height="351"/>
                                 <connections>
                                     <segue destination="nDB-rg-Ckf" kind="embed" id="yZH-0k-5oh"/>
                                 </connections>
@@ -2327,7 +2327,7 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Wss-SR-un0" secondAttribute="trailing" constant="8" id="0Hy-14-S4s"/>
                             <constraint firstItem="BC2-ce-GYi" firstAttribute="trailing" secondItem="djv-Fe-LAU" secondAttribute="trailing" id="4ok-xq-Z4m"/>
-                            <constraint firstItem="Wss-SR-un0" firstAttribute="leading" secondItem="BC2-ce-GYi" secondAttribute="trailing" constant="8" id="AJs-oL-ovD"/>
+                            <constraint firstItem="Wss-SR-un0" firstAttribute="leading" secondItem="BC2-ce-GYi" secondAttribute="trailing" constant="16" id="AJs-oL-ovD"/>
                             <constraint firstItem="dVf-cd-9K7" firstAttribute="leading" secondItem="d9Y-Go-gwW" secondAttribute="leading" constant="20" symbolic="YES" id="AwV-Ul-N11"/>
                             <constraint firstItem="CJl-2j-y9J" firstAttribute="trailing" secondItem="dVf-cd-9K7" secondAttribute="trailing" id="DS4-m5-8kU"/>
                             <constraint firstItem="dVf-cd-9K7" firstAttribute="top" secondItem="d9Y-Go-gwW" secondAttribute="top" constant="8" id="GHS-ea-bq1"/>
@@ -3102,7 +3102,7 @@ Gw
                                 </connections>
                             </containerView>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="eAJ-eS-IHL">
-                                <rect key="frame" x="529" y="42" width="185" height="447"/>
+                                <rect key="frame" x="537" y="42" width="177" height="447"/>
                                 <connections>
                                     <segue destination="nDB-rg-Ckf" kind="embed" id="yul-UQ-F1Q"/>
                                 </connections>
@@ -3113,7 +3113,7 @@ Gw
                             <constraint firstAttribute="bottom" secondItem="eAJ-eS-IHL" secondAttribute="bottom" constant="42" id="Of3-4E-0Yz"/>
                             <constraint firstItem="4oR-2z-iOV" firstAttribute="top" secondItem="q6P-13-wzZ" secondAttribute="top" id="PrQ-FB-imn"/>
                             <constraint firstItem="4oR-2z-iOV" firstAttribute="trailing" secondItem="q6P-13-wzZ" secondAttribute="trailing" id="R5w-FU-DRf"/>
-                            <constraint firstItem="eAJ-eS-IHL" firstAttribute="leading" secondItem="fGp-j1-fNK" secondAttribute="trailing" constant="8" id="R6e-jS-dgk"/>
+                            <constraint firstItem="eAJ-eS-IHL" firstAttribute="leading" secondItem="fGp-j1-fNK" secondAttribute="trailing" constant="16" id="R6e-jS-dgk"/>
                             <constraint firstItem="lm7-N0-jV0" firstAttribute="bottom" secondItem="4oR-2z-iOV" secondAttribute="bottom" id="UeB-92-DfX"/>
                             <constraint firstItem="fGp-j1-fNK" firstAttribute="leading" secondItem="KG1-ac-oC6" secondAttribute="leading" constant="20" id="WO2-2V-g34"/>
                             <constraint firstItem="lm7-N0-jV0" firstAttribute="trailing" secondItem="4oR-2z-iOV" secondAttribute="trailing" id="ZWe-Qe-3BD"/>
@@ -4378,14 +4378,14 @@ Gw
                                 </connections>
                             </containerView>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="qpo-0T-6wa">
-                                <rect key="frame" x="828" y="42" width="254" height="398"/>
+                                <rect key="frame" x="836" y="42" width="246" height="398"/>
                                 <connections>
                                     <segue destination="nDB-rg-Ckf" kind="embed" id="YNG-my-y7e"/>
                                 </connections>
                             </containerView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="qpo-0T-6wa" firstAttribute="leading" secondItem="0NQ-8g-NTk" secondAttribute="trailing" constant="8" id="661-w0-IG2"/>
+                            <constraint firstItem="qpo-0T-6wa" firstAttribute="leading" secondItem="0NQ-8g-NTk" secondAttribute="trailing" constant="16" id="661-w0-IG2"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Njb-t7-0sg" secondAttribute="trailing" constant="20" symbolic="YES" id="6i1-au-cfz"/>
                             <constraint firstAttribute="bottom" secondItem="qpo-0T-6wa" secondAttribute="bottom" constant="42" id="9Ob-an-HDa"/>
                             <constraint firstItem="HCw-4V-obv" firstAttribute="trailing" secondItem="rBg-iH-I78" secondAttribute="trailing" id="Bl2-ua-p3X"/>
