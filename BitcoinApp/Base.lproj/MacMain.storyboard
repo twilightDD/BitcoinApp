@@ -4443,14 +4443,14 @@ Gw
             <objects>
                 <viewController id="nDB-rg-Ckf" customClass="SOXPagingViewController" sceneMemberID="viewController">
                     <view key="view" id="E3o-4c-lX0">
-                        <rect key="frame" x="0.0" y="0.0" width="185" height="476"/>
+                        <rect key="frame" x="0.0" y="0.0" width="198" height="476"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="89s-RM-RkM">
-                                <rect key="frame" x="0.0" y="0.0" width="185" height="476"/>
+                                <rect key="frame" x="0.0" y="0.0" width="198" height="476"/>
                                 <subviews>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="eWy-9s-Qgd">
-                                        <rect key="frame" x="0.0" y="326" width="185" height="150"/>
+                                        <rect key="frame" x="0.0" y="326" width="198" height="150"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5S9-8x-7RA">
                                                 <rect key="frame" x="-2" y="30" width="81" height="17"/>
@@ -4574,7 +4574,7 @@ Gw
                                         </constraints>
                                     </customView>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VQY-Hv-5wf">
-                                        <rect key="frame" x="-6" y="59" width="197" height="32"/>
+                                        <rect key="frame" x="7" y="59" width="197" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="185" id="hOy-gI-tyl"/>
                                         </constraints>
@@ -4587,7 +4587,7 @@ Gw
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YZT-bn-HTZ">
-                                        <rect key="frame" x="58" y="26" width="133" height="32"/>
+                                        <rect key="frame" x="71" y="26" width="133" height="32"/>
                                         <buttonCell key="cell" type="push" title="Load next page" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gWd-RQ-VHy">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -4597,7 +4597,7 @@ Gw
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wmN-wb-h5d">
-                                        <rect key="frame" x="85" y="-7" width="106" height="32"/>
+                                        <rect key="frame" x="98" y="-7" width="106" height="32"/>
                                         <buttonCell key="cell" type="push" title="Fetch Data" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jaW-eH-Xev">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -4627,7 +4627,7 @@ Gw
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6TH-MB-LI0">
-                                        <rect key="frame" x="111" y="278" width="80" height="32"/>
+                                        <rect key="frame" x="124" y="278" width="80" height="32"/>
                                         <buttonCell key="cell" type="push" title="Export" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ixb-FN-moe">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
