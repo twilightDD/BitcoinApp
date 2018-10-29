@@ -207,7 +207,7 @@
     NSSavePanel *savePanel = [NSSavePanel savePanel];
     savePanel.allowedFileTypes = @[@"csv"];
     savePanel.nameFieldStringValue = [self suggestedExportFileName];
-    
+
     [savePanel beginWithCompletionHandler:^(NSModalResponse result) {
         if (result == NSFileHandlingPanelOKButton) {
             NSError *error = nil;
@@ -217,8 +217,9 @@
                             encoding:NSUTF16StringEncoding
                                error:&error];
             if (error) {
-                // TODO: Present save error
-                NSLog(@"%@", error.localizedDescription);
+                NSLog(@"File save error %@", error.localizedDescription);
+                NSAlert *alert = [NSAlert alertWithError:error];
+                [alert runModal];
             }
         }
     }];
