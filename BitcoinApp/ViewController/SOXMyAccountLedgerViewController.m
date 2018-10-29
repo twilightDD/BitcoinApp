@@ -111,4 +111,10 @@
     }
 }
 
+#pragma mark - SOXExportDataProtocol
+- (NSString *)suggestedExportFileName {
+    return @"AccountLedger";
+}
+
+
 @end

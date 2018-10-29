@@ -300,4 +300,9 @@
     }
 }
 
+#pragma mark - SOXExportDataProtocol
+- (NSString *)suggestedExportFileName {
+    return @"ActiveOrders";
+}
+
 @end

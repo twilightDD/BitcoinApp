@@ -9,11 +9,15 @@
 #import "SOXAbstractViewController.h"
 #import "SOXPagingViewController.h"
 
-
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
+@protocol SOXExportDataProtocol
 
-@interface SOXPagingAbstractViewController : SOXAbstractViewController <SOXPagingViewControllerProtocol>
+- (NSString *)suggestedExportFileName;
+
+@end
+
+@interface SOXPagingAbstractViewController : SOXAbstractViewController <SOXPagingViewControllerProtocol, SOXExportDataProtocol>
 
 
 @end

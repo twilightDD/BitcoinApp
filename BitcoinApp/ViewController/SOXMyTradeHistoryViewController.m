@@ -133,4 +133,9 @@
     }
 }
 
+#pragma mark - SOXExportDataProtocol
+- (NSString *)suggestedExportFileName {
+    return @"TradeHistory";
+}
+
 @end

@@ -206,7 +206,8 @@
 - (void)saveString:(NSString *)stringToSave {
     NSSavePanel *savePanel = [NSSavePanel savePanel];
     savePanel.allowedFileTypes = @[@"csv"];
-
+    savePanel.nameFieldStringValue = [self suggestedExportFileName];
+    
     [savePanel beginWithCompletionHandler:^(NSModalResponse result) {
         if (result == NSFileHandlingPanelOKButton) {
             NSError *error = nil;
@@ -216,9 +217,9 @@
                             encoding:NSUTF16StringEncoding
                                error:&error];
             if (error) {
+                // TODO: Present save error
                 NSLog(@"%@", error.localizedDescription);
             }
-
         }
     }];
 }
@@ -264,4 +265,11 @@
 - (void)pagingViewControllerDidLoad {
     NSAssert(NO, @"Implement in subclass");
 }
+
+#pragma mark - Subclass methods
+- (NSString *)suggestedExportFileName {
+    NSAssert(NO, @"Implement in subclass");
+    return nil;
+}
+
 @end
