@@ -346,16 +346,16 @@
 - (void)addBuyBacklogForRemainingBitcoinAmountToBuy:(NSDecimalNumber *)remainingBitcoinAmountToBuy
                                        forSoldPrice:(NSDecimalNumber *)soldPrice {
     return;
-    [SOXAutomaticTradingCore missedImplementation:
-     @"- (void)addBuyBacklogForRemainingBitcoinAmountToBuy:(NSDecimalNumber *)remainingBitcoinAmountToBuy "
-     "forSoldPrice:(NSDecimalNumber *)soldPrice"];
+//    [SOXAutomaticTradingCore missedImplementation:
+//     @"- (void)addBuyBacklogForRemainingBitcoinAmountToBuy:(NSDecimalNumber *)remainingBitcoinAmountToBuy "
+//     "forSoldPrice:(NSDecimalNumber *)soldPrice"];
 }
 - (void)addSellBacklogForRemainingBitcoinAmountToSell:(NSDecimalNumber *)remainingBitcoinAmountToSell
                                        forBoughtPrice:(NSDecimalNumber *)boughtPrice {
     return;
-    [SOXAutomaticTradingCore missedImplementation:
-     @"- (void)addSellBacklogForRemainingBitcoinAmountToSell:(NSDecimalNumber *)remainingBitcoinAmountToSell "
-     "forBoughtPrice:(NSDecimalNumber *)boughtPrice"];
+//    [SOXAutomaticTradingCore missedImplementation:
+//     @"- (void)addSellBacklogForRemainingBitcoinAmountToSell:(NSDecimalNumber *)remainingBitcoinAmountToSell "
+//     "forBoughtPrice:(NSDecimalNumber *)boughtPrice"];
 }
 
 - (void)createBalanceTradesForBoughtTrades {
@@ -475,6 +475,10 @@
     }
 }
 
+- (void)tryToExecuteBalanceTradesWithParameters:(NSArray *)parametersToExecute
+                                   forOrderType:(BitcoinDE_OrderType)orderType {
+    NSAssert(NO, @"Implement in subclass");
+}
 #pragma mark | Helpers
 - (void)checkForBalanceTradesForBoughtTrades {
     [self informBuyDelegateAboutRunningQueues];

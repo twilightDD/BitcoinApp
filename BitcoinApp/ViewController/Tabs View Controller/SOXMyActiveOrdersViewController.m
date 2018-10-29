@@ -123,7 +123,8 @@
     [self disableSpinningWheel];
 
     if ([answerOfServerRequest valueForKey:ServerAnswerErrorKey]) {
-#warning  enable fetch button
+        [self updateControllerDatasWithDataObjects:nil
+                              andPayloadDictionary:nil];
         return;
     }
     

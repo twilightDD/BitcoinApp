@@ -166,7 +166,6 @@
     }
 
     NSString *startDateString = [SOXFormatters rfc3339GetDateTimeStringDate:startDate];
-#warning HACK!
     NSString *endDateString   = [SOXFormatters rfc3339GetDateTimeStringDate:endDate];
 
     NSNumber *pageNumber = @(page);

@@ -1551,7 +1551,7 @@
                                         <button toolTip="Reload banner data" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="50d-QC-hTs">
                                             <rect key="frame" x="464" y="4" width="20" height="22"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="20" id="HH4-5O-PWu"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="HH4-5O-PWu"/>
                                                 <constraint firstAttribute="height" constant="20" id="oHp-e9-CuD"/>
                                             </constraints>
                                             <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRefreshTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="abx-xQ-LJK">
@@ -1900,6 +1900,7 @@
                             <constraint firstAttribute="bottom" secondItem="PVj-VZ-YfL" secondAttribute="bottom" constant="20" id="jYk-V4-uHd"/>
                             <constraint firstItem="mem-lt-z5X" firstAttribute="centerY" secondItem="PVj-VZ-YfL" secondAttribute="centerY" id="n0I-cF-oRb"/>
                             <constraint firstItem="Gdg-Cq-pHV" firstAttribute="leading" secondItem="49z-8y-L8q" secondAttribute="leading" constant="20" symbolic="YES" id="pZo-XA-Auh"/>
+                            <constraint firstItem="mem-lt-z5X" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Gdg-Cq-pHV" secondAttribute="trailing" constant="12" symbolic="YES" id="qvU-Fd-gRS"/>
                             <constraint firstItem="AaQ-lx-Nnc" firstAttribute="bottom" secondItem="UdF-MR-Kxs" secondAttribute="bottom" id="rao-PD-AeO"/>
                             <constraint firstItem="7Rj-Aw-xee" firstAttribute="leading" secondItem="49z-8y-L8q" secondAttribute="leading" constant="20" id="w99-et-2f6"/>
                         </constraints>
@@ -1930,7 +1931,7 @@
         <scene sceneID="FDl-hu-vIc">
             <objects>
                 <viewController id="q7D-iu-Op3" customClass="SOXMyActiveOrdersViewController" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="d9Y-Go-gwW">
+                    <view key="view" id="d9Y-Go-gwW">
                         <rect key="frame" x="0.0" y="0.0" width="729" height="401"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -3159,11 +3160,11 @@ Gw
             <objects>
                 <viewController storyboardIdentifier="CreateNewOrderIdentifier" id="UMb-sB-suB" customClass="SOXCreateNewOrderViewController" sceneMemberID="viewController">
                     <view key="view" id="1na-89-Udh">
-                        <rect key="frame" x="0.0" y="0.0" width="662" height="336"/>
+                        <rect key="frame" x="0.0" y="0.0" width="661" height="336"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="aWc-gU-d53">
-                                <rect key="frame" x="18" y="297" width="626" height="19"/>
+                                <rect key="frame" x="18" y="297" width="625" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="750" constant="100" id="GVl-e8-flT"/>
                                 </constraints>
@@ -3275,7 +3276,7 @@ Gw
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="w8c-KB-of4">
-                                <rect key="frame" x="477" y="13" width="171" height="32"/>
+                                <rect key="frame" x="476" y="13" width="171" height="32"/>
                                 <buttonCell key="cell" type="push" title="Create Buy/Sell Order" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="db6-Ic-HPL">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -3307,9 +3308,9 @@ Gw
                                 </connections>
                             </button>
                             <box horizontalCompressionResistancePriority="1000" title="Options" translatesAutoresizingMaskIntoConstraints="NO" id="kfE-Jk-12m">
-                                <rect key="frame" x="380" y="59" width="265" height="230"/>
+                                <rect key="frame" x="380" y="59" width="264" height="230"/>
                                 <view key="contentView" id="Yxd-wM-TZl">
-                                    <rect key="frame" x="2" y="2" width="261" height="213"/>
+                                    <rect key="frame" x="2" y="2" width="260" height="213"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="5tt-E2-Y2e">
@@ -3363,9 +3364,9 @@ Gw
                                             </connections>
                                         </button>
                                         <datePicker verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Mzv-eg-HWw">
-                                            <rect key="frame" x="101" y="20" width="141" height="148"/>
+                                            <rect key="frame" x="101" y="20" width="140" height="148"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="140" id="tLy-2N-SVO"/>
+                                                <constraint firstAttribute="width" constant="139" id="tLy-2N-SVO"/>
                                                 <constraint firstAttribute="height" constant="148" id="wQM-vF-Fgv"/>
                                             </constraints>
                                             <datePickerCell key="cell" borderStyle="bezel" alignment="left" datePickerStyle="clockAndCalendar" id="0hB-Uj-F6T">
@@ -3437,7 +3438,7 @@ Gw
                                 </view>
                             </box>
                             <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3zw-PC-P9q">
-                                <rect key="frame" x="96" y="23" width="381" height="17"/>
+                                <rect key="frame" x="96" y="23" width="380" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="84" id="4zR-Ns-Mf6"/>
                                 </constraints>
@@ -3514,7 +3515,7 @@ Gw
                 <customObject id="X15-X3-ZW6" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="ELZ-ho-4GV"/>
             </objects>
-            <point key="canvasLocation" x="-2004" y="2156"/>
+            <point key="canvasLocation" x="-1970" y="2177.5"/>
         </scene>
         <!--Execute Trade View Controller-->
         <scene sceneID="z37-1q-W32">
@@ -4091,8 +4092,8 @@ Gw
         <scene sceneID="GHY-7L-bja">
             <objects>
                 <viewController id="TPt-gD-CmY" customClass="SOXMyTradeHistoryViewController" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="O2L-9r-szs">
-                        <rect key="frame" x="0.0" y="0.0" width="1049" height="448"/>
+                    <view key="view" id="O2L-9r-szs">
+                        <rect key="frame" x="0.0" y="0.0" width="1029" height="448"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBg-iH-I78">
@@ -4576,7 +4577,7 @@ Gw
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VQY-Hv-5wf">
                                         <rect key="frame" x="7" y="59" width="197" height="32"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="185" id="hOy-gI-tyl"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="185" id="hOy-gI-tyl"/>
                                         </constraints>
                                         <buttonCell key="cell" type="push" title="Load all (9999 pages left)" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bKf-fp-7gU">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -4993,6 +4994,7 @@ Gw
                             <constraint firstItem="8Pn-gW-UjZ" firstAttribute="top" secondItem="eCx-9e-aa0" secondAttribute="top" constant="20" id="42k-Vt-rqm"/>
                             <constraint firstItem="02B-cx-6kj" firstAttribute="leading" secondItem="eCx-9e-aa0" secondAttribute="leading" constant="20" id="57y-Wt-JiT"/>
                             <constraint firstAttribute="trailing" secondItem="8Pn-gW-UjZ" secondAttribute="trailing" constant="20" id="T5x-Rt-doS"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="02B-cx-6kj" secondAttribute="trailing" constant="20" symbolic="YES" id="XpY-Pj-n8W"/>
                             <constraint firstAttribute="bottom" secondItem="02B-cx-6kj" secondAttribute="bottom" constant="20" id="kQz-LW-aBU"/>
                             <constraint firstItem="02B-cx-6kj" firstAttribute="top" secondItem="d9v-jx-tl0" secondAttribute="bottom" constant="20" id="nMt-Pt-xFT"/>
                             <constraint firstItem="8Pn-gW-UjZ" firstAttribute="leading" secondItem="eCx-9e-aa0" secondAttribute="leading" constant="20" id="wnN-Y1-fHD"/>
@@ -5037,7 +5039,7 @@ Gw
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="U9G-Om-HFU">
                                 <rect key="frame" x="67" y="5" width="84" height="17"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="7AJ-gg-n2v"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="7AJ-gg-n2v"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="-0,12345678" id="Dnd-aq-9GQ">
                                     <font key="font" metaFont="system"/>
@@ -5056,7 +5058,7 @@ Gw
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dfJ-fZ-T5j">
                                 <rect key="frame" x="245" y="5" width="89" height="17"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="85" id="PUI-rH-vk2"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="85" id="PUI-rH-vk2"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="999999,99 €" id="7Sa-Xz-VrH">
                                     <font key="font" metaFont="system"/>
@@ -5075,7 +5077,7 @@ Gw
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FDe-x9-6tH">
                                 <rect key="frame" x="405" y="5" width="89" height="17"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="85" id="GJq-z2-cSA"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="85" id="GJq-z2-cSA"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="999999,99 €" id="040-lt-358">
                                     <font key="font" metaFont="system"/>
@@ -5092,9 +5094,9 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hbz-rK-Qrb">
-                                <rect key="frame" x="598" y="5" width="79" height="17"/>
+                                <rect key="frame" x="598" y="5" width="84" height="17"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="75" id="DPA-QF-bLU"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="DPA-QF-bLU"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="0,12345678" id="zlv-cZ-bhF">
                                     <font key="font" metaFont="system"/>
@@ -5148,9 +5150,9 @@ Gw
         <image name="NSRefreshTemplate" width="11" height="15"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KrD-O9-iXN"/>
+        <segue reference="9rv-7D-aVO"/>
         <segue reference="gQD-Dm-8uX"/>
-        <segue reference="yZH-0k-5oh"/>
+        <segue reference="YNG-my-y7e"/>
         <segue reference="Fh9-LT-kpw"/>
     </inferredMetricsTieBreakers>
 </document>

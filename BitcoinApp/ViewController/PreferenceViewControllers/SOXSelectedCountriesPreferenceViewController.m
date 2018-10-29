@@ -57,7 +57,6 @@
 
     CGFloat basicX = 20;
     CGFloat basicY = 20;
-    CGFloat deltaX = 58;
     CGFloat deltaY = 24;
     CGFloat height = 16;
     CGFloat width = 190;

@@ -88,8 +88,7 @@
                                  createPotentialParameters:(BOOL)createPotentialParameters;
 
 - (void)tryToExecuteBalanceTradesWithParameters:(NSArray *)parametersToExecute
-                                   forOrderType:(BitcoinDE_OrderType)orderType;
-
+                                   forOrderType:(BitcoinDE_OrderType)orderType ;
 #pragma mark - Math Helpers
 - (NSDecimalNumber *)sumOfBitcoinsOfParameters:(NSArray <NSDictionary *>*)parameter;
 
