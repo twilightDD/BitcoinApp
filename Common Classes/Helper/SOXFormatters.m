@@ -299,15 +299,6 @@
     return rfc;
 }
 
-+ (NSString*)rfc3339DateTimeStringDate:(NSDate *)date addHours:(NSInteger)hoursToAdd {
-    if (!date) {
-        date = [NSDate date];
-    }
-    NSDate *dateByAddedHours = [self dateFromDate:date byAddingHours:hoursToAdd];
-    NSString *rfc = [[SOXFormatters dateFormatterEncodeRFC3339] stringFromDate:dateByAddedHours];
-    return rfc;
-}
-
 + (NSString *)shortDateShortTimeStringForDate:(NSDate *)date {
     if (!date) {
         return @"";
@@ -449,24 +440,6 @@
     NSDate *dateGregorian = [gregorianCalendar dateFromComponents:dateComponents];
 
     return dateGregorian;
-}
-
-#warning HACK!
-+ (NSDate *)dateFromDate:(NSDate *)date
-           byAddingHours:(NSInteger )hoursToAdd {
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *inputDateComponents = [calendar components:(NSCalendarUnitDay
-                                                                  | NSCalendarUnitMonth
-                                                                  | NSCalendarUnitYear
-                                                                  | NSCalendarUnitHour
-                                                                  | NSCalendarUnitMinute
-                                                                  | NSCalendarUnitSecond)
-                                                        fromDate:date];
-    inputDateComponents.hour = inputDateComponents.hour + hoursToAdd;
-
-    NSDate *dateFromDate = [self dateGregorianFromDateComponents:inputDateComponents];
-    
-    return dateFromDate;
 }
 
 @end
