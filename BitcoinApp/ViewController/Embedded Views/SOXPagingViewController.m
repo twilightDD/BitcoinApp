@@ -128,14 +128,6 @@
                                           , pageData.pageLast - pageData.pageCurrent];
 }
 
-// on accountLedger we need a different enddate (API fuck up)
-- (void)setSeparateEndDate:(NSDate *)selectedEndDate {
-    if (selectedEndDate) {
-        self.selectedEndDate = selectedEndDate;
-        self.endDateDatePicker.dateValue = selectedEndDate;
-    }
-}
-
 #pragma mark - Action methods
 #pragma mark Settings
 - (IBAction)popUpButtonActions:(NSPopUpButton *)sender {

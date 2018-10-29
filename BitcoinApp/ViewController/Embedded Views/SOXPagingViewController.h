@@ -49,5 +49,5 @@
 - (void)resetPagingButtons;
 - (void)updatePagingButtonsWithPageData:(SOXPage_BitcoinDE_Data *)pageData
                   whileLoadingMorePages:(BOOL)whileLoadingMorePages ;
-- (void)setSeparateEndDate:(NSDate *)selectedEndDate;
+
 @end

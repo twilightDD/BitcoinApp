@@ -48,6 +48,15 @@
                                             withParameter:parameter
                                                 respondTo:self];
 }
+#pragma mark - Manual getters
+- (NSDate *)selectedEndDate {
+    // account ledger allows no future date (API flaw)
+    NSDate *selectedEndDate = [super selectedEndDate];
+    selectedEndDate = [selectedEndDate earlierDate:[SOXFormatters dateBeforeMidnightForDate:[NSDate dateWithTimeIntervalSinceNow:-86400]]];
+
+    return selectedEndDate;
+
+}
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
 - (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest {
@@ -86,10 +95,10 @@
     }
 
     // AccountLedger allows no date in future or today
-    {
-        NSDate *endDate = [SOXFormatters dateBeforeMidnightForDate:[NSDate dateWithTimeIntervalSinceNow:-86400]];
-        [self.pagingViewController setSeparateEndDate:endDate];
-    }
+//    {
+//        NSDate *endDate = [SOXFormatters dateBeforeMidnightForDate:[NSDate dateWithTimeIntervalSinceNow:-86400]];
+//        [self.pagingViewController setSeparateEndDate:endDate];
+//    }
 }
 
 - (void)popupButtonAction:(NSPopUpButton *)sender {
