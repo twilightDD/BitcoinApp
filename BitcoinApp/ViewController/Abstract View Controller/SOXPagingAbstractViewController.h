@@ -13,6 +13,7 @@
 
 @protocol SOXExportDataProtocol
 
+- (void)copy:(id)sender;
 - (NSString *)suggestedExportFileName;
 
 @end

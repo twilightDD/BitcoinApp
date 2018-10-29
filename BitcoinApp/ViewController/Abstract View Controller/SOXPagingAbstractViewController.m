@@ -15,6 +15,7 @@
 
 #import "SOXKeys_BitcoinDE.h"
 #import "SOXPage_BitcoinDE_Data.h"
+#import "SOXMyTrades_BitcoinDE_Data.h"
 
 @interface SOXPagingAbstractViewController ()
 
@@ -188,6 +189,10 @@
                         else if ([columnTitle containsString:@"orderInformation_state"]) {
                             BitcoinDE_OrderStateType orderStateType = [(NSNumber *)valueForColumnTitle integerValue];
                             valueForColumnTitle = [SOXMarket_BitcoinDE_DefTypes orderStateTypeStringForOrderstateType:orderStateType];
+                        }
+                        else if ([columnTitle containsString:@"state"]) {
+                            BitcoinDE_MyTradeHistoryParameter_TradeStateType tradeStateType = [(NSNumber *)valueForColumnTitle integerValue];
+                            valueForColumnTitle = [SOXMyTrades_BitcoinDE_Data titleForTradeStateType:tradeStateType];
                         }
                         else {
                             valueForColumnTitle = [valueForColumnTitle stringValue];
