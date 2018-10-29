@@ -86,22 +86,24 @@
 }
 
 - (void)setupPreferenceWindow {
-
+    
+    SOXDebugPreferencesViewController * debugPreferencesViewController = [[SOXDebugPreferencesViewController alloc] initWithNibName:@"SOXDebugPreferencesViewController" bundle:nil];
     // Keys and Secrets
     SOXKeysAndSecretPreferenceViewController *keyAndSecretPreferencesViewController
     = [[SOXKeysAndSecretPreferenceViewController alloc] initWithNibName:@"SOXKeysAndSecretPreferenceViewController"
                                                                  bundle:nil];
-
+    
     SOXSelectedCountriesPreferenceViewController *selectedCountriesPreferenceViewController
     = [[SOXSelectedCountriesPreferenceViewController alloc] initWithNibName:@"SOXSelectedCountriesPreferenceViewController"
                                                                      bundle:nil];
-
-    SOXDebugPreferencesViewController * debugPreferencesViewController = [[SOXDebugPreferencesViewController alloc] initWithNibName:@"SOXDebugPreferencesViewController" bundle:nil];
-
+    
+    
+    
     NSArray *subPreferenceControllers = @[
+                                          debugPreferencesViewController,
                                           keyAndSecretPreferencesViewController,
                                           selectedCountriesPreferenceViewController,
-                                          debugPreferencesViewController,
+
                                           ];
 
     MASPreferencesWindowController *masPreferencesWindowController

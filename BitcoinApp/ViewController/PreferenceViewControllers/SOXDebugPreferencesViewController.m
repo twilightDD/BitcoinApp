@@ -27,4 +27,10 @@
 - (NSString *)toolbarItemLabel {
     return @"Debug";
 }
+
+- (NSImage *)toolbarItemImage {
+    NSImage *image = [NSImage imageNamed:NSImageNamePreferencesGeneral];
+    return image;
+}
+
 @end

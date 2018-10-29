@@ -158,7 +158,7 @@
 }
 
 - (NSImage *)toolbarItemImage {
-    NSImage *image = [NSImage imageNamed:@"countries"];
+    NSImage *image = [NSImage imageNamed:NSImageNameNetwork];
     return image;
 }
 

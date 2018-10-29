@@ -186,7 +186,7 @@
 }
 
 - (NSImage *)toolbarItemImage {
-    NSImage *image = [NSImage imageNamed:@"keyAndSecret"];
+    NSImage *image = [NSImage imageNamed:NSImageNameUserAccounts];
     return image;
 }
 
