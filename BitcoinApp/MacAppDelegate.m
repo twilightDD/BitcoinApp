@@ -67,8 +67,6 @@
                                                                                windowTitle:@"Errors"];
         self.eventWindowController = [[SOXLogWindowController alloc] initWithWindowNibName:SOXLogWindowControllerNibKey
                                                                                windowTitle:@"Events"];
-//        self.preferenceWindowController = [[SOXMainPreferencesWindowController alloc] initWithWindowNibName:@"SOXMainPreferencesWindowController"
-//                                                                                                windowTitle:@"Preferences"];
     }
 
     // startup Preferences core
