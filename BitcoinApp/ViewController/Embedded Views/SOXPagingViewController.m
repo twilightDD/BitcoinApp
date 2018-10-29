@@ -92,8 +92,8 @@
     self.fetchDataButton.hidden = NO;
     self.fetchDataButton.enabled = YES;
     self.fetchDataButton.title = @"Fetch data";
-    self.loadMoreTradeDatasButton.hidden = YES;
-    self.loadAllTradeDatasButton.hidden = YES;
+    self.loadMoreTradeDatasButton.enabled = NO;
+    self.loadAllTradeDatasButton.enabled = NO;
 }
 
 - (void)loadingPagingButton {
@@ -115,27 +115,17 @@
         self.loadMoreTradeDatasButton.enabled = NO;
     }
     else {
-        self.loadAllTradeDatasButton.enabled = YES;
-        self.loadMoreTradeDatasButton.enabled = YES;
+        // hide buttons, if needed
+        BOOL enableLoadMoreTradDatasButton = self.delegate.currentPage < pageData.pageLast;
+        self.loadAllTradeDatasButton.enabled = enableLoadMoreTradDatasButton;
+        self.loadMoreTradeDatasButton.enabled = enableLoadMoreTradDatasButton;
         self.fetchDataButton.enabled = YES;
         self.fetchDataButton.title = @"Fetch data";
     }
 
-    // hide buttons, if needed
-    BOOL enableLoadMoreTradDatasButton = self.delegate.currentPage != pageData.pageLast;
-    if (enableLoadMoreTradDatasButton) {
-        self.loadAllTradeDatasButton.hidden = NO;
-        if (pageData) {
-            self.loadAllTradeDatasButton.title = [NSString stringWithFormat:@"Load all (%ti pages left)"
-                                                  , pageData.pageLast - pageData.pageCurrent];
-        }
-        self.loadMoreTradeDatasButton.hidden = NO;
-    }
-    else {
-        self.loadMoreTradeDatasButton.hidden = YES;
-        self.loadAllTradeDatasButton.hidden = YES;
-        self.fetchDataButton.title = @"Fetch data";
-    }
+
+    self.loadAllTradeDatasButton.title = [NSString stringWithFormat:@"Load all (%ti pages left)"
+                                          , pageData.pageLast - pageData.pageCurrent];
 }
 
 // on accountLedger we need a different enddate (API fuck up)

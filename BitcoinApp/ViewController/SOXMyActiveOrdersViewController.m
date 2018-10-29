@@ -217,12 +217,12 @@
         self.changeOrderButton = self.pagingViewController.changeOrderButton;
         self.changeOrderButton.hidden = NO;
         self.changeOrderButton.enabled = NO;
-        self.changeOrderButton.title = @"Change order";
+        self.changeOrderButton.title = @"Change";
 
         self.removeOrderButton = self.pagingViewController.removeOrderButton;
         self.removeOrderButton.hidden = NO;
         self.removeOrderButton.enabled = NO;
-        self.removeOrderButton.title = @"Remove order";
+        self.removeOrderButton.title = @"Remove";
     }
 
     {
