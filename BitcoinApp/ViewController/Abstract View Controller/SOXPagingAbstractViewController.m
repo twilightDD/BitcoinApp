@@ -135,8 +135,7 @@
 }
 
 #pragma mark Export
-- (void)exportButtonPressed {
-    // get columnTitles
+- (NSString *)exportString {
     NSArray <NSString *> *columnTitles = [self.tableView.tableColumns valueForKey:@"identifier"];
     NSUInteger columnTitlesCount = columnTitles.count - 1;
 
@@ -161,18 +160,34 @@
                 if (valueForColumnTitle) {
                     // convert to string, if needed
                     if ([valueForColumnTitle isKindOfClass:[NSNumber class]]) {
-                        if ([columnTitle containsString:@"volume"]
+                        if ([columnTitle containsString:@"orderInformation_currencyType"]) {
+                            BitcoinDE_CurrencyType currencyType = [(NSNumber *)valueForColumnTitle integerValue];
+                            valueForColumnTitle = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:currencyType];
+                        }
+                        else if ([columnTitle containsString:@"volume"]
                             || [columnTitle containsString:@"price"]
                             || [columnTitle containsString:@"Price"]
-                            || [columnTitle containsString:@"Eur"]) {
+                            || [columnTitle containsString:@"Eur"]
+                            || [columnTitle containsString:@"orderInformation_minVolume"]
+                            || [columnTitle containsString:@"orderInformation_maxVolume"]) {
                             valueForColumnTitle = [SOXFormatters currencyStringForNumber:valueForColumnTitle
                                                                             roundingMode:NSNumberFormatterRoundHalfEven];
                         }
                         else if ([columnTitle containsString:@"amount"]
                                  || [columnTitle containsString:@"BTC"]
                                  || [columnTitle containsString:@"Cash"]
-                                 || [columnTitle containsString:@"Balance"]) {
+                                 || [columnTitle containsString:@"Balance"]
+                                 || [columnTitle containsString:@"orderInformation_maxAmount"]
+                                 || [columnTitle containsString:@"orderInformation_minAmount"] ) {
                             valueForColumnTitle = [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:valueForColumnTitle];
+                        }
+                        else if ([columnTitle containsString:@"orderRequirements_onlyKYCFull"]
+                                 || [columnTitle containsString:@"orderInformation_newOrderForRemainingAmount"]) {
+                            valueForColumnTitle = [(NSNumber *)valueForColumnTitle boolValue] ? @"YES" : @"NO";
+                        }
+                        else if ([columnTitle containsString:@"orderInformation_state"]) {
+                            BitcoinDE_OrderStateType orderStateType = [(NSNumber *)valueForColumnTitle integerValue];
+                            valueForColumnTitle = [SOXMarket_BitcoinDE_DefTypes orderStateTypeStringForOrderstateType:orderStateType];
                         }
                         else {
                             valueForColumnTitle = [valueForColumnTitle stringValue];
@@ -196,11 +211,12 @@
             exportString = [exportString stringByAppendingString:@"\n"];
         }
     }];
+    return exportString;
+}
 
-    [self addToPasteBoard:exportString];
-
+- (void)exportButtonPressed {
+    NSString * exportString = [self exportString];
     [self saveString:exportString];
-
 }
 
 - (void)saveString:(NSString *)stringToSave {
@@ -249,13 +265,19 @@
     [self loadNextPage];
 }
 
-#pragma - Pasteboard
+#pragma | Pasteboard
 - (void)addToPasteBoard:(NSString *)pasteboardString {
     NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
     [pasteboard clearContents];
 
     [pasteboard setString:pasteboardString
                   forType:NSPasteboardTypeString];
+}
+
+#pragma mark - Pasteboard handling
+- (void)copy:(id)sender {
+    NSString *exportString = [self exportString];
+    [self addToPasteBoard:exportString];
 }
 
 #pragma mark - SOXPagingViewControllerProtocol

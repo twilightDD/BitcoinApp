@@ -1947,7 +1947,7 @@
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="" editable="NO" width="70" minWidth="10" maxWidth="3.4028234663852886e+38" id="gje-je-9Nf">
+                                                <tableColumn identifier="orderInformation_orderID" editable="NO" width="70" minWidth="10" maxWidth="3.4028234663852886e+38" id="gje-je-9Nf">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="OrderID">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1967,7 +1967,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="40" minWidth="40" maxWidth="1000" id="T6P-2d-aZO">
+                                                <tableColumn identifier="orderInformation_currencyType" editable="NO" width="40" minWidth="40" maxWidth="1000" id="T6P-2d-aZO">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="currency">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1988,7 +1988,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="40" minWidth="40" maxWidth="1000" id="i86-vH-MYd">
+                                                <tableColumn identifier="orderInformation_type" editable="NO" width="40" minWidth="40" maxWidth="1000" id="i86-vH-MYd">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="type">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2008,7 +2008,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="100" minWidth="10" maxWidth="3.4028234663852886e+38" id="9ff-Ke-frs">
+                                                <tableColumn identifier="orderInformation_price" editable="NO" width="100" minWidth="10" maxWidth="3.4028234663852886e+38" id="9ff-Ke-frs">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="price">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2029,7 +2029,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="140" minWidth="10" maxWidth="3.4028234663852886e+38" id="a7f-p9-2VM">
+                                                <tableColumn identifier="orderInformation_maxAmount" editable="NO" width="140" minWidth="10" maxWidth="3.4028234663852886e+38" id="a7f-p9-2VM">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="max_amount">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2051,7 +2051,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="100" minWidth="10" maxWidth="3.4028234663852886e+38" id="CL9-A3-qKx">
+                                                <tableColumn identifier="orderInformation_maxVolume" editable="NO" width="100" minWidth="10" maxWidth="3.4028234663852886e+38" id="CL9-A3-qKx">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="max_volume">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2072,7 +2072,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="140" minWidth="10" maxWidth="3.4028234663852886e+38" id="tWX-0r-NaC">
+                                                <tableColumn identifier="orderInformation_minAmount" editable="NO" width="140" minWidth="10" maxWidth="3.4028234663852886e+38" id="tWX-0r-NaC">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="min_amount">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2094,7 +2094,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="100" minWidth="40" maxWidth="1000" id="1L4-9n-cDS">
+                                                <tableColumn identifier="orderInformation_minVolume" editable="NO" width="100" minWidth="40" maxWidth="1000" id="1L4-9n-cDS">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="min_volume">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2115,7 +2115,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="Btb-GV-QJk">
+                                                <tableColumn identifier="orderInformation_createdAt" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="Btb-GV-QJk">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="created_at">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2136,7 +2136,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="bq1-PX-EAf">
+                                                <tableColumn identifier="orderInformation_endDateTime" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="bq1-PX-EAf">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="end_datetime">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2157,7 +2157,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="ZVP-zp-VTD">
+                                                <tableColumn identifier="orderRequirements_onlyKYCFull" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="ZVP-zp-VTD">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="onlyKYC">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2178,7 +2178,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="eNm-8S-V4A">
+                                                <tableColumn identifier="orderRequirements_minTrustLevel" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="eNm-8S-V4A">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="trustLevel">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2198,7 +2198,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="yiZ-I4-16z">
+                                                <tableColumn identifier="orderInformation_newOrderForRemainingAmount" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="yiZ-I4-16z">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="autoRenew">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2219,7 +2219,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="S4F-Gx-ycJ">
+                                                <tableColumn identifier="orderInformation_state" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="S4F-Gx-ycJ">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="state">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>

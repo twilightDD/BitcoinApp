@@ -40,6 +40,7 @@
 
 - (void)exportButtonPressed;
 - (void)addToPasteBoard:(NSString *)pasteboardString;
+- (NSString *)exportString;
 
 - (void)updatePagingButtons:(NSDictionary *)payloadDictionary;
 - (void)resetTradeDatas; // TODO: Rename
