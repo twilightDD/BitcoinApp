@@ -187,6 +187,11 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
 }
 
 + (void)setActiveCountryCodes:(NSArray <NSString *> *)activeCountryCodes {
+    // for all
+    [self setUserDefaultObject:activeCountryCodes
+                        forKey:OrderViewControllerCountryCodeKey];
+
+    // for orderType and currencyType
     for (BitcoinDE_OrderType orderType = BitcoinDE_BuyOrderType;
          orderType < BitcoinDE_OrderType_EndOfType;
          orderType++) {
@@ -200,6 +205,7 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
                                 forKey:userDefaultKey];
         }
     }
+
 
     // Inform all orderViewControllers of changes in global "active country codes"-list
     [[NSNotificationCenter defaultCenter] postNotificationName:ActiveCountryCodesPreferencesDidChangeNotification
