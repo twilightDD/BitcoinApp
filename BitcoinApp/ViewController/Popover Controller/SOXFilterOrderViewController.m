@@ -7,6 +7,7 @@
 //
 
 #import "SOXFilterOrderViewController.h"
+#import "SOXSelectedCountriesPreferenceViewController.h"
 
 #import "SOXPreferenceCenter.h"
 
@@ -35,55 +36,18 @@
 }
 
 - (void)setupCountryButtons {
+    self.countryButtons  = [SOXSelectedCountriesPreferenceViewController addCountryButtonsToView:self.selectCountriesBox];
+
     NSArray <NSString *> *supportedCountryCodes = [SOXPreferenceCenter supportedCountryCodes];
-    NSArray <NSString *> *supportedCountryNames = [SOXPreferenceCenter supportedCountryNames];
     NSArray <NSString *> *activeCountryCodes = [SOXPreferenceCenter activeCountryCodesforOrderType:self.orderType
                                                                                       currencyType:self.currencyType];
-
-    __block NSMutableArray *countryButtons = [NSMutableArray array];
-
-    CGFloat basicX = 20;
-    CGFloat basicY = -10;
-    CGFloat deltaY = 24;
-    CGFloat height = 16;
-    CGFloat width = 190;
-
-    __block CGFloat currentX = basicX;
-    __block CGFloat currentY = basicY;
-
-    [supportedCountryCodes enumerateObjectsUsingBlock:^(NSString * _Nonnull countryCode
-                                                        , NSUInteger idx
-                                                        , BOOL * _Nonnull stop) {
-        NSString *countryName = [supportedCountryNames objectAtIndex:idx];
-        NSButton *countryButton = [NSButton checkboxWithTitle:countryName
-                                                       target:nil
-                                                       action:nil];
-        countryButton.tag = idx;
+    SEL countryButtonActionSelector = NSSelectorFromString(@"countryButtonAction:");
+    [self.countryButtons enumerateObjectsUsingBlock:^(NSButton * _Nonnull countryButton, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString *countryCode = [supportedCountryCodes objectAtIndex:idx];
         countryButton.state = [activeCountryCodes containsObject:countryCode] ? NSControlStateValueOn : NSControlStateValueOff;
         countryButton.target = self;
-        SEL countryButtonActionSelector = NSSelectorFromString(@"countryButtonAction:");
         countryButton.action = countryButtonActionSelector;
-        
-        // set position
-        {
-            if (idx % 10 == 0
-                && idx != 0) {
-                currentX = currentX + width;
-                currentY = basicY;
-            }
-            currentY = currentY + deltaY;
-            countryButton.frame = CGRectMake(currentX, currentY, width, height);
-        }
-
-        [countryButton needsLayout];
-        [self.selectCountriesBox addSubview:countryButton];
-
-        [countryButtons addObject:countryButton];
-
     }];
-
-    [self.selectCountriesBox needsLayout];
-    self.countryButtons = countryButtons.copy;
 }
 
 - (NSArray <NSString *> *)selectedCountryCodes {

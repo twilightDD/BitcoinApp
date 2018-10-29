@@ -10,4 +10,6 @@
 
 @interface SOXSelectedCountriesPreferenceViewController : SOXAbstractPreferenceViewController
 
++ (NSArray <NSButton *> *)addCountryButtonsToView:(NSView *)view;
+
 @end

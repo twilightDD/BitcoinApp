@@ -46,14 +46,12 @@
     [self setupCountryButtons];
 }
 
-- (void)setupCountryButtons {
-    self.countrySelectionView.autoresizingMask = NSViewWidthSizable;
++ (NSArray <NSButton *> *)addCountryButtonsToView:(NSView *)view {
+    __block NSMutableArray *countryButtons = [NSMutableArray array];
 
     NSArray <NSString *> *supportedCountryCodes = [SOXPreferenceCenter supportedCountryCodes];
     NSArray <NSString *> *supportedCountryNames = [SOXPreferenceCenter supportedCountryNames];
-    NSArray <NSString *> *activeCountryCodes = [SOXPreferenceCenter activeCountryCodes];
 
-    __block NSMutableArray *countryButtons = [NSMutableArray array];
 
     CGFloat basicX = 20;
     CGFloat basicY = 20;
@@ -72,10 +70,8 @@
                                                        target:nil
                                                        action:nil];
         countryButton.tag = idx;
-        countryButton.state = [activeCountryCodes containsObject:countryCode] ? NSControlStateValueOn : NSControlStateValueOff;
-        countryButton.target = self;
-        SEL countryButtonActionSelector = NSSelectorFromString(@"countryButtonAction:");
-        countryButton.action = countryButtonActionSelector;
+    
+
 
         // set position
         {
@@ -87,13 +83,29 @@
             currentY = currentY + deltaY;
             countryButton.frame = CGRectMake(currentX, currentY, width, height);
         }
-        [self.countrySelectionView addSubview:countryButton];
+        [view addSubview:countryButton];
 
         [countryButtons addObject:countryButton];
 
     }];
+    
+    return [countryButtons copy];
+}
 
-    self.countryButtons = countryButtons.copy;
+- (void)setupCountryButtons {
+    self.countrySelectionView.autoresizingMask = NSViewWidthSizable;
+
+    self.countryButtons  = [SOXSelectedCountriesPreferenceViewController addCountryButtonsToView:self.countrySelectionView];
+
+    NSArray <NSString *> *supportedCountryCodes = [SOXPreferenceCenter supportedCountryCodes];
+    NSArray <NSString *> *activeCountryCodes = [SOXPreferenceCenter activeCountryCodes];
+    SEL countryButtonActionSelector = NSSelectorFromString(@"countryButtonAction:");
+    [self.countryButtons enumerateObjectsUsingBlock:^(NSButton * _Nonnull countryButton, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString *countryCode = [supportedCountryCodes objectAtIndex:idx];
+        countryButton.state = [activeCountryCodes containsObject:countryCode] ? NSControlStateValueOn : NSControlStateValueOff;
+        countryButton.target = self;
+        countryButton.action = countryButtonActionSelector;
+    }];
 }
 
 #pragma mark - Private methods
