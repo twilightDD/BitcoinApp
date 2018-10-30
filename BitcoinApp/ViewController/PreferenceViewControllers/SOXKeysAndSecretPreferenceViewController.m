@@ -105,6 +105,7 @@
 - (IBAction)importButtonAction:(NSButton *)sender {
     NSOpenPanel *openPanel = [NSOpenPanel openPanel];
     openPanel.title = @"Load Key and Secrets";
+    openPanel.allowedFileTypes = @[@"txt"];
 
     [openPanel beginWithCompletionHandler:^(NSModalResponse result) {
         if (result == NSFileHandlingPanelOKButton) {
