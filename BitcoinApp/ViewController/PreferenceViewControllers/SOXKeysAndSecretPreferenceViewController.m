@@ -24,6 +24,9 @@
 @property (strong) IBOutlet NSButton *addKeySecretPairButton;
 @property (strong) IBOutlet NSButton *removeKeySecretPairButton;
 
+@property (strong) IBOutlet NSButton *createDemoDataButton;
+@property (strong) IBOutlet NSButton *importButton;
+
 @property (strong) IBOutlet NSButton *saveButton;
 @property (strong) IBOutlet NSButton *dismissButton;
 
@@ -50,6 +53,8 @@
 
         [column.dataCell setFont:font];
     }
+
+    [self setupUI];
 }
 
 - (void)viewWillAppear {
@@ -97,6 +102,19 @@
     [self.tableView deselectAll:nil];
 }
 
+- (IBAction)importButtonAction:(NSButton *)sender {
+    NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+    openPanel.title = @"Load Key and Secrets";
+
+    [openPanel beginWithCompletionHandler:^(NSModalResponse result) {
+        if (result == NSFileHandlingPanelOKButton) {
+            NSURL *selectedURL = openPanel.URL;
+            [self importFileWithURL:selectedURL];
+        }
+    }];
+}
+
+
 - (IBAction)saveButtonAction:(NSButton *)sender {
     BOOL validationResult = [self validateKeysAndSecretsInput];
     if (validationResult) {
@@ -128,6 +146,90 @@
 }
 
 #pragma mark - Private methods
+- (void)setupUI {
+    self.importButton.title = @"Import";
+}
+
+- (void)importFileWithURL:(NSURL *)url {
+    NSError *error = nil;
+
+    NSString *loadedKeysAndSecrets = [NSString stringWithContentsOfFile:url.path
+                                                               encoding:NSUTF8StringEncoding
+                                                                  error:&error];
+    if (error) {
+        NSLog(@"Import keys and secret file - loading error %@", error.localizedDescription);
+        NSAlert *alert = [NSAlert alertWithError:error];
+        [alert runModal];
+    }
+    else {
+        [self importKeysAndSecrets:loadedKeysAndSecrets];
+    }
+}
+
+- (void)importKeysAndSecrets:(NSString *)keysAndSecrets {
+    NSArray <NSString *> *lines = [keysAndSecrets componentsSeparatedByString:@"\n"];
+
+    __block paringErrorOccured = NO;
+    __block NSMutableArray *importedKeysAndSecrets = [NSMutableArray array];
+    __block NSString *errorText = @"";
+    [lines enumerateObjectsUsingBlock:^(NSString * _Nonnull line, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSArray <NSString *> *lineComponents = [line componentsSeparatedByString:@":"];
+        if (lineComponents.count == 2) {
+            NSString *key = [lineComponents objectAtIndex:0];
+            BOOL validateKey = [SOXPreferencesCore validateKey:key];
+            NSString *secret = [lineComponents objectAtIndex:1];
+            BOOL validateSecret = [SOXPreferencesCore validateSecret:secret];
+
+
+            if (validateKey
+                && validateSecret) {
+                NSMutableDictionary *newKeyAndSecretDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                                            key, APIUserKey,
+                                                            secret, APISecretKey,
+                                                            nil];
+
+                [importedKeysAndSecrets addObject:newKeyAndSecretDict];
+            }
+            else {
+                paringErrorOccured = YES;
+                if (validateKey == NO) {
+                    NSString *lineErrorText = [NSString stringWithFormat:@"Line %tu: Error in key\n",idx+1];
+                    errorText = [errorText stringByAppendingString:lineErrorText];
+                }
+                if (validateSecret == NO) {
+                    NSString *lineErrorText = [NSString stringWithFormat:@"Line %tu: Error in secret\n",idx+1];
+                    errorText = [errorText stringByAppendingString:lineErrorText];
+                }
+            }
+        }
+        else {
+            paringErrorOccured = YES;
+            NSString *lineErrorText = [NSString stringWithFormat:@"Line %tu: Format error\n",idx+1];
+            errorText = [errorText stringByAppendingString:lineErrorText];
+        }
+    }];
+
+    BOOL saveToKeychainSuccess = NO;
+    if (paringErrorOccured == NO
+        && importedKeysAndSecrets.count > 0) {
+        [self.keysAndSecrets addObjectsFromArray:importedKeysAndSecrets];
+        [self.keysAndSecretsArrayController rearrangeObjects];
+        saveToKeychainSuccess = [SOXPreferencesCore saveKeysAndSecrets:self.keysAndSecrets];
+    }
+
+    NSAlert *alertPanel = [[NSAlert alloc] init];
+    if (paringErrorOccured == NO) {
+        alertPanel.messageText = @"Import successful";
+        alertPanel.informativeText = [NSString stringWithFormat:@"%tu key secret pairs imported."
+                                      , importedKeysAndSecrets.count];
+    }
+    else {
+        alertPanel.messageText = @"Import went wrong. No key secret pairs imported.";
+        alertPanel.informativeText = errorText;
+    }
+    [alertPanel runModal];
+}
+
 - (BOOL)validateKeysAndSecretsInput {
     __block BOOL validationResult = YES;
 
@@ -161,21 +263,6 @@
             [invalidInputs addObject:invalidColumns];
         }
     }];
-
-    //    if (invalidInputs.count > 0) {
-    //        [invalidInputs enumerateObjectsUsingBlock:^(NSMutableDictionary * _Nonnull dict,
-    //                                                    NSUInteger idx,
-    //                                                    BOOL * _Nonnull stop) {
-    //            NSNumber *row = [dict objectForKey:@"row"];
-    //            id errorInKey = [dict objectForKey:APIUserKey];
-    //            id errorInSecret = [dict objectForKey:APISecretKey];
-    //
-    //
-    //
-    //
-    //        }];
-    //    }
-
 
     return validationResult;
 }
