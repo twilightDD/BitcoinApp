@@ -1072,20 +1072,20 @@
             <objects>
                 <viewController id="QBX-OO-T9K" customClass="SOXBannerViewController" sceneMemberID="viewController">
                     <view key="view" id="XTy-1Y-1hn">
-                        <rect key="frame" x="0.0" y="0.0" width="491" height="137"/>
+                        <rect key="frame" x="0.0" y="0.0" width="489" height="137"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <box boxType="custom" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="sfN-GW-9jc">
-                                <rect key="frame" x="0.0" y="0.0" width="491" height="137"/>
+                                <rect key="frame" x="0.0" y="0.0" width="489" height="137"/>
                                 <view key="contentView" id="1i6-H3-iQT">
-                                    <rect key="frame" x="1" y="1" width="489" height="135"/>
+                                    <rect key="frame" x="1" y="1" width="487" height="135"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="16" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J8O-sa-1lW">
-                                            <rect key="frame" x="8" y="8" width="473" height="119"/>
+                                            <rect key="frame" x="8" y="8" width="471" height="119"/>
                                             <subviews>
                                                 <stackView distribution="fillEqually" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IVL-DT-9oR" userLabel="Coin amount">
-                                                    <rect key="frame" x="0.0" y="27" width="94" height="92"/>
+                                                    <rect key="frame" x="0.0" y="27" width="93" height="92"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EwQ-UD-qia">
                                                             <rect key="frame" x="25" y="73" width="43" height="19"/>
@@ -1197,10 +1197,10 @@
                                                     </customSpacing>
                                                 </stackView>
                                                 <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="BIc-f8-Hqa">
-                                                    <rect key="frame" x="108" y="0.0" width="5" height="119"/>
+                                                    <rect key="frame" x="107" y="0.0" width="5" height="119"/>
                                                 </box>
                                                 <stackView distribution="fillEqually" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rJL-Qj-YBC" userLabel="Fidor">
-                                                    <rect key="frame" x="127" y="27" width="93" height="92"/>
+                                                    <rect key="frame" x="126" y="27" width="93" height="92"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y2W-30-7eg">
                                                             <rect key="frame" x="25" y="73" width="43" height="19"/>
@@ -1211,7 +1211,7 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="16" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZMP-KD-04C">
-                                                            <rect key="frame" x="0.0" y="0.0" width="92" height="65"/>
+                                                            <rect key="frame" x="1" y="0.0" width="92" height="65"/>
                                                             <subviews>
                                                                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fst-V2-Q7l" userLabel="DescriptionStack">
                                                                     <rect key="frame" x="0.0" y="0.0" width="38" height="65"/>
@@ -1314,10 +1314,10 @@
                                                     </customSpacing>
                                                 </stackView>
                                                 <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Tvo-4p-Qde">
-                                                    <rect key="frame" x="234" y="0.0" width="5" height="119"/>
+                                                    <rect key="frame" x="233" y="0.0" width="5" height="119"/>
                                                 </box>
                                                 <stackView distribution="fillEqually" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fOj-HV-tQV" userLabel="RatesStack">
-                                                    <rect key="frame" x="253" y="27" width="94" height="92"/>
+                                                    <rect key="frame" x="252" y="27" width="93" height="92"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zfI-FP-Coh">
                                                             <rect key="frame" x="25" y="73" width="43" height="19"/>
@@ -1432,10 +1432,10 @@
                                                     </customSpacing>
                                                 </stackView>
                                                 <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="TDX-Hr-bOW">
-                                                    <rect key="frame" x="361" y="0.0" width="5" height="119"/>
+                                                    <rect key="frame" x="359" y="0.0" width="5" height="119"/>
                                                 </box>
                                                 <stackView distribution="fillEqually" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aTk-QB-Ksu" userLabel="Coin Value">
-                                                    <rect key="frame" x="380" y="46" width="93" height="73"/>
+                                                    <rect key="frame" x="378" y="46" width="93" height="73"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zNQ-4W-MRR">
                                                             <rect key="frame" x="25" y="54" width="43" height="19"/>
@@ -1446,7 +1446,7 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="16" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C7I-8U-PBB">
-                                                            <rect key="frame" x="0.0" y="0.0" width="92" height="46"/>
+                                                            <rect key="frame" x="1" y="0.0" width="92" height="46"/>
                                                             <subviews>
                                                                 <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sdp-M6-mrQ" userLabel="DescriptionStack">
                                                                     <rect key="frame" x="0.0" y="0.0" width="38" height="46"/>
@@ -1529,6 +1529,20 @@
                                                     </customSpacing>
                                                 </stackView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="kNV-6S-VbL" firstAttribute="width" secondItem="d2m-z0-HUQ" secondAttribute="width" id="7Ey-gG-nSr"/>
+                                                <constraint firstItem="09M-sd-vB3" firstAttribute="width" secondItem="UA5-GU-pca" secondAttribute="width" id="EKU-j3-mR6"/>
+                                                <constraint firstItem="kNV-6S-VbL" firstAttribute="width" secondItem="fst-V2-Q7l" secondAttribute="width" id="KkB-4v-wgV"/>
+                                                <constraint firstItem="Tvo-4p-Qde" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="BIc-f8-Hqa" secondAttribute="trailing" constant="10" id="M28-8a-lor"/>
+                                                <constraint firstItem="Tvo-4p-Qde" firstAttribute="centerX" secondItem="J8O-sa-1lW" secondAttribute="centerX" id="TEN-Xi-gwb"/>
+                                                <constraint firstItem="IVL-DT-9oR" firstAttribute="width" secondItem="aTk-QB-Ksu" secondAttribute="width" id="Uiv-MY-jgo"/>
+                                                <constraint firstItem="TDX-Hr-bOW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Tvo-4p-Qde" secondAttribute="trailing" constant="10" id="Wxp-Mn-XXp"/>
+                                                <constraint firstItem="IVL-DT-9oR" firstAttribute="width" secondItem="fOj-HV-tQV" secondAttribute="width" id="dYY-hL-9TV"/>
+                                                <constraint firstItem="IVL-DT-9oR" firstAttribute="width" secondItem="rJL-Qj-YBC" secondAttribute="width" id="fwi-Kq-RO1"/>
+                                                <constraint firstItem="09M-sd-vB3" firstAttribute="width" secondItem="3PV-fR-X9N" secondAttribute="width" id="lQW-mz-tpc"/>
+                                                <constraint firstItem="kNV-6S-VbL" firstAttribute="width" secondItem="sdp-M6-mrQ" secondAttribute="width" id="u1d-5o-m7X"/>
+                                                <constraint firstItem="09M-sd-vB3" firstAttribute="width" secondItem="IRL-vM-L6O" secondAttribute="width" id="zAi-ZG-zy9"/>
+                                            </constraints>
                                             <visibilityPriorities>
                                                 <integer value="1000"/>
                                                 <integer value="1000"/>
@@ -1549,7 +1563,7 @@
                                             </customSpacing>
                                         </stackView>
                                         <button toolTip="Reload banner data" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="50d-QC-hTs">
-                                            <rect key="frame" x="464" y="4" width="20" height="22"/>
+                                            <rect key="frame" x="462" y="4" width="20" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="HH4-5O-PWu"/>
                                                 <constraint firstAttribute="height" constant="20" id="oHp-e9-CuD"/>
@@ -1567,6 +1581,7 @@
                                         <constraint firstItem="J8O-sa-1lW" firstAttribute="top" secondItem="1i6-H3-iQT" secondAttribute="top" constant="8" id="9px-Km-QjJ"/>
                                         <constraint firstAttribute="bottom" secondItem="J8O-sa-1lW" secondAttribute="bottom" constant="8" id="APy-4x-bVB"/>
                                         <constraint firstAttribute="bottom" secondItem="50d-QC-hTs" secondAttribute="bottom" constant="5" id="Rmc-XC-NF4"/>
+                                        <constraint firstItem="50d-QC-hTs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1i6-H3-iQT" secondAttribute="leading" constant="20" symbolic="YES" id="aGq-vC-9E8"/>
                                         <constraint firstAttribute="trailing" secondItem="J8O-sa-1lW" secondAttribute="trailing" constant="8" id="cq0-Gr-pCT"/>
                                         <constraint firstAttribute="trailing" secondItem="50d-QC-hTs" secondAttribute="trailing" constant="5" id="oM6-Gn-Oqk"/>
                                         <constraint firstItem="J8O-sa-1lW" firstAttribute="leading" secondItem="1i6-H3-iQT" secondAttribute="leading" constant="8" id="tJ7-s9-Znb"/>
