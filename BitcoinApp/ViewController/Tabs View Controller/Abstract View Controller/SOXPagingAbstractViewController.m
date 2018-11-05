@@ -130,6 +130,13 @@
     return selectedEndDate;
 }
 
+#pragma mark - Manual setters
+- (void)setSelectedCurrencyType:(BitcoinDE_CurrencyType)selectedCurrencyType {
+    _selectedCurrencyType = selectedCurrencyType;
+    [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
+                                                        object:@(self.selectedCurrencyType)];
+}
+
 #pragma mark - Private methods
 - (void)updateTradeStatistics {
     NSAssert(NO, @"Is implemented in subclass SOXStatisticsAbstractViewController");
