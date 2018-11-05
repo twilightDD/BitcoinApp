@@ -216,6 +216,10 @@
 		D0F7027E216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F7027B216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.m */; };
 		D0F7027F216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F7027C216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.xib */; };
 		D0F70280216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F7027C216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.xib */; };
+		D0FD14A12190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FD149F2190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.m */; };
+		D0FD14A22190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FD149F2190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.m */; };
+		D0FD14A32190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0FD14A02190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.xib */; };
+		D0FD14A42190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0FD14A02190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.xib */; };
 		D0FFEA5B212223E2000F09FF /* SOXPageData.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FFEA5A212223E2000F09FF /* SOXPageData.m */; };
 		D0FFEA5C212223E2000F09FF /* SOXPageData.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FFEA5A212223E2000F09FF /* SOXPageData.m */; };
 		D0FFEA5F212223F9000F09FF /* SOXPage_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FFEA5E212223F9000F09FF /* SOXPage_BitcoinDE_Data.m */; };
@@ -426,6 +430,9 @@
 		D0F7027A216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXSelectedCountriesPreferenceViewController.h; sourceTree = "<group>"; };
 		D0F7027B216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXSelectedCountriesPreferenceViewController.m; sourceTree = "<group>"; };
 		D0F7027C216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SOXSelectedCountriesPreferenceViewController.xib; sourceTree = "<group>"; };
+		D0FD149E2190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXKeysAndSecretPreferenceHelpViewController.h; sourceTree = "<group>"; };
+		D0FD149F2190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXKeysAndSecretPreferenceHelpViewController.m; sourceTree = "<group>"; };
+		D0FD14A02190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SOXKeysAndSecretPreferenceHelpViewController.xib; sourceTree = "<group>"; };
 		D0FFEA59212223E2000F09FF /* SOXPageData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXPageData.h; sourceTree = "<group>"; };
 		D0FFEA5A212223E2000F09FF /* SOXPageData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXPageData.m; sourceTree = "<group>"; };
 		D0FFEA5D212223F9000F09FF /* SOXPage_BitcoinDE_Data.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXPage_BitcoinDE_Data.h; sourceTree = "<group>"; };
@@ -885,6 +892,9 @@
 				D0F7025F216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.h */,
 				D0F70260216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.m */,
 				D0F70261216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.xib */,
+				D0FD149E2190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.h */,
+				D0FD149F2190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.m */,
+				D0FD14A02190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.xib */,
 				D0F7027A216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.h */,
 				D0F7027B216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.m */,
 				D0F7027C216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.xib */,
@@ -1084,6 +1094,7 @@
 				D021509820474AEC005A0932 /* SOXLogWindowController.xib in Resources */,
 				D0F70280216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.xib in Resources */,
 				D0F70265216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.xib in Resources */,
+				D0FD14A42190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1098,6 +1109,7 @@
 				D0EB0E551F855B54004839C2 /* SOXLogWindowController.xib in Resources */,
 				D0F7027F216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.xib in Resources */,
 				D0F70264216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.xib in Resources */,
+				D0FD14A32190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1420,6 +1432,7 @@
 				D021508520474AEC005A0932 /* SOXMyOrderDetailsViewController.m in Sources */,
 				D021508620474AEC005A0932 /* NSTextField+URL.m in Sources */,
 				D021508720474AEC005A0932 /* SOXMyAccountLedgerViewController.m in Sources */,
+				D0FD14A22190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.m in Sources */,
 				D021508820474AEC005A0932 /* SOXPaymentOptionValueTransformer.m in Sources */,
 				D021508920474AEC005A0932 /* SOXMyActiveOrdersViewController.m in Sources */,
 				D021508A20474AEC005A0932 /* MacAppDelegate.m in Sources */,
@@ -1497,6 +1510,7 @@
 				D03289921E8A2C7C006F15F0 /* SOXMyOrderDetailsViewController.m in Sources */,
 				D0B9A3381E89934D008860ED /* NSTextField+URL.m in Sources */,
 				D03289991E8A4C44006F15F0 /* SOXMyAccountLedgerViewController.m in Sources */,
+				D0FD14A12190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.m in Sources */,
 				D090304D1EB1F4FC00775E05 /* SOXPaymentOptionValueTransformer.m in Sources */,
 				D0631F071E89BB5C007ED75A /* SOXMyActiveOrdersViewController.m in Sources */,
 				D063E91A1E74BF97006E2D17 /* MacAppDelegate.m in Sources */,

@@ -8,6 +8,8 @@
 
 #import "SOXKeysAndSecretPreferenceViewController.h"
 
+#import "SOXKeysAndSecretPreferenceHelpViewController.h"
+
 #import "SOXPreferencesCore.h"
 
 #import "MacAppDelegate.h"
@@ -24,11 +26,11 @@
 @property (strong) IBOutlet NSButton *addKeySecretPairButton;
 @property (strong) IBOutlet NSButton *removeKeySecretPairButton;
 
-@property (strong) IBOutlet NSButton *createDemoDataButton;
-@property (strong) IBOutlet NSButton *importButton;
-
 @property (strong) IBOutlet NSButton *saveButton;
 @property (strong) IBOutlet NSButton *dismissButton;
+
+@property (strong) IBOutlet NSButton *importButton;
+@property (strong) IBOutlet NSButton *helpButton;
 
 #pragma mark | properties
 @property (strong, nonatomic) NSMutableArray <NSMutableDictionary*> *keysAndSecrets;
@@ -65,15 +67,39 @@
 #pragma mark - Keychain methods
 - (void)loadFromKeychain {
     // ask PreferenceCore
-    self.keysAndSecrets = [SOXPreferencesCore keysAndSecrets];
+    self.keysAndSecrets = [[SOXPreferencesCore keysAndSecrets] mutableCopy];
 
     [self.keysAndSecretsArrayController rearrangeObjects];
 }
 
 - (void)saveToKeychain {
-    BOOL success = [SOXPreferencesCore saveKeysAndSecrets:self.keysAndSecrets];
-    if (success == NO) {
-
+    NSArray <NSDictionary *> *validationResults = [self validateKeysAndSecretsInput];
+    NSError *error = nil;
+    if (validationResults.count == 0) {
+        [SOXPreferencesCore saveKeysAndSecrets:self.keysAndSecrets
+                                         error:error];
+        if (error) {
+            NSAlert *saveErrorAlert = [NSAlert alertWithError:error];
+            [saveErrorAlert runModal];
+        }
+    }
+    else {
+        NSAlert *validationErrorAlert = [[NSAlert alloc] init];
+        validationErrorAlert.messageText = @"Validation error";
+        NSString *informationText = @"Fix errors in:\n";
+        for (NSDictionary *dictionary in validationResults) {
+            NSNumber *row = [dictionary objectForKey:@"row"];
+            if ([dictionary.allKeys containsObject:APIUserKey]) {
+                NSString *text = [NSString stringWithFormat:@"Row %@ (User Key)\n", row];
+                informationText = [informationText stringByAppendingString:text];
+            }
+            if ([dictionary.allKeys containsObject:APISecretKey]) {
+                NSString *text = [NSString stringWithFormat:@"Row %@ (Secret)\n", row];
+                informationText = [informationText stringByAppendingString:text];
+            }
+        }
+        validationErrorAlert.informativeText = informationText;
+        [validationErrorAlert runModal];
     }
 }
 
@@ -102,6 +128,16 @@
     [self.tableView deselectAll:nil];
 }
 
+
+- (IBAction)saveButtonAction:(NSButton *)sender {
+   [self saveToKeychain];
+}
+
+- (IBAction)dismissButtonAction:(NSButtonCell *)sender {
+    [self loadFromKeychain];
+}
+
+
 - (IBAction)importButtonAction:(NSButton *)sender {
     NSOpenPanel *openPanel = [NSOpenPanel openPanel];
     openPanel.title = @"Load Key and Secrets";
@@ -114,36 +150,22 @@
         }
     }];
 }
+- (IBAction)helpButtonAction:(NSButton *)sender {
 
+    NSPopover *popover = [[NSPopover alloc] init];
+    [popover setBehavior:NSPopoverBehaviorTransient];
+    [popover setAnimates:YES];
+    [popover setContentViewController:[SOXKeysAndSecretPreferenceHelpViewController new]];
+    [popover setContentSize:NSMakeSize(400, 250)];
 
-- (IBAction)saveButtonAction:(NSButton *)sender {
-    BOOL validationResult = [self validateKeysAndSecretsInput];
-    if (validationResult) {
-        [self saveToKeychain];
-        [self.errorWindowController showMessage:@" Saved to keychain"];
-    }
-    else {
-        // TODO: Fehlermeldung bringen
-        [self.errorWindowController showMessage:@" ->>>>>>> NO save to keychain"];
-    }
-}
+    // Convert point to main window coordinates
+    NSRect entryRect = [sender convertRect:sender.bounds
+                                    toView:[[NSApp mainWindow] contentView]];
 
-- (IBAction)dismissButtonAction:(NSButtonCell *)sender {
-    [self loadFromKeychain];
-}
-
-- (IBAction)createDemoDataButtonAction:(NSButton *)sender {
-    self.keysAndSecrets = [[NSMutableArray array] init];
-    for (NSUInteger a = 0; a<8; a++) {
-        NSMutableDictionary *newDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                        [NSString stringWithFormat:@"key %tu", a], APIUserKey
-                                        , [NSString stringWithFormat:@"secret %tu", a], APISecretKey
-                                        , nil];
-
-        [self.keysAndSecrets addObject:newDict];
-    }
-
-    [self.keysAndSecretsArrayController rearrangeObjects];
+    // Show popover
+    [popover showRelativeToRect:entryRect
+                         ofView:[[NSApp mainWindow] contentView]
+                  preferredEdge:NSMinYEdge];
 }
 
 #pragma mark - Private methods
@@ -170,7 +192,7 @@
 - (void)importKeysAndSecrets:(NSString *)keysAndSecrets {
     NSArray <NSString *> *lines = [keysAndSecrets componentsSeparatedByString:@"\n"];
 
-    __block paringErrorOccured = NO;
+    __block BOOL paringErrorOccured = NO;
     __block NSMutableArray *importedKeysAndSecrets = [NSMutableArray array];
     __block NSString *errorText = @"";
     [lines enumerateObjectsUsingBlock:^(NSString * _Nonnull line, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -215,7 +237,13 @@
         && importedKeysAndSecrets.count > 0) {
         [self.keysAndSecrets addObjectsFromArray:importedKeysAndSecrets];
         [self.keysAndSecretsArrayController rearrangeObjects];
-        saveToKeychainSuccess = [SOXPreferencesCore saveKeysAndSecrets:self.keysAndSecrets];
+//        NSError *error;
+//        saveToKeychainSuccess = [SOXPreferencesCore saveKeysAndSecrets:self.keysAndSecrets
+//                                                                 error:error];
+//        if (error) {
+//            NSAlert *saveErrorAlert = [NSAlert alertWithError:error];
+//            [saveErrorAlert runModal];
+//        }
     }
 
     NSAlert *alertPanel = [[NSAlert alloc] init];
@@ -231,9 +259,7 @@
     [alertPanel runModal];
 }
 
-- (BOOL)validateKeysAndSecretsInput {
-    __block BOOL validationResult = YES;
-
+- (NSArray <NSDictionary *> *)validateKeysAndSecretsInput {
     __block NSMutableArray *invalidInputs = [NSMutableArray array];
 
     [self.keysAndSecrets enumerateObjectsUsingBlock:^(NSMutableDictionary * _Nonnull dictionary,
@@ -245,27 +271,26 @@
         NSString *secret = [dictionary objectForKey:APISecretKey];
         BOOL validateSecret = [SOXPreferencesCore validateSecret:secret];
 
-        validationResult = validationResult && validateKey && validateSecret;
+        if (validateKey == NO
+            || validateSecret == NO) {
+            NSMutableDictionary *invalidColumn = [NSMutableDictionary dictionary];
+            [invalidColumn setObject:@(rowCount)
+                               forKey:@"row"];
 
-        NSMutableDictionary *invalidColumns = [NSMutableDictionary dictionary];
-        if (validateKey == NO) {
-            [invalidColumns setObject:@(rowCount)
-                               forKey:@"row"];
-            [invalidColumns setObject:[NSNull null]
-                               forKey:APIUserKey];
-        }
-        if (validateSecret == NO) {
-            [invalidColumns setObject:@(rowCount)
-                               forKey:@"row"];
-            [invalidColumns setObject:[NSNull null]
-                               forKey:APISecretKey];
-        }
-        if (invalidColumns.allKeys.count > 0) {
-            [invalidInputs addObject:invalidColumns];
+            if (validateKey == NO) {
+                [invalidColumn setObject:[NSNull null]
+                                   forKey:APIUserKey];
+            }
+            if (validateSecret == NO) {
+                [invalidColumn setObject:[NSNull null]
+                                   forKey:APISecretKey];
+            }
+
+            [invalidInputs addObject:[invalidColumn copy]];
         }
     }];
 
-    return validationResult;
+    return [invalidInputs copy];
 }
 
 #pragma mark - MASPreferencesViewController

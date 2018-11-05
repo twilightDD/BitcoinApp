@@ -21,7 +21,8 @@
 + (BOOL)validateKey:(NSString *)key;
 + (BOOL)validateSecret:(NSString *)key;
 
-+ (BOOL)saveKeysAndSecrets:(NSMutableArray <NSMutableDictionary*> *)keysAndSecrets;
++ (BOOL)saveKeysAndSecrets:(NSMutableArray <NSMutableDictionary*> *)keysAndSecrets
+                     error:(NSError *)error;
 + (NSMutableArray <NSMutableDictionary*> *)keysAndSecrets;
 
 @end

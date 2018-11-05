@@ -70,11 +70,12 @@
     return [SOXPreferencesCore sharedCore].keysAndSecrets;
 }
 
-+ (BOOL)saveKeysAndSecrets:(NSMutableArray <NSMutableDictionary*> *)keysAndSecrets{
++ (BOOL)saveKeysAndSecrets:(NSMutableArray <NSMutableDictionary*> *)keysAndSecrets
+                     error:(NSError *)error {
     SOXPreferencesCore *preferenceCore = [SOXPreferencesCore sharedCore];
     preferenceCore.keysAndSecrets = keysAndSecrets;
 
-    BOOL success = [preferenceCore saveToKeychain];
+    BOOL success = [preferenceCore saveToKeychain:error];
 
     return success;
 }
@@ -176,9 +177,7 @@
     }
 }
 
-- (BOOL)saveToKeychain {
-    NSError *error = nil;
-
+- (BOOL)saveToKeychain:(NSError *)error {
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self.keysAndSecrets
                                                        options:NSJSONWritingPrettyPrinted
                                                          error:&error];
