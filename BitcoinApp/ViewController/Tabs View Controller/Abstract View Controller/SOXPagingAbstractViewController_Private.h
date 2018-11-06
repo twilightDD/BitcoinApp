@@ -6,14 +6,13 @@
 //  Copyright © 2018 2sox / Peter Hauke. All rights reserved.
 //
 #import "SOXPagingAbstractViewController.h"
+#import "SOXAbstractViewController_Private.h"
 
 #import "SOXAccountLedger_BitcoinDE_Data.h"
 
 @class SOXPagingViewController;
 
 @interface SOXPagingAbstractViewController ()
-
-@property (strong) IBOutlet NSArrayController *arrayController;
 
 @property (strong, nonatomic) SOXPagingViewController *pagingViewController;
 @property (weak) NSPopUpButton *accountLedgerOrderTypePopUpButton;
@@ -28,8 +27,6 @@
 @property (nonatomic) BitcoinDE_OrderStateType selectedOrderStateType;
 @property (strong, nonatomic, readonly) NSDate *selectedStartDate;
 @property (strong, nonatomic, readonly) NSDate *selectedEndDate;
-
-@property (strong, nonatomic) NSMutableArray *arrayControllerDatas;
 
 @property (nonatomic) NSInteger currentPage;
 

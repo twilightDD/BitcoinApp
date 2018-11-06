@@ -7,12 +7,13 @@
 //
 
 #import "SOXStatisticsAbstractViewController.h"
+#import "SOXPagingAbstractViewController_Private.h"
 
 @class SOXTradeStatisticsViewController;
 
 @interface SOXStatisticsAbstractViewController()
 
-@property (nonatomic, strong, readonly) SOXTradeStatisticsViewController *tradeStatisticsViewController;
+//@property (nonatomic, strong, readonly) SOXTradeStatisticsViewController *tradeStatisticsViewController;
 
 - (void)updateTradeStatistics;
 

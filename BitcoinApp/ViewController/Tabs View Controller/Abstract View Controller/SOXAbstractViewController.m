@@ -8,11 +8,14 @@
 
 #import "SOXAbstractViewController.h"
 
+#import "SOXAbstractViewController_Private.h"
+
 #import "SOXLogWindowController.h"
 #import "MacAppDelegate.h"
 
 @interface SOXAbstractViewController ()
 
+#pragma mark | IBOutlets
 @property (weak) IBOutlet NSView *spinningBackgroundView;
 @property (weak) IBOutlet NSProgressIndicator *circularProgressIndicator;
 

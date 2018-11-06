@@ -8,7 +8,12 @@
 
 #import "SOXAbstractViewController.h"
 
+#import "SOXKeys_BitcoinDE.h"
+
 @interface SOXAbstractViewController()
+
+@property (strong) IBOutlet NSArrayController *arrayController;
+@property (strong, nonatomic) NSMutableArray *arrayControllerDatas;
 
 - (void)enableSpinningWheel;
 - (void)disableSpinningWheel;

@@ -7,7 +7,7 @@
 //
 
 #import "SOXStatisticsAbstractViewController.h"
-#import "SOXPagingAbstractViewController_Private.h"
+#import "SOXStatisticsAbstractViewController_Private.h"
 
 #import "SOXTradeStatisticsViewController.h"
 
