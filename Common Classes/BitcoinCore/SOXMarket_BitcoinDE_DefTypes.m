@@ -10,7 +10,7 @@
 
 @implementation SOXMarket_BitcoinDE_DefTypes
 
-+ (NSString *)titleForOrderType:(BitcoinDE_OrderType)orderType {
++ (NSString *)naturalStringForOrderType:(BitcoinDE_OrderType)orderType {
     NSString *titleForOrderType = @"Error";
     switch (orderType) {
         case BitcoinDE_OrderTypeUnknown:

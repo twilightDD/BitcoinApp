@@ -201,7 +201,7 @@
         for (BitcoinDE_OrderType idx = BitcoinDE_OrderTypeUnknown
              ; idx < BitcoinDE_OrderType_EndOfType
              ; idx++) {
-            [self.orderTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes titleForOrderType:idx]];
+            [self.orderTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes naturalStringForOrderType:idx]];
         }
 
         // orderStateType selection
