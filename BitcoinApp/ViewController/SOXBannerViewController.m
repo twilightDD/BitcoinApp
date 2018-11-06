@@ -57,6 +57,8 @@
 @property (weak) IBOutlet NSTextField *coinValueTextField;
 @property (weak) IBOutlet NSTextField *emptyDescriptionTextField; // layout errors
 @property (weak) IBOutlet NSTextField *emptyTextField;// layout errors
+@property (weak) IBOutlet NSTextField *emptyDescription2TextField; // layout errors
+@property (weak) IBOutlet NSTextField *empty2TextField;// layout errors
 
 #pragma mark | Others
 @property (weak) IBOutlet NSButton *updateBannerButton;
@@ -199,9 +201,10 @@
         self.coinValueDescriptionTextField.stringValue = @"Value";
         self.coinValueTextField.stringValue = @"...";
         
-        self.emptyDescriptionTextField.hidden = YES;
-        self.emptyTextField.hidden = YES;
-    
+        self.emptyDescriptionTextField.stringValue = @"";
+        self.emptyTextField.stringValue = @"";
+        self.emptyDescription2TextField.stringValue = @"";
+        self.empty2TextField.stringValue = @"";
     }
 }
 

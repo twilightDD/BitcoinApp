@@ -1435,10 +1435,10 @@
                                                     <rect key="frame" x="359" y="0.0" width="5" height="119"/>
                                                 </box>
                                                 <stackView distribution="fillEqually" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aTk-QB-Ksu" userLabel="Coin Value">
-                                                    <rect key="frame" x="378" y="46" width="93" height="73"/>
+                                                    <rect key="frame" x="378" y="27" width="93" height="92"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zNQ-4W-MRR">
-                                                            <rect key="frame" x="25" y="54" width="43" height="19"/>
+                                                            <rect key="frame" x="25" y="73" width="43" height="19"/>
                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="9OJ-Vx-3Iz">
                                                                 <font key="font" metaFont="systemSemibold" size="15"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1446,13 +1446,13 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="16" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C7I-8U-PBB">
-                                                            <rect key="frame" x="1" y="0.0" width="92" height="46"/>
+                                                            <rect key="frame" x="1" y="0.0" width="92" height="65"/>
                                                             <subviews>
-                                                                <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sdp-M6-mrQ" userLabel="DescriptionStack">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="38" height="46"/>
+                                                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sdp-M6-mrQ" userLabel="DescriptionStack">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="38" height="65"/>
                                                                     <subviews>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Q2f-6I-X6F">
-                                                                            <rect key="frame" x="-2" y="27" width="42" height="19"/>
+                                                                            <rect key="frame" x="-2" y="46" width="42" height="19"/>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="5Jk-pP-TPz">
                                                                                 <font key="font" metaFont="system" size="15"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1460,8 +1460,16 @@
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Swe-C7-ICY">
-                                                                            <rect key="frame" x="-2" y="0.0" width="42" height="19"/>
+                                                                            <rect key="frame" x="-2" y="23" width="42" height="19"/>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="HAQ-iL-qFL">
+                                                                                <font key="font" metaFont="system" size="15"/>
+                                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                            </textFieldCell>
+                                                                        </textField>
+                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zkv-jO-ZoJ">
+                                                                            <rect key="frame" x="-2" y="0.0" width="42" height="19"/>
+                                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="D0i-u3-bfy">
                                                                                 <font key="font" metaFont="system" size="15"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -1471,17 +1479,19 @@
                                                                     <visibilityPriorities>
                                                                         <integer value="1000"/>
                                                                         <integer value="1000"/>
+                                                                        <integer value="1000"/>
                                                                     </visibilityPriorities>
                                                                     <customSpacing>
                                                                         <real value="3.4028234663852886e+38"/>
                                                                         <real value="3.4028234663852886e+38"/>
+                                                                        <real value="3.4028234663852886e+38"/>
                                                                     </customSpacing>
                                                                 </stackView>
-                                                                <stackView distribution="fill" orientation="vertical" alignment="trailing" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UA5-GU-pca" userLabel="ValuesStack">
-                                                                    <rect key="frame" x="54" y="0.0" width="38" height="46"/>
+                                                                <stackView distribution="fill" orientation="vertical" alignment="trailing" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UA5-GU-pca" userLabel="ValuesStack">
+                                                                    <rect key="frame" x="54" y="0.0" width="38" height="65"/>
                                                                     <subviews>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MNx-sU-WUO">
-                                                                            <rect key="frame" x="-2" y="27" width="42" height="19"/>
+                                                                            <rect key="frame" x="-2" y="46" width="42" height="19"/>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="JuO-Bb-JBV">
                                                                                 <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="rN9-Gi-CJP"/>
                                                                                 <font key="font" metaFont="system" size="15"/>
@@ -1490,9 +1500,18 @@
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="87r-AJ-JBl">
-                                                                            <rect key="frame" x="-2" y="0.0" width="42" height="19"/>
+                                                                            <rect key="frame" x="-2" y="23" width="42" height="19"/>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="w4A-NA-pk1">
                                                                                 <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="YoY-E8-0vx"/>
+                                                                                <font key="font" metaFont="system" size="15"/>
+                                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                            </textFieldCell>
+                                                                        </textField>
+                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4rq-GS-fHh">
+                                                                            <rect key="frame" x="-2" y="0.0" width="42" height="19"/>
+                                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="gzs-PI-n0a">
+                                                                                <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="dGT-Aa-eH1"/>
                                                                                 <font key="font" metaFont="system" size="15"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -1502,8 +1521,10 @@
                                                                     <visibilityPriorities>
                                                                         <integer value="1000"/>
                                                                         <integer value="1000"/>
+                                                                        <integer value="1000"/>
                                                                     </visibilityPriorities>
                                                                     <customSpacing>
+                                                                        <real value="3.4028234663852886e+38"/>
                                                                         <real value="3.4028234663852886e+38"/>
                                                                         <real value="3.4028234663852886e+38"/>
                                                                     </customSpacing>
@@ -1610,6 +1631,8 @@
                         <outlet property="coinValueHeadlineTextField" destination="zNQ-4W-MRR" id="8q2-eR-70n"/>
                         <outlet property="coinValueTextField" destination="MNx-sU-WUO" id="SMc-cm-EPi"/>
                         <outlet property="coinValueValuesAndDescriptionStackView" destination="C7I-8U-PBB" id="ArF-um-kqb"/>
+                        <outlet property="empty2TextField" destination="4rq-GS-fHh" id="TRt-Gc-xdO"/>
+                        <outlet property="emptyDescription2TextField" destination="zkv-jO-ZoJ" id="MC5-Jd-9aU"/>
                         <outlet property="emptyDescriptionTextField" destination="Swe-C7-ICY" id="LVG-39-5CE"/>
                         <outlet property="emptyTextField" destination="87r-AJ-JBl" id="xBb-Tc-TfV"/>
                         <outlet property="fidorReservationAvailableAmountDescriptionTextField" destination="7JW-Mt-ieO" id="hzB-x3-MZw"/>
