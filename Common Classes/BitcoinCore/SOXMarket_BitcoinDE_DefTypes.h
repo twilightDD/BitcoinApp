@@ -46,12 +46,11 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_PaymentOption) {
     , BitcoinDE_PaymentOptionExpressAndSepa = 3
 };
 
-typedef NS_ENUM (NSUInteger, BitcoinDE_UpdateType) {
-    BitcoinDE_UpdateType_Unknown = 0
-    , BitcoinDE_UpdateType_AllOrderChanges
-    , BitcoinDE_UpdateType_BuyOrderChanges
-    , BitcoinDE_UpdateType_SellOrderChanges
-    , BitcoinDE_UpdateType_RemoveOrderChanges
+typedef NS_ENUM (NSUInteger, BitcoinDE_SocketUpdateType) {
+    BitcoinDE_SocketUpdateType_Unknown = 0
+    , BitcoinDE_SocketUpdateType_BuyOrderChanges
+    , BitcoinDE_SocketUpdateType_SellOrderChanges
+    , BitcoinDE_SocketUpdateType_RemoveOrderChanges
 };
 
 typedef NS_ENUM (NSInteger, BitcoinDE_CurrencyType) {

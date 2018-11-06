@@ -40,28 +40,28 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
 @implementation SOXSocketIO_BitcoinDE_Core
 
 #pragma mark - Public Class methods
-+ (void)unRegisterForOrderUpdatesForUpdateType:(BitcoinDE_UpdateType)bitcoinDE_UpdateType
++ (void)unRegisterForOrderUpdatesForUpdateType:(BitcoinDE_SocketUpdateType)bitcoinDE_UpdateType
                                forCurrencyType:(BitcoinDE_CurrencyType)currencyType
                                       delegate:(id <SOXSocketIOCoreProtocol>)delegate {
     NSString *tradingPairString = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType];
 
     SOXSocketIO_BitcoinDE_Core *core = [SOXSocketIO_BitcoinDE_Core sharedCore];
     switch (bitcoinDE_UpdateType) {
-        case BitcoinDE_UpdateType_BuyOrderChanges: {
+        case BitcoinDE_SocketUpdateType_BuyOrderChanges: {
             NSHashTable *buyChangesDelegatesForCurrencyType = [core.delegateForBuyOrderUpdates objectForKey:tradingPairString];
             if (buyChangesDelegatesForCurrencyType) {
                 [buyChangesDelegatesForCurrencyType removeObject:delegate];
             }
             break;
         }
-        case BitcoinDE_UpdateType_SellOrderChanges: {
+        case BitcoinDE_SocketUpdateType_SellOrderChanges: {
             NSHashTable *sellChangesDelegatesForCurrencyType = [core.delegateForSellOrderUpdates objectForKey:tradingPairString];
             if (sellChangesDelegatesForCurrencyType) {
                 [sellChangesDelegatesForCurrencyType removeObject:delegate];
             }
             break;
         }
-        case BitcoinDE_UpdateType_RemoveOrderChanges: {
+        case BitcoinDE_SocketUpdateType_RemoveOrderChanges: {
             NSHashTable *removeChangesDelegatesForCurrencyType = [core.delegateForRemoveOrderUpdates objectForKey:tradingPairString];
             if (removeChangesDelegatesForCurrencyType) {
                 [removeChangesDelegatesForCurrencyType removeObject:delegate];
@@ -80,7 +80,7 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
     }
 }
 
-+ (void)registerForOrderUpdatesForUpdateType:(BitcoinDE_UpdateType)bitcoinDE_UpdateType
++ (void)registerForOrderUpdatesForUpdateType:(BitcoinDE_SocketUpdateType)bitcoinDE_UpdateType
                              forCurrencyType:(BitcoinDE_CurrencyType)currencyType
                                     delegate:(id <SOXSocketIOCoreProtocol>)delegate {
     NSString *tradingPairString = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType];
@@ -88,7 +88,7 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
     SOXSocketIO_BitcoinDE_Core *core = [SOXSocketIO_BitcoinDE_Core sharedCore];
     if (delegate) {
         switch (bitcoinDE_UpdateType) {
-            case BitcoinDE_UpdateType_BuyOrderChanges: {
+            case BitcoinDE_SocketUpdateType_BuyOrderChanges: {
                 NSHashTable *buyChangesDelegatesForCurrencyType = [core.delegateForBuyOrderUpdates objectForKey:tradingPairString];
                 if (!buyChangesDelegatesForCurrencyType) {
                     buyChangesDelegatesForCurrencyType = [NSHashTable hashTableWithOptions:NSHashTableWeakMemory];
@@ -98,7 +98,7 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
                 [buyChangesDelegatesForCurrencyType addObject:delegate];
                 break;
             }
-            case BitcoinDE_UpdateType_SellOrderChanges:
+            case BitcoinDE_SocketUpdateType_SellOrderChanges:
             {
                 NSHashTable *sellChangesDelegatesForCurrencyType = [core.delegateForSellOrderUpdates objectForKey:tradingPairString];
                 if (!sellChangesDelegatesForCurrencyType) {
@@ -109,7 +109,7 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
                 [sellChangesDelegatesForCurrencyType addObject:delegate];
                 break;
             }
-            case BitcoinDE_UpdateType_RemoveOrderChanges:
+            case BitcoinDE_SocketUpdateType_RemoveOrderChanges:
             {
                 NSHashTable *removeChangesDelegatesForCurrencyType = [core.delegateForRemoveOrderUpdates objectForKey:tradingPairString];
                 if (!removeChangesDelegatesForCurrencyType) {

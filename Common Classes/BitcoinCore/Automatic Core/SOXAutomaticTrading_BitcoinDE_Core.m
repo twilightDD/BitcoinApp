@@ -183,13 +183,13 @@
     // Update all orderBooks
     [self flushAllOrderBooks];
 
-    [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
+    [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_SocketUpdateType_BuyOrderChanges
                                                        forCurrencyType:self.currencyType
                                                               delegate:self];
-    [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
+    [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_SocketUpdateType_SellOrderChanges
                                                        forCurrencyType:self.currencyType
                                                               delegate:self];
-    [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
+    [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_SocketUpdateType_RemoveOrderChanges
                                                        forCurrencyType:self.currencyType
                                                               delegate:self];
 
@@ -691,10 +691,10 @@
                                                   withBehavior:[SOXFormatters currencyNumberHandler]];
         }
         DDLogInfo(@"buySum: %@ averagePrice: %@", buyBTCSum, averagePrice);
-        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
+        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_SocketUpdateType_BuyOrderChanges
                                                          forCurrencyType:self.currencyType
                                                                 delegate:self];
-        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
+        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_SocketUpdateType_RemoveOrderChanges
                                                          forCurrencyType:self.currencyType
                                                                 delegate:self];
 
@@ -731,10 +731,10 @@
 
         self.sellOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:sellOrderBookDatas
                                                                     forOrderType:BitcoinDE_OrderTypeSell];
-        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
+        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_SocketUpdateType_SellOrderChanges
                                                          forCurrencyType:self.currencyType
                                                                 delegate:self];
-        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_RemoveOrderChanges
+        [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_SocketUpdateType_RemoveOrderChanges
                                                          forCurrencyType:self.currencyType
                                                                 delegate:self];
 
