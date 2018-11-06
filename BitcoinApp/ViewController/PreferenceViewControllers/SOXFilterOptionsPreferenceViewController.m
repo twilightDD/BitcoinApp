@@ -92,7 +92,7 @@
 #pragma mark - Private Methods
 - (void)setupUI {
     NSString *headlineText = @"Filter options for ";
-    if (self.orderType != BitcoinDE_UnknownOrderType
+    if (self.orderType != BitcoinDE_OrderTypeUnknown
         && self.currencyType != BitcoinDE_CurrencyTypeUnknown) {
         NSString *text = [NSString stringWithFormat:@"%@ %@ table."
                           , [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:self.orderType]

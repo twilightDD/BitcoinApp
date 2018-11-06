@@ -198,7 +198,7 @@
         // orderType selection
         self.orderTypeSelectionPopUpButton = self.pagingViewController.secondSelectionPopUpButton;
         [self.orderTypeSelectionPopUpButton removeAllItems];
-        for (BitcoinDE_OrderType idx = BitcoinDE_UnknownOrderType
+        for (BitcoinDE_OrderType idx = BitcoinDE_OrderTypeUnknown
              ; idx < BitcoinDE_OrderType_EndOfType
              ; idx++) {
             [self.orderTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes titleForOrderType:idx]];

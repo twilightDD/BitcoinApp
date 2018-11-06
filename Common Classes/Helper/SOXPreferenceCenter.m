@@ -18,7 +18,7 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
 
     [self removeUserDefaultForKey:OrderViewControllerCountryCodeKey];
 
-    for (BitcoinDE_OrderType orderType = BitcoinDE_BuyOrderType;
+    for (BitcoinDE_OrderType orderType = BitcoinDE_OrderTypeBuy;
          orderType < BitcoinDE_OrderType_EndOfType;
          orderType++) {
         for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeBitcoin;
@@ -113,7 +113,7 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
 + (void)setSepaPaymentFilterOption:(NSControlStateValue )state
                       forOrderType:(BitcoinDE_OrderType)orderType
                       currencyType:(BitcoinDE_CurrencyType)currencyType {
-    if (orderType != BitcoinDE_UnknownOrderType
+    if (orderType != BitcoinDE_OrderTypeUnknown
         && currencyType != BitcoinDE_CurrencyTypeUnknown) {
         NSNumber *noSepaFilterValue = @NO;
         if (state == NSControlStateValueOn) {
@@ -140,7 +140,7 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
                         forKey:OrderViewControllerSEPAKey];
 
     // for orderType and currencyType
-    for (BitcoinDE_OrderType orderType = BitcoinDE_BuyOrderType;
+    for (BitcoinDE_OrderType orderType = BitcoinDE_OrderTypeBuy;
          orderType < BitcoinDE_OrderType_EndOfType;
          orderType++) {
         for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeBitcoin;
@@ -237,7 +237,7 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
                         forKey:OrderViewControllerCountryCodeKey];
 
     // for orderType and currencyType
-    for (BitcoinDE_OrderType orderType = BitcoinDE_BuyOrderType;
+    for (BitcoinDE_OrderType orderType = BitcoinDE_OrderTypeBuy;
          orderType < BitcoinDE_OrderType_EndOfType;
          orderType++) {
         for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeBitcoin;
@@ -260,7 +260,7 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
 + (void)setActiveCountryCodes:(NSArray <NSString *> *)activeCountryCodes
                  forOrderType:(BitcoinDE_OrderType)orderType
                  currencyType:(BitcoinDE_CurrencyType)currencyType {
-    if (orderType != BitcoinDE_UnknownOrderType
+    if (orderType != BitcoinDE_OrderTypeUnknown
         && currencyType != BitcoinDE_CurrencyTypeUnknown) {
         NSString *userDefaultKey = [self userDefaultKeyForDomain:OrderViewControllerCountryCodeKey
                                                        orderType:orderType
@@ -347,7 +347,7 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
                             orderType:(BitcoinDE_OrderType)orderType
                          currencyType:(BitcoinDE_CurrencyType)currencyType {
     NSString *userDefaultKey = [domain copy];
-    if (orderType != BitcoinDE_UnknownOrderType
+    if (orderType != BitcoinDE_OrderTypeUnknown
         && currencyType != BitcoinDE_CurrencyTypeUnknown) {
         userDefaultKey = [userDefaultKey stringByAppendingString:@"_"];
         userDefaultKey = [userDefaultKey stringByAppendingString:[SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType]];

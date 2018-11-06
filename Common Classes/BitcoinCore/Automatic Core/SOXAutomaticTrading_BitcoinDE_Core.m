@@ -212,7 +212,7 @@
 
 - (void)fetchBuyOrderBook {
     NSLog(@">>>>> fetchBuyOrderBook");
-    NSDictionary *buyParameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:BitcoinDE_BuyOrderType
+    NSDictionary *buyParameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:BitcoinDE_OrderTypeBuy
                                                                              currencyType:self.currencyType
                                                                  onlyExpressPaymentOption:YES];
 
@@ -226,7 +226,7 @@
 
 - (void)fetchSellOrderBook {
     NSLog(@">>>>> fetchSellOrderBook");
-    NSDictionary *sellParameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:BitcoinDE_SellOrderType
+    NSDictionary *sellParameters = [SOXShowOrderbook_BitcoinDE_Data parametersForOrderType:BitcoinDE_OrderTypeSell
                                                                               currencyType:self.currencyType
                                                                   onlyExpressPaymentOption:YES];
 
@@ -261,7 +261,7 @@
 + (NSMutableArray *)sortedOrderBook:(NSMutableArray <SOXShowOrderbookData *> *)orderBookDatas
                        forOrderType:(BitcoinDE_OrderType)orderType {
     switch (orderType) {
-        case BitcoinDE_BuyOrderType: {
+        case BitcoinDE_OrderTypeBuy: {
             [orderBookDatas sortUsingComparator:^NSComparisonResult(SOXShowOrderbook_BitcoinDE_Data *_Nonnull obj1, SOXShowOrderbook_BitcoinDE_Data  *_Nonnull obj2) {
                 if ([obj1.orderInformation_price isLessThan:obj2.orderInformation_price]) {
                     return NSOrderedAscending;
@@ -274,7 +274,7 @@
             }];
             break;
         }
-        case BitcoinDE_SellOrderType: {
+        case BitcoinDE_OrderTypeSell: {
             [orderBookDatas sortUsingComparator:^NSComparisonResult(SOXShowOrderbook_BitcoinDE_Data *_Nonnull obj1, SOXShowOrderbook_BitcoinDE_Data  *_Nonnull obj2) {
                 if ([obj1.orderInformation_price isLessThan:obj2.orderInformation_price]) {
                     return NSOrderedDescending;
@@ -319,7 +319,7 @@
         NSDecimalNumber *priceForBTCAmountToBuy = [btcAmountToBuy decimalNumberByMultiplyingBy:orderToBuy.orderInformation_price
                                                                                   withBehavior:[SOXFormatters currencyNumberHandler]];
         NSDictionary *buyParameters = [SOXTradeJob_BitcoinDE_Data parameterAutomaticTradingForOrderID:orderToBuy.orderInformation_orderID
-                                                                                            orderType:BitcoinDE_BuyOrderType
+                                                                                            orderType:BitcoinDE_OrderTypeBuy
                                                                                         bitcoinAmount:btcAmountToBuy
                                                                                                 price:orderToBuy.orderInformation_price
                                                                                       forCurrencyType:self.currencyType];
@@ -431,7 +431,7 @@
 
     if ([boughtBTCSum isGreaterThan:[NSDecimalNumber zero]] ) {
         NSDictionary *substitutedBuyParameters = [SOXTradeJob_BitcoinDE_Data parameterBalanceTradingForOrderID:@"substitutedBuyOrder"
-                                                                                                     orderType:BitcoinDE_BuyOrderType
+                                                                                                     orderType:BitcoinDE_OrderTypeBuy
                                                                                                  bitcoinAmount:boughtBTCSum
                                                                                                          price:averageAutomaticBoughtPrice
                                                                                            automaticTradePrice:averageAutomaticBoughtPrice
@@ -507,23 +507,23 @@
 
     NSString *orderTypeString = [parameters objectForKey:BitcoinDE_ExecuteTrade_Type];
     BitcoinDE_OrderType automaticTradeHadOrderType = [SOXMarket_BitcoinDE_DefTypes orderTypeForOrderTypeString:orderTypeString];
-    if (automaticTradeHadOrderType != BitcoinDE_BuyOrderType
-        && automaticTradeHadOrderType != BitcoinDE_SellOrderType) {
+    if (automaticTradeHadOrderType != BitcoinDE_OrderTypeBuy
+        && automaticTradeHadOrderType != BitcoinDE_OrderTypeSell) {
         return;
     }
 
     NSArray *parametersToExecute;
 
-    if (automaticTradeHadOrderType == BitcoinDE_BuyOrderType) {
+    if (automaticTradeHadOrderType == BitcoinDE_OrderTypeBuy) {
         parametersToExecute = [self sellBalanceTradeParametersForBuyAmount:[parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]
                                                                forBuyPrice:[parameters objectForKey:BitcoinDE_ExecuteTrade_AutomaticTradePrice]
                                                  createPotentialParameters:NO];
     }
 
     // Execute Balance Trades
-    BitcoinDE_OrderType executeBalanceType = BitcoinDE_UnknownOrderType;
-    if (automaticTradeHadOrderType == BitcoinDE_BuyOrderType) {
-        executeBalanceType = BitcoinDE_SellOrderType;
+    BitcoinDE_OrderType executeBalanceType = BitcoinDE_OrderTypeUnknown;
+    if (automaticTradeHadOrderType == BitcoinDE_OrderTypeBuy) {
+        executeBalanceType = BitcoinDE_OrderTypeSell;
     }
 
     [self tryToExecuteBalanceTradesWithParameters:parametersToExecute
@@ -535,7 +535,7 @@
 
     for (NSDictionary *parameters in parametersToExecute) {
         // Execute BalanceTrade
-        if (orderType == BitcoinDE_SellOrderType) {
+        if (orderType == BitcoinDE_OrderTypeSell) {
             if (self.executeBalanceTradesForBuyTrades) {
                 [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ExecuteTrade
                                                         withParameter:parameters
@@ -548,7 +548,7 @@
     NSDecimalNumber *sum = [NSDecimalNumber zero];
 
     for (NSDictionary *parameters in parametersToExecute) {
-        if (orderType == BitcoinDE_SellOrderType) {
+        if (orderType == BitcoinDE_OrderTypeSell) {
             if (self.executeBalanceTradesForBuyTrades) {
                 { // DEBUG
                     NSString *note = [NSString stringWithFormat:@"Try to execute sellBalance for bought - ID: %@ - price: %@ - amount: %@"
@@ -674,7 +674,7 @@
         }
 
         self.buyOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:buyOrderBookDatas
-                                                                   forOrderType:BitcoinDE_BuyOrderType];
+                                                                   forOrderType:BitcoinDE_OrderTypeBuy];
 
         NSString *keyPath = [NSString stringWithFormat:@"@sum.self.orderInformation_maxAmount"];
         NSDecimalNumber *buyBTCSum    = [self.buyOrderBook valueForKeyPath:keyPath];
@@ -730,7 +730,7 @@
         }
 
         self.sellOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:sellOrderBookDatas
-                                                                    forOrderType:BitcoinDE_SellOrderType];
+                                                                    forOrderType:BitcoinDE_OrderTypeSell];
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
                                                          forCurrencyType:self.currencyType
                                                                 delegate:self];
@@ -1056,7 +1056,7 @@
     if ([orderInformationType isEqualToString:BitcoinDE_WebSocket_BuyOrderType]) {
         [self.buyOrderBook addObject:addOrderData];
         self.buyOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:self.buyOrderBook
-                                                                   forOrderType:BitcoinDE_BuyOrderType];
+                                                                   forOrderType:BitcoinDE_OrderTypeBuy];
 
         SOXShowOrderbookData *firstSellOrderBookData = self.sellOrderBook.firstObject;
         { // DEBUG
@@ -1111,7 +1111,7 @@
     else if ([orderInformationType isEqualToString:BitcoinDE_WebSocket_SellOrderType]) {
         [self.sellOrderBook addObject:addOrderData];
         self.sellOrderBook = [SOXAutomaticTrading_BitcoinDE_Core sortedOrderBook:self.sellOrderBook
-                                                                    forOrderType:BitcoinDE_SellOrderType];
+                                                                    forOrderType:BitcoinDE_OrderTypeSell];
 
         SOXShowOrderbookData *firstBuyOrderBookData = self.buyOrderBook.firstObject;
         { // DEBUG

@@ -145,7 +145,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     // maxPossibleBTCAmountToTrade
     {
         {
-            if (self.orderType == BitcoinDE_BuyOrderType) {
+            if (self.orderType == BitcoinDE_OrderTypeBuy) {
                 /*
                  Express => maxAvaFidor
                  Sepa => default(SEPA mgl) ? order.maxAmount : geht nicht
@@ -212,7 +212,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
                     self.executeTradeIsPossible = NO;
                 }
             }
-            else if (self.orderType == BitcoinDE_SellOrderType) {
+            else if (self.orderType == BitcoinDE_OrderTypeSell) {
                 /*
                  Express => maxAvaBTC
                  Sepa => default(SEPA mgl) ? order.maxAmount : geht nicht
@@ -347,7 +347,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
     NSString *minimumBTCAmountButtonText;
     NSString *maximalFidorBTCAmountButtonText;
     NSString *maximalOrderBTCAmountButtonText;
-    if (self.orderType == BitcoinDE_BuyOrderType) {
+    if (self.orderType == BitcoinDE_OrderTypeBuy) {
         titleText = [NSString stringWithFormat:@"Buy bitcoins (%@)"
                      , [SOXMarket_BitcoinDE_DefTypes paymentOptionStringForPaymentOption:self.orderBookPaymentOption]];
         amountToTradeDescriptionText = @"Buy bitcoins";
@@ -355,7 +355,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
         maximalFidorBTCAmountButtonText = [NSString stringWithFormat:@"Max %@ for reservation", shortCurrencyString];
         maximalOrderBTCAmountButtonText = [NSString stringWithFormat:@"Max %@ from order", shortCurrencyString];
     }
-    else if (self.orderType == BitcoinDE_SellOrderType) {
+    else if (self.orderType == BitcoinDE_OrderTypeSell) {
         titleText = [NSString stringWithFormat:@"Sell bitcoins (%@)"
                      , [SOXMarket_BitcoinDE_DefTypes paymentOptionStringForPaymentOption:self.orderBookPaymentOption]];
         amountToTradeDescriptionText = @"Sell bitcoins";
@@ -395,7 +395,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
 
 - (void)setupExecuteTradeButton {
     NSString *executeTradeButtonText;
-    if (self.orderType == BitcoinDE_BuyOrderType) {
+    if (self.orderType == BitcoinDE_OrderTypeBuy) {
         if (self.executePaymentOption != BitcoinDE_PaymentOptionSEPAOnly) {
             executeTradeButtonText = @"Buy via Express";
         }
@@ -403,7 +403,7 @@ NSString const * _Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTra
             executeTradeButtonText = @"Buy via SEPA";
         }
     }
-    else if (self.orderType == BitcoinDE_SellOrderType) {
+    else if (self.orderType == BitcoinDE_OrderTypeSell) {
         if (self.executePaymentOption != BitcoinDE_PaymentOptionSEPAOnly) {
             executeTradeButtonText = @"Sell via Express";
         }

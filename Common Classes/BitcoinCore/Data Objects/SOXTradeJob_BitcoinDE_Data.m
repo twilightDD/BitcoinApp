@@ -17,7 +17,7 @@
                       forCurrencyType:(BitcoinDE_CurrencyType)currencyType {
     if (!orderID
         || orderID.length == 0
-        || (orderType != BitcoinDE_BuyOrderType && orderType != BitcoinDE_SellOrderType)) {
+        || (orderType != BitcoinDE_OrderTypeBuy && orderType != BitcoinDE_OrderTypeSell)) {
         return nil;
     }
 

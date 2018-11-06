@@ -140,10 +140,10 @@
         self.addOrderButton.title = [NSString stringWithFormat:@"Create new %@ %@ order"
                                      , currencyString
                                      , buySellString];
-        if (self.orderType == BitcoinDE_BuyOrderType) {
+        if (self.orderType == BitcoinDE_OrderTypeBuy) {
             self.titleTextField.stringValue                     = @"Buy";
         }
-        else if (self.orderType == BitcoinDE_SellOrderType) {
+        else if (self.orderType == BitcoinDE_OrderTypeSell) {
             self.titleTextField.stringValue                     = @"Sell";
         }
     }
@@ -188,10 +188,10 @@
     [self enableSpinningWheel];
     
     BitcoinDE_ServerCommandType serverCommand = UnknownCommand;
-    if (self.orderType == BitcoinDE_BuyOrderType ){
+    if (self.orderType == BitcoinDE_OrderTypeBuy ){
         serverCommand = BitcoinDE_ShowBuyOrderbookCommandType;
     }
-    else if (self.orderType == BitcoinDE_SellOrderType) {
+    else if (self.orderType == BitcoinDE_OrderTypeSell) {
         serverCommand = BitcoinDE_ShowSellOrderbookCommandType;
     }
     
@@ -204,7 +204,7 @@
 }
 
 - (void)registerForWebSocketUpdates {
-    if (self.orderType == BitcoinDE_BuyOrderType) {
+    if (self.orderType == BitcoinDE_OrderTypeBuy) {
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_BuyOrderChanges
                                                          forCurrencyType:self.currencyType
                                                                 delegate:self];
@@ -212,7 +212,7 @@
                                                          forCurrencyType:self.currencyType
                                                                 delegate:self];
     }
-    else if (self.orderType == BitcoinDE_SellOrderType) {
+    else if (self.orderType == BitcoinDE_OrderTypeSell) {
         [SOXSocketIO_BitcoinDE_Core registerForOrderUpdatesForUpdateType:BitcoinDE_UpdateType_SellOrderChanges
                                                          forCurrencyType:self.currencyType
                                                                 delegate:self];
@@ -228,7 +228,7 @@
 #pragma mark | Array Controller Descriptors
 - (void)createSortDescriptorsForArrayController {
     BOOL ascending = NO;
-    if (self.orderType == BitcoinDE_BuyOrderType) {
+    if (self.orderType == BitcoinDE_OrderTypeBuy) {
         ascending = YES;
     }
     

@@ -107,7 +107,7 @@
                                , nil];
 
     // only on order with type "sell" we can set paymentOption
-    if (orderType == BitcoinDE_SellOrderType) {
+    if (orderType == BitcoinDE_OrderTypeSell) {
         NSMutableDictionary *mutableParameter = [parameter mutableCopy];
         [mutableParameter setObject:@(payment_option) forKey:@"payment_option"];
         
@@ -144,10 +144,10 @@
                                    page:(NSInteger )page {
     NSString *orderTypeString;
     switch (orderType) {
-        case BitcoinDE_BuyOrderType:
+        case BitcoinDE_OrderTypeBuy:
             orderTypeString = MyOrderBookParameter_OrderTypeBuyKey;
             break;
-        case BitcoinDE_SellOrderType:
+        case BitcoinDE_OrderTypeSell:
             orderTypeString = MyOrderBookParameter_OrderTypeSellKey;
         default:
             break;

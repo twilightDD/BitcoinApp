@@ -301,7 +301,7 @@
             NSDecimalNumber *amountToSell = [SOXFormatters lesserDecimalNumberFrom:remainingBitcoinAmountToSell
                                                                                and:sellOrder.orderInformation_maxAmount];
             NSDictionary *sellParameters = [SOXTradeJob_BitcoinDE_Data parameterBalanceTradingForOrderID:sellOrder.orderInformation_orderID
-                                                                                               orderType:BitcoinDE_SellOrderType
+                                                                                               orderType:BitcoinDE_OrderTypeSell
                                                                                            bitcoinAmount:amountToSell
                                                                                                    price:sellOrder.orderInformation_price
                                                                                      automaticTradePrice:boughtPrice

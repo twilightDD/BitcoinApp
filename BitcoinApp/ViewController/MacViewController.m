@@ -99,42 +99,42 @@ static NSString *AutomaticTradeETHSegueKey = @"EmbedAutoTraderForETH";
 - (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:OrdersViewControllerBuyBTCSegueKey]) {
         SOXOrdersViewController *viewC = segue.destinationController;
-        viewC.orderType = BitcoinDE_BuyOrderType;
+        viewC.orderType = BitcoinDE_OrderTypeBuy;
         viewC.currencyType = BitcoinDE_CurrencyTypeBitcoin;
     }
     else if ([segue.identifier isEqualToString:OrdersViewControllerSellBTCSegueKey]) {
         SOXOrdersViewController *viewC = segue.destinationController;
-        viewC.orderType = BitcoinDE_SellOrderType;
+        viewC.orderType = BitcoinDE_OrderTypeSell;
         viewC.currencyType = BitcoinDE_CurrencyTypeBitcoin;
     }
     else if ([segue.identifier isEqualToString:OrdersViewControllerBuyBCHSegueKey]) {
         SOXOrdersViewController *viewC = segue.destinationController;
-        viewC.orderType = BitcoinDE_BuyOrderType;
+        viewC.orderType = BitcoinDE_OrderTypeBuy;
         viewC.currencyType = BitcoinDE_CurrencyTypeBitcoinCash;
     }
     else if ([segue.identifier isEqualToString:OrdersViewControllerSellBCHSegueKey]) {
         SOXOrdersViewController *viewC = segue.destinationController;
-        viewC.orderType = BitcoinDE_SellOrderType;
+        viewC.orderType = BitcoinDE_OrderTypeSell;
         viewC.currencyType = BitcoinDE_CurrencyTypeBitcoinCash;
     }
     else if ([segue.identifier isEqualToString:OrdersViewControllerBuyBTGSegueKey]) {
         SOXOrdersViewController *viewC = segue.destinationController;
-        viewC.orderType = BitcoinDE_BuyOrderType;
+        viewC.orderType = BitcoinDE_OrderTypeBuy;
         viewC.currencyType = BitcoinDE_CurrencyTypeBitcoinGold;
     }
     else if ([segue.identifier isEqualToString:OrdersViewControllerSellBTGSegueKey]) {
         SOXOrdersViewController *viewC = segue.destinationController;
-        viewC.orderType = BitcoinDE_SellOrderType;
+        viewC.orderType = BitcoinDE_OrderTypeSell;
         viewC.currencyType = BitcoinDE_CurrencyTypeBitcoinGold;
     }
     else if ([segue.identifier isEqualToString:OrdersViewControllerBuyETHSegueKey]) {
         SOXOrdersViewController *viewC = segue.destinationController;
-        viewC.orderType = BitcoinDE_BuyOrderType;
+        viewC.orderType = BitcoinDE_OrderTypeBuy;
         viewC.currencyType = BitcoinDE_CurrencyTypeEthereum;
     }
     else if ([segue.identifier isEqualToString:OrdersViewControllerSellETHSegueKey]) {
         SOXOrdersViewController *viewC = segue.destinationController;
-        viewC.orderType = BitcoinDE_SellOrderType;
+        viewC.orderType = BitcoinDE_OrderTypeSell;
         viewC.currencyType = BitcoinDE_CurrencyTypeEthereum;
     }
     else if ([segue.identifier isEqualToString:AutomaticTradeBTCSegueKey]) {

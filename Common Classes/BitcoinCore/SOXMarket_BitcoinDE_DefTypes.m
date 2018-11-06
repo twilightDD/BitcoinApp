@@ -13,13 +13,13 @@
 + (NSString *)titleForOrderType:(BitcoinDE_OrderType)orderType {
     NSString *titleForOrderType = @"Error";
     switch (orderType) {
-        case BitcoinDE_UnknownOrderType:
+        case BitcoinDE_OrderTypeUnknown:
             titleForOrderType = @"All";
             break;
-        case  BitcoinDE_BuyOrderType:
+        case  BitcoinDE_OrderTypeBuy:
             titleForOrderType = @"Buy";
             break;
-        case  BitcoinDE_SellOrderType:
+        case  BitcoinDE_OrderTypeSell:
             titleForOrderType = @"Sell";
             break;
         default:
@@ -32,13 +32,13 @@
 + (NSString *)orderTypeStringForOrderType:(BitcoinDE_OrderType)orderType {
     NSString *orderTypeStringForOrderType = @"Error";
     switch (orderType) {
-        case BitcoinDE_UnknownOrderType:
+        case BitcoinDE_OrderTypeUnknown:
             orderTypeStringForOrderType = @"All";
             break;
-        case  BitcoinDE_BuyOrderType:
+        case  BitcoinDE_OrderTypeBuy:
             orderTypeStringForOrderType = @"buy";
             break;
-        case  BitcoinDE_SellOrderType:
+        case  BitcoinDE_OrderTypeSell:
             orderTypeStringForOrderType = @"sell";
             break;
         default:
@@ -49,12 +49,12 @@
 }
 
 + (BitcoinDE_OrderType)orderTypeForOrderTypeString:(NSString *)orderTypeString {
-    BitcoinDE_OrderType orderType = BitcoinDE_UnknownOrderType;
+    BitcoinDE_OrderType orderType = BitcoinDE_OrderTypeUnknown;
     if ([orderTypeString isEqualToString:@"buy"]) {
-        orderType = BitcoinDE_BuyOrderType;
+        orderType = BitcoinDE_OrderTypeBuy;
     }
     else if ([orderTypeString isEqualToString:@"sell"]) {
-        orderType = BitcoinDE_SellOrderType;
+        orderType = BitcoinDE_OrderTypeSell;
     }
 
     return orderType;

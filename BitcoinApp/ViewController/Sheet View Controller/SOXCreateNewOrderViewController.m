@@ -80,8 +80,8 @@
     [super viewWillAppear];
 
     // better save than sorry
-    if (self.orderType != BitcoinDE_BuyOrderType
-        && self.orderType != BitcoinDE_SellOrderType) {
+    if (self.orderType != BitcoinDE_OrderTypeBuy
+        && self.orderType != BitcoinDE_OrderTypeSell) {
         return;
     }
 
@@ -116,10 +116,10 @@
 
 - (void)setupPriceLimitValue {
     switch (self.orderType) {
-        case BitcoinDE_BuyOrderType:
+        case BitcoinDE_OrderTypeBuy:
             self.priceLimit = [SOXMarket_BitcoinDE_Core rateWeightedHalfForCurrencyType:self.currencyType];
             break;
-        case BitcoinDE_SellOrderType:
+        case BitcoinDE_OrderTypeSell:
             self.priceLimit = [SOXMarket_BitcoinDE_Core rateWeightedDoubleForCurrencyType:self.currencyType];
             break;
         default:
@@ -134,10 +134,10 @@
          The price shall not be less than 50% of the current market rate.
          #2 The value of the amount of bitcoin may not be lower than than €60.00
          */
-        if (self.orderType == BitcoinDE_BuyOrderType){
+        if (self.orderType == BitcoinDE_OrderTypeBuy){
             self.price = [SOXMarket_BitcoinDE_Core rateWeightedHalfForCurrencyType:self.currencyType];
         }
-        else if (self.orderType == BitcoinDE_SellOrderType) {
+        else if (self.orderType == BitcoinDE_OrderTypeSell) {
             self.price = [SOXMarket_BitcoinDE_Core rateWeightedForCurrencyType:self.currencyType];
         }
     }
@@ -167,7 +167,7 @@
     NSString *cancelButtonText = @"Cancel";
 
     NSString *shortCurrencyString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:self.currencyType];
-    if (self.orderType == BitcoinDE_BuyOrderType) {
+    if (self.orderType == BitcoinDE_OrderTypeBuy) {
         amountDescriptionTextFieldText = @"Amount to buy";
         maxAmountButtonHidden = YES;
         if (self.orderBookDataToReplace == nil) {
@@ -179,7 +179,7 @@
             createOrderButtonText = @"Change buy order";
         }
     }
-    else if (self.orderType == BitcoinDE_SellOrderType) {
+    else if (self.orderType == BitcoinDE_OrderTypeSell) {
         amountDescriptionTextFieldText = @"Amount to sell";
         maxAmountButtonTitle = [NSString stringWithFormat:@"Max %@"
                                 , shortCurrencyString];
@@ -208,12 +208,12 @@
     {
         NSString *volumeTextFieldText = @"Error";
         switch (self.orderType) {
-            case BitcoinDE_BuyOrderType:
+            case BitcoinDE_OrderTypeBuy:
                 volumeTextFieldText = [NSString stringWithFormat:@"Min. price: %@\n(50%% weighted rate)"
                                        , [SOXFormatters currencyStringForNumber:self.priceLimit
                                                                    roundingMode:NSNumberFormatterRoundUp]];
                 break;
-            case BitcoinDE_SellOrderType:
+            case BitcoinDE_OrderTypeSell:
                 volumeTextFieldText = [NSString stringWithFormat:@"Max. price: %@\n(200%% weighted rate)"
                                        , [SOXFormatters currencyStringForNumber:self.priceLimit
                                                                    roundingMode:NSNumberFormatterRoundDown]];
@@ -288,13 +288,13 @@
 
 - (void)setupUIBoxPaymentOptionHint {
     // Hint on buy: paymentOption depend on default via preferences on webside
-    if (self.orderType == BitcoinDE_BuyOrderType) {
+    if (self.orderType == BitcoinDE_OrderTypeBuy) {
         self.paymentOptionHintTextField.allowsEditingTextAttributes = YES;
         self.paymentOptionHintTextField.selectable = YES;
         [self.paymentOptionHintTextField setHyperlinkFormattingFromString:@"Express Trade Settings"
                                                             withURLString:@"https://www.bitcoin.de/de/express-trade/settings"];
     }
-    else if (self.orderType == BitcoinDE_SellOrderType) {
+    else if (self.orderType == BitcoinDE_OrderTypeSell) {
         self.paymentOptionHintTextField.stringValue = @"Sell orders are alway Express Orders";
     }
 }
@@ -319,8 +319,8 @@
 
     if (!self.price
         || [self.price isLessThan:[NSDecimalNumber zero]]
-        || (self.orderType == BitcoinDE_BuyOrderType && [self.price isLessThan:self.priceLimit])
-        || (self.orderType == BitcoinDE_SellOrderType && [self.price isGreaterThan:self.priceLimit])
+        || (self.orderType == BitcoinDE_OrderTypeBuy && [self.price isLessThan:self.priceLimit])
+        || (self.orderType == BitcoinDE_OrderTypeSell && [self.price isGreaterThan:self.priceLimit])
         ) {
         self.validInput = NO;
         return;
@@ -350,13 +350,13 @@
     if (priceIsZero) {
         volumeInformation = @"Confucius says:\nNo Price - No Profit";
     }
-    else if (self.orderType == BitcoinDE_BuyOrderType
+    else if (self.orderType == BitcoinDE_OrderTypeBuy
              && priceToLess) {
         volumeInformation = [NSString stringWithFormat:@"Price beneath minimal price (%@)"
                              , [SOXFormatters currencyStringForNumber:self.priceLimit
                                                          roundingMode:NSNumberFormatterRoundHalfUp]];
     }
-    else if (self.orderType == BitcoinDE_SellOrderType
+    else if (self.orderType == BitcoinDE_OrderTypeSell
              && priceToHigh) {
         volumeInformation = [NSString stringWithFormat:@"Price above maximal price (%@)"
                              , [SOXFormatters currencyStringForNumber:self.priceLimit
