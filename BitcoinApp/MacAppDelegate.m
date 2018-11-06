@@ -25,6 +25,7 @@
 
 @interface MacAppDelegate ()
 
+@property (weak, nonatomic) NSWindow *mainWindow;
 @property (readwrite, strong, nonatomic) SOXLogWindowController *errorWindowController;
 @property (readwrite, strong, nonatomic) SOXLogWindowController *eventWindowController;
 @property (strong, nonatomic) MASPreferencesWindowController *masPreferencesWindowController;
@@ -36,6 +37,7 @@
 @implementation MacAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    self.mainWindow = [NSApp mainWindow];
     // Insert code here to initialize your application
     
     [Fabric with:@[[Crashlytics class]]];
@@ -120,6 +122,11 @@
     DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+}
+
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag {
+    [self.mainWindow makeKeyAndOrderFront:self];
+    return YES;
 }
 
 #pragma mark - Action methods
