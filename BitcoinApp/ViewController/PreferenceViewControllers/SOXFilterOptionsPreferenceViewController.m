@@ -91,7 +91,18 @@
 
 #pragma mark - Private Methods
 - (void)setupUI {
-    self.headlineTextField.stringValue = @"Filter options for all Ordertables";
+    NSString *headlineText = @"Filter options for ";
+    if (self.orderType != BitcoinDE_UnknownOrderType
+        && self.currencyType != BitcoinDE_CurrencyTypeUnknown) {
+        NSString *text = [NSString stringWithFormat:@"%@ %@ table."
+                          , [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:self.orderType]
+                          , [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:self.currencyType]];
+        headlineText = [headlineText stringByAppendingString:text];
+    }
+    else {
+        headlineText = [headlineText stringByAppendingString:@"all order table"];
+    }
+    self.headlineTextField.stringValue = headlineText;
     self.countrySelectionBox.title = @"Show orders for countries";
     self.noSepaButton.title = @"Hide SEPA-only orders";
 
