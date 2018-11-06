@@ -11,7 +11,7 @@
 
 #import "SOXCreateNewOrderViewController.h"
 #import "SOXExecuteTradeViewController.h"
-#import "SOXFilterOrderViewController.h"
+#import "SOXSelectedCountriesPreferenceViewController.h"
 
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXSocketIO_BitcoinDE_Core.h"
@@ -22,7 +22,7 @@
 #import "SOXPreferenceCenter.h"
 
 #pragma mark - Interface
-@interface SOXOrdersViewController () <SOXMarketCoreServerRequestProtocol, SOXMarketCoreErrorProtocol, SOXSocketIOCoreProtocol, SOXChangeOrderProtocol, NSTableViewDelegate, SOXFilterOrderViewControllerDelegate>
+@interface SOXOrdersViewController () <SOXMarketCoreServerRequestProtocol, SOXMarketCoreErrorProtocol, SOXSocketIOCoreProtocol, SOXChangeOrderProtocol, NSTableViewDelegate, SOXSelectedCountriesViewControllerDelegate>
 
 #pragma mark IBOutlets
 @property (weak) IBOutlet NSTextField *titleTextField;
@@ -94,9 +94,9 @@
 #pragma mark - Action methods
 - (IBAction)furtherFiltersAction:(NSButton *)sender {
     // Create view controller
-    NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"MacMain"
-                                                         bundle:nil];
-    SOXFilterOrderViewController *viewController = [storyboard instantiateControllerWithIdentifier:@"SOXFilterOrderViewControllerIdentifier"];
+    SOXSelectedCountriesPreferenceViewController *viewController =
+    [[SOXSelectedCountriesPreferenceViewController alloc] initWithNibName:@"SOXSelectedCountriesPreferenceViewController"
+                                                                   bundle:nil];
     viewController.delegate = self;
     viewController.orderType = self.orderType;
     viewController.currencyType = self.currencyType;
@@ -106,7 +106,7 @@
     [self.furtherFilterPopover setBehavior:NSPopoverBehaviorTransient];
     [self.furtherFilterPopover setAnimates:YES];
     [self.furtherFilterPopover setContentViewController:viewController];
-    [self.furtherFilterPopover setContentSize:NSMakeSize(725, 300)];
+    [self.furtherFilterPopover setContentSize:NSMakeSize(890, 374)];
     
     // Convert point to main window coordinates
     NSRect entryRect = [sender convertRect:sender.bounds

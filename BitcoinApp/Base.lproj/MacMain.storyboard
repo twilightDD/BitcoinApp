@@ -4975,55 +4975,6 @@ Gw
             </objects>
             <point key="canvasLocation" x="1213" y="883"/>
         </scene>
-        <!--Filter Order View Controller-->
-        <scene sceneID="xFH-Tp-JmA">
-            <objects>
-                <viewController identifier="SOXFilterOrderViewControllerIdentifier" storyboardIdentifier="SOXFilterOrderViewControllerIdentifier" id="NT5-07-VYi" customClass="SOXFilterOrderViewController" sceneMemberID="viewController">
-                    <view key="view" id="eCx-9e-aa0" customClass="SOXView">
-                        <rect key="frame" x="0.0" y="0.0" width="800" height="362"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <box title="Select countries" translatesAutoresizingMaskIntoConstraints="NO" id="8Pn-gW-UjZ">
-                                <rect key="frame" x="17" y="52" width="766" height="290"/>
-                                <view key="contentView" id="d9v-jx-tl0" customClass="SOXView">
-                                    <rect key="frame" x="2" y="2" width="762" height="273"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="286" id="Afn-va-Rtl"/>
-                                    <constraint firstAttribute="width" constant="760" id="mdB-sC-6he"/>
-                                </constraints>
-                            </box>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="02B-cx-6kj">
-                                <rect key="frame" x="18" y="18" width="74" height="18"/>
-                                <buttonCell key="cell" type="check" title="No Sepa" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="YWa-ni-03n">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="noSepaButtonAction:" target="NT5-07-VYi" id="ghm-Vm-hl6"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="8Pn-gW-UjZ" firstAttribute="top" secondItem="eCx-9e-aa0" secondAttribute="top" constant="20" id="42k-Vt-rqm"/>
-                            <constraint firstItem="02B-cx-6kj" firstAttribute="leading" secondItem="eCx-9e-aa0" secondAttribute="leading" constant="20" id="57y-Wt-JiT"/>
-                            <constraint firstAttribute="trailing" secondItem="8Pn-gW-UjZ" secondAttribute="trailing" constant="20" id="T5x-Rt-doS"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="02B-cx-6kj" secondAttribute="trailing" constant="20" symbolic="YES" id="XpY-Pj-n8W"/>
-                            <constraint firstAttribute="bottom" secondItem="02B-cx-6kj" secondAttribute="bottom" constant="20" id="kQz-LW-aBU"/>
-                            <constraint firstItem="02B-cx-6kj" firstAttribute="top" secondItem="d9v-jx-tl0" secondAttribute="bottom" constant="20" id="nMt-Pt-xFT"/>
-                            <constraint firstItem="8Pn-gW-UjZ" firstAttribute="leading" secondItem="eCx-9e-aa0" secondAttribute="leading" constant="20" id="wnN-Y1-fHD"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="noSepaButton" destination="02B-cx-6kj" id="eCb-K7-2NQ"/>
-                        <outlet property="selectCountriesBox" destination="8Pn-gW-UjZ" id="fsm-vb-l4q"/>
-                    </connections>
-                </viewController>
-                <customObject id="92E-6z-4gq" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2016" y="1643.5"/>
-        </scene>
         <!--Trade Statistics View Controller-->
         <scene sceneID="W47-hf-8nR">
             <objects>

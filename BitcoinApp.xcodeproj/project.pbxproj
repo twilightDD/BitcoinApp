@@ -188,8 +188,6 @@
 		D0BCFCA9200423F8004F9E57 /* SOXFeeCoinValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BCFCA7200423F8004F9E57 /* SOXFeeCoinValueTransformer.m */; };
 		D0BCFCAC20042620004F9E57 /* SOXStateValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BCFCAB20042620004F9E57 /* SOXStateValueTransformer.m */; };
 		D0BCFCAD20042620004F9E57 /* SOXStateValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BCFCAB20042620004F9E57 /* SOXStateValueTransformer.m */; };
-		D0C512F6215C335800B2B4B0 /* SOXFilterOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C512F5215C335800B2B4B0 /* SOXFilterOrderViewController.m */; };
-		D0C512F7215C335800B2B4B0 /* SOXFilterOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C512F5215C335800B2B4B0 /* SOXFilterOrderViewController.m */; };
 		D0D0B3E020EAB27100F12A6B /* SOXTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D0B3DF20EAB27100F12A6B /* SOXTableView.m */; };
 		D0D0B3E120EAB27100F12A6B /* SOXTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D0B3DF20EAB27100F12A6B /* SOXTableView.m */; };
 		D0D0B3E320EAC0DD00F12A6B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D0B3E220EAC0DD00F12A6B /* Security.framework */; };
@@ -404,8 +402,6 @@
 		D0BCFCA7200423F8004F9E57 /* SOXFeeCoinValueTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXFeeCoinValueTransformer.m; sourceTree = "<group>"; };
 		D0BCFCAA20042620004F9E57 /* SOXStateValueTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXStateValueTransformer.h; sourceTree = "<group>"; };
 		D0BCFCAB20042620004F9E57 /* SOXStateValueTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXStateValueTransformer.m; sourceTree = "<group>"; };
-		D0C512F4215C335800B2B4B0 /* SOXFilterOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXFilterOrderViewController.h; sourceTree = "<group>"; };
-		D0C512F5215C335800B2B4B0 /* SOXFilterOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXFilterOrderViewController.m; sourceTree = "<group>"; };
 		D0D0B3DE20EAB27100F12A6B /* SOXTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXTableView.h; sourceTree = "<group>"; };
 		D0D0B3DF20EAB27100F12A6B /* SOXTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXTableView.m; sourceTree = "<group>"; };
 		D0D0B3E220EAC0DD00F12A6B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -867,8 +863,6 @@
 		D0C512F3215C331F00B2B4B0 /* Popover Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D0C512F4215C335800B2B4B0 /* SOXFilterOrderViewController.h */,
-				D0C512F5215C335800B2B4B0 /* SOXFilterOrderViewController.m */,
 			);
 			path = "Popover Controller";
 			sourceTree = "<group>";
@@ -1411,7 +1405,6 @@
 				D06DE29321824A7C002BC973 /* SOXTradeStatisticsViewController.m in Sources */,
 				D021507B20474AEC005A0932 /* SOXDataConverter_BitcoinDE.m in Sources */,
 				D06DE29721824CC2002BC973 /* SOXStatisticsAbstractViewController.m in Sources */,
-				D0C512F7215C335800B2B4B0 /* SOXFilterOrderViewController.m in Sources */,
 				D0F7027E216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.m in Sources */,
 				D021507C20474AEC005A0932 /* MacViewController.m in Sources */,
 				D021507D20474AEC005A0932 /* SOXKeys_BitcoinDE.m in Sources */,
@@ -1489,7 +1482,6 @@
 				D06DE29221824A7C002BC973 /* SOXTradeStatisticsViewController.m in Sources */,
 				D02ED5AE1E814CA600AA9448 /* SOXDataConverter_BitcoinDE.m in Sources */,
 				D06DE29621824CC2002BC973 /* SOXStatisticsAbstractViewController.m in Sources */,
-				D0C512F6215C335800B2B4B0 /* SOXFilterOrderViewController.m in Sources */,
 				D0F7027D216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.m in Sources */,
 				D063E9201E74BF97006E2D17 /* MacViewController.m in Sources */,
 				D0E5C5031E809C9800352985 /* SOXKeys_BitcoinDE.m in Sources */,

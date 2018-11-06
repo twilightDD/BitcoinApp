@@ -9,6 +9,9 @@
 #import "SOXAbstractPreferenceViewController.h"
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
+static NSString *FilterOrderViewSelectedCountriesKey = @"selectedCountries";
+static NSString *FilterOrderViewNoSepaKey = @"noSepa";
+
 @protocol SOXSelectedCountriesViewControllerDelegate
 
 - (void)filterSelectionChangedForKey:(NSString *)key withObject:(id)object;

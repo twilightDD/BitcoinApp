@@ -105,7 +105,8 @@
     self.countryButtons  = [SOXSelectedCountriesPreferenceViewController addCountryButtonsToView:self.countrySelectionView];
 
     NSArray <NSString *> *supportedCountryCodes = [SOXPreferenceCenter supportedCountryCodes];
-    NSArray <NSString *> *activeCountryCodes = [SOXPreferenceCenter activeCountryCodes];
+    NSArray <NSString *> *activeCountryCodes = [SOXPreferenceCenter activeCountryCodesforOrderType:self.orderType
+                                                                                      currencyType:self.currencyType];
     SEL countryButtonActionSelector = NSSelectorFromString(@"countryButtonAction:");
     [self.countryButtons enumerateObjectsUsingBlock:^(NSButton * _Nonnull countryButton,
                                                       NSUInteger idx,
@@ -138,7 +139,13 @@
 
 - (void)updateSelectedCountriesUserDefaults {
     NSArray *selectedCountryCodes = [self selectedCountryCodes];
-    [SOXPreferenceCenter setActiveCountryCodes:selectedCountryCodes];
+
+    [self informDelegateForKey:FilterOrderViewSelectedCountriesKey
+                    withObject:selectedCountryCodes];
+
+    [SOXPreferenceCenter setActiveCountryCodes:selectedCountryCodes
+                                  forOrderType:self.orderType
+                                  currencyType:self.currencyType];
 }
 
 - (void)updateShowSepaUserDefaults {
@@ -183,8 +190,21 @@
     [self updateSelectedCountriesUserDefaults];
 }
 
-- (IBAction)noSepaButtonAction:(NSButton *)sender {
+- (IBAction)noSepaButtonAction:(NSButton *)button {
+    NSControlStateValue state = button.state;
+    [self informDelegateForKey:FilterOrderViewNoSepaKey
+                    withObject:@(state)];
+
     [self updateShowSepaUserDefaults];
+}
+
+#pragma mark - SOXSelectedCountriesViewControllerDelegate
+- (void)informDelegateForKey:(NSString *)key withObject:(id)object {
+    NSParameterAssert(key);
+    NSParameterAssert(object);
+
+    [self.delegate filterSelectionChangedForKey:key
+                                     withObject:object];
 }
 
 #pragma mark - MASPreferencesViewController
