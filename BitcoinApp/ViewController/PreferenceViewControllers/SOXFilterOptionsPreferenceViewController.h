@@ -1,5 +1,5 @@
 //
-//  SOXSelectedCountriesPreferenceViewController.h
+//  SOXFilterOptionsPreferenceViewController.h
 //  BitcoinApp
 //
 //  Created by Peter Hauke on 08.10.18.
@@ -18,7 +18,7 @@ static NSString *FilterOrderViewNoSepaKey = @"noSepa";
 
 @end
 
-@interface SOXSelectedCountriesPreferenceViewController : SOXAbstractPreferenceViewController
+@interface SOXFilterOptionsPreferenceViewController : SOXAbstractPreferenceViewController
 
 @property (nonatomic) BitcoinDE_OrderType orderType;
 @property (nonatomic) BitcoinDE_CurrencyType currencyType;

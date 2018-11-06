@@ -1,18 +1,18 @@
 //
-//  SOXSelectedCountriesPreferenceViewController.m
+//  SOXFilterOptionsPreferenceViewController.m
 //  BitcoinApp
 //
 //  Created by Peter Hauke on 08.10.18.
 //  Copyright © 2018 2sox / Peter Hauke. All rights reserved.
 //
 
-#import "SOXSelectedCountriesPreferenceViewController.h"
+#import "SOXFilterOptionsPreferenceViewController.h"
 
 #import "SOXPreferenceCenter.h"
 #import "SOXView.h"
 
 #pragma mark - Interface
-@interface SOXSelectedCountriesPreferenceViewController ()
+@interface SOXFilterOptionsPreferenceViewController ()
 
 #pragma mark | IBOutlets
 @property (strong) IBOutlet NSTextField *headlineTextField;
@@ -33,7 +33,7 @@
 @end
 
 #pragma mark - Implementation
-@implementation SOXSelectedCountriesPreferenceViewController
+@implementation SOXFilterOptionsPreferenceViewController
 
 #pragma mark Init & Co.
 - (void)viewDidLoad {
@@ -102,7 +102,7 @@
 - (void)setupCountryButtons {
     self.countrySelectionView.autoresizingMask = NSViewWidthSizable;
 
-    self.countryButtons  = [SOXSelectedCountriesPreferenceViewController addCountryButtonsToView:self.countrySelectionView];
+    self.countryButtons  = [SOXFilterOptionsPreferenceViewController addCountryButtonsToView:self.countrySelectionView];
 
     NSArray <NSString *> *supportedCountryCodes = [SOXPreferenceCenter supportedCountryCodes];
     NSArray <NSString *> *activeCountryCodes = [SOXPreferenceCenter activeCountryCodesforOrderType:self.orderType

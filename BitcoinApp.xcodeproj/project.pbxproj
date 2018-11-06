@@ -210,10 +210,10 @@
 		D0F70272216AEA8C00BA7EDF /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F7026F216AEA8800BA7EDF /* MASPreferencesWindow.xib */; };
 		D0F70276216AECE900BA7EDF /* SOXAbstractPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F70274216AECE900BA7EDF /* SOXAbstractPreferenceViewController.m */; };
 		D0F70277216AECE900BA7EDF /* SOXAbstractPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F70274216AECE900BA7EDF /* SOXAbstractPreferenceViewController.m */; };
-		D0F7027D216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F7027B216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.m */; };
-		D0F7027E216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F7027B216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.m */; };
-		D0F7027F216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F7027C216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.xib */; };
-		D0F70280216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F7027C216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.xib */; };
+		D0F7027D216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F7027B216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.m */; };
+		D0F7027E216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F7027B216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.m */; };
+		D0F7027F216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F7027C216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.xib */; };
+		D0F70280216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F7027C216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.xib */; };
 		D0FD14A12190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FD149F2190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.m */; };
 		D0FD14A22190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FD149F2190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.m */; };
 		D0FD14A32190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0FD14A02190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.xib */; };
@@ -423,9 +423,9 @@
 		D0F70270216AEA8800BA7EDF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Pods/MASPreferences/Framework/en.lproj/MASPreferencesWindow.xib; sourceTree = "<group>"; };
 		D0F70273216AECE900BA7EDF /* SOXAbstractPreferenceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXAbstractPreferenceViewController.h; sourceTree = "<group>"; };
 		D0F70274216AECE900BA7EDF /* SOXAbstractPreferenceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXAbstractPreferenceViewController.m; sourceTree = "<group>"; };
-		D0F7027A216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXSelectedCountriesPreferenceViewController.h; sourceTree = "<group>"; };
-		D0F7027B216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXSelectedCountriesPreferenceViewController.m; sourceTree = "<group>"; };
-		D0F7027C216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SOXSelectedCountriesPreferenceViewController.xib; sourceTree = "<group>"; };
+		D0F7027A216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXFilterOptionsPreferenceViewController.h; sourceTree = "<group>"; };
+		D0F7027B216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXFilterOptionsPreferenceViewController.m; sourceTree = "<group>"; };
+		D0F7027C216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SOXFilterOptionsPreferenceViewController.xib; sourceTree = "<group>"; };
 		D0FD149E2190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXKeysAndSecretPreferenceHelpViewController.h; sourceTree = "<group>"; };
 		D0FD149F2190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXKeysAndSecretPreferenceHelpViewController.m; sourceTree = "<group>"; };
 		D0FD14A02190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SOXKeysAndSecretPreferenceHelpViewController.xib; sourceTree = "<group>"; };
@@ -889,9 +889,9 @@
 				D0FD149E2190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.h */,
 				D0FD149F2190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.m */,
 				D0FD14A02190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.xib */,
-				D0F7027A216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.h */,
-				D0F7027B216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.m */,
-				D0F7027C216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.xib */,
+				D0F7027A216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.h */,
+				D0F7027B216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.m */,
+				D0F7027C216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.xib */,
 				D02AA76F216BF4A500F2EA95 /* SOXDebugPreferencesViewController.h */,
 				D02AA770216BF4A500F2EA95 /* SOXDebugPreferencesViewController.m */,
 				D02AA771216BF4A500F2EA95 /* SOXDebugPreferencesViewController.xib */,
@@ -1086,7 +1086,7 @@
 				D021509620474AEC005A0932 /* Assets.xcassets in Resources */,
 				D021509720474AEC005A0932 /* MacMain.storyboard in Resources */,
 				D021509820474AEC005A0932 /* SOXLogWindowController.xib in Resources */,
-				D0F70280216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.xib in Resources */,
+				D0F70280216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.xib in Resources */,
 				D0F70265216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.xib in Resources */,
 				D0FD14A42190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.xib in Resources */,
 			);
@@ -1101,7 +1101,7 @@
 				D0F70272216AEA8C00BA7EDF /* MASPreferencesWindow.xib in Resources */,
 				D063E9281E74BF97006E2D17 /* MacMain.storyboard in Resources */,
 				D0EB0E551F855B54004839C2 /* SOXLogWindowController.xib in Resources */,
-				D0F7027F216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.xib in Resources */,
+				D0F7027F216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.xib in Resources */,
 				D0F70264216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.xib in Resources */,
 				D0FD14A32190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.xib in Resources */,
 			);
@@ -1405,7 +1405,7 @@
 				D06DE29321824A7C002BC973 /* SOXTradeStatisticsViewController.m in Sources */,
 				D021507B20474AEC005A0932 /* SOXDataConverter_BitcoinDE.m in Sources */,
 				D06DE29721824CC2002BC973 /* SOXStatisticsAbstractViewController.m in Sources */,
-				D0F7027E216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.m in Sources */,
+				D0F7027E216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.m in Sources */,
 				D021507C20474AEC005A0932 /* MacViewController.m in Sources */,
 				D021507D20474AEC005A0932 /* SOXKeys_BitcoinDE.m in Sources */,
 				D0FFEA60212223F9000F09FF /* SOXPage_BitcoinDE_Data.m in Sources */,
@@ -1482,7 +1482,7 @@
 				D06DE29221824A7C002BC973 /* SOXTradeStatisticsViewController.m in Sources */,
 				D02ED5AE1E814CA600AA9448 /* SOXDataConverter_BitcoinDE.m in Sources */,
 				D06DE29621824CC2002BC973 /* SOXStatisticsAbstractViewController.m in Sources */,
-				D0F7027D216AF1BF00BA7EDF /* SOXSelectedCountriesPreferenceViewController.m in Sources */,
+				D0F7027D216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.m in Sources */,
 				D063E9201E74BF97006E2D17 /* MacViewController.m in Sources */,
 				D0E5C5031E809C9800352985 /* SOXKeys_BitcoinDE.m in Sources */,
 				D0FFEA5F212223F9000F09FF /* SOXPage_BitcoinDE_Data.m in Sources */,

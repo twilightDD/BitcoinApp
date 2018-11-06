@@ -19,7 +19,7 @@
 // Prefs
 #import "MASPreferences.h"
 #import "SOXKeysAndSecretPreferenceViewController.h"
-#import "SOXSelectedCountriesPreferenceViewController.h"
+#import "SOXFilterOptionsPreferenceViewController.h"
 #import "SOXDebugPreferencesViewController.h"
 
 
@@ -91,8 +91,8 @@
     = [[SOXKeysAndSecretPreferenceViewController alloc] initWithNibName:@"SOXKeysAndSecretPreferenceViewController"
                                                                  bundle:nil];
     
-    SOXSelectedCountriesPreferenceViewController *selectedCountriesPreferenceViewController
-    = [[SOXSelectedCountriesPreferenceViewController alloc] initWithNibName:@"SOXSelectedCountriesPreferenceViewController"
+    SOXFilterOptionsPreferenceViewController *selectedCountriesPreferenceViewController
+    = [[SOXFilterOptionsPreferenceViewController alloc] initWithNibName:@"SOXFilterOptionsPreferenceViewController"
                                                                      bundle:nil];
     
     

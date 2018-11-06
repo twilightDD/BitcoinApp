@@ -11,7 +11,7 @@
 
 #import "SOXCreateNewOrderViewController.h"
 #import "SOXExecuteTradeViewController.h"
-#import "SOXSelectedCountriesPreferenceViewController.h"
+#import "SOXFilterOptionsPreferenceViewController.h"
 
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXSocketIO_BitcoinDE_Core.h"
@@ -94,8 +94,8 @@
 #pragma mark - Action methods
 - (IBAction)furtherFiltersAction:(NSButton *)sender {
     // Create view controller
-    SOXSelectedCountriesPreferenceViewController *viewController =
-    [[SOXSelectedCountriesPreferenceViewController alloc] initWithNibName:@"SOXSelectedCountriesPreferenceViewController"
+    SOXFilterOptionsPreferenceViewController *viewController =
+    [[SOXFilterOptionsPreferenceViewController alloc] initWithNibName:@"SOXFilterOptionsPreferenceViewController"
                                                                    bundle:nil];
     viewController.delegate = self;
     viewController.orderType = self.orderType;
