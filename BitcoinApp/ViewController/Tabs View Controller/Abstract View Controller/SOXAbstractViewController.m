@@ -31,6 +31,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.spinningBackgroundView.hidden = YES;
+
     for (NSTableColumn *column in self.tableView.tableColumns) {
         NSFont *font = [NSFont systemFontOfSize:[NSFont systemFontSize]];
 
@@ -54,21 +56,16 @@
                                                   }];
 }
 
-- (void)viewWillAppear {
-    [super viewWillAppear];
-    self.spinningBackgroundView.hidden = YES;
-    self.spinningBackgroundView.layer.backgroundColor = [NSColor colorWithCalibratedRed:0
-                                                                                  green:0
-                                                                                   blue:0
-                                                                                  alpha:0.1].CGColor;
-}
-
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self.apiKeysAndSecretsDidChangeObserver];
 }
 
 #pragma mark - Custom Views
 - (void)enableSpinningWheel {
+    self.spinningBackgroundView.layer.backgroundColor = [NSColor colorWithCalibratedRed:0
+                                                                                  green:0
+                                                                                   blue:0
+                                                                                  alpha:0.1].CGColor;
     self.spinningBackgroundView.hidden = NO;
     [self.circularProgressIndicator startAnimation:nil];
 }
