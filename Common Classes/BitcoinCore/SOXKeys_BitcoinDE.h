@@ -11,6 +11,8 @@
 @interface SOXKeys_BitcoinDE : NSObject
 
 #pragma mark - Notifications
+FOUNDATION_EXPORT NSString *const SOXAPIKeysAndSecretsDidChangeNotification;
+
 FOUNDATION_EXPORT NSString *const BitcoinDE_Notification_RequestShowAccountInfo;
 FOUNDATION_EXPORT NSString *const BitcoinDE_Notification_RequestShowRates;
 FOUNDATION_EXPORT NSString *const BitcoinDE_Notification_PresentBannerInformationForCurrency;

@@ -7,10 +7,12 @@
 //
 
 #import "SOXPreferencesCore.h"
+#import <Cocoa/Cocoa.h>
+
+#import "SOXKeys_BitcoinDE.h"
+#import "SOXConstants.h"
 
 #import "SAMKeychain.h"
-
-#import "SOXConstants.h"
 
 #pragma mark - Interface
 @interface SOXPreferencesCore ()
@@ -46,8 +48,9 @@
 
     NSMutableArray *keysAndSecrets = [SOXPreferencesCore sharedCore].keysAndSecrets;
 
-    if (keysAndSecrets.count >=  1) {
-        NSMutableDictionary *keysAndSecretDictionary = [[SOXPreferencesCore sharedCore].keysAndSecrets objectAtIndex:index];
+    if (keysAndSecrets.count >  0) {
+        
+        NSMutableDictionary *keysAndSecretDictionary = [keysAndSecrets objectAtIndex:index];
         key = [keysAndSecretDictionary objectForKey:APIUserKey];
     }
 
@@ -73,9 +76,31 @@
 + (BOOL)saveKeysAndSecrets:(NSMutableArray <NSMutableDictionary*> *)keysAndSecrets
                      error:(NSError *)error {
     SOXPreferencesCore *preferenceCore = [SOXPreferencesCore sharedCore];
+
+    __block BOOL completelyNewKeysAndSecrets = NO;
+    // compare old with new keysAndSecrets
+    // on completely new we need to update banner and reset all tableViews in UI
+    {
+        NSArray *oldKeysAndSecrets = preferenceCore.keysAndSecrets;
+        [keysAndSecrets enumerateObjectsUsingBlock:^(NSMutableDictionary * _Nonnull keyAndSecretDict,
+                                                     NSUInteger idx,
+                                                     BOOL * _Nonnull stop) {
+            completelyNewKeysAndSecrets = ![oldKeysAndSecrets containsObject:keyAndSecretDict];
+            *stop = completelyNewKeysAndSecrets;
+        }];
+    }
     preferenceCore.keysAndSecrets = keysAndSecrets;
 
     BOOL success = [preferenceCore saveToKeychain:error];
+    if (error) {
+        NSAlert *saveAlert = [NSAlert alertWithError:error];
+        [saveAlert runModal];
+    }
+    else if (success
+             && completelyNewKeysAndSecrets == YES) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:SOXAPIKeysAndSecretsDidChangeNotification
+                                                            object:nil];
+    }
 
     return success;
 }

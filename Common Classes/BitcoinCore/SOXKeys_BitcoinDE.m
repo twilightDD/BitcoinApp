@@ -11,6 +11,8 @@
 @implementation SOXKeys_BitcoinDE
 
 #pragma mark - Notifications
+NSString *const SOXAPIKeysAndSecretsDidChangeNotification   = @"API Key and Secret Did Change";
+
 NSString *const BitcoinDE_Notification_RequestShowAccountInfo   = @"Notification_RequestShowAccountInfo";
 NSString *const BitcoinDE_Notification_RequestShowRates         = @"Notification_RequestShowRates";
 NSString *const BitcoinDE_Notification_PresentBannerInformationForCurrency = @"Notification_PresentBannerInformationForCurrency";

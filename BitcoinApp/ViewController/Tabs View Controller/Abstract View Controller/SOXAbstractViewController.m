@@ -21,6 +21,8 @@
 
 @property (strong) IBOutlet NSView *noDataBackgroundView;
 
+#pragma mark | Properties
+@property (strong, nonatomic) id apiKeysAndSecretsDidChangeObserver;
 
 @end
 
@@ -40,7 +42,16 @@
         [column.dataCell setFont:font];
     }
 
-
+    weakify(self);
+    self.apiKeysAndSecretsDidChangeObserver =
+    [[NSNotificationCenter defaultCenter] addObserverForName:SOXAPIKeysAndSecretsDidChangeNotification
+                                                      object:nil
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification * _Nonnull note) {
+                                                      strongify(self);
+                                                      self.arrayControllerDatas = [NSMutableArray array];
+                                                      [self.arrayController rearrangeObjects];
+                                                  }];
 }
 
 - (void)viewWillAppear {
@@ -50,6 +61,10 @@
                                                                                   green:0
                                                                                    blue:0
                                                                                   alpha:0.1].CGColor;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self.apiKeysAndSecretsDidChangeObserver];
 }
 
 #pragma mark - Custom Views

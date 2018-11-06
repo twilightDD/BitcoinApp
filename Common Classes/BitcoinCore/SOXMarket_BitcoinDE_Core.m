@@ -59,7 +59,6 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 @property (copy, nonatomic) NSString *apiKey;
 @property (copy, nonatomic) NSString *apiSecret;
 @property (nonatomic) NSUInteger apiPointer;
-@property (nonatomic) NSUInteger apiPointerLimit;
 
 //@property (weak, nonatomic) id delegateForRequests;
 @property (weak, nonatomic) id <SOXBannerDataProtocol> delegateForBannerUpdates;
@@ -131,7 +130,6 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 #endif
         sharedCore.apiPointer = 0;
         // Keychain
-        sharedCore.apiPointerLimit = [SOXPreferencesCore countOfValidKeychainItems];
     });
     return sharedCore;
 }
@@ -1053,7 +1051,7 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 
 - (void)increaseApiPointer {
     self.apiPointer++;
-    if (self.apiPointer >= self.apiPointerLimit) {
+    if (self.apiPointer >= [SOXPreferencesCore countOfValidKeychainItems] ) {
         self.apiPointer = 0;
     }
 }

@@ -71,6 +71,7 @@
 @property (strong, nonatomic) id requestShowAccountInfoNotification;
 @property (strong, nonatomic) id requestShowRatesNotification;
 @property (strong, nonatomic) id presentBannerInformationForCurrencyNotification;
+@property (strong, nonatomic) id apiKeysAndSecretsDidChangeObserver;
 
 @end
 
@@ -90,6 +91,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self.requestShowAccountInfoNotification];
     [[NSNotificationCenter defaultCenter] removeObserver:self.requestShowRatesNotification];
     [[NSNotificationCenter defaultCenter] removeObserver:self.presentBannerInformationForCurrencyNotification];
+    [[NSNotificationCenter defaultCenter] removeObserver:self.apiKeysAndSecretsDidChangeObserver];
 }
 
 #pragma mark - Private methods
@@ -97,32 +99,44 @@
     NSOperationQueue *mainQueue = [NSOperationQueue mainQueue];
     
     weakify(self)
-    self.requestShowAccountInfoNotification = [[NSNotificationCenter defaultCenter] addObserverForName:BitcoinDE_Notification_RequestShowAccountInfo
-                                                                                                object:nil
-                                                                                                 queue:mainQueue
-                                                                                            usingBlock:^(NSNotification * _Nonnull note) {
-                                                                                                strongify(self)
-                                                                                                [self answerOfServerRequest:note.object];
-                                                                                            }
-                                               ];
+    self.requestShowAccountInfoNotification =
+    [[NSNotificationCenter defaultCenter] addObserverForName:BitcoinDE_Notification_RequestShowAccountInfo
+                                                      object:nil
+                                                       queue:mainQueue
+                                                  usingBlock:^(NSNotification * _Nonnull note) {
+                                                      strongify(self)
+                                                      [self answerOfServerRequest:note.object];
+                                                  }
+     ];
     
-    self.requestShowRatesNotification = [[NSNotificationCenter defaultCenter] addObserverForName:BitcoinDE_Notification_RequestShowRates
-                                                                                          object:nil
-                                                                                           queue:mainQueue
-                                                                                      usingBlock:^(NSNotification * _Nonnull note) {
-                                                                                          strongify(self)
-                                                                                          [self answerOfServerRequest:note.object];
-                                                                                      }
-                                         ];
+    self.requestShowRatesNotification =
+    [[NSNotificationCenter defaultCenter] addObserverForName:BitcoinDE_Notification_RequestShowRates
+                                                      object:nil
+                                                       queue:mainQueue
+                                                  usingBlock:^(NSNotification * _Nonnull note) {
+                                                      strongify(self)
+                                                      [self answerOfServerRequest:note.object];
+                                                  }
+     ];
 
-    self.presentBannerInformationForCurrencyNotification = [[NSNotificationCenter defaultCenter] addObserverForName:BitcoinDE_Notification_PresentBannerInformationForCurrency
-                                                                                                object:nil
-                                                                                                 queue:mainQueue
-                                                                                            usingBlock:^(NSNotification * _Nonnull note) {
-                                                                                                strongify(self)
-                                                                                                [self presentBannerForCurrencyType:note];
-                                                                                            }
-                                                            ];
+    self.presentBannerInformationForCurrencyNotification =
+    [[NSNotificationCenter defaultCenter] addObserverForName:BitcoinDE_Notification_PresentBannerInformationForCurrency
+                                                      object:nil
+                                                       queue:mainQueue
+                                                  usingBlock:^(NSNotification * _Nonnull note) {
+                                                      strongify(self)
+                                                      [self presentBannerForCurrencyType:note];
+                                                  }
+     ];
+
+    self.apiKeysAndSecretsDidChangeObserver =
+    [[NSNotificationCenter defaultCenter] addObserverForName:SOXAPIKeysAndSecretsDidChangeNotification
+                                                      object:nil
+                                                       queue:mainQueue
+                                                  usingBlock:^(NSNotification * _Nonnull note) {
+                                                      [[SOXMarket_BitcoinDE_Core sharedCore] startAccountInfoUpdate];
+                                                      [[SOXMarket_BitcoinDE_Core sharedCore] startAllRatesUpdate];
+                                                  }];
 }
 
 - (void)setupUI {
