@@ -45,6 +45,7 @@
 @property (nonatomic, strong) NSPopover *furtherFilterPopover;
 
 @property (strong, nonatomic) id activeCountryCodesPreferencesDidChangeObserver;
+@property (strong, nonatomic) id showNoSepaOrdersPreferencesDidChangeObserver;
 
 @end
 
@@ -87,6 +88,7 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self.activeCountryCodesPreferencesDidChangeObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:self.showNoSepaOrdersPreferencesDidChangeObserver];
 }
 
 #pragma mark - Action methods
@@ -173,6 +175,15 @@
                                                   usingBlock:^(NSNotification * _Nonnull note) {
                                                       NSArray *activeCountryCodes = note.object;
                                                       [self updateSelectedCountriesPredicateForCounties:activeCountryCodes];
+                                                  }];
+
+    self.showNoSepaOrdersPreferencesDidChangeObserver =
+    [[NSNotificationCenter defaultCenter] addObserverForName:ShowNoSepaOrdersPreferencesDidChangeNotification
+                                                      object:nil
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification * _Nonnull note) {
+                                                      NSControlStateValue controlStateValue = [note.object integerValue];
+                                                      [self updatePaymentOptionPredicateForControlStateValue:controlStateValue];
                                                   }];
 }
 

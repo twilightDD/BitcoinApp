@@ -16,12 +16,16 @@
 
 #pragma mark | IBOutlets
 @property (strong) IBOutlet NSTextField *headlineTextField;
-@property (strong) IBOutlet SOXView *countrySelectionView;
 
+// Countries
+@property (strong) IBOutlet NSBox *countrySelectionBox;
+@property (strong) IBOutlet SOXView *countrySelectionView;
 @property (strong) IBOutlet NSButton *enableAllButton;
 @property (strong) IBOutlet NSButton *enableDefaultsButton;
 @property (strong) IBOutlet NSButton *disableAllButton;
 
+// Payment Option
+@property (strong) IBOutlet NSButton *noSepaButton;
 
 #pragma mark | Properties
 @property (strong, nonatomic) NSArray <NSButton *> *countryButtons;
@@ -38,14 +42,7 @@
     [self setupUI];
 }
 
-
-#pragma mark - Private Methods
-- (void)setupUI {
-    self.headlineTextField.stringValue = @"Einstellungen für alle OrderViews";
-
-    [self setupCountryButtons];
-}
-
+#pragma mark - Public Class Methods
 + (NSArray <NSButton *> *)addCountryButtonsToView:(NSView *)view {
     __block NSMutableArray *countryButtons = [NSMutableArray array];
 
@@ -54,7 +51,7 @@
 
 
     CGFloat basicX = 20;
-    CGFloat basicY = 20;
+    CGFloat basicY = -10;
     CGFloat deltaY = 24;
     CGFloat height = 16;
     CGFloat width = 190;
@@ -70,7 +67,7 @@
                                                        target:nil
                                                        action:nil];
         countryButton.tag = idx;
-    
+
 
 
         // set position
@@ -88,8 +85,18 @@
         [countryButtons addObject:countryButton];
 
     }];
-    
+
     return [countryButtons copy];
+}
+
+#pragma mark - Private Methods
+- (void)setupUI {
+    self.headlineTextField.stringValue = @"Filter options for all Ordertables";
+    self.countrySelectionBox.title = @"Show orders for countries";
+    self.noSepaButton.title = @"Hide SEPA-only orders";
+
+    [self setupCountryButtons];
+    [self setupNoSepaButton];
 }
 
 - (void)setupCountryButtons {
@@ -100,12 +107,19 @@
     NSArray <NSString *> *supportedCountryCodes = [SOXPreferenceCenter supportedCountryCodes];
     NSArray <NSString *> *activeCountryCodes = [SOXPreferenceCenter activeCountryCodes];
     SEL countryButtonActionSelector = NSSelectorFromString(@"countryButtonAction:");
-    [self.countryButtons enumerateObjectsUsingBlock:^(NSButton * _Nonnull countryButton, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.countryButtons enumerateObjectsUsingBlock:^(NSButton * _Nonnull countryButton,
+                                                      NSUInteger idx,
+                                                      BOOL * _Nonnull stop) {
         NSString *countryCode = [supportedCountryCodes objectAtIndex:idx];
         countryButton.state = [activeCountryCodes containsObject:countryCode] ? NSControlStateValueOn : NSControlStateValueOff;
         countryButton.target = self;
         countryButton.action = countryButtonActionSelector;
     }];
+}
+
+- (void)setupNoSepaButton {
+    NSControlStateValue noSepaButtonState = [SOXPreferenceCenter sepaPaymentOptionState];
+    self.noSepaButton.state = noSepaButtonState;
 }
 
 #pragma mark - Private methods
@@ -122,9 +136,16 @@
     return selectedCountryCodes.copy;
 }
 
-- (void)updateUserDefaults {
+- (void)updateSelectedCountriesUserDefaults {
     NSArray *selectedCountryCodes = [self selectedCountryCodes];
     [SOXPreferenceCenter setActiveCountryCodes:selectedCountryCodes];
+}
+
+- (void)updateShowSepaUserDefaults {
+    NSControlStateValue sepaStateValue = self.noSepaButton.state;
+    [SOXPreferenceCenter setSepaPaymentFilterOption:sepaStateValue
+                                       forOrderType:self.orderType
+                                       currencyType:self.currencyType];
 }
 
 #pragma mark - Action methods
@@ -132,7 +153,7 @@
     for (NSButton *countyButton in self.countryButtons) {
         countyButton.state = NSControlStateValueOn;
     }
-    [self updateUserDefaults];
+    [self updateSelectedCountriesUserDefaults];
 }
 
 - (IBAction)enableDefaultButtonAction:(NSButton *)sender {
@@ -148,24 +169,27 @@
         NSButton *countryButton = [self.countryButtons objectAtIndex:idx];
         countryButton.state = NSControlStateValueOn;
     }
-    [self updateUserDefaults];
+    [self updateSelectedCountriesUserDefaults];
 }
 
 - (IBAction)disableAllButtonAction:(NSButton *)sender {
     for (NSButton *countyButton in self.countryButtons) {
         countyButton.state = NSControlStateValueOff;
     }
-    [self updateUserDefaults];
+    [self updateSelectedCountriesUserDefaults];
 }
 
 - (void)countryButtonAction:(NSButton *)button {
-    [self updateUserDefaults];
+    [self updateSelectedCountriesUserDefaults];
 }
 
+- (IBAction)noSepaButtonAction:(NSButton *)sender {
+    [self updateShowSepaUserDefaults];
+}
 
 #pragma mark - MASPreferencesViewController
 - (NSString *)toolbarItemLabel {
-    return @"Selected countries";
+    return @"Filter Options";
 }
 
 - (NSImage *)toolbarItemImage {

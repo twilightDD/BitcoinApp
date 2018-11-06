@@ -7,9 +7,20 @@
 //
 
 #import "SOXAbstractPreferenceViewController.h"
+#import "SOXMarket_BitcoinDE_DefTypes.h"
+
+@protocol SOXSelectedCountriesViewControllerDelegate
+
+- (void)filterSelectionChangedForKey:(NSString *)key withObject:(id)object;
+
+@end
 
 @interface SOXSelectedCountriesPreferenceViewController : SOXAbstractPreferenceViewController
 
-+ (NSArray <NSButton *> *)addCountryButtonsToView:(NSView *)view;
+@property (nonatomic) BitcoinDE_OrderType orderType;
+@property (nonatomic) BitcoinDE_CurrencyType currencyType;
+@property (weak, nonatomic) id <SOXSelectedCountriesViewControllerDelegate> delegate;
 
+// Kann weg
++ (NSArray <NSButton *> *)addCountryButtonsToView:(NSView *)view;
 @end

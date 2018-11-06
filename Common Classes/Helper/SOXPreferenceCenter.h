@@ -11,7 +11,7 @@
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
 static NSString *ActiveCountryCodesPreferencesDidChangeNotification = @"ActiveCountryCodesPreferencesDidChangeNotification";
-
+static NSString *ShowNoSepaOrdersPreferencesDidChangeNotification = @"ShowNoSepaOrdersPreferencesDidChangeNotification";
 
 @interface SOXPreferenceCenter : NSObject
 + (void)resetAllSettings;
@@ -26,6 +26,7 @@ static NSString *ActiveCountryCodesPreferencesDidChangeNotification = @"ActiveCo
 + (NSDecimalNumber *)minimalVolume;
 
 #pragma mark - Sepa Payment Option
++ (NSControlStateValue )sepaPaymentOptionState;
 + (NSControlStateValue )sepaPaymentOptionStateForOrderType:(BitcoinDE_OrderType)orderType
                                               currencyType:(BitcoinDE_CurrencyType)currencyType;
 + (void)setSepaPaymentFilterOption:(NSControlStateValue )state

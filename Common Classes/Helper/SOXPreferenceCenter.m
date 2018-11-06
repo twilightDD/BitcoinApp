@@ -81,6 +81,17 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
 }
 
 #pragma mark - Sepa Payment Option
++ (NSControlStateValue )sepaPaymentOptionState {
+    NSControlStateValue sepaPaymentOptionState = NSControlStateValueOff;
+    id noSepaFilterValue = [self userDefaultForKey:OrderViewControllerSEPAKey];
+    if (noSepaFilterValue != nil
+        && [noSepaFilterValue isKindOfClass:[NSNumber class]]) {
+        sepaPaymentOptionState = [(NSNumber *)noSepaFilterValue boolValue] ? NSControlStateValueOn: NSControlStateValueOff;
+    }
+
+    return sepaPaymentOptionState;
+}
+
 + (NSControlStateValue )sepaPaymentOptionStateForOrderType:(BitcoinDE_OrderType)orderType
                                               currencyType:(BitcoinDE_CurrencyType)currencyType {
     NSControlStateValue sepaPaymentOptionState = NSControlStateValueOn;
@@ -102,17 +113,51 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
 + (void)setSepaPaymentFilterOption:(NSControlStateValue )state
                       forOrderType:(BitcoinDE_OrderType)orderType
                       currencyType:(BitcoinDE_CurrencyType)currencyType {
+    if (orderType != BitcoinDE_UnknownOrderType
+        && currencyType != BitcoinDE_CurrencyTypeUnknown) {
+        NSNumber *noSepaFilterValue = @NO;
+        if (state == NSControlStateValueOn) {
+            noSepaFilterValue = @YES;
+        }
+        NSString *userDefaultKey = [self userDefaultKeyForDomain:OrderViewControllerSEPAKey
+                                                       orderType:orderType
+                                                    currencyType:currencyType];
+        [self setUserDefaultObject:noSepaFilterValue
+                            forKey:userDefaultKey];
+    }
+    else {
+        [self setSepaPaymentFilterOption:state];
+    }
+}
+
++ (void)setSepaPaymentFilterOption:(NSControlStateValue)state {
     NSNumber *noSepaFilterValue = @NO;
     if (state == NSControlStateValueOn) {
         noSepaFilterValue = @YES;
     }
-    NSString *userDefaultKey = [self userDefaultKeyForDomain:OrderViewControllerSEPAKey
-                                                   orderType:orderType
-                                                currencyType:currencyType];
+    // for all
     [self setUserDefaultObject:noSepaFilterValue
-                        forKey:userDefaultKey];
-}
+                        forKey:OrderViewControllerSEPAKey];
 
+    // for orderType and currencyType
+    for (BitcoinDE_OrderType orderType = BitcoinDE_BuyOrderType;
+         orderType < BitcoinDE_OrderType_EndOfType;
+         orderType++) {
+        for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeBitcoin;
+             currencyType <BitcoinDE_CurrencyType_EndOfType;
+             currencyType++) {
+            NSString *userDefaultKey = [self userDefaultKeyForDomain:OrderViewControllerSEPAKey
+                                                           orderType:orderType
+                                                        currencyType:currencyType];
+            [self setUserDefaultObject:noSepaFilterValue
+                                forKey:userDefaultKey];
+        }
+    }
+
+    // Inform all orderViewControllers of changes in global "noSepaOrders"-list
+    [[NSNotificationCenter defaultCenter] postNotificationName:ShowNoSepaOrdersPreferencesDidChangeNotification
+                                                        object:noSepaFilterValue];
+}
 
 
 #pragma mark - Country Codes
