@@ -9,10 +9,6 @@
 #import "SOXPagingAbstractViewController.h"
 #import "SOXPagingAbstractViewController_Private.h"
 
-#import "SOXPagingViewController.h"
-
-#import "SOXFormatters.h"
-
 #import "SOXPage_BitcoinDE_Data.h"
 #import "SOXMyTrades_BitcoinDE_Data.h"
 

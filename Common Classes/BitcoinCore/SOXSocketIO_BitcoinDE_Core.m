@@ -14,7 +14,6 @@
 
 #import "SocketIO.h"
 #import "SocketIOPacket.h"
-#import <SocketRocket/SRWebSocket.h>
 
 #pragma mark - Keys
 static NSString *AddOrderKey = @"add_order";

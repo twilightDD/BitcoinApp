@@ -8,8 +8,6 @@
 
 #import "SOXStateValueTransformer.h"
 
-#import "SOXMyTrades_BitcoinDE_Data.h"
-
 @implementation SOXStateValueTransformer
 
 + (Class)transformedValueClass {

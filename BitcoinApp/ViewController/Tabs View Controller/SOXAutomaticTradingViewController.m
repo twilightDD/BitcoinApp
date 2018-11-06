@@ -8,10 +8,8 @@
 
 #import "SOXAutomaticTradingViewController.h"
 
-#import "SOXAccountInfo_BitcoinDE_Data.h"
 #import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXAutomaticTrading_BitcoinDE_Core.h"
-#import "SOXShowOrderbook_BitcoinDE_Data.h"
 
 #import "SOXKeys_BitcoinDE.h"
 

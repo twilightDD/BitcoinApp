@@ -9,10 +9,6 @@
 #import "SOXPagingViewController.h"
 #import "SOXPagingAbstractViewController_Private.h"
 
-#import "SOXFormatters.h"
-
-#import "SOXKeys_BitcoinDE.h"
-
 #import "SOXPage_BitcoinDE_Data.h"
 
 #pragma mark - Interface

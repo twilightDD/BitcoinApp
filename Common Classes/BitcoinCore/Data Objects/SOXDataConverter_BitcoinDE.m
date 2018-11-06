@@ -7,9 +7,7 @@
 //
 
 #import "SOXDataConverter_BitcoinDE.h"
-#import "SOXKeys_BitcoinDE.h"
 
-#import "SOXShowOrderbook_BitcoinDE_Data.h" // BitcoinDE_ShowBuyOrderbookCommandType and BitcoinDE_ShowSellOrderbookCommandType
 #import "SOXAccountInfo_BitcoinDE_Data.h"   // for BitcoinDE_ShowAccountInfoCommandType
 #import "SOXRates_BitcoinDE_Data.h"         // for BitcoinDE_ShowRatesCommandType
 #import "SOXMyOrderBook_BitcoinDE_Data.h"   // for BitcoinDE_CreateOrderType

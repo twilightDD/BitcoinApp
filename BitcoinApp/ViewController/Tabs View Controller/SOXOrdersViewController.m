@@ -13,11 +13,9 @@
 #import "SOXExecuteTradeViewController.h"
 #import "SOXFilterOptionsPreferenceViewController.h"
 
-#import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXSocketIO_BitcoinDE_Core.h"
 #import "SOXShowOrderbook_BitcoinDE_Data.h"
 
-#import "SOXKeys_BitcoinDE.h"
 #import "SOXErrorMessage_BitcoinDE.h"
 #import "SOXPreferenceCenter.h"
 

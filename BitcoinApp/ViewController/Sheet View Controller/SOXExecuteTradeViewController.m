@@ -12,7 +12,6 @@
 #import "SOXShowOrderbook_BitcoinDE_Data.h"
 #import "SOXTradeJob_BitcoinDE_Data.h"
 
-#import "SOXKeys_BitcoinDE.h"
 #import "SOXPreferenceCenter.h"
 
 #import "SOXFormatters.h"

@@ -247,18 +247,10 @@
         }
     }];
 
-    BOOL saveToKeychainSuccess = NO;
     if (paringErrorOccured == NO
         && importedKeysAndSecrets.count > 0) {
         [self.keysAndSecrets addObjectsFromArray:importedKeysAndSecrets];
         [self.keysAndSecretsArrayController rearrangeObjects];
-//        NSError *error;
-//        saveToKeychainSuccess = [SOXPreferencesCore saveKeysAndSecrets:self.keysAndSecrets
-//                                                                 error:error];
-//        if (error) {
-//            NSAlert *saveErrorAlert = [NSAlert alertWithError:error];
-//            [saveErrorAlert runModal];
-//        }
     }
 
     NSAlert *alertPanel = [[NSAlert alloc] init];

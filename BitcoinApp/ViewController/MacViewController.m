@@ -8,11 +8,6 @@
 
 #import "MacViewController.h"
 
-#import "SOXMarket_BitcoinDE_Core.h"
-#import "SOXSocketIO_BitcoinDE_Core.h"
-
-#import "SOXMarket_BitcoinDE_DefTypes.h"
-
 #import "SOXOrdersViewController.h"
 #import "SOXAutomaticTradingViewController.h"
 

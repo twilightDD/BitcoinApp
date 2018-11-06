@@ -11,13 +11,7 @@
 
 #import "DDLog.h"
 
-#import "SOXKeys_BitcoinDE.h"
 #import "SOXMarketHelper.h"
-
-#import "SOXMarket_BitcoinDE_Core.h"
-#import "SOXSocketIO_BitcoinDE_Core.h"
-
-#import "SOXErrorMessage_BitcoinDE.h"
 
 #import "SOXAccountInfo_BitcoinDE_Data.h"
 #import "SOXShowOrderbook_BitcoinDE_Data.h"

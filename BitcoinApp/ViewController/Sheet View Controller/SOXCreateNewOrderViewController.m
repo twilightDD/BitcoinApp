@@ -8,17 +8,14 @@
 
 #import "SOXCreateNewOrderViewController.h"
 
-#import "SOXMarket_BitcoinDE_Core.h"
-#import "SOXMyOrderBook_BitcoinDE_Data.h"
-
+#import "SOXFormatters.h"
 #import "SOXPreferenceCenter.h"
 
-#import "SOXKeys_BitcoinDE.h"
-
-#import "SOXFormatters.h"
-
-#import "NSAttributedString+URL.h"
 #import "NSTextField+URL.h"
+
+#import "SOXKeys_BitcoinDE.h"
+#import "SOXMarket_BitcoinDE_Core.h"
+#import "SOXMyOrderBook_BitcoinDE_Data.h"
 
 #pragma mark - Interface
 @interface SOXCreateNewOrderViewController () <SOXMarketCoreServerRequestProtocol>

@@ -9,7 +9,6 @@
 #import "SOXShowOrderbook_BitcoinDE_Data.h"
 
 #import "SOXKeys_BitcoinDE.h"
-#import "SOXMarket_BitcoinDE_DefTypes.h"
 
 #pragma mark - Interface
 @interface SOXShowOrderbook_BitcoinDE_Data ()

@@ -16,7 +16,6 @@
 
 #import "SOXKeys_BitcoinDE.h"
 #import "SOXHash.h"
-#import "SOXFormatters.h"
 
 #import "SOXDataConverter_BitcoinDE.h"
 #import "SOXErrorMessage_BitcoinDE.h"
