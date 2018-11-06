@@ -34,6 +34,7 @@
 
 #pragma mark | properties
 @property (strong, nonatomic) NSMutableArray <NSMutableDictionary*> *keysAndSecrets;
+
 @property (strong, nonatomic) SOXLogWindowController *errorWindowController;
 
 
@@ -68,7 +69,6 @@
 - (void)loadFromKeychain {
     // ask PreferenceCore
     self.keysAndSecrets = [[SOXPreferencesCore keysAndSecrets] mutableCopy];
-
     [self.keysAndSecretsArrayController rearrangeObjects];
 }
 
@@ -170,6 +170,9 @@
 
 #pragma mark - Private methods
 - (void)setupUI {
+    self.saveButton.title = @"Save to Keychain";
+    self.dismissButton.title = @"Reload from Keychain";
+    
     self.importButton.title = @"Import";
 }
 
