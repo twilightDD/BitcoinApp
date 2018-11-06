@@ -42,8 +42,6 @@
 @property (nonatomic) BOOL socketIODidDisconnectAppeared;
 @property (nonatomic, copy) NSString *currencyTypeString;
 
-@property (nonatomic, strong) NSPopover *furtherFilterPopover;
-
 @property (strong, nonatomic) id activeCountryCodesPreferencesDidChangeObserver;
 @property (strong, nonatomic) id showNoSepaOrdersPreferencesDidChangeObserver;
 
@@ -102,18 +100,17 @@
     viewController.currencyType = self.currencyType;
 
     // Create popover
-    self.furtherFilterPopover = [[NSPopover alloc] init];
-    [self.furtherFilterPopover setBehavior:NSPopoverBehaviorTransient];
-    [self.furtherFilterPopover setAnimates:YES];
-    [self.furtherFilterPopover setContentViewController:viewController];
-    [self.furtherFilterPopover setContentSize:NSMakeSize(890, 374)];
-    
+    NSPopover *furtherFilterPopover = [[NSPopover alloc] init];
+    furtherFilterPopover.behavior = NSPopoverBehaviorTransient;
+    furtherFilterPopover.animates = YES;
+    furtherFilterPopover.contentViewController = viewController;
+
     // Convert point to main window coordinates
     NSRect entryRect = [sender convertRect:sender.bounds
                                     toView:[[NSApp mainWindow] contentView]];
     
     // Show popover
-    [self.furtherFilterPopover showRelativeToRect:entryRect
+    [furtherFilterPopover showRelativeToRect:entryRect
                                            ofView:[[NSApp mainWindow] contentView]
                                     preferredEdge:NSMinYEdge];
 }
