@@ -140,16 +140,10 @@
         self.addOrderButton.title = [NSString stringWithFormat:@"Create new %@ %@ order"
                                      , currencyString
                                      , buySellString];
-        if (self.orderType == BitcoinDE_OrderTypeBuy) {
-            self.titleTextField.stringValue                     = @"Buy";
-        }
-        else if (self.orderType == BitcoinDE_OrderTypeSell) {
-            self.titleTextField.stringValue                     = @"Sell";
-        }
+        self.titleTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes naturalStringForOrderType:self.orderType];
     }
     
     self.otherFilterButton.title = @"Filters";
-    
 }
 
 - (void)setupArrayController {
