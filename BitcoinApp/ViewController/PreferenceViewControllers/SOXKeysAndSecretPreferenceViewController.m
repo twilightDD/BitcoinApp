@@ -37,7 +37,7 @@
 
 @property (strong, nonatomic) SOXLogWindowController *errorWindowController;
 
-
+@property (nonatomic) BOOL keysAndSecretsChanged;
 @end
 
 @implementation SOXKeysAndSecretPreferenceViewController
@@ -70,6 +70,8 @@
     // ask PreferenceCore
     self.keysAndSecrets = [[SOXPreferencesCore keysAndSecrets] mutableCopy];
     [self.keysAndSecretsArrayController rearrangeObjects];
+
+    self.keysAndSecretsChanged = NO;
 }
 
 - (void)saveToKeychain {
@@ -81,6 +83,9 @@
         if (error) {
             NSAlert *saveErrorAlert = [NSAlert alertWithError:error];
             [saveErrorAlert runModal];
+        }
+        else {
+            self.keysAndSecretsChanged = NO;
         }
     }
     else {
@@ -117,6 +122,8 @@
                                row:self.keysAndSecrets.count-1
                          withEvent:nil
                             select:YES];
+
+        self.keysAndSecretsChanged = YES;
     }
 }
 
@@ -126,6 +133,8 @@
     [self.keysAndSecretsArrayController rearrangeObjects];
 
     [self.tableView deselectAll:nil];
+
+    self.keysAndSecretsChanged = YES;
 }
 
 
@@ -143,10 +152,13 @@
     openPanel.title = @"Load Key and Secrets";
     openPanel.allowedFileTypes = @[@"txt"];
 
+    weakify(self);
     [openPanel beginWithCompletionHandler:^(NSModalResponse result) {
         if (result == NSFileHandlingPanelOKButton) {
+            strongify(self);
             NSURL *selectedURL = openPanel.URL;
             [self importFileWithURL:selectedURL];
+            self.keysAndSecretsChanged = YES;
         }
     }];
 }
@@ -171,7 +183,7 @@
 #pragma mark - Private methods
 - (void)setupUI {
     self.saveButton.title = @"Save to Keychain";
-    self.dismissButton.title = @"Reload from Keychain";
+    self.dismissButton.title = @"Reset";
     
     self.importButton.title = @"Import";
 }
