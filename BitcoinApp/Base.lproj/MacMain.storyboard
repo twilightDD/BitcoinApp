@@ -643,16 +643,22 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="JRH-DP-FPK"/>
-                                        <menuItem title="Error log" id="Uxb-RX-U9H">
+                                        <menuItem title="Main Window" id="Uxb-RX-U9H">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="showErrorLogWindow:" target="Voe-Tx-rLC" id="TAc-Pe-u3P"/>
+                                                <action selector="showMainWindow:" target="Voe-Tx-rLC" id="R9M-Ga-pTX"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Event log" id="hGI-2R-5bA">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="showEventLogWindow:" target="Voe-Tx-rLC" id="o1w-h5-Kag"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Error log" id="nRz-UU-KWS">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="showErrorLogWindow:" target="Voe-Tx-rLC" id="Gdn-ij-yO1"/>
                                             </connections>
                                         </menuItem>
                                     </items>

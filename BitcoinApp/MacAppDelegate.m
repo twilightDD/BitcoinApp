@@ -22,15 +22,12 @@
 #import "SOXFilterOptionsPreferenceViewController.h"
 #import "SOXDebugPreferencesViewController.h"
 
-
 @interface MacAppDelegate ()
 
-@property (weak, nonatomic) NSWindow *mainWindow;
+@property (strong, nonatomic) NSWindow *mainWindow;
 @property (readwrite, strong, nonatomic) SOXLogWindowController *errorWindowController;
 @property (readwrite, strong, nonatomic) SOXLogWindowController *eventWindowController;
 @property (strong, nonatomic) MASPreferencesWindowController *masPreferencesWindowController;
-
-- (IBAction)saveAction:(id)sender;
 
 @end
 
@@ -85,34 +82,6 @@
     }
 }
 
-- (void)setupPreferenceWindow {
-    
-    SOXDebugPreferencesViewController * debugPreferencesViewController = [[SOXDebugPreferencesViewController alloc] initWithNibName:@"SOXDebugPreferencesViewController" bundle:nil];
-    // Keys and Secrets
-    SOXKeysAndSecretPreferenceViewController *keyAndSecretPreferencesViewController
-    = [[SOXKeysAndSecretPreferenceViewController alloc] initWithNibName:@"SOXKeysAndSecretPreferenceViewController"
-                                                                 bundle:nil];
-    
-    SOXFilterOptionsPreferenceViewController *selectedCountriesPreferenceViewController
-    = [[SOXFilterOptionsPreferenceViewController alloc] initWithNibName:@"SOXFilterOptionsPreferenceViewController"
-                                                                     bundle:nil];
-    
-    
-    
-    NSArray *subPreferenceControllers = @[
-                                          debugPreferencesViewController,
-                                          keyAndSecretPreferencesViewController,
-                                          selectedCountriesPreferenceViewController,
-
-                                          ];
-
-    MASPreferencesWindowController *masPreferencesWindowController
-    = [[MASPreferencesWindowController alloc] initWithViewControllers:subPreferenceControllers
-                                                                title:@"Preferences"];
-
-    self.masPreferencesWindowController = masPreferencesWindowController;
-}
-
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     // Insert code here to tear down your application
     DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -129,7 +98,37 @@
     return YES;
 }
 
+#pragma mark - Private methods
+- (void)setupPreferenceWindow {
+    SOXDebugPreferencesViewController * debugPreferencesViewController =
+    [[SOXDebugPreferencesViewController alloc] initWithNibName:@"SOXDebugPreferencesViewController" bundle:nil];
+
+    SOXKeysAndSecretPreferenceViewController *keyAndSecretPreferencesViewController =
+    [[SOXKeysAndSecretPreferenceViewController alloc] initWithNibName:@"SOXKeysAndSecretPreferenceViewController"
+                                                               bundle:nil];
+
+    SOXFilterOptionsPreferenceViewController *selectedCountriesPreferenceViewController =
+    [[SOXFilterOptionsPreferenceViewController alloc] initWithNibName:@"SOXFilterOptionsPreferenceViewController"
+                                                               bundle:nil];
+
+    NSArray *subPreferenceControllers = @[
+                                          debugPreferencesViewController,
+                                          keyAndSecretPreferencesViewController,
+                                          selectedCountriesPreferenceViewController,
+                                          ];
+
+    MASPreferencesWindowController *masPreferencesWindowController =
+    [[MASPreferencesWindowController alloc] initWithViewControllers:subPreferenceControllers
+                                                              title:@"Preferences"];
+
+    self.masPreferencesWindowController = masPreferencesWindowController;
+}
+
 #pragma mark - Action methods
+- (IBAction)showMainWindow:(id)sender {
+    [self.mainWindow makeKeyAndOrderFront:self];
+}
+
 - (IBAction)showErrorLogWindow:(NSMenuItem *)sender {
     [self.errorWindowController showWindow:self];
 }
