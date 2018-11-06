@@ -130,7 +130,8 @@
 }
 
 - (void)setupNoSepaButton {
-    NSControlStateValue noSepaButtonState = [SOXPreferenceCenter sepaPaymentOptionState];
+    NSControlStateValue noSepaButtonState = [SOXPreferenceCenter sepaPaymentOptionStateForOrderType:self.orderType
+                                                                                       currencyType:self.currencyType];
     self.noSepaButton.state = noSepaButtonState;
 }
 
