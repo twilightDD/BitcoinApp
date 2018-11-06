@@ -7,21 +7,12 @@
 //
 
 #import "SOXMyTradeHistoryViewController.h"
-#import "SOXAbstractViewController_Private.h"
-#import "SOXPagingAbstractViewController_Private.h"
 #import "SOXStatisticsAbstractViewController_Private.h"
 
-#import "SOXMyOrderDetailsViewController.h"
-#import "SOXPagingViewController.h"
-
-#import "SOXMarket_BitcoinDE_Core.h"
 #import "SOXMyTrades_BitcoinDE_Data.h"
 
-#import "SOXKeys_BitcoinDE.h"
-#import "SOXMarket_BitcoinDE_DefTypes.h"
-
 #pragma mark - Interface
-@interface SOXMyTradeHistoryViewController () <SOXMarketCoreServerRequestProtocol>
+@interface SOXMyTradeHistoryViewController ()
 
 @property (nonatomic) BitcoinDE_MyTradeHistoryParameter_OrderType selectedTradeHistoryOrderType;
 @property (nonatomic) BitcoinDE_MyTradeHistoryParameter_TradeStateType selectedTradeStateType;
@@ -80,7 +71,8 @@
 
 #pragma mark - SOXPagingViewControllerProtocol
 - (void)pagingViewControllerDidLoad {
-    { // buttons
+    // popup buttons
+    {
         // currency selection
         self.currencyTypeSelectionPopUpButton = self.pagingViewController.firstSelectionPopUpButton;
         [self.currencyTypeSelectionPopUpButton removeAllItems];
@@ -89,7 +81,7 @@
              ; idx++) {
             [self.currencyTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:idx]];
         }
-
+        
         // orderType selection
         self.orderTypeSelectionPopUpButton = self.pagingViewController.secondSelectionPopUpButton;
         [self.orderTypeSelectionPopUpButton removeAllItems];
@@ -98,7 +90,7 @@
              ; idx++) {
             [self.orderTypeSelectionPopUpButton addItemWithTitle:[SOXMyTrades_BitcoinDE_Data titleForOrderType:idx]];
         }
-
+        
         // tradeState selection
         self.tradeStateTypeSelectionPopUpButton = self.pagingViewController.thirdSelectionPopUpButton;
         [self.tradeStateTypeSelectionPopUpButton removeAllItems];

@@ -7,20 +7,10 @@
 //
 
 #import "SOXMyAccountLedgerViewController.h"
-#import "SOXAbstractViewController_Private.h"
-#import "SOXPagingAbstractViewController_Private.h"
 #import "SOXStatisticsAbstractViewController_Private.h"
 
-#import "SOXMarket_BitcoinDE_Core.h"
-#import "SOXAccountLedger_BitcoinDE_Data.h"
-
-#import "SOXFormatters.h"
-
-#import "SOXKeys_BitcoinDE.h"
-#import "SOXMarket_BitcoinDE_DefTypes.h"
-
 #pragma mark - Interface
-@interface SOXMyAccountLedgerViewController () <SOXMarketCoreServerRequestProtocol>
+@interface SOXMyAccountLedgerViewController ()
 
 @end
 
@@ -29,7 +19,7 @@
 #pragma mark Init&Co.
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.selectedCurrencyType = BitcoinDE_CurrencyTypeBitcoin;
     self.selectedAccountLedgerOrderType = BitcoinDE_AccountLedgerParameter_AllOrderType;
 }
@@ -53,9 +43,8 @@
     // account ledger allows no future date (API flaw)
     NSDate *selectedEndDate = [super selectedEndDate];
     selectedEndDate = [selectedEndDate earlierDate:[SOXFormatters dateBeforeMidnightForDate:[NSDate dateWithTimeIntervalSinceNow:-86400]]];
-
+    
     return selectedEndDate;
-
 }
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
@@ -63,7 +52,7 @@
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowAccountLedgerType)]) {
         NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
         NSMutableArray *accountLedgerDatas = [SOXAccountLedger_BitcoinDE_Data accountLedgerDataArrayForAccountLedgerDictionary:payloadDictionary
-                                              forCurrencyType:self.selectedCurrencyType];
+                                                                                                               forCurrencyType:self.selectedCurrencyType];
         [self updateControllerDatasWithDataObjects:accountLedgerDatas
                               andPayloadDictionary:payloadDictionary];
     }
@@ -71,7 +60,8 @@
 
 #pragma mark - SOXPagingViewControllerProtocol
 - (void)pagingViewControllerDidLoad {
-    { // buttons
+    // popup buttons
+    {
         // currency selection
         self.currencyTypeSelectionPopUpButton = self.pagingViewController.firstSelectionPopUpButton;
         [self.currencyTypeSelectionPopUpButton removeAllItems];
@@ -80,7 +70,7 @@
              ; idx++) {
             [self.currencyTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:idx]];
         }
-
+        
         // accountLedgerOrderType selection
         self.accountLedgerOrderTypePopUpButton = self.pagingViewController.secondSelectionPopUpButton;
         [self.accountLedgerOrderTypePopUpButton removeAllItems];
@@ -89,16 +79,10 @@
              ; idx++) {
             [self.accountLedgerOrderTypePopUpButton addItemWithTitle:[SOXAccountLedger_BitcoinDE_Data titleForAccountLedgerOrderType:idx]];
         }
-
+        
         // no third selection
         self.pagingViewController.thirdSelectionPopUpButton.hidden = YES;
     }
-
-    // AccountLedger allows no date in future or today
-//    {
-//        NSDate *endDate = [SOXFormatters dateBeforeMidnightForDate:[NSDate dateWithTimeIntervalSinceNow:-86400]];
-//        [self.pagingViewController setSeparateEndDate:endDate];
-//    }
 }
 
 - (void)popupButtonAction:(NSPopUpButton *)sender {
@@ -124,6 +108,5 @@
 - (NSString *)suggestedExportFileName {
     return @"AccountLedger";
 }
-
 
 @end

@@ -9,11 +9,13 @@
 #import <Cocoa/Cocoa.h>
 #import "SOXMarket_BitcoinDE_Core.h"
 
-@interface SOXAbstractViewController : NSViewController <SOXMarketCoreServerRequestProtocol>
+@interface SOXAbstractViewController : NSViewController 
 
 @property (weak) IBOutlet NSTableView *tableView;
+
 - (void)enableSpinningWheel;
 - (void)disableSpinningWheel;
 - (void)presentNoDataView;
 - (void)hideNoDataView;
+
 @end

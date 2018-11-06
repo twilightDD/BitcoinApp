@@ -7,10 +7,14 @@
 //
 
 #import "SOXAbstractViewController.h"
+#import "SOXMarket_BitcoinDE_Core.h"
 
 #import "SOXKeys_BitcoinDE.h"
+#import "SOXMarket_BitcoinDE_DefTypes.h"
 
-@interface SOXAbstractViewController()
+#import "SOXFormatters.h"
+
+@interface SOXAbstractViewController() <SOXMarketCoreServerRequestProtocol>
 
 @property (strong) IBOutlet NSArrayController *arrayController;
 @property (strong, nonatomic) NSMutableArray *arrayControllerDatas;
