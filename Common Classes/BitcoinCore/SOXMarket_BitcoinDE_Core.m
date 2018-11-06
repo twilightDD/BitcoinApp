@@ -77,6 +77,7 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 @property (nonatomic) NSInteger currentCredits;
 @property (nonatomic) NSInteger maxCredits;
 @property (weak, nonatomic) id <SOXCreditUpdateProtocol> delegateForCreditUpdates;
+@property (strong, nonatomic) id apiKeysAndSecretsDidChangeObserver;
 
 @end
 
@@ -86,7 +87,11 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
     _ratesData = ratesData;
 
 }
-#pragma mark Public Class methods
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self.apiKeysAndSecretsDidChangeObserver];
+}
+
 + (SOXMarket_BitcoinDE_Core * _Nonnull)sharedCore {
     static SOXMarket_BitcoinDE_Core *sharedCore;
     
@@ -100,7 +105,13 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
         sharedCore.runningRequests = [NSMutableArray array];
         sharedCore.networkRequestCounter = 0;
         sharedCore.maxCredits = 0;
-
+        sharedCore.apiKeysAndSecretsDidChangeObserver =
+        [[NSNotificationCenter defaultCenter] addObserverForName:SOXAPIKeysAndSecretsDidChangeNotification
+                                                          object:nil
+                                                           queue:[NSOperationQueue mainQueue]
+                                                      usingBlock:^(NSNotification * _Nonnull note) {
+                                                          sharedCore.maxCredits = 0;
+                                                      }];
         // Keychain
 #if PETER
 //        sharedCore.apiKeys = @[@"ac80762c443ee36c6d8edea28be22a52"];
