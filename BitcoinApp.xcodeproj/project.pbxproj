@@ -563,7 +563,6 @@
 				D063E91E1E74BF97006E2D17 /* MacViewController.h */,
 				D063E91F1E74BF97006E2D17 /* MacViewController.m */,
 				D03C90D3213AAD1100F1E358 /* Sheet View Controller */,
-				D0C512F3215C331F00B2B4B0 /* Popover Controller */,
 				D0E5C4FC1E80801D00352985 /* SOXBannerViewController.h */,
 				D0E5C4FD1E80801D00352985 /* SOXBannerViewController.m */,
 				D0509D1A2187CA90009EFE7D /* Tabs View Controller */,
@@ -858,13 +857,6 @@
 				D0B9A3371E89934D008860ED /* NSTextField+URL.m */,
 			);
 			path = Categories;
-			sourceTree = "<group>";
-		};
-		D0C512F3215C331F00B2B4B0 /* Popover Controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Popover Controller";
 			sourceTree = "<group>";
 		};
 		D0EB0E4E1F8551E9004839C2 /* WindowController */ = {
