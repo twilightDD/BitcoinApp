@@ -63,14 +63,6 @@ typedef NS_ENUM (NSInteger, BitcoinDE_CurrencyType) { // used in MacMain.storybo
     , BitcoinDE_CurrencyType_EndOfType = 5
 };
 
-//typedef NS_ENUM (NSInteger, BitcoinDE_OrderStateType) {
-//    BitcoinDE_OrderStateTypeUnknown = -3
-//    , BitcoinDE_OrderStateTypeExpired = -2// -2 => ausgelaufen
-//    , BitcoinDE_OrderStateTypeCancelled = -1// -1 => abgebrochen
-//    , BitcoinDE_OrderStateTypePending = 0 // 0 => auf Markt verfügbar
-//    , BitcoinDE_OrderStateType_EndOfType
-//};
-
 typedef NS_ENUM (NSInteger, BitcoinDE_OrderStateType) {
     BitcoinDE_OrderStateTypeUnknown = 1
     , BitcoinDE_OrderStateTypePending = 0 // 0 => auf Markt verfügbar

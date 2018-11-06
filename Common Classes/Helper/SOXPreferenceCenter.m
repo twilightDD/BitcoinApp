@@ -260,7 +260,7 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
 + (void)setActiveCountryCodes:(NSArray <NSString *> *)activeCountryCodes
                  forOrderType:(BitcoinDE_OrderType)orderType
                  currencyType:(BitcoinDE_CurrencyType)currencyType {
-    if (orderType != BitcoinDE_OrderStateTypeUnknown
+    if (orderType != BitcoinDE_UnknownOrderType
         && currencyType != BitcoinDE_CurrencyTypeUnknown) {
         NSString *userDefaultKey = [self userDefaultKeyForDomain:OrderViewControllerCountryCodeKey
                                                        orderType:orderType
@@ -347,7 +347,7 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
                             orderType:(BitcoinDE_OrderType)orderType
                          currencyType:(BitcoinDE_CurrencyType)currencyType {
     NSString *userDefaultKey = [domain copy];
-    if (orderType != BitcoinDE_OrderStateTypeUnknown
+    if (orderType != BitcoinDE_UnknownOrderType
         && currencyType != BitcoinDE_CurrencyTypeUnknown) {
         userDefaultKey = [userDefaultKey stringByAppendingString:@"_"];
         userDefaultKey = [userDefaultKey stringByAppendingString:[SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType]];
