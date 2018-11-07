@@ -407,6 +407,7 @@
 		D0D0B3E220EAC0DD00F12A6B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D0D0E2161F69C92E005FBEDF /* SOXSingleSelectionValueTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXSingleSelectionValueTransformer.h; sourceTree = "<group>"; };
 		D0D0E2171F69C92E005FBEDF /* SOXSingleSelectionValueTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXSingleSelectionValueTransformer.m; sourceTree = "<group>"; };
+		D0DECDEC219315FE007EC0C7 /* mac BitcoinApp Peter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "mac BitcoinApp Peter.entitlements"; sourceTree = "<group>"; };
 		D0E5C4FC1E80801D00352985 /* SOXBannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXBannerViewController.h; sourceTree = "<group>"; };
 		D0E5C4FD1E80801D00352985 /* SOXBannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXBannerViewController.m; sourceTree = "<group>"; };
 		D0E5C5011E809C9800352985 /* SOXKeys_BitcoinDE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXKeys_BitcoinDE.h; sourceTree = "<group>"; };
@@ -689,6 +690,7 @@
 		D063E90C1E74BF97006E2D17 = {
 			isa = PBXGroup;
 			children = (
+				D0DECDEC219315FE007EC0C7 /* mac BitcoinApp Peter.entitlements */,
 				D0F7026F216AEA8800BA7EDF /* MASPreferencesWindow.xib */,
 				D049C4491E77082D003CBF36 /* Common Classes */,
 				D063E9171E74BF97006E2D17 /* Mac BitcoinApp */,
@@ -1021,6 +1023,12 @@
 				TargetAttributes = {
 					D021505B20474AEC005A0932 = {
 						DevelopmentTeam = URATVA2LKM;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 					D063E9141E74BF97006E2D17 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1629,6 +1637,9 @@
 			baseConfigurationReference = E377D484F4EA8D742A434C45 /* Pods-mac BitcoinApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "mac BitcoinApp Peter.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = URATVA2LKM;
@@ -1650,8 +1661,9 @@
 				);
 				INFOPLIST_FILE = "mac BitcoinApp copy-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = de.2sox.BitcoinApp;
+				PRODUCT_BUNDLE_IDENTIFIER = de.2sox.soxtrade;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -1660,6 +1672,9 @@
 			baseConfigurationReference = 7480465E0A6F485CDAC18AD1 /* Pods-mac BitcoinApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "mac BitcoinApp Peter.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = URATVA2LKM;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1675,8 +1690,9 @@
 				);
 				INFOPLIST_FILE = "mac BitcoinApp copy-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = de.2sox.BitcoinApp;
+				PRODUCT_BUNDLE_IDENTIFIER = de.2sox.soxtrade;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
@@ -1788,9 +1804,11 @@
 			baseConfigurationReference = E377D484F4EA8D742A434C45 /* Pods-mac BitcoinApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = URATVA2LKM;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1804,8 +1822,9 @@
 				);
 				INFOPLIST_FILE = BitcoinApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = de.2sox.BitcoinApp;
+				PRODUCT_BUNDLE_IDENTIFIER = de.2sox.soxtrade;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -1814,8 +1833,10 @@
 			baseConfigurationReference = 7480465E0A6F485CDAC18AD1 /* Pods-mac BitcoinApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = URATVA2LKM;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1824,8 +1845,9 @@
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/BitcoinApp/PrefixHeader.pch";
 				INFOPLIST_FILE = BitcoinApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = de.2sox.BitcoinApp;
+				PRODUCT_BUNDLE_IDENTIFIER = de.2sox.soxtrade;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
