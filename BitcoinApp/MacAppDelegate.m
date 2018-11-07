@@ -21,6 +21,7 @@
 
 // Prefs
 #import "MASPreferences.h"
+#import "SOXGeneralSettingsPreferenceViewController.h"
 #import "SOXKeysAndSecretPreferenceViewController.h"
 #import "SOXFilterOptionsPreferenceViewController.h"
 #import "SOXDebugPreferencesViewController.h"
@@ -113,6 +114,9 @@
 
 #pragma mark - Private methods
 - (void)setupPreferenceWindow {
+    SOXGeneralSettingsPreferenceViewController *generalSettingsPreferenceViewController =
+    [[SOXGeneralSettingsPreferenceViewController alloc] initWithNibName:@"SOXGeneralSettingsPreferenceViewController"
+                                                                 bundle:nil];
     SOXDebugPreferencesViewController * debugPreferencesViewController =
     [[SOXDebugPreferencesViewController alloc] initWithNibName:@"SOXDebugPreferencesViewController" bundle:nil];
 
@@ -125,9 +129,10 @@
                                                                bundle:nil];
 
     NSArray *subPreferenceControllers = @[
-                                          debugPreferencesViewController,
+                                          generalSettingsPreferenceViewController,
                                           keyAndSecretPreferencesViewController,
                                           selectedCountriesPreferenceViewController,
+                                          debugPreferencesViewController,
                                           ];
 
     MASPreferencesWindowController *masPreferencesWindowController =

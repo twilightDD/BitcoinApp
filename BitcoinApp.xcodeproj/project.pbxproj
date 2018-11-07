@@ -98,6 +98,10 @@
 		D02ED5BF1E817CFE00AA9448 /* SOXShowOrderbookData.m in Sources */ = {isa = PBXBuildFile; fileRef = D02ED5BD1E817CFE00AA9448 /* SOXShowOrderbookData.m */; };
 		D02ED5C21E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D02ED5C11E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m */; };
 		D02ED5C31E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D02ED5C11E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m */; };
+		D02F7283219378B6005F5E1C /* SOXGeneralSettingsPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D02F7281219378B6005F5E1C /* SOXGeneralSettingsPreferenceViewController.m */; };
+		D02F7284219378B6005F5E1C /* SOXGeneralSettingsPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D02F7281219378B6005F5E1C /* SOXGeneralSettingsPreferenceViewController.m */; };
+		D02F7285219378B6005F5E1C /* SOXGeneralSettingsPreferenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D02F7282219378B6005F5E1C /* SOXGeneralSettingsPreferenceViewController.xib */; };
+		D02F7286219378B6005F5E1C /* SOXGeneralSettingsPreferenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D02F7282219378B6005F5E1C /* SOXGeneralSettingsPreferenceViewController.xib */; };
 		D03289921E8A2C7C006F15F0 /* SOXMyOrderDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D03289911E8A2C7C006F15F0 /* SOXMyOrderDetailsViewController.m */; };
 		D03289951E8A4C29006F15F0 /* SOXMyTradeHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D03289941E8A4C29006F15F0 /* SOXMyTradeHistoryViewController.m */; };
 		D03289991E8A4C44006F15F0 /* SOXMyAccountLedgerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D03289971E8A4C44006F15F0 /* SOXMyAccountLedgerViewController.m */; };
@@ -285,6 +289,9 @@
 		D02ED5BD1E817CFE00AA9448 /* SOXShowOrderbookData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXShowOrderbookData.m; sourceTree = "<group>"; };
 		D02ED5C01E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXShowOrderbook_BitcoinDE_Data.h; sourceTree = "<group>"; };
 		D02ED5C11E817D1100AA9448 /* SOXShowOrderbook_BitcoinDE_Data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXShowOrderbook_BitcoinDE_Data.m; sourceTree = "<group>"; };
+		D02F7280219378B6005F5E1C /* SOXGeneralSettingsPreferenceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXGeneralSettingsPreferenceViewController.h; sourceTree = "<group>"; };
+		D02F7281219378B6005F5E1C /* SOXGeneralSettingsPreferenceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXGeneralSettingsPreferenceViewController.m; sourceTree = "<group>"; };
+		D02F7282219378B6005F5E1C /* SOXGeneralSettingsPreferenceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SOXGeneralSettingsPreferenceViewController.xib; sourceTree = "<group>"; };
 		D03289901E8A2C7C006F15F0 /* SOXMyOrderDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXMyOrderDetailsViewController.h; sourceTree = "<group>"; };
 		D03289911E8A2C7C006F15F0 /* SOXMyOrderDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXMyOrderDetailsViewController.m; sourceTree = "<group>"; };
 		D03289931E8A4C29006F15F0 /* SOXMyTradeHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXMyTradeHistoryViewController.h; sourceTree = "<group>"; };
@@ -877,6 +884,9 @@
 			children = (
 				D0F70273216AECE900BA7EDF /* SOXAbstractPreferenceViewController.h */,
 				D0F70274216AECE900BA7EDF /* SOXAbstractPreferenceViewController.m */,
+				D02F7280219378B6005F5E1C /* SOXGeneralSettingsPreferenceViewController.h */,
+				D02F7281219378B6005F5E1C /* SOXGeneralSettingsPreferenceViewController.m */,
+				D02F7282219378B6005F5E1C /* SOXGeneralSettingsPreferenceViewController.xib */,
 				D0F7025F216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.h */,
 				D0F70260216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.m */,
 				D0F70261216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.xib */,
@@ -1081,6 +1091,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D02F7286219378B6005F5E1C /* SOXGeneralSettingsPreferenceViewController.xib in Resources */,
 				D02AA775216BF4A500F2EA95 /* SOXDebugPreferencesViewController.xib in Resources */,
 				D0F70271216AEA8800BA7EDF /* MASPreferencesWindow.xib in Resources */,
 				D021509620474AEC005A0932 /* Assets.xcassets in Resources */,
@@ -1096,6 +1107,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D02F7285219378B6005F5E1C /* SOXGeneralSettingsPreferenceViewController.xib in Resources */,
 				D02AA774216BF4A500F2EA95 /* SOXDebugPreferencesViewController.xib in Resources */,
 				D063E9251E74BF97006E2D17 /* Assets.xcassets in Resources */,
 				D0F70272216AEA8C00BA7EDF /* MASPreferencesWindow.xib in Resources */,
@@ -1414,6 +1426,7 @@
 				D021507F20474AEC005A0932 /* SOXMyTrades_BitcoinDE_Data.m in Sources */,
 				D021508020474AEC005A0932 /* main.m in Sources */,
 				D021508120474AEC005A0932 /* SOXAccountInfoData.m in Sources */,
+				D02F7284219378B6005F5E1C /* SOXGeneralSettingsPreferenceViewController.m in Sources */,
 				D0D0B3E120EAB27100F12A6B /* SOXTableView.m in Sources */,
 				D0F70263216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.m in Sources */,
 				D021508220474AEC005A0932 /* SOXRatesData.m in Sources */,
@@ -1491,6 +1504,7 @@
 				D0AA14F31E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m in Sources */,
 				D063E91D1E74BF97006E2D17 /* main.m in Sources */,
 				D02ED5BA1E81546800AA9448 /* SOXAccountInfoData.m in Sources */,
+				D02F7283219378B6005F5E1C /* SOXGeneralSettingsPreferenceViewController.m in Sources */,
 				D0D0B3E020EAB27100F12A6B /* SOXTableView.m in Sources */,
 				D0F70262216AE3AF00BA7EDF /* SOXKeysAndSecretPreferenceViewController.m in Sources */,
 				D02ED5B61E8152F900AA9448 /* SOXRatesData.m in Sources */,
