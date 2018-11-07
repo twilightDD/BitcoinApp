@@ -14,6 +14,10 @@
 
 #import "SAMKeychain.h"
 
+#warning Add valid keychain title
+static NSString *KeychainServiceKey = @"BitcoinService";
+static NSString *KeychainAccountKey = @"BitcounAccount";
+
 #pragma mark - Interface
 @interface SOXPreferencesCore ()
 
@@ -28,7 +32,7 @@
 
 #pragma mark - Public Class methods
 + (void)startupPreferencesCore {
-    [SOXPreferencesCore sharedCore];
+    SOXPreferencesCore *sharedCore = [SOXPreferencesCore sharedCore];
 }
 
 + (BOOL)validKeychain {
@@ -136,7 +140,7 @@
     dispatch_once(&pred, ^{
         sharedCore = [[self class] new];
         sharedCore.keysAndSecrets = [NSMutableArray array];
-        [sharedCore loadFromKeychain];
+        [sharedCore loadAPIKeysAndSecretsFromKeychain];
 
     });
 
@@ -177,24 +181,30 @@
 }
 
 #pragma mark | Keychain methods
-- (void)loadFromKeychain {
+- (void)loadAPIKeysAndSecretsFromKeychain {
     self.validKeychainBool = NO;
 
     NSError *error = nil;
 
-    NSData *data = [SAMKeychain passwordDataForService:@"BitcoinService"
-                                               account:@"BitcounAccount"];
+    NSData *data = [SAMKeychain passwordDataForService:KeychainServiceKey
+                                               account:KeychainAccountKey];
     if (data) {
         NSMutableArray *array = [NSJSONSerialization JSONObjectWithData:data
                                                                 options:NSJSONReadingMutableContainers
                                                                   error:&error];
-        self.keysAndSecrets = [array mutableCopy];
-
-        // TODO: check for _really_ valid keychain items!
-        // - lenght
-        // - only lowerCases or figures
-        if (self.keysAndSecrets.count > 0) {
-            self.validKeychainBool = YES;
+        if (error) {
+            NSAlert *errorAlert = [NSAlert alertWithError:error];
+            [errorAlert runModal];
+        }
+        else {
+            self.keysAndSecrets = [array mutableCopy];
+            
+            // TODO: check for _really_ valid keychain items!
+            // - lenght
+            // - only lowerCases or figures
+            if (self.keysAndSecrets.count > 0) {
+                self.validKeychainBool = YES;
+            }
         }
     }
     else {
@@ -207,11 +217,12 @@
                                                        options:NSJSONWritingPrettyPrinted
                                                          error:&error];
     BOOL success = [SAMKeychain setPasswordData:jsonData
-                      forService:@"BitcoinService"
-                         account:@"BitcounAccount"];
+                                     forService:KeychainServiceKey
+                                        account:KeychainAccountKey];
 
     if (error) {
-        NSLog(@"Error on preference save: %@", error.localizedDescription);
+        NSAlert *errorAlert = [NSAlert alertWithError:error];
+        [errorAlert runModal];
     }
 
     return success;
