@@ -28,10 +28,7 @@
 @property (weak) IBOutlet NSButton *otherFilterButton;
 @property (weak) IBOutlet NSButton *addOrderButton;
 
-@property (strong) IBOutlet NSArrayController *orderBookArrayController;
-
 #pragma mark Properties
-@property (strong, nonatomic) NSMutableArray *orderBook;
 @property (strong, nonatomic) NSArray *sortDescriptorsForArrayController;
 @property (strong, nonatomic) NSPredicate *orderBookPredicate;
 @property (strong, nonatomic) NSPredicate *paymentOptionPredicate;
@@ -61,7 +58,7 @@
     
     //    self.orderBookArrayController.sortDescriptors = [self sortDescriptorsForArrayController];
     //    self.orderBookArrayController.filterPredicate = self.orderBookPredicate;
-    self.orderBookArrayController.clearsFilterPredicateOnInsertion = NO;
+    self.arrayController.clearsFilterPredicateOnInsertion = NO;
     
     [SOXMarket_BitcoinDE_Core registerForErrorMessages:self];
     
@@ -283,8 +280,8 @@
 #pragma mark - Table view handling
 - (void)tableViewDoubleAction:(NSTableView *)tableView {
     NSInteger clickedRow = tableView.clickedRow;
-    NSUInteger selectionIndex = self.orderBookArrayController.selectionIndex;
-    NSArray *selectedObjects = self.orderBookArrayController.selectedObjects;
+    NSUInteger selectionIndex = self.arrayController.selectionIndex;
+    NSArray *selectedObjects = self.arrayController.selectedObjects;
     
     DDLogInfo(@"\nclickedRow %ti\nselectionIndex %tu\nselectedObjects\n%@",clickedRow, selectionIndex, selectedObjects );
     
@@ -324,8 +321,8 @@
         
         NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
         NSMutableArray *orderBook = [SOXShowOrderbook_BitcoinDE_Data orderbookDataArrayForShowOrderbookDictionary:payloadDictionary];
-        self.orderBook = orderBook;
-        
+        self.arrayControllerDatas = orderBook;
+//        [self.arrayController rearrangeObjects];
         [self disableSpinningWheel];
         
 #if PETER
@@ -348,9 +345,9 @@
     self.socketIODidDisconnectAppeared = YES;
     
     // Flush orderBooks
-    [self.orderBook removeAllObjects];
+    [self.arrayControllerDatas removeAllObjects];
     
-    [self.orderBookArrayController rearrangeObjects];
+    [self.arrayController rearrangeObjects];
 }
 
 - (void)addedOrder:(SOXShowOrderbookData *)addOrderData {
@@ -363,8 +360,8 @@
     
     NSLog(@"addedOrder: %@", addOrderData.orderRequirements_paymentOption);
     
-    [self.orderBook addObject:addOrderData];
-    [self.orderBookArrayController rearrangeObjects];
+    [self.arrayControllerDatas addObject:addOrderData];
+    [self.arrayController rearrangeObjects];
 }
 
 - (void)removedOrderWithOrderID:(NSDictionary *)payloadDictionary {
@@ -372,7 +369,7 @@
     NSMutableArray *foundOrders = [NSMutableArray array];
     
     // check for orderbookData with correct orderID
-    for (SOXShowOrderbookData *orderbookData in self.orderBook) {
+    for (SOXShowOrderbookData *orderbookData in self.arrayControllerDatas) {
         if ([orderbookData.orderInformation_orderID isEqualToString:orderID]) {
             [foundOrders addObject:orderbookData];
         }
@@ -380,14 +377,14 @@
     
     // remove orderbookData from arrayController
     for (id foundOrder in foundOrders) {
-        [self.orderBook removeObject:foundOrder];
+        [self.arrayControllerDatas removeObject:foundOrder];
     }
     
-    [self.orderBookArrayController rearrangeObjects];
+    [self.arrayController rearrangeObjects];
 }
 
 -(void)updateOrderWithSocketOrderObjectID:(NSString *)orderObjectID withValues:(NSDictionary *)changesDictionary {
-    for (SOXShowOrderbook_BitcoinDE_Data *orderbookData in self.orderBook) {
+    for (SOXShowOrderbook_BitcoinDE_Data *orderbookData in self.arrayControllerDatas) {
         if ([orderbookData.orderInformation_socketOrderObjectID isEqualToString:orderObjectID]) {
             // ist data object mit orderObjectID vorhanden? Ja: updaten!
             [orderbookData updateOrderbookDataWith:changesDictionary];

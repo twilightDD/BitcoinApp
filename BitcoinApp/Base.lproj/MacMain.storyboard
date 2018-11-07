@@ -1951,8 +1951,8 @@
                     </view>
                     <connections>
                         <outlet property="addOrderButton" destination="mem-lt-z5X" id="pmt-pj-gbv"/>
+                        <outlet property="arrayController" destination="4Tj-Nm-93b" id="elM-An-aZv"/>
                         <outlet property="circularProgressIndicator" destination="eC6-v3-MYv" id="1GB-1p-FGS"/>
-                        <outlet property="orderBookArrayController" destination="4Tj-Nm-93b" id="wMi-ZS-5XU"/>
                         <outlet property="otherFilterButton" destination="Gdg-Cq-pHV" id="fa8-dJ-MTf"/>
                         <outlet property="spinningBackgroundView" destination="AaQ-lx-Nnc" id="qcQ-v1-r3s"/>
                         <outlet property="tableView" destination="ILN-vM-hc0" id="7vu-m8-Eev"/>
@@ -1960,9 +1960,9 @@
                     </connections>
                 </viewController>
                 <customObject id="Ixs-NX-vvZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController objectClassName="SOXShowOrderbookData" selectsInsertedObjects="NO" avoidsEmptySelection="NO" automaticallyRearrangesObjects="YES" id="4Tj-Nm-93b" userLabel="OrderBookArrayController">
+                <arrayController objectClassName="SOXShowOrderbookData" selectsInsertedObjects="NO" avoidsEmptySelection="NO" automaticallyRearrangesObjects="YES" id="4Tj-Nm-93b" userLabel="ArrayController">
                     <connections>
-                        <binding destination="ssU-Oy-97E" name="contentArray" keyPath="self.orderBook" id="ODs-HG-gtx"/>
+                        <binding destination="ssU-Oy-97E" name="contentArray" keyPath="self.arrayControllerDatas" id="I3y-bA-40w"/>
                         <binding destination="ssU-Oy-97E" name="filterPredicate" keyPath="self.orderBookPredicate" id="E4e-tv-6Ba"/>
                         <binding destination="ssU-Oy-97E" name="sortDescriptors" keyPath="self.sortDescriptorsForArrayController" previousBinding="E4e-tv-6Ba" id="DfI-R0-K9p"/>
                     </connections>
