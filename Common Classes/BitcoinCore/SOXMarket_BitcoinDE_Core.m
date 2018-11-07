@@ -205,10 +205,8 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 
     // Check for valid apiKey/Secret-pairs in keychain
     if ([SOXPreferencesCore validKeychain] == NO) {
-        SOXErrorMessage_BitcoinDE *errorMessage = [[SOXErrorMessage_BitcoinDE alloc] initWithServerRequestTitle:@"No keys and secrets!"];
-        errorMessage.errorMessage = @"Use Preference pane.";
-
-        [controller presentErrorWithErrorDictionary:errorMessage];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SOXOpenPreferenceKeyAndSecretNotification
+                                                            object:nil];
 
         return;
     }

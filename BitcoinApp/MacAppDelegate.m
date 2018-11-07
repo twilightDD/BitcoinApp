@@ -10,11 +10,13 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
+#import "SOXLogWindowController.h"
+
 #import "SOXPreferencesCore.h"
 
-#import "SOXErrorMessage_BitcoinDE.h"
+#import "SOXKeys_BitcoinDE.h"
 
-#import "SOXLogWindowController.h"
+#import "SOXErrorMessage_BitcoinDE.h"
 
 // Prefs
 #import "MASPreferences.h"
@@ -28,6 +30,8 @@
 @property (readwrite, strong, nonatomic) SOXLogWindowController *errorWindowController;
 @property (readwrite, strong, nonatomic) SOXLogWindowController *eventWindowController;
 @property (strong, nonatomic) MASPreferencesWindowController *masPreferencesWindowController;
+
+@property (strong, nonatomic) id openPreferenceKeyAndSecretObserver;
 
 @end
 
@@ -69,21 +73,25 @@
     }
 
     // startup Preferences core
-    
     [SOXPreferencesCore startupPreferencesCore];
     [self setupPreferenceWindow];
-    if ([SOXPreferencesCore validKeychain] == NO) {
-        SOXErrorMessage_BitcoinDE *errorMessage = [[SOXErrorMessage_BitcoinDE alloc] initWithServerRequestTitle:@"No keys and secrets!"];
-        errorMessage.errorMessage = @"Use Preference pane.";
-        [self.errorWindowController presentErrorMessage:errorMessage];
+    [self checkValidKeysAndSecretsInKeychain];
 
-        // open prefs
-        [self.masPreferencesWindowController showWindow:self];
-    }
+    // Observer
+    self.openPreferenceKeyAndSecretObserver =
+    [[NSNotificationCenter defaultCenter] addObserverForName:SOXOpenPreferenceKeyAndSecretNotification
+                                                      object:nil
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification * _Nonnull note) {
+                                                      [self checkValidKeysAndSecretsInKeychain];
+                                                  }];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     // Insert code here to tear down your application
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self.openPreferenceKeyAndSecretObserver];
+
     DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -122,6 +130,20 @@
                                                               title:@"Preferences"];
 
     self.masPreferencesWindowController = masPreferencesWindowController;
+}
+
+- (void)checkValidKeysAndSecretsInKeychain {
+    if ([SOXPreferencesCore validKeychain] == NO) {
+        if ([self.masPreferencesWindowController.window isVisible] == NO) {
+            NSAlert *noKeysAndSecretsAlert = [[NSAlert alloc] init];
+            noKeysAndSecretsAlert.messageText = @"No Keys and Secrets";
+            noKeysAndSecretsAlert.informativeText  = @"In the keychain no keys and secrets could be found.\nPlease open the settings and enter keys and secrets.";
+
+            [noKeysAndSecretsAlert runModal];
+        }
+        [self.masPreferencesWindowController showWindow:self];
+        [self.masPreferencesWindowController selectControllerWithIdentifier:NSStringFromClass([SOXKeysAndSecretPreferenceViewController class])];
+    }
 }
 
 #pragma mark - Action methods

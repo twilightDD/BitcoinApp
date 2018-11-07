@@ -12,6 +12,7 @@
 
 #pragma mark - Notifications
 FOUNDATION_EXPORT NSString *const SOXAPIKeysAndSecretsDidChangeNotification;
+FOUNDATION_EXPORT NSString *const SOXOpenPreferenceKeyAndSecretNotification;
 
 FOUNDATION_EXPORT NSString *const BitcoinDE_Notification_RequestShowAccountInfo;
 FOUNDATION_EXPORT NSString *const BitcoinDE_Notification_RequestShowRates;
