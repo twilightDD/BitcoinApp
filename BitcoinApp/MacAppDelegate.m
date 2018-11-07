@@ -13,6 +13,7 @@
 #import "SOXLogWindowController.h"
 
 #import "SOXPreferencesCore.h"
+#import "SOXPreferenceCenter.h"
 
 #import "SOXKeys_BitcoinDE.h"
 
@@ -74,6 +75,10 @@
 
     // startup Preferences core
     [SOXPreferencesCore startupPreferencesCore];
+    if ([SOXPreferenceCenter isVeryFirstAppStart]) {
+        [SOXPreferenceCenter firstAppStartSetup];
+    }
+
     [self setupPreferenceWindow];
     [self checkValidKeysAndSecretsInKeychain];
 

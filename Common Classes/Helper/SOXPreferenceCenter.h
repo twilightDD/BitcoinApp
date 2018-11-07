@@ -14,8 +14,12 @@ static NSString *ActiveCountryCodesPreferencesDidChangeNotification = @"ActiveCo
 static NSString *ShowNoSepaOrdersPreferencesDidChangeNotification = @"ShowNoSepaOrdersPreferencesDidChangeNotification";
 
 @interface SOXPreferenceCenter : NSObject
+#pragma mark - General
 + (void)resetAllSettings;
++ (BOOL)isVeryFirstAppStart;
++ (void)firstAppStartSetup;
 
+#pragma mark - Defaults
 + (BOOL)defaultKYCOnly;
 + (BOOL)new_order_for_remaining_amount;
 + (BitcoinDE_TrustLevel)defaultTrustLevelBuyOrder;

@@ -10,8 +10,11 @@
 
 static NSString *OrderViewControllerSEPAKey = @"noSepaPaymentOptionFilter";
 static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
+static NSString *FirstAppStartKey = @"date of first app launch";
 
 @implementation SOXPreferenceCenter
+
+#pragma mark - General
 + (void)resetAllSettings {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *dictionaryRepresentation = [userDefaults dictionaryRepresentation];
@@ -38,8 +41,34 @@ static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
     dictionaryRepresentation = [userDefaults dictionaryRepresentation];
 }
 
++ (BOOL)isVeryFirstAppStart {
+    BOOL isVeryFirstAppStart = NO;
+    NSDate *firstAppStartDate = [self userDefaultForKey:FirstAppStartKey];
+    if (firstAppStartDate == nil) {
+        isVeryFirstAppStart = YES;
+        [self setUserDefaultObject:[NSDate date]
+                            forKey:FirstAppStartKey];
+    }
 
+    return isVeryFirstAppStart;
+}
 
++ (void)firstAppStartSetup {
+    // Country Codes
+    if ([SOXPreferenceCenter activeCountryCodes].count == 0) {
+        [self setActiveCountryCodes:[SOXPreferenceCenter defaultCountryCodes]];
+    }
+//    defaultKYCOnly
+//    new_order_for_remaining_amount
+//    defaultTrustLevelBuyOrder
+//    defaultTrustLevelNewOrder
+//    defaultPaymentOptionForCreateOrder
+//    defaultPaymentOptionForExecuteTrade
+//    secureExecuteTrade
+//    minimalVolume
+}
+
+#pragma mark - Defaults
 + (BOOL)defaultKYCOnly {
     return YES;
 }
