@@ -255,43 +255,37 @@
 
     // Reservation figures and date
     SOXAccountInfo_BitcoinDE_Data *accountInfoData = (SOXAccountInfo_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].accountInfoData;
+    self.fidorReservationValuesAndDescriptionStackView.hidden = !accountInfoData.bankReservation_exists;
     if (accountInfoData.bankReservation_exists) {
-        self.fidorReservationValuesAndDescriptionStackView.hidden = NO;
+        // Show sum of reservations
+        NSDecimalNumber *overallTotalReservationAmount = [NSDecimalNumber zero];
+        NSDecimalNumber *overallAvailableReservationAmount = [NSDecimalNumber zero];
+        for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeUnknown + 1;
+             currencyType < BitcoinDE_CurrencyType_EndOfType;
+             currencyType++) {
+            overallTotalReservationAmount = [overallTotalReservationAmount decimalNumberByAdding:
+                                             [accountInfoData allocationMaxEurVolumeForCurrencyType:currencyType]];
+            overallAvailableReservationAmount = [overallAvailableReservationAmount decimalNumberByAdding:
+                                                 [accountInfoData allocationEurVolumeOpenOrdersForCurrencyType:currencyType]];
+        }
 
         if (self.currencyType == BitcoinDE_CurrencyTypeUnknown) {
-            // Show sum of reservations
-            NSDecimalNumber *totalReservationAmount = [NSDecimalNumber zero];
-            NSDecimalNumber *availableReservationAmount = [NSDecimalNumber zero];
+            NSString *overallTotalReservationAmountString = [NSString stringWithFormat:@"%@ € (%@%%)"
+                                                             , overallTotalReservationAmount
+                                                             , @100];
+            self.fidorReservationTotalAmountTextField.stringValue = overallTotalReservationAmountString;
+            self.fidorReservationTotalAmountTextField.toolTip = [NSString stringWithFormat:@"100%% of total reservation"];
 
-            for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeUnknown + 1;
-                 currencyType < BitcoinDE_CurrencyType_EndOfType;
-                 currencyType++) {
-                totalReservationAmount = [totalReservationAmount decimalNumberByAdding:
-                                          [accountInfoData allocationMaxEurVolumeForCurrencyType:currencyType]];
-                availableReservationAmount = [availableReservationAmount decimalNumberByAdding:
-                                              [accountInfoData allocationEurVolumeOpenOrdersForCurrencyType:currencyType]];
-            }
-            
-            NSString *totalReservationAmountString = [NSString stringWithFormat:@"%@ € (%@%%)"
-                                                      , totalReservationAmount
-                                                      ,@100];
-            self.fidorReservationTotalAmountTextField.stringValue = totalReservationAmountString;
-            self.fidorReservationAvailableAmountTextField.doubleValue = availableReservationAmount.doubleValue;
-
-
+            self.fidorReservationAvailableAmountTextField.doubleValue = overallAvailableReservationAmount.doubleValue;
         }
         else {
-            // show reservation for selected currency
-            NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:self.currencyType];
-            self.fidorReservationHeadlineTextField.stringValue = [NSString stringWithFormat:@"Reservation for %@"
-                                                                  , currencyTypeString];
-
-            self.fidorReservationTotalAmountTextField.doubleValue = [accountInfoData allocationMaxEurVolumeForCurrencyType:self.currencyType].doubleValue ;
-
             NSString *totalReservationAmountString = [NSString stringWithFormat:@"%@ € (%@%%)"
                                                       , [accountInfoData allocationMaxEurVolumeForCurrencyType:self.currencyType]
-                                                      ,@50];
+                                                      , [accountInfoData allocationPercentForCurrencyType:self.currencyType]];
             self.fidorReservationTotalAmountTextField.stringValue = totalReservationAmountString;
+            self.fidorReservationTotalAmountTextField.toolTip = [NSString stringWithFormat:@"%@%% of total reservation of %@ €"
+                                                                 , [accountInfoData allocationPercentForCurrencyType:self.currencyType]
+                                                                 , overallTotalReservationAmount];
 
             self.fidorReservationAvailableAmountTextField.doubleValue = [accountInfoData allocationEurVolumeOpenOrdersForCurrencyType:self.currencyType].doubleValue;
         }
@@ -299,9 +293,9 @@
         // Reservation end date
         NSString *validUntilString = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:accountInfoData.bankReservation_validUntil];
         self.fidorReservationValidUntilTextField.stringValue = validUntilString;
-    }
-    else {
-        self.fidorReservationValuesAndDescriptionStackView.hidden = YES;
+        NSString *reservedAtString = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:accountInfoData.bankReservation_reservedAt];
+        self.fidorReservationValidUntilTextField.toolTip = [NSString stringWithFormat:@"Reserved at %@"
+                                                            , reservedAtString];
     }
 }
 
