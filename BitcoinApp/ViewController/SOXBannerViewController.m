@@ -271,7 +271,11 @@
                 availableReservationAmount = [availableReservationAmount decimalNumberByAdding:
                                               [accountInfoData allocationEurVolumeOpenOrdersForCurrencyType:currencyType]];
             }
-            self.fidorReservationTotalAmountTextField.doubleValue = totalReservationAmount.doubleValue;
+            
+            NSString *totalReservationAmountString = [NSString stringWithFormat:@"%@ € (%@%%)"
+                                                      , totalReservationAmount
+                                                      ,@100];
+            self.fidorReservationTotalAmountTextField.stringValue = totalReservationAmountString;
             self.fidorReservationAvailableAmountTextField.doubleValue = availableReservationAmount.doubleValue;
 
 
@@ -283,6 +287,12 @@
                                                                   , currencyTypeString];
 
             self.fidorReservationTotalAmountTextField.doubleValue = [accountInfoData allocationMaxEurVolumeForCurrencyType:self.currencyType].doubleValue ;
+
+            NSString *totalReservationAmountString = [NSString stringWithFormat:@"%@ € (%@%%)"
+                                                      , [accountInfoData allocationMaxEurVolumeForCurrencyType:self.currencyType]
+                                                      ,@50];
+            self.fidorReservationTotalAmountTextField.stringValue = totalReservationAmountString;
+
             self.fidorReservationAvailableAmountTextField.doubleValue = [accountInfoData allocationEurVolumeOpenOrdersForCurrencyType:self.currencyType].doubleValue;
         }
 

@@ -20,12 +20,32 @@ static NSString *ShowNoSepaOrdersPreferencesDidChangeNotification = @"ShowNoSepa
 + (void)firstAppStartSetup;
 
 #pragma mark - Defaults
++ (BOOL)automaticallyLoadOrderbookForOrderType:(BitcoinDE_OrderType)orderType
+                               forCurrencyType:(BitcoinDE_CurrencyType)currencyType;
++ (NSControlStateValue)controlStateForAutoLoadOrderbookForOrderType:(BitcoinDE_OrderType)orderType
+                                                    forCurrencyType:(BitcoinDE_CurrencyType)currencyType;
++ (void)setAutomaticallyLoadOrderbook:(BOOL)automaticallyLoadOrderbook
+                         forOrderType:(BitcoinDE_OrderType)orderType
+                      forCurrencyType:(BitcoinDE_CurrencyType)currencyType;
+
 + (BOOL)defaultKYCOnly;
-+ (BOOL)new_order_for_remaining_amount;
++ (void)setDefaultKYCOnly:(BOOL)defaultKYCOnly;
+
++ (BOOL)reNewOrderForRemainingAmount;
++ (void)setReNewOrderForRemainingAmount:(BOOL)reNewOrderForRemainingAmount;
+
 + (BitcoinDE_TrustLevel)defaultTrustLevelBuyOrder;
-+ (BitcoinDE_TrustLevel)defaultTrustLevelNewOrder;
-+ (BitcoinDE_PaymentOption)defaultPaymentOptionForCreateOrder;
+
++ (BitcoinDE_TrustLevel)defaultTrustLevelForNewOrder;
++ (void)setDefaultTrustLevelNewOrder:(BitcoinDE_TrustLevel)defaultTrustLevelNewOrder;
+
++ (BitcoinDE_PaymentOption)defaultPaymentOptionForNewOrder;
+
 + (BitcoinDE_PaymentOption)defaultPaymentOptionForExecuteTrade;
+
++ (NSNumber *)defaultEndDateTimespan;
++ (void)setDefaultEndDateTimespan:(NSNumber *)endDateTimespan;
+
 + (BOOL)secureExecuteTrade;
 + (NSDecimalNumber *)minimalVolume;
 

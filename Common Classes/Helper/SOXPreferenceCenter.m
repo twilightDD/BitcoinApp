@@ -8,9 +8,15 @@
 
 #import "SOXPreferenceCenter.h"
 
-static NSString *OrderViewControllerSEPAKey = @"noSepaPaymentOptionFilter";
-static NSString *OrderViewControllerCountryCodeKey = @"countryCodeFilter";
-static NSString *FirstAppStartKey = @"date of first app launch";
+static NSString *UserDef_Domain_AutomaticallyLoadOrderbookKey = @"2SOX_domain_automaticallyLoadOrderbook";
+static NSString *UserDef_Domain_OrderViewControllerSEPAKey = @"2SOX_domain_noSepaPaymentOptionFilter";
+static NSString *UserDef_Domain_OrderViewControllerCountryCodeKey = @"2SOX_domain_countryCodeFilter";
+static NSString *UserDef_FirstAppStartKey = @"2SOX_domain_dateOfFirstAppLaunch";
+
+static NSString *UserDef_default_kycOnly = @"2SOX_default_KYCOnly";
+static NSString *UserDef_default_reNewOrderForRemainingAmount = @"2SOX_default_reNewOrderForRemainingAmount";
+static NSString *UserDef_default_trustLevelNewOrder = @"2SOX_default_trustLevelNewOrder";
+static NSString *UserDef_default_endDateTimespan = @"2SOX_default_endDateTimespan";
 
 @implementation SOXPreferenceCenter
 
@@ -19,7 +25,7 @@ static NSString *FirstAppStartKey = @"date of first app launch";
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *dictionaryRepresentation = [userDefaults dictionaryRepresentation];
 
-    [self removeUserDefaultForKey:OrderViewControllerCountryCodeKey];
+    [self removeUserDefaultForKey:UserDef_Domain_OrderViewControllerCountryCodeKey];
 
     for (BitcoinDE_OrderType orderType = BitcoinDE_OrderTypeBuy;
          orderType < BitcoinDE_OrderType_EndOfType;
@@ -27,12 +33,12 @@ static NSString *FirstAppStartKey = @"date of first app launch";
         for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeBitcoin;
              currencyType <BitcoinDE_CurrencyType_EndOfType;
              currencyType++) {
-            NSString *userDefaultKey = [self userDefaultKeyForDomain:OrderViewControllerCountryCodeKey
+            NSString *userDefaultKey = [self userDefaultKeyForDomain:UserDef_Domain_OrderViewControllerCountryCodeKey
                                                            orderType:orderType
                                                         currencyType:currencyType];
             [self removeUserDefaultForKey:userDefaultKey];
 
-            userDefaultKey = [self userDefaultKeyForDomain:OrderViewControllerSEPAKey
+            userDefaultKey = [self userDefaultKeyForDomain:UserDef_Domain_OrderViewControllerSEPAKey
                                                  orderType:orderType
                                               currencyType:currencyType];
             [self removeUserDefaultForKey:userDefaultKey];
@@ -43,11 +49,11 @@ static NSString *FirstAppStartKey = @"date of first app launch";
 
 + (BOOL)isVeryFirstAppStart {
     BOOL isVeryFirstAppStart = NO;
-    NSDate *firstAppStartDate = [self userDefaultForKey:FirstAppStartKey];
+    NSDate *firstAppStartDate = [self userDefaultForKey:UserDef_FirstAppStartKey];
     if (firstAppStartDate == nil) {
         isVeryFirstAppStart = YES;
         [self setUserDefaultObject:[NSDate date]
-                            forKey:FirstAppStartKey];
+                            forKey:UserDef_FirstAppStartKey];
     }
 
     return isVeryFirstAppStart;
@@ -69,23 +75,73 @@ static NSString *FirstAppStartKey = @"date of first app launch";
 }
 
 #pragma mark - Defaults
-+ (BOOL)defaultKYCOnly {
-    return YES;
++ (BOOL)automaticallyLoadOrderbookForOrderType:(BitcoinDE_OrderType)orderType
+                               forCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    NSString *userDefaultKey = [self userDefaultKeyForDomain:UserDef_Domain_AutomaticallyLoadOrderbookKey
+                                                   orderType:orderType
+                                                currencyType:currencyType];
+    NSNumber *userDefault = [SOXPreferenceCenter userDefaultForKey:userDefaultKey];
+    BOOL automaticallyLoadOrderbook = userDefault.boolValue;
+    return automaticallyLoadOrderbook;
 }
 
-+ (BOOL)new_order_for_remaining_amount {
-    return YES;
++ (NSControlStateValue)controlStateForAutoLoadOrderbookForOrderType:(BitcoinDE_OrderType)orderType
+                                                    forCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    BOOL controlState = [SOXPreferenceCenter automaticallyLoadOrderbookForOrderType:orderType
+                                                                    forCurrencyType:currencyType];
+
+    return controlState ? NSControlStateValueOn : NSControlStateValueOff;
+}
+
++ (void)setAutomaticallyLoadOrderbook:(BOOL)automaticallyLoadOrderbook
+                         forOrderType:(BitcoinDE_OrderType)orderType
+                      forCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    NSString *userDefaultKey = [self userDefaultKeyForDomain:UserDef_Domain_AutomaticallyLoadOrderbookKey
+                                                   orderType:orderType
+                                                currencyType:currencyType];
+    [self setUserDefaultObject:@(automaticallyLoadOrderbook)
+                        forKey:userDefaultKey];
+
+}
+
++ (BOOL)defaultKYCOnly {
+    NSNumber *userDefault = [SOXPreferenceCenter userDefaultForKey:UserDef_default_kycOnly];
+    BOOL defaultKYCOnly = userDefault.boolValue;
+    return defaultKYCOnly;
+}
+
++ (void)setDefaultKYCOnly:(BOOL)defaultKYCOnly {
+    [SOXPreferenceCenter setUserDefaultObject:@(defaultKYCOnly)
+                                       forKey:UserDef_default_kycOnly];
+}
+
++ (BOOL)reNewOrderForRemainingAmount {
+    NSNumber *userDefault = [SOXPreferenceCenter userDefaultForKey:UserDef_default_reNewOrderForRemainingAmount];
+    BOOL reNewOrderForRemainingAmount = userDefault.boolValue;
+    return reNewOrderForRemainingAmount;
+}
+
++ (void)setReNewOrderForRemainingAmount:(BOOL)reNewOrderForRemainingAmount {
+    [SOXPreferenceCenter setUserDefaultObject:@(reNewOrderForRemainingAmount)
+                                       forKey:UserDef_default_reNewOrderForRemainingAmount];
 }
 
 + (BitcoinDE_TrustLevel)defaultTrustLevelBuyOrder {
     return BitcoinDE_TrustLevelGold;
 }
 
-+ (BitcoinDE_TrustLevel)defaultTrustLevelNewOrder {
-    return BitcoinDE_TrustLevelBronze;
++ (BitcoinDE_TrustLevel)defaultTrustLevelForNewOrder {
+    NSNumber *userDefault = [SOXPreferenceCenter userDefaultForKey:UserDef_default_trustLevelNewOrder];
+    BitcoinDE_TrustLevel reNewOrderForRemainingAmount = (BitcoinDE_TrustLevel)userDefault.unsignedIntegerValue;
+    return reNewOrderForRemainingAmount;
 }
 
-+ (BitcoinDE_PaymentOption)defaultPaymentOptionForCreateOrder {
++ (void)setDefaultTrustLevelNewOrder:(BitcoinDE_TrustLevel)defaultTrustLevelNewOrder {
+    [SOXPreferenceCenter setUserDefaultObject:@(defaultTrustLevelNewOrder)
+                                       forKey:UserDef_default_trustLevelNewOrder];
+}
+
++ (BitcoinDE_PaymentOption)defaultPaymentOptionForNewOrder {
     return BitcoinDE_PaymentOptionExpressOnly;
 }
 
@@ -93,6 +149,16 @@ static NSString *FirstAppStartKey = @"date of first app launch";
     //    return BitcoinDE_PaymentOptionExpressOnly;
     //    return BitcoinDE_PaymentOptionSEPAOnly;
     return BitcoinDE_PaymentOptionExpressAndSepa;
+}
+
++ (NSNumber *)defaultEndDateTimespan {
+    NSNumber *defaultEndDateTimespan = [SOXPreferenceCenter userDefaultForKey:UserDef_default_endDateTimespan];
+    return defaultEndDateTimespan;
+}
+
++ (void)setDefaultEndDateTimespan:(NSNumber *)endDateTimespan {
+    [SOXPreferenceCenter setUserDefaultObject:endDateTimespan
+                                       forKey:UserDef_default_endDateTimespan];
 }
 
 + (BOOL)secureExecuteTrade {
@@ -112,7 +178,7 @@ static NSString *FirstAppStartKey = @"date of first app launch";
 #pragma mark - Sepa Payment Option
 + (NSControlStateValue )sepaPaymentOptionState {
     NSControlStateValue sepaPaymentOptionState = NSControlStateValueOff;
-    id noSepaFilterValue = [self userDefaultForKey:OrderViewControllerSEPAKey];
+    id noSepaFilterValue = [self userDefaultForKey:UserDef_Domain_OrderViewControllerSEPAKey];
     if (noSepaFilterValue != nil
         && [noSepaFilterValue isKindOfClass:[NSNumber class]]) {
         sepaPaymentOptionState = [(NSNumber *)noSepaFilterValue boolValue] ? NSControlStateValueOn: NSControlStateValueOff;
@@ -126,7 +192,7 @@ static NSString *FirstAppStartKey = @"date of first app launch";
     NSControlStateValue sepaPaymentOptionState = NSControlStateValueOn;
     
     { // look up at userDefaults
-        NSString *userDefaultKey = [self userDefaultKeyForDomain:OrderViewControllerSEPAKey
+        NSString *userDefaultKey = [self userDefaultKeyForDomain:UserDef_Domain_OrderViewControllerSEPAKey
                                                        orderType:orderType
                                                     currencyType:currencyType];
         id noSepaFilterValue = [self userDefaultForKey:userDefaultKey];
@@ -148,7 +214,7 @@ static NSString *FirstAppStartKey = @"date of first app launch";
         if (state == NSControlStateValueOn) {
             noSepaFilterValue = @YES;
         }
-        NSString *userDefaultKey = [self userDefaultKeyForDomain:OrderViewControllerSEPAKey
+        NSString *userDefaultKey = [self userDefaultKeyForDomain:UserDef_Domain_OrderViewControllerSEPAKey
                                                        orderType:orderType
                                                     currencyType:currencyType];
         [self setUserDefaultObject:noSepaFilterValue
@@ -166,7 +232,7 @@ static NSString *FirstAppStartKey = @"date of first app launch";
     }
     // for all
     [self setUserDefaultObject:noSepaFilterValue
-                        forKey:OrderViewControllerSEPAKey];
+                        forKey:UserDef_Domain_OrderViewControllerSEPAKey];
 
     // for orderType and currencyType
     for (BitcoinDE_OrderType orderType = BitcoinDE_OrderTypeBuy;
@@ -175,7 +241,7 @@ static NSString *FirstAppStartKey = @"date of first app launch";
         for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeBitcoin;
              currencyType <BitcoinDE_CurrencyType_EndOfType;
              currencyType++) {
-            NSString *userDefaultKey = [self userDefaultKeyForDomain:OrderViewControllerSEPAKey
+            NSString *userDefaultKey = [self userDefaultKeyForDomain:UserDef_Domain_OrderViewControllerSEPAKey
                                                            orderType:orderType
                                                         currencyType:currencyType];
             [self setUserDefaultObject:noSepaFilterValue
@@ -240,7 +306,7 @@ static NSString *FirstAppStartKey = @"date of first app launch";
 
 + (NSArray <NSString *> *)activeCountryCodesforOrderType:(BitcoinDE_OrderType)orderType
                                             currencyType:(BitcoinDE_CurrencyType)currencyType {
-    NSString *userDefaultKey = [self userDefaultKeyForDomain:OrderViewControllerCountryCodeKey
+    NSString *userDefaultKey = [self userDefaultKeyForDomain:UserDef_Domain_OrderViewControllerCountryCodeKey
                                                    orderType:orderType
                                                 currencyType:currencyType];
     NSArray *activeCountryCodes = [self userDefaultForKey:userDefaultKey];
@@ -249,7 +315,7 @@ static NSString *FirstAppStartKey = @"date of first app launch";
 }
 
 + (NSArray <NSString *> *)activeCountryCodes {
-    NSString *userDefaultKey = OrderViewControllerCountryCodeKey;
+    NSString *userDefaultKey = UserDef_Domain_OrderViewControllerCountryCodeKey;
     NSArray *userDefaultsValue = [self userDefaultForKey:userDefaultKey];
     if (userDefaultsValue == nil) {
         userDefaultsValue = [self defaultCountryCodes];
@@ -263,7 +329,7 @@ static NSString *FirstAppStartKey = @"date of first app launch";
 + (void)setActiveCountryCodes:(NSArray <NSString *> *)activeCountryCodes {
     // for all
     [self setUserDefaultObject:activeCountryCodes
-                        forKey:OrderViewControllerCountryCodeKey];
+                        forKey:UserDef_Domain_OrderViewControllerCountryCodeKey];
 
     // for orderType and currencyType
     for (BitcoinDE_OrderType orderType = BitcoinDE_OrderTypeBuy;
@@ -272,7 +338,7 @@ static NSString *FirstAppStartKey = @"date of first app launch";
         for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeBitcoin;
              currencyType <BitcoinDE_CurrencyType_EndOfType;
              currencyType++) {
-            NSString *userDefaultKey = [self userDefaultKeyForDomain:OrderViewControllerCountryCodeKey
+            NSString *userDefaultKey = [self userDefaultKeyForDomain:UserDef_Domain_OrderViewControllerCountryCodeKey
                                                            orderType:orderType
                                                         currencyType:currencyType];
             [self setUserDefaultObject:activeCountryCodes
@@ -291,7 +357,7 @@ static NSString *FirstAppStartKey = @"date of first app launch";
                  currencyType:(BitcoinDE_CurrencyType)currencyType {
     if (orderType != BitcoinDE_OrderTypeUnknown
         && currencyType != BitcoinDE_CurrencyTypeUnknown) {
-        NSString *userDefaultKey = [self userDefaultKeyForDomain:OrderViewControllerCountryCodeKey
+        NSString *userDefaultKey = [self userDefaultKeyForDomain:UserDef_Domain_OrderViewControllerCountryCodeKey
                                                        orderType:orderType
                                                     currencyType:currencyType];
         [self setUserDefaultObject:activeCountryCodes forKey:userDefaultKey];

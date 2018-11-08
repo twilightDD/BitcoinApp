@@ -146,7 +146,7 @@
 - (void)setupTrustLevelValue {
     self.trustLevel = self.orderBookDataToReplace ?
     [SOXMarket_BitcoinDE_DefTypes trustLevelForTrustLevelString:self.orderBookDataToReplace.orderRequirements_minTrustLevel] :
-    [SOXPreferenceCenter defaultTrustLevelNewOrder];
+    [SOXPreferenceCenter defaultTrustLevelForNewOrder];
 }
 
 #pragma mark | UI
@@ -243,7 +243,7 @@
         self.reNewOrderButton.title = @"Automatic residual purchase request";
         self.reNewOrderButton.state = self.orderBookDataToReplace ?
         self.orderBookDataToReplace.orderInformation_newOrderForRemainingAmount :
-        [SOXPreferenceCenter new_order_for_remaining_amount];
+        [SOXPreferenceCenter reNewOrderForRemainingAmount];
     }
 
     { // TrustLevel
@@ -404,7 +404,7 @@
                                                                  new_order_for_remaining_amount:self.reNewOrderButton.state
                                                                                 min_trust_level:self.trustLevel
                                                                                   only_kyc_full:self.reNewOrderButton.state
-                                                                                 payment_option:[SOXPreferenceCenter defaultPaymentOptionForCreateOrder]
+                                                                                 payment_option:[SOXPreferenceCenter defaultPaymentOptionForNewOrder]
                                                                                    seat_of_bank:[SOXPreferenceCenter defaultCountryCodes]];
 
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_CreateOrderType
