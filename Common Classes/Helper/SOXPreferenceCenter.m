@@ -8,15 +8,15 @@
 
 #import "SOXPreferenceCenter.h"
 
-static NSString *UserDef_Domain_AutomaticallyLoadOrderbookKey = @"2SOX_domain_automaticallyLoadOrderbook";
-static NSString *UserDef_Domain_OrderViewControllerSEPAKey = @"2SOX_domain_noSepaPaymentOptionFilter";
-static NSString *UserDef_Domain_OrderViewControllerCountryCodeKey = @"2SOX_domain_countryCodeFilter";
-static NSString *UserDef_FirstAppStartKey = @"2SOX_domain_dateOfFirstAppLaunch";
+static NSString *UserDef_Domain_AutomaticallyLoadOrderbookKey = @"de.2sox.coiner.domain_automaticallyLoadOrderbook";
+static NSString *UserDef_Domain_OrderViewControllerSEPAKey = @"de.2sox.coiner.domain_noSepaPaymentOptionFilter";
+static NSString *UserDef_Domain_OrderViewControllerCountryCodeKey = @"de.2sox.coiner.domain_countryCodeFilter";
+static NSString *UserDef_FirstAppStartKey = @"de.2sox.coiner.domain_date";
 
-static NSString *UserDef_default_kycOnly = @"2SOX_default_KYCOnly";
-static NSString *UserDef_default_reNewOrderForRemainingAmount = @"2SOX_default_reNewOrderForRemainingAmount";
-static NSString *UserDef_default_trustLevelNewOrder = @"2SOX_default_trustLevelNewOrder";
-static NSString *UserDef_default_endDateTimespan = @"2SOX_default_endDateTimespan";
+static NSString *UserDef_default_kycOnly = @"de.2sox.coiner.default_KYCOnly";
+static NSString *UserDef_default_reNewOrderForRemainingAmount = @"de.2sox.coiner.default_reNewOrderForRemainingAmount";
+static NSString *UserDef_default_trustLevelNewOrder = @"de.2sox.coiner.default_trustLevelNewOrder";
+static NSString *UserDef_default_endDateTimespan = @"de.2sox.coiner.default_endDateTimespan";
 
 @implementation SOXPreferenceCenter
 
@@ -25,25 +25,12 @@ static NSString *UserDef_default_endDateTimespan = @"2SOX_default_endDateTimespa
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *dictionaryRepresentation = [userDefaults dictionaryRepresentation];
 
-    [self removeUserDefaultForKey:UserDef_Domain_OrderViewControllerCountryCodeKey];
-
-    for (BitcoinDE_OrderType orderType = BitcoinDE_OrderTypeBuy;
-         orderType < BitcoinDE_OrderType_EndOfType;
-         orderType++) {
-        for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeBitcoin;
-             currencyType <BitcoinDE_CurrencyType_EndOfType;
-             currencyType++) {
-            NSString *userDefaultKey = [self userDefaultKeyForDomain:UserDef_Domain_OrderViewControllerCountryCodeKey
-                                                           orderType:orderType
-                                                        currencyType:currencyType];
-            [self removeUserDefaultForKey:userDefaultKey];
-
-            userDefaultKey = [self userDefaultKeyForDomain:UserDef_Domain_OrderViewControllerSEPAKey
-                                                 orderType:orderType
-                                              currencyType:currencyType];
+    for (NSString *userDefaultKey in dictionaryRepresentation.allKeys) {
+        if ([userDefaultKey containsString:@"de.2sox.coiner."]) {
             [self removeUserDefaultForKey:userDefaultKey];
         }
     }
+
     dictionaryRepresentation = [userDefaults dictionaryRepresentation];
 }
 
@@ -61,17 +48,30 @@ static NSString *UserDef_default_endDateTimespan = @"2SOX_default_endDateTimespa
 
 + (void)firstAppStartSetup {
     // Country Codes
-    if ([SOXPreferenceCenter activeCountryCodes].count == 0) {
-        [self setActiveCountryCodes:[SOXPreferenceCenter defaultCountryCodes]];
-    }
-//    defaultKYCOnly
-//    new_order_for_remaining_amount
-//    defaultTrustLevelBuyOrder
-//    defaultTrustLevelNewOrder
-//    defaultPaymentOptionForCreateOrder
-//    defaultPaymentOptionForExecuteTrade
-//    secureExecuteTrade
-//    minimalVolume
+    [self setActiveCountryCodes:[SOXPreferenceCenter defaultCountryCodes]];
+
+    // defaultKYCOnly
+    [self setDefaultKYCOnly:YES];
+
+    // ReNewOrderForRemainingAmountReNewOrderForRemainingAmount
+    [self setReNewOrderForRemainingAmount:YES];
+
+    // defaultTrustLevelBuyOrder
+    //[self setDefaultTrustLevelBuyOrder:BitcoinDE_TrustLevelBronze];
+
+    // defaultTrustLevelNewOrder
+    [self setDefaultTrustLevelNewOrder:BitcoinDE_TrustLevelBronze];
+
+    // defaultPaymentOptionForCreateOrder
+
+    // defaultPaymentOptionForExecuteTrade
+
+    // defaultEndDateTimeSpan
+    [self setDefaultEndDateTimespan:@5];
+
+    // secureExecuteTrade
+
+    // minimalVolume
 }
 
 #pragma mark - Defaults
