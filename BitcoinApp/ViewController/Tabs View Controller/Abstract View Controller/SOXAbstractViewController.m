@@ -7,8 +7,9 @@
 //
 
 #import "SOXAbstractViewController.h"
-
 #import "SOXAbstractViewController_Private.h"
+
+#import "SOXPreferencesCore.h"
 
 #import "SOXLogWindowController.h"
 #import "MacAppDelegate.h"
@@ -62,12 +63,15 @@
 
 #pragma mark - Custom Views
 - (void)enableSpinningWheel {
-    self.spinningBackgroundView.layer.backgroundColor = [NSColor colorWithCalibratedRed:0
-                                                                                  green:0
-                                                                                   blue:0
-                                                                                  alpha:0.1].CGColor;
-    self.spinningBackgroundView.hidden = NO;
-    [self.circularProgressIndicator startAnimation:nil];
+    if ([SOXPreferencesCore validKeychain]
+        && self.spinningBackgroundView.hidden) {
+        self.spinningBackgroundView.layer.backgroundColor = [NSColor colorWithCalibratedRed:0
+                                                                                      green:0
+                                                                                       blue:0
+                                                                                      alpha:0.1].CGColor;
+        self.spinningBackgroundView.hidden = NO;
+        [self.circularProgressIndicator startAnimation:nil];
+    }
 }
 
 - (void)disableSpinningWheel {
