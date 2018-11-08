@@ -58,7 +58,7 @@
 
 
 #pragma mark | Properties
-@property (strong) NSNumber *endDateTimespan;
+@property (strong, nonatomic) NSNumber *endDateTimespan;
 @end
 
 @implementation SOXGeneralSettingsPreferenceViewController
@@ -100,24 +100,27 @@
 
     { // TrustLevel
         self.trustLevelDescpriptionTextField.stringValue = @"Minimal Trust Level";
-        self.bronceTrustLevelButton.title               = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelBronze];
-        self.bronceTrustLevelButton.tag                 = BitcoinDE_TrustLevelBronze;
+        self.bronceTrustLevelButton.title = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelBronze];
+        self.bronceTrustLevelButton.tag = BitcoinDE_TrustLevelBronze;
+        self.bronceTrustLevelButton.state = NSControlStateValueOff;
 
-        self.silverTrustLevelButton.title               = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelSilver];
-        self.silverTrustLevelButton.tag                 = BitcoinDE_TrustLevelSilver;
+        self.silverTrustLevelButton.title = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelSilver];
+        self.silverTrustLevelButton.tag = BitcoinDE_TrustLevelSilver;
+        self.silverTrustLevelButton.state = NSControlStateValueOff;
 
-        self.goldTrustLevelButton.title                 = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelGold];
-        self.goldTrustLevelButton.tag                   = BitcoinDE_TrustLevelGold;
+        self.goldTrustLevelButton.title = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelGold];
+        self.goldTrustLevelButton.tag = BitcoinDE_TrustLevelGold;
+        self.goldTrustLevelButton.state = NSControlStateValueOff;
 
         BitcoinDE_TrustLevel trustLevel = [SOXPreferenceCenter defaultTrustLevelForNewOrder];
         if (self.bronceTrustLevelButton.tag == trustLevel) {
-            self.bronceTrustLevelButton.state = 1;
+            self.bronceTrustLevelButton.state = NSControlStateValueOn;
         }
         else if (self.silverTrustLevelButton.tag == trustLevel) {
-            self.silverTrustLevelButton.state = 1;
+            self.silverTrustLevelButton.state = NSControlStateValueOn;
         }
         else if (self.goldTrustLevelButton.tag == trustLevel) {
-            self.goldTrustLevelButton.state = 1;
+            self.goldTrustLevelButton.state = NSControlStateValueOn;
         }
     }
 
