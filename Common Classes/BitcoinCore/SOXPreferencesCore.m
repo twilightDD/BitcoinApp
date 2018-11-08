@@ -32,7 +32,7 @@ static NSString *KeychainAccountKey = @"BitcounAccount";
 
 #pragma mark - Public Class methods
 + (void)startupPreferencesCore {
-    SOXPreferencesCore *sharedCore = [SOXPreferencesCore sharedCore];
+   [SOXPreferencesCore sharedCore];
 }
 
 + (BOOL)validKeychain {
