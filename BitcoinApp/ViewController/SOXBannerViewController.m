@@ -14,6 +14,7 @@
 #import "SOXAccountInfo_BitcoinDE_Data.h"
 #import "SOXRates_BitcoinDE_Data.h"
 
+#import "SOXPreferencesCore.h"
 #import "SOXFormatters.h"
 
 #pragma mark - Interface
@@ -138,6 +139,7 @@
                                                   usingBlock:^(NSNotification * _Nonnull note) {
                                                       [[SOXMarket_BitcoinDE_Core sharedCore] startAccountInfoUpdate];
                                                       [[SOXMarket_BitcoinDE_Core sharedCore] startAllRatesUpdate];
+                                                      self.updateBannerButton.enabled = YES;
                                                   }];
 }
 
@@ -206,6 +208,9 @@
         self.emptyDescription2TextField.stringValue = @"";
         self.empty2TextField.stringValue = @"";
     }
+
+
+    self.updateBannerButton.enabled = [SOXPreferencesCore validKeychain];
 }
 
 - (void)updateUIForCoinAmounts {
