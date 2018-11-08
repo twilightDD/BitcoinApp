@@ -32,8 +32,9 @@
 @property (strong) IBOutlet NSTextField *endDateTimeSpanValueTextField;
 @property (strong) IBOutlet NSStepper *endDateStepper;
 
-
 @property (strong) IBOutlet NSTextField *paymentOptionHintTextField;
+@property (strong) IBOutlet NSTextField *reservationHintTextField;
+
 
 // Load orderbooks automatically
 @property (strong) IBOutlet NSBox *loadOrderbooksAutomaticallyBox;
@@ -129,16 +130,23 @@
         self.endDateTimeSpanDescriptionTextField.stringValue = @"Order should end in days:";
     }
     [self setupUIBoxPaymentOptionHint];
+    [self setupUIBoxReservationHint];
 }
 
 - (void)setupUIBoxPaymentOptionHint {
-    // Hint on buy: paymentOption depend on default via preferences on webside
-
     self.paymentOptionHintTextField.allowsEditingTextAttributes = YES;
     self.paymentOptionHintTextField.selectable = YES;
     [self.paymentOptionHintTextField setHyperlinkFormattingFromString:@"Express Trade Settings"
                                                         withURLString:@"https://www.bitcoin.de/de/express-trade/settings"];
 }
+
+- (void)setupUIBoxReservationHint {
+    self.reservationHintTextField.allowsEditingTextAttributes = YES;
+    self.reservationHintTextField.selectable = YES;
+    [self.reservationHintTextField setHyperlinkFormattingFromString:@"Change Express Reservation"
+                                                        withURLString:@"https://www.bitcoin.de/de/create_reservation"];
+}
+
 
 - (void)setupLoadOrderBooksAutomatically {
     self.buyDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes naturalStringForOrderType:BitcoinDE_OrderTypeBuy];
