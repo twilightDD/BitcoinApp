@@ -20,7 +20,7 @@
 @interface SOXKeysAndSecretPreferenceViewController ()
 
 #pragma mark | Outlets
-@property (strong) IBOutlet NSArrayController *keysAndSecretsArrayController;
+@property (strong) IBOutlet NSTextField *headLineTextField;
 
 @property (strong) IBOutlet NSTableView *tableView;
 @property (strong) IBOutlet NSButton *addKeySecretPairButton;
@@ -31,6 +31,8 @@
 
 @property (strong) IBOutlet NSButton *importButton;
 @property (strong) IBOutlet NSButton *helpButton;
+
+@property (strong) IBOutlet NSArrayController *keysAndSecretsArrayController;
 
 #pragma mark | properties
 @property (strong, nonatomic) NSMutableArray <NSMutableDictionary*> *keysAndSecrets;
@@ -182,6 +184,8 @@
 
 #pragma mark - Private methods
 - (void)setupUI {
+    self.headLineTextField.stringValue = @"Keys and Secrets";
+
     self.saveButton.title = @"Save to Keychain";
     self.dismissButton.title = @"Reset";
     
