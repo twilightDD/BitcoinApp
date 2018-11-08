@@ -196,7 +196,7 @@
         BitcoinDE_CurrencyType newCurrencyType = sender.indexOfSelectedItem;
         if (newCurrencyType != self.selectedCurrencyType) {
             self.selectedCurrencyType = newCurrencyType;
-            [self resetTradeDatas];
+            self.needsToReloadTradeDatas = YES;
         }
     }
     // orderType selection
@@ -204,7 +204,7 @@
         BitcoinDE_OrderType newOrderType = sender.indexOfSelectedItem;
         if (newOrderType != self.selectedOrderType) {
             self.selectedOrderType = newOrderType;
-            [self resetTradeDatas];
+            self.needsToReloadTradeDatas = YES;
         }
     }
     // orderStateType
@@ -213,12 +213,15 @@
         
         if (newOrderStateType != self.selectedOrderStateType) {
             self.selectedOrderStateType = newOrderStateType;
-            [self resetTradeDatas];
+            self.needsToReloadTradeDatas = YES;
+            
             BOOL hideChangeAndRemoveButtons = newOrderStateType != BitcoinDE_OrderStateTypePending;
             self.changeOrderButton.hidden = hideChangeAndRemoveButtons;
             self.removeOrderButton.hidden = hideChangeAndRemoveButtons;
         }
     }
+    
+    [super popupButtonAction:sender];
 }
 
 - (void)changeOrderButtonPressed {

@@ -17,6 +17,7 @@ static NSString *UserDef_default_kycOnly = @"de.2sox.coiner.default_KYCOnly";
 static NSString *UserDef_default_reNewOrderForRemainingAmount = @"de.2sox.coiner.default_reNewOrderForRemainingAmount";
 static NSString *UserDef_default_trustLevelNewOrder = @"de.2sox.coiner.default_trustLevelNewOrder";
 static NSString *UserDef_default_endDateTimespan = @"de.2sox.coiner.default_endDateTimespan";
+static NSString *UserDef_default_autoUpdateInfoTabs = @"de.2sox.coiner.default_autoUpdateInfoTabs";
 
 @implementation SOXPreferenceCenter
 
@@ -180,6 +181,23 @@ static NSString *UserDef_default_endDateTimespan = @"de.2sox.coiner.default_endD
     });
 
     return minimalVolume;
+}
+
++ (BOOL)autoUpdateInfoTabs {
+    NSNumber *userDefault = [SOXPreferenceCenter userDefaultForKey:UserDef_default_autoUpdateInfoTabs];
+    BOOL autoUpdateInfoTabs = userDefault.boolValue;
+    return autoUpdateInfoTabs;
+}
+
++ (NSControlStateValue)controlStateForAutoUpdateInfoTabs {
+    BOOL autoUpdateInfoTabs = [SOXPreferenceCenter autoUpdateInfoTabs];
+
+    return autoUpdateInfoTabs ? NSControlStateValueOn : NSControlStateValueOff;
+}
+
++ (void)setAutoUpdateInfoTabs:(BOOL)autoUpdateInfoTabs {
+    [SOXPreferenceCenter setUserDefaultObject:@(autoUpdateInfoTabs)
+                                       forKey:UserDef_default_autoUpdateInfoTabs];
 }
 
 #pragma mark - Sepa Payment Option

@@ -8,6 +8,8 @@
 #import "SOXPagingAbstractViewController.h"
 #import "SOXAbstractViewController_Private.h"
 
+#import "SOXPreferenceCenter.h"
+
 #import "SOXAccountLedger_BitcoinDE_Data.h"
 
 @class SOXPagingViewController;
@@ -28,6 +30,7 @@
 @property (strong, nonatomic, readonly) NSDate *selectedStartDate;
 @property (strong, nonatomic, readonly) NSDate *selectedEndDate;
 
+@property (nonatomic) BOOL needsToReloadTradeDatas;
 @property (nonatomic) NSInteger currentPage;
 
 - (void)updateControllerDatasWithDataObjects:(NSArray *)dataObjects

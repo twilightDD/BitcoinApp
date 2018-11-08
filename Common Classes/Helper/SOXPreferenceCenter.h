@@ -49,6 +49,10 @@ static NSString *ShowNoSepaOrdersPreferencesDidChangeNotification = @"ShowNoSepa
 + (BOOL)secureExecuteTrade;
 + (NSDecimalNumber *)minimalVolume;
 
++ (BOOL)autoUpdateInfoTabs;
++ (NSControlStateValue)controlStateForAutoUpdateInfoTabs;
++ (void)setAutoUpdateInfoTabs:(BOOL)autoUpdateInfoTabs;
+
 #pragma mark - Sepa Payment Option
 + (NSControlStateValue )sepaPaymentOptionState;
 + (NSControlStateValue )sepaPaymentOptionStateForOrderType:(BitcoinDE_OrderType)orderType

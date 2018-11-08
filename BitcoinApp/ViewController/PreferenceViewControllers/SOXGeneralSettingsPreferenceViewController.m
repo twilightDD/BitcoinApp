@@ -57,6 +57,8 @@
 @property (strong) IBOutlet NSButton *ethBuyButton;
 @property (strong) IBOutlet NSButton *ethSellButton;
 
+@property (strong) IBOutlet NSButton *autoUpdateInfoTabsButton;
+
 
 #pragma mark | Properties
 @property (strong, nonatomic) NSNumber *endDateTimespan;
@@ -149,6 +151,8 @@
 
 
 - (void)setupLoadOrderBooksAutomatically {
+    self.loadOrderbooksAutomaticallyBox.title = @"Automatically loadings";
+    
     self.buyDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes naturalStringForOrderType:BitcoinDE_OrderTypeBuy];
     self.sellDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes naturalStringForOrderType:BitcoinDE_OrderTypeSell];
 
@@ -179,6 +183,10 @@
                                                                                 forCurrencyType:BitcoinDE_CurrencyTypeEthereum];
     self.ethSellButton.state = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeSell
                                                                                  forCurrencyType:BitcoinDE_CurrencyTypeEthereum];
+
+    // Auto update info Tabs
+    self.autoUpdateInfoTabsButton.title = @"Automatically update info tabs";
+    self.autoUpdateInfoTabsButton.state = [SOXPreferenceCenter controlStateForAutoUpdateInfoTabs];
 }
 
 #pragma mark - Action Methods
@@ -213,6 +221,11 @@
     [SOXPreferenceCenter setAutomaticallyLoadOrderbook:automaticallyLoadOrderbook
                                           forOrderType:BitcoinDE_OrderTypeSell
                                        forCurrencyType:currencyType];
+}
+
+- (IBAction)autoUpdateInfoTabsButtonAction:(NSButton *)sender {
+    BOOL autoUpdateInfoTabs = sender.state;
+    [SOXPreferenceCenter setAutoUpdateInfoTabs:autoUpdateInfoTabs];
 }
 
 #pragma mark - Manual setter

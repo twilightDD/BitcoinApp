@@ -24,12 +24,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.arrayControllerDatas = [NSMutableArray array];
+    self.needsToReloadTradeDatas = NO;
 }
 
 - (void)viewWillAppear {
     [super viewWillAppear];
 
-    if (self.arrayControllerDatas.count == 0) {
+    if (self.arrayControllerDatas.count == 0
+        && [SOXPreferenceCenter autoUpdateInfoTabs]) {
         [self resetTradeDatas];
         [self loadNextPage];
     }
@@ -289,7 +291,14 @@
 
 #pragma mark - SOXPagingViewControllerProtocol
 - (void)popupButtonAction:(NSPopUpButton *)sender {
-    NSAssert(NO, @"Implement in subclass");
+    if (self.needsToReloadTradeDatas) {
+        self.needsToReloadTradeDatas = NO;
+        [self resetTradeDatas];
+        if ([SOXPreferenceCenter autoUpdateInfoTabs]) {
+            self.currentPage = 0;
+            [self loadNextPage];
+        }
+    }
 }
 
 - (void)pagingViewControllerDidLoad {

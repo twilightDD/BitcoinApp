@@ -108,7 +108,7 @@
         BitcoinDE_CurrencyType newCurrencyType = sender.indexOfSelectedItem;
         if (newCurrencyType != self.selectedCurrencyType) {
             self.selectedCurrencyType = newCurrencyType;
-            [self resetTradeDatas];
+            self.needsToReloadTradeDatas = YES;
         }
     }
     // orderType selection
@@ -116,7 +116,7 @@
         BitcoinDE_MyTradeHistoryParameter_OrderType newOrderType = sender.indexOfSelectedItem + 1;
         if (newOrderType != self.selectedTradeHistoryOrderType) {
             self.selectedTradeHistoryOrderType = newOrderType;
-            [self resetTradeDatas];
+            self.needsToReloadTradeDatas = YES;
         }
     }
     // tradeState selection
@@ -124,9 +124,11 @@
         BitcoinDE_MyTradeHistoryParameter_TradeStateType newTradeStateType = sender.indexOfSelectedItem + 1;
         if (newTradeStateType != self.selectedTradeStateType) {
             self.selectedTradeStateType = newTradeStateType;
-            [self resetTradeDatas];
+            self.needsToReloadTradeDatas = YES;
         }
     }
+
+    [super popupButtonAction:sender];
 }
 
 #pragma mark - SOXExportDataProtocol
