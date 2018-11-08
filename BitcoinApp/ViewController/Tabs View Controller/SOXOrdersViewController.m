@@ -50,11 +50,10 @@
     [super viewDidLoad];
     self.currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:self.currencyType];
     
-#if PETER
-    // PETER = APP for AppStore
-    // Automatic Trade version should not load orderBooks automatically.
-    // [self requestServerData];
-#endif
+    if ([SOXPreferenceCenter automaticallyLoadOrderbookForOrderType:self.orderType
+                                                    forCurrencyType:self.currencyType]) {
+        [self requestServerData];
+    }
     
     //    self.orderBookArrayController.sortDescriptors = [self sortDescriptorsForArrayController];
     //    self.orderBookArrayController.filterPredicate = self.orderBookPredicate;
@@ -324,12 +323,11 @@
         self.arrayControllerDatas = orderBook;
 //        [self.arrayController rearrangeObjects];
         [self disableSpinningWheel];
-        
-#if PETER
-        // PETER = APP for AppStore
-        // Automatic Trade version should not load orderBooks automatically.
-        [self registerForWebSocketUpdates]; // after basic dataset, so self.orderBook != nil;
-#endif
+
+        if ([SOXPreferenceCenter automaticallyLoadOrderbookForOrderType:self.orderType
+                                                        forCurrencyType:self.currencyType]) {
+            [self registerForWebSocketUpdates];
+        }
     }
 }
 
