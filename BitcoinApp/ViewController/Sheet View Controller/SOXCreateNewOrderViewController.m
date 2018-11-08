@@ -277,7 +277,9 @@
         endDate = self.orderBookDataToReplace.orderInformation_endDateTime;
     }
     else {
-        NSDate *dateIn5Days = [NSDate dateWithTimeIntervalSinceNow:5 * 24 * 60 * 60];
+        NSNumber *defaultEndDateTimeSpan = [SOXPreferenceCenter defaultEndDateTimespan];
+        NSTimeInterval timeIntervall = defaultEndDateTimeSpan.integerValue * 24 * 60 * 60;
+        NSDate *dateIn5Days = [NSDate dateWithTimeIntervalSinceNow:timeIntervall];
         endDate = [SOXFormatters dateQuarterBeforeMidnightForDate:dateIn5Days];
     }
     self.endDatePicker.dateValue = endDate;
