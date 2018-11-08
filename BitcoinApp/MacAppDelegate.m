@@ -41,6 +41,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     self.mainWindow = [NSApp mainWindow];
+    self.mainWindow.title = @"CoinerApp";
+    
     // Insert code here to initialize your application
     
     [Fabric with:@[[Crashlytics class]]];
@@ -80,7 +82,10 @@
         [SOXPreferenceCenter firstAppStartSetup];
     }
 
+    // Preferences
     [self setupPreferenceWindow];
+
+    // Look up for valid keys and secrets (show info if needed)
     [self checkValidKeysAndSecretsInKeychain];
 
     // Observer
