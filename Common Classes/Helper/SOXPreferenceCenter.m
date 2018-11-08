@@ -69,6 +69,13 @@ static NSString *UserDef_default_endDateTimespan = @"de.2sox.coiner.default_endD
     // defaultEndDateTimeSpan
     [self setDefaultEndDateTimespan:@5];
 
+    // automatically load orderbooks
+    [self setAutomaticallyLoadOrderbook:YES
+                           forOrderType:BitcoinDE_OrderTypeBuy
+                        forCurrencyType:BitcoinDE_CurrencyTypeBitcoin];
+    [self setAutomaticallyLoadOrderbook:YES
+                           forOrderType:BitcoinDE_OrderTypeBuy
+                        forCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
     // secureExecuteTrade
 
     // minimalVolume
