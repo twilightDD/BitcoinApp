@@ -3052,7 +3052,12 @@ Gw
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
-                                                        <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.tradeDetails_Euro_before_fee" id="hev-3c-vNG"/>
+                                                        <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.self" id="4A2-z0-nhg">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                                <string key="NSValueTransformerName">SOXNegateTradeDetailsEuroBeforeFeeOnBuyValueTransformer</string>
+                                                            </dictionary>
+                                                        </binding>
                                                     </connections>
                                                 </tableColumn>
                                                 <tableColumn identifier="tradeDetails_Euro_after_fee" editable="NO" width="120" minWidth="10" maxWidth="1100" id="WMb-IW-VZq">
@@ -3069,7 +3074,12 @@ Gw
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
-                                                        <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.tradeDetails_Euro_after_fee" id="3ij-ul-cbK"/>
+                                                        <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.self" id="wMN-4o-2WH">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                                <string key="NSValueTransformerName">SOXNegateTradeDetailsEuroAfterFeeOnBuyValueTransformer</string>
+                                                            </dictionary>
+                                                        </binding>
                                                     </connections>
                                                 </tableColumn>
                                                 <tableColumn identifier="" width="1" minWidth="1" maxWidth="1" id="OzP-ju-tIh" userLabel="Empty column">
@@ -5145,9 +5155,9 @@ Gw
         <image name="NSRefreshTemplate" width="11" height="15"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9rv-7D-aVO"/>
+        <segue reference="WzO-2Q-C8a"/>
         <segue reference="gQD-Dm-8uX"/>
-        <segue reference="YNG-my-y7e"/>
+        <segue reference="yul-UQ-F1Q"/>
         <segue reference="Fh9-LT-kpw"/>
     </inferredMetricsTieBreakers>
 </document>

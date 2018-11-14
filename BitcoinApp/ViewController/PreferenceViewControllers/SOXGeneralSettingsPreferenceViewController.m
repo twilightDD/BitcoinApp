@@ -151,7 +151,7 @@
 
 
 - (void)setupLoadOrderBooksAutomatically {
-    self.loadOrderbooksAutomaticallyBox.title = @"Automatically loadings";
+    self.loadOrderbooksAutomaticallyBox.title = @"Auto-Fetch Orderbooks and Banners at Startup";
     
     self.buyDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes naturalStringForOrderType:BitcoinDE_OrderTypeBuy];
     self.sellDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes naturalStringForOrderType:BitcoinDE_OrderTypeSell];
@@ -185,7 +185,7 @@
                                                                                  forCurrencyType:BitcoinDE_CurrencyTypeEthereum];
 
     // Auto update info Tabs
-    self.autoUpdateInfoTabsButton.title = @"Automatically update info tabs";
+    self.autoUpdateInfoTabsButton.title = @"Auto-Fetch Account Ledger on Demand";
     self.autoUpdateInfoTabsButton.state = [SOXPreferenceCenter controlStateForAutoUpdateInfoTabs];
 }
 

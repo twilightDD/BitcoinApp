@@ -103,7 +103,7 @@
         headlineText = [headlineText stringByAppendingString:@"all order table"];
     }
     self.headlineTextField.stringValue = headlineText;
-    self.countrySelectionBox.title = @"Show orders for countries";
+    self.countrySelectionBox.title = @"Filter orders for countries";
     self.noSepaButton.title = @"Hide SEPA-only orders";
 
     [self setupCountryButtons];
