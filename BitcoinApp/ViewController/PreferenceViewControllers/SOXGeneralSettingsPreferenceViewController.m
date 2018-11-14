@@ -38,24 +38,31 @@
 
 // Load orderbooks automatically
 @property (strong) IBOutlet NSBox *loadOrderbooksAutomaticallyBox;
+
+@property (strong) IBOutlet NSTextField *emptyDescriptionTextField;
 @property (strong) IBOutlet NSTextField *buyDescriptionTextField;
 @property (strong) IBOutlet NSTextField *sellDescriptionTextField;
+@property (strong) IBOutlet NSTextField *bannerDescriptionTextField;
 
 @property (strong) IBOutlet NSTextField *btcDescriptionTextField;
 @property (strong) IBOutlet NSButton *btcBuyButton;
 @property (strong) IBOutlet NSButton *btcSellButton;
+@property (strong) IBOutlet NSButton *btcBannerButton;
 
 @property (strong) IBOutlet NSTextField *bchDescriptionTextField;
 @property (strong) IBOutlet NSButton *bchBuyButton;
-@property (strong) IBOutlet NSButtonCell *bchSellButton;
+@property (strong) IBOutlet NSButton *bchSellButton;
+@property (strong) IBOutlet NSButton *bchBannerButton;
 
 @property (strong) IBOutlet NSTextField *btgDescriptionTextField;
 @property (strong) IBOutlet NSButton *btgBuyButton;
 @property (strong) IBOutlet NSButton *btgSellButton;
+@property (strong) IBOutlet NSButton *btgBannerButton;
 
 @property (strong) IBOutlet NSTextField *ethDescriptionTextField;
 @property (strong) IBOutlet NSButton *ethBuyButton;
 @property (strong) IBOutlet NSButton *ethSellButton;
+@property (strong) IBOutlet NSButton *ethBannerButton;
 
 @property (strong) IBOutlet NSButton *autoUpdateInfoTabsButton;
 
@@ -152,9 +159,11 @@
 
 - (void)setupLoadOrderBooksAutomatically {
     self.loadOrderbooksAutomaticallyBox.title = @"Auto-Fetch Orderbooks and Banners at Startup";
-    
+
+    self.emptyDescriptionTextField.stringValue = @"";
     self.buyDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes naturalStringForOrderType:BitcoinDE_OrderTypeBuy];
     self.sellDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes naturalStringForOrderType:BitcoinDE_OrderTypeSell];
+    self.bannerDescriptionTextField.stringValue = @"Rates";
 
     // BTC
     self.btcDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoin];
@@ -163,12 +172,14 @@
     self.btcSellButton.state = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeSell
                                                                                  forCurrencyType:BitcoinDE_CurrencyTypeBitcoin];
 
+    self.btcBannerButton.state = [SOXPreferenceCenter controlStateForBannerForCurrencyType:BitcoinDE_CurrencyTypeBitcoin];
     // BCH
     self.bchDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
     self.bchBuyButton.state =  [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeBuy
                                                                                  forCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
     self.bchSellButton.state = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeSell
                                                                                 forCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
+    self.bchBannerButton.state = [SOXPreferenceCenter controlStateForBannerForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
 
     // BTG
     self.btgDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoinGold];
@@ -176,6 +187,7 @@
                                                                                 forCurrencyType:BitcoinDE_CurrencyTypeBitcoinGold];
     self.btgSellButton.state = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeSell
                                                                                  forCurrencyType:BitcoinDE_CurrencyTypeBitcoinGold];
+    self.btgBannerButton.state = [SOXPreferenceCenter controlStateForBannerForCurrencyType:BitcoinDE_CurrencyTypeBitcoinGold];
 
     // ETH
     self.ethDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeEthereum];
@@ -183,6 +195,7 @@
                                                                                 forCurrencyType:BitcoinDE_CurrencyTypeEthereum];
     self.ethSellButton.state = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeSell
                                                                                  forCurrencyType:BitcoinDE_CurrencyTypeEthereum];
+    self.ethBannerButton.state = [SOXPreferenceCenter controlStateForBannerForCurrencyType:BitcoinDE_CurrencyTypeEthereum];
 
     // Auto update info Tabs
     self.autoUpdateInfoTabsButton.title = @"Auto-Fetch Account Ledger on Demand";
@@ -221,6 +234,13 @@
     [SOXPreferenceCenter setAutomaticallyLoadOrderbook:automaticallyLoadOrderbook
                                           forOrderType:BitcoinDE_OrderTypeSell
                                        forCurrencyType:currencyType];
+}
+
+- (IBAction)bannerButtonActions:(NSButton *)sender {
+    BOOL automaticallyLoadOrderbook = sender.state;
+    BitcoinDE_CurrencyType currencyType = sender.tag;
+    [SOXPreferenceCenter setAutomaticallyLoadBanner:automaticallyLoadOrderbook
+                                    forCurrencyType:currencyType];
 }
 
 - (IBAction)autoUpdateInfoTabsButtonAction:(NSButton *)sender {

@@ -9,6 +9,7 @@
 #import "SOXPreferenceCenter.h"
 
 static NSString *UserDef_Domain_AutomaticallyLoadOrderbookKey = @"de.2sox.coiner.domain_automaticallyLoadOrderbook";
+static NSString *UserDef_Domain_AutomaticallyLoadBannerKey = @"de.2sox.coiner.domain_automaticallyLoadBanner";
 static NSString *UserDef_Domain_OrderViewControllerSEPAKey = @"de.2sox.coiner.domain_noSepaPaymentOptionFilter";
 static NSString *UserDef_Domain_OrderViewControllerCountryCodeKey = @"de.2sox.coiner.domain_countryCodeFilter";
 static NSString *UserDef_FirstAppStartKey = @"de.2sox.coiner.domain_date";
@@ -77,6 +78,20 @@ static NSString *UserDef_default_autoUpdateInfoTabs = @"de.2sox.coiner.default_a
     [self setAutomaticallyLoadOrderbook:YES
                            forOrderType:BitcoinDE_OrderTypeBuy
                         forCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
+
+    // automatically load banners
+    [self setAutomaticallyLoadBanner:YES
+                     forCurrencyType:BitcoinDE_CurrencyTypeBitcoin];
+
+    [self setAutomaticallyLoadBanner:YES
+                     forCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
+
+    [self setAutomaticallyLoadBanner:YES
+                     forCurrencyType:BitcoinDE_CurrencyTypeBitcoinGold];
+
+    [self setAutomaticallyLoadBanner:YES
+                     forCurrencyType:BitcoinDE_CurrencyTypeEthereum];
+
     // secureExecuteTrade
 
     // minimalVolume
@@ -110,6 +125,30 @@ static NSString *UserDef_default_autoUpdateInfoTabs = @"de.2sox.coiner.default_a
     [self setUserDefaultObject:@(automaticallyLoadOrderbook)
                         forKey:userDefaultKey];
 
+}
+
++ (BOOL)automaticallyLoadBannerForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    NSString *userDefaultKey = [self userDefaultKeyForDomain:UserDef_Domain_AutomaticallyLoadBannerKey
+                                                   orderType:BitcoinDE_OrderTypeUnknown
+                                                currencyType:currencyType];
+    NSNumber *userDefault = [SOXPreferenceCenter userDefaultForKey:userDefaultKey];
+    BOOL automaticallyLoadBanner = userDefault.boolValue;
+    return automaticallyLoadBanner;
+}
+
++ (NSControlStateValue)controlStateForBannerForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    BOOL controlState = [SOXPreferenceCenter automaticallyLoadBannerForCurrencyType:(BitcoinDE_CurrencyType)currencyType];
+
+    return controlState ? NSControlStateValueOn : NSControlStateValueOff;
+}
+
++ (void)setAutomaticallyLoadBanner:(BOOL)automaticallyLoadBanner
+                   forCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    NSString *userDefaultKey = [self userDefaultKeyForDomain:UserDef_Domain_AutomaticallyLoadBannerKey
+                                                   orderType:BitcoinDE_OrderTypeUnknown
+                                                currencyType:currencyType];
+    [self setUserDefaultObject:@(automaticallyLoadBanner)
+                        forKey:userDefaultKey];
 }
 
 + (BOOL)defaultKYCOnly {
@@ -467,12 +506,14 @@ static NSString *UserDef_default_autoUpdateInfoTabs = @"de.2sox.coiner.default_a
                             orderType:(BitcoinDE_OrderType)orderType
                          currencyType:(BitcoinDE_CurrencyType)currencyType {
     NSString *userDefaultKey = [domain copy];
-    if (orderType != BitcoinDE_OrderTypeUnknown
-        && currencyType != BitcoinDE_CurrencyTypeUnknown) {
-        userDefaultKey = [userDefaultKey stringByAppendingString:@"_"];
-        userDefaultKey = [userDefaultKey stringByAppendingString:[SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType]];
+    if (orderType != BitcoinDE_OrderTypeUnknown) {
         userDefaultKey = [userDefaultKey stringByAppendingString:@"_"];
         userDefaultKey = [userDefaultKey stringByAppendingString:[SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:orderType]];
+    }
+
+    if (currencyType != BitcoinDE_CurrencyTypeUnknown) {
+        userDefaultKey = [userDefaultKey stringByAppendingString:@"_"];
+        userDefaultKey = [userDefaultKey stringByAppendingString:[SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType]];
     }
     
     return userDefaultKey;

@@ -11,6 +11,8 @@
 #import "SOXOrdersViewController.h"
 #import "SOXAutomaticTradingViewController.h"
 
+#import "SOXPreferenceCenter.h"
+
 static NSString *BannerContainerViewSegueKey          = @"BannerContainerViewSegue";
 static NSString *ShowMyOrdersContainerSegueKey        = @"ShowMyOrdersContainerSegue";
 static NSString *OrdersViewControllerBuyBTCSegueKey      = @"OrdersViewControllerBuyBTCSegue";      // TabView.0
@@ -49,7 +51,13 @@ static NSString *AutomaticTradeETHSegueKey = @"EmbedAutoTraderForETH";
 
     [self setupUI];
     [[SOXMarket_BitcoinDE_Core sharedCore] startAccountInfoUpdate];
-    [[SOXMarket_BitcoinDE_Core sharedCore] startAllRatesUpdate];
+    for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeUnknown + 1
+         ; currencyType < BitcoinDE_CurrencyType_EndOfType
+         ; currencyType++) {
+        if ([SOXPreferenceCenter automaticallyLoadBannerForCurrencyType:currencyType]) {
+            [[SOXMarket_BitcoinDE_Core sharedCore] startRatesUpdateForCurrencyType:currencyType];
+        }
+    }
 }
 
 - (void)viewWillAppear {
