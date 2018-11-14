@@ -262,6 +262,7 @@
     SOXAccountInfo_BitcoinDE_Data *accountInfoData = (SOXAccountInfo_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].accountInfoData;
     self.fidorReservationValuesAndDescriptionStackView.hidden = !accountInfoData.bankReservation_exists;
     if (accountInfoData.bankReservation_exists) {
+        self.fidorReservationHeadlineTextField.textColor = [NSColor textColor];
         // Show sum of reservations
         NSDecimalNumber *overallTotalReservationAmount = [NSDecimalNumber zero];
         NSDecimalNumber *overallAvailableReservationAmount = [NSDecimalNumber zero];
@@ -301,6 +302,10 @@
         NSString *reservedAtString = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:accountInfoData.bankReservation_reservedAt];
         self.fidorReservationValidUntilTextField.toolTip = [NSString stringWithFormat:@"Reserved at %@"
                                                             , reservedAtString];
+    }
+    else {
+        self.fidorReservationHeadlineTextField.textColor = [NSColor redColor];
+        self.fidorReservationHeadlineTextField.stringValue = @"No Fidor Reservation";
     }
 }
 
