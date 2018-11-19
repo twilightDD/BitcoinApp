@@ -100,10 +100,12 @@ static NSString *KeychainAccountKey = @"BitcounAccount";
         NSAlert *saveAlert = [NSAlert alertWithError:error];
         [saveAlert runModal];
     }
-    else if (success
-             && completelyNewKeysAndSecrets == YES) {
+
+    BOOL validKeysAndSecrets = [SOXPreferencesCore validKeychain];
+    BOOL shouldReloadBanner = completelyNewKeysAndSecrets && validKeysAndSecrets;
+    if (success) {
         [[NSNotificationCenter defaultCenter] postNotificationName:SOXAPIKeysAndSecretsDidChangeNotification
-                                                            object:nil];
+                                                            object:@(shouldReloadBanner)];
     }
 
     return success;

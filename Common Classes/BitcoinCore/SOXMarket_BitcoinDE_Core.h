@@ -86,7 +86,7 @@ FOUNDATION_EXPORT NSString *const _Nonnull HTTPMethodPOSTKey;
 - (void)startAccountInfoUpdate;
 - (NSInteger)startAllRatesUpdate;
 - (void)startRatesUpdateForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
-
+- (void)resetBannerInformation;
 /**
  *  Singleton.
  *

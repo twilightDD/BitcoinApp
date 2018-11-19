@@ -137,9 +137,7 @@
                                                       object:nil
                                                        queue:mainQueue
                                                   usingBlock:^(NSNotification * _Nonnull note) {
-                                                      [[SOXMarket_BitcoinDE_Core sharedCore] startAccountInfoUpdate];
-                                                      [[SOXMarket_BitcoinDE_Core sharedCore] startAllRatesUpdate];
-                                                      self.updateBannerButton.enabled = YES;
+                                                      [self keysAndSecretsDidChangeNotification:note];
                                                   }];
 }
 
@@ -175,11 +173,12 @@
         
         self.fidorReservationTotalAmountDescriptionTextField.stringValue = @"Max Euro";
         self.fidorReservationAvailableAmountDescriptionTextField.stringValue = @"Open orders";
-        self.fidorReservationValidUntilDescriptionTextField.stringValue = @"Valid unitl";
+        self.fidorReservationValidUntilDescriptionTextField.stringValue = @"Valid until";
         
         self.fidorReservationTotalAmountTextField.stringValue = @"...";
         self.fidorReservationAvailableAmountTextField.stringValue = @"...";
         self.fidorReservationValidUntilTextField.stringValue = @"...";
+        self.fidorReservationTotalAmountTextField.toolTip = nil;
         
     }
     
@@ -210,7 +209,7 @@
     }
 
 
-    self.updateBannerButton.enabled = [SOXPreferencesCore validKeychain];
+//    self.updateBannerButton.enabled = [SOXPreferencesCore validKeychain];
 }
 
 - (void)updateUIForCoinAmounts {
@@ -229,6 +228,13 @@
 
 
     SOXAccountInfo_BitcoinDE_Data *accountInfoData = (SOXAccountInfo_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].accountInfoData;
+    if (accountInfoData == nil) {
+        self.btcBalanceTotalAmountTextField.stringValue = @"...";
+        self.btcBalanceAvailableAmountTextField.stringValue = @"...";
+        self.btcBalanceReservedAmountTextField.stringValue = @"...";
+        return;
+    }
+
     NSDecimalNumber *btcBalanceTotalAmount         = [accountInfoData totalAmountForCurrencyType:self.currencyType];
     NSDecimalNumber *btcBalanceAvailableAmountText = [accountInfoData availableAmountForCurrencyType:self.currencyType];
     NSDecimalNumber *btcBalanceReservedAmountText  = [accountInfoData reservedAmountForCurrencyType:self.currencyType];
@@ -243,6 +249,7 @@
     self.btcBalanceReservedAmountTextField.stringValue  = [NSString stringWithFormat:@"%@ %@"
                                                            , [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:btcBalanceReservedAmountText]
                                                            , currencyTypeShortString];
+
 }
 
 - (void)updateUIForAllocations {
@@ -260,6 +267,13 @@
 
     // Reservation figures and date
     SOXAccountInfo_BitcoinDE_Data *accountInfoData = (SOXAccountInfo_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].accountInfoData;
+    if (accountInfoData == nil) {
+        self.fidorReservationTotalAmountTextField.stringValue = @"...";
+        self.fidorReservationAvailableAmountTextField.stringValue = @"...";
+        self.fidorReservationValidUntilTextField.stringValue = @"...";
+        return;
+    }
+
     self.fidorReservationValuesAndDescriptionStackView.hidden = !accountInfoData.bankReservation_exists;
     if (accountInfoData.bankReservation_exists) {
         self.fidorReservationHeadlineTextField.textColor = [NSColor textColor];
@@ -325,11 +339,18 @@
 
         // Rate figures
         SOXRates_BitcoinDE_Data *ratesData = (SOXRates_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].ratesData;
-        self.ratesRateWeightedTextField.objectValue     = [ratesData rateWeightedForCurrencyType:self.currencyType];
-        self.ratesRateWeighted3hTextField.objectValue   = [ratesData rateWeighted3hForCurrencyType:self.currencyType];
-        self.ratesRateWeighted12hTextField.objectValue  = [ratesData rateWeighted12hForCurrencyType:self.currencyType];
-
+        if (ratesData == nil) {
+            self.ratesRateWeightedTextField.stringValue = @"...";
+            self.ratesRateWeighted3hTextField.stringValue = @"...";
+            self.ratesRateWeighted12hTextField.stringValue = @"...";
+        }
+        else {
+            self.ratesRateWeightedTextField.objectValue     = [ratesData rateWeightedForCurrencyType:self.currencyType];
+            self.ratesRateWeighted3hTextField.objectValue   = [ratesData rateWeighted3hForCurrencyType:self.currencyType];
+            self.ratesRateWeighted12hTextField.objectValue  = [ratesData rateWeighted12hForCurrencyType:self.currencyType];
+        }
     }
+
     self.ratesHeadlineTextField.stringValue = ratesHeadlineText;
 
     // We know the rates so we can show the Volume of my coins
@@ -380,7 +401,6 @@
     self.coinValueHeadlineTextField.stringValue = coinValueHeadlineText;
     self.coinValueTextField.stringValue = [SOXFormatters currencyStringForNumber:totalVolume
                                                                     roundingMode:NSNumberFormatterRoundUp];
-
 }
 
 #pragma mark - Action methods
@@ -398,6 +418,25 @@
     [self updateUIForCoinAmounts];
     [self updateUIForAllocations];
     [self updateUIForRates];
+}
+
+- (void)keysAndSecretsDidChangeNotification:(NSNotification *)notification {
+    if ([notification.object isKindOfClass:[NSNumber class]]) {
+        BOOL shouldReloadBanner = [notification.object boolValue];
+        if (shouldReloadBanner) {
+            [[SOXMarket_BitcoinDE_Core sharedCore] startAccountInfoUpdate];
+            [[SOXMarket_BitcoinDE_Core sharedCore] startAllRatesUpdate];
+
+        }
+        else {
+            [[SOXMarket_BitcoinDE_Core sharedCore] resetBannerInformation];
+            [self updateUIForCoinAmounts];
+            [self updateUIForAllocations];
+            [self updateUIForRates];
+            [self updateVolumeOfCoins];
+        }
+        self.updateBannerButton.enabled = NO;
+    }
 }
 
 #pragma mark - SOXMarketCoreServerRequestProtocol

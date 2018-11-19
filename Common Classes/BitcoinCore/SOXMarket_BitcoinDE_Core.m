@@ -1096,4 +1096,9 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
                                                 respondTo:nil];
 }
 
+- (void)resetBannerInformation {
+    self.accountInfoData = nil;
+    self.ratesData = nil;
+}
+
 @end
