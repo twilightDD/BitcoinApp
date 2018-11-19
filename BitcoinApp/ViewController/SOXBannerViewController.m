@@ -422,8 +422,8 @@
 
 - (void)keysAndSecretsDidChangeNotification:(NSNotification *)notification {
     if ([notification.object isKindOfClass:[NSNumber class]]) {
-        BOOL shouldReloadBanner = [notification.object boolValue];
-        if (shouldReloadBanner) {
+        BOOL newValidKeysAndSecrets = [notification.object boolValue];
+        if (newValidKeysAndSecrets) {
             [[SOXMarket_BitcoinDE_Core sharedCore] startAccountInfoUpdate];
             [[SOXMarket_BitcoinDE_Core sharedCore] startAllRatesUpdate];
 

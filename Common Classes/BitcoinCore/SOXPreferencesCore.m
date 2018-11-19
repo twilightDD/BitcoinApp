@@ -102,10 +102,10 @@ static NSString *KeychainAccountKey = @"BitcounAccount";
     }
 
     BOOL validKeysAndSecrets = [SOXPreferencesCore validKeychain];
-    BOOL shouldReloadBanner = completelyNewKeysAndSecrets && validKeysAndSecrets;
+    BOOL newValidKeysAndSecrets = completelyNewKeysAndSecrets && validKeysAndSecrets;
     if (success) {
         [[NSNotificationCenter defaultCenter] postNotificationName:SOXAPIKeysAndSecretsDidChangeNotification
-                                                            object:@(shouldReloadBanner)];
+                                                            object:@(newValidKeysAndSecrets)];
     }
 
     return success;
