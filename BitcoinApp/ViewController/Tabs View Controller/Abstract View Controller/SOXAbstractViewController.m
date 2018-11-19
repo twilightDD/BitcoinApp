@@ -9,6 +9,7 @@
 #import "SOXAbstractViewController.h"
 #import "SOXAbstractViewController_Private.h"
 
+#import "SOXSocketIO_BitcoinDE_Core.h"
 #import "SOXPreferencesCore.h"
 
 #import "SOXLogWindowController.h"
@@ -45,15 +46,12 @@
         [column.dataCell setFont:font];
     }
 
-    weakify(self);
     self.apiKeysAndSecretsDidChangeObserver =
     [[NSNotificationCenter defaultCenter] addObserverForName:SOXAPIKeysAndSecretsDidChangeNotification
                                                       object:nil
                                                        queue:[NSOperationQueue mainQueue]
                                                   usingBlock:^(NSNotification * _Nonnull note) {
-                                                      strongify(self);
-                                                      self.arrayControllerDatas = [NSMutableArray array];
-                                                      [self.arrayController rearrangeObjects];
+                                                      [self keysAndSecretsDidChangeNotification:note];
                                                   }];
 }
 
@@ -87,6 +85,19 @@
     self.noDataBackgroundView.hidden = YES;
 }
 
+#pragma mark - Notification Methods
+- (void)keysAndSecretsDidChangeNotification:(NSNotification *)notification {
+    if ([notification.object isKindOfClass:[NSNumber class]]) {
+        BOOL newValidKeysAndSecrets = [notification.object boolValue];
+        if (newValidKeysAndSecrets) {
+            // reload orderBook
+        }
+        else {
+            self.arrayControllerDatas = [NSMutableArray array];
+            [self.arrayController rearrangeObjects];
+        }
+    }
+}
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
 - (void)answerOfServerRequest:(NSDictionary *)answerOfServerRequest {

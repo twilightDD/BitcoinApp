@@ -212,6 +212,17 @@
         DDLogInfo(@"SOXOrdersViewController - (void)viewWillAppear : self.orderType has wrong type");
     }
 }
+- (void)unRegisterForWebSocketUpdates {
+    [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_SocketUpdateType_BuyOrderChanges
+                                                       forCurrencyType:self.currencyType
+                                                              delegate:self];
+    [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_SocketUpdateType_SellOrderChanges
+                                                       forCurrencyType:self.currencyType
+                                                              delegate:self];
+    [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_SocketUpdateType_RemoveOrderChanges
+                                                       forCurrencyType:self.currencyType
+                                                              delegate:self];
+}
 
 #pragma mark | Array Controller Descriptors
 - (void)createSortDescriptorsForArrayController {
@@ -295,6 +306,17 @@
     viewC.currencyType = self.currencyType;
     viewC.orderBookData = selectedOrderBookData;
     [self presentViewControllerAsSheet:viewC];
+}
+
+#pragma mark - Notification Methods
+- (void)keysAndSecretsDidChangeNotification:(NSNotification *)notification {
+    [super keysAndSecretsDidChangeNotification:notification];
+    if ([notification.object isKindOfClass:[NSNumber class]]) {
+        BOOL newValidKeysAndSecrets = [notification.object boolValue];
+        if (newValidKeysAndSecrets == NO) {
+            [self unRegisterForWebSocketUpdates];
+        }
+    }
 }
 
 #pragma mark - SOXMarketCoreServerRequestProtocol

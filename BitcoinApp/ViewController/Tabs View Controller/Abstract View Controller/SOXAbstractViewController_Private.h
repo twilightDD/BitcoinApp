@@ -22,4 +22,6 @@
 - (void)enableSpinningWheel;
 - (void)disableSpinningWheel;
 
+- (void)keysAndSecretsDidChangeNotification:(NSNotification *)notification;
+
 @end
