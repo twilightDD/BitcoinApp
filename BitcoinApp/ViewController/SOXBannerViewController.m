@@ -280,18 +280,21 @@
         // Show sum of reservations
         NSDecimalNumber *overallTotalReservationAmount = [NSDecimalNumber zero];
         NSDecimalNumber *overallAvailableReservationAmount = [NSDecimalNumber zero];
-        for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeUnknown + 1;
-             currencyType < BitcoinDE_CurrencyType_EndOfType;
-             currencyType++) {
-            overallTotalReservationAmount = [overallTotalReservationAmount decimalNumberByAdding:
-                                             [accountInfoData allocationMaxEurVolumeForCurrencyType:currencyType]];
-            overallAvailableReservationAmount = [overallAvailableReservationAmount decimalNumberByAdding:
-                                                 [accountInfoData allocationEurVolumeOpenOrdersForCurrencyType:currencyType]];
-        }
-
         if (self.currencyType == BitcoinDE_CurrencyTypeUnknown) {
+            for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeUnknown + 1;
+                 currencyType < BitcoinDE_CurrencyType_EndOfType;
+                 currencyType++) {
+                overallTotalReservationAmount = [overallTotalReservationAmount decimalNumberByAdding:
+                                                 [accountInfoData allocationMaxEurVolumeForCurrencyType:currencyType]];
+                overallAvailableReservationAmount = [overallAvailableReservationAmount decimalNumberByAdding:
+                                                     [accountInfoData allocationEurVolumeOpenOrdersForCurrencyType:currencyType]];
+            }
+
+            NSString *overallTotalReservationAmountCurrency = [SOXFormatters currencyStringForNumber:overallTotalReservationAmount
+                                                                                      roundingMode:NSNumberFormatterRoundHalfUp];
+
             NSString *overallTotalReservationAmountString = [NSString stringWithFormat:@"%@ € (%@%%)"
-                                                             , overallTotalReservationAmount
+                                                             , overallTotalReservationAmountCurrency
                                                              , @100];
             self.fidorReservationTotalAmountTextField.stringValue = overallTotalReservationAmountString;
             self.fidorReservationTotalAmountTextField.toolTip = [NSString stringWithFormat:@"100%% of total reservation"];
@@ -299,8 +302,11 @@
             self.fidorReservationAvailableAmountTextField.doubleValue = overallAvailableReservationAmount.doubleValue;
         }
         else {
+            NSString *allocationMaxEurVolumeCurrencyString =
+            [SOXFormatters currencyStringForNumber:[accountInfoData allocationMaxEurVolumeForCurrencyType:self.currencyType]
+                                      roundingMode:NSNumberFormatterRoundHalfUp];
             NSString *totalReservationAmountString = [NSString stringWithFormat:@"%@ € (%@%%)"
-                                                      , [accountInfoData allocationMaxEurVolumeForCurrencyType:self.currencyType]
+                                                      , allocationMaxEurVolumeCurrencyString
                                                       , [accountInfoData allocationPercentForCurrencyType:self.currencyType]];
             self.fidorReservationTotalAmountTextField.stringValue = totalReservationAmountString;
             self.fidorReservationTotalAmountTextField.toolTip = [NSString stringWithFormat:@"%@%% of total reservation of %@ €"
