@@ -80,8 +80,12 @@ static NSString *KeychainAccountKey = @"BitcounAccount";
 + (BOOL)saveKeysAndSecrets:(NSMutableArray <NSMutableDictionary*> *)keysAndSecrets
                      error:(NSError *)error {
     SOXPreferencesCore *preferenceCore = [SOXPreferencesCore sharedCore];
+    preferenceCore.keysAndSecrets = keysAndSecrets;
 
-    __block BOOL completelyNewKeysAndSecrets = NO;
+
+
+    __block BOOL completelyNewKeysAndSecrets = YES;
+    /*
     // compare old with new keysAndSecrets
     // on completely new we need to update banner and reset all tableViews in UI
     {
@@ -93,7 +97,8 @@ static NSString *KeychainAccountKey = @"BitcounAccount";
             *stop = completelyNewKeysAndSecrets;
         }];
     }
-    preferenceCore.keysAndSecrets = keysAndSecrets;
+     */
+
 
     BOOL success = [preferenceCore saveToKeychain:error];
     if (error) {
