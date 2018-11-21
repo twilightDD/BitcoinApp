@@ -33,7 +33,7 @@
 + (void)unRegisterForOrderUpdatesForUpdateType:(BitcoinDE_SocketUpdateType)bitcoinDE_UpdateType
                                forCurrencyType:(BitcoinDE_CurrencyType)currencyType
                                       delegate:(id <SOXSocketIOCoreProtocol>)delegate;
-+ (void)unRegisterForSocketUpdates:(id <SOXSocketIOCoreProtocol>)delegate;
+
 + (void)registerForOrderUpdatesForUpdateType:(BitcoinDE_SocketUpdateType)bitcoinDE_UpdateType
                              forCurrencyType:(BitcoinDE_CurrencyType)currencyType
                                     delegate:(id <SOXSocketIOCoreProtocol>)delegate;

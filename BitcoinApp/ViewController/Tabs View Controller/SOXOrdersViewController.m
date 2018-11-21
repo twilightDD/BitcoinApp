@@ -212,6 +212,7 @@
         DDLogInfo(@"SOXOrdersViewController - (void)viewWillAppear : self.orderType has wrong type");
     }
 }
+
 - (void)unRegisterForWebSocketUpdates {
     [SOXSocketIO_BitcoinDE_Core unRegisterForOrderUpdatesForUpdateType:BitcoinDE_SocketUpdateType_BuyOrderChanges
                                                        forCurrencyType:self.currencyType
