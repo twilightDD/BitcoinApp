@@ -14,6 +14,7 @@
 #import "SOXKeys_BitcoinDE.h"
 
 #import "NSDate+SOXCompare.h"
+#import "NSDecimalNumber+Convenient.h"
 
 @interface SOXMyTrades_BitcoinDE_Data () 
 
@@ -252,19 +253,9 @@
     {
         self.tradeID                        = [tDD objectForKey:BitcoinDE_ShowMyTrades_TradeID];
         self.type                           = [tDD objectForKey:BitcoinDE_ShowMyTrades_Type];
-        // amount
-        NSDecimalNumber *showMyTrades_Amount = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Amount]];
-        if ([self.type isEqualToString:MyTradeHistoryParameter_OrderTypeSellKey]) {
-            showMyTrades_Amount = [showMyTrades_Amount decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"-1"]];
-        }
-        self.amount                         = showMyTrades_Amount;
+        self.amount                         = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Amount]];
         self.price                          = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Price]];
-
-        NSDecimalNumber *volume = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Volume]];
-        if ([self.type isEqualToString:MyTradeHistoryParameter_OrderTypeBuyKey]) {
-            volume = [volume decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"-1"]];
-        }
-        self.volume                         = volume;
+        self.volume                         = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Volume]];
         self.feeEur                         = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_FeeEur]];
         self.feeBTC                         = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_FeeBTC]];
         self.aNewOrderIDForRemainingAmount  = [tDD objectForKey:BitcoinDE_ShowMyTrades_NewOrderIDForRemainingAmount];
@@ -291,35 +282,37 @@
     }
 
     // Own calculations
-    NSDecimalNumber *feeFaktor = [NSDecimalNumber decimalNumberWithString:@"0.996"];
-    NSDecimalNumber *volumeSelf = [self.amount decimalNumberByMultiplyingBy:self.price];
-    NSDecimalNumber *volumeSelfMinusFee = [volumeSelf decimalNumberByMultiplyingBy:feeFaktor];
-    NSDecimalNumber *volumeSelfRounded;
-    if ([self.type isEqualToString:MyTradeHistoryParameter_OrderTypeBuyKey]) {
-          volumeSelfRounded = [volumeSelfMinusFee decimalNumberByRoundingAccordingToBehavior:[SOXFormatters currencyNumberHandlerRoundDown]];
-    }
-    else {
-        volumeSelfRounded = [volumeSelfMinusFee decimalNumberByRoundingAccordingToBehavior:[SOXFormatters currencyNumberHandlerRoundUp]];
-    }
-    volumeSelfRounded = [volumeSelfRounded decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"-1"]];
-    self.ownCalc_bookingVolume = volumeSelfRounded;
-    if (self.paymentMethod.unsignedIntegerValue == BitcoinDE_MyTradeHistoryParameter_ExpressPaymentMethodType
-        && [self.successfullyFinishedAt isLaterThan:[SOXFormatters fidorFeeStartedAtDate]]) {
-        NSDecimalNumber *fidfee = [self.ownCalc_bookingVolume decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"0.001"]];
-        if ([self.type isEqualToString:MyTradeHistoryParameter_OrderTypeBuyKey]) {
-            fidfee = [fidfee decimalNumberByRoundingAccordingToBehavior:[SOXFormatters currencyNumberHandlerRoundUp]];
+    {
+        // ownCalc_bookingVolume
+        NSDecimalNumber *ownVolume = [self.amount decimalNumberByMultiplyingBy:self.price];
+        NSDecimalNumber *ownVolumeMinusFee = [ownVolume decimalNumberByMultiplyingBy:[SOXMarket_BitcoinDE_DefTypes bitcoindDE_feeFactor]];
+        NSDecimalNumber *ownVolumeMinusFeeRounded = [ownVolumeMinusFee decimalNumberByRoundingAccordingToBehavior:[SOXFormatters currencyNumberHandlerRoundDown]];
+        self.ownCalc_bookingVolume = ownVolumeMinusFeeRounded;
+
+        // ownCalc_fidorFee
+        if (self.paymentMethod.unsignedIntegerValue == BitcoinDE_MyTradeHistoryParameter_ExpressPaymentMethodType
+            && [self.successfullyFinishedAt isLaterThan:[SOXFormatters fidorFeeStartedAtDate]]) {
+            NSDecimalNumber *fidorFee = [self.ownCalc_bookingVolume decimalNumberByMultiplyingBy:[SOXMarket_BitcoinDE_DefTypes fidor_feeFactorStarting20180221]];
+            NSDecimalNumber *fidorFeeRounded = [fidorFee decimalNumberByRoundingAccordingToBehavior:[SOXFormatters currencyNumberHandlerRoundDown]];
+            self.ownCalc_fidorFee = fidorFeeRounded;
         }
         else {
-            fidfee = [fidfee decimalNumberByRoundingAccordingToBehavior:[SOXFormatters currencyNumberHandlerRoundDown]];
+            self.ownCalc_fidorFee = [NSDecimalNumber zero];
         }
-        self.ownCalc_fidorFee = fidfee;
-    }
-    else {
-        self.ownCalc_fidorFee = [NSDecimalNumber zero];
     }
 
+    // Finally: fix sign for sell/buy
+    {
+        // Volumes => minus for BUY
+        if ([self.type isEqualToString:MyTradeHistoryParameter_OrderTypeBuyKey]) {
+            self.volume = [self.volume decimalNumberByMultiplyingBy:[NSDecimalNumber minusOne]];
+            self.ownCalc_bookingVolume = [self.ownCalc_bookingVolume decimalNumberByMultiplyingBy:[NSDecimalNumber minusOne]];
+        }
+        // Amounts => minus for SELL
+        if ([self.type isEqualToString:MyTradeHistoryParameter_OrderTypeSellKey]) {
+            self.amount = [self.amount decimalNumberByMultiplyingBy:[NSDecimalNumber minusOne]];
+        }
+    }
 }
-
-
 
 @end

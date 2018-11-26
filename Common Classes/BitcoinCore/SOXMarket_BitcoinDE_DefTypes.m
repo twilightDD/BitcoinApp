@@ -9,7 +9,34 @@
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
 @implementation SOXMarket_BitcoinDE_DefTypes
+#pragma mark - Magic Numbers
++ (NSDecimalNumber *)fidor_feeFactorStarting20180221 {
+    /*
+     Fidor erhebt seit 21.2.2018 0,1 % Gebühren für Express-Verkäufe.
+     */
+    static NSDecimalNumber *fidor_feeFactorStarting20180221 = nil;
+    static dispatch_once_t pred;
+    dispatch_once(&pred, ^{
+        fidor_feeFactorStarting20180221 = [NSDecimalNumber decimalNumberWithString:@"0.001"];
+    });
 
+    return fidor_feeFactorStarting20180221;
+}
+
++ (NSDecimalNumber *)bitcoindDE_feeFactor {
+    /*
+     BitcoinDE erhebt für alle Transaktionen 0,4% Gebühr
+     */
+    static NSDecimalNumber *bitcoindDE_feeFactor = nil;
+    static dispatch_once_t pred;
+    dispatch_once(&pred, ^{
+        bitcoindDE_feeFactor = [NSDecimalNumber decimalNumberWithString:@"0.996"];
+    });
+
+    return bitcoindDE_feeFactor;
+}
+
+#pragma mark - Helper Methods
 + (NSString *)naturalStringForOrderType:(BitcoinDE_OrderType)orderType {
     NSString *titleForOrderType = @"Error";
     switch (orderType) {

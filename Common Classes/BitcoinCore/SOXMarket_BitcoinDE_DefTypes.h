@@ -73,6 +73,11 @@ typedef NS_ENUM (NSInteger, BitcoinDE_OrderStateType) {
 
 @interface SOXMarket_BitcoinDE_DefTypes : SOXMarket_DefTypes
 
+#pragma mark - Magic Numbers
++ (NSDecimalNumber *)bitcoindDE_feeFactor;
++ (NSDecimalNumber *)fidor_feeFactorStarting20180221;
+
+#pragma mark - Helper Methods
 + (NSString *)naturalStringForOrderType:(BitcoinDE_OrderType)orderType;
 + (NSString *)orderTypeStringForOrderType:(BitcoinDE_OrderType)orderType;
 + (BitcoinDE_OrderType)orderTypeForOrderTypeString:(NSString *)orderTypeString;
