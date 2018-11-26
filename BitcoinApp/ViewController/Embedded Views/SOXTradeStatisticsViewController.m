@@ -19,20 +19,26 @@
 #import "SOXFormatters.h"
 
 @interface SOXTradeStatisticsViewController ()
-@property (strong) IBOutlet NSTextField *entryCountTextField;
-
+// first stack
 @property (strong) IBOutlet NSTextField *coinSumDescriptionTextField;
 @property (strong) IBOutlet NSTextField *coinSumValueTextField;
-
-@property (strong) IBOutlet NSTextField *volumeSumDescriptionTextField;
-@property (strong) IBOutlet NSTextField *volumeSumValueTextField;
-
-@property (strong) IBOutlet NSTextField *feeSumDescriptionTextField;
-@property (strong) IBOutlet NSTextField *feeSumValueTextField;
-
 @property (strong) IBOutlet NSTextField *kickbackSumDescriptionTextField;
 @property (strong) IBOutlet NSTextField *kickbackSumValueTextField;
 
+// second stack
+@property (strong) IBOutlet NSTextField *volumeSumDescriptionTextField;
+@property (strong) IBOutlet NSTextField *volumeSumValueTextField;
+@property (strong) IBOutlet NSTextField *volumeAfterFeeDescriptionTextField;
+@property (strong) IBOutlet NSTextField *volumeAfterFeeSumValueTextField;
+
+// third stack
+@property (strong) IBOutlet NSTextField *feeSumDescriptionTextField;
+@property (strong) IBOutlet NSTextField *feeSumValueTextField;
+@property (strong) IBOutlet NSTextField *feeFidorSumDescriptionTextField;
+@property (strong) IBOutlet NSTextField *feeFidorSumValueTextField;
+
+// fourth stack
+@property (strong) IBOutlet NSTextField *entryCountTextField;
 
 @end
 
@@ -45,15 +51,26 @@
 }
 
 - (void)setupUI {
+    // First stack
     self.coinSumDescriptionTextField.stringValue = @"Coin balance:";
-    self.volumeSumDescriptionTextField.stringValue = @"Volume balance:";
-    self.feeSumDescriptionTextField.stringValue = @"Fees:";
-    self.kickbackSumDescriptionTextField.stringValue = @"Kickbacks:";
-
     self.coinSumValueTextField.stringValue = @"[-]";
-    self.volumeSumValueTextField.stringValue = @"[-]";
-    self.feeSumValueTextField.stringValue = @"[-]";
+    self.kickbackSumDescriptionTextField.stringValue = @"Kickbacks:";
     self.kickbackSumValueTextField.stringValue = @"[-]";
+
+    // second stack
+    self.volumeSumDescriptionTextField.stringValue = @"Volume balance after Bitcoin fee:";
+    self.volumeSumValueTextField.stringValue = @"[-]";
+    self.volumeAfterFeeDescriptionTextField.stringValue = @"Volume balance after Fidor fee:";
+    self.volumeAfterFeeSumValueTextField.stringValue = @"[-]";
+
+    // third stack
+    self.feeSumDescriptionTextField.stringValue = @"Bitcoin fees:";
+    self.feeSumValueTextField.stringValue = @"[-]";
+    self.feeFidorSumDescriptionTextField.stringValue = @"Fidor fees:";
+    self.feeFidorSumValueTextField.stringValue = @"[-]";
+
+    // fourth stack
+    self.entryCountTextField.stringValue = @"-/-";
 }
 
 #pragma mark - Public Methods
@@ -202,17 +219,17 @@
      feeEur
      */
     NSDecimalNumber *coinSum = [NSDecimalNumber zero];
-    NSDecimalNumber *volumeBuySum = [NSDecimalNumber zero];
-    NSDecimalNumber *volumeSellSum = [NSDecimalNumber zero];
     NSDecimalNumber *volumeSum = [NSDecimalNumber zero];
-    NSDecimalNumber *feeVolumeSum = [NSDecimalNumber zero];
+    NSDecimalNumber *feeBitcoinVolumeSum = [NSDecimalNumber zero];
+    NSDecimalNumber *feeFidorVolumeSum = [NSDecimalNumber zero];
 
     NSMutableSet *tradingPairs = [NSMutableSet set];
 
     for (SOXMyTrades_BitcoinDE_Data *myTradeData in myTradeDatas) {
         coinSum = [coinSum decimalNumberByAdding:myTradeData.amount];
         volumeSum = [volumeSum decimalNumberByAdding:myTradeData.ownCalc_bookingVolume];
-        feeVolumeSum = [feeVolumeSum decimalNumberByAdding:myTradeData.feeEur];
+        feeBitcoinVolumeSum = [feeBitcoinVolumeSum decimalNumberByAdding:myTradeData.feeEur];
+        feeFidorVolumeSum = [feeFidorVolumeSum decimalNumberByAdding:myTradeData.ownCalc_fidorFee];
         [tradingPairs addObject:myTradeData.trading_pair];
     }
     if (tradingPairs.count > 1) {
@@ -223,13 +240,16 @@
     }
 
 
-    NSDecimalNumber *winLostSum = [volumeSellSum decimalNumberBySubtracting:volumeBuySum];
     self.volumeSumValueTextField.stringValue = [SOXFormatters currencyStringForNumber:volumeSum
                                                                          roundingMode:NSNumberFormatterRoundHalfUp];
+    NSDecimalNumber *volumeAfterFeeSum = [volumeSum decimalNumberBySubtracting:feeFidorVolumeSum];
+    self.volumeAfterFeeSumValueTextField.stringValue = [SOXFormatters currencyStringForNumber:volumeAfterFeeSum
+                                                                         roundingMode:NSNumberFormatterRoundHalfUp];
 
-    self.feeSumValueTextField.stringValue = [SOXFormatters currencyStringForNumber:feeVolumeSum
+    self.feeSumValueTextField.stringValue = [SOXFormatters currencyStringForNumber:feeBitcoinVolumeSum
                                                                       roundingMode:NSNumberFormatterRoundHalfUp];
-
+    self.feeFidorSumValueTextField.stringValue = [SOXFormatters currencyStringForNumber:feeFidorVolumeSum
+                                                                           roundingMode:NSNumberFormatterRoundHalfUp];
 }
 
 @end
