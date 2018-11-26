@@ -209,6 +209,14 @@
 
 #pragma mark - Public methods
 #pragma mark | Date methods
++ (NSDate *)fidorFeeStartedAtDate {
+    static dispatch_once_t pred;
+    static NSDate *fidorFeeStartedAtDate = nil;
+    dispatch_once(&pred, ^{
+        fidorFeeStartedAtDate = [SOXFormatters dateForRFC3339DateTimeString:@"2018-02-21T00:00:00Z"];
+    });
+    return fidorFeeStartedAtDate;
+}
 + (NSDate *)dateForRFC3339DateTimeString:(NSString *)rfc3339DateTimeString {
     NSDate *date = [[SOXFormatters dateFormatterDecodeRFC3339] dateFromString:rfc3339DateTimeString];
     return date;

@@ -13,6 +13,8 @@
 #import "SOXFormatters.h"
 #import "SOXKeys_BitcoinDE.h"
 
+#import "NSDate+SOXCompare.h"
+
 @interface SOXMyTrades_BitcoinDE_Data () 
 
 @property (strong, nonatomic, readwrite) NSString *tradeID;
@@ -291,15 +293,7 @@
     // Own calculations
     NSDecimalNumber *feeFaktor = [NSDecimalNumber decimalNumberWithString:@"0.996"];
     NSDecimalNumber *volumeSelf = [self.amount decimalNumberByMultiplyingBy:self.price];
-//    NSLog(@"amount * price = %@ * %@ = %@"
-//          , self.amount
-//          , self.price
-//          , volumeSelf);
     NSDecimalNumber *volumeSelfMinusFee = [volumeSelf decimalNumberByMultiplyingBy:feeFaktor];
-//    NSLog(@"volumeSelf - fee = %@ * %@ = %@"
-//          , volumeSelf
-//          , feeFaktor
-//          , volumeSelfMinusFee);
     NSDecimalNumber *volumeSelfRounded;
     if ([self.type isEqualToString:MyTradeHistoryParameter_OrderTypeBuyKey]) {
           volumeSelfRounded = [volumeSelfMinusFee decimalNumberByRoundingAccordingToBehavior:[SOXFormatters currencyNumberHandlerRoundDown]];
@@ -309,26 +303,20 @@
     }
     volumeSelfRounded = [volumeSelfRounded decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"-1"]];
     self.ownCalc_bookingVolume = volumeSelfRounded;
-//    NSLog(@"volumeSelfMinusFee rounded down: %@ -> %@"
-//          , volumeSelfMinusFee
-//          , self.ownCalc_bookingVolume);
-
-
-    if (self.paymentMethod.unsignedIntegerValue == BitcoinDE_MyTradeHistoryParameter_ExpressPaymentMethodType) {
-        self.ownCalc_fidorFee = [self.feeEur decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"4"]
-                                                          withBehavior:[SOXFormatters currencyNumberHandlerRoundDown]];
+    if (self.paymentMethod.unsignedIntegerValue == BitcoinDE_MyTradeHistoryParameter_ExpressPaymentMethodType
+        && [self.successfullyFinishedAt isLaterThan:[SOXFormatters fidorFeeStartedAtDate]]) {
+        NSDecimalNumber *fidfee = [self.ownCalc_bookingVolume decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"0.001"]];
+        if ([self.type isEqualToString:MyTradeHistoryParameter_OrderTypeBuyKey]) {
+            fidfee = [fidfee decimalNumberByRoundingAccordingToBehavior:[SOXFormatters currencyNumberHandlerRoundUp]];
+        }
+        else {
+            fidfee = [fidfee decimalNumberByRoundingAccordingToBehavior:[SOXFormatters currencyNumberHandlerRoundDown]];
+        }
+        self.ownCalc_fidorFee = fidfee;
     }
     else {
         self.ownCalc_fidorFee = [NSDecimalNumber zero];
     }
-
-
-    NSLog(@"tradeID: %@, vol %@, fee %@ (%@), ownBookVol %@"
-          , self.tradeID
-          , self.volume
-          , self.feeEur
-          , [tDD objectForKey:BitcoinDE_ShowMyTrades_FeeEur]
-          , self.ownCalc_bookingVolume);
 
 }
 
