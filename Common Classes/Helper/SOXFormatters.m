@@ -341,6 +341,36 @@
     return currencyNumberHandler;
 }
 
++ (NSDecimalNumberHandler *)currencyNumberHandlerRoundDown {
+    static dispatch_once_t pred;
+    static NSDecimalNumberHandler *currencyNumberHandlerRoundDown = nil;
+    dispatch_once(&pred, ^{
+        currencyNumberHandlerRoundDown = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown
+                                                                                                scale:2
+                                                                                     raiseOnExactness:YES
+                                                                                      raiseOnOverflow:YES
+                                                                                     raiseOnUnderflow:YES
+                                                                                  raiseOnDivideByZero:YES];
+    });
+    
+    return currencyNumberHandlerRoundDown;
+}
+
++ (NSDecimalNumberHandler *)currencyNumberHandlerRoundUp {
+    static dispatch_once_t pred;
+    static NSDecimalNumberHandler *currencyNumberHandlerRoundDown = nil;
+    dispatch_once(&pred, ^{
+        currencyNumberHandlerRoundDown = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundUp
+                                                                                                scale:2
+                                                                                     raiseOnExactness:YES
+                                                                                      raiseOnOverflow:YES
+                                                                                     raiseOnUnderflow:YES
+                                                                                  raiseOnDivideByZero:YES];
+    });
+
+    return currencyNumberHandlerRoundDown;
+}
+
 + (NSDecimalNumber *)currencyNumberForNumber:(NSDecimalNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode {
     NSNumberFormatter *currencyFormatter = [SOXFormatters currencyFormatter];
     currencyFormatter.roundingMode       = roundingMode;

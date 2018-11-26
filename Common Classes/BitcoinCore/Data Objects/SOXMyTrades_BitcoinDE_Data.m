@@ -40,6 +40,8 @@
 @property (strong, nonatomic, readwrite) NSNumber *tradingPartnerInfo_amountTrades;
 @property (strong, nonatomic, readwrite) NSNumber *tradingPartnerInfo_Rating;
 
+@property (strong, nonatomic, readwrite) NSDecimalNumber *ownCalc_bookingVolume;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *ownCalc_fidorFee;
 @end
 
 @implementation SOXMyTrades_BitcoinDE_Data
@@ -234,10 +236,19 @@
     {
         self.tradeID                        = [tDD objectForKey:BitcoinDE_ShowMyTrades_TradeID];
         self.type                           = [tDD objectForKey:BitcoinDE_ShowMyTrades_Type];
-
-        self.amount                         = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Amount]];
+        // amount
+        NSDecimalNumber *showMyTrades_Amount = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Amount]];
+        if ([self.type isEqualToString:MyTradeHistoryParameter_OrderTypeSellKey]) {
+            showMyTrades_Amount = [showMyTrades_Amount decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"-1"]];
+        }
+        self.amount                         = showMyTrades_Amount;
         self.price                          = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Price]];
-        self.volume                         = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Volume]];
+
+        NSDecimalNumber *volume = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Volume]];
+        if ([self.type isEqualToString:MyTradeHistoryParameter_OrderTypeBuyKey]) {
+            volume = [volume decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"-1"]];
+        }
+        self.volume                         = volume;
         self.feeEur                         = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_FeeEur]];
         self.feeBTC                         = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_FeeBTC]];
         self.aNewOrderIDForRemainingAmount  = [tDD objectForKey:BitcoinDE_ShowMyTrades_NewOrderIDForRemainingAmount];
@@ -262,6 +273,41 @@
         self.tradingPartnerInfo_amountTrades    = [tPI objectForKey:BitcoinDE_ShowMyTrades_TradingPartnerInformation_AmountTrades];
         self.tradingPartnerInfo_Rating          = [tPI objectForKey:BitcoinDE_ShowMyTrades_TradingPartnerInformation_Rating];
     }
+
+    // Own calculations
+    NSDecimalNumber *feeFaktor = [NSDecimalNumber decimalNumberWithString:@"0.996"];
+    NSDecimalNumber *volumeSelf = [self.amount decimalNumberByMultiplyingBy:self.price];
+//    NSLog(@"amount * price = %@ * %@ = %@"
+//          , self.amount
+//          , self.price
+//          , volumeSelf);
+    NSDecimalNumber *volumeSelfMinusFee = [volumeSelf decimalNumberByMultiplyingBy:feeFaktor];
+//    NSLog(@"volumeSelf - fee = %@ * %@ = %@"
+//          , volumeSelf
+//          , feeFaktor
+//          , volumeSelfMinusFee);
+    NSDecimalNumber *volumeSelfRounded;
+    if ([self.type isEqualToString:MyTradeHistoryParameter_OrderTypeBuyKey]) {
+          volumeSelfRounded = [volumeSelfMinusFee decimalNumberByRoundingAccordingToBehavior:[SOXFormatters currencyNumberHandlerRoundDown]];
+    }
+    else {
+        volumeSelfRounded = [volumeSelfMinusFee decimalNumberByRoundingAccordingToBehavior:[SOXFormatters currencyNumberHandlerRoundUp]];
+    }
+    volumeSelfRounded = [volumeSelfRounded decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"-1"]];
+    self.ownCalc_bookingVolume = volumeSelfRounded;
+//    NSLog(@"volumeSelfMinusFee rounded down: %@ -> %@"
+//          , volumeSelfMinusFee
+//          , self.ownCalc_bookingVolume);
+    self.ownCalc_fidorFee = [self.feeEur decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"4"]
+                                                      withBehavior:[SOXFormatters currencyNumberHandlerRoundDown]];
+
+    NSLog(@"tradeID: %@, vol %@, fee %@ (%@), ownBookVol %@"
+          , self.tradeID
+          , self.volume
+          , self.feeEur
+          , [tDD objectForKey:BitcoinDE_ShowMyTrades_FeeEur]
+          , self.ownCalc_bookingVolume);
+
 }
 
 

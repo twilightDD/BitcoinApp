@@ -30,6 +30,8 @@
 
 #pragma mark - Currency methods
 + (NSDecimalNumberHandler *)currencyNumberHandler;
++ (NSDecimalNumberHandler *)currencyNumberHandlerRoundDown;
++ (NSDecimalNumberHandler *)currencyNumberHandlerRoundUp;
 + (NSDecimalNumber *)currencyNumberForNumber:(NSDecimalNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode;
 + (NSString *)currencyStringForNumber:(NSDecimalNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode;
 

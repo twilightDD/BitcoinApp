@@ -204,24 +204,16 @@
     NSDecimalNumber *coinSum = [NSDecimalNumber zero];
     NSDecimalNumber *volumeBuySum = [NSDecimalNumber zero];
     NSDecimalNumber *volumeSellSum = [NSDecimalNumber zero];
+    NSDecimalNumber *volumeSum = [NSDecimalNumber zero];
     NSDecimalNumber *feeVolumeSum = [NSDecimalNumber zero];
 
     NSMutableSet *tradingPairs = [NSMutableSet set];
+
     for (SOXMyTrades_BitcoinDE_Data *myTradeData in myTradeDatas) {
-        if ([myTradeData.type isEqualToString:MyTradeHistoryParameter_OrderTypeBuyKey]) {
-            coinSum = [coinSum decimalNumberByAdding:myTradeData.amount];
-            NSDecimalNumber *volumeAfterFee = [myTradeData.volume decimalNumberBySubtracting:myTradeData.feeEur];
-            volumeBuySum = [volumeBuySum decimalNumberByAdding:volumeAfterFee];
-            feeVolumeSum = [feeVolumeSum decimalNumberByAdding:myTradeData.feeEur];
-            [tradingPairs addObject:myTradeData.trading_pair];
-        }
-        else if ([myTradeData.type isEqualToString:MyTradeHistoryParameter_OrderTypeSellKey]) {
-            coinSum = [coinSum decimalNumberBySubtracting:myTradeData.amount];
-            NSDecimalNumber *volumeAfterFee = [myTradeData.volume decimalNumberBySubtracting:myTradeData.feeEur];
-            volumeSellSum = [volumeSellSum decimalNumberByAdding:volumeAfterFee];
-            feeVolumeSum = [feeVolumeSum decimalNumberByAdding:myTradeData.feeEur];
-            [tradingPairs addObject:myTradeData.trading_pair];
-        }
+        coinSum = [coinSum decimalNumberByAdding:myTradeData.amount];
+        volumeSum = [volumeSum decimalNumberByAdding:myTradeData.ownCalc_bookingVolume];
+        feeVolumeSum = [feeVolumeSum decimalNumberByAdding:myTradeData.feeEur];
+        [tradingPairs addObject:myTradeData.trading_pair];
     }
     if (tradingPairs.count > 1) {
         self.coinSumValueTextField.stringValue = @"[-]";
@@ -232,7 +224,7 @@
 
 
     NSDecimalNumber *winLostSum = [volumeSellSum decimalNumberBySubtracting:volumeBuySum];
-    self.volumeSumValueTextField.stringValue = [SOXFormatters currencyStringForNumber:winLostSum
+    self.volumeSumValueTextField.stringValue = [SOXFormatters currencyStringForNumber:volumeSum
                                                                          roundingMode:NSNumberFormatterRoundHalfUp];
 
     self.feeSumValueTextField.stringValue = [SOXFormatters currencyStringForNumber:feeVolumeSum
