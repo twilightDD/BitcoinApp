@@ -135,6 +135,20 @@
     return titleForTradeStateType;
 }
 
++ (NSString *)titleForPaymentMethodType:(BitcoinDE_MyTradeHistoryParameter_PaymentMethodType)paymentMethodType {
+    static NSArray *titlesForPaymentMethodType;
+    static dispatch_once_t pred;
+    dispatch_once(&pred, ^{
+        titlesForPaymentMethodType = @[@"Unknown"
+                                    , @"SEPA"
+                                    , @"Express"
+                                    ];
+    });
+
+    NSString *titleForPaymentMethodType = [titlesForPaymentMethodType objectAtIndex:paymentMethodType];
+    return titleForPaymentMethodType;
+}
+
 #pragma mark | Pasteboard
 + (NSString *)pasteboardStringForTrades:(NSArray <SOXMyTrades_BitcoinDE_Data *> *)trades {
 

@@ -25,6 +25,12 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_MyTradeHistoryParameter_TradeStateType) {
     , BitcoinDE_MyTradeHistoryParameter_EndOfTradeStateType
 };
 
+typedef NS_ENUM (NSUInteger, BitcoinDE_MyTradeHistoryParameter_PaymentMethodType) {
+    BitcoinDE_MyTradeHistoryParameter_UnknownPaymentMethodType       = 0
+    , BitcoinDE_MyTradeHistoryParameter_SEPAPaymentMethodType
+    , BitcoinDE_MyTradeHistoryParameter_ExpressPaymentMethodType
+    , BitcoinDE_MyTradeHistoryParameter_EndOfPaymentMethodType
+};
 
 @interface SOXMyTrades_BitcoinDE_Data : SOXAbstractData
 
@@ -67,6 +73,7 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_MyTradeHistoryParameter_TradeStateType) {
 
 + (NSString *)titleForOrderType:(BitcoinDE_MyTradeHistoryParameter_OrderType)orderType;
 + (NSString *)titleForTradeStateType:(BitcoinDE_MyTradeHistoryParameter_TradeStateType)tradeStateType;
++ (NSString *)titleForPaymentMethodType:(BitcoinDE_MyTradeHistoryParameter_PaymentMethodType)paymentMethodType;
 
 + (NSString *)pasteboardStringForTrades:(NSArray <SOXMyTrades_BitcoinDE_Data *> *)trades;
 @end

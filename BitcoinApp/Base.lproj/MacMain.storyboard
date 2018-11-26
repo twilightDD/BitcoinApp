@@ -4379,9 +4379,10 @@ Gw
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
-                                                        <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.paymentMethod" id="vHz-MF-lyP">
+                                                        <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.paymentMethod" id="NL0-tE-UxU">
                                                             <dictionary key="options">
                                                                 <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                                <string key="NSValueTransformerName">SOXMyTradeHistoryPaymentMethodValueTransformer</string>
                                                             </dictionary>
                                                         </binding>
                                                     </connections>
