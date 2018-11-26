@@ -78,6 +78,9 @@
 - (NSDecimalNumber *)allocationMaxEurVolumeForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
     SOXBitcoinDE_Allocation *tradingPairAllocation = [self tradingPairAllocationForCurrency:currencyType];
     NSDecimalNumber *allocationMaxEurVolumeForCurrency = tradingPairAllocation.allocation_max_eur_volume;
+    if (allocationMaxEurVolumeForCurrency == nil) {
+        allocationMaxEurVolumeForCurrency = [NSDecimalNumber zero];
+    }
 
     return allocationMaxEurVolumeForCurrency;
 }
@@ -85,6 +88,9 @@
 - (NSDecimalNumber *)allocationEurVolumeOpenOrdersForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
     SOXBitcoinDE_Allocation *tradingPairAllocation = [self tradingPairAllocationForCurrency:currencyType];
     NSDecimalNumber *allocationEurVolumeOpenOrdersForCurrency = tradingPairAllocation.allocation_eur_volume_open_orders;
+    if (allocationEurVolumeOpenOrdersForCurrency == nil) {
+        allocationEurVolumeOpenOrdersForCurrency = [NSDecimalNumber zero];
+    }
 
     return allocationEurVolumeOpenOrdersForCurrency;
 }
@@ -92,6 +98,9 @@
 - (NSDecimalNumber *)totalAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
     SOXBitcoinDE_Balance *tradingPairBalance = [self tradingPairBalanceForCurrencyType:currencyType];
     NSDecimalNumber *totalAmountForCurrencyType = tradingPairBalance.totalAmount;
+    if (totalAmountForCurrencyType == nil) {
+        totalAmountForCurrencyType = [NSDecimalNumber zero];
+    }
 
     return totalAmountForCurrencyType;
 }
@@ -99,6 +108,9 @@
 - (NSDecimalNumber *)availableAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
     SOXBitcoinDE_Balance *tradingPairBalance = [self tradingPairBalanceForCurrencyType:currencyType];
     NSDecimalNumber *availableAmountForCurrencyType = tradingPairBalance.availableAmount;
+    if (availableAmountForCurrencyType == nil) {
+        availableAmountForCurrencyType = [NSDecimalNumber zero];
+    }
 
     return availableAmountForCurrencyType;
 }
@@ -106,7 +118,9 @@
 - (NSDecimalNumber *)reservedAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
     SOXBitcoinDE_Balance *tradingPairBalance = [self tradingPairBalanceForCurrencyType:currencyType];
     NSDecimalNumber *reservedAmountForCurrencyType = tradingPairBalance.reservedAmount;
-
+    if (reservedAmountForCurrencyType == nil) {
+        reservedAmountForCurrencyType = [NSDecimalNumber zero];
+    }
     return reservedAmountForCurrencyType;
 }
 

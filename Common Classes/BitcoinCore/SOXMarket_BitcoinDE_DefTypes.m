@@ -128,6 +128,7 @@
                                                   , @"bch", @(BitcoinDE_CurrencyTypeBitcoinCash)
                                                   , @"btg", @(BitcoinDE_CurrencyTypeBitcoinGold)
                                                   , @"eth", @(BitcoinDE_CurrencyTypeEthereum)
+                                                  , @"bsv", @(BitcoinDE_CurrencyTypeBitcoinCashSV)
                                                   , nil];
     });
 
@@ -147,6 +148,7 @@
                                                   , @"BCH", @(BitcoinDE_CurrencyTypeBitcoinCash)
                                                   , @"BTG", @(BitcoinDE_CurrencyTypeBitcoinGold)
                                                   , @"ETH", @(BitcoinDE_CurrencyTypeEthereum)
+                                                  , @"BSV", @(BitcoinDE_CurrencyTypeBitcoinCashSV)
                                                   , nil];
     });
 
@@ -166,6 +168,7 @@
                                                     , @"Bitcoin Cash", @(BitcoinDE_CurrencyTypeBitcoinCash)
                                                     , @"Bitcoin Gold", @(BitcoinDE_CurrencyTypeBitcoinGold)
                                                     , @"Ethereum", @(BitcoinDE_CurrencyTypeEthereum)
+                                                    , @"Bitcoin Cash SV", @(BitcoinDE_CurrencyTypeBitcoinCashSV)
                                                     , nil];
     });
 
@@ -195,6 +198,7 @@
                                             , @"bcheur", @(BitcoinDE_CurrencyTypeBitcoinCash)
                                             , @"btgeur", @(BitcoinDE_CurrencyTypeBitcoinGold)
                                             , @"etheur", @(BitcoinDE_CurrencyTypeEthereum)
+                                            , @"bsveur", @(BitcoinDE_CurrencyTypeBitcoinCashSV)
                                             , nil];
     });
 
