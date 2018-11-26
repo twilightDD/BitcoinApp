@@ -312,8 +312,16 @@
 //    NSLog(@"volumeSelfMinusFee rounded down: %@ -> %@"
 //          , volumeSelfMinusFee
 //          , self.ownCalc_bookingVolume);
-    self.ownCalc_fidorFee = [self.feeEur decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"4"]
-                                                      withBehavior:[SOXFormatters currencyNumberHandlerRoundDown]];
+
+
+    if (self.paymentMethod.unsignedIntegerValue == BitcoinDE_MyTradeHistoryParameter_ExpressPaymentMethodType) {
+        self.ownCalc_fidorFee = [self.feeEur decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"4"]
+                                                          withBehavior:[SOXFormatters currencyNumberHandlerRoundDown]];
+    }
+    else {
+        self.ownCalc_fidorFee = [NSDecimalNumber zero];
+    }
+
 
     NSLog(@"tradeID: %@, vol %@, fee %@ (%@), ownBookVol %@"
           , self.tradeID
