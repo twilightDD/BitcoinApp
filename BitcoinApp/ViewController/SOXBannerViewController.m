@@ -293,7 +293,7 @@
             NSString *overallTotalReservationAmountCurrency = [SOXFormatters currencyStringForNumber:overallTotalReservationAmount
                                                                                       roundingMode:NSNumberFormatterRoundHalfUp];
 
-            NSString *overallTotalReservationAmountString = [NSString stringWithFormat:@"%@ € (%@%%)"
+            NSString *overallTotalReservationAmountString = [NSString stringWithFormat:@"%@ (%@%%)"
                                                              , overallTotalReservationAmountCurrency
                                                              , @100];
             self.fidorReservationTotalAmountTextField.stringValue = overallTotalReservationAmountString;
@@ -305,7 +305,7 @@
             NSString *allocationMaxEurVolumeCurrencyString =
             [SOXFormatters currencyStringForNumber:[accountInfoData allocationMaxEurVolumeForCurrencyType:self.currencyType]
                                       roundingMode:NSNumberFormatterRoundHalfUp];
-            NSString *totalReservationAmountString = [NSString stringWithFormat:@"%@ € (%@%%)"
+            NSString *totalReservationAmountString = [NSString stringWithFormat:@"%@ (%@%%)"
                                                       , allocationMaxEurVolumeCurrencyString
                                                       , [accountInfoData allocationPercentForCurrencyType:self.currencyType]];
             self.fidorReservationTotalAmountTextField.stringValue = totalReservationAmountString;
