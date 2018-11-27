@@ -54,6 +54,11 @@
 @property (strong) IBOutlet NSButton *bchSellButton;
 @property (strong) IBOutlet NSButton *bchBannerButton;
 
+@property (strong) IBOutlet NSTextField *bsvDescriptionTextField;
+@property (strong) IBOutlet NSButton *bsvBuyButton;
+@property (strong) IBOutlet NSButton *bsvSellButton;
+@property (strong) IBOutlet NSButton *bsvBannerButton;
+
 @property (strong) IBOutlet NSTextField *btgDescriptionTextField;
 @property (strong) IBOutlet NSButton *btgBuyButton;
 @property (strong) IBOutlet NSButton *btgSellButton;
@@ -173,6 +178,7 @@
                                                                                  forCurrencyType:BitcoinDE_CurrencyTypeBitcoin];
 
     self.btcBannerButton.state = [SOXPreferenceCenter controlStateForBannerForCurrencyType:BitcoinDE_CurrencyTypeBitcoin];
+
     // BCH
     self.bchDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
     self.bchBuyButton.state =  [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeBuy
@@ -180,6 +186,14 @@
     self.bchSellButton.state = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeSell
                                                                                 forCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
     self.bchBannerButton.state = [SOXPreferenceCenter controlStateForBannerForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
+
+    // BSV
+    self.bsvDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCashSV];
+    self.bsvBuyButton.state =  [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeBuy
+                                                                                 forCurrencyType:BitcoinDE_CurrencyTypeBitcoinCashSV];
+    self.bsvSellButton.state = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeSell
+                                                                                 forCurrencyType:BitcoinDE_CurrencyTypeBitcoinCashSV];
+    self.bsvBannerButton.state = [SOXPreferenceCenter controlStateForBannerForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
 
     // BTG
     self.btgDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoinGold];
