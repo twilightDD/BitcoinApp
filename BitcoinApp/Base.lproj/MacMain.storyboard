@@ -801,6 +801,42 @@
                                             </constraints>
                                         </view>
                                     </tabViewItem>
+                                    <tabViewItem label="TabBSV" identifier="1" id="WdG-xS-bB4">
+                                        <view key="view" id="gPV-9L-NbT">
+                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="fRl-OM-X00">
+                                                    <rect key="frame" x="0.0" y="0.0" width="449" height="413"/>
+                                                    <connections>
+                                                        <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerBuyBSVSegue" id="M1y-2H-j1m"/>
+                                                    </connections>
+                                                </containerView>
+                                                <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="a9e-tF-ns1">
+                                                    <rect key="frame" x="455" y="12" width="5" height="389"/>
+                                                </box>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="Lrq-06-NIY">
+                                                    <rect key="frame" x="466" y="0.0" width="448" height="413"/>
+                                                    <connections>
+                                                        <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerSellBSVSegue" id="hNG-sW-py7"/>
+                                                    </connections>
+                                                </containerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Lrq-06-NIY" secondAttribute="bottom" id="4ge-rs-gk0"/>
+                                                <constraint firstItem="Lrq-06-NIY" firstAttribute="top" secondItem="gPV-9L-NbT" secondAttribute="top" id="5k8-M5-Fuv"/>
+                                                <constraint firstAttribute="bottom" secondItem="fRl-OM-X00" secondAttribute="bottom" id="7N9-Mi-gnj"/>
+                                                <constraint firstItem="fRl-OM-X00" firstAttribute="leading" secondItem="gPV-9L-NbT" secondAttribute="leading" id="8lS-xg-gKE"/>
+                                                <constraint firstItem="a9e-tF-ns1" firstAttribute="centerX" secondItem="gPV-9L-NbT" secondAttribute="centerX" id="O5M-7T-Ov4"/>
+                                                <constraint firstItem="fRl-OM-X00" firstAttribute="top" secondItem="gPV-9L-NbT" secondAttribute="top" id="f6p-Om-NUp"/>
+                                                <constraint firstItem="a9e-tF-ns1" firstAttribute="top" secondItem="gPV-9L-NbT" secondAttribute="top" constant="12" symbolic="YES" id="j14-BZ-Dd0"/>
+                                                <constraint firstAttribute="trailing" secondItem="Lrq-06-NIY" secondAttribute="trailing" id="pM2-lg-gYZ"/>
+                                                <constraint firstItem="Lrq-06-NIY" firstAttribute="leading" secondItem="a9e-tF-ns1" secondAttribute="trailing" constant="8" symbolic="YES" id="sXN-vr-x7n"/>
+                                                <constraint firstAttribute="bottom" secondItem="a9e-tF-ns1" secondAttribute="bottom" constant="12" symbolic="YES" id="uU3-y3-sE4"/>
+                                                <constraint firstItem="a9e-tF-ns1" firstAttribute="leading" secondItem="fRl-OM-X00" secondAttribute="trailing" constant="8" symbolic="YES" id="vGP-7S-TI0"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
                                     <tabViewItem label="TabBTG" identifier="1" id="aNV-f4-fkc">
                                         <view key="view" id="aOW-l4-o1D">
                                             <rect key="frame" x="10" y="33" width="914" height="413"/>
@@ -970,6 +1006,26 @@
                                                 <constraint firstItem="xQR-8N-Xna" firstAttribute="top" secondItem="YoS-dT-aaC" secondAttribute="top" id="7Ni-4U-jTW"/>
                                                 <constraint firstAttribute="trailing" secondItem="xQR-8N-Xna" secondAttribute="trailing" id="YfZ-Sj-ZZd"/>
                                                 <constraint firstItem="xQR-8N-Xna" firstAttribute="leading" secondItem="YoS-dT-aaC" secondAttribute="leading" id="o5b-AM-EKO"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="BSV" identifier="" id="sKH-gO-8S4">
+                                        <view key="view" id="pZs-pd-xtf">
+                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="KVM-mi-ni5">
+                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="413"/>
+                                                    <connections>
+                                                        <segue destination="cwM-7M-FeE" kind="embed" identifier="EmbedAutoTraderForBSV" id="ebL-4z-gzQ"/>
+                                                    </connections>
+                                                </containerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="KVM-mi-ni5" firstAttribute="top" secondItem="pZs-pd-xtf" secondAttribute="top" id="BDi-4L-WoN"/>
+                                                <constraint firstItem="KVM-mi-ni5" firstAttribute="leading" secondItem="pZs-pd-xtf" secondAttribute="leading" id="bf8-Ba-nnq"/>
+                                                <constraint firstAttribute="bottom" secondItem="KVM-mi-ni5" secondAttribute="bottom" id="d7T-YQ-1dH"/>
+                                                <constraint firstAttribute="trailing" secondItem="KVM-mi-ni5" secondAttribute="trailing" id="d9Q-fB-mZk"/>
                                             </constraints>
                                         </view>
                                     </tabViewItem>
@@ -3136,7 +3192,7 @@ Gw
                                 <rect key="frame" x="21" y="91" width="519" height="375"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LCN-5P-5FH">
-                                        <rect key="frame" x="91" y="180" width="338" height="17"/>
+                                        <rect key="frame" x="91" y="179" width="338" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Für die gewählten Optionen sind keine Daten verfügbar" id="I5w-u6-8DY">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -5369,6 +5425,6 @@ Gw
         <segue reference="9rv-7D-aVO"/>
         <segue reference="gQD-Dm-8uX"/>
         <segue reference="YNG-my-y7e"/>
-        <segue reference="Fh9-LT-kpw"/>
+        <segue reference="M1y-2H-j1m"/>
     </inferredMetricsTieBreakers>
 </document>
