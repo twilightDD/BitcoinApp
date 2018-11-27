@@ -87,6 +87,12 @@
     [self validateInputs];
 }
 
+- (void)viewDidAppear {
+    [super viewDidAppear];
+    if (self.priceLimit == nil) {
+        [self noPriceLimitPossible];
+    }
+}
 #pragma mark - Setup methods
 #pragma mark | Values
 - (void)setupValues {
@@ -115,6 +121,7 @@
     switch (self.orderType) {
         case BitcoinDE_OrderTypeBuy:
             self.priceLimit = [SOXMarket_BitcoinDE_Core rateWeightedHalfForCurrencyType:self.currencyType];
+
             break;
         case BitcoinDE_OrderTypeSell:
             self.priceLimit = [SOXMarket_BitcoinDE_Core rateWeightedDoubleForCurrencyType:self.currencyType];
@@ -122,6 +129,29 @@
         default:
             break;
     }
+}
+
+- (void)noPriceLimitPossible {
+    switch (self.orderType) {
+        case BitcoinDE_OrderTypeBuy:
+            self.priceLimit = [NSDecimalNumber zero];
+            break;
+        case BitcoinDE_OrderTypeSell:
+            if (self.priceLimit == nil) {
+                self.priceLimit = [NSDecimalNumber decimalNumberWithString:@"100"];
+            }
+            break;
+        default:
+            break;
+    }
+
+    NSAlert *priceLimitAlert = [[NSAlert alloc] init];
+    priceLimitAlert.messageText = @"Could not deduce a price limit.";
+    NSString *informativeText = [NSString stringWithFormat:@"- Try to reload banner\n"
+                                 "- Price limit is set to %@"
+                                 , [SOXFormatters currencyStringForNumber:self.priceLimit roundingMode:NSNumberFormatterRoundHalfUp]];
+    priceLimitAlert.informativeText = informativeText;
+    [priceLimitAlert runModal];
 }
 
 - (void)setupPriceValue {
