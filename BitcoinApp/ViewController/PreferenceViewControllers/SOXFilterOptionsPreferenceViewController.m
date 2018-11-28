@@ -63,12 +63,16 @@
                                                         , NSUInteger idx
                                                         , BOOL * _Nonnull stop) {
         NSString *countryName = [supportedCountryNames objectAtIndex:idx];
-        NSButton *countryButton = [NSButton checkboxWithTitle:countryName
-                                                       target:nil
-                                                       action:nil];
+        // 10.12+
+//        NSButton *countryButton = [NSButton checkboxWithTitle:countryName
+//                                                       target:nil
+//                                                       action:nil];
+        // for < OSX 10.12
+        NSButton *countryButton = [[NSButton alloc] init];
+        [countryButton setButtonType:NSButtonTypeSwitch];
+        countryButton.title = countryName;
+
         countryButton.tag = idx;
-
-
 
         // set position
         {
