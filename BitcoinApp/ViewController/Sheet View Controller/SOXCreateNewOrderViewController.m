@@ -15,7 +15,9 @@
 
 #import "SOXKeys_BitcoinDE.h"
 #import "SOXMarket_BitcoinDE_Core.h"
+
 #import "SOXMyOrderBook_BitcoinDE_Data.h"
+#import "SOXRates_BitcoinDE_Data.h"
 
 #pragma mark - Interface
 @interface SOXCreateNewOrderViewController () <SOXMarketCoreServerRequestProtocol>
@@ -67,6 +69,8 @@
 
 @property (nonatomic, getter = isInputValid) BOOL validInput;
 
+@property (strong, nonatomic) id requestShowRatesNotification;
+
 @end
 
 #pragma mark - Implementation
@@ -82,18 +86,33 @@
         return;
     }
 
+    [self checkForRates];
+    [self setupObservers];
+
     [self setupValues];
     [self setupUI];
     [self validateInputs];
 }
 
-- (void)viewDidAppear {
-    [super viewDidAppear];
-    if (self.priceLimit == nil) {
-        [self noPriceLimitPossible];
-    }
+- (void)viewWillDisappear {
+    [super viewWillDisappear];
+    [[NSNotificationCenter defaultCenter] removeObserver:self.requestShowRatesNotification];
 }
+
 #pragma mark - Setup methods
+- (void)setupObservers {
+    weakify(self);
+    self.requestShowRatesNotification =
+    [[NSNotificationCenter defaultCenter] addObserverForName:BitcoinDE_Notification_RequestShowRates
+                                                      object:nil
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification * _Nonnull note) {
+                                                      strongify(self)
+                                                      [self answerOfServerRequest:note.object];
+                                                  }
+     ];
+}
+
 #pragma mark | Values
 - (void)setupValues {
     [self setupAmountValue];
@@ -330,6 +349,28 @@
 
 
 #pragma mark - Private methods
+#pragma mark | Rates methods
+- (void)checkForRates {
+    SOXRates_BitcoinDE_Data *ratesData = (SOXRates_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].ratesData;
+    NSDecimalNumber *rateWeighted = [ratesData rateWeightedForCurrencyType:self.currencyType];
+    if (rateWeighted == nil) {
+        [[SOXMarket_BitcoinDE_Core sharedCore] startRatesUpdateForCurrencyType:self.currencyType];
+    }
+}
+
+- (void)ratesUpdatesReceived {
+    SOXRates_BitcoinDE_Data *ratesData = (SOXRates_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].ratesData;
+    NSDecimalNumber *rateWeighted = [ratesData rateWeightedForCurrencyType:self.currencyType];
+    if (rateWeighted) {
+        [self setupPriceLimitValue];
+        [self setupUI];
+    }
+    else {
+        [self noPriceLimitPossible];
+    }
+}
+
+#pragma mark | Input validation
 - (void)validateInputs {
     if ([[self volumeNonNil] isLessThan:[SOXPreferenceCenter minimalVolume]]
         || [[self minVolumeNonNil] isLessThan:[SOXPreferenceCenter minimalVolume]]) {
@@ -419,6 +460,7 @@
     self.volumeInformationLine.stringValue = volumeInformation;
 }
 
+#pragma mark | Order handling
 - (void)removeOldOrder {
     NSDictionary *myOrderBookParameter = [SOXMyOrderBook_BitcoinDE_Data parameterForDeletingOrderWithOrderBookData:self.orderBookDataToReplace];
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_RemoveOrderType
@@ -582,6 +624,9 @@
     else if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_RemoveOrderType)]) {
         self.orderBookDataToReplace = nil;
         [self createNewOrder];
+    }
+    else if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowRatesCommandType)]) {
+        [self ratesUpdatesReceived];
     }
 }
 
