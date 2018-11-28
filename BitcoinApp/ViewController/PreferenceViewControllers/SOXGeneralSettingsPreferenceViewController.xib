@@ -504,7 +504,7 @@
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
                                                         <connections>
-                                                            <action selector="sellButtonActions:" target="-2" id="4TW-ec-spN"/>
+                                                            <action selector="bannerButtonActions:" target="-2" id="ODo-tk-xt5"/>
                                                         </connections>
                                                     </button>
                                                     <button verticalHuggingPriority="750" tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="mOb-1I-Dur">

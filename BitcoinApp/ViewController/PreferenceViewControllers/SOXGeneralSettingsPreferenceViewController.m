@@ -193,7 +193,7 @@
                                                                                  forCurrencyType:BitcoinDE_CurrencyTypeBitcoinCashSV];
     self.bsvSellButton.state = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeSell
                                                                                  forCurrencyType:BitcoinDE_CurrencyTypeBitcoinCashSV];
-    self.bsvBannerButton.state = [SOXPreferenceCenter controlStateForBannerForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
+    self.bsvBannerButton.state = [SOXPreferenceCenter controlStateForBannerForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCashSV];
 
     // BTG
     self.btgDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoinGold];
