@@ -347,10 +347,9 @@
 //        [self.arrayController rearrangeObjects];
         [self disableSpinningWheel];
 
-        if ([SOXPreferenceCenter automaticallyLoadOrderbookForOrderType:self.orderType
-                                                        forCurrencyType:self.currencyType]) {
-            [self registerForWebSocketUpdates];
-        }
+        // Register Socket Updates
+        [self registerForWebSocketUpdates];
+
     }
 }
 
