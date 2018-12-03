@@ -106,6 +106,7 @@
 }
 
 - (void)resetTradeDatas {
+    self.currentPage = 0;
     self.arrayControllerDatas = [NSMutableArray array];
     [self.pagingViewController resetPagingButtons];
 }
