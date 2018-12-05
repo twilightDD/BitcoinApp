@@ -22,6 +22,9 @@
 + (NSDate *)dateQuarterBeforeMidnightForDate:(NSDate *)date;
 + (NSDate *)dateNextDayQuarterBeforeMidnightForDate:(NSDate *)date;
 
++ (NSDate *)dateFirstDayOfMonth:(NSInteger)month;
++ (NSDate *)dateLastDayOfMonth:(NSInteger)month;
+
 + (NSString *)stringDateTimeStringForRFC3339DateTimeString:(NSString *)rfc3339DateTimeString;
 + (NSString*)rfc3339GetDateTimeStringDate:(NSDate *)date;
 + (NSString*)rfc3339PostDateTimeStringDate:(NSDate *)date;

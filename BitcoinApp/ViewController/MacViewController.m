@@ -91,15 +91,15 @@ static NSString *AutomaticTradeBSVSegueKey = @"EmbedAutoTraderForBSV";
 
 
 #if PETER
-        NSTabViewItem *item12 = [self.bottomTabView tabViewItemAtIndex:12];
+        NSTabViewItem *item12 = [self.bottomTabView tabViewItemAtIndex:12]; // auto trader: eth
         [self.bottomTabView removeTabViewItem:item12];
-        NSTabViewItem *item11 = [self.bottomTabView tabViewItemAtIndex:11];
+        NSTabViewItem *item11 = [self.bottomTabView tabViewItemAtIndex:11]; // auto trader: gold
         [self.bottomTabView removeTabViewItem:item11];
-        NSTabViewItem *item10 = [self.bottomTabView tabViewItemAtIndex:10];
+        NSTabViewItem *item10 = [self.bottomTabView tabViewItemAtIndex:10]; // auto trader: sv
         [self.bottomTabView removeTabViewItem:item10];
-        NSTabViewItem *item9 = [self.bottomTabView tabViewItemAtIndex:9];
+        NSTabViewItem *item9 = [self.bottomTabView tabViewItemAtIndex:9]; // auto trader: cash
         [self.bottomTabView removeTabViewItem:item9];
-        NSTabViewItem *item8 = [self.bottomTabView tabViewItemAtIndex:8];
+        NSTabViewItem *item8 = [self.bottomTabView tabViewItemAtIndex:8]; // auto trader: bitcoin
         [self.bottomTabView removeTabViewItem:item8];
 #endif
     }

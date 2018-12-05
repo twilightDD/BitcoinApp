@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="b0H-R2-Kgl">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Statistics View Controller-->
+        <scene sceneID="EaA-9V-BNV">
+            <objects>
+                <viewController id="b0H-R2-Kgl" customClass="SOXStatisticsViewController" sceneMemberID="viewController">
+                    <view key="view" id="SVR-lW-tdN">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Aq-iV-K0N">
+                                <rect key="frame" x="20" y="55" width="410" height="225"/>
+                                <clipView key="contentView" id="6xV-nB-3r5">
+                                    <rect key="frame" x="1" y="1" width="393" height="223"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="yRP-9h-6ZS">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="223"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <size key="minSize" width="393" height="223"/>
+                                            <size key="maxSize" width="463" height="10000000"/>
+                                            <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </textView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="9RP-hi-9wc">
+                                    <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="hdO-Xo-Uc2">
+                                    <rect key="frame" x="394" y="1" width="15" height="223"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="J39-pS-lTs">
+                                <rect key="frame" x="355" y="7" width="81" height="32"/>
+                                <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="GSi-ox-JJu">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="buttonAction:" target="b0H-R2-Kgl" id="XFj-r2-K22"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="5Aq-iV-K0N" secondAttribute="trailing" constant="20" id="7YY-kp-XTa"/>
+                            <constraint firstItem="J39-pS-lTs" firstAttribute="top" secondItem="yRP-9h-6ZS" secondAttribute="bottom" constant="21" id="hBq-l2-YRv"/>
+                            <constraint firstItem="5Aq-iV-K0N" firstAttribute="top" secondItem="SVR-lW-tdN" secondAttribute="top" constant="20" id="iJd-Cj-Pzw"/>
+                            <constraint firstItem="5Aq-iV-K0N" firstAttribute="leading" secondItem="SVR-lW-tdN" secondAttribute="leading" constant="20" id="k4k-x8-lkh"/>
+                            <constraint firstAttribute="bottom" secondItem="J39-pS-lTs" secondAttribute="bottom" constant="14" id="pKe-F8-Izk"/>
+                            <constraint firstAttribute="trailing" secondItem="J39-pS-lTs" secondAttribute="trailing" constant="20" id="r4O-xj-zT6"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="button" destination="J39-pS-lTs" id="Ym8-Yl-mMo"/>
+                        <outlet property="textView" destination="yRP-9h-6ZS" id="4Ds-07-Otb"/>
+                    </connections>
+                </viewController>
+                <customObject id="M3S-Ji-mVe" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="221" y="-266"/>
+        </scene>
+    </scenes>
+</document>

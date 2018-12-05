@@ -265,6 +265,32 @@
     return dateBeforeMidnight;
 }
 
++ (NSDate *)dateFirstDayOfMonth:(NSInteger)month {
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    dateComponents.day = 1;
+    dateComponents.month = month;
+    dateComponents.year = 2018;
+    dateComponents.hour = 23;
+    dateComponents.minute = 45;
+    dateComponents.second = 00;
+
+    NSDate *dateFirstDayOfMonth = [self dateFromDateComponents:dateComponents];
+    return dateFirstDayOfMonth;
+}
+
++ (NSDate *)dateLastDayOfMonth:(NSInteger)month {
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    dateComponents.day = 0;
+    dateComponents.month = month+1;
+    dateComponents.year = 2018;
+    dateComponents.hour = 23;
+    dateComponents.minute = 45;
+    dateComponents.second = 00;
+
+    NSDate *dateLastDayOfMonth = [self dateFromDateComponents:dateComponents];
+    return dateLastDayOfMonth;
+}
+
 + (NSString *)stringDateTimeStringForRFC3339DateTimeString:(NSString *)rfc3339DateTimeString {
     // Returns a user-visible date time string that corresponds to the
     // specified RFC 3339 date time string. Note that this does not handle

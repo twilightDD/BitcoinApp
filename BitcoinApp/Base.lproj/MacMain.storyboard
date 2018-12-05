@@ -1069,6 +1069,26 @@
                                             </constraints>
                                         </view>
                                     </tabViewItem>
+                                    <tabViewItem label="IAP" identifier="" id="tdI-1d-FLi">
+                                        <view key="view" id="hGk-Be-ezH">
+                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="YrW-uI-Tha">
+                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="413"/>
+                                                    <connections>
+                                                        <segue destination="oCL-t0-kOF" kind="embed" id="WGm-Uz-hod"/>
+                                                    </connections>
+                                                </containerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="YrW-uI-Tha" secondAttribute="bottom" id="FP9-YO-h0K"/>
+                                                <constraint firstItem="YrW-uI-Tha" firstAttribute="leading" secondItem="hGk-Be-ezH" secondAttribute="leading" id="Hpq-tg-Oqd"/>
+                                                <constraint firstAttribute="trailing" secondItem="YrW-uI-Tha" secondAttribute="trailing" id="ZXi-Z2-NcQ"/>
+                                                <constraint firstItem="YrW-uI-Tha" firstAttribute="top" secondItem="hGk-Be-ezH" secondAttribute="top" id="yt1-dg-uPr"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
                                 </tabViewItems>
                             </tabView>
                             <box boxType="custom" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="ljh-CW-puG">
@@ -1719,6 +1739,14 @@
                 <customObject id="qFb-Ue-orS" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="867" y="58"/>
+        </scene>
+        <!--SOXStatisticsViewController-->
+        <scene sceneID="XmD-Gb-f1v">
+            <objects>
+                <controllerPlaceholder storyboardName="SOXStatisticsViewController" id="oCL-t0-kOF" sceneMemberID="viewController"/>
+                <customObject id="gec-Jd-3Jr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="759" y="507"/>
         </scene>
         <!--Orders View Controller-->
         <scene sceneID="mGC-kT-vfQ">
@@ -2383,7 +2411,7 @@
                                 <rect key="frame" x="20" y="46" width="500" height="324"/>
                                 <subviews>
                                     <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="sQ4-6W-phR">
-                                        <rect key="frame" x="242" y="155" width="16" height="16"/>
+                                        <rect key="frame" x="242" y="154" width="16" height="16"/>
                                     </progressIndicator>
                                 </subviews>
                                 <constraints>
@@ -3180,7 +3208,7 @@ Gw
                                 <rect key="frame" x="21" y="62" width="519" height="404"/>
                                 <subviews>
                                     <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="09c-cw-0o8">
-                                        <rect key="frame" x="252" y="195" width="16" height="16"/>
+                                        <rect key="frame" x="252" y="194" width="16" height="16"/>
                                     </progressIndicator>
                                 </subviews>
                                 <constraints>
@@ -4512,7 +4540,7 @@ Gw
                                 <rect key="frame" x="20" y="46" width="800" height="371"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PEp-j3-oM4">
-                                        <rect key="frame" x="231" y="178" width="338" height="17"/>
+                                        <rect key="frame" x="231" y="177" width="338" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Für die gewählten Optionen sind keine Daten verfügbar" id="04g-V8-PS3">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
