@@ -174,6 +174,8 @@
 		D096A7A321B85D7D00274483 /* SOXStatisticsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D096A7A121B85D7D00274483 /* SOXStatisticsViewController.storyboard */; };
 		D096A7A721B86CAE00274483 /* SOXDataStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = D096A7A621B86CAE00274483 /* SOXDataStatistics.m */; };
 		D096A7A821B86CAE00274483 /* SOXDataStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = D096A7A621B86CAE00274483 /* SOXDataStatistics.m */; };
+		D096A7AB21B888A000274483 /* SOXAccountLedger_BitcoinDE_StatisticData.m in Sources */ = {isa = PBXBuildFile; fileRef = D096A7AA21B888A000274483 /* SOXAccountLedger_BitcoinDE_StatisticData.m */; };
+		D096A7AC21B888A000274483 /* SOXAccountLedger_BitcoinDE_StatisticData.m in Sources */ = {isa = PBXBuildFile; fileRef = D096A7AA21B888A000274483 /* SOXAccountLedger_BitcoinDE_StatisticData.m */; };
 		D09759772006BFBE008A4334 /* SOXMyTradeAmountValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D09759762006BFBE008A4334 /* SOXMyTradeAmountValueTransformer.m */; };
 		D09759782006BFBE008A4334 /* SOXMyTradeAmountValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D09759762006BFBE008A4334 /* SOXMyTradeAmountValueTransformer.m */; };
 		D09DCED7219CC0D2009B1AC7 /* SOXNegateTradeDetailsEuroAfterFeeOnBuyValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D09DCED6219CC0D2009B1AC7 /* SOXNegateTradeDetailsEuroAfterFeeOnBuyValueTransformer.m */; };
@@ -406,6 +408,8 @@
 		D096A7A121B85D7D00274483 /* SOXStatisticsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SOXStatisticsViewController.storyboard; sourceTree = "<group>"; };
 		D096A7A521B86CAE00274483 /* SOXDataStatistics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXDataStatistics.h; sourceTree = "<group>"; };
 		D096A7A621B86CAE00274483 /* SOXDataStatistics.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXDataStatistics.m; sourceTree = "<group>"; };
+		D096A7A921B888A000274483 /* SOXAccountLedger_BitcoinDE_StatisticData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXAccountLedger_BitcoinDE_StatisticData.h; sourceTree = "<group>"; };
+		D096A7AA21B888A000274483 /* SOXAccountLedger_BitcoinDE_StatisticData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXAccountLedger_BitcoinDE_StatisticData.m; sourceTree = "<group>"; };
 		D09759752006BFBE008A4334 /* SOXMyTradeAmountValueTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXMyTradeAmountValueTransformer.h; sourceTree = "<group>"; };
 		D09759762006BFBE008A4334 /* SOXMyTradeAmountValueTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXMyTradeAmountValueTransformer.m; sourceTree = "<group>"; };
 		D09DCED5219CC0D2009B1AC7 /* SOXNegateTradeDetailsEuroAfterFeeOnBuyValueTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXNegateTradeDetailsEuroAfterFeeOnBuyValueTransformer.h; sourceTree = "<group>"; };
@@ -894,6 +898,8 @@
 			children = (
 				D096A7A521B86CAE00274483 /* SOXDataStatistics.h */,
 				D096A7A621B86CAE00274483 /* SOXDataStatistics.m */,
+				D096A7A921B888A000274483 /* SOXAccountLedger_BitcoinDE_StatisticData.h */,
+				D096A7AA21B888A000274483 /* SOXAccountLedger_BitcoinDE_StatisticData.m */,
 			);
 			path = Statistics;
 			sourceTree = "<group>";
@@ -1468,6 +1474,7 @@
 				D021507520474AEC005A0932 /* SOXFormatters.m in Sources */,
 				D021507620474AEC005A0932 /* SOXOrdersViewController.m in Sources */,
 				D021507720474AEC005A0932 /* SOXRates_BitcoinDE_Data.m in Sources */,
+				D096A7AC21B888A000274483 /* SOXAccountLedger_BitcoinDE_StatisticData.m in Sources */,
 				D021507820474AEC005A0932 /* SOXShowOrderbookData.m in Sources */,
 				D096A7A821B86CAE00274483 /* SOXDataStatistics.m in Sources */,
 				D04BF87120F7E3CC004255D8 /* SOXPreferencesCore.m in Sources */,
@@ -1553,6 +1560,7 @@
 				D01F589E1E8495D200C170F7 /* SOXFormatters.m in Sources */,
 				D0331D531E7CAEFF008C0244 /* SOXOrdersViewController.m in Sources */,
 				D02ED5B21E814CF100AA9448 /* SOXRates_BitcoinDE_Data.m in Sources */,
+				D096A7AB21B888A000274483 /* SOXAccountLedger_BitcoinDE_StatisticData.m in Sources */,
 				D02ED5BE1E817CFE00AA9448 /* SOXShowOrderbookData.m in Sources */,
 				D096A7A721B86CAE00274483 /* SOXDataStatistics.m in Sources */,
 				D04BF87020F7E3CC004255D8 /* SOXPreferencesCore.m in Sources */,
