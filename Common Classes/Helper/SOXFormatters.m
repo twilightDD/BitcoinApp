@@ -265,11 +265,11 @@
     return dateBeforeMidnight;
 }
 
-+ (NSDate *)dateFirstDayOfMonth:(NSInteger)month {
++ (NSDate *)dateFirstDayOfMonth:(NSNumber *)month year:(NSNumber *)year {
     NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
     dateComponents.day = 1;
-    dateComponents.month = month;
-    dateComponents.year = 2018;
+    dateComponents.month = month.integerValue;
+    dateComponents.year = year.integerValue;
     dateComponents.hour = 23;
     dateComponents.minute = 45;
     dateComponents.second = 00;
@@ -278,11 +278,11 @@
     return dateFirstDayOfMonth;
 }
 
-+ (NSDate *)dateLastDayOfMonth:(NSInteger)month {
++ (NSDate *)dateLastDayOfMonth:(NSNumber *)month year:(NSNumber *)year {
     NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
     dateComponents.day = 0;
-    dateComponents.month = month+1;
-    dateComponents.year = 2018;
+    dateComponents.month = month.integerValue + 1;
+    dateComponents.year = year.integerValue;
     dateComponents.hour = 23;
     dateComponents.minute = 45;
     dateComponents.second = 00;

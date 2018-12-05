@@ -24,6 +24,10 @@
 
 
 #pragma mark | Properties
+@property (strong, nonatomic) NSNumber *startMonth;
+@property (strong, nonatomic) NSNumber *startYear;
+@property (strong, nonatomic) NSNumber *endMonth;
+@property (strong, nonatomic) NSNumber *endYear;
 
 @property (strong, nonatomic) NSDate *startDate;
 @property (strong, nonatomic) NSDate *endDate;
@@ -37,17 +41,23 @@
 #pragma mark Init&Co.
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    [self setupUI];
 }
 
 #pragma mark - Private Methods
+- (void)setupUI {
+    self.startMonth = @11;
+    self.startYear = @2018;
+    self.endMonth = @11;
+    self.endYear = @2018;
+}
 - (void)requestServerData {
     self.arrayControllerDatas = [NSMutableArray array];
     self.requestQueue = [NSMutableArray array];
     self.textFieldString = @"";
     self.bitcoinFeeSum = [NSDecimalNumber zero];
-    self.startDate = [SOXFormatters dateFirstDayOfMonth:11];
-    self.endDate = [SOXFormatters dateLastDayOfMonth:11];
+    self.startDate = [SOXFormatters dateFirstDayOfMonth:self.startMonth year:self.startYear];
+    self.endDate = [SOXFormatters dateLastDayOfMonth:self.endMonth year:self.endYear];
     
     for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeUnknown + 1;
          currencyType < BitcoinDE_CurrencyType_EndOfType;
