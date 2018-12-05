@@ -23,5 +23,5 @@
 @property (nonatomic) BOOL isLoading;
 
 - (instancetype)initWithCurrencyType:(BitcoinDE_CurrencyType)currencyType;
-
+- (void)addAccountLedgerDatas:(NSMutableArray *)accountLedgerDatas;
 @end

@@ -11,10 +11,11 @@
 
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
+#import "SOXDataStatistics.h"
+
 #import "SOXAccountLedger_BitcoinDE_Data.h"
 #import "SOXAccountLedger_BitcoinDE_StatisticData.h"
-
-#import "SOXDataStatistics.h"
+#import "SOXAccountLedger_BitcoinDE_StatisticData.h"
 #import "SOXPage_BitcoinDE_Data.h"
 
 @interface SOXStatisticsViewController () <SOXMarketCoreServerRequestProtocol>
@@ -64,6 +65,10 @@
     for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeUnknown + 1;
          currencyType < BitcoinDE_CurrencyType_EndOfType;
          currencyType++) {
+        SOXAccountLedger_BitcoinDE_StatisticData *accountLedgerStatisticsData;
+        accountLedgerStatisticsData = [[SOXAccountLedger_BitcoinDE_StatisticData alloc] initWithCurrencyType:currencyType];
+        [self.arrayControllerDatas addObject:accountLedgerStatisticsData];
+
         [self updateTextFieldWithString:[NSString stringWithFormat:
                                          @"Add Request type %@"
                                          , [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType]
@@ -76,6 +81,7 @@
 
         [self.requestQueue addObject:parameter];
     }
+    [self.arrayController rearrangeObjects];
     [self requestNextServerData];
 }
 
@@ -102,6 +108,16 @@
                                          ]];
         [self updateTextFieldWithString:[NSString stringWithFormat:@"Final feeSum: %@"
                                          , self.bitcoinFeeSum]];
+        for (SOXAccountLedger_BitcoinDE_StatisticData *data in self.arrayControllerDatas) {
+            NSLog(@"%ti - %@ - %@ - %@ - %@"
+                  , data.currencyType
+                  , data.coinSum
+                  , data.winLostSum
+                  , data.feeVolumeSum
+                  , data.kickbackSum);
+        }
+
+
     }
 
 }
@@ -128,8 +144,20 @@
         [self.requestQueue removeLastObject];
 
         BitcoinDE_CurrencyType currencyType = [SOXMarket_BitcoinDE_DefTypes currencyTypeForTradingPairString:currencyString];
-        NSMutableArray *accountLedgerDatas = [SOXAccountLedger_BitcoinDE_Data accountLedgerDataArrayForAccountLedgerDictionary:payloadDictionary
-                                                                                                               forCurrencyType:currencyType];
+        NSMutableArray *accountLedgerDatas =
+        [SOXAccountLedger_BitcoinDE_Data accountLedgerDataArrayForAccountLedgerDictionary:payloadDictionary
+                                                                          forCurrencyType:currencyType];
+
+        SOXAccountLedger_BitcoinDE_StatisticData *accountLedgerStatisticData;
+        for (SOXAccountLedger_BitcoinDE_StatisticData *statisticData in self.arrayControllerDatas) {
+            if (statisticData.currencyType == currencyType) {
+                accountLedgerStatisticData = statisticData;
+                break;
+            }
+        }
+        [accountLedgerStatisticData addAccountLedgerDatas:accountLedgerDatas];
+        [self.arrayController rearrangeObjects];
+
         [self updateTextFieldWithString:[NSString stringWithFormat:
                                          @"answer: currency: %@, countOfData: %tu"
                                          , [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:currencyType]
@@ -150,7 +178,7 @@
 
 
         if (accountLedgerDatas.count > 0) {
-            [self.arrayControllerDatas addObjectsFromArray:accountLedgerDatas];
+//            [self.arrayControllerDatas addObjectsFromArray:accountLedgerDatas];
             SOXPage_BitcoinDE_Data *pageData = [SOXPage_BitcoinDE_Data pageDataForPayloadDictionary:payloadDictionary];
             [self updateTextFieldWithString:[NSString stringWithFormat:
                                              @"pageData: current: %ti, last: %ti"
