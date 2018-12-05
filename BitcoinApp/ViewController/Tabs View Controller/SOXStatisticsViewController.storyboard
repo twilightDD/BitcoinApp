@@ -364,6 +364,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
+                                                        <binding destination="Eup-8f-FdA" name="textColor" keyPath="arrangedObjects.textColor" id="LIo-ui-Dxf"/>
                                                         <binding destination="Eup-8f-FdA" name="value" keyPath="arrangedObjects.currencyType" id="sj5-yz-WIs"/>
                                                     </connections>
                                                 </tableColumn>
@@ -380,6 +381,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
+                                                        <binding destination="Eup-8f-FdA" name="textColor" keyPath="arrangedObjects.textColor" id="nkk-4G-4eB"/>
                                                         <binding destination="Eup-8f-FdA" name="value" keyPath="arrangedObjects.coinSum" id="7Nf-U2-UZc"/>
                                                     </connections>
                                                 </tableColumn>
@@ -396,6 +398,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
+                                                        <binding destination="Eup-8f-FdA" name="textColor" keyPath="arrangedObjects.textColor" id="K8u-YI-QjM"/>
                                                         <binding destination="Eup-8f-FdA" name="value" keyPath="arrangedObjects.winLostSum" id="zWF-aK-KZl"/>
                                                     </connections>
                                                 </tableColumn>
@@ -412,6 +415,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
+                                                        <binding destination="Eup-8f-FdA" name="textColor" keyPath="arrangedObjects.textColor" id="vTZ-e4-ova"/>
                                                         <binding destination="Eup-8f-FdA" name="value" keyPath="arrangedObjects.feeVolumeSum" id="0RA-7p-4KZ"/>
                                                     </connections>
                                                 </tableColumn>
@@ -428,6 +432,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
+                                                        <binding destination="Eup-8f-FdA" name="textColor" keyPath="arrangedObjects.textColor" id="23X-rN-Ohd"/>
                                                         <binding destination="Eup-8f-FdA" name="value" keyPath="arrangedObjects.kickbackSum" id="Ygs-aS-1au"/>
                                                     </connections>
                                                 </tableColumn>

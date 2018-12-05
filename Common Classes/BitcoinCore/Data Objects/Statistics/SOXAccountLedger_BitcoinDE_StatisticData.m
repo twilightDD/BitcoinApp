@@ -21,6 +21,8 @@
 @property (strong, nonatomic, readwrite) NSDecimalNumber *kickbackSum;
 @property (strong, nonatomic, readwrite) NSMutableArray <SOXAccountLedger_BitcoinDE_Data *> *accountLedgerDatas;
 
+@property (strong, nonatomic, readwrite) NSColor *textColor;
+
 #pragma mark | Private Properties
 @end
 
@@ -37,6 +39,7 @@
         self.winLostSum = [NSDecimalNumber zero];
         self.feeVolumeSum = [NSDecimalNumber zero];
         self.kickbackSum = [NSDecimalNumber zero];
+        self.isLoading = YES;
     }
 
     return self;
@@ -57,6 +60,15 @@
     self.winLostSum = [statistic objectForKey:@"winLostSum"];
     self.feeVolumeSum = [statistic objectForKey:@"feeVolumeSum"];
     self.kickbackSum = [statistic objectForKey:@"kickbackSum"];
+}
+- (NSColor *)textColor {
+    if (self.isLoading) {
+        return [NSColor lightGrayColor];
+    }
+    else {
+        return [NSColor textColor];
+    }
+
 }
 
 @end

@@ -21,6 +21,7 @@
 @property (strong, nonatomic, readonly) NSMutableArray <SOXAccountLedger_BitcoinDE_Data *> *accountLedgerDatas;
 
 @property (nonatomic) BOOL isLoading;
+@property (strong, nonatomic, readonly) NSColor *textColor;
 
 - (instancetype)initWithCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 - (void)addAccountLedgerDatas:(NSMutableArray *)accountLedgerDatas;

@@ -109,6 +109,7 @@
         [self updateTextFieldWithString:[NSString stringWithFormat:@"Final feeSum: %@"
                                          , self.bitcoinFeeSum]];
         for (SOXAccountLedger_BitcoinDE_StatisticData *data in self.arrayControllerDatas) {
+            data.isLoading = NO;
             NSLog(@"%ti - %@ - %@ - %@ - %@"
                   , data.currencyType
                   , data.coinSum
@@ -201,6 +202,9 @@
 
                     [self.requestQueue addObject:parameter];
                 }
+            }
+            else {
+                accountLedgerStatisticData.isLoading = NO;
             }
         }
     }
