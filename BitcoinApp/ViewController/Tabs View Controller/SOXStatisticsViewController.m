@@ -49,11 +49,26 @@
 
 #pragma mark - Private Methods
 - (void)setupUI {
-    self.startMonth = @11;
-    self.startYear = @2018;
-    self.endMonth = @11;
-    self.endYear = @2018;
+    NSNumber *currentMonth = [SOXFormatters currentMonth];
+    NSNumber *currentYear = [SOXFormatters currentYear];
+
+    NSNumber *monthToUse;
+    NSNumber *yearToUse = currentYear;
+    if (currentMonth.integerValue == 1) {
+        // On january use december last year
+        monthToUse = @12;
+        yearToUse = @(currentYear.integerValue - 1);
+    }
+    else {
+        monthToUse = @(currentMonth.integerValue - 1);
+    }
+
+    self.startMonth = monthToUse;
+    self.startYear = yearToUse;
+    self.endMonth = monthToUse;
+    self.endYear = yearToUse;
 }
+
 - (void)requestServerData {
     self.arrayControllerDatas = [NSMutableArray array];
     self.requestQueue = [NSMutableArray array];

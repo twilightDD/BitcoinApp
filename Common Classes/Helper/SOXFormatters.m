@@ -265,6 +265,22 @@
     return dateBeforeMidnight;
 }
 
++ (NSNumber *)currentMonth {
+    NSDate *currentDate = [NSDate date];
+    NSDateComponents *currentDateComponents = [self dateComponentsDayMonthYearFromDate:currentDate];
+    NSInteger currentMonth = currentDateComponents.month;
+
+    return @(currentMonth);
+}
+
++ (NSNumber *)currentYear {
+    NSDate *currentDate = [NSDate date];
+    NSDateComponents *currentDateComponents = [self dateComponentsDayMonthYearFromDate:currentDate];
+    NSInteger currentYear = currentDateComponents.year;
+
+    return @(currentYear);
+}
+
 + (NSDate *)dateFirstDayOfMonth:(NSNumber *)month year:(NSNumber *)year {
     NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
     dateComponents.day = 1;

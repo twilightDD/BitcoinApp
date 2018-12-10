@@ -22,6 +22,8 @@
 + (NSDate *)dateQuarterBeforeMidnightForDate:(NSDate *)date;
 + (NSDate *)dateNextDayQuarterBeforeMidnightForDate:(NSDate *)date;
 
++ (NSNumber *)currentMonth;
++ (NSNumber *)currentYear;
 + (NSDate *)dateFirstDayOfMonth:(NSNumber *)month year:(NSNumber *)year;
 + (NSDate *)dateLastDayOfMonth:(NSNumber *)month year:(NSNumber *)year;
 
