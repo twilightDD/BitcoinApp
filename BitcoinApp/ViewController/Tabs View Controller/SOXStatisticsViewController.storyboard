@@ -341,17 +341,17 @@
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cNx-De-XQm">
                                 <rect key="frame" x="20" y="312" width="586" height="250"/>
                                 <clipView key="contentView" id="Ccr-TI-c3f">
-                                    <rect key="frame" x="1" y="0.0" width="584" height="249"/>
+                                    <rect key="frame" x="1" y="0.0" width="584" height="234"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="TXb-FT-HQt" id="xoL-mW-TYb">
-                                            <rect key="frame" x="0.0" y="0.0" width="584" height="226"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="659" height="211"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="" width="50" minWidth="40" maxWidth="1000" id="4Qr-7i-ovI">
+                                                <tableColumn identifier="" width="120" minWidth="40" maxWidth="1000" id="4Qr-7i-ovI">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="currency">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -372,7 +372,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="120" minWidth="120" maxWidth="1000" id="6kf-OE-rEQ">
+                                                <tableColumn identifier="" width="140" minWidth="120" maxWidth="1000" id="6kf-OE-rEQ">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="coinSum">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -393,7 +393,7 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="120" minWidth="120" maxWidth="1000" id="ynd-pZ-eZy">
+                                                <tableColumn identifier="" width="120" minWidth="40" maxWidth="1000" id="ynd-pZ-eZy">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="winLostSum">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -411,7 +411,7 @@
                                                         <binding destination="Eup-8f-FdA" name="value" keyPath="arrangedObjects.winLostSum" id="Gu5-8T-fCL"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="120" minWidth="120" maxWidth="1000" id="uzo-Pv-9KN">
+                                                <tableColumn identifier="" width="120" minWidth="40" maxWidth="1000" id="uzo-Pv-9KN">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="feeVolumeSum">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -429,7 +429,7 @@
                                                         <binding destination="Eup-8f-FdA" name="value" keyPath="arrangedObjects.feeVolumeSum" id="CWE-J9-FLf"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="120" minWidth="50" maxWidth="1000" id="txO-ZW-g8a">
+                                                <tableColumn identifier="" width="140" minWidth="50" maxWidth="1000" id="txO-ZW-g8a">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="kickbackSum">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -470,7 +470,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="kUF-my-VdF"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="83w-Yj-H94">
+                                <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="83w-Yj-H94">
                                     <rect key="frame" x="1" y="234" width="584" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -479,7 +479,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="TXb-FT-HQt">
-                                    <rect key="frame" x="0.0" y="0.0" width="584" height="23"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="659" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
@@ -501,6 +501,7 @@
                     <connections>
                         <outlet property="arrayController" destination="Eup-8f-FdA" id="XrF-l0-ntb"/>
                         <outlet property="button" destination="J39-pS-lTs" id="Ym8-Yl-mMo"/>
+                        <outlet property="tableView" destination="xoL-mW-TYb" id="fWs-VP-zDc"/>
                         <outlet property="textView" destination="yRP-9h-6ZS" id="4Ds-07-Otb"/>
                     </connections>
                 </viewController>
