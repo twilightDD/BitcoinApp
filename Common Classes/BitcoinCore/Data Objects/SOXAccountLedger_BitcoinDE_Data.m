@@ -70,6 +70,9 @@ static NSString *AccountLedgerParameter_PageKey         = @"page";
     NSNumber *pageNumber = @(page);
 
     NSString *startDateString = [SOXFormatters rfc3339PostDateTimeStringDate:startDate];
+
+    // fix endDate for AccountLedger: must be younger than yesterday. API fuck up!!! (10.12.18;ph)
+    endDate = [endDate earlierDate:[SOXFormatters dateBeforeMidnightForDate:[NSDate dateWithTimeIntervalSinceNow:-86400]]];
     NSString *endDateString   = [SOXFormatters rfc3339PostDateTimeStringDate:endDate];
 
     NSDictionary *parameterDict = [NSDictionary dictionaryWithObjectsAndKeys:
