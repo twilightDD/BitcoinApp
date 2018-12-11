@@ -50,15 +50,17 @@
 @property (strong, nonatomic) NSNumber *startYear;
 @property (strong, nonatomic) NSNumber *endMonth;
 @property (strong, nonatomic) NSNumber *endYear;
-
 @property (strong, nonatomic) NSDate *startDate;
 @property (strong, nonatomic) NSDate *endDate;
+
 @property (strong, nonatomic) NSMutableArray *requestQueue;
 @property (strong, nonatomic) NSString *textFieldString;
 @property (strong, nonatomic) NSDecimalNumber *bitcoinFeeSum;
 
 @property (strong, nonatomic) NSTableColumn *currentPageTableColumn;
 @property (strong, nonatomic) NSTableColumn *lastPageTableColumn;
+
+@property (copy, nonatomic) NSString *requestDataButtonTitle;
 
 @property (nonatomic) BOOL isFetching;
 @end
@@ -69,8 +71,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.isFetching = NO;
-
     for (NSTableColumn *column in self.tableView.tableColumns) {
         if ([column.identifier isEqualToString:@"lastPage"]) {
             self.lastPageTableColumn = column;
@@ -80,16 +80,16 @@
         }
     }
 
+    self.isFetching = NO;
+
     [self setupUI];
 }
 
 #pragma mark - Private Methods
 #pragma mark | Setup
 - (void)setupUI {
-    self.requestDataButton.title = @"Fetch";
     [self setupStartAndEndDate];
     [self setupCurrencyButtons];
-    [self toggleColumns];
 }
 
 - (void)setupStartAndEndDate {
@@ -137,22 +137,19 @@
     self.ethLoadButton.state = [SOXPreferenceCenter controlStateForLoadStatisticsForCurrencyType:BitcoinDE_CurrencyTypeEthereum];
 }
 
-- (void)toggleColumns {
-    self.currentPageTableColumn.hidden = !self.currentPageTableColumn.hidden;
-    self.lastPageTableColumn.hidden = !self.lastPageTableColumn.hidden;
-}
-
 - (void)requestServerData {
     self.isFetching = YES;
-    [self toggleColumns];
 
+    // reset content and values
     self.arrayControllerDatas = [NSMutableArray array];
     self.requestQueue = [NSMutableArray array];
+    [self.arrayController rearrangeObjects];
     self.textFieldString = @"";
     self.bitcoinFeeSum = [NSDecimalNumber zero];
     self.startDate = [SOXFormatters dateFirstDayOfMonth:self.startMonth year:self.startYear];
     self.endDate = [SOXFormatters dateLastDayOfMonth:self.endMonth year:self.endYear];
-    
+
+    // setup first page of requests
     for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeUnknown + 1;
          currencyType < BitcoinDE_CurrencyType_EndOfType;
          currencyType++) {
@@ -181,14 +178,19 @@
                                             , [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType]
                                             ]];
         }
-
-
     }
-    [self.arrayController rearrangeObjects];
+
+
     [self requestNextServerData];
 }
 
 - (void)requestNextServerData {
+    if (self.isFetching == NO) {
+        [self updateTextFieldWithString:[NSString stringWithFormat:
+                                         @"break"
+                                         ]];
+        return;
+    }
     [self updateTextFieldWithString:@"---------------------------------------------"];
     NSDictionary *parameter = [self.requestQueue lastObject];
     if (parameter) {
@@ -218,7 +220,6 @@
                                                     respondTo:self];
     }
     else {
-        [self toggleColumns];
         self.isFetching = NO;
 
         [self updateTextFieldWithString:[NSString stringWithFormat:
@@ -237,8 +238,8 @@
                   , data.kickbackSum);
         }
     }
-
 }
+
 - (void)updateTextFieldWithString:(NSString *)string {
     self.textFieldString = [self.textFieldString stringByAppendingString:@"\n"];
     self.textFieldString = [self.textFieldString stringByAppendingString:string];
@@ -257,6 +258,22 @@
     return accountLedgerStatisticData;
 }
 
+#pragma mark - Manual setters
+- (void)setIsFetching:(BOOL)isFetching {
+    _isFetching = isFetching;
+
+    if (isFetching) {
+        self.requestDataButtonTitle = @"Cancel";
+
+    }
+    else {
+        self.requestDataButtonTitle = @"Fetch";
+    }
+    self.currentPageTableColumn.hidden = !isFetching;
+    self.lastPageTableColumn.hidden = !isFetching;
+}
+
+
 #pragma mark - Action Methods
 - (IBAction)selectCurrencyTypeLoadActions:(NSButton *)sender {
     BOOL loadCurrencyType = sender.state;
@@ -266,7 +283,10 @@
 }
 
 - (IBAction)requestDataButtonAction:(NSButton *)sender {
-    [self requestServerData];
+    self.isFetching = !self.isFetching;
+    if (self.isFetching) {
+        [self requestServerData];
+    }
 }
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
