@@ -227,6 +227,8 @@
 		D0E5C5041E809C9800352985 /* SOXKeys_BitcoinDE.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E5C5021E809C9800352985 /* SOXKeys_BitcoinDE.m */; };
 		D0EB0E541F855B54004839C2 /* SOXLogWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EB0E521F855B54004839C2 /* SOXLogWindowController.m */; };
 		D0EB0E551F855B54004839C2 /* SOXLogWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0EB0E531F855B54004839C2 /* SOXLogWindowController.xib */; };
+		D0EDCCEB21C06B6D00C21F03 /* SOXStatisticsSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EDCCEA21C06B6D00C21F03 /* SOXStatisticsSummaryViewController.m */; };
+		D0EDCCEC21C06B6D00C21F03 /* SOXStatisticsSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EDCCEA21C06B6D00C21F03 /* SOXStatisticsSummaryViewController.m */; };
 		D0F70256216ABC4800BA7EDF /* SOXView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F70255216ABC4800BA7EDF /* SOXView.m */; };
 		D0F70257216ABC4800BA7EDF /* SOXView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F70255216ABC4800BA7EDF /* SOXView.m */; };
 		D0F70259216AE0AF00BA7EDF /* libPods-mac BitcoinApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0F70258216AE0AF00BA7EDF /* libPods-mac BitcoinApp.a */; };
@@ -469,6 +471,8 @@
 		D0EB0E511F855B54004839C2 /* SOXLogWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXLogWindowController.h; sourceTree = "<group>"; };
 		D0EB0E521F855B54004839C2 /* SOXLogWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXLogWindowController.m; sourceTree = "<group>"; };
 		D0EB0E531F855B54004839C2 /* SOXLogWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SOXLogWindowController.xib; sourceTree = "<group>"; };
+		D0EDCCE921C06B6D00C21F03 /* SOXStatisticsSummaryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXStatisticsSummaryViewController.h; sourceTree = "<group>"; };
+		D0EDCCEA21C06B6D00C21F03 /* SOXStatisticsSummaryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXStatisticsSummaryViewController.m; sourceTree = "<group>"; };
 		D0F70254216ABC4800BA7EDF /* SOXView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXView.h; sourceTree = "<group>"; };
 		D0F70255216ABC4800BA7EDF /* SOXView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXView.m; sourceTree = "<group>"; };
 		D0F70258216AE0AF00BA7EDF /* libPods-mac BitcoinApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libPods-mac BitcoinApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -854,6 +858,8 @@
 				D06DE29121824A7C002BC973 /* SOXTradeStatisticsViewController.m */,
 				D07BE9D821831EDB00101DCF /* SOXPagingViewController.h */,
 				D07BE9D921831EDB00101DCF /* SOXPagingViewController.m */,
+				D0EDCCE921C06B6D00C21F03 /* SOXStatisticsSummaryViewController.h */,
+				D0EDCCEA21C06B6D00C21F03 /* SOXStatisticsSummaryViewController.m */,
 			);
 			path = "Embedded Views";
 			sourceTree = "<group>";
@@ -1478,6 +1484,7 @@
 				D021506A20474AEC005A0932 /* SOXMarketHelper.m in Sources */,
 				D021506B20474AEC005A0932 /* SOXFeeCoinValueTransformer.m in Sources */,
 				D042764C213DC6AB0096B76C /* SOXAbstractData.m in Sources */,
+				D0EDCCEC21C06B6D00C21F03 /* SOXStatisticsSummaryViewController.m in Sources */,
 				D021506C20474AEC005A0932 /* SOXConstants.m in Sources */,
 				D021506D20474AEC005A0932 /* NSAttributedString+URL.m in Sources */,
 				D021506E20474AEC005A0932 /* SOXErrorMessage_BitcoinDE.m in Sources */,
@@ -1567,6 +1574,7 @@
 				D0A33F921F42079D0042B2A7 /* SOXMarketHelper.m in Sources */,
 				D0BCFCA8200423F8004F9E57 /* SOXFeeCoinValueTransformer.m in Sources */,
 				D042764B213DC6AB0096B76C /* SOXAbstractData.m in Sources */,
+				D0EDCCEB21C06B6D00C21F03 /* SOXStatisticsSummaryViewController.m in Sources */,
 				D049C4591E7712E6003CBF36 /* SOXConstants.m in Sources */,
 				D0B9A3341E895EA0008860ED /* NSAttributedString+URL.m in Sources */,
 				D0B942B01E8AF1D600EF7434 /* SOXErrorMessage_BitcoinDE.m in Sources */,

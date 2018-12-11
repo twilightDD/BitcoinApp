@@ -627,10 +627,10 @@
             </objects>
             <point key="canvasLocation" x="119" y="-251"/>
         </scene>
-        <!--View Controller-->
+        <!--Statistics Summary View Controller-->
         <scene sceneID="65c-Sj-RoM">
             <objects>
-                <viewController id="m0Z-El-gmj" sceneMemberID="viewController">
+                <viewController id="m0Z-El-gmj" customClass="SOXStatisticsSummaryViewController" sceneMemberID="viewController">
                     <view key="view" id="6lk-vQ-YxN">
                         <rect key="frame" x="0.0" y="0.0" width="850" height="358"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -3507,6 +3507,122 @@
                             <constraint firstItem="faI-b2-h3e" firstAttribute="leading" secondItem="6lk-vQ-YxN" secondAttribute="leading" id="oKx-s2-Scl"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="bchBuyBuyCoinsTextField" destination="2D7-Uh-Q89" id="bjA-qa-uLm"/>
+                        <outlet property="bchBuyBuySalesTextField" destination="eMG-Cv-SU0" id="5Rq-gq-Xgx"/>
+                        <outlet property="bchBuyBuyTradesTextField" destination="Tvk-4P-uXN" id="nRt-QU-srM"/>
+                        <outlet property="bchBuyFeeBitcoinDETextField" destination="Cp5-PH-gCg" id="3bb-EB-3IB"/>
+                        <outlet property="bchBuyFeeCoinerTextField" destination="v1l-Lc-2im" id="tV7-eA-pH6"/>
+                        <outlet property="bchBuyFeeFidorTextField" destination="iHa-JN-97X" id="hlm-tM-JnL"/>
+                        <outlet property="bchBuyKickbackCoinsTextField" destination="BBw-fF-wI3" id="uXq-vC-V7v"/>
+                        <outlet property="bchBuyKickbackEventsTextField" destination="Ilk-aI-hN8" id="o5X-yu-3w6"/>
+                        <outlet property="bchBuySellCoinsTextField" destination="ecu-G7-Jx7" id="Nnc-PV-pXi"/>
+                        <outlet property="bchBuySellSalesTextField" destination="il5-2w-nJm" id="Qm2-H3-pXx"/>
+                        <outlet property="bchBuySellTradesTextField" destination="f9Y-A5-ymf" id="6Vh-Gq-W9M"/>
+                        <outlet property="bchBuyWinLostAfterFeeTextField" destination="gRY-tR-Lxg" id="3wd-SL-eC8"/>
+                        <outlet property="bchBuyWinLostRawTextField" destination="0ds-W5-lTZ" id="A4a-qE-rPo"/>
+                        <outlet property="bchCurrencyTextField" destination="Zdp-fn-V0E" id="l6D-lH-byy"/>
+                        <outlet property="bsvBuyBuyCoinsTextField" destination="Edl-ju-LGY" id="N5c-x9-wlo"/>
+                        <outlet property="bsvBuyBuySalesTextField" destination="IgF-C6-Jc0" id="vcK-uZ-mF9"/>
+                        <outlet property="bsvBuyBuyTradesTextField" destination="3LC-Fo-4w1" id="NR8-IC-Zha"/>
+                        <outlet property="bsvBuyFeeBitcoinDETextField" destination="3ZO-tR-oFe" id="Naa-xU-rpA"/>
+                        <outlet property="bsvBuyFeeCoinerTextField" destination="udv-Z9-9JQ" id="ZU6-Da-ZGW"/>
+                        <outlet property="bsvBuyFeeFidorTextField" destination="qcC-RK-yCe" id="FKJ-Jy-lS9"/>
+                        <outlet property="bsvBuyKickbackCoinsTextField" destination="NZS-gj-TXh" id="Lgy-FK-sW6"/>
+                        <outlet property="bsvBuyKickbackEventsTextField" destination="Dmt-zX-goy" id="gU9-wj-2xg"/>
+                        <outlet property="bsvBuySellCoinsTextField" destination="JgB-yk-cQb" id="UyN-W3-Am4"/>
+                        <outlet property="bsvBuySellSalesTextField" destination="qu0-zk-no2" id="pRp-bg-ceP"/>
+                        <outlet property="bsvBuySellTradesTextField" destination="zLS-yq-gK2" id="ZBh-0p-U3q"/>
+                        <outlet property="bsvBuyWinLostAfterFeeTextField" destination="Njn-fm-An4" id="ONM-PW-NcN"/>
+                        <outlet property="bsvBuyWinLostRawTextField" destination="zqi-KP-JqV" id="kCF-eD-0e0"/>
+                        <outlet property="bsvCurrencyTextField" destination="lSR-yw-w98" id="dyP-xH-Xat"/>
+                        <outlet property="btcBuyBuyCoinsTextField" destination="SwR-16-LCP" id="RQB-KB-FoX"/>
+                        <outlet property="btcBuyBuySalesTextField" destination="T0n-aY-eSd" id="3c6-Kq-Cw5"/>
+                        <outlet property="btcBuyBuyTradesTextField" destination="RZ4-Cb-4cM" id="Ljc-a2-n1W"/>
+                        <outlet property="btcBuyFeeBitcoinDETextField" destination="ULe-EV-Yn1" id="D41-RQ-YTd"/>
+                        <outlet property="btcBuyFeeCoinerTextField" destination="u1l-To-8hY" id="N3R-Ig-YPE"/>
+                        <outlet property="btcBuyFeeFidorTextField" destination="qhn-89-Cki" id="TT7-zl-0YI"/>
+                        <outlet property="btcBuyKickbackCoinsTextField" destination="G8U-hO-qiY" id="uLz-44-Jj8"/>
+                        <outlet property="btcBuyKickbackEventsTextField" destination="sev-i2-bke" id="x0d-3c-f2p"/>
+                        <outlet property="btcBuySellCoinsTextField" destination="h84-CQ-hhB" id="kax-K5-3Hj"/>
+                        <outlet property="btcBuySellSalesTextField" destination="tu2-iD-KPa" id="hS9-KB-br4"/>
+                        <outlet property="btcBuySellTradesTextField" destination="fqj-zJ-fMO" id="EtT-1C-Gvx"/>
+                        <outlet property="btcBuyWinLostAfterFeeTextField" destination="9fv-FA-1hY" id="PEu-tq-yW2"/>
+                        <outlet property="btcBuyWinLostRawTextField" destination="ZYY-jI-wgG" id="IX4-fD-QV8"/>
+                        <outlet property="btcCurrencyTextField" destination="qW7-L2-JG7" id="ykk-k2-7ur"/>
+                        <outlet property="btgBuyBuyCoinsTextField" destination="lPt-Xt-KCx" id="0N6-W9-Fd7"/>
+                        <outlet property="btgBuyBuySalesTextField" destination="tqb-4s-KL2" id="Qll-T9-3XU"/>
+                        <outlet property="btgBuyBuyTradesTextField" destination="IQt-RF-0jQ" id="ldy-bF-2bj"/>
+                        <outlet property="btgBuyFeeBitcoinDETextField" destination="Vdg-tb-dR7" id="eAe-N4-ELS"/>
+                        <outlet property="btgBuyFeeCoinerTextField" destination="crQ-bN-oYI" id="znX-Gl-h31"/>
+                        <outlet property="btgBuyFeeFidorTextField" destination="l8M-YV-m9q" id="0Nn-2F-aUW"/>
+                        <outlet property="btgBuyKickbackCoinsTextField" destination="isw-Jj-0b9" id="fBV-rl-fCZ"/>
+                        <outlet property="btgBuyKickbackEventsTextField" destination="Lpp-g7-ESI" id="Di1-aK-Bx7"/>
+                        <outlet property="btgBuySellCoinsTextField" destination="5fF-EL-Pbr" id="tKq-b6-vBD"/>
+                        <outlet property="btgBuySellSalesTextField" destination="mnf-q7-ajJ" id="mS7-eQ-8Xi"/>
+                        <outlet property="btgBuySellTradesTextField" destination="9Rh-kz-l2I" id="1u3-Xd-3KB"/>
+                        <outlet property="btgBuyWinLostAfterFeeTextField" destination="gjS-xE-Pmn" id="xaP-xB-PNh"/>
+                        <outlet property="btgBuyWinLostRawTextField" destination="agW-Pc-Oh5" id="iMA-vi-oiH"/>
+                        <outlet property="btgCurrencyTextField" destination="Gt3-li-so7" id="FMn-cC-OZN"/>
+                        <outlet property="buyColumnStackView" destination="qmh-0K-v2G" id="841-HJ-7Oc"/>
+                        <outlet property="currencyColumnStackView" destination="gNQ-D9-3Rf" id="TD6-1m-C2V"/>
+                        <outlet property="empty1CurrencyTextField" destination="B9W-ei-JwR" id="yHs-gd-eyZ"/>
+                        <outlet property="empty2TextField" destination="Syg-tm-fTj" id="rEi-zu-nqe"/>
+                        <outlet property="ethBuyBuyCoinsTextField" destination="trs-ue-yK9" id="Lh0-sK-M7C"/>
+                        <outlet property="ethBuyBuySalesTextField" destination="4Nh-LC-QZ1" id="73P-lu-5yA"/>
+                        <outlet property="ethBuyBuyTradesTextField" destination="07T-wM-ZdH" id="vzg-k9-U9F"/>
+                        <outlet property="ethBuyFeeBitcoinDETextField" destination="bM0-ef-SmI" id="Zl9-df-6CY"/>
+                        <outlet property="ethBuyFeeCoinerTextField" destination="wbb-bs-uhi" id="bZn-7A-buc"/>
+                        <outlet property="ethBuyFeeFidorTextField" destination="Qqs-5t-Gf5" id="VDq-15-GMA"/>
+                        <outlet property="ethBuyKickbackCoinsTextField" destination="fGx-3G-2WE" id="Ra1-mr-5ud"/>
+                        <outlet property="ethBuyKickbackEventsTextField" destination="iu0-vc-rL7" id="yUG-pW-Ryv"/>
+                        <outlet property="ethBuySellCoinsTextField" destination="DbN-h8-F5H" id="Lfe-MJ-XeW"/>
+                        <outlet property="ethBuySellSalesTextField" destination="a2q-yu-e3T" id="S3i-5j-fZc"/>
+                        <outlet property="ethBuySellTradesTextField" destination="X1L-RV-POG" id="eOe-ba-nzT"/>
+                        <outlet property="ethBuyWinLostAfterFeeTextField" destination="DXo-U9-IIg" id="EGV-qT-ox5"/>
+                        <outlet property="ethBuyWinLostRawTextField" destination="psF-rX-hpM" id="HaX-t3-dKS"/>
+                        <outlet property="ethCurrencyTextField" destination="opo-kF-fdS" id="Gi9-YT-XIa"/>
+                        <outlet property="header1BuyCoinsBuyTextField" destination="PHh-fG-OyA" id="sM3-QE-5Zf"/>
+                        <outlet property="header1BuySalesBuyTextField" destination="Uhc-tQ-tfF" id="zwg-VP-cKb"/>
+                        <outlet property="header1BuyTradesTextField" destination="wBH-uz-QSF" id="iEI-9o-RsR"/>
+                        <outlet property="header1FeeBitcoinDETextField" destination="IUO-cX-Xme" id="VXI-cG-Lmj"/>
+                        <outlet property="header1FeeCoinerBuyTextField" destination="17F-Of-VAn" id="JUF-we-pmV"/>
+                        <outlet property="header1FeeFidorBuyTextField" destination="o54-Ve-2zI" id="vrL-2D-0PZ"/>
+                        <outlet property="header1KickbackCoinsBuyTextField" destination="H4g-8e-wHX" id="GZh-bW-xVd"/>
+                        <outlet property="header1KickbackEventsTextField" destination="x3s-4N-stC" id="uQG-Qt-x2p"/>
+                        <outlet property="header1SellCoinsBuyTextField" destination="DYK-Lx-jyu" id="0EE-to-i9p"/>
+                        <outlet property="header1SellSalesBuyTextField" destination="AZB-6n-Kqk" id="RuE-Bj-cE7"/>
+                        <outlet property="header1SellTradesTextField" destination="Z8h-xr-ZoE" id="0Ek-0z-12O"/>
+                        <outlet property="header1WinLostAfterFeeBuyTextField" destination="LTI-Gl-7ez" id="ALA-rg-YLb"/>
+                        <outlet property="header1WinLostRawTextField" destination="uf6-4R-Hnt" id="Sjr-9X-Vfg"/>
+                        <outlet property="header2BuyCoinsBuyTextField" destination="Yph-dc-s2l" id="VUM-lF-far"/>
+                        <outlet property="header2BuySalesBuyTextField" destination="XVQ-QT-4X8" id="xk4-O0-V0o"/>
+                        <outlet property="header2BuyTradesTextField" destination="CFw-ub-nQO" id="C1I-kd-dam"/>
+                        <outlet property="header2FeeBitcoinDETextField" destination="fI9-dO-2tc" id="3xT-jc-3fs"/>
+                        <outlet property="header2FeeCoinerBuyTextField" destination="Gfg-oN-hhG" id="Tlr-BO-usc"/>
+                        <outlet property="header2FeeFidorBuyTextField" destination="oOJ-Bg-rpS" id="8o3-R0-jue"/>
+                        <outlet property="header2KickbackCoinsBuyTextField" destination="VTI-TD-Zju" id="lcd-wK-PR9"/>
+                        <outlet property="header2KickbackEventsTextField" destination="aMo-SR-BNP" id="y3V-jy-Jqh"/>
+                        <outlet property="header2SellCoinsBuyTextField" destination="2zd-c4-byI" id="vce-pt-4Ur"/>
+                        <outlet property="header2SellSalesBuyTextField" destination="PI9-5D-UH8" id="2ng-94-6MJ"/>
+                        <outlet property="header2SellTradesTextField" destination="y3v-TQ-L3P" id="xLx-3C-DhB"/>
+                        <outlet property="header2WinLostAfterFeeBuyTextField" destination="SLm-Bf-cLh" id="nxu-1S-DXe"/>
+                        <outlet property="header2WinLostRawTextField" destination="9AW-nQ-bi5" id="mHO-3w-17G"/>
+                        <outlet property="sumBuyBuyCoinsTextField" destination="s3G-EX-gmn" id="Ate-jF-Hf2"/>
+                        <outlet property="sumBuyBuySalesTextField" destination="j0c-FK-ctr" id="CT6-1t-dLe"/>
+                        <outlet property="sumBuyBuyTradesTextField" destination="oLd-iS-8Ie" id="Rdy-1R-SPF"/>
+                        <outlet property="sumBuyFeeBitcoinDETextField" destination="VeC-Ln-cKI" id="y9x-zb-O9a"/>
+                        <outlet property="sumBuyFeeCoinerTextField" destination="Ulf-7l-Naj" id="Km3-uq-ZJ7"/>
+                        <outlet property="sumBuyFeeFidorTextField" destination="mGx-fD-k8R" id="2Ed-NU-vAx"/>
+                        <outlet property="sumBuyKickbackCoinsTextField" destination="diD-YQ-TYy" id="ydI-Iy-eyR"/>
+                        <outlet property="sumBuyKickbackEventsTextField" destination="JeW-d8-kvE" id="FtM-6g-Hrc"/>
+                        <outlet property="sumBuySellCoinsTextField" destination="b8W-Z6-Z4D" id="hYl-DI-RzX"/>
+                        <outlet property="sumBuySellSalesTextField" destination="kt6-CP-5NE" id="TJb-TS-O7n"/>
+                        <outlet property="sumBuySellTradesTextField" destination="Zk5-Ei-eXs" id="Y5p-5K-jEX"/>
+                        <outlet property="sumBuyWinLostAfterFeeTextField" destination="EDX-zb-DoO" id="eyX-Ea-vcD"/>
+                        <outlet property="sumBuyWinLostRawTextField" destination="CBG-3H-dzh" id="5vW-wH-fgA"/>
+                        <outlet property="sumCurrencyTextField" destination="rBl-hM-REW" id="cfe-hw-uej"/>
+                    </connections>
                 </viewController>
                 <customObject id="EJx-XL-Fst" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
