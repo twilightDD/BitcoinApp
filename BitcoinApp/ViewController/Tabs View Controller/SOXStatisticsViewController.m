@@ -267,9 +267,9 @@
                                              , pageData.pageLast]];
             if (pageData.pageCurrent == 1
                 && pageData.pageLast > pageData.pageCurrent) {
-                for (NSInteger page = pageData.pageCurrent + 1;
-                     page <= pageData.pageLast;
-                     page++) {
+                for (NSInteger page = pageData.pageLast;
+                     page > 1;
+                     page--) {
                     [self updateTextFieldWithString:[NSString stringWithFormat:
                                                      @"Add Request type %@ (page %ti)"
                                                      , [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType]
@@ -284,7 +284,7 @@
                     [self.requestQueue addObject:parameter];
                 }
             }
-            else {
+            else if (pageData.pageCurrent == pageData.pageLast){
                 accountLedgerStatisticData.isLoading = NO;
             }
         }
