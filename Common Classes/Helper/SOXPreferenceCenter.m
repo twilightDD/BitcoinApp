@@ -10,6 +10,7 @@
 
 static NSString *UserDef_Domain_AutomaticallyLoadOrderbookKey = @"de.2sox.coiner.domain_automaticallyLoadOrderbook";
 static NSString *UserDef_Domain_AutomaticallyLoadBannerKey = @"de.2sox.coiner.domain_automaticallyLoadBanner";
+static NSString *UserDef_Domain_LoadStatisticsForCurrencyTypeKey = @"de.2sox.coiner.domain_loadStatisticsForCurrencyType";
 static NSString *UserDef_Domain_OrderViewControllerSEPAKey = @"de.2sox.coiner.domain_noSepaPaymentOptionFilter";
 static NSString *UserDef_Domain_OrderViewControllerCountryCodeKey = @"de.2sox.coiner.domain_countryCodeFilter";
 static NSString *UserDef_FirstAppStartKey = @"de.2sox.coiner.domain_date";
@@ -151,6 +152,32 @@ static NSString *UserDef_default_autoUpdateInfoTabs = @"de.2sox.coiner.default_a
                         forKey:userDefaultKey];
 }
 
+#pragma mark | StatisticsViewController
++ (BOOL)loadStatisticsForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    NSString *userDefaultKey = [self userDefaultKeyForDomain:UserDef_Domain_LoadStatisticsForCurrencyTypeKey
+                                                   orderType:BitcoinDE_OrderTypeUnknown
+                                                currencyType:currencyType];
+    NSNumber *userDefault = [SOXPreferenceCenter userDefaultForKey:userDefaultKey];
+    BOOL loadStatistics = userDefault.boolValue;
+    return loadStatistics;
+}
+
++ (NSControlStateValue)controlStateForLoadStatisticsForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    BOOL controlState = [SOXPreferenceCenter loadStatisticsForCurrencyType:currencyType];
+
+    return controlState ? NSControlStateValueOn : NSControlStateValueOff;
+}
+
++ (void)setLoadStatistics:(BOOL)loadCurrencyType
+          forCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    NSString *userDefaultKey = [self userDefaultKeyForDomain:UserDef_Domain_LoadStatisticsForCurrencyTypeKey
+                                                   orderType:BitcoinDE_OrderTypeUnknown
+                                                currencyType:currencyType];
+    [self setUserDefaultObject:@(loadCurrencyType)
+                        forKey:userDefaultKey];
+}
+
+#pragma mark | KYC only
 + (BOOL)defaultKYCOnly {
     NSNumber *userDefault = [SOXPreferenceCenter userDefaultForKey:UserDef_default_kycOnly];
     BOOL defaultKYCOnly = userDefault.boolValue;

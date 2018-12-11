@@ -33,6 +33,12 @@ static NSString *ShowNoSepaOrdersPreferencesDidChangeNotification = @"ShowNoSepa
 + (void)setAutomaticallyLoadBanner:(BOOL)automaticallyLoadBanner
                    forCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 
+// StatisticsViewController
++ (BOOL)loadStatisticsForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
++ (NSControlStateValue)controlStateForLoadStatisticsForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
++ (void)setLoadStatistics:(BOOL)loadCurrencyType
+          forCurrencyType:(BitcoinDE_CurrencyType)currencyType;
+
 + (BOOL)defaultKYCOnly;
 + (void)setDefaultKYCOnly:(BOOL)defaultKYCOnly;
 
