@@ -42,7 +42,11 @@
         self.winLostSum = [NSDecimalNumber zero];
         self.feeVolumeSum = [NSDecimalNumber zero];
         self.kickbackSum = [NSDecimalNumber zero];
-        self.isLoading = YES;
+        self.isLoading = NO;
+        self.isActive = NO;
+        self.isWaiting = NO;
+        self.currentPage = 1;
+        self.lastPage = 1;
     }
 
     return self;
@@ -55,9 +59,13 @@
     [self updateProperties];
 
 }
+
 - (void)updatedWithPageData:(SOXPageData *)pageData {
     self.currentPage = pageData.pageCurrent;
     self.lastPage = pageData.pageLast;
+    if (pageData.pageCurrent == pageData.pageLast) {
+        self.isLoading = NO;
+    }
 }
 
 #pragma mark - Private Methods

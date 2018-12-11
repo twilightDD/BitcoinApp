@@ -156,6 +156,8 @@
 		D07AEDAD21BF2261006B39D5 /* SOXAccountLedgerStatisticsData_KickbackWithShortCurrency_ValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D07AEDAB21BF2261006B39D5 /* SOXAccountLedgerStatisticsData_KickbackWithShortCurrency_ValueTransformer.m */; };
 		D07AEDB021BF234F006B39D5 /* SOXAccountLedgerStatisticsData_CurrencyTypeToCurrencyString_ValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D07AEDAF21BF234F006B39D5 /* SOXAccountLedgerStatisticsData_CurrencyTypeToCurrencyString_ValueTransformer.m */; };
 		D07AEDB121BF234F006B39D5 /* SOXAccountLedgerStatisticsData_CurrencyTypeToCurrencyString_ValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D07AEDAF21BF234F006B39D5 /* SOXAccountLedgerStatisticsData_CurrencyTypeToCurrencyString_ValueTransformer.m */; };
+		D07AEDB421BF4102006B39D5 /* SOXAccountLedgerStatisticsData_LoadPageInformation_ValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D07AEDB321BF4102006B39D5 /* SOXAccountLedgerStatisticsData_LoadPageInformation_ValueTransformer.m */; };
+		D07AEDB521BF4102006B39D5 /* SOXAccountLedgerStatisticsData_LoadPageInformation_ValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D07AEDB321BF4102006B39D5 /* SOXAccountLedgerStatisticsData_LoadPageInformation_ValueTransformer.m */; };
 		D07BE9DA21831EDB00101DCF /* SOXPagingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D07BE9D921831EDB00101DCF /* SOXPagingViewController.m */; };
 		D07BE9DB21831EDB00101DCF /* SOXPagingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D07BE9D921831EDB00101DCF /* SOXPagingViewController.m */; };
 		D07DA1972152E00C00F0416B /* SOXBoolNmberToWordValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D07DA1962152E00C00F0416B /* SOXBoolNmberToWordValueTransformer.m */; };
@@ -389,6 +391,8 @@
 		D07AEDAB21BF2261006B39D5 /* SOXAccountLedgerStatisticsData_KickbackWithShortCurrency_ValueTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXAccountLedgerStatisticsData_KickbackWithShortCurrency_ValueTransformer.m; sourceTree = "<group>"; };
 		D07AEDAE21BF234F006B39D5 /* SOXAccountLedgerStatisticsData_CurrencyTypeToCurrencyString_ValueTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXAccountLedgerStatisticsData_CurrencyTypeToCurrencyString_ValueTransformer.h; sourceTree = "<group>"; };
 		D07AEDAF21BF234F006B39D5 /* SOXAccountLedgerStatisticsData_CurrencyTypeToCurrencyString_ValueTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXAccountLedgerStatisticsData_CurrencyTypeToCurrencyString_ValueTransformer.m; sourceTree = "<group>"; };
+		D07AEDB221BF4102006B39D5 /* SOXAccountLedgerStatisticsData_LoadPageInformation_ValueTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXAccountLedgerStatisticsData_LoadPageInformation_ValueTransformer.h; sourceTree = "<group>"; };
+		D07AEDB321BF4102006B39D5 /* SOXAccountLedgerStatisticsData_LoadPageInformation_ValueTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXAccountLedgerStatisticsData_LoadPageInformation_ValueTransformer.m; sourceTree = "<group>"; };
 		D07BE9D821831EDB00101DCF /* SOXPagingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXPagingViewController.h; sourceTree = "<group>"; };
 		D07BE9D921831EDB00101DCF /* SOXPagingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXPagingViewController.m; sourceTree = "<group>"; };
 		D07BE9DC21832FA800101DCF /* SOXPagingAbstractViewController_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXPagingAbstractViewController_Private.h; sourceTree = "<group>"; };
@@ -873,6 +877,8 @@
 				D07AEDAF21BF234F006B39D5 /* SOXAccountLedgerStatisticsData_CurrencyTypeToCurrencyString_ValueTransformer.m */,
 				D07AEDAA21BF2261006B39D5 /* SOXAccountLedgerStatisticsData_KickbackWithShortCurrency_ValueTransformer.h */,
 				D07AEDAB21BF2261006B39D5 /* SOXAccountLedgerStatisticsData_KickbackWithShortCurrency_ValueTransformer.m */,
+				D07AEDB221BF4102006B39D5 /* SOXAccountLedgerStatisticsData_LoadPageInformation_ValueTransformer.h */,
+				D07AEDB321BF4102006B39D5 /* SOXAccountLedgerStatisticsData_LoadPageInformation_ValueTransformer.m */,
 				D02150A620475965005A0932 /* SOXBalanceWithShortCurrencyValueTransformer.h */,
 				D02150A720475965005A0932 /* SOXBalanceWithShortCurrencyValueTransformer.m */,
 				D07DA1952152E00C00F0416B /* SOXBoolNmberToWordValueTransformer.h */,
@@ -1506,6 +1512,7 @@
 				D02150A42047594D005A0932 /* SOXCashflowWithShortCurrencyValueTransformer.m in Sources */,
 				D021507F20474AEC005A0932 /* SOXMyTrades_BitcoinDE_Data.m in Sources */,
 				D021508020474AEC005A0932 /* main.m in Sources */,
+				D07AEDB521BF4102006B39D5 /* SOXAccountLedgerStatisticsData_LoadPageInformation_ValueTransformer.m in Sources */,
 				D021508120474AEC005A0932 /* SOXAccountInfoData.m in Sources */,
 				D02F7284219378B6005F5E1C /* SOXGeneralSettingsPreferenceViewController.m in Sources */,
 				D0D0B3E120EAB27100F12A6B /* SOXTableView.m in Sources */,
@@ -1594,6 +1601,7 @@
 				D02150A32047594D005A0932 /* SOXCashflowWithShortCurrencyValueTransformer.m in Sources */,
 				D0AA14F31E929F12008D8FD7 /* SOXMyTrades_BitcoinDE_Data.m in Sources */,
 				D063E91D1E74BF97006E2D17 /* main.m in Sources */,
+				D07AEDB421BF4102006B39D5 /* SOXAccountLedgerStatisticsData_LoadPageInformation_ValueTransformer.m in Sources */,
 				D02ED5BA1E81546800AA9448 /* SOXAccountInfoData.m in Sources */,
 				D02F7283219378B6005F5E1C /* SOXGeneralSettingsPreferenceViewController.m in Sources */,
 				D0D0B3E020EAB27100F12A6B /* SOXTableView.m in Sources */,

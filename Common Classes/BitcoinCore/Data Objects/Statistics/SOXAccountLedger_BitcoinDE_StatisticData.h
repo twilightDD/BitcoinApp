@@ -21,6 +21,8 @@
 @property (strong, nonatomic, readonly) NSMutableArray <SOXAccountLedger_BitcoinDE_Data *> *accountLedgerDatas;
 
 @property (nonatomic) BOOL isLoading;
+@property (nonatomic) BOOL isWaiting;
+@property (nonatomic) BOOL isActive;
 @property (nonatomic, readonly) NSInteger currentPage;
 @property (nonatomic, readonly) NSInteger lastPage;
 @property (strong, nonatomic, readonly) NSColor *textColor;
