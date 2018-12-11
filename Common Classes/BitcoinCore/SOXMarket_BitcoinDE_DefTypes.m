@@ -206,8 +206,7 @@
 
 + (BitcoinDE_CurrencyType)currencyTypeForTradingPairString:(NSString *)tradingPairString {
     NSArray *currencyTypes = [[self tradingPairCurrencyTypeDictionary] allKeysForObject:tradingPairString];
-    NSAssert(currencyTypes.count < 2, @"more than one key for given object");
-
+    
     NSNumber *currencyTypeNumber = currencyTypes.firstObject;
     BitcoinDE_CurrencyType currencyType = currencyTypeNumber.integerValue;
 

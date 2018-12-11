@@ -17,7 +17,7 @@
 
 
 static NSString *AccountLedgerParameter_TypeKey         = @"type";
-static NSString *AccountLedgerParameter_Currency        = @"currency";
+// static NSString *AccountLedgerParameter_Currency        = @"currency"; // see "~_Private.h"
 static NSString *AccountLedgerParameter_DateStartKey    = @"datetime_start";
 static NSString *AccountLedgerParameter_DateEndKey      = @"datetime_end";
 static NSString *AccountLedgerParameter_PageKey         = @"page";

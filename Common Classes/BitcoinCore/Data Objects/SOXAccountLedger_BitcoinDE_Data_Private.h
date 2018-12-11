@@ -21,6 +21,9 @@ static NSString *BitcoinDE_AccountLedgerParameter_BuyDiamondshopOrderTypeKey = @
 static NSString *BitcoinDE_AccountLedgerParameter_KickbackOrderTypeKey = @"kickback";
 static NSString *BitcoinDE_AccountLedgerParameter_OutgoingFeeVoluntaryOrderTypeKey = @"outgoing_fee_voluntary";
 
+
+static NSString *AccountLedgerParameter_Currency        = @"currency";
+
 @interface SOXAccountLedger_BitcoinDE_Data()
 
 @end

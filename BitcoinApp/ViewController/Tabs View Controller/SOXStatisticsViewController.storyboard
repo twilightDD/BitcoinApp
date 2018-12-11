@@ -144,7 +144,7 @@
                                                         <binding destination="Eup-8f-FdA" name="textColor" keyPath="arrangedObjects.textColor" id="UY0-Tv-VXg"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="currentPage" width="160" minWidth="160" maxWidth="160" id="vMr-Io-yhj">
+                                                <tableColumn identifier="fetchingTableColumn" width="160" minWidth="160" maxWidth="160" id="vMr-Io-yhj">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Fetching ...">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
