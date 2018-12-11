@@ -265,7 +265,8 @@
                                              @"pageData: current: %ti, last: %ti"
                                              , pageData.pageCurrent
                                              , pageData.pageLast]];
-            if (pageData.pageLast > pageData.pageCurrent) {
+            if (pageData.pageCurrent == 1
+                && pageData.pageLast > pageData.pageCurrent) {
                 for (NSInteger page = pageData.pageCurrent + 1;
                      page <= pageData.pageLast;
                      page++) {
