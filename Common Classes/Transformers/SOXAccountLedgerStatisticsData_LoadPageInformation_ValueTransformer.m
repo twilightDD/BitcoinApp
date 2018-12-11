@@ -27,29 +27,29 @@
     if ([value isKindOfClass:[SOXAccountLedger_BitcoinDE_StatisticData class]]) {
         SOXAccountLedger_BitcoinDE_StatisticData *accountLedgerStatisticData = value;
         NSString *transformedValue;
-        if (accountLedgerStatisticData.isLoading) {
-            if (accountLedgerStatisticData.currentPage == 0) {
-                transformedValue = @"Loading first page";
-            }
-        }
-        if (accountLedgerStatisticData.isActive) {
-            if (accountLedgerStatisticData.isWaiting) {
+        switch (accountLedgerStatisticData.state) {
+            case SOXStatisticData_StateType_New :
+                transformedValue = @"Not selected";
+                break;
+            case SOXStatisticData_StateType_WaitingForLoading :
                 transformedValue = @"Waiting ...";
-            }
-            else if (accountLedgerStatisticData.currentPage == accountLedgerStatisticData.lastPage) {
+                break;
+            case SOXStatisticData_StateType_IsLoadingFirstPage :
+                transformedValue = @"Fetching first page";
+                break;
+            case SOXStatisticData_StateType_IsLoadingMorePages :
+                transformedValue = [NSString stringWithFormat:
+                                    @"Fetching page %ti of %ti"
+                                    , accountLedgerStatisticData.currentPage + 1
+                                    , accountLedgerStatisticData.lastPage];
+                break;
+            case SOXStatisticData_StateType_FullyLoaded :
                 transformedValue = [NSString stringWithFormat:
                                     @"%ti pages fetched"
                                     , accountLedgerStatisticData.lastPage];
-            }
-            else {
-                transformedValue = [NSString stringWithFormat:
-                                    @"Fetching page %ti of %ti"
-                                    , accountLedgerStatisticData.currentPage
-                                    , accountLedgerStatisticData.lastPage];
-            }
-        }
-        else {
-            transformedValue = @"Not selected";
+                break;
+            default:
+                break;
         }
         return transformedValue;
     }

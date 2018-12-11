@@ -42,11 +42,9 @@
         self.winLostSum = [NSDecimalNumber zero];
         self.feeVolumeSum = [NSDecimalNumber zero];
         self.kickbackSum = [NSDecimalNumber zero];
-        self.isLoading = NO;
-        self.isActive = NO;
-        self.isWaiting = NO;
-        self.currentPage = 1;
-        self.lastPage = 1;
+        self.state = SOXStatisticData_StateType_New;
+        self.currentPage = 0;
+        self.lastPage = 0;
     }
 
     return self;
@@ -64,7 +62,7 @@
     self.currentPage = pageData.pageCurrent;
     self.lastPage = pageData.pageLast;
     if (pageData.pageCurrent == pageData.pageLast) {
-        self.isLoading = NO;
+        self.state = SOXStatisticData_StateType_FullyLoaded;
     }
 }
 
@@ -78,13 +76,12 @@
 }
 
 - (NSColor *)textColor {
-    if (self.isLoading) {
-        return [NSColor lightGrayColor];
-    }
-    else {
+    if (self.state == SOXStatisticData_StateType_FullyLoaded) {
         return [NSColor textColor];
     }
-
+    else {
+        return [NSColor lightGrayColor];
+    }
 }
 
 @end

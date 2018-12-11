@@ -155,9 +155,8 @@
         [self.arrayControllerDatas addObject:accountLedgerStatisticsData];
 
         if ([SOXPreferenceCenter loadStatisticsForCurrencyType:currencyType]) {
-            accountLedgerStatisticsData.isActive = YES;
-            accountLedgerStatisticsData.isLoading = YES;
-            accountLedgerStatisticsData.isWaiting = YES;
+            accountLedgerStatisticsData.state = SOXStatisticData_StateType_WaitingForLoading;
+
             NSDictionary *parameter = [SOXAccountLedger_BitcoinDE_Data parameterForOrderType:BitcoinDE_AccountLedgerParameter_AllOrderType
                                                                              forCurrencyType:currencyType
                                                                                    startDate:self.startDate
@@ -187,19 +186,25 @@
     [self updateTextFieldWithString:@"---------------------------------------------"];
     NSDictionary *parameter = [self.requestQueue lastObject];
     if (parameter) {
-
         NSString  *currencyString = [parameter objectForKey:@"currency"];
         currencyString = [currencyString stringByAppendingString:@"eur"];
 
         BitcoinDE_CurrencyType currencyType = [SOXMarket_BitcoinDE_DefTypes currencyTypeForTradingPairString:currencyString];
         SOXAccountLedger_BitcoinDE_StatisticData *accountLedgerStatisticData = [self accountLedgerStatisticsDataForCurrencyType:currencyType];
-        accountLedgerStatisticData.isWaiting = NO;
+        if (accountLedgerStatisticData.currentPage == 0) {
+            accountLedgerStatisticData.state = SOXStatisticData_StateType_IsLoadingFirstPage;
+        }
+        else {
+            accountLedgerStatisticData.state = SOXStatisticData_StateType_IsLoadingMorePages;
+        }
+
 
         [self updateTextFieldWithString:[NSString stringWithFormat:
-                                         @"Start next request - type: %@ - currency: %@ - page: %@"
+                                         @"Start next request - type: %@ - currency: %@ - page: %@ - state: %tu"
                                          , [parameter objectForKey:@"type"]
                                          , [parameter objectForKey:@"currency"]
                                          , [parameter objectForKey:@"page"]
+                                         , accountLedgerStatisticData.state
                                          ]];
 
         [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountLedgerType
@@ -217,7 +222,6 @@
         [self updateTextFieldWithString:[NSString stringWithFormat:@"Final feeSum: %@"
                                          , self.bitcoinFeeSum]];
         for (SOXAccountLedger_BitcoinDE_StatisticData *data in self.arrayControllerDatas) {
-            data.isLoading = NO;
             NSLog(@"%ti - %@ - %@ - %@ - %@"
                   , data.currencyType
                   , data.coinSum
@@ -225,8 +229,6 @@
                   , data.feeVolumeSum
                   , data.kickbackSum);
         }
-
-
     }
 
 }
@@ -299,7 +301,6 @@
 
 
         if (accountLedgerDatas.count > 0) {
-//            [self.arrayControllerDatas addObjectsFromArray:accountLedgerDatas];
             SOXPage_BitcoinDE_Data *pageData = [SOXPage_BitcoinDE_Data pageDataForPayloadDictionary:payloadDictionary];
             [accountLedgerStatisticData updatedWithPageData:pageData];
             [self updateTextFieldWithString:[NSString stringWithFormat:
@@ -326,7 +327,7 @@
                 }
             }
             else if (pageData.pageCurrent == pageData.pageLast){
-                accountLedgerStatisticData.isLoading = NO;
+                //accountLedgerStatisticData.isLoading = NO;
             }
         }
     }
