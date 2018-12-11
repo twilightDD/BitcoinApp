@@ -261,6 +261,7 @@
         if (accountLedgerDatas.count > 0) {
 //            [self.arrayControllerDatas addObjectsFromArray:accountLedgerDatas];
             SOXPage_BitcoinDE_Data *pageData = [SOXPage_BitcoinDE_Data pageDataForPayloadDictionary:payloadDictionary];
+            [accountLedgerStatisticData updatedWithPageData:pageData];
             [self updateTextFieldWithString:[NSString stringWithFormat:
                                              @"pageData: current: %ti, last: %ti"
                                              , pageData.pageCurrent

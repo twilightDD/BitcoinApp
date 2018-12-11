@@ -10,7 +10,7 @@
 
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
-@class SOXAccountLedger_BitcoinDE_Data;
+@class SOXAccountLedger_BitcoinDE_Data, SOXPageData;
 
 @interface SOXAccountLedger_BitcoinDE_StatisticData : NSObject
 @property (nonatomic, readonly) BitcoinDE_CurrencyType currencyType;
@@ -21,8 +21,12 @@
 @property (strong, nonatomic, readonly) NSMutableArray <SOXAccountLedger_BitcoinDE_Data *> *accountLedgerDatas;
 
 @property (nonatomic) BOOL isLoading;
+@property (nonatomic, readonly) NSInteger currentPage;
+@property (nonatomic, readonly) NSInteger lastPage;
 @property (strong, nonatomic, readonly) NSColor *textColor;
 
 - (instancetype)initWithCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 - (void)addAccountLedgerDatas:(NSMutableArray *)accountLedgerDatas;
+- (void)updatedWithPageData:(SOXPageData *)pageData;
+
 @end

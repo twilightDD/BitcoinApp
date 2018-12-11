@@ -10,6 +10,7 @@
 #import "SOXAccountLedger_BitcoinDE_Data.h"
 
 #import "SOXDataStatistics.h"
+#import "SOXPageData.h"
 
 #pragma mark -
 @interface SOXAccountLedger_BitcoinDE_StatisticData ()
@@ -21,6 +22,8 @@
 @property (strong, nonatomic, readwrite) NSDecimalNumber *kickbackSum;
 @property (strong, nonatomic, readwrite) NSMutableArray <SOXAccountLedger_BitcoinDE_Data *> *accountLedgerDatas;
 
+@property (nonatomic, readwrite) NSInteger currentPage;
+@property (nonatomic, readwrite) NSInteger lastPage;
 @property (strong, nonatomic, readwrite) NSColor *textColor;
 
 #pragma mark | Private Properties
@@ -52,6 +55,10 @@
     [self updateProperties];
 
 }
+- (void)updatedWithPageData:(SOXPageData *)pageData {
+    self.currentPage = pageData.pageCurrent;
+    self.lastPage = pageData.pageLast;
+}
 
 #pragma mark - Private Methods
 - (void)updateProperties {
@@ -61,6 +68,7 @@
     self.feeVolumeSum = [statistic objectForKey:@"feeVolumeSum"];
     self.kickbackSum = [statistic objectForKey:@"kickbackSum"];
 }
+
 - (NSColor *)textColor {
     if (self.isLoading) {
         return [NSColor lightGrayColor];
