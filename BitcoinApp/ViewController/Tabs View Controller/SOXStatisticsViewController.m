@@ -43,7 +43,7 @@
 @property (strong) IBOutlet NSButton *ethLoadButton;
 
 @property (strong) IBOutlet NSTextView *textView;
-@property (strong) IBOutlet NSButton *button;
+@property (strong) IBOutlet NSButton *requestDataButton;
 
 #pragma mark | Properties
 @property (strong, nonatomic) NSNumber *startMonth;
@@ -59,6 +59,8 @@
 
 @property (strong, nonatomic) NSTableColumn *currentPageTableColumn;
 @property (strong, nonatomic) NSTableColumn *lastPageTableColumn;
+
+@property (nonatomic) BOOL isFetching;
 @end
 
 @implementation SOXStatisticsViewController
@@ -66,6 +68,8 @@
 #pragma mark Init&Co.
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.isFetching = NO;
 
     for (NSTableColumn *column in self.tableView.tableColumns) {
         if ([column.identifier isEqualToString:@"lastPage"]) {
@@ -82,6 +86,7 @@
 #pragma mark - Private Methods
 #pragma mark | Setup
 - (void)setupUI {
+    self.requestDataButton.title = @"Fetch";
     [self setupStartAndEndDate];
     [self setupCurrencyButtons];
     [self toggleColumns];
@@ -138,6 +143,7 @@
 }
 
 - (void)requestServerData {
+    self.isFetching = YES;
     [self toggleColumns];
 
     self.arrayControllerDatas = [NSMutableArray array];
@@ -213,6 +219,7 @@
     }
     else {
         [self toggleColumns];
+        self.isFetching = NO;
 
         [self updateTextFieldWithString:[NSString stringWithFormat:
                                          @"No more requests: %tu - got %tu accountDatas"
@@ -258,7 +265,7 @@
                            forCurrencyType:currencyType];
 }
 
-- (IBAction)buttonAction:(NSButton *)sender {
+- (IBAction)requestDataButtonAction:(NSButton *)sender {
     [self requestServerData];
 }
 
