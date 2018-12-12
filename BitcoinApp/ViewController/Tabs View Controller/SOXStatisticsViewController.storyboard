@@ -182,7 +182,7 @@
                                     </subviews>
                                 </clipView>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="135" id="kUF-my-VdF"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="135" id="kUF-my-VdF"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="83w-Yj-H94">
                                     <rect key="frame" x="1" y="119" width="584" height="15"/>
