@@ -8,6 +8,8 @@
 
 #import "SOXStatisticsSummaryViewController.h"
 
+#import "SOXFormatters.h"
+
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
 #import "SOXAccountLedger_BitcoinDE_StatisticData.h"
@@ -126,28 +128,95 @@
     }
 }
 - (void)resetUI {
-    // empty labels
-    {
-
-    }
-
     // Header 1
     {
-
+        self.currenciesDescriptionTextField.stringValue = @"Currency";
+        self.kickbackDescriptionTextField.stringValue = @"Kickback";
+        self.feeDescriptionTextField.stringValue = @"Fee";
+        self.winLoseDescriptionTextField.stringValue = @"Win/Lose";
     }
 
     // Header 2
     {
+        self.head2CurrencyDescriptionTextField.stringValue = @"Name";
+        self.head2KickbackCountTextField.stringValue = @"Payments";
+        self.head2KickbackAmountTextField.stringValue = @"Amount";
+        self.head2FeeBitcoinDETextField.stringValue = @"BitcoinDE";
+        self.head2FeeFidorTextField.stringValue = @"Fidor";
+        self.head2FeeAppTextField.stringValue = @"<Appname>";
+        self.head2WinLoseBeforeFeesTextField.stringValue = @"Before Fees";
+        self.head2WinLoseAfterFeeTextField.stringValue = @"After Fees";
     }
 
-    // CurrencyColumn
+    // BTC
     {
-
+        self.btcCurrencyDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoin];
+        self.btcKickbackCountTextField.stringValue = @"0";
+        self.btcKickbackAmountTextField.stringValue = [SOXFormatters stringEightDigitsForBTCNumber:[NSDecimalNumber zero]];
+        self.btcFeeBitcoinDETextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+        self.btcFeeFidorTextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+        self.btcFeeAppTextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+        self.btcWinLoseBeforeFeesTextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+        self.btcWinLoseAfterFeeTextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
     }
 
+    // BCH
+    {
+        self.bchCurrencyDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
+        self.bchKickbackCountTextField.stringValue = @"0";
+        self.bchKickbackAmountTextField.stringValue = [SOXFormatters stringEightDigitsForBTCNumber:[NSDecimalNumber zero]];
+        self.bchFeeBitcoinDETextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+        self.bchFeeFidorTextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+        self.bchFeeAppTextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+        self.bchWinLoseBeforeFeesTextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+        self.bchWinLoseAfterFeeTextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+    }
+
+    // BSV
+    {
+        self.bsvCurrencyDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCashSV];
+        self.bsvKickbackCountTextField.stringValue = @"0";
+        self.bsvKickbackAmountTextField.stringValue = [SOXFormatters stringEightDigitsForBTCNumber:[NSDecimalNumber zero]];
+        self.bsvFeeBitcoinDETextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+        self.bsvFeeFidorTextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+        self.bsvFeeAppTextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+        self.bsvWinLoseBeforeFeesTextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+        self.bsvWinLoseAfterFeeTextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+    }
+
+    // BTG
+    {
+        self.btgCurrencyDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoinGold];
+        self.btgKickbackCountTextField.stringValue = @"0";
+        self.btgKickbackAmountTextField.stringValue = [SOXFormatters stringEightDigitsForBTCNumber:[NSDecimalNumber zero]];
+        self.btgFeeBitcoinDETextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+        self.btgFeeFidorTextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+        self.btgFeeAppTextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+        self.btgWinLoseBeforeFeesTextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+        self.btgWinLoseAfterFeeTextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+    }
+
+    // ETH
+    {
+        self.ethCurrencyDescriptionTextField.stringValue = @"Sum";
+        self.ethKickbackCountTextField.stringValue = @"0";
+        self.ethKickbackAmountTextField.stringValue = [SOXFormatters stringEightDigitsForBTCNumber:[NSDecimalNumber zero]];
+        self.ethFeeBitcoinDETextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+        self.ethFeeFidorTextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+        self.ethFeeAppTextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+        self.ethWinLoseBeforeFeesTextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+        self.ethWinLoseAfterFeeTextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+    }
     // Sum Row
     {
-
+        self.sumCurrencyDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoin];
+        self.sumKickbackCountTextField.stringValue = @"0";
+        self.sumKickbackAmountTextField.stringValue = [SOXFormatters stringEightDigitsForBTCNumber:[NSDecimalNumber zero]];
+        self.sumFeeBitcoinDETextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+        self.sumFeeFidorTextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+        self.sumFeeAppTextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+        self.sumWinLoseBeforeFeesTextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+        self.sumWinLoseAfterFeeTextField.stringValue = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
     }
 }
 #pragma mark - Public Methods
