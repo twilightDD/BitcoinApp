@@ -19,6 +19,7 @@
     NSDecimalNumber *volumeSellSum = [NSDecimalNumber zero];
     NSDecimalNumber *feeVolumeSum = [NSDecimalNumber zero];
     NSDecimalNumber *kickbackSum = [NSDecimalNumber zero];
+    NSInteger kickbackCount = 0;
 
     NSMutableSet *tradingPairs = [NSMutableSet set];
     for (SOXAccountLedger_BitcoinDE_Data *accountLedgerData in accountLedgerDatas) {
@@ -61,6 +62,7 @@
         //        }
         else if ([accountLedgerData.positionDetails_Type isEqualToString: BitcoinDE_AccountLedgerParameter_KickbackOrderTypeKey]) {
             kickbackSum = [kickbackSum decimalNumberByAdding:accountLedgerData.positionDetails_Cashflow];
+            kickbackCount++;
          //   [tradingPairs addObject:accountLedgerData.tradeDetails_trading_pair];
         }
         //        else if (accountLedgerData.positionDetails_Type isEqualToString: BitcoinDE_AccountLedgerParameter_OutgoingFeeVoluntaryOrderTypeKey) {
@@ -74,8 +76,10 @@
                              @"volumeBuySum" : volumeBuySum,
                              @"winLostSum" : winLostSum,
                              @"feeVolumeSum" : feeVolumeSum,
-                             @"kickbackSum" : kickbackSum
+                             @"kickbackSum" : kickbackSum,
+                             @"kickbackCount" : @(kickbackCount)
                              };
+
 //    self.coinSumValueTextField.stringValue = [SOXFormatters stringForBTCNumber:coinSum];
 //
 //    NSDecimalNumber *winLostSum = [volumeSellSum decimalNumberBySubtracting:volumeBuySum];

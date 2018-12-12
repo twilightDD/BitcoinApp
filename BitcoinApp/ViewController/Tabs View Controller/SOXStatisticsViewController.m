@@ -9,6 +9,8 @@
 #import "SOXStatisticsViewController.h"
 #import "SOXAbstractViewController_Private.h"
 
+#import "SOXStatisticsSummaryViewController.h"
+
 #import "SOXPreferenceCenter.h"
 
 #import "SOXMarket_BitcoinDE_DefTypes.h"
@@ -45,6 +47,8 @@
 @property (strong) IBOutlet NSButton *requestDataButton;
 
 #pragma mark | Properties
+@property (strong, nonatomic) SOXStatisticsSummaryViewController *statisticsSummaryViewController;
+
 @property (strong, nonatomic) NSNumber *startMonth;
 @property (strong, nonatomic) NSNumber *startYear;
 @property (strong, nonatomic) NSNumber *endMonth;
@@ -78,6 +82,13 @@
     self.isFetching = NO;
 
     [self setupUI];
+}
+
+#pragma mark - Segue handling
+- (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"StatisticsSummarySegue"]) {
+        self.statisticsSummaryViewController = segue.destinationController;
+    }
 }
 
 #pragma mark - Private Methods
@@ -196,7 +207,8 @@
     }
     else {
         self.isFetching = NO;
-
+        [self.statisticsSummaryViewController updateWithStatisticsDatas:self.arrayControllerDatas];
+        
         // Create statistics
     }
 }

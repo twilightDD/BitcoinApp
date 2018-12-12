@@ -28,6 +28,7 @@ typedef NS_ENUM (NSUInteger, SOXStatisticData_StateType) {
 @property (strong, nonatomic, readonly) NSDecimalNumber *winLostSum;
 @property (strong, nonatomic, readonly) NSDecimalNumber *feeVolumeSum;
 @property (strong, nonatomic, readonly) NSDecimalNumber *kickbackSum;
+@property (strong, nonatomic, readonly) NSNumber *kickbackCount;
 @property (strong, nonatomic, readonly) NSMutableArray <SOXAccountLedger_BitcoinDE_Data *> *accountLedgerDatas;
 
 @property (nonatomic) SOXStatisticData_StateType state;
@@ -41,5 +42,6 @@ typedef NS_ENUM (NSUInteger, SOXStatisticData_StateType) {
 - (instancetype)initWithCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 - (void)addAccountLedgerDatas:(NSMutableArray *)accountLedgerDatas;
 - (void)updatedWithPageData:(SOXPageData *)pageData;
+
 
 @end

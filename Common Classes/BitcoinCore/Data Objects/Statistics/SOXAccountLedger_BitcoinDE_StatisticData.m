@@ -20,6 +20,7 @@
 @property (strong, nonatomic, readwrite) NSDecimalNumber *winLostSum;
 @property (strong, nonatomic, readwrite) NSDecimalNumber *feeVolumeSum;
 @property (strong, nonatomic, readwrite) NSDecimalNumber *kickbackSum;
+@property (strong, nonatomic, readwrite) NSNumber *kickbackCount;
 @property (strong, nonatomic, readwrite) NSMutableArray <SOXAccountLedger_BitcoinDE_Data *> *accountLedgerDatas;
 
 @property (nonatomic, readwrite) NSInteger currentPage;
@@ -42,6 +43,7 @@
         self.winLostSum = [NSDecimalNumber zero];
         self.feeVolumeSum = [NSDecimalNumber zero];
         self.kickbackSum = [NSDecimalNumber zero];
+        self.kickbackCount = 0;
         self.state = SOXStatisticData_StateType_New;
         self.currentPage = 0;
         self.lastPage = 0;
@@ -73,6 +75,7 @@
     self.winLostSum = [statistic objectForKey:@"winLostSum"];
     self.feeVolumeSum = [statistic objectForKey:@"feeVolumeSum"];
     self.kickbackSum = [statistic objectForKey:@"kickbackSum"];
+    self.kickbackCount = [statistic objectForKey:@"kickbackCount"];
 }
 
 - (NSColor *)textColor {
