@@ -8,6 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class SOXAccountLedger_BitcoinDE_StatisticData;
+
 @interface SOXStatisticsSummaryViewController : NSViewController
+
+- (void)updateWithStatisticsDatas:(NSArray <SOXAccountLedger_BitcoinDE_StatisticData*> *)statisticDatas;
 
 @end

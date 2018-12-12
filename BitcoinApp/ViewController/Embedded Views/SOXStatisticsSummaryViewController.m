@@ -8,6 +8,10 @@
 
 #import "SOXStatisticsSummaryViewController.h"
 
+#import "SOXMarket_BitcoinDE_DefTypes.h"
+
+#import "SOXAccountLedger_BitcoinDE_StatisticData.h"
+
 #pragma mark - Interface
 @interface SOXStatisticsSummaryViewController ()
 
@@ -148,7 +152,119 @@
 #pragma mark Init & Co.
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do view setup here.
+    [self setupLabelFormat];
+    [self resetUI];
 }
 
+#pragma mark - Private Methods
+#pragma mark | Setup
+- (void)setupLabelFormat {
+    NSArray <NSTextField *> *allTextFields = [self allTextFieldsInView:self.view];
+
+    NSLog(@"allTextFields: %tu", allTextFields.count);
+
+    NSFont *font = [NSFont systemFontOfSize:[NSFont systemFontSize]];
+    if ([NSFont respondsToSelector:@selector(monospacedDigitSystemFontOfSize:weight:)]) {
+        font = [NSFont monospacedDigitSystemFontOfSize:[NSFont systemFontSize]
+                                                weight:NSFontWeightRegular];
+    }
+    for (NSTextField *textField in allTextFields) {
+//        NSLog(@"font before: %@", textField.font);
+        [textField setFont:font];
+//        NSLog(@"font after: %@", textField.font);
+//        NSLog(@"--");
+    }
+}
+- (void)resetUI {
+    // empty labels
+    {
+        self.empty1CurrencyTextField.stringValue = @"";
+        self.empty2TextField.stringValue = @"";
+        self.header1BuyTradesTextField.stringValue = @"";
+        self.header1BuyCoinsBuyTextField.stringValue = @"";
+        self.header1SellTradesTextField.stringValue = @"";
+        self.header1SellCoinsBuyTextField.stringValue = @"";
+        self.header1KickbackEventsTextField.stringValue = @"";
+        self.header1FeeBitcoinDETextField.stringValue = @"";
+        self.header1FeeCoinerBuyTextField.stringValue = @"";
+        self.header1WinLostRawTextField.stringValue = @"";
+    }
+
+    // Header 1
+    {
+        self.header1BuySalesBuyTextField.stringValue = @"Buy";
+        self.header1SellSalesBuyTextField.stringValue = @"Sell";
+        self.header1KickbackCoinsBuyTextField.stringValue = @"Kickback";
+        self.header1FeeFidorBuyTextField.stringValue = @"Fee";
+        self.header1WinLostAfterFeeBuyTextField.stringValue = @"Win/Lost";
+    }
+
+    // Header 2
+    {
+        self.header2BuyTradesTextField.stringValue = @"Trades";
+        self.header2BuySalesBuyTextField.stringValue = @"Receipts";
+        self.header2BuyCoinsBuyTextField.stringValue = @"Coins";
+        self.header2SellTradesTextField.stringValue = @"Trades";
+        self.header2SellSalesBuyTextField.stringValue = @"Spending";
+        self.header2SellCoinsBuyTextField.stringValue = @"Coins";
+        self.header2KickbackEventsTextField.stringValue = @"Events";
+        self.header2KickbackCoinsBuyTextField.stringValue = @"Coins";
+        self.header2FeeBitcoinDETextField.stringValue = @"Bitcoin.de";
+        self.header2FeeFidorBuyTextField.stringValue = @"Fidor";
+        self.header2FeeCoinerBuyTextField.stringValue = @"Coiner";
+        self.header2WinLostRawTextField.stringValue = @"Raw";
+        self.header2WinLostAfterFeeBuyTextField.stringValue = @"After Fee";
+    }
+
+    // CurrencyColumn
+    {
+        self.btcCurrencyTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoin];
+        self.bchCurrencyTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
+        self.bsvCurrencyTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCashSV];
+        self.btgCurrencyTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoinGold];
+        self.ethCurrencyTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeEthereum];
+
+    }
+
+    // Sum Row
+    {
+
+           self.sumCurrencyTextField.stringValue = @"Sum";
+        self.sumBuyBuyTradesTextField.stringValue = @"0.00";
+        self.sumBuyBuySalesTextField.stringValue = @"0.00";
+        self.sumBuyBuyCoinsTextField.stringValue = @"0.00";
+        self.sumBuySellTradesTextField.stringValue = @"0.00";
+        self.sumBuySellSalesTextField.stringValue = @"0.00";
+        self.sumBuySellCoinsTextField.stringValue = @"0.00";
+        self.sumBuyKickbackEventsTextField.stringValue = @"0.00";
+        self.sumBuyKickbackCoinsTextField.stringValue = @"0.00";
+        self.sumBuyFeeBitcoinDETextField.stringValue = @"0.00";
+        self.sumBuyFeeFidorTextField.stringValue = @"0.00";
+        self.sumBuyFeeCoinerTextField.stringValue = @"0.00";
+        self.sumBuyWinLostRawTextField.stringValue = @"0.00";
+        self.sumBuyWinLostAfterFeeTextField.stringValue = @"0.00";
+
+    }
+}
+#pragma mark - Public Methods
+- (void)updateWithStatisticsDatas:(NSArray <SOXAccountLedger_BitcoinDE_StatisticData*> *)statisticDatas {
+
+}
+
+#pragma mark - Private Methods
+- (NSArray <NSTextField *> *)allTextFieldsInView:(NSView *)view {
+    NSMutableArray <NSTextField *> *textFields = [NSMutableArray array];
+    Class textFieldClass = [NSTextField class];
+    Class stackViewClass = [NSStackView class];
+    for (NSView *subView in view.subviews) {
+        if ([subView isKindOfClass:textFieldClass]) {
+            [textFields addObject:(NSTextField *)subView];
+        }
+        else if ([subView isKindOfClass:stackViewClass]) {
+            [textFields addObjectsFromArray:[self allTextFieldsInView:subView]];
+        }
+    }
+
+    return [textFields copy];
+}
 @end
