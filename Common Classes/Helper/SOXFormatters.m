@@ -431,6 +431,14 @@
     return [NSDecimalNumber decimalNumberWithDecimal:currencyNumber.decimalValue];
 }
 
++ (NSString *)currencyStringForNumber:(NSDecimalNumber *)value {
+    NSNumberFormatter *currencyFormatter = [SOXFormatters currencyFormatter];
+    currencyFormatter.roundingMode       = NSNumberFormatterRoundHalfEven;
+
+    NSString *currencyString = [currencyFormatter stringFromNumber:value];
+    return currencyString;
+}
+
 + (NSString *)currencyStringForNumber:(NSDecimalNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode {
     NSNumberFormatter *currencyFormatter = [SOXFormatters currencyFormatter];
     currencyFormatter.roundingMode       = roundingMode;
@@ -462,6 +470,17 @@
         stringForBTCNumber = [btcFormatter stringFromNumber:btcValue];
     }
     
+    return stringForBTCNumber;
+}
+
++ (NSString *)stringEightDigitsForBTCNumber:(NSDecimalNumber *)btcValue {
+    NSString *stringForBTCNumber = @"0";
+
+    if (btcValue) {
+        NSNumberFormatter *btcFormatter = [SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter];
+        stringForBTCNumber = [btcFormatter stringFromNumber:btcValue];
+    }
+
     return stringForBTCNumber;
 }
 
