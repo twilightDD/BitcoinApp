@@ -627,10 +627,10 @@
             </objects>
             <point key="canvasLocation" x="119" y="-251"/>
         </scene>
-        <!--View Controller-->
+        <!--Statistics Summary View Controller-->
         <scene sceneID="QUX-iD-tRm">
             <objects>
-                <viewController id="VAj-lH-nhd" sceneMemberID="viewController">
+                <viewController id="VAj-lH-nhd" customClass="SOXStatisticsSummaryViewController" sceneMemberID="viewController">
                     <view key="view" id="SXp-zM-5Bj">
                         <rect key="frame" x="0.0" y="0.0" width="613" height="159"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -927,7 +927,7 @@
                                         </customSpacing>
                                     </stackView>
                                     <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="S7V-Ad-PtK">
-                                        <rect key="frame" x="0.0" y="118" width="96" height="5"/>
+                                        <rect key="frame" x="0.0" y="118" width="613" height="5"/>
                                     </box>
                                     <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="750" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="STl-mW-JW0">
                                         <rect key="frame" x="0.0" y="101" width="613" height="17"/>
@@ -2067,10 +2067,10 @@
                                         </customSpacing>
                                     </stackView>
                                     <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="htu-t0-rNj">
-                                        <rect key="frame" x="0.0" y="20" width="96" height="5"/>
+                                        <rect key="frame" x="0.0" y="20" width="613" height="5"/>
                                     </box>
                                     <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Gr5-C4-Rl4">
-                                        <rect key="frame" x="0.0" y="17" width="96" height="5"/>
+                                        <rect key="frame" x="0.0" y="17" width="613" height="5"/>
                                     </box>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="750" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GpJ-bL-PQb">
                                         <rect key="frame" x="0.0" y="0.0" width="613" height="17"/>
@@ -2408,6 +2408,68 @@
                             <constraint firstItem="zdG-g3-oOa" firstAttribute="top" secondItem="SXp-zM-5Bj" secondAttribute="top" id="qbV-vh-h5u"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="bchCurrencyDescriptionTextField" destination="jTb-BY-yTL" id="PN9-yx-nbX"/>
+                        <outlet property="bchFeeAppTextField" destination="Xpg-fr-82E" id="nme-tN-oTx"/>
+                        <outlet property="bchFeeBitcoinDETextField" destination="HZX-Zo-uzo" id="Bn3-1E-58u"/>
+                        <outlet property="bchFeeFidorTextField" destination="vLC-2x-Foj" id="ggd-Rm-ZMi"/>
+                        <outlet property="bchKickbackAmountTextField" destination="xwi-vO-0Mq" id="DtY-gs-6WT"/>
+                        <outlet property="bchKickbackCountTextField" destination="rKt-qV-Gea" id="gsZ-Ep-kHI"/>
+                        <outlet property="bchWinLoseAfterFeeTextField" destination="00B-6h-RHo" id="UgM-6f-4nv"/>
+                        <outlet property="bchWinLoseBeforeFeesTextField" destination="VgV-vY-j2v" id="EGX-ZB-aTT"/>
+                        <outlet property="bsvCurrencyDescriptionTextField" destination="N5Q-oa-DbA" id="eMV-oX-ieW"/>
+                        <outlet property="bsvFeeAppTextField" destination="bIb-aP-Mzt" id="NRW-K5-3oN"/>
+                        <outlet property="bsvFeeBitcoinDETextField" destination="TzL-2e-cW2" id="RBh-e7-Upg"/>
+                        <outlet property="bsvFeeFidorTextField" destination="OuF-hF-T6b" id="OT3-Ka-Y8T"/>
+                        <outlet property="bsvKickbackAmountTextField" destination="tnq-Hb-xEv" id="Y8w-9E-HNt"/>
+                        <outlet property="bsvKickbackCountTextField" destination="O0E-7t-jsK" id="DBO-1B-FaS"/>
+                        <outlet property="bsvWinLoseAfterFeeTextField" destination="R7c-3o-9ZD" id="cNU-mI-W6S"/>
+                        <outlet property="bsvWinLoseBeforeFeesTextField" destination="UHc-A4-mcJ" id="Ibm-IS-Akr"/>
+                        <outlet property="btcCurrencyDescriptionTextField" destination="ZSp-h8-gxO" id="pB5-ic-afJ"/>
+                        <outlet property="btcFeeAppTextField" destination="If3-zu-0S2" id="waK-Au-TUx"/>
+                        <outlet property="btcFeeBitcoinDETextField" destination="5Po-dS-TwD" id="naz-SW-Wie"/>
+                        <outlet property="btcFeeFidorTextField" destination="SKg-fb-9nj" id="QU5-h3-PTW"/>
+                        <outlet property="btcKickbackAmountTextField" destination="Y9Z-mX-GAg" id="TEa-yF-v8I"/>
+                        <outlet property="btcKickbackCountTextField" destination="do4-Tb-0S0" id="ay5-mg-7GW"/>
+                        <outlet property="btcWinLoseAfterFeeTextField" destination="NtL-fr-WPf" id="hte-sO-Wf1"/>
+                        <outlet property="btcWinLoseBeforeFeesTextField" destination="mMI-wU-jfW" id="UOH-AK-Kaf"/>
+                        <outlet property="btgCurrencyDescriptionTextField" destination="zse-0A-W5I" id="cNj-qn-KWT"/>
+                        <outlet property="btgFeeAppTextField" destination="1Sh-Ug-zi6" id="sEm-to-mCP"/>
+                        <outlet property="btgFeeBitcoinDETextField" destination="vuA-VZ-baO" id="dHL-NJ-t4C"/>
+                        <outlet property="btgFeeFidorTextField" destination="L2w-jM-hVa" id="ISJ-b7-3bP"/>
+                        <outlet property="btgKickbackAmountTextField" destination="9r0-p6-sj1" id="iMm-zL-eCf"/>
+                        <outlet property="btgKickbackCountTextField" destination="NV5-Nu-Z1M" id="7bW-q5-vKj"/>
+                        <outlet property="btgWinLoseAfterFeeTextField" destination="yrD-Ag-Dv4" id="W4Z-MA-c58"/>
+                        <outlet property="btgWinLoseBeforeFeesTextField" destination="Jhu-ve-moM" id="ZY1-sa-LeS"/>
+                        <outlet property="currenciesDescriptionTextField" destination="vGl-8y-U0m" id="Ypc-hs-X41"/>
+                        <outlet property="ethCurrencyDescriptionTextField" destination="57X-9s-YKD" id="PJz-2p-XPM"/>
+                        <outlet property="ethFeeAppTextField" destination="jOx-es-bPX" id="O4f-VX-npR"/>
+                        <outlet property="ethFeeBitcoinDETextField" destination="kaP-NF-DZ1" id="pJt-EJ-eeI"/>
+                        <outlet property="ethFeeFidorTextField" destination="JIT-mU-LEL" id="8K7-mK-U4k"/>
+                        <outlet property="ethKickbackAmountTextField" destination="hDL-fk-PHP" id="Tmi-O0-fo9"/>
+                        <outlet property="ethKickbackCountTextField" destination="YOJ-kc-zdd" id="3DR-Hw-Xmx"/>
+                        <outlet property="ethWinLoseAfterFeeTextField" destination="yrD-Ag-Dv4" id="Lrf-lQ-qCn"/>
+                        <outlet property="ethWinLoseBeforeFeesTextField" destination="oCJ-UL-vL4" id="RK5-QA-7kx"/>
+                        <outlet property="feeDescriptionTextField" destination="3Ja-Fe-c7t" id="Yjd-Rj-RQV"/>
+                        <outlet property="head2CurrencyDescriptionTextField" destination="NuC-1l-mrz" id="zRh-Na-kxZ"/>
+                        <outlet property="head2FeeAppTextField" destination="y8p-8S-Trx" id="dA0-2N-VGB"/>
+                        <outlet property="head2FeeBitcoinDETextField" destination="lo8-Tx-jX3" id="iOA-5d-Kxb"/>
+                        <outlet property="head2FeeFidorTextField" destination="doP-kH-dqw" id="EVG-Qz-uyo"/>
+                        <outlet property="head2KickbackAmountTextField" destination="ynE-Ix-YFx" id="re6-Nt-xz8"/>
+                        <outlet property="head2KickbackCountTextField" destination="Ggd-H5-6Ne" id="IIg-Vh-RbC"/>
+                        <outlet property="head2WinLoseAfterFeeTextField" destination="7Pr-2N-iFk" id="lcf-IX-Zb4"/>
+                        <outlet property="head2WinLoseBeforeFeesTextField" destination="QvT-lv-g4f" id="Fn1-FR-AzA"/>
+                        <outlet property="kickbackDescriptionTextField" destination="SMg-sb-B7R" id="XQx-5K-Q78"/>
+                        <outlet property="sumCurrencyDescriptionTextField" destination="2gv-dk-507" id="Og0-lk-pLE"/>
+                        <outlet property="sumFeeAppTextField" destination="gZi-3A-hfd" id="ThK-3L-4bO"/>
+                        <outlet property="sumFeeBitcoinDETextField" destination="ycQ-8q-okE" id="wli-2X-EeD"/>
+                        <outlet property="sumFeeFidorTextField" destination="Ilf-ly-zBv" id="VgJ-oc-rIZ"/>
+                        <outlet property="sumKickbackAmountTextField" destination="Rfv-TB-nGD" id="8yZ-1N-G0r"/>
+                        <outlet property="sumKickbackCountTextField" destination="tmG-Sr-XQ8" id="mxy-gd-7Ua"/>
+                        <outlet property="sumWinLoseAfterFeeTextField" destination="5ur-vH-rhQ" id="4IT-xa-3Jn"/>
+                        <outlet property="sumWinLoseBeforeFeesTextField" destination="QfZ-QS-93S" id="UJd-Yz-l62"/>
+                        <outlet property="winLoseDescriptionTextField" destination="yG1-bI-7Fb" id="FWI-M9-Tmo"/>
+                    </connections>
                 </viewController>
                 <customObject id="y5Z-uH-Go2" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
