@@ -13,16 +13,12 @@
 
 - (instancetype)initForCurrencyTyp:(BitcoinDE_CurrencyType)currencyType;
 
-- (void)registerControllerForUpdates:(id <SOXAutomaticTradingCoreProtocol>)controller;
+- (void)registerControllerForUpdates:(id<SOXAutomaticTradingCoreProtocol>)controller;
 - (void)deRegisterControllerForUpdates:(id)controller;
 
 - (void)executeTrades:(BOOL)executeTrades;
 - (void)executeAutomaticTrades:(BOOL)executeAutomaticTrades;
 - (void)executeBalanceTrades:(BOOL)executeBalanceTrades;
-
-
-
-
 
 
 @end

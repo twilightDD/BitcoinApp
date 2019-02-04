@@ -10,7 +10,6 @@
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
 
-
 @implementation SOXShortTradingPairValueTransformer
 
 + (Class)transformedValueClass {
@@ -23,9 +22,9 @@
 
 - (id)transformedValue:(id)value {
     if ([value isKindOfClass:[NSNumber class]]) {
-        NSNumber *currencyTypeNumber = value;
+        NSNumber *currencyTypeNumber        = value;
         BitcoinDE_CurrencyType currencyType = currencyTypeNumber.integerValue;
-        NSString *transformedValue = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:currencyType];
+        NSString *transformedValue          = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:currencyType];
         return transformedValue;
     }
 

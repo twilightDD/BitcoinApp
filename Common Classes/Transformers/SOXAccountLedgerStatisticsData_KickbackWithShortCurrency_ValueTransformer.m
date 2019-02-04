@@ -30,20 +30,17 @@
 
     if ([value isKindOfClass:[SOXAccountLedger_BitcoinDE_StatisticData class]]) {
         SOXAccountLedger_BitcoinDE_StatisticData *accountLedgerStatisticData = value;
-        kickbackSum = accountLedgerStatisticData.kickbackSum;
-        currencyType = accountLedgerStatisticData.currencyType;
+        kickbackSum                                                          = accountLedgerStatisticData.kickbackSum;
+        currencyType                                                         = accountLedgerStatisticData.currencyType;
     }
     else {
         NSAssert(NO, @"Unknown value class");
     }
 
-    if (kickbackSum
-        && currencyType != BitcoinDE_CurrencyTypeUnknown) {
+    if (kickbackSum && currencyType != BitcoinDE_CurrencyTypeUnknown) {
         NSString *shortCurrencyString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:currencyType];
 
-        NSString *result = [NSString stringWithFormat:@"%@ %@"
-                            , [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:kickbackSum]
-                            , shortCurrencyString];
+        NSString *result = [NSString stringWithFormat:@"%@ %@", [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:kickbackSum], shortCurrencyString];
         return result;
     }
 

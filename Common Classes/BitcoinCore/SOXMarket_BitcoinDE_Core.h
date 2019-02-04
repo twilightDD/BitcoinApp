@@ -27,7 +27,7 @@ FOUNDATION_EXPORT NSString *const _Nonnull HTTPMethodPOSTKey;
 
 @protocol SOXMarketCoreServerRequestProtocol <NSObject>
 
-- (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest;
+- (void)answerOfServerRequest:(NSDictionary *_Nonnull)answerOfServerRequest;
 
 @optional
 - (void)presentErrorWithErrorDictionary:(SOXErrorMessage_BitcoinDE *)errorMessage;
@@ -42,19 +42,19 @@ FOUNDATION_EXPORT NSString *const _Nonnull HTTPMethodPOSTKey;
 
 @protocol SOXCreditUpdateProtocol <NSObject>
 
-- (void)creditValuesUpdated:(NSDictionary * _Nonnull)creditDicts;
+- (void)creditValuesUpdated:(NSDictionary *_Nonnull)creditDicts;
 
 @end
 
 @protocol SOXStatusBarUpdateProtocol <NSObject>
 
-- (void)statusBarUpdated:(NSString * _Nonnull)statusBarText;
+- (void)statusBarUpdated:(NSString *_Nonnull)statusBarText;
 
 @end
 
 @protocol SOXMarketCoreErrorProtocol <NSObject>
 
-- (void)presentErrorMessage:(SOXErrorMessage_BitcoinDE * _Nonnull)errorMessage;
+- (void)presentErrorMessage:(SOXErrorMessage_BitcoinDE *_Nonnull)errorMessage;
 
 @end
 
@@ -64,24 +64,24 @@ FOUNDATION_EXPORT NSString *const _Nonnull HTTPMethodPOSTKey;
 //@property (strong, nonatomic) NSDecimalNumber * _Nullable rate_weighted_half;
 
 
-@property (strong, nonatomic) SOXAccountInfoData * _Nullable accountInfoData;
-@property (strong, nonatomic) SOXRatesData * _Nullable ratesData;
+@property (strong, nonatomic) SOXAccountInfoData *_Nullable accountInfoData;
+@property (strong, nonatomic) SOXRatesData *_Nullable ratesData;
 
-@property (weak, nonatomic, readonly) NSObject <SOXMarketCoreErrorProtocol> * _Nullable delegateForErrorMessages;
+@property (weak, nonatomic, readonly) NSObject<SOXMarketCoreErrorProtocol> *_Nullable delegateForErrorMessages;
 
-+ (NSDecimalNumber * _Nullable)allocationPercentForCurrency:(BitcoinDE_CurrencyType)currencyType;
-+ (NSDecimalNumber * _Nullable)allocationMaxEurVolumeForCurrency:(BitcoinDE_CurrencyType)currencyType;
-+ (NSDecimalNumber * _Nullable)allocationEurVolumeOpenOrdersForCurrency:(BitcoinDE_CurrencyType)currencyType;
++ (NSDecimalNumber *_Nullable)allocationPercentForCurrency:(BitcoinDE_CurrencyType)currencyType;
++ (NSDecimalNumber *_Nullable)allocationMaxEurVolumeForCurrency:(BitcoinDE_CurrencyType)currencyType;
++ (NSDecimalNumber *_Nullable)allocationEurVolumeOpenOrdersForCurrency:(BitcoinDE_CurrencyType)currencyType;
 
-+ (NSDecimalNumber * _Nullable)totalAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
-+ (NSDecimalNumber * _Nullable)availableAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
-+ (NSDecimalNumber * _Nullable)reservedAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
++ (NSDecimalNumber *_Nullable)totalAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
++ (NSDecimalNumber *_Nullable)availableAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
++ (NSDecimalNumber *_Nullable)reservedAmountForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 
-+ (NSDecimalNumber * _Nullable)rateWeightedForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
-+ (NSDecimalNumber * _Nullable)rateWeighted3hForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
-+ (NSDecimalNumber * _Nullable)rateWeighted12hForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
-+ (NSDecimalNumber * _Nullable)rateWeightedHalfForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
-+ (NSDecimalNumber * _Nullable)rateWeightedDoubleForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
++ (NSDecimalNumber *_Nullable)rateWeightedForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
++ (NSDecimalNumber *_Nullable)rateWeighted3hForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
++ (NSDecimalNumber *_Nullable)rateWeighted12hForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
++ (NSDecimalNumber *_Nullable)rateWeightedHalfForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
++ (NSDecimalNumber *_Nullable)rateWeightedDoubleForCurrencyType:(BitcoinDE_CurrencyType)currencyType;
 
 - (void)startAccountInfoUpdate;
 - (NSInteger)startAllRatesUpdate;
@@ -92,18 +92,18 @@ FOUNDATION_EXPORT NSString *const _Nonnull HTTPMethodPOSTKey;
  *
  *  @return The Core.
  */
-+ (SOXMarket_BitcoinDE_Core * _Nonnull)sharedCore;
++ (SOXMarket_BitcoinDE_Core *_Nonnull)sharedCore;
 
 + (void)requestDataForServerCommand:(BitcoinDE_ServerCommandType)serverCommandType
-                      withParameter:(NSDictionary * _Nullable)parameterDictionary
-                          respondTo:(NSObject <SOXMarketCoreServerRequestProtocol>* _Nullable)controller;
+                      withParameter:(NSDictionary *_Nullable)parameterDictionary
+                          respondTo:(NSObject<SOXMarketCoreServerRequestProtocol> *_Nullable)controller;
 
 #pragma mark | Status handling
-+ (void)registerForCreditUpdates:(id <SOXCreditUpdateProtocol> _Nullable) delegateForCreditUpdates;
-+ (void)registerForStatusBarUpdates:(id <SOXStatusBarUpdateProtocol> _Nullable) delegateForStatusBarUpdates;
++ (void)registerForCreditUpdates:(id<SOXCreditUpdateProtocol> _Nullable)delegateForCreditUpdates;
++ (void)registerForStatusBarUpdates:(id<SOXStatusBarUpdateProtocol> _Nullable)delegateForStatusBarUpdates;
 
 #pragma mark | Error handling
-+ (void)registerForErrorMessages:(id <SOXMarketCoreErrorProtocol> _Nullable)delegateForErrorMessages;
++ (void)registerForErrorMessages:(id<SOXMarketCoreErrorProtocol> _Nullable)delegateForErrorMessages;
 
 
 @end

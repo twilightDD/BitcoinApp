@@ -13,6 +13,6 @@
 
 @interface SOXDataStatistics : NSObject
 
-+ (NSDictionary *)statisticsForAccountLedgerDatas:(NSArray <SOXAccountLedger_BitcoinDE_Data *> *)accountLedgerDatas;
++ (NSDictionary *)statisticsForAccountLedgerDatas:(NSArray<SOXAccountLedger_BitcoinDE_Data *> *)accountLedgerDatas;
 
 @end

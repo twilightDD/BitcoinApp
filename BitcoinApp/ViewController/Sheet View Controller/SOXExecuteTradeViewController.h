@@ -12,12 +12,12 @@
 
 @class SOXShowOrderbook_BitcoinDE_Data;
 
-FOUNDATION_EXPORT NSString const  * _Nonnull ExecuteTradeViewControllerIdentifierKey;
+FOUNDATION_EXPORT NSString const *_Nonnull ExecuteTradeViewControllerIdentifierKey;
 
 @interface SOXExecuteTradeViewController : NSViewController
 
 @property (nonatomic) BitcoinDE_OrderType orderType;
 @property (nonatomic) BitcoinDE_CurrencyType currencyType;
-@property (strong) SOXShowOrderbook_BitcoinDE_Data * _Nullable orderBookData;
+@property (strong) SOXShowOrderbook_BitcoinDE_Data *_Nullable orderBookData;
 
 @end

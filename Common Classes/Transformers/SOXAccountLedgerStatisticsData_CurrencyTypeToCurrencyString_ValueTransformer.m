@@ -27,7 +27,7 @@
 
     if ([value isKindOfClass:[SOXAccountLedger_BitcoinDE_StatisticData class]]) {
         SOXAccountLedger_BitcoinDE_StatisticData *accountLedgerStatisticData = value;
-        currencyType = accountLedgerStatisticData.currencyType;
+        currencyType                                                         = accountLedgerStatisticData.currencyType;
     }
     else {
         NSAssert(NO, @"Unknown value class");
@@ -37,7 +37,7 @@
         NSString *currencyString = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:currencyType];
         return currencyString;
     }
-    
+
     return @"Error";
 }
 

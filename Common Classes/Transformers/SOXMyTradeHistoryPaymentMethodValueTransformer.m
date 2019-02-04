@@ -22,7 +22,7 @@
 
 - (id)transformedValue:(id)value {
     if ([value isKindOfClass:[NSNumber class]]) {
-        NSNumber *paymentMethod = (NSNumber *)value;
+        NSNumber *paymentMethod       = (NSNumber *)value;
         NSString *paymentMethodString = [SOXMyTrades_BitcoinDE_Data titleForPaymentMethodType:paymentMethod.unsignedIntegerValue];
         return paymentMethodString;
     }

@@ -19,21 +19,21 @@
 #pragma mark Init&Co.
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.selectedCurrencyType = BitcoinDE_CurrencyTypeBitcoin;
+
+    self.selectedCurrencyType           = BitcoinDE_CurrencyTypeBitcoin;
     self.selectedAccountLedgerOrderType = BitcoinDE_AccountLedgerParameter_AllOrderType;
 }
 
 #pragma mark - Private methods
 - (void)loadNextPage {
     [super loadNextPage];
-    
+
     NSDictionary *parameter = [SOXAccountLedger_BitcoinDE_Data parameterForOrderType:self.selectedAccountLedgerOrderType
                                                                      forCurrencyType:self.selectedCurrencyType
                                                                            startDate:self.selectedStartDate
                                                                              endDate:self.selectedEndDate
                                                                                 page:self.currentPage];
-    
+
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowAccountLedgerType
                                             withParameter:parameter
                                                 respondTo:self];
@@ -43,14 +43,14 @@
 //    // account ledger allows no future date (API flaw)
 //    NSDate *selectedEndDate = [super selectedEndDate];
 //   // selectedEndDate = [selectedEndDate earlierDate:[SOXFormatters dateBeforeMidnightForDate:[NSDate dateWithTimeIntervalSinceNow:-86400]]];
-//    
+//
 //    return selectedEndDate;
 //}
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
-- (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest {
+- (void)answerOfServerRequest:(NSDictionary *_Nonnull)answerOfServerRequest {
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowAccountLedgerType)]) {
-        NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
+        NSDictionary *payloadDictionary    = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
         NSMutableArray *accountLedgerDatas = [SOXAccountLedger_BitcoinDE_Data accountLedgerDataArrayForAccountLedgerDictionary:payloadDictionary
                                                                                                                forCurrencyType:self.selectedCurrencyType];
         [self updateControllerDatasWithDataObjects:accountLedgerDatas
@@ -65,21 +65,17 @@
         // currency selection
         self.currencyTypeSelectionPopUpButton = self.pagingViewController.firstSelectionPopUpButton;
         [self.currencyTypeSelectionPopUpButton removeAllItems];
-        for (BitcoinDE_CurrencyType idx = BitcoinDE_CurrencyTypeBitcoin
-             ; idx < BitcoinDE_CurrencyType_EndOfType
-             ; idx++) {
+        for (BitcoinDE_CurrencyType idx = BitcoinDE_CurrencyTypeBitcoin; idx < BitcoinDE_CurrencyType_EndOfType; idx++) {
             [self.currencyTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:idx]];
         }
-        
+
         // accountLedgerOrderType selection
         self.accountLedgerOrderTypePopUpButton = self.pagingViewController.secondSelectionPopUpButton;
         [self.accountLedgerOrderTypePopUpButton removeAllItems];
-        for (BitcoinDE_AccountLedgerParameter_OrderType idx = BitcoinDE_AccountLedgerParameter_UnknownOrderType + 1
-             ; idx < BitcoinDE_AccountLedgerParameter_EndOfType
-             ; idx++) {
+        for (BitcoinDE_AccountLedgerParameter_OrderType idx = BitcoinDE_AccountLedgerParameter_UnknownOrderType + 1; idx < BitcoinDE_AccountLedgerParameter_EndOfType; idx++) {
             [self.accountLedgerOrderTypePopUpButton addItemWithTitle:[SOXAccountLedger_BitcoinDE_Data titleForAccountLedgerOrderType:idx]];
         }
-        
+
         // no third selection
         self.pagingViewController.thirdSelectionPopUpButton.hidden = YES;
     }
@@ -90,7 +86,7 @@
     if (sender == self.currencyTypeSelectionPopUpButton) {
         BitcoinDE_CurrencyType newCurrencyType = sender.indexOfSelectedItem + 1;
         if (newCurrencyType != self.selectedCurrencyType) {
-            self.selectedCurrencyType = newCurrencyType;
+            self.selectedCurrencyType    = newCurrencyType;
             self.needsToReloadTradeDatas = YES;
         }
     }
@@ -99,7 +95,7 @@
         BitcoinDE_AccountLedgerParameter_OrderType newSelectedAccountLedgerOrderType = sender.indexOfSelectedItem + 1;
         if (newSelectedAccountLedgerOrderType != self.selectedAccountLedgerOrderType) {
             self.selectedAccountLedgerOrderType = newSelectedAccountLedgerOrderType;
-            self.needsToReloadTradeDatas = YES;
+            self.needsToReloadTradeDatas        = YES;
         }
     }
 

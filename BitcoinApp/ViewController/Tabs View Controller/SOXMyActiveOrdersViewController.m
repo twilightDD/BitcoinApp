@@ -33,49 +33,49 @@
 #pragma mark Init&Co.
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     self.selectedOrderStateType = BitcoinDE_OrderStateTypePending;
 }
 
 #pragma mark - Private methods
 - (void)loadNextPage {
     [super loadNextPage];
-    
+
     NSDictionary *parameters = [SOXMyOrderBook_BitcoinDE_Data parameterForOrderType:self.selectedOrderType
                                                                        currencyType:self.selectedCurrencyType
                                                                          orderState:self.selectedOrderStateType
                                                                           startDate:self.selectedStartDate
                                                                             endDate:self.selectedEndDate
                                                                                page:self.currentPage];
-    
+
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowMyOrdersCommandType
                                             withParameter:parameters
                                                 respondTo:self];
 }
 
 - (void)informUserAboutDeletion:(NSInteger)countofDeletedObjects {
-    NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = @"Deletion successfull";
+    NSAlert *alert        = [[NSAlert alloc] init];
+    alert.messageText     = @"Deletion successfull";
     alert.informativeText = [NSString stringWithFormat:@"%ti orders deleted.", countofDeletedObjects];
-    alert.alertStyle = NSAlertStyleInformational;
+    alert.alertStyle      = NSAlertStyleInformational;
     [alert runModal];
 }
 
 #pragma mark | Table view methods
 - (void)tableViewDoubleAction:(NSTableView *)tableView {
-    NSArray <SOXMyOrderBook_BitcoinDE_Data *> *selectedObjects = [self.arrayController selectedObjects];
-    SOXMyOrderBook_BitcoinDE_Data *selectedMyOrder = selectedObjects.firstObject;
-    
-    NSStoryboard *storyBoard = [NSStoryboard storyboardWithName:@"MacMain" bundle:nil];
+    NSArray<SOXMyOrderBook_BitcoinDE_Data *> *selectedObjects = [self.arrayController selectedObjects];
+    SOXMyOrderBook_BitcoinDE_Data *selectedMyOrder            = selectedObjects.firstObject;
+
+    NSStoryboard *storyBoard               = [NSStoryboard storyboardWithName:@"MacMain" bundle:nil];
     SOXMyOrderDetailsViewController *viewC = [storyBoard instantiateControllerWithIdentifier:@"MyOrderDetailsViewControllerIdentifier"];
-    viewC.myOrder = selectedMyOrder;
+    viewC.myOrder                          = selectedMyOrder;
     [self presentViewControllerAsSheet:viewC];
 }
 
 - (void)updateChangeAndRemoveOrderButtons {
     self.changeOrderButton.enabled = NO;
     self.removeOrderButton.enabled = NO;
-    
+
     NSInteger numberOfSelectedRows = [self.tableView numberOfSelectedRows];
     if (numberOfSelectedRows == 1) {
         self.changeOrderButton.enabled = numberOfSelectedRows;
@@ -86,22 +86,22 @@
 }
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
-- (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest {
+- (void)answerOfServerRequest:(NSDictionary *_Nonnull)answerOfServerRequest {
     [self disableSpinningWheel];
-    
+
     if ([answerOfServerRequest valueForKey:ServerAnswerErrorKey]) {
         [self updateControllerDatasWithDataObjects:nil
                               andPayloadDictionary:nil];
         return;
     }
-    
+
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowMyOrdersCommandType)]) {
-        NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
+        NSDictionary *payloadDictionary  = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
         NSMutableArray *myOrderBookDatas = [SOXMyOrderBook_BitcoinDE_Data myOrderbookDataArrayForMyOrderbookDictionary:payloadDictionary];
         [self updateControllerDatasWithDataObjects:myOrderBookDatas
                               andPayloadDictionary:payloadDictionary];
     }
-    else if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_RemoveOrderType)]){
+    else if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_RemoveOrderType)]) {
         NSDictionary *errors = [answerOfServerRequest objectForKey:ServerAnswerErrorKey];
         if (errors.count == 0) {
             self.countOfDeletedMyOrderBook_BitcoinDE_Datas++;
@@ -109,25 +109,25 @@
                 // Start tableView update
                 [self resetTradeDatas];
                 [self loadNextPage];
-                
+
                 // reset counters
                 self.countOfMyOrderBook_BitcoinDE_DatasToDelete = 0;
                 self.countOfDeletedMyOrderBook_BitcoinDE_Datas  = 0;
-                
+
                 [[SOXMarket_BitcoinDE_Core sharedCore] startAccountInfoUpdate];
-                
+
                 [self informUserAboutDeletion:self.countOfDeletedMyOrderBook_BitcoinDE_Datas];
             }
         }
     }
-    
+
     [self updateTradeStatistics];
 }
 
 #pragma mark - NSTableViewDelegate
 - (void)tableViewSelectionIsChanging:(NSNotification *)notification {
     [super tableViewSelectionIsChanging:notification];
-    
+
     // responds to mouse events only
     if (self.tableView == notification.object) {
         [self updateChangeAndRemoveOrderButtons];
@@ -148,43 +148,37 @@
         // currency selection
         self.currencyTypeSelectionPopUpButton = self.pagingViewController.firstSelectionPopUpButton;
         [self.currencyTypeSelectionPopUpButton removeAllItems];
-        for (BitcoinDE_CurrencyType idx = BitcoinDE_CurrencyTypeUnknown
-             ; idx < BitcoinDE_CurrencyType_EndOfType
-             ; idx++) {
+        for (BitcoinDE_CurrencyType idx = BitcoinDE_CurrencyTypeUnknown; idx < BitcoinDE_CurrencyType_EndOfType; idx++) {
             [self.currencyTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:idx]];
         }
-        
+
         // orderType selection
         self.orderTypeSelectionPopUpButton = self.pagingViewController.secondSelectionPopUpButton;
         [self.orderTypeSelectionPopUpButton removeAllItems];
-        for (BitcoinDE_OrderType idx = BitcoinDE_OrderTypeUnknown
-             ; idx < BitcoinDE_OrderType_EndOfType
-             ; idx++) {
+        for (BitcoinDE_OrderType idx = BitcoinDE_OrderTypeUnknown; idx < BitcoinDE_OrderType_EndOfType; idx++) {
             [self.orderTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes naturalStringForOrderType:idx]];
         }
-        
+
         // orderStateType selection
         self.orderStateTypeSelectionPopUpButton = self.pagingViewController.thirdSelectionPopUpButton;
         [self.orderStateTypeSelectionPopUpButton removeAllItems];
-        for (BitcoinDE_OrderStateType idx = BitcoinDE_OrderStateTypeUnknown - 1
-             ; idx > BitcoinDE_OrderStateType_EndOfType
-             ; idx--) {
+        for (BitcoinDE_OrderStateType idx = BitcoinDE_OrderStateTypeUnknown - 1; idx > BitcoinDE_OrderStateType_EndOfType; idx--) {
             [self.orderStateTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes orderStateTypeStringForOrderstateType:idx]];
         }
     }
-    
+
     {
-        self.changeOrderButton = self.pagingViewController.changeOrderButton;
-        self.changeOrderButton.hidden = NO;
+        self.changeOrderButton         = self.pagingViewController.changeOrderButton;
+        self.changeOrderButton.hidden  = NO;
         self.changeOrderButton.enabled = NO;
-        self.changeOrderButton.title = @"Change";
-        
-        self.removeOrderButton = self.pagingViewController.removeOrderButton;
-        self.removeOrderButton.hidden = NO;
+        self.changeOrderButton.title   = @"Change";
+
+        self.removeOrderButton         = self.pagingViewController.removeOrderButton;
+        self.removeOrderButton.hidden  = NO;
         self.removeOrderButton.enabled = NO;
-        self.removeOrderButton.title = @"Remove";
+        self.removeOrderButton.title   = @"Remove";
     }
-    
+
     {
         [self.tableView setDoubleAction:@selector(tableViewDoubleAction:)];
     }
@@ -195,7 +189,7 @@
     if (sender == self.currencyTypeSelectionPopUpButton) {
         BitcoinDE_CurrencyType newCurrencyType = sender.indexOfSelectedItem;
         if (newCurrencyType != self.selectedCurrencyType) {
-            self.selectedCurrencyType = newCurrencyType;
+            self.selectedCurrencyType    = newCurrencyType;
             self.needsToReloadTradeDatas = YES;
         }
     }
@@ -203,55 +197,55 @@
     else if (sender == self.orderTypeSelectionPopUpButton) {
         BitcoinDE_OrderType newOrderType = sender.indexOfSelectedItem;
         if (newOrderType != self.selectedOrderType) {
-            self.selectedOrderType = newOrderType;
+            self.selectedOrderType       = newOrderType;
             self.needsToReloadTradeDatas = YES;
         }
     }
     // orderStateType
     else if (sender == self.orderStateTypeSelectionPopUpButton) {
         BitcoinDE_OrderStateType newOrderStateType = sender.indexOfSelectedItem * -1;
-        
+
         if (newOrderStateType != self.selectedOrderStateType) {
-            self.selectedOrderStateType = newOrderStateType;
+            self.selectedOrderStateType  = newOrderStateType;
             self.needsToReloadTradeDatas = YES;
-            
+
             BOOL hideChangeAndRemoveButtons = newOrderStateType != BitcoinDE_OrderStateTypePending;
-            self.changeOrderButton.hidden = hideChangeAndRemoveButtons;
-            self.removeOrderButton.hidden = hideChangeAndRemoveButtons;
+            self.changeOrderButton.hidden   = hideChangeAndRemoveButtons;
+            self.removeOrderButton.hidden   = hideChangeAndRemoveButtons;
         }
     }
-    
+
     [super popupButtonAction:sender];
 }
 
 - (void)changeOrderButtonPressed {
-    NSArray <SOXMyOrderBook_BitcoinDE_Data *> *selectedDatas = self.arrayController.selectedObjects;
-    
+    NSArray<SOXMyOrderBook_BitcoinDE_Data *> *selectedDatas = self.arrayController.selectedObjects;
+
     if (selectedDatas.count == 1) {
         SOXMyOrderBook_BitcoinDE_Data *orderBookDataToReplace = selectedDatas.firstObject;
-        
-        BitcoinDE_OrderType orderType = [SOXMarket_BitcoinDE_DefTypes orderTypeForOrderTypeString:orderBookDataToReplace.orderInformation_type];
-        BitcoinDE_CurrencyType currencyType = [SOXMarket_BitcoinDE_DefTypes currencyTypeForTradingPairString:orderBookDataToReplace.orderInformation_tradingPair];
-        NSStoryboard *storyBoard = [NSStoryboard storyboardWithName:@"MacMain" bundle:nil];
+
+        BitcoinDE_OrderType orderType          = [SOXMarket_BitcoinDE_DefTypes orderTypeForOrderTypeString:orderBookDataToReplace.orderInformation_type];
+        BitcoinDE_CurrencyType currencyType    = [SOXMarket_BitcoinDE_DefTypes currencyTypeForTradingPairString:orderBookDataToReplace.orderInformation_tradingPair];
+        NSStoryboard *storyBoard               = [NSStoryboard storyboardWithName:@"MacMain" bundle:nil];
         SOXCreateNewOrderViewController *viewC = [storyBoard instantiateControllerWithIdentifier:@"CreateNewOrderIdentifier"];
-        viewC.orderType = orderType;
-        viewC.currencyType = currencyType;
-        viewC.orderBookDataToReplace = orderBookDataToReplace;
-        viewC.delegate = self;
-        
+        viewC.orderType                        = orderType;
+        viewC.currencyType                     = currencyType;
+        viewC.orderBookDataToReplace           = orderBookDataToReplace;
+        viewC.delegate                         = self;
+
         [self presentViewControllerAsSheet:viewC];
     }
 }
 
 - (void)removeOrderButtonPressed {
-    NSArray <SOXMyOrderBook_BitcoinDE_Data *> *selectedDatas = self.arrayController.selectedObjects;
+    NSArray<SOXMyOrderBook_BitcoinDE_Data *> *selectedDatas = self.arrayController.selectedObjects;
     if (selectedDatas.count > 0) {
         self.changeOrderButton.enabled = NO;
         self.removeOrderButton.enabled = NO;
         [self enableSpinningWheel];
-        
+
         self.countOfMyOrderBook_BitcoinDE_DatasToDelete = selectedDatas.count;
-        
+
         // get parameterDictionaries for data to delete
         NSArray *myOrderBookParametersToDelete = [SOXMyOrderBook_BitcoinDE_Data parametersForDeletingMyOrderBookDatas:selectedDatas];
         for (NSDictionary *myOrderBookParameter in myOrderBookParametersToDelete) {

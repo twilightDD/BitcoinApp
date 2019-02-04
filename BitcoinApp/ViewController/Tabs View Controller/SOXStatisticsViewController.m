@@ -100,14 +100,14 @@
 
 - (void)setupStartAndEndDate {
     NSNumber *currentMonth = [SOXFormatters currentMonth];
-    NSNumber *currentYear = [SOXFormatters currentYear];
+    NSNumber *currentYear  = [SOXFormatters currentYear];
 
     NSNumber *monthToUse;
     NSNumber *yearToUse = currentYear;
     if (currentMonth.integerValue == 1) {
         // On january use december last year
         monthToUse = @12;
-        yearToUse = @(currentYear.integerValue - 1);
+        yearToUse  = @(currentYear.integerValue - 1);
     }
     else {
         // Use "Last month" as default.
@@ -115,34 +115,34 @@
     }
 
     self.startMonth = monthToUse;
-    self.startYear = yearToUse;
-    self.endMonth = monthToUse;
-    self.endYear = yearToUse;
+    self.startYear  = yearToUse;
+    self.endMonth   = monthToUse;
+    self.endYear    = yearToUse;
 }
 
 - (void)setupCurrencyButtons {
     self.emptyDescriptionTextField.stringValue = @"";
-    self.loadDescriptionTextField.stringValue = @"Load";
+    self.loadDescriptionTextField.stringValue  = @"Load";
 
     // BTC
     self.btcDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoin];
-    self.btcLoadButton.state = [SOXPreferenceCenter controlStateForLoadStatisticsForCurrencyType:BitcoinDE_CurrencyTypeBitcoin];
+    self.btcLoadButton.state                 = [SOXPreferenceCenter controlStateForLoadStatisticsForCurrencyType:BitcoinDE_CurrencyTypeBitcoin];
 
     // BCH
     self.bchDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
-    self.bchLoadButton.state = [SOXPreferenceCenter controlStateForLoadStatisticsForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
+    self.bchLoadButton.state                 = [SOXPreferenceCenter controlStateForLoadStatisticsForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
 
     // BSV
     self.bsvDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCashSV];
-    self.bsvLoadButton.state = [SOXPreferenceCenter controlStateForLoadStatisticsForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCashSV];
+    self.bsvLoadButton.state                 = [SOXPreferenceCenter controlStateForLoadStatisticsForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCashSV];
 
     // BTG
     self.btgDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoinGold];
-    self.btgLoadButton.state = [SOXPreferenceCenter controlStateForLoadStatisticsForCurrencyType:BitcoinDE_CurrencyTypeBitcoinGold];
+    self.btgLoadButton.state                 = [SOXPreferenceCenter controlStateForLoadStatisticsForCurrencyType:BitcoinDE_CurrencyTypeBitcoinGold];
 
     // ETH
     self.ethDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeEthereum];
-    self.ethLoadButton.state = [SOXPreferenceCenter controlStateForLoadStatisticsForCurrencyType:BitcoinDE_CurrencyTypeEthereum];
+    self.ethLoadButton.state                 = [SOXPreferenceCenter controlStateForLoadStatisticsForCurrencyType:BitcoinDE_CurrencyTypeEthereum];
 }
 
 #pragma mark | Request methods
@@ -151,11 +151,11 @@
 
     // reset content and values
     self.arrayControllerDatas = [NSMutableArray array];
-    self.requestQueue = [NSMutableArray array];
+    self.requestQueue         = [NSMutableArray array];
     [self.arrayController rearrangeObjects];
 
     self.startDate = [SOXFormatters dateFirstDayOfMonth:self.startMonth year:self.startYear];
-    self.endDate = [SOXFormatters dateLastDayOfMonth:self.endMonth year:self.endYear];
+    self.endDate   = [SOXFormatters dateLastDayOfMonth:self.endMonth year:self.endYear];
 
     // setup first page of requests
     for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeUnknown + 1;
@@ -178,7 +178,6 @@
             [self.requestQueue addObject:parameter];
         }
         else {
-
         }
     }
 
@@ -208,7 +207,7 @@
     else {
         self.isFetching = NO;
         [self.statisticsSummaryViewController updateWithStatisticsDatas:self.arrayControllerDatas];
-        
+
         // Create statistics
     }
 }
@@ -217,8 +216,8 @@
 - (SOXAccountLedger_BitcoinDE_StatisticData *)accountLedgerStatisticsDataForServerRequestParameters:(NSDictionary *)parameter {
     SOXAccountLedger_BitcoinDE_StatisticData *accountLedgerStatisticData;
 
-    NSString *currencyString = [parameter objectForKey:AccountLedgerParameter_Currency];
-    currencyString = [currencyString stringByAppendingString:@"eur"];
+    NSString *currencyString            = [parameter objectForKey:AccountLedgerParameter_Currency];
+    currencyString                      = [currencyString stringByAppendingString:@"eur"];
     BitcoinDE_CurrencyType currencyType = [SOXMarket_BitcoinDE_DefTypes currencyTypeForTradingPairString:currencyString];
 
     for (SOXAccountLedger_BitcoinDE_StatisticData *statisticData in self.arrayControllerDatas) {
@@ -248,7 +247,7 @@
 
 #pragma mark - Action Methods
 - (IBAction)selectCurrencyTypeLoadActions:(NSButton *)sender {
-    BOOL loadCurrencyType = sender.state;
+    BOOL loadCurrencyType               = sender.state;
     BitcoinDE_CurrencyType currencyType = sender.tag;
     [SOXPreferenceCenter setLoadStatistics:loadCurrencyType
                            forCurrencyType:currencyType];
@@ -271,14 +270,14 @@
         [self.requestQueue removeLastObject];
 
         // reconstruct currencyType
-        NSString  *currencyString = [parameter objectForKey:AccountLedgerParameter_Currency];
-        currencyString = [currencyString stringByAppendingString:@"eur"];
+        NSString *currencyString            = [parameter objectForKey:AccountLedgerParameter_Currency];
+        currencyString                      = [currencyString stringByAppendingString:@"eur"];
         BitcoinDE_CurrencyType currencyType = [SOXMarket_BitcoinDE_DefTypes currencyTypeForTradingPairString:currencyString];
 
         // create SOXAccountLedger_BitcoinDE_StatisticData
         NSMutableArray *accountLedgerDatas =
-        [SOXAccountLedger_BitcoinDE_Data accountLedgerDataArrayForAccountLedgerDictionary:payloadDictionary
-                                                                          forCurrencyType:currencyType];
+            [SOXAccountLedger_BitcoinDE_Data accountLedgerDataArrayForAccountLedgerDictionary:payloadDictionary
+                                                                              forCurrencyType:currencyType];
 
         SOXAccountLedger_BitcoinDE_StatisticData *accountLedgerStatisticData = [self accountLedgerStatisticsDataForServerRequestParameters:parameter];
         [accountLedgerStatisticData addAccountLedgerDatas:accountLedgerDatas];
@@ -290,8 +289,7 @@
             [accountLedgerStatisticData updatedWithPageData:pageData];
 
             // create more serverRequests if needed
-            if (pageData.pageCurrent == 1
-                && pageData.pageLast > pageData.pageCurrent) {
+            if (pageData.pageCurrent == 1 && pageData.pageLast > pageData.pageCurrent) {
                 for (NSInteger page = pageData.pageLast;
                      page > 1;
                      page--) {

@@ -27,8 +27,8 @@
 
 @property (strong, nonatomic) NSMutableArray *buyOrderBook;
 @property (strong, nonatomic) NSMutableArray *sellOrderBook;
-@property (strong, nonatomic) NSMutableSet *buySEPAOrderBook; // as cache for SEPA offers
-@property (strong, nonatomic) NSMutableSet *sellSEPAOrderBook;  // as cache for SEPA orders
+@property (strong, nonatomic) NSMutableSet *buySEPAOrderBook;    // as cache for SEPA offers
+@property (strong, nonatomic) NSMutableSet *sellSEPAOrderBook;   // as cache for SEPA orders
 @property (strong, nonatomic) NSMutableArray *buyOrderBookInExecution;
 @property (strong, nonatomic) NSMutableArray *sellOrderBookInExecution;
 
@@ -54,7 +54,7 @@
 //@property (strong, nonatomic) NSMutableArray *runningBalanceBuyTradeParameters;
 @property (strong, nonatomic) NSMutableArray *runningBalanceSellTradeParameters;
 
-@property (strong, nonatomic) NSMutableArray *successfulAutomaticBuyTradeParameters; // buy parameters we have to balance out
+@property (strong, nonatomic) NSMutableArray *successfulAutomaticBuyTradeParameters;   // buy parameters we have to balance out
 //@property (strong, nonatomic) NSMutableArray *successfulAutomaticSellTradeParameters;   // sell parameters we have to balance out
 //@property (strong, nonatomic) NSMutableArray *successfulBalanceBuyTradeParameters;
 @property (strong, nonatomic) NSMutableArray *successfulBalanceSellTradeParameters;
@@ -88,9 +88,9 @@
                                  createPotentialParameters:(BOOL)createPotentialParameters;
 
 - (void)tryToExecuteBalanceTradesWithParameters:(NSArray *)parametersToExecute
-                                   forOrderType:(BitcoinDE_OrderType)orderType ;
+                                   forOrderType:(BitcoinDE_OrderType)orderType;
 #pragma mark - Math Helpers
-- (NSDecimalNumber *)sumOfBitcoinsOfParameters:(NSArray <NSDictionary *>*)parameter;
+- (NSDecimalNumber *)sumOfBitcoinsOfParameters:(NSArray<NSDictionary *> *)parameter;
 
 #pragma mark - Handle (un)successful trades
 #pragma mark | Auto trades

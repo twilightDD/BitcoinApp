@@ -24,11 +24,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 #if TARGET_OS_IPHONE
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    #error "Fabric's minimum iOS version is 6.0"
+#error "Fabric's minimum iOS version is 6.0"
 #endif
 #else
 #if __MAC_OS_X_VERSION_MIN_REQUIRED < 1070
-    #error "Fabric's minimum OS X version is 10.7"
+#error "Fabric's minimum OS X version is 10.7"
 #endif
 #endif
 
@@ -79,4 +79,3 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
-

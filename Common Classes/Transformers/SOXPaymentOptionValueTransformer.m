@@ -24,9 +24,9 @@
     NSString *transformedValue = @"Error in transformer";
     if ([value isKindOfClass:[NSNumber class]]) {
         NSNumber *valueNumber = value;
-        transformedValue = [SOXMarket_BitcoinDE_DefTypes paymentOptionStringForPaymentOption:valueNumber.unsignedIntegerValue];
+        transformedValue      = [SOXMarket_BitcoinDE_DefTypes paymentOptionStringForPaymentOption:valueNumber.unsignedIntegerValue];
     }
-    
+
     return transformedValue;
 }
 

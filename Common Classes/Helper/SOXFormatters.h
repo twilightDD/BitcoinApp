@@ -28,8 +28,8 @@
 + (NSDate *)dateLastDayOfMonth:(NSNumber *)month year:(NSNumber *)year;
 
 + (NSString *)stringDateTimeStringForRFC3339DateTimeString:(NSString *)rfc3339DateTimeString;
-+ (NSString*)rfc3339GetDateTimeStringDate:(NSDate *)date;
-+ (NSString*)rfc3339PostDateTimeStringDate:(NSDate *)date;
++ (NSString *)rfc3339GetDateTimeStringDate:(NSDate *)date;
++ (NSString *)rfc3339PostDateTimeStringDate:(NSDate *)date;
 + (NSString *)shortDateShortTimeStringForDate:(NSDate *)date;
 + (NSString *)shortDateMediumTimeStringForDate:(NSDate *)date;
 + (NSString *)shortDateLongTimeStringForDate:(NSDate *)date;

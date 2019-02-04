@@ -104,9 +104,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param customAttributesOrNil          A dictionary of custom attributes to associate with this event.
  */
 + (void)logLevelEnd:(nullable NSString *)levelNameOrNil
-              score:(nullable NSNumber *)scoreOrNil
-            success:(nullable NSNumber *)levelCompletedSuccesfullyOrNil
-   customAttributes:(nullable ANS_GENERIC_NSDICTIONARY(NSString *, id) *)customAttributesOrNil;
+               score:(nullable NSNumber *)scoreOrNil
+             success:(nullable NSNumber *)levelCompletedSuccesfullyOrNil
+    customAttributes:(nullable ANS_GENERIC_NSDICTIONARY(NSString *, id) *)customAttributesOrNil;
 
 /**
  *  Log an Add to Cart event to see users adding items to a shopping cart in real-time, understand how
@@ -153,10 +153,10 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param customAttributesOrNil A dictionary of custom attributes to associate with this event.
  */
 + (void)logRating:(nullable NSNumber *)ratingOrNil
-      contentName:(nullable NSString *)contentNameOrNil
-      contentType:(nullable NSString *)contentTypeOrNil
-        contentId:(nullable NSString *)contentIdOrNil
- customAttributes:(nullable ANS_GENERIC_NSDICTIONARY(NSString *, id) *)customAttributesOrNil;
+         contentName:(nullable NSString *)contentNameOrNil
+         contentType:(nullable NSString *)contentTypeOrNil
+           contentId:(nullable NSString *)contentIdOrNil
+    customAttributes:(nullable ANS_GENERIC_NSDICTIONARY(NSString *, id) *)customAttributesOrNil;
 
 /**
  *  Log a Content View event to see users viewing content within your app in real-time and

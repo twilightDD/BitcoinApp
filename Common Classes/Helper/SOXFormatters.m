@@ -19,14 +19,14 @@
     /*
      Format gemäß RFC 3339 (Bsp: 2015-01-20T15:00:00+02:00).
      */
-    
+
     static dispatch_once_t pred;
     static NSDateFormatter *sRFC3339DateFormatter = nil;
     dispatch_once(&pred, ^{
         sRFC3339DateFormatter            = [[NSDateFormatter alloc] init];
         sRFC3339DateFormatter.locale     = [NSLocale autoupdatingCurrentLocale];
         sRFC3339DateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZ";
-        sRFC3339DateFormatter.timeZone   = [NSTimeZone localTimeZone];//[NSTimeZone timeZoneForSecondsFromGMT:0];
+        sRFC3339DateFormatter.timeZone   = [NSTimeZone localTimeZone];   //[NSTimeZone timeZoneForSecondsFromGMT:0];
     });
     return sRFC3339DateFormatter;
 }
@@ -38,7 +38,7 @@
         sRFC3339DateFormatter            = [[NSDateFormatter alloc] init];
         sRFC3339DateFormatter.locale     = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
         sRFC3339DateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
-        sRFC3339DateFormatter.timeZone   = [NSTimeZone timeZoneForSecondsFromGMT:0]; // Get Z-Format
+        sRFC3339DateFormatter.timeZone   = [NSTimeZone timeZoneForSecondsFromGMT:0];   // Get Z-Format
     });
 
     return sRFC3339DateFormatter;
@@ -54,7 +54,6 @@
     });
 
     return sRFC3339DateFormatter;
-
 }
 + (NSDateFormatter *)dateFormatterEncodeRFC3339 {
     /*
@@ -65,14 +64,12 @@
     static dispatch_once_t pred;
     static NSDateFormatter *sRFC3339DateFormatter = nil;
     dispatch_once(&pred, ^{
-
-        sRFC3339DateFormatter            = [[NSDateFormatter alloc] init];
+        sRFC3339DateFormatter = [[NSDateFormatter alloc] init];
 
         sRFC3339DateFormatter.locale     = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
         sRFC3339DateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
-//        sRFC3339DateFormatter.timeZone   = [NSTimeZone localTimeZone]; // Post 00:00 Format
-        sRFC3339DateFormatter.timeZone   = [NSTimeZone timeZoneForSecondsFromGMT:0]; // Get Z-Format
-
+        //        sRFC3339DateFormatter.timeZone   = [NSTimeZone localTimeZone]; // Post 00:00 Format
+        sRFC3339DateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];   // Get Z-Format
     });
 
     /* Result: 2018-09-17T21:45:00Z
@@ -138,7 +135,7 @@
         currencyStringFormatter = [NSNumberFormatter new];
         [currencyStringFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
         [currencyStringFormatter setLocale:[NSLocale autoupdatingCurrentLocale]];
-//        [currencyStringFormatter setRoundingIncrement:@(2)];
+        //        [currencyStringFormatter setRoundingIncrement:@(2)];
         [currencyStringFormatter setMinimumIntegerDigits:1];
         [currencyStringFormatter setMinimumFractionDigits:2];
         [currencyStringFormatter setMaximumFractionDigits:2];
@@ -152,15 +149,15 @@
     dispatch_once(&pred, ^{
         btcFormatter = [NSNumberFormatter new];
 
-        btcFormatter.minimumIntegerDigits = 1;
+        btcFormatter.minimumIntegerDigits  = 1;
         btcFormatter.minimumFractionDigits = 2;
         btcFormatter.maximumFractionDigits = 8;
 
-        btcFormatter.locale= [NSLocale autoupdatingCurrentLocale];
-//        btcFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
-//        btcFormatter.currencySymbol = @"\u20BF";
-//        btcFormatter.currencyCode = @"\u20BF";
-//        btcFormatter.internationalCurrencySymbol = @"XBT";
+        btcFormatter.locale = [NSLocale autoupdatingCurrentLocale];
+        //        btcFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
+        //        btcFormatter.currencySymbol = @"\u20BF";
+        //        btcFormatter.currencyCode = @"\u20BF";
+        //        btcFormatter.internationalCurrencySymbol = @"XBT";
     });
     return btcFormatter;
 }
@@ -171,11 +168,11 @@
     dispatch_once(&pred, ^{
         btcFormatter = [NSNumberFormatter new];
 
-        btcFormatter.minimumIntegerDigits = 1;
+        btcFormatter.minimumIntegerDigits  = 1;
         btcFormatter.minimumFractionDigits = 8;
         btcFormatter.maximumFractionDigits = 8;
 
-        btcFormatter.locale= [NSLocale autoupdatingCurrentLocale];
+        btcFormatter.locale = [NSLocale autoupdatingCurrentLocale];
     });
     return btcFormatter;
 }
@@ -224,9 +221,9 @@
 
 + (NSDate *)dateAtMidnightForDate:(NSDate *)date {
     NSDateComponents *dateComponents = [self dateComponentsDayMonthYearFromDate:date];
-    dateComponents.hour = 0;
-    dateComponents.minute = 0;
-    dateComponents.second = 0;
+    dateComponents.hour              = 0;
+    dateComponents.minute            = 0;
+    dateComponents.second            = 0;
 
     NSDate *dateAtMidnightForDate = [self dateGregorianFromDateComponents:dateComponents];
     return dateAtMidnightForDate;
@@ -235,7 +232,7 @@
 + (NSDate *)dateBeforeMidnightForDate:(NSDate *)date {
     NSDateComponents *dateComponents = [self dateComponentsDayMonthYearFromDate:date];
 
-    dateComponents.hour = 23;
+    dateComponents.hour   = 23;
     dateComponents.minute = 59;
     dateComponents.second = 59;
 
@@ -246,7 +243,7 @@
 + (NSDate *)dateQuarterBeforeMidnightForDate:(NSDate *)date {
     NSDateComponents *dateComponents = [self dateComponentsDayMonthYearFromDate:date];
 
-    dateComponents.hour = 23;
+    dateComponents.hour   = 23;
     dateComponents.minute = 45;
     dateComponents.second = 00;
 
@@ -256,39 +253,39 @@
 
 + (NSDate *)dateNextDayQuarterBeforeMidnightForDate:(NSDate *)date {
     NSDateComponents *dateComponents = [self dateComponentsDayMonthYearFromDate:date];
-    dateComponents.day = dateComponents.day + 1;
-    dateComponents.hour = 23;
-    dateComponents.minute = 45;
-    dateComponents.second = 00;
+    dateComponents.day               = dateComponents.day + 1;
+    dateComponents.hour              = 23;
+    dateComponents.minute            = 45;
+    dateComponents.second            = 00;
 
     NSDate *dateBeforeMidnight = [self dateFromDateComponents:dateComponents];
     return dateBeforeMidnight;
 }
 
 + (NSNumber *)currentMonth {
-    NSDate *currentDate = [NSDate date];
+    NSDate *currentDate                     = [NSDate date];
     NSDateComponents *currentDateComponents = [self dateComponentsDayMonthYearFromDate:currentDate];
-    NSInteger currentMonth = currentDateComponents.month;
+    NSInteger currentMonth                  = currentDateComponents.month;
 
     return @(currentMonth);
 }
 
 + (NSNumber *)currentYear {
-    NSDate *currentDate = [NSDate date];
+    NSDate *currentDate                     = [NSDate date];
     NSDateComponents *currentDateComponents = [self dateComponentsDayMonthYearFromDate:currentDate];
-    NSInteger currentYear = currentDateComponents.year;
+    NSInteger currentYear                   = currentDateComponents.year;
 
     return @(currentYear);
 }
 
 + (NSDate *)dateFirstDayOfMonth:(NSNumber *)month year:(NSNumber *)year {
     NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-    dateComponents.day = 1;
-    dateComponents.month = month.integerValue;
-    dateComponents.year = year.integerValue;
-    dateComponents.hour = 00;
-    dateComponents.minute = 00;
-    dateComponents.second = 00;
+    dateComponents.day               = 1;
+    dateComponents.month             = month.integerValue;
+    dateComponents.year              = year.integerValue;
+    dateComponents.hour              = 00;
+    dateComponents.minute            = 00;
+    dateComponents.second            = 00;
 
     NSDate *dateFirstDayOfMonth = [self dateFromDateComponents:dateComponents];
     return dateFirstDayOfMonth;
@@ -296,12 +293,12 @@
 
 + (NSDate *)dateLastDayOfMonth:(NSNumber *)month year:(NSNumber *)year {
     NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-    dateComponents.day = 1;
-    dateComponents.month = month.integerValue + 1;
-    dateComponents.year = year.integerValue;
-    dateComponents.hour = 00;
-    dateComponents.minute = 00;
-    dateComponents.second = 00;
+    dateComponents.day               = 1;
+    dateComponents.month             = month.integerValue + 1;
+    dateComponents.year              = year.integerValue;
+    dateComponents.hour              = 00;
+    dateComponents.minute            = 00;
+    dateComponents.second            = 00;
 
     NSDate *dateLastDayOfMonth = [self dateFromDateComponents:dateComponents];
     return dateLastDayOfMonth;
@@ -313,17 +310,17 @@
     // all possible RFC 3339 date time strings, just one of the most common
     // styles.
 
-    NSDate *date = [[SOXFormatters dateFormatterDecodeRFC3339] dateFromString:rfc3339DateTimeString];
+    NSDate *date                        = [[SOXFormatters dateFormatterDecodeRFC3339] dateFromString:rfc3339DateTimeString];
     NSString *userVisibleDateTimeString = nil;
-    
+
     if (date != nil) {
         userVisibleDateTimeString = [[SOXFormatters dateFormatterShortDateShortTime] stringFromDate:date];
     }
-    
+
     return userVisibleDateTimeString;
 }
 
-+ (NSString*)rfc3339GetDateTimeStringDate:(NSDate *)date {
++ (NSString *)rfc3339GetDateTimeStringDate:(NSDate *)date {
     if (!date) {
         date = [NSDate date];
     }
@@ -331,7 +328,7 @@
     NSString *rfc = [[SOXFormatters dateFormatterEncodeGetRFC3339] stringFromDate:date];
     return rfc;
 }
-+ (NSString*)rfc3339PostDateTimeStringDate:(NSDate *)date {
++ (NSString *)rfc3339PostDateTimeStringDate:(NSDate *)date {
     if (!date) {
         date = [NSDate date];
     }
@@ -340,11 +337,11 @@
     return rfc;
 }
 
-+ (NSString*)rfc3339DateTimeStringDate:(NSDate *)date {
++ (NSString *)rfc3339DateTimeStringDate:(NSDate *)date {
     if (!date) {
         date = [NSDate date];
     }
-    
+
     NSString *rfc = [[SOXFormatters dateFormatterEncodeRFC3339] stringFromDate:date];
     return rfc;
 }
@@ -402,7 +399,7 @@
                                                                                      raiseOnUnderflow:YES
                                                                                   raiseOnDivideByZero:YES];
     });
-    
+
     return currencyNumberHandlerRoundDown;
 }
 
@@ -427,7 +424,7 @@
 
     NSString *currencyString = [currencyFormatter stringFromNumber:value];
     NSNumber *currencyNumber = [currencyFormatter numberFromString:currencyString];
-    
+
     return [NSDecimalNumber decimalNumberWithDecimal:currencyNumber.decimalValue];
 }
 
@@ -442,7 +439,7 @@
 + (NSString *)currencyStringForNumber:(NSDecimalNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode {
     NSNumberFormatter *currencyFormatter = [SOXFormatters currencyFormatter];
     currencyFormatter.roundingMode       = roundingMode;
-    
+
     NSString *currencyString = [currencyFormatter stringFromNumber:value];
     return currencyString;
 }
@@ -464,12 +461,12 @@
 
 + (NSString *)stringForBTCNumber:(NSDecimalNumber *)btcValue {
     NSString *stringForBTCNumber = @"0";
-    
+
     if (btcValue) {
         NSNumberFormatter *btcFormatter = [SOXFormatters bitcoinNumberFormatter];
-        stringForBTCNumber = [btcFormatter stringFromNumber:btcValue];
+        stringForBTCNumber              = [btcFormatter stringFromNumber:btcValue];
     }
-    
+
     return stringForBTCNumber;
 }
 
@@ -478,7 +475,7 @@
 
     if (btcValue) {
         NSNumberFormatter *btcFormatter = [SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter];
-        stringForBTCNumber = [btcFormatter stringFromNumber:btcValue];
+        stringForBTCNumber              = [btcFormatter stringFromNumber:btcValue];
     }
 
     return stringForBTCNumber;
@@ -501,7 +498,7 @@
 
 #pragma mark - Interest Rate
 + (NSDecimalNumber *)formattedInterestRate:(NSDecimalNumber *)effectiveInterestRate {
-    effectiveInterestRate = [[NSDecimalNumber one] decimalNumberBySubtracting:effectiveInterestRate];
+    effectiveInterestRate                  = [[NSDecimalNumber one] decimalNumberBySubtracting:effectiveInterestRate];
     NSDecimalNumber *formattedInterestRate = [effectiveInterestRate decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"100"]
                                                                                     withBehavior:[SOXFormatters interestRateNumberHandler]];
     return formattedInterestRate;
@@ -509,7 +506,7 @@
 
 #pragma mark - Private class methods
 + (NSDateComponents *)dateComponentsDayMonthYearFromDate:(NSDate *)date {
-    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSCalendar *calendar                  = [NSCalendar currentCalendar];
     NSDateComponents *inputDateComponents = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear)
                                                         fromDate:date];
 
@@ -523,7 +520,7 @@
 }
 
 + (NSDate *)dateFromDateComponents:(NSDateComponents *)dateComponents {
-    NSCalendar *currentCalendar = [NSCalendar autoupdatingCurrentCalendar];
+    NSCalendar *currentCalendar    = [NSCalendar autoupdatingCurrentCalendar];
     NSDate *dateFromDateComponents = [currentCalendar dateFromComponents:dateComponents];
 
     return dateFromDateComponents;
@@ -536,7 +533,7 @@
      und nicht 2018-09-10 21:59:59 +0200 (bei currentLocale)
      */
     NSCalendar *gregorianCalendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
-    NSDate *dateGregorian = [gregorianCalendar dateFromComponents:dateComponents];
+    NSDate *dateGregorian         = [gregorianCalendar dateFromComponents:dateComponents];
 
     return dateGregorian;
 }

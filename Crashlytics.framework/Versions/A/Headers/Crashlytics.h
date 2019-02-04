@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly, copy) NSString *APIKey;
 @property (nonatomic, readonly, copy) NSString *version;
-@property (nonatomic, assign)         BOOL      debugMode;
+@property (nonatomic, assign) BOOL debugMode;
 
 /**
  *
@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
  * synchronously during start.
  *
  **/
-@property (nonatomic, assign, nullable) id <CrashlyticsDelegate> delegate;
+@property (nonatomic, assign, nullable) id<CrashlyticsDelegate> delegate;
 
 /**
  *  The recommended way to install Crashlytics into your application is to place a call to +startWithAPIKey: 
@@ -200,9 +200,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)recordError:(NSError *)error withAdditionalUserInfo:(nullable CLS_GENERIC_NSDICTIONARY(NSString *, id) *)userInfo;
 
 - (void)logEvent:(NSString *)eventName CLS_DEPRECATED("Please refer to Answers +logCustomEventWithName:");
-- (void)logEvent:(NSString *)eventName attributes:(nullable NSDictionary *) attributes CLS_DEPRECATED("Please refer to Answers +logCustomEventWithName:");
+- (void)logEvent:(NSString *)eventName attributes:(nullable NSDictionary *)attributes CLS_DEPRECATED("Please refer to Answers +logCustomEventWithName:");
 + (void)logEvent:(NSString *)eventName CLS_DEPRECATED("Please refer to Answers +logCustomEventWithName:");
-+ (void)logEvent:(NSString *)eventName attributes:(nullable NSDictionary *) attributes CLS_DEPRECATED("Please refer to Answers +logCustomEventWithName:");
++ (void)logEvent:(NSString *)eventName attributes:(nullable NSDictionary *)attributes CLS_DEPRECATED("Please refer to Answers +logCustomEventWithName:");
 
 @end
 
@@ -219,7 +219,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (void)crashlyticsDidDetectCrashDuringPreviousExecution:(Crashlytics *)crashlytics CLS_DEPRECATED("Please refer to -crashlyticsDidDetectReportForLastExecution:");
-- (void)crashlytics:(Crashlytics *)crashlytics didDetectCrashDuringPreviousExecution:(id <CLSCrashReport>)crash CLS_DEPRECATED("Please refer to -crashlyticsDidDetectReportForLastExecution:");
+- (void)crashlytics:(Crashlytics *)crashlytics didDetectCrashDuringPreviousExecution:(id<CLSCrashReport>)crash CLS_DEPRECATED("Please refer to -crashlyticsDidDetectReportForLastExecution:");
 
 /**
  *

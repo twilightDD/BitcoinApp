@@ -10,7 +10,7 @@
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
 static NSString *FilterOrderViewSelectedCountriesKey = @"selectedCountries";
-static NSString *FilterOrderViewNoSepaKey = @"noSepa";
+static NSString *FilterOrderViewNoSepaKey            = @"noSepa";
 
 @protocol SOXSelectedCountriesViewControllerDelegate
 
@@ -22,8 +22,8 @@ static NSString *FilterOrderViewNoSepaKey = @"noSepa";
 
 @property (nonatomic) BitcoinDE_OrderType orderType;
 @property (nonatomic) BitcoinDE_CurrencyType currencyType;
-@property (weak, nonatomic) id <SOXSelectedCountriesViewControllerDelegate> delegate;
+@property (weak, nonatomic) id<SOXSelectedCountriesViewControllerDelegate> delegate;
 
 // Kann weg
-+ (NSArray <NSButton *> *)addCountryButtonsToView:(NSView *)view;
++ (NSArray<NSButton *> *)addCountryButtonsToView:(NSView *)view;
 @end

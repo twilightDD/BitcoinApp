@@ -11,7 +11,7 @@
 
 @class SOXTradeStatisticsViewController;
 
-@interface SOXStatisticsAbstractViewController()
+@interface SOXStatisticsAbstractViewController ()
 
 //@property (nonatomic, strong, readonly) SOXTradeStatisticsViewController *tradeStatisticsViewController;
 

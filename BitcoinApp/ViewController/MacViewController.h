@@ -13,4 +13,3 @@
 @interface MacViewController : NSViewController
 
 @end
-

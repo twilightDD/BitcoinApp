@@ -10,6 +10,6 @@
 
 @interface NSAttributedString (URL)
 
-+ (instancetype)hyperlinkFromString:(NSString*)inString withURL:(NSURL*)aURL;
++ (instancetype)hyperlinkFromString:(NSString *)inString withURL:(NSURL *)aURL;
 
 @end

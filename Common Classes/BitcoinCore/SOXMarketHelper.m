@@ -13,14 +13,14 @@
 @implementation SOXMarketHelper
 
 + (BOOL)existOrderBookData:(SOXShowOrderbookData *)addOrderData
-               inOrderBook:(NSArray <SOXShowOrderbookData *>*)orderbook {
+               inOrderBook:(NSArray<SOXShowOrderbookData *> *)orderbook {
     NSString *newOrderDataOrderID = addOrderData.orderInformation_orderID;
 
     __block BOOL existOrderBookData = NO;
-    [orderbook enumerateObjectsUsingBlock:^(SOXShowOrderbookData * _Nonnull orderData, NSUInteger idx, BOOL * _Nonnull stop) {
+    [orderbook enumerateObjectsUsingBlock:^(SOXShowOrderbookData *_Nonnull orderData, NSUInteger idx, BOOL *_Nonnull stop) {
         if ([orderData.orderInformation_orderID isEqualToString:newOrderDataOrderID]) {
             existOrderBookData = YES;
-            *stop = YES;
+            *stop              = YES;
         }
     }];
 

@@ -9,5 +9,5 @@
 #import "SOXMyOrderBookData.h"
 
 @implementation SOXMyOrderBookData
- 
+
 @end

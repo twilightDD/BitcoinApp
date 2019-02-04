@@ -24,16 +24,16 @@
 #pragma mark Init&Co.
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     // Defaults for types
     self.selectedTradeHistoryOrderType = BitcoinDE_MyTradeHistoryParameter_AllOrderType;
-    self.selectedTradeStateType = BitcoinDE_MyTradeHistoryParameter_SuccessfulTradeStateType;
+    self.selectedTradeStateType        = BitcoinDE_MyTradeHistoryParameter_SuccessfulTradeStateType;
 }
 
 #pragma mark - Private methods
 - (void)loadNextPage {
     [super loadNextPage];
-    
+
     NSDictionary *parameterDictionary = [SOXMyTrades_BitcoinDE_Data parameterForOrderType:self.selectedTradeHistoryOrderType
                                                                                tradeState:self.selectedTradeStateType
                                                                              currencyType:self.selectedCurrencyType
@@ -46,14 +46,13 @@
 }
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
-- (void)answerOfServerRequest:(NSDictionary * _Nonnull)answerOfServerRequest {
+- (void)answerOfServerRequest:(NSDictionary *_Nonnull)answerOfServerRequest {
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowMyTradesType)]) {
         NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
-        
+
         NSMutableArray *myTrades = [SOXMyTrades_BitcoinDE_Data myTradesDataArrayForMyTradeHistoryDictionary:payloadDictionary];
         [self updateControllerDatasWithDataObjects:myTrades
                               andPayloadDictionary:payloadDictionary];
-        
     }
 }
 
@@ -62,8 +61,8 @@
 #if PETER
     [super copy:sender];
 #else
-    NSArray <SOXMyTrades_BitcoinDE_Data *> *selectedTrades = self.arrayController.selectedObjects;
-    
+    NSArray<SOXMyTrades_BitcoinDE_Data *> *selectedTrades = self.arrayController.selectedObjects;
+
     NSString *pasteboardString = [SOXMyTrades_BitcoinDE_Data pasteboardStringForTrades:selectedTrades];
     [self addToPasteBoard:pasteboardString];
 #endif
@@ -76,27 +75,21 @@
         // currency selection
         self.currencyTypeSelectionPopUpButton = self.pagingViewController.firstSelectionPopUpButton;
         [self.currencyTypeSelectionPopUpButton removeAllItems];
-        for (BitcoinDE_CurrencyType idx = BitcoinDE_CurrencyTypeUnknown
-             ; idx < BitcoinDE_CurrencyType_EndOfType
-             ; idx++) {
+        for (BitcoinDE_CurrencyType idx = BitcoinDE_CurrencyTypeUnknown; idx < BitcoinDE_CurrencyType_EndOfType; idx++) {
             [self.currencyTypeSelectionPopUpButton addItemWithTitle:[SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:idx]];
         }
-        
+
         // orderType selection
         self.orderTypeSelectionPopUpButton = self.pagingViewController.secondSelectionPopUpButton;
         [self.orderTypeSelectionPopUpButton removeAllItems];
-        for (BitcoinDE_MyTradeHistoryParameter_OrderType idx = BitcoinDE_MyTradeHistoryParameter_UnknownOrderType + 1
-             ; idx < BitcoinDE_MyTradeHistoryParameter_EndOfOrderType
-             ; idx++) {
+        for (BitcoinDE_MyTradeHistoryParameter_OrderType idx = BitcoinDE_MyTradeHistoryParameter_UnknownOrderType + 1; idx < BitcoinDE_MyTradeHistoryParameter_EndOfOrderType; idx++) {
             [self.orderTypeSelectionPopUpButton addItemWithTitle:[SOXMyTrades_BitcoinDE_Data titleForOrderType:idx]];
         }
-        
+
         // tradeState selection
         self.tradeStateTypeSelectionPopUpButton = self.pagingViewController.thirdSelectionPopUpButton;
         [self.tradeStateTypeSelectionPopUpButton removeAllItems];
-        for (BitcoinDE_MyTradeHistoryParameter_TradeStateType idx = BitcoinDE_MyTradeHistoryParameter_UnknownTradeStateType + 1
-             ; idx < BitcoinDE_MyTradeHistoryParameter_EndOfTradeStateType
-             ; idx++) {
+        for (BitcoinDE_MyTradeHistoryParameter_TradeStateType idx = BitcoinDE_MyTradeHistoryParameter_UnknownTradeStateType + 1; idx < BitcoinDE_MyTradeHistoryParameter_EndOfTradeStateType; idx++) {
             [self.tradeStateTypeSelectionPopUpButton addItemWithTitle:[SOXMyTrades_BitcoinDE_Data titleForTradeStateType:idx]];
         }
     }
@@ -107,7 +100,7 @@
     if (sender == self.currencyTypeSelectionPopUpButton) {
         BitcoinDE_CurrencyType newCurrencyType = sender.indexOfSelectedItem;
         if (newCurrencyType != self.selectedCurrencyType) {
-            self.selectedCurrencyType = newCurrencyType;
+            self.selectedCurrencyType    = newCurrencyType;
             self.needsToReloadTradeDatas = YES;
         }
     }
@@ -116,14 +109,14 @@
         BitcoinDE_MyTradeHistoryParameter_OrderType newOrderType = sender.indexOfSelectedItem + 1;
         if (newOrderType != self.selectedTradeHistoryOrderType) {
             self.selectedTradeHistoryOrderType = newOrderType;
-            self.needsToReloadTradeDatas = YES;
+            self.needsToReloadTradeDatas       = YES;
         }
     }
     // tradeState selection
     else if (sender == self.tradeStateTypeSelectionPopUpButton) {
         BitcoinDE_MyTradeHistoryParameter_TradeStateType newTradeStateType = sender.indexOfSelectedItem + 1;
         if (newTradeStateType != self.selectedTradeStateType) {
-            self.selectedTradeStateType = newTradeStateType;
+            self.selectedTradeStateType  = newTradeStateType;
             self.needsToReloadTradeDatas = YES;
         }
     }

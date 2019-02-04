@@ -51,12 +51,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.selectedCurrencyType = BitcoinDE_CurrencyTypeUnknown;
+    self.selectedCurrencyType    = BitcoinDE_CurrencyTypeUnknown;
     self.shouldLoadAllTradeDatas = NO;
 
     // dates
-    self.selectedStartDate = [SOXFormatters dateForRFC3339DateTimeString:@"2000-01-01T02:00:00+02:00" ];
-    self.selectedEndDate = [SOXFormatters dateNextDayQuarterBeforeMidnightForDate:[NSDate date]];
+    self.selectedStartDate = [SOXFormatters dateForRFC3339DateTimeString:@"2000-01-01T02:00:00+02:00"];
+    self.selectedEndDate   = [SOXFormatters dateNextDayQuarterBeforeMidnightForDate:[NSDate date]];
 
     [self setupUI];
 }
@@ -69,14 +69,14 @@
     self.changeOrderButton.hidden = YES;
     self.removeOrderButton.hidden = YES;
 
-    { // date picker
+    {   // date picker
         self.startDateTextField.stringValue = @"Start date";
         self.startDateDatePicker.dateValue  = self.selectedStartDate;
-        self.startDateDatePicker.locale = [NSLocale autoupdatingCurrentLocale];
+        self.startDateDatePicker.locale     = [NSLocale autoupdatingCurrentLocale];
 
-        self.endDateTextField.stringValue   = @"End date";
-        self.endDateDatePicker.dateValue    = self.selectedEndDate;
-        self.endDateDatePicker.locale = [NSLocale autoupdatingCurrentLocale];
+        self.endDateTextField.stringValue = @"End date";
+        self.endDateDatePicker.dateValue  = self.selectedEndDate;
+        self.endDateDatePicker.locale     = [NSLocale autoupdatingCurrentLocale];
     }
 
     // delegates configure popupButtons
@@ -85,11 +85,11 @@
 
 #pragma mark Paging
 - (void)resetPagingButtons {
-    self.fetchDataButton.hidden = NO;
-    self.fetchDataButton.enabled = YES;
-    self.fetchDataButton.title = @"Fetch data";
+    self.fetchDataButton.hidden           = NO;
+    self.fetchDataButton.enabled          = YES;
+    self.fetchDataButton.title            = @"Fetch data";
     self.loadMoreTradeDatasButton.enabled = NO;
-    self.loadAllTradeDatasButton.enabled = NO;
+    self.loadAllTradeDatasButton.enabled  = NO;
 }
 
 - (void)loadingPagingButton {
@@ -97,9 +97,9 @@
 }
 
 - (void)setAllPagingButtonsEnabled:(BOOL)enabled {
-    self.loadAllTradeDatasButton.enabled = enabled;
+    self.loadAllTradeDatasButton.enabled  = enabled;
     self.loadMoreTradeDatasButton.enabled = enabled;
-    self.fetchDataButton.enabled = enabled;
+    self.fetchDataButton.enabled          = enabled;
 }
 
 - (void)updatePagingButtonsWithPageData:(SOXPage_BitcoinDE_Data *)pageData
@@ -107,21 +107,20 @@
 
     // Enable buttons on multipage loading
     if (whileLoadingMorePages) {
-        self.loadAllTradeDatasButton.enabled = NO;
+        self.loadAllTradeDatasButton.enabled  = NO;
         self.loadMoreTradeDatasButton.enabled = NO;
     }
     else {
         // hide buttons, if needed
-        BOOL enableLoadMoreTradDatasButton = self.delegate.currentPage < pageData.pageLast;
-        self.loadAllTradeDatasButton.enabled = enableLoadMoreTradDatasButton;
+        BOOL enableLoadMoreTradDatasButton    = self.delegate.currentPage < pageData.pageLast;
+        self.loadAllTradeDatasButton.enabled  = enableLoadMoreTradDatasButton;
         self.loadMoreTradeDatasButton.enabled = enableLoadMoreTradDatasButton;
-        self.fetchDataButton.enabled = YES;
-        self.fetchDataButton.title = @"Fetch data";
+        self.fetchDataButton.enabled          = YES;
+        self.fetchDataButton.title            = @"Fetch data";
     }
 
 
-    self.loadAllTradeDatasButton.title = [NSString stringWithFormat:@"Load all (%ti pages left)"
-                                          , pageData.pageLast - pageData.pageCurrent];
+    self.loadAllTradeDatasButton.title = [NSString stringWithFormat:@"Load all (%ti pages left)", pageData.pageLast - pageData.pageCurrent];
 }
 
 #pragma mark - Action methods
@@ -172,7 +171,7 @@
 - (IBAction)loadAllTradeDatasAction:(NSButton *)sender {
     [self setAllPagingButtonsEnabled:NO];
     self.fetchDataButton.enabled = YES;
-    self.fetchDataButton.title = @"Cancel";
+    self.fetchDataButton.title   = @"Cancel";
     [self.delegate loadAllTradeDatas];
 }
 

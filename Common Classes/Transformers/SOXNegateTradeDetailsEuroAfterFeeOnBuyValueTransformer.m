@@ -23,7 +23,7 @@
 - (id)transformedValue:(id)value {
     if ([value isKindOfClass:[SOXAccountLedger_BitcoinDE_Data class]]) {
         SOXAccountLedger_BitcoinDE_Data *accountLedgerData = (SOXAccountLedger_BitcoinDE_Data *)value;
-        NSDecimalNumber *tradeDetails_Euro_after_fee = accountLedgerData.tradeDetails_Euro_after_fee;
+        NSDecimalNumber *tradeDetails_Euro_after_fee       = accountLedgerData.tradeDetails_Euro_after_fee;
         if ([accountLedgerData.positionDetails_Type isEqualToString:BitcoinDE_AccountLedgerParameter_BuyOrderTypeKey]) {
             tradeDetails_Euro_after_fee = [tradeDetails_Euro_after_fee decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"-1"]];
         }

@@ -21,7 +21,7 @@
 @property (strong, nonatomic, readwrite) NSDecimalNumber *feeVolumeSum;
 @property (strong, nonatomic, readwrite) NSDecimalNumber *kickbackSum;
 @property (strong, nonatomic, readwrite) NSNumber *kickbackCount;
-@property (strong, nonatomic, readwrite) NSMutableArray <SOXAccountLedger_BitcoinDE_Data *> *accountLedgerDatas;
+@property (strong, nonatomic, readwrite) NSMutableArray<SOXAccountLedger_BitcoinDE_Data *> *accountLedgerDatas;
 
 @property (nonatomic, readwrite) NSInteger currentPage;
 @property (nonatomic, readwrite) NSInteger lastPage;
@@ -37,16 +37,16 @@
 - (instancetype)initWithCurrencyType:(BitcoinDE_CurrencyType)currencyType {
     self = [super self];
     if (self) {
-        self.currencyType = currencyType;
+        self.currencyType       = currencyType;
         self.accountLedgerDatas = [NSMutableArray array];
-        self.coinSum = [NSDecimalNumber zero];
-        self.winLostSum = [NSDecimalNumber zero];
-        self.feeVolumeSum = [NSDecimalNumber zero];
-        self.kickbackSum = [NSDecimalNumber zero];
-        self.kickbackCount = 0;
-        self.state = SOXStatisticData_StateType_New;
-        self.currentPage = 0;
-        self.lastPage = 0;
+        self.coinSum            = [NSDecimalNumber zero];
+        self.winLostSum         = [NSDecimalNumber zero];
+        self.feeVolumeSum       = [NSDecimalNumber zero];
+        self.kickbackSum        = [NSDecimalNumber zero];
+        self.kickbackCount      = 0;
+        self.state              = SOXStatisticData_StateType_New;
+        self.currentPage        = 0;
+        self.lastPage           = 0;
     }
 
     return self;
@@ -57,12 +57,11 @@
         [self.accountLedgerDatas addObjectsFromArray:accountLedgerDatas];
     }
     [self updateProperties];
-
 }
 
 - (void)updatedWithPageData:(SOXPageData *)pageData {
     self.currentPage = pageData.pageCurrent;
-    self.lastPage = pageData.pageLast;
+    self.lastPage    = pageData.pageLast;
     if (pageData.pageCurrent == pageData.pageLast) {
         self.state = SOXStatisticData_StateType_FullyLoaded;
     }
@@ -71,11 +70,11 @@
 #pragma mark - Private Methods
 - (void)updateProperties {
     NSDictionary *statistic = [SOXDataStatistics statisticsForAccountLedgerDatas:self.accountLedgerDatas];
-    self.coinSum = [statistic objectForKey:@"coinSum"];
-    self.winLostSum = [statistic objectForKey:@"winLostSum"];
-    self.feeVolumeSum = [statistic objectForKey:@"feeVolumeSum"];
-    self.kickbackSum = [statistic objectForKey:@"kickbackSum"];
-    self.kickbackCount = [statistic objectForKey:@"kickbackCount"];
+    self.coinSum            = [statistic objectForKey:@"coinSum"];
+    self.winLostSum         = [statistic objectForKey:@"winLostSum"];
+    self.feeVolumeSum       = [statistic objectForKey:@"feeVolumeSum"];
+    self.kickbackSum        = [statistic objectForKey:@"kickbackSum"];
+    self.kickbackCount      = [statistic objectForKey:@"kickbackCount"];
 }
 
 - (NSColor *)textColor {

@@ -12,6 +12,6 @@
 
 @interface SOXStatisticsSummaryViewController : NSViewController
 
-- (void)updateWithStatisticsDatas:(NSArray <SOXAccountLedger_BitcoinDE_StatisticData*> *)statisticDatas;
+- (void)updateWithStatisticsDatas:(NSArray<SOXAccountLedger_BitcoinDE_StatisticData *> *)statisticDatas;
 
 @end

@@ -1,0 +1,27 @@
+---
+BasedOnStyle: LLVM
+Language: ObjC
+
+AlignConsecutiveAssignments: true  # align on "="
+AlignConsecutiveDeclarations: false # default: false  --> Because PointerAlignment: Right doesn't work yet in clang-format, we can't set to "true", although we'd like that
+AllowShortFunctionsOnASingleLine: None
+
+ColumnLimit: 0 # Has to be 0, or else quite a lot of really strange line breaks occur in places where we don't want them at all. It's a shame really, because some alignments/features only seem to work with a fixed column limit
+
+BreakBeforeBraces: Custom
+BraceWrapping:
+  BeforeCatch:     true
+  BeforeElse:      true
+IncludeIsMainRegex: '(_Tests)?$'
+IndentCaseLabels: true
+IndentWidth: 4
+IndentWrappedFunctionNames: true
+MaxEmptyLinesToKeep: 2
+ObjCBlockIndentWidth: 4
+ObjCSpaceAfterProperty: true
+SpacesBeforeTrailingComments: 3
+SpacesInContainerLiterals: false
+SortIncludes: false
+...
+
+

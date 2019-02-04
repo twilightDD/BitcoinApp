@@ -15,7 +15,6 @@ static NSString *SOXLogWindowControllerNibKey = @"SOXLogWindowController";
 @interface SOXLogWindowController : SOXWindowController
 
 
-
 - (void)showErrorMessage:(SOXErrorMessage_BitcoinDE *)errorMessage;
 - (void)showMessage:(NSString *)messageString;
 

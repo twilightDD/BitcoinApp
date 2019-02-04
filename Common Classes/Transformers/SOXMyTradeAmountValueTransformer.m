@@ -27,26 +27,23 @@
 
 - (id)transformedValue:(id)value {
     NSDecimalNumber *amount = nil;
-    NSString *tradingPair = nil;
+    NSString *tradingPair   = nil;
 
     if ([value isKindOfClass:[SOXMyTrades_BitcoinDE_Data class]]) {
         SOXMyTrades_BitcoinDE_Data *myTradeData = value;
-        amount = myTradeData.amount;
-        tradingPair = myTradeData.trading_pair;
+        amount                                  = myTradeData.amount;
+        tradingPair                             = myTradeData.trading_pair;
     }
 
     if (amount && tradingPair) {
         BitcoinDE_CurrencyType currencyType = [SOXMarket_BitcoinDE_DefTypes currencyTypeForTradingPairString:tradingPair];
-        NSString *shortCurrencyString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:currencyType];
+        NSString *shortCurrencyString       = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:currencyType];
 
-        NSString *result = [NSString stringWithFormat:@"%@ %@"
-                            , [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:amount]
-                            , shortCurrencyString];
+        NSString *result = [NSString stringWithFormat:@"%@ %@", [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:amount], shortCurrencyString];
         return result;
     }
     else if (tradingPair) {
         return @"-";
-
     }
 
     return @"Error";

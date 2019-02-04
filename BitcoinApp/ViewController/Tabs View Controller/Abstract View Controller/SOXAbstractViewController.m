@@ -47,12 +47,12 @@
     }
 
     self.apiKeysAndSecretsDidChangeObserver =
-    [[NSNotificationCenter defaultCenter] addObserverForName:SOXAPIKeysAndSecretsDidChangeNotification
-                                                      object:nil
-                                                       queue:[NSOperationQueue mainQueue]
-                                                  usingBlock:^(NSNotification * _Nonnull note) {
-                                                      [self keysAndSecretsDidChangeNotification:note];
-                                                  }];
+        [[NSNotificationCenter defaultCenter] addObserverForName:SOXAPIKeysAndSecretsDidChangeNotification
+                                                          object:nil
+                                                           queue:[NSOperationQueue mainQueue]
+                                                      usingBlock:^(NSNotification *_Nonnull note) {
+                                                          [self keysAndSecretsDidChangeNotification:note];
+                                                      }];
 }
 
 - (void)dealloc {
@@ -61,12 +61,12 @@
 
 #pragma mark - Custom Views
 - (void)enableSpinningWheel {
-    if ([SOXPreferencesCore validKeychain]
-        && self.spinningBackgroundView.hidden) {
+    if ([SOXPreferencesCore validKeychain] && self.spinningBackgroundView.hidden) {
         self.spinningBackgroundView.layer.backgroundColor = [NSColor colorWithCalibratedRed:0
                                                                                       green:0
                                                                                        blue:0
-                                                                                      alpha:0.1].CGColor;
+                                                                                      alpha:0.1]
+                                                                .CGColor;
         self.spinningBackgroundView.hidden = NO;
         [self.circularProgressIndicator startAnimation:nil];
     }
@@ -105,7 +105,7 @@
 }
 
 - (void)presentErrorWithErrorDictionary:(SOXErrorMessage_BitcoinDE *)errorMessage {
-    MacAppDelegate* appDelegate = (MacAppDelegate*)[[NSApplication sharedApplication] delegate];
+    MacAppDelegate *appDelegate                   = (MacAppDelegate *)[[NSApplication sharedApplication] delegate];
     SOXLogWindowController *errorWindowController = appDelegate.errorWindowController;
     [errorWindowController performSelectorOnMainThread:@selector(presentErrorMessage:)
                                             withObject:errorMessage

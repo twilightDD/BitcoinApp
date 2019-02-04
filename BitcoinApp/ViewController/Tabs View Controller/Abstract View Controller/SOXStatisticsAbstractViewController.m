@@ -21,7 +21,7 @@
 
 #pragma mark - Segue handling
 - (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender {
-    [super prepareForSegue:segue sender:sender]; // call superClass!
+    [super prepareForSegue:segue sender:sender];   // call superClass!
 
     if ([segue.destinationController isKindOfClass:[SOXTradeStatisticsViewController class]]) {
         self.tradeStatisticsViewController = segue.destinationController;
@@ -46,8 +46,8 @@
 - (void)updateTradeStatistics {
     // in case of tableViewSelectionIsChanging the arrayController returns no selectedObjects
     NSIndexSet *selectedRowIndexes = self.tableView.selectedRowIndexes;
-    NSArray *arrangedObjects = self.arrayController.arrangedObjects;
-    NSArray *selectedObjects = [arrangedObjects objectsAtIndexes:selectedRowIndexes];
+    NSArray *arrangedObjects       = self.arrayController.arrangedObjects;
+    NSArray *selectedObjects       = [arrangedObjects objectsAtIndexes:selectedRowIndexes];
     [self.tradeStatisticsViewController updateInfosForArrangedObjects:arrangedObjects
                                                   withSelectedObjects:selectedObjects
                                                     forCurrencyString:@"bubus"];

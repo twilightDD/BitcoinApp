@@ -14,7 +14,7 @@
 
 #import "SOXFormatters.h"
 
-@interface SOXAbstractViewController() <SOXMarketCoreServerRequestProtocol>
+@interface SOXAbstractViewController () <SOXMarketCoreServerRequestProtocol>
 
 @property (strong) IBOutlet NSArrayController *arrayController;
 @property (strong, nonatomic) NSMutableArray *arrayControllerDatas;

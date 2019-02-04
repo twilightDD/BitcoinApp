@@ -28,25 +28,22 @@
         SOXAccountLedger_BitcoinDE_StatisticData *accountLedgerStatisticData = value;
         NSString *transformedValue;
         switch (accountLedgerStatisticData.state) {
-            case SOXStatisticData_StateType_New :
+            case SOXStatisticData_StateType_New:
                 transformedValue = @"Not selected";
                 break;
-            case SOXStatisticData_StateType_WaitingForLoading :
+            case SOXStatisticData_StateType_WaitingForLoading:
                 transformedValue = @"Waiting ...";
                 break;
-            case SOXStatisticData_StateType_IsLoadingFirstPage :
+            case SOXStatisticData_StateType_IsLoadingFirstPage:
                 transformedValue = @"Fetching first page";
                 break;
-            case SOXStatisticData_StateType_IsLoadingMorePages :
+            case SOXStatisticData_StateType_IsLoadingMorePages:
                 transformedValue = [NSString stringWithFormat:
-                                    @"Fetching page %ti of %ti"
-                                    , accountLedgerStatisticData.currentPage + 1
-                                    , accountLedgerStatisticData.lastPage];
+                                                 @"Fetching page %ti of %ti", accountLedgerStatisticData.currentPage + 1, accountLedgerStatisticData.lastPage];
                 break;
-            case SOXStatisticData_StateType_FullyLoaded :
+            case SOXStatisticData_StateType_FullyLoaded:
                 transformedValue = [NSString stringWithFormat:
-                                    @"%ti pages fetched"
-                                    , accountLedgerStatisticData.lastPage];
+                                                 @"%ti pages fetched", accountLedgerStatisticData.lastPage];
                 break;
             default:
                 break;

@@ -16,7 +16,7 @@
 #import "NSDate+SOXCompare.h"
 #import "NSDecimalNumber+Convenient.h"
 
-@interface SOXMyTrades_BitcoinDE_Data () 
+@interface SOXMyTrades_BitcoinDE_Data ()
 
 @property (strong, nonatomic, readwrite) NSString *tradeID;
 @property (strong, nonatomic, readwrite) NSString *type;
@@ -35,7 +35,7 @@
 @property (strong, nonatomic, readwrite) NSString *trading_pair;
 
 @property (strong, nonatomic, readwrite) NSString *tradingPartnerInfo_Username;
-@property (nonatomic, readwrite)         BOOL      tradingPartnerInfo_IsKYCFull;
+@property (nonatomic, readwrite) BOOL tradingPartnerInfo_IsKYCFull;
 @property (strong, nonatomic, readwrite) NSString *tradingPartnerInfo_TrustLevel;
 @property (strong, nonatomic, readwrite) NSString *tradingPartnerInfo_BankName;
 @property (strong, nonatomic, readwrite) NSString *tradingPartnerInfo_BIC;
@@ -66,7 +66,7 @@
         default:
             break;
     }
-    
+
     NSNumber *tradeStateNumber;
     switch (tradeState) {
         case BitcoinDE_MyTradeHistoryParameter_CancelledTradeStateType:
@@ -86,9 +86,9 @@
 
     NSString *startDateString = [SOXFormatters rfc3339GetDateTimeStringDate:startDate];
     NSString *endDateString   = [SOXFormatters rfc3339GetDateTimeStringDate:endDate];
-    
+
     NSNumber *pageNumber = @(page);
-    
+
     return [self parameterDictionaryForOrderType:orderTypeString
                                       tradeState:tradeStateNumber
                                     currencyType:currencyTypeString
@@ -99,12 +99,12 @@
 
 + (NSMutableArray *)myTradesDataArrayForMyTradeHistoryDictionary:(NSDictionary *)payloadDictionary {
     NSMutableArray *myTradesDataArray = [NSMutableArray array];
-    
+
     NSDictionary *tradeDetailsDictionaries = [payloadDictionary objectForKey:BitcoinDE_ShowMyTrades_Trades_MainKey];
     for (NSDictionary *tradeDetailsDictionary in tradeDetailsDictionaries) {
         [myTradesDataArray addObject:[self myTradeDataFormyTradeHistoryDictionary:tradeDetailsDictionary]];
     }
-    
+
     return myTradesDataArray;
 }
 
@@ -112,11 +112,7 @@
     static NSArray *titlesForOrderType;
     static dispatch_once_t pred;
     dispatch_once(&pred, ^{
-        titlesForOrderType = @[@"Unknown"
-                               , @"All"
-                               , @"Buy"
-                               , @"Sell"
-                               ];
+        titlesForOrderType = @[@"Unknown", @"All", @"Buy", @"Sell"];
     });
 
     NSString *titleForOrderType = [titlesForOrderType objectAtIndex:orderType];
@@ -127,11 +123,7 @@
     static NSArray *titlesForTradeStateType;
     static dispatch_once_t pred;
     dispatch_once(&pred, ^{
-        titlesForTradeStateType = @[@"Unknown"
-                                    , @"Successful"
-                                    , @"Pending"
-                                    , @"Cancelled"
-                                    ];
+        titlesForTradeStateType = @[@"Unknown", @"Successful", @"Pending", @"Cancelled"];
     });
 
     NSString *titleForTradeStateType = [titlesForTradeStateType objectAtIndex:tradeStateType];
@@ -142,10 +134,7 @@
     static NSArray *titlesForPaymentMethodType;
     static dispatch_once_t pred;
     dispatch_once(&pred, ^{
-        titlesForPaymentMethodType = @[@"Unknown"
-                                    , @"SEPA"
-                                    , @"Express"
-                                    ];
+        titlesForPaymentMethodType = @[@"Unknown", @"SEPA", @"Express"];
     });
 
     NSString *titleForPaymentMethodType = [titlesForPaymentMethodType objectAtIndex:paymentMethodType];
@@ -153,7 +142,7 @@
 }
 
 #pragma mark | Pasteboard
-+ (NSString *)pasteboardStringForTrades:(NSArray <SOXMyTrades_BitcoinDE_Data *> *)trades {
++ (NSString *)pasteboardStringForTrades:(NSArray<SOXMyTrades_BitcoinDE_Data *> *)trades {
 
     /*
      Datum    OrderID    BTC bestellt    BTC (Zu/Abgang)    Kickback    Fehlersumme    €/BTC    Volumen        Summe    Ertrag    Ertrag pP.    Rate    Anmerkung*/
@@ -161,11 +150,11 @@
     NSString *pbString = @"";
     for (SOXMyTrades_BitcoinDE_Data *trade in trades) {
         BOOL isBuyTrade = [trade.type isEqualToString:MyTradeHistoryParameter_OrderTypeBuyKey];
-        
+
         // Datum
         NSDate *date = trade.successfullyFinishedAt;
-        pbString = [pbString stringByAppendingString:[SOXFormatters shortDateMediumTimeStringForDate:date]];
-        pbString = [pbString stringByAppendingString:@"\t"];
+        pbString     = [pbString stringByAppendingString:[SOXFormatters shortDateMediumTimeStringForDate:date]];
+        pbString     = [pbString stringByAppendingString:@"\t"];
 
         // OrderID
         pbString = [pbString stringByAppendingString:trade.tradeID];
@@ -193,9 +182,9 @@
 
         // Preis (€/Coin)
         NSString *priceString = [SOXFormatters currencyStringForNumber:trade.price
-                                                           roundingMode:NSNumberFormatterRoundHalfEven];
-        pbString = [pbString stringByAppendingString:priceString];
-        pbString = [pbString stringByAppendingString:@"\t"];
+                                                          roundingMode:NSNumberFormatterRoundHalfEven];
+        pbString              = [pbString stringByAppendingString:priceString];
+        pbString              = [pbString stringByAppendingString:@"\t"];
 
         // thats all
         pbString = [pbString stringByAppendingString:@"\n"];
@@ -236,14 +225,14 @@
     if (pageNumber) {
         [parameterDictHelper setObject:pageNumber forKey:MyTradeHistoryParameter_PageKey];
     }
-    
+
     return [parameterDictHelper copy];
 }
 
 + (SOXMyTrades_BitcoinDE_Data *)myTradeDataFormyTradeHistoryDictionary:(NSDictionary *)tradeDetailsDictionary {
     SOXMyTrades_BitcoinDE_Data *myTradeData = [[SOXMyTrades_BitcoinDE_Data alloc] init];
     [myTradeData setupMyTradeDataForTradeDetailsDictionary:tradeDetailsDictionary];
-    
+
     return myTradeData;
 }
 
@@ -251,50 +240,49 @@
 - (void)setupMyTradeDataForTradeDetailsDictionary:(NSDictionary *)tDD {
     // My Trade Details
     {
-        self.tradeID                        = [tDD objectForKey:BitcoinDE_ShowMyTrades_TradeID];
-        self.type                           = [tDD objectForKey:BitcoinDE_ShowMyTrades_Type];
-        self.amount                         = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Amount]];
-        self.price                          = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Price]];
-        self.volume                         = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Volume]];
-        self.feeEur                         = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_FeeEur]];
-        self.feeBTC                         = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_FeeBTC]];
-        self.aNewOrderIDForRemainingAmount  = [tDD objectForKey:BitcoinDE_ShowMyTrades_NewOrderIDForRemainingAmount];
-        self.state                          = [tDD objectForKey:BitcoinDE_ShowMyTrades_State];
-        self.myRatingForTradingPartner      = [tDD objectForKey:BitcoinDE_ShowMyTrades_MyRatingForTradingPartner];
-        self.createdAt                      = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:[tDD objectForKey:BitcoinDE_ShowMyTrades_CreatedAt]];
-        self.successfullyFinishedAt         = [SOXFormatters dateForRFC3339DateTimeString:[tDD objectForKey:BitcoinDE_ShowMyTrades_SuccessfullyFinishedAt]];
-        self.cancelledAt                    = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:[tDD objectForKey:BitcoinDE_ShowMyTrades_CancelledAt]];
-        self.paymentMethod                  = [tDD objectForKey:BitcoinDE_ShowMyTrades_PaymentMethod];
-        self.trading_pair                   = [tDD objectForKey:BitcoinDE_ShowMyTrades_TradingPair];
+        self.tradeID                       = [tDD objectForKey:BitcoinDE_ShowMyTrades_TradeID];
+        self.type                          = [tDD objectForKey:BitcoinDE_ShowMyTrades_Type];
+        self.amount                        = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Amount]];
+        self.price                         = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Price]];
+        self.volume                        = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Volume]];
+        self.feeEur                        = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_FeeEur]];
+        self.feeBTC                        = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_FeeBTC]];
+        self.aNewOrderIDForRemainingAmount = [tDD objectForKey:BitcoinDE_ShowMyTrades_NewOrderIDForRemainingAmount];
+        self.state                         = [tDD objectForKey:BitcoinDE_ShowMyTrades_State];
+        self.myRatingForTradingPartner     = [tDD objectForKey:BitcoinDE_ShowMyTrades_MyRatingForTradingPartner];
+        self.createdAt                     = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:[tDD objectForKey:BitcoinDE_ShowMyTrades_CreatedAt]];
+        self.successfullyFinishedAt        = [SOXFormatters dateForRFC3339DateTimeString:[tDD objectForKey:BitcoinDE_ShowMyTrades_SuccessfullyFinishedAt]];
+        self.cancelledAt                   = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:[tDD objectForKey:BitcoinDE_ShowMyTrades_CancelledAt]];
+        self.paymentMethod                 = [tDD objectForKey:BitcoinDE_ShowMyTrades_PaymentMethod];
+        self.trading_pair                  = [tDD objectForKey:BitcoinDE_ShowMyTrades_TradingPair];
     }
-    
+
     // Trading Partner Information
     {
-        NSDictionary *tPI = [tDD objectForKey:BitcoinDE_ShowMyTrades_TradingPartnerInformation];
-        self.tradingPartnerInfo_Username        = [tPI objectForKey:BitcoinDE_ShowMyTrades_TradingPartnerInformation_Username];
-        self.tradingPartnerInfo_IsKYCFull       = [[tPI objectForKey:BitcoinDE_ShowMyTrades_TradingPartnerInformation_IsKYCFull] boolValue];
-        self.tradingPartnerInfo_TrustLevel      = [tPI objectForKey:BitcoinDE_ShowMyTrades_TradingPartnerInformation_TrustLevel];
-        self.tradingPartnerInfo_BankName        = [tPI objectForKey:BitcoinDE_ShowMyTrades_TradingPartnerInformation_BankName];
-        self.tradingPartnerInfo_BIC             = [tPI objectForKey:BitcoinDE_ShowMyTrades_TradingPartnerInformation_BIC];
-        self.tradingPartnerInfo_SeatOfBank      = [tPI objectForKey:BitcoinDE_ShowMyTrades_TradingPartnerInformation_SeatOfBank];
-        self.tradingPartnerInfo_amountTrades    = [tPI objectForKey:BitcoinDE_ShowMyTrades_TradingPartnerInformation_AmountTrades];
-        self.tradingPartnerInfo_Rating          = [tPI objectForKey:BitcoinDE_ShowMyTrades_TradingPartnerInformation_Rating];
+        NSDictionary *tPI                    = [tDD objectForKey:BitcoinDE_ShowMyTrades_TradingPartnerInformation];
+        self.tradingPartnerInfo_Username     = [tPI objectForKey:BitcoinDE_ShowMyTrades_TradingPartnerInformation_Username];
+        self.tradingPartnerInfo_IsKYCFull    = [[tPI objectForKey:BitcoinDE_ShowMyTrades_TradingPartnerInformation_IsKYCFull] boolValue];
+        self.tradingPartnerInfo_TrustLevel   = [tPI objectForKey:BitcoinDE_ShowMyTrades_TradingPartnerInformation_TrustLevel];
+        self.tradingPartnerInfo_BankName     = [tPI objectForKey:BitcoinDE_ShowMyTrades_TradingPartnerInformation_BankName];
+        self.tradingPartnerInfo_BIC          = [tPI objectForKey:BitcoinDE_ShowMyTrades_TradingPartnerInformation_BIC];
+        self.tradingPartnerInfo_SeatOfBank   = [tPI objectForKey:BitcoinDE_ShowMyTrades_TradingPartnerInformation_SeatOfBank];
+        self.tradingPartnerInfo_amountTrades = [tPI objectForKey:BitcoinDE_ShowMyTrades_TradingPartnerInformation_AmountTrades];
+        self.tradingPartnerInfo_Rating       = [tPI objectForKey:BitcoinDE_ShowMyTrades_TradingPartnerInformation_Rating];
     }
 
     // Own calculations
     {
         // ownCalc_bookingVolume
-        NSDecimalNumber *ownVolume = [self.amount decimalNumberByMultiplyingBy:self.price];
-        NSDecimalNumber *ownVolumeMinusFee = [ownVolume decimalNumberByMultiplyingBy:[SOXMarket_BitcoinDE_DefTypes bitcoindDE_feeFactor]];
+        NSDecimalNumber *ownVolume                = [self.amount decimalNumberByMultiplyingBy:self.price];
+        NSDecimalNumber *ownVolumeMinusFee        = [ownVolume decimalNumberByMultiplyingBy:[SOXMarket_BitcoinDE_DefTypes bitcoindDE_feeFactor]];
         NSDecimalNumber *ownVolumeMinusFeeRounded = [ownVolumeMinusFee decimalNumberByRoundingAccordingToBehavior:[SOXFormatters currencyNumberHandlerRoundDown]];
-        self.ownCalc_bookingVolume = ownVolumeMinusFeeRounded;
+        self.ownCalc_bookingVolume                = ownVolumeMinusFeeRounded;
 
         // ownCalc_fidorFee
-        if (self.paymentMethod.unsignedIntegerValue == BitcoinDE_MyTradeHistoryParameter_ExpressPaymentMethodType
-            && [self.successfullyFinishedAt isLaterThan:[SOXFormatters fidorFeeStartedAtDate]]) {
-            NSDecimalNumber *fidorFee = [self.ownCalc_bookingVolume decimalNumberByMultiplyingBy:[SOXMarket_BitcoinDE_DefTypes fidor_feeFactorStarting20180221]];
+        if (self.paymentMethod.unsignedIntegerValue == BitcoinDE_MyTradeHistoryParameter_ExpressPaymentMethodType && [self.successfullyFinishedAt isLaterThan:[SOXFormatters fidorFeeStartedAtDate]]) {
+            NSDecimalNumber *fidorFee        = [self.ownCalc_bookingVolume decimalNumberByMultiplyingBy:[SOXMarket_BitcoinDE_DefTypes fidor_feeFactorStarting20180221]];
             NSDecimalNumber *fidorFeeRounded = [fidorFee decimalNumberByRoundingAccordingToBehavior:[SOXFormatters currencyNumberHandlerRoundDown]];
-            self.ownCalc_fidorFee = fidorFeeRounded;
+            self.ownCalc_fidorFee            = fidorFeeRounded;
         }
         else {
             self.ownCalc_fidorFee = [NSDecimalNumber zero];
@@ -305,7 +293,7 @@
     {
         // Volumes => minus for BUY
         if ([self.type isEqualToString:MyTradeHistoryParameter_OrderTypeBuyKey]) {
-            self.volume = [self.volume decimalNumberByMultiplyingBy:[NSDecimalNumber minusOne]];
+            self.volume                = [self.volume decimalNumberByMultiplyingBy:[NSDecimalNumber minusOne]];
             self.ownCalc_bookingVolume = [self.ownCalc_bookingVolume decimalNumberByMultiplyingBy:[NSDecimalNumber minusOne]];
         }
         // Amounts => minus for SELL

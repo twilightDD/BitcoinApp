@@ -27,29 +27,26 @@
 }
 
 - (id)transformedValue:(id)value {
-    NSDecimalNumber *cashflow = nil;
+    NSDecimalNumber *cashflow           = nil;
     BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeUnknown;
 
 
     if ([value isKindOfClass:[SOXAccountLedger_BitcoinDE_Data class]]) {
         SOXAccountLedger_BitcoinDE_Data *accountLedgerData = value;
-        cashflow = accountLedgerData.positionDetails_Cashflow;
-        NSString *tradingPair = accountLedgerData.tradeDetails_trading_pair;
-        currencyType = [SOXMarket_BitcoinDE_DefTypes currencyTypeForTradingPairString:tradingPair];
+        cashflow                                           = accountLedgerData.positionDetails_Cashflow;
+        NSString *tradingPair                              = accountLedgerData.tradeDetails_trading_pair;
+        currencyType                                       = [SOXMarket_BitcoinDE_DefTypes currencyTypeForTradingPairString:tradingPair];
     }
     else if ([value isKindOfClass:[SOXAccountLedger_BitcoinDE_StatisticData class]]) {
         SOXAccountLedger_BitcoinDE_StatisticData *accountLedgerStatisticData = value;
-        cashflow = accountLedgerStatisticData.coinSum;
-        currencyType = accountLedgerStatisticData.currencyType;
+        cashflow                                                             = accountLedgerStatisticData.coinSum;
+        currencyType                                                         = accountLedgerStatisticData.currencyType;
     }
 
-    if (cashflow
-        && currencyType != BitcoinDE_CurrencyTypeUnknown) {
+    if (cashflow && currencyType != BitcoinDE_CurrencyTypeUnknown) {
         NSString *shortCurrencyString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:currencyType];
 
-        NSString *result = [NSString stringWithFormat:@"%@ %@"
-                            , [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:cashflow]
-                            , shortCurrencyString];
+        NSString *result = [NSString stringWithFormat:@"%@ %@", [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:cashflow], shortCurrencyString];
         return result;
     }
     else if (cashflow) {

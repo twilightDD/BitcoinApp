@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "SOXMarket_BitcoinDE_Core.h"
 
-@interface SOXAbstractViewController : NSViewController 
+@interface SOXAbstractViewController : NSViewController
 
 @property (weak) IBOutlet NSTableView *tableView;
 

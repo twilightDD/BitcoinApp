@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "IOSAppDelegate.h"
 
-int main(int argc, char * argv[]) {
+int main(int argc, char *argv[]) {
     @autoreleasepool {
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([IOSAppDelegate class]));
     }

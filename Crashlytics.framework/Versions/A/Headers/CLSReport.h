@@ -86,17 +86,17 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Record an application-specific user identifier. See Crashlytics.h for details.
  **/
-@property (nonatomic, copy, nullable) NSString * userIdentifier;
+@property (nonatomic, copy, nullable) NSString *userIdentifier;
 
 /**
  * Record a user name. See Crashlytics.h for details.
  **/
-@property (nonatomic, copy, nullable) NSString * userName;
+@property (nonatomic, copy, nullable) NSString *userName;
 
 /**
  * Record a user email. See Crashlytics.h for details.
  **/
-@property (nonatomic, copy, nullable) NSString * userEmail;
+@property (nonatomic, copy, nullable) NSString *userEmail;
 
 @end
 

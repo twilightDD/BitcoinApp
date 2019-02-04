@@ -40,24 +40,24 @@
 @implementation MacAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    self.mainWindow = [NSApp mainWindow];
+    self.mainWindow       = [NSApp mainWindow];
     self.mainWindow.title = @"CoinerApp";
-    
-    // Insert code here to initialize your application
-    
-    [Fabric with:@[[Crashlytics class]]];
 
-    { // CocoaLumberjack
+    // Insert code here to initialize your application
+
+    [Fabric with:@ [[Crashlytics class]]];
+
+    {   // CocoaLumberjack
 #ifdef DEBUG
-        [DDLog addLogger:[DDTTYLogger sharedInstance]]; // TTY = Xcode console
-        [DDLog addLogger:[DDASLLogger sharedInstance]]; // ASL = Apple System Logs
+        [DDLog addLogger:[DDTTYLogger sharedInstance]];   // TTY = Xcode console
+        [DDLog addLogger:[DDASLLogger sharedInstance]];   // ASL = Apple System Logs
 #endif
 
-        DDFileLogger *fileLogger = [[DDFileLogger alloc] init]; // File Logger
-        fileLogger.maximumFileSize = 0; // no file size limitation
-        fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
+        DDFileLogger *fileLogger                          = [[DDFileLogger alloc] init];   // File Logger
+        fileLogger.maximumFileSize                        = 0;                             // no file size limitation
+        fileLogger.rollingFrequency                       = 60 * 60 * 24;                  // 24 hour rolling
         fileLogger.logFileManager.maximumNumberOfLogFiles = 31;
-        fileLogger.logFileManager.logFilesDiskQuota = 31 * 100 * 1024 * 1024; // 31 days * 100 MB per Day * 1024 B * 1024 B =  3.250.585.600 Byte = 3.2 GB
+        fileLogger.logFileManager.logFilesDiskQuota       = 31 * 100 * 1024 * 1024;   // 31 days * 100 MB per Day * 1024 B * 1024 B =  3.250.585.600 Byte = 3.2 GB
         [DDLog addLogger:fileLogger];
     }
 
@@ -69,7 +69,7 @@
     DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
-    { //Prepare error log window
+    {   //Prepare error log window
         self.errorWindowController = [[SOXLogWindowController alloc] initWithWindowNibName:SOXLogWindowControllerNibKey
                                                                                windowTitle:@"Errors"];
         self.eventWindowController = [[SOXLogWindowController alloc] initWithWindowNibName:SOXLogWindowControllerNibKey
@@ -90,12 +90,12 @@
 
     // Observer
     self.openPreferenceKeyAndSecretObserver =
-    [[NSNotificationCenter defaultCenter] addObserverForName:SOXOpenPreferenceKeyAndSecretNotification
-                                                      object:nil
-                                                       queue:nil
-                                                  usingBlock:^(NSNotification * _Nonnull note) {
-                                                      [self checkValidKeysAndSecretsInKeychain];
-                                                  }];
+        [[NSNotificationCenter defaultCenter] addObserverForName:SOXOpenPreferenceKeyAndSecretNotification
+                                                          object:nil
+                                                           queue:nil
+                                                      usingBlock:^(NSNotification *_Nonnull note) {
+                                                          [self checkValidKeysAndSecretsInKeychain];
+                                                      }];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -120,29 +120,30 @@
 #pragma mark - Private methods
 - (void)setupPreferenceWindow {
     SOXGeneralSettingsPreferenceViewController *generalSettingsPreferenceViewController =
-    [[SOXGeneralSettingsPreferenceViewController alloc] initWithNibName:@"SOXGeneralSettingsPreferenceViewController"
-                                                                 bundle:nil];
-    SOXDebugPreferencesViewController * debugPreferencesViewController =
-    [[SOXDebugPreferencesViewController alloc] initWithNibName:@"SOXDebugPreferencesViewController" bundle:nil];
+        [[SOXGeneralSettingsPreferenceViewController alloc] initWithNibName:@"SOXGeneralSettingsPreferenceViewController"
+                                                                     bundle:nil];
+    SOXDebugPreferencesViewController *debugPreferencesViewController =
+        [[SOXDebugPreferencesViewController alloc] initWithNibName:@"SOXDebugPreferencesViewController"
+                                                            bundle:nil];
 
     SOXKeysAndSecretPreferenceViewController *keyAndSecretPreferencesViewController =
-    [[SOXKeysAndSecretPreferenceViewController alloc] initWithNibName:@"SOXKeysAndSecretPreferenceViewController"
-                                                               bundle:nil];
+        [[SOXKeysAndSecretPreferenceViewController alloc] initWithNibName:@"SOXKeysAndSecretPreferenceViewController"
+                                                                   bundle:nil];
 
     SOXFilterOptionsPreferenceViewController *selectedCountriesPreferenceViewController =
-    [[SOXFilterOptionsPreferenceViewController alloc] initWithNibName:@"SOXFilterOptionsPreferenceViewController"
-                                                               bundle:nil];
+        [[SOXFilterOptionsPreferenceViewController alloc] initWithNibName:@"SOXFilterOptionsPreferenceViewController"
+                                                                   bundle:nil];
 
     NSArray *subPreferenceControllers = @[
-                                          generalSettingsPreferenceViewController,
-                                          keyAndSecretPreferencesViewController,
-                                          selectedCountriesPreferenceViewController,
-                                          debugPreferencesViewController,
-                                          ];
+        generalSettingsPreferenceViewController,
+        keyAndSecretPreferencesViewController,
+        selectedCountriesPreferenceViewController,
+        debugPreferencesViewController,
+    ];
 
     MASPreferencesWindowController *masPreferencesWindowController =
-    [[MASPreferencesWindowController alloc] initWithViewControllers:subPreferenceControllers
-                                                              title:@"Preferences"];
+        [[MASPreferencesWindowController alloc] initWithViewControllers:subPreferenceControllers
+                                                                  title:@"Preferences"];
 
     self.masPreferencesWindowController = masPreferencesWindowController;
 }
@@ -150,9 +151,9 @@
 - (void)checkValidKeysAndSecretsInKeychain {
     if ([SOXPreferencesCore validKeychain] == NO) {
         if ([self.masPreferencesWindowController.window isVisible] == NO) {
-            NSAlert *noKeysAndSecretsAlert = [[NSAlert alloc] init];
-            noKeysAndSecretsAlert.messageText = @"No Keys and Secrets";
-            noKeysAndSecretsAlert.informativeText  = @"In the keychain no keys and secrets could be found.\nPlease open the settings and enter keys and secrets.";
+            NSAlert *noKeysAndSecretsAlert        = [[NSAlert alloc] init];
+            noKeysAndSecretsAlert.messageText     = @"No Keys and Secrets";
+            noKeysAndSecretsAlert.informativeText = @"In the keychain no keys and secrets could be found.\nPlease open the settings and enter keys and secrets.";
 
             [noKeysAndSecretsAlert runModal];
         }
@@ -181,8 +182,8 @@
 #pragma mark - Core Data stack
 
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
-@synthesize managedObjectModel = _managedObjectModel;
-@synthesize managedObjectContext = _managedObjectContext;
+@synthesize managedObjectModel         = _managedObjectModel;
+@synthesize managedObjectContext       = _managedObjectContext;
 
 - (NSURL *)applicationDocumentsDirectory {
     // The directory the application uses to store the Core Data store file. This code uses a directory named "de.2sox.BitcoinApp" in the user's Application Support directory.
@@ -195,8 +196,8 @@
     if (_managedObjectModel) {
         return _managedObjectModel;
     }
-    
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"BitcoinApp" withExtension:@"momd"];
+
+    NSURL *modelURL     = [[NSBundle mainBundle] URLForResource:@"BitcoinApp" withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return _managedObjectModel;
 }
@@ -206,31 +207,32 @@
     if (_persistentStoreCoordinator) {
         return _persistentStoreCoordinator;
     }
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
+
+    NSFileManager *fileManager           = [NSFileManager defaultManager];
     NSURL *applicationDocumentsDirectory = [self applicationDocumentsDirectory];
-    BOOL shouldFail = NO;
-    NSError *error = nil;
-    NSString *failureReason = @"There was an error creating or loading the application's saved data.";
-    
+    BOOL shouldFail                      = NO;
+    NSError *error                       = nil;
+    NSString *failureReason              = @"There was an error creating or loading the application's saved data.";
+
     // Make sure the application files directory is there
     NSDictionary *properties = [applicationDocumentsDirectory resourceValuesForKeys:@[NSURLIsDirectoryKey] error:&error];
     if (properties) {
         if (![properties[NSURLIsDirectoryKey] boolValue]) {
             failureReason = [NSString stringWithFormat:@"Expected a folder to store application data, found a file (%@).", [applicationDocumentsDirectory path]];
-            shouldFail = YES;
+            shouldFail    = YES;
         }
-    } else if ([error code] == NSFileReadNoSuchFileError) {
+    }
+    else if ([error code] == NSFileReadNoSuchFileError) {
         error = nil;
         [fileManager createDirectoryAtPath:[applicationDocumentsDirectory path] withIntermediateDirectories:YES attributes:nil error:&error];
     }
-    
+
     if (!shouldFail && !error) {
         NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-        NSURL *url = [applicationDocumentsDirectory URLByAppendingPathComponent:@"BitcoinApp.storedata"];
+        NSURL *url                                = [applicationDocumentsDirectory URLByAppendingPathComponent:@"BitcoinApp.storedata"];
         if (![coordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:nil error:&error]) {
             // Replace this implementation with code to handle the error appropriately.
-             
+
             /*
              Typical reasons for an error here include:
              * The persistent store is not accessible, due to permissions or data protection when the device is locked.
@@ -242,11 +244,11 @@
         }
         _persistentStoreCoordinator = coordinator;
     }
-    
+
     if (shouldFail || error) {
         // Report any error we got.
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
+        NSMutableDictionary *dict              = [NSMutableDictionary dictionary];
+        dict[NSLocalizedDescriptionKey]        = @"Failed to initialize the application's saved data";
         dict[NSLocalizedFailureReasonErrorKey] = failureReason;
         if (error) {
             dict[NSUnderlyingErrorKey] = error;
@@ -264,7 +266,7 @@
     if (_managedObjectContext) {
         return _managedObjectContext;
     }
-    
+
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     if (!coordinator) {
         return nil;
@@ -284,7 +286,7 @@
     if (![context commitEditing]) {
         DDLogInfo(@"%@:%@ unable to commit editing before saving", [self class], NSStringFromSelector(_cmd));
     }
-    
+
     NSError *error = nil;
     if (context.hasChanges && ![context save:&error]) {
         [[NSApplication sharedApplication] presentError:error];
@@ -303,16 +305,16 @@
     if (!context) {
         return NSTerminateNow;
     }
-    
+
     if (![context commitEditing]) {
         DDLogInfo(@"%@:%@ unable to commit editing to terminate", [self class], NSStringFromSelector(_cmd));
         return NSTerminateCancel;
     }
-    
+
     if (!context.hasChanges) {
         return NSTerminateNow;
     }
-    
+
     NSError *error = nil;
     if (![context save:&error]) {
 
@@ -322,18 +324,18 @@
             return NSTerminateCancel;
         }
 
-        NSString *question = NSLocalizedString(@"Could not save changes while quitting. Quit anyway?", @"Quit without saves error question message");
-        NSString *info = NSLocalizedString(@"Quitting now will lose any changes you have made since the last successful save", @"Quit without saves error question info");
-        NSString *quitButton = NSLocalizedString(@"Quit anyway", @"Quit anyway button title");
+        NSString *question     = NSLocalizedString(@"Could not save changes while quitting. Quit anyway?", @"Quit without saves error question message");
+        NSString *info         = NSLocalizedString(@"Quitting now will lose any changes you have made since the last successful save", @"Quit without saves error question info");
+        NSString *quitButton   = NSLocalizedString(@"Quit anyway", @"Quit anyway button title");
         NSString *cancelButton = NSLocalizedString(@"Cancel", @"Cancel button title");
-        NSAlert *alert = [[NSAlert alloc] init];
+        NSAlert *alert         = [[NSAlert alloc] init];
         [alert setMessageText:question];
         [alert setInformativeText:info];
         [alert addButtonWithTitle:quitButton];
         [alert addButtonWithTitle:cancelButton];
 
         NSInteger answer = [alert runModal];
-        
+
         if (answer == NSAlertSecondButtonReturn) {
             return NSTerminateCancel;
         }

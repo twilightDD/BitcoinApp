@@ -56,10 +56,10 @@
 @property (weak) IBOutlet NSTextField *coinValueHeadlineTextField;
 @property (weak) IBOutlet NSTextField *coinValueDescriptionTextField;
 @property (weak) IBOutlet NSTextField *coinValueTextField;
-@property (weak) IBOutlet NSTextField *emptyDescriptionTextField; // layout errors
-@property (weak) IBOutlet NSTextField *emptyTextField;// layout errors
-@property (weak) IBOutlet NSTextField *emptyDescription2TextField; // layout errors
-@property (weak) IBOutlet NSTextField *empty2TextField;// layout errors
+@property (weak) IBOutlet NSTextField *emptyDescriptionTextField;    // layout errors
+@property (weak) IBOutlet NSTextField *emptyTextField;               // layout errors
+@property (weak) IBOutlet NSTextField *emptyDescription2TextField;   // layout errors
+@property (weak) IBOutlet NSTextField *empty2TextField;              // layout errors
 
 #pragma mark | Others
 @property (weak) IBOutlet NSButton *updateBannerButton;
@@ -100,45 +100,42 @@
 #pragma mark - Private methods
 - (void)registerOberservers {
     NSOperationQueue *mainQueue = [NSOperationQueue mainQueue];
-    
+
     weakify(self)
-    self.requestShowAccountInfoNotification =
-    [[NSNotificationCenter defaultCenter] addObserverForName:BitcoinDE_Notification_RequestShowAccountInfo
-                                                      object:nil
-                                                       queue:mainQueue
-                                                  usingBlock:^(NSNotification * _Nonnull note) {
-                                                      strongify(self)
-                                                      [self answerOfServerRequest:note.object];
-                                                  }
-     ];
-    
+        self.requestShowAccountInfoNotification =
+        [[NSNotificationCenter defaultCenter] addObserverForName:BitcoinDE_Notification_RequestShowAccountInfo
+                                                          object:nil
+                                                           queue:mainQueue
+                                                      usingBlock:^(NSNotification *_Nonnull note) {
+                                                          strongify(self)
+                                                              [self answerOfServerRequest:note.object];
+                                                      }];
+
     self.requestShowRatesNotification =
-    [[NSNotificationCenter defaultCenter] addObserverForName:BitcoinDE_Notification_RequestShowRates
-                                                      object:nil
-                                                       queue:mainQueue
-                                                  usingBlock:^(NSNotification * _Nonnull note) {
-                                                      strongify(self)
-                                                      [self answerOfServerRequest:note.object];
-                                                  }
-     ];
+        [[NSNotificationCenter defaultCenter] addObserverForName:BitcoinDE_Notification_RequestShowRates
+                                                          object:nil
+                                                           queue:mainQueue
+                                                      usingBlock:^(NSNotification *_Nonnull note) {
+                                                          strongify(self)
+                                                              [self answerOfServerRequest:note.object];
+                                                      }];
 
     self.presentBannerInformationForCurrencyNotification =
-    [[NSNotificationCenter defaultCenter] addObserverForName:BitcoinDE_Notification_PresentBannerInformationForCurrency
-                                                      object:nil
-                                                       queue:mainQueue
-                                                  usingBlock:^(NSNotification * _Nonnull note) {
-                                                      strongify(self)
-                                                      [self presentBannerForCurrencyType:note];
-                                                  }
-     ];
+        [[NSNotificationCenter defaultCenter] addObserverForName:BitcoinDE_Notification_PresentBannerInformationForCurrency
+                                                          object:nil
+                                                           queue:mainQueue
+                                                      usingBlock:^(NSNotification *_Nonnull note) {
+                                                          strongify(self)
+                                                              [self presentBannerForCurrencyType:note];
+                                                      }];
 
     self.apiKeysAndSecretsDidChangeObserver =
-    [[NSNotificationCenter defaultCenter] addObserverForName:SOXAPIKeysAndSecretsDidChangeNotification
-                                                      object:nil
-                                                       queue:mainQueue
-                                                  usingBlock:^(NSNotification * _Nonnull note) {
-                                                      [self keysAndSecretsDidChangeNotification:note];
-                                                  }];
+        [[NSNotificationCenter defaultCenter] addObserverForName:SOXAPIKeysAndSecretsDidChangeNotification
+                                                          object:nil
+                                                           queue:mainQueue
+                                                      usingBlock:^(NSNotification *_Nonnull note) {
+                                                          [self keysAndSecretsDidChangeNotification:note];
+                                                      }];
 }
 
 - (void)setupUI {
@@ -154,74 +151,73 @@
     // BTC stack
     {
         self.btcBalanceHeadlineTextField.stringValue = @"My Bitcoins";
-        
-        self.btcBalanceTotalAmountDescriptionTextField.stringValue = @"Total";
+
+        self.btcBalanceTotalAmountDescriptionTextField.stringValue     = @"Total";
         self.btcBalanceAvailableAmountDescriptionTextField.stringValue = @"Available";
-        self.btcBalanceReservedAmountDescriptionTextField.stringValue = @"Reserved";
-        
-        self.btcBalanceTotalAmountTextField.stringValue = @"...";
-        self.btcBalanceTotalAmountTextField.font = monospacedFont;
+        self.btcBalanceReservedAmountDescriptionTextField.stringValue  = @"Reserved";
+
+        self.btcBalanceTotalAmountTextField.stringValue     = @"...";
+        self.btcBalanceTotalAmountTextField.font            = monospacedFont;
         self.btcBalanceAvailableAmountTextField.stringValue = @"...";
-        self.btcBalanceAvailableAmountTextField.font = monospacedFont;
-        self.btcBalanceReservedAmountTextField.stringValue = @"...";
-        self.btcBalanceReservedAmountTextField.font = monospacedFont;
+        self.btcBalanceAvailableAmountTextField.font        = monospacedFont;
+        self.btcBalanceReservedAmountTextField.stringValue  = @"...";
+        self.btcBalanceReservedAmountTextField.font         = monospacedFont;
     }
-    
+
     // Bank stack
     {
         self.fidorReservationHeadlineTextField.stringValue = @"Fidor Bank reservation";
-        
-        self.fidorReservationTotalAmountDescriptionTextField.stringValue = @"Max Euro";
+
+        self.fidorReservationTotalAmountDescriptionTextField.stringValue     = @"Max Euro";
         self.fidorReservationAvailableAmountDescriptionTextField.stringValue = @"Open orders";
-        self.fidorReservationValidUntilDescriptionTextField.stringValue = @"Valid until";
-        
-        self.fidorReservationTotalAmountTextField.stringValue = @"...";
+        self.fidorReservationValidUntilDescriptionTextField.stringValue      = @"Valid until";
+
+        self.fidorReservationTotalAmountTextField.stringValue     = @"...";
         self.fidorReservationAvailableAmountTextField.stringValue = @"...";
-        self.fidorReservationValidUntilTextField.stringValue = @"...";
-        self.fidorReservationTotalAmountTextField.toolTip = nil;
-        
+        self.fidorReservationValidUntilTextField.stringValue      = @"...";
+        self.fidorReservationTotalAmountTextField.toolTip         = nil;
     }
-    
+
     // Rates stack
     {
         self.ratesHeadlineTextField.stringValue = @"Weighted Coin Rates";
-        
-        self.ratesRateWeightedDescriptionTextField.stringValue = @"Current";
-        self.ratesRateWeighted3hDescriptionTextField.stringValue = @"Last 3 hours";
+
+        self.ratesRateWeightedDescriptionTextField.stringValue    = @"Current";
+        self.ratesRateWeighted3hDescriptionTextField.stringValue  = @"Last 3 hours";
         self.ratesRateWeighted12hDescriptionTextField.stringValue = @"Last 12 hours";
-        
-        self.ratesRateWeightedTextField.stringValue = @"...";
-        self.ratesRateWeighted3hTextField.stringValue = @"...";
+
+        self.ratesRateWeightedTextField.stringValue    = @"...";
+        self.ratesRateWeighted3hTextField.stringValue  = @"...";
         self.ratesRateWeighted12hTextField.stringValue = @"...";
     }
-    
+
     // Credit stack
     {
         self.coinValueHeadlineTextField.stringValue = @"Coin value";
-        
+
         self.coinValueDescriptionTextField.stringValue = @"Value";
-        self.coinValueTextField.stringValue = @"...";
-        
-        self.emptyDescriptionTextField.stringValue = @"";
-        self.emptyTextField.stringValue = @"";
+        self.coinValueTextField.stringValue            = @"...";
+
+        self.emptyDescriptionTextField.stringValue  = @"";
+        self.emptyTextField.stringValue             = @"";
         self.emptyDescription2TextField.stringValue = @"";
-        self.empty2TextField.stringValue = @"";
+        self.empty2TextField.stringValue            = @"";
     }
 
 
-//    self.updateBannerButton.enabled = [SOXPreferencesCore validKeychain];
+    //    self.updateBannerButton.enabled = [SOXPreferencesCore validKeychain];
 }
 
 - (void)updateUIForCoinAmounts {
     NSString *btcBalanceHeadlineText;
     if (self.currencyType == BitcoinDE_CurrencyTypeUnknown) {
         self.btcBalanceValuesAndDescriptionStackView.hidden = YES;
-        btcBalanceHeadlineText = @"Coin amount";
+        btcBalanceHeadlineText                              = @"Coin amount";
     }
     else {
         self.btcBalanceValuesAndDescriptionStackView.hidden = NO;
-        NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:self.currencyType];
-        btcBalanceHeadlineText = [NSString stringWithFormat:@"%@ amounts", currencyTypeString];
+        NSString *currencyTypeString                        = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:self.currencyType];
+        btcBalanceHeadlineText                              = [NSString stringWithFormat:@"%@ amounts", currencyTypeString];
     }
 
     self.btcBalanceHeadlineTextField.stringValue = btcBalanceHeadlineText;
@@ -229,9 +225,9 @@
 
     SOXAccountInfo_BitcoinDE_Data *accountInfoData = (SOXAccountInfo_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].accountInfoData;
     if (accountInfoData == nil) {
-        self.btcBalanceTotalAmountTextField.stringValue = @"...";
+        self.btcBalanceTotalAmountTextField.stringValue     = @"...";
         self.btcBalanceAvailableAmountTextField.stringValue = @"...";
-        self.btcBalanceReservedAmountTextField.stringValue = @"...";
+        self.btcBalanceReservedAmountTextField.stringValue  = @"...";
         return;
     }
 
@@ -239,17 +235,10 @@
     NSDecimalNumber *btcBalanceAvailableAmountText = [accountInfoData availableAmountForCurrencyType:self.currencyType];
     NSDecimalNumber *btcBalanceReservedAmountText  = [accountInfoData reservedAmountForCurrencyType:self.currencyType];
 
-    NSString *currencyTypeShortString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:self.currencyType];
-    self.btcBalanceTotalAmountTextField.stringValue     = [NSString stringWithFormat:@"%@ %@"
-                                                           , [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:btcBalanceTotalAmount]
-                                                           , currencyTypeShortString];
-    self.btcBalanceAvailableAmountTextField.stringValue = [NSString stringWithFormat:@"%@ %@"
-                                                           , [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:btcBalanceAvailableAmountText]
-                                                           , currencyTypeShortString];
-    self.btcBalanceReservedAmountTextField.stringValue  = [NSString stringWithFormat:@"%@ %@"
-                                                           , [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:btcBalanceReservedAmountText]
-                                                           , currencyTypeShortString];
-
+    NSString *currencyTypeShortString                   = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:self.currencyType];
+    self.btcBalanceTotalAmountTextField.stringValue     = [NSString stringWithFormat:@"%@ %@", [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:btcBalanceTotalAmount], currencyTypeShortString];
+    self.btcBalanceAvailableAmountTextField.stringValue = [NSString stringWithFormat:@"%@ %@", [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:btcBalanceAvailableAmountText], currencyTypeShortString];
+    self.btcBalanceReservedAmountTextField.stringValue  = [NSString stringWithFormat:@"%@ %@", [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:btcBalanceReservedAmountText], currencyTypeShortString];
 }
 
 - (void)updateUIForAllocations {
@@ -260,17 +249,16 @@
     }
     else {
         NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:self.currencyType];
-        fidorReservationHeadlineText = [NSString stringWithFormat:@"Reservation for %@"
-                                        , currencyTypeString];
+        fidorReservationHeadlineText = [NSString stringWithFormat:@"Reservation for %@", currencyTypeString];
     }
     self.fidorReservationHeadlineTextField.stringValue = fidorReservationHeadlineText;
 
     // Reservation figures and date
     SOXAccountInfo_BitcoinDE_Data *accountInfoData = (SOXAccountInfo_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].accountInfoData;
     if (accountInfoData == nil) {
-        self.fidorReservationTotalAmountTextField.stringValue = @"...";
+        self.fidorReservationTotalAmountTextField.stringValue     = @"...";
         self.fidorReservationAvailableAmountTextField.stringValue = @"...";
-        self.fidorReservationValidUntilTextField.stringValue = @"...";
+        self.fidorReservationValidUntilTextField.stringValue      = @"...";
         return;
     }
 
@@ -278,53 +266,46 @@
     if (accountInfoData.bankReservation_exists) {
         self.fidorReservationHeadlineTextField.textColor = [NSColor textColor];
         // Show sum of reservations
-        NSDecimalNumber *overallTotalReservationAmount = [NSDecimalNumber zero];
+        NSDecimalNumber *overallTotalReservationAmount     = [NSDecimalNumber zero];
         NSDecimalNumber *overallAvailableReservationAmount = [NSDecimalNumber zero];
         if (self.currencyType == BitcoinDE_CurrencyTypeUnknown) {
             for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeUnknown + 1;
                  currencyType < BitcoinDE_CurrencyType_EndOfType;
                  currencyType++) {
-                overallTotalReservationAmount = [overallTotalReservationAmount decimalNumberByAdding:
-                                                 [accountInfoData allocationMaxEurVolumeForCurrencyType:currencyType]];
+                overallTotalReservationAmount     = [overallTotalReservationAmount decimalNumberByAdding:
+                                                                                   [accountInfoData allocationMaxEurVolumeForCurrencyType:currencyType]];
                 overallAvailableReservationAmount = [overallAvailableReservationAmount decimalNumberByAdding:
-                                                     [accountInfoData allocationEurVolumeOpenOrdersForCurrencyType:currencyType]];
+                                                                                           [accountInfoData allocationEurVolumeOpenOrdersForCurrencyType:currencyType]];
             }
 
             NSString *overallTotalReservationAmountCurrency = [SOXFormatters currencyStringForNumber:overallTotalReservationAmount
-                                                                                      roundingMode:NSNumberFormatterRoundHalfUp];
+                                                                                        roundingMode:NSNumberFormatterRoundHalfUp];
 
-            NSString *overallTotalReservationAmountString = [NSString stringWithFormat:@"%@ (%@%%)"
-                                                             , overallTotalReservationAmountCurrency
-                                                             , @100];
+            NSString *overallTotalReservationAmountString         = [NSString stringWithFormat:@"%@ (%@%%)", overallTotalReservationAmountCurrency, @100];
             self.fidorReservationTotalAmountTextField.stringValue = overallTotalReservationAmountString;
-            self.fidorReservationTotalAmountTextField.toolTip = [NSString stringWithFormat:@"100%% of total reservation"];
+            self.fidorReservationTotalAmountTextField.toolTip     = [NSString stringWithFormat:@"100%% of total reservation"];
 
             self.fidorReservationAvailableAmountTextField.doubleValue = overallAvailableReservationAmount.doubleValue;
         }
         else {
             NSString *allocationMaxEurVolumeCurrencyString =
-            [SOXFormatters currencyStringForNumber:[accountInfoData allocationMaxEurVolumeForCurrencyType:self.currencyType]
-                                      roundingMode:NSNumberFormatterRoundHalfUp];
-            NSString *totalReservationAmountString = [NSString stringWithFormat:@"%@ (%@%%)"
-                                                      , allocationMaxEurVolumeCurrencyString
-                                                      , [accountInfoData allocationPercentForCurrencyType:self.currencyType]];
+                [SOXFormatters currencyStringForNumber:[accountInfoData allocationMaxEurVolumeForCurrencyType:self.currencyType]
+                                          roundingMode:NSNumberFormatterRoundHalfUp];
+            NSString *totalReservationAmountString                = [NSString stringWithFormat:@"%@ (%@%%)", allocationMaxEurVolumeCurrencyString, [accountInfoData allocationPercentForCurrencyType:self.currencyType]];
             self.fidorReservationTotalAmountTextField.stringValue = totalReservationAmountString;
-            self.fidorReservationTotalAmountTextField.toolTip = [NSString stringWithFormat:@"%@%% of total reservation of %@ €"
-                                                                 , [accountInfoData allocationPercentForCurrencyType:self.currencyType]
-                                                                 , overallTotalReservationAmount];
+            self.fidorReservationTotalAmountTextField.toolTip     = [NSString stringWithFormat:@"%@%% of total reservation of %@ €", [accountInfoData allocationPercentForCurrencyType:self.currencyType], overallTotalReservationAmount];
 
             self.fidorReservationAvailableAmountTextField.doubleValue = [accountInfoData allocationEurVolumeOpenOrdersForCurrencyType:self.currencyType].doubleValue;
         }
 
         // Reservation end date
-        NSString *validUntilString = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:accountInfoData.bankReservation_validUntil];
+        NSString *validUntilString                           = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:accountInfoData.bankReservation_validUntil];
         self.fidorReservationValidUntilTextField.stringValue = validUntilString;
-        NSString *reservedAtString = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:accountInfoData.bankReservation_reservedAt];
-        self.fidorReservationValidUntilTextField.toolTip = [NSString stringWithFormat:@"Reserved at %@"
-                                                            , reservedAtString];
+        NSString *reservedAtString                           = [SOXFormatters stringDateTimeStringForRFC3339DateTimeString:accountInfoData.bankReservation_reservedAt];
+        self.fidorReservationValidUntilTextField.toolTip     = [NSString stringWithFormat:@"Reserved at %@", reservedAtString];
     }
     else {
-        self.fidorReservationHeadlineTextField.textColor = [NSColor redColor];
+        self.fidorReservationHeadlineTextField.textColor   = [NSColor redColor];
         self.fidorReservationHeadlineTextField.stringValue = @"No Fidor Reservation";
     }
 }
@@ -335,25 +316,24 @@
     // Header
     NSString *ratesHeadlineText;
     if (self.currencyType == BitcoinDE_CurrencyTypeUnknown) {
-        ratesHeadlineText = @"Weighted rates";
+        ratesHeadlineText                              = @"Weighted rates";
         self.ratesValuesAndDescriptionStackView.hidden = YES;
     }
     else {
-        ratesHeadlineText = [NSString stringWithFormat:@"Weighted %@ rates"
-                             , currencyTypeString];
+        ratesHeadlineText                              = [NSString stringWithFormat:@"Weighted %@ rates", currencyTypeString];
         self.ratesValuesAndDescriptionStackView.hidden = NO;
 
         // Rate figures
         SOXRates_BitcoinDE_Data *ratesData = (SOXRates_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].ratesData;
         if (ratesData == nil) {
-            self.ratesRateWeightedTextField.stringValue = @"...";
-            self.ratesRateWeighted3hTextField.stringValue = @"...";
+            self.ratesRateWeightedTextField.stringValue    = @"...";
+            self.ratesRateWeighted3hTextField.stringValue  = @"...";
             self.ratesRateWeighted12hTextField.stringValue = @"...";
         }
         else {
-            self.ratesRateWeightedTextField.objectValue     = [ratesData rateWeightedForCurrencyType:self.currencyType];
-            self.ratesRateWeighted3hTextField.objectValue   = [ratesData rateWeighted3hForCurrencyType:self.currencyType];
-            self.ratesRateWeighted12hTextField.objectValue  = [ratesData rateWeighted12hForCurrencyType:self.currencyType];
+            self.ratesRateWeightedTextField.objectValue    = [ratesData rateWeightedForCurrencyType:self.currencyType];
+            self.ratesRateWeighted3hTextField.objectValue  = [ratesData rateWeighted3hForCurrencyType:self.currencyType];
+            self.ratesRateWeighted12hTextField.objectValue = [ratesData rateWeighted12hForCurrencyType:self.currencyType];
         }
     }
 
@@ -375,37 +355,29 @@
              currencyType < BitcoinDE_CurrencyType_EndOfType;
              currencyType++) {
             NSDecimalNumber *totalCoinAmount = [SOXMarket_BitcoinDE_Core totalAmountForCurrencyType:currencyType];
-            NSDecimalNumber *rateWeighted = [SOXMarket_BitcoinDE_Core rateWeightedForCurrencyType:currencyType];
-            if (totalCoinAmount
-                && [totalCoinAmount isNotEqualTo:[NSDecimalNumber notANumber]]
-                && rateWeighted
-                && [rateWeighted isNotEqualTo:[NSDecimalNumber notANumber]]) {
+            NSDecimalNumber *rateWeighted    = [SOXMarket_BitcoinDE_Core rateWeightedForCurrencyType:currencyType];
+            if (totalCoinAmount && [totalCoinAmount isNotEqualTo:[NSDecimalNumber notANumber]] && rateWeighted && [rateWeighted isNotEqualTo:[NSDecimalNumber notANumber]]) {
 
-                NSDecimalNumber *coinValue = [totalCoinAmount decimalNumberByMultiplyingBy:rateWeighted ];
-                totalVolume = [totalVolume decimalNumberByAdding:coinValue];
+                NSDecimalNumber *coinValue = [totalCoinAmount decimalNumberByMultiplyingBy:rateWeighted];
+                totalVolume                = [totalVolume decimalNumberByAdding:coinValue];
             }
         }
         self.coinValueTextField.stringValue = [SOXFormatters currencyStringForNumber:totalVolume
                                                                         roundingMode:NSNumberFormatterRoundUp];
     }
     else {
-        coinValueHeadlineText = [NSString stringWithFormat:@"%@ Value"
-                             , currencyTypeString];
+        coinValueHeadlineText = [NSString stringWithFormat:@"%@ Value", currencyTypeString];
         // Volume figures
         NSDecimalNumber *totalCoinAmount = [SOXMarket_BitcoinDE_Core totalAmountForCurrencyType:self.currencyType];
-        NSDecimalNumber *rateWeighted = [SOXMarket_BitcoinDE_Core rateWeightedForCurrencyType:self.currencyType];
-        if (totalCoinAmount
-            && [totalCoinAmount isNotEqualTo:[NSDecimalNumber notANumber]]
-            && rateWeighted
-            && [rateWeighted isNotEqualTo:[NSDecimalNumber notANumber]]) {
+        NSDecimalNumber *rateWeighted    = [SOXMarket_BitcoinDE_Core rateWeightedForCurrencyType:self.currencyType];
+        if (totalCoinAmount && [totalCoinAmount isNotEqualTo:[NSDecimalNumber notANumber]] && rateWeighted && [rateWeighted isNotEqualTo:[NSDecimalNumber notANumber]]) {
 
-            totalVolume = [totalCoinAmount decimalNumberByMultiplyingBy:rateWeighted ];
-
+            totalVolume = [totalCoinAmount decimalNumberByMultiplyingBy:rateWeighted];
         }
     }
 
     self.coinValueHeadlineTextField.stringValue = coinValueHeadlineText;
-    self.coinValueTextField.stringValue = [SOXFormatters currencyStringForNumber:totalVolume
+    self.coinValueTextField.stringValue         = [SOXFormatters currencyStringForNumber:totalVolume
                                                                     roundingMode:NSNumberFormatterRoundUp];
 }
 
@@ -419,7 +391,7 @@
 #pragma mark - Notification methods
 - (void)presentBannerForCurrencyType:(NSNotification *)notification {
     NSNumber *currencyTypeNumber = notification.object;
-    self.currencyType = currencyTypeNumber.unsignedIntegerValue;
+    self.currencyType            = currencyTypeNumber.unsignedIntegerValue;
 
     [self updateUIForCoinAmounts];
     [self updateUIForAllocations];
@@ -432,7 +404,6 @@
         if (newValidKeysAndSecrets) {
             [[SOXMarket_BitcoinDE_Core sharedCore] startAccountInfoUpdate];
             [[SOXMarket_BitcoinDE_Core sharedCore] startAllRatesUpdate];
-
         }
         else {
             [[SOXMarket_BitcoinDE_Core sharedCore] resetBannerInformation];
@@ -466,14 +437,14 @@
 
 #pragma mark - Reload Timer
 - (void)startRatesReloadTimer {
-//    DDLogInfo(@"***** NEW RATE: %@", [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted);
-//    
-//    NSTimer *ratesReloadTimer  = [NSTimer scheduledTimerWithTimeInterval:600
-//                                                                     target:self
-//                                                                   selector:@selector(requestServerData)
-//                                                                   userInfo:nil
-//                                                                    repeats:NO];
-//    [[NSRunLoop mainRunLoop] addTimer:ratesReloadTimer forMode:NSDefaultRunLoopMode];
+    //    DDLogInfo(@"***** NEW RATE: %@", [SOXMarket_BitcoinDE_Core sharedCore].rate_weighted);
+    //
+    //    NSTimer *ratesReloadTimer  = [NSTimer scheduledTimerWithTimeInterval:600
+    //                                                                     target:self
+    //                                                                   selector:@selector(requestServerData)
+    //                                                                   userInfo:nil
+    //                                                                    repeats:NO];
+    //    [[NSRunLoop mainRunLoop] addTimer:ratesReloadTimer forMode:NSDefaultRunLoopMode];
 }
 
 

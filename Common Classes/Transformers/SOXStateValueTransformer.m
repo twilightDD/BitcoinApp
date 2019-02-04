@@ -20,7 +20,7 @@
 
 - (id)transformedValue:(id)value {
     if ([value isKindOfClass:[NSNumber class]]) {
-        NSNumber *state = value;
+        NSNumber *state       = value;
         NSString *stateString = nil;
         switch (state.integerValue) {
             case -2:
@@ -38,7 +38,7 @@
             default:
                 break;
         }
-        return  stateString;
+        return stateString;
     }
 
     return @"Error";

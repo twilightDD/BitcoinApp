@@ -20,22 +20,22 @@
     switch (serverCommandType) {
         case BitcoinDE_ShowBuyOrderbookCommandType:;
         case BitcoinDE_ShowSellOrderbookCommandType:
-            payload = payloadDictionary; //[SOXShowOrderbook_BitcoinDE_Data orderbookDataArrayForShowOrderbookDictionary:payloadDictionary];
+            payload = payloadDictionary;   //[SOXShowOrderbook_BitcoinDE_Data orderbookDataArrayForShowOrderbookDictionary:payloadDictionary];
             break;
         case BitcoinDE_ShowMyOrdersCommandType:
             payload = payloadDictionary;
             break;
         case BitcoinDE_ShowMyOrderDetailsCommandType:
-            
+
             break;
         case BitcoinDE_ShowAccountInfoCommandType:
             payload = [SOXAccountInfo_BitcoinDE_Data accountInfoDataForAccountInfoDictionary:payloadDictionary];
             break;
         case BitcoinDE_ShowOrderbookCompactCommandType:
-            
+
             break;
         case BitcoinDE_ShowPublicTradeHistoryCommandType:
-            
+
             break;
         case BitcoinDE_ShowRatesCommandType:
             payload = [SOXRates_BitcoinDE_Data rateDataForRateInfoDictionary:payloadDictionary];
@@ -54,14 +54,14 @@
             break;
         case BitcoinDE_ExecuteTrade:
             payload = @"Das ist nur ein Payloaddummy. Bei success bekommen wir keine Payload, aber wir brauchen irgendwas, "
-            "was als Payload fungiert, weil sonst gibt es einen Fehler und der BalanceTrade wird nicht ausgeführt";
+                       "was als Payload fungiert, weil sonst gibt es einen Fehler und der BalanceTrade wird nicht ausgeführt";
             break;
         default:
             // error
-            
+
             break;
     }
-    
+
     return payload;
 }
 

@@ -9,27 +9,27 @@
 #import "SOXAbstractData.h"
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
-typedef NS_ENUM (NSUInteger, BitcoinDE_MyTradeHistoryParameter_OrderType) {
-    BitcoinDE_MyTradeHistoryParameter_UnknownOrderType = 0
-    , BitcoinDE_MyTradeHistoryParameter_AllOrderType
-    , BitcoinDE_MyTradeHistoryParameter_BuyOrderType
-    , BitcoinDE_MyTradeHistoryParameter_SellOrderType
-    , BitcoinDE_MyTradeHistoryParameter_EndOfOrderType
+typedef NS_ENUM(NSUInteger, BitcoinDE_MyTradeHistoryParameter_OrderType) {
+    BitcoinDE_MyTradeHistoryParameter_UnknownOrderType = 0,
+    BitcoinDE_MyTradeHistoryParameter_AllOrderType,
+    BitcoinDE_MyTradeHistoryParameter_BuyOrderType,
+    BitcoinDE_MyTradeHistoryParameter_SellOrderType,
+    BitcoinDE_MyTradeHistoryParameter_EndOfOrderType
 };
 
-typedef NS_ENUM (NSUInteger, BitcoinDE_MyTradeHistoryParameter_TradeStateType) {
-    BitcoinDE_MyTradeHistoryParameter_UnknownTradeStateType       = 0
-    , BitcoinDE_MyTradeHistoryParameter_SuccessfulTradeStateType
-    , BitcoinDE_MyTradeHistoryParameter_PendingTradeStateType
-    , BitcoinDE_MyTradeHistoryParameter_CancelledTradeStateType
-    , BitcoinDE_MyTradeHistoryParameter_EndOfTradeStateType
+typedef NS_ENUM(NSUInteger, BitcoinDE_MyTradeHistoryParameter_TradeStateType) {
+    BitcoinDE_MyTradeHistoryParameter_UnknownTradeStateType = 0,
+    BitcoinDE_MyTradeHistoryParameter_SuccessfulTradeStateType,
+    BitcoinDE_MyTradeHistoryParameter_PendingTradeStateType,
+    BitcoinDE_MyTradeHistoryParameter_CancelledTradeStateType,
+    BitcoinDE_MyTradeHistoryParameter_EndOfTradeStateType
 };
 
-typedef NS_ENUM (NSUInteger, BitcoinDE_MyTradeHistoryParameter_PaymentMethodType) {
-    BitcoinDE_MyTradeHistoryParameter_UnknownPaymentMethodType       = 0
-    , BitcoinDE_MyTradeHistoryParameter_SEPAPaymentMethodType
-    , BitcoinDE_MyTradeHistoryParameter_ExpressPaymentMethodType
-    , BitcoinDE_MyTradeHistoryParameter_EndOfPaymentMethodType
+typedef NS_ENUM(NSUInteger, BitcoinDE_MyTradeHistoryParameter_PaymentMethodType) {
+    BitcoinDE_MyTradeHistoryParameter_UnknownPaymentMethodType = 0,
+    BitcoinDE_MyTradeHistoryParameter_SEPAPaymentMethodType,
+    BitcoinDE_MyTradeHistoryParameter_ExpressPaymentMethodType,
+    BitcoinDE_MyTradeHistoryParameter_EndOfPaymentMethodType
 };
 
 @interface SOXMyTrades_BitcoinDE_Data : SOXAbstractData
@@ -51,7 +51,7 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_MyTradeHistoryParameter_PaymentMethodType
 @property (strong, nonatomic, readonly) NSString *trading_pair;
 
 @property (strong, nonatomic, readonly) NSString *tradingPartnerInfo_Username;
-@property (nonatomic, readonly)         BOOL tradingPartnerInfo_IsKYCFull;
+@property (nonatomic, readonly) BOOL tradingPartnerInfo_IsKYCFull;
 @property (strong, nonatomic, readonly) NSString *tradingPartnerInfo_TrustLevel;
 @property (strong, nonatomic, readonly) NSString *tradingPartnerInfo_BankName;
 @property (strong, nonatomic, readonly) NSString *tradingPartnerInfo_BIC;
@@ -75,5 +75,5 @@ typedef NS_ENUM (NSUInteger, BitcoinDE_MyTradeHistoryParameter_PaymentMethodType
 + (NSString *)titleForTradeStateType:(BitcoinDE_MyTradeHistoryParameter_TradeStateType)tradeStateType;
 + (NSString *)titleForPaymentMethodType:(BitcoinDE_MyTradeHistoryParameter_PaymentMethodType)paymentMethodType;
 
-+ (NSString *)pasteboardStringForTrades:(NSArray <SOXMyTrades_BitcoinDE_Data *> *)trades;
++ (NSString *)pasteboardStringForTrades:(NSArray<SOXMyTrades_BitcoinDE_Data *> *)trades;
 @end

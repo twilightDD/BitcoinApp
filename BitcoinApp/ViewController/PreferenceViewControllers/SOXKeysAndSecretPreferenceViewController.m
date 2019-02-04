@@ -35,7 +35,7 @@
 @property (strong) IBOutlet NSArrayController *keysAndSecretsArrayController;
 
 #pragma mark | properties
-@property (strong, nonatomic) NSMutableArray <NSMutableDictionary*> *keysAndSecrets;
+@property (strong, nonatomic) NSMutableArray<NSMutableDictionary *> *keysAndSecrets;
 
 @property (strong, nonatomic) SOXLogWindowController *errorWindowController;
 
@@ -46,7 +46,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.errorWindowController = [(MacAppDelegate*)[[NSApplication sharedApplication] delegate] errorWindowController];
+    self.errorWindowController = [(MacAppDelegate *)[[NSApplication sharedApplication] delegate] errorWindowController];
 
     for (NSTableColumn *column in self.tableView.tableColumns) {
         NSFont *font = [NSFont systemFontOfSize:[NSFont systemFontSize]];
@@ -77,8 +77,8 @@
 }
 
 - (void)saveToKeychain {
-    NSArray <NSDictionary *> *validationResults = [self validateKeysAndSecretsInput];
-    NSError *error = nil;
+    NSArray<NSDictionary *> *validationResults = [self validateKeysAndSecretsInput];
+    NSError *error                             = nil;
     if (validationResults.count == 0) {
         [SOXPreferencesCore saveKeysAndSecrets:self.keysAndSecrets
                                          error:error];
@@ -91,17 +91,17 @@
         }
     }
     else {
-        NSAlert *validationErrorAlert = [[NSAlert alloc] init];
+        NSAlert *validationErrorAlert    = [[NSAlert alloc] init];
         validationErrorAlert.messageText = @"Validation error";
-        NSString *informationText = @"Fix errors in:\n";
+        NSString *informationText        = @"Fix errors in:\n";
         for (NSDictionary *dictionary in validationResults) {
             NSNumber *row = [dictionary objectForKey:@"row"];
             if ([dictionary.allKeys containsObject:APIUserKey]) {
-                NSString *text = [NSString stringWithFormat:@"Row %@ (User Key)\n", row];
+                NSString *text  = [NSString stringWithFormat:@"Row %@ (User Key)\n", row];
                 informationText = [informationText stringByAppendingString:text];
             }
             if ([dictionary.allKeys containsObject:APISecretKey]) {
-                NSString *text = [NSString stringWithFormat:@"Row %@ (Secret)\n", row];
+                NSString *text  = [NSString stringWithFormat:@"Row %@ (Secret)\n", row];
                 informationText = [informationText stringByAppendingString:text];
             }
         }
@@ -114,14 +114,12 @@
 - (IBAction)addKeySecretPairButtonAction:(NSButton *)sender {
     if (self.keysAndSecrets.count < 10) {
         NSMutableDictionary *newDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                        [NSString stringWithFormat:@"enter key"], APIUserKey
-                                        , [NSString stringWithFormat:@"enter secret"], APISecretKey
-                                        , nil];
+                                                                [NSString stringWithFormat:@"enter key"], APIUserKey, [NSString stringWithFormat:@"enter secret"], APISecretKey, nil];
         [self.keysAndSecrets addObject:newDict];
         [self.keysAndSecretsArrayController rearrangeObjects];
 
         [self.tableView editColumn:0
-                               row:self.keysAndSecrets.count-1
+                               row:self.keysAndSecrets.count - 1
                          withEvent:nil
                             select:YES];
 
@@ -141,7 +139,7 @@
 
 
 - (IBAction)saveButtonAction:(NSButton *)sender {
-   [self saveToKeychain];
+    [self saveToKeychain];
 }
 
 - (IBAction)dismissButtonAction:(NSButtonCell *)sender {
@@ -150,8 +148,8 @@
 
 
 - (IBAction)importButtonAction:(NSButton *)sender {
-    NSOpenPanel *openPanel = [NSOpenPanel openPanel];
-    openPanel.title = @"Load Key and Secrets";
+    NSOpenPanel *openPanel     = [NSOpenPanel openPanel];
+    openPanel.title            = @"Load Key and Secrets";
     openPanel.allowedFileTypes = @[@"txt"];
 
     weakify(self);
@@ -186,9 +184,9 @@
 - (void)setupUI {
     self.headLineTextField.stringValue = @"Keys and Secrets";
 
-    self.saveButton.title = @"Save to Keychain";
+    self.saveButton.title    = @"Save to Keychain";
     self.dismissButton.title = @"Reset";
-    
+
     self.importButton.title = @"Import";
 }
 
@@ -209,92 +207,88 @@
 }
 
 - (void)importKeysAndSecrets:(NSString *)keysAndSecrets {
-    NSArray <NSString *> *lines = [keysAndSecrets componentsSeparatedByString:@"\n"];
+    NSArray<NSString *> *lines = [keysAndSecrets componentsSeparatedByString:@"\n"];
 
-    __block BOOL paringErrorOccured = NO;
+    __block BOOL paringErrorOccured                = NO;
     __block NSMutableArray *importedKeysAndSecrets = [NSMutableArray array];
-    __block NSString *errorText = @"";
-    [lines enumerateObjectsUsingBlock:^(NSString * _Nonnull line, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSArray <NSString *> *lineComponents = [line componentsSeparatedByString:@":"];
+    __block NSString *errorText                    = @"";
+    [lines enumerateObjectsUsingBlock:^(NSString *_Nonnull line, NSUInteger idx, BOOL *_Nonnull stop) {
+        NSArray<NSString *> *lineComponents = [line componentsSeparatedByString:@":"];
         if (lineComponents.count == 2) {
-            NSString *key = [lineComponents objectAtIndex:0];
-            BOOL validateKey = [SOXPreferencesCore validateKey:key];
-            NSString *secret = [lineComponents objectAtIndex:1];
+            NSString *key       = [lineComponents objectAtIndex:0];
+            BOOL validateKey    = [SOXPreferencesCore validateKey:key];
+            NSString *secret    = [lineComponents objectAtIndex:1];
             BOOL validateSecret = [SOXPreferencesCore validateSecret:secret];
 
 
-            if (validateKey
-                && validateSecret) {
+            if (validateKey && validateSecret) {
                 NSMutableDictionary *newKeyAndSecretDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                                            key, APIUserKey,
-                                                            secret, APISecretKey,
-                                                            nil];
+                                                                                    key, APIUserKey,
+                                                                                    secret, APISecretKey,
+                                                                                    nil];
 
                 [importedKeysAndSecrets addObject:newKeyAndSecretDict];
             }
             else {
                 paringErrorOccured = YES;
                 if (validateKey == NO) {
-                    NSString *lineErrorText = [NSString stringWithFormat:@"Line %tu: Error in key\n",idx+1];
-                    errorText = [errorText stringByAppendingString:lineErrorText];
+                    NSString *lineErrorText = [NSString stringWithFormat:@"Line %tu: Error in key\n", idx + 1];
+                    errorText               = [errorText stringByAppendingString:lineErrorText];
                 }
                 if (validateSecret == NO) {
-                    NSString *lineErrorText = [NSString stringWithFormat:@"Line %tu: Error in secret\n",idx+1];
-                    errorText = [errorText stringByAppendingString:lineErrorText];
+                    NSString *lineErrorText = [NSString stringWithFormat:@"Line %tu: Error in secret\n", idx + 1];
+                    errorText               = [errorText stringByAppendingString:lineErrorText];
                 }
             }
         }
         else {
-            paringErrorOccured = YES;
-            NSString *lineErrorText = [NSString stringWithFormat:@"Line %tu: Format error\n",idx+1];
-            errorText = [errorText stringByAppendingString:lineErrorText];
+            paringErrorOccured      = YES;
+            NSString *lineErrorText = [NSString stringWithFormat:@"Line %tu: Format error\n", idx + 1];
+            errorText               = [errorText stringByAppendingString:lineErrorText];
         }
     }];
 
-    if (paringErrorOccured == NO
-        && importedKeysAndSecrets.count > 0) {
+    if (paringErrorOccured == NO && importedKeysAndSecrets.count > 0) {
         [self.keysAndSecrets addObjectsFromArray:importedKeysAndSecrets];
         [self.keysAndSecretsArrayController rearrangeObjects];
     }
 
     NSAlert *alertPanel = [[NSAlert alloc] init];
     if (paringErrorOccured == NO) {
-        alertPanel.messageText = @"Import successful";
-        alertPanel.informativeText = [NSString stringWithFormat:@"%tu key secret pairs imported."
-                                      , importedKeysAndSecrets.count];
+        alertPanel.messageText     = @"Import successful";
+        alertPanel.informativeText = [NSString stringWithFormat:@"%tu key secret pairs imported.", importedKeysAndSecrets.count];
     }
     else {
-        alertPanel.messageText = @"Import went wrong. No key secret pairs imported.";
+        alertPanel.messageText     = @"Import went wrong. No key secret pairs imported.";
         alertPanel.informativeText = errorText;
     }
     [alertPanel runModal];
 }
 
-- (NSArray <NSDictionary *> *)validateKeysAndSecretsInput {
+- (NSArray<NSDictionary *> *)validateKeysAndSecretsInput {
     __block NSMutableArray *invalidInputs = [NSMutableArray array];
 
-    [self.keysAndSecrets enumerateObjectsUsingBlock:^(NSMutableDictionary * _Nonnull dictionary,
+    [self.keysAndSecrets enumerateObjectsUsingBlock:^(NSMutableDictionary *_Nonnull dictionary,
                                                       NSUInteger rowCount,
-                                                      BOOL * _Nonnull stop) {
-        NSString *key = [dictionary objectForKey:APIUserKey];
+                                                      BOOL *_Nonnull stop) {
+        NSString *key    = [dictionary objectForKey:APIUserKey];
         BOOL validateKey = [SOXPreferencesCore validateKey:key];
 
-        NSString *secret = [dictionary objectForKey:APISecretKey];
+        NSString *secret    = [dictionary objectForKey:APISecretKey];
         BOOL validateSecret = [SOXPreferencesCore validateSecret:secret];
 
-        if (validateKey == NO
-            || validateSecret == NO) {
+        if (validateKey == NO || validateSecret == NO) {
             NSMutableDictionary *invalidColumn = [NSMutableDictionary dictionary];
             [invalidColumn setObject:@(rowCount)
-                               forKey:@"row"];
+                              forKey:@"row"];
 
             if (validateKey == NO) {
                 [invalidColumn setObject:[NSNull null]
-                                   forKey:APIUserKey];
+                                  forKey:APIUserKey];
             }
             if (validateSecret == NO) {
                 [invalidColumn setObject:[NSNull null]
-                                   forKey:APISecretKey];
+                                  forKey:APISecretKey];
             }
 
             [invalidInputs addObject:[invalidColumn copy]];

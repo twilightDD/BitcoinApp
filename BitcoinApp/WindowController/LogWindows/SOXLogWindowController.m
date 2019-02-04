@@ -16,7 +16,7 @@
 @interface SOXLogWindowController ()
 
 #pragma mark | IBOutlets
-@property (unsafe_unretained) IBOutlet NSTextView  *logTextView;
+@property (unsafe_unretained) IBOutlet NSTextView *logTextView;
 @property (weak) IBOutlet NSScrollView *logScrollView;
 @property (weak) IBOutlet NSButton *clearTextViewButton;
 
@@ -36,13 +36,11 @@
 }
 
 
-
 - (void)showErrorMessage:(SOXErrorMessage_BitcoinDE *)errorMessage {
-//    if (!self.window.isVisible) {
-        [self showWindow:nil];
-//    }
-    NSString *lineWithDate = [NSString stringWithFormat:@"%@"
-                              , [SOXFormatters shortDateLongTimeStringForDate:[NSDate date]]];
+    //    if (!self.window.isVisible) {
+    [self showWindow:nil];
+    //    }
+    NSString *lineWithDate = [NSString stringWithFormat:@"%@", [SOXFormatters shortDateLongTimeStringForDate:[NSDate date]]];
 
     self.logString = [self.logString stringByAppendingString:@"\n-----------\n"];
     self.logString = [self.logString stringByAppendingString:lineWithDate];
@@ -56,12 +54,11 @@
 
 - (void)showMessage:(NSString *)messageString {
     [self showWindow:nil];
-    
+
     self.logString = [self.logString stringByAppendingString:@"\n-----------\n"];
 
-    NSString *lineWithDate = [NSString stringWithFormat:@"%@"
-                              , [SOXFormatters shortDateLongTimeStringForDate:[NSDate date]]];
-    self.logString = [self.logString stringByAppendingString:lineWithDate];
+    NSString *lineWithDate = [NSString stringWithFormat:@"%@", [SOXFormatters shortDateLongTimeStringForDate:[NSDate date]]];
+    self.logString         = [self.logString stringByAppendingString:lineWithDate];
 
     self.logString = [self.logString stringByAppendingString:messageString];
 
@@ -73,18 +70,19 @@
     // we don't have any valid api/secret pair in keychain => don't send anything
     // User beschimpfen
 
-    NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = errorMessage.serverRequestTitle;
+    NSAlert *alert        = [[NSAlert alloc] init];
+    alert.messageText     = errorMessage.serverRequestTitle;
     alert.informativeText = errorMessage.errorMessage;
-    alert.alertStyle = NSAlertStyleCritical;
+    alert.alertStyle      = NSAlertStyleCritical;
     [alert runModal];
 }
 
 #pragma mark - Private methods
 - (void)updateTextView {
     self.logTextView.string = self.logString;
-    NSPoint pt = NSMakePoint(0.0, [[self.logScrollView documentView]
-                                   bounds].size.height);
+    NSPoint pt              = NSMakePoint(0.0, [[self.logScrollView documentView]
+                                      bounds]
+                                      .size.height);
     [self.logScrollView.documentView scrollPoint:pt];
 }
 
@@ -99,16 +97,16 @@
 
     NSString *desktopDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 
-    NSString *dateString = [[NSDate date] description];
-    NSString *fileName = [self.window.title stringByAppendingString:dateString];
-    NSString *filePath = [desktopDirectoryPath stringByAppendingPathComponent:fileName];
+    NSString *dateString            = [[NSDate date] description];
+    NSString *fileName              = [self.window.title stringByAppendingString:dateString];
+    NSString *filePath              = [desktopDirectoryPath stringByAppendingPathComponent:fileName];
     NSString *filePathWithExtension = [filePath stringByAppendingPathExtension:@"txt"];
 
     NSError *writeError = nil;
     [self.logString writeToFile:filePathWithExtension
-                          atomically:YES
-                            encoding:NSStringEncodingConversionAllowLossy
-                               error:&writeError];
+                     atomically:YES
+                       encoding:NSStringEncodingConversionAllowLossy
+                          error:&writeError];
     if (writeError) {
         NSLog(@"WRITE ERROR %@", writeError.localizedDescription);
     }

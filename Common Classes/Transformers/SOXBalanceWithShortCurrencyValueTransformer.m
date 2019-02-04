@@ -24,21 +24,19 @@
 
 - (id)transformedValue:(id)value {
     NSDecimalNumber *balance = nil;
-    NSString *tradingPair = nil;
+    NSString *tradingPair    = nil;
 
     if ([value isKindOfClass:[SOXAccountLedger_BitcoinDE_Data class]]) {
         SOXAccountLedger_BitcoinDE_Data *accountLedgerData = value;
-        balance = accountLedgerData.positionDetails_Balance;
-        tradingPair = accountLedgerData.tradeDetails_trading_pair;
+        balance                                            = accountLedgerData.positionDetails_Balance;
+        tradingPair                                        = accountLedgerData.tradeDetails_trading_pair;
     }
 
     if (balance && tradingPair) {
         BitcoinDE_CurrencyType currencyType = [SOXMarket_BitcoinDE_DefTypes currencyTypeForTradingPairString:tradingPair];
-        NSString *shortCurrencyString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:currencyType];
+        NSString *shortCurrencyString       = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:currencyType];
 
-        NSString *result = [NSString stringWithFormat:@"%@ %@"
-                            , [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:balance]
-                            , shortCurrencyString];
+        NSString *result = [NSString stringWithFormat:@"%@ %@", [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:balance], shortCurrencyString];
         return result;
     }
     else if (balance) {

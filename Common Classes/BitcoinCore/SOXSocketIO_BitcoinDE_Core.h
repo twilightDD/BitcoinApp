@@ -32,11 +32,11 @@
 //                                    delegate:(id <SOXSocketIOCoreProtocol>)delegate;
 + (void)unRegisterForOrderUpdatesForUpdateType:(BitcoinDE_SocketUpdateType)bitcoinDE_UpdateType
                                forCurrencyType:(BitcoinDE_CurrencyType)currencyType
-                                      delegate:(id <SOXSocketIOCoreProtocol>)delegate;
+                                      delegate:(id<SOXSocketIOCoreProtocol>)delegate;
 
 + (void)registerForOrderUpdatesForUpdateType:(BitcoinDE_SocketUpdateType)bitcoinDE_UpdateType
                              forCurrencyType:(BitcoinDE_CurrencyType)currencyType
-                                    delegate:(id <SOXSocketIOCoreProtocol>)delegate;
+                                    delegate:(id<SOXSocketIOCoreProtocol>)delegate;
 
-@property (weak, nonatomic) id <SOXSocketIOCoreProtocol> delegate;
+@property (weak, nonatomic) id<SOXSocketIOCoreProtocol> delegate;
 @end

@@ -67,78 +67,78 @@
 
 - (void)viewWillAppear {
     [super viewWillAppear];
-    
+
     [self setupUI];
 }
 
 #pragma mark - Private methods
 - (void)setupUI {
     self.titleTextField.stringValue = @"Order details";
-    
+
     {
-        self.orderIDDescriptionTextField.stringValue = @"Order ID";
-        self.typeDescriptionTextField.stringValue = @"Type";
+        self.orderIDDescriptionTextField.stringValue   = @"Order ID";
+        self.typeDescriptionTextField.stringValue      = @"Type";
         self.maxAmountDescriptionTextField.stringValue = @"Max. amount";
         self.minAmountDescriptionTextField.stringValue = @"Min. amoun";
-        self.priceDescriptionTextField.stringValue = @"Price";
+        self.priceDescriptionTextField.stringValue     = @"Price";
         self.maxVolumeDescriptionTextField.stringValue = @"Max. Volume";
         self.minVolumeDescriptionTextField.stringValue = @"Min. Volume";
-        
+
         self.createNewForRemainingDescriptionTextField.stringValue = @"Create new for remaining";
-        self.stateDescriptionTextField.stringValue = @"State";
-        self.minTrustLevelDescriptionTextField.stringValue = @"Min. trust level";
-        self.onlyKYCFullDescriptionTextField.stringValue = @"Only KYC Full";
-        self.paymentOptionDescriptionTextField.stringValue = @"Payment option";
-        self.seatOfBankDescriptionTextField.stringValue = @"Seat Of Bank";
-        
+        self.stateDescriptionTextField.stringValue                 = @"State";
+        self.minTrustLevelDescriptionTextField.stringValue         = @"Min. trust level";
+        self.onlyKYCFullDescriptionTextField.stringValue           = @"Only KYC Full";
+        self.paymentOptionDescriptionTextField.stringValue         = @"Payment option";
+        self.seatOfBankDescriptionTextField.stringValue            = @"Seat Of Bank";
+
         self.closeButton.stringValue = @"Close";
     }
-    
+
     {
-        self.orderIDTextField.stringValue = self.myOrder.orderInformation_orderID;
-        self.typeTextField.stringValue = self.myOrder.orderInformation_type;
+        self.orderIDTextField.stringValue   = self.myOrder.orderInformation_orderID;
+        self.typeTextField.stringValue      = self.myOrder.orderInformation_type;
         self.maxAmountTextField.doubleValue = self.myOrder.orderInformation_maxAmount.doubleValue;
         self.minAmountTextField.doubleValue = self.myOrder.orderInformation_minAmount.doubleValue;
-        self.priceTextField.doubleValue = self.myOrder.orderInformation_price.doubleValue;
+        self.priceTextField.doubleValue     = self.myOrder.orderInformation_price.doubleValue;
         self.maxVolumeTextField.doubleValue = self.myOrder.orderInformation_maxVolume.doubleValue;
         self.minVolumeTextField.doubleValue = self.myOrder.orderInformation_minVolume.doubleValue;
-        
+
         self.createNewForRemainingTextField.stringValue = self.myOrder.orderInformation_newOrderForRemainingAmount ? @"Yes" : @"No";
-        self.stateTextField.stringValue = self.myOrder.orderInformation_state.stringValue;
-        NSString *minTrustLevel = self.myOrder.orderRequirements_minTrustLevel;
+        self.stateTextField.stringValue                 = self.myOrder.orderInformation_state.stringValue;
+        NSString *minTrustLevel                         = self.myOrder.orderRequirements_minTrustLevel;
         if (!minTrustLevel) {
             minTrustLevel = @"-";
         }
         self.minTrustLevelTextField.stringValue = minTrustLevel;
-        self.onlyKYCFullTextField.stringValue = self.myOrder.orderRequirements_onlyKYCFull ? @"Yes" : @"No";
-        
+        self.onlyKYCFullTextField.stringValue   = self.myOrder.orderRequirements_onlyKYCFull ? @"Yes" : @"No";
+
         NSString *paymentOption = self.myOrder.orderRequirements_paymentOption;
         if (!paymentOption) {
             paymentOption = @"-";
         }
         self.paymentOptionTextField.stringValue = paymentOption;
-        
+
         NSArray *seatsOfBank = self.myOrder.orderRequirements_seatOfBank;
         NSString *seatsOfBankString;
         if (!seatsOfBank) {
             seatsOfBankString = @"-";
         }
-        else if ([seatsOfBank containsObject:@"DE"] ) {
+        else if ([seatsOfBank containsObject:@"DE"]) {
             seatsOfBankString = [NSString stringWithFormat:@"DE + %tu andere", seatsOfBank.count - 1];
         }
         else {
-            seatsOfBankString = [NSString stringWithFormat:@"Kein DE + %tu andere", seatsOfBank.count -1];
+            seatsOfBankString = [NSString stringWithFormat:@"Kein DE + %tu andere", seatsOfBank.count - 1];
         }
         self.seatOfBankDTextField.stringValue = seatsOfBankString;
     }
-    
+
     {
-        self.createdAtDescriptionTextField.stringValue = @"Created At";
+        self.createdAtDescriptionTextField.stringValue   = @"Created At";
         self.endDateTimeDescriptionTextField.stringValue = @"End Date";
-        
-        NSString *createdAt = [SOXFormatters shortDateShortTimeStringForDate:self.myOrder.orderInformation_createdAt];
-        self.createdAtTextField.stringValue = createdAt ? createdAt : @"-";
-        NSString *endDateTime = [SOXFormatters shortDateShortTimeStringForDate:self.myOrder.orderInformation_endDateTime];
+
+        NSString *createdAt                   = [SOXFormatters shortDateShortTimeStringForDate:self.myOrder.orderInformation_createdAt];
+        self.createdAtTextField.stringValue   = createdAt ? createdAt : @"-";
+        NSString *endDateTime                 = [SOXFormatters shortDateShortTimeStringForDate:self.myOrder.orderInformation_endDateTime];
         self.endDateTimeTextField.stringValue = endDateTime ? endDateTime : @"-";
     }
 }

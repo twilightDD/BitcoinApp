@@ -8,24 +8,24 @@
 
 #import "SOXPreferenceCenter.h"
 
-static NSString *UserDef_Domain_AutomaticallyLoadOrderbookKey = @"de.2sox.coiner.domain_automaticallyLoadOrderbook";
-static NSString *UserDef_Domain_AutomaticallyLoadBannerKey = @"de.2sox.coiner.domain_automaticallyLoadBanner";
-static NSString *UserDef_Domain_LoadStatisticsForCurrencyTypeKey = @"de.2sox.coiner.domain_loadStatisticsForCurrencyType";
-static NSString *UserDef_Domain_OrderViewControllerSEPAKey = @"de.2sox.coiner.domain_noSepaPaymentOptionFilter";
+static NSString *UserDef_Domain_AutomaticallyLoadOrderbookKey     = @"de.2sox.coiner.domain_automaticallyLoadOrderbook";
+static NSString *UserDef_Domain_AutomaticallyLoadBannerKey        = @"de.2sox.coiner.domain_automaticallyLoadBanner";
+static NSString *UserDef_Domain_LoadStatisticsForCurrencyTypeKey  = @"de.2sox.coiner.domain_loadStatisticsForCurrencyType";
+static NSString *UserDef_Domain_OrderViewControllerSEPAKey        = @"de.2sox.coiner.domain_noSepaPaymentOptionFilter";
 static NSString *UserDef_Domain_OrderViewControllerCountryCodeKey = @"de.2sox.coiner.domain_countryCodeFilter";
-static NSString *UserDef_FirstAppStartKey = @"de.2sox.coiner.domain_date";
+static NSString *UserDef_FirstAppStartKey                         = @"de.2sox.coiner.domain_date";
 
-static NSString *UserDef_default_kycOnly = @"de.2sox.coiner.default_KYCOnly";
+static NSString *UserDef_default_kycOnly                      = @"de.2sox.coiner.default_KYCOnly";
 static NSString *UserDef_default_reNewOrderForRemainingAmount = @"de.2sox.coiner.default_reNewOrderForRemainingAmount";
-static NSString *UserDef_default_trustLevelNewOrder = @"de.2sox.coiner.default_trustLevelNewOrder";
-static NSString *UserDef_default_endDateTimespan = @"de.2sox.coiner.default_endDateTimespan";
-static NSString *UserDef_default_autoUpdateInfoTabs = @"de.2sox.coiner.default_autoUpdateInfoTabs";
+static NSString *UserDef_default_trustLevelNewOrder           = @"de.2sox.coiner.default_trustLevelNewOrder";
+static NSString *UserDef_default_endDateTimespan              = @"de.2sox.coiner.default_endDateTimespan";
+static NSString *UserDef_default_autoUpdateInfoTabs           = @"de.2sox.coiner.default_autoUpdateInfoTabs";
 
 @implementation SOXPreferenceCenter
 
 #pragma mark - General
 + (void)resetAllSettings {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *userDefaults           = [NSUserDefaults standardUserDefaults];
     NSDictionary *dictionaryRepresentation = [userDefaults dictionaryRepresentation];
 
     for (NSString *userDefaultKey in dictionaryRepresentation.allKeys) {
@@ -38,7 +38,7 @@ static NSString *UserDef_default_autoUpdateInfoTabs = @"de.2sox.coiner.default_a
 }
 
 + (BOOL)isVeryFirstAppStart {
-    BOOL isVeryFirstAppStart = NO;
+    BOOL isVeryFirstAppStart  = NO;
     NSDate *firstAppStartDate = [self userDefaultForKey:UserDef_FirstAppStartKey];
     if (firstAppStartDate == nil) {
         isVeryFirstAppStart = YES;
@@ -101,10 +101,10 @@ static NSString *UserDef_default_autoUpdateInfoTabs = @"de.2sox.coiner.default_a
 #pragma mark - Defaults
 + (BOOL)automaticallyLoadOrderbookForOrderType:(BitcoinDE_OrderType)orderType
                                forCurrencyType:(BitcoinDE_CurrencyType)currencyType {
-    NSString *userDefaultKey = [self userDefaultKeyForDomain:UserDef_Domain_AutomaticallyLoadOrderbookKey
+    NSString *userDefaultKey        = [self userDefaultKeyForDomain:UserDef_Domain_AutomaticallyLoadOrderbookKey
                                                    orderType:orderType
                                                 currencyType:currencyType];
-    NSNumber *userDefault = [SOXPreferenceCenter userDefaultForKey:userDefaultKey];
+    NSNumber *userDefault           = [SOXPreferenceCenter userDefaultForKey:userDefaultKey];
     BOOL automaticallyLoadOrderbook = userDefault.boolValue;
     return automaticallyLoadOrderbook;
 }
@@ -125,14 +125,13 @@ static NSString *UserDef_default_autoUpdateInfoTabs = @"de.2sox.coiner.default_a
                                                 currencyType:currencyType];
     [self setUserDefaultObject:@(automaticallyLoadOrderbook)
                         forKey:userDefaultKey];
-
 }
 
 + (BOOL)automaticallyLoadBannerForCurrencyType:(BitcoinDE_CurrencyType)currencyType {
-    NSString *userDefaultKey = [self userDefaultKeyForDomain:UserDef_Domain_AutomaticallyLoadBannerKey
+    NSString *userDefaultKey     = [self userDefaultKeyForDomain:UserDef_Domain_AutomaticallyLoadBannerKey
                                                    orderType:BitcoinDE_OrderTypeUnknown
                                                 currencyType:currencyType];
-    NSNumber *userDefault = [SOXPreferenceCenter userDefaultForKey:userDefaultKey];
+    NSNumber *userDefault        = [SOXPreferenceCenter userDefaultForKey:userDefaultKey];
     BOOL automaticallyLoadBanner = userDefault.boolValue;
     return automaticallyLoadBanner;
 }
@@ -157,8 +156,8 @@ static NSString *UserDef_default_autoUpdateInfoTabs = @"de.2sox.coiner.default_a
     NSString *userDefaultKey = [self userDefaultKeyForDomain:UserDef_Domain_LoadStatisticsForCurrencyTypeKey
                                                    orderType:BitcoinDE_OrderTypeUnknown
                                                 currencyType:currencyType];
-    NSNumber *userDefault = [SOXPreferenceCenter userDefaultForKey:userDefaultKey];
-    BOOL loadStatistics = userDefault.boolValue;
+    NSNumber *userDefault    = [SOXPreferenceCenter userDefaultForKey:userDefaultKey];
+    BOOL loadStatistics      = userDefault.boolValue;
     return loadStatistics;
 }
 
@@ -180,7 +179,7 @@ static NSString *UserDef_default_autoUpdateInfoTabs = @"de.2sox.coiner.default_a
 #pragma mark | KYC only
 + (BOOL)defaultKYCOnly {
     NSNumber *userDefault = [SOXPreferenceCenter userDefaultForKey:UserDef_default_kycOnly];
-    BOOL defaultKYCOnly = userDefault.boolValue;
+    BOOL defaultKYCOnly   = userDefault.boolValue;
     return defaultKYCOnly;
 }
 
@@ -190,7 +189,7 @@ static NSString *UserDef_default_autoUpdateInfoTabs = @"de.2sox.coiner.default_a
 }
 
 + (BOOL)reNewOrderForRemainingAmount {
-    NSNumber *userDefault = [SOXPreferenceCenter userDefaultForKey:UserDef_default_reNewOrderForRemainingAmount];
+    NSNumber *userDefault             = [SOXPreferenceCenter userDefaultForKey:UserDef_default_reNewOrderForRemainingAmount];
     BOOL reNewOrderForRemainingAmount = userDefault.boolValue;
     return reNewOrderForRemainingAmount;
 }
@@ -205,7 +204,7 @@ static NSString *UserDef_default_autoUpdateInfoTabs = @"de.2sox.coiner.default_a
 }
 
 + (BitcoinDE_TrustLevel)defaultTrustLevelForNewOrder {
-    NSNumber *userDefault = [SOXPreferenceCenter userDefaultForKey:UserDef_default_trustLevelNewOrder];
+    NSNumber *userDefault                             = [SOXPreferenceCenter userDefaultForKey:UserDef_default_trustLevelNewOrder];
     BitcoinDE_TrustLevel reNewOrderForRemainingAmount = (BitcoinDE_TrustLevel)userDefault.unsignedIntegerValue;
     return reNewOrderForRemainingAmount;
 }
@@ -250,7 +249,7 @@ static NSString *UserDef_default_autoUpdateInfoTabs = @"de.2sox.coiner.default_a
 }
 
 + (BOOL)autoUpdateInfoTabs {
-    NSNumber *userDefault = [SOXPreferenceCenter userDefaultForKey:UserDef_default_autoUpdateInfoTabs];
+    NSNumber *userDefault   = [SOXPreferenceCenter userDefaultForKey:UserDef_default_autoUpdateInfoTabs];
     BOOL autoUpdateInfoTabs = userDefault.boolValue;
     return autoUpdateInfoTabs;
 }
@@ -267,40 +266,37 @@ static NSString *UserDef_default_autoUpdateInfoTabs = @"de.2sox.coiner.default_a
 }
 
 #pragma mark - Sepa Payment Option
-+ (NSControlStateValue )sepaPaymentOptionState {
++ (NSControlStateValue)sepaPaymentOptionState {
     NSControlStateValue sepaPaymentOptionState = NSControlStateValueOff;
-    id noSepaFilterValue = [self userDefaultForKey:UserDef_Domain_OrderViewControllerSEPAKey];
-    if (noSepaFilterValue != nil
-        && [noSepaFilterValue isKindOfClass:[NSNumber class]]) {
-        sepaPaymentOptionState = [(NSNumber *)noSepaFilterValue boolValue] ? NSControlStateValueOn: NSControlStateValueOff;
+    id noSepaFilterValue                       = [self userDefaultForKey:UserDef_Domain_OrderViewControllerSEPAKey];
+    if (noSepaFilterValue != nil && [noSepaFilterValue isKindOfClass:[NSNumber class]]) {
+        sepaPaymentOptionState = [(NSNumber *)noSepaFilterValue boolValue] ? NSControlStateValueOn : NSControlStateValueOff;
     }
 
     return sepaPaymentOptionState;
 }
 
-+ (NSControlStateValue )sepaPaymentOptionStateForOrderType:(BitcoinDE_OrderType)orderType
-                                              currencyType:(BitcoinDE_CurrencyType)currencyType {
++ (NSControlStateValue)sepaPaymentOptionStateForOrderType:(BitcoinDE_OrderType)orderType
+                                             currencyType:(BitcoinDE_CurrencyType)currencyType {
     NSControlStateValue sepaPaymentOptionState = NSControlStateValueOn;
-    
-    { // look up at userDefaults
+
+    {   // look up at userDefaults
         NSString *userDefaultKey = [self userDefaultKeyForDomain:UserDef_Domain_OrderViewControllerSEPAKey
                                                        orderType:orderType
                                                     currencyType:currencyType];
-        id noSepaFilterValue = [self userDefaultForKey:userDefaultKey];
-        if (noSepaFilterValue != nil
-            && [noSepaFilterValue isKindOfClass:[NSNumber class]]) {
-            sepaPaymentOptionState = [(NSNumber *)noSepaFilterValue boolValue] ? NSControlStateValueOn: NSControlStateValueOff;
+        id noSepaFilterValue     = [self userDefaultForKey:userDefaultKey];
+        if (noSepaFilterValue != nil && [noSepaFilterValue isKindOfClass:[NSNumber class]]) {
+            sepaPaymentOptionState = [(NSNumber *)noSepaFilterValue boolValue] ? NSControlStateValueOn : NSControlStateValueOff;
         }
     }
-    
+
     return sepaPaymentOptionState;
 }
 
-+ (void)setSepaPaymentFilterOption:(NSControlStateValue )state
++ (void)setSepaPaymentFilterOption:(NSControlStateValue)state
                       forOrderType:(BitcoinDE_OrderType)orderType
                       currencyType:(BitcoinDE_CurrencyType)currencyType {
-    if (orderType != BitcoinDE_OrderTypeUnknown
-        && currencyType != BitcoinDE_CurrencyTypeUnknown) {
+    if (orderType != BitcoinDE_OrderTypeUnknown && currencyType != BitcoinDE_CurrencyTypeUnknown) {
         NSNumber *noSepaFilterValue = @NO;
         if (state == NSControlStateValueOn) {
             noSepaFilterValue = @YES;
@@ -330,7 +326,7 @@ static NSString *UserDef_default_autoUpdateInfoTabs = @"de.2sox.coiner.default_a
          orderType < BitcoinDE_OrderType_EndOfType;
          orderType++) {
         for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeBitcoin;
-             currencyType <BitcoinDE_CurrencyType_EndOfType;
+             currencyType < BitcoinDE_CurrencyType_EndOfType;
              currencyType++) {
             NSString *userDefaultKey = [self userDefaultKeyForDomain:UserDef_Domain_OrderViewControllerSEPAKey
                                                            orderType:orderType
@@ -349,11 +345,11 @@ static NSString *UserDef_default_autoUpdateInfoTabs = @"de.2sox.coiner.default_a
 #pragma mark - Country Codes
 + (NSArray *)defaultCountryCodes {
     NSArray *defaultTradingCountries = [NSArray arrayWithObjects:@"AT", @"CH", @"DE", nil];
-    
+
     return defaultTradingCountries;
 }
 
-+ (NSArray <NSString *> *)supportedCountryCodes {
++ (NSArray<NSString *> *)supportedCountryCodes {
     static dispatch_once_t pred;
     static NSArray *supportedCountryCodes = nil;
     dispatch_once(&pred, ^{
@@ -389,24 +385,23 @@ static NSString *UserDef_default_autoUpdateInfoTabs = @"de.2sox.coiner.default_a
                                   @"RO",
                                   @"SE",
                                   @"SI",
-                                  @"SK"
-                                  ];
+                                  @"SK"];
     });
     return supportedCountryCodes;
 }
 
-+ (NSArray <NSString *> *)activeCountryCodesforOrderType:(BitcoinDE_OrderType)orderType
-                                            currencyType:(BitcoinDE_CurrencyType)currencyType {
-    NSString *userDefaultKey = [self userDefaultKeyForDomain:UserDef_Domain_OrderViewControllerCountryCodeKey
++ (NSArray<NSString *> *)activeCountryCodesforOrderType:(BitcoinDE_OrderType)orderType
+                                           currencyType:(BitcoinDE_CurrencyType)currencyType {
+    NSString *userDefaultKey    = [self userDefaultKeyForDomain:UserDef_Domain_OrderViewControllerCountryCodeKey
                                                    orderType:orderType
                                                 currencyType:currencyType];
     NSArray *activeCountryCodes = [self userDefaultForKey:userDefaultKey];
-    
+
     return activeCountryCodes;
 }
 
-+ (NSArray <NSString *> *)activeCountryCodes {
-    NSString *userDefaultKey = UserDef_Domain_OrderViewControllerCountryCodeKey;
++ (NSArray<NSString *> *)activeCountryCodes {
+    NSString *userDefaultKey   = UserDef_Domain_OrderViewControllerCountryCodeKey;
     NSArray *userDefaultsValue = [self userDefaultForKey:userDefaultKey];
     if (userDefaultsValue == nil) {
         userDefaultsValue = [self defaultCountryCodes];
@@ -417,7 +412,7 @@ static NSString *UserDef_default_autoUpdateInfoTabs = @"de.2sox.coiner.default_a
     return userDefaultsValue;
 }
 
-+ (void)setActiveCountryCodes:(NSArray <NSString *> *)activeCountryCodes {
++ (void)setActiveCountryCodes:(NSArray<NSString *> *)activeCountryCodes {
     // for all
     [self setUserDefaultObject:activeCountryCodes
                         forKey:UserDef_Domain_OrderViewControllerCountryCodeKey];
@@ -427,7 +422,7 @@ static NSString *UserDef_default_autoUpdateInfoTabs = @"de.2sox.coiner.default_a
          orderType < BitcoinDE_OrderType_EndOfType;
          orderType++) {
         for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeBitcoin;
-             currencyType <BitcoinDE_CurrencyType_EndOfType;
+             currencyType < BitcoinDE_CurrencyType_EndOfType;
              currencyType++) {
             NSString *userDefaultKey = [self userDefaultKeyForDomain:UserDef_Domain_OrderViewControllerCountryCodeKey
                                                            orderType:orderType
@@ -443,11 +438,10 @@ static NSString *UserDef_default_autoUpdateInfoTabs = @"de.2sox.coiner.default_a
                                                         object:activeCountryCodes];
 }
 
-+ (void)setActiveCountryCodes:(NSArray <NSString *> *)activeCountryCodes
++ (void)setActiveCountryCodes:(NSArray<NSString *> *)activeCountryCodes
                  forOrderType:(BitcoinDE_OrderType)orderType
                  currencyType:(BitcoinDE_CurrencyType)currencyType {
-    if (orderType != BitcoinDE_OrderTypeUnknown
-        && currencyType != BitcoinDE_CurrencyTypeUnknown) {
+    if (orderType != BitcoinDE_OrderTypeUnknown && currencyType != BitcoinDE_CurrencyTypeUnknown) {
         NSString *userDefaultKey = [self userDefaultKeyForDomain:UserDef_Domain_OrderViewControllerCountryCodeKey
                                                        orderType:orderType
                                                     currencyType:currencyType];
@@ -460,44 +454,45 @@ static NSString *UserDef_default_autoUpdateInfoTabs = @"de.2sox.coiner.default_a
 
 
 #pragma mark - Countries
-+ (NSArray <NSString *> *)supportedCountryNames {
++ (NSArray<NSString *> *)supportedCountryNames {
     static dispatch_once_t pred;
     static NSArray *supportedCountryNames = nil;
     dispatch_once(&pred, ^{
-        supportedCountryNames = @[@"AT Österreich",
-                                  @"BE Belgien",
-                                  @"BG Bulgarien",
-                                  @"CH Schweiz",
-                                  @"CY Zypern",
-                                  @"CZ Tschechische Republik",
-                                  @"DE Deutschland",
-                                  @"DK Dänemark",
-                                  @"EE Estland",
-                                  @"ES Spanien",
-                                  @"FI Finnland",
-                                  @"FR Frankreich",
-                                  @"GB Vereinigtes Königreich",
-                                  @"GR Griechenland",
-                                  @"HR Kroatien",
-                                  @"HU Ungarn",
-                                  @"IE Irland",
-                                  @"IS Island",
-                                  @"IT Italien",
-                                  @"LI Liechtenstein",
-                                  @"LT Litauen",
-                                  @"LU Luxemburg",
-                                  @"LV Lettland",
-                                  @"MQ Martinique",
-                                  @"MT Malta",
-                                  @"NL Niederlande",
-                                  @"NO Norwegen",
-                                  @"PL Polen",
-                                  @"PT Portugal",
-                                  @"RO Rumänien",
-                                  @"SE Schweden",
-                                  @"SI Slowenien",
-                                  @"SK Slowakei",
-                                  ];
+        supportedCountryNames = @[
+            @"AT Österreich",
+            @"BE Belgien",
+            @"BG Bulgarien",
+            @"CH Schweiz",
+            @"CY Zypern",
+            @"CZ Tschechische Republik",
+            @"DE Deutschland",
+            @"DK Dänemark",
+            @"EE Estland",
+            @"ES Spanien",
+            @"FI Finnland",
+            @"FR Frankreich",
+            @"GB Vereinigtes Königreich",
+            @"GR Griechenland",
+            @"HR Kroatien",
+            @"HU Ungarn",
+            @"IE Irland",
+            @"IS Island",
+            @"IT Italien",
+            @"LI Liechtenstein",
+            @"LT Litauen",
+            @"LU Luxemburg",
+            @"LV Lettland",
+            @"MQ Martinique",
+            @"MT Malta",
+            @"NL Niederlande",
+            @"NO Norwegen",
+            @"PL Polen",
+            @"PT Portugal",
+            @"RO Rumänien",
+            @"SE Schweden",
+            @"SI Slowenien",
+            @"SK Slowakei",
+        ];
     });
 
     return supportedCountryNames;
@@ -505,16 +500,16 @@ static NSString *UserDef_default_autoUpdateInfoTabs = @"de.2sox.coiner.default_a
 
 + (NSString *)countryNameForCountryCode:(NSString *)countryCode {
     NSUInteger countryCodeIndex = [[self supportedCountryCodes] indexOfObject:countryCode];
-    NSString *countryName = [[self supportedCountryNames] objectAtIndex:countryCodeIndex];
+    NSString *countryName       = [[self supportedCountryNames] objectAtIndex:countryCodeIndex];
 
     return countryName;
 }
 
 #pragma mark - NSUserDefault access
-+ (id )userDefaultForKey:(NSString *)key {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
++ (id)userDefaultForKey:(NSString *)key {
+    NSUserDefaults *userDefaults    = [NSUserDefaults standardUserDefaults];
     NSDictionary *userDefaultForKey = [userDefaults valueForKey:key];
-    
+
     return userDefaultForKey;
 }
 
@@ -542,7 +537,7 @@ static NSString *UserDef_default_autoUpdateInfoTabs = @"de.2sox.coiner.default_a
         userDefaultKey = [userDefaultKey stringByAppendingString:@"_"];
         userDefaultKey = [userDefaultKey stringByAppendingString:[SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType]];
     }
-    
+
     return userDefaultKey;
 }
 @end

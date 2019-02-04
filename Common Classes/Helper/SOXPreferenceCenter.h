@@ -11,7 +11,7 @@
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
 static NSString *ActiveCountryCodesPreferencesDidChangeNotification = @"ActiveCountryCodesPreferencesDidChangeNotification";
-static NSString *ShowNoSepaOrdersPreferencesDidChangeNotification = @"ShowNoSepaOrdersPreferencesDidChangeNotification";
+static NSString *ShowNoSepaOrdersPreferencesDidChangeNotification   = @"ShowNoSepaOrdersPreferencesDidChangeNotification";
 
 @interface SOXPreferenceCenter : NSObject
 #pragma mark - General
@@ -65,26 +65,26 @@ static NSString *ShowNoSepaOrdersPreferencesDidChangeNotification = @"ShowNoSepa
 + (void)setAutoUpdateInfoTabs:(BOOL)autoUpdateInfoTabs;
 
 #pragma mark - Sepa Payment Option
-+ (NSControlStateValue )sepaPaymentOptionState;
-+ (NSControlStateValue )sepaPaymentOptionStateForOrderType:(BitcoinDE_OrderType)orderType
-                                              currencyType:(BitcoinDE_CurrencyType)currencyType;
-+ (void)setSepaPaymentFilterOption:(NSControlStateValue )state
++ (NSControlStateValue)sepaPaymentOptionState;
++ (NSControlStateValue)sepaPaymentOptionStateForOrderType:(BitcoinDE_OrderType)orderType
+                                             currencyType:(BitcoinDE_CurrencyType)currencyType;
++ (void)setSepaPaymentFilterOption:(NSControlStateValue)state
                       forOrderType:(BitcoinDE_OrderType)orderType
                       currencyType:(BitcoinDE_CurrencyType)currencyType;
 
 #pragma mark - Country Codes
 + (NSArray *)defaultCountryCodes;
-+ (NSArray <NSString *> *)supportedCountryCodes;
-+ (NSArray <NSString *> *)activeCountryCodesforOrderType:(BitcoinDE_OrderType)orderType
-                                            currencyType:(BitcoinDE_CurrencyType)currencyType;
-+ (NSArray <NSString *> *)activeCountryCodes;
++ (NSArray<NSString *> *)supportedCountryCodes;
++ (NSArray<NSString *> *)activeCountryCodesforOrderType:(BitcoinDE_OrderType)orderType
+                                           currencyType:(BitcoinDE_CurrencyType)currencyType;
++ (NSArray<NSString *> *)activeCountryCodes;
 
-+ (void)setActiveCountryCodes:(NSArray <NSString *> *)activeCountryCodes
++ (void)setActiveCountryCodes:(NSArray<NSString *> *)activeCountryCodes
                  forOrderType:(BitcoinDE_OrderType)orderType
                  currencyType:(BitcoinDE_CurrencyType)currencyType;
 
 #pragma mark - Countries
-+ (NSArray <NSString *> *)supportedCountryNames;
++ (NSArray<NSString *> *)supportedCountryNames;
 + (NSString *)countryNameForCountryCode:(NSString *)countryCode;
 
 @end

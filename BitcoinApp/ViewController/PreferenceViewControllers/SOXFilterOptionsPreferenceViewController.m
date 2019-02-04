@@ -28,7 +28,7 @@
 @property (strong) IBOutlet NSButton *noSepaButton;
 
 #pragma mark | Properties
-@property (strong, nonatomic) NSArray <NSButton *> *countryButtons;
+@property (strong, nonatomic) NSArray<NSButton *> *countryButtons;
 
 @end
 
@@ -43,30 +43,28 @@
 }
 
 #pragma mark - Public Class Methods
-+ (NSArray <NSButton *> *)addCountryButtonsToView:(NSView *)view {
++ (NSArray<NSButton *> *)addCountryButtonsToView:(NSView *)view {
     __block NSMutableArray *countryButtons = [NSMutableArray array];
 
-    NSArray <NSString *> *supportedCountryCodes = [SOXPreferenceCenter supportedCountryCodes];
-    NSArray <NSString *> *supportedCountryNames = [SOXPreferenceCenter supportedCountryNames];
+    NSArray<NSString *> *supportedCountryCodes = [SOXPreferenceCenter supportedCountryCodes];
+    NSArray<NSString *> *supportedCountryNames = [SOXPreferenceCenter supportedCountryNames];
 
 
     CGFloat basicX = 20;
     CGFloat basicY = -10;
     CGFloat deltaY = 24;
     CGFloat height = 16;
-    CGFloat width = 190;
+    CGFloat width  = 190;
 
     __block CGFloat currentX = basicX;
     __block CGFloat currentY = basicY;
 
-    [supportedCountryCodes enumerateObjectsUsingBlock:^(NSString * _Nonnull countryCode
-                                                        , NSUInteger idx
-                                                        , BOOL * _Nonnull stop) {
+    [supportedCountryCodes enumerateObjectsUsingBlock:^(NSString *_Nonnull countryCode, NSUInteger idx, BOOL *_Nonnull stop) {
         NSString *countryName = [supportedCountryNames objectAtIndex:idx];
         // 10.12+
-//        NSButton *countryButton = [NSButton checkboxWithTitle:countryName
-//                                                       target:nil
-//                                                       action:nil];
+        //        NSButton *countryButton = [NSButton checkboxWithTitle:countryName
+        //                                                       target:nil
+        //                                                       action:nil];
         // for < OSX 10.12
         NSButton *countryButton = [[NSButton alloc] init];
         [countryButton setButtonType:NSButtonTypeSwitch];
@@ -76,18 +74,16 @@
 
         // set position
         {
-            if (idx % 10 == 0
-                && idx != 0) {
+            if (idx % 10 == 0 && idx != 0) {
                 currentX = currentX + width;
                 currentY = basicY;
             }
-            currentY = currentY + deltaY;
+            currentY            = currentY + deltaY;
             countryButton.frame = CGRectMake(currentX, currentY, width, height);
         }
         [view addSubview:countryButton];
 
         [countryButtons addObject:countryButton];
-
     }];
 
     return [countryButtons copy];
@@ -96,19 +92,16 @@
 #pragma mark - Private Methods
 - (void)setupUI {
     NSString *headlineText = @"Filter options for ";
-    if (self.orderType != BitcoinDE_OrderTypeUnknown
-        && self.currencyType != BitcoinDE_CurrencyTypeUnknown) {
-        NSString *text = [NSString stringWithFormat:@"%@ %@ table."
-                          , [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:self.orderType]
-                          , [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:self.currencyType]];
-        headlineText = [headlineText stringByAppendingString:text];
+    if (self.orderType != BitcoinDE_OrderTypeUnknown && self.currencyType != BitcoinDE_CurrencyTypeUnknown) {
+        NSString *text = [NSString stringWithFormat:@"%@ %@ table.", [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:self.orderType], [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:self.currencyType]];
+        headlineText   = [headlineText stringByAppendingString:text];
     }
     else {
         headlineText = [headlineText stringByAppendingString:@"all order table"];
     }
     self.headlineTextField.stringValue = headlineText;
-    self.countrySelectionBox.title = @"Filter orders for countries";
-    self.noSepaButton.title = @"Hide SEPA-only orders";
+    self.countrySelectionBox.title     = @"Filter orders for countries";
+    self.noSepaButton.title            = @"Hide SEPA-only orders";
 
     [self setupCountryButtons];
     [self setupNoSepaButton];
@@ -117,34 +110,34 @@
 - (void)setupCountryButtons {
     self.countrySelectionView.autoresizingMask = NSViewWidthSizable;
 
-    self.countryButtons  = [SOXFilterOptionsPreferenceViewController addCountryButtonsToView:self.countrySelectionView];
+    self.countryButtons = [SOXFilterOptionsPreferenceViewController addCountryButtonsToView:self.countrySelectionView];
 
-    NSArray <NSString *> *supportedCountryCodes = [SOXPreferenceCenter supportedCountryCodes];
-    NSArray <NSString *> *activeCountryCodes = [SOXPreferenceCenter activeCountryCodesforOrderType:self.orderType
-                                                                                      currencyType:self.currencyType];
-    SEL countryButtonActionSelector = NSSelectorFromString(@"countryButtonAction:");
-    [self.countryButtons enumerateObjectsUsingBlock:^(NSButton * _Nonnull countryButton,
+    NSArray<NSString *> *supportedCountryCodes = [SOXPreferenceCenter supportedCountryCodes];
+    NSArray<NSString *> *activeCountryCodes    = [SOXPreferenceCenter activeCountryCodesforOrderType:self.orderType
+                                                                                     currencyType:self.currencyType];
+    SEL countryButtonActionSelector            = NSSelectorFromString(@"countryButtonAction:");
+    [self.countryButtons enumerateObjectsUsingBlock:^(NSButton *_Nonnull countryButton,
                                                       NSUInteger idx,
-                                                      BOOL * _Nonnull stop) {
+                                                      BOOL *_Nonnull stop) {
         NSString *countryCode = [supportedCountryCodes objectAtIndex:idx];
-        countryButton.state = [activeCountryCodes containsObject:countryCode] ? NSControlStateValueOn : NSControlStateValueOff;
-        countryButton.target = self;
-        countryButton.action = countryButtonActionSelector;
+        countryButton.state   = [activeCountryCodes containsObject:countryCode] ? NSControlStateValueOn : NSControlStateValueOff;
+        countryButton.target  = self;
+        countryButton.action  = countryButtonActionSelector;
     }];
 }
 
 - (void)setupNoSepaButton {
     NSControlStateValue noSepaButtonState = [SOXPreferenceCenter sepaPaymentOptionStateForOrderType:self.orderType
                                                                                        currencyType:self.currencyType];
-    self.noSepaButton.state = noSepaButtonState;
+    self.noSepaButton.state               = noSepaButtonState;
 }
 
 #pragma mark - Private methods
-- (NSArray <NSString *> *)selectedCountryCodes {
-    NSArray <NSString *> *supportedCountryCodes = [SOXPreferenceCenter supportedCountryCodes];
+- (NSArray<NSString *> *)selectedCountryCodes {
+    NSArray<NSString *> *supportedCountryCodes = [SOXPreferenceCenter supportedCountryCodes];
 
     __block NSMutableArray *selectedCountryCodes = [NSMutableArray array];
-    [self.countryButtons enumerateObjectsUsingBlock:^(NSButton * _Nonnull button, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.countryButtons enumerateObjectsUsingBlock:^(NSButton *_Nonnull button, NSUInteger idx, BOOL *_Nonnull stop) {
         if (button.state == NSControlStateValueOn) {
             [selectedCountryCodes addObject:[supportedCountryCodes objectAtIndex:idx]];
         }
@@ -185,12 +178,12 @@
         countyButton.state = NSControlStateValueOff;
     }
 
-    NSArray <NSString *> *supportedCountryCodes = [SOXPreferenceCenter supportedCountryCodes];
-    NSArray <NSString *> *defaultTradingCountries = [SOXPreferenceCenter defaultCountryCodes];
+    NSArray<NSString *> *supportedCountryCodes   = [SOXPreferenceCenter supportedCountryCodes];
+    NSArray<NSString *> *defaultTradingCountries = [SOXPreferenceCenter defaultCountryCodes];
     for (NSString *defaultTradingCountry in defaultTradingCountries) {
-        NSUInteger idx = [supportedCountryCodes indexOfObject:defaultTradingCountry];
+        NSUInteger idx          = [supportedCountryCodes indexOfObject:defaultTradingCountry];
         NSButton *countryButton = [self.countryButtons objectAtIndex:idx];
-        countryButton.state = NSControlStateValueOn;
+        countryButton.state     = NSControlStateValueOn;
     }
     [self updateSelectedCountriesUserDefaults];
 }

@@ -20,12 +20,12 @@
  */
 @property (nonatomic, readonly) NSInteger apiErrorCode;
 
-- (SOXErrorMessage_BitcoinDE * _Nonnull)initWithServerRequestTitle:(NSString * _Nullable)serverRequestTitle;
+- (SOXErrorMessage_BitcoinDE *_Nonnull)initWithServerRequestTitle:(NSString *_Nullable)serverRequestTitle;
 
-- (void)checkNSURLResonse:(NSURLResponse * _Nullable)response;
-- (void)checkJsonError:(NSError * _Nullable)jsonError;
-- (void)checkforAPIErrors:(NSArray * _Nullable)apiErrors;
-- (void)appendErrorDescripton:(NSString * _Nullable)errorDescripton;
+- (void)checkNSURLResonse:(NSURLResponse *_Nullable)response;
+- (void)checkJsonError:(NSError *_Nullable)jsonError;
+- (void)checkforAPIErrors:(NSArray *_Nullable)apiErrors;
+- (void)appendErrorDescripton:(NSString *_Nullable)errorDescripton;
 
-- (NSString * _Nullable)description;
+- (NSString *_Nullable)description;
 @end

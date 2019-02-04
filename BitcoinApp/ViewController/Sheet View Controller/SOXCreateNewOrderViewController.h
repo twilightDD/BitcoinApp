@@ -20,7 +20,7 @@
 
 @interface SOXCreateNewOrderViewController : NSViewController
 
-@property (weak, nonatomic) id <SOXChangeOrderProtocol> delegate;
+@property (weak, nonatomic) id<SOXChangeOrderProtocol> delegate;
 
 // TODO: doublette of type OrdersType (@see SOXOrdersViewController)
 @property (nonatomic) BitcoinDE_OrderType orderType;

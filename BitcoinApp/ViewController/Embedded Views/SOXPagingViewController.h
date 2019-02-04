@@ -39,7 +39,7 @@
 @property (strong, readonly) IBOutlet NSButton *removeOrderButton;
 
 #pragma mark | Properties
-@property (weak) SOXPagingAbstractViewController <SOXPagingViewControllerProtocol> *delegate;
+@property (weak) SOXPagingAbstractViewController<SOXPagingViewControllerProtocol> *delegate;
 
 @property (strong, nonatomic, readonly) NSDate *selectedStartDate;
 @property (strong, nonatomic, readonly) NSDate *selectedEndDate;
@@ -48,6 +48,6 @@
 - (void)loadingPagingButton;
 - (void)resetPagingButtons;
 - (void)updatePagingButtonsWithPageData:(SOXPage_BitcoinDE_Data *)pageData
-                  whileLoadingMorePages:(BOOL)whileLoadingMorePages ;
+                  whileLoadingMorePages:(BOOL)whileLoadingMorePages;
 
 @end

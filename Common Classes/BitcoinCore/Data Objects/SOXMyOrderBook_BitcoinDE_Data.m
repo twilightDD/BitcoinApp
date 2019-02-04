@@ -14,7 +14,7 @@
 
 #import "SOXMyTrades_BitcoinDE_Data.h"
 
-@interface SOXMyOrderBook_BitcoinDE_Data()
+@interface SOXMyOrderBook_BitcoinDE_Data ()
 
 #pragma mark Properties
 #pragma mark | Order Details
@@ -27,16 +27,16 @@
 @property (strong, nonatomic, readwrite) NSNumber *orderInformation_price;
 @property (strong, nonatomic, readwrite) NSNumber *orderInformation_maxVolume;
 @property (strong, nonatomic, readwrite) NSNumber *orderInformation_minVolume;
-@property (strong, nonatomic, readwrite) NSDate   *orderInformation_createdAt;
-@property (strong, nonatomic, readwrite) NSDate   *orderInformation_endDateTime;
-@property (nonatomic, readwrite)         BOOL     orderInformation_newOrderForRemainingAmount;
+@property (strong, nonatomic, readwrite) NSDate *orderInformation_createdAt;
+@property (strong, nonatomic, readwrite) NSDate *orderInformation_endDateTime;
+@property (nonatomic, readwrite) BOOL orderInformation_newOrderForRemainingAmount;
 @property (strong, nonatomic, readwrite) NSNumber *orderInformation_state;
 
 #pragma mark | Order Requirements
 @property (strong, nonatomic, readwrite) NSString *orderRequirements_minTrustLevel;
-@property (nonatomic, readwrite)         BOOL     orderRequirements_onlyKYCFull;
+@property (nonatomic, readwrite) BOOL orderRequirements_onlyKYCFull;
 @property (strong, nonatomic, readwrite) NSString *orderRequirements_paymentOption;
-@property (strong, nonatomic, readwrite) NSArray  *orderRequirements_seatOfBank;
+@property (strong, nonatomic, readwrite) NSArray *orderRequirements_seatOfBank;
 
 #pragma mark | Page information
 @property (strong, nonatomic, readwrite) NSNumber *page_current;
@@ -53,22 +53,21 @@
 #pragma mark - OrderBook Object creation
 + (NSMutableArray *)myOrderbookDataArrayForMyOrderbookDictionary:(NSDictionary *)payloadDictionary {
     NSMutableArray *myOrderbookDataArray = [NSMutableArray array];
-    
+
     NSDictionary *myOrderbookDictionary = [payloadDictionary objectForKey:BitcoinDE_ShowMyOrders_MainKey];
     for (NSDictionary *myOrderDictionary in myOrderbookDictionary) {
         [myOrderbookDataArray addObject:[self myOrderbookDataForOrderDictionary:myOrderDictionary]];
     }
-    
+
     return myOrderbookDataArray;
 }
 
 + (NSDictionary *)myOrderBookDataForCreateInfoDictionary:(NSDictionary *)payloadDictionary {
     NSString *newOrderID = [payloadDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderID];
-    
+
     NSDictionary *myOrderBookData = [NSDictionary dictionaryWithObjectsAndKeys:
-                                     newOrderID, BitcoinDE_ShowOrderbook_OrderID
-                                     ,nil];
-    
+                                                      newOrderID, BitcoinDE_ShowOrderbook_OrderID, nil];
+
     return myOrderBookData;
 }
 
@@ -82,35 +81,28 @@
                                               price:(NSNumber *)price
                                        end_datetime:(NSDate *)end_datetime
                      new_order_for_remaining_amount:(BOOL)new_order_for_remaining_amount
-                                    min_trust_level:(BitcoinDE_TrustLevel )min_trust_level
+                                    min_trust_level:(BitcoinDE_TrustLevel)min_trust_level
                                       only_kyc_full:(BOOL)only_kyc_full
-                                     payment_option:(BitcoinDE_PaymentOption )payment_option
-                                       seat_of_bank:(NSArray <NSString *> *)seat_of_bank {
-    
-    
-    NSString *orderTypeString = [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:orderType];
-    NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType];
+                                     payment_option:(BitcoinDE_PaymentOption)payment_option
+                                       seat_of_bank:(NSArray<NSString *> *)seat_of_bank {
+
+
+    NSString *orderTypeString       = [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:orderType];
+    NSString *currencyTypeString    = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType];
     NSString *minTrustLevelAsString = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:min_trust_level];
-    NSString *endDateString = [SOXFormatters rfc3339PostDateTimeStringDate:end_datetime];
-    
+    NSString *endDateString         = [SOXFormatters rfc3339PostDateTimeStringDate:end_datetime];
+
     NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:
-                               orderTypeString, @"type"
-                               , currencyTypeString, BitcoinDE_ShowOrderbook_TradingPair
-                               , max_amount , @"max_amount"
-                               ,price , @"price"
-                               ,min_amount , @"min_amount"
-                               ,endDateString , @"end_datetime"
-                               ,@(new_order_for_remaining_amount) , @"new_order_for_remaining_amount"
-                               ,minTrustLevelAsString , @"min_trust_level"
-                               ,@(only_kyc_full) , @"only_kyc_full"
-//                               ,seat_of_bank , @"seat_of_bank"
-                               , nil];
+                                                orderTypeString, @"type", currencyTypeString, BitcoinDE_ShowOrderbook_TradingPair, max_amount, @"max_amount", price, @"price", min_amount, @"min_amount", endDateString, @"end_datetime", @(new_order_for_remaining_amount), @"new_order_for_remaining_amount", minTrustLevelAsString, @"min_trust_level", @(only_kyc_full), @"only_kyc_full"
+                                                //                               ,seat_of_bank , @"seat_of_bank"
+                                                ,
+                                                nil];
 
     // only on order with type "sell" we can set paymentOption
     if (orderType == BitcoinDE_OrderTypeSell) {
         NSMutableDictionary *mutableParameter = [parameter mutableCopy];
         [mutableParameter setObject:@(payment_option) forKey:@"payment_option"];
-        
+
         parameter = [mutableParameter copy];
     }
     return parameter;
@@ -119,14 +111,12 @@
 #pragma mark | Delete Orders
 + (NSDictionary *)parameterForDeletingOrderWithOrderBookData:(SOXMyOrderBook_BitcoinDE_Data *)myOrderBookData {
     NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:
-                               myOrderBookData.orderInformation_orderID , BitcoinDE_ShowOrderbook_OrderID
-                               ,myOrderBookData.orderInformation_tradingPair , BitcoinDE_ShowOrderbook_TradingPair
-                               , nil];
+                                                myOrderBookData.orderInformation_orderID, BitcoinDE_ShowOrderbook_OrderID, myOrderBookData.orderInformation_tradingPair, BitcoinDE_ShowOrderbook_TradingPair, nil];
 
     return parameter;
 }
 
-+ (NSArray <NSDictionary *> *)parametersForDeletingMyOrderBookDatas:(NSArray <SOXMyOrderBook_BitcoinDE_Data *>*)myOrderBookDatas {
++ (NSArray<NSDictionary *> *)parametersForDeletingMyOrderBookDatas:(NSArray<SOXMyOrderBook_BitcoinDE_Data *> *)myOrderBookDatas {
     NSMutableArray *parameters = [NSMutableArray array];
     for (SOXMyOrderBook_BitcoinDE_Data *myOrderBookData in myOrderBookDatas) {
         NSDictionary *parameter = [SOXMyOrderBook_BitcoinDE_Data parameterForDeletingOrderWithOrderBookData:myOrderBookData];
@@ -141,7 +131,7 @@
                              orderState:(BitcoinDE_OrderStateType)orderState
                               startDate:(NSDate *)startDate
                                 endDate:(NSDate *)endDate
-                                   page:(NSInteger )page {
+                                   page:(NSInteger)page {
     NSString *orderTypeString;
     switch (orderType) {
         case BitcoinDE_OrderTypeBuy:
@@ -176,7 +166,6 @@
                                        startDate:startDateString
                                          endDate:endDateString
                                             page:pageNumber];
-
 }
 
 + (NSDictionary *)parameterDictionaryForOrderType:(NSString *)orderTypeString
@@ -218,7 +207,7 @@
 + (SOXMyOrderBookData *)myOrderbookDataForOrderDictionary:(NSDictionary *)myOrderDictionary {
     SOXMyOrderBook_BitcoinDE_Data *myOrderbookData = [[SOXMyOrderBook_BitcoinDE_Data alloc] init];
     [myOrderbookData setupMyOrderbookDataForOrderDictionary:myOrderDictionary];
-    
+
     return myOrderbookData;
 }
 
@@ -226,30 +215,30 @@
 - (void)setupMyOrderbookDataForOrderDictionary:(NSDictionary *)myOrderDictionary {
     // Order information
     {
-        self.orderInformation_orderID                       = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_OrderID];
-        self.orderInformation_type                          = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_Type];
-        self.orderInformation_tradingPair                   = [myOrderDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPair];
-        self.orderInformation_currencyType                  = [SOXMarket_BitcoinDE_DefTypes currencyTypeForTradingPairString:self.orderInformation_tradingPair];
-        self.orderInformation_maxAmount                     = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MaxAmount];
-        self.orderInformation_minAmount                     = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MinAmount];
-        self.orderInformation_price                         = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_Price];
-        self.orderInformation_maxVolume                     = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MaxVolume];
-        self.orderInformation_minVolume                     = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MinVolume];
-        self.orderInformation_createdAt                     = [SOXFormatters dateForRFC3339DateTimeString:[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_CreatedAt]];
-        self.orderInformation_endDateTime                   = [SOXFormatters dateForRFC3339DateTimeString:[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_EndDateTime]];
-        self.orderInformation_newOrderForRemainingAmount    = [[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_NewOrderForRemainingAmount] boolValue];
-        self.orderInformation_state                         = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_State];
+        self.orderInformation_orderID                    = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_OrderID];
+        self.orderInformation_type                       = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_Type];
+        self.orderInformation_tradingPair                = [myOrderDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPair];
+        self.orderInformation_currencyType               = [SOXMarket_BitcoinDE_DefTypes currencyTypeForTradingPairString:self.orderInformation_tradingPair];
+        self.orderInformation_maxAmount                  = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MaxAmount];
+        self.orderInformation_minAmount                  = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MinAmount];
+        self.orderInformation_price                      = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_Price];
+        self.orderInformation_maxVolume                  = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MaxVolume];
+        self.orderInformation_minVolume                  = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MinVolume];
+        self.orderInformation_createdAt                  = [SOXFormatters dateForRFC3339DateTimeString:[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_CreatedAt]];
+        self.orderInformation_endDateTime                = [SOXFormatters dateForRFC3339DateTimeString:[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_EndDateTime]];
+        self.orderInformation_newOrderForRemainingAmount = [[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_NewOrderForRemainingAmount] boolValue];
+        self.orderInformation_state                      = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_State];
     }
 
     // Order Requirements
     {
         NSDictionary *orderRequirementsDictionary = [myOrderDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderRequirements];
-        self.orderRequirements_minTrustLevel = [orderRequirementsDictionary objectForKey:BitcoinDE_ShowMyOrders_OrderRequirements_MinTrustLevel];
-        self.orderRequirements_onlyKYCFull   = [[orderRequirementsDictionary objectForKey:BitcoinDE_ShowMyOrders_OrderRequirements_OnlyKYCFull] boolValue];
-        self.orderRequirements_paymentOption = [orderRequirementsDictionary objectForKey:BitcoinDE_ShowMyOrders_OrderRequirements_PaymentOption];
-        self.orderRequirements_seatOfBank    = [orderRequirementsDictionary objectForKey:BitcoinDE_ShowMyOrders_OrderRequirements_SeatOfBank];
+        self.orderRequirements_minTrustLevel      = [orderRequirementsDictionary objectForKey:BitcoinDE_ShowMyOrders_OrderRequirements_MinTrustLevel];
+        self.orderRequirements_onlyKYCFull        = [[orderRequirementsDictionary objectForKey:BitcoinDE_ShowMyOrders_OrderRequirements_OnlyKYCFull] boolValue];
+        self.orderRequirements_paymentOption      = [orderRequirementsDictionary objectForKey:BitcoinDE_ShowMyOrders_OrderRequirements_PaymentOption];
+        self.orderRequirements_seatOfBank         = [orderRequirementsDictionary objectForKey:BitcoinDE_ShowMyOrders_OrderRequirements_SeatOfBank];
     }
-    
+
     // Page information
     {
         self.page_current = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_Page_Current];

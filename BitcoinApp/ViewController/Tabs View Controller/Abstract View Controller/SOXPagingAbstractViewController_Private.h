@@ -42,5 +42,5 @@
 - (void)addToPasteBoard:(NSString *)pasteboardString;
 - (NSString *)exportString;
 
-- (void)resetTradeDatas; // TODO: Rename
+- (void)resetTradeDatas;   // TODO: Rename
 @end

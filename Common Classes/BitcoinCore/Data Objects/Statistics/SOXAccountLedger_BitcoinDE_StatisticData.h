@@ -12,12 +12,12 @@
 
 @class SOXAccountLedger_BitcoinDE_Data, SOXPageData;
 
-typedef NS_ENUM (NSUInteger, SOXStatisticData_StateType) {
-    SOXStatisticData_StateType_New = 0
-    , SOXStatisticData_StateType_WaitingForLoading
-    , SOXStatisticData_StateType_IsLoadingFirstPage
-    , SOXStatisticData_StateType_IsLoadingMorePages
-    , SOXStatisticData_StateType_FullyLoaded
+typedef NS_ENUM(NSUInteger, SOXStatisticData_StateType) {
+    SOXStatisticData_StateType_New = 0,
+    SOXStatisticData_StateType_WaitingForLoading,
+    SOXStatisticData_StateType_IsLoadingFirstPage,
+    SOXStatisticData_StateType_IsLoadingMorePages,
+    SOXStatisticData_StateType_FullyLoaded
 };
 
 
@@ -29,7 +29,7 @@ typedef NS_ENUM (NSUInteger, SOXStatisticData_StateType) {
 @property (strong, nonatomic, readonly) NSDecimalNumber *feeVolumeSum;
 @property (strong, nonatomic, readonly) NSDecimalNumber *kickbackSum;
 @property (strong, nonatomic, readonly) NSNumber *kickbackCount;
-@property (strong, nonatomic, readonly) NSMutableArray <SOXAccountLedger_BitcoinDE_Data *> *accountLedgerDatas;
+@property (strong, nonatomic, readonly) NSMutableArray<SOXAccountLedger_BitcoinDE_Data *> *accountLedgerDatas;
 
 @property (nonatomic) SOXStatisticData_StateType state;
 //@property (nonatomic) BOOL isLoading;

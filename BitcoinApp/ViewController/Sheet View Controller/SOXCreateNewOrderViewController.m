@@ -67,7 +67,7 @@
 @property (nonatomic) NSDecimalNumber *minimalPossibleAmount;
 @property (nonatomic) NSDecimalNumber *priceLimit;
 
-@property (nonatomic, getter = isInputValid) BOOL validInput;
+@property (nonatomic, getter=isInputValid) BOOL validInput;
 
 @property (strong, nonatomic) id requestShowRatesNotification;
 
@@ -77,12 +77,11 @@
 @implementation SOXCreateNewOrderViewController
 
 #pragma mark Init&Co.
--(void)viewWillAppear {
+- (void)viewWillAppear {
     [super viewWillAppear];
 
     // better save than sorry
-    if (self.orderType != BitcoinDE_OrderTypeBuy
-        && self.orderType != BitcoinDE_OrderTypeSell) {
+    if (self.orderType != BitcoinDE_OrderTypeBuy && self.orderType != BitcoinDE_OrderTypeSell) {
         return;
     }
 
@@ -103,14 +102,13 @@
 - (void)setupObservers {
     weakify(self);
     self.requestShowRatesNotification =
-    [[NSNotificationCenter defaultCenter] addObserverForName:BitcoinDE_Notification_RequestShowRates
-                                                      object:nil
-                                                       queue:[NSOperationQueue mainQueue]
-                                                  usingBlock:^(NSNotification * _Nonnull note) {
-                                                      strongify(self)
-                                                      [self answerOfServerRequest:note.object];
-                                                  }
-     ];
+        [[NSNotificationCenter defaultCenter] addObserverForName:BitcoinDE_Notification_RequestShowRates
+                                                          object:nil
+                                                           queue:[NSOperationQueue mainQueue]
+                                                      usingBlock:^(NSNotification *_Nonnull note) {
+                                                          strongify(self)
+                                                              [self answerOfServerRequest:note.object];
+                                                      }];
 }
 
 #pragma mark | Values
@@ -123,15 +121,11 @@
 }
 
 - (void)setupAmountValue {
-    self.amount = self.orderBookDataToReplace ?
-    [NSDecimalNumber decimalNumberWithDecimal:self.orderBookDataToReplace.orderInformation_maxAmount.decimalValue] :
-    [NSDecimalNumber decimalNumberWithString:@"0.05"];
+    self.amount = self.orderBookDataToReplace ? [NSDecimalNumber decimalNumberWithDecimal:self.orderBookDataToReplace.orderInformation_maxAmount.decimalValue] : [NSDecimalNumber decimalNumberWithString:@"0.05"];
 }
 
 - (void)setupMinAmountValue {
-    self.minAmount = self.orderBookDataToReplace ?
-    [NSDecimalNumber decimalNumberWithDecimal:self.orderBookDataToReplace.orderInformation_minAmount.decimalValue] :
-    [NSDecimalNumber decimalNumberWithString:@"0.05"];
+    self.minAmount             = self.orderBookDataToReplace ? [NSDecimalNumber decimalNumberWithDecimal:self.orderBookDataToReplace.orderInformation_minAmount.decimalValue] : [NSDecimalNumber decimalNumberWithString:@"0.05"];
     self.minimalPossibleAmount = [NSDecimalNumber decimalNumberWithString:@"0.00001"];
 }
 
@@ -164,11 +158,11 @@
             break;
     }
 
-    NSAlert *priceLimitAlert = [[NSAlert alloc] init];
-    priceLimitAlert.messageText = @"Could not deduce a price limit.";
-    NSString *informativeText = [NSString stringWithFormat:@"- Try to reload banner\n"
-                                 "- Price limit is set to %@"
-                                 , [SOXFormatters currencyStringForNumber:self.priceLimit roundingMode:NSNumberFormatterRoundHalfUp]];
+    NSAlert *priceLimitAlert        = [[NSAlert alloc] init];
+    priceLimitAlert.messageText     = @"Could not deduce a price limit.";
+    NSString *informativeText       = [NSString stringWithFormat:@"- Try to reload banner\n"
+                                                            "- Price limit is set to %@",
+                                                           [SOXFormatters currencyStringForNumber:self.priceLimit roundingMode:NSNumberFormatterRoundHalfUp]];
     priceLimitAlert.informativeText = informativeText;
     [priceLimitAlert runModal];
 }
@@ -180,7 +174,7 @@
          The price shall not be less than 50% of the current market rate.
          #2 The value of the amount of bitcoin may not be lower than than €60.00
          */
-        if (self.orderType == BitcoinDE_OrderTypeBuy){
+        if (self.orderType == BitcoinDE_OrderTypeBuy) {
             self.price = [SOXMarket_BitcoinDE_Core rateWeightedHalfForCurrencyType:self.currencyType];
         }
         else if (self.orderType == BitcoinDE_OrderTypeSell) {
@@ -193,9 +187,7 @@
 }
 
 - (void)setupTrustLevelValue {
-    self.trustLevel = self.orderBookDataToReplace ?
-    [SOXMarket_BitcoinDE_DefTypes trustLevelForTrustLevelString:self.orderBookDataToReplace.orderRequirements_minTrustLevel] :
-    [SOXPreferenceCenter defaultTrustLevelForNewOrder];
+    self.trustLevel = self.orderBookDataToReplace ? [SOXMarket_BitcoinDE_DefTypes trustLevelForTrustLevelString:self.orderBookDataToReplace.orderRequirements_minTrustLevel] : [SOXPreferenceCenter defaultTrustLevelForNewOrder];
 }
 
 #pragma mark | UI
@@ -205,64 +197,61 @@
 }
 
 - (void)setupUITexts {
-    NSString *titleTextFieldText = @"Error";
+    NSString *titleTextFieldText             = @"Error";
     NSString *amountDescriptionTextFieldText = @"Error";
-    NSString *createOrderButtonText = @"Error";
-    NSString *maxAmountButtonTitle = @"Error";
-    BOOL maxAmountButtonHidden = NO;
-    NSString *cancelButtonText = @"Cancel";
+    NSString *createOrderButtonText          = @"Error";
+    NSString *maxAmountButtonTitle           = @"Error";
+    BOOL maxAmountButtonHidden               = NO;
+    NSString *cancelButtonText               = @"Cancel";
 
     NSString *shortCurrencyString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:self.currencyType];
     if (self.orderType == BitcoinDE_OrderTypeBuy) {
         amountDescriptionTextFieldText = @"Amount to buy";
-        maxAmountButtonHidden = YES;
+        maxAmountButtonHidden          = YES;
         if (self.orderBookDataToReplace == nil) {
-            titleTextFieldText = @"Create new buy order";
+            titleTextFieldText    = @"Create new buy order";
             createOrderButtonText = @"Create new buy order";
         }
         else {
-            titleTextFieldText = @"Change buy order";
+            titleTextFieldText    = @"Change buy order";
             createOrderButtonText = @"Change buy order";
         }
     }
     else if (self.orderType == BitcoinDE_OrderTypeSell) {
         amountDescriptionTextFieldText = @"Amount to sell";
-        maxAmountButtonTitle = [NSString stringWithFormat:@"Max %@"
-                                , shortCurrencyString];
+        maxAmountButtonTitle           = [NSString stringWithFormat:@"Max %@", shortCurrencyString];
         if (self.orderBookDataToReplace == nil) {
-            titleTextFieldText = @"Create new sell order";
+            titleTextFieldText    = @"Create new sell order";
             createOrderButtonText = @"Create new sell order";
         }
         else {
-            titleTextFieldText = @"Change sell order";
+            titleTextFieldText    = @"Change sell order";
             createOrderButtonText = @"Change sell order";
         }
     }
 
-    self.titleTextField.stringValue                 = titleTextFieldText;
-    self.amountDescriptionTextField.stringValue     = amountDescriptionTextFieldText;
-    self.maxAmountButton.title = maxAmountButtonTitle;
-    self.maxAmountButton.hidden = maxAmountButtonHidden;
+    self.titleTextField.stringValue             = titleTextFieldText;
+    self.amountDescriptionTextField.stringValue = amountDescriptionTextFieldText;
+    self.maxAmountButton.title                  = maxAmountButtonTitle;
+    self.maxAmountButton.hidden                 = maxAmountButtonHidden;
 
-    self.minAmountDescriptionTextField.stringValue  = @"Minimal amount";
-    self.priceDescriptionTextField.stringValue      = @"Price per BTC";
+    self.minAmountDescriptionTextField.stringValue = @"Minimal amount";
+    self.priceDescriptionTextField.stringValue     = @"Price per BTC";
 
     self.createOrderButton.title = createOrderButtonText;
-    self.cancelButton.title = cancelButtonText;
+    self.cancelButton.title      = cancelButtonText;
 
     // priceLimitInformationTextField
     {
         NSString *volumeTextFieldText = @"Error";
         switch (self.orderType) {
             case BitcoinDE_OrderTypeBuy:
-                volumeTextFieldText = [NSString stringWithFormat:@"Min. price: %@\n(50%% weighted rate)"
-                                       , [SOXFormatters currencyStringForNumber:self.priceLimit
-                                                                   roundingMode:NSNumberFormatterRoundUp]];
+                volumeTextFieldText = [NSString stringWithFormat:@"Min. price: %@\n(50%% weighted rate)", [SOXFormatters currencyStringForNumber:self.priceLimit
+                                                                                                                                    roundingMode:NSNumberFormatterRoundUp]];
                 break;
             case BitcoinDE_OrderTypeSell:
-                volumeTextFieldText = [NSString stringWithFormat:@"Max. price: %@\n(200%% weighted rate)"
-                                       , [SOXFormatters currencyStringForNumber:self.priceLimit
-                                                                   roundingMode:NSNumberFormatterRoundDown]];
+                volumeTextFieldText = [NSString stringWithFormat:@"Max. price: %@\n(200%% weighted rate)", [SOXFormatters currencyStringForNumber:self.priceLimit
+                                                                                                                                     roundingMode:NSNumberFormatterRoundDown]];
                 break;
             default:
                 break;
@@ -273,7 +262,7 @@
 
 - (void)setupUIBox {
     // Strings
-    self.optionBox.title                            = @"Options";
+    self.optionBox.title = @"Options";
 
     [self setupUIBoxCheckboxes];
     [self setupUIBoxDatePicker];
@@ -281,30 +270,26 @@
 }
 
 - (void)setupUIBoxCheckboxes {
-    { // OnlyKYC
+    {   // OnlyKYC
         self.onlyKYCButton.title = @"Allow only fully identified Users";
-        self.onlyKYCButton.state = self.orderBookDataToReplace ?
-        self.orderBookDataToReplace.orderRequirements_onlyKYCFull :
-        [SOXPreferenceCenter defaultKYCOnly];
+        self.onlyKYCButton.state = self.orderBookDataToReplace ? self.orderBookDataToReplace.orderRequirements_onlyKYCFull : [SOXPreferenceCenter defaultKYCOnly];
     }
 
-    { // ReNew
+    {   // ReNew
         self.reNewOrderButton.title = @"Automatic residual purchase request";
-        self.reNewOrderButton.state = self.orderBookDataToReplace ?
-        self.orderBookDataToReplace.orderInformation_newOrderForRemainingAmount :
-        [SOXPreferenceCenter reNewOrderForRemainingAmount];
+        self.reNewOrderButton.state = self.orderBookDataToReplace ? self.orderBookDataToReplace.orderInformation_newOrderForRemainingAmount : [SOXPreferenceCenter reNewOrderForRemainingAmount];
     }
 
-    { // TrustLevel
+    {   // TrustLevel
         self.trustLevelDescpriptionTextField.stringValue = @"Minimal Trust Level";
-        self.bronceTrustLevelButton.title               = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelBronze];
-        self.bronceTrustLevelButton.tag                 = BitcoinDE_TrustLevelBronze;
+        self.bronceTrustLevelButton.title                = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelBronze];
+        self.bronceTrustLevelButton.tag                  = BitcoinDE_TrustLevelBronze;
 
-        self.silverTrustLevelButton.title               = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelSilver];
-        self.silverTrustLevelButton.tag                 = BitcoinDE_TrustLevelSilver;
+        self.silverTrustLevelButton.title = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelSilver];
+        self.silverTrustLevelButton.tag   = BitcoinDE_TrustLevelSilver;
 
-        self.goldTrustLevelButton.title                 = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelGold];
-        self.goldTrustLevelButton.tag                   = BitcoinDE_TrustLevelGold;
+        self.goldTrustLevelButton.title = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelGold];
+        self.goldTrustLevelButton.tag   = BitcoinDE_TrustLevelGold;
 
         if (self.bronceTrustLevelButton.tag == self.trustLevel) {
             self.bronceTrustLevelButton.state = 1;
@@ -327,9 +312,9 @@
     }
     else {
         NSNumber *defaultEndDateTimeSpan = [SOXPreferenceCenter defaultEndDateTimespan];
-        NSTimeInterval timeIntervall = defaultEndDateTimeSpan.integerValue * 24 * 60 * 60;
-        NSDate *dateIn5Days = [NSDate dateWithTimeIntervalSinceNow:timeIntervall];
-        endDate = [SOXFormatters dateQuarterBeforeMidnightForDate:dateIn5Days];
+        NSTimeInterval timeIntervall     = defaultEndDateTimeSpan.integerValue * 24 * 60 * 60;
+        NSDate *dateIn5Days              = [NSDate dateWithTimeIntervalSinceNow:timeIntervall];
+        endDate                          = [SOXFormatters dateQuarterBeforeMidnightForDate:dateIn5Days];
     }
     self.endDatePicker.dateValue = endDate;
 }
@@ -338,7 +323,7 @@
     // Hint on buy: paymentOption depend on default via preferences on webside
     if (self.orderType == BitcoinDE_OrderTypeBuy) {
         self.paymentOptionHintTextField.allowsEditingTextAttributes = YES;
-        self.paymentOptionHintTextField.selectable = YES;
+        self.paymentOptionHintTextField.selectable                  = YES;
         [self.paymentOptionHintTextField setHyperlinkFormattingFromString:@"Express Trade Settings"
                                                             withURLString:@"https://www.bitcoin.de/de/express-trade/settings"];
     }
@@ -352,7 +337,7 @@
 #pragma mark | Rates methods
 - (void)checkForRates {
     SOXRates_BitcoinDE_Data *ratesData = (SOXRates_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].ratesData;
-    NSDecimalNumber *rateWeighted = [ratesData rateWeightedForCurrencyType:self.currencyType];
+    NSDecimalNumber *rateWeighted      = [ratesData rateWeightedForCurrencyType:self.currencyType];
     if (rateWeighted == nil) {
         [[SOXMarket_BitcoinDE_Core sharedCore] startRatesUpdateForCurrencyType:self.currencyType];
     }
@@ -360,7 +345,7 @@
 
 - (void)ratesUpdatesReceived {
     SOXRates_BitcoinDE_Data *ratesData = (SOXRates_BitcoinDE_Data *)[SOXMarket_BitcoinDE_Core sharedCore].ratesData;
-    NSDecimalNumber *rateWeighted = [ratesData rateWeightedForCurrencyType:self.currencyType];
+    NSDecimalNumber *rateWeighted      = [ratesData rateWeightedForCurrencyType:self.currencyType];
     if (rateWeighted) {
         [self setupPriceLimitValue];
         [self setupUI];
@@ -372,12 +357,11 @@
 
 #pragma mark | Input validation
 - (void)validateInputs {
-    if ([[self volumeNonNil] isLessThan:[SOXPreferenceCenter minimalVolume]]
-        || [[self minVolumeNonNil] isLessThan:[SOXPreferenceCenter minimalVolume]]) {
+    if ([[self volumeNonNil] isLessThan:[SOXPreferenceCenter minimalVolume]] || [[self minVolumeNonNil] isLessThan:[SOXPreferenceCenter minimalVolume]]) {
         self.validInput = NO;
         return;
     }
-    
+
     if ([self.amount isLessThan:self.minimalPossibleAmount]) {
         self.validInput = NO;
         return;
@@ -387,11 +371,7 @@
         return;
     }
 
-    if (!self.price
-        || [self.price isLessThan:[NSDecimalNumber zero]]
-        || (self.orderType == BitcoinDE_OrderTypeBuy && [self.price isLessThan:self.priceLimit])
-        || (self.orderType == BitcoinDE_OrderTypeSell && [self.price isGreaterThan:self.priceLimit])
-        ) {
+    if (!self.price || [self.price isLessThan:[NSDecimalNumber zero]] || (self.orderType == BitcoinDE_OrderTypeBuy && [self.price isLessThan:self.priceLimit]) || (self.orderType == BitcoinDE_OrderTypeSell && [self.price isGreaterThan:self.priceLimit])) {
         self.validInput = NO;
         return;
     }
@@ -407,54 +387,41 @@
 
 - (void)updateVolumeInformationLine {
     NSDecimalNumber *priceAsDecimalNumber = [self priceNonNil];
-    NSDecimalNumber *volume = [self volumeNonNil];
-    NSDecimalNumber *minVolume = [self minVolumeNonNil];
+    NSDecimalNumber *volume               = [self volumeNonNil];
+    NSDecimalNumber *minVolume            = [self minVolumeNonNil];
 
-    BOOL priceIsZero = [priceAsDecimalNumber isEqualToNumber:[NSDecimalNumber zero]];
-    BOOL priceToLess = [priceAsDecimalNumber isLessThan:self.priceLimit];
-    BOOL priceToHigh = [priceAsDecimalNumber isGreaterThan:self.priceLimit];
+    BOOL priceIsZero     = [priceAsDecimalNumber isEqualToNumber:[NSDecimalNumber zero]];
+    BOOL priceToLess     = [priceAsDecimalNumber isLessThan:self.priceLimit];
+    BOOL priceToHigh     = [priceAsDecimalNumber isGreaterThan:self.priceLimit];
     BOOL minAmountToLess = [minVolume isLessThan:[SOXPreferenceCenter minimalVolume]];
-    BOOL amountToLess = [volume isLessThan:[SOXPreferenceCenter minimalVolume]];
+    BOOL amountToLess    = [volume isLessThan:[SOXPreferenceCenter minimalVolume]];
 
     NSString *volumeInformation;
     if (priceIsZero) {
         volumeInformation = @"Confucius says:\nNo Price - No Profit";
     }
-    else if (self.orderType == BitcoinDE_OrderTypeBuy
-             && priceToLess) {
-        volumeInformation = [NSString stringWithFormat:@"Price beneath minimal price (%@)"
-                             , [SOXFormatters currencyStringForNumber:self.priceLimit
-                                                         roundingMode:NSNumberFormatterRoundHalfUp]];
+    else if (self.orderType == BitcoinDE_OrderTypeBuy && priceToLess) {
+        volumeInformation = [NSString stringWithFormat:@"Price beneath minimal price (%@)", [SOXFormatters currencyStringForNumber:self.priceLimit
+                                                                                                                      roundingMode:NSNumberFormatterRoundHalfUp]];
     }
-    else if (self.orderType == BitcoinDE_OrderTypeSell
-             && priceToHigh) {
-        volumeInformation = [NSString stringWithFormat:@"Price above maximal price (%@)"
-                             , [SOXFormatters currencyStringForNumber:self.priceLimit
-                                                         roundingMode:NSNumberFormatterRoundHalfUp]];
+    else if (self.orderType == BitcoinDE_OrderTypeSell && priceToHigh) {
+        volumeInformation = [NSString stringWithFormat:@"Price above maximal price (%@)", [SOXFormatters currencyStringForNumber:self.priceLimit
+                                                                                                                    roundingMode:NSNumberFormatterRoundHalfUp]];
     }
     else if (amountToLess) {
         NSDecimalNumber *amountNeeded = [[SOXPreferenceCenter minimalVolume] decimalNumberByDividingBy:priceAsDecimalNumber
                                                                                           withBehavior:[SOXFormatters btcNumberHandler]];
-        volumeInformation = [NSString stringWithFormat:@"Amount to less (min: %@)\nVolume must be grater than %@"
-                             , [SOXFormatters stringForBTCNumber:amountNeeded]
-                             , [SOXFormatters currencyStringForNumber:[SOXPreferenceCenter minimalVolume]
-                                                         roundingMode:NSNumberFormatterRoundHalfUp]];
+        volumeInformation             = [NSString stringWithFormat:@"Amount to less (min: %@)\nVolume must be grater than %@", [SOXFormatters stringForBTCNumber:amountNeeded], [SOXFormatters currencyStringForNumber:[SOXPreferenceCenter minimalVolume]
+                                                                                                                                                                                              roundingMode:NSNumberFormatterRoundHalfUp]];
     }
     else if (minAmountToLess) {
         NSDecimalNumber *minAmountNeeded = [[SOXPreferenceCenter minimalVolume] decimalNumberByDividingBy:priceAsDecimalNumber
                                                                                              withBehavior:[SOXFormatters btcNumberHandler]];
-        volumeInformation = [NSString stringWithFormat:@"Minimum amount to less (min: %@)\nVolume must be grater than %@"
-                             , [SOXFormatters stringForBTCNumber:minAmountNeeded]
-                             , [SOXFormatters currencyStringForNumber:[SOXPreferenceCenter minimalVolume]
-                                                         roundingMode:NSNumberFormatterRoundHalfUp]];
+        volumeInformation                = [NSString stringWithFormat:@"Minimum amount to less (min: %@)\nVolume must be grater than %@", [SOXFormatters stringForBTCNumber:minAmountNeeded], [SOXFormatters currencyStringForNumber:[SOXPreferenceCenter minimalVolume]
+                                                                                                                                                                                                         roundingMode:NSNumberFormatterRoundHalfUp]];
     }
     else {
-        volumeInformation = [NSString stringWithFormat:@"%@ %@ %@ for %@ equals %@"
-                             , [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:self.orderType]
-                             , [SOXFormatters stringForBTCNumber:self.amount]
-                             , [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:self.currencyType]
-                             , [SOXFormatters currencyStringForNumber:priceAsDecimalNumber roundingMode:NSNumberFormatterRoundHalfUp]
-                             , [SOXFormatters currencyStringForNumber:volume roundingMode:NSNumberFormatterRoundHalfUp]];
+        volumeInformation = [NSString stringWithFormat:@"%@ %@ %@ for %@ equals %@", [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:self.orderType], [SOXFormatters stringForBTCNumber:self.amount], [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:self.currencyType], [SOXFormatters currencyStringForNumber:priceAsDecimalNumber roundingMode:NSNumberFormatterRoundHalfUp], [SOXFormatters currencyStringForNumber:volume roundingMode:NSNumberFormatterRoundHalfUp]];
     }
 
     self.volumeInformationLine.stringValue = volumeInformation;
@@ -488,19 +455,19 @@
 
 #pragma mark - Special getter methods (nonnull)
 - (NSDecimalNumber *)priceNonNil {
-    NSDecimalNumber *priceNonNil = [NSDecimalNumber decimalNumberWithDecimal:self.price.decimalValue] ? : [NSDecimalNumber zero];
+    NSDecimalNumber *priceNonNil = [NSDecimalNumber decimalNumberWithDecimal:self.price.decimalValue] ?: [NSDecimalNumber zero];
     return priceNonNil;
 }
 
 - (NSDecimalNumber *)volumeNonNil {
-    NSDecimalNumber *amount = self.amount ? : [NSDecimalNumber zero];
+    NSDecimalNumber *amount = self.amount ?: [NSDecimalNumber zero];
     NSDecimalNumber *volume = [[self priceNonNil] decimalNumberByMultiplyingBy:amount
                                                                   withBehavior:[SOXFormatters currencyNumberHandler]];
     return volume;
 }
 
 - (NSDecimalNumber *)minVolumeNonNil {
-    NSDecimalNumber *minAmount = self.minAmount ? : [NSDecimalNumber zero];
+    NSDecimalNumber *minAmount = self.minAmount ?: [NSDecimalNumber zero];
     NSDecimalNumber *minVolume = [[self priceNonNil] decimalNumberByMultiplyingBy:minAmount
                                                                      withBehavior:[SOXFormatters currencyNumberHandler]];
     return minVolume;
@@ -521,7 +488,7 @@
     NSDecimalNumber *newAmount = [[SOXMarket_BitcoinDE_Core availableAmountForCurrencyType:self.currencyType] copy];
     if (self.orderBookDataToReplace) {
         NSDecimalNumber *maxAmountOfOrderToReplace = [NSDecimalNumber decimalNumberWithDecimal:[self.orderBookDataToReplace.orderInformation_maxAmount decimalValue]];
-        newAmount = [newAmount decimalNumberByAdding:maxAmountOfOrderToReplace];
+        newAmount                                  = [newAmount decimalNumberByAdding:maxAmountOfOrderToReplace];
     }
     self.amount = newAmount;
     [self validateInputs];
@@ -531,9 +498,9 @@
     if (self.isInputValid) {
         // create strings
         NSString *createOrderButtonTitle = self.createOrderButton.title;
-        NSString *cancelButtonTitle       = @"Cancel";
-        NSString *messageText             = @"Warning";
-        NSString *informativeText = @"ERROR";
+        NSString *cancelButtonTitle      = @"Cancel";
+        NSString *messageText            = @"Warning";
+        NSString *informativeText        = @"ERROR";
         if (self.orderBookDataToReplace) {
             informativeText = @"Do you really want to change the order?";
         }
@@ -550,25 +517,24 @@
 
         // present alert
         weakify(self)
-        [alert beginSheetModalForWindow:self.view.window
-                      completionHandler:^(NSModalResponse returnCode) {
-                          strongify(self)
-                          if (returnCode == 1000) { // Execute trade
-                              if (self.orderBookDataToReplace) {
-                                  [self removeOldOrder];
+            [alert beginSheetModalForWindow:self.view.window
+                          completionHandler:^(NSModalResponse returnCode) {
+                              strongify(self) if (returnCode == 1000) {   // Execute trade
+                                  if (self.orderBookDataToReplace) {
+                                      [self removeOldOrder];
+                                  }
+                                  else {
+                                      [self createNewOrder];
+                                  }
                               }
-                              else {
-                                  [self createNewOrder];
-                              }
-                          }
-                      }];
+                          }];
     }
     else {
         // inform user
-        NSAlert *alert = [[NSAlert alloc] init];
-        alert.messageText = @"Non valid input";
+        NSAlert *alert        = [[NSAlert alloc] init];
+        alert.messageText     = @"Non valid input";
         alert.informativeText = [NSString stringWithFormat:@"Some information are missing"];
-        alert.alertStyle = NSAlertStyleInformational;
+        alert.alertStyle      = NSAlertStyleInformational;
         [alert runModal];
     }
 }
@@ -582,20 +548,20 @@
 }
 
 #pragma mark - SOXMarketCoreServerRequestProtocol
--(void)answerOfServerRequest:(NSDictionary *)answerOfServerRequest {
+- (void)answerOfServerRequest:(NSDictionary *)answerOfServerRequest {
     // on Error: do nothing (error message will be displayed by bitcoinCore)
     if ([answerOfServerRequest objectForKey:ServerAnswerErrorKey]) {
-        self.orderBookDataToReplace = nil; // in case our order was sold/bought
+        self.orderBookDataToReplace = nil;   // in case our order was sold/bought
         return;
     }
-    
+
     if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_CreateOrderType)]) {
         NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
-        NSString *newOrderID = [payloadDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderID];
-        
-         // inform user
+        NSString *newOrderID            = [payloadDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderID];
+
+        // inform user
         {
-            NSString *messageText,*informativeText;
+            NSString *messageText, *informativeText;
             NSAlertStyle alertStyle;
             if (newOrderID) {
                 messageText     = @"Successfully created";
@@ -612,7 +578,7 @@
                 [self.delegate orderWasChanged:nil newOrderID:newOrderID];
             }
 
-            NSAlert *alert = [[NSAlert alloc] init];
+            NSAlert *alert        = [[NSAlert alloc] init];
             alert.messageText     = messageText;
             alert.informativeText = informativeText;
             alert.alertStyle      = alertStyle;
@@ -632,11 +598,11 @@
 
 #pragma mark - NSControlTextEditingDelegate
 - (void)controlTextDidChange:(NSNotification *)notification {
-    NSTextField* textField           = notification.object;
-    NSNumberFormatter* textFieldFormatter = textField.formatter;
-    NSText* textFieldEditor               = textField.currentEditor;
-    
-    id newValue = ( textFieldEditor != nil ? [textFieldFormatter numberFromString:textFieldEditor.string] : textField.objectValue );
+    NSTextField *textField                = notification.object;
+    NSNumberFormatter *textFieldFormatter = textField.formatter;
+    NSText *textFieldEditor               = textField.currentEditor;
+
+    id newValue = (textFieldEditor != nil ? [textFieldFormatter numberFromString:textFieldEditor.string] : textField.objectValue);
 
     if (textField == self.amountTextField) {
         _amount = newValue;

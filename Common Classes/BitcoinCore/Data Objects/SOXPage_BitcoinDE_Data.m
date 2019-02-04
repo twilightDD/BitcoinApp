@@ -31,9 +31,9 @@
 
 - (void)setupDataForPayloadDictionary:(NSDictionary *)payloadDictionary {
     NSDictionary *pageDictionary = [payloadDictionary objectForKey:BitcoinDE_ShowMyTrades_Page];
-    
+
     self.pageCurrent = [(NSNumber *)[pageDictionary objectForKey:BitcoinDE_ShowMyTrades_Page_Current] integerValue];
-    self.pageLast = [(NSNumber *)[pageDictionary objectForKey:BitcoinDE_ShowMyTrades_Page_Last] integerValue];
+    self.pageLast    = [(NSNumber *)[pageDictionary objectForKey:BitcoinDE_ShowMyTrades_Page_Last] integerValue];
 }
 
 @end

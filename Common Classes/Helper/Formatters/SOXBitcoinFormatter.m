@@ -14,18 +14,17 @@
     NSString *stringForObjectValue = @"";
     if ([obj isKindOfClass:[NSNumber class]]) {
         NSNumberFormatter *bitcoinFormatter = [SOXFormatters bitcoinNumberFormatter];
-        stringForObjectValue = [bitcoinFormatter stringFromNumber:obj];
+        stringForObjectValue                = [bitcoinFormatter stringFromNumber:obj];
     }
     return stringForObjectValue;
 }
 
-- (BOOL)getObjectValue:(out id  _Nullable __autoreleasing *)obj
-            forString:(NSString *)string
-     errorDescription:(out NSString *__autoreleasing  _Nullable *)error {
+- (BOOL)getObjectValue:(out id _Nullable __autoreleasing *)obj
+             forString:(NSString *)string
+      errorDescription:(out NSString *__autoreleasing _Nullable *)error {
 
     return YES;
 }
-
 
 
 @end

@@ -15,9 +15,7 @@
                             orderType:(BitcoinDE_OrderType)orderType
                         bitcoinAmount:(NSNumber *)bitcoinAmount
                       forCurrencyType:(BitcoinDE_CurrencyType)currencyType {
-    if (!orderID
-        || orderID.length == 0
-        || (orderType != BitcoinDE_OrderTypeBuy && orderType != BitcoinDE_OrderTypeSell)) {
+    if (!orderID || orderID.length == 0 || (orderType != BitcoinDE_OrderTypeBuy && orderType != BitcoinDE_OrderTypeSell)) {
         return nil;
     }
 
@@ -25,13 +23,9 @@
     NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType];
 
     NSString *orderTypeString = [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:orderType];
-    NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:
-                               orderID, BitcoinDE_ExecuteTrade_OrderID
-                               , orderTypeString, BitcoinDE_ExecuteTrade_Type
-                               , bitcoinAmount, BitcoinDE_ExecuteTrade_BitcoinAmount
-                               , currencyTypeString, BitcoinDE_ShowOrderbook_TradingPair
-                               , nil];
-    
+    NSDictionary *parameter   = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                orderID, BitcoinDE_ExecuteTrade_OrderID, orderTypeString, BitcoinDE_ExecuteTrade_Type, bitcoinAmount, BitcoinDE_ExecuteTrade_BitcoinAmount, currencyTypeString, BitcoinDE_ShowOrderbook_TradingPair, nil];
+
     return parameter;
 }
 
@@ -42,7 +36,7 @@
                                       forCurrencyType:(BitcoinDE_CurrencyType)currencyType {
     NSDictionary *parameters = [self parameterForOrderID:orderID
                                                orderType:orderType
-                                          bitcoinAmount:bitcoinAmount
+                                           bitcoinAmount:bitcoinAmount
                                          forCurrencyType:currencyType];
 
     NSMutableDictionary *parameterAutomaticTrading = [parameters mutableCopy];

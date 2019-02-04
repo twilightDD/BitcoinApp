@@ -12,12 +12,12 @@
 @implementation NSTextField (URL)
 
 - (void)setHyperlinkFormattingFromString:(NSString *)hyperlink withURLString:(NSString *)urlString {
-    self.allowsEditingTextAttributes= YES;
-    self.selectable                 = YES;
-    
+    self.allowsEditingTextAttributes = YES;
+    self.selectable                  = YES;
+
     NSAttributedString *string = [NSAttributedString hyperlinkFromString:hyperlink
                                                                  withURL:[NSURL URLWithString:urlString]];
-    
+
     self.attributedStringValue = string;
 }
 

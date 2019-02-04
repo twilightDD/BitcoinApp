@@ -13,6 +13,6 @@
 @interface SOXMarketHelper : NSObject
 
 + (BOOL)existOrderBookData:(SOXShowOrderbookData *)addOrderData
-               inOrderBook:(NSArray <SOXShowOrderbookData *>*)orderbook;
+               inOrderBook:(NSArray<SOXShowOrderbookData *> *)orderbook;
 
 @end

@@ -22,7 +22,7 @@ static NSString *KeychainAccountKey = @"BitcounAccount";
 @interface SOXPreferencesCore ()
 
 @property (nonatomic) BOOL validKeychainBool;
-@property (strong, nonatomic, nonnull) NSMutableArray <NSMutableDictionary*> *keysAndSecrets;
+@property (strong, nonatomic, nonnull) NSMutableArray<NSMutableDictionary *> *keysAndSecrets;
 
 @end
 
@@ -32,17 +32,17 @@ static NSString *KeychainAccountKey = @"BitcounAccount";
 
 #pragma mark - Public Class methods
 + (void)startupPreferencesCore {
-   [SOXPreferencesCore sharedCore];
+    [SOXPreferencesCore sharedCore];
 }
 
 + (BOOL)validKeychain {
-//    return NO; // Test switch
+    //    return NO; // Test switch
 
     BOOL validKeychain = [[SOXPreferencesCore sharedCore] validKeychainBool];
     return validKeychain;
 }
 
-+ (NSUInteger )countOfValidKeychainItems {
++ (NSUInteger)countOfValidKeychainItems {
     NSUInteger countOfValidKeychainItems = [SOXPreferencesCore sharedCore].keysAndSecrets.count;
     return countOfValidKeychainItems;
 }
@@ -52,10 +52,10 @@ static NSString *KeychainAccountKey = @"BitcounAccount";
 
     NSMutableArray *keysAndSecrets = [SOXPreferencesCore sharedCore].keysAndSecrets;
 
-    if (keysAndSecrets.count >  0) {
-        
+    if (keysAndSecrets.count > 0) {
+
         NSMutableDictionary *keysAndSecretDictionary = [keysAndSecrets objectAtIndex:index];
-        key = [keysAndSecretDictionary objectForKey:APIUserKey];
+        key                                          = [keysAndSecretDictionary objectForKey:APIUserKey];
     }
 
     return key;
@@ -66,22 +66,21 @@ static NSString *KeychainAccountKey = @"BitcounAccount";
 
     NSMutableArray *keysAndSecrets = [SOXPreferencesCore sharedCore].keysAndSecrets;
 
-    if (keysAndSecrets.count >=  1) {
+    if (keysAndSecrets.count >= 1) {
         NSMutableDictionary *keysAndSecretDictionary = [[SOXPreferencesCore sharedCore].keysAndSecrets objectAtIndex:index];
-        secret = [keysAndSecretDictionary objectForKey:APISecretKey];
+        secret                                       = [keysAndSecretDictionary objectForKey:APISecretKey];
     }
     return secret;
 }
 
-+ (NSMutableArray <NSMutableDictionary*> *)keysAndSecrets {
++ (NSMutableArray<NSMutableDictionary *> *)keysAndSecrets {
     return [SOXPreferencesCore sharedCore].keysAndSecrets;
 }
 
-+ (BOOL)saveKeysAndSecrets:(NSMutableArray <NSMutableDictionary*> *)keysAndSecrets
++ (BOOL)saveKeysAndSecrets:(NSMutableArray<NSMutableDictionary *> *)keysAndSecrets
                      error:(NSError *)error {
     SOXPreferencesCore *preferenceCore = [SOXPreferencesCore sharedCore];
-    preferenceCore.keysAndSecrets = keysAndSecrets;
-
+    preferenceCore.keysAndSecrets      = keysAndSecrets;
 
 
     __block BOOL completelyNewKeysAndSecrets = YES;
@@ -106,7 +105,7 @@ static NSString *KeychainAccountKey = @"BitcounAccount";
         [saveAlert runModal];
     }
 
-    BOOL validKeysAndSecrets = [SOXPreferencesCore validKeychain];
+    BOOL validKeysAndSecrets    = [SOXPreferencesCore validKeychain];
     BOOL newValidKeysAndSecrets = completelyNewKeysAndSecrets && validKeysAndSecrets;
     if (success) {
         [[NSNotificationCenter defaultCenter] postNotificationName:SOXAPIKeysAndSecretsDidChangeNotification
@@ -139,16 +138,15 @@ static NSString *KeychainAccountKey = @"BitcounAccount";
 }
 
 #pragma mark - Private Class methods
-+ (SOXPreferencesCore * _Nonnull)sharedCore {
++ (SOXPreferencesCore *_Nonnull)sharedCore {
     static SOXPreferencesCore *sharedCore;
 
     static dispatch_once_t pred;
 
     dispatch_once(&pred, ^{
-        sharedCore = [[self class] new];
+        sharedCore                = [[self class] new];
         sharedCore.keysAndSecrets = [NSMutableArray array];
         [sharedCore loadAPIKeysAndSecretsFromKeychain];
-
     });
 
     return sharedCore;
@@ -171,7 +169,7 @@ static NSString *KeychainAccountKey = @"BitcounAccount";
     if ([string rangeOfCharacterFromSet:illegalCharacterSet].location != NSNotFound) {
         return NO;
     }
-    
+
     NSCharacterSet *punctuationCharacterSet = [NSCharacterSet punctuationCharacterSet];
     if ([string rangeOfCharacterFromSet:punctuationCharacterSet].location != NSNotFound) {
         return NO;
@@ -205,7 +203,7 @@ static NSString *KeychainAccountKey = @"BitcounAccount";
         }
         else {
             self.keysAndSecrets = [array mutableCopy];
-            
+
             // TODO: check for _really_ valid keychain items!
             // - lenght
             // - only lowerCases or figures
@@ -223,7 +221,7 @@ static NSString *KeychainAccountKey = @"BitcounAccount";
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self.keysAndSecrets
                                                        options:NSJSONWritingPrettyPrinted
                                                          error:&error];
-    BOOL success = [SAMKeychain setPasswordData:jsonData
+    BOOL success     = [SAMKeychain setPasswordData:jsonData
                                      forService:KeychainServiceKey
                                         account:KeychainAccountKey];
 

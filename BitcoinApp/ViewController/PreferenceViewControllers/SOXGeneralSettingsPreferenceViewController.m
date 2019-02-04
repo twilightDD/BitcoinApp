@@ -80,8 +80,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-
 }
 
 - (void)viewWillAppear {
@@ -98,33 +96,32 @@
 
     [self setupCreateNewOrderBox];
     [self setupLoadOrderBooksAutomatically];
-
 }
 - (void)setupCreateNewOrderBox {
     self.createNewOrderBox.title = @"Create new order";
 
-    { // OnlyKYC
+    {   // OnlyKYC
         self.onlyKYCButton.title = @"Allow only fully identified Users";
         self.onlyKYCButton.state = [SOXPreferenceCenter defaultKYCOnly] ? NSControlStateValueOn : NSControlStateValueOff;
     }
 
-    { // ReNew
+    {   // ReNew
         self.reNewOrderButton.title = @"Automatic residual purchase request";
-        self.reNewOrderButton.state =  [SOXPreferenceCenter reNewOrderForRemainingAmount] ? NSControlStateValueOn : NSControlStateValueOff;
+        self.reNewOrderButton.state = [SOXPreferenceCenter reNewOrderForRemainingAmount] ? NSControlStateValueOn : NSControlStateValueOff;
     }
 
-    { // TrustLevel
+    {   // TrustLevel
         self.trustLevelDescpriptionTextField.stringValue = @"Minimal Trust Level";
-        self.bronceTrustLevelButton.title = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelBronze];
-        self.bronceTrustLevelButton.tag = BitcoinDE_TrustLevelBronze;
-        self.bronceTrustLevelButton.state = NSControlStateValueOff;
+        self.bronceTrustLevelButton.title                = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelBronze];
+        self.bronceTrustLevelButton.tag                  = BitcoinDE_TrustLevelBronze;
+        self.bronceTrustLevelButton.state                = NSControlStateValueOff;
 
         self.silverTrustLevelButton.title = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelSilver];
-        self.silverTrustLevelButton.tag = BitcoinDE_TrustLevelSilver;
+        self.silverTrustLevelButton.tag   = BitcoinDE_TrustLevelSilver;
         self.silverTrustLevelButton.state = NSControlStateValueOff;
 
         self.goldTrustLevelButton.title = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:BitcoinDE_TrustLevelGold];
-        self.goldTrustLevelButton.tag = BitcoinDE_TrustLevelGold;
+        self.goldTrustLevelButton.tag   = BitcoinDE_TrustLevelGold;
         self.goldTrustLevelButton.state = NSControlStateValueOff;
 
         BitcoinDE_TrustLevel trustLevel = [SOXPreferenceCenter defaultTrustLevelForNewOrder];
@@ -149,67 +146,67 @@
 
 - (void)setupUIBoxPaymentOptionHint {
     self.paymentOptionHintTextField.allowsEditingTextAttributes = YES;
-    self.paymentOptionHintTextField.selectable = YES;
+    self.paymentOptionHintTextField.selectable                  = YES;
     [self.paymentOptionHintTextField setHyperlinkFormattingFromString:@"Express Trade Settings"
                                                         withURLString:@"https://www.bitcoin.de/de/express-trade/settings"];
 }
 
 - (void)setupUIBoxReservationHint {
     self.reservationHintTextField.allowsEditingTextAttributes = YES;
-    self.reservationHintTextField.selectable = YES;
+    self.reservationHintTextField.selectable                  = YES;
     [self.reservationHintTextField setHyperlinkFormattingFromString:@"Change Express Reservation"
-                                                        withURLString:@"https://www.bitcoin.de/de/create_reservation"];
+                                                      withURLString:@"https://www.bitcoin.de/de/create_reservation"];
 }
 
 
 - (void)setupLoadOrderBooksAutomatically {
     self.loadOrderbooksAutomaticallyBox.title = @"Auto-Fetch Orderbooks and Banners at Startup";
 
-    self.emptyDescriptionTextField.stringValue = @"";
-    self.buyDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes naturalStringForOrderType:BitcoinDE_OrderTypeBuy];
-    self.sellDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes naturalStringForOrderType:BitcoinDE_OrderTypeSell];
+    self.emptyDescriptionTextField.stringValue  = @"";
+    self.buyDescriptionTextField.stringValue    = [SOXMarket_BitcoinDE_DefTypes naturalStringForOrderType:BitcoinDE_OrderTypeBuy];
+    self.sellDescriptionTextField.stringValue   = [SOXMarket_BitcoinDE_DefTypes naturalStringForOrderType:BitcoinDE_OrderTypeSell];
     self.bannerDescriptionTextField.stringValue = @"Rates";
 
     // BTC
     self.btcDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoin];
-    self.btcBuyButton.state = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeBuy
+    self.btcBuyButton.state                  = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeBuy
                                                                                 forCurrencyType:BitcoinDE_CurrencyTypeBitcoin];
-    self.btcSellButton.state = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeSell
+    self.btcSellButton.state                 = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeSell
                                                                                  forCurrencyType:BitcoinDE_CurrencyTypeBitcoin];
 
     self.btcBannerButton.state = [SOXPreferenceCenter controlStateForBannerForCurrencyType:BitcoinDE_CurrencyTypeBitcoin];
 
     // BCH
     self.bchDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
-    self.bchBuyButton.state =  [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeBuy
-                                                                                 forCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
-    self.bchSellButton.state = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeSell
+    self.bchBuyButton.state                  = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeBuy
                                                                                 forCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
-    self.bchBannerButton.state = [SOXPreferenceCenter controlStateForBannerForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
+    self.bchSellButton.state                 = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeSell
+                                                                                 forCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
+    self.bchBannerButton.state               = [SOXPreferenceCenter controlStateForBannerForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCash];
 
     // BSV
     self.bsvDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCashSV];
-    self.bsvBuyButton.state =  [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeBuy
+    self.bsvBuyButton.state                  = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeBuy
+                                                                                forCurrencyType:BitcoinDE_CurrencyTypeBitcoinCashSV];
+    self.bsvSellButton.state                 = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeSell
                                                                                  forCurrencyType:BitcoinDE_CurrencyTypeBitcoinCashSV];
-    self.bsvSellButton.state = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeSell
-                                                                                 forCurrencyType:BitcoinDE_CurrencyTypeBitcoinCashSV];
-    self.bsvBannerButton.state = [SOXPreferenceCenter controlStateForBannerForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCashSV];
+    self.bsvBannerButton.state               = [SOXPreferenceCenter controlStateForBannerForCurrencyType:BitcoinDE_CurrencyTypeBitcoinCashSV];
 
     // BTG
     self.btgDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeBitcoinGold];
-    self.btgBuyButton.state = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeBuy
+    self.btgBuyButton.state                  = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeBuy
                                                                                 forCurrencyType:BitcoinDE_CurrencyTypeBitcoinGold];
-    self.btgSellButton.state = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeSell
+    self.btgSellButton.state                 = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeSell
                                                                                  forCurrencyType:BitcoinDE_CurrencyTypeBitcoinGold];
-    self.btgBannerButton.state = [SOXPreferenceCenter controlStateForBannerForCurrencyType:BitcoinDE_CurrencyTypeBitcoinGold];
+    self.btgBannerButton.state               = [SOXPreferenceCenter controlStateForBannerForCurrencyType:BitcoinDE_CurrencyTypeBitcoinGold];
 
     // ETH
     self.ethDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeEthereum];
-    self.ethBuyButton.state = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeBuy
+    self.ethBuyButton.state                  = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeBuy
                                                                                 forCurrencyType:BitcoinDE_CurrencyTypeEthereum];
-    self.ethSellButton.state = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeSell
+    self.ethSellButton.state                 = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeSell
                                                                                  forCurrencyType:BitcoinDE_CurrencyTypeEthereum];
-    self.ethBannerButton.state = [SOXPreferenceCenter controlStateForBannerForCurrencyType:BitcoinDE_CurrencyTypeEthereum];
+    self.ethBannerButton.state               = [SOXPreferenceCenter controlStateForBannerForCurrencyType:BitcoinDE_CurrencyTypeEthereum];
 
     // Auto update info Tabs
     self.autoUpdateInfoTabsButton.title = @"Auto-Fetch Account Ledger on Demand";
@@ -235,7 +232,7 @@
 
 #pragma mark | Load Orderbooks automatically
 - (IBAction)buyButtonActions:(NSButton *)sender {
-    BOOL automaticallyLoadOrderbook = sender.state;
+    BOOL automaticallyLoadOrderbook     = sender.state;
     BitcoinDE_CurrencyType currencyType = sender.tag;
     [SOXPreferenceCenter setAutomaticallyLoadOrderbook:automaticallyLoadOrderbook
                                           forOrderType:BitcoinDE_OrderTypeBuy
@@ -243,7 +240,7 @@
 }
 
 - (IBAction)sellButtonActions:(NSButton *)sender {
-    BOOL automaticallyLoadOrderbook = sender.state;
+    BOOL automaticallyLoadOrderbook     = sender.state;
     BitcoinDE_CurrencyType currencyType = sender.tag;
     [SOXPreferenceCenter setAutomaticallyLoadOrderbook:automaticallyLoadOrderbook
                                           forOrderType:BitcoinDE_OrderTypeSell
@@ -251,7 +248,7 @@
 }
 
 - (IBAction)bannerButtonActions:(NSButton *)sender {
-    BOOL automaticallyLoadOrderbook = sender.state;
+    BOOL automaticallyLoadOrderbook     = sender.state;
     BitcoinDE_CurrencyType currencyType = sender.tag;
     [SOXPreferenceCenter setAutomaticallyLoadBanner:automaticallyLoadOrderbook
                                     forCurrencyType:currencyType];

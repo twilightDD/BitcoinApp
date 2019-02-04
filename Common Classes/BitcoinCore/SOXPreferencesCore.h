@@ -13,7 +13,7 @@
 + (void)startupPreferencesCore;
 
 + (BOOL)validKeychain;
-+ (NSUInteger )countOfValidKeychainItems;
++ (NSUInteger)countOfValidKeychainItems;
 
 + (NSString *)apiKeyAtIndex:(NSUInteger)index;
 + (NSString *)apiSecretAtIndex:(NSUInteger)index;
@@ -21,8 +21,8 @@
 + (BOOL)validateKey:(NSString *)key;
 + (BOOL)validateSecret:(NSString *)key;
 
-+ (BOOL)saveKeysAndSecrets:(NSMutableArray <NSMutableDictionary*> *)keysAndSecrets
++ (BOOL)saveKeysAndSecrets:(NSMutableArray<NSMutableDictionary *> *)keysAndSecrets
                      error:(NSError *)error;
-+ (NSMutableArray <NSMutableDictionary*> *)keysAndSecrets;
++ (NSMutableArray<NSMutableDictionary *> *)keysAndSecrets;
 
 @end

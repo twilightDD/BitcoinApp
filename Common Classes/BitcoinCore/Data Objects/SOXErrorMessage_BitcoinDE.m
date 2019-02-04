@@ -25,39 +25,39 @@ NSString static *APIError_BitcoinDE_FieldKey   = @"field";
 @implementation SOXErrorMessage_BitcoinDE
 
 #pragma mark Init&Co.
-- (SOXErrorMessage_BitcoinDE * _Nonnull)initWithServerRequestTitle:(NSString * _Nullable)serverRequestTitle {
+- (SOXErrorMessage_BitcoinDE *_Nonnull)initWithServerRequestTitle:(NSString *_Nullable)serverRequestTitle {
     self = [super init];
     if (self) {
         self.serverRequestTitle = serverRequestTitle;
-        self.hasError = NO;
-        self.apiErrorCode = 0; // 0 == no error
+        self.hasError           = NO;
+        self.apiErrorCode       = 0;   // 0 == no error
     }
 
     return self;
 }
 
 #pragma mark - Public methods
-- (void)checkNSURLResonse:(NSURLResponse * _Nullable)response {
+- (void)checkNSURLResonse:(NSURLResponse *_Nullable)response {
     if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
         NSHTTPURLResponse *httpURLResponse = (NSHTTPURLResponse *)response;
-        NSString *errorDescription = [self errorDescriptionForURLResponseStatusCode:httpURLResponse.statusCode];
+        NSString *errorDescription         = [self errorDescriptionForURLResponseStatusCode:httpURLResponse.statusCode];
         if (errorDescription) {
             [self appendErrorDescripton:errorDescription];
         }
     }
 }
 
-- (void)checkJsonError:(NSError * _Nullable)jsonError {
+- (void)checkJsonError:(NSError *_Nullable)jsonError {
     if (jsonError) {
         [self appendErrorDescripton:jsonError.description];
     }
 }
 
-- (void)checkforAPIErrors:(NSArray * _Nullable)apiErrors {
+- (void)checkforAPIErrors:(NSArray *_Nullable)apiErrors {
     if (!apiErrors || apiErrors.count == 0) {
         return;
     }
-    
+
     for (NSDictionary *apiError in apiErrors) {
         /* BitcoinDE
          Name       Required	Type	Value	Notes
@@ -65,60 +65,57 @@ NSString static *APIError_BitcoinDE_FieldKey   = @"field";
          code       true        string	--      Fehlercode
          field      false       string	--      Feld, auf den sich der Fehler bezieht.
          */
-        
+
         NSString *message = [apiError objectForKey:APIError_BitcoinDE_MessageKey];
         NSString *code    = [apiError objectForKey:APIError_BitcoinDE_CodeKey];
         NSString *field   = [apiError objectForKey:APIError_BitcoinDE_FieldKey];
-        
+
         // api error code
         NSInteger apiErrorCode = code.integerValue;
-        self.apiErrorCode = apiErrorCode;
-        
+        self.apiErrorCode      = apiErrorCode;
+
         NSString *errorDescription = [NSString stringWithFormat:@"%@ - %@", code, message];
         if (field) {
             NSString *fieldString = [NSString stringWithFormat:@" (%@)", field];
-            errorDescription = [errorDescription stringByAppendingString:fieldString];
+            errorDescription      = [errorDescription stringByAppendingString:fieldString];
         }
-        
+
         [self appendErrorDescripton:errorDescription];
     }
 }
 
-- (void)appendErrorDescripton:(NSString * _Nullable)errorDescripton {
+- (void)appendErrorDescripton:(NSString *_Nullable)errorDescripton {
     if (!errorDescripton) {
         return;
     }
-    
+
     if (self.errorMessage) {
         NSString *errorDescriptionToAppend = [NSString stringWithFormat:@"\n%@", errorDescripton];
-        self.errorMessage = [self.errorMessage stringByAppendingString:errorDescriptionToAppend];
+        self.errorMessage                  = [self.errorMessage stringByAppendingString:errorDescriptionToAppend];
     }
     else {
         self.errorMessage = errorDescripton;
-        self.hasError = YES;
+        self.hasError     = YES;
     }
 }
 
 - (NSString *)description {
     NSString *serverRequestTitleString = [NSString stringWithFormat:@"ServerRequest: %@", self.serverRequestTitle];
-    NSString *hasErrorString = [NSString stringWithFormat:@"hasError: %@", self.hasError ? @"YES" : @"NO"];
-    NSString *description = [NSString stringWithFormat:@"\n%@\n%@\n%@/napiError: %ti"
-                             , serverRequestTitleString
-                             , hasErrorString,
-                             self.errorMessage,
-                             self.apiErrorCode];
-    
+    NSString *hasErrorString           = [NSString stringWithFormat:@"hasError: %@", self.hasError ? @"YES" : @"NO"];
+    NSString *description              = [NSString stringWithFormat:@"\n%@\n%@\n%@/napiError: %ti", serverRequestTitleString, hasErrorString,
+                                                       self.errorMessage,
+                                                       self.apiErrorCode];
+
     return description;
 }
 
 #pragma mark - Private methods
-- (NSString * _Nullable)errorDescriptionForURLResponseStatusCode:(NSUInteger)responseErrorCode {
-    if (responseErrorCode == 0//) {
-        || responseErrorCode == 200
-        || responseErrorCode == 201) {
+- (NSString *_Nullable)errorDescriptionForURLResponseStatusCode:(NSUInteger)responseErrorCode {
+    if (responseErrorCode == 0   //) {
+        || responseErrorCode == 200 || responseErrorCode == 201) {
         return nil;
     }
-    
+
     NSString *errorDescription = @"errorDescription";
     switch (responseErrorCode) {
         case 200:
@@ -146,15 +143,15 @@ NSString static *APIError_BitcoinDE_FieldKey   = @"field";
             errorDescription = @"Unknown URLResponse error";
             break;
     }
-    
+
     return errorDescription;
 }
 
-- (NSString * _Nullable)errorDescriptionForAPIErrorCode:(NSUInteger)apiErrorCode {
+- (NSString *_Nullable)errorDescriptionForAPIErrorCode:(NSUInteger)apiErrorCode {
     if (apiErrorCode == 0) {
         return nil;
     }
-    
+
     NSString *errorDescription = @"errorDescription";
     switch (apiErrorCode) {
         case 1:
@@ -305,9 +302,8 @@ NSString static *APIError_BitcoinDE_FieldKey   = @"field";
             errorDescription = @"Unknown API error";
             break;
     }
-    
+
     return errorDescription;
 }
 
 @end
-

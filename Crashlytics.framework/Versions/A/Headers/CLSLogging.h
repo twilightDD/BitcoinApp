@@ -12,7 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 #endif
 
 
-
 /**
  *
  * The CLS_LOG macro provides as easy way to gather more information in your log messages that are
@@ -47,8 +46,8 @@ NS_ASSUME_NONNULL_BEGIN
  **/
 
 #ifdef __OBJC__
-OBJC_EXTERN void CLSLog(NSString *format, ...) NS_FORMAT_FUNCTION(1,2);
-OBJC_EXTERN void CLSLogv(NSString *format, va_list ap) NS_FORMAT_FUNCTION(1,0);
+OBJC_EXTERN void CLSLog(NSString *format, ...) NS_FORMAT_FUNCTION(1, 2);
+OBJC_EXTERN void CLSLogv(NSString *format, va_list ap) NS_FORMAT_FUNCTION(1, 0);
 
 /**
  *
@@ -56,8 +55,8 @@ OBJC_EXTERN void CLSLogv(NSString *format, va_list ap) NS_FORMAT_FUNCTION(1,0);
  * and your Crashlytics dashboard. It is not recommended for Release builds.
  *
  **/
-OBJC_EXTERN void CLSNSLog(NSString *format, ...) NS_FORMAT_FUNCTION(1,2);
-OBJC_EXTERN void CLSNSLogv(NSString *format, va_list ap) NS_FORMAT_FUNCTION(1,0);
+OBJC_EXTERN void CLSNSLog(NSString *format, ...) NS_FORMAT_FUNCTION(1, 2);
+OBJC_EXTERN void CLSNSLogv(NSString *format, va_list ap) NS_FORMAT_FUNCTION(1, 0);
 
 
 NS_ASSUME_NONNULL_END
