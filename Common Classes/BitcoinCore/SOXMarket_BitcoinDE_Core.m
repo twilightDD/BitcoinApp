@@ -277,7 +277,9 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
                                                                         }
                                                                     }
 
-                                                                    if (errorMessage.hasError) {
+                                                                    if (errorMessage.hasError
+                                                                        && errorMessage.apiErrorCode != 31 // 31 - Page greater than last page
+                                                                        ) {
                                                                         MacAppDelegate* appDelegate = (MacAppDelegate*)[[NSApplication sharedApplication] delegate];
                                                                         SOXLogWindowController *errorWindowController = appDelegate.errorWindowController;
                                                                         [errorWindowController performSelectorOnMainThread:@selector(showErrorMessage:)

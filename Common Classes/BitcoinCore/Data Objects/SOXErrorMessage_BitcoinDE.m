@@ -17,6 +17,7 @@ NSString static *APIError_BitcoinDE_FieldKey   = @"field";
 
 #pragma mark Properties
 @property (nonatomic, readwrite) BOOL hasError;
+@property (nonatomic, readwrite) NSInteger apiErrorCode;
 
 @end
 
@@ -29,6 +30,7 @@ NSString static *APIError_BitcoinDE_FieldKey   = @"field";
     if (self) {
         self.serverRequestTitle = serverRequestTitle;
         self.hasError = NO;
+        self.apiErrorCode = 0; // 0 == no error
     }
 
     return self;
@@ -68,6 +70,10 @@ NSString static *APIError_BitcoinDE_FieldKey   = @"field";
         NSString *code    = [apiError objectForKey:APIError_BitcoinDE_CodeKey];
         NSString *field   = [apiError objectForKey:APIError_BitcoinDE_FieldKey];
         
+        // api error code
+        NSInteger apiErrorCode = code.integerValue;
+        self.apiErrorCode = apiErrorCode;
+        
         NSString *errorDescription = [NSString stringWithFormat:@"%@ - %@", code, message];
         if (field) {
             NSString *fieldString = [NSString stringWithFormat:@" (%@)", field];
@@ -96,10 +102,11 @@ NSString static *APIError_BitcoinDE_FieldKey   = @"field";
 - (NSString *)description {
     NSString *serverRequestTitleString = [NSString stringWithFormat:@"ServerRequest: %@", self.serverRequestTitle];
     NSString *hasErrorString = [NSString stringWithFormat:@"hasError: %@", self.hasError ? @"YES" : @"NO"];
-    NSString *description = [NSString stringWithFormat:@"\n%@\n%@\n%@"
+    NSString *description = [NSString stringWithFormat:@"\n%@\n%@\n%@/napiError: %ti"
                              , serverRequestTitleString
                              , hasErrorString,
-                             self.errorMessage];
+                             self.errorMessage,
+                             self.apiErrorCode];
     
     return description;
 }

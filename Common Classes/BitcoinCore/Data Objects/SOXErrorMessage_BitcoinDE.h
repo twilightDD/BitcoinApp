@@ -14,6 +14,12 @@
 @property (copy, nonatomic, nullable) NSString *errorMessage;
 @property (nonatomic, readonly) BOOL hasError;
 
+
+/**
+ See bitcoin.de API documentation for error code list.
+ */
+@property (nonatomic, readonly) NSInteger apiErrorCode;
+
 - (SOXErrorMessage_BitcoinDE * _Nonnull)initWithServerRequestTitle:(NSString * _Nullable)serverRequestTitle;
 
 - (void)checkNSURLResonse:(NSURLResponse * _Nullable)response;
