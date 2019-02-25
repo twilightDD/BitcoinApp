@@ -22,8 +22,8 @@
 @property (strong, nonatomic, readwrite) NSString *orderInformation_type;
 @property (strong, nonatomic, readwrite) NSString *orderInformation_tradingPair;
 @property (nonatomic, readwrite) BitcoinDE_CurrencyType orderInformation_currencyType;
-@property (strong, nonatomic, readwrite) NSNumber *orderInformation_maxAmount;
-@property (strong, nonatomic, readwrite) NSNumber *orderInformation_minAmount;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *orderInformation_maxAmount;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *orderInformation_minAmount;
 @property (strong, nonatomic, readwrite) NSNumber *orderInformation_price;
 @property (strong, nonatomic, readwrite) NSNumber *orderInformation_maxVolume;
 @property (strong, nonatomic, readwrite) NSNumber *orderInformation_minVolume;
@@ -219,8 +219,8 @@
         self.orderInformation_type                       = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_Type];
         self.orderInformation_tradingPair                = [myOrderDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPair];
         self.orderInformation_currencyType               = [SOXMarket_BitcoinDE_DefTypes currencyTypeForTradingPairString:self.orderInformation_tradingPair];
-        self.orderInformation_maxAmount                  = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MaxAmount];
-        self.orderInformation_minAmount                  = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MinAmount];
+        self.orderInformation_maxAmount                  = [NSDecimalNumber decimalNumberWithString:[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MaxAmount]];
+        self.orderInformation_minAmount                  = [NSDecimalNumber decimalNumberWithString:[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MinAmount]];
         self.orderInformation_price                      = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_Price];
         self.orderInformation_maxVolume                  = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MaxVolume];
         self.orderInformation_minVolume                  = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MinVolume];
