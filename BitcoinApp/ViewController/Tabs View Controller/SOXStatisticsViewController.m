@@ -48,6 +48,7 @@
 
 #pragma mark | Properties
 @property (strong, nonatomic) SOXStatisticsSummaryViewController *statisticsSummaryViewController;
+@property (strong, nonatomic) SOXAccountLedger_BitcoinDE_StatisticData *overallStatisticsData;
 
 @property (strong, nonatomic) NSNumber *startMonth;
 @property (strong, nonatomic) NSNumber *startYear;
@@ -180,7 +181,11 @@
         else {
         }
     }
-
+    
+    // For statistic sums
+    self.overallStatisticsData = [[SOXAccountLedger_BitcoinDE_StatisticData alloc] init];
+    [self.arrayControllerDatas addObject:self.overallStatisticsData];
+    
     [self requestNextServerData];
 }
 
@@ -281,6 +286,8 @@
 
         SOXAccountLedger_BitcoinDE_StatisticData *accountLedgerStatisticData = [self accountLedgerStatisticsDataForServerRequestParameters:parameter];
         [accountLedgerStatisticData addAccountLedgerDatas:accountLedgerDatas];
+        
+        [self.overallStatisticsData addAccountLedgerDatas:accountLedgerDatas];
         [self.arrayController rearrangeObjects];
 
         // PageData: Look up for more pages to load

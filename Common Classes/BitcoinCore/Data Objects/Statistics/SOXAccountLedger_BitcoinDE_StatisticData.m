@@ -34,10 +34,9 @@
 @implementation SOXAccountLedger_BitcoinDE_StatisticData
 
 #pragma mark Init & Co.
-- (instancetype)initWithCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+- (instancetype)init {
     self = [super self];
     if (self) {
-        self.currencyType       = currencyType;
         self.accountLedgerDatas = [NSMutableArray array];
         self.coinSum            = [NSDecimalNumber zero];
         self.winLostSum         = [NSDecimalNumber zero];
@@ -48,9 +47,18 @@
         self.currentPage        = 0;
         self.lastPage           = 0;
     }
+    
+    return self;
+}
+- (instancetype)initWithCurrencyType:(BitcoinDE_CurrencyType)currencyType {
+    self = [self init];
+    if (self) {
+        self.currencyType       = currencyType;
+    }
 
     return self;
 }
+
 #pragma mark - Public Methods
 - (void)addAccountLedgerDatas:(NSMutableArray *)accountLedgerDatas {
     if (accountLedgerDatas.count > 0) {
