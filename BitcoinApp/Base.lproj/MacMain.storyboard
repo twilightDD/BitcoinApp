@@ -4753,7 +4753,7 @@ Gw
                                                 </constraints>
                                                 <popUpButtonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" altersStateOfSelectedItem="NO" selectedItem="jVg-ut-R74" id="cLY-9w-Oem">
                                                     <behavior key="behavior" lightByContents="YES"/>
-                                                    <font key="font" metaFont="system"/>
+                                                    <font key="font" metaFont="menu"/>
                                                     <menu key="menu" id="TAs-8I-DMT">
                                                         <items>
                                                             <menuItem state="on" hidden="YES" id="jVg-ut-R74"/>
