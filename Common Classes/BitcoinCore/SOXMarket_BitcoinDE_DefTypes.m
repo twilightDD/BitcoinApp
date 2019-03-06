@@ -190,7 +190,12 @@
 
     dispatch_once(&pred, ^{
         tradingPairStringsForCurrencyTyp = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                             @"btceur", @(BitcoinDE_CurrencyTypeBitcoin), @"bcheur", @(BitcoinDE_CurrencyTypeBitcoinCash), @"btgeur", @(BitcoinDE_CurrencyTypeBitcoinGold), @"etheur", @(BitcoinDE_CurrencyTypeEthereum), @"bsveur", @(BitcoinDE_CurrencyTypeBitcoinCashSV), nil];
+                                                             @"btceur", @(BitcoinDE_CurrencyTypeBitcoin),
+                                                             @"bcheur", @(BitcoinDE_CurrencyTypeBitcoinCash),
+                                                             @"btgeur", @(BitcoinDE_CurrencyTypeBitcoinGold),
+                                                             @"etheur", @(BitcoinDE_CurrencyTypeEthereum),
+                                                             @"bsveur", @(BitcoinDE_CurrencyTypeBitcoinCashSV),
+                                                             nil];
     });
 
     return tradingPairStringsForCurrencyTyp;

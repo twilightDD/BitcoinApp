@@ -57,8 +57,8 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
-                                                        <binding destination="Eup-8f-FdA" name="value" keyPath="arrangedObjects.accountLedgerDatas.@count" id="DLs-tC-Wo3"/>
                                                         <binding destination="Eup-8f-FdA" name="textColor" keyPath="arrangedObjects.textColor" id="UY0-Tv-VXg"/>
+                                                        <binding destination="Eup-8f-FdA" name="value" keyPath="arrangedObjects.myTradesDatas.@count" id="sdW-dA-1lU"/>
                                                     </connections>
                                                 </tableColumn>
                                                 <tableColumn width="120" minWidth="40" maxWidth="1000" id="ynd-pZ-eZy">
@@ -200,11 +200,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
-                                                        <binding destination="Eup-8f-FdA" name="value" keyPath="arrangedObjects.self" id="Vdi-VD-xoB">
-                                                            <dictionary key="options">
-                                                                <string key="NSValueTransformerName">SOXAccountLedgerStatisticsData_LoadPageInformation_ValueTransformer</string>
-                                                            </dictionary>
-                                                        </binding>
+                                                        <binding destination="Eup-8f-FdA" name="value" keyPath="arrangedObjects.stateDescription" id="b5I-P2-yDm"/>
                                                     </connections>
                                                 </tableColumn>
                                                 <tableColumn width="1" minWidth="1" maxWidth="1" id="MWE-1e-EAL">
