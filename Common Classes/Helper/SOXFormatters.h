@@ -25,6 +25,7 @@
 + (NSNumber *)currentMonth;
 + (NSNumber *)currentYear;
 + (NSDate *)dateFirstDayOfMonth:(NSNumber *)month year:(NSNumber *)year;
++ (NSDate *)dateLastDayWithinMonth:(NSNumber *)month year:(NSNumber *)year;
 + (NSDate *)dateLastDayOfMonth:(NSNumber *)month year:(NSNumber *)year;
 
 + (NSString *)stringDateTimeStringForRFC3339DateTimeString:(NSString *)rfc3339DateTimeString;

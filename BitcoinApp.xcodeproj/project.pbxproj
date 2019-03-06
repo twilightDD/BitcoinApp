@@ -171,6 +171,8 @@
 		D08ABF0E1E9C03040059825F /* SOXPreferenceCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ABF0D1E9C03040059825F /* SOXPreferenceCenter.m */; };
 		D08ABF0F1E9C03040059825F /* SOXPreferenceCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ABF0D1E9C03040059825F /* SOXPreferenceCenter.m */; };
 		D08ABF121E9C270D0059825F /* SOXCreateNewOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ABF111E9C270D0059825F /* SOXCreateNewOrderViewController.m */; };
+		D08C1457222FD46300E0B9E0 /* SOXDateHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C1456222FD46300E0B9E0 /* SOXDateHelpers.m */; };
+		D08C1458222FD46300E0B9E0 /* SOXDateHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C1456222FD46300E0B9E0 /* SOXDateHelpers.m */; };
 		D090304D1EB1F4FC00775E05 /* SOXPaymentOptionValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D090304C1EB1F4FC00775E05 /* SOXPaymentOptionValueTransformer.m */; };
 		D090304E1EB1F4FC00775E05 /* SOXPaymentOptionValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D090304C1EB1F4FC00775E05 /* SOXPaymentOptionValueTransformer.m */; };
 		D0962CCC1E945906004FFF62 /* SOXAbstractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0962CCB1E945906004FFF62 /* SOXAbstractViewController.m */; };
@@ -412,6 +414,8 @@
 		D08ABF0D1E9C03040059825F /* SOXPreferenceCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXPreferenceCenter.m; sourceTree = "<group>"; };
 		D08ABF101E9C270D0059825F /* SOXCreateNewOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXCreateNewOrderViewController.h; sourceTree = "<group>"; };
 		D08ABF111E9C270D0059825F /* SOXCreateNewOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXCreateNewOrderViewController.m; sourceTree = "<group>"; };
+		D08C1455222FD46300E0B9E0 /* SOXDateHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXDateHelpers.h; sourceTree = "<group>"; };
+		D08C1456222FD46300E0B9E0 /* SOXDateHelpers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXDateHelpers.m; sourceTree = "<group>"; };
 		D090304B1EB1F4FC00775E05 /* SOXPaymentOptionValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXPaymentOptionValueTransformer.h; sourceTree = "<group>"; };
 		D090304C1EB1F4FC00775E05 /* SOXPaymentOptionValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXPaymentOptionValueTransformer.m; sourceTree = "<group>"; };
 		D0962CCA1E945906004FFF62 /* SOXAbstractViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXAbstractViewController.h; sourceTree = "<group>"; };
@@ -715,6 +719,8 @@
 				D01F589D1E8495D200C170F7 /* SOXFormatters.m */,
 				D08ABF0C1E9C03040059825F /* SOXPreferenceCenter.h */,
 				D08ABF0D1E9C03040059825F /* SOXPreferenceCenter.m */,
+				D08C1455222FD46300E0B9E0 /* SOXDateHelpers.h */,
+				D08C1456222FD46300E0B9E0 /* SOXDateHelpers.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1494,6 +1500,7 @@
 				D07DA1982152E00C00F0416B /* SOXBoolNmberToWordValueTransformer.m in Sources */,
 				D021507220474AEC005A0932 /* SOXMyOrderBookData.m in Sources */,
 				D021507320474AEC005A0932 /* SOXAutomaticTrading_BitcoinDE_Core.m in Sources */,
+				D08C1458222FD46300E0B9E0 /* SOXDateHelpers.m in Sources */,
 				D021507420474AEC005A0932 /* SOXTradeJob_BitcoinDE_Data.m in Sources */,
 				D0F70277216AECE900BA7EDF /* SOXAbstractPreferenceViewController.m in Sources */,
 				D021507520474AEC005A0932 /* SOXFormatters.m in Sources */,
@@ -1584,6 +1591,7 @@
 				D07DA1972152E00C00F0416B /* SOXBoolNmberToWordValueTransformer.m in Sources */,
 				D0631F0A1E89C1EA007ED75A /* SOXMyOrderBookData.m in Sources */,
 				D032EA4F1EE8A71200D9EFBA /* SOXAutomaticTrading_BitcoinDE_Core.m in Sources */,
+				D08C1457222FD46300E0B9E0 /* SOXDateHelpers.m in Sources */,
 				D00FF1371EA03B71008BCD63 /* SOXTradeJob_BitcoinDE_Data.m in Sources */,
 				D0F70276216AECE900BA7EDF /* SOXAbstractPreferenceViewController.m in Sources */,
 				D01F589E1E8495D200C170F7 /* SOXFormatters.m in Sources */,

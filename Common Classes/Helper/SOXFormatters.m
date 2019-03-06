@@ -291,6 +291,19 @@
     return dateFirstDayOfMonth;
 }
 
++ (NSDate *)dateLastDayWithinMonth:(NSNumber *)month year:(NSNumber *)year {
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    dateComponents.day               = 0;
+    dateComponents.month             = month.integerValue + 1;
+    dateComponents.year              = year.integerValue;
+    dateComponents.hour              = 23;
+    dateComponents.minute            = 59;
+    dateComponents.second            = 59;
+    
+    NSDate *dateLastDayOfMonth = [self dateFromDateComponents:dateComponents];
+    return dateLastDayOfMonth;
+}
+
 + (NSDate *)dateLastDayOfMonth:(NSNumber *)month year:(NSNumber *)year {
     NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
     dateComponents.day               = 1;

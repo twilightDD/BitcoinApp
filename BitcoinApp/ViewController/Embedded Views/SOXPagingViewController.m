@@ -9,6 +9,8 @@
 #import "SOXPagingViewController.h"
 #import "SOXPagingAbstractViewController_Private.h"
 
+#import "SOXDateHelpers.h"
+
 #import "SOXPage_BitcoinDE_Data.h"
 
 #pragma mark - Interface
@@ -23,6 +25,7 @@
 @property (strong, readwrite) IBOutlet NSDatePicker *startDateDatePicker;
 @property (strong) IBOutlet NSTextField *endDateTextField;
 @property (strong, readwrite) IBOutlet NSDatePicker *endDateDatePicker;
+@property (strong) IBOutlet NSPopUpButton *convenientDatePopUpButton;
 
 @property (strong) IBOutlet NSButton *changeOrderButton;
 @property (strong) IBOutlet NSButton *removeOrderButton;
@@ -77,6 +80,10 @@
         self.endDateTextField.stringValue = @"End date";
         self.endDateDatePicker.dateValue  = self.selectedEndDate;
         self.endDateDatePicker.locale     = [NSLocale autoupdatingCurrentLocale];
+        
+        [self.convenientDatePopUpButton removeAllItems];
+        [self.convenientDatePopUpButton addItemWithTitle:@"dummy"];
+        [self.convenientDatePopUpButton addItemsWithTitles:[SOXDateHelpers convenientDateRangeTitles]];
     }
 
     // delegates configure popupButtons
@@ -146,6 +153,17 @@
         [self resetPagingButtons];
     }
 }
+
+- (IBAction)convenientDatePopUpButtonAction:(NSPopUpButton *)sender {
+    NSInteger dateRange = sender.indexOfSelectedItem - 1;
+    
+    self.selectedStartDate = [SOXDateHelpers startDateForDateRange:dateRange];
+    self.startDateDatePicker.dateValue = self.selectedStartDate;
+    
+    self.selectedEndDate = [SOXDateHelpers endDateForDateRange:dateRange];
+    self.endDateDatePicker.dateValue = self.selectedEndDate;
+}
+
 
 #pragma mark Change/Remove order
 - (IBAction)changeOrderButtonAction:(NSButton *)sender {

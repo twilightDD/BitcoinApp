@@ -2055,8 +2055,8 @@
         <scene sceneID="FDl-hu-vIc">
             <objects>
                 <viewController id="q7D-iu-Op3" customClass="SOXMyActiveOrdersViewController" sceneMemberID="viewController">
-                    <view key="view" id="d9Y-Go-gwW">
-                        <rect key="frame" x="0.0" y="0.0" width="729" height="401"/>
+                    <view key="view" misplaced="YES" id="d9Y-Go-gwW">
+                        <rect key="frame" x="0.0" y="0.0" width="784" height="401"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVf-cd-9K7">
@@ -2443,9 +2443,9 @@
                                 </connections>
                             </containerView>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="Wss-SR-un0">
-                                <rect key="frame" x="536" y="46" width="185" height="347"/>
+                                <rect key="frame" x="536" y="46" width="240" height="347"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="185" id="F9u-zL-2Zd"/>
+                                    <constraint firstAttribute="width" constant="240" id="F9u-zL-2Zd"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="nDB-rg-Ckf" kind="embed" id="yZH-0k-5oh"/>
@@ -2991,14 +2991,14 @@ Gw
         <scene sceneID="kdR-ZD-AXk">
             <objects>
                 <viewController id="d67-em-sMP" customClass="SOXMyAccountLedgerViewController" sceneMemberID="viewController">
-                    <view key="view" id="KG1-ac-oC6">
-                        <rect key="frame" x="0.0" y="0.0" width="750" height="497"/>
+                    <view key="view" misplaced="YES" id="KG1-ac-oC6">
+                        <rect key="frame" x="0.0" y="0.0" width="785" height="497"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fGp-j1-fNK">
-                                <rect key="frame" x="20" y="46" width="521" height="443"/>
+                                <rect key="frame" x="20" y="46" width="501" height="443"/>
                                 <clipView key="contentView" id="q6P-13-wzZ">
-                                    <rect key="frame" x="1" y="0.0" width="519" height="427"/>
+                                    <rect key="frame" x="1" y="0.0" width="499" height="427"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" autosaveColumns="NO" headerView="UdI-6x-40i" id="ukh-mk-8h8">
@@ -3188,7 +3188,7 @@ Gw
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="180" id="wkM-9V-7ME"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="7C6-vt-23Y">
-                                    <rect key="frame" x="1" y="427" width="519" height="15"/>
+                                    <rect key="frame" x="1" y="427" width="499" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="lZK-RD-pkv">
@@ -3201,10 +3201,10 @@ Gw
                                 </tableHeaderView>
                             </scrollView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="4oR-2z-iOV" userLabel="SpinningBackgroundView">
-                                <rect key="frame" x="21" y="62" width="519" height="402"/>
+                                <rect key="frame" x="21" y="62" width="499" height="402"/>
                                 <subviews>
                                     <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="09c-cw-0o8">
-                                        <rect key="frame" x="252" y="193" width="16" height="16"/>
+                                        <rect key="frame" x="242" y="193" width="16" height="16"/>
                                     </progressIndicator>
                                 </subviews>
                                 <constraints>
@@ -3213,10 +3213,10 @@ Gw
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="lm7-N0-jV0">
-                                <rect key="frame" x="21" y="62" width="519" height="402"/>
+                                <rect key="frame" x="21" y="62" width="499" height="402"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LCN-5P-5FH">
-                                        <rect key="frame" x="91" y="193" width="338" height="17"/>
+                                        <rect key="frame" x="81" y="193" width="338" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Für die gewählten Optionen sind keine Daten verfügbar" id="I5w-u6-8DY">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -3230,7 +3230,7 @@ Gw
                                 </constraints>
                             </customView>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="AOG-OZ-CYt">
-                                <rect key="frame" x="21" y="5" width="520" height="36"/>
+                                <rect key="frame" x="21" y="5" width="500" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="kcE-X2-oUm"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="500" id="zTf-qB-nSI"/>
@@ -3240,9 +3240,9 @@ Gw
                                 </connections>
                             </containerView>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="eAJ-eS-IHL">
-                                <rect key="frame" x="557" y="42" width="185" height="447"/>
+                                <rect key="frame" x="537" y="42" width="240" height="447"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="185" id="him-GE-SBm"/>
+                                    <constraint firstAttribute="width" constant="240" id="him-GE-SBm"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="nDB-rg-Ckf" kind="embed" id="yul-UQ-F1Q"/>
@@ -4226,8 +4226,8 @@ Gw
         <scene sceneID="GHY-7L-bja">
             <objects>
                 <viewController id="TPt-gD-CmY" customClass="SOXMyTradeHistoryViewController" sceneMemberID="viewController">
-                    <view key="view" id="O2L-9r-szs">
-                        <rect key="frame" x="0.0" y="0.0" width="1029" height="448"/>
+                    <view key="view" misplaced="YES" id="O2L-9r-szs">
+                        <rect key="frame" x="0.0" y="0.0" width="1084" height="448"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBg-iH-I78">
@@ -4574,9 +4574,9 @@ Gw
                                 </connections>
                             </containerView>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="qpo-0T-6wa">
-                                <rect key="frame" x="836" y="42" width="185" height="398"/>
+                                <rect key="frame" x="836" y="42" width="240" height="398"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="185" id="S0B-V6-LTO"/>
+                                    <constraint firstAttribute="width" constant="240" id="S0B-V6-LTO"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="nDB-rg-Ckf" kind="embed" id="YNG-my-y7e"/>
@@ -4633,14 +4633,14 @@ Gw
             <objects>
                 <viewController id="nDB-rg-Ckf" customClass="SOXPagingViewController" sceneMemberID="viewController">
                     <view key="view" id="E3o-4c-lX0">
-                        <rect key="frame" x="0.0" y="0.0" width="198" height="476"/>
+                        <rect key="frame" x="0.0" y="0.0" width="230" height="476"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="89s-RM-RkM">
-                                <rect key="frame" x="0.0" y="0.0" width="198" height="476"/>
+                                <rect key="frame" x="0.0" y="0.0" width="230" height="476"/>
                                 <subviews>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="eWy-9s-Qgd">
-                                        <rect key="frame" x="0.0" y="326" width="198" height="150"/>
+                                        <rect key="frame" x="0.0" y="326" width="230" height="150"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5S9-8x-7RA">
                                                 <rect key="frame" x="-2" y="30" width="84" height="17"/>
@@ -4711,6 +4711,9 @@ Gw
                                             </popUpButton>
                                             <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="w1P-hc-rLT">
                                                 <rect key="frame" x="0.0" y="0.0" width="80" height="22"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="80" id="oe0-Od-RzD"/>
+                                                </constraints>
                                                 <datePickerCell key="cell" borderStyle="bezel" alignment="left" datePickerStyle="textField" id="fUc-s8-m7W">
                                                     <font key="font" metaFont="system"/>
                                                     <date key="date" timeIntervalSinceReferenceDate="-595929600">
@@ -4725,6 +4728,9 @@ Gw
                                             </datePicker>
                                             <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xky-te-oFe">
                                                 <rect key="frame" x="88" y="0.0" width="80" height="22"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="80" id="gXZ-TP-Y1M"/>
+                                                </constraints>
                                                 <datePickerCell key="cell" borderStyle="bezel" alignment="left" datePickerStyle="textField" id="6dC-y6-WVn">
                                                     <font key="font" metaFont="system"/>
                                                     <date key="date" timeIntervalSinceReferenceDate="-595929600">
@@ -4737,22 +4743,44 @@ Gw
                                                     <action selector="endDatePickerAction:" target="nDB-rg-Ckf" id="Q2d-sG-a28"/>
                                                 </connections>
                                             </datePicker>
+                                            <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="hEJ-Uh-m1j">
+                                                <rect key="frame" x="176" y="0.0" width="20" height="22"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="20" id="gTE-dw-14P"/>
+                                                </constraints>
+                                                <popUpButtonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" altersStateOfSelectedItem="NO" selectedItem="jVg-ut-R74" id="cLY-9w-Oem">
+                                                    <behavior key="behavior" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                    <menu key="menu" id="TAs-8I-DMT">
+                                                        <items>
+                                                            <menuItem state="on" hidden="YES" id="jVg-ut-R74"/>
+                                                            <menuItem title="Item 2" id="hgL-Ne-YmG"/>
+                                                            <menuItem title="Item 3" id="Ash-Dj-lAL"/>
+                                                        </items>
+                                                    </menu>
+                                                </popUpButtonCell>
+                                                <connections>
+                                                    <action selector="convenientDatePopUpButtonAction:" target="nDB-rg-Ckf" id="54u-AJ-9G5"/>
+                                                </connections>
+                                            </popUpButton>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="OBt-lh-V2v" secondAttribute="trailing" constant="20" symbolic="YES" id="58j-pq-Zeo"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qND-yr-5Gt" secondAttribute="trailing" constant="20" symbolic="YES" id="5s4-kq-EuE"/>
                                             <constraint firstItem="qND-yr-5Gt" firstAttribute="top" secondItem="eWy-9s-Qgd" secondAttribute="top" id="6YS-P9-R2X"/>
                                             <constraint firstItem="OBt-lh-V2v" firstAttribute="leading" secondItem="5S9-8x-7RA" secondAttribute="trailing" constant="8" symbolic="YES" id="80C-9d-Re1"/>
+                                            <constraint firstItem="Xky-te-oFe" firstAttribute="bottom" secondItem="hEJ-Uh-m1j" secondAttribute="bottom" id="8dp-7n-veW"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="OcC-5L-X3Z" secondAttribute="trailing" id="EW6-ed-hLK"/>
                                             <constraint firstItem="Xky-te-oFe" firstAttribute="top" secondItem="OBt-lh-V2v" secondAttribute="bottom" constant="8" id="FZJ-87-Mml"/>
                                             <constraint firstItem="w1P-hc-rLT" firstAttribute="leading" secondItem="5S9-8x-7RA" secondAttribute="leading" id="GDE-QB-nfJ"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hEJ-Uh-m1j" secondAttribute="trailing" constant="8" id="PNl-aU-Uct"/>
                                             <constraint firstItem="jvm-3W-v93" firstAttribute="leading" secondItem="OcC-5L-X3Z" secondAttribute="leading" id="Qxt-gH-Fou"/>
                                             <constraint firstAttribute="bottom" secondItem="Xky-te-oFe" secondAttribute="bottom" id="RgU-Mi-oGl"/>
                                             <constraint firstItem="5S9-8x-7RA" firstAttribute="baseline" secondItem="OBt-lh-V2v" secondAttribute="baseline" id="RhD-wV-sC8"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Xky-te-oFe" secondAttribute="trailing" constant="20" symbolic="YES" id="S7P-KY-PC8"/>
                                             <constraint firstItem="jvm-3W-v93" firstAttribute="top" secondItem="OcC-5L-X3Z" secondAttribute="bottom" constant="10" id="V13-1y-jbN"/>
                                             <constraint firstItem="Xky-te-oFe" firstAttribute="leading" secondItem="OBt-lh-V2v" secondAttribute="leading" id="XJN-7E-ptc"/>
                                             <constraint firstItem="w1P-hc-rLT" firstAttribute="top" secondItem="5S9-8x-7RA" secondAttribute="bottom" constant="8" id="YMQ-dc-kYJ"/>
+                                            <constraint firstItem="hEJ-Uh-m1j" firstAttribute="leading" secondItem="Xky-te-oFe" secondAttribute="trailing" constant="8" symbolic="YES" id="ZM9-IR-pSD"/>
                                             <constraint firstItem="qND-yr-5Gt" firstAttribute="leading" secondItem="eWy-9s-Qgd" secondAttribute="leading" id="bvw-9u-WMo"/>
                                             <constraint firstItem="5S9-8x-7RA" firstAttribute="leading" secondItem="jvm-3W-v93" secondAttribute="leading" id="dKx-pb-rlW"/>
                                             <constraint firstItem="Xky-te-oFe" firstAttribute="leading" secondItem="w1P-hc-rLT" secondAttribute="trailing" constant="8" symbolic="YES" id="eXL-6j-Dpj"/>
@@ -4761,10 +4789,11 @@ Gw
                                             <constraint firstItem="5S9-8x-7RA" firstAttribute="top" secondItem="jvm-3W-v93" secondAttribute="bottom" constant="20" id="raQ-MA-dhz"/>
                                             <constraint firstItem="OcC-5L-X3Z" firstAttribute="leading" secondItem="qND-yr-5Gt" secondAttribute="leading" id="u7w-mF-LUu"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jvm-3W-v93" secondAttribute="trailing" constant="20" symbolic="YES" id="uK9-q1-sWy"/>
+                                            <constraint firstItem="hEJ-Uh-m1j" firstAttribute="height" secondItem="Xky-te-oFe" secondAttribute="height" id="wVC-pp-om0"/>
                                         </constraints>
                                     </customView>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VQY-Hv-5wf">
-                                        <rect key="frame" x="7" y="59" width="197" height="32"/>
+                                        <rect key="frame" x="39" y="59" width="197" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="185" id="hOy-gI-tyl"/>
                                         </constraints>
@@ -4777,7 +4806,7 @@ Gw
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YZT-bn-HTZ">
-                                        <rect key="frame" x="71" y="26" width="133" height="32"/>
+                                        <rect key="frame" x="103" y="26" width="133" height="32"/>
                                         <buttonCell key="cell" type="push" title="Load next page" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gWd-RQ-VHy">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -4787,7 +4816,7 @@ Gw
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wmN-wb-h5d">
-                                        <rect key="frame" x="98" y="-7" width="106" height="32"/>
+                                        <rect key="frame" x="130" y="-7" width="106" height="32"/>
                                         <buttonCell key="cell" type="push" title="Fetch Data" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jaW-eH-Xev">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -4817,7 +4846,7 @@ Gw
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6TH-MB-LI0">
-                                        <rect key="frame" x="124" y="278" width="80" height="32"/>
+                                        <rect key="frame" x="156" y="278" width="80" height="32"/>
                                         <buttonCell key="cell" type="push" title="Export" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ixb-FN-moe">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -4862,6 +4891,7 @@ Gw
                     </view>
                     <connections>
                         <outlet property="changeOrderButton" destination="YqK-DC-leQ" id="COf-To-olZ"/>
+                        <outlet property="convenientDatePopUpButton" destination="hEJ-Uh-m1j" id="Wds-8A-Kvd"/>
                         <outlet property="endDateDatePicker" destination="Xky-te-oFe" id="uKX-ND-nvE"/>
                         <outlet property="endDateTextField" destination="OBt-lh-V2v" id="Fyv-XW-7fp"/>
                         <outlet property="exportButton" destination="6TH-MB-LI0" id="GR5-Ts-cMl"/>
@@ -4880,7 +4910,7 @@ Gw
                 <userDefaultsController id="0pF-DQ-8Du"/>
                 <userDefaultsController id="4gw-Kv-T7Y"/>
             </objects>
-            <point key="canvasLocation" x="194" y="2511"/>
+            <point key="canvasLocation" x="124" y="2511"/>
         </scene>
         <!--Automatic Trading View Controller-->
         <scene sceneID="lPU-HL-3jH">
@@ -5446,9 +5476,9 @@ Gw
         <image name="NSRefreshTemplate" width="11" height="15"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9rv-7D-aVO"/>
+        <segue reference="KrD-O9-iXN"/>
         <segue reference="gQD-Dm-8uX"/>
-        <segue reference="YNG-my-y7e"/>
+        <segue reference="yZH-0k-5oh"/>
         <segue reference="M1y-2H-j1m"/>
     </inferredMetricsTieBreakers>
 </document>
