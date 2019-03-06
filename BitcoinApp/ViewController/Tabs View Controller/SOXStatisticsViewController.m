@@ -15,8 +15,6 @@
 
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
-#import "SOXDataStatistics.h"
-
 #import "SOXAccountLedger_BitcoinDE_Data_Private.h"
 #import "SOXAccountLedger_BitcoinDE_StatisticData.h"
 #import "SOXPage_BitcoinDE_Data.h"

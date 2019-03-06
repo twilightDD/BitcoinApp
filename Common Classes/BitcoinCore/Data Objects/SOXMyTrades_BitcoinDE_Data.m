@@ -279,7 +279,8 @@
         self.ownCalc_bookingVolume                = ownVolumeMinusFeeRounded;
 
         // ownCalc_fidorFee
-        if (self.paymentMethod.unsignedIntegerValue == BitcoinDE_MyTradeHistoryParameter_ExpressPaymentMethodType && [self.successfullyFinishedAt isLaterThan:[SOXFormatters fidorFeeStartedAtDate]]) {
+        if (self.paymentMethod.unsignedIntegerValue == BitcoinDE_MyTradeHistoryParameter_ExpressPaymentMethodType
+            && [self.successfullyFinishedAt isLaterThan:[SOXFormatters fidorFeeStartedAtDate]]) {
             NSDecimalNumber *fidorFee        = [self.ownCalc_bookingVolume decimalNumberByMultiplyingBy:[SOXMarket_BitcoinDE_DefTypes fidor_feeFactorStarting20180221]];
             NSDecimalNumber *fidorFeeRounded = [fidorFee decimalNumberByRoundingAccordingToBehavior:[SOXFormatters currencyNumberHandlerRoundDown]];
             self.ownCalc_fidorFee            = fidorFeeRounded;

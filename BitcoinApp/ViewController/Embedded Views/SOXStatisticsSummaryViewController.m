@@ -221,68 +221,11 @@
 }
 #pragma mark - Public Methods
 - (void)updateWithStatisticsDatas:(NSArray<SOXAccountLedger_BitcoinDE_StatisticData *> *)statisticDatas {
-    for (SOXAccountLedger_BitcoinDE_StatisticData *statisticData in statisticDatas) {
-        BitcoinDE_CurrencyType currencyType = statisticData.currencyType;
-        switch (currencyType) {
-            case BitcoinDE_CurrencyTypeBitcoin:
-                [self updateUIBTCwithstatisticData:statisticData];
-                break;
-            case BitcoinDE_CurrencyTypeBitcoinCash:
-                [self updateUIBCHwithstatisticData:statisticData];
-                break;
-            case BitcoinDE_CurrencyTypeBitcoinCashSV:
-                [self updateUIBSVwithstatisticData:statisticData];
-                break;
-            case BitcoinDE_CurrencyTypeBitcoinGold:
-                [self updateUIBTGwithstatisticData:statisticData];
-                break;
-            case BitcoinDE_CurrencyTypeEthereum:
-                [self updateUIETHwithstatisticData:statisticData];
-                break;
 
-            default:
-                break;
-        }
-    }
-
-    [self updateUISumwithStatisticDatas:statisticDatas];
 }
 
 #pragma mark - Private Methods
-- (void)updateUIBTCwithstatisticData:(SOXAccountLedger_BitcoinDE_StatisticData *)statisticData {
-    self.btcKickbackAmountTextField.objectValue    = [SOXFormatters stringEightDigitsForBTCNumber:statisticData.kickbackSum];
-    self.btcKickbackCountTextField.objectValue     = statisticData.kickbackCount;
-    self.btcFeeBitcoinDETextField.objectValue      = [SOXFormatters currencyStringForNumber:statisticData.feeVolumeSum];
-    self.btcWinLoseBeforeFeesTextField.objectValue = [SOXFormatters currencyStringForNumber:statisticData.winLostSum];
-}
 
-- (void)updateUIBCHwithstatisticData:(SOXAccountLedger_BitcoinDE_StatisticData *)statisticData {
-    self.bchKickbackAmountTextField.objectValue    = [SOXFormatters stringEightDigitsForBTCNumber:statisticData.kickbackSum];
-    self.bchKickbackCountTextField.objectValue     = statisticData.kickbackCount;
-    self.bchFeeBitcoinDETextField.objectValue      = [SOXFormatters currencyStringForNumber:statisticData.feeVolumeSum];
-    self.bchWinLoseBeforeFeesTextField.objectValue = [SOXFormatters currencyStringForNumber:statisticData.winLostSum];
-}
-
-- (void)updateUIBSVwithstatisticData:(SOXAccountLedger_BitcoinDE_StatisticData *)statisticData {
-    self.bsvKickbackAmountTextField.objectValue    = [SOXFormatters stringEightDigitsForBTCNumber:statisticData.kickbackSum];
-    self.bsvKickbackCountTextField.objectValue     = statisticData.kickbackCount;
-    self.bsvFeeBitcoinDETextField.objectValue      = [SOXFormatters currencyStringForNumber:statisticData.feeVolumeSum];
-    self.bsvWinLoseBeforeFeesTextField.objectValue = [SOXFormatters currencyStringForNumber:statisticData.winLostSum];
-}
-
-- (void)updateUIBTGwithstatisticData:(SOXAccountLedger_BitcoinDE_StatisticData *)statisticData {
-    self.btgKickbackAmountTextField.objectValue    = [SOXFormatters stringEightDigitsForBTCNumber:statisticData.kickbackSum];
-    self.btgKickbackCountTextField.objectValue     = statisticData.kickbackCount;
-    self.btgFeeBitcoinDETextField.objectValue      = [SOXFormatters currencyStringForNumber:statisticData.feeVolumeSum];
-    self.btgWinLoseBeforeFeesTextField.objectValue = [SOXFormatters currencyStringForNumber:statisticData.winLostSum];
-}
-
-- (void)updateUIETHwithstatisticData:(SOXAccountLedger_BitcoinDE_StatisticData *)statisticData {
-    self.ethKickbackAmountTextField.objectValue    = [SOXFormatters stringEightDigitsForBTCNumber:statisticData.kickbackSum];
-    self.ethKickbackCountTextField.objectValue     = statisticData.kickbackCount;
-    self.ethFeeBitcoinDETextField.objectValue      = [SOXFormatters currencyStringForNumber:statisticData.feeVolumeSum];
-    self.ethWinLoseBeforeFeesTextField.objectValue = [SOXFormatters currencyStringForNumber:statisticData.winLostSum];
-}
 
 - (void)updateUISumwithStatisticDatas:(NSArray<SOXAccountLedger_BitcoinDE_StatisticData *> *)statisticDatas {
     NSDecimalNumber *feeVolumeSum             = [statisticDatas valueForKeyPath:@"@sum.feeVolumeSum"];

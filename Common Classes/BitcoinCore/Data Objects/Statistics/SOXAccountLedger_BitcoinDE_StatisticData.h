@@ -24,9 +24,15 @@ typedef NS_ENUM(NSUInteger, SOXStatisticData_StateType) {
 @interface SOXAccountLedger_BitcoinDE_StatisticData : NSObject
 
 @property (nonatomic, readonly) BitcoinDE_CurrencyType currencyType;
+@property (strong, nonatomic, readonly) NSString *currencyName;
 @property (strong, nonatomic, readonly) NSDecimalNumber *coinSum;
-@property (strong, nonatomic, readonly) NSDecimalNumber *winLostSum;
-@property (strong, nonatomic, readonly) NSDecimalNumber *feeVolumeSum;
+@property (strong, nonatomic, readonly) NSDecimalNumber *volumeBuySum;
+@property (strong, nonatomic, readonly) NSDecimalNumber *volumeSellSum;
+@property (strong, nonatomic, readonly) NSDecimalNumber *bitcoinFeeVolumeSum;
+@property (strong, nonatomic, readonly) NSDecimalNumber *cashFlowVolumeSum;
+@property (strong, nonatomic, readonly) NSDecimalNumber *fidorFeeVolumeSum;
+@property (strong, nonatomic, readonly) NSDecimalNumber *appFeeVolumeSum;
+@property (strong, nonatomic, readonly) NSDecimalNumber *incomeVolumeSum;
 @property (strong, nonatomic, readonly) NSDecimalNumber *kickbackSum;
 @property (strong, nonatomic, readonly) NSNumber *kickbackCount;
 @property (strong, nonatomic, readonly) NSMutableArray<SOXAccountLedger_BitcoinDE_Data *> *accountLedgerDatas;
