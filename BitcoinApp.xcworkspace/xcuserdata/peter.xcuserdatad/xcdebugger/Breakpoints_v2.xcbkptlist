@@ -28,7 +28,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Common Classes/BitcoinCore/SOXMarket_BitcoinDE_Core.m"
-            timestampString = "571229972.958452"
+            timestampString = "572818885.5139329"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "432"
@@ -113,7 +113,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "315"
             endingLineNumber = "315"
-            landmarkName = "+setSepaPaymentFilterOption:forOrderType:currencyType:"
+            landmarkName = "+setSepaPaymentFilterOption:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -146,22 +146,6 @@
             startingLineNumber = "186"
             endingLineNumber = "186"
             landmarkName = "-requestServerData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Common Classes/Transformers/SOXMaxAmountWithShortCurrencyValueTransformer.m"
-            timestampString = "565015128.02783"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "-transformedValue:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -273,7 +257,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Common Classes/BitcoinCore/SOXMarket_BitcoinDE_Core.m"
-            timestampString = "571229972.958937"
+            timestampString = "572818885.514914"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "327"
@@ -289,7 +273,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Common Classes/BitcoinCore/SOXMarket_BitcoinDE_Core.m"
-            timestampString = "571229972.959312"
+            timestampString = "572818885.515121"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "256"
@@ -301,16 +285,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Common Classes/BitcoinCore/SOXMarket_BitcoinDE_Core.m"
-            timestampString = "571229999.800424"
+            filePath = "BitcoinApp/ViewController/Tabs View Controller/SOXStatisticsViewController.m"
+            timestampString = "572817393.227909"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "597"
-            endingLineNumber = "597"
-            landmarkName = "+createURL"
+            startingLineNumber = "290"
+            endingLineNumber = "290"
+            landmarkName = "-answerOfServerRequest:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BitcoinApp/ViewController/Tabs View Controller/SOXMyActiveOrdersViewController.m"
+            timestampString = "572817450.226891"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "-answerOfServerRequest:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -320,45 +320,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Common Classes/BitcoinCore/SOXMarket_BitcoinDE_Core.m"
-            timestampString = "571230044.868704"
+            filePath = "Common Classes/BitcoinCore/Data Objects/SOXMyOrderBook_BitcoinDE_Data.m"
+            timestampString = "572819438.229539"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "612"
-            endingLineNumber = "612"
-            landmarkName = "+createMD5ofURLQueryString"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Common Classes/BitcoinCore/SOXMarket_BitcoinDE_Core.m"
-            timestampString = "571230058.3241169"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "647"
-            endingLineNumber = "647"
-            landmarkName = "+createHMACString"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Common Classes/BitcoinCore/SOXMarket_BitcoinDE_Core.m"
-            timestampString = "571230068.955595"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "461"
-            endingLineNumber = "461"
-            landmarkName = "+requestForServerCommandType:parameters:"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
+            landmarkName = "-setupMyOrderbookDataForOrderDictionary:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
