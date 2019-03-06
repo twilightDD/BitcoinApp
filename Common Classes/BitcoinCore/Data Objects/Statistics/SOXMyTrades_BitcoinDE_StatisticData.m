@@ -103,7 +103,34 @@
 
 #pragma mark - Manual Setter and Getter
 - (NSString *)stateDescription {
-    return [NSString stringWithFormat:@"%lu", (unsigned long)self.state];
+    NSString *stateDescription;
+    switch (self.state) {
+        case SOXStatisticData_StateType_New:
+            stateDescription = @"Not selected";
+            break;
+        case SOXStatisticData_StateType_Sum:
+            stateDescription = @"";
+            break;
+        case SOXStatisticData_StateType_WaitingForLoading:
+            stateDescription = @"Waiting ...";
+            break;
+        case SOXStatisticData_StateType_IsLoadingFirstPage:
+            stateDescription = @"Fetching first page";
+            break;
+        case SOXStatisticData_StateType_IsLoadingMorePages:
+            stateDescription = [NSString stringWithFormat:
+                                             @"Fetching page %ti of %ti", self.currentPage + 1, self.lastPage];
+            break;
+        case SOXStatisticData_StateType_FullyLoaded:
+            stateDescription = [NSString stringWithFormat:
+                                             @"%ti pages fetched", self.lastPage];
+            break;
+        default:
+            stateDescription = @"Error on stateDescription";
+            break;
+    }
+
+    return stateDescription;
 }
 
 #pragma mark - Private Methods
@@ -143,11 +170,21 @@
 }
 
 - (NSColor *)textColor {
-    if (self.state == SOXStatisticData_StateType_FullyLoaded) {
+    if (self.state == SOXStatisticData_StateType_FullyLoaded
+        || self.state == SOXStatisticData_StateType_Sum) {
         return [NSColor textColor];
     }
     else {
         return [NSColor lightGrayColor];
+    }
+}
+
+- (BOOL)isBold {
+    if (self.state == SOXStatisticData_StateType_Sum) {
+        return YES;
+    }
+    else {
+        return NO;
     }
 }
 @end

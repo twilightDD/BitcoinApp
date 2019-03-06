@@ -183,6 +183,7 @@
 
     // For statistic sums
     self.overallStatisticsData = [[SOXMyTrades_BitcoinDE_StatisticData alloc] init];
+    self.overallStatisticsData.state = SOXStatisticData_StateType_Sum;
     [self.arrayControllerDatas addObject:self.overallStatisticsData];
 
     [self requestNextServerData];
@@ -213,16 +214,6 @@
         [self.statisticsSummaryViewController updateWithStatisticsDatas:self.arrayControllerDatas];
 
         // Create statistics
-
-        for (SOXMyTrades_BitcoinDE_StatisticData *data in self.arrayControllerDatas) {
-            NSLog(@"---------------------------------");
-            NSLog(@"%@ %@ %@ %@ ",
-                  data.currencyName,
-                  data.volumeBuySum,
-                  data.volumeSellSum,
-                  data.fidorFeeVolumeSum);
-        }
-        NSLog(@"---------------------------------");
     }
 }
 
@@ -291,10 +282,10 @@
 
         SOXMyTrades_BitcoinDE_StatisticData *myTradesStatisticData = [self myTradesStatisticsDataForServerRequestParameters:parameter];
         [myTradesStatisticData addMyTradesDatas:myTradesDatas];
-        
+
         [self.overallStatisticsData addMyTradesDatas:myTradesDatas];
         [self.arrayController rearrangeObjects];
-        
+
         // PageData: Look up for more pages to load
         if (myTradesDatas.count > 0) {
             SOXPage_BitcoinDE_Data *pageData = [SOXPage_BitcoinDE_Data pageDataForPayloadDictionary:payloadDictionary];
@@ -316,52 +307,52 @@
     }
     // AccountLedger
     {
-    //    else if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowAccountLedgerType)]) {
-    //        NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
-    //
-    //        // parameter for answer
-    //        NSDictionary *parameter = [self.requestQueue lastObject];
-    //        [self.requestQueue removeLastObject];
-    //
-    //        // reconstruct currencyType
-    //        NSString *currencyString            = [parameter objectForKey:AccountLedgerParameter_Currency];
-    //        currencyString                      = [currencyString stringByAppendingString:@"eur"];
-    //        BitcoinDE_CurrencyType currencyType = [SOXMarket_BitcoinDE_DefTypes currencyTypeForTradingPairString:currencyString];
-    //
-    //        // create SOXAccountLedger_BitcoinDE_StatisticData
-    //        NSMutableArray *accountLedgerDatas =
-    //            [SOXAccountLedger_BitcoinDE_Data accountLedgerDataArrayForAccountLedgerDictionary:payloadDictionary
-    //                                                                              forCurrencyType:currencyType];
-    //
-    //        SOXAccountLedger_BitcoinDE_StatisticData *accountLedgerStatisticData = [self accountLedgerStatisticsDataForServerRequestParameters:parameter];
-    //        [accountLedgerStatisticData addAccountLedgerDatas:accountLedgerDatas];
-    //
-    //        [self.overallStatisticsData addAccountLedgerDatas:accountLedgerDatas];
-    //        [self.arrayController rearrangeObjects];
-    //
-    //        // PageData: Look up for more pages to load
-    //        if (accountLedgerDatas.count > 0) {
-    //            SOXPage_BitcoinDE_Data *pageData = [SOXPage_BitcoinDE_Data pageDataForPayloadDictionary:payloadDictionary];
-    //            [accountLedgerStatisticData updatedWithPageData:pageData];
-    //
-    //            // create more serverRequests if needed
-    //            if (pageData.pageCurrent == 1 && pageData.pageLast > pageData.pageCurrent) {
-    //                for (NSInteger page = pageData.pageLast;
-    //                     page > 1;
-    //                     page--) {
-    //                    NSDictionary *parameter = [SOXAccountLedger_BitcoinDE_Data parameterForOrderType:BitcoinDE_AccountLedgerParameter_AllOrderType
-    //                                                                                     forCurrencyType:currencyType
-    //                                                                                           startDate:self.startDate
-    //                                                                                             endDate:self.endDate
-    //                                                                                                page:page];
-    //                    [self.requestQueue addObject:parameter];
-    //                }
-    //            }
-    //        }
-    //    }
+        //    else if ([[answerOfServerRequest objectForKey:ServerAnswerServerCommandKey] isEqual:@(BitcoinDE_ShowAccountLedgerType)]) {
+        //        NSDictionary *payloadDictionary = [answerOfServerRequest objectForKey:ServerAnswerPayloadKey];
+        //
+        //        // parameter for answer
+        //        NSDictionary *parameter = [self.requestQueue lastObject];
+        //        [self.requestQueue removeLastObject];
+        //
+        //        // reconstruct currencyType
+        //        NSString *currencyString            = [parameter objectForKey:AccountLedgerParameter_Currency];
+        //        currencyString                      = [currencyString stringByAppendingString:@"eur"];
+        //        BitcoinDE_CurrencyType currencyType = [SOXMarket_BitcoinDE_DefTypes currencyTypeForTradingPairString:currencyString];
+        //
+        //        // create SOXAccountLedger_BitcoinDE_StatisticData
+        //        NSMutableArray *accountLedgerDatas =
+        //            [SOXAccountLedger_BitcoinDE_Data accountLedgerDataArrayForAccountLedgerDictionary:payloadDictionary
+        //                                                                              forCurrencyType:currencyType];
+        //
+        //        SOXAccountLedger_BitcoinDE_StatisticData *accountLedgerStatisticData = [self accountLedgerStatisticsDataForServerRequestParameters:parameter];
+        //        [accountLedgerStatisticData addAccountLedgerDatas:accountLedgerDatas];
+        //
+        //        [self.overallStatisticsData addAccountLedgerDatas:accountLedgerDatas];
+        //        [self.arrayController rearrangeObjects];
+        //
+        //        // PageData: Look up for more pages to load
+        //        if (accountLedgerDatas.count > 0) {
+        //            SOXPage_BitcoinDE_Data *pageData = [SOXPage_BitcoinDE_Data pageDataForPayloadDictionary:payloadDictionary];
+        //            [accountLedgerStatisticData updatedWithPageData:pageData];
+        //
+        //            // create more serverRequests if needed
+        //            if (pageData.pageCurrent == 1 && pageData.pageLast > pageData.pageCurrent) {
+        //                for (NSInteger page = pageData.pageLast;
+        //                     page > 1;
+        //                     page--) {
+        //                    NSDictionary *parameter = [SOXAccountLedger_BitcoinDE_Data parameterForOrderType:BitcoinDE_AccountLedgerParameter_AllOrderType
+        //                                                                                     forCurrencyType:currencyType
+        //                                                                                           startDate:self.startDate
+        //                                                                                             endDate:self.endDate
+        //                                                                                                page:page];
+        //                    [self.requestQueue addObject:parameter];
+        //                }
+        //            }
+        //        }
+        //    }
     }
-    // fire next request
-    [self requestNextServerData];
+        // fire next request
+        [self requestNextServerData];
 }
 
 @end

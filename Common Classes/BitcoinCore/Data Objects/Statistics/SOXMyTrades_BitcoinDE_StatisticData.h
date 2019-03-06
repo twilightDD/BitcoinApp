@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, SOXStatisticData_StateType) {
     SOXStatisticData_StateType_New = 0,
+    SOXStatisticData_StateType_Sum,
     SOXStatisticData_StateType_WaitingForLoading,
     SOXStatisticData_StateType_IsLoadingFirstPage,
     SOXStatisticData_StateType_IsLoadingMorePages,
