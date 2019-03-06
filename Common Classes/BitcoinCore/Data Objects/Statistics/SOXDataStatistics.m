@@ -21,7 +21,6 @@
     NSDecimalNumber *kickbackSum   = [NSDecimalNumber zero];
     NSInteger kickbackCount        = 0;
 
-    NSMutableSet *tradingPairs = [NSMutableSet set];
     for (SOXAccountLedger_BitcoinDE_Data *accountLedgerData in accountLedgerDatas) {
 
         if ([accountLedgerData.positionDetails_Type isEqualToString:BitcoinDE_AccountLedgerParameter_AllOrderTypeKey]) {

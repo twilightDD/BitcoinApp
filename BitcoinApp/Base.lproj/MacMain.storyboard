@@ -702,7 +702,7 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="250"/>
+            <point key="canvasLocation" x="51" y="159"/>
         </scene>
         <!--Mac View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -4227,7 +4227,7 @@ Gw
             <objects>
                 <viewController id="TPt-gD-CmY" customClass="SOXMyTradeHistoryViewController" sceneMemberID="viewController">
                     <view key="view" misplaced="YES" id="O2L-9r-szs">
-                        <rect key="frame" x="0.0" y="0.0" width="1048" height="448"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1084" height="448"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBg-iH-I78">
@@ -5476,9 +5476,9 @@ Gw
         <image name="NSRefreshTemplate" width="11" height="15"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KrD-O9-iXN"/>
+        <segue reference="9rv-7D-aVO"/>
         <segue reference="gQD-Dm-8uX"/>
-        <segue reference="yZH-0k-5oh"/>
+        <segue reference="YNG-my-y7e"/>
         <segue reference="M1y-2H-j1m"/>
     </inferredMetricsTieBreakers>
 </document>
