@@ -185,6 +185,8 @@
     self.overallStatisticsData = [[SOXMyTrades_BitcoinDE_StatisticData alloc] init];
     self.overallStatisticsData.state = SOXStatisticData_StateType_Sum;
     [self.arrayControllerDatas addObject:self.overallStatisticsData];
+    
+    [self.arrayController rearrangeObjects];
 
     [self requestNextServerData];
 }
