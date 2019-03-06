@@ -71,6 +71,10 @@
     // hide buttons not needed in every view
     self.changeOrderButton.hidden = YES;
     self.removeOrderButton.hidden = YES;
+    
+    self.loadAllTradeDatasButton.title = @"Load all pages";
+    self.loadMoreTradeDatasButton.title = @"Load next page";
+    self.fetchDataButton.title = @"Fetch data";
 
     {   // date picker
         self.startDateTextField.stringValue = @"Start date";
@@ -80,7 +84,7 @@
         self.endDateTextField.stringValue = @"End date";
         self.endDateDatePicker.dateValue  = self.selectedEndDate;
         self.endDateDatePicker.locale     = [NSLocale autoupdatingCurrentLocale];
-        
+
         [self.convenientDatePopUpButton removeAllItems];
         [self.convenientDatePopUpButton addItemWithTitle:@"dummy"];
         [self.convenientDatePopUpButton addItemsWithTitles:[SOXDateHelpers convenientDateRangeTitles]];
@@ -127,7 +131,8 @@
     }
 
 
-    self.loadAllTradeDatasButton.title = [NSString stringWithFormat:@"Load all (%ti pages left)", pageData.pageLast - pageData.pageCurrent];
+    self.loadAllTradeDatasButton.title = [NSString stringWithFormat:@"Load all (%ti pages left)",
+                                                                    pageData.pageLast - pageData.pageCurrent];
 }
 
 #pragma mark - Action methods
@@ -156,11 +161,11 @@
 
 - (IBAction)convenientDatePopUpButtonAction:(NSPopUpButton *)sender {
     NSInteger dateRange = sender.indexOfSelectedItem - 1;
-    
-    self.selectedStartDate = [SOXDateHelpers startDateForDateRange:dateRange];
+
+    self.selectedStartDate             = [SOXDateHelpers startDateForDateRange:dateRange];
     self.startDateDatePicker.dateValue = self.selectedStartDate;
-    
-    self.selectedEndDate = [SOXDateHelpers endDateForDateRange:dateRange];
+
+    self.selectedEndDate             = [SOXDateHelpers endDateForDateRange:dateRange];
     self.endDateDatePicker.dateValue = self.selectedEndDate;
 }
 
