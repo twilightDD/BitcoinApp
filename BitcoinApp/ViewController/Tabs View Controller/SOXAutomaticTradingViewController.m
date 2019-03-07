@@ -179,6 +179,9 @@
 
     [self.tradingCore setBuyMaximalFidorAmount:maximalFidorAmount];
     [self.tradingCore setBuyInterestRate:interestRate];
+    [self.tradingCore executeTrades:self.executeTrades];
+    [self.tradingCore executeAutomaticTrades:self.executeAutomaticTrades];
+    [self.tradingCore executeBalanceTrades:self.executeBalanceTrades];
 
     [self.tradingCore registerControllerForUpdates:self];
 }
