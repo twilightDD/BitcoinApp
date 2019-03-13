@@ -14,6 +14,8 @@
 
 #import "SOXFormatters.h"
 
+#import "NSDecimalNumber+Convenient.h"
+
 
 static NSString *AccountLedgerParameter_TypeKey = @"type";
 // static NSString *AccountLedgerParameter_Currency        = @"currency"; // see "~_Private.h"
@@ -39,6 +41,7 @@ static NSString *AccountLedgerParameter_PageKey      = @"page";
 @property (strong, nonatomic, readwrite) NSDecimalNumber *tradeDetails_Euro_after_fee;
 @property (strong, nonatomic, readwrite) NSString *tradeDetails_trading_pair;
 
+@property (strong, nonatomic, readwrite) NSDecimalNumber *ownCalc_bitcoinEuroFee;
 @property (strong, nonatomic, readwrite) NSDecimalNumber *ownCalc_fidorFee;
 
 @end
@@ -186,8 +189,10 @@ static NSString *AccountLedgerParameter_PageKey      = @"page";
         }
     }
     
-//    // own_calc
-//    {
+    // own_calc
+    {
+        // ownCalc_bitcoinEuroFee
+        self.ownCalc_bitcoinEuroFee = [[self.tradeDetails_Euro_before_fee decimalNumberBySubtracting:self.tradeDetails_Euro_after_fee] absoluteDecimalNumber];
 //        // ownCalc_fidorFee
 //        if (self.paymentMethod.unsignedIntegerValue == BitcoinDE_MyTradeHistoryParameter_ExpressPaymentMethodType
 //            && [self.successfullyFinishedAt isLaterThan:[SOXFormatters fidorFeeStartedAtDate]]) {
@@ -198,7 +203,7 @@ static NSString *AccountLedgerParameter_PageKey      = @"page";
 //        else {
 //            self.ownCalc_fidorFee = [NSDecimalNumber zero];
 //        }
-//    }
+    }
 }
 
 @end
