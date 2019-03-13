@@ -289,7 +289,7 @@
         // ownCalc_bookingVolume
         NSDecimalNumber *ownVolume                = [self.amount decimalNumberByMultiplyingBy:self.price];
         NSDecimalNumber *ownVolumeMinusFee        = [ownVolume decimalNumberByMultiplyingBy:[SOXMarket_BitcoinDE_DefTypes bitcoindDE_feeFactor]];
-        NSDecimalNumber *ownVolumeMinusFeeRounded = [ownVolumeMinusFee decimalNumberByRoundingAccordingToBehavior:[SOXFormatters currencyNumberHandlerRoundDown]];
+        NSDecimalNumber *ownVolumeMinusFeeRounded = [ownVolumeMinusFee decimalNumberByRoundingAccordingToBehavior:[SOXFormatters currencyNumberHandler]];
         self.ownCalc_bookingVolume                = ownVolumeMinusFeeRounded;
 
         // ownCalc_fidorFee
