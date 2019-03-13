@@ -18,6 +18,8 @@
 
 #import "SOXFormatters.h"
 
+#import "NSDecimalNumber+Convenient.h"
+
 @interface SOXTradeStatisticsViewController ()
 // first stack
 @property (strong) IBOutlet NSTextField *coinSumDescriptionTextField;
@@ -107,21 +109,27 @@
     NSDecimalNumber *kickbackSum   = [NSDecimalNumber zero];
 
     NSMutableSet *tradingPairs = [NSMutableSet set];
+    
     for (SOXAccountLedger_BitcoinDE_Data *accountLedgerData in accountLedgerDatas) {
 
+        coinSum              = [coinSum decimalNumberByAdding:accountLedgerData.positionDetails_Cashflow];
+//        NSDecimalNumber *fee = [accountLedgerData.tradeDetails_Euro_before_fee decimalNumberBySubtracting:accountLedgerData.tradeDetails_Euro_after_fee];
+//        if (fee) {
+//            feeVolumeSum         = [[feeVolumeSum decimalNumberByAdding:fee] absoluteDecimalNumber];
+//        }
+        NSDecimalNumber *ownCalc_bitcoinEuroFee = accountLedgerData.ownCalc_bitcoinEuroFee;
+        if (ownCalc_bitcoinEuroFee) {
+            feeVolumeSum = [feeVolumeSum decimalNumberByAdding:ownCalc_bitcoinEuroFee];
+        }
+        
+        
         if ([accountLedgerData.positionDetails_Type isEqualToString:BitcoinDE_AccountLedgerParameter_AllOrderTypeKey]) {
         }
         else if ([accountLedgerData.positionDetails_Type isEqualToString:BitcoinDE_AccountLedgerParameter_BuyOrderTypeKey]) {
-            coinSum              = [coinSum decimalNumberByAdding:accountLedgerData.positionDetails_Cashflow];
             volumeBuySum         = [volumeBuySum decimalNumberByAdding:accountLedgerData.tradeDetails_Euro_after_fee];
-            NSDecimalNumber *fee = [accountLedgerData.tradeDetails_Euro_before_fee decimalNumberBySubtracting:accountLedgerData.tradeDetails_Euro_after_fee];
-            feeVolumeSum         = [feeVolumeSum decimalNumberByAdding:fee];
         }
         else if ([accountLedgerData.positionDetails_Type isEqualToString:BitcoinDE_AccountLedgerParameter_SellOrderTypeKey]) {
-            coinSum              = [coinSum decimalNumberByAdding:accountLedgerData.positionDetails_Cashflow];
             volumeSellSum        = [volumeSellSum decimalNumberByAdding:accountLedgerData.tradeDetails_Euro_after_fee];
-            NSDecimalNumber *fee = [accountLedgerData.tradeDetails_Euro_before_fee decimalNumberBySubtracting:accountLedgerData.tradeDetails_Euro_after_fee];
-            feeVolumeSum         = [feeVolumeSum decimalNumberByAdding:fee];
         }
         //        else if (accountLedgerData.positionDetails_Type isEqualToString: BitcoinDE_AccountLedgerParameter_InpaymentOrderTypeKey) {
         //
@@ -155,7 +163,7 @@
 
     self.coinSumValueTextField.stringValue = [SOXFormatters stringForBTCNumber:coinSum];
 
-    NSDecimalNumber *winLostSum              = [volumeSellSum decimalNumberBySubtracting:volumeBuySum];
+    NSDecimalNumber *winLostSum              = [volumeSellSum decimalNumberByAdding:volumeBuySum];
     self.volumeSumValueTextField.stringValue = [SOXFormatters currencyStringForNumber:winLostSum
                                                                          roundingMode:NSNumberFormatterRoundHalfUp];
 
