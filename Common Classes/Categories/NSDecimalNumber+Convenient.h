@@ -12,4 +12,6 @@
 
 + (NSDecimalNumber *)minusOne;
 
+- (NSDecimalNumber *)absoluteDecimalNumber;
+
 @end

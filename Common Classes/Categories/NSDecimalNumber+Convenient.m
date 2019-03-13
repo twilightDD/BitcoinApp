@@ -14,4 +14,13 @@
     return [NSDecimalNumber decimalNumberWithString:@"-1"];
 }
 
+- (NSDecimalNumber *)absoluteDecimalNumber {
+    if ([self compare:[NSDecimalNumber zero]] == NSOrderedAscending) {
+        // negative value
+        return [[NSDecimalNumber zero] decimalNumberBySubtracting:self];
+    } else {
+        return self;
+    }
+}
+
 @end
