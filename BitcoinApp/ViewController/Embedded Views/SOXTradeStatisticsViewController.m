@@ -210,7 +210,7 @@
         self.coinSumValueTextField.stringValue = [SOXFormatters stringForBTCNumber:coinSum];
     }
 
-    NSDecimalNumber *winLostSum              = [volumeSellSum decimalNumberBySubtracting:volumeBuySum];
+    NSDecimalNumber *winLostSum              = [volumeSellSum decimalNumberByAdding:volumeBuySum];
     self.volumeSumValueTextField.stringValue = [SOXFormatters currencyStringForNumber:winLostSum
                                                                          roundingMode:NSNumberFormatterRoundHalfUp];
 }
