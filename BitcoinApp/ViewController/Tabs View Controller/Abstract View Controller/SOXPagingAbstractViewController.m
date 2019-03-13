@@ -167,7 +167,13 @@
                             BitcoinDE_CurrencyType currencyType = [(NSNumber *)valueForColumnTitle integerValue];
                             valueForColumnTitle                 = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:currencyType];
                         }
-                        else if ([columnTitle containsString:@"volume"] || [columnTitle containsString:@"price"] || [columnTitle containsString:@"Price"] || [columnTitle containsString:@"Eur"] || [columnTitle containsString:@"orderInformation_minVolume"] || [columnTitle containsString:@"orderInformation_maxVolume"]) {
+                        else if ([columnTitle containsString:@"volume"]
+                                 || [columnTitle containsString:@"price"]
+                                 || [columnTitle containsString:@"Price"]
+                                 || [columnTitle containsString:@"Eur"]
+                                 || [columnTitle containsString:@"orderInformation_minVolume"]
+                                 || [columnTitle containsString:@"orderInformation_maxVolume"]
+                                 || [columnTitle containsString:@"ownCalc_bookingVolume"]) {
                             valueForColumnTitle = [SOXFormatters currencyStringForNumber:valueForColumnTitle
                                                                             roundingMode:NSNumberFormatterRoundHalfEven];
                         }
