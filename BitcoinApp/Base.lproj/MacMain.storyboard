@@ -3002,7 +3002,7 @@ Gw
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" autosaveColumns="NO" headerView="UdI-6x-40i" id="ukh-mk-8h8">
-                                            <rect key="frame" x="0.0" y="0.0" width="928" height="404"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1051" height="404"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -3132,10 +3132,9 @@ Gw
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
-                                                        <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.self" id="4A2-z0-nhg">
+                                                        <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.tradeDetails_Euro_before_fee" id="gXh-v3-2av">
                                                             <dictionary key="options">
                                                                 <bool key="NSConditionallySetsEditable" value="YES"/>
-                                                                <string key="NSValueTransformerName">SOXNegateTradeDetailsEuroBeforeFeeOnBuyValueTransformer</string>
                                                             </dictionary>
                                                         </binding>
                                                     </connections>
@@ -3154,10 +3153,30 @@ Gw
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
-                                                        <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.self" id="wMN-4o-2WH">
+                                                        <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.tradeDetails_Euro_after_fee" id="Q1v-aW-YxB">
                                                             <dictionary key="options">
                                                                 <bool key="NSConditionallySetsEditable" value="YES"/>
-                                                                <string key="NSValueTransformerName">SOXNegateTradeDetailsEuroAfterFeeOnBuyValueTransformer</string>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
+                                                </tableColumn>
+                                                <tableColumn identifier="ownCalc_bitcoinEuroFee" editable="NO" width="120" minWidth="10" maxWidth="1100" id="lhu-XJ-Qx0">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="bitcoinEuroFee">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="JdV-Fi-rDd">
+                                                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="8Vh-bN-xVh"/>
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="8E9-hF-O6h" name="value" keyPath="arrangedObjects.ownCalc_bitcoinEuroFee" id="iGD-ac-X1N">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
                                                             </dictionary>
                                                         </binding>
                                                     </connections>
@@ -3196,7 +3215,7 @@ Gw
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="UdI-6x-40i">
-                                    <rect key="frame" x="0.0" y="0.0" width="928" height="23"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1051" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
@@ -4348,7 +4367,7 @@ Gw
                                                         <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.volume" id="Ujb-ep-A2A"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="volume" editable="NO" width="100" minWidth="10" maxWidth="3.4028234663852886e+38" id="2hn-dd-MCD">
+                                                <tableColumn identifier="ownCalc_bookingVolume" editable="NO" width="100" minWidth="10" maxWidth="3.4028234663852886e+38" id="2hn-dd-MCD">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="BookingVol">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -4365,7 +4384,7 @@ Gw
                                                         <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.ownCalc_bookingVolume" id="6NZ-HS-442"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="volume" editable="NO" width="100" minWidth="10" maxWidth="3.4028234663852886e+38" id="Qar-Tl-aeP">
+                                                <tableColumn identifier="ownCalc_fidorFee" editable="NO" width="100" minWidth="10" maxWidth="3.4028234663852886e+38" id="Qar-Tl-aeP">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="FidorFee">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -4446,7 +4465,7 @@ Gw
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="state" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="gTS-6o-5kV">
+                                                <tableColumn identifier="paymentMethod" editable="NO" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="gTS-6o-5kV">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Payment">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -5493,9 +5512,9 @@ Gw
         <image name="NSRefreshTemplate" width="11" height="15"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9rv-7D-aVO"/>
+        <segue reference="WzO-2Q-C8a"/>
         <segue reference="gQD-Dm-8uX"/>
-        <segue reference="YNG-my-y7e"/>
+        <segue reference="yul-UQ-F1Q"/>
         <segue reference="M1y-2H-j1m"/>
     </inferredMetricsTieBreakers>
 </document>
