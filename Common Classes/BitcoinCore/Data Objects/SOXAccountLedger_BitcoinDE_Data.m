@@ -176,6 +176,10 @@ static NSString *AccountLedgerParameter_PageKey      = @"page";
             NSDictionary *euroDetails         = [tradeDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_Euro];
             self.tradeDetails_Euro_before_fee = [self convertToNumber:[euroDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_Euro_BeforeFee]];
             self.tradeDetails_Euro_after_fee  = [self convertToNumber:[euroDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_BTC_AfterFee]];
+            if ([self.positionDetails_Type isEqualToString:BitcoinDE_AccountLedgerParameter_BuyOrderTypeKey]) {
+                self.tradeDetails_Euro_before_fee = [self.tradeDetails_Euro_before_fee decimalNumberByMultiplyingBy:[NSDecimalNumber minusOne]];
+                self.tradeDetails_Euro_after_fee = [self.tradeDetails_Euro_after_fee decimalNumberByMultiplyingBy:[NSDecimalNumber minusOne]];
+            }
         }
         else {
             self.tradeDetails_trading_pair = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType];
