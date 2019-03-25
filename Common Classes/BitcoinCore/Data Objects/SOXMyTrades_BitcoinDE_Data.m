@@ -254,12 +254,18 @@
 - (void)setupMyTradeDataForTradeDetailsDictionary:(NSDictionary *)tDD {
     // My Trade Details
     {
-        self.tradeID                       = [tDD objectForKey:BitcoinDE_ShowMyTrades_TradeID];
-        self.type                          = [tDD objectForKey:BitcoinDE_ShowMyTrades_Type];
-        self.amount                        = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Amount]];
-        self.price                         = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Price]];
-        self.volume                        = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Volume]];
-        self.feeEur                        = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_FeeEur]];
+        self.tradeID = [tDD objectForKey:BitcoinDE_ShowMyTrades_TradeID];
+
+        self.type   = [tDD objectForKey:BitcoinDE_ShowMyTrades_Type];
+        self.amount = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Amount]];
+        self.price  = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Price]];
+        self.volume = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Volume]];
+
+        // feeEur
+        { // value in dict from server may be incorrect! i.e. trade 7K87G2 (19.1.18); 13.03.19;ph
+            // we calculate feeEur later (see ownCaluclations)
+            // self.feeEur = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_FeeEur]];
+        }
         self.feeBTC                        = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_FeeBTC]];
         self.aNewOrderIDForRemainingAmount = [tDD objectForKey:BitcoinDE_ShowMyTrades_NewOrderIDForRemainingAmount];
         self.state                         = [tDD objectForKey:BitcoinDE_ShowMyTrades_State];
@@ -287,13 +293,27 @@
     // Own calculations
     {
         // ownCalc_bookingVolume
-        NSDecimalNumber *ownVolume                = [self.amount decimalNumberByMultiplyingBy:self.price];
-        NSDecimalNumber *ownVolumeMinusFee        = [ownVolume decimalNumberByMultiplyingBy:[SOXMarket_BitcoinDE_DefTypes bitcoindDE_feeFactor]];
-        NSDecimalNumber *ownVolumeMinusFeeRounded = [ownVolumeMinusFee decimalNumberByRoundingAccordingToBehavior:[SOXFormatters currencyNumberHandler]];
-        self.ownCalc_bookingVolume                = ownVolumeMinusFeeRounded;
+        {
+            NSDecimalNumber *ownVolume         = [self.amount decimalNumberByMultiplyingBy:self.price];
+            NSDecimalNumber *ownVolumeMinusFee = [ownVolume decimalNumberByMultiplyingBy:[SOXMarket_BitcoinDE_DefTypes bitcoindDE_feeFactor]];
+
+            NSDecimalNumberHandler *numberHandler = [SOXFormatters currencyNumberHandler];
+            if ([self.successfullyFinishedAt isLaterThan:[SOXFormatters bitcoinDERoundingChangeDate]]) {
+                numberHandler = [SOXFormatters currencyNumberHandlerRoundDown];
+            }
+            NSDecimalNumber *ownVolumeMinusFeeRounded = [ownVolumeMinusFee decimalNumberByRoundingAccordingToBehavior:numberHandler];
+            self.ownCalc_bookingVolume                = ownVolumeMinusFeeRounded;
+        }
+        
+        // feeEur
+        {
+            // value in dict from server may be incorrect! i.e. trade 7K87G2 (19.1.18); 13.03.19;ph
+            self.feeEur = [self.volume decimalNumberBySubtracting:self.ownCalc_bookingVolume];
+        }
 
         // ownCalc_fidorFee
-        if (self.paymentMethod.unsignedIntegerValue == BitcoinDE_MyTradeHistoryParameter_ExpressPaymentMethodType && [self.successfullyFinishedAt isLaterThan:[SOXFormatters fidorFeeStartedAtDate]]) {
+        if (self.paymentMethod.unsignedIntegerValue == BitcoinDE_MyTradeHistoryParameter_ExpressPaymentMethodType
+            && [self.successfullyFinishedAt isLaterThan:[SOXFormatters fidorFeeStartedAtDate]]) {
             NSDecimalNumber *fidorFee        = [self.ownCalc_bookingVolume decimalNumberByMultiplyingBy:[SOXMarket_BitcoinDE_DefTypes fidor_feeFactorStarting20180221]];
             NSDecimalNumber *fidorFeeRounded = [fidorFee decimalNumberByRoundingAccordingToBehavior:[SOXFormatters currencyNumberHandlerRoundDown]];
             self.ownCalc_fidorFee            = fidorFeeRounded;

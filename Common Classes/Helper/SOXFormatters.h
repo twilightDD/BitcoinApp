@@ -16,6 +16,7 @@
 
 #pragma mark - Date methods
 + (NSDate *)fidorFeeStartedAtDate;
++ (NSDate *)bitcoinDERoundingChangeDate;
 + (NSDate *)dateForRFC3339DateTimeString:(NSString *)rfc3339DateTimeString;
 + (NSDate *)dateAtMidnightForDate:(NSDate *)date;
 + (NSDate *)dateBeforeMidnightForDate:(NSDate *)date;

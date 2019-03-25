@@ -214,6 +214,29 @@
     });
     return fidorFeeStartedAtDate;
 }
+
++ (NSDate *)bitcoinDERoundingChangeDate {
+    /*
+     Bitcoin.de hat irgendwann mal die Rundung des auszuzahlenden Betrages geändert
+     AccountLedger liefert den Überweisungsbetrag direkt.
+     Für MyTradeHistory muss der Überweisungsbetrag errechnet werden.
+     Zeitpunkt der Umstellung:
+     - nach 20.4.18 (Freitag)
+     - vor 25.4.18 (Mittwoch)
+     - => Peter sagt: ab 23.4. (Montag) wurde umgestellt
+     Ergebnis:
+     - Bei MyTradeHistory muss Überweisung VOR dem Datum mathematisch gerundet werden.
+     - Bei MyTradeHistory muss Überweisung VOR dem Datum abgerundet werden.
+     25.03.19;ph
+     */
+    static dispatch_once_t pred;
+    static NSDate *bitcoinDERoundingChangeDate = nil;
+    dispatch_once(&pred, ^{
+        bitcoinDERoundingChangeDate = [SOXFormatters dateForRFC3339DateTimeString:@"2018-04-23T00:00:00Z"];
+    });
+    return bitcoinDERoundingChangeDate;
+}
+
 + (NSDate *)dateForRFC3339DateTimeString:(NSString *)rfc3339DateTimeString {
     NSDate *date = [[SOXFormatters dateFormatterDecodeRFC3339] dateFromString:rfc3339DateTimeString];
     return date;
