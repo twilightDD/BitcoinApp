@@ -84,6 +84,13 @@
     [self setupUI];
 }
 
+- (void)viewWillAppear {
+    [super viewWillAppear];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_PresentBannerInformationForCurrency
+                                                        object:@(BitcoinDE_CurrencyTypeUnknown)];
+}
+
 #pragma mark - Segue handling
 - (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"StatisticsSummarySegue"]) {
