@@ -43,6 +43,8 @@
 + (NSDecimalNumber *)currencyNumberForNumber:(NSDecimalNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode;
 + (NSString *)currencyStringForNumber:(NSDecimalNumber *)value;
 + (NSString *)currencyStringForNumber:(NSDecimalNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode;
++ (NSString *)currencyStringWithoutSymbolForNumber:(NSDecimalNumber *)value;
++ (NSString *)currencyStringWithoutSymbolForNumber:(NSDecimalNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode;
 
 #pragma mark - BTC methods
 + (NSDecimalNumberHandler *)btcNumberHandler;

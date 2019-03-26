@@ -143,6 +143,20 @@
     return currencyStringFormatter;
 }
 
++ (NSNumberFormatter *)currencyWithoutSymbolFormatter {
+    static dispatch_once_t pred;
+    static NSNumberFormatter *currencyFormatterWithoutSymbol = nil;
+    dispatch_once(&pred, ^{
+        currencyFormatterWithoutSymbol = [NSNumberFormatter new];
+        [currencyFormatterWithoutSymbol setNumberStyle:NSNumberFormatterNoStyle];
+        [currencyFormatterWithoutSymbol setLocale:[NSLocale autoupdatingCurrentLocale]];
+        [currencyFormatterWithoutSymbol setMinimumIntegerDigits:1];
+        [currencyFormatterWithoutSymbol setMinimumFractionDigits:2];
+        [currencyFormatterWithoutSymbol setMaximumFractionDigits:2];
+    });
+    return currencyFormatterWithoutSymbol;
+}
+
 + (NSNumberFormatter *)bitcoinNumberFormatter {
     static dispatch_once_t pred;
     static NSNumberFormatter *btcFormatter = nil;
@@ -465,17 +479,25 @@
 }
 
 + (NSString *)currencyStringForNumber:(NSDecimalNumber *)value {
-    NSNumberFormatter *currencyFormatter = [SOXFormatters currencyFormatter];
-    currencyFormatter.roundingMode       = NSNumberFormatterRoundHalfEven;
-
-    NSString *currencyString = [currencyFormatter stringFromNumber:value];
-    return currencyString;
+    return [self currencyStringForNumber:value roundingMode:NSNumberFormatterRoundHalfEven];
 }
 
 + (NSString *)currencyStringForNumber:(NSDecimalNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode {
     NSNumberFormatter *currencyFormatter = [SOXFormatters currencyFormatter];
     currencyFormatter.roundingMode       = roundingMode;
 
+    NSString *currencyString = [currencyFormatter stringFromNumber:value];
+    return currencyString;
+}
+
++ (NSString *)currencyStringWithoutSymbolForNumber:(NSDecimalNumber *)value {
+    return [self currencyStringWithoutSymbolForNumber:value roundingMode:NSNumberFormatterRoundHalfEven];
+}
+
++ (NSString *)currencyStringWithoutSymbolForNumber:(NSDecimalNumber *)value roundingMode:(NSNumberFormatterRoundingMode)roundingMode {
+    NSNumberFormatter *currencyFormatter = [SOXFormatters currencyWithoutSymbolFormatter];
+    currencyFormatter.roundingMode       = roundingMode;
+    
     NSString *currencyString = [currencyFormatter stringFromNumber:value];
     return currencyString;
 }

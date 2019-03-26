@@ -94,7 +94,10 @@
 
     dispatch_once(&pred, ^{
         paymentOptionDescription = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                     @"Unknown", @(BitcoinDE_PaymentOptionUnknown), @"Express", @(BitcoinDE_PaymentOptionExpressOnly), @"SEPA", @(BitcoinDE_PaymentOptionSEPAOnly), @"Express/SEPA", @(BitcoinDE_PaymentOptionExpressAndSepa), nil];
+                                                     @"Unknown", @(BitcoinDE_PaymentOptionUnknown),
+                                                     @"Express", @(BitcoinDE_PaymentOptionExpressOnly),
+                                                     @"SEPA", @(BitcoinDE_PaymentOptionSEPAOnly),
+                                                     @"Express/SEPA", @(BitcoinDE_PaymentOptionExpressAndSepa), nil];
     });
 
     return [paymentOptionDescription objectForKey:@(paymentOption)];
@@ -107,7 +110,10 @@
 
     dispatch_once(&pred, ^{
         trustLevelDescription = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                  @"Unknown", @(BitcoinDE_TrustLevelUnknown), @"bronze", @(BitcoinDE_TrustLevelBronze), @"silver", @(BitcoinDE_TrustLevelSilver), @"gold", @(BitcoinDE_TrustLevelGold), nil];
+                                                  @"Unknown", @(BitcoinDE_TrustLevelUnknown),
+                                                  @"bronze", @(BitcoinDE_TrustLevelBronze),
+                                                  @"silver", @(BitcoinDE_TrustLevelSilver),
+                                                  @"gold", @(BitcoinDE_TrustLevelGold), nil];
     });
 
     return [trustLevelDescription objectForKey:@(trustLevel)];

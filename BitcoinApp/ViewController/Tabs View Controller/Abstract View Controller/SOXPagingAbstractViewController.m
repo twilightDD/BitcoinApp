@@ -140,24 +140,27 @@
 #pragma mark Export
 - (NSString *)exportString {
     NSArray<NSString *> *columnTitles = [self.tableView.tableColumns valueForKey:@"identifier"];
-    NSUInteger columnTitlesCount      = columnTitles.count - 1;
+
 
     // get objects to export
-    NSArray *arrayControllerObjects = self.arrayController.selectedObjects;
-    if (arrayControllerObjects.count == 0) {
-        arrayControllerObjects = self.arrayController.arrangedObjects;
+    NSArray *objectsToExport = self.arrayController.selectedObjects;
+    if (objectsToExport.count == 0) {
+        objectsToExport = self.arrayController.arrangedObjects;
     }
-    NSUInteger dataObjectsCounts = arrayControllerObjects.count - 1;
+
+    // get counters to decide about ; or LineBreak
+    NSUInteger columnTitlesCount = columnTitles.count - 1;
+    NSUInteger dataObjectsCounts = objectsToExport.count - 1;
 
     // first line in a csv are headers
     __block NSString *exportString = [columnTitles componentsJoinedByString:@";"];
     exportString                   = [exportString stringByAppendingString:@"\n"];
 
     // enum objects
-    [arrayControllerObjects enumerateObjectsUsingBlock:^(id _Nonnull dataObj, NSUInteger dataIdx, BOOL *_Nonnull stop) {
+    [objectsToExport enumerateObjectsUsingBlock:^(id _Nonnull dataObj, NSUInteger dataIdx, BOOL *_Nonnull stop) {
         // enum columns
         [columnTitles enumerateObjectsUsingBlock:^(NSString *_Nonnull columnTitle, NSUInteger columnIdx, BOOL *_Nonnull stop) {
-            if (columnTitle.length > 0) {
+            if (columnTitle.length > 0) { // "empty column" are not exported
                 // get value for columnTitle and convert it to string
                 id valueForColumnTitle = [dataObj valueForKey:columnTitle];
                 if (valueForColumnTitle) {
@@ -173,14 +176,20 @@
                                  || [columnTitle containsString:@"Eur"]
                                  || [columnTitle containsString:@"orderInformation_minVolume"]
                                  || [columnTitle containsString:@"orderInformation_maxVolume"]
-                                 || [columnTitle containsString:@"ownCalc_bookingVolume"]) {
-                            valueForColumnTitle = [SOXFormatters currencyStringForNumber:valueForColumnTitle
-                                                                            roundingMode:NSNumberFormatterRoundHalfEven];
+                                 || [columnTitle containsString:@"ownCalc_bookingVolume"]
+                                 || [columnTitle containsString:@"ownCalc_fidorFee"]) {
+                            valueForColumnTitle = [SOXFormatters currencyStringWithoutSymbolForNumber:valueForColumnTitle];                            
                         }
-                        else if ([columnTitle containsString:@"amount"] || [columnTitle containsString:@"BTC"] || [columnTitle containsString:@"Cash"] || [columnTitle containsString:@"Balance"] || [columnTitle containsString:@"orderInformation_maxAmount"] || [columnTitle containsString:@"orderInformation_minAmount"]) {
+                        else if ([columnTitle containsString:@"amount"]
+                                 || [columnTitle containsString:@"BTC"]
+                                 || [columnTitle containsString:@"Cash"]
+                                 || [columnTitle containsString:@"Balance"]
+                                 || [columnTitle containsString:@"orderInformation_maxAmount"]
+                                 || [columnTitle containsString:@"orderInformation_minAmount"]) {
                             valueForColumnTitle = [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:valueForColumnTitle];
                         }
-                        else if ([columnTitle containsString:@"orderRequirements_onlyKYCFull"] || [columnTitle containsString:@"orderInformation_newOrderForRemainingAmount"]) {
+                        else if ([columnTitle containsString:@"orderRequirements_onlyKYCFull"]
+                                 || [columnTitle containsString:@"orderInformation_newOrderForRemainingAmount"]) {
                             valueForColumnTitle = [(NSNumber *)valueForColumnTitle boolValue] ? @"YES" : @"NO";
                         }
                         else if ([columnTitle containsString:@"orderInformation_state"]) {
@@ -190,6 +199,10 @@
                         else if ([columnTitle containsString:@"state"]) {
                             BitcoinDE_MyTradeHistoryParameter_TradeStateType tradeStateType = [(NSNumber *)valueForColumnTitle integerValue];
                             valueForColumnTitle                                             = [SOXMyTrades_BitcoinDE_Data titleForTradeStateType:tradeStateType];
+                        }
+                        else if ([columnTitle containsString:@"paymentMethod"]) {
+                            NSNumber *valueNumber = (NSNumber *)valueForColumnTitle;
+                            valueForColumnTitle      = [SOXMyTrades_BitcoinDE_Data titleForPaymentMethodType:valueNumber.unsignedIntegerValue];
                         }
                         else {
                             valueForColumnTitle = [valueForColumnTitle stringValue];
@@ -213,6 +226,7 @@
             exportString = [exportString stringByAppendingString:@"\n"];
         }
     }];
+
     return exportString;
 }
 
