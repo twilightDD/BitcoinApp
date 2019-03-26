@@ -140,14 +140,28 @@
 #pragma mark Export
 - (NSString *)exportString {
     NSArray<NSString *> *columnTitles = [self.tableView.tableColumns valueForKey:@"identifier"];
-
-
+    
     // get objects to export
     NSArray *objectsToExport = self.arrayController.selectedObjects;
     if (objectsToExport.count == 0) {
         objectsToExport = self.arrayController.arrangedObjects;
     }
 
+    // insert a fake column for trading pair, if necessary
+    if (![columnTitles containsObject:@"orderInformation_currencyType"]) { // SOXMyOrderBookData
+        NSMutableArray *mutableColumnTitles = [columnTitles mutableCopy];
+        
+        id firstObjectToExport = [objectsToExport firstObject];
+        if ([firstObjectToExport isKindOfClass:[SOXAccountLedger_BitcoinDE_Data class]]) {
+            [mutableColumnTitles insertObject:@"tradeDetails_trading_pair" atIndex:1];
+        }
+        else if ([firstObjectToExport isKindOfClass:[SOXMyTrades_BitcoinDE_Data class]]) {
+            [mutableColumnTitles insertObject:@"trading_pair" atIndex:1];
+            
+        }
+        columnTitles = [mutableColumnTitles copy];
+    }
+    
     // get counters to decide about ; or LineBreak
     NSUInteger columnTitlesCount = columnTitles.count - 1;
     NSUInteger dataObjectsCounts = objectsToExport.count - 1;
@@ -178,7 +192,7 @@
                                  || [columnTitle containsString:@"orderInformation_maxVolume"]
                                  || [columnTitle containsString:@"ownCalc_bookingVolume"]
                                  || [columnTitle containsString:@"ownCalc_fidorFee"]) {
-                            valueForColumnTitle = [SOXFormatters currencyStringWithoutSymbolForNumber:valueForColumnTitle];                            
+                            valueForColumnTitle = [SOXFormatters currencyStringWithoutSymbolForNumber:valueForColumnTitle];
                         }
                         else if ([columnTitle containsString:@"amount"]
                                  || [columnTitle containsString:@"BTC"]
@@ -211,8 +225,20 @@
                     else if ([valueForColumnTitle isKindOfClass:[NSDate class]]) {
                         valueForColumnTitle = [SOXFormatters shortDateShortTimeStringForDate:valueForColumnTitle];
                     }
+                    else if ([valueForColumnTitle isKindOfClass:[NSString class]]) {
+                        if ([columnTitle containsString:@"tradeDetails_trading_pair"]
+                            || [columnTitle containsString:@"trading_pair"]) {
+                            
+                            valueForColumnTitle = [(NSString *)valueForColumnTitle stringByReplacingOccurrencesOfString:@"eur" withString:@""];
+                            valueForColumnTitle = [valueForColumnTitle uppercaseString];
+                        }
+                    }
+                    
                     exportString = [exportString stringByAppendingString:valueForColumnTitle];
                 }
+//                else {
+//                    NSLog(@"no value for %@", columnTitle);
+//                }
 
                 // there is no separator after the last value
                 if (columnIdx < columnTitlesCount) {

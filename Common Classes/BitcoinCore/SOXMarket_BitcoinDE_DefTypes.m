@@ -97,7 +97,8 @@
                                                      @"Unknown", @(BitcoinDE_PaymentOptionUnknown),
                                                      @"Express", @(BitcoinDE_PaymentOptionExpressOnly),
                                                      @"SEPA", @(BitcoinDE_PaymentOptionSEPAOnly),
-                                                     @"Express/SEPA", @(BitcoinDE_PaymentOptionExpressAndSepa), nil];
+                                                     @"Express/SEPA", @(BitcoinDE_PaymentOptionExpressAndSepa),
+                                                     nil];
     });
 
     return [paymentOptionDescription objectForKey:@(paymentOption)];
@@ -113,7 +114,8 @@
                                                   @"Unknown", @(BitcoinDE_TrustLevelUnknown),
                                                   @"bronze", @(BitcoinDE_TrustLevelBronze),
                                                   @"silver", @(BitcoinDE_TrustLevelSilver),
-                                                  @"gold", @(BitcoinDE_TrustLevelGold), nil];
+                                                  @"gold", @(BitcoinDE_TrustLevelGold),
+                                                  nil];
     });
 
     return [trustLevelDescription objectForKey:@(trustLevel)];
@@ -126,7 +128,11 @@
 
     dispatch_once(&pred, ^{
         trustLevelDescription = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                  @(BitcoinDE_TrustLevelUnknown), @"Unknown", @(BitcoinDE_TrustLevelBronze), @"bronze", @(BitcoinDE_TrustLevelSilver), @"silver", @(BitcoinDE_TrustLevelGold), @"gold", nil];
+                                                  @(BitcoinDE_TrustLevelUnknown), @"Unknown",
+                                                  @(BitcoinDE_TrustLevelBronze), @"bronze",
+                                                  @(BitcoinDE_TrustLevelSilver), @"silver",
+                                                  @(BitcoinDE_TrustLevelGold), @"gold",
+                                                  nil];
     });
 
     return [[trustLevelDescription objectForKey:trustLevelString] unsignedIntegerValue];
@@ -144,7 +150,13 @@
 
     dispatch_once(&pred, ^{
         tradingPairShortStringsForCurrencyType = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                                   @"???", @(BitcoinDE_CurrencyTypeUnknown), @"btc", @(BitcoinDE_CurrencyTypeBitcoin), @"bch", @(BitcoinDE_CurrencyTypeBitcoinCash), @"btg", @(BitcoinDE_CurrencyTypeBitcoinGold), @"eth", @(BitcoinDE_CurrencyTypeEthereum), @"bsv", @(BitcoinDE_CurrencyTypeBitcoinCashSV), nil];
+                                                                   @"???", @(BitcoinDE_CurrencyTypeUnknown),
+                                                                   @"btc", @(BitcoinDE_CurrencyTypeBitcoin),
+                                                                   @"bch", @(BitcoinDE_CurrencyTypeBitcoinCash),
+                                                                   @"btg", @(BitcoinDE_CurrencyTypeBitcoinGold),
+                                                                   @"eth", @(BitcoinDE_CurrencyTypeEthereum),
+                                                                   @"bsv", @(BitcoinDE_CurrencyTypeBitcoinCashSV),
+                                                                   nil];
     });
 
     NSString *tradingPairShortStringForCurrencyType = [tradingPairShortStringsForCurrencyType objectForKey:@(currencyType)];
@@ -158,7 +170,13 @@
 
     dispatch_once(&pred, ^{
         tradingPairShortStringsForCurrencyType = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                                   @"???", @(BitcoinDE_CurrencyTypeUnknown), @"BTC", @(BitcoinDE_CurrencyTypeBitcoin), @"BCH", @(BitcoinDE_CurrencyTypeBitcoinCash), @"BTG", @(BitcoinDE_CurrencyTypeBitcoinGold), @"ETH", @(BitcoinDE_CurrencyTypeEthereum), @"BSV", @(BitcoinDE_CurrencyTypeBitcoinCashSV), nil];
+                                                                   @"???", @(BitcoinDE_CurrencyTypeUnknown),
+                                                                   @"BTC", @(BitcoinDE_CurrencyTypeBitcoin),
+                                                                   @"BCH", @(BitcoinDE_CurrencyTypeBitcoinCash),
+                                                                   @"BTG", @(BitcoinDE_CurrencyTypeBitcoinGold),
+                                                                   @"ETH", @(BitcoinDE_CurrencyTypeEthereum),
+                                                                   @"BSV", @(BitcoinDE_CurrencyTypeBitcoinCashSV),
+                                                                   nil];
     });
 
     NSString *tradingPairShortStringForCurrencyType = [tradingPairShortStringsForCurrencyType objectForKey:@(currencyType)];
@@ -172,7 +190,13 @@
 
     dispatch_once(&pred, ^{
         tradingPairNaturalStringsForCurrencyType = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                                     @"Alle", @(BitcoinDE_CurrencyTypeUnknown), @"Bitcoin", @(BitcoinDE_CurrencyTypeBitcoin), @"Bitcoin Cash", @(BitcoinDE_CurrencyTypeBitcoinCash), @"Bitcoin Gold", @(BitcoinDE_CurrencyTypeBitcoinGold), @"Ethereum", @(BitcoinDE_CurrencyTypeEthereum), @"Bitcoin Cash SV", @(BitcoinDE_CurrencyTypeBitcoinCashSV), nil];
+                                                                     @"Alle", @(BitcoinDE_CurrencyTypeUnknown),
+                                                                     @"Bitcoin", @(BitcoinDE_CurrencyTypeBitcoin),
+                                                                     @"Bitcoin Cash", @(BitcoinDE_CurrencyTypeBitcoinCash),
+                                                                     @"Bitcoin Gold", @(BitcoinDE_CurrencyTypeBitcoinGold),
+                                                                     @"Ethereum", @(BitcoinDE_CurrencyTypeEthereum),
+                                                                     @"Bitcoin Cash SV", @(BitcoinDE_CurrencyTypeBitcoinCashSV),
+                                                                     nil];
     });
 
     NSString *tradingPairNaturalStringForCurrencyType = [tradingPairNaturalStringsForCurrencyType objectForKey:@(currencyType)];
@@ -219,7 +243,10 @@
 
     dispatch_once(&pred, ^{
         orderStateTypeDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                     @"Expired", @(BitcoinDE_OrderStateTypeExpired), @"Cancelled", @(BitcoinDE_OrderStateTypeCancelled), @"Pending", @(BitcoinDE_OrderStateTypePending), nil];
+                                                     @"Expired", @(BitcoinDE_OrderStateTypeExpired),
+                                                     @"Cancelled", @(BitcoinDE_OrderStateTypeCancelled),
+                                                     @"Pending", @(BitcoinDE_OrderStateTypePending),
+                                                     nil];
     });
 
     return orderStateTypeDictionary;
