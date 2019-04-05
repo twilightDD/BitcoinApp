@@ -255,6 +255,72 @@
     return exportString;
 }
 
+- (NSString *)csvHeaderFromColumnTitles:(NSArray<NSString *> *)columnTitles {
+    __block NSMutableArray<NSString *> *translatedColumnTitles = [NSMutableArray array];
+    NSDictionary *columnTitleTranslations = [self columnTitleTranslations];
+    [columnTitles enumerateObjectsUsingBlock:^(NSString *_Nonnull columnTitle, NSUInteger idx, BOOL *_Nonnull stop){
+        NSString *translation = [columnTitleTranslations objectForKey:columnTitle];
+        if (translation.length > 0) {
+            [translatedColumnTitles addObject:translation];
+        }
+        else {
+            [translatedColumnTitles addObject:columnTitle];
+        }
+    }];
+
+    NSString *csvHeaderFromColumnTitles = [translatedColumnTitles componentsJoinedByString:@";"];
+    csvHeaderFromColumnTitles           = [csvHeaderFromColumnTitles stringByAppendingString:@"\n"];
+    return csvHeaderFromColumnTitles;
+}
+
+- (NSDictionary *)columnTitleTranslations {
+    static NSDictionary *translatedColumnTitles;
+    static dispatch_once_t pred;
+    dispatch_once(&pred, ^{
+        translatedColumnTitles = @{
+            @"orderInformation_currencyType": @"Coinwährung",
+            @"tradeDetails_trading_pair": @"Coinwährung",
+            @"trading_pair": @"Coinwährung",
+            @"volume": @"Umsatz",
+            @"price": @"Preis",
+            @"Price": @"Preis",
+            @"Eur": @"Euro",
+            @"orderInformation_minVolume": @"Mindest Umsatz",
+            @"orderInformation_maxVolume": @"Maximal Umsatz",
+            @"ownCalc_bookingVolume": @"Gebuchter Umsatz",
+            @"ownCalc_fidorFee": @"Fidor Gebühr",
+            @"amount": @"Menge",
+            @"BTC": @"BTC",
+            @"Cash": @"Umsatz",
+            @"Balance": @"Balance",
+            @"orderInformation_maxAmount": @"Maximale Coins",
+            @"orderInformation_minAmount": @"Minimale Coins",
+            @"orderRequirements_onlyKYCFull": @"Nur bekannte Händler",
+            @"orderInformation_newOrderForRemainingAmount": @"Automatische Folgeorder",
+            @"orderInformation_state": @"Status",
+            @"state": @"Status",
+            @"paymentMethod": @"Zahlart",
+            @"successfullyFinishedAt":@"",
+            @"tradeID":@"",
+            @"type":@"",
+            @"feeEur":@"",
+            @"feeBTC":@"",
+            @"tradingPartnerInfo_Username":@"",
+            @"positionDetails_Date":@"",
+            @"tradeDetails_Trade_id":@"",
+            @"positionDetails_Type":@"",
+            @"positionDetails_Cashflow":@"",
+            @"positionDetails_Balance":@"",
+            @"tradeDetails_Price":@"",
+            @"tradeDetails_Euro_before_fee":@"",
+            @"tradeDetails_Euro_after_fee":@"",
+            @"ownCalc_bitcoinEuroFee":@"",
+            };
+    });
+
+    return translatedColumnTitles;
+}
+
 - (void)exportButtonPressed {
     NSString *exportString = [self exportString];
     [self saveString:exportString];
