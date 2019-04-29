@@ -59,6 +59,7 @@ typedef NS_ENUM(NSUInteger, BitcoinDE_MyTradeHistoryParameter_PaymentMethodType)
 @property (strong, nonatomic, readonly) NSNumber *tradingPartnerInfo_amountTrades;
 @property (strong, nonatomic, readonly) NSNumber *tradingPartnerInfo_Rating;
 
+@property (strong, nonatomic, readonly) NSDecimalNumber *ownCalc_amountAfterFee;
 @property (strong, nonatomic, readonly) NSDecimalNumber *ownCalc_bookingVolume;
 @property (strong, nonatomic, readonly) NSDecimalNumber *ownCalc_fidorFee;
 

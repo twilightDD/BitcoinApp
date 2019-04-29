@@ -4312,7 +4312,7 @@ Gw
                                                     </connections>
                                                 </tableColumn>
                                                 <tableColumn identifier="amount" editable="NO" width="140" minWidth="40" maxWidth="1000" id="4MZ-GR-MVY">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="amount">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ownCalc_amountAfterFee">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -4322,7 +4322,7 @@ Gw
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
-                                                    <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="amount"/>
+                                                    <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="ownCalc_amountAfterFee"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
                                                         <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.self" id="e1j-oX-q9q">
@@ -5512,9 +5512,9 @@ Gw
         <image name="NSRefreshTemplate" width="11" height="15"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="WzO-2Q-C8a"/>
+        <segue reference="9rv-7D-aVO"/>
         <segue reference="gQD-Dm-8uX"/>
-        <segue reference="yul-UQ-F1Q"/>
+        <segue reference="YNG-my-y7e"/>
         <segue reference="M1y-2H-j1m"/>
     </inferredMetricsTieBreakers>
 </document>

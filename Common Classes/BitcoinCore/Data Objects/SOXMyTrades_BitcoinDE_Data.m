@@ -43,6 +43,7 @@
 @property (strong, nonatomic, readwrite) NSNumber *tradingPartnerInfo_amountTrades;
 @property (strong, nonatomic, readwrite) NSNumber *tradingPartnerInfo_Rating;
 
+@property (strong, nonatomic, readwrite) NSDecimalNumber *ownCalc_amountAfterFee;
 @property (strong, nonatomic, readwrite) NSDecimalNumber *ownCalc_bookingVolume;
 @property (strong, nonatomic, readwrite) NSDecimalNumber *ownCalc_fidorFee;
 @end
@@ -292,6 +293,15 @@
 
     // Own calculations
     {
+        // ownCalc_amountAfterFee
+        if ([self.type isEqualToString:@"buy"]) {
+            self.ownCalc_amountAfterFee = [self.amount decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"0.992"]];
+        }
+        else {
+            self.ownCalc_amountAfterFee = [self.amount copy];
+        }
+        
+        
         // ownCalc_bookingVolume
         {
             NSDecimalNumber *ownVolume         = [self.amount decimalNumberByMultiplyingBy:self.price];
@@ -333,6 +343,7 @@
         // Amounts => minus for SELL
         if ([self.type isEqualToString:MyTradeHistoryParameter_OrderTypeSellKey]) {
             self.amount = [self.amount decimalNumberByMultiplyingBy:[NSDecimalNumber minusOne]];
+            self.ownCalc_amountAfterFee = [self.ownCalc_amountAfterFee decimalNumberByMultiplyingBy:[NSDecimalNumber minusOne]];
         }
     }
 }

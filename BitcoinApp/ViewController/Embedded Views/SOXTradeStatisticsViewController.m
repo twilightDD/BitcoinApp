@@ -229,7 +229,7 @@
     NSMutableSet *tradingPairs = [NSMutableSet set];
 
     for (SOXMyTrades_BitcoinDE_Data *myTradeData in myTradeDatas) {
-        coinSum             = [coinSum decimalNumberByAdding:myTradeData.amount];
+        coinSum             = [coinSum decimalNumberByAdding:myTradeData.ownCalc_amountAfterFee];
         volumeSum           = [volumeSum decimalNumberByAdding:myTradeData.ownCalc_bookingVolume];
         feeBitcoinVolumeSum = [feeBitcoinVolumeSum decimalNumberByAdding:myTradeData.feeEur];
         feeFidorVolumeSum   = [feeFidorVolumeSum decimalNumberByAdding:myTradeData.ownCalc_fidorFee];
