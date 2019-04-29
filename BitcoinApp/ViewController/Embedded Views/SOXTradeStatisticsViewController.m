@@ -161,6 +161,10 @@
         //        }
     }
 
+    // dont include kickbacks in coinSum
+    coinSum = [coinSum decimalNumberBySubtracting:kickbackSum];
+    
+    
     self.coinSumValueTextField.stringValue = [SOXFormatters stringForBTCNumber:coinSum];
 
     NSDecimalNumber *winLostSum              = [volumeSellSum decimalNumberByAdding:volumeBuySum];
