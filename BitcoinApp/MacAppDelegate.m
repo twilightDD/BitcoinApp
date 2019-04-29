@@ -26,6 +26,9 @@
 #import "SOXFilterOptionsPreferenceViewController.h"
 #import "SOXDebugPreferencesViewController.h"
 
+// IAP
+#import "SOXIAPHelper.h"
+
 @interface MacAppDelegate ()
 
 @property (strong, nonatomic) NSWindow *mainWindow;
@@ -35,6 +38,7 @@
 
 @property (strong, nonatomic) id openPreferenceKeyAndSecretObserver;
 
+@property (strong, nonatomic) SOXIAPHelper *iapHelper;
 @end
 
 @implementation MacAppDelegate
@@ -96,6 +100,11 @@
                                                       usingBlock:^(NSNotification *_Nonnull note) {
                                                           [self checkValidKeysAndSecretsInKeychain];
                                                       }];
+    
+    DDLogInfo(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    DDLogInfo(@"SOXIAPHelper");
+    self.iapHelper = [[SOXIAPHelper alloc] init];
+    [self.iapHelper requestAvaibleIAPs];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {

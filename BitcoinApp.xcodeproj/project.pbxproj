@@ -210,7 +210,8 @@
 		D0BCFCA9200423F8004F9E57 /* SOXFeeCoinValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BCFCA7200423F8004F9E57 /* SOXFeeCoinValueTransformer.m */; };
 		D0BCFCAC20042620004F9E57 /* SOXStateValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BCFCAB20042620004F9E57 /* SOXStateValueTransformer.m */; };
 		D0BCFCAD20042620004F9E57 /* SOXStateValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BCFCAB20042620004F9E57 /* SOXStateValueTransformer.m */; };
-		D0CBF0DB22576BC100DC6EAA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0CBF0DA22576BC100DC6EAA /* StoreKit.framework */; };
+		D0CBF0DF2257714900DC6EAA /* SOXIAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CBF0DE2257714900DC6EAA /* SOXIAPHelper.m */; };
+		D0CBF0E02257714900DC6EAA /* SOXIAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CBF0DE2257714900DC6EAA /* SOXIAPHelper.m */; };
 		D0D0B3E020EAB27100F12A6B /* SOXTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D0B3DF20EAB27100F12A6B /* SOXTableView.m */; };
 		D0D0B3E120EAB27100F12A6B /* SOXTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D0B3DF20EAB27100F12A6B /* SOXTableView.m */; };
 		D0D0B3E320EAC0DD00F12A6B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D0B3E220EAC0DD00F12A6B /* Security.framework */; };
@@ -453,7 +454,8 @@
 		D0BCFCA7200423F8004F9E57 /* SOXFeeCoinValueTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXFeeCoinValueTransformer.m; sourceTree = "<group>"; };
 		D0BCFCAA20042620004F9E57 /* SOXStateValueTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXStateValueTransformer.h; sourceTree = "<group>"; };
 		D0BCFCAB20042620004F9E57 /* SOXStateValueTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXStateValueTransformer.m; sourceTree = "<group>"; };
-		D0CBF0DA22576BC100DC6EAA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		D0CBF0DD2257714900DC6EAA /* SOXIAPHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXIAPHelper.h; sourceTree = "<group>"; };
+		D0CBF0DE2257714900DC6EAA /* SOXIAPHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXIAPHelper.m; sourceTree = "<group>"; };
 		D0D0B3DE20EAB27100F12A6B /* SOXTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXTableView.h; sourceTree = "<group>"; };
 		D0D0B3DF20EAB27100F12A6B /* SOXTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXTableView.m; sourceTree = "<group>"; };
 		D0D0B3E220EAC0DD00F12A6B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -505,7 +507,6 @@
 			files = (
 				D0F70259216AE0AF00BA7EDF /* libPods-mac BitcoinApp.a in Frameworks */,
 				D0D0B3E420EAC0E700F12A6B /* Security.framework in Frameworks */,
-				D0CBF0DB22576BC100DC6EAA /* StoreKit.framework in Frameworks */,
 				D021509320474AEC005A0932 /* Crashlytics.framework in Frameworks */,
 				D021509420474AEC005A0932 /* Fabric.framework in Frameworks */,
 			);
@@ -554,7 +555,6 @@
 		181B8FDF53AF076D5A1A38BD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D0CBF0DA22576BC100DC6EAA /* StoreKit.framework */,
 				D0F70258216AE0AF00BA7EDF /* libPods-mac BitcoinApp.a */,
 				D0D0B3E220EAC0DD00F12A6B /* Security.framework */,
 				D049C45E1E7721AC003CBF36 /* Fabric.framework */,
@@ -676,6 +676,7 @@
 		D049C4491E77082D003CBF36 /* Common Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D0CBF0DC2257712600DC6EAA /* IAP Classes */,
 				D0B9A3311E895E96008860ED /* Categories */,
 				D049C44A1E770D00003CBF36 /* BitcoinCore */,
 				D049C4541E7712C5003CBF36 /* Helper */,
@@ -956,6 +957,15 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
+		D0CBF0DC2257712600DC6EAA /* IAP Classes */ = {
+			isa = PBXGroup;
+			children = (
+				D0CBF0DD2257714900DC6EAA /* SOXIAPHelper.h */,
+				D0CBF0DE2257714900DC6EAA /* SOXIAPHelper.m */,
+			);
+			path = "IAP Classes";
+			sourceTree = "<group>";
+		};
 		D0EB0E4E1F8551E9004839C2 /* WindowController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1124,7 +1134,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.Sandbox = {
 								enabled = 1;
@@ -1472,6 +1482,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D02AA773216BF4A500F2EA95 /* SOXDebugPreferencesViewController.m in Sources */,
+				D0CBF0E02257714900DC6EAA /* SOXIAPHelper.m in Sources */,
 				D021505E20474AEC005A0932 /* BitcoinApp.xcdatamodeld in Sources */,
 				D0565BD621348DF7002E0E21 /* SOXPagingAbstractViewController.m in Sources */,
 				D021505F20474AEC005A0932 /* SOXAccountLedger_BitcoinDE_Data.m in Sources */,
@@ -1562,6 +1573,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D02AA772216BF4A500F2EA95 /* SOXDebugPreferencesViewController.m in Sources */,
+				D0CBF0DF2257714900DC6EAA /* SOXIAPHelper.m in Sources */,
 				D063E9231E74BF97006E2D17 /* BitcoinApp.xcdatamodeld in Sources */,
 				D0565BD521348DF7002E0E21 /* SOXPagingAbstractViewController.m in Sources */,
 				D0B3F1311E8A729F00FCA52A /* SOXAccountLedger_BitcoinDE_Data.m in Sources */,
