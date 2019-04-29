@@ -291,13 +291,13 @@
             NSString *allocationMaxEurVolumeCurrencyString =
                 [SOXFormatters currencyStringForNumber:[accountInfoData allocationMaxEurVolumeForCurrencyType:self.currencyType]
                                           roundingMode:NSNumberFormatterRoundHalfUp];
-            NSString *totalReservationAmountString                = [NSString stringWithFormat:@"%@ (%@%%)",
-                                                                                allocationMaxEurVolumeCurrencyString,
-                                                                                [accountInfoData allocationPercentForCurrencyType:self.currencyType]];
+            NSString *totalReservationAmountString                = [NSString stringWithFormat:@"%@ (%@%%)"
+                                                                     , allocationMaxEurVolumeCurrencyString
+                                                                     , [accountInfoData allocationPercentForCurrencyType:self.currencyType]];
             self.fidorReservationTotalAmountTextField.stringValue = totalReservationAmountString;
-            self.fidorReservationTotalAmountTextField.toolTip     = [NSString stringWithFormat:@"%@%% of total reservation of %@ €",
-                                                                                           [accountInfoData allocationPercentForCurrencyType:self.currencyType],
-                                                                                           overallTotalReservationAmount];
+            self.fidorReservationTotalAmountTextField.toolTip     = [NSString stringWithFormat:@"%@%% of total reservation of %@"
+                                                                     , [accountInfoData allocationPercentForCurrencyType:self.currencyType]
+                                                                     , [SOXFormatters currencyStringForNumber:overallTotalReservationAmount]];
 
             self.fidorReservationAvailableAmountTextField.doubleValue = [accountInfoData allocationEurVolumeOpenOrdersForCurrencyType:self.currencyType].doubleValue;
         }
