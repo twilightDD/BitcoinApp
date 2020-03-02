@@ -34,7 +34,7 @@
         ownCalc_amountAfterFee = myTradeData.ownCalc_amountAfterFee;
         tradingPair            = myTradeData.trading_pair;
     }
-
+    
     if (ownCalc_amountAfterFee && tradingPair) {
         BitcoinDE_CurrencyType currencyType = [SOXMarket_BitcoinDE_DefTypes currencyTypeForTradingPairString:tradingPair];
         NSString *shortCurrencyString       = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:currencyType];
