@@ -276,13 +276,16 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
             }
         }
         
-        if (errorMessage.hasError && errorMessage.apiErrorCode != 31   // 31 - Page greater than last page
+        if (errorMessage.hasError
+            && errorMessage.apiErrorCode != 31   // 31 - Page greater than last page
             ) {
-            MacAppDelegate *appDelegate                   = (MacAppDelegate *)[[NSApplication sharedApplication] delegate];
-            SOXLogWindowController *errorWindowController = appDelegate.errorWindowController;
-            [errorWindowController performSelectorOnMainThread:@selector(showErrorMessage:)
-                                                    withObject:errorMessage
-                                                 waitUntilDone:NO];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                MacAppDelegate *appDelegate                   = (MacAppDelegate *)[[NSApplication sharedApplication] delegate];
+                SOXLogWindowController *errorWindowController = appDelegate.errorWindowController;
+                [errorWindowController performSelectorOnMainThread:@selector(showErrorMessage:)
+                                                        withObject:errorMessage
+                                                     waitUntilDone:NO];
+            });
         }
     }];
     getTask.priority              = 1.0;
