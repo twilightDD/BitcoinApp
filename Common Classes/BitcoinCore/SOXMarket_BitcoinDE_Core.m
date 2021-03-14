@@ -519,12 +519,21 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
     NSString *uri = [SOXMarket_BitcoinDE_Core commandForServerCommandType:serverCommandType];
         DDLogInfo(@"uri\n%@",uri);
     
-    NSString *currency = parameterDictionary[@"trading_pair"];
+    NSString *tradingPair = parameterDictionary[BitcoinDE_ShowOrderbook_TradingPair];
+    if (tradingPair != nil) {
+        ///:trading_pair/rates
+        uri = [NSString stringWithFormat:@"/%@%@", tradingPair, uri];
+        DDLogInfo(@"with tradingPair: \n%@", uri);
+    }
+    
+    // accountLedger
+    NSString *currency = parameterDictionary[@"currency"];
     if (currency != nil) {
         ///:trading_pair/rates
         uri = [NSString stringWithFormat:@"/%@%@", currency, uri];
         DDLogInfo(@"with currency: \n%@", uri);
     }
+    
     
     [SOXMarket_BitcoinDE_Core sharedCore].uri = uri;
 }
