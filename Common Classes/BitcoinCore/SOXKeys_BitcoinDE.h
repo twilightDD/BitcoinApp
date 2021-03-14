@@ -69,12 +69,6 @@ FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Balance;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_TradeID;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_Price;
-//FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_BTC;
-//FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_BTC_BeforeFee;
-//FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_BTC_AfterFee;
-//FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_Euro;
-//FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_Euro_BeforeFee;
-//FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_Euro_AfterFee;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trading_Pair;
 //APIv4:
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_Currency_To_Trade;
@@ -123,11 +117,13 @@ FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_Page_Last;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_Trades_MainKey;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_TradeID;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_Type;
-FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_Amount;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_Price;
-FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_Volume;
-FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_FeeEur;
-FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_FeeBTC;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_Amount_Currency_To_Trade; // coin amount
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_Amount_Currency_To_Trade_After_Fee; // coin amount - coin fee
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_Fee_Currency_To_Trade; // coin fee
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_Volume_Currency_To_Pay; // euro volume
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_Volume_Currency_To_Pay_After_Fee; // euro volume - euro fee
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_Fee_Currency_To_Pay; // euro fee
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_NewOrderIDForRemainingAmount;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_State;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyTrades_MyRatingForTradingPartner;

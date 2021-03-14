@@ -36,11 +36,13 @@ typedef NS_ENUM(NSUInteger, BitcoinDE_MyTradeHistoryParameter_PaymentMethodType)
 
 @property (strong, nonatomic, readonly) NSString *tradeID;
 @property (strong, nonatomic, readonly) NSString *type;
-@property (strong, nonatomic, readonly) NSDecimalNumber *amount;
 @property (strong, nonatomic, readonly) NSDecimalNumber *price;
-@property (strong, nonatomic, readonly) NSDecimalNumber *volume;
-@property (strong, nonatomic, readonly) NSDecimalNumber *feeEur;
-@property (strong, nonatomic, readonly) NSDecimalNumber *feeBTC;
+@property (strong, nonatomic, readonly) NSDecimalNumber *amount_Currency_To_Trade;
+@property (strong, nonatomic, readonly) NSDecimalNumber *amount_Currency_To_Trade_After_Fee;
+@property (strong, nonatomic, readonly) NSDecimalNumber *fee_Currency_To_Trade;
+@property (strong, nonatomic, readonly) NSDecimalNumber *volume_Currency_To_Pay;
+@property (strong, nonatomic, readonly) NSDecimalNumber *volume_Currency_To_Pay_After_Fee;
+@property (strong, nonatomic, readonly) NSDecimalNumber *fee_Currency_To_Pay;
 @property (strong, nonatomic, readonly) NSString *aNewOrderIDForRemainingAmount;
 @property (strong, nonatomic, readonly) NSNumber *state;
 @property (strong, nonatomic, readonly) NSString *myRatingForTradingPartner;

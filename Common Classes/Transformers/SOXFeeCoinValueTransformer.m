@@ -30,7 +30,8 @@
 
     if ([value isKindOfClass:[SOXMyTrades_BitcoinDE_Data class]]) {
         SOXMyTrades_BitcoinDE_Data *myTradeData = value;
-        feeAmount                               = myTradeData.feeBTC;
+//        feeAmount                               = myTradeData.feeBTC;
+        feeAmount                               = myTradeData.fee_Currency_To_Trade;
         tradingPair                             = myTradeData.trading_pair;
     }
 

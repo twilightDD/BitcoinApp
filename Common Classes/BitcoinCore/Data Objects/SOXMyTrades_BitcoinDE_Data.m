@@ -20,11 +20,13 @@
 
 @property (strong, nonatomic, readwrite) NSString *tradeID;
 @property (strong, nonatomic, readwrite) NSString *type;
-@property (strong, nonatomic, readwrite) NSDecimalNumber *amount;
 @property (strong, nonatomic, readwrite) NSDecimalNumber *price;
-@property (strong, nonatomic, readwrite) NSDecimalNumber *volume;
-@property (strong, nonatomic, readwrite) NSDecimalNumber *feeEur;
-@property (strong, nonatomic, readwrite) NSDecimalNumber *feeBTC;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *amount_Currency_To_Trade;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *amount_Currency_To_Trade_After_Fee;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *fee_Currency_To_Trade;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *volume_Currency_To_Pay;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *volume_Currency_To_Pay_After_Fee;
+@property (strong, nonatomic, readwrite) NSDecimalNumber *fee_Currency_To_Pay;
 @property (strong, nonatomic, readwrite) NSString *aNewOrderIDForRemainingAmount;
 @property (strong, nonatomic, readwrite) NSNumber *state;
 @property (strong, nonatomic, readwrite) NSString *myRatingForTradingPartner;
@@ -43,8 +45,6 @@
 @property (strong, nonatomic, readwrite) NSNumber *tradingPartnerInfo_amountTrades;
 @property (strong, nonatomic, readwrite) NSNumber *tradingPartnerInfo_Rating;
 
-@property (strong, nonatomic, readwrite) NSDecimalNumber *ownCalc_amountAfterFee;
-@property (strong, nonatomic, readwrite) NSDecimalNumber *ownCalc_bookingVolume;
 @property (strong, nonatomic, readwrite) NSDecimalNumber *ownCalc_fidorFee;
 @end
 
@@ -176,7 +176,7 @@
         pbString = [pbString stringByAppendingString:@"\t"];
 
         // BTC bestellt
-        NSString *amountString = [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:trade.amount];
+        NSString *amountString = [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:trade.amount_Currency_To_Trade];
         if (isBuyTrade) {
             pbString = [pbString stringByAppendingString:amountString];
         }
@@ -256,18 +256,22 @@
     // My Trade Details
     {
         self.tradeID = [tDD objectForKey:BitcoinDE_ShowMyTrades_TradeID];
-
+    
         self.type   = [tDD objectForKey:BitcoinDE_ShowMyTrades_Type];
-        self.amount = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Amount]];
         self.price  = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Price]];
-        self.volume = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Volume]];
+        self.amount_Currency_To_Trade = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Amount_Currency_To_Trade]];
+        self.amount_Currency_To_Trade_After_Fee = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Amount_Currency_To_Trade_After_Fee]];
+        self.fee_Currency_To_Trade = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Fee_Currency_To_Trade]];
+        self.volume_Currency_To_Pay = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Volume_Currency_To_Pay]];
+        self.volume_Currency_To_Pay_After_Fee = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Volume_Currency_To_Pay_After_Fee]];
+        self.fee_Currency_To_Pay = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_Fee_Currency_To_Pay]];
+
 
         // feeEur
         { // value in dict from server may be incorrect! i.e. trade 7K87G2 (19.1.18); 13.03.19;ph
             // we calculate feeEur later (see ownCaluclations)
             // self.feeEur = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_FeeEur]];
         }
-        self.feeBTC                        = [self convertToNumber:[tDD objectForKey:BitcoinDE_ShowMyTrades_FeeBTC]];
         self.aNewOrderIDForRemainingAmount = [tDD objectForKey:BitcoinDE_ShowMyTrades_NewOrderIDForRemainingAmount];
         self.state                         = [tDD objectForKey:BitcoinDE_ShowMyTrades_State];
         self.myRatingForTradingPartner     = [tDD objectForKey:BitcoinDE_ShowMyTrades_MyRatingForTradingPartner];
@@ -291,8 +295,9 @@
         self.tradingPartnerInfo_Rating       = [tPI objectForKey:BitcoinDE_ShowMyTrades_TradingPartnerInformation_Rating];
     }
 
-    // Own calculations
-    {
+    // Own calculations - not needed in APIv4
+    /*
+    
         // ownCalc_amountAfterFee
         if ([self.type isEqualToString:@"buy"]) {
             self.ownCalc_amountAfterFee = [self.amount decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"0.992"]];
@@ -321,29 +326,32 @@
             self.feeEur = [self.volume decimalNumberBySubtracting:self.ownCalc_bookingVolume];
         }
 
+     */
         // ownCalc_fidorFee
         if (self.paymentMethod.unsignedIntegerValue == BitcoinDE_MyTradeHistoryParameter_ExpressPaymentMethodType
             && [self.successfullyFinishedAt isLaterThan:[SOXFormatters fidorFeeStartedAtDate]]) {
-            NSDecimalNumber *fidorFee        = [self.ownCalc_bookingVolume decimalNumberByMultiplyingBy:[SOXMarket_BitcoinDE_DefTypes fidor_feeFactorStarting20180221]];
+            NSDecimalNumber *fidorFee        = [self.volume_Currency_To_Pay_After_Fee decimalNumberByMultiplyingBy:[SOXMarket_BitcoinDE_DefTypes fidor_feeFactorStarting20180221]];
             NSDecimalNumber *fidorFeeRounded = [fidorFee decimalNumberByRoundingAccordingToBehavior:[SOXFormatters currencyNumberHandlerRoundDown]];
             self.ownCalc_fidorFee            = fidorFeeRounded;
         }
         else {
             self.ownCalc_fidorFee = [NSDecimalNumber zero];
         }
-    }
-
-    // Finally: fix sign for sell/buy
+        DDLogInfo(@"ownCalc_fidorFee: %@", self.ownCalc_fidorFee);
+    
+    
+    
+//    // Finally: fix sign for sell/buy
     {
         // Volumes => minus for BUY
         if ([self.type isEqualToString:MyTradeHistoryParameter_OrderTypeBuyKey]) {
-            self.volume                = [self.volume decimalNumberByMultiplyingBy:[NSDecimalNumber minusOne]];
-            self.ownCalc_bookingVolume = [self.ownCalc_bookingVolume decimalNumberByMultiplyingBy:[NSDecimalNumber minusOne]];
+            self.volume_Currency_To_Pay = [self.volume_Currency_To_Pay decimalNumberByMultiplyingBy:[NSDecimalNumber minusOne]];
+            self.volume_Currency_To_Pay_After_Fee = [self.volume_Currency_To_Pay_After_Fee decimalNumberByMultiplyingBy:[NSDecimalNumber minusOne]];
         }
         // Amounts => minus for SELL
         if ([self.type isEqualToString:MyTradeHistoryParameter_OrderTypeSellKey]) {
-            self.amount = [self.amount decimalNumberByMultiplyingBy:[NSDecimalNumber minusOne]];
-            self.ownCalc_amountAfterFee = [self.ownCalc_amountAfterFee decimalNumberByMultiplyingBy:[NSDecimalNumber minusOne]];
+            self.amount_Currency_To_Trade = [self.amount_Currency_To_Trade decimalNumberByMultiplyingBy:[NSDecimalNumber minusOne]];
+            self.amount_Currency_To_Trade_After_Fee = [self.amount_Currency_To_Trade_After_Fee decimalNumberByMultiplyingBy:[NSDecimalNumber minusOne]];
         }
     }
 }
