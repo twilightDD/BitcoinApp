@@ -880,13 +880,34 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 
     static dispatch_once_t pred;
 
+    
+    // API-Version 4
     dispatch_once(&pred, ^{
         commandDescriptions = @{
             @(UnknownCommand): @"Error",
-            @(BitcoinDE_ShowBuyOrderbookCommandType): @"/orders"   //"sell" liefert Kaufangebote
-            ,
-            @(BitcoinDE_ShowSellOrderbookCommandType): @"/orders"   //"buy" liefert Verkaufsangebote
-            ,
+            @(BitcoinDE_ShowBuyOrderbookCommandType): @"/orderbook",   //"sell" liefert Kaufangebote
+            @(BitcoinDE_ShowSellOrderbookCommandType): @"/orderbook",   //"buy" liefert Verkaufsangebote
+            @(BitcoinDE_ShowMyOrdersCommandType): @"/orders",
+            @(BitcoinDE_ShowMyOrderDetailsCommandType): @"/orders",
+            @(BitcoinDE_ShowAccountInfoCommandType): @"/account",
+            @(BitcoinDE_ShowOrderbookCompactCommandType): @"/orderbook/compact",
+            @(BitcoinDE_ShowPublicTradeHistoryCommandType): @"/trades/history",
+            @(BitcoinDE_ShowRatesCommandType): @"/rates",
+            @(BitcoinDE_ShowMyTradesType): @"/trades",
+            @(BitcoinDE_ShowAccountLedgerType): @"/account/ledger",
+            @(BitcoinDE_RemoveOrderType): @"/orders/",
+            @(BitcoinDE_CreateOrderType): @"/orders",
+            @(BitcoinDE_ExecuteTrade): @"/trades/"
+        };
+    });
+    
+    
+    /* //API-Version 2
+    dispatch_once(&pred, ^{
+        commandDescriptions = @{
+            @(UnknownCommand): @"Error",
+            @(BitcoinDE_ShowBuyOrderbookCommandType): @"/orders",   //"sell" liefert Kaufangebote
+            @(BitcoinDE_ShowSellOrderbookCommandType): @"/orders",   //"buy" liefert Verkaufsangebote
             @(BitcoinDE_ShowMyOrdersCommandType): @"/orders/my_own",
             @(BitcoinDE_ShowMyOrderDetailsCommandType): @"/orders/:order_id",
             @(BitcoinDE_ShowAccountInfoCommandType): @"/account",
@@ -900,6 +921,7 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
             @(BitcoinDE_ExecuteTrade): @"/trades/"
         };
     });
+     */
     return commandDescriptions;
 }
 
@@ -1002,7 +1024,8 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
     static dispatch_once_t pred;
 
     dispatch_once(&pred, ^{
-        baseURLString = @"https://api.bitcoin.de/v2";
+        baseURLString = @"https://api.bitcoin.de/v4";
+//        baseURLString = @"https://api.bitcoin.de/v2";
     });
 
     return baseURLString;
