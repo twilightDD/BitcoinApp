@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3E1804FFF2D90CCDF0EBB40B2F4C2C03"
+               BlueprintIdentifier = "CEF41AAA0CAD612151ECA505B1C6572C"
+               BuildableName = "libsocket.IO.a"
                BlueprintName = "socket.IO"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libsocket.IO.a">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

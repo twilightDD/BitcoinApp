@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D9F38DEF258831D74FFB8BFD4D2686AD"
+               BlueprintIdentifier = "5572D14DECB5A676C1B31B30A3BA7F10"
+               BuildableName = "libSAMKeychain.a"
                BlueprintName = "SAMKeychain"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libSAMKeychain.a">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

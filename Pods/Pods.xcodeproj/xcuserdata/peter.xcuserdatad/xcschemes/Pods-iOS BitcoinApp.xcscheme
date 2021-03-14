@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ACBE38B9CA75FFC1B10D684F610C8E2A"
+               BlueprintIdentifier = "287D193BE033D81AD04BEFAD0D66043E"
+               BuildableName = "libPods-iOS BitcoinApp.a"
                BlueprintName = "Pods-iOS BitcoinApp"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libPods-iOS BitcoinApp.a">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

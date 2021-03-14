@@ -7,786 +7,705 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00F2C35DDD27875CB06AD99030B5EEEF /* DDASLLogCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B7253B1E1D16A99540A5FA0FAA8404F /* DDASLLogCapture.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		0ED0FE0101F83D9132CA002D91A1100C /* Pods-mac BitcoinAppTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 244B6F62097721B870495F6BB5C674AF /* Pods-mac BitcoinAppTests-dummy.m */; };
-		129164CFA3C7A4D881E802F213C840A8 /* SAMKeychain-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 870D807B3AF0BD809348B1DD6A11C1F8 /* SAMKeychain-dummy.m */; };
-		17C03536EC5D19A3BB0DB4C075D37A0B /* Pods-mac BitcoinApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F05A228EC6CC845521DFC4F14E8FA6BF /* Pods-mac BitcoinApp-dummy.m */; };
-		180C008618D57E8737BFEF36340FCF15 /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 28251666F21DD68B2EA00F19E7506D70 /* SRWebSocket.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		1C085D68E8CD378ECA749BDB3A5291E7 /* Pods-iOS BitcoinAppTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FADEDBE58CBD96281B9AE45ACF40A31 /* Pods-iOS BitcoinAppTests-dummy.m */; };
-		290E933B757AFD5974F10FF166936539 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 03AD1DC465A64EFF330D95D2DB92DBAE /* DDASLLogger.m */; };
-		29DC335087C5354500EF5D8F5B198AD6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97330B070A5FB6CB3DA42A337174357F /* Security.framework */; };
-		312D4C03229BA7CC35B9537E5C0B0089 /* SocketIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D2B9F6378C9D58B98777BC523511F41 /* SocketIO.m */; };
-		36BEAEEEBCDE6125D1D46F4D981778D6 /* SocketIOTransportWebsocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 68040AB24B9A0B29B5F7D89C667791F5 /* SocketIOTransportWebsocket.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		3AF14187361E4D76E85155786303EC0F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF46C128BC9000C620020CAF92ECEE6 /* Foundation.framework */; };
-		3F7171C7CCBAA565CB81593DD5A10655 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD68B1DF8BCD92EE0EDA8EFB6FF2FCE /* CoreServices.framework */; };
-		40B7938062FFDAAD3AFEB92A54CC146A /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABFF27C9F031D6CF5FD88D3E12058EE /* DDContextFilterLogFormatter.m */; };
-		42C4F181A6213E0CA001813CC4CCA668 /* SAMKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ADA913BB5192517857752ADBBAB87AB /* SAMKeychain.m */; };
-		47156FA49A7082CC0BCFB700A2389B4A /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1A02D7755C61D3BD3BBF36E1634C69 /* DDDispatchQueueLogFormatter.m */; };
-		4F1BA5E1C854F8B1900D444107233431 /* SAMKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BAEA25AB7EAED3A45F0C8483DE4632D1 /* SAMKeychainQuery.m */; };
-		51141C60F273FE2D82F294213903A90E /* SocketIOTransportWebsocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 570C6DDD21F2B3829E56199546C63952 /* SocketIOTransportWebsocket.m */; };
-		52D71738D319E3C281C73C374F3A4B2E /* DDOSLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7661F55530E824DE14C7C630C529E5 /* DDOSLogger.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		564E5B118BCA3D12B5FB4C6AC42713BC /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD87346A9F8E0EBDCC7BA4432B3AD3D5 /* MASPreferencesWindowController.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		57A1D24B58E3D0C15DA3CC60B04F8B1F /* SocketIOTransportXHR.m in Sources */ = {isa = PBXBuildFile; fileRef = 642E802F1692BE294ED6BE15FFD9647E /* SocketIOTransportXHR.m */; };
-		5F013D01F60093A3497DA6ADDDE158A1 /* MASPreferencesViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 500C5529B9DBEF9C45F2F7FB302A4A1E /* MASPreferencesViewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		5F6C9E1E6269820CB6545FDA031DE06C /* DDLogMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 367E5D11F9E398FBB8CA0AC63588F196 /* DDLogMacros.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		63446163908062C111DEB18B597F37A2 /* DDContextFilterLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 960063106BCD90782C2790D8F28E9CDB /* DDContextFilterLogFormatter.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		647A988A80EDFAF6F3B357EFF68CB66A /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 63DDCF41F5D5AD8E7D0D22BB5C19AC74 /* DDFileLogger.m */; };
-		6ED1CDDF1348633F0BDBC45836EE52D9 /* DDTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = B57B852789678B7F3ACB0417E8D9E6F6 /* DDTTYLogger.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		6F5A2E91E400DF8F153357C7536993E2 /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = B827F1FBA3C50514F2DF72F1B72C0868 /* DDAbstractDatabaseLogger.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		709B9AB2158114363AB4DDD5B3B0CFA9 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 2135033683DCD24110940E087037B60B /* SRWebSocket.m */; };
-		7615750C52BB80F0B34830C574A3448D /* MASPreferences.h in Headers */ = {isa = PBXBuildFile; fileRef = CBBDE6841AEDAC6BBB0F2870B6638056 /* MASPreferences.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		810B5CE04EB63C8560A8D7F8D212782F /* DDFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E9D72F6EBA946A412F18899D50EB483 /* DDFileLogger.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		82570CBB292D4617EBF276BC75573405 /* SAMKeychain.h in Headers */ = {isa = PBXBuildFile; fileRef = B93F3F60A5A00E8ECC7985FBA512238C /* SAMKeychain.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		8827B0E83E91FA77FEC8ECB30190DF22 /* SocketIOPacket.h in Headers */ = {isa = PBXBuildFile; fileRef = BCC5BEE90767CAD419033BE3D28F140D /* SocketIOPacket.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		8A617A41DA5286CB20D0F0082C4A2A34 /* SocketIO.h in Headers */ = {isa = PBXBuildFile; fileRef = C1BAEF7A7598ED48540FAD4C7020A435 /* SocketIO.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		8F16509D24F7DFF6AA7576547D0CC12A /* CocoaLumberjack-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 40DA5DBF49A834BA3F639B7110C34125 /* CocoaLumberjack-dummy.m */; };
-		93BB7FE6851BBF952C9CA61D21D22215 /* Pods-iOS BitcoinApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3F9E97D58113C537A205542D26F42D /* Pods-iOS BitcoinApp-dummy.m */; };
-		948E6C14F71C36CAE86B5FB0ED478BBA /* DDDispatchQueueLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F07BE06CB928451D59AF52015916FD3 /* DDDispatchQueueLogFormatter.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		9847AFDE401C16AF51D2D69386EB386D /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C6D413BD72E188E57ACBC6076C7081F /* DDLog.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		986BFDF69328F432FAF555637E0A918E /* SAMKeychainQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = C2D1A41D26D8084EFDCFDFDF75BE5A70 /* SAMKeychainQuery.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		A260CEDA9C048C0BBE939B2C3D5F42ED /* DDLog+LOGV.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FE50C0A693C6CD1096BFE92BC0CC491 /* DDLog+LOGV.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		A5345695ACB7E6AE8864638F1BB47285 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFC0714D2EEEE35F185B08F4BD1E777 /* DDAbstractDatabaseLogger.m */; };
-		AECA28C01EB93A9216AF89448A43E627 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = D17338975EB9A39653C9CD8E2B7F7486 /* DDLog.m */; };
-		B09ABCB44DDA8FD929CF15A5DD7F230F /* SocketIOTransportXHR.h in Headers */ = {isa = PBXBuildFile; fileRef = E534093E48F1D4CE93A8258F0F47F244 /* SocketIOTransportXHR.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		B0CBF2F4DF5CF3445852E0EFA2847E76 /* SocketRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C3C992237DA29F4DA6A0B44D165496F /* SocketRocket.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		B806CE6CFFF7BF1D8D782342FAB2CB60 /* CocoaLumberjack.h in Headers */ = {isa = PBXBuildFile; fileRef = A6658C1AE3F3FE12DE400C79133965FE /* CocoaLumberjack.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		B8A2F77289E0854C7C4B8DAF3F3341AD /* DDAssertMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = A8B65BC86CF6760B906253E16ED59D7D /* DDAssertMacros.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		BDDA24493BD5047A965E27BD4D8C6A27 /* SocketIOTransport.h in Headers */ = {isa = PBXBuildFile; fileRef = 2727084A46B9C3FC3719094A6117B607 /* SocketIOTransport.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		C161737FAA652F64B16014BE24D6EFFF /* DDLegacyMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = A8172EF764806CCC01CB5F97B6BC0182 /* DDLegacyMacros.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		C31E820FACC2B8B759FC81221A4A04DD /* SocketRocket-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F7ABFDF5867587C5817A85709807E7 /* SocketRocket-dummy.m */; };
-		C425F07338F8FD275C8DD63FDEC9FE03 /* MASPreferencesWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 58E8F3FE633F3EDE0B54A8B367839B30 /* MASPreferencesWindowController.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		C7C09B7DBFB4D8F18434278CFA2FC6E7 /* SocketIOJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FC7CFB87861FB0AAE86120997C035D5 /* SocketIOJSONSerialization.m */; };
-		D88B97C1A21B56BE586D56B4771996E6 /* DDMultiFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 77FA79A383F531811F82DC00F5599646 /* DDMultiFormatter.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		D8A5A94E2AACFE4497C85CA0ADDF98AB /* SocketIOJSONSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 38C5557BF23512EAA9AF4196CB8242B0 /* SocketIOJSONSerialization.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		D96128255024067476BABC74BE819E2C /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC58A079D00BDB089C59F041C98F521 /* DDASLLogCapture.m */; };
-		DB9A7C48D3F3B32B11A1A7948B2365D3 /* DDOSLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = E44925118612EA84CB0F27C1534C11DD /* DDOSLogger.m */; };
-		DBFACEC59107D66CB8815821CEEEFF38 /* socket.IO-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F3353A8A5F111D1D7DC0F4A26C4AD56 /* socket.IO-dummy.m */; };
-		DD8A1B8181B22DA4CBE27D72561BC239 /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FD67D19E5BBC5BE6717BC58EBCBC048B /* DDMultiFormatter.m */; };
-		E54658EE9D4285F1FAFCF36B6034F817 /* SocketIOPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = AE56B7A7D07A1D7FEA04C8ED5FAA24B7 /* SocketIOPacket.m */; };
-		E9C5E7D72E04D7C2C851214863047CAA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97330B070A5FB6CB3DA42A337174357F /* Security.framework */; };
-		F8E9EC90CA39022F8A7FF5B5440CF596 /* MASPreferences-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7838D3E09BA3431A733B1A86BA2548 /* MASPreferences-dummy.m */; };
-		FB4E7177C196215C8C02674508D5CBAD /* DDASLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = D7374949966FF8EA83AAF2E49E39E163 /* DDASLLogger.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		FD701D2D197ADAED5847FCD71B616DA8 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D448E23E7358F6F6CCA1A435B00B0F /* DDTTYLogger.m */; };
+		04182CDABD6165E1088443BBC04E9835 /* DDTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BEC9D9574E25BC56F3AFA89C362F902 /* DDTTYLogger.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		0459023CE081700B826153BCC29DF3F7 /* CLIColor.h in Headers */ = {isa = PBXBuildFile; fileRef = F33F1C145D5EC4672D2B9B62C038C746 /* CLIColor.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		074533502DBEF67B2D680761D79BA23D /* DDFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = C54927EC31A28C9BC38AE0183C8D1713 /* DDFileLogger.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		14BD5053A3FBCBB47D95231706E10B99 /* DDDispatchQueueLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E824784034764D7DFCBC16D1697AF1A /* DDDispatchQueueLogFormatter.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		1A7736579A6A134BBFE4E511CE6234B3 /* DDLog+LOGV.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C48B7978C7B541720471373AE0C658A /* DDLog+LOGV.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		1BF4D9DCF2C605B882B70DA9ED9C7BE0 /* SAMKeychain.h in Headers */ = {isa = PBXBuildFile; fileRef = 37A559BD8489EF58B5620F5185026D4A /* SAMKeychain.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		1CA9BC78AB02C43A88ED314AF2772DE4 /* Pods-mac BitcoinApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A0042520ED11A58FE9E39A8CEA4510 /* Pods-mac BitcoinApp-dummy.m */; };
+		20432A86849EAB849D036DEF7B2B3E49 /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 20764FB842384B889880915F20133D5C /* DDAbstractDatabaseLogger.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		225954BE08C2A11B58527BD7E486E224 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E335AD08E0401A732AE0CBB9784BC9 /* DDLog.m */; };
+		23264922C2BC9F97BAD4396AA4E911DC /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E4380D4861B0B0B2517903F36734EDBD /* DDContextFilterLogFormatter.m */; };
+		25CC2DF318A99D4B4BAE94ABFED1A788 /* SAMKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = E492CBE5CB4891F05AAD06D6974B1607 /* SAMKeychainQuery.m */; };
+		2746862CB79C6128783F3C71BF56C9A7 /* SAMKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA3AF5B9CDDAFA16FD612EDBC4F3F9D /* SAMKeychain.m */; };
+		27DE60CAD8ED27FD41ACED0825014955 /* DDAssertMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = D2AB2FBFB54DDF680BEB137B6E2CCAA6 /* DDAssertMacros.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		2F7D25EA29E4167F1CED2641C0B06F01 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D4B57559A0AEC952F4A83F614537041 /* DDASLLogger.m */; };
+		31037C7013DE77E8FA23C1267F7698E3 /* DDLogMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CDBB4DDB1E34934CA26E80A1DBCBA1E /* DDLogMacros.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		3A62D9FE48EFD337BA43DFDB91D9D844 /* SocketIOJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D3776DFB29377879D5644021D79F02 /* SocketIOJSONSerialization.m */; };
+		42E2EF61EAE0CDB4DD9811A676EF522F /* SocketIOPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6668069B62FB220FB0ED7690F0C340E2 /* SocketIOPacket.m */; };
+		4DC1EB07CAF6767118317408E62B60F0 /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 894E77BBDD816327A51AA94D51D83257 /* CLIColor.m */; };
+		56816CB6CE61A60158D171193847EFA8 /* SocketIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E531CA524D279103D52A52CE0372FFE /* SocketIO.m */; };
+		56D7020942EC251D3B0860C02EB26999 /* DDContextFilterLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = D3FC9887F330FBDCD7DF05F76980022D /* DDContextFilterLogFormatter.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		5C651E9F66FA0E47055980A43C55B71D /* DDASLLogCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = F449C6CE07DD9AFEC433CB2444988A10 /* DDASLLogCapture.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		65082FF60E80D7609D8B7D210EAE1F91 /* MASPreferencesWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4277B1F48F58838982E9A36A53DC150B /* MASPreferencesWindowController.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		65C3E00D83B09BA83627BAA6AF3382C8 /* DDMultiFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 729039D4765BAF4B12AEEA133E0C52E1 /* DDMultiFormatter.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		65F7FE2FC20662719A7E91D0E4A617C3 /* DDLoggerNames.h in Headers */ = {isa = PBXBuildFile; fileRef = 48DF5E4AAA5678B9E5F9E7BA24DE7092 /* DDLoggerNames.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		66B38C9066CB217767FF84C17432B54C /* MASPreferencesViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B3D494CC7AFC8E90CF060CC1B001D08 /* MASPreferencesViewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		6940EC88D79410C4B1F49B80483614EA /* DDFileLogger+Buffering.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E8ACD6D38A757C33EED1941B4E6050 /* DDFileLogger+Buffering.m */; };
+		6D8F6C3A2287796B25FEA77A66577AFB /* Pods-mac BitcoinAppTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 34E8011E516DC42BFC877CA296052FAE /* Pods-mac BitcoinAppTests-dummy.m */; };
+		7BDD852D28E2194E90680BE7BF1E4711 /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = C9F790B61D338514CE9C4964AA07C807 /* DDLog.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		7DA41DD241EF76A5BC24948EB15EB46F /* SAMKeychain-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2E0BFDD429105D2DAF27CF152141D2 /* SAMKeychain-dummy.m */; };
+		815A2D6583DADE9F65065C3AFE95E834 /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB983893CCF8719E006BA6C0E62D581 /* DDMultiFormatter.m */; };
+		83558D7AD813A6C2DB97AC1455D475D3 /* MASPreferences.h in Headers */ = {isa = PBXBuildFile; fileRef = CBBF501A3F2060C7A7AB597D322EEF08 /* MASPreferences.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		8383FF76CAAF25C8FE900AEC6EBBAEF8 /* CocoaLumberjack-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CB40F8DFBDC44CAE95FDBC7E9868BC26 /* CocoaLumberjack-dummy.m */; };
+		83AD9AC86834FC2DEF56B93709F0B5ED /* DDOSLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F26E78444D3B0C98B9EC6C2E3E715C6 /* DDOSLogger.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		83B4A685693348CA8E816BAFE320D771 /* DDFileLogger+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 674482D51CB85C68B178965B7EC40CE1 /* DDFileLogger+Internal.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		8EF4CDC6DFF6D3142CAE386A3A0F349F /* Pods-iOS BitcoinApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE5E443C8F09F9BFE73C67DEDAF3E48 /* Pods-iOS BitcoinApp-dummy.m */; };
+		929FF13C69854C325174F6367DF5E26E /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FC0D5E5EF97AA6298656BA026813C6 /* DDDispatchQueueLogFormatter.m */; };
+		95E9E340892B19F069A443BA0EA1CC02 /* SocketIOJSONSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = A5BCD786B6B843250DFEC32420CDCFDE /* SocketIOJSONSerialization.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		99809A30F06EDE8822CA1C346A95B40B /* MASPreferences-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F9F27C56676B023572BEE147B8E0596 /* MASPreferences-dummy.m */; };
+		A02282564A2A10159E47D9AC3798A281 /* SAMKeychainQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = 1411B384602317761BC5A1FE61DEDBC6 /* SAMKeychainQuery.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		A3EC42FD150B91EAAE2B89E1239134E7 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = D4DA3980D462B06C2D984FBC54857BD0 /* DDFileLogger.m */; };
+		A61FC4A9CCAA7751D872043029A59D88 /* DDLoggerNames.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D5D1DD0399FE80E5EC8D3A43943DF7 /* DDLoggerNames.m */; };
+		A918247F02D264F638BB2CB30F821DAF /* SocketIOPacket.h in Headers */ = {isa = PBXBuildFile; fileRef = BF2BDC6DE0DCC39E71C5B3AD19E5D55D /* SocketIOPacket.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		AA57B143DD82C776CA083F0E7A028D34 /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BA0AECA53151F843BD03B48A1AD517 /* MASPreferencesWindowController.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		AAA4BE8ED7E5BACCBB34AE243147858D /* SocketIOTransportXHR.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B923CF3BDE34A3F2DB400E123EB9212 /* SocketIOTransportXHR.m */; };
+		AD66D3CBE7769FD9B473E0EB6E2FDD7D /* SocketIOTransportWebsocket.h in Headers */ = {isa = PBXBuildFile; fileRef = EC72AAF25EF29B57239FDABCBF504EE3 /* SocketIOTransportWebsocket.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		B1842371E0FD23D563180E47A808EDFF /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ECC53DFAA3957CCD3DC2CCE27567711 /* SRWebSocket.m */; };
+		B9682B233856F89812970CDEA1F6FD69 /* SocketIO.h in Headers */ = {isa = PBXBuildFile; fileRef = 34A5D5C5EC5DFC9C472B873754015A8F /* SocketIO.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		BC3A006E04AC8E1CDAD5094CC2F60D63 /* DDASLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = D25BB26DEC5D0D4FC6E58AA1F50DE00E /* DDASLLogger.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		C5F5BE14C890D99E390365351AD5EFDF /* SocketRocket-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7832B15E265A997DF5FA1219DF4949F5 /* SocketRocket-dummy.m */; };
+		CB82025DB1C13B1B6F5BEA1CF5379124 /* SocketIOTransport.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B1B74F144BD1DE9C32767F9DFEDF9F /* SocketIOTransport.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		CC89B598FE2D4105A8D3AA7E2B9BA8F4 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 8483551D58141EE18278E6AE21219EA1 /* DDTTYLogger.m */; };
+		CD4B4D90853D8B9D4DC6722A0C8B4821 /* SocketIOTransportWebsocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA3CC144BC8E963900E4F6D0B7D1D86 /* SocketIOTransportWebsocket.m */; };
+		D3D7590F76F57F561E4699B1860597B1 /* DDFileLogger+Buffering.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CFF4FF78F856ACF1662CBEE1B38AF9A /* DDFileLogger+Buffering.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		D8D4BBE969D158A1854274C4F67621E5 /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 4550521C7605283F0FDA6C25389777D7 /* SRWebSocket.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		D934026649CD29EE3938E5AF83D5BFF4 /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B98E0A6FEE457774E6D6B7FA0434FC6 /* DDASLLogCapture.m */; };
+		DCBC1C00A77F9171878F562A8CBE7628 /* DDLegacyMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 64829B036B69EF524B5EA10FD34971C1 /* DDLegacyMacros.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		DD7C0A8DBA106D9B47192D3346ADC23B /* Pods-iOS BitcoinAppTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C281607356A47DF9D0F9578CEDE501D3 /* Pods-iOS BitcoinAppTests-dummy.m */; };
+		E5B03E21C98E1E5DAD82764FC937A64C /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 518CF3162CBB51A6C63B8E2FBB023A97 /* DDAbstractDatabaseLogger.m */; };
+		EFF04060FCB2AD2AC28F75652C29AA0F /* SocketIOTransportXHR.h in Headers */ = {isa = PBXBuildFile; fileRef = 40B47B9FDBAB886F108C536FF7BBEF2E /* SocketIOTransportXHR.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		F6F22B2E26DCC4B5548FBD4708320743 /* CocoaLumberjack.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B302B7E73F5E8242A1253DF32593CCA /* CocoaLumberjack.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		F704B367DCE84AF673F5293BE1294557 /* socket.IO-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2162B82D8C99B8513610F2FB98DF369E /* socket.IO-dummy.m */; };
+		FA646634BBD8223C695F082C0D9FC097 /* DDOSLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 46238031C4C39645AE52BB84DA47B8E9 /* DDOSLogger.m */; };
+		FEB391F745C6EA5804EEA14B307D3F3B /* SocketRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 36FDE9E8C91A62FFF6368D8074DE414A /* SocketRocket.h */; settings = {ATTRIBUTES = (Project, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		11CE2AF326503B52E2339B3BF15DD93A /* PBXContainerItemProxy */ = {
+		10C9E23B058CB9CCAB56B8E7DF372C25 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = C0DD6B67CAC96985ADC078BBDC208107;
+			remoteGlobalIDString = 1948D0B63D2CF6A48E18B0B292BC6091;
 			remoteInfo = SocketRocket;
 		};
-		49C378BD47FA4754DFF7C63EE824EB30 /* PBXContainerItemProxy */ = {
+		17BE98661635AED27F5BD31BC5EA70BF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = A981997B8B9615DDDBFD0C3448A04B3E;
+			remoteGlobalIDString = 1948D0B63D2CF6A48E18B0B292BC6091;
+			remoteInfo = SocketRocket;
+		};
+		2B4F997A68A0B6A1A0E132654E1D10AD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E95654B155D25890BE8E26081FCA8265;
+			remoteInfo = CocoaLumberjack;
+		};
+		AFF0A4892F944E7F543F1910B7A5AF9D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CCE0F64E83CEAFEE20D04DC7BD57303E;
 			remoteInfo = MASPreferences;
 		};
-		799A24781E740225A846D2A4B5C575D5 /* PBXContainerItemProxy */ = {
+		BE433CC59D961645A52E9E76808C20D7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D9F38DEF258831D74FFB8BFD4D2686AD;
-			remoteInfo = SAMKeychain;
+			remoteGlobalIDString = D0487ECA637D2DA787A22AF8E15C1FC5;
+			remoteInfo = "Pods-mac BitcoinApp";
 		};
-		813D52AD9A638551F48EBD476C00C054 /* PBXContainerItemProxy */ = {
+		CB397EF97868239A1DAF342DDE2BBF08 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = C0DD6B67CAC96985ADC078BBDC208107;
-			remoteInfo = SocketRocket;
-		};
-		E91A2AD81463EB110717E27E4ABEF4B4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3E1804FFF2D90CCDF0EBB40B2F4C2C03;
+			remoteGlobalIDString = CEF41AAA0CAD612151ECA505B1C6572C;
 			remoteInfo = socket.IO;
 		};
-		F18ED0601FB033B21F6D36AFD99F66D0 /* PBXContainerItemProxy */ = {
+		DBA8E24B7D05E75EAE01313C65EA5ABE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 160822FD4D40AF503A4F916DF2130AB9;
-			remoteInfo = CocoaLumberjack;
+			remoteGlobalIDString = 287D193BE033D81AD04BEFAD0D66043E;
+			remoteInfo = "Pods-iOS BitcoinApp";
+		};
+		F761556192EF8CE7E2C1BCFB5185D32D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5572D14DECB5A676C1B31B30A3BA7F10;
+			remoteInfo = SAMKeychain;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		036A5C2863D624BE53337A0DD521A806 /* libPods-iOS BitcoinAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOS BitcoinAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		03AD1DC465A64EFF330D95D2DB92DBAE /* DDASLLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogger.m; path = Classes/DDASLLogger.m; sourceTree = "<group>"; };
-		09038212BED5287410932049A9A9BA7D /* SAMKeychain.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = SAMKeychain.bundle; path = Support/SAMKeychain.bundle; sourceTree = "<group>"; };
-		0ABFF27C9F031D6CF5FD88D3E12058EE /* DDContextFilterLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDContextFilterLogFormatter.m; path = Classes/Extensions/DDContextFilterLogFormatter.m; sourceTree = "<group>"; };
-		0F74DBE92D1698A70C8F588650D23A5E /* CocoaLumberjack.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CocoaLumberjack.xcconfig; sourceTree = "<group>"; };
-		19F3DBEBD6091EE4F9720495AE87892A /* libPods-mac BitcoinApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mac BitcoinApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1C465085BA633D7255E6EB9697C0631B /* Pods-mac BitcoinApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-mac BitcoinApp.debug.xcconfig"; sourceTree = "<group>"; };
-		2135033683DCD24110940E087037B60B /* SRWebSocket.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SRWebSocket.m; path = SocketRocket/SRWebSocket.m; sourceTree = "<group>"; };
-		22B3F135B9F1E8DFE423EA8AE245621C /* SocketRocket.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SocketRocket.xcconfig; sourceTree = "<group>"; };
-		231159F52FD87D32D0F06AD075AD9FC6 /* libCocoaLumberjack.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCocoaLumberjack.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		244B6F62097721B870495F6BB5C674AF /* Pods-mac BitcoinAppTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-mac BitcoinAppTests-dummy.m"; sourceTree = "<group>"; };
-		2727084A46B9C3FC3719094A6117B607 /* SocketIOTransport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SocketIOTransport.h; sourceTree = "<group>"; };
-		28251666F21DD68B2EA00F19E7506D70 /* SRWebSocket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SRWebSocket.h; path = SocketRocket/SRWebSocket.h; sourceTree = "<group>"; };
-		2903D95F0261BA382D686F69D37DD78B /* libPods-mac BitcoinAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mac BitcoinAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2C1A02D7755C61D3BD3BBF36E1634C69 /* DDDispatchQueueLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDDispatchQueueLogFormatter.m; path = Classes/Extensions/DDDispatchQueueLogFormatter.m; sourceTree = "<group>"; };
-		2FADEDBE58CBD96281B9AE45ACF40A31 /* Pods-iOS BitcoinAppTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-iOS BitcoinAppTests-dummy.m"; sourceTree = "<group>"; };
-		32A244A13E6D5BC17056349B49712E5A /* Pods-mac BitcoinAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-mac BitcoinAppTests.debug.xcconfig"; sourceTree = "<group>"; };
-		367E5D11F9E398FBB8CA0AC63588F196 /* DDLogMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLogMacros.h; path = Classes/DDLogMacros.h; sourceTree = "<group>"; };
-		379531FA7303648116EBFC6C47F1A217 /* Pods-mac BitcoinApp-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-mac BitcoinApp-acknowledgements.markdown"; sourceTree = "<group>"; };
-		38C5557BF23512EAA9AF4196CB8242B0 /* SocketIOJSONSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SocketIOJSONSerialization.h; sourceTree = "<group>"; };
-		3B12220EAAE24958E21E6B64F3DA79F4 /* CocoaLumberjack-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CocoaLumberjack-prefix.pch"; sourceTree = "<group>"; };
-		3B7253B1E1D16A99540A5FA0FAA8404F /* DDASLLogCapture.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogCapture.h; path = Classes/DDASLLogCapture.h; sourceTree = "<group>"; };
-		3EDFBFC0C7F2CC9692DF631F0683805D /* Pods-iOS BitcoinAppTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-iOS BitcoinAppTests-frameworks.sh"; sourceTree = "<group>"; };
-		40DA5DBF49A834BA3F639B7110C34125 /* CocoaLumberjack-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CocoaLumberjack-dummy.m"; sourceTree = "<group>"; };
-		43F55D1D2D7C4F42FCC250DABE3BFB9C /* Pods-mac BitcoinAppTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-mac BitcoinAppTests-resources.sh"; sourceTree = "<group>"; };
-		449BCBE67E079B9B6F97D5828AF5C9E8 /* Pods-iOS BitcoinApp-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-iOS BitcoinApp-acknowledgements.plist"; sourceTree = "<group>"; };
-		46914C41B7D9C5DA5C4EA28CE50C6439 /* Pods-mac BitcoinAppTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-mac BitcoinAppTests-frameworks.sh"; sourceTree = "<group>"; };
-		47F7ABFDF5867587C5817A85709807E7 /* SocketRocket-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SocketRocket-dummy.m"; sourceTree = "<group>"; };
-		4BFC0714D2EEEE35F185B08F4BD1E777 /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDAbstractDatabaseLogger.m; path = Classes/DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
-		4C3C992237DA29F4DA6A0B44D165496F /* SocketRocket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SocketRocket.h; path = SocketRocket/SocketRocket.h; sourceTree = "<group>"; };
-		4FE50C0A693C6CD1096BFE92BC0CC491 /* DDLog+LOGV.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "DDLog+LOGV.h"; path = "Classes/DDLog+LOGV.h"; sourceTree = "<group>"; };
-		500C5529B9DBEF9C45F2F7FB302A4A1E /* MASPreferencesViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASPreferencesViewController.h; path = Framework/MASPreferencesViewController.h; sourceTree = "<group>"; };
-		54FF65743858DF33DDAC331C8C46052D /* Pods-mac BitcoinAppTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-mac BitcoinAppTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		570C6DDD21F2B3829E56199546C63952 /* SocketIOTransportWebsocket.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SocketIOTransportWebsocket.m; sourceTree = "<group>"; };
-		58E8F3FE633F3EDE0B54A8B367839B30 /* MASPreferencesWindowController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASPreferencesWindowController.h; path = Framework/MASPreferencesWindowController.h; sourceTree = "<group>"; };
-		5AD1E78B34474DB415E1AEDFB4D2F10C /* libSocketRocket.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSocketRocket.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		63DDCF41F5D5AD8E7D0D22BB5C19AC74 /* DDFileLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDFileLogger.m; path = Classes/DDFileLogger.m; sourceTree = "<group>"; };
-		642E802F1692BE294ED6BE15FFD9647E /* SocketIOTransportXHR.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SocketIOTransportXHR.m; sourceTree = "<group>"; };
-		6745561D8D6089001D5749F33689CD7F /* Pods-iOS BitcoinApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-iOS BitcoinApp.release.xcconfig"; sourceTree = "<group>"; };
-		68040AB24B9A0B29B5F7D89C667791F5 /* SocketIOTransportWebsocket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SocketIOTransportWebsocket.h; sourceTree = "<group>"; };
-		6F07BE06CB928451D59AF52015916FD3 /* DDDispatchQueueLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDDispatchQueueLogFormatter.h; path = Classes/Extensions/DDDispatchQueueLogFormatter.h; sourceTree = "<group>"; };
-		77FA79A383F531811F82DC00F5599646 /* DDMultiFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDMultiFormatter.h; path = Classes/Extensions/DDMultiFormatter.h; sourceTree = "<group>"; };
-		78D448E23E7358F6F6CCA1A435B00B0F /* DDTTYLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDTTYLogger.m; path = Classes/DDTTYLogger.m; sourceTree = "<group>"; };
-		7ADA913BB5192517857752ADBBAB87AB /* SAMKeychain.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SAMKeychain.m; path = Sources/SAMKeychain.m; sourceTree = "<group>"; };
-		7C6D413BD72E188E57ACBC6076C7081F /* DDLog.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLog.h; path = Classes/DDLog.h; sourceTree = "<group>"; };
-		7F3353A8A5F111D1D7DC0F4A26C4AD56 /* socket.IO-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "socket.IO-dummy.m"; sourceTree = "<group>"; };
-		8233657DE42D1C84F5D62897203A6135 /* SAMKeychain-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SAMKeychain-prefix.pch"; sourceTree = "<group>"; };
-		834D03902442EA32CE6EC119676E8D3E /* Pods-iOS BitcoinAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-iOS BitcoinAppTests.debug.xcconfig"; sourceTree = "<group>"; };
-		870D807B3AF0BD809348B1DD6A11C1F8 /* SAMKeychain-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SAMKeychain-dummy.m"; sourceTree = "<group>"; };
-		8BC58A079D00BDB089C59F041C98F521 /* DDASLLogCapture.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogCapture.m; path = Classes/DDASLLogCapture.m; sourceTree = "<group>"; };
-		8E9D72F6EBA946A412F18899D50EB483 /* DDFileLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDFileLogger.h; path = Classes/DDFileLogger.h; sourceTree = "<group>"; };
-		8F8CD57497889D09F685699522D43038 /* Pods-mac BitcoinApp-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-mac BitcoinApp-resources.sh"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		960063106BCD90782C2790D8F28E9CDB /* DDContextFilterLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDContextFilterLogFormatter.h; path = Classes/Extensions/DDContextFilterLogFormatter.h; sourceTree = "<group>"; };
-		97330B070A5FB6CB3DA42A337174357F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
-		984F5FBB2BEF8CCA0D4E042E216B0DA4 /* Pods-mac BitcoinApp-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-mac BitcoinApp-acknowledgements.plist"; sourceTree = "<group>"; };
-		98626F3F02AC911E350F7967544919F9 /* Pods-iOS BitcoinAppTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-iOS BitcoinAppTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		98B2CD57923C8F065F8CF231D4CC7554 /* socket.IO-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "socket.IO-prefix.pch"; sourceTree = "<group>"; };
-		9D2B9F6378C9D58B98777BC523511F41 /* SocketIO.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SocketIO.m; sourceTree = "<group>"; };
-		9D86BBD711F6A1735045830EACBA2D54 /* Pods-mac BitcoinApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-mac BitcoinApp.release.xcconfig"; sourceTree = "<group>"; };
-		9E72C7FFE57E4E5CE929FA173A0BF196 /* SocketRocket-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SocketRocket-prefix.pch"; sourceTree = "<group>"; };
-		9FC7CFB87861FB0AAE86120997C035D5 /* SocketIOJSONSerialization.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SocketIOJSONSerialization.m; sourceTree = "<group>"; };
-		A246C49A8D25BBB9C0422CB73DADDD48 /* Pods-iOS BitcoinAppTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-iOS BitcoinAppTests-resources.sh"; sourceTree = "<group>"; };
-		A3390AE5490690E601BA7D470CE68ECA /* MASPreferencesWindow.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = MASPreferencesWindow.xib; path = en.lproj/MASPreferencesWindow.xib; sourceTree = "<group>"; };
-		A6658C1AE3F3FE12DE400C79133965FE /* CocoaLumberjack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CocoaLumberjack.h; path = Classes/CocoaLumberjack.h; sourceTree = "<group>"; };
-		A8172EF764806CCC01CB5F97B6BC0182 /* DDLegacyMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLegacyMacros.h; path = Classes/DDLegacyMacros.h; sourceTree = "<group>"; };
-		A8B65BC86CF6760B906253E16ED59D7D /* DDAssertMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAssertMacros.h; path = Classes/DDAssertMacros.h; sourceTree = "<group>"; };
-		A9C5414E783C52EF48A325EA8DF6D78E /* Pods-iOS BitcoinAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-iOS BitcoinAppTests.release.xcconfig"; sourceTree = "<group>"; };
-		AD7661F55530E824DE14C7C630C529E5 /* DDOSLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDOSLogger.h; path = Classes/DDOSLogger.h; sourceTree = "<group>"; };
-		AE1FE5AA36F4ED0E7EAC946144327288 /* libsocket.IO.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libsocket.IO.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		AE56B7A7D07A1D7FEA04C8ED5FAA24B7 /* SocketIOPacket.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SocketIOPacket.m; sourceTree = "<group>"; };
-		B57B852789678B7F3ACB0417E8D9E6F6 /* DDTTYLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDTTYLogger.h; path = Classes/DDTTYLogger.h; sourceTree = "<group>"; };
-		B6296DAF130EFFB6CB9BA4D542B73FF8 /* libMASPreferences.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMASPreferences.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		B7AB0BA0C7CAA71D78A5A524AE781DB4 /* Pods-iOS BitcoinApp-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-iOS BitcoinApp-frameworks.sh"; sourceTree = "<group>"; };
-		B827F1FBA3C50514F2DF72F1B72C0868 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAbstractDatabaseLogger.h; path = Classes/DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
-		B93F3F60A5A00E8ECC7985FBA512238C /* SAMKeychain.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SAMKeychain.h; path = Sources/SAMKeychain.h; sourceTree = "<group>"; };
-		BAEA25AB7EAED3A45F0C8483DE4632D1 /* SAMKeychainQuery.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SAMKeychainQuery.m; path = Sources/SAMKeychainQuery.m; sourceTree = "<group>"; };
-		BCC5BEE90767CAD419033BE3D28F140D /* SocketIOPacket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SocketIOPacket.h; sourceTree = "<group>"; };
-		BD2495DD80D9AE8E025075A1384C3203 /* Pods-iOS BitcoinApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-iOS BitcoinApp.debug.xcconfig"; sourceTree = "<group>"; };
-		BE7838D3E09BA3431A733B1A86BA2548 /* MASPreferences-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MASPreferences-dummy.m"; sourceTree = "<group>"; };
-		BFF6A2A36F800B1F5C5DD288511BA851 /* MASPreferences.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MASPreferences.xcconfig; sourceTree = "<group>"; };
-		C1BAEF7A7598ED48540FAD4C7020A435 /* SocketIO.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SocketIO.h; sourceTree = "<group>"; };
-		C2D1A41D26D8084EFDCFDFDF75BE5A70 /* SAMKeychainQuery.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SAMKeychainQuery.h; path = Sources/SAMKeychainQuery.h; sourceTree = "<group>"; };
-		C4C959FEEA7D46885A4FD1337D980FC2 /* Pods-mac BitcoinAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-mac BitcoinAppTests.release.xcconfig"; sourceTree = "<group>"; };
-		C6395302A8F9C333E6C0910302DEC683 /* Pods-iOS BitcoinApp-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-iOS BitcoinApp-acknowledgements.markdown"; sourceTree = "<group>"; };
-		CBBDE6841AEDAC6BBB0F2870B6638056 /* MASPreferences.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASPreferences.h; path = Framework/MASPreferences.h; sourceTree = "<group>"; };
-		CEF46C128BC9000C620020CAF92ECEE6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		CF3F9E97D58113C537A205542D26F42D /* Pods-iOS BitcoinApp-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-iOS BitcoinApp-dummy.m"; sourceTree = "<group>"; };
-		D17338975EB9A39653C9CD8E2B7F7486 /* DDLog.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDLog.m; path = Classes/DDLog.m; sourceTree = "<group>"; };
-		D17EAE3F479FF05C9ED106B94BAEE449 /* Pods-iOS BitcoinAppTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-iOS BitcoinAppTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		D7374949966FF8EA83AAF2E49E39E163 /* DDASLLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogger.h; path = Classes/DDASLLogger.h; sourceTree = "<group>"; };
-		D81CE5E5B2A9C542E1EBF53673BC126F /* Pods-mac BitcoinApp-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-mac BitcoinApp-frameworks.sh"; sourceTree = "<group>"; };
-		DEFFFFC2B63B2D3932D59A756A17F380 /* SAMKeychain.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SAMKeychain.xcconfig; sourceTree = "<group>"; };
-		DFFD800952B4B16893BE2F27C7C8227A /* libPods-iOS BitcoinApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOS BitcoinApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E44925118612EA84CB0F27C1534C11DD /* DDOSLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDOSLogger.m; path = Classes/DDOSLogger.m; sourceTree = "<group>"; };
-		E534093E48F1D4CE93A8258F0F47F244 /* SocketIOTransportXHR.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SocketIOTransportXHR.h; sourceTree = "<group>"; };
-		E6D5B0DE7028DF318F005F79E6BF36B5 /* libSAMKeychain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSAMKeychain.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		F05A228EC6CC845521DFC4F14E8FA6BF /* Pods-mac BitcoinApp-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-mac BitcoinApp-dummy.m"; sourceTree = "<group>"; };
-		F0F0F5413FE601AF6638DBA9BE0256B1 /* Pods-mac BitcoinAppTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-mac BitcoinAppTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		F9A103593AC1C2785DAF8252AFEAC4CF /* Pods-iOS BitcoinApp-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-iOS BitcoinApp-resources.sh"; sourceTree = "<group>"; };
-		FAD68B1DF8BCD92EE0EDA8EFB6FF2FCE /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/CoreServices.framework; sourceTree = DEVELOPER_DIR; };
-		FD67D19E5BBC5BE6717BC58EBCBC048B /* DDMultiFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDMultiFormatter.m; path = Classes/Extensions/DDMultiFormatter.m; sourceTree = "<group>"; };
-		FD780FAE17A79C9B6AAEFD14822ABB6C /* socket.IO.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = socket.IO.xcconfig; sourceTree = "<group>"; };
-		FD87346A9F8E0EBDCC7BA4432B3AD3D5 /* MASPreferencesWindowController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASPreferencesWindowController.m; path = Framework/MASPreferencesWindowController.m; sourceTree = "<group>"; };
-		FDB5CA5591B55A0400CDC9C640E9E8AD /* MASPreferences-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MASPreferences-prefix.pch"; sourceTree = "<group>"; };
+		02E335AD08E0401A732AE0CBB9784BC9 /* DDLog.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDLog.m; path = Sources/CocoaLumberjack/DDLog.m; sourceTree = "<group>"; };
+		05C3F3F1594FCE85B7ECB9081AC6F30A /* MASPreferences-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MASPreferences-prefix.pch"; sourceTree = "<group>"; };
+		0605C453121C81CDA2DA3C718124FAD2 /* Pods-iOS BitcoinApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-iOS BitcoinApp.release.xcconfig"; sourceTree = "<group>"; };
+		08D5D1DD0399FE80E5EC8D3A43943DF7 /* DDLoggerNames.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDLoggerNames.m; path = Sources/CocoaLumberjack/DDLoggerNames.m; sourceTree = "<group>"; };
+		09857C26DCA38A57D1C3899798C05270 /* Pods-iOS BitcoinAppTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-iOS BitcoinAppTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		0B1E6A6B555A26BD8DD307B0F6214FED /* socket.IO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = socket.IO.release.xcconfig; sourceTree = "<group>"; };
+		0CDBB4DDB1E34934CA26E80A1DBCBA1E /* DDLogMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLogMacros.h; path = Sources/CocoaLumberjack/include/CocoaLumberjack/DDLogMacros.h; sourceTree = "<group>"; };
+		1411B384602317761BC5A1FE61DEDBC6 /* SAMKeychainQuery.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SAMKeychainQuery.h; path = Sources/SAMKeychainQuery.h; sourceTree = "<group>"; };
+		1AC9029D206751130945A5096F9CC257 /* MASPreferences.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MASPreferences.debug.xcconfig; sourceTree = "<group>"; };
+		1B923CF3BDE34A3F2DB400E123EB9212 /* SocketIOTransportXHR.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SocketIOTransportXHR.m; sourceTree = "<group>"; };
+		1B98E0A6FEE457774E6D6B7FA0434FC6 /* DDASLLogCapture.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogCapture.m; path = Sources/CocoaLumberjack/DDASLLogCapture.m; sourceTree = "<group>"; };
+		1BEC9D9574E25BC56F3AFA89C362F902 /* DDTTYLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDTTYLogger.h; path = Sources/CocoaLumberjack/include/CocoaLumberjack/DDTTYLogger.h; sourceTree = "<group>"; };
+		1BFFB88618192489B3718F066645F8B1 /* MASPreferences.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MASPreferences.release.xcconfig; sourceTree = "<group>"; };
+		1C076001A25718D603E3E92585253664 /* Pods-mac BitcoinAppTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-mac BitcoinAppTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		2008ACEDF60BE09E50950F5557BB670E /* Pods-mac BitcoinAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-mac BitcoinAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		20764FB842384B889880915F20133D5C /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAbstractDatabaseLogger.h; path = Sources/CocoaLumberjack/include/CocoaLumberjack/DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
+		2162B82D8C99B8513610F2FB98DF369E /* socket.IO-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "socket.IO-dummy.m"; sourceTree = "<group>"; };
+		218EE5F7648D841B58BD1749FBB13FBB /* socket.IO-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "socket.IO-prefix.pch"; sourceTree = "<group>"; };
+		2302D5F9EE32EFF6B3A06CF1D32EA26C /* Pods-iOS BitcoinApp-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-iOS BitcoinApp-acknowledgements.plist"; sourceTree = "<group>"; };
+		2CFF4FF78F856ACF1662CBEE1B38AF9A /* DDFileLogger+Buffering.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "DDFileLogger+Buffering.h"; path = "Sources/CocoaLumberjack/include/CocoaLumberjack/DDFileLogger+Buffering.h"; sourceTree = "<group>"; };
+		2E824784034764D7DFCBC16D1697AF1A /* DDDispatchQueueLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDDispatchQueueLogFormatter.h; path = Sources/CocoaLumberjack/include/CocoaLumberjack/DDDispatchQueueLogFormatter.h; sourceTree = "<group>"; };
+		3178D68241309F12B6263B08797C855E /* Pods-mac BitcoinAppTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-mac BitcoinAppTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		34A5D5C5EC5DFC9C472B873754015A8F /* SocketIO.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SocketIO.h; sourceTree = "<group>"; };
+		34E8011E516DC42BFC877CA296052FAE /* Pods-mac BitcoinAppTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-mac BitcoinAppTests-dummy.m"; sourceTree = "<group>"; };
+		3665972FF8DA17DE40397F98B626C6EC /* libsocket.IO.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libsocket.IO.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		36FDE9E8C91A62FFF6368D8074DE414A /* SocketRocket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SocketRocket.h; path = SocketRocket/SocketRocket.h; sourceTree = "<group>"; };
+		37A559BD8489EF58B5620F5185026D4A /* SAMKeychain.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SAMKeychain.h; path = Sources/SAMKeychain.h; sourceTree = "<group>"; };
+		37EA1C021457EA7133C8F50F37266A07 /* Pods-iOS BitcoinAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-iOS BitcoinAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		38F1AB8D7330120A131F0D26584A80F5 /* Pods-mac BitcoinApp-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-mac BitcoinApp-acknowledgements.markdown"; sourceTree = "<group>"; };
+		3A81BBE5C96E8B563398077F7DB1DE1B /* Pods-iOS BitcoinAppTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-iOS BitcoinAppTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		3ACAA384106E87A20D010C3AD6C6FE39 /* SocketRocket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SocketRocket.release.xcconfig; sourceTree = "<group>"; };
+		40B47B9FDBAB886F108C536FF7BBEF2E /* SocketIOTransportXHR.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SocketIOTransportXHR.h; sourceTree = "<group>"; };
+		4277B1F48F58838982E9A36A53DC150B /* MASPreferencesWindowController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASPreferencesWindowController.h; path = Framework/MASPreferencesWindowController.h; sourceTree = "<group>"; };
+		43F9966E7614888A0CDCFAB2F62F2FDD /* libMASPreferences.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMASPreferences.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4550521C7605283F0FDA6C25389777D7 /* SRWebSocket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SRWebSocket.h; path = SocketRocket/SRWebSocket.h; sourceTree = "<group>"; };
+		46238031C4C39645AE52BB84DA47B8E9 /* DDOSLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDOSLogger.m; path = Sources/CocoaLumberjack/DDOSLogger.m; sourceTree = "<group>"; };
+		48DF5E4AAA5678B9E5F9E7BA24DE7092 /* DDLoggerNames.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLoggerNames.h; path = Sources/CocoaLumberjack/include/CocoaLumberjack/DDLoggerNames.h; sourceTree = "<group>"; };
+		4B302B7E73F5E8242A1253DF32593CCA /* CocoaLumberjack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CocoaLumberjack.h; path = "Sources/CocoaLumberjack/Supporting Files/CocoaLumberjack.h"; sourceTree = "<group>"; };
+		4C48B7978C7B541720471373AE0C658A /* DDLog+LOGV.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "DDLog+LOGV.h"; path = "Sources/CocoaLumberjack/include/CocoaLumberjack/DDLog+LOGV.h"; sourceTree = "<group>"; };
+		4E531CA524D279103D52A52CE0372FFE /* SocketIO.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SocketIO.m; sourceTree = "<group>"; };
+		4F9F27C56676B023572BEE147B8E0596 /* MASPreferences-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MASPreferences-dummy.m"; sourceTree = "<group>"; };
+		518CF3162CBB51A6C63B8E2FBB023A97 /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDAbstractDatabaseLogger.m; path = Sources/CocoaLumberjack/DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
+		5BA3CC144BC8E963900E4F6D0B7D1D86 /* SocketIOTransportWebsocket.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SocketIOTransportWebsocket.m; sourceTree = "<group>"; };
+		60164D962537FBA5600655A79BD30FAF /* Pods-mac BitcoinApp-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-mac BitcoinApp-acknowledgements.plist"; sourceTree = "<group>"; };
+		612028EAFF1C2054A0EB821A9C9F2440 /* libSAMKeychain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSAMKeychain.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		643E31373A22EB4A4775F7277542C065 /* libPods-mac BitcoinApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mac BitcoinApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		64829B036B69EF524B5EA10FD34971C1 /* DDLegacyMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLegacyMacros.h; path = "Sources/CocoaLumberjack/Supporting Files/DDLegacyMacros.h"; sourceTree = "<group>"; };
+		6668069B62FB220FB0ED7690F0C340E2 /* SocketIOPacket.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SocketIOPacket.m; sourceTree = "<group>"; };
+		674465B145B9FFFBD7D2587F47BC81A0 /* libPods-mac BitcoinAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mac BitcoinAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		674482D51CB85C68B178965B7EC40CE1 /* DDFileLogger+Internal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "DDFileLogger+Internal.h"; path = "Sources/CocoaLumberjack/DDFileLogger+Internal.h"; sourceTree = "<group>"; };
+		69BA0AECA53151F843BD03B48A1AD517 /* MASPreferencesWindowController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASPreferencesWindowController.m; path = Framework/MASPreferencesWindowController.m; sourceTree = "<group>"; };
+		6AB983893CCF8719E006BA6C0E62D581 /* DDMultiFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDMultiFormatter.m; path = Sources/CocoaLumberjack/Extensions/DDMultiFormatter.m; sourceTree = "<group>"; };
+		6DCA4BD5E18A2BAD894AB8C5ECD1FFBC /* Pods-iOS BitcoinApp-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-iOS BitcoinApp-acknowledgements.markdown"; sourceTree = "<group>"; };
+		6ECC53DFAA3957CCD3DC2CCE27567711 /* SRWebSocket.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SRWebSocket.m; path = SocketRocket/SRWebSocket.m; sourceTree = "<group>"; };
+		6F26E78444D3B0C98B9EC6C2E3E715C6 /* DDOSLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDOSLogger.h; path = Sources/CocoaLumberjack/include/CocoaLumberjack/DDOSLogger.h; sourceTree = "<group>"; };
+		71CE1524BFCDE65E2F134047964DE6C7 /* SAMKeychain.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SAMKeychain.release.xcconfig; sourceTree = "<group>"; };
+		729039D4765BAF4B12AEEA133E0C52E1 /* DDMultiFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDMultiFormatter.h; path = Sources/CocoaLumberjack/include/CocoaLumberjack/DDMultiFormatter.h; sourceTree = "<group>"; };
+		730547391FF110070CAB19BA5656145D /* Pods-mac BitcoinApp-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-mac BitcoinApp-resources.sh"; sourceTree = "<group>"; };
+		771881554D342E90B09F3BE74CA9231F /* CocoaLumberjack-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CocoaLumberjack-prefix.pch"; sourceTree = "<group>"; };
+		7832B15E265A997DF5FA1219DF4949F5 /* SocketRocket-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SocketRocket-dummy.m"; sourceTree = "<group>"; };
+		791F441011CC17657373579E2D887841 /* SocketRocket-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SocketRocket-prefix.pch"; sourceTree = "<group>"; };
+		79B0D986C9E8E58ACC78E756A1A87533 /* SAMKeychain.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = SAMKeychain.bundle; path = Support/SAMKeychain.bundle; sourceTree = "<group>"; };
+		7B3D494CC7AFC8E90CF060CC1B001D08 /* MASPreferencesViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASPreferencesViewController.h; path = Framework/MASPreferencesViewController.h; sourceTree = "<group>"; };
+		7B531CA11653F08E4761F79A514DA077 /* Pods-mac BitcoinApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-mac BitcoinApp.release.xcconfig"; sourceTree = "<group>"; };
+		7E14B7F44410F9F00FC0B003D3D8C61E /* socket.IO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = socket.IO.debug.xcconfig; sourceTree = "<group>"; };
+		80AE9BAF2A1D75E43E4A1C618737FEA3 /* libPods-iOS BitcoinAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOS BitcoinAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8483551D58141EE18278E6AE21219EA1 /* DDTTYLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDTTYLogger.m; path = Sources/CocoaLumberjack/DDTTYLogger.m; sourceTree = "<group>"; };
+		85A01882ED06DFEA2E0CE78BCDB204A7 /* libSocketRocket.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSocketRocket.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		894E77BBDD816327A51AA94D51D83257 /* CLIColor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CLIColor.m; path = Sources/CocoaLumberjack/CLI/CLIColor.m; sourceTree = "<group>"; };
+		8FE5E443C8F09F9BFE73C67DEDAF3E48 /* Pods-iOS BitcoinApp-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-iOS BitcoinApp-dummy.m"; sourceTree = "<group>"; };
+		91D28C78E43908E3E78E6A0ACFD4AFB9 /* libPods-iOS BitcoinApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOS BitcoinApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95E8ACD6D38A757C33EED1941B4E6050 /* DDFileLogger+Buffering.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "DDFileLogger+Buffering.m"; path = "Sources/CocoaLumberjack/Extensions/DDFileLogger+Buffering.m"; sourceTree = "<group>"; };
+		99D9BF6FAB5FAF0658AFCA45DC73E9B4 /* SocketRocket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SocketRocket.debug.xcconfig; sourceTree = "<group>"; };
+		9AF2C1BC1101562037749225E38C5776 /* Pods-iOS BitcoinApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-iOS BitcoinApp.debug.xcconfig"; sourceTree = "<group>"; };
+		9D4B57559A0AEC952F4A83F614537041 /* DDASLLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogger.m; path = Sources/CocoaLumberjack/DDASLLogger.m; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9F2E0BFDD429105D2DAF27CF152141D2 /* SAMKeychain-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SAMKeychain-dummy.m"; sourceTree = "<group>"; };
+		A5BCD786B6B843250DFEC32420CDCFDE /* SocketIOJSONSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SocketIOJSONSerialization.h; sourceTree = "<group>"; };
+		AFBA06F94980810943A13F135030DCA4 /* CocoaLumberjack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CocoaLumberjack.release.xcconfig; sourceTree = "<group>"; };
+		B0A0042520ED11A58FE9E39A8CEA4510 /* Pods-mac BitcoinApp-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-mac BitcoinApp-dummy.m"; sourceTree = "<group>"; };
+		B1D2FBBEB5173C2071B35364ECB0F404 /* Pods-iOS BitcoinAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-iOS BitcoinAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B62848C267051F5C8F08274A2F225EC0 /* Pods-mac BitcoinApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-mac BitcoinApp.debug.xcconfig"; sourceTree = "<group>"; };
+		B6FC0D5E5EF97AA6298656BA026813C6 /* DDDispatchQueueLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDDispatchQueueLogFormatter.m; path = Sources/CocoaLumberjack/Extensions/DDDispatchQueueLogFormatter.m; sourceTree = "<group>"; };
+		BF2BDC6DE0DCC39E71C5B3AD19E5D55D /* SocketIOPacket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SocketIOPacket.h; sourceTree = "<group>"; };
+		C261436D14052AE3C35F240BCD155CAC /* libCocoaLumberjack.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCocoaLumberjack.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C281607356A47DF9D0F9578CEDE501D3 /* Pods-iOS BitcoinAppTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-iOS BitcoinAppTests-dummy.m"; sourceTree = "<group>"; };
+		C3B1B74F144BD1DE9C32767F9DFEDF9F /* SocketIOTransport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SocketIOTransport.h; sourceTree = "<group>"; };
+		C54927EC31A28C9BC38AE0183C8D1713 /* DDFileLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDFileLogger.h; path = Sources/CocoaLumberjack/include/CocoaLumberjack/DDFileLogger.h; sourceTree = "<group>"; };
+		C9726EF441FF9F641E904C0491D964D8 /* Pods-mac BitcoinAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-mac BitcoinAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C9F790B61D338514CE9C4964AA07C807 /* DDLog.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLog.h; path = Sources/CocoaLumberjack/include/CocoaLumberjack/DDLog.h; sourceTree = "<group>"; };
+		CB40F8DFBDC44CAE95FDBC7E9868BC26 /* CocoaLumberjack-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CocoaLumberjack-dummy.m"; sourceTree = "<group>"; };
+		CBBF501A3F2060C7A7AB597D322EEF08 /* MASPreferences.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASPreferences.h; path = Framework/MASPreferences.h; sourceTree = "<group>"; };
+		CDA3AF5B9CDDAFA16FD612EDBC4F3F9D /* SAMKeychain.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SAMKeychain.m; path = Sources/SAMKeychain.m; sourceTree = "<group>"; };
+		D1DBFD26F1023EC47B769960F72EC10C /* MASPreferencesWindow.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = MASPreferencesWindow.xib; path = en.lproj/MASPreferencesWindow.xib; sourceTree = "<group>"; };
+		D25BB26DEC5D0D4FC6E58AA1F50DE00E /* DDASLLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogger.h; path = Sources/CocoaLumberjack/include/CocoaLumberjack/DDASLLogger.h; sourceTree = "<group>"; };
+		D2AB2FBFB54DDF680BEB137B6E2CCAA6 /* DDAssertMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAssertMacros.h; path = Sources/CocoaLumberjack/include/CocoaLumberjack/DDAssertMacros.h; sourceTree = "<group>"; };
+		D3FC9887F330FBDCD7DF05F76980022D /* DDContextFilterLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDContextFilterLogFormatter.h; path = Sources/CocoaLumberjack/include/CocoaLumberjack/DDContextFilterLogFormatter.h; sourceTree = "<group>"; };
+		D4DA3980D462B06C2D984FBC54857BD0 /* DDFileLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDFileLogger.m; path = Sources/CocoaLumberjack/DDFileLogger.m; sourceTree = "<group>"; };
+		D8D3776DFB29377879D5644021D79F02 /* SocketIOJSONSerialization.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SocketIOJSONSerialization.m; sourceTree = "<group>"; };
+		DF43579B626ABE4E73B3DC9F8958A574 /* SAMKeychain-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SAMKeychain-prefix.pch"; sourceTree = "<group>"; };
+		DF82C5DC9D5B94558408C7EAA1F7196B /* SAMKeychain.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SAMKeychain.debug.xcconfig; sourceTree = "<group>"; };
+		E4380D4861B0B0B2517903F36734EDBD /* DDContextFilterLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDContextFilterLogFormatter.m; path = Sources/CocoaLumberjack/Extensions/DDContextFilterLogFormatter.m; sourceTree = "<group>"; };
+		E492CBE5CB4891F05AAD06D6974B1607 /* SAMKeychainQuery.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SAMKeychainQuery.m; path = Sources/SAMKeychainQuery.m; sourceTree = "<group>"; };
+		EC72AAF25EF29B57239FDABCBF504EE3 /* SocketIOTransportWebsocket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SocketIOTransportWebsocket.h; sourceTree = "<group>"; };
+		F33F1C145D5EC4672D2B9B62C038C746 /* CLIColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLIColor.h; path = Sources/CocoaLumberjack/include/CocoaLumberjack/CLIColor.h; sourceTree = "<group>"; };
+		F449C6CE07DD9AFEC433CB2444988A10 /* DDASLLogCapture.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogCapture.h; path = Sources/CocoaLumberjack/include/CocoaLumberjack/DDASLLogCapture.h; sourceTree = "<group>"; };
+		FD0F8D503CF657CAF84A842F41484548 /* CocoaLumberjack.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CocoaLumberjack.debug.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0A50EEAE9675C259F3C02507A83BE1C1 /* Frameworks */ = {
+		1EE4F79C48C06501BEF1C64F4D8B1BCF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0C2D579217497B0730785F4EB628F380 /* Frameworks */ = {
+		248F24F444E95ED42EAD4D7200E51561 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		19161CDF77F1BFC3DCBF01B5C7DC4E52 /* Frameworks */ = {
+		26458EBFF491D7CD6BE474328070D21B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		21C20B1025F8BAF72878C3F205155111 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3F7171C7CCBAA565CB81593DD5A10655 /* CoreServices.framework in Frameworks */,
-				29DC335087C5354500EF5D8F5B198AD6 /* Security.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3B728CF4E32499FC48143BA3220CBC0F /* Frameworks */ = {
+		6E5FEE7D0D4D71E8BAE2642F018B71A6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C1FB75EE6A1D2A5745C4554E441BC7B5 /* Frameworks */ = {
+		72F35CE53C80A9AC10180BA259E01D0F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C68E8A40D79F1129164A44E0A1627585 /* Frameworks */ = {
+		7FABCB7589E712EC14ACD70C1F1FD16C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CFD48D37103FE1C16F155B4E7058C6DE /* Frameworks */ = {
+		C64259458E3491090D4888B3D231E737 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EB82751217F98E6C6A2ECD514105F7BD /* Frameworks */ = {
+		D7285A0E4DEC160CB38E40974B78B6D3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AF14187361E4D76E85155786303EC0F /* Foundation.framework in Frameworks */,
-				E9C5E7D72E04D7C2C851214863047CAA /* Security.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC5EE6A780E9BF495AC6D4DF1E838FB4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		08A7A10AABB6CECA69913EC05CE3B4A8 /* Pods-mac BitcoinApp */ = {
+		2ACEF7A2B873DE85461AAAB13EF56184 /* SocketRocket */ = {
 			isa = PBXGroup;
 			children = (
-				379531FA7303648116EBFC6C47F1A217 /* Pods-mac BitcoinApp-acknowledgements.markdown */,
-				984F5FBB2BEF8CCA0D4E042E216B0DA4 /* Pods-mac BitcoinApp-acknowledgements.plist */,
-				F05A228EC6CC845521DFC4F14E8FA6BF /* Pods-mac BitcoinApp-dummy.m */,
-				D81CE5E5B2A9C542E1EBF53673BC126F /* Pods-mac BitcoinApp-frameworks.sh */,
-				8F8CD57497889D09F685699522D43038 /* Pods-mac BitcoinApp-resources.sh */,
-				1C465085BA633D7255E6EB9697C0631B /* Pods-mac BitcoinApp.debug.xcconfig */,
-				9D86BBD711F6A1735045830EACBA2D54 /* Pods-mac BitcoinApp.release.xcconfig */,
-			);
-			name = "Pods-mac BitcoinApp";
-			path = "Target Support Files/Pods-mac BitcoinApp";
-			sourceTree = "<group>";
-		};
-		1B7BC5B8FEF4CAA75ADBE4BDC84D4A77 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				2E5E76BD40D837F5B72FF69F9CA73630 /* CocoaLumberjack */,
-				8482FFAD37BFDA300C1E3BCF270A599F /* MASPreferences */,
-				483C0CF8EE40DBF3059A996C15202AD1 /* SAMKeychain */,
-				9AC15CC2EE03B9FD671D02C1C434C836 /* socket.IO */,
-				2E6D95674D4511C424CB201306A11FD5 /* SocketRocket */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		245C48AD3487EA0F47A60513B30DB40E /* Pods-mac BitcoinAppTests */ = {
-			isa = PBXGroup;
-			children = (
-				54FF65743858DF33DDAC331C8C46052D /* Pods-mac BitcoinAppTests-acknowledgements.markdown */,
-				F0F0F5413FE601AF6638DBA9BE0256B1 /* Pods-mac BitcoinAppTests-acknowledgements.plist */,
-				244B6F62097721B870495F6BB5C674AF /* Pods-mac BitcoinAppTests-dummy.m */,
-				46914C41B7D9C5DA5C4EA28CE50C6439 /* Pods-mac BitcoinAppTests-frameworks.sh */,
-				43F55D1D2D7C4F42FCC250DABE3BFB9C /* Pods-mac BitcoinAppTests-resources.sh */,
-				32A244A13E6D5BC17056349B49712E5A /* Pods-mac BitcoinAppTests.debug.xcconfig */,
-				C4C959FEEA7D46885A4FD1337D980FC2 /* Pods-mac BitcoinAppTests.release.xcconfig */,
-			);
-			name = "Pods-mac BitcoinAppTests";
-			path = "Target Support Files/Pods-mac BitcoinAppTests";
-			sourceTree = "<group>";
-		};
-		2B010F5035BDA6AC99158A4BDDFD8E38 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				DEFFFFC2B63B2D3932D59A756A17F380 /* SAMKeychain.xcconfig */,
-				870D807B3AF0BD809348B1DD6A11C1F8 /* SAMKeychain-dummy.m */,
-				8233657DE42D1C84F5D62897203A6135 /* SAMKeychain-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/SAMKeychain";
-			sourceTree = "<group>";
-		};
-		2E5E76BD40D837F5B72FF69F9CA73630 /* CocoaLumberjack */ = {
-			isa = PBXGroup;
-			children = (
-				CC741DEE6FCB1C6F14732757F90951BE /* Default */,
-				7EB3AB4B5EA5EE8773D3240A4AD135E4 /* Extensions */,
-				6E33C62B6736AA770E2E803A11646B6E /* Support Files */,
-			);
-			path = CocoaLumberjack;
-			sourceTree = "<group>";
-		};
-		2E6D95674D4511C424CB201306A11FD5 /* SocketRocket */ = {
-			isa = PBXGroup;
-			children = (
-				4C3C992237DA29F4DA6A0B44D165496F /* SocketRocket.h */,
-				28251666F21DD68B2EA00F19E7506D70 /* SRWebSocket.h */,
-				2135033683DCD24110940E087037B60B /* SRWebSocket.m */,
-				88AD4D0B125E10EEFFD7AF75266F3BBD /* Support Files */,
+				36FDE9E8C91A62FFF6368D8074DE414A /* SocketRocket.h */,
+				4550521C7605283F0FDA6C25389777D7 /* SRWebSocket.h */,
+				6ECC53DFAA3957CCD3DC2CCE27567711 /* SRWebSocket.m */,
+				E6FAD512A31DE0BFFB8EE5957104FE7D /* Support Files */,
 			);
 			path = SocketRocket;
 			sourceTree = "<group>";
 		};
-		2E947D8623ACF1DCEC224A9BBA1B6F28 /* Support Files */ = {
+		32051B10DB4EAF4FCF88380D0729F3B4 /* SAMKeychain */ = {
 			isa = PBXGroup;
 			children = (
-				BFF6A2A36F800B1F5C5DD288511BA851 /* MASPreferences.xcconfig */,
-				BE7838D3E09BA3431A733B1A86BA2548 /* MASPreferences-dummy.m */,
-				FDB5CA5591B55A0400CDC9C640E9E8AD /* MASPreferences-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/MASPreferences";
-			sourceTree = "<group>";
-		};
-		483C0CF8EE40DBF3059A996C15202AD1 /* SAMKeychain */ = {
-			isa = PBXGroup;
-			children = (
-				B93F3F60A5A00E8ECC7985FBA512238C /* SAMKeychain.h */,
-				7ADA913BB5192517857752ADBBAB87AB /* SAMKeychain.m */,
-				C2D1A41D26D8084EFDCFDFDF75BE5A70 /* SAMKeychainQuery.h */,
-				BAEA25AB7EAED3A45F0C8483DE4632D1 /* SAMKeychainQuery.m */,
-				9F32F0DE7FD5244ABB360F3F1F369930 /* Resources */,
-				2B010F5035BDA6AC99158A4BDDFD8E38 /* Support Files */,
+				37A559BD8489EF58B5620F5185026D4A /* SAMKeychain.h */,
+				CDA3AF5B9CDDAFA16FD612EDBC4F3F9D /* SAMKeychain.m */,
+				1411B384602317761BC5A1FE61DEDBC6 /* SAMKeychainQuery.h */,
+				E492CBE5CB4891F05AAD06D6974B1607 /* SAMKeychainQuery.m */,
+				B6722EE126337A35F091389997188528 /* Resources */,
+				E81C52E4905A94CD7DAEA2CE26E2FBF6 /* Support Files */,
 			);
 			path = SAMKeychain;
 			sourceTree = "<group>";
 		};
-		60924D60CF3D60B660ED523670D9A522 /* Resources */ = {
+		3A22FF8B30D14F1E3BD51D6B8F9D08E9 /* socket.IO */ = {
 			isa = PBXGroup;
 			children = (
-				EA8D378506830151C5028A2A9F99B006 /* MASPreferencesWindow.xib */,
+				34A5D5C5EC5DFC9C472B873754015A8F /* SocketIO.h */,
+				4E531CA524D279103D52A52CE0372FFE /* SocketIO.m */,
+				A5BCD786B6B843250DFEC32420CDCFDE /* SocketIOJSONSerialization.h */,
+				D8D3776DFB29377879D5644021D79F02 /* SocketIOJSONSerialization.m */,
+				BF2BDC6DE0DCC39E71C5B3AD19E5D55D /* SocketIOPacket.h */,
+				6668069B62FB220FB0ED7690F0C340E2 /* SocketIOPacket.m */,
+				C3B1B74F144BD1DE9C32767F9DFEDF9F /* SocketIOTransport.h */,
+				EC72AAF25EF29B57239FDABCBF504EE3 /* SocketIOTransportWebsocket.h */,
+				5BA3CC144BC8E963900E4F6D0B7D1D86 /* SocketIOTransportWebsocket.m */,
+				40B47B9FDBAB886F108C536FF7BBEF2E /* SocketIOTransportXHR.h */,
+				1B923CF3BDE34A3F2DB400E123EB9212 /* SocketIOTransportXHR.m */,
+				6B11D561824CCDEE58735C13EF2CF5A5 /* Support Files */,
 			);
-			name = Resources;
+			path = socket.IO;
 			sourceTree = "<group>";
 		};
-		6E33C62B6736AA770E2E803A11646B6E /* Support Files */ = {
+		60BAF3AD8213B01D0D4C49919D890775 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				0F74DBE92D1698A70C8F588650D23A5E /* CocoaLumberjack.xcconfig */,
-				40DA5DBF49A834BA3F639B7110C34125 /* CocoaLumberjack-dummy.m */,
-				3B12220EAAE24958E21E6B64F3DA79F4 /* CocoaLumberjack-prefix.pch */,
+				CB40F8DFBDC44CAE95FDBC7E9868BC26 /* CocoaLumberjack-dummy.m */,
+				771881554D342E90B09F3BE74CA9231F /* CocoaLumberjack-prefix.pch */,
+				FD0F8D503CF657CAF84A842F41484548 /* CocoaLumberjack.debug.xcconfig */,
+				AFBA06F94980810943A13F135030DCA4 /* CocoaLumberjack.release.xcconfig */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/CocoaLumberjack";
 			sourceTree = "<group>";
 		};
-		714F93CF4748A890BECA9FF869159E27 /* Pods-iOS BitcoinApp */ = {
+		6B11D561824CCDEE58735C13EF2CF5A5 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				C6395302A8F9C333E6C0910302DEC683 /* Pods-iOS BitcoinApp-acknowledgements.markdown */,
-				449BCBE67E079B9B6F97D5828AF5C9E8 /* Pods-iOS BitcoinApp-acknowledgements.plist */,
-				CF3F9E97D58113C537A205542D26F42D /* Pods-iOS BitcoinApp-dummy.m */,
-				B7AB0BA0C7CAA71D78A5A524AE781DB4 /* Pods-iOS BitcoinApp-frameworks.sh */,
-				F9A103593AC1C2785DAF8252AFEAC4CF /* Pods-iOS BitcoinApp-resources.sh */,
-				BD2495DD80D9AE8E025075A1384C3203 /* Pods-iOS BitcoinApp.debug.xcconfig */,
-				6745561D8D6089001D5749F33689CD7F /* Pods-iOS BitcoinApp.release.xcconfig */,
-			);
-			name = "Pods-iOS BitcoinApp";
-			path = "Target Support Files/Pods-iOS BitcoinApp";
-			sourceTree = "<group>";
-		};
-		7DB346D0F39D3F0E887471402A8071AB = {
-			isa = PBXGroup;
-			children = (
-				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				96D996393384F21972E2DD81788EE22C /* Frameworks */,
-				1B7BC5B8FEF4CAA75ADBE4BDC84D4A77 /* Pods */,
-				C73AED1D712B8FAA6F338DB259D28B65 /* Products */,
-				D26EBB8E81B1B31F283F6BC7072FCAE5 /* Targets Support Files */,
-			);
-			sourceTree = "<group>";
-		};
-		7E526CCA18EE71AE336A142AC210AEA1 /* Pods-iOS BitcoinAppTests */ = {
-			isa = PBXGroup;
-			children = (
-				D17EAE3F479FF05C9ED106B94BAEE449 /* Pods-iOS BitcoinAppTests-acknowledgements.markdown */,
-				98626F3F02AC911E350F7967544919F9 /* Pods-iOS BitcoinAppTests-acknowledgements.plist */,
-				2FADEDBE58CBD96281B9AE45ACF40A31 /* Pods-iOS BitcoinAppTests-dummy.m */,
-				3EDFBFC0C7F2CC9692DF631F0683805D /* Pods-iOS BitcoinAppTests-frameworks.sh */,
-				A246C49A8D25BBB9C0422CB73DADDD48 /* Pods-iOS BitcoinAppTests-resources.sh */,
-				834D03902442EA32CE6EC119676E8D3E /* Pods-iOS BitcoinAppTests.debug.xcconfig */,
-				A9C5414E783C52EF48A325EA8DF6D78E /* Pods-iOS BitcoinAppTests.release.xcconfig */,
-			);
-			name = "Pods-iOS BitcoinAppTests";
-			path = "Target Support Files/Pods-iOS BitcoinAppTests";
-			sourceTree = "<group>";
-		};
-		7EB3AB4B5EA5EE8773D3240A4AD135E4 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				960063106BCD90782C2790D8F28E9CDB /* DDContextFilterLogFormatter.h */,
-				0ABFF27C9F031D6CF5FD88D3E12058EE /* DDContextFilterLogFormatter.m */,
-				6F07BE06CB928451D59AF52015916FD3 /* DDDispatchQueueLogFormatter.h */,
-				2C1A02D7755C61D3BD3BBF36E1634C69 /* DDDispatchQueueLogFormatter.m */,
-				77FA79A383F531811F82DC00F5599646 /* DDMultiFormatter.h */,
-				FD67D19E5BBC5BE6717BC58EBCBC048B /* DDMultiFormatter.m */,
-			);
-			name = Extensions;
-			sourceTree = "<group>";
-		};
-		8482FFAD37BFDA300C1E3BCF270A599F /* MASPreferences */ = {
-			isa = PBXGroup;
-			children = (
-				CBBDE6841AEDAC6BBB0F2870B6638056 /* MASPreferences.h */,
-				500C5529B9DBEF9C45F2F7FB302A4A1E /* MASPreferencesViewController.h */,
-				58E8F3FE633F3EDE0B54A8B367839B30 /* MASPreferencesWindowController.h */,
-				FD87346A9F8E0EBDCC7BA4432B3AD3D5 /* MASPreferencesWindowController.m */,
-				60924D60CF3D60B660ED523670D9A522 /* Resources */,
-				2E947D8623ACF1DCEC224A9BBA1B6F28 /* Support Files */,
-			);
-			path = MASPreferences;
-			sourceTree = "<group>";
-		};
-		88AD4D0B125E10EEFFD7AF75266F3BBD /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				22B3F135B9F1E8DFE423EA8AE245621C /* SocketRocket.xcconfig */,
-				47F7ABFDF5867587C5817A85709807E7 /* SocketRocket-dummy.m */,
-				9E72C7FFE57E4E5CE929FA173A0BF196 /* SocketRocket-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/SocketRocket";
-			sourceTree = "<group>";
-		};
-		96D996393384F21972E2DD81788EE22C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				F2EE93B0CBB10A8AAC8BC79950142ABC /* OS X */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		9AC15CC2EE03B9FD671D02C1C434C836 /* socket.IO */ = {
-			isa = PBXGroup;
-			children = (
-				C1BAEF7A7598ED48540FAD4C7020A435 /* SocketIO.h */,
-				9D2B9F6378C9D58B98777BC523511F41 /* SocketIO.m */,
-				38C5557BF23512EAA9AF4196CB8242B0 /* SocketIOJSONSerialization.h */,
-				9FC7CFB87861FB0AAE86120997C035D5 /* SocketIOJSONSerialization.m */,
-				BCC5BEE90767CAD419033BE3D28F140D /* SocketIOPacket.h */,
-				AE56B7A7D07A1D7FEA04C8ED5FAA24B7 /* SocketIOPacket.m */,
-				2727084A46B9C3FC3719094A6117B607 /* SocketIOTransport.h */,
-				68040AB24B9A0B29B5F7D89C667791F5 /* SocketIOTransportWebsocket.h */,
-				570C6DDD21F2B3829E56199546C63952 /* SocketIOTransportWebsocket.m */,
-				E534093E48F1D4CE93A8258F0F47F244 /* SocketIOTransportXHR.h */,
-				642E802F1692BE294ED6BE15FFD9647E /* SocketIOTransportXHR.m */,
-				D4BAAADF5B305CC7A3C3B3DB263212B4 /* Support Files */,
-			);
-			path = socket.IO;
-			sourceTree = "<group>";
-		};
-		9F32F0DE7FD5244ABB360F3F1F369930 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				09038212BED5287410932049A9A9BA7D /* SAMKeychain.bundle */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		C73AED1D712B8FAA6F338DB259D28B65 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				231159F52FD87D32D0F06AD075AD9FC6 /* libCocoaLumberjack.a */,
-				B6296DAF130EFFB6CB9BA4D542B73FF8 /* libMASPreferences.a */,
-				DFFD800952B4B16893BE2F27C7C8227A /* libPods-iOS BitcoinApp.a */,
-				036A5C2863D624BE53337A0DD521A806 /* libPods-iOS BitcoinAppTests.a */,
-				19F3DBEBD6091EE4F9720495AE87892A /* libPods-mac BitcoinApp.a */,
-				2903D95F0261BA382D686F69D37DD78B /* libPods-mac BitcoinAppTests.a */,
-				E6D5B0DE7028DF318F005F79E6BF36B5 /* libSAMKeychain.a */,
-				AE1FE5AA36F4ED0E7EAC946144327288 /* libsocket.IO.a */,
-				5AD1E78B34474DB415E1AEDFB4D2F10C /* libSocketRocket.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		CC741DEE6FCB1C6F14732757F90951BE /* Default */ = {
-			isa = PBXGroup;
-			children = (
-				A6658C1AE3F3FE12DE400C79133965FE /* CocoaLumberjack.h */,
-				B827F1FBA3C50514F2DF72F1B72C0868 /* DDAbstractDatabaseLogger.h */,
-				4BFC0714D2EEEE35F185B08F4BD1E777 /* DDAbstractDatabaseLogger.m */,
-				3B7253B1E1D16A99540A5FA0FAA8404F /* DDASLLogCapture.h */,
-				8BC58A079D00BDB089C59F041C98F521 /* DDASLLogCapture.m */,
-				D7374949966FF8EA83AAF2E49E39E163 /* DDASLLogger.h */,
-				03AD1DC465A64EFF330D95D2DB92DBAE /* DDASLLogger.m */,
-				A8B65BC86CF6760B906253E16ED59D7D /* DDAssertMacros.h */,
-				8E9D72F6EBA946A412F18899D50EB483 /* DDFileLogger.h */,
-				63DDCF41F5D5AD8E7D0D22BB5C19AC74 /* DDFileLogger.m */,
-				A8172EF764806CCC01CB5F97B6BC0182 /* DDLegacyMacros.h */,
-				7C6D413BD72E188E57ACBC6076C7081F /* DDLog.h */,
-				D17338975EB9A39653C9CD8E2B7F7486 /* DDLog.m */,
-				4FE50C0A693C6CD1096BFE92BC0CC491 /* DDLog+LOGV.h */,
-				367E5D11F9E398FBB8CA0AC63588F196 /* DDLogMacros.h */,
-				AD7661F55530E824DE14C7C630C529E5 /* DDOSLogger.h */,
-				E44925118612EA84CB0F27C1534C11DD /* DDOSLogger.m */,
-				B57B852789678B7F3ACB0417E8D9E6F6 /* DDTTYLogger.h */,
-				78D448E23E7358F6F6CCA1A435B00B0F /* DDTTYLogger.m */,
-			);
-			name = Default;
-			sourceTree = "<group>";
-		};
-		D26EBB8E81B1B31F283F6BC7072FCAE5 /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				714F93CF4748A890BECA9FF869159E27 /* Pods-iOS BitcoinApp */,
-				7E526CCA18EE71AE336A142AC210AEA1 /* Pods-iOS BitcoinAppTests */,
-				08A7A10AABB6CECA69913EC05CE3B4A8 /* Pods-mac BitcoinApp */,
-				245C48AD3487EA0F47A60513B30DB40E /* Pods-mac BitcoinAppTests */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		D4BAAADF5B305CC7A3C3B3DB263212B4 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				FD780FAE17A79C9B6AAEFD14822ABB6C /* socket.IO.xcconfig */,
-				7F3353A8A5F111D1D7DC0F4A26C4AD56 /* socket.IO-dummy.m */,
-				98B2CD57923C8F065F8CF231D4CC7554 /* socket.IO-prefix.pch */,
+				2162B82D8C99B8513610F2FB98DF369E /* socket.IO-dummy.m */,
+				218EE5F7648D841B58BD1749FBB13FBB /* socket.IO-prefix.pch */,
+				7E14B7F44410F9F00FC0B003D3D8C61E /* socket.IO.debug.xcconfig */,
+				0B1E6A6B555A26BD8DD307B0F6214FED /* socket.IO.release.xcconfig */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/socket.IO";
 			sourceTree = "<group>";
 		};
-		F2EE93B0CBB10A8AAC8BC79950142ABC /* OS X */ = {
+		6CE4DDD05DAD23F52282F82395498A07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				FAD68B1DF8BCD92EE0EDA8EFB6FF2FCE /* CoreServices.framework */,
-				CEF46C128BC9000C620020CAF92ECEE6 /* Foundation.framework */,
-				97330B070A5FB6CB3DA42A337174357F /* Security.framework */,
+				F0B4AF987E3B3D8A1E4723FB5725CB91 /* MASPreferencesWindow.xib */,
 			);
-			name = "OS X";
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		6CF2105EBE34B8805BA1563E1594A0C3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C261436D14052AE3C35F240BCD155CAC /* libCocoaLumberjack.a */,
+				43F9966E7614888A0CDCFAB2F62F2FDD /* libMASPreferences.a */,
+				91D28C78E43908E3E78E6A0ACFD4AFB9 /* libPods-iOS BitcoinApp.a */,
+				80AE9BAF2A1D75E43E4A1C618737FEA3 /* libPods-iOS BitcoinAppTests.a */,
+				643E31373A22EB4A4775F7277542C065 /* libPods-mac BitcoinApp.a */,
+				674465B145B9FFFBD7D2587F47BC81A0 /* libPods-mac BitcoinAppTests.a */,
+				612028EAFF1C2054A0EB821A9C9F2440 /* libSAMKeychain.a */,
+				3665972FF8DA17DE40397F98B626C6EC /* libsocket.IO.a */,
+				85A01882ED06DFEA2E0CE78BCDB204A7 /* libSocketRocket.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		86CA3004E70AAB4042066F9192B00531 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				4F9F27C56676B023572BEE147B8E0596 /* MASPreferences-dummy.m */,
+				05C3F3F1594FCE85B7ECB9081AC6F30A /* MASPreferences-prefix.pch */,
+				1AC9029D206751130945A5096F9CC257 /* MASPreferences.debug.xcconfig */,
+				1BFFB88618192489B3718F066645F8B1 /* MASPreferences.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/MASPreferences";
+			sourceTree = "<group>";
+		};
+		A0A632D66AC7AD9C07A173FED18FAE9A /* MASPreferences */ = {
+			isa = PBXGroup;
+			children = (
+				CBBF501A3F2060C7A7AB597D322EEF08 /* MASPreferences.h */,
+				7B3D494CC7AFC8E90CF060CC1B001D08 /* MASPreferencesViewController.h */,
+				4277B1F48F58838982E9A36A53DC150B /* MASPreferencesWindowController.h */,
+				69BA0AECA53151F843BD03B48A1AD517 /* MASPreferencesWindowController.m */,
+				6CE4DDD05DAD23F52282F82395498A07 /* Resources */,
+				86CA3004E70AAB4042066F9192B00531 /* Support Files */,
+			);
+			path = MASPreferences;
+			sourceTree = "<group>";
+		};
+		AA7CFAF29FB6E2DE8F75D5D9BC4C232C /* Pods-iOS BitcoinApp */ = {
+			isa = PBXGroup;
+			children = (
+				6DCA4BD5E18A2BAD894AB8C5ECD1FFBC /* Pods-iOS BitcoinApp-acknowledgements.markdown */,
+				2302D5F9EE32EFF6B3A06CF1D32EA26C /* Pods-iOS BitcoinApp-acknowledgements.plist */,
+				8FE5E443C8F09F9BFE73C67DEDAF3E48 /* Pods-iOS BitcoinApp-dummy.m */,
+				9AF2C1BC1101562037749225E38C5776 /* Pods-iOS BitcoinApp.debug.xcconfig */,
+				0605C453121C81CDA2DA3C718124FAD2 /* Pods-iOS BitcoinApp.release.xcconfig */,
+			);
+			name = "Pods-iOS BitcoinApp";
+			path = "Target Support Files/Pods-iOS BitcoinApp";
+			sourceTree = "<group>";
+		};
+		B3C8F8895590E31D72863D5D8C6303BD /* CocoaLumberjack */ = {
+			isa = PBXGroup;
+			children = (
+				D2E13AAF2F0EFBDE638A1C5E85579C46 /* Core */,
+				60BAF3AD8213B01D0D4C49919D890775 /* Support Files */,
+			);
+			path = CocoaLumberjack;
+			sourceTree = "<group>";
+		};
+		B6722EE126337A35F091389997188528 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				79B0D986C9E8E58ACC78E756A1A87533 /* SAMKeychain.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		BA701538CCB2207B0DE245E9EA0E432E /* Pods-iOS BitcoinAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				09857C26DCA38A57D1C3899798C05270 /* Pods-iOS BitcoinAppTests-acknowledgements.markdown */,
+				3A81BBE5C96E8B563398077F7DB1DE1B /* Pods-iOS BitcoinAppTests-acknowledgements.plist */,
+				C281607356A47DF9D0F9578CEDE501D3 /* Pods-iOS BitcoinAppTests-dummy.m */,
+				B1D2FBBEB5173C2071B35364ECB0F404 /* Pods-iOS BitcoinAppTests.debug.xcconfig */,
+				37EA1C021457EA7133C8F50F37266A07 /* Pods-iOS BitcoinAppTests.release.xcconfig */,
+			);
+			name = "Pods-iOS BitcoinAppTests";
+			path = "Target Support Files/Pods-iOS BitcoinAppTests";
+			sourceTree = "<group>";
+		};
+		C293A1C1CAD0C81FAD8550EF122DDCFE /* Pods-mac BitcoinApp */ = {
+			isa = PBXGroup;
+			children = (
+				38F1AB8D7330120A131F0D26584A80F5 /* Pods-mac BitcoinApp-acknowledgements.markdown */,
+				60164D962537FBA5600655A79BD30FAF /* Pods-mac BitcoinApp-acknowledgements.plist */,
+				B0A0042520ED11A58FE9E39A8CEA4510 /* Pods-mac BitcoinApp-dummy.m */,
+				730547391FF110070CAB19BA5656145D /* Pods-mac BitcoinApp-resources.sh */,
+				B62848C267051F5C8F08274A2F225EC0 /* Pods-mac BitcoinApp.debug.xcconfig */,
+				7B531CA11653F08E4761F79A514DA077 /* Pods-mac BitcoinApp.release.xcconfig */,
+			);
+			name = "Pods-mac BitcoinApp";
+			path = "Target Support Files/Pods-mac BitcoinApp";
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				D89477F20FB1DE18A04690586D7808C4 /* Frameworks */,
+				E94E1A2D82EE38F40CAB52E7FA5C2ED4 /* Pods */,
+				6CF2105EBE34B8805BA1563E1594A0C3 /* Products */,
+				F121DD1C6E3C66DF60E375818208AC38 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D2E13AAF2F0EFBDE638A1C5E85579C46 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				F33F1C145D5EC4672D2B9B62C038C746 /* CLIColor.h */,
+				894E77BBDD816327A51AA94D51D83257 /* CLIColor.m */,
+				4B302B7E73F5E8242A1253DF32593CCA /* CocoaLumberjack.h */,
+				20764FB842384B889880915F20133D5C /* DDAbstractDatabaseLogger.h */,
+				518CF3162CBB51A6C63B8E2FBB023A97 /* DDAbstractDatabaseLogger.m */,
+				F449C6CE07DD9AFEC433CB2444988A10 /* DDASLLogCapture.h */,
+				1B98E0A6FEE457774E6D6B7FA0434FC6 /* DDASLLogCapture.m */,
+				D25BB26DEC5D0D4FC6E58AA1F50DE00E /* DDASLLogger.h */,
+				9D4B57559A0AEC952F4A83F614537041 /* DDASLLogger.m */,
+				D2AB2FBFB54DDF680BEB137B6E2CCAA6 /* DDAssertMacros.h */,
+				D3FC9887F330FBDCD7DF05F76980022D /* DDContextFilterLogFormatter.h */,
+				E4380D4861B0B0B2517903F36734EDBD /* DDContextFilterLogFormatter.m */,
+				2E824784034764D7DFCBC16D1697AF1A /* DDDispatchQueueLogFormatter.h */,
+				B6FC0D5E5EF97AA6298656BA026813C6 /* DDDispatchQueueLogFormatter.m */,
+				C54927EC31A28C9BC38AE0183C8D1713 /* DDFileLogger.h */,
+				D4DA3980D462B06C2D984FBC54857BD0 /* DDFileLogger.m */,
+				2CFF4FF78F856ACF1662CBEE1B38AF9A /* DDFileLogger+Buffering.h */,
+				95E8ACD6D38A757C33EED1941B4E6050 /* DDFileLogger+Buffering.m */,
+				674482D51CB85C68B178965B7EC40CE1 /* DDFileLogger+Internal.h */,
+				64829B036B69EF524B5EA10FD34971C1 /* DDLegacyMacros.h */,
+				C9F790B61D338514CE9C4964AA07C807 /* DDLog.h */,
+				02E335AD08E0401A732AE0CBB9784BC9 /* DDLog.m */,
+				4C48B7978C7B541720471373AE0C658A /* DDLog+LOGV.h */,
+				48DF5E4AAA5678B9E5F9E7BA24DE7092 /* DDLoggerNames.h */,
+				08D5D1DD0399FE80E5EC8D3A43943DF7 /* DDLoggerNames.m */,
+				0CDBB4DDB1E34934CA26E80A1DBCBA1E /* DDLogMacros.h */,
+				729039D4765BAF4B12AEEA133E0C52E1 /* DDMultiFormatter.h */,
+				6AB983893CCF8719E006BA6C0E62D581 /* DDMultiFormatter.m */,
+				6F26E78444D3B0C98B9EC6C2E3E715C6 /* DDOSLogger.h */,
+				46238031C4C39645AE52BB84DA47B8E9 /* DDOSLogger.m */,
+				1BEC9D9574E25BC56F3AFA89C362F902 /* DDTTYLogger.h */,
+				8483551D58141EE18278E6AE21219EA1 /* DDTTYLogger.m */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		D89477F20FB1DE18A04690586D7808C4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E4EBF082A2433DB6440F3807E2712F4F /* Pods-mac BitcoinAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				1C076001A25718D603E3E92585253664 /* Pods-mac BitcoinAppTests-acknowledgements.markdown */,
+				3178D68241309F12B6263B08797C855E /* Pods-mac BitcoinAppTests-acknowledgements.plist */,
+				34E8011E516DC42BFC877CA296052FAE /* Pods-mac BitcoinAppTests-dummy.m */,
+				C9726EF441FF9F641E904C0491D964D8 /* Pods-mac BitcoinAppTests.debug.xcconfig */,
+				2008ACEDF60BE09E50950F5557BB670E /* Pods-mac BitcoinAppTests.release.xcconfig */,
+			);
+			name = "Pods-mac BitcoinAppTests";
+			path = "Target Support Files/Pods-mac BitcoinAppTests";
+			sourceTree = "<group>";
+		};
+		E6FAD512A31DE0BFFB8EE5957104FE7D /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				7832B15E265A997DF5FA1219DF4949F5 /* SocketRocket-dummy.m */,
+				791F441011CC17657373579E2D887841 /* SocketRocket-prefix.pch */,
+				99D9BF6FAB5FAF0658AFCA45DC73E9B4 /* SocketRocket.debug.xcconfig */,
+				3ACAA384106E87A20D010C3AD6C6FE39 /* SocketRocket.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SocketRocket";
+			sourceTree = "<group>";
+		};
+		E81C52E4905A94CD7DAEA2CE26E2FBF6 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				9F2E0BFDD429105D2DAF27CF152141D2 /* SAMKeychain-dummy.m */,
+				DF43579B626ABE4E73B3DC9F8958A574 /* SAMKeychain-prefix.pch */,
+				DF82C5DC9D5B94558408C7EAA1F7196B /* SAMKeychain.debug.xcconfig */,
+				71CE1524BFCDE65E2F134047964DE6C7 /* SAMKeychain.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SAMKeychain";
+			sourceTree = "<group>";
+		};
+		E94E1A2D82EE38F40CAB52E7FA5C2ED4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B3C8F8895590E31D72863D5D8C6303BD /* CocoaLumberjack */,
+				A0A632D66AC7AD9C07A173FED18FAE9A /* MASPreferences */,
+				32051B10DB4EAF4FCF88380D0729F3B4 /* SAMKeychain */,
+				3A22FF8B30D14F1E3BD51D6B8F9D08E9 /* socket.IO */,
+				2ACEF7A2B873DE85461AAAB13EF56184 /* SocketRocket */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F121DD1C6E3C66DF60E375818208AC38 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				AA7CFAF29FB6E2DE8F75D5D9BC4C232C /* Pods-iOS BitcoinApp */,
+				BA701538CCB2207B0DE245E9EA0E432E /* Pods-iOS BitcoinAppTests */,
+				C293A1C1CAD0C81FAD8550EF122DDCFE /* Pods-mac BitcoinApp */,
+				E4EBF082A2433DB6440F3807E2712F4F /* Pods-mac BitcoinAppTests */,
+			);
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		024ECD7C055F3E6DD5A4D3E37255E720 /* Headers */ = {
+		171B9062E589DA3EE46195278F047A4B /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2B7665607BF249B948B080E4F09F9AC2 /* Headers */ = {
+		1FAF920CF445CF0D883A907CD92F0355 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83558D7AD813A6C2DB97AC1455D475D3 /* MASPreferences.h in Headers */,
+				66B38C9066CB217767FF84C17432B54C /* MASPreferencesViewController.h in Headers */,
+				65082FF60E80D7609D8B7D210EAE1F91 /* MASPreferencesWindowController.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		26C459960C07FDA39F7A2D0301EEA79A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B9682B233856F89812970CDEA1F6FD69 /* SocketIO.h in Headers */,
+				95E9E340892B19F069A443BA0EA1CC02 /* SocketIOJSONSerialization.h in Headers */,
+				A918247F02D264F638BB2CB30F821DAF /* SocketIOPacket.h in Headers */,
+				CB82025DB1C13B1B6F5BEA1CF5379124 /* SocketIOTransport.h in Headers */,
+				AD66D3CBE7769FD9B473E0EB6E2FDD7D /* SocketIOTransportWebsocket.h in Headers */,
+				EFF04060FCB2AD2AC28F75652C29AA0F /* SocketIOTransportXHR.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C98C553E9BE2B9C5C19E807EB88B288 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		36B7E5F463456EA01AE2713451ACCCA8 /* Headers */ = {
+		3A4C3FDAFEDC018951C5188414FBAA6A /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		491758B7CD75C2F1A172E25B929DD185 /* Headers */ = {
+		5F46B5EAF7354D7D83FA4ECD7DDF8B78 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				82570CBB292D4617EBF276BC75573405 /* SAMKeychain.h in Headers */,
-				986BFDF69328F432FAF555637E0A918E /* SAMKeychainQuery.h in Headers */,
+				1BF4D9DCF2C605B882B70DA9ED9C7BE0 /* SAMKeychain.h in Headers */,
+				A02282564A2A10159E47D9AC3798A281 /* SAMKeychainQuery.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6FE16AB1C5BB563A1539FC5D8B7DE644 /* Headers */ = {
+		7C2B82C1EF7366344F549EBE8D05FE8E /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7615750C52BB80F0B34830C574A3448D /* MASPreferences.h in Headers */,
-				5F013D01F60093A3497DA6ADDDE158A1 /* MASPreferencesViewController.h in Headers */,
-				C425F07338F8FD275C8DD63FDEC9FE03 /* MASPreferencesWindowController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		73140CB8BF4169BAA4E2EB7F82B5E8A6 /* Headers */ = {
+		CDD8F5A347E56655240A4ECF86380EE9 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A617A41DA5286CB20D0F0082C4A2A34 /* SocketIO.h in Headers */,
-				D8A5A94E2AACFE4497C85CA0ADDF98AB /* SocketIOJSONSerialization.h in Headers */,
-				8827B0E83E91FA77FEC8ECB30190DF22 /* SocketIOPacket.h in Headers */,
-				BDDA24493BD5047A965E27BD4D8C6A27 /* SocketIOTransport.h in Headers */,
-				36BEAEEEBCDE6125D1D46F4D981778D6 /* SocketIOTransportWebsocket.h in Headers */,
-				B09ABCB44DDA8FD929CF15A5DD7F230F /* SocketIOTransportXHR.h in Headers */,
+				0459023CE081700B826153BCC29DF3F7 /* CLIColor.h in Headers */,
+				F6F22B2E26DCC4B5548FBD4708320743 /* CocoaLumberjack.h in Headers */,
+				20432A86849EAB849D036DEF7B2B3E49 /* DDAbstractDatabaseLogger.h in Headers */,
+				5C651E9F66FA0E47055980A43C55B71D /* DDASLLogCapture.h in Headers */,
+				BC3A006E04AC8E1CDAD5094CC2F60D63 /* DDASLLogger.h in Headers */,
+				27DE60CAD8ED27FD41ACED0825014955 /* DDAssertMacros.h in Headers */,
+				56D7020942EC251D3B0860C02EB26999 /* DDContextFilterLogFormatter.h in Headers */,
+				14BD5053A3FBCBB47D95231706E10B99 /* DDDispatchQueueLogFormatter.h in Headers */,
+				D3D7590F76F57F561E4699B1860597B1 /* DDFileLogger+Buffering.h in Headers */,
+				83B4A685693348CA8E816BAFE320D771 /* DDFileLogger+Internal.h in Headers */,
+				074533502DBEF67B2D680761D79BA23D /* DDFileLogger.h in Headers */,
+				DCBC1C00A77F9171878F562A8CBE7628 /* DDLegacyMacros.h in Headers */,
+				1A7736579A6A134BBFE4E511CE6234B3 /* DDLog+LOGV.h in Headers */,
+				7BDD852D28E2194E90680BE7BF1E4711 /* DDLog.h in Headers */,
+				65F7FE2FC20662719A7E91D0E4A617C3 /* DDLoggerNames.h in Headers */,
+				31037C7013DE77E8FA23C1267F7698E3 /* DDLogMacros.h in Headers */,
+				65C3E00D83B09BA83627BAA6AF3382C8 /* DDMultiFormatter.h in Headers */,
+				83AD9AC86834FC2DEF56B93709F0B5ED /* DDOSLogger.h in Headers */,
+				04182CDABD6165E1088443BBC04E9835 /* DDTTYLogger.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		84EC386F76738274E52E169D7DD6D8B2 /* Headers */ = {
+		F7F969AFE1E6F49E403F082B1C14D1FD /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B806CE6CFFF7BF1D8D782342FAB2CB60 /* CocoaLumberjack.h in Headers */,
-				6F5A2E91E400DF8F153357C7536993E2 /* DDAbstractDatabaseLogger.h in Headers */,
-				00F2C35DDD27875CB06AD99030B5EEEF /* DDASLLogCapture.h in Headers */,
-				FB4E7177C196215C8C02674508D5CBAD /* DDASLLogger.h in Headers */,
-				B8A2F77289E0854C7C4B8DAF3F3341AD /* DDAssertMacros.h in Headers */,
-				63446163908062C111DEB18B597F37A2 /* DDContextFilterLogFormatter.h in Headers */,
-				948E6C14F71C36CAE86B5FB0ED478BBA /* DDDispatchQueueLogFormatter.h in Headers */,
-				810B5CE04EB63C8560A8D7F8D212782F /* DDFileLogger.h in Headers */,
-				C161737FAA652F64B16014BE24D6EFFF /* DDLegacyMacros.h in Headers */,
-				A260CEDA9C048C0BBE939B2C3D5F42ED /* DDLog+LOGV.h in Headers */,
-				9847AFDE401C16AF51D2D69386EB386D /* DDLog.h in Headers */,
-				5F6C9E1E6269820CB6545FDA031DE06C /* DDLogMacros.h in Headers */,
-				D88B97C1A21B56BE586D56B4771996E6 /* DDMultiFormatter.h in Headers */,
-				52D71738D319E3C281C73C374F3A4B2E /* DDOSLogger.h in Headers */,
-				6ED1CDDF1348633F0BDBC45836EE52D9 /* DDTTYLogger.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C46D9C18BEB6B27813D35CF8B2FFA94C /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B0CBF2F4DF5CF3445852E0EFA2847E76 /* SocketRocket.h in Headers */,
-				180C008618D57E8737BFEF36340FCF15 /* SRWebSocket.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F7D1E79136EED041D9AD2A446B287C6B /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				FEB391F745C6EA5804EEA14B307D3F3B /* SocketRocket.h in Headers */,
+				D8D4BBE969D158A1854274C4F67621E5 /* SRWebSocket.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		160822FD4D40AF503A4F916DF2130AB9 /* CocoaLumberjack */ = {
+		1948D0B63D2CF6A48E18B0B292BC6091 /* SocketRocket */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4DDDB543ACA9594D50A3778E16E9243B /* Build configuration list for PBXNativeTarget "CocoaLumberjack" */;
+			buildConfigurationList = 43EA7ABACE2DD84A17E35C3E08EF7A37 /* Build configuration list for PBXNativeTarget "SocketRocket" */;
 			buildPhases = (
-				84EC386F76738274E52E169D7DD6D8B2 /* Headers */,
-				DF6A88A2A52B663B4E4627A0E4BAA800 /* Sources */,
-				C1FB75EE6A1D2A5745C4554E441BC7B5 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = CocoaLumberjack;
-			productName = CocoaLumberjack;
-			productReference = 231159F52FD87D32D0F06AD075AD9FC6 /* libCocoaLumberjack.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		3E1804FFF2D90CCDF0EBB40B2F4C2C03 /* socket.IO */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 01FD621FAC8545548CD640F5B8A01E68 /* Build configuration list for PBXNativeTarget "socket.IO" */;
-			buildPhases = (
-				73140CB8BF4169BAA4E2EB7F82B5E8A6 /* Headers */,
-				0D4AA966A3EBD54F50E931723D7F52D0 /* Sources */,
-				C68E8A40D79F1129164A44E0A1627585 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				CB6E1C2C2222F53D17A32AE872BD9DB6 /* PBXTargetDependency */,
-			);
-			name = socket.IO;
-			productName = socket.IO;
-			productReference = AE1FE5AA36F4ED0E7EAC946144327288 /* libsocket.IO.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		466BB0E1C3BED4E2DD977CD2FDF9878A /* Pods-mac BitcoinAppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E478D1547A8D4D6B7A3707C471DC30EF /* Build configuration list for PBXNativeTarget "Pods-mac BitcoinAppTests" */;
-			buildPhases = (
-				36B7E5F463456EA01AE2713451ACCCA8 /* Headers */,
-				531F980A7ECFE6BF91AE8113D1F8863B /* Sources */,
-				3B728CF4E32499FC48143BA3220CBC0F /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pods-mac BitcoinAppTests";
-			productName = "Pods-mac BitcoinAppTests";
-			productReference = 2903D95F0261BA382D686F69D37DD78B /* libPods-mac BitcoinAppTests.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		A981997B8B9615DDDBFD0C3448A04B3E /* MASPreferences */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = EC82C7E53D2E4A646D3CFD0EF96FF458 /* Build configuration list for PBXNativeTarget "MASPreferences" */;
-			buildPhases = (
-				6FE16AB1C5BB563A1539FC5D8B7DE644 /* Headers */,
-				C1EC3F6367513C4D442F96C3D8E5EB8C /* Sources */,
-				0A50EEAE9675C259F3C02507A83BE1C1 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = MASPreferences;
-			productName = MASPreferences;
-			productReference = B6296DAF130EFFB6CB9BA4D542B73FF8 /* libMASPreferences.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		ACBE38B9CA75FFC1B10D684F610C8E2A /* Pods-iOS BitcoinApp */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7381BCE6A71A7BCB4AF54749E22429C6 /* Build configuration list for PBXNativeTarget "Pods-iOS BitcoinApp" */;
-			buildPhases = (
-				024ECD7C055F3E6DD5A4D3E37255E720 /* Headers */,
-				BDCB78FC15C8B790CA7A64F1A0D2EC2B /* Sources */,
-				0C2D579217497B0730785F4EB628F380 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pods-iOS BitcoinApp";
-			productName = "Pods-iOS BitcoinApp";
-			productReference = DFFD800952B4B16893BE2F27C7C8227A /* libPods-iOS BitcoinApp.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		C0DD6B67CAC96985ADC078BBDC208107 /* SocketRocket */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FE72062293C570551B2805CF6277813B /* Build configuration list for PBXNativeTarget "SocketRocket" */;
-			buildPhases = (
-				C46D9C18BEB6B27813D35CF8B2FFA94C /* Headers */,
-				F21A49DCF90A69AF76FA626ABB65B1DE /* Sources */,
-				21C20B1025F8BAF72878C3F205155111 /* Frameworks */,
+				F7F969AFE1E6F49E403F082B1C14D1FD /* Headers */,
+				98D9AF13DF87C6C49616A0A73FC9A1B9 /* Sources */,
+				72F35CE53C80A9AC10180BA259E01D0F /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -794,38 +713,51 @@
 			);
 			name = SocketRocket;
 			productName = SocketRocket;
-			productReference = 5AD1E78B34474DB415E1AEDFB4D2F10C /* libSocketRocket.a */;
+			productReference = 85A01882ED06DFEA2E0CE78BCDB204A7 /* libSocketRocket.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		CA1C762B7CA89F3E02E202F1F464B5D0 /* Pods-mac BitcoinApp */ = {
+		287D193BE033D81AD04BEFAD0D66043E /* Pods-iOS BitcoinApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BCDA48AC201BA8753114626F85F2B76B /* Build configuration list for PBXNativeTarget "Pods-mac BitcoinApp" */;
+			buildConfigurationList = 97F067A3A554F3BF5AFE0799B30CE336 /* Build configuration list for PBXNativeTarget "Pods-iOS BitcoinApp" */;
 			buildPhases = (
-				2B7665607BF249B948B080E4F09F9AC2 /* Headers */,
-				518D5C79C41538F4DDD42F93DCC03FCB /* Sources */,
-				CFD48D37103FE1C16F155B4E7058C6DE /* Frameworks */,
+				2C98C553E9BE2B9C5C19E807EB88B288 /* Headers */,
+				E3BE04598174EA843084679ED9100FC0 /* Sources */,
+				1EE4F79C48C06501BEF1C64F4D8B1BCF /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9D3E9D15D1CD66901EB6625E84B4BED9 /* PBXTargetDependency */,
-				8AB2DA53FB6872853CDE6F629E8E08F1 /* PBXTargetDependency */,
-				4CE92BBCFD0E22B2F6053455A35843A6 /* PBXTargetDependency */,
-				84195BEED4C01EDE8B992853D902BCDE /* PBXTargetDependency */,
-				702ADDA5DEB4E86EA8A11120DB7F4E6A /* PBXTargetDependency */,
 			);
-			name = "Pods-mac BitcoinApp";
-			productName = "Pods-mac BitcoinApp";
-			productReference = 19F3DBEBD6091EE4F9720495AE87892A /* libPods-mac BitcoinApp.a */;
+			name = "Pods-iOS BitcoinApp";
+			productName = "Pods-iOS BitcoinApp";
+			productReference = 91D28C78E43908E3E78E6A0ACFD4AFB9 /* libPods-iOS BitcoinApp.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		D9F38DEF258831D74FFB8BFD4D2686AD /* SAMKeychain */ = {
+		2F87395121ED50AD51D610553BF5B95A /* Pods-iOS BitcoinAppTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 22A0A577437504E8DF789EB00C840202 /* Build configuration list for PBXNativeTarget "SAMKeychain" */;
+			buildConfigurationList = 6BF5CB827B1DD4188812955F45C515E1 /* Build configuration list for PBXNativeTarget "Pods-iOS BitcoinAppTests" */;
 			buildPhases = (
-				491758B7CD75C2F1A172E25B929DD185 /* Headers */,
-				B95ADDD365A6F4E3B0F885C1275508A0 /* Sources */,
-				EB82751217F98E6C6A2ECD514105F7BD /* Frameworks */,
+				7C2B82C1EF7366344F549EBE8D05FE8E /* Headers */,
+				95D268AE59989D9B40C426619050D9C1 /* Sources */,
+				248F24F444E95ED42EAD4D7200E51561 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CA25051C2F4620482A0344144398A4EE /* PBXTargetDependency */,
+			);
+			name = "Pods-iOS BitcoinAppTests";
+			productName = "Pods-iOS BitcoinAppTests";
+			productReference = 80AE9BAF2A1D75E43E4A1C618737FEA3 /* libPods-iOS BitcoinAppTests.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		5572D14DECB5A676C1B31B30A3BA7F10 /* SAMKeychain */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 52E9588118811AB05EBECC8C49A3054C /* Build configuration list for PBXNativeTarget "SAMKeychain" */;
+			buildPhases = (
+				5F46B5EAF7354D7D83FA4ECD7DDF8B78 /* Headers */,
+				5E14EEE56079B508CD4E354D602AA69E /* Sources */,
+				C64259458E3491090D4888B3D231E737 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -833,198 +765,289 @@
 			);
 			name = SAMKeychain;
 			productName = SAMKeychain;
-			productReference = E6D5B0DE7028DF318F005F79E6BF36B5 /* libSAMKeychain.a */;
+			productReference = 612028EAFF1C2054A0EB821A9C9F2440 /* libSAMKeychain.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		F443E07ABA1502607EA71F5A13EE3B36 /* Pods-iOS BitcoinAppTests */ = {
+		CCE0F64E83CEAFEE20D04DC7BD57303E /* MASPreferences */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 88BAEA5DC043B7FF74D3FFA02351913A /* Build configuration list for PBXNativeTarget "Pods-iOS BitcoinAppTests" */;
+			buildConfigurationList = 44C2AF9DEFBCE4905D5483E79E1EB1D1 /* Build configuration list for PBXNativeTarget "MASPreferences" */;
 			buildPhases = (
-				F7D1E79136EED041D9AD2A446B287C6B /* Headers */,
-				6BAD7BF2E647E877F76B8B3EBE5682BD /* Sources */,
-				19161CDF77F1BFC3DCBF01B5C7DC4E52 /* Frameworks */,
+				1FAF920CF445CF0D883A907CD92F0355 /* Headers */,
+				5417B1A64F6F9B5E2C21B3C0AE0CC268 /* Sources */,
+				D7285A0E4DEC160CB38E40974B78B6D3 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Pods-iOS BitcoinAppTests";
-			productName = "Pods-iOS BitcoinAppTests";
-			productReference = 036A5C2863D624BE53337A0DD521A806 /* libPods-iOS BitcoinAppTests.a */;
+			name = MASPreferences;
+			productName = MASPreferences;
+			productReference = 43F9966E7614888A0CDCFAB2F62F2FDD /* libMASPreferences.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		CEF41AAA0CAD612151ECA505B1C6572C /* socket.IO */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED11BF61AAD2854135F5853D4503E4A1 /* Build configuration list for PBXNativeTarget "socket.IO" */;
+			buildPhases = (
+				26C459960C07FDA39F7A2D0301EEA79A /* Headers */,
+				A0A41E332D2BF971BC3306D6B5D4A027 /* Sources */,
+				7FABCB7589E712EC14ACD70C1F1FD16C /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D37A91FEEFF4A973A04FA01036F3D97B /* PBXTargetDependency */,
+			);
+			name = socket.IO;
+			productName = socket.IO;
+			productReference = 3665972FF8DA17DE40397F98B626C6EC /* libsocket.IO.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		D0487ECA637D2DA787A22AF8E15C1FC5 /* Pods-mac BitcoinApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C9B254F2A721FFE8BC513971A1182A46 /* Build configuration list for PBXNativeTarget "Pods-mac BitcoinApp" */;
+			buildPhases = (
+				3A4C3FDAFEDC018951C5188414FBAA6A /* Headers */,
+				4BD5D5C6C2E9DD158FA837C207A43870 /* Sources */,
+				6E5FEE7D0D4D71E8BAE2642F018B71A6 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				95ED93DD5B44B1CE4B16D669C88860E1 /* PBXTargetDependency */,
+				EBDEE79DE9523B47E37E3BC7D4F08265 /* PBXTargetDependency */,
+				69C4D684A20BBE20E066C3AAC5455E84 /* PBXTargetDependency */,
+				8D42224883CB2A195AC6F63B3EC0E620 /* PBXTargetDependency */,
+				C0FEF82C9DCE272F7DCCF4CFA70D2E34 /* PBXTargetDependency */,
+			);
+			name = "Pods-mac BitcoinApp";
+			productName = "Pods-mac BitcoinApp";
+			productReference = 643E31373A22EB4A4775F7277542C065 /* libPods-mac BitcoinApp.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		DF31E8FDE6426BE6EB4A1DB28E933FD0 /* Pods-mac BitcoinAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3372A19B9AB7B522B6833986C221C7F5 /* Build configuration list for PBXNativeTarget "Pods-mac BitcoinAppTests" */;
+			buildPhases = (
+				171B9062E589DA3EE46195278F047A4B /* Headers */,
+				07A691E3B9A26C8944113CBAAE6976E6 /* Sources */,
+				EC5EE6A780E9BF495AC6D4DF1E838FB4 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BD5309518309378C2E633A965E8A3AEE /* PBXTargetDependency */,
+			);
+			name = "Pods-mac BitcoinAppTests";
+			productName = "Pods-mac BitcoinAppTests";
+			productReference = 674465B145B9FFFBD7D2587F47BC81A0 /* libPods-mac BitcoinAppTests.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		E95654B155D25890BE8E26081FCA8265 /* CocoaLumberjack */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE14006AC937B304BA6C59A1730855C5 /* Build configuration list for PBXNativeTarget "CocoaLumberjack" */;
+			buildPhases = (
+				CDD8F5A347E56655240A4ECF86380EE9 /* Headers */,
+				DF0333BEE6711DD6FA8DD660D1D04D5F /* Sources */,
+				26458EBFF491D7CD6BE474328070D21B /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CocoaLumberjack;
+			productName = CocoaLumberjack;
+			productReference = C261436D14052AE3C35F240BCD155CAC /* libCocoaLumberjack.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 0930;
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
 			};
-			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
-			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = C73AED1D712B8FAA6F338DB259D28B65 /* Products */;
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = 6CF2105EBE34B8805BA1563E1594A0C3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				160822FD4D40AF503A4F916DF2130AB9 /* CocoaLumberjack */,
-				A981997B8B9615DDDBFD0C3448A04B3E /* MASPreferences */,
-				ACBE38B9CA75FFC1B10D684F610C8E2A /* Pods-iOS BitcoinApp */,
-				F443E07ABA1502607EA71F5A13EE3B36 /* Pods-iOS BitcoinAppTests */,
-				CA1C762B7CA89F3E02E202F1F464B5D0 /* Pods-mac BitcoinApp */,
-				466BB0E1C3BED4E2DD977CD2FDF9878A /* Pods-mac BitcoinAppTests */,
-				D9F38DEF258831D74FFB8BFD4D2686AD /* SAMKeychain */,
-				3E1804FFF2D90CCDF0EBB40B2F4C2C03 /* socket.IO */,
-				C0DD6B67CAC96985ADC078BBDC208107 /* SocketRocket */,
+				E95654B155D25890BE8E26081FCA8265 /* CocoaLumberjack */,
+				CCE0F64E83CEAFEE20D04DC7BD57303E /* MASPreferences */,
+				287D193BE033D81AD04BEFAD0D66043E /* Pods-iOS BitcoinApp */,
+				2F87395121ED50AD51D610553BF5B95A /* Pods-iOS BitcoinAppTests */,
+				D0487ECA637D2DA787A22AF8E15C1FC5 /* Pods-mac BitcoinApp */,
+				DF31E8FDE6426BE6EB4A1DB28E933FD0 /* Pods-mac BitcoinAppTests */,
+				5572D14DECB5A676C1B31B30A3BA7F10 /* SAMKeychain */,
+				CEF41AAA0CAD612151ECA505B1C6572C /* socket.IO */,
+				1948D0B63D2CF6A48E18B0B292BC6091 /* SocketRocket */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		0D4AA966A3EBD54F50E931723D7F52D0 /* Sources */ = {
+		07A691E3B9A26C8944113CBAAE6976E6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBFACEC59107D66CB8815821CEEEFF38 /* socket.IO-dummy.m in Sources */,
-				312D4C03229BA7CC35B9537E5C0B0089 /* SocketIO.m in Sources */,
-				C7C09B7DBFB4D8F18434278CFA2FC6E7 /* SocketIOJSONSerialization.m in Sources */,
-				E54658EE9D4285F1FAFCF36B6034F817 /* SocketIOPacket.m in Sources */,
-				51141C60F273FE2D82F294213903A90E /* SocketIOTransportWebsocket.m in Sources */,
-				57A1D24B58E3D0C15DA3CC60B04F8B1F /* SocketIOTransportXHR.m in Sources */,
+				6D8F6C3A2287796B25FEA77A66577AFB /* Pods-mac BitcoinAppTests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		518D5C79C41538F4DDD42F93DCC03FCB /* Sources */ = {
+		4BD5D5C6C2E9DD158FA837C207A43870 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17C03536EC5D19A3BB0DB4C075D37A0B /* Pods-mac BitcoinApp-dummy.m in Sources */,
+				1CA9BC78AB02C43A88ED314AF2772DE4 /* Pods-mac BitcoinApp-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		531F980A7ECFE6BF91AE8113D1F8863B /* Sources */ = {
+		5417B1A64F6F9B5E2C21B3C0AE0CC268 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0ED0FE0101F83D9132CA002D91A1100C /* Pods-mac BitcoinAppTests-dummy.m in Sources */,
+				99809A30F06EDE8822CA1C346A95B40B /* MASPreferences-dummy.m in Sources */,
+				AA57B143DD82C776CA083F0E7A028D34 /* MASPreferencesWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6BAD7BF2E647E877F76B8B3EBE5682BD /* Sources */ = {
+		5E14EEE56079B508CD4E354D602AA69E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C085D68E8CD378ECA749BDB3A5291E7 /* Pods-iOS BitcoinAppTests-dummy.m in Sources */,
+				7DA41DD241EF76A5BC24948EB15EB46F /* SAMKeychain-dummy.m in Sources */,
+				2746862CB79C6128783F3C71BF56C9A7 /* SAMKeychain.m in Sources */,
+				25CC2DF318A99D4B4BAE94ABFED1A788 /* SAMKeychainQuery.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B95ADDD365A6F4E3B0F885C1275508A0 /* Sources */ = {
+		95D268AE59989D9B40C426619050D9C1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				129164CFA3C7A4D881E802F213C840A8 /* SAMKeychain-dummy.m in Sources */,
-				42C4F181A6213E0CA001813CC4CCA668 /* SAMKeychain.m in Sources */,
-				4F1BA5E1C854F8B1900D444107233431 /* SAMKeychainQuery.m in Sources */,
+				DD7C0A8DBA106D9B47192D3346ADC23B /* Pods-iOS BitcoinAppTests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BDCB78FC15C8B790CA7A64F1A0D2EC2B /* Sources */ = {
+		98D9AF13DF87C6C49616A0A73FC9A1B9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93BB7FE6851BBF952C9CA61D21D22215 /* Pods-iOS BitcoinApp-dummy.m in Sources */,
+				C5F5BE14C890D99E390365351AD5EFDF /* SocketRocket-dummy.m in Sources */,
+				B1842371E0FD23D563180E47A808EDFF /* SRWebSocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C1EC3F6367513C4D442F96C3D8E5EB8C /* Sources */ = {
+		A0A41E332D2BF971BC3306D6B5D4A027 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8E9EC90CA39022F8A7FF5B5440CF596 /* MASPreferences-dummy.m in Sources */,
-				564E5B118BCA3D12B5FB4C6AC42713BC /* MASPreferencesWindowController.m in Sources */,
+				F704B367DCE84AF673F5293BE1294557 /* socket.IO-dummy.m in Sources */,
+				56816CB6CE61A60158D171193847EFA8 /* SocketIO.m in Sources */,
+				3A62D9FE48EFD337BA43DFDB91D9D844 /* SocketIOJSONSerialization.m in Sources */,
+				42E2EF61EAE0CDB4DD9811A676EF522F /* SocketIOPacket.m in Sources */,
+				CD4B4D90853D8B9D4DC6722A0C8B4821 /* SocketIOTransportWebsocket.m in Sources */,
+				AAA4BE8ED7E5BACCBB34AE243147858D /* SocketIOTransportXHR.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DF6A88A2A52B663B4E4627A0E4BAA800 /* Sources */ = {
+		DF0333BEE6711DD6FA8DD660D1D04D5F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F16509D24F7DFF6AA7576547D0CC12A /* CocoaLumberjack-dummy.m in Sources */,
-				A5345695ACB7E6AE8864638F1BB47285 /* DDAbstractDatabaseLogger.m in Sources */,
-				D96128255024067476BABC74BE819E2C /* DDASLLogCapture.m in Sources */,
-				290E933B757AFD5974F10FF166936539 /* DDASLLogger.m in Sources */,
-				40B7938062FFDAAD3AFEB92A54CC146A /* DDContextFilterLogFormatter.m in Sources */,
-				47156FA49A7082CC0BCFB700A2389B4A /* DDDispatchQueueLogFormatter.m in Sources */,
-				647A988A80EDFAF6F3B357EFF68CB66A /* DDFileLogger.m in Sources */,
-				AECA28C01EB93A9216AF89448A43E627 /* DDLog.m in Sources */,
-				DD8A1B8181B22DA4CBE27D72561BC239 /* DDMultiFormatter.m in Sources */,
-				DB9A7C48D3F3B32B11A1A7948B2365D3 /* DDOSLogger.m in Sources */,
-				FD701D2D197ADAED5847FCD71B616DA8 /* DDTTYLogger.m in Sources */,
+				4DC1EB07CAF6767118317408E62B60F0 /* CLIColor.m in Sources */,
+				8383FF76CAAF25C8FE900AEC6EBBAEF8 /* CocoaLumberjack-dummy.m in Sources */,
+				E5B03E21C98E1E5DAD82764FC937A64C /* DDAbstractDatabaseLogger.m in Sources */,
+				D934026649CD29EE3938E5AF83D5BFF4 /* DDASLLogCapture.m in Sources */,
+				2F7D25EA29E4167F1CED2641C0B06F01 /* DDASLLogger.m in Sources */,
+				23264922C2BC9F97BAD4396AA4E911DC /* DDContextFilterLogFormatter.m in Sources */,
+				929FF13C69854C325174F6367DF5E26E /* DDDispatchQueueLogFormatter.m in Sources */,
+				6940EC88D79410C4B1F49B80483614EA /* DDFileLogger+Buffering.m in Sources */,
+				A3EC42FD150B91EAAE2B89E1239134E7 /* DDFileLogger.m in Sources */,
+				225954BE08C2A11B58527BD7E486E224 /* DDLog.m in Sources */,
+				A61FC4A9CCAA7751D872043029A59D88 /* DDLoggerNames.m in Sources */,
+				815A2D6583DADE9F65065C3AFE95E834 /* DDMultiFormatter.m in Sources */,
+				FA646634BBD8223C695F082C0D9FC097 /* DDOSLogger.m in Sources */,
+				CC89B598FE2D4105A8D3AA7E2B9BA8F4 /* DDTTYLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F21A49DCF90A69AF76FA626ABB65B1DE /* Sources */ = {
+		E3BE04598174EA843084679ED9100FC0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C31E820FACC2B8B759FC81221A4A04DD /* SocketRocket-dummy.m in Sources */,
-				709B9AB2158114363AB4DDD5B3B0CFA9 /* SRWebSocket.m in Sources */,
+				8EF4CDC6DFF6D3142CAE386A3A0F349F /* Pods-iOS BitcoinApp-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4CE92BBCFD0E22B2F6053455A35843A6 /* PBXTargetDependency */ = {
+		69C4D684A20BBE20E066C3AAC5455E84 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SAMKeychain;
-			target = D9F38DEF258831D74FFB8BFD4D2686AD /* SAMKeychain */;
-			targetProxy = 799A24781E740225A846D2A4B5C575D5 /* PBXContainerItemProxy */;
+			target = 5572D14DECB5A676C1B31B30A3BA7F10 /* SAMKeychain */;
+			targetProxy = F761556192EF8CE7E2C1BCFB5185D32D /* PBXContainerItemProxy */;
 		};
-		702ADDA5DEB4E86EA8A11120DB7F4E6A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = socket.IO;
-			target = 3E1804FFF2D90CCDF0EBB40B2F4C2C03 /* socket.IO */;
-			targetProxy = E91A2AD81463EB110717E27E4ABEF4B4 /* PBXContainerItemProxy */;
-		};
-		84195BEED4C01EDE8B992853D902BCDE /* PBXTargetDependency */ = {
+		8D42224883CB2A195AC6F63B3EC0E620 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SocketRocket;
-			target = C0DD6B67CAC96985ADC078BBDC208107 /* SocketRocket */;
-			targetProxy = 813D52AD9A638551F48EBD476C00C054 /* PBXContainerItemProxy */;
+			target = 1948D0B63D2CF6A48E18B0B292BC6091 /* SocketRocket */;
+			targetProxy = 17BE98661635AED27F5BD31BC5EA70BF /* PBXContainerItemProxy */;
 		};
-		8AB2DA53FB6872853CDE6F629E8E08F1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MASPreferences;
-			target = A981997B8B9615DDDBFD0C3448A04B3E /* MASPreferences */;
-			targetProxy = 49C378BD47FA4754DFF7C63EE824EB30 /* PBXContainerItemProxy */;
-		};
-		9D3E9D15D1CD66901EB6625E84B4BED9 /* PBXTargetDependency */ = {
+		95ED93DD5B44B1CE4B16D669C88860E1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CocoaLumberjack;
-			target = 160822FD4D40AF503A4F916DF2130AB9 /* CocoaLumberjack */;
-			targetProxy = F18ED0601FB033B21F6D36AFD99F66D0 /* PBXContainerItemProxy */;
+			target = E95654B155D25890BE8E26081FCA8265 /* CocoaLumberjack */;
+			targetProxy = 2B4F997A68A0B6A1A0E132654E1D10AD /* PBXContainerItemProxy */;
 		};
-		CB6E1C2C2222F53D17A32AE872BD9DB6 /* PBXTargetDependency */ = {
+		BD5309518309378C2E633A965E8A3AEE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-mac BitcoinApp";
+			target = D0487ECA637D2DA787A22AF8E15C1FC5 /* Pods-mac BitcoinApp */;
+			targetProxy = BE433CC59D961645A52E9E76808C20D7 /* PBXContainerItemProxy */;
+		};
+		C0FEF82C9DCE272F7DCCF4CFA70D2E34 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = socket.IO;
+			target = CEF41AAA0CAD612151ECA505B1C6572C /* socket.IO */;
+			targetProxy = CB397EF97868239A1DAF342DDE2BBF08 /* PBXContainerItemProxy */;
+		};
+		CA25051C2F4620482A0344144398A4EE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-iOS BitcoinApp";
+			target = 287D193BE033D81AD04BEFAD0D66043E /* Pods-iOS BitcoinApp */;
+			targetProxy = DBA8E24B7D05E75EAE01313C65EA5ABE /* PBXContainerItemProxy */;
+		};
+		D37A91FEEFF4A973A04FA01036F3D97B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SocketRocket;
-			target = C0DD6B67CAC96985ADC078BBDC208107 /* SocketRocket */;
-			targetProxy = 11CE2AF326503B52E2339B3BF15DD93A /* PBXContainerItemProxy */;
+			target = 1948D0B63D2CF6A48E18B0B292BC6091 /* SocketRocket */;
+			targetProxy = 10C9E23B058CB9CCAB56B8E7DF372C25 /* PBXContainerItemProxy */;
+		};
+		EBDEE79DE9523B47E37E3BC7D4F08265 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MASPreferences;
+			target = CCE0F64E83CEAFEE20D04DC7BD57303E /* MASPreferences */;
+			targetProxy = AFF0A4892F944E7F543F1910B7A5AF9D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		EA8D378506830151C5028A2A9F99B006 /* MASPreferencesWindow.xib */ = {
+		F0B4AF987E3B3D8A1E4723FB5725CB91 /* MASPreferencesWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A3390AE5490690E601BA7D470CE68ECA /* MASPreferencesWindow.xib */,
+				D1DBFD26F1023EC47B769960F72EC10C /* MASPreferencesWindow.xib */,
 			);
 			name = MASPreferencesWindow.xib;
 			path = Framework;
@@ -1033,41 +1056,23 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		07CD5FD3C5476A0B5A528228FC7327B0 /* Release */ = {
+		0310CC712AF4FFAEDE3C92A25EF21CB7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9D86BBD711F6A1735045830EACBA2D54 /* Pods-mac BitcoinApp.release.xcconfig */;
+			baseConfigurationReference = 1AC9029D206751130945A5096F9CC257 /* MASPreferences.debug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				EXECUTABLE_PREFIX = lib;
-				MACH_O_TYPE = staticlib;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		10B5B9A302F0971C613E6361EFD57A5E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = FD780FAE17A79C9B6AAEFD14822ABB6C /* socket.IO.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				EXECUTABLE_PREFIX = lib;
-				GCC_PREFIX_HEADER = "Target Support Files/socket.IO/socket.IO-prefix.pch";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				GCC_PREFIX_HEADER = "Target Support Files/MASPreferences/MASPreferences-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = MASPreferences;
+				PRODUCT_NAME = MASPreferences;
 				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1075,42 +1080,22 @@
 			};
 			name = Debug;
 		};
-		10DD2AD4C31EAD7B59A3377A87432F9C /* Release */ = {
+		0897D2094FE3FEA0045C675A04C61B47 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6745561D8D6089001D5749F33689CD7F /* Pods-iOS BitcoinApp.release.xcconfig */;
+			baseConfigurationReference = 0B1E6A6B555A26BD8DD307B0F6214FED /* socket.IO.release.xcconfig */;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
-				MACH_O_TYPE = staticlib;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		181BE0A7EAE2049CE5240C4E0D4D5281 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = FD780FAE17A79C9B6AAEFD14822ABB6C /* socket.IO.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				EXECUTABLE_PREFIX = lib;
 				GCC_PREFIX_HEADER = "Target Support Files/socket.IO/socket.IO-prefix.pch";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = socket_IO;
+				PRODUCT_NAME = socket.IO;
 				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1118,53 +1103,34 @@
 			};
 			name = Release;
 		};
-		2793A39524D98CEE6276D9285C68974C /* Release */ = {
+		12029EA841AAAE5A1176D58AF3C24A38 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DEFFFFC2B63B2D3932D59A756A17F380 /* SAMKeychain.xcconfig */;
+			baseConfigurationReference = 7E14B7F44410F9F00FC0B003D3D8C61E /* socket.IO.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				EXECUTABLE_PREFIX = lib;
-				GCC_PREFIX_HEADER = "Target Support Files/SAMKeychain/SAMKeychain-prefix.pch";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				GCC_PREFIX_HEADER = "Target Support Files/socket.IO/socket.IO-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = socket_IO;
+				PRODUCT_NAME = socket.IO;
 				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 			};
-			name = Release;
+			name = Debug;
 		};
-		2AEF41A934CC74B3BF3D4670D1846C57 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A9C5414E783C52EF48A325EA8DF6D78E /* Pods-iOS BitcoinAppTests.release.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
-				MACH_O_TYPE = staticlib;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		45530A38B04B5487B40CC04B2ACA926E /* Release */ = {
+		32FEF8DD0149CCA6B5FC5AB57D982845 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1187,264 +1153,13 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_REQUIRED = NO;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_RELEASE=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-			};
-			name = Release;
-		};
-		4EE01D3EE667F5A369395A89BD11BCB9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 22B3F135B9F1E8DFE423EA8AE245621C /* SocketRocket.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				EXECUTABLE_PREFIX = lib;
-				GCC_PREFIX_HEADER = "Target Support Files/SocketRocket/SocketRocket-prefix.pch";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-			};
-			name = Release;
-		};
-		66BD49A0CF63D94008E78889B9F24275 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BFF6A2A36F800B1F5C5DD288511BA851 /* MASPreferences.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				EXECUTABLE_PREFIX = lib;
-				GCC_PREFIX_HEADER = "Target Support Files/MASPreferences/MASPreferences-prefix.pch";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-			};
-			name = Debug;
-		};
-		6CAF6547AA41A9C48BE893D6295770B6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 834D03902442EA32CE6EC119676E8D3E /* Pods-iOS BitcoinAppTests.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
-				MACH_O_TYPE = staticlib;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		6CB53ECF6EB9F9374B7DB9EF99BB8CDC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C465085BA633D7255E6EB9697C0631B /* Pods-mac BitcoinApp.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				EXECUTABLE_PREFIX = lib;
-				MACH_O_TYPE = staticlib;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		6D9A79CB853BE879812CC85AAB83B8AA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 32A244A13E6D5BC17056349B49712E5A /* Pods-mac BitcoinAppTests.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				EXECUTABLE_PREFIX = lib;
-				MACH_O_TYPE = staticlib;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		6DBF596177B100512699FAB38B9F9071 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DEFFFFC2B63B2D3932D59A756A17F380 /* SAMKeychain.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				EXECUTABLE_PREFIX = lib;
-				GCC_PREFIX_HEADER = "Target Support Files/SAMKeychain/SAMKeychain-prefix.pch";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-			};
-			name = Debug;
-		};
-		A6D2C721707EF5D25C03B3F1D1C0450F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BFF6A2A36F800B1F5C5DD288511BA851 /* MASPreferences.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				EXECUTABLE_PREFIX = lib;
-				GCC_PREFIX_HEADER = "Target Support Files/MASPreferences/MASPreferences-prefix.pch";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-			};
-			name = Release;
-		};
-		A84FDC46CB01E4E35E924A876799BFC1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BD2495DD80D9AE8E025075A1384C3203 /* Pods-iOS BitcoinApp.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
-				MACH_O_TYPE = staticlib;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		B575BE77254EB97E75988A5F754E3482 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0F74DBE92D1698A70C8F588650D23A5E /* CocoaLumberjack.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				EXECUTABLE_PREFIX = lib;
-				GCC_PREFIX_HEADER = "Target Support Files/CocoaLumberjack/CocoaLumberjack-prefix.pch";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-			};
-			name = Debug;
-		};
-		BF346D3CFDD692BA3950368CE9AFD80E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1470,67 +1185,73 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
 		};
-		CA7040A63A1FE9B8183C3B61FE87FDB7 /* Debug */ = {
+		4716F5D650AAABAC2276742B7C851193 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 22B3F135B9F1E8DFE423EA8AE245621C /* SocketRocket.xcconfig */;
+			baseConfigurationReference = AFBA06F94980810943A13F135030DCA4 /* CocoaLumberjack.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				EXECUTABLE_PREFIX = lib;
-				GCC_PREFIX_HEADER = "Target Support Files/SocketRocket/SocketRocket-prefix.pch";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-			};
-			name = Debug;
-		};
-		D72A82558E96C61A0CFD184907B9FA9A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0F74DBE92D1698A70C8F588650D23A5E /* CocoaLumberjack.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				EXECUTABLE_PREFIX = lib;
 				GCC_PREFIX_HEADER = "Target Support Files/CocoaLumberjack/CocoaLumberjack-prefix.pch";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = CocoaLumberjack;
+				PRODUCT_NAME = CocoaLumberjack;
 				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
-		E8B77A62FB1C041CF45AD4AD1345A273 /* Release */ = {
+		4AAA8C04EF054953824E98244298EDFF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C4C959FEEA7D46885A4FD1337D980FC2 /* Pods-mac BitcoinAppTests.release.xcconfig */;
+			baseConfigurationReference = 9AF2C1BC1101562037749225E38C5776 /* Pods-iOS BitcoinApp.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5AEE2829EE7A3B99F3C97D79D7912B4E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7B531CA11653F08E4761F79A514DA077 /* Pods-mac BitcoinApp.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				EXECUTABLE_PREFIX = lib;
 				MACH_O_TYPE = staticlib;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -1540,100 +1261,434 @@
 			};
 			name = Release;
 		};
+		6923834AEEED11E22179B74290EE7240 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD0F8D503CF657CAF84A842F41484548 /* CocoaLumberjack.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/CocoaLumberjack/CocoaLumberjack-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = CocoaLumberjack;
+				PRODUCT_NAME = CocoaLumberjack;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		6961408B97D1D1C3E087AF4CCE2B1F50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37EA1C021457EA7133C8F50F37266A07 /* Pods-iOS BitcoinAppTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7CDC12DD94B9A618D71F93F968721713 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BFFB88618192489B3718F066645F8B1 /* MASPreferences.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/MASPreferences/MASPreferences-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = MASPreferences;
+				PRODUCT_NAME = MASPreferences;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+			};
+			name = Release;
+		};
+		95CAA00DC3BD78671DEE5890B042577A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2008ACEDF60BE09E50950F5557BB670E /* Pods-mac BitcoinAppTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				EXECUTABLE_PREFIX = lib;
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		A24F5E2DD24903D153A620E8399BFCD9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3ACAA384106E87A20D010C3AD6C6FE39 /* SocketRocket.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/SocketRocket/SocketRocket-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = SocketRocket;
+				PRODUCT_NAME = SocketRocket;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+			};
+			name = Release;
+		};
+		AB8BEFC47DB3A67F576B53DE306CCF72 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		C2EDAE0D492398DE3651B2E182A29A00 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C9726EF441FF9F641E904C0491D964D8 /* Pods-mac BitcoinAppTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				EXECUTABLE_PREFIX = lib;
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		E5603B4A5A67AE134D02B681E8A497DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B62848C267051F5C8F08274A2F225EC0 /* Pods-mac BitcoinApp.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				EXECUTABLE_PREFIX = lib;
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		E74A56D8D478F2025AF1A00F60D33C0F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B1D2FBBEB5173C2071B35364ECB0F404 /* Pods-iOS BitcoinAppTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E9890734EDAB869B6D3CAD3F3D9ABFB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99D9BF6FAB5FAF0658AFCA45DC73E9B4 /* SocketRocket.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/SocketRocket/SocketRocket-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = SocketRocket;
+				PRODUCT_NAME = SocketRocket;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+			};
+			name = Debug;
+		};
+		ECE078C0377277A8CEC61B7AAC5D20F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0605C453121C81CDA2DA3C718124FAD2 /* Pods-iOS BitcoinApp.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F4711C8AA9301D286E6ADEDA2A5BCD1F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF82C5DC9D5B94558408C7EAA1F7196B /* SAMKeychain.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/SAMKeychain/SAMKeychain-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = SAMKeychain;
+				PRODUCT_NAME = SAMKeychain;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+			};
+			name = Debug;
+		};
+		F6B0A12E3F2255075695EB01889DA729 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 71CE1524BFCDE65E2F134047964DE6C7 /* SAMKeychain.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/SAMKeychain/SAMKeychain-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = SAMKeychain;
+				PRODUCT_NAME = SAMKeychain;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		01FD621FAC8545548CD640F5B8A01E68 /* Build configuration list for PBXNativeTarget "socket.IO" */ = {
+		3372A19B9AB7B522B6833986C221C7F5 /* Build configuration list for PBXNativeTarget "Pods-mac BitcoinAppTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				10B5B9A302F0971C613E6361EFD57A5E /* Debug */,
-				181BE0A7EAE2049CE5240C4E0D4D5281 /* Release */,
+				C2EDAE0D492398DE3651B2E182A29A00 /* Debug */,
+				95CAA00DC3BD78671DEE5890B042577A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22A0A577437504E8DF789EB00C840202 /* Build configuration list for PBXNativeTarget "SAMKeychain" */ = {
+		43EA7ABACE2DD84A17E35C3E08EF7A37 /* Build configuration list for PBXNativeTarget "SocketRocket" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6DBF596177B100512699FAB38B9F9071 /* Debug */,
-				2793A39524D98CEE6276D9285C68974C /* Release */,
+				E9890734EDAB869B6D3CAD3F3D9ABFB0 /* Debug */,
+				A24F5E2DD24903D153A620E8399BFCD9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+		44C2AF9DEFBCE4905D5483E79E1EB1D1 /* Build configuration list for PBXNativeTarget "MASPreferences" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BF346D3CFDD692BA3950368CE9AFD80E /* Debug */,
-				45530A38B04B5487B40CC04B2ACA926E /* Release */,
+				0310CC712AF4FFAEDE3C92A25EF21CB7 /* Debug */,
+				7CDC12DD94B9A618D71F93F968721713 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4DDDB543ACA9594D50A3778E16E9243B /* Build configuration list for PBXNativeTarget "CocoaLumberjack" */ = {
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B575BE77254EB97E75988A5F754E3482 /* Debug */,
-				D72A82558E96C61A0CFD184907B9FA9A /* Release */,
+				32FEF8DD0149CCA6B5FC5AB57D982845 /* Debug */,
+				AB8BEFC47DB3A67F576B53DE306CCF72 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7381BCE6A71A7BCB4AF54749E22429C6 /* Build configuration list for PBXNativeTarget "Pods-iOS BitcoinApp" */ = {
+		52E9588118811AB05EBECC8C49A3054C /* Build configuration list for PBXNativeTarget "SAMKeychain" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A84FDC46CB01E4E35E924A876799BFC1 /* Debug */,
-				10DD2AD4C31EAD7B59A3377A87432F9C /* Release */,
+				F4711C8AA9301D286E6ADEDA2A5BCD1F /* Debug */,
+				F6B0A12E3F2255075695EB01889DA729 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		88BAEA5DC043B7FF74D3FFA02351913A /* Build configuration list for PBXNativeTarget "Pods-iOS BitcoinAppTests" */ = {
+		6BF5CB827B1DD4188812955F45C515E1 /* Build configuration list for PBXNativeTarget "Pods-iOS BitcoinAppTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6CAF6547AA41A9C48BE893D6295770B6 /* Debug */,
-				2AEF41A934CC74B3BF3D4670D1846C57 /* Release */,
+				E74A56D8D478F2025AF1A00F60D33C0F /* Debug */,
+				6961408B97D1D1C3E087AF4CCE2B1F50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BCDA48AC201BA8753114626F85F2B76B /* Build configuration list for PBXNativeTarget "Pods-mac BitcoinApp" */ = {
+		97F067A3A554F3BF5AFE0799B30CE336 /* Build configuration list for PBXNativeTarget "Pods-iOS BitcoinApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6CB53ECF6EB9F9374B7DB9EF99BB8CDC /* Debug */,
-				07CD5FD3C5476A0B5A528228FC7327B0 /* Release */,
+				4AAA8C04EF054953824E98244298EDFF /* Debug */,
+				ECE078C0377277A8CEC61B7AAC5D20F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E478D1547A8D4D6B7A3707C471DC30EF /* Build configuration list for PBXNativeTarget "Pods-mac BitcoinAppTests" */ = {
+		BE14006AC937B304BA6C59A1730855C5 /* Build configuration list for PBXNativeTarget "CocoaLumberjack" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6D9A79CB853BE879812CC85AAB83B8AA /* Debug */,
-				E8B77A62FB1C041CF45AD4AD1345A273 /* Release */,
+				6923834AEEED11E22179B74290EE7240 /* Debug */,
+				4716F5D650AAABAC2276742B7C851193 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EC82C7E53D2E4A646D3CFD0EF96FF458 /* Build configuration list for PBXNativeTarget "MASPreferences" */ = {
+		C9B254F2A721FFE8BC513971A1182A46 /* Build configuration list for PBXNativeTarget "Pods-mac BitcoinApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				66BD49A0CF63D94008E78889B9F24275 /* Debug */,
-				A6D2C721707EF5D25C03B3F1D1C0450F /* Release */,
+				E5603B4A5A67AE134D02B681E8A497DC /* Debug */,
+				5AEE2829EE7A3B99F3C97D79D7912B4E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FE72062293C570551B2805CF6277813B /* Build configuration list for PBXNativeTarget "SocketRocket" */ = {
+		ED11BF61AAD2854135F5853D4503E4A1 /* Build configuration list for PBXNativeTarget "socket.IO" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CA7040A63A1FE9B8183C3B61FE87FDB7 /* Debug */,
-				4EE01D3EE667F5A369395A89BD11BCB9 /* Release */,
+				12029EA841AAAE5A1176D58AF3C24A38 /* Debug */,
+				0897D2094FE3FEA0045C675A04C61B47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 }
