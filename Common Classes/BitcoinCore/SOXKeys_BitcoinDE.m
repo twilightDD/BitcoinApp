@@ -160,12 +160,15 @@ NSString *const BitcoinDE_ShowOrderbook_MainKey = @"orders";
 NSString *const BitcoinDE_ShowOrderbook_OrderID                     = @"order_id";
 NSString *const BitcoinDE_ShowOrderbook_Type                        = @"type";
 NSString *const BitcoinDE_ShowOrderbook_TradingPair                 = @"trading_pair";
-NSString *const BitcoinDE_ShowOrderbook_MaxAmount                   = @"max_amount";
-NSString *const BitcoinDE_ShowOrderbook_MinAmount                   = @"min_amount";
 NSString *const BitcoinDE_ShowOrderbook_Price                       = @"price";
-NSString *const BitcoinDE_ShowOrderbook_MaxVolume                   = @"max_volume";
-NSString *const BitcoinDE_ShowOrderbook_MinVolume                   = @"min_volume";
+NSString *const BitcoinDE_ShowOrderbook_MaxAmount_currency_to_pay   = @"max_amount_currency_to_trade"; // MaxAmount
+NSString *const BitcoinDE_ShowOrderbook_MinAmount_currency_to_pay   = @"min_amount_currency_to_trade"; // MinAmount
+NSString *const BitcoinDE_ShowOrderbook_MaxVolume_currency_to_pay   = @"max_volume_currency_to_pay"; // MaxVolume
+NSString *const BitcoinDE_ShowOrderbook_MinVolume_currency_to_pay   = @"min_volume_currency_to_pay"; // MinVolume
 NSString *const BitcoinDE_ShowOrderbook_OrderRequirementsFullfilled = @"order_requirements_fullfilled";
+NSString *const BitcoinDE_ShowOrderbook_Is_External_Wallet_Order    = @"is_external_wallet_order";
+NSString *const BitcoinDE_ShowOrderbook_Sepa_Option                 = @"sepa_option";
+
 
 #pragma mark | Trading Partner Information
 NSString *const BitcoinDE_ShowOrderbook_TradingPartnerInformation              = @"trading_partner_information";

@@ -109,9 +109,9 @@
 
 + (instancetype)orderBookDataForSocketIODictionary:(NSDictionary *)addOrderSocketIODictionary {
     SOXShowOrderbook_BitcoinDE_Data *orderbookData     = [[SOXShowOrderbook_BitcoinDE_Data alloc] init];
-    orderbookData.orderInformation_orderID             = [addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_OrderID];
+    orderbookData.orderInformation_orderID             = [addOrderSocketIODictionary objectForKey:BitcoinDE_ShowOrderbook_OrderID];
     orderbookData.orderInformation_socketOrderObjectID = [addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_SocketObjectID];
-    orderbookData.orderInformation_type                = [addOrderSocketIODictionary objectForKey:BitcoinDE_ShowMyOrders_Type];
+    orderbookData.orderInformation_type                = [addOrderSocketIODictionary objectForKey:BitcoinDE_ShowOrderbook_Type];
     orderbookData.orderInformation_tradingPair         = [addOrderSocketIODictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPair];
     orderbookData.orderInformation_maxAmount           = [NSDecimalNumber decimalNumberWithDecimal:[[addOrderSocketIODictionary objectForKey:@"amount"] decimalValue]];
     orderbookData.orderInformation_minAmount           = [NSDecimalNumber decimalNumberWithDecimal:[[addOrderSocketIODictionary objectForKey:BitcoinDE_WebSocket_AddOrder_MinAmount] decimalValue]];
@@ -193,14 +193,14 @@
 - (void)setupOrderbookDataForOrderDictionary:(NSDictionary *)orderDictionary {
     // Order information
     {
-        self.orderInformation_orderID                     = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderID];
-        self.orderInformation_type                        = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_Type];
-        self.orderInformation_tradingPair                 = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPair];
-        self.orderInformation_maxAmount                   = [NSDecimalNumber decimalNumberWithDecimal:[[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MaxAmount] decimalValue]];
-        self.orderInformation_minAmount                   = [NSDecimalNumber decimalNumberWithDecimal:[[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MinAmount] decimalValue]];
-        self.orderInformation_price                       = [NSDecimalNumber decimalNumberWithDecimal:[[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_Price] decimalValue]];
-        self.orderInformation_maxVolume                   = [NSDecimalNumber decimalNumberWithDecimal:[[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MaxVolume] decimalValue]];
-        self.orderInformation_minVolume                   = [NSDecimalNumber decimalNumberWithDecimal:[[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MinVolume] decimalValue]];
+        self.orderInformation_orderID       = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderID];
+        self.orderInformation_type          = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_Type];
+        self.orderInformation_tradingPair   = [orderDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPair];
+        self.orderInformation_maxAmount     = [NSDecimalNumber decimalNumberWithDecimal:[[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MaxAmount_currency_to_pay] decimalValue]];
+        self.orderInformation_minAmount     = [NSDecimalNumber decimalNumberWithDecimal:[[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MinAmount_currency_to_pay] decimalValue]];
+        self.orderInformation_price         = [NSDecimalNumber decimalNumberWithDecimal:[[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_Price] decimalValue]];
+        self.orderInformation_maxVolume     = [NSDecimalNumber decimalNumberWithDecimal:[[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MaxVolume_currency_to_pay] decimalValue]];
+        self.orderInformation_minVolume     = [NSDecimalNumber decimalNumberWithDecimal:[[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_MinVolume_currency_to_pay] decimalValue]];
         self.orderInformation_orderRequirementsFullfilled = [[orderDictionary objectForKey:BitcoinDE_ShowOrderbook_OrderRequirementsFullfilled] boolValue];
     }
 

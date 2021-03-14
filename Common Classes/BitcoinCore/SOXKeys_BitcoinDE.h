@@ -155,12 +155,14 @@ FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_MainKey;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_OrderID;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_Type;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_TradingPair;
-FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_MaxAmount;
-FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_MinAmount;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_Price;
-FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_MaxVolume;
-FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_MinVolume;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_MaxAmount_currency_to_pay; // MaxAmount
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_MinAmount_currency_to_pay; // MinAmount
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_MaxVolume_currency_to_pay; // MaxVolume
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_MinVolume_currency_to_pay; // MinVolume
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_OrderRequirementsFullfilled;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_Is_External_Wallet_Order;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_Sepa_Option;
 
 #pragma mark | Trading Partner Information
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowOrderbook_TradingPartnerInformation;
