@@ -93,10 +93,17 @@
     NSString *endDateString         = [SOXFormatters rfc3339PostDateTimeStringDate:end_datetime];
 
     NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                orderTypeString, @"type", currencyTypeString, BitcoinDE_ShowOrderbook_TradingPair, max_amount, @"max_amount", price, @"price", min_amount, @"min_amount", endDateString, @"end_datetime", @(new_order_for_remaining_amount), @"new_order_for_remaining_amount", minTrustLevelAsString, @"min_trust_level", @(only_kyc_full), @"only_kyc_full"
-                                                //                               ,seat_of_bank , @"seat_of_bank"
-                                                ,
-                                                nil];
+                               orderTypeString, @"type",
+                               currencyTypeString, BitcoinDE_ShowOrderbook_TradingPair,
+                               max_amount, @"max_amount",
+                               price, @"price",
+                               min_amount, @"min_amount",
+                               endDateString, @"end_datetime",
+                               @(new_order_for_remaining_amount), @"new_order_for_remaining_amount",
+                               minTrustLevelAsString, @"min_trust_level",
+                               @(only_kyc_full), @"only_kyc_full",
+                               //seat_of_bank , @"seat_of_bank"
+                               nil];
 
     // only on order with type "sell" we can set paymentOption
     if (orderType == BitcoinDE_OrderTypeSell) {
