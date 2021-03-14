@@ -393,13 +393,13 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 }
 
 #pragma mark - Server commands
-+ (NSArray *_Nonnull)serverCommandsKeys {
-    NSDictionary *commands = [SOXMarket_BitcoinDE_Core commands];
-    NSArray *sortedKeys    = [commands.allKeys sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"self"
-                                                                                                        ascending:YES]]];
-
-    return sortedKeys;
-}
+//+ (NSArray *_Nonnull)serverCommandsKeys {
+//    NSDictionary *commands = [SOXMarket_BitcoinDE_Core commands];
+//    NSArray *sortedKeys    = [commands.allKeys sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"self"
+//                                                                                                        ascending:YES]]];
+//
+//    return sortedKeys;
+//}
 
 + (NSString *_Nonnull)descriptionForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType {
     NSDictionary *commandDescriptions = [SOXMarket_BitcoinDE_Core commandDescriptions];
