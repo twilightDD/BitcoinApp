@@ -479,7 +479,8 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
     }
 
     [SOXMarket_BitcoinDE_Core createHttpMethodForServerCommandType:serverCommandType];
-    [SOXMarket_BitcoinDE_Core createURIForServerCommandType:serverCommandType];
+    [SOXMarket_BitcoinDE_Core createURIForServerCommandType:serverCommandType withParameter:parameterDictionary];
+//    [SOXMarket_BitcoinDE_Core createURIForServerCommandType:serverCommandType];
     [SOXMarket_BitcoinDE_Core createNonceString];
     if (serverCommandType != BitcoinDE_ExecuteTrade) {
         [SOXMarket_BitcoinDE_Core createURLQueryStringFromParameterDictionary:parameterDictionary];
@@ -508,9 +509,19 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
     [SOXMarket_BitcoinDE_Core createHMACString];
 }
 
-+ (void)createURIForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType {
++ (void)createURIForServerCommandType:(BitcoinDE_ServerCommandType)serverCommandType
+                        withParameter:(NSDictionary *_Nullable)parameterDictionary {
+    
     NSString *uri = [SOXMarket_BitcoinDE_Core commandForServerCommandType:serverCommandType];
-    //    DDLogInfo(@"uri\n%@",uri);
+        DDLogInfo(@"uri\n%@",uri);
+    
+    NSString *currency = parameterDictionary[@"trading_pair"];
+    if (currency != nil) {
+        ///:trading_pair/rates
+        uri = [NSString stringWithFormat:@"/%@%@", currency, uri];
+        DDLogInfo(@"with currency: \n%@", uri);
+    }
+    
     [SOXMarket_BitcoinDE_Core sharedCore].uri = uri;
 }
 
