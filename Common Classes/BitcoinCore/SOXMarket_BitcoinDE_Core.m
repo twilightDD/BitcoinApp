@@ -579,16 +579,14 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 
     [SOXMarket_BitcoinDE_Core sharedCore].urlQueryString = urlQueryString;
 
-    // Encode urlQueryString in POST and AccountLedger
-    if ([[SOXMarket_BitcoinDE_Core sharedCore].httpMethod isEqualToString:HTTPMethodPOSTKey] || [[SOXMarket_BitcoinDE_Core sharedCore].uri isEqualToString:@"/account/ledger"]) {
-        NSMutableCharacterSet *chars = NSCharacterSet.URLQueryAllowedCharacterSet.mutableCopy;
-        [chars removeCharactersInRange:NSMakeRange(':', 1)];   // %3A
-        [chars removeCharactersInRange:NSMakeRange('+', 1)];   // %2B
-        NSString *urlEncodedQueryString = [urlQueryString stringByAddingPercentEncodingWithAllowedCharacters:chars];
-
-        [SOXMarket_BitcoinDE_Core sharedCore].urlQueryString        = urlEncodedQueryString;   // needed for POST (createOrder)
-        [SOXMarket_BitcoinDE_Core sharedCore].urlEncodedQueryString = urlEncodedQueryString;
-    }
+    // New in APIv4: Encode urlQueryString for all requests (in v2: for POST and AccountLedger only: 14032021, ph
+    NSMutableCharacterSet *chars = NSCharacterSet.URLQueryAllowedCharacterSet.mutableCopy;
+    [chars removeCharactersInRange:NSMakeRange(':', 1)];   // %3A
+    [chars removeCharactersInRange:NSMakeRange('+', 1)];   // %2B
+    NSString *urlEncodedQueryString = [urlQueryString stringByAddingPercentEncodingWithAllowedCharacters:chars];
+    
+    [SOXMarket_BitcoinDE_Core sharedCore].urlQueryString        = urlEncodedQueryString;   // needed for POST (createOrder)
+    [SOXMarket_BitcoinDE_Core sharedCore].urlEncodedQueryString = urlEncodedQueryString;
 }
 
 + (void)createURL {
