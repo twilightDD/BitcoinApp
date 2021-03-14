@@ -95,9 +95,9 @@
     NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:
                                orderTypeString, @"type",
                                currencyTypeString, BitcoinDE_ShowOrderbook_TradingPair,
-                               max_amount, @"max_amount",
+                               max_amount, @"max_amount_currency_to_trade",
                                price, @"price",
-                               min_amount, @"min_amount",
+                               min_amount, @"min_amount_currency_to_trade",
                                endDateString, @"end_datetime",
                                @(new_order_for_remaining_amount), @"new_order_for_remaining_amount",
                                minTrustLevelAsString, @"min_trust_level",
