@@ -145,23 +145,26 @@
     self.coinSum             = [NSDecimalNumber zero];
     self.kickbackSum         = [NSDecimalNumber zero];
 
+#warning Update for APIv4; 14032021, ph
+    
     for (SOXMyTrades_BitcoinDE_Data *myTradesData in self.myTradesDatas) {
         if ([myTradesData.type isEqualToString:MyTradeHistoryParameter_OrderTypeBuyKey]) {
-            self.coinSum      = [self.coinSum decimalNumberByAdding:myTradesData.amount];
-            self.volumeBuySum = [self.volumeBuySum decimalNumberByAdding:myTradesData.ownCalc_bookingVolume];
+            self.coinSum      = [self.coinSum decimalNumberByAdding:myTradesData.amount_Currency_To_Trade_After_Fee];
+            self.volumeBuySum = [self.volumeBuySum decimalNumberByAdding:myTradesData.volume_Currency_To_Pay_After_Fee];
         }
         else if ([myTradesData.type isEqualToString:MyTradeHistoryParameter_OrderTypeSellKey]) {
-            self.coinSum       = [self.coinSum decimalNumberBySubtracting:myTradesData.amount];
-            self.volumeSellSum = [self.volumeSellSum decimalNumberByAdding:myTradesData.ownCalc_bookingVolume];
+            self.coinSum       = [self.coinSum decimalNumberBySubtracting:myTradesData.amount_Currency_To_Trade_After_Fee];
+            self.volumeSellSum = [self.volumeSellSum decimalNumberByAdding:myTradesData.volume_Currency_To_Pay_After_Fee];
         }
         else {
             NSAssert(NO, @"no valid type");
         }
 
-        self.bitcoinFeeVolumeSum = [self.bitcoinFeeVolumeSum decimalNumberByAdding:myTradesData.feeEur];
+        self.bitcoinFeeVolumeSum = [self.bitcoinFeeVolumeSum decimalNumberByAdding:myTradesData.fee_Currency_To_Pay];
         self.fidorFeeVolumeSum   = [self.fidorFeeVolumeSum decimalNumberByAdding:myTradesData.ownCalc_fidorFee];
         self.appFeeVolumeSum     = [self.appFeeVolumeSum decimalNumberByAdding:myTradesData.ownCalc_fidorFee];
     }
+     
 
     self.cashFlowVolumeSum = [self.volumeSellSum decimalNumberByAdding:self.volumeBuySum];
     // over all income: cashFlow - fidorFee - appFee
