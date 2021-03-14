@@ -69,13 +69,20 @@ NSString *const BitcoinDE_ShowAccountLedger_Balance   = @"balance";
 NSString *const BitcoinDE_ShowAccountLedger_Trade                = @"trade";
 NSString *const BitcoinDE_ShowAccountLedger_Trade_TradeID        = @"trade_id";
 NSString *const BitcoinDE_ShowAccountLedger_Trade_Price          = @"price";
-NSString *const BitcoinDE_ShowAccountLedger_Trade_BTC            = @"primary_currency";
-NSString *const BitcoinDE_ShowAccountLedger_Trade_BTC_BeforeFee  = @"before_fee";
-NSString *const BitcoinDE_ShowAccountLedger_Trade_BTC_AfterFee   = @"after_fee";
-NSString *const BitcoinDE_ShowAccountLedger_Trade_Euro           = @"secondary_currency";
-NSString *const BitcoinDE_ShowAccountLedger_Trade_Euro_BeforeFee = @"before_fee";
-NSString *const BitcoinDE_ShowAccountLedger_Trade_Euro_AfterFee  = @"after_fee";
+//NSString *const BitcoinDE_ShowAccountLedger_Trade_BTC            = @"primary_currency";
+//NSString *const BitcoinDE_ShowAccountLedger_Trade_BTC_BeforeFee  = @"before_fee";
+//NSString *const BitcoinDE_ShowAccountLedger_Trade_BTC_AfterFee   = @"after_fee";
+//NSString *const BitcoinDE_ShowAccountLedger_Trade_Euro           = @"secondary_currency";
+//NSString *const BitcoinDE_ShowAccountLedger_Trade_Euro_BeforeFee = @"before_fee";
+//NSString *const BitcoinDE_ShowAccountLedger_Trade_Euro_AfterFee  = @"after_fee";
 NSString *const BitcoinDE_ShowAccountLedger_Trading_Pair         = @"trading_pair";
+//APIv4:
+NSString *const BitcoinDE_ShowAccountLedger_Trade_Currency_To_Trade = @"currency_to_trade";
+NSString *const BitcoinDE_ShowAccountLedger_Trade_Currency_To_Pay = @"currency_to_pay";
+NSString *const BitcoinDE_ShowAccountLedger_Trade_Currency = @"currency";
+NSString *const BitcoinDE_ShowAccountLedger_Trade_Before_fee = @"before_fee";
+NSString *const BitcoinDE_ShowAccountLedger_Trade_After_fee = @"after_fee";
+
 
 #pragma mark | Page Details
 NSString *const BitcoinDE_ShowAccountLedger_Page         = @"page";

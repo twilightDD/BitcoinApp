@@ -69,13 +69,20 @@ FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Balance;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_TradeID;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_Price;
-FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_BTC;
-FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_BTC_BeforeFee;
-FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_BTC_AfterFee;
-FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_Euro;
-FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_Euro_BeforeFee;
-FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_Euro_AfterFee;
+//FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_BTC;
+//FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_BTC_BeforeFee;
+//FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_BTC_AfterFee;
+//FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_Euro;
+//FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_Euro_BeforeFee;
+//FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_Euro_AfterFee;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trading_Pair;
+//APIv4:
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_Currency_To_Trade;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_Currency_To_Pay;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_Currency;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_Before_fee;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Trade_After_fee;
+
 
 #pragma mark |- Page Details
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowAccountLedger_Page;

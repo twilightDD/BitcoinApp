@@ -177,13 +177,15 @@ static NSString *AccountLedgerParameter_PageKey      = @"page";
             self.tradeDetails_Price        = [self convertToNumber:[tradeDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_Price]];
             self.tradeDetails_trading_pair = [tradeDetails objectForKey:BitcoinDE_ShowAccountLedger_Trading_Pair];
 
-            NSDictionary *btcDetails         = [tradeDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_BTC];
-            self.tradeDetails_BTC_before_fee = [self convertToNumber:[btcDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_BTC_BeforeFee]];
-            self.tradeDetails_BTC_after_fee  = [self convertToNumber:[btcDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_BTC_AfterFee]];
+            // Coins (currency to trade)
+            NSDictionary *currencyToTradeDetails         = [tradeDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_Currency_To_Trade];
+            self.tradeDetails_BTC_before_fee = [self convertToNumber:[currencyToTradeDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_Before_fee]];
+            self.tradeDetails_BTC_after_fee  = [self convertToNumber:[currencyToTradeDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_After_fee]];
 
-            NSDictionary *euroDetails         = [tradeDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_Euro];
-            self.tradeDetails_Euro_before_fee = [self convertToNumber:[euroDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_Euro_BeforeFee]];
-            self.tradeDetails_Euro_after_fee  = [self convertToNumber:[euroDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_BTC_AfterFee]];
+            // Euro (currency to pay)
+            NSDictionary *currencyToPayDetails         = [tradeDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_Currency_To_Pay];
+            self.tradeDetails_Euro_before_fee = [self convertToNumber:[currencyToPayDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_Before_fee]];
+            self.tradeDetails_Euro_after_fee  = [self convertToNumber:[currencyToPayDetails objectForKey:BitcoinDE_ShowAccountLedger_Trade_After_fee]];
             if ([self.positionDetails_Type isEqualToString:BitcoinDE_AccountLedgerParameter_BuyOrderTypeKey]) {
                 self.tradeDetails_Euro_before_fee = [self.tradeDetails_Euro_before_fee decimalNumberByMultiplyingBy:[NSDecimalNumber minusOne]];
                 self.tradeDetails_Euro_after_fee = [self.tradeDetails_Euro_after_fee decimalNumberByMultiplyingBy:[NSDecimalNumber minusOne]];
