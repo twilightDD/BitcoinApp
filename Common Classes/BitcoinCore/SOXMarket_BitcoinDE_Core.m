@@ -225,65 +225,66 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
     NSUInteger networkRequestCounter = [SOXMarket_BitcoinDE_Core sharedCore].networkRequestCounter;
 
     weakify(self)
-        NSURLSessionTask *getTask = [[NSURLSession sharedSession] dataTaskWithRequest:request
-                                                                    completionHandler:
-                                                                        ^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
-                                                                            strongify(self)
-
-                                                                                [SOXMarket_BitcoinDE_Core incomingResponseForNetworkRequestCounter:networkRequestCounter];
-
-                                                                            // Erro handling
-                                                                            NSString *serverRequestTitle = [NSString stringWithFormat:@"%tu (%@)",
-                                                                                                                                      serverCommandType, [SOXMarket_BitcoinDE_Core descriptionForServerCommandType:serverCommandType]];
-                                                                            if (parameterDictionary.allKeys.count > 0) {
-                                                                                NSString *furtherTitle = [NSString stringWithFormat:@" - pair: %@", [parameterDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPair]];
-                                                                                serverRequestTitle     = [serverRequestTitle stringByAppendingString:furtherTitle];
-                                                                            }
-
-                                                                            SOXErrorMessage_BitcoinDE *errorMessage = [[SOXErrorMessage_BitcoinDE alloc] initWithServerRequestTitle:serverRequestTitle];
-
-                                                                            __block NSDictionary *serverAnswer;
-                                                                            dispatch_sync(dispatch_get_main_queue(), ^{
-                                                                                serverAnswer = [self answerDictionaryForServerCommand:serverCommandType
-                                                                                                                           parameters:parameterDictionary
-                                                                                                                             withData:data
-                                                                                                                          urlResponse:response
-                                                                                                                                error:error
-                                                                                                                         errorMessage:errorMessage];
-                                                                            });
-                                                                            if (serverAnswer) {
-                                                                                if (serverCommandType == BitcoinDE_ShowAccountInfoCommandType) {
-                                                                                    SOXAccountInfo_BitcoinDE_Data *accountInfoData = [serverAnswer objectForKey:ServerAnswerPayloadKey];
-                                                                                    if (accountInfoData) {
-                                                                                        [SOXMarket_BitcoinDE_Core sharedCore].accountInfoData = accountInfoData;
-                                                                                        [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_RequestShowAccountInfo
-                                                                                                                                            object:serverAnswer];
-                                                                                    }
-                                                                                }
-                                                                                else if (serverCommandType == BitcoinDE_ShowRatesCommandType) {
-                                                                                    [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_RequestShowRates
-                                                                                                                                        object:serverAnswer];
-                                                                                }
-                                                                                else {
-                                                                                    // Send answer to asking controller
-                                                                                    if ([controller respondsToSelector:@selector(answerOfServerRequest:)]) {
-                                                                                        // NSURLSessionTask has its own thread
-                                                                                        [controller performSelectorOnMainThread:@selector(answerOfServerRequest:)
-                                                                                                                     withObject:serverAnswer
-                                                                                                                  waitUntilDone:NO];
-                                                                                    }
-                                                                                }
-                                                                            }
-
-                                                                            if (errorMessage.hasError && errorMessage.apiErrorCode != 31   // 31 - Page greater than last page
-                                                                            ) {
-                                                                                MacAppDelegate *appDelegate                   = (MacAppDelegate *)[[NSApplication sharedApplication] delegate];
-                                                                                SOXLogWindowController *errorWindowController = appDelegate.errorWindowController;
-                                                                                [errorWindowController performSelectorOnMainThread:@selector(showErrorMessage:)
-                                                                                                                        withObject:errorMessage
-                                                                                                                     waitUntilDone:NO];
-                                                                            }
-                                                                        }];
+    NSURLSessionTask *getTask = [[NSURLSession sharedSession] dataTaskWithRequest:request
+                                                                completionHandler: ^(NSData *_Nullable data,
+                                                                                     NSURLResponse *_Nullable response,
+                                                                                     NSError *_Nullable error) {
+        strongify(self)
+        
+        [SOXMarket_BitcoinDE_Core incomingResponseForNetworkRequestCounter:networkRequestCounter];
+        
+        // Erro handling
+        NSString *serverRequestTitle = [NSString stringWithFormat:@"%tu (%@)",
+                                        serverCommandType, [SOXMarket_BitcoinDE_Core descriptionForServerCommandType:serverCommandType]];
+        if (parameterDictionary.allKeys.count > 0) {
+            NSString *furtherTitle = [NSString stringWithFormat:@" - pair: %@", [parameterDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPair]];
+            serverRequestTitle     = [serverRequestTitle stringByAppendingString:furtherTitle];
+        }
+        
+        SOXErrorMessage_BitcoinDE *errorMessage = [[SOXErrorMessage_BitcoinDE alloc] initWithServerRequestTitle:serverRequestTitle];
+        
+        __block NSDictionary *serverAnswer;
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            serverAnswer = [self answerDictionaryForServerCommand:serverCommandType
+                                                       parameters:parameterDictionary
+                                                         withData:data
+                                                      urlResponse:response
+                                                            error:error
+                                                     errorMessage:errorMessage];
+        });
+        if (serverAnswer) {
+            if (serverCommandType == BitcoinDE_ShowAccountInfoCommandType) {
+                SOXAccountInfo_BitcoinDE_Data *accountInfoData = [serverAnswer objectForKey:ServerAnswerPayloadKey];
+                if (accountInfoData) {
+                    [SOXMarket_BitcoinDE_Core sharedCore].accountInfoData = accountInfoData;
+                    [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_RequestShowAccountInfo
+                                                                        object:serverAnswer];
+                }
+            }
+            else if (serverCommandType == BitcoinDE_ShowRatesCommandType) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:BitcoinDE_Notification_RequestShowRates
+                                                                    object:serverAnswer];
+            }
+            else {
+                // Send answer to asking controller
+                if ([controller respondsToSelector:@selector(answerOfServerRequest:)]) {
+                    // NSURLSessionTask has its own thread
+                    [controller performSelectorOnMainThread:@selector(answerOfServerRequest:)
+                                                 withObject:serverAnswer
+                                              waitUntilDone:NO];
+                }
+            }
+        }
+        
+        if (errorMessage.hasError && errorMessage.apiErrorCode != 31   // 31 - Page greater than last page
+            ) {
+            MacAppDelegate *appDelegate                   = (MacAppDelegate *)[[NSApplication sharedApplication] delegate];
+            SOXLogWindowController *errorWindowController = appDelegate.errorWindowController;
+            [errorWindowController performSelectorOnMainThread:@selector(showErrorMessage:)
+                                                    withObject:errorMessage
+                                                 waitUntilDone:NO];
+        }
+    }];
     getTask.priority              = 1.0;
 
     [SOXMarket_BitcoinDE_Core addNSURLSessionTask:getTask
