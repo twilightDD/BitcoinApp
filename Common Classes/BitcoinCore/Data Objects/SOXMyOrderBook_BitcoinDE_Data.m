@@ -90,7 +90,7 @@
     NSString *orderTypeString       = [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:orderType];
     NSString *currencyTypeString    = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType];
     NSString *minTrustLevelAsString = [SOXMarket_BitcoinDE_DefTypes trustLevelStringForTrustLevel:min_trust_level];
-    NSString *endDateString         = [SOXFormatters rfc3339PostDateTimeStringDate:end_datetime];
+    NSString *endDateString         = [SOXFormatters rfc3339DateTimeStringDate:end_datetime];
 
     NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:
                                orderTypeString, @"type",
@@ -162,8 +162,8 @@
             break;
     }
 
-    NSString *startDateString = [SOXFormatters rfc3339GetDateTimeStringDate:startDate];
-    NSString *endDateString   = [SOXFormatters rfc3339GetDateTimeStringDate:endDate];
+    NSString *startDateString = [SOXFormatters rfc3339DateTimeStringDate:startDate];
+    NSString *endDateString   = [SOXFormatters rfc3339DateTimeStringDate:endDate];
 
     NSNumber *pageNumber = @(page);
 

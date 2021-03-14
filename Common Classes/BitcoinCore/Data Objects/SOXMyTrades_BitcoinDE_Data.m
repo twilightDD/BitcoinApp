@@ -85,8 +85,8 @@
 
     NSString *currencyTypeString = [SOXMarket_BitcoinDE_DefTypes tradingPairStringForCurrencyType:currencyType];
 
-    NSString *startDateString = [SOXFormatters rfc3339GetDateTimeStringDate:startDate];
-    NSString *endDateString   = [SOXFormatters rfc3339GetDateTimeStringDate:endDate];
+    NSString *startDateString = [SOXFormatters rfc3339DateTimeStringDate:startDate];
+    NSString *endDateString   = [SOXFormatters rfc3339DateTimeStringDate:endDate];
 
     NSNumber *pageNumber = @(page);
 

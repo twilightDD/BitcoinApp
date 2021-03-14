@@ -68,8 +68,8 @@
 
         sRFC3339DateFormatter.locale     = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
         sRFC3339DateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
-        //        sRFC3339DateFormatter.timeZone   = [NSTimeZone localTimeZone]; // Post 00:00 Format
-        sRFC3339DateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];   // Get Z-Format
+        sRFC3339DateFormatter.timeZone   = [NSTimeZone localTimeZone]; // Post 00:00 Format
+//        sRFC3339DateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];   // Get Z-Format
     });
 
     /* Result: 2018-09-17T21:45:00Z
