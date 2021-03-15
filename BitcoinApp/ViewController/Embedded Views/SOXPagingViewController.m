@@ -59,7 +59,7 @@
 
     // dates
     self.selectedStartDate = [SOXFormatters dateForRFC3339DateTimeString:@"2000-01-01T02:00:00+02:00"];
-    self.selectedEndDate   = [SOXFormatters dateNextDayQuarterBeforeMidnightForDate:[NSDate date]];
+    self.selectedEndDate   = [SOXFormatters dateQuarterBeforeMidnightForDate:[NSDate date]];
 
     [self setupUI];
 }
