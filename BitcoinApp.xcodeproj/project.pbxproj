@@ -160,6 +160,8 @@
 		D07AEDB521BF4102006B39D5 /* SOXAccountLedgerStatisticsData_LoadPageInformation_ValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D07AEDB321BF4102006B39D5 /* SOXAccountLedgerStatisticsData_LoadPageInformation_ValueTransformer.m */; };
 		D07BE9DA21831EDB00101DCF /* SOXPagingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D07BE9D921831EDB00101DCF /* SOXPagingViewController.m */; };
 		D07BE9DB21831EDB00101DCF /* SOXPagingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D07BE9D921831EDB00101DCF /* SOXPagingViewController.m */; };
+		D07D0A7725FF797700277DDC /* NSDate+Limit.m in Sources */ = {isa = PBXBuildFile; fileRef = D07D0A7625FF797700277DDC /* NSDate+Limit.m */; };
+		D07D0A7825FF797700277DDC /* NSDate+Limit.m in Sources */ = {isa = PBXBuildFile; fileRef = D07D0A7625FF797700277DDC /* NSDate+Limit.m */; };
 		D07DA1972152E00C00F0416B /* SOXBoolNmberToWordValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D07DA1962152E00C00F0416B /* SOXBoolNmberToWordValueTransformer.m */; };
 		D07DA1982152E00C00F0416B /* SOXBoolNmberToWordValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D07DA1962152E00C00F0416B /* SOXBoolNmberToWordValueTransformer.m */; };
 		D07E7B381EA5175D00AB50A5 /* SOXExecuteTradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D07E7B361EA5175D00AB50A5 /* SOXExecuteTradeViewController.m */; };
@@ -400,6 +402,8 @@
 		D07BE9D821831EDB00101DCF /* SOXPagingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXPagingViewController.h; sourceTree = "<group>"; };
 		D07BE9D921831EDB00101DCF /* SOXPagingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXPagingViewController.m; sourceTree = "<group>"; };
 		D07BE9DC21832FA800101DCF /* SOXPagingAbstractViewController_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXPagingAbstractViewController_Private.h; sourceTree = "<group>"; };
+		D07D0A7525FF797700277DDC /* NSDate+Limit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+Limit.h"; sourceTree = "<group>"; };
+		D07D0A7625FF797700277DDC /* NSDate+Limit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Limit.m"; sourceTree = "<group>"; };
 		D07DA1952152E00C00F0416B /* SOXBoolNmberToWordValueTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXBoolNmberToWordValueTransformer.h; sourceTree = "<group>"; };
 		D07DA1962152E00C00F0416B /* SOXBoolNmberToWordValueTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXBoolNmberToWordValueTransformer.m; sourceTree = "<group>"; };
 		D07E7B351EA5175D00AB50A5 /* SOXExecuteTradeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXExecuteTradeViewController.h; sourceTree = "<group>"; };
@@ -945,6 +949,8 @@
 				D0B9A3331E895EA0008860ED /* NSAttributedString+URL.m */,
 				D0B9A3361E89934D008860ED /* NSTextField+URL.h */,
 				D0B9A3371E89934D008860ED /* NSTextField+URL.m */,
+				D07D0A7525FF797700277DDC /* NSDate+Limit.h */,
+				D07D0A7625FF797700277DDC /* NSDate+Limit.m */,
 				D0DD8DB621AC9BB000778967 /* NSDate+SOXCompare.h */,
 				D0DD8DB721AC9BB000778967 /* NSDate+SOXCompare.m */,
 				D0DD8DBA21ACAC2300778967 /* NSDecimalNumber+Convenient.h */,
@@ -1159,6 +1165,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -1409,6 +1416,7 @@
 				D021507920474AEC005A0932 /* SOXAccountInfo_BitcoinDE_Data.m in Sources */,
 				D021507A20474AEC005A0932 /* SOXMarket_BitcoinDE_DefTypes.m in Sources */,
 				D06DE29321824A7C002BC973 /* SOXTradeStatisticsViewController.m in Sources */,
+				D07D0A7825FF797700277DDC /* NSDate+Limit.m in Sources */,
 				D021507B20474AEC005A0932 /* SOXDataConverter_BitcoinDE.m in Sources */,
 				D06DE29721824CC2002BC973 /* SOXStatisticsAbstractViewController.m in Sources */,
 				D0F7027E216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.m in Sources */,
@@ -1500,6 +1508,7 @@
 				D02ED5AC1E814CA600AA9448 /* SOXAccountInfo_BitcoinDE_Data.m in Sources */,
 				D08086771E9CECAC00373F09 /* SOXMarket_BitcoinDE_DefTypes.m in Sources */,
 				D06DE29221824A7C002BC973 /* SOXTradeStatisticsViewController.m in Sources */,
+				D07D0A7725FF797700277DDC /* NSDate+Limit.m in Sources */,
 				D02ED5AE1E814CA600AA9448 /* SOXDataConverter_BitcoinDE.m in Sources */,
 				D06DE29621824CC2002BC973 /* SOXStatisticsAbstractViewController.m in Sources */,
 				D0F7027D216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.m in Sources */,
