@@ -557,13 +557,17 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 
         NSString *httpMethod = [SOXMarket_BitcoinDE_Core sharedCore].httpMethod;
         if ([httpMethod isEqualToString:HTTPMethodDELETEKey]) {
-            NSMutableArray *parameters = [NSMutableArray array];
-            for (NSString *key in allKeys) {
-                NSString *parameter = [parameterDictionary objectForKey:key];
-                [parameters addObject:parameter];
-            }
-            // join pairs with "/"
-            urlQueryString = [parameters componentsJoinedByString:@"/"];
+            // APIV4: Delete an order requires orderID only; 15032021, ph
+            NSString *orderID = parameterDictionary[BitcoinDE_ShowMyOrders_OrderID];
+            urlQueryString = orderID;
+            
+//            NSMutableArray *parameters = [NSMutableArray array];
+//            for (NSString *key in allKeys) {
+//                NSString *parameter = [parameterDictionary objectForKey:key];
+//                [parameters addObject:parameter];
+//            }
+//            // join pairs with "/"
+//            urlQueryString = [parameters componentsJoinedByString:@"/"];
         }
         else {   //if ([httpMethod isEqualToString:HTTPMethodPOSTKey]) {
             // create "parameter=value" pairs
