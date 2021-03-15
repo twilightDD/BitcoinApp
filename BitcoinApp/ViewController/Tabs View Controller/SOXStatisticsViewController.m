@@ -111,22 +111,10 @@
     NSNumber *currentMonth = [SOXFormatters currentMonth];
     NSNumber *currentYear  = [SOXFormatters currentYear];
 
-    NSNumber *monthToUse;
-    NSNumber *yearToUse = currentYear;
-    if (currentMonth.integerValue == 1) {
-        // On january use december last year
-        monthToUse = @12;
-        yearToUse  = @(currentYear.integerValue - 1);
-    }
-    else {
-        // Use "Last month" as default.
-        monthToUse = @(currentMonth.integerValue - 1);
-    }
-
-    self.startMonth = monthToUse;
-    self.startYear  = yearToUse;
-    self.endMonth   = monthToUse;
-    self.endYear    = yearToUse;
+    self.startMonth = currentMonth;
+    self.startYear  = currentYear;
+    self.endMonth   = currentMonth;
+    self.endYear    = currentYear;
 }
 
 - (void)setupCurrencyButtons {
@@ -171,13 +159,11 @@
     for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeUnknown + 1;
          currencyType < BitcoinDE_CurrencyType_EndOfType;
          currencyType++) {
+        
         SOXMyTrades_BitcoinDE_StatisticData *myTradesStatisticsData;
         myTradesStatisticsData = [[SOXMyTrades_BitcoinDE_StatisticData alloc] initWithCurrencyType:currencyType];
         [self.arrayControllerDatas addObject:myTradesStatisticsData];
 
-        
-        
-        
         // page request for selected currencies only
         if ([SOXPreferenceCenter loadStatisticsForCurrencyType:currencyType]) {
             myTradesStatisticsData.state = SOXStatisticData_StateType_WaitingForLoading;
@@ -189,8 +175,6 @@
                                                                                 endDate:self.endDate
                                                                                    page:1];
             [self.requestQueue addObject:parameter];
-        }
-        else {
         }
     }
 
