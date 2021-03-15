@@ -28,6 +28,7 @@
 - (void)loadNextPage {
     [super loadNextPage];
 
+    // enddate may be in future; but result will be limited to "yesterday"
     NSDictionary *parameter = [SOXAccountLedger_BitcoinDE_Data parameterForOrderType:self.selectedAccountLedgerOrderType
                                                                      forCurrencyType:self.selectedCurrencyType
                                                                            startDate:self.selectedStartDate

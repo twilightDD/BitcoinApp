@@ -11,6 +11,8 @@
 
 #import "SOXMyTrades_BitcoinDE_Data.h"
 
+#import "NSDate+Limit.h"
+
 #pragma mark - Interface
 @interface SOXMyTradeHistoryViewController ()
 
@@ -34,11 +36,14 @@
 - (void)loadNextPage {
     [super loadNextPage];
 
+    // endDate for TradeHistory may be today, but not in future hours
+    NSDate *selectedEndDate = [self.selectedEndDate limitedToNow];
+    
     NSDictionary *parameterDictionary = [SOXMyTrades_BitcoinDE_Data parameterForOrderType:self.selectedTradeHistoryOrderType
                                                                                tradeState:self.selectedTradeStateType
                                                                              currencyType:self.selectedCurrencyType
                                                                                 startDate:self.selectedStartDate
-                                                                                  endDate:self.selectedEndDate
+                                                                                  endDate:selectedEndDate
                                                                                      page:self.currentPage];
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowMyTradesType
                                             withParameter:parameterDictionary

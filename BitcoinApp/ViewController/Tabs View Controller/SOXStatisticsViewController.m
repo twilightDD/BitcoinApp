@@ -20,6 +20,8 @@
 
 #import "SOXPage_BitcoinDE_Data.h"
 
+#import "NSDate+Limit.h"
+
 #pragma mark - Interface
 @interface SOXStatisticsViewController () <SOXMarketCoreServerRequestProtocol>
 
@@ -163,7 +165,8 @@
 
     self.startDate = [SOXFormatters dateFirstDayOfMonth:self.startMonth year:self.startYear];
     self.endDate   = [SOXFormatters dateLastDayOfMonth:self.endMonth year:self.endYear];
-
+    self.endDate = [self.endDate limitedToNow]; // endDate for TradeHistory may be today, but not in future hours
+    
     // setup first page of requests
     for (BitcoinDE_CurrencyType currencyType = BitcoinDE_CurrencyTypeUnknown + 1;
          currencyType < BitcoinDE_CurrencyType_EndOfType;
@@ -172,6 +175,9 @@
         myTradesStatisticsData = [[SOXMyTrades_BitcoinDE_StatisticData alloc] initWithCurrencyType:currencyType];
         [self.arrayControllerDatas addObject:myTradesStatisticsData];
 
+        
+        
+        
         // page request for selected currencies only
         if ([SOXPreferenceCenter loadStatisticsForCurrencyType:currencyType]) {
             myTradesStatisticsData.state = SOXStatisticData_StateType_WaitingForLoading;

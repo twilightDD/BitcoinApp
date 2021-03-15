@@ -14,6 +14,8 @@
 
 #import "SOXMyOrderBook_BitcoinDE_Data.h"
 
+#import "NSDate+Limit.h"
+
 #pragma mark - Interface
 @interface SOXMyActiveOrdersViewController () <SOXChangeOrderProtocol, NSTableViewDelegate>
 
@@ -41,11 +43,14 @@
 - (void)loadNextPage {
     [super loadNextPage];
 
+    // endDate for ShowMyActiveOrders may be today, but not in future hours
+    NSDate *selectedEndDate = [self.selectedEndDate limitedToNow];
+    
     NSDictionary *parameters = [SOXMyOrderBook_BitcoinDE_Data parameterForOrderType:self.selectedOrderType
                                                                        currencyType:self.selectedCurrencyType
                                                                          orderState:self.selectedOrderStateType
                                                                           startDate:self.selectedStartDate
-                                                                            endDate:self.selectedEndDate
+                                                                            endDate:selectedEndDate
                                                                                page:self.currentPage];
 
     [SOXMarket_BitcoinDE_Core requestDataForServerCommand:BitcoinDE_ShowMyOrdersCommandType
