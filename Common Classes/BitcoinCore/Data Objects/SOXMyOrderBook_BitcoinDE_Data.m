@@ -226,11 +226,11 @@
         self.orderInformation_type                       = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_Type];
         self.orderInformation_tradingPair                = [myOrderDictionary objectForKey:BitcoinDE_ShowOrderbook_TradingPair];
         self.orderInformation_currencyType               = [SOXMarket_BitcoinDE_DefTypes currencyTypeForTradingPairString:self.orderInformation_tradingPair];
-        self.orderInformation_maxAmount                  = [NSDecimalNumber decimalNumberWithString:[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MaxAmount]];
-        self.orderInformation_minAmount                  = [NSDecimalNumber decimalNumberWithString:[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MinAmount]];
+        self.orderInformation_maxAmount                  = [NSDecimalNumber decimalNumberWithString:[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MaxAmount_currency_to_trade]];
+        self.orderInformation_minAmount                  = [NSDecimalNumber decimalNumberWithString:[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MinAmount_currency_to_trade]];
         self.orderInformation_price                      = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_Price];
-        self.orderInformation_maxVolume                  = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MaxVolume];
-        self.orderInformation_minVolume                  = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MinVolume];
+        self.orderInformation_maxVolume                  = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MaxVolume_currency_to_pay];
+        self.orderInformation_minVolume                  = [myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_MinVolume_currency_to_pay];
         self.orderInformation_createdAt                  = [SOXFormatters dateForRFC3339DateTimeString:[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_CreatedAt]];
         self.orderInformation_endDateTime                = [SOXFormatters dateForRFC3339DateTimeString:[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_EndDateTime]];
         self.orderInformation_newOrderForRemainingAmount = [[myOrderDictionary objectForKey:BitcoinDE_ShowMyOrders_NewOrderForRemainingAmount] boolValue];

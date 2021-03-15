@@ -95,11 +95,11 @@ NSString *const BitcoinDE_ShowMyOrders_MainKey = @"orders";
 #pragma mark | Order Details
 NSString *const BitcoinDE_ShowMyOrders_OrderID                    = @"order_id";
 NSString *const BitcoinDE_ShowMyOrders_Type                       = @"type";
-NSString *const BitcoinDE_ShowMyOrders_MaxAmount                  = @"max_amount";
-NSString *const BitcoinDE_ShowMyOrders_MinAmount                  = @"min_amount";
 NSString *const BitcoinDE_ShowMyOrders_Price                      = @"price";
-NSString *const BitcoinDE_ShowMyOrders_MaxVolume                  = @"max_volume";
-NSString *const BitcoinDE_ShowMyOrders_MinVolume                  = @"min_volume";
+NSString *const BitcoinDE_ShowMyOrders_MaxAmount_currency_to_trade = @"max_amount_currency_to_trade"; // MaxAmount
+NSString *const BitcoinDE_ShowMyOrders_MinAmount_currency_to_trade = @"min_amount_currency_to_trade"; // MinAmount
+NSString *const BitcoinDE_ShowMyOrders_MaxVolume_currency_to_pay  = @"max_volume_currency_to_pay"; // MaxVolume
+NSString *const BitcoinDE_ShowMyOrders_MinVolume_currency_to_pay  = @"min_volume_currency_to_pay"; // MinVolume
 NSString *const BitcoinDE_ShowMyOrders_CreatedAt                  = @"created_at";
 NSString *const BitcoinDE_ShowMyOrders_EndDateTime                = @"end_datetime";
 NSString *const BitcoinDE_ShowMyOrders_NewOrderForRemainingAmount = @"new_order_for_remaining_amount";

@@ -90,11 +90,11 @@ FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_MainKey;
 #pragma mark | Order Details
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_OrderID;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_Type;
-FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_MaxAmount;
-FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_MinAmount;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_Price;
-FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_MaxVolume;
-FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_MinVolume;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_MaxAmount_currency_to_trade; // MaxAmount
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_MinAmount_currency_to_trade; // MinAmount
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_MaxVolume_currency_to_pay; // MaxVolume
+FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_MinVolume_currency_to_pay; // MinVolume
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_CreatedAt;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_EndDateTime;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ShowMyOrders_NewOrderForRemainingAmount;
