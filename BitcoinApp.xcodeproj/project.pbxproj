@@ -122,6 +122,8 @@
 		D049C4631E7721AC003CBF36 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D049C45F1E7721AC003CBF36 /* Crashlytics.framework */; };
 		D04BF87020F7E3CC004255D8 /* SOXPreferencesCore.m in Sources */ = {isa = PBXBuildFile; fileRef = D04BF86F20F7E3CC004255D8 /* SOXPreferencesCore.m */; };
 		D04BF87120F7E3CC004255D8 /* SOXPreferencesCore.m in Sources */ = {isa = PBXBuildFile; fileRef = D04BF86F20F7E3CC004255D8 /* SOXPreferencesCore.m */; };
+		D04CA6FE2610A15700B433A6 /* CompatibilityToSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04CA6FD2610A15700B433A6 /* CompatibilityToSwift.swift */; };
+		D04CA6FF2610A15700B433A6 /* CompatibilityToSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04CA6FD2610A15700B433A6 /* CompatibilityToSwift.swift */; };
 		D0565BD521348DF7002E0E21 /* SOXPagingAbstractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0565BD421348DF7002E0E21 /* SOXPagingAbstractViewController.m */; };
 		D0565BD621348DF7002E0E21 /* SOXPagingAbstractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0565BD421348DF7002E0E21 /* SOXPagingAbstractViewController.m */; };
 		D05B23D61FB76CBB004BAA6E /* SOXMarket_DefTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = D05B23D51FB76CBB004BAA6E /* SOXMarket_DefTypes.m */; };
@@ -346,6 +348,9 @@
 		D049C45F1E7721AC003CBF36 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		D04BF86E20F7E3CC004255D8 /* SOXPreferencesCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXPreferencesCore.h; sourceTree = "<group>"; };
 		D04BF86F20F7E3CC004255D8 /* SOXPreferencesCore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXPreferencesCore.m; sourceTree = "<group>"; };
+		D04CA6FB2610A15600B433A6 /* mac BitcoinApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mac BitcoinApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		D04CA6FC2610A15600B433A6 /* mac BitcoinApp Peter-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mac BitcoinApp Peter-Bridging-Header.h"; sourceTree = "<group>"; };
+		D04CA6FD2610A15700B433A6 /* CompatibilityToSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibilityToSwift.swift; sourceTree = "<group>"; };
 		D0565BD321348DF7002E0E21 /* SOXPagingAbstractViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXPagingAbstractViewController.h; sourceTree = "<group>"; };
 		D0565BD421348DF7002E0E21 /* SOXPagingAbstractViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXPagingAbstractViewController.m; sourceTree = "<group>"; };
 		D05B23D41FB76CBB004BAA6E /* SOXMarket_DefTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXMarket_DefTypes.h; sourceTree = "<group>"; };
@@ -791,6 +796,7 @@
 				D0509D192187CA47009EFE7D /* Classes */,
 				D063E9181E74BF97006E2D17 /* MacAppDelegate.h */,
 				D063E9191E74BF97006E2D17 /* MacAppDelegate.m */,
+				D04CA6FD2610A15700B433A6 /* CompatibilityToSwift.swift */,
 				D03C90D1213AACB800F1E358 /* ViewController */,
 				D0EB0E4E1F8551E9004839C2 /* WindowController */,
 				D063E9241E74BF97006E2D17 /* Assets.xcassets */,
@@ -800,6 +806,8 @@
 				D063E91B1E74BF97006E2D17 /* Supporting Files */,
 				D0F70254216ABC4800BA7EDF /* SOXView.h */,
 				D0F70255216ABC4800BA7EDF /* SOXView.m */,
+				D04CA6FB2610A15600B433A6 /* mac BitcoinApp-Bridging-Header.h */,
+				D04CA6FC2610A15600B433A6 /* mac BitcoinApp Peter-Bridging-Header.h */,
 			);
 			name = "Mac BitcoinApp";
 			path = BitcoinApp;
@@ -1126,6 +1134,7 @@
 				TargetAttributes = {
 					D021505B20474AEC005A0932 = {
 						DevelopmentTeam = URATVA2LKM;
+						LastSwiftMigration = 1240;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
@@ -1139,6 +1148,7 @@
 					D063E9141E74BF97006E2D17 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = URATVA2LKM;
+						LastSwiftMigration = 1240;
 						ProvisioningStyle = Automatic;
 					};
 					D063E92D1E74BF97006E2D17 = {
@@ -1409,6 +1419,7 @@
 				D021507620474AEC005A0932 /* SOXOrdersViewController.m in Sources */,
 				D021507720474AEC005A0932 /* SOXRates_BitcoinDE_Data.m in Sources */,
 				D096A7AC21B888A000274483 /* SOXAccountLedger_BitcoinDE_StatisticData.m in Sources */,
+				D04CA6FF2610A15700B433A6 /* CompatibilityToSwift.swift in Sources */,
 				D0B76EA72230280A00680DBD /* SOXMyTrades_BitcoinDE_StatisticData.m in Sources */,
 				D021507820474AEC005A0932 /* SOXShowOrderbookData.m in Sources */,
 				D096A7A821B86CAE00274483 /* SOXDataStatistics.m in Sources */,
@@ -1501,6 +1512,7 @@
 				D0331D531E7CAEFF008C0244 /* SOXOrdersViewController.m in Sources */,
 				D02ED5B21E814CF100AA9448 /* SOXRates_BitcoinDE_Data.m in Sources */,
 				D096A7AB21B888A000274483 /* SOXAccountLedger_BitcoinDE_StatisticData.m in Sources */,
+				D04CA6FE2610A15700B433A6 /* CompatibilityToSwift.swift in Sources */,
 				D0B76EA62230280A00680DBD /* SOXMyTrades_BitcoinDE_StatisticData.m in Sources */,
 				D02ED5BE1E817CFE00AA9448 /* SOXShowOrderbookData.m in Sources */,
 				D096A7A721B86CAE00274483 /* SOXDataStatistics.m in Sources */,
@@ -1672,6 +1684,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "mac BitcoinApp Peter.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -1699,6 +1712,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.2sox.soxtrade;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "BitcoinApp/mac BitcoinApp Peter-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1706,6 +1722,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "mac BitcoinApp Peter.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -1727,6 +1744,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.2sox.soxtrade;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "BitcoinApp/mac BitcoinApp Peter-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -1838,6 +1857,7 @@
 			baseConfigurationReference = 1D88C6F891C371E66BA36F5F /* Pods-mac BitcoinApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1859,6 +1879,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.2sox.soxtrade;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "BitcoinApp/mac BitcoinApp-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1867,6 +1890,7 @@
 			baseConfigurationReference = 5D9D8C1F4B1A9582D3725F8E /* Pods-mac BitcoinApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1882,6 +1906,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.2sox.soxtrade;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "BitcoinApp/mac BitcoinApp-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -1889,6 +1915,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B30DF34ECAF33459973BF538 /* Pods-mac BitcoinAppTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = URATVA2LKM;
@@ -1904,6 +1931,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5DC4280E57323ABE03DD1721 /* Pods-mac BitcoinAppTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = URATVA2LKM;
