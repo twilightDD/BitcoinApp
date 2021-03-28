@@ -29,6 +29,13 @@
 // IAP
 #import "SOXIAPHelper.h"
 
+
+#import "SOXSocketIO_BitcoinDE_NewCore.h"
+
+
+#import"mac_BitcoinApp-Swift.h"
+
+
 @interface MacAppDelegate ()
 
 @property (strong, nonatomic) NSWindow *mainWindow;
@@ -47,6 +54,11 @@
     self.mainWindow       = [NSApp mainWindow];
     self.mainWindow.title = @"CoinerApp";
 
+//    SOXSocketIO_BitcoinDE_NewCore *core = [[SOXSocketIO_BitcoinDE_NewCore alloc] init];
+//    [core testMself];
+    
+    [Core testMe];
+    
     // Insert code here to initialize your application
 
     [Fabric with:@ [[Crashlytics class]]];

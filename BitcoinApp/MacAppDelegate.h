@@ -9,6 +9,8 @@
 #import <Cocoa/Cocoa.h>
 
 @class SOXLogWindowController;
+@class Core;
+
 
 @interface MacAppDelegate : NSObject <NSApplicationDelegate>
 
