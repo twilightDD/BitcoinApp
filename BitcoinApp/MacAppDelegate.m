@@ -53,11 +53,6 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     self.mainWindow       = [NSApp mainWindow];
     self.mainWindow.title = @"CoinerApp";
-
-//    SOXSocketIO_BitcoinDE_NewCore *core = [[SOXSocketIO_BitcoinDE_NewCore alloc] init];
-//    [core testMself];
-    
-//    [Core testMe];
     
     // Insert code here to initialize your application
 
