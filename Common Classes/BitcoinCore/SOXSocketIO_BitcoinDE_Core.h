@@ -41,6 +41,8 @@
                              forCurrencyType:(BitcoinDE_CurrencyType)currencyType
                                     delegate:(id<SOXSocketIOCoreProtocol>)delegate;
 
++ (void)socketDidConnect;
++ (void)socketDidDisconnect;
 + (void)addOrder:(NSDictionary *)dictionary;
 + (void)removeOrder:(NSDictionary *)dictionary;
 + (void)updateOrder:(NSDictionary *)dictionary;
