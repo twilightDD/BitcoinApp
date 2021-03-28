@@ -65,8 +65,6 @@
 		D021508E20474AEC005A0932 /* SOXMyTradeAmountValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D09759762006BFBE008A4334 /* SOXMyTradeAmountValueTransformer.m */; };
 		D021508F20474AEC005A0932 /* SOXAbstractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0962CCB1E945906004FFF62 /* SOXAbstractViewController.m */; };
 		D021509020474AEC005A0932 /* SOXLogWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EB0E521F855B54004839C2 /* SOXLogWindowController.m */; };
-		D021509320474AEC005A0932 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D049C45F1E7721AC003CBF36 /* Crashlytics.framework */; };
-		D021509420474AEC005A0932 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D049C45E1E7721AC003CBF36 /* Fabric.framework */; };
 		D021509620474AEC005A0932 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D063E9241E74BF97006E2D17 /* Assets.xcassets */; };
 		D021509720474AEC005A0932 /* MacMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D063E9261E74BF97006E2D17 /* MacMain.storyboard */; };
 		D021509820474AEC005A0932 /* SOXLogWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0EB0E531F855B54004839C2 /* SOXLogWindowController.xib */; };
@@ -116,10 +114,6 @@
 		D049C45A1E7712E6003CBF36 /* SOXConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D049C4561E7712E6003CBF36 /* SOXConstants.m */; };
 		D049C45B1E7712E6003CBF36 /* SOXHash.m in Sources */ = {isa = PBXBuildFile; fileRef = D049C4581E7712E6003CBF36 /* SOXHash.m */; };
 		D049C45C1E7712E6003CBF36 /* SOXHash.m in Sources */ = {isa = PBXBuildFile; fileRef = D049C4581E7712E6003CBF36 /* SOXHash.m */; };
-		D049C4601E7721AC003CBF36 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D049C45E1E7721AC003CBF36 /* Fabric.framework */; };
-		D049C4611E7721AC003CBF36 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D049C45E1E7721AC003CBF36 /* Fabric.framework */; };
-		D049C4621E7721AC003CBF36 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D049C45F1E7721AC003CBF36 /* Crashlytics.framework */; };
-		D049C4631E7721AC003CBF36 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D049C45F1E7721AC003CBF36 /* Crashlytics.framework */; };
 		D04BF87020F7E3CC004255D8 /* SOXPreferencesCore.m in Sources */ = {isa = PBXBuildFile; fileRef = D04BF86F20F7E3CC004255D8 /* SOXPreferencesCore.m */; };
 		D04BF87120F7E3CC004255D8 /* SOXPreferencesCore.m in Sources */ = {isa = PBXBuildFile; fileRef = D04BF86F20F7E3CC004255D8 /* SOXPreferencesCore.m */; };
 		D04CA6FE2610A15700B433A6 /* CompatibilityToSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04CA6FD2610A15700B433A6 /* CompatibilityToSwift.swift */; };
@@ -348,8 +342,6 @@
 		D049C4561E7712E6003CBF36 /* SOXConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXConstants.m; sourceTree = "<group>"; };
 		D049C4571E7712E6003CBF36 /* SOXHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXHash.h; sourceTree = "<group>"; };
 		D049C4581E7712E6003CBF36 /* SOXHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXHash.m; sourceTree = "<group>"; };
-		D049C45E1E7721AC003CBF36 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		D049C45F1E7721AC003CBF36 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		D04BF86E20F7E3CC004255D8 /* SOXPreferencesCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXPreferencesCore.h; sourceTree = "<group>"; };
 		D04BF86F20F7E3CC004255D8 /* SOXPreferencesCore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXPreferencesCore.m; sourceTree = "<group>"; };
 		D04CA6FB2610A15600B433A6 /* mac BitcoinApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mac BitcoinApp-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -520,8 +512,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0D0B3E420EAC0E700F12A6B /* Security.framework in Frameworks */,
-				D021509320474AEC005A0932 /* Crashlytics.framework in Frameworks */,
-				D021509420474AEC005A0932 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,8 +521,6 @@
 			files = (
 				D0D0B3E320EAC0DD00F12A6B /* Security.framework in Frameworks */,
 				B9F68ED00EF1147E8A37D564 /* libPods-mac BitcoinApp.a in Frameworks */,
-				D049C4621E7721AC003CBF36 /* Crashlytics.framework in Frameworks */,
-				D049C4601E7721AC003CBF36 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,8 +537,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5CAD54D01A6BF912CFA3BE9 /* libPods-iOS BitcoinApp.a in Frameworks */,
-				D049C4631E7721AC003CBF36 /* Crashlytics.framework in Frameworks */,
-				D049C4611E7721AC003CBF36 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -569,8 +555,6 @@
 			isa = PBXGroup;
 			children = (
 				D0D0B3E220EAC0DD00F12A6B /* Security.framework */,
-				D049C45E1E7721AC003CBF36 /* Fabric.framework */,
-				D049C45F1E7721AC003CBF36 /* Crashlytics.framework */,
 				DF45B40D8F59179007F987AF /* libPods-iOS BitcoinApp.a */,
 				A243607ED1705CCF7ABD64B7 /* libPods-iOS BitcoinAppTests.a */,
 				337C676324C43B0D3C145DF6 /* libPods-mac BitcoinApp.a */,
@@ -1046,7 +1030,6 @@
 				D021505D20474AEC005A0932 /* Sources */,
 				D021509120474AEC005A0932 /* Frameworks */,
 				D021509520474AEC005A0932 /* Resources */,
-				D021509B20474AEC005A0932 /* Fabric */,
 			);
 			buildRules = (
 			);
@@ -1066,7 +1049,6 @@
 				D063E9121E74BF97006E2D17 /* Frameworks */,
 				D063E9131E74BF97006E2D17 /* Resources */,
 				D8203FF062B9225CA3AF4FA2 /* [CP] Copy Pods Resources */,
-				D049C45D1E7720F4003CBF36 /* Fabric */,
 			);
 			buildRules = (
 			);
@@ -1336,34 +1318,6 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
-		};
-		D021509B20474AEC005A0932 /* Fabric */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Fabric;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 2a417f89f43234d98f7fa5e9d4a83b71fe853e6c 4bb3acc74cef15473fab5cbee2f26ddc6ae2d6f9746a54e7acff6707c31a954f";
-		};
-		D049C45D1E7720F4003CBF36 /* Fabric */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Fabric;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 2a417f89f43234d98f7fa5e9d4a83b71fe853e6c 4bb3acc74cef15473fab5cbee2f26ddc6ae2d6f9746a54e7acff6707c31a954f";
 		};
 		D8203FF062B9225CA3AF4FA2 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

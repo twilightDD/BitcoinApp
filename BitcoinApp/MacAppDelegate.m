@@ -7,8 +7,6 @@
 //
 
 #import "MacAppDelegate.h"
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
 
 #import "SOXLogWindowController.h"
 
@@ -55,8 +53,6 @@
     self.mainWindow.title = @"CoinerApp";
     
     // Insert code here to initialize your application
-
-    [Fabric with:@ [[Crashlytics class]]];
 
     {   // CocoaLumberjack
 #ifdef DEBUG
