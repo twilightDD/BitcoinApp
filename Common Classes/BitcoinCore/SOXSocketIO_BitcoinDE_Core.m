@@ -15,6 +15,8 @@
 #import "SocketIO.h"
 #import "SocketIOPacket.h"
 
+#import "mac_BitcoinApp-Swift.h"
+
 #pragma mark - Keys
 static NSString *AddOrderKey    = @"add_order";
 static NSString *RemoveOrderKey = @"remove_order";
@@ -83,7 +85,7 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
         [core.delegateForSellOrderUpdates removeAllObjects];
         [core.delegateForRemoveOrderUpdates removeAllObjects];
         DDLogInfo(@"~~~~~ Going to stop webSocket: no delegate is interested anymore.");
-        [SOXSocketIO_BitcoinDE_Core stopWebSocketCore];
+        [Core stopWebSocketCore];
     }
 }
 
@@ -131,9 +133,132 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
         }
 
         if (![SOXSocketIO_BitcoinDE_Core sharedCore].socketIO) {
-            [SOXSocketIO_BitcoinDE_Core startWebSocketCore];
+            [Core startWebSocketCore];
         }
     }
+}
+
++ (void)addOrder:(NSDictionary *)dictionary {
+    [[SOXSocketIO_BitcoinDE_Core sharedCore] addOrder:dictionary];
+}
+
++ (void)removeOrder:(NSDictionary *)dictionary {
+    [[SOXSocketIO_BitcoinDE_Core sharedCore] removeOrder:dictionary];
+}
+
++ (void)updateOrder:(NSDictionary *)dictionary {
+    [[SOXSocketIO_BitcoinDE_Core sharedCore] updateOrder:dictionary];
+}
+
++ (void)socketIODidConnect {
+    DDLogInfo(@"~~~~~ socketIODidConnect");
+    SEL socketIODidConnectSelector = NSSelectorFromString(@"socketIODidConnect:");
+    NSString *note                 = @"*** socketIODidConnect";
+    for (NSObject *delegate in [SOXSocketIO_BitcoinDE_Core sharedCore].delegateForBuyOrderUpdates) {
+        if ([delegate respondsToSelector:socketIODidConnectSelector]) {
+            [delegate performSelectorOnMainThread:socketIODidConnectSelector
+                                       withObject:note
+                                    waitUntilDone:NO];
+        }
+    }
+    for (NSObject *delegate in [SOXSocketIO_BitcoinDE_Core sharedCore].delegateForSellOrderUpdates) {
+        if ([delegate respondsToSelector:socketIODidConnectSelector]) {
+            [delegate performSelectorOnMainThread:socketIODidConnectSelector
+                                       withObject:note
+                                    waitUntilDone:NO];
+        }
+    }
+}
+
++ (void)socketIODidDisconnect {
+    DDLogInfo(@"~~~~~ socketIODidDisconnect");
+    
+    SEL socketIODidDisconnect = NSSelectorFromString(@"socketIODidDisconnect:");
+    NSString *note            = @"*** socketIODidDisconnect";
+    for (NSObject *delegate in [SOXSocketIO_BitcoinDE_Core sharedCore].delegateForBuyOrderUpdates) {
+        if ([delegate respondsToSelector:socketIODidDisconnect]) {
+            [delegate performSelectorOnMainThread:socketIODidDisconnect
+                                       withObject:note
+                                    waitUntilDone:NO];
+        }
+    }
+    for (NSObject *delegate in [SOXSocketIO_BitcoinDE_Core sharedCore].delegateForSellOrderUpdates) {
+        if ([delegate respondsToSelector:socketIODidDisconnect]) {
+            [delegate performSelectorOnMainThread:socketIODidDisconnect
+                                       withObject:note
+                                    waitUntilDone:NO];
+        }
+    }
+    
+    // Restart after disconnect if some delegates for updates are present
+    SOXSocketIO_BitcoinDE_Core *core = [SOXSocketIO_BitcoinDE_Core sharedCore];
+    if (core.delegateForBuyOrderUpdates.count > 0 || core.delegateForSellOrderUpdates.count > 0 || core.delegateForRemoveOrderUpdates.count > 0) {
+        [SOXSocketIO_BitcoinDE_Core restartWebSocketCore];
+    }
+    else {
+        NSString *info = @"~~~~~DON't restart WebSocket Connection: no delegates are interested ~~~~~";
+        DDLogInfo(@"%@", info);
+    }
+}
+
+
+- (void)addOrder:(NSDictionary *)dictionary {
+    SOXShowOrderbookData *addOrderData = [SOXShowOrderbook_BitcoinDE_Data orderBookDataForSocketIODictionary:dictionary];
+    if (!addOrderData) {
+        DDLogInfo(@"nil");
+    }
+    
+    if ([addOrderData.orderInformation_type isEqualToString:BitcoinDE_WebSocket_BuyOrderType]) {
+        NSHashTable *delegateForBuyOrderUpdatesForTradingPair = [self.delegateForBuyOrderUpdates objectForKey:addOrderData.orderInformation_tradingPair];
+        for (NSObject *delegate in delegateForBuyOrderUpdatesForTradingPair) {
+            [delegate performSelectorOnMainThread:@selector(addedOrder:)
+                                       withObject:addOrderData
+                                    waitUntilDone:NO];
+        }
+    }
+    else if ([addOrderData.orderInformation_type isEqualToString:BitcoinDE_WebSocket_SellOrderType]) {
+        NSHashTable *delegateForSellOrderUpdatesForTradingPair = [self.delegateForSellOrderUpdates objectForKey:addOrderData.orderInformation_tradingPair];
+        for (NSObject *delegate in delegateForSellOrderUpdatesForTradingPair) {
+            [delegate performSelectorOnMainThread:@selector(addedOrder:)
+                                       withObject:addOrderData
+                                    waitUntilDone:NO];
+        }
+    }
+    else {
+        DDLogInfo(@"socketIO:didReceiveEvent: BitcoinDE_WebSocket_AddOrder_MainKey -> unknown type: %@", addOrderData.orderInformation_type);
+    }
+}
+
+
+- (void)removeOrder:(NSDictionary *)dictionary {
+    NSString *tradingPairString = [dictionary objectForKey:BitcoinDE_WebSocket_TradingPair];
+    NSHashTable *delegateForRemoveOrderUpdatesForTradingPair = [self.delegateForRemoveOrderUpdates objectForKey:tradingPairString];
+    for (NSObject *delegate in delegateForRemoveOrderUpdatesForTradingPair) {
+        if ([delegate respondsToSelector:@selector(removedOrderWithOrderID:)]) {
+            [delegate performSelectorOnMainThread:@selector(removedOrderWithOrderID:)
+                                       withObject:dictionary
+                                    waitUntilDone:NO];
+        }
+    }
+}
+
+- (void)updateOrder:(NSDictionary *)dictionary {
+    NSArray *objectOrderIDs = dictionary.allKeys;   // Key des Dict ist objectOrderID (sehr geile API!)
+    for (NSString *objectOrderID in objectOrderIDs) {     // für jeden Key(objectOrderID) die Payload an die Delegates senden
+        NSDictionary *changesDictionary = [dictionary objectForKey:objectOrderID];
+        
+        NSString *tradingPairString              = [changesDictionary objectForKey:BitcoinDE_WebSocket_TradingPair];
+        NSHashTable *delegateForSellOrderUpdates = [self.delegateForSellOrderUpdates objectForKey:tradingPairString];
+        // inform sell-delegates: WebSocket_UpdateOrder only for sell orders
+        for (NSObject *delegate in delegateForSellOrderUpdates) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [delegate performSelector:@selector(updateOrderWithSocketOrderObjectID:withValues:)
+                               withObject:objectOrderID
+                               withObject:changesDictionary];
+            });
+        }
+    }
+    
 }
 
 #pragma mark - Private class methods
@@ -153,16 +278,13 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
     return sharedCore;
 }
 
-+ (void)startWebSocketCore {
-    [SOXSocketIO_BitcoinDE_Core sharedCore].socketIO           = [[SocketIO alloc] initWithDelegate:[SOXSocketIO_BitcoinDE_Core sharedCore]];
-    [SOXSocketIO_BitcoinDE_Core sharedCore].socketIO.useSecure = YES;
-    [[SOXSocketIO_BitcoinDE_Core sharedCore].socketIO connectToHost:@"ws.bitcoin.de" onPort:443];
-}
+//+ (void)startWebSocketCore {
+//    [Core startWebSocketCore];
+//}
 
-+ (void)stopWebSocketCore {
-    [[SOXSocketIO_BitcoinDE_Core sharedCore].socketIO disconnect];
-    [[SOXSocketIO_BitcoinDE_Core sharedCore] setSocketIO:nil];
-}
+//+ (void)stopWebSocketCore {
+//    [Core stopWebSocketCore];
+//}
 
 + (void)restartWebSocketCore {
     NSString *info = @"~~~~~ Try to restart WebSocket Connection in 20 seconds ~~~~~";
@@ -186,7 +308,7 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
 
     // wait a little bit and restart socket
     NSTimer *ratesReloadTimer = [NSTimer scheduledTimerWithTimeInterval:20
-                                                                 target:[SOXSocketIO_BitcoinDE_Core class]
+                                                                 target:[Core class]// [SOXSocketIO_BitcoinDE_Core class]
                                                                selector:@selector(startWebSocketCore)
                                                                userInfo:nil
                                                                 repeats:NO];
@@ -263,46 +385,13 @@ static NSString *UpdateOrderKey = @"refresh_express_option";
 
     if ([packet.name isEqualToString:BitcoinDE_WebSocket_AddOrder_MainKey]) {
         for (NSDictionary *packetDictionary in packetArguments) {
-            SOXShowOrderbookData *addOrderData = [SOXShowOrderbook_BitcoinDE_Data orderBookDataForSocketIODictionary:packetDictionary];
-            if (!addOrderData) {
-                DDLogInfo(@"nil");
-            }
-
-            if ([addOrderData.orderInformation_type isEqualToString:BitcoinDE_WebSocket_BuyOrderType]) {
-                NSHashTable *delegateForBuyOrderUpdatesForTradingPair = [self.delegateForBuyOrderUpdates objectForKey:addOrderData.orderInformation_tradingPair];
-                for (NSObject *delegate in delegateForBuyOrderUpdatesForTradingPair) {
-                    [delegate performSelectorOnMainThread:@selector(addedOrder:)
-                                               withObject:addOrderData
-                                            waitUntilDone:NO];
-                }
-            }
-            else if ([addOrderData.orderInformation_type isEqualToString:BitcoinDE_WebSocket_SellOrderType]) {
-                NSHashTable *delegateForSellOrderUpdatesForTradingPair = [self.delegateForSellOrderUpdates objectForKey:addOrderData.orderInformation_tradingPair];
-                for (NSObject *delegate in delegateForSellOrderUpdatesForTradingPair) {
-                    [delegate performSelectorOnMainThread:@selector(addedOrder:)
-                                               withObject:addOrderData
-                                            waitUntilDone:NO];
-                }
-            }
-            else {
-                DDLogInfo(@"socketIO:didReceiveEvent: BitcoinDE_WebSocket_AddOrder_MainKey -> unknown type: %@", addOrderData.orderInformation_type);
-            }
+            [self addOrder:packetDictionary];
+            
         }
     }
 
     else if ([packet.name isEqualToString:BitcoinDE_WebSocket_RemoveOrder_MainKey]) {
-        DDLogInfo(@"SocketIO: remove_order");
-        for (NSDictionary *packetDictionary in packetArguments) {
-            NSString *tradingPairString                              = [packetDictionary objectForKey:BitcoinDE_WebSocket_TradingPair];
-            NSHashTable *delegateForRemoveOrderUpdatesForTradingPair = [self.delegateForRemoveOrderUpdates objectForKey:tradingPairString];
-            for (NSObject *delegate in delegateForRemoveOrderUpdatesForTradingPair) {
-                if ([delegate respondsToSelector:@selector(removedOrderWithOrderID:)]) {
-                    [delegate performSelectorOnMainThread:@selector(removedOrderWithOrderID:)
-                                               withObject:packetDictionary
-                                            waitUntilDone:NO];
-                }
-            }
-        }
+      
     }
     else if ([packet.name isEqualToString:BitcoinDE_WebSocket_UpdateOrder_MainKey]) {
         /* packet.args ist ein Array aus Dictionaries

@@ -370,7 +370,7 @@
         return;
     }
 
-    NSLog(@"addedOrder: %@", addOrderData.orderRequirements_paymentOption);
+    NSLog(@"addedOrder: paymentOption %@", addOrderData.orderRequirements_paymentOption);
 
     [self.arrayControllerDatas addObject:addOrderData];
     [self.arrayController rearrangeObjects];

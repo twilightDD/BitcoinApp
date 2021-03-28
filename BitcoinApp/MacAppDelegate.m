@@ -57,7 +57,7 @@
 //    SOXSocketIO_BitcoinDE_NewCore *core = [[SOXSocketIO_BitcoinDE_NewCore alloc] init];
 //    [core testMself];
     
-    [Core testMe];
+//    [Core testMe];
     
     // Insert code here to initialize your application
 
