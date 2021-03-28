@@ -1,0 +1,6 @@
+module Pods_mac_BitcoinApp {
+  umbrella header "Pods-mac BitcoinApp-umbrella.h"
+
+  export *
+  module * { export * }
+}
