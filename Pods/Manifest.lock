@@ -4,18 +4,14 @@ PODS:
   - CocoaLumberjack/Core (3.7.0)
   - MASPreferences (1.3)
   - SAMKeychain (1.5.3)
-  - socket.IO (0.5.2):
-    - SocketRocket (~> 0.2)
   - Socket.IO-Client-Swift (15.2.0):
     - Starscream (~> 3.1)
-  - SocketRocket (0.5.1)
   - Starscream (3.1.1)
 
 DEPENDENCIES:
   - CocoaLumberjack
   - MASPreferences
   - SAMKeychain
-  - socket.IO
   - Socket.IO-Client-Swift
 
 SPEC REPOS:
@@ -23,20 +19,16 @@ SPEC REPOS:
     - CocoaLumberjack
     - MASPreferences
     - SAMKeychain
-    - socket.IO
     - Socket.IO-Client-Swift
-    - SocketRocket
     - Starscream
 
 SPEC CHECKSUMS:
   CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
   MASPreferences: c08b8622dd17b47da87669e741efd7c92e970e8c
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
-  socket.IO: eaaaea33481d8a81d8f78e331f0c72ba44758036
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
-  SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
 
-PODFILE CHECKSUM: ae3746dfdc577a12024ebd83bb5aefbbbbb5663c
+PODFILE CHECKSUM: 9dcfb816ba60fbf75b6f75f175cce76003bd5cd6
 
 COCOAPODS: 1.10.0

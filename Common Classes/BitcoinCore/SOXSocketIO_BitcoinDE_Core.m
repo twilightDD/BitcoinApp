@@ -12,18 +12,12 @@
 
 #import "SOXShowOrderbook_BitcoinDE_Data.h"
 
-//#import "SocketIO.h"
-//#import "SocketIOPacket.h"
-
 #import "mac_BitcoinApp-Swift.h"
 
 #pragma mark - Interface
 @interface SOXSocketIO_BitcoinDE_Core ()
 
 #pragma mark Properties
-//@property (strong, nonatomic) SocketIO *socketIO;
-
-//@property (strong, nonatomic) NSHashTable *delegateForAllOrderUpdates;
 @property (strong, nonatomic) NSMutableDictionary *delegateForBuyOrderUpdates;
 @property (strong, nonatomic) NSMutableDictionary *delegateForSellOrderUpdates;
 @property (strong, nonatomic) NSMutableDictionary *delegateForRemoveOrderUpdates;

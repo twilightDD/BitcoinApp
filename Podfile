@@ -19,7 +19,6 @@ target 'mac BitcoinApp' do
   # use_frameworks!
 
   # Pods for mac BitcoinApp
-  pod 'socket.IO'
   pod 'CocoaLumberjack'
   pod 'SAMKeychain'
   pod 'MASPreferences'
