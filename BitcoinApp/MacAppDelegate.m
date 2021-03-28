@@ -28,12 +28,6 @@
 #import "SOXIAPHelper.h"
 
 
-#import "SOXSocketIO_BitcoinDE_NewCore.h"
-
-
-#import"mac_BitcoinApp-Swift.h"
-
-
 @interface MacAppDelegate ()
 
 @property (strong, nonatomic) NSWindow *mainWindow;

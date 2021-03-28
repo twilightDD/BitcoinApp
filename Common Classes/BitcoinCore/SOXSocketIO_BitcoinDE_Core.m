@@ -33,7 +33,7 @@
 + (void)unRegisterForOrderUpdatesForUpdateType:(BitcoinDE_SocketUpdateType)bitcoinDE_UpdateType
                                forCurrencyType:(BitcoinDE_CurrencyType)currencyType
                                       delegate:(id<SOXSocketIOCoreProtocol>)delegate {
-    if ([SOXNewSocket_BitcoinDE_Core isConnected] == false) {
+    if ([SOXSocketManager_BitcoinDE isConnected] == false) {
         NSLog(@"~~~~~ socket == nil");
         return;
     }
@@ -79,7 +79,7 @@
         [core.delegateForRemoveOrderUpdates removeAllObjects];
         
         DDLogInfo(@"~~~~~ Going to stop webSocket: no delegate is interested anymore.");
-        [SOXNewSocket_BitcoinDE_Core stopWebSocketCore];
+        [SOXSocketManager_BitcoinDE stopWebSocketCore];
     }
 }
 
@@ -126,7 +126,7 @@
                 break;
         }
 
-        [SOXNewSocket_BitcoinDE_Core startWebSocketCore];
+        [SOXSocketManager_BitcoinDE startWebSocketCore];
     }
 }
 
@@ -235,7 +235,7 @@
 
     // wait a little bit and restart socket
     NSTimer *ratesReloadTimer = [NSTimer scheduledTimerWithTimeInterval:20
-                                                                 target:[SOXNewSocket_BitcoinDE_Core class]
+                                                                 target:[SOXSocketManager_BitcoinDE class]
                                                                selector:@selector(startWebSocketCore)
                                                                userInfo:nil
                                                                 repeats:NO];

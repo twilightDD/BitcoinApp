@@ -1,5 +1,5 @@
 //
-//  SOXNewSocket_BitcoinDE_Core.swift
+//  SOXSocketManager_BitcoinDE.swift
 //  BitcoinApp
 //
 //  Created by Peter Hauke on 28.03.21.
@@ -10,9 +10,9 @@ import Foundation
 
 import SocketIO
 
-//MARK: - SOXNewSocket_BitcoinDE_Core
+//MARK: - SOXSocketManager_BitcoinDE
 @objc
-open class SOXNewSocket_BitcoinDE_Core: NSObject {
+open class SOXSocketManager_BitcoinDE: NSObject {
     
     //MARK: Lets and Vars
     @objc
@@ -62,7 +62,7 @@ open class SOXNewSocket_BitcoinDE_Core: NSObject {
 
 
 //MARK: - Extension - Socket Callbacks
-extension SOXNewSocket_BitcoinDE_Core {
+extension SOXSocketManager_BitcoinDE {
     
     private class func addCallbacks(to socket: SocketIOClient) {
         
