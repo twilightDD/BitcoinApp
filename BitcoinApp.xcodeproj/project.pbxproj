@@ -118,8 +118,6 @@
 		D04BF87120F7E3CC004255D8 /* SOXPreferencesCore.m in Sources */ = {isa = PBXBuildFile; fileRef = D04BF86F20F7E3CC004255D8 /* SOXPreferencesCore.m */; };
 		D04CA6FE2610A15700B433A6 /* CompatibilityToSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04CA6FD2610A15700B433A6 /* CompatibilityToSwift.swift */; };
 		D04CA6FF2610A15700B433A6 /* CompatibilityToSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04CA6FD2610A15700B433A6 /* CompatibilityToSwift.swift */; };
-		D04CA7622610A7E800B433A6 /* SOXSocketIO_BitcoinDE_NewCore.m in Sources */ = {isa = PBXBuildFile; fileRef = D04CA7612610A7E800B433A6 /* SOXSocketIO_BitcoinDE_NewCore.m */; };
-		D04CA7632610A7E800B433A6 /* SOXSocketIO_BitcoinDE_NewCore.m in Sources */ = {isa = PBXBuildFile; fileRef = D04CA7612610A7E800B433A6 /* SOXSocketIO_BitcoinDE_NewCore.m */; };
 		D04CA7742610F68200B433A6 /* SOXNewSocket_BitcoinDE_Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04CA7732610F68200B433A6 /* SOXNewSocket_BitcoinDE_Core.swift */; };
 		D04CA7752610F68200B433A6 /* SOXNewSocket_BitcoinDE_Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04CA7732610F68200B433A6 /* SOXNewSocket_BitcoinDE_Core.swift */; };
 		D0565BD521348DF7002E0E21 /* SOXPagingAbstractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0565BD421348DF7002E0E21 /* SOXPagingAbstractViewController.m */; };
@@ -347,8 +345,6 @@
 		D04CA6FB2610A15600B433A6 /* mac BitcoinApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mac BitcoinApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		D04CA6FC2610A15600B433A6 /* mac BitcoinApp Peter-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mac BitcoinApp Peter-Bridging-Header.h"; sourceTree = "<group>"; };
 		D04CA6FD2610A15700B433A6 /* CompatibilityToSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibilityToSwift.swift; sourceTree = "<group>"; };
-		D04CA7602610A7E800B433A6 /* SOXSocketIO_BitcoinDE_NewCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXSocketIO_BitcoinDE_NewCore.h; sourceTree = "<group>"; };
-		D04CA7612610A7E800B433A6 /* SOXSocketIO_BitcoinDE_NewCore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXSocketIO_BitcoinDE_NewCore.m; sourceTree = "<group>"; };
 		D04CA7732610F68200B433A6 /* SOXNewSocket_BitcoinDE_Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOXNewSocket_BitcoinDE_Core.swift; sourceTree = "<group>"; };
 		D0565BD321348DF7002E0E21 /* SOXPagingAbstractViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXPagingAbstractViewController.h; sourceTree = "<group>"; };
 		D0565BD421348DF7002E0E21 /* SOXPagingAbstractViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXPagingAbstractViewController.m; sourceTree = "<group>"; };
@@ -693,8 +689,6 @@
 				D0270AE21E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.h */,
 				D0270AE31E78610F009FAC07 /* SOXSocketIO_BitcoinDE_Core.m */,
 				D04CA7732610F68200B433A6 /* SOXNewSocket_BitcoinDE_Core.swift */,
-				D04CA7602610A7E800B433A6 /* SOXSocketIO_BitcoinDE_NewCore.h */,
-				D04CA7612610A7E800B433A6 /* SOXSocketIO_BitcoinDE_NewCore.m */,
 				D0E5C5011E809C9800352985 /* SOXKeys_BitcoinDE.h */,
 				D0E5C5021E809C9800352985 /* SOXKeys_BitcoinDE.m */,
 				D0A33F901F42079D0042B2A7 /* SOXMarketHelper.h */,
@@ -1362,7 +1356,6 @@
 				D021506720474AEC005A0932 /* SOXStateValueTransformer.m in Sources */,
 				D07BE9DB21831EDB00101DCF /* SOXPagingViewController.m in Sources */,
 				D021506820474AEC005A0932 /* SOXMarket_BitcoinDE_Core.m in Sources */,
-				D04CA7632610A7E800B433A6 /* SOXSocketIO_BitcoinDE_NewCore.m in Sources */,
 				D021506920474AEC005A0932 /* SOXHash.m in Sources */,
 				D021506A20474AEC005A0932 /* SOXMarketHelper.m in Sources */,
 				D021506B20474AEC005A0932 /* SOXFeeCoinValueTransformer.m in Sources */,
@@ -1457,7 +1450,6 @@
 				D0BCFCAC20042620004F9E57 /* SOXStateValueTransformer.m in Sources */,
 				D07BE9DA21831EDB00101DCF /* SOXPagingViewController.m in Sources */,
 				D049C4511E770D2B003CBF36 /* SOXMarket_BitcoinDE_Core.m in Sources */,
-				D04CA7622610A7E800B433A6 /* SOXSocketIO_BitcoinDE_NewCore.m in Sources */,
 				D049C45B1E7712E6003CBF36 /* SOXHash.m in Sources */,
 				D0A33F921F42079D0042B2A7 /* SOXMarketHelper.m in Sources */,
 				D0BCFCA8200423F8004F9E57 /* SOXFeeCoinValueTransformer.m in Sources */,
