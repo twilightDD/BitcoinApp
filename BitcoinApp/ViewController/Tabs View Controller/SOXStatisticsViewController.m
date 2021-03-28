@@ -45,6 +45,9 @@
 @property (strong) IBOutlet NSTextField *ethDescriptionTextField;
 @property (strong) IBOutlet NSButton *ethLoadButton;
 
+@property (strong) IBOutlet NSTextField *ltcDescriptionTextField;
+@property (strong) IBOutlet NSButton *ltcLoadButton;
+
 @property (strong) IBOutlet NSButton *requestDataButton;
 
 #pragma mark | Properties
@@ -140,6 +143,10 @@
     // ETH
     self.ethDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeEthereum];
     self.ethLoadButton.state                 = [SOXPreferenceCenter controlStateForLoadStatisticsForCurrencyType:BitcoinDE_CurrencyTypeEthereum];
+    
+    // LTC
+    self.ltcDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeLitecoin];
+    self.ltcLoadButton.state                 = [SOXPreferenceCenter controlStateForLoadStatisticsForCurrencyType:BitcoinDE_CurrencyTypeLitecoin];
 }
 
 #pragma mark | Request methods

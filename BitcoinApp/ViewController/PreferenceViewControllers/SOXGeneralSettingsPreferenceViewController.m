@@ -69,6 +69,11 @@
 @property (strong) IBOutlet NSButton *ethSellButton;
 @property (strong) IBOutlet NSButton *ethBannerButton;
 
+@property (strong) IBOutlet NSTextField *ltcDescriptionTextField;
+@property (strong) IBOutlet NSButton *ltcBuyButton;
+@property (strong) IBOutlet NSButton *ltcSellButton;
+@property (strong) IBOutlet NSButton *ltcBannerButton;
+
 @property (strong) IBOutlet NSButton *autoUpdateInfoTabsButton;
 
 
@@ -207,6 +212,14 @@
     self.ethSellButton.state                 = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeSell
                                                                                  forCurrencyType:BitcoinDE_CurrencyTypeEthereum];
     self.ethBannerButton.state               = [SOXPreferenceCenter controlStateForBannerForCurrencyType:BitcoinDE_CurrencyTypeEthereum];
+    
+    // ETH
+    self.ltcDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeLitecoin];
+    self.ltcBuyButton.state                  = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeBuy
+                                                                                                 forCurrencyType:BitcoinDE_CurrencyTypeLitecoin];
+    self.ltcSellButton.state                 = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeSell
+                                                                                                 forCurrencyType:BitcoinDE_CurrencyTypeLitecoin];
+    self.ltcBannerButton.state               = [SOXPreferenceCenter controlStateForBannerForCurrencyType:BitcoinDE_CurrencyTypeLitecoin];
 
     // Auto update info Tabs
     self.autoUpdateInfoTabsButton.title = @"Auto-Fetch Account Ledger on Demand";

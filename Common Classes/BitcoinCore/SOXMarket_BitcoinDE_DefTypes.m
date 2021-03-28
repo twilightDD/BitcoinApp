@@ -150,13 +150,14 @@
 
     dispatch_once(&pred, ^{
         tradingPairShortStringsForCurrencyType = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                                   @"???", @(BitcoinDE_CurrencyTypeUnknown),
-                                                                   @"btc", @(BitcoinDE_CurrencyTypeBitcoin),
-                                                                   @"bch", @(BitcoinDE_CurrencyTypeBitcoinCash),
-                                                                   @"btg", @(BitcoinDE_CurrencyTypeBitcoinGold),
-                                                                   @"eth", @(BitcoinDE_CurrencyTypeEthereum),
-                                                                   @"bsv", @(BitcoinDE_CurrencyTypeBitcoinCashSV),
-                                                                   nil];
+                                                  @"???", @(BitcoinDE_CurrencyTypeUnknown),
+                                                  @"btc", @(BitcoinDE_CurrencyTypeBitcoin),
+                                                  @"bch", @(BitcoinDE_CurrencyTypeBitcoinCash),
+                                                  @"btg", @(BitcoinDE_CurrencyTypeBitcoinGold),
+                                                  @"eth", @(BitcoinDE_CurrencyTypeEthereum),
+                                                  @"bsv", @(BitcoinDE_CurrencyTypeBitcoinCashSV),
+                                                  @"ltc", @(BitcoinDE_CurrencyTypeLitecoin),
+                                                  nil];
     });
 
     NSString *tradingPairShortStringForCurrencyType = [tradingPairShortStringsForCurrencyType objectForKey:@(currencyType)];
@@ -170,13 +171,14 @@
 
     dispatch_once(&pred, ^{
         tradingPairShortStringsForCurrencyType = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                                   @"???", @(BitcoinDE_CurrencyTypeUnknown),
-                                                                   @"BTC", @(BitcoinDE_CurrencyTypeBitcoin),
-                                                                   @"BCH", @(BitcoinDE_CurrencyTypeBitcoinCash),
-                                                                   @"BTG", @(BitcoinDE_CurrencyTypeBitcoinGold),
-                                                                   @"ETH", @(BitcoinDE_CurrencyTypeEthereum),
-                                                                   @"BSV", @(BitcoinDE_CurrencyTypeBitcoinCashSV),
-                                                                   nil];
+                                                  @"???", @(BitcoinDE_CurrencyTypeUnknown),
+                                                  @"BTC", @(BitcoinDE_CurrencyTypeBitcoin),
+                                                  @"BCH", @(BitcoinDE_CurrencyTypeBitcoinCash),
+                                                  @"BTG", @(BitcoinDE_CurrencyTypeBitcoinGold),
+                                                  @"ETH", @(BitcoinDE_CurrencyTypeEthereum),
+                                                  @"BSV", @(BitcoinDE_CurrencyTypeBitcoinCashSV),
+                                                  @"LTC", @(BitcoinDE_CurrencyTypeLitecoin),
+                                                  nil];
     });
 
     NSString *tradingPairShortStringForCurrencyType = [tradingPairShortStringsForCurrencyType objectForKey:@(currencyType)];
@@ -190,13 +192,14 @@
 
     dispatch_once(&pred, ^{
         tradingPairNaturalStringsForCurrencyType = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                                     @"Alle", @(BitcoinDE_CurrencyTypeUnknown),
-                                                                     @"Bitcoin", @(BitcoinDE_CurrencyTypeBitcoin),
-                                                                     @"Bitcoin Cash", @(BitcoinDE_CurrencyTypeBitcoinCash),
-                                                                     @"Bitcoin Gold", @(BitcoinDE_CurrencyTypeBitcoinGold),
-                                                                     @"Ethereum", @(BitcoinDE_CurrencyTypeEthereum),
-                                                                     @"Bitcoin Cash SV", @(BitcoinDE_CurrencyTypeBitcoinCashSV),
-                                                                     nil];
+                                                    @"Alle", @(BitcoinDE_CurrencyTypeUnknown),
+                                                    @"Bitcoin", @(BitcoinDE_CurrencyTypeBitcoin),
+                                                    @"Bitcoin Cash", @(BitcoinDE_CurrencyTypeBitcoinCash),
+                                                    @"Bitcoin Gold", @(BitcoinDE_CurrencyTypeBitcoinGold),
+                                                    @"Ethereum", @(BitcoinDE_CurrencyTypeEthereum),
+                                                    @"Bitcoin Cash SV", @(BitcoinDE_CurrencyTypeBitcoinCashSV),
+                                                    @"Litecoin", @(BitcoinDE_CurrencyTypeLitecoin),
+                                                    nil];
     });
 
     NSString *tradingPairNaturalStringForCurrencyType = [tradingPairNaturalStringsForCurrencyType objectForKey:@(currencyType)];
@@ -220,12 +223,13 @@
 
     dispatch_once(&pred, ^{
         tradingPairStringsForCurrencyTyp = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                             @"btceur", @(BitcoinDE_CurrencyTypeBitcoin),
-                                                             @"bcheur", @(BitcoinDE_CurrencyTypeBitcoinCash),
-                                                             @"btgeur", @(BitcoinDE_CurrencyTypeBitcoinGold),
-                                                             @"etheur", @(BitcoinDE_CurrencyTypeEthereum),
-                                                             @"bsveur", @(BitcoinDE_CurrencyTypeBitcoinCashSV),
-                                                             nil];
+                                            @"btceur", @(BitcoinDE_CurrencyTypeBitcoin),
+                                            @"bcheur", @(BitcoinDE_CurrencyTypeBitcoinCash),
+                                            @"btgeur", @(BitcoinDE_CurrencyTypeBitcoinGold),
+                                            @"etheur", @(BitcoinDE_CurrencyTypeEthereum),
+                                            @"bsveur", @(BitcoinDE_CurrencyTypeBitcoinCashSV),
+                                            @"ltceur", @(BitcoinDE_CurrencyTypeLitecoin),
+                                            nil];
     });
 
     return tradingPairStringsForCurrencyTyp;

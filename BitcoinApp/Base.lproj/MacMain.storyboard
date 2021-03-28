@@ -871,20 +871,20 @@
                                     </tabViewItem>
                                     <tabViewItem label="TabETH" identifier="1" id="xJ0-3F-ffY">
                                         <view key="view" id="i9q-n5-DdU">
-                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
+                                            <rect key="frame" x="10" y="33" width="914" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="tWi-70-Aib">
-                                                    <rect key="frame" x="0.0" y="0.0" width="449" height="413"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="449" height="414"/>
                                                     <connections>
                                                         <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerBuyETHSegue" id="Fh9-LT-kpw"/>
                                                     </connections>
                                                 </containerView>
                                                 <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="bJD-9z-W6M">
-                                                    <rect key="frame" x="455" y="12" width="5" height="389"/>
+                                                    <rect key="frame" x="455" y="12" width="5" height="390"/>
                                                 </box>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="Lbv-0y-DIZ">
-                                                    <rect key="frame" x="466" y="0.0" width="448" height="413"/>
+                                                    <rect key="frame" x="466" y="0.0" width="448" height="414"/>
                                                     <connections>
                                                         <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerSellETHSegue" id="yi4-A3-JOD"/>
                                                     </connections>
@@ -905,13 +905,49 @@
                                             </constraints>
                                         </view>
                                     </tabViewItem>
+                                    <tabViewItem label="TabLTC" identifier="1" id="gWk-xh-7oB">
+                                        <view key="view" id="9Nf-Jq-QTm">
+                                            <rect key="frame" x="10" y="33" width="914" height="414"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="ysq-Ib-VR3">
+                                                    <rect key="frame" x="0.0" y="0.0" width="449" height="414"/>
+                                                    <connections>
+                                                        <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerBuyLTCSegue" id="RcE-16-iTh"/>
+                                                    </connections>
+                                                </containerView>
+                                                <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="l4y-tR-st6">
+                                                    <rect key="frame" x="455" y="12" width="5" height="390"/>
+                                                </box>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="hMD-OB-pas">
+                                                    <rect key="frame" x="466" y="0.0" width="448" height="414"/>
+                                                    <connections>
+                                                        <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerSellLTCSegue" id="1j2-rW-rHK"/>
+                                                    </connections>
+                                                </containerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="hMD-OB-pas" secondAttribute="bottom" id="38o-JD-z7b"/>
+                                                <constraint firstItem="l4y-tR-st6" firstAttribute="centerX" secondItem="9Nf-Jq-QTm" secondAttribute="centerX" id="Jep-KH-Dmi"/>
+                                                <constraint firstItem="ysq-Ib-VR3" firstAttribute="leading" secondItem="9Nf-Jq-QTm" secondAttribute="leading" id="L2c-D3-5Ze"/>
+                                                <constraint firstAttribute="bottom" secondItem="l4y-tR-st6" secondAttribute="bottom" constant="12" symbolic="YES" id="NsW-Ss-s7h"/>
+                                                <constraint firstItem="ysq-Ib-VR3" firstAttribute="top" secondItem="9Nf-Jq-QTm" secondAttribute="top" id="Tbe-6Z-4mM"/>
+                                                <constraint firstItem="l4y-tR-st6" firstAttribute="leading" secondItem="ysq-Ib-VR3" secondAttribute="trailing" constant="8" symbolic="YES" id="WIe-sd-aGR"/>
+                                                <constraint firstItem="hMD-OB-pas" firstAttribute="leading" secondItem="l4y-tR-st6" secondAttribute="trailing" constant="8" symbolic="YES" id="fIH-CA-gy3"/>
+                                                <constraint firstItem="hMD-OB-pas" firstAttribute="top" secondItem="9Nf-Jq-QTm" secondAttribute="top" id="laP-RS-8bR"/>
+                                                <constraint firstItem="l4y-tR-st6" firstAttribute="top" secondItem="9Nf-Jq-QTm" secondAttribute="top" constant="12" symbolic="YES" id="m3i-dD-y30"/>
+                                                <constraint firstAttribute="bottom" secondItem="ysq-Ib-VR3" secondAttribute="bottom" id="n3X-QG-GrD"/>
+                                                <constraint firstAttribute="trailing" secondItem="hMD-OB-pas" secondAttribute="trailing" id="oJ5-SC-5up"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
                                     <tabViewItem label="Active orders" identifier="" id="l82-SC-zEw">
                                         <view key="view" id="MN5-M8-jLH">
-                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
+                                            <rect key="frame" x="10" y="33" width="914" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="aZ7-BW-zaH">
-                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="413"/>
+                                                    <rect key="frame" x="0.0" y="1" width="914" height="413"/>
                                                     <connections>
                                                         <segue destination="q7D-iu-Op3" kind="embed" id="2AF-qZ-Ph7"/>
                                                     </connections>
@@ -927,11 +963,11 @@
                                     </tabViewItem>
                                     <tabViewItem label="Account ledger" identifier="2" id="Ch0-iV-PHR">
                                         <view key="view" id="Q3R-zu-LRo">
-                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
+                                            <rect key="frame" x="10" y="33" width="914" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="oUM-74-QBF">
-                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="413"/>
+                                                    <rect key="frame" x="0.0" y="1" width="914" height="413"/>
                                                     <connections>
                                                         <segue destination="d67-em-sMP" kind="embed" identifier="AccountLedgerViewControllerSegue" id="OTS-cT-mu6"/>
                                                     </connections>
@@ -947,11 +983,11 @@
                                     </tabViewItem>
                                     <tabViewItem label="My Trade History" identifier="" id="KJJ-NU-KfP">
                                         <view key="view" id="Jwu-D5-GY5">
-                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
+                                            <rect key="frame" x="10" y="33" width="914" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="Jo0-rk-ilP">
-                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="413"/>
+                                                    <rect key="frame" x="0.0" y="1" width="914" height="413"/>
                                                     <connections>
                                                         <segue destination="TPt-gD-CmY" kind="embed" identifier="MyTradeHistoryViewControllerSegue" id="aLD-dy-1E4"/>
                                                     </connections>
@@ -967,11 +1003,11 @@
                                     </tabViewItem>
                                     <tabViewItem label="BTC" identifier="" id="ucc-xu-QEr">
                                         <view key="view" id="KtV-3h-LnT">
-                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
+                                            <rect key="frame" x="10" y="33" width="914" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="Fs1-UN-uNY">
-                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="413"/>
+                                                    <rect key="frame" x="0.0" y="1" width="914" height="413"/>
                                                     <connections>
                                                         <segue destination="cwM-7M-FeE" kind="embed" identifier="EmbedAutoTraderForBTC" id="Hbf-fd-iIm"/>
                                                     </connections>
@@ -987,11 +1023,11 @@
                                     </tabViewItem>
                                     <tabViewItem label="BCH" identifier="" id="j0B-3G-QB4">
                                         <view key="view" id="YoS-dT-aaC">
-                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
+                                            <rect key="frame" x="10" y="33" width="914" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="xQR-8N-Xna">
-                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="413"/>
+                                                    <rect key="frame" x="0.0" y="1" width="914" height="413"/>
                                                     <connections>
                                                         <segue destination="cwM-7M-FeE" kind="embed" identifier="EmbedAutoTraderForBCH" id="IXN-hH-jj1"/>
                                                     </connections>
@@ -1007,11 +1043,11 @@
                                     </tabViewItem>
                                     <tabViewItem label="BSV" identifier="" id="sKH-gO-8S4">
                                         <view key="view" id="pZs-pd-xtf">
-                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
+                                            <rect key="frame" x="10" y="33" width="914" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="KVM-mi-ni5">
-                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="413"/>
+                                                    <rect key="frame" x="0.0" y="1" width="914" height="413"/>
                                                     <connections>
                                                         <segue destination="cwM-7M-FeE" kind="embed" identifier="EmbedAutoTraderForBSV" id="ebL-4z-gzQ"/>
                                                     </connections>
@@ -1027,11 +1063,11 @@
                                     </tabViewItem>
                                     <tabViewItem label="BTG" identifier="" id="MG6-Ar-fVj">
                                         <view key="view" id="V3q-F9-d6O">
-                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
+                                            <rect key="frame" x="10" y="33" width="914" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="Ab4-V2-fR1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="413"/>
+                                                    <rect key="frame" x="0.0" y="1" width="914" height="413"/>
                                                     <connections>
                                                         <segue destination="cwM-7M-FeE" kind="embed" identifier="EmbedAutoTraderForBTG" id="Af4-4a-k8V"/>
                                                     </connections>
@@ -1047,11 +1083,11 @@
                                     </tabViewItem>
                                     <tabViewItem label="ETH" identifier="" id="prg-W5-5Mn">
                                         <view key="view" id="g1H-rJ-sge">
-                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
+                                            <rect key="frame" x="10" y="33" width="914" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="9nY-r8-CKk">
-                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="413"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="414"/>
                                                     <connections>
                                                         <segue destination="cwM-7M-FeE" kind="embed" identifier="EmbedAutoTraderForETH" id="gQD-Dm-8uX"/>
                                                     </connections>
@@ -1065,13 +1101,33 @@
                                             </constraints>
                                         </view>
                                     </tabViewItem>
+                                    <tabViewItem label="LTC" identifier="" id="JG1-eJ-fcA">
+                                        <view key="view" id="Tin-Ij-WwA">
+                                            <rect key="frame" x="10" y="33" width="914" height="414"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="JRI-fT-RgJ">
+                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="414"/>
+                                                    <connections>
+                                                        <segue destination="cwM-7M-FeE" kind="embed" identifier="EmbedAutoTraderForLTC" id="hel-sO-CQm"/>
+                                                    </connections>
+                                                </containerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="JRI-fT-RgJ" firstAttribute="leading" secondItem="Tin-Ij-WwA" secondAttribute="leading" id="QD3-Im-is6"/>
+                                                <constraint firstAttribute="bottom" secondItem="JRI-fT-RgJ" secondAttribute="bottom" id="WNO-eG-hgs"/>
+                                                <constraint firstAttribute="trailing" secondItem="JRI-fT-RgJ" secondAttribute="trailing" id="hZB-AU-oYc"/>
+                                                <constraint firstItem="JRI-fT-RgJ" firstAttribute="top" secondItem="Tin-Ij-WwA" secondAttribute="top" id="tbw-Dr-cK3"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
                                     <tabViewItem label="IAP" identifier="" id="tdI-1d-FLi">
                                         <view key="view" id="hGk-Be-ezH">
-                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
+                                            <rect key="frame" x="10" y="33" width="914" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="YrW-uI-Tha">
-                                                    <rect key="frame" x="0.0" y="0.0" width="914" height="413"/>
+                                                    <rect key="frame" x="0.0" y="1" width="914" height="413"/>
                                                     <connections>
                                                         <segue destination="oCL-t0-kOF" kind="embed" id="WGm-Uz-hod"/>
                                                     </connections>
@@ -5461,9 +5517,9 @@ Gw
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="9rv-7D-aVO"/>
-        <segue reference="gQD-Dm-8uX"/>
+        <segue reference="hel-sO-CQm"/>
         <segue reference="YNG-my-y7e"/>
-        <segue reference="M1y-2H-j1m"/>
+        <segue reference="1j2-rW-rHK"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="NSAddTemplate" width="14" height="13"/>

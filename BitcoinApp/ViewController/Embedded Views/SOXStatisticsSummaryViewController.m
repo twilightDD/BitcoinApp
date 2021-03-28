@@ -85,6 +85,16 @@
 @property (strong) IBOutlet NSTextField *ethWinLoseBeforeFeesTextField;
 @property (strong) IBOutlet NSTextField *ethWinLoseAfterFeeTextField;
 
+#pragma mark Currency LTC
+@property (strong) IBOutlet NSTextField *ltcCurrencyDescriptionTextField;
+@property (strong) IBOutlet NSTextField *ltcKickbackCountTextField;
+@property (strong) IBOutlet NSTextField *ltcKickbackAmountTextField;
+@property (strong) IBOutlet NSTextField *ltcFeeBitcoinDETextField;
+@property (strong) IBOutlet NSTextField *ltcFeeFidorTextField;
+@property (strong) IBOutlet NSTextField *ltcFeeAppTextField;
+@property (strong) IBOutlet NSTextField *ltcWinLoseBeforeFeesTextField;
+@property (strong) IBOutlet NSTextField *ltcWinLoseAfterFeeTextField;
+
 #pragma mark Sum
 @property (strong) IBOutlet NSTextField *sumCurrencyDescriptionTextField;
 @property (strong) IBOutlet NSTextField *sumKickbackCountTextField;
@@ -128,6 +138,7 @@
     }
 }
 - (void)resetUI {
+    
     // Header 1
     {
         self.currenciesDescriptionTextField.stringValue = @"Currency";
@@ -207,6 +218,19 @@
         self.ethWinLoseBeforeFeesTextField.stringValue   = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
         self.ethWinLoseAfterFeeTextField.stringValue     = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
     }
+    
+    // LTC
+    {
+    self.ltcCurrencyDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeLitecoin];
+    self.ltcKickbackCountTextField.stringValue       = @"0";
+    self.ltcKickbackAmountTextField.stringValue      = [SOXFormatters stringEightDigitsForBTCNumber:[NSDecimalNumber zero]];
+    self.ltcFeeBitcoinDETextField.stringValue        = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+    self.ltcFeeFidorTextField.stringValue            = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+    self.ltcFeeAppTextField.stringValue              = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+    self.ltcWinLoseBeforeFeesTextField.stringValue   = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+    self.ltcWinLoseAfterFeeTextField.stringValue     = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+    }
+    
     // Sum Row
     {
         self.sumCurrencyDescriptionTextField.stringValue = @"Sum";
