@@ -12,6 +12,7 @@
 #import "SOXShowOrderbook_BitcoinDE_Data.h"
 #import "SOXTradeJob_BitcoinDE_Data.h"
 
+#import "SOXErrorMessage_BitcoinDE.h"
 #import "SOXPreferenceCenter.h"
 
 #import "SOXFormatters.h"
@@ -487,6 +488,9 @@ NSString const *_Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTrad
 }
 
 - (void)executeTrade {
+    if (SOXErrorMessage_BitcoinDE.testServerConnection == false) {
+        return;
+    }
     NSDictionary *parameterDictionary;
     parameterDictionary = [SOXTradeJob_BitcoinDE_Data parameterForOrderID:self.orderBookData.orderInformation_orderID
                                                                 orderType:self.orderType

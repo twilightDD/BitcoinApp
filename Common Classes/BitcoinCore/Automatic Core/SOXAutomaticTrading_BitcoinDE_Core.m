@@ -11,6 +11,7 @@
 
 #import "DDLog.h"
 
+#import "SOXErrorMessage_BitcoinDE.h"
 #import "SOXMarketHelper.h"
 
 #import "SOXAccountInfo_BitcoinDE_Data.h"
@@ -67,8 +68,9 @@
     [self.buyDelegates addObject:controller];
 
     {   // Note max fidor
-        NSString *note = [NSString stringWithFormat:@"START: Maximal Fidor trading amount %@", [SOXFormatters currencyStringForNumber:self.buyMaximalFidorAmountInvestment
-                                                                                                                         roundingMode:NSNumberFormatterRoundDown]];
+        NSString *note = [NSString stringWithFormat:@"START: Maximal Fidor trading amount %@",
+                          [SOXFormatters currencyStringForNumber:self.buyMaximalFidorAmountInvestment
+                                                    roundingMode:NSNumberFormatterRoundDown]];
         [self informBuyDelegateWithNote:note];
     }
 
@@ -180,6 +182,18 @@
                                                        forCurrencyType:self.currencyType
                                                               delegate:self];
 
+    
+    if (SOXErrorMessage_BitcoinDE.testServerConnection == false) {
+    
+        for (NSObject<SOXAutomaticTradingCoreProtocol> *delegate in self.buyDelegates) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [delegate performSelector:@selector(flushLogView)];
+                NSString *note = @"An error occurred. bitcoin.de server refuses connection.";
+                [self informBuyDelegateWithNote:note];
+            });
+        }
+        return;
+    }
     [self fetchOrderBooks];
 
     self.socketIODidDisconnectAppeared = NO;

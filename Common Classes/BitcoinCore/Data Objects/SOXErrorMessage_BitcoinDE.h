@@ -28,4 +28,7 @@
 - (void)appendErrorDescripton:(NSString *_Nullable)errorDescripton;
 
 - (NSString *_Nullable)description;
+
++ (BOOL)testServerConnection;
+
 @end

@@ -19,6 +19,8 @@
 #import "SOXMyOrderBook_BitcoinDE_Data.h"
 #import "SOXRates_BitcoinDE_Data.h"
 
+#import "SOXErrorMessage_BitcoinDE.h"
+
 #pragma mark - Interface
 @interface SOXCreateNewOrderViewController () <SOXMarketCoreServerRequestProtocol>
 
@@ -436,6 +438,10 @@
 }
 
 - (void)createNewOrder {
+    if (SOXErrorMessage_BitcoinDE.testServerConnection == false) {
+        return;
+    }
+
     NSDictionary *parameters = [SOXMyOrderBook_BitcoinDE_Data parameterForNewOrderWithOrderType:self.orderType
                                                                                    currencyType:self.currencyType
                                                                                      max_amount:@(self.amountTextField.doubleValue)

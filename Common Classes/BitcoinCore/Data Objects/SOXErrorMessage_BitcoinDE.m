@@ -8,6 +8,9 @@
 
 #import "SOXErrorMessage_BitcoinDE.h"
 
+#import "MacAppDelegate.h"
+#import "SOXLogWindowController.h"
+
 NSString static *APIError_BitcoinDE_MessageKey = @"message";
 NSString static *APIError_BitcoinDE_CodeKey    = @"code";
 NSString static *APIError_BitcoinDE_FieldKey   = @"field";
@@ -18,7 +21,6 @@ NSString static *APIError_BitcoinDE_FieldKey   = @"field";
 #pragma mark Properties
 @property (nonatomic, readwrite) BOOL hasError;
 @property (nonatomic, readwrite) NSInteger apiErrorCode;
-
 @end
 
 #pragma mark - Implementation
@@ -107,6 +109,27 @@ NSString static *APIError_BitcoinDE_FieldKey   = @"field";
                                                        self.apiErrorCode];
 
     return description;
+}
+
++ (BOOL)testServerConnection {
+    NSDate *bitcoinAPIChangesOnDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:661661661];
+//    NSLog(@"%@", bitcoinAPIChangesOnDate);
+//    bitcoinAPIChangesOnDate = [NSDate dateWithTimeIntervalSince1970:0];
+    if ([NSDate.date isGreaterThan:bitcoinAPIChangesOnDate]) {
+        SOXErrorMessage_BitcoinDE *errorMessage = [[SOXErrorMessage_BitcoinDE alloc] initWithServerRequestTitle:@"Connection refused."];
+        errorMessage.errorMessage = @"Could not get an answer by bitcoin.de";
+        MacAppDelegate *appDelegate = (MacAppDelegate *)[[NSApplication sharedApplication] delegate];
+        SOXLogWindowController *errorWindowController = appDelegate.errorWindowController;
+        if (errorWindowController == nil) {
+            errorWindowController = [[SOXLogWindowController alloc] initWithWindowNibName:SOXLogWindowControllerNibKey
+                                                                                   windowTitle:@"Errors"];
+        }
+        [errorWindowController performSelectorOnMainThread:@selector(showErrorMessage:)
+                                                withObject:errorMessage
+                                             waitUntilDone:NO];
+        return NO;
+    }
+    return YES;
 }
 
 #pragma mark - Private methods
