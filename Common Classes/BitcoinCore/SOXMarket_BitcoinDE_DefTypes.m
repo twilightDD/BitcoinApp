@@ -157,6 +157,7 @@
                                                   @"eth", @(BitcoinDE_CurrencyTypeEthereum),
                                                   @"bsv", @(BitcoinDE_CurrencyTypeBitcoinCashSV),
                                                   @"ltc", @(BitcoinDE_CurrencyTypeLitecoin),
+                                                  @"xrp", @(BitcoinDE_CurrencyTypeRipple),
                                                   nil];
     });
 
@@ -178,6 +179,7 @@
                                                   @"ETH", @(BitcoinDE_CurrencyTypeEthereum),
                                                   @"BSV", @(BitcoinDE_CurrencyTypeBitcoinCashSV),
                                                   @"LTC", @(BitcoinDE_CurrencyTypeLitecoin),
+                                                  @"XRP", @(BitcoinDE_CurrencyTypeRipple),
                                                   nil];
     });
 
@@ -199,6 +201,7 @@
                                                     @"Ethereum", @(BitcoinDE_CurrencyTypeEthereum),
                                                     @"Bitcoin Cash SV", @(BitcoinDE_CurrencyTypeBitcoinCashSV),
                                                     @"Litecoin", @(BitcoinDE_CurrencyTypeLitecoin),
+                                                    @"Ripple", @(BitcoinDE_CurrencyTypeRipple),
                                                     nil];
     });
 
@@ -229,6 +232,7 @@
                                             @"etheur", @(BitcoinDE_CurrencyTypeEthereum),
                                             @"bsveur", @(BitcoinDE_CurrencyTypeBitcoinCashSV),
                                             @"ltceur", @(BitcoinDE_CurrencyTypeLitecoin),
+                                            @"xrpeur", @(BitcoinDE_CurrencyTypeRipple),
                                             nil];
     });
 

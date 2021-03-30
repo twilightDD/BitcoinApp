@@ -95,6 +95,16 @@
 @property (strong) IBOutlet NSTextField *ltcWinLoseBeforeFeesTextField;
 @property (strong) IBOutlet NSTextField *ltcWinLoseAfterFeeTextField;
 
+#pragma mark Currency XRP
+@property (strong) IBOutlet NSTextField *xrpCurrencyDescriptionTextField;
+@property (strong) IBOutlet NSTextField *xrpKickbackCountTextField;
+@property (strong) IBOutlet NSTextField *xrpKickbackAmountTextField;
+@property (strong) IBOutlet NSTextField *xrpFeeBitcoinDETextField;
+@property (strong) IBOutlet NSTextField *xrpFeeFidorTextField;
+@property (strong) IBOutlet NSTextField *xrpFeeAppTextField;
+@property (strong) IBOutlet NSTextField *xrpWinLoseBeforeFeesTextField;
+@property (strong) IBOutlet NSTextField *xrpWinLoseAfterFeeTextField;
+
 #pragma mark Sum
 @property (strong) IBOutlet NSTextField *sumCurrencyDescriptionTextField;
 @property (strong) IBOutlet NSTextField *sumKickbackCountTextField;
@@ -229,6 +239,18 @@
     self.ltcFeeAppTextField.stringValue              = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
     self.ltcWinLoseBeforeFeesTextField.stringValue   = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
     self.ltcWinLoseAfterFeeTextField.stringValue     = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+    }
+    
+    // XRP
+    {
+    self.xrpCurrencyDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeRipple];
+    self.xrpKickbackCountTextField.stringValue       = @"0";
+    self.xrpKickbackAmountTextField.stringValue      = [SOXFormatters stringEightDigitsForBTCNumber:[NSDecimalNumber zero]];
+    self.xrpFeeBitcoinDETextField.stringValue        = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+    self.xrpFeeFidorTextField.stringValue            = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+    self.xrpFeeAppTextField.stringValue              = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+    self.xrpWinLoseBeforeFeesTextField.stringValue   = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
+    self.xrpWinLoseAfterFeeTextField.stringValue     = [SOXFormatters currencyStringForNumber:[NSDecimalNumber zero]];
     }
     
     // Sum Row

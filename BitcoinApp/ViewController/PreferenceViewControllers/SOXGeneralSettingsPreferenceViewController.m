@@ -74,6 +74,11 @@
 @property (strong) IBOutlet NSButton *ltcSellButton;
 @property (strong) IBOutlet NSButton *ltcBannerButton;
 
+@property (strong) IBOutlet NSTextField *xrpDescriptionTextField;
+@property (strong) IBOutlet NSButton *xrpBuyButton;
+@property (strong) IBOutlet NSButton *xrpSellButton;
+@property (strong) IBOutlet NSButton *xrpBannerButton;
+
 @property (strong) IBOutlet NSButton *autoUpdateInfoTabsButton;
 
 
@@ -213,13 +218,21 @@
                                                                                  forCurrencyType:BitcoinDE_CurrencyTypeEthereum];
     self.ethBannerButton.state               = [SOXPreferenceCenter controlStateForBannerForCurrencyType:BitcoinDE_CurrencyTypeEthereum];
     
-    // ETH
+    // LTC
     self.ltcDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeLitecoin];
     self.ltcBuyButton.state                  = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeBuy
                                                                                                  forCurrencyType:BitcoinDE_CurrencyTypeLitecoin];
     self.ltcSellButton.state                 = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeSell
                                                                                                  forCurrencyType:BitcoinDE_CurrencyTypeLitecoin];
     self.ltcBannerButton.state               = [SOXPreferenceCenter controlStateForBannerForCurrencyType:BitcoinDE_CurrencyTypeLitecoin];
+    
+    // XRP
+    self.xrpDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeRipple];
+    self.xrpBuyButton.state                  = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeBuy
+                                                                                                 forCurrencyType:BitcoinDE_CurrencyTypeRipple];
+    self.xrpSellButton.state                 = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeSell
+                                                                                                 forCurrencyType:BitcoinDE_CurrencyTypeRipple];
+    self.xrpBannerButton.state               = [SOXPreferenceCenter controlStateForBannerForCurrencyType:BitcoinDE_CurrencyTypeRipple];
 
     // Auto update info Tabs
     self.autoUpdateInfoTabsButton.title = @"Auto-Fetch Account Ledger on Demand";

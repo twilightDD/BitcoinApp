@@ -48,6 +48,9 @@
 @property (strong) IBOutlet NSTextField *ltcDescriptionTextField;
 @property (strong) IBOutlet NSButton *ltcLoadButton;
 
+@property (strong) IBOutlet NSTextField *xrpDescriptionTextField;
+@property (strong) IBOutlet NSButton *xrpLoadButton;
+
 @property (strong) IBOutlet NSButton *requestDataButton;
 
 #pragma mark | Properties
@@ -147,6 +150,10 @@
     // LTC
     self.ltcDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeLitecoin];
     self.ltcLoadButton.state                 = [SOXPreferenceCenter controlStateForLoadStatisticsForCurrencyType:BitcoinDE_CurrencyTypeLitecoin];
+    
+    // XRP
+    self.xrpDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeRipple];
+    self.xrpLoadButton.state                 = [SOXPreferenceCenter controlStateForLoadStatisticsForCurrencyType:BitcoinDE_CurrencyTypeRipple];
 }
 
 #pragma mark | Request methods
