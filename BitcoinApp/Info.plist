@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>Exception Domains</key>
@@ -49,7 +49,7 @@
 		<true/>
 	</dict>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2017 2sox / Peter Hauke. All rights reserved.</string>
+	<string>Copyright © 2017-2021 2sox / Peter Hauke. All rights reserved.</string>
 	<key>NSMainStoryboardFile</key>
 	<string>MacMain</string>
 	<key>NSPrincipalClass</key>
