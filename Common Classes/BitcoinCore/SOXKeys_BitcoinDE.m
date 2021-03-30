@@ -24,12 +24,12 @@ NSString *const BitcoinDE_TradingPair_BitcoinCash     = @"bcheur";
 NSString *const BitcoinDE_TradingPair_Ethereum        = @"etheur";
 
 #pragma mark - BitcoinDE_ExecuteTrade
-NSString *const BitcoinDE_ExecuteTrade_OrderID             = @"order_id";
-NSString *const BitcoinDE_ExecuteTrade_Type                = @"type";
-NSString *const BitcoinDE_ExecuteTrade_BitcoinAmount       = @"amount";
-NSString *const BitcoinDE_ExecuteTrade_IsAutomaticTrade    = @"isAutomaticTrade";
-NSString *const BitcoinDE_ExecuteTrade_Price               = @"price";
-NSString *const BitcoinDE_ExecuteTrade_AutomaticTradePrice = @"automaticTradePrice";
+NSString *const BitcoinDE_ExecuteTrade_OrderID                  = @"order_id";
+NSString *const BitcoinDE_ExecuteTrade_Type                     = @"type";
+NSString *const BitcoinDE_ExecuteTrade_Amount_currency_to_trade = @"amount_currency_to_trade";
+NSString *const BitcoinDE_ExecuteTrade_IsAutomaticTrade         = @"isAutomaticTrade";
+NSString *const BitcoinDE_ExecuteTrade_Price                    = @"price";
+NSString *const BitcoinDE_ExecuteTrade_AutomaticTradePrice      = @"automaticTradePrice";
 
 #pragma mark - BitcoinDE_ShowAccountInfo
 NSString *const BitcoinDE_ShowAccountInfo_MainKey = @"data";

@@ -26,7 +26,7 @@ FOUNDATION_EXPORT NSString *const BitcoinDE_TradingPair_Ethereum;
 #pragma mark - BitcoinDE_ExecuteTrade
 FOUNDATION_EXPORT NSString *const BitcoinDE_ExecuteTrade_OrderID;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ExecuteTrade_Type;
-FOUNDATION_EXPORT NSString *const BitcoinDE_ExecuteTrade_BitcoinAmount;
+FOUNDATION_EXPORT NSString *const BitcoinDE_ExecuteTrade_Amount_currency_to_trade;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ExecuteTrade_IsAutomaticTrade;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ExecuteTrade_Price;
 FOUNDATION_EXPORT NSString *const BitcoinDE_ExecuteTrade_AutomaticTradePrice;

@@ -367,12 +367,12 @@
     NSMutableDictionary *tradeParametersWithFee = [tradeParameters mutableCopy];
 
     {   // calculate bitcoins with fee
-        NSDecimalNumber *boughtBitcoins  = [tradeParameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount];
+        NSDecimalNumber *boughtBitcoins  = [tradeParameters objectForKey:BitcoinDE_ExecuteTrade_Amount_currency_to_trade];
         NSDecimalNumber *bitcoinFee      = [NSDecimalNumber decimalNumberWithString:@"0.992"];
         NSDecimalNumber *balanceBitcoins = [boughtBitcoins decimalNumberByMultiplyingBy:bitcoinFee
                                                                            withBehavior:[SOXFormatters btcNumberHandler]];
 
-        [tradeParametersWithFee setObject:balanceBitcoins forKey:BitcoinDE_ExecuteTrade_BitcoinAmount];
+        [tradeParametersWithFee setObject:balanceBitcoins forKey:BitcoinDE_ExecuteTrade_Amount_currency_to_trade];
         // TODO:  consider fee for price here ?!
     }
     [self.successfulAutomaticBuyTradeParameters addObject:[tradeParametersWithFee copy]];

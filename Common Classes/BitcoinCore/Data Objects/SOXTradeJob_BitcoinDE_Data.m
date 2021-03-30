@@ -24,7 +24,11 @@
 
     NSString *orderTypeString = [SOXMarket_BitcoinDE_DefTypes orderTypeStringForOrderType:orderType];
     NSDictionary *parameter   = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                orderID, BitcoinDE_ExecuteTrade_OrderID, orderTypeString, BitcoinDE_ExecuteTrade_Type, bitcoinAmount, BitcoinDE_ExecuteTrade_BitcoinAmount, currencyTypeString, BitcoinDE_ShowOrderbook_TradingPair, nil];
+                                 orderID, BitcoinDE_ExecuteTrade_OrderID,
+                                 orderTypeString, BitcoinDE_ExecuteTrade_Type,
+                                 bitcoinAmount, BitcoinDE_ExecuteTrade_Amount_currency_to_trade,
+                                 currencyTypeString, BitcoinDE_ShowOrderbook_TradingPair,
+                                 nil];
 
     return parameter;
 }

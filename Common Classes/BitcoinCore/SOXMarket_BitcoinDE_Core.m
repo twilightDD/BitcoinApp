@@ -491,7 +491,6 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
         [SOXMarket_BitcoinDE_Core createURL];
     }
     else {
-        NSString *orderID = [parameterDictionary objectForKey:BitcoinDE_ExecuteTrade_OrderID];
 
         // create_urlQueryStringFromParameterDictionary
         {
@@ -502,6 +501,7 @@ NSString *const _Nonnull NetworkRequestCounterKey = @"NetworkRequestCounter";
 
         // createURL
         {
+            NSString *orderID = [parameterDictionary objectForKey:BitcoinDE_ExecuteTrade_OrderID];
             SOXMarket_BitcoinDE_Core *core = [SOXMarket_BitcoinDE_Core sharedCore];
             NSString *url                  = [NSString stringWithFormat:@"%@%@%@", [SOXMarket_BitcoinDE_Core baseURLString], core.uri, orderID];
             core.url                       = url;

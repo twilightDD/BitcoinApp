@@ -405,7 +405,7 @@
 #pragma mark - Balance trade methods
 - (void)createBalanceTradesForBoughtTrades {
     // Called only, if no active automatic or balance trades
-    NSString *keyPath                            = [NSString stringWithFormat:@"@sum.%@", BitcoinDE_ExecuteTrade_BitcoinAmount];
+    NSString *keyPath                            = [NSString stringWithFormat:@"@sum.%@", BitcoinDE_ExecuteTrade_Amount_currency_to_trade];
     NSDecimalNumber *boughtBTCSum                = [self.successfulAutomaticBuyTradeParameters valueForKeyPath:keyPath];
     NSDecimalNumber *averageAutomaticBoughtPrice = [self averageAutomaticTradePriceOfBacklogParameters:self.successfulAutomaticBuyTradeParameters];
 
@@ -438,7 +438,7 @@
         }
     }
 
-    NSString *keyPath             = [NSString stringWithFormat:@"@sum.%@", BitcoinDE_ExecuteTrade_BitcoinAmount];
+    NSString *keyPath             = [NSString stringWithFormat:@"@sum.%@", BitcoinDE_ExecuteTrade_Amount_currency_to_trade];
     NSDecimalNumber *buyBTCSum    = [tradeParametersBacklog valueForKeyPath:keyPath];
     NSDecimalNumber *averagePrice = [NSDecimalNumber zero];
 
@@ -449,7 +449,7 @@
     else {
         for (NSDictionary *backlogParameter in tradeParametersBacklog) {
             // for all buyBacklogs: add buyBTC and calculate average price
-            NSDecimalNumber *bitcoinAmount = [backlogParameter objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount];
+            NSDecimalNumber *bitcoinAmount = [backlogParameter objectForKey:BitcoinDE_ExecuteTrade_Amount_currency_to_trade];
             NSDecimalNumber *price         = [backlogParameter objectForKey:BitcoinDE_ExecuteTrade_AutomaticTradePrice];
             NSDecimalNumber *volume        = [bitcoinAmount decimalNumberByMultiplyingBy:price
                                                                      withBehavior:[SOXFormatters currencyNumberHandler]];
@@ -489,7 +489,7 @@
     NSArray *parametersToExecute;
 
     if (automaticTradeHadOrderType == BitcoinDE_OrderTypeBuy) {
-        parametersToExecute = [self sellBalanceTradeParametersForBuyAmount:[parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]
+        parametersToExecute = [self sellBalanceTradeParametersForBuyAmount:[parameters objectForKey:BitcoinDE_ExecuteTrade_Amount_currency_to_trade]
                                                                forBuyPrice:[parameters objectForKey:BitcoinDE_ExecuteTrade_AutomaticTradePrice]
                                                  createPotentialParameters:NO];
     }
@@ -525,7 +525,7 @@
         if (orderType == BitcoinDE_OrderTypeSell) {
             if (self.executeBalanceTradesForBuyTrades) {
                 {   // DEBUG
-                    NSString *note = [NSString stringWithFormat:@"Try to execute sellBalance for bought - ID: %@ - price: %@ - amount: %@", [parameters objectForKey:BitcoinDE_ExecuteTrade_OrderID], [parameters objectForKey:BitcoinDE_ExecuteTrade_Price], [parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]];
+                    NSString *note = [NSString stringWithFormat:@"Try to execute sellBalance for bought - ID: %@ - price: %@ - amount: %@", [parameters objectForKey:BitcoinDE_ExecuteTrade_OrderID], [parameters objectForKey:BitcoinDE_ExecuteTrade_Price], [parameters objectForKey:BitcoinDE_ExecuteTrade_Amount_currency_to_trade]];
                     [self informBuyDelegateWithNote:note];
                 }
 
@@ -535,7 +535,7 @@
                                                                        fromOrderBook:self.sellOrderBook];
                     if (!sellOrderBookData) {
                         {   // DEBUG
-                            NSString *note = [NSString stringWithFormat:@"Could not found sellBalanceOrder in sellOrderBook - ID: %@ - price: %@ - amount: %@", [parameters objectForKey:BitcoinDE_ExecuteTrade_OrderID], [parameters objectForKey:BitcoinDE_ExecuteTrade_Price], [parameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount]];
+                            NSString *note = [NSString stringWithFormat:@"Could not found sellBalanceOrder in sellOrderBook - ID: %@ - price: %@ - amount: %@", [parameters objectForKey:BitcoinDE_ExecuteTrade_OrderID], [parameters objectForKey:BitcoinDE_ExecuteTrade_Price], [parameters objectForKey:BitcoinDE_ExecuteTrade_Amount_currency_to_trade]];
                             [self informBuyDelegateWithNote:note];
                         }
                         break;
@@ -577,7 +577,7 @@
             else {
                 note = @"Trade SUCCESSFUL: ";
             }
-            NSString *noteExtension = [NSString stringWithFormat:@"type: %@-%@ - ID: %@ - btc: %@ - price: %@ - autoPrice: %@", [(NSNumber *)[tradeParameters objectForKey:BitcoinDE_ExecuteTrade_IsAutomaticTrade] boolValue] ? @"Auto" : @"Balance", [tradeParameters objectForKey:BitcoinDE_ExecuteTrade_Type], [tradeParameters objectForKey:BitcoinDE_ExecuteTrade_OrderID], [tradeParameters objectForKey:BitcoinDE_ExecuteTrade_BitcoinAmount], [tradeParameters objectForKey:BitcoinDE_ExecuteTrade_Price], [tradeParameters objectForKey:BitcoinDE_ExecuteTrade_AutomaticTradePrice]];
+            NSString *noteExtension = [NSString stringWithFormat:@"type: %@-%@ - ID: %@ - btc: %@ - price: %@ - autoPrice: %@", [(NSNumber *)[tradeParameters objectForKey:BitcoinDE_ExecuteTrade_IsAutomaticTrade] boolValue] ? @"Auto" : @"Balance", [tradeParameters objectForKey:BitcoinDE_ExecuteTrade_Type], [tradeParameters objectForKey:BitcoinDE_ExecuteTrade_OrderID], [tradeParameters objectForKey:BitcoinDE_ExecuteTrade_Amount_currency_to_trade], [tradeParameters objectForKey:BitcoinDE_ExecuteTrade_Price], [tradeParameters objectForKey:BitcoinDE_ExecuteTrade_AutomaticTradePrice]];
             note                    = [note stringByAppendingString:noteExtension];
             [self informBuyDelegateWithNote:note];
         }
