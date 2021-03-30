@@ -101,15 +101,15 @@ static NSString *AutomaticTradeXRPSegueKey            = @"EmbedAutoTraderForXRP"
 
 #if PETER
         NSTabViewItem *item14 = [self.bottomTabView tabViewItemAtIndex:14];   // auto trader: eth
-        [self.bottomTabView removeTabViewItem:item13];
+        [self.bottomTabView removeTabViewItem:item14];
         NSTabViewItem *item13 = [self.bottomTabView tabViewItemAtIndex:13];   // auto trader: gold
-        [self.bottomTabView removeTabViewItem:item12];
+        [self.bottomTabView removeTabViewItem:item13];
         NSTabViewItem *item12 = [self.bottomTabView tabViewItemAtIndex:12];   // auto trader: sv
-        [self.bottomTabView removeTabViewItem:item11];
+        [self.bottomTabView removeTabViewItem:item12];
         NSTabViewItem *item11 = [self.bottomTabView tabViewItemAtIndex:11];   // auto trader: cash
-        [self.bottomTabView removeTabViewItem:item10];
+        [self.bottomTabView removeTabViewItem:item11];
         NSTabViewItem *item10 = [self.bottomTabView tabViewItemAtIndex:10];   // auto trader: bitcoin
-        [self.bottomTabView removeTabViewItem:item9];
+        [self.bottomTabView removeTabViewItem:item10];
 #endif
     }
 }

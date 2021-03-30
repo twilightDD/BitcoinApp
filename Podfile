@@ -28,5 +28,10 @@ target 'mac BitcoinApp' do
     inherit! :search_paths
     # Pods for testing
   end
+  
+  target 'mac BitcoinApp Peter' do
+    inherit! :search_paths
+    # Pods for testing
+  end
 
 end
