@@ -238,7 +238,8 @@
     self.maxAmountButton.hidden                 = maxAmountButtonHidden;
 
     self.minAmountDescriptionTextField.stringValue = @"Minimal amount";
-    self.priceDescriptionTextField.stringValue     = @"Price per BTC";
+    NSString *tradingPairShortString = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:self.currencyType];
+    self.priceDescriptionTextField.stringValue     = [NSString stringWithFormat:@"Price per %@", tradingPairShortString];
 
     self.createOrderButton.title = createOrderButtonText;
     self.cancelButton.title      = cancelButtonText;
