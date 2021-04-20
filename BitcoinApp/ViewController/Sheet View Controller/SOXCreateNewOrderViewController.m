@@ -249,12 +249,14 @@
         NSString *volumeTextFieldText = @"Error";
         switch (self.orderType) {
             case BitcoinDE_OrderTypeBuy:
-                volumeTextFieldText = [NSString stringWithFormat:@"Min. price: %@\n(50%% weighted rate)", [SOXFormatters currencyStringForNumber:self.priceLimit
-                                                                                                                                    roundingMode:NSNumberFormatterRoundUp]];
+                volumeTextFieldText = [NSString stringWithFormat:@"Min. price: %@\n(50%% weighted rate)",
+                                       [SOXFormatters currencyStringForNumber:self.priceLimit
+                                                                 roundingMode:NSNumberFormatterRoundUp]];
                 break;
             case BitcoinDE_OrderTypeSell:
-                volumeTextFieldText = [NSString stringWithFormat:@"Max. price: %@\n(200%% weighted rate)", [SOXFormatters currencyStringForNumber:self.priceLimit
-                                                                                                                                     roundingMode:NSNumberFormatterRoundDown]];
+                volumeTextFieldText = [NSString stringWithFormat:@"Max. price: %@\n(200%% weighted rate)",
+                                       [SOXFormatters currencyStringForNumber:self.priceLimit
+                                                                 roundingMode:NSNumberFormatterRoundDown]];
                 break;
             default:
                 break;
