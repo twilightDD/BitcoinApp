@@ -246,6 +246,8 @@
 		D0F7027E216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F7027B216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.m */; };
 		D0F7027F216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F7027C216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.xib */; };
 		D0F70280216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F7027C216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.xib */; };
+		D0FC0970262F8CE9007ABDE6 /* SOXMyTradeHistoryFeeCoinsValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FC096F262F8CE9007ABDE6 /* SOXMyTradeHistoryFeeCoinsValueTransformer.m */; };
+		D0FC0971262F8CE9007ABDE6 /* SOXMyTradeHistoryFeeCoinsValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FC096F262F8CE9007ABDE6 /* SOXMyTradeHistoryFeeCoinsValueTransformer.m */; };
 		D0FD14A12190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FD149F2190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.m */; };
 		D0FD14A22190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FD149F2190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.m */; };
 		D0FD14A32190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0FD14A02190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.xib */; };
@@ -492,6 +494,8 @@
 		D0F7027A216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXFilterOptionsPreferenceViewController.h; sourceTree = "<group>"; };
 		D0F7027B216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXFilterOptionsPreferenceViewController.m; sourceTree = "<group>"; };
 		D0F7027C216AF1BF00BA7EDF /* SOXFilterOptionsPreferenceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SOXFilterOptionsPreferenceViewController.xib; sourceTree = "<group>"; };
+		D0FC096E262F8CE9007ABDE6 /* SOXMyTradeHistoryFeeCoinsValueTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXMyTradeHistoryFeeCoinsValueTransformer.h; sourceTree = "<group>"; };
+		D0FC096F262F8CE9007ABDE6 /* SOXMyTradeHistoryFeeCoinsValueTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXMyTradeHistoryFeeCoinsValueTransformer.m; sourceTree = "<group>"; };
 		D0FD149E2190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOXKeysAndSecretPreferenceHelpViewController.h; sourceTree = "<group>"; };
 		D0FD149F2190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOXKeysAndSecretPreferenceHelpViewController.m; sourceTree = "<group>"; };
 		D0FD14A02190E1AF00708A71 /* SOXKeysAndSecretPreferenceHelpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SOXKeysAndSecretPreferenceHelpViewController.xib; sourceTree = "<group>"; };
@@ -906,6 +910,8 @@
 				D0BCFC9E20041468004F9E57 /* SOXMinAmountWithShortCurrencyValueTransformer.m */,
 				D09759752006BFBE008A4334 /* SOXMyTradeAmountValueTransformer.h */,
 				D09759762006BFBE008A4334 /* SOXMyTradeAmountValueTransformer.m */,
+				D0FC096E262F8CE9007ABDE6 /* SOXMyTradeHistoryFeeCoinsValueTransformer.h */,
+				D0FC096F262F8CE9007ABDE6 /* SOXMyTradeHistoryFeeCoinsValueTransformer.m */,
 				D0DD8DB221AC969900778967 /* SOXMyTradeHistoryPaymentMethodValueTransformer.h */,
 				D0DD8DB321AC969900778967 /* SOXMyTradeHistoryPaymentMethodValueTransformer.m */,
 				D090304B1EB1F4FC00775E05 /* SOXPaymentOptionValueTransformer.h */,
@@ -1427,6 +1433,7 @@
 				D021507520474AEC005A0932 /* SOXFormatters.m in Sources */,
 				D021507620474AEC005A0932 /* SOXOrdersViewController.m in Sources */,
 				D021507720474AEC005A0932 /* SOXRates_BitcoinDE_Data.m in Sources */,
+				D0FC0971262F8CE9007ABDE6 /* SOXMyTradeHistoryFeeCoinsValueTransformer.m in Sources */,
 				D04CA7752610F68200B433A6 /* SOXSocketManager_BitcoinDE.swift in Sources */,
 				D096A7AC21B888A000274483 /* SOXAccountLedger_BitcoinDE_StatisticData.m in Sources */,
 				D04CA6FF2610A15700B433A6 /* CompatibilityToSwift.swift in Sources */,
@@ -1521,6 +1528,7 @@
 				D01F589E1E8495D200C170F7 /* SOXFormatters.m in Sources */,
 				D0331D531E7CAEFF008C0244 /* SOXOrdersViewController.m in Sources */,
 				D02ED5B21E814CF100AA9448 /* SOXRates_BitcoinDE_Data.m in Sources */,
+				D0FC0970262F8CE9007ABDE6 /* SOXMyTradeHistoryFeeCoinsValueTransformer.m in Sources */,
 				D04CA7742610F68200B433A6 /* SOXSocketManager_BitcoinDE.swift in Sources */,
 				D096A7AB21B888A000274483 /* SOXAccountLedger_BitcoinDE_StatisticData.m in Sources */,
 				D04CA6FE2610A15700B433A6 /* CompatibilityToSwift.swift in Sources */,

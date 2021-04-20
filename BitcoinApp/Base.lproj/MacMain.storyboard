@@ -708,7 +708,7 @@
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="MacViewController" sceneMemberID="viewController">
-                    <view key="view" wantsLayer="YES" misplaced="YES" id="m2S-Jp-Qdl">
+                    <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="1069" height="674"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -727,20 +727,20 @@
                                 <tabViewItems>
                                     <tabViewItem label="TabBTC" identifier="1" id="eLR-ge-YSa">
                                         <view key="view" id="kJ0-KF-JIj">
-                                            <rect key="frame" x="10" y="33" width="975" height="414"/>
+                                            <rect key="frame" x="10" y="33" width="1023" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="A8Q-hU-Lrd">
-                                                    <rect key="frame" x="0.0" y="0.0" width="449" height="414"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="503" height="414"/>
                                                     <connections>
                                                         <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerBuyBTCSegue" id="ZEn-rF-4RA"/>
                                                     </connections>
                                                 </containerView>
                                                 <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Tu7-dB-5fP">
-                                                    <rect key="frame" x="455" y="12" width="5" height="390"/>
+                                                    <rect key="frame" x="509" y="12" width="5" height="390"/>
                                                 </box>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="ovw-tP-oiM">
-                                                    <rect key="frame" x="466" y="0.0" width="448" height="414"/>
+                                                    <rect key="frame" x="520" y="0.0" width="503" height="414"/>
                                                     <connections>
                                                         <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerSellBTCSegue" id="Sxs-iN-Wh5"/>
                                                     </connections>
@@ -4387,7 +4387,7 @@ Gw
                                                     </connections>
                                                 </tableColumn>
                                                 <tableColumn identifier="amount" editable="NO" width="140" minWidth="40" maxWidth="1000" id="4MZ-GR-MVY">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ownCalc_amountAfterFee">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="amount_Currency_To_Trade_After_Fee">
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -4396,10 +4396,10 @@ Gw
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
-                                                    <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="ownCalc_amountAfterFee"/>
+                                                    <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="amount_Currency_To_Trade_After_Fee"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
-                                                        <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.self" id="e1j-oX-q9q">
+                                                        <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.self" id="rmm-yF-ELe">
                                                             <dictionary key="options">
                                                                 <bool key="NSConditionallySetsEditable" value="YES"/>
                                                                 <string key="NSValueTransformerName">SOXMyTradeAmountValueTransformer</string>
@@ -4504,10 +4504,9 @@ Gw
                                                     <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="feeBTC"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
-                                                        <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.self" id="dfS-xM-BIE">
+                                                        <binding destination="sb6-Q3-A24" name="value" keyPath="arrangedObjects.self" id="vsG-bI-v0q">
                                                             <dictionary key="options">
-                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
-                                                                <string key="NSValueTransformerName">SOXFeeCoinValueTransformer</string>
+                                                                <string key="NSValueTransformerName">SOXMyTradeHistoryFeeCoinsValueTransformer</string>
                                                             </dictionary>
                                                         </binding>
                                                     </connections>

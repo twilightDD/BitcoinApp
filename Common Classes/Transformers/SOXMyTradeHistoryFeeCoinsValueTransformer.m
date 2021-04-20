@@ -1,22 +1,20 @@
 //
-//  SOXMyTradeAmountValueTransformer.m
+//  SOXMyTradeHistoryFeeCoinsValueTransformer.m
 //  BitcoinApp
 //
-//  Created by Peter Hauke on 10.01.18.
-//  Copyright © 2018 2sox / Peter Hauke. All rights reserved.
+//  Created by Peter Hauke on 21.04.21.
+//  Copyright © 2021 2sox / Peter Hauke. All rights reserved.
 //
 
-#import "SOXMyTradeAmountValueTransformer.h"
+#import "SOXMyTradeHistoryFeeCoinsValueTransformer.h"
 
 #import "SOXMarket_BitcoinDE_DefTypes.h"
 
 #import "SOXFormatters.h"
 
 #import "SOXMyTrades_BitcoinDE_Data.h"
-#import "SOXMyTrades_BitcoinDE_Data_Private.h"
 
-@implementation SOXMyTradeAmountValueTransformer
-
+@implementation SOXMyTradeHistoryFeeCoinsValueTransformer
 
 + (Class)transformedValueClass {
     return [NSString class];
@@ -27,34 +25,28 @@
 }
 
 - (id)transformedValue:(id)value {
-    NSDecimalNumber *amount_Currency_To_Trade_After_Fee = nil;
+    NSDecimalNumber *fee_Currency_To_Trade = nil;
     NSString *tradingPair                   = nil;
-
+    
     if ([value isKindOfClass:[SOXMyTrades_BitcoinDE_Data class]]) {
         SOXMyTrades_BitcoinDE_Data *myTradeData = value;
-        if ([myTradeData.type isEqualToString:MyTradeHistoryParameter_OrderTypeBuyKey]) {
-            amount_Currency_To_Trade_After_Fee = myTradeData.amount_Currency_To_Trade_After_Fee;
-        }
-        else {
-            amount_Currency_To_Trade_After_Fee = myTradeData.amount_Currency_To_Trade;
-        }
-        
+        fee_Currency_To_Trade  = myTradeData.fee_Currency_To_Trade;
         tradingPair            = myTradeData.trading_pair;
     }
     
-    if (amount_Currency_To_Trade_After_Fee && tradingPair) {
+    if (fee_Currency_To_Trade && tradingPair) {
         BitcoinDE_CurrencyType currencyType = [SOXMarket_BitcoinDE_DefTypes currencyTypeForTradingPairString:tradingPair];
         NSString *shortCurrencyString       = [SOXMarket_BitcoinDE_DefTypes tradingPairShortStringUpperCaseForCurrencyType:currencyType];
-
+        
         NSString *result = [NSString stringWithFormat:@"%@ %@"
-                            , [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:amount_Currency_To_Trade_After_Fee]
+                            , [[SOXFormatters bitcoinNumberWithoutCurrencySymbolFormatter] stringFromNumber:fee_Currency_To_Trade]
                             , shortCurrencyString];
         return result;
     }
     else if (tradingPair) {
         return @"-";
     }
-
+    
     return @"Error";
 }
 
