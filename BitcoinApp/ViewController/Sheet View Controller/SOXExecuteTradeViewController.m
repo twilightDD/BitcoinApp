@@ -381,11 +381,20 @@ NSString const *_Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTrad
 - (void)setupExecuteTradeButton {
     NSString *executeTradeButtonText;
     if (self.orderType == BitcoinDE_OrderTypeBuy) {
-        if (self.executePaymentOption != BitcoinDE_PaymentOptionSEPAOnly) {
-            executeTradeButtonText = @"Buy via Express";
-        }
-        else {
-            executeTradeButtonText = @"Buy via SEPA";
+        
+        switch (self.executePaymentOption) {
+            case BitcoinDE_PaymentOptionExpressOnly:
+                executeTradeButtonText = @"Buy via Express";
+                break;
+            case BitcoinDE_PaymentOptionExpressAndSepa:
+                executeTradeButtonText = @"Buy via Express or SEPA";
+                break;
+            case BitcoinDE_PaymentOptionSEPAOnly:
+                executeTradeButtonText = @"Buy via SEPA";
+                break;
+            default:
+                executeTradeButtonText = @"Default";
+                break;
         }
     }
     else if (self.orderType == BitcoinDE_OrderTypeSell) {
@@ -457,6 +466,9 @@ NSString const *_Nonnull ExecuteTradeViewControllerIdentifierKey = @"ExecuteTrad
         // Express or Sepa
         if (self.orderBookPaymentOption == BitcoinDE_PaymentOptionExpressAndSepa && self.defaultPaymentOption == BitcoinDE_PaymentOptionExpressAndSepa) {
             if (self.maxPossibleBTCAmountToTrade && [self.amountToTrade isLessThanOrEqualTo:self.maxPossibleBTCAmountToTrade]) {
+                self.executePaymentOption = BitcoinDE_PaymentOptionExpressOnly;
+            }
+            else if (self.maxAmountOrder && [self.amountToTrade isLessThanOrEqualTo:self.maxPossibleBTCAmountToTrade]) {
                 self.executePaymentOption = BitcoinDE_PaymentOptionExpressOnly;
             }
             else if (self.maxAmountOrder && [self.amountToTrade isLessThanOrEqualTo:self.maxAmountOrder]) {
