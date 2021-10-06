@@ -105,6 +105,7 @@ static NSString *AutomaticTradeDOGSegueKey            = @"EmbedAutoTraderForDOG"
 
 
 #if PETER
+    
         NSTabViewItem *item15 = [self.bottomTabView tabViewItemAtIndex:15];   // auto trader: eth
         [self.bottomTabView removeTabViewItem:item15];
         NSTabViewItem *item14 = [self.bottomTabView tabViewItemAtIndex:14];   // auto trader: gold
@@ -113,8 +114,8 @@ static NSString *AutomaticTradeDOGSegueKey            = @"EmbedAutoTraderForDOG"
         [self.bottomTabView removeTabViewItem:item13];
         NSTabViewItem *item12 = [self.bottomTabView tabViewItemAtIndex:12];   // auto trader: cash
         [self.bottomTabView removeTabViewItem:item12];
-        NSTabViewItem *item12 = [self.bottomTabView tabViewItemAtIndex:11];   // auto trader: bitcoin
-        [self.bottomTabView removeTabViewItem:item12];
+        NSTabViewItem *item11 = [self.bottomTabView tabViewItemAtIndex:11];   // auto trader: bitcoin
+        [self.bottomTabView removeTabViewItem:item11];
 #endif
     }
 }
