@@ -51,6 +51,9 @@
 @property (strong) IBOutlet NSTextField *xrpDescriptionTextField;
 @property (strong) IBOutlet NSButton *xrpLoadButton;
 
+@property (strong) IBOutlet NSTextField *dogDescriptionTextField;
+@property (strong) IBOutlet NSButton *dogLoadButton;
+
 @property (strong) IBOutlet NSButton *requestDataButton;
 
 #pragma mark | Properties
@@ -154,6 +157,10 @@
     // XRP
     self.xrpDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeRipple];
     self.xrpLoadButton.state                 = [SOXPreferenceCenter controlStateForLoadStatisticsForCurrencyType:BitcoinDE_CurrencyTypeRipple];
+    
+    // DOG
+    self.dogDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeDoge];
+    self.dogLoadButton.state                 = [SOXPreferenceCenter controlStateForLoadStatisticsForCurrencyType:BitcoinDE_CurrencyTypeDoge];
 }
 
 #pragma mark | Request methods

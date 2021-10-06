@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -709,11 +709,11 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="MacViewController" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="1069" height="674"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1133" height="674"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <containerView identifier="BannerContainerViewIdentifier" translatesAutoresizingMaskIntoConstraints="NO" id="CSm-MP-mkG" userLabel="BannerContainerView">
-                                <rect key="frame" x="20" y="534" width="1029" height="121"/>
+                                <rect key="frame" x="20" y="534" width="1093" height="121"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="121" placeholder="YES" id="bdC-eV-eM9"/>
                                 </constraints>
@@ -722,25 +722,25 @@
                                 </connections>
                             </containerView>
                             <tabView translatesAutoresizingMaskIntoConstraints="NO" id="B9m-IQ-OSo">
-                                <rect key="frame" x="13" y="64" width="1043" height="460"/>
+                                <rect key="frame" x="13" y="64" width="1107" height="460"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="TabBTC" identifier="1" id="eLR-ge-YSa">
                                         <view key="view" id="kJ0-KF-JIj">
-                                            <rect key="frame" x="10" y="33" width="1023" height="414"/>
+                                            <rect key="frame" x="10" y="33" width="1087" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="A8Q-hU-Lrd">
-                                                    <rect key="frame" x="0.0" y="0.0" width="503" height="414"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="535" height="414"/>
                                                     <connections>
                                                         <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerBuyBTCSegue" id="ZEn-rF-4RA"/>
                                                     </connections>
                                                 </containerView>
                                                 <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Tu7-dB-5fP">
-                                                    <rect key="frame" x="509" y="12" width="5" height="390"/>
+                                                    <rect key="frame" x="541" y="12" width="5" height="390"/>
                                                 </box>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="ovw-tP-oiM">
-                                                    <rect key="frame" x="520" y="0.0" width="503" height="414"/>
+                                                    <rect key="frame" x="552" y="0.0" width="535" height="414"/>
                                                     <connections>
                                                         <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerSellBTCSegue" id="Sxs-iN-Wh5"/>
                                                     </connections>
@@ -763,20 +763,20 @@
                                     </tabViewItem>
                                     <tabViewItem label="TabBCH" identifier="1" id="sNw-jo-a6Q">
                                         <view key="view" id="TJg-5t-cyV">
-                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
+                                            <rect key="frame" x="10" y="33" width="1083" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="oCb-Jr-FAj">
-                                                    <rect key="frame" x="0.0" y="0.0" width="449" height="413"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="503" height="414"/>
                                                     <connections>
                                                         <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerBuyBCHSegue" id="w3B-e0-psU"/>
                                                     </connections>
                                                 </containerView>
                                                 <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="kuH-pq-QOa">
-                                                    <rect key="frame" x="455" y="12" width="5" height="389"/>
+                                                    <rect key="frame" x="509" y="12" width="5" height="390"/>
                                                 </box>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="tkq-hM-DsF">
-                                                    <rect key="frame" x="466" y="0.0" width="448" height="413"/>
+                                                    <rect key="frame" x="520" y="0.0" width="503" height="414"/>
                                                     <connections>
                                                         <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerSellBCHSegue" id="uNF-WE-KG0"/>
                                                     </connections>
@@ -799,20 +799,20 @@
                                     </tabViewItem>
                                     <tabViewItem label="TabBSV" identifier="1" id="WdG-xS-bB4">
                                         <view key="view" id="gPV-9L-NbT">
-                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
+                                            <rect key="frame" x="10" y="33" width="1083" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="fRl-OM-X00">
-                                                    <rect key="frame" x="0.0" y="0.0" width="449" height="413"/>
+                                                    <rect key="frame" x="0.0" y="1" width="449" height="413"/>
                                                     <connections>
                                                         <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerBuyBSVSegue" id="M1y-2H-j1m"/>
                                                     </connections>
                                                 </containerView>
                                                 <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="a9e-tF-ns1">
-                                                    <rect key="frame" x="455" y="12" width="5" height="389"/>
+                                                    <rect key="frame" x="455" y="13" width="5" height="389"/>
                                                 </box>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="Lrq-06-NIY">
-                                                    <rect key="frame" x="466" y="0.0" width="448" height="413"/>
+                                                    <rect key="frame" x="466" y="1" width="448" height="413"/>
                                                     <connections>
                                                         <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerSellBSVSegue" id="hNG-sW-py7"/>
                                                     </connections>
@@ -835,20 +835,20 @@
                                     </tabViewItem>
                                     <tabViewItem label="TabBTG" identifier="1" id="aNV-f4-fkc">
                                         <view key="view" id="aOW-l4-o1D">
-                                            <rect key="frame" x="10" y="33" width="914" height="413"/>
+                                            <rect key="frame" x="10" y="33" width="1083" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="Tqa-sT-oZ4">
-                                                    <rect key="frame" x="0.0" y="0.0" width="449" height="413"/>
+                                                    <rect key="frame" x="0.0" y="1" width="449" height="413"/>
                                                     <connections>
                                                         <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerBuyBTGSegue" id="LXx-OU-juS"/>
                                                     </connections>
                                                 </containerView>
                                                 <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="BSc-zK-nRx">
-                                                    <rect key="frame" x="455" y="12" width="5" height="389"/>
+                                                    <rect key="frame" x="455" y="13" width="5" height="389"/>
                                                 </box>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="tnT-zA-U5o">
-                                                    <rect key="frame" x="466" y="0.0" width="448" height="413"/>
+                                                    <rect key="frame" x="466" y="1" width="448" height="413"/>
                                                     <connections>
                                                         <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerSellBTGSegue" id="cqk-5J-dmQ"/>
                                                     </connections>
@@ -871,7 +871,7 @@
                                     </tabViewItem>
                                     <tabViewItem label="TabETH" identifier="1" id="xJ0-3F-ffY">
                                         <view key="view" id="i9q-n5-DdU">
-                                            <rect key="frame" x="10" y="33" width="914" height="414"/>
+                                            <rect key="frame" x="10" y="33" width="1083" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="tWi-70-Aib">
@@ -907,7 +907,7 @@
                                     </tabViewItem>
                                     <tabViewItem label="TabLTC" identifier="1" id="gWk-xh-7oB">
                                         <view key="view" id="9Nf-Jq-QTm">
-                                            <rect key="frame" x="10" y="33" width="974" height="414"/>
+                                            <rect key="frame" x="10" y="33" width="1083" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="ysq-Ib-VR3">
@@ -943,20 +943,20 @@
                                     </tabViewItem>
                                     <tabViewItem label="TabXRP" identifier="1" id="TEk-fn-rk8">
                                         <view key="view" id="DyD-s8-ZD9">
-                                            <rect key="frame" x="10" y="33" width="975" height="414"/>
+                                            <rect key="frame" x="10" y="33" width="1087" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="BzP-Ru-8aR">
-                                                    <rect key="frame" x="0.0" y="0.0" width="479" height="414"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="535" height="414"/>
                                                     <connections>
                                                         <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerBuyXRPSegue" id="8l0-jq-Tbi"/>
                                                     </connections>
                                                 </containerView>
                                                 <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="GSJ-d7-y2C">
-                                                    <rect key="frame" x="485" y="12" width="5" height="390"/>
+                                                    <rect key="frame" x="541" y="12" width="5" height="390"/>
                                                 </box>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="O3k-gc-c81">
-                                                    <rect key="frame" x="496" y="0.0" width="479" height="414"/>
+                                                    <rect key="frame" x="552" y="0.0" width="535" height="414"/>
                                                     <connections>
                                                         <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerSellXRPSegue" id="5ym-o3-blU"/>
                                                     </connections>
@@ -977,9 +977,45 @@
                                             </constraints>
                                         </view>
                                     </tabViewItem>
+                                    <tabViewItem label="TabDOG" identifier="1" id="vxH-t8-FpO">
+                                        <view key="view" id="E0P-dM-7Xw">
+                                            <rect key="frame" x="10" y="33" width="1087" height="414"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="faS-3g-dqN">
+                                                    <rect key="frame" x="0.0" y="0.0" width="535" height="414"/>
+                                                    <connections>
+                                                        <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerBuyDOGSegue" id="sjp-aE-Bfq"/>
+                                                    </connections>
+                                                </containerView>
+                                                <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="pGv-UP-fnr">
+                                                    <rect key="frame" x="541" y="12" width="5" height="390"/>
+                                                </box>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="vhB-kD-jWm">
+                                                    <rect key="frame" x="552" y="0.0" width="535" height="414"/>
+                                                    <connections>
+                                                        <segue destination="ssU-Oy-97E" kind="embed" identifier="OrdersViewControllerSellDOGSegue" id="vnd-gY-i0C"/>
+                                                    </connections>
+                                                </containerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="faS-3g-dqN" secondAttribute="bottom" id="1Ut-zN-W67"/>
+                                                <constraint firstAttribute="bottom" secondItem="pGv-UP-fnr" secondAttribute="bottom" constant="12" symbolic="YES" id="FEp-77-q2w"/>
+                                                <constraint firstItem="faS-3g-dqN" firstAttribute="top" secondItem="E0P-dM-7Xw" secondAttribute="top" id="FUB-jm-GFp"/>
+                                                <constraint firstItem="pGv-UP-fnr" firstAttribute="top" secondItem="E0P-dM-7Xw" secondAttribute="top" constant="12" symbolic="YES" id="G0t-V5-8ZL"/>
+                                                <constraint firstItem="vhB-kD-jWm" firstAttribute="leading" secondItem="pGv-UP-fnr" secondAttribute="trailing" constant="8" symbolic="YES" id="Jcs-qD-auE"/>
+                                                <constraint firstItem="pGv-UP-fnr" firstAttribute="centerX" secondItem="E0P-dM-7Xw" secondAttribute="centerX" id="U5k-vY-YRR"/>
+                                                <constraint firstAttribute="bottom" secondItem="vhB-kD-jWm" secondAttribute="bottom" id="cD7-yl-Zol"/>
+                                                <constraint firstAttribute="trailing" secondItem="vhB-kD-jWm" secondAttribute="trailing" id="cLr-ZQ-52o"/>
+                                                <constraint firstItem="pGv-UP-fnr" firstAttribute="leading" secondItem="faS-3g-dqN" secondAttribute="trailing" constant="8" symbolic="YES" id="kOd-YA-ZQt"/>
+                                                <constraint firstItem="vhB-kD-jWm" firstAttribute="top" secondItem="E0P-dM-7Xw" secondAttribute="top" id="kqg-H2-eOX"/>
+                                                <constraint firstItem="faS-3g-dqN" firstAttribute="leading" secondItem="E0P-dM-7Xw" secondAttribute="leading" id="lhe-bY-HuY"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
                                     <tabViewItem label="Active orders" identifier="" id="l82-SC-zEw">
                                         <view key="view" id="MN5-M8-jLH">
-                                            <rect key="frame" x="10" y="33" width="914" height="414"/>
+                                            <rect key="frame" x="10" y="33" width="1087" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="aZ7-BW-zaH">
@@ -999,7 +1035,7 @@
                                     </tabViewItem>
                                     <tabViewItem label="Account ledger" identifier="2" id="Ch0-iV-PHR">
                                         <view key="view" id="Q3R-zu-LRo">
-                                            <rect key="frame" x="10" y="33" width="914" height="414"/>
+                                            <rect key="frame" x="10" y="33" width="1087" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="oUM-74-QBF">
@@ -1019,7 +1055,7 @@
                                     </tabViewItem>
                                     <tabViewItem label="My Trade History" identifier="" id="KJJ-NU-KfP">
                                         <view key="view" id="Jwu-D5-GY5">
-                                            <rect key="frame" x="10" y="33" width="914" height="414"/>
+                                            <rect key="frame" x="10" y="33" width="1087" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="Jo0-rk-ilP">
@@ -1039,7 +1075,7 @@
                                     </tabViewItem>
                                     <tabViewItem label="BTC" identifier="" id="ucc-xu-QEr">
                                         <view key="view" id="KtV-3h-LnT">
-                                            <rect key="frame" x="10" y="33" width="914" height="414"/>
+                                            <rect key="frame" x="10" y="33" width="1087" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="Fs1-UN-uNY">
@@ -1059,7 +1095,7 @@
                                     </tabViewItem>
                                     <tabViewItem label="BCH" identifier="" id="j0B-3G-QB4">
                                         <view key="view" id="YoS-dT-aaC">
-                                            <rect key="frame" x="10" y="33" width="914" height="414"/>
+                                            <rect key="frame" x="10" y="33" width="1087" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="xQR-8N-Xna">
@@ -1079,7 +1115,7 @@
                                     </tabViewItem>
                                     <tabViewItem label="BSV" identifier="" id="sKH-gO-8S4">
                                         <view key="view" id="pZs-pd-xtf">
-                                            <rect key="frame" x="10" y="33" width="914" height="414"/>
+                                            <rect key="frame" x="10" y="33" width="1087" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="KVM-mi-ni5">
@@ -1099,7 +1135,7 @@
                                     </tabViewItem>
                                     <tabViewItem label="BTG" identifier="" id="MG6-Ar-fVj">
                                         <view key="view" id="V3q-F9-d6O">
-                                            <rect key="frame" x="10" y="33" width="914" height="414"/>
+                                            <rect key="frame" x="10" y="33" width="1087" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="Ab4-V2-fR1">
@@ -1119,7 +1155,7 @@
                                     </tabViewItem>
                                     <tabViewItem label="ETH" identifier="" id="prg-W5-5Mn">
                                         <view key="view" id="g1H-rJ-sge">
-                                            <rect key="frame" x="10" y="33" width="914" height="414"/>
+                                            <rect key="frame" x="10" y="33" width="1087" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="9nY-r8-CKk">
@@ -1139,7 +1175,7 @@
                                     </tabViewItem>
                                     <tabViewItem label="LTC" identifier="" id="JG1-eJ-fcA">
                                         <view key="view" id="Tin-Ij-WwA">
-                                            <rect key="frame" x="10" y="33" width="1021" height="414"/>
+                                            <rect key="frame" x="10" y="33" width="1087" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="JRI-fT-RgJ">
@@ -1159,7 +1195,7 @@
                                     </tabViewItem>
                                     <tabViewItem label="XRP" identifier="" id="oHf-sJ-JgO">
                                         <view key="view" id="8XJ-1M-GUH">
-                                            <rect key="frame" x="10" y="33" width="1023" height="414"/>
+                                            <rect key="frame" x="10" y="33" width="1087" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="rd7-Aj-wvP">
@@ -1179,7 +1215,7 @@
                                     </tabViewItem>
                                     <tabViewItem label="IAP" identifier="" id="tdI-1d-FLi">
                                         <view key="view" id="hGk-Be-ezH">
-                                            <rect key="frame" x="10" y="33" width="975" height="414"/>
+                                            <rect key="frame" x="10" y="33" width="1087" height="414"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="YrW-uI-Tha">
@@ -1200,13 +1236,13 @@
                                 </tabViewItems>
                             </tabView>
                             <box boxType="custom" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="ljh-CW-puG">
-                                <rect key="frame" x="20" y="20" width="1029" height="38"/>
+                                <rect key="frame" x="20" y="20" width="1093" height="38"/>
                                 <view key="contentView" id="7KU-hO-f7z">
-                                    <rect key="frame" x="1" y="1" width="1027" height="36"/>
+                                    <rect key="frame" x="1" y="1" width="1091" height="36"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="k1Q-d5-dvP">
-                                            <rect key="frame" x="14" y="10" width="37" height="16"/>
+                                            <rect key="frame" x="18" y="10" width="37" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="zte-gv-QZ1">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1214,7 +1250,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CJx-Nr-pZ0">
-                                            <rect key="frame" x="976" y="10" width="37" height="16"/>
+                                            <rect key="frame" x="1036" y="10" width="37" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="b8d-YG-3zQ">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -2144,6 +2180,7 @@
                 </viewController>
                 <customObject id="Ixs-NX-vvZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController objectClassName="SOXShowOrderbookData" selectsInsertedObjects="NO" avoidsEmptySelection="NO" automaticallyRearrangesObjects="YES" id="4Tj-Nm-93b" userLabel="ArrayController">
+                    <classReference key="objectClass" className="SOXShowOrderbookData"/>
                     <connections>
                         <binding destination="ssU-Oy-97E" name="contentArray" keyPath="self.arrayControllerDatas" id="I3y-bA-40w"/>
                         <binding destination="ssU-Oy-97E" name="filterPredicate" keyPath="self.orderBookPredicate" id="E4e-tv-6Ba"/>
@@ -2571,6 +2608,7 @@
                 </viewController>
                 <customObject id="7kO-Hb-1O5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController objectClassName="SOXMyOrderBook_BitcoinDE_Data" selectsInsertedObjects="NO" avoidsEmptySelection="NO" id="t8U-TY-Pcr" userLabel="MyOrders Array Controller">
+                    <classReference key="objectClass" className="SOXMyOrderBook_BitcoinDE_Data"/>
                     <connections>
                         <binding destination="q7D-iu-Op3" name="contentArray" keyPath="self.arrayControllerDatas" id="5DO-Qp-wvu"/>
                     </connections>
@@ -3378,6 +3416,7 @@ Gw
                 </viewController>
                 <customObject id="gWJ-Pw-cBy" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController objectClassName="SOXAccountLedger_BitcoinDE_Data" editable="NO" selectsInsertedObjects="NO" avoidsEmptySelection="NO" id="8E9-hF-O6h">
+                    <classReference key="objectClass" className="SOXAccountLedger_BitcoinDE_Data"/>
                     <connections>
                         <binding destination="d67-em-sMP" name="contentArray" keyPath="self.arrayControllerDatas" id="jnY-G5-QT3"/>
                     </connections>
@@ -4702,6 +4741,7 @@ Gw
                 </viewController>
                 <customObject id="hHl-2S-Jgz" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController objectClassName="SOXMyTrades_BitcoinDE_Data" id="sb6-Q3-A24" userLabel="MyTradesArrayController">
+                    <classReference key="objectClass" className="SOXMyTrades_BitcoinDE_Data"/>
                     <connections>
                         <binding destination="TPt-gD-CmY" name="contentArray" keyPath="self.arrayControllerDatas" id="z3t-Uo-jzR"/>
                     </connections>
@@ -5574,7 +5614,7 @@ Gw
         <segue reference="9rv-7D-aVO"/>
         <segue reference="X8C-yP-6Ki"/>
         <segue reference="YNG-my-y7e"/>
-        <segue reference="5ym-o3-blU"/>
+        <segue reference="sjp-aE-Bfq"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="NSAddTemplate" width="14" height="13"/>

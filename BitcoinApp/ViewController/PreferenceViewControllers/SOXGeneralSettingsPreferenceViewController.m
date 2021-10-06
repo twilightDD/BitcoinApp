@@ -79,6 +79,11 @@
 @property (strong) IBOutlet NSButton *xrpSellButton;
 @property (strong) IBOutlet NSButton *xrpBannerButton;
 
+@property (strong) IBOutlet NSTextField *dogDescriptionTextField;
+@property (strong) IBOutlet NSButton *dogBuyButton;
+@property (strong) IBOutlet NSButton *dogSellButton;
+@property (strong) IBOutlet NSButton *dogBannerButton;
+
 @property (strong) IBOutlet NSButton *autoUpdateInfoTabsButton;
 
 
@@ -233,6 +238,14 @@
     self.xrpSellButton.state                 = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeSell
                                                                                                  forCurrencyType:BitcoinDE_CurrencyTypeRipple];
     self.xrpBannerButton.state               = [SOXPreferenceCenter controlStateForBannerForCurrencyType:BitcoinDE_CurrencyTypeRipple];
+    
+    // Doge
+    self.dogDescriptionTextField.stringValue = [SOXMarket_BitcoinDE_DefTypes tradingPairNaturalStringForCurrencyType:BitcoinDE_CurrencyTypeDoge];
+    self.dogBuyButton.state                  = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeBuy
+                                                                                                 forCurrencyType:BitcoinDE_CurrencyTypeDoge];
+    self.dogSellButton.state                 = [SOXPreferenceCenter controlStateForAutoLoadOrderbookForOrderType:BitcoinDE_OrderTypeSell
+                                                                                                 forCurrencyType:BitcoinDE_CurrencyTypeDoge];
+    self.dogBannerButton.state               = [SOXPreferenceCenter controlStateForBannerForCurrencyType:BitcoinDE_CurrencyTypeDoge];
 
     // Auto update info Tabs
     self.autoUpdateInfoTabsButton.title = @"Auto-Fetch Account Ledger on Demand";

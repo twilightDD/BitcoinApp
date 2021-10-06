@@ -64,7 +64,8 @@ typedef NS_ENUM(NSInteger, BitcoinDE_CurrencyType) {
     BitcoinDE_CurrencyTypeEthereum      = 5,
     BitcoinDE_CurrencyTypeLitecoin      = 6,
     BitcoinDE_CurrencyTypeRipple        = 7,
-    BitcoinDE_CurrencyType_EndOfType    = 8
+    BitcoinDE_CurrencyTypeDoge          = 8,
+    BitcoinDE_CurrencyType_EndOfType    = 9
 };
 
 typedef NS_ENUM(NSInteger, BitcoinDE_OrderStateType) {

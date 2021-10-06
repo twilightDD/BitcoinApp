@@ -158,6 +158,7 @@
                                                   @"bsv", @(BitcoinDE_CurrencyTypeBitcoinCashSV),
                                                   @"ltc", @(BitcoinDE_CurrencyTypeLitecoin),
                                                   @"xrp", @(BitcoinDE_CurrencyTypeRipple),
+                                                  @"doge", @(BitcoinDE_CurrencyTypeDoge),
                                                   nil];
     });
 
@@ -180,6 +181,7 @@
                                                   @"BSV", @(BitcoinDE_CurrencyTypeBitcoinCashSV),
                                                   @"LTC", @(BitcoinDE_CurrencyTypeLitecoin),
                                                   @"XRP", @(BitcoinDE_CurrencyTypeRipple),
+                                                  @"DOG", @(BitcoinDE_CurrencyTypeDoge),
                                                   nil];
     });
 
@@ -202,6 +204,7 @@
                                                     @"Bitcoin Cash SV", @(BitcoinDE_CurrencyTypeBitcoinCashSV),
                                                     @"Litecoin", @(BitcoinDE_CurrencyTypeLitecoin),
                                                     @"Ripple", @(BitcoinDE_CurrencyTypeRipple),
+                                                    @"Doge", @(BitcoinDE_CurrencyTypeDoge),
                                                     nil];
     });
 
@@ -233,6 +236,7 @@
                                             @"bsveur", @(BitcoinDE_CurrencyTypeBitcoinCashSV),
                                             @"ltceur", @(BitcoinDE_CurrencyTypeLitecoin),
                                             @"xrpeur", @(BitcoinDE_CurrencyTypeRipple),
+                                            @"dogeeur", @(BitcoinDE_CurrencyTypeDoge),
                                             nil];
     });
 
