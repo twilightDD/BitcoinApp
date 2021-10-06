@@ -233,7 +233,12 @@
     NSMutableSet *tradingPairs = [NSMutableSet set];
 
     for (SOXMyTrades_BitcoinDE_Data *myTradeData in myTradeDatas) {
-        coinSum             = [coinSum decimalNumberByAdding:myTradeData.amount_Currency_To_Trade_After_Fee];
+        if ([myTradeData.type isEqual:MyTradeHistoryParameter_OrderTypeBuyKey]) {
+            coinSum = [coinSum decimalNumberByAdding:myTradeData.amount_Currency_To_Trade_After_Fee];
+        }
+        else {
+            coinSum = [coinSum decimalNumberByAdding:myTradeData.amount_Currency_To_Trade];
+        }
         volumeSum           = [volumeSum decimalNumberByAdding:myTradeData.volume_Currency_To_Pay_After_Fee];
 //        feeBitcoinVolumeSum = [feeBitcoinVolumeSum decimalNumberByAdding:myTradeData.feeEur];
         feeBitcoinVolumeSum = [feeBitcoinVolumeSum decimalNumberByAdding:myTradeData.fee_Currency_To_Pay];
